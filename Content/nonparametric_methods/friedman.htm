@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2771.76" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Friedman and Cohran Q Tests - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Friedman test;Quade test;Kendall W test;Cochran Q test;Nonparametric two way ANOVA;Two way ANOVA (nonparametric)" />
+            Friedman and Cochran Q Tests</h1>
+        <p>&#160;</p>
+        <p>Menu locations:<br /><b>Analysis_Analysis of Variance_Friedman<br />Analysis_Nonparametric_Friedman<br />Analysis_Nonparametric_Cochran Q</b></p>
+        <p>&#160;</p>
+        <p>This method compares several related samples and can be used as a nonparametric alternative to the two way ANOVA.</p>
+        <p>&#160;</p>
+        <p>The power of this method is low with small samples but it is the best method for nonparametric two way analysis of variance with sample sizes above five.</p>
+        <p>&#160;</p>
+        <p>The Iman-Davenport T<sub>2</sub>variant of the Friedman test statistic is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle T_2 = \frac{(b-1)T_1}{b(k-1)-T_1}$</MadCap:equation>
+        </p>
+        <p>- where there are k treatments and b blocks and T<sub>1</sub> is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle T_1 = \frac{\displaystyle (k-1) \left[ \sum_{j=1}^k R_j^2-bC_1 \right]}{A_1-C_1}$</MadCap:equation>
+        </p>
+        <p>- where R<sub>j</sub> is the sum of the ranks (from pooled observations) for all blocks in a one treatment and A<sub>1</sub> and C<sub>1</sub>  are:</p>
+        <p>
+            <MadCap:equation>$\displaystyle A_1 = \sum_{i=1}^b \sum_{j=1}^k [R(X{_i}_j)]^2 \\
+
+\displaystyle C_1 = \frac{bk(k+1)^2}{4}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>results in one block don't affect results in other blocks</li>
+            <li>observations in a block are ranked by a criterion of interest</li>
+        </ul>
+        <p>&#160;</p>
+        <p>The null hypothesis of the test is that the treatments have identical effects. The alternative hypothesis is that at least one of the treatments tends to yield larger values than at least one of the other treatments.</p>
+        <p>&#160;</p>
+        <p>When the test is significant StatsDirect allows you to make multiple comparisons between the individual samples. These comparisons are performed automatically for all possible contrasts and you are informed of the statistical significance of each contrast. A contrast is considered significant if the following inequality is satisfied:</p>
+        <p>
+            <MadCap:equation>$\displaystyle |R_j-R_i|&gt;t_{1-\alpha/2}\sqrt{\frac{\displaystyle 2b \left(A_1-\sum_{j=1}^k R_j^2 \right)}{(b-1)(k-1)}}$</MadCap:equation>
+        </p>
+        <p>- where t is a quantile from the Student t distribution on (b-1)(k-1) degrees of freedom. This method is a nonparametric equivalent to Fisher's least significant difference method (<a href="../references/reference_list.htm">Conover, 1999</a>).</p>
+        <p>&#160;</p>
+        <p>An alternative to the Friedman test is to perform two way ANOVA on ranks; this is how the T<sub>2</sub> statistic was derived.</p>
+        <p>&#160;</p>
+        <p><u>Cochran's Q, Kendall's W and Quade</u>
+        </p>
+        <p>Kendall's W coefficient of concordance test (also attributed to Wallis and Babington-Smith independently) gives the same numerical answers as Friedman's test.</p>
+        <p>&#160;</p>
+        <p>Quade's proposed a slightly different method for testing the same hypotheses as described above for Friedman's method. Friedman's test generally performs better than Quade's test and should be used instead.</p>
+        <p>&#160;</p>
+        <p>Cochran's Q test can be performed using this Friedman test function by entering dichotomous data coded as in the example below (<a href="../references/reference_list.htm">Conover, 1999</a>):</p>
+        <p>&#160;</p>
+        <table>
+            <tr>
+                <td>&#160;</td>
+                <td colspan="3" style="text-align: center;"><u>Sportsman</u>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Game</td>
+                <td style="text-decoration: underline;text-align: center;">1</td>
+                <td style="text-decoration: underline;text-align: center;">2</td>
+                <td style="text-decoration: underline;text-align: center;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: center;">0</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: center;">0</td>
+                <td style="text-align: center;">0</td>
+                <td style="text-align: center;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: center;">0</td>
+                <td style="text-align: center;">0</td>
+                <td style="text-align: center;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: center;">0</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>- here Conover (1999) describes how three people ran their own separate scoring systems for predicting the outcomes of basketball games; the table above shows 1 if they predicted the outcome correctly and 0 if not for 12 games. Whenever binary data is used StatsDirect will run the Cochran variant of this test - providing the T<sub>1</sub> statistic above, which is equal to Q. If there are fewer than 25 blocks with at least one observation then the chi-square approximation may be weak, therefore you should select the "Simulate Exact P" option.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>The overall test statistic is T<sub>2</sub>  calculated as above <a href="../references/reference_list.htm">(Iman and Davenport, 1980)</a>. T<sub>2</sub> is approximately distributed as an F random variable with k-1 numerator and (b-1)(k-1) denominator degrees of freedom, this is how the P value is derived. Older literature and some software uses an alternative statistic that is tested against a chi-square distribution, the method used in StatsDirect is more accurate <a href="../references/reference_list.htm">(Conover, 1999)</a>. A simulated exact P is provided as an option - this permutes the blocks at random and provides a Monte Carlo P value with the margin of simulation error expressed as a 99% confidence interval.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Conover (1999, p. 372)</a>.</p>
+        <p>Test workbook (ANOVA worksheet: Grass 1, Grass 2, Grass 3, Grass 4).</p>
+        <p>&#160;</p>
+        <p>The following data represent the rank preferences of twelve home owners for four different types of grass planted in their gardens for a trial period. They considered defined criteria before ranking each grass between 1 (best) and 4 (worst).</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Grass 1</td>
+                <td style="text-decoration: underline;">Grass 2</td>
+                <td style="text-decoration: underline;">Grass 3</td>
+                <td style="text-decoration: underline;">Grass 4</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>3</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2</td>
+                <td>3</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>1.5</td>
+                <td>1.5</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2</td>
+                <td>1</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>4</td>
+                <td>1</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>3.5</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3.5</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>1</td>
+                <td>3</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2</td>
+                <td>3</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>3.5</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3.5</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first prepare them in four workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Friedman from the Nonparametric section of the analysis menu. Then <a href="../workbook/selecting_data.htm">select</a> the columns marked "Grass 1", "Grass 2", "Grass 3" and "Grass 4" in one selection action. Then after the first set of results are shown select "Friedman multiple comparisons" from the Further analysis box and click Run.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>T<sub>2</sub> = 3.192198 P = 0.0362</p>
+        <p>&#160;</p>
+        <p><u>All pairwise comparisons (Conover)</u>
+        </p>
+        <p>Grass 1 vs. Grass 2, P = 0.0149</p>
+        <p>Grass 1 vs. Grass 3, P = 0.0226</p>
+        <p>Grass 1 vs. Grass 4, P = 0.4834</p>
+        <p>Grass 2 vs. Grass 3, P = 0.8604</p>
+        <p>Grass 2 vs. Grass 4, P = 0.0717</p>
+        <p>Grass 3 vs. Grass 4, P = 0.1017</p>
+        <p>&#160;</p>
+        <p>From the overall test statistic we can conclude that there is a statistically significant tendency for at least one group to yield higher values than at least one of the other groups. Considering the raw data and the contrast results we see that grasses 2 and 3 are significantly preferred above grass 1 but that there is little to choose between 2 and 3.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../analysis_of_variance/anova.htm">analysis of variance</a>
+        </p>
+    </body>
+</html>

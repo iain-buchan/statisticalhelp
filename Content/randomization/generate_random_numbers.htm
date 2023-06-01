@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="3283" MadCap:lastWidth="2868" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Random Number Generation (by Distribution) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Random numbers" />
+            Random Numbers</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Generating_Random Numbers</b>.</p>
+        <p>&#160;</p>
+        <p>This function enables you to create one or more series of random numbers from given distributions.</p>
+        <p>&#160;</p>
+        <p>A <a href="random_number_generator.htm">robust generator</a> of uniform (pseudo)random numbers is used as the basis for generating deviates from the probability distributions described below. You are given the opportunity to enter your own seed number to be used by the random number generator but you should use the default seed (based upon your computer's clock) in most cases. Please note that each seed generates its own series and that series is the same if you use the seed again. You have very little chance of using the same seed twice if you select the seed that StatsDirect suggests.</p>
+        <p>&#160;</p>
+        <p>These functions are intended for simulation work; they employ widely cited and debated algorithms (<a href="../references/reference_list.htm">Gentle, 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Uniform (continuous uniform, rectangular)</u>
+        </p>
+        <p>The continuous uniform distribution has a constant density function of the interval (a, b) and thus a rectangular shape from a to b:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{1}{a+b} \\
+\displaystyle \text{var}(x)=\frac{(b-a)^2}{12}$</MadCap:equation>
+        </p>
+        <p>- where a and b lie between minus and plus infinity.</p>
+        <p>&#160;</p>
+        <p>The interval most commonly used is 0 to 1</p>
+        <p>&#160;</p>
+        <p><u>Normal (Gaussian)</u>
+        </p>
+        <p>The commonly used standard <a href="../distributions/normal.htm">normal distribution</a> (mean of 0 and standard deviation of 1) is one of a family of normal distributions defined by the density function:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{1}{\sqrt{2\pi\sigma}}\exp{\left(\frac{\displaystyle -(x-\mu)^2}{2\sigma^2}\right)}$</MadCap:equation>
+        </p>
+        <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
+        <p>&#160;</p>
+        <p>Algorithm: inversion of the cumulative distribution function (<a href="../references/reference_list.htm">Wichura, 1988; Gentle 2003</a>)</p>
+        <p>&#160;</p>
+        <p><u>Lognormal</u>
+        </p>
+        <p>The density of a lognormal distribution is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{1}{x\sqrt{2\pi\sigma}}\exp{\left(\frac{\displaystyle 1}{2\sigma^2}(\ln{(x)-\mu)^2}\right)}$</MadCap:equation>
+        </p>
+        <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
+        <p>&#160;</p>
+        <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ).</p>
+        <p>&#160;</p>
+        <p>Algorithm: transformed inversion of the cumulative distribution function (<a href="../references/reference_list.htm">Wichura, 1988; Gentle 2003</a>)</p>
+        <p>&#160;</p>
+        <p><u>Exponential</u>
+        </p>
+        <p>The (negative) exponential distribution is a special case (shaping parameter of 1) of the gamma distribution. Its density is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\lambda\exp (-\lambda x)$</MadCap:equation>
+        </p>
+        <p>- where the parameter λ must be greater than zero.</p>
+        <p>&#160;</p>
+        <p>Algorithm: transformation (<a href="../references/reference_list.htm">Ahrens and Dieter, 1972</a>).</p>
+        <p>&#160;</p>
+        <p><u>Gamma</u>
+        </p>
+        <p>The density function of the gamma distribution is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{\lambda}{\Gamma(r)}(\lambda x)^{r-1} \exp (-\lambda x)$</MadCap:equation>
+        </p>
+        <p>- where the parameters λ and r (shaping parameter) must be greater than zero.</p>
+        <p>&#160;</p>
+        <p>G(*) is the gamma function:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}\exp(-t) \space dt, \space x&gt;0 \\$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Please note that gamma deviates with a shaping parameter of 0.5 are half the square of normal deviates and gamma deviates with a shaping parameter of 1 are exponential deviates.</p>
+        <p>&#160;</p>
+        <p>Algorithm: acceptance-rejection methods GD and GS (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b</a>).</p>
+        <p>&#160;</p>
+        <p><u>Binomial</u>
+        </p>
+        <p>The density function of the <a href="../distributions/binomial.htm">binomial distribution</a> is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\left(\begin{array}{c}n\\ x\end{array}\right)p^x(1-p)^{n-x} \\$</MadCap:equation>
+        </p>
+        <p>- where p lies between 0 and 1 in n ranges.</p>
+        <p>&#160;</p>
+        <p>Algorithm: acceptance-rejection method BTPEC (<a href="../references/reference_list.htm">Kachitvichyanukul and Schmeiser, 1988</a>).</p>
+        <p>&#160;</p>
+        <p><u>Poisson</u>
+        </p>
+        <p>The density function of the <a href="../distributions/poisson.htm">Poisson distribution</a> is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\frac{\exp (-\lambda)\lambda^x}{x!}$</MadCap:equation>
+        </p>
+        <p>- where parameter l is greater than zero.</p>
+        <p>&#160;</p>
+        <p>Algorithm: acceptance-rejection (<a href="../references/reference_list.htm">Ahrens and Dieter, 1982a</a>).</p>
+        <p>&#160;</p>
+        <p><u>Chi-square</u>
+        </p>
+        <p>The density function of the <a href="../distributions/chisq.htm">chi-square distribution</a> is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\frac{x^{n/2-1} \exp(-x/2)}{2^{n/2}(n/2-1)!} \space \text{if} \space x&gt;0; P(x)=0 \space \text{otherwise}$</MadCap:equation>
+        </p>
+        <p>The deviates are calculated as gamma deviates with parameters n/2 and 2, where n is degrees of freedom.</p>
+        <p>&#160;</p>
+        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974,1982b; Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>F (variance ratio)</u>
+        </p>
+        <p>The density function of the <a href="../distributions/f.htm">F distribution</a> is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\frac{\left( \frac{\displaystyle  n+d-2}{\displaystyle 2}\right)! \space x^{n/2-1}}{(n/2-1)!(d/2-1)!\left( 1+\frac{\displaystyle n}{\displaystyle d}x\right)^{(n+d)/2}} \left( \frac{n}{d}\right)^{n/2} \space \text{if}\space x&gt;0; P(x)=0 \space \text{otherwise}$</MadCap:equation>
+        </p>
+        <p>The deviates are calculated as nx/dz where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
+        <p>&#160;</p>
+        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b; Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Student's t</u>
+        </p>
+        <p>The density function of <a href="../distributions/t.htm">Student's t distribution</a>  is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\frac{\left( \frac{\displaystyle n-1}{\displaystyle 2}\right)!}{(n/2-1)!\sqrt{\pi n}(1+x^2/n)^{(n+1)/2}}$</MadCap:equation>
+        </p>
+        <p>The deviates are calculated as a standard normal deviate multiplied by the square root of the degrees of freedom (n) divided by a gamma deviate with parameters n/2 and 2 (a chi-square deviate with n degrees of freedom).</p>
+        <p>&#160;</p>
+        <p>Algorithm: Transformed standard normal and gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b; Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Beta</u>
+        </p>
+        <p>The density function of the beta distribution is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\Lambda(x)[1-\Lambda(x] \\
+\displaystyle \Lambda(x)=\frac{1}{1+\exp(-x)}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Algorithm: Acceptance-rejection methods BB and BC (<a href="../references/reference_list.htm">Cheng 1978</a>).</p>
+        <p>&#160;</p>
+        <p><u>Logistic</u>
+        </p>
+        <p>The density function of the beta distribution is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{\Gamma(p+q)}{\Gamma(p)\Gamma(q)}\frac{x^{p-1}}{c} 1-\frac{x^{q-1}}{c}\frac{1}{c}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Cauchy</u>
+        </p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Weibull</u>
+        </p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Geometric</u>
+        </p>
+        <p>Algorithm: Transformed Poisson and exponential deviates (<a href="../references/reference_list.htm">Devroye, 1986; Gentle 2003; Ahrens and Dieter, 1972, 1982a</a>).</p>
+        <p>&#160;</p>
+        <p><u>Negative binomial</u>
+        </p>
+        <p>Algorithm: Transformed Poisson and gamma deviates (<a href="../references/reference_list.htm">Devroye, 1986; Gentle 2003; Ahrens and Dieter, 1974, 1982b, 1982a</a>).</p>
+    </body>
+</html>

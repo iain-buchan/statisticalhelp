@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CatapultTargetFile
+  Version="2"
+  Type="WebHelp2"
+  DefaultUrl="/Content/contents.htm"
+  ConditionTagExpression="include[Primary.WEBHELP] exclude[Primary.SWHELP] "
+  Skin="/Project/Skins/SD3HTML5.flskn"
+  MasterPage="/Content/resources/MasterPages/MasterFooter.flmsp"
+  PreCompileScaledImages="false"
+  EnableSitemap="true"
+  GenerateWebSafeImages="false"
+  SitemapWebUrl="http://www.statsdirect.com/help/"
+  ReplaceSpacesWithUnderscores="true"
+  MakeFileLowerCase="true"
+  UseCustomTopicFileExtension="false"
+  InsertMOTW="true"
+  WebSafeFileExtension="png"
+  Comment=""
+  TargetLanguage="en-gb"
+  MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
+  BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
+  MasterStylesheet="/Content/resources/stylesheets/statsdirect.css"
+  MoveOutputContentToRoot="true" />

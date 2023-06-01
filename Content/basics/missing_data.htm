@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="250" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Handling Missing Data with StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="How StatsDirect statistical software handles missing observations." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Missing data" />Missing Data</h1>
+        <p>&#160;</p>
+        <p>StatsDirect stores missing data as the value 3.0E+300 internally, but you do not need to remember this. If you leave gaps in a column of numbers in the workbook, StatsDirect will treat the gaps as missing data.</p>
+        <p>&#160;</p>
+        <p>If you want to insert missing data at the top or bottom of a column then you must enter an asterisk (*) in the relevant cells. It is better to enter asterices for all missing data that are part of your analysis. For example, the two way analysis of variance with replicates uses a substitution method for missing data and it needs to know the exact locations of these data.</p>
+        <p>&#160;</p>
+        <p>If you import data from software which uses a specific missing data value, then you should use the <a href="../data_preparation/search_replace.htm">search</a> facility in StatsDirect to replace all instances of this external missing data value with an asterisk "*".</p>
+        <p>&#160;</p>
+        <p>You may wish to use the <a href="../data_preparation/clear_missing_data.htm">clear missing data</a> function to remove incomplete records in order to check your data before analysis.</p>
+    </body>
+</html>

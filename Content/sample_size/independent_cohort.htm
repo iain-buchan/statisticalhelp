@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="4" MadCap:lastHeight="880.5519" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Sample Size for Independent Cohort Studies - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Sample size: Independent prospective studies" />
+            Sample Size for Independent Cohort Studies</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Sample Size_Independent Cohort</b>.</p>
+        <p>&#160;</p>
+        <p>This function gives the minimum number of case subjects required to detect a true relative risk or experimental event rate with power POWER and two sided type I error probability ALPHA. This sample size is also given as a continuity-corrected value intended for use with corrected chi-square and Fisher's exact tests (<a href="../references/reference_list.htm">Casagrande et al. 1978; Meinert 1986; Fleiss, 1981; Dupont, 1990</a>).</p>
+        <p>&#160;</p>
+        <p><u>Information required</u>
+        </p>
+        <ul>
+            <li>POWER: probability of detecting a real effect.</li>
+            <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
+            <li>P0: probability of event in controls.</li>
+            <li>*: input either P1 or RR, where RR=P1/P0.</li>
+            <li>P1: probability of event in experimental subjects.</li>
+            <li>RR: relative risk of events between experimental subjects and controls.</li>
+            <li>M: number of control subjects per experimental subject.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Practical issues</u>
+        </p>
+        <ul>
+            <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
+            <li>5% is the usual choice for ALPHA.</li>
+            <li>P0 can be estimated as the population prevalence of the event under investigation.</li>
+            <li>If possible, choose a range of relative risks that you want have the statistical power to detect.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The estimated sample size n is calculated as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle n=\frac{\left[ z_{\alpha}\sqrt{(1+1/m)\bar p(1-\bar p)+z_{\beta}\sqrt{p_0(1-p_0)/m+p_1(1-p_1)}}\right]^2}{(p_0-p_1)^2} \\
+\displaystyle \bar p=\frac{p_1+m p_0}{m+1}\\
+\displaystyle n_c=\frac{n}{4}\left(  1+\sqrt{1+\frac{2(m+1)}{nm|p_0-p_1|}}\right)^2$</MadCap:equation>
+        </p>
+        <p>- where α = alpha, β = 1 - power, n<sub>c</sub> is the continuity corrected sample size and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer.</p>
+    </body>
+</html>

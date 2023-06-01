@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="2345" MadCap:lastWidth="3189">
+    <head><title>Nested (Hierarchical) Analysis of Variance (ANOVA) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="This function calculates ANOVA for a fully nested random (hierarchical or split-plot) study design. One level of sub-grouping is supported and subgroups may be of unequal sizes. Corrected treatment and subgroup means are given." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="ANOVA: Nested;Fully nested random ANOVA;Nested ANOVA" />Fully Nested Random Analysis of Variance</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Analysis of Variance_Fully Nested</b>.</p>
+        <p>&#160;</p>
+        <p>This function calculates <a href="anova.htm">ANOVA</a> for a fully nested random (hierarchical or split-plot) study design. One level of sub-grouping is supported and subgroups may be of unequal sizes. Corrected treatment and subgroup means are given.</p>
+        <p>&#160;</p>
+        <p>You should seek expert statistical guidance before using this method.</p>
+        <p>&#160;</p>
+        <p>If each treatment/exposure group in a study contains treatment/exposure sub-groups then data for nested analysis of variance may be set out as follows:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td colspan="3" style="text-align: center;text-decoration: underline;">Hospital 
+		 1</td>
+                <td colspan="3" style="text-align: center;text-decoration: underline;">Hospital 
+		 2</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;text-decoration: underline;">ward 
+		 1</td>
+                <td style="text-align: center;text-decoration: underline;">ward 
+		 2</td>
+                <td style="text-align: center;text-decoration: underline;">ward 
+		 3</td>
+                <td style="text-align: center;text-decoration: underline;">ward 
+		 1</td>
+                <td style="text-align: center;text-decoration: underline;">ward 
+		 2</td>
+                <td style="text-align: center;text-decoration: underline;">ward 
+		 3</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td>&lt;--- 
+		 patients</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">&#160;</td>
+                <td>&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>The <a href="anova.htm">effects</a> (treatments and their subgroups) in this type of study are often random but the same basic calculations are used for models with fixed effects or for mixed models. The variance ratios given are based on a fixed effects model but you can use the mean square results to calculate any other variance ratio of interest. A good account is given by <a href="../references/reference_list.htm">Snedecor and Cochran (1989)</a>.</p>
+        <p>&#160;</p>
+        <ul>
+            <li>For a fixed effects model use the "F (VR between groups)" statistic.</li>
+            <li>For a random effects model use the "F (using group/subgroup msqr)" statistic.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>ANOVA for a three factor fully random nested (split-plot) model is calculated as follows (Snedecor and Cochran, 1989):</p>
+        <p>
+            <MadCap:equation>$\displaystyle CF=\frac{\displaystyle (\sum_{i=1}^g \sum_{j=1}^{s_i} \sum_{k=1}^{n_{ij}}X_{ijk})^2}{N} \\
+\displaystyle SS_{\text{total}}=\sum_{i=1}^g \sum_{j=1}^{s_i} \sum_{k=1}^{n_{ij}} X_{ijk}-CF \\
+\displaystyle SS_{\text{groups}}=\sum_{i=1}^{g} \frac{\displaystyle (\sum_{j=1}^{s_i}\sum_{k=1}^{n_{ji}} X_{ijk})^2}{s_in_{ij}}-CF \\
+\displaystyle SS_{\text{subgroups (group i)}}=\sum_{i=1}^{s_i} \frac{\displaystyle (\sum_{k=1}^{n_{ij}}X_{ijk})^2}{n_{ij}}-\frac{\displaystyle (\sum_{j=1}^{s_i}\sum_{k=1}^{n_{ji}} X_{ijk})^2}{s_in_{ij}}$</MadCap:equation>
+        </p>
+        <p>- where X<sub>ijk</sub> is the kth observation from the jth subgroup of the ith group, g is the number of groups, SS<sub>total</sub> is the total sum of squares, SS<sub>groups</sub> is the sum of squares due to the group factor, SS<sub>subgroups (group i)</sub> is the sum of squares due to the subgroup factor of group i, si is the number of subgroups in the ith group, n<sub>ij</sub> is the number of observations in the jth subgroup of the ith group and N is the total number of observations.</p>
+        <p>&#160;</p>
+        <p>Hocking (1985) describes potential instabilities of this calculation, you should therefore seek expert statistical guidance before using it.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Snedecor and Cochran (1989)</a>.</p>
+        <p>Test workbook (ANOVA worksheet: P1L1, P1L2, P1L3, P2L1, P2L2, P2L3, P3L1, P3L2, P3L3, P4L1, P4L2, P4L3).</p>
+        <p>&#160;</p>
+        <p>The following data represent calcium measurements from the leaves of turnip greens. The groups represent 4 plants and the subgroups represent 3 leaves taken from each plant. 2 samples were taken from each leaf for calcium measurement.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: center;text-decoration: underline;">&#160;</td>
+                <td style="text-align: center;text-decoration: underline;">Plant 
+		 1</td>
+                <td style="text-align: center;text-decoration: underline;">&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;text-decoration: underline;">leaf 
+		 1</td>
+                <td style="text-align: center;text-decoration: underline;">leaf 
+		 2</td>
+                <td style="text-align: center;text-decoration: underline;">leaf 
+		 3</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td>&lt;--- 
+		 sample</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td style="text-align: center;">x</td>
+                <td>&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first enter them in the workbook using a separate column for each subgroup:</p>
+        <p>&#160;</p>
+        <p>P = plant</p>
+        <p>L = leaf</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">P1L1</td>
+                <td style="text-decoration: underline;">P1L2</td>
+                <td style="text-decoration: underline;">P1L3</td>
+                <td style="text-decoration: underline;">P2L1</td>
+                <td style="text-decoration: underline;">P2L2</td>
+                <td style="text-decoration: underline;">P2L3</td>
+                <td style="text-decoration: underline;">P3L1</td>
+                <td style="text-decoration: underline;">P3L2</td>
+                <td style="text-decoration: underline;">P3L3</td>
+                <td style="text-decoration: underline;">P4L1</td>
+                <td style="text-decoration: underline;">P4L2</td>
+                <td style="text-decoration: underline;">P4L3</td>
+            </tr>
+            <tr>
+                <td>3.28</td>
+                <td>3.52</td>
+                <td>2.88</td>
+                <td>2.46</td>
+                <td>1.87</td>
+                <td>2.19</td>
+                <td>2.77</td>
+                <td>3.74</td>
+                <td>2.55</td>
+                <td>3.78</td>
+                <td>4.07</td>
+                <td>3.31</td>
+            </tr>
+            <tr>
+                <td>3.09</td>
+                <td>3.48</td>
+                <td>2.80</td>
+                <td>2.44</td>
+                <td>1.92</td>
+                <td>2.19</td>
+                <td>2.66</td>
+                <td>3.44</td>
+                <td>2.55</td>
+                <td>3.87</td>
+                <td>4.12</td>
+                <td>3.31</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Alternatively, open the test workbook using the file open function of the file menu. Then select Fully Nested from the analysis of variance section of the analysis menu. Enter the number of groups as four and then select the four sets of subgroups marked "P1L1" (i.e. Plant 1 Leaf 1) etc.. Each subgroup should be selected by a single <a href="../workbook/selecting_data.htm">selection</a> action.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Fully nested/hierarchical random analysis of variance</u>
+        </p>
+        <p>&#160;</p>
+        <p>Variables: (P1L1, P1L2, P1L3) (P2L1, P2L2, P2L3) (P3L1, P3L2, P3L3) (P4L1, P4L2, P4L3)</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Source of Variation</td>
+                <td style="text-decoration: underline;">Sum Squares</td>
+                <td style="text-decoration: underline;">DF</td>
+                <td style="text-decoration: underline;">Mean Square</td>
+            </tr>
+            <tr>
+                <td>Between Groups</td>
+                <td>7.560346</td>
+                <td>3</td>
+                <td>2.520115</td>
+            </tr>
+            <tr>
+                <td>Between Subgroups within Groups</td>
+                <td>2.6302</td>
+                <td>8</td>
+                <td>0.328775</td>
+            </tr>
+            <tr>
+                <td>Residual</td>
+                <td>0.07985</td>
+                <td>12</td>
+                <td>0.006654</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>10.270396</td>
+                <td>23</td>
+                <td>&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>F (VR between groups) = 378.727406 P &lt; .0001</p>
+        <p>&#160;</p>
+        <p>F (using group/subgroup msqr) = 7.665167 P = .0097</p>
+        <p>&#160;</p>
+        <p>F (VR between subgroups within groups) = 49.408892 P &lt; .0001</p>
+        <p>&#160;</p>
+        <p>The "F (VR between groups)" statistic assumes a fixed effects model. For this example, which assumes random effects, use the "F (using group/subgroup msqr)" statistic, this treats the residual sum of squares as the samples sum of squares. For the null hypothesis of zero group variance, consider 2.5201/0.3288 (= 7.66 on an F(3,8) distribution) instead of 2.5201/0.0067 (= 379 on an F(3,12) distribution) because the point of randomization has been re-defined. The " F (VR between subgroups within groups" statistic clearly rejects the null hypothesis of zero subgroup-in-group variance.</p>
+        <p>&#160;</p>
+        <p>The analysis shows that the plants contribute most to the overall variability and the leaves also have a statistically significant contribution. The samples from each leaf, as reflected by the residual sum of squares, contribute relatively little to the overall variability. Sampling further plants or leaves is, therefore, more important than taking multiple samples per leaf.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="anova.htm">analysis of variance</a>
+        </p>
+    </body>
+</html>

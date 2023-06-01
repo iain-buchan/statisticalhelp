@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CatapultTarget
+  Version="2"
+  Comment=""
+  Type="WebHelpMobile"
+  Destinations=""
+  GlossaryTermConversion="marked"
+  Skin="/Project/Skins/SD3MobileHelp.flskn"
+  ConditionTagExpression="include[Primary.WEBHELP] exclude[Primary.SWHELP] "
+  GenerateWebSafeImages="true"
+  WebSafeFileExtension="png"
+  ReplaceSpacesWithUnderscores="true"
+  MakeFileLowerCase="true"
+  EnableSitemap="true"
+  SitemapWebUrl="http://www.statsdirect.com/mhelp/"
+  TargetLanguage="en-gb"
+  MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
+  MasterPage="/Content/resources/masterpages/masterfooter.flmsp"
+  BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
+  MasterStylesheet="/Content/resources/stylesheets/statsdirect.css">
+  <PrintedOutput
+    CollapseMargins="true" />
+</CatapultTarget>

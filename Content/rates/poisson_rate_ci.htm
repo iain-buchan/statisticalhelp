@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="941.5519" MadCap:lastWidth="2868" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Poisson Confidence Interval (Incidence Rate) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Incidence rate confidence interval;Poisson rate confidence interval;Rates: Single" />Poisson Rate Confidence Interval</h1>
+        <p>&#160;</p>
+        <p>Menu locations:</p>
+        <p><strong>Analysis_Rates_Poisson Rate CI;</strong>
+        </p>
+        <p><strong>Analysis_Exact_Poisson Rate CI.</strong>
+        </p>
+        <p>&#160;</p>
+        <p>Uncommon events in populations, such as the occurrence of specific diseases, are usefully modelled using a <a href="../distributions/poisson.htm">Poisson distribution</a>. A common application of Poisson confidence intervals is to <a href="incidence_and_prevalence.htm">incidence rates</a> of diseases (<a href="../references/reference_list.htm">Gail and Benichou, 2000; Rothman and Greenland, 1998; Selvin, 1996</a>).</p>
+        <p>&#160;</p>
+        <p>The incidence rate is estimated as the number of events observed divided by the time at risk of event during the observation period.</p>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>Exact Poisson confidence limits for the estimated rate are found as the Poisson means, for distributions with the observed number of events and probabilities relevant to the chosen confidence level, divided by time at risk. The relationship between the Poisson and chi-square distributions is employed here (<a href="../references/reference_list.htm">Ulm, 1990</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle Y_l=\frac{\chi_{2Y,\space\alpha/2}^2}{2} \\
+
+\displaystyle Y_u=\frac{\chi_{2(Y+1),\space1-\alpha/2}^2}{2}$</MadCap:equation>
+        </p>
+        <p>- where Y is the observed number of events, Y<sub>l</sub> and Y<sub>u</sub> are lower and upper confidence limits for Y respectively, χ<sup>2</sup><sub>ν,a</sub> is the chi-square quantile for upper tail probability on ν degrees of freedom.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Say that 14 events are observed in 200 people studied for 1 year and 100 people studies for 2 years.</p>
+        <p>&#160;</p>
+        <p>The person time at risk is 200 + 100 x 2 = 400 person years</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Events observed = 14</p>
+        <p>Time at risk of event = 400</p>
+        <p>&#160;</p>
+        <p>Poisson (e.g. incidence) rate estimate = 0.035</p>
+        <p>Exact 95% confidence interval = 0.019135 to 0.058724</p>
+        <p>&#160;</p>
+        <p>Here we can say with 95% confidence that the true population incidence rate for this event lies between 0.02 and 0.06 events per person year.</p>
+        <p>&#160;</p>
+        <p>See also <a href="compare_crude_incidence_rates.htm">incidence rate comparisons</a></p>
+        <p>&#160;</p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

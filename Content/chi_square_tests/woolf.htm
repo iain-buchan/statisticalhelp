@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1433" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Woolf Chi-square Analysis (Stratified 2 by 2 Tables) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Woolf chi-square (stratified tables);Chi-square tests: Woolf" />
+            Woolf Statistics for 2 by 2 Tables and Series</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Chi-square_Woolf</b>.</p>
+        <p>&#160;</p>
+        <p>In case-control studies observed frequencies can often be represented by a series of two by two tables. Each stratum of this series represents observations taken at different times, different places or another system of sub-grouping within one large study.</p>
+        <p>&#160;</p>
+        <p>A pooled odds ratio for all strata can be calculated by the method of Mantel and Haenszel or that of Woolf. The <a href="../meta_analysis/mh.htm">Mantel-Haenszel</a> method is more robust when some of the strata contain small frequencies.</p>
+        <p>&#160;</p>
+        <p>Results are given for individual tables and for the combined statistics (<a href="haldane_correction.htm" target="_popup">Haldane</a> corrected), including chi-square for heterogeneity between the tables.</p>
+        <p>&#160;</p>
+        <p>DATA INPUT:</p>
+        <p>Observed frequencies should be entered as multiple fourfold tables:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td style="text-align: center;text-decoration: underline;">feature present</td>
+                <td style="text-align: center;text-decoration: underline;">feature absent</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome positive:</td>
+                <td style="text-align: center;">a</td>
+                <td style="text-align: center;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome negative:</td>
+                <td style="text-align: center;">c</td>
+                <td style="text-align: center;">d</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 516)</a>.</p>
+        <p>&#160;</p>
+        <p>The following data compare the smoking status of lung cancer patients with controls. Ten different studies are combined in an attempt to improve the overall estimate of relative risk. The matching of controls has been ignored because there was not enough information about matching from each study to be sure that the matching was the same in each study.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">Lung cancer</td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">Controls</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">smoker</td>
+                <td style="text-align: right;text-decoration: underline;">non-smoker</td>
+                <td style="text-align: right;text-decoration: underline;">smoker</td>
+                <td style="text-align: right;text-decoration: underline;">non-smoker</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">83</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">14</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">90</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">227</td>
+                <td style="text-align: right;">43</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">129</td>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">81</td>
+                <td style="text-align: right;">19</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">412</td>
+                <td style="text-align: right;">32</td>
+                <td style="text-align: right;">299</td>
+                <td style="text-align: right;">131</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1350</td>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">1296</td>
+                <td style="text-align: right;">61</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">60</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">106</td>
+                <td style="text-align: right;">27</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">459</td>
+                <td style="text-align: right;">18</td>
+                <td style="text-align: right;">534</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">499</td>
+                <td style="text-align: right;">19</td>
+                <td style="text-align: right;">462</td>
+                <td style="text-align: right;">56</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">451</td>
+                <td style="text-align: right;">39</td>
+                <td style="text-align: right;">1729</td>
+                <td style="text-align: right;">636</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">260</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">259</td>
+                <td style="text-align: right;">28</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must select the Woolf function from the chi-square section of the analysis menu. Then enter each row of the table above as a separate 2 by 2 contingency table:</p>
+        <p>&#160;</p>
+        <p>i.e. The first row is entered as:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td style="text-decoration: underline;text-align: right;">
+                    <p align="right">Smkr</p>
+                </td>
+                <td style="text-decoration: underline;text-align: right;">
+                    <p align="right">Non</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p align="right">Lung cancer</p>
+                </td>
+                <td style="text-align: right;">
+                    <p align="right">83</p>
+                </td>
+                <td style="text-align: right;">
+                    <p align="right">3</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p align="right">Control</p>
+                </td>
+                <td style="text-align: right;">
+                    <p align="right">72</p>
+                </td>
+                <td style="text-align: right;">
+                    <p align="right">14</p>
+                </td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>... this is then repeated for each of the ten rows.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Statistics from combined values without <a href="haldane_correction.htm" target="_popup">Haldane</a> correction:</p>
+        <p>&#160;</p>
+        <p>Odds ratio = 4.519207</p>
+        <p>&#160;</p>
+        <p>Approximate 95% CI = 3.752994 to 5.441851</p>
+        <p>&#160;</p>
+        <p>Chi² for E(LOR) = 0 is 253.2108, P &lt; 0.0001</p>
+        <p>Chi² for Heterogeneity = 6.634122, P = 0.6752</p>
+        <p>&#160;</p>
+        <p>Statistics from combined values with Haldane correction:</p>
+        <p>&#160;</p>
+        <p>Odds ratio = 4.510211</p>
+        <p>&#160;</p>
+        <p>Approximate 95% CI = 3.747642 to 5.427948</p>
+        <p>&#160;</p>
+        <p>Chi² for E(LOR) = 0 is 254.0865, P &lt; 0.0001</p>
+        <p>Chi² for Heterogeneity = 6.532662, P = 0.6856</p>
+        <p>&#160;</p>
+        <p>Here we can say that there was no convincing evidence of heterogeneity between the separate estimates of relative risk from each of the different studies. The pooled estimate suggested that with 95% confidence that the true population odds for being a smoker were between 3.7 and 5.4 times greater in lung cancer patients compared with controls.</p>
+        <p>&#160;</p>
+        <p>The equivalent analysis using the Mantel-Haenszel method gave a confidence interval for the pooled odds ratio of 3.9 to 5.6; the difference is partly accounted for by the Haldane correction. You should use the more robust Mantel-Haenszel for most analyses of this kind. Woolf's method is included for further investigation of inter-table relationships under expert statistical guidance.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

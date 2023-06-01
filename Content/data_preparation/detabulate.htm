@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="547" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Convert Tables into Row and Column Classifier Variables - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Detabulate;Tabulate and detabulate;Crosstabulate and detabulate" />Detabulate</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Grouping_Detabulate</b>.</p>
+        <p>&#160;</p>
+        <p>This a function to expand a two way table of counts into a column indicator variable and a row indicator variable, i.e. to deconstruct a table back into individual level data. This is the opposite of crosstabs or the <a href="tabulate.htm">tabulate</a> function.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Given the following table:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">reaction:0</td>
+                <td style="text-decoration: underline;text-align: right;">reaction:1</td>
+                <td style="text-decoration: underline;text-align: right;">reaction:2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">sex:0</td>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">sex:1</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">3</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>You can use the Data_Grouping_Detabulate menu item on the two by three table of counts to get back to individual level data with each row representing the classification of a subject as follows:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">Row Classifier</td>
+                <td style="text-align: right;text-decoration: underline;">Column Classifier</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+        </table>
+    </body>
+</html>

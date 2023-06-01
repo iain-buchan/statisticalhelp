@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="457" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Combining Variables in Data and Group Identifier Columns - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Join sub-groups of data;Combine variables" />
+            Combine Groups and Form an Identifier</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Organizing_Combine Groups</b>.</p>
+        <p>&#160;</p>
+        <p>This function combines data from the workbook columns you select and puts them into a single new data column with a group identifier column alongside it.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Data~G1</td>
+                <td style="text-decoration: underline;">Data~G2</td>
+                <td style="text-decoration: underline;">Data~G3 ---&gt;</td>
+                <td style="text-decoration: underline;">Group ID</td>
+                <td style="text-decoration: underline;">Data</td>
+            </tr>
+            <tr>
+                <td>1.1</td>
+                <td>0.7</td>
+                <td>1.9</td>
+                <td>Data~G1</td>
+                <td>1.1</td>
+            </tr>
+            <tr>
+                <td>1.3</td>
+                <td>1.0</td>
+                <td>2.2</td>
+                <td>Data~G1</td>
+                <td>1.3</td>
+            </tr>
+            <tr>
+                <td>0.9</td>
+                <td>0.6</td>
+                <td>1.7</td>
+                <td>Data~G1</td>
+                <td>0.9</td>
+            </tr>
+            <tr>
+                <td>1.5</td>
+                <td>1.1</td>
+                <td>&#160;</td>
+                <td>Data~G1</td>
+                <td>1.5</td>
+            </tr>
+            <tr>
+                <td>1.3</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>Data~G1</td>
+                <td>1.3</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>Data~G2</td>
+                <td>0.7</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>Data~G2</td>
+                <td>1.0</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>Data~G2</td>
+                <td>0.6</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>Data~G2</td>
+                <td>1.1</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>Data~G1</td>
+                <td>1.9</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>Data~G1</td>
+                <td>2.2</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>Data~G1</td>
+                <td>1.7</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Some other statistical packages require group identifier columns for group comparison tests, where all data are expected to be in a single column. StatsDirect does not do this for simple group comparison methods because separate data columns aid comprehension of the analysis. If you need to share data between StatsDirect and statistical packages that require group identifiers then use this function and the <a href="group_split.htm">group split</a> function to prepare data prior to import/export.</p>
+    </body>
+</html>

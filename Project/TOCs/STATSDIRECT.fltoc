@@ -1,0 +1,876 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CatapultToc
+  Version="1">
+  <TocEntry
+    Title="Contents"
+    Link="/Content/contents.htm" />
+  <TocEntry
+    Title="Basic statistical principles"
+    Link="/Content/basics/basics.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue"
+    SectionNumberReset="continue"
+    VolumeNumberReset="same"
+    ChapterNumberReset="continue"
+    ComputeToc="false"
+    ReplaceMergeNode="false">
+    <TocEntry
+      Title="Statistics"
+      Link="/Content/basics/statistics.htm" />
+    <TocEntry
+      Title="Measurement scales and data types"
+      Link="/Content/basics/measurement_scales.htm" />
+    <TocEntry
+      Title="Selecting statistical methods"
+      Link="/Content/methods/method_selection.htm"
+      BreakType="chapter"
+      StartSection="false"
+      PageNumberReset="continue"></TocEntry>
+    <TocEntry
+      Title="P values"
+      Link="/Content/basics/p_values.htm" />
+    <TocEntry
+      Title="Confidence intervals"
+      Link="/Content/basics/confidence_interval.htm" />
+    <TocEntry
+      Title="Degrees of freedom"
+      Link="/Content/basics/degrees_freedom.htm" />
+    <TocEntry
+      Title="Epidemiology"
+      Link="/Content/basics/epidemiology.htm" />
+    <TocEntry
+      Title="Causality"
+      Link="/Content/basics/causality.htm" />
+    <TocEntry
+      Title="Bias"
+      Link="/Content/basics/bias.htm" />
+    <TocEntry
+      Title="Confounding"
+      Link="/Content/basics/confounding.htm" />
+    <TocEntry
+      Title="Prospective vs. retrospective studies"
+      Link="/Content/basics/prospective.htm" />
+    <TocEntry
+      Title="Attributable risk"
+      Link="/Content/basics/attributable_risk.htm" />
+    <TocEntry
+      Title="Validity"
+      Link="/Content/basics/validity.htm" />
+    <TocEntry
+      Title="Reliability"
+      Link="/Content/basics/reliability.htm" />
+    <TocEntry
+      Title="Calculator"
+      Link="/Content/basics/calculator.htm" />
+    <TocEntry
+      Title="Analysis"
+      Link="/Content/basics/analysis.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Preparing your data"
+    Link="/Content/data_preparation/data_preparation.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue"
+    ReplaceMergeNode="false">
+    <TocEntry
+      Title="Generating data"
+      Link="/Content/data_preparation/generating.htm">
+      <TocEntry
+        Title="Workbook"
+        Link="/Content/basics/worksheet.htm" />
+      <TocEntry
+        Title="Excel links"
+        Link="/Content/basics/excel.htm" />
+      <TocEntry
+        Title="Missing data"
+        Link="/Content/basics/missing_data.htm" />
+      <TocEntry
+        Title="Fill series"
+        Link="/Content/data_preparation/fill_series.htm" />
+      <TocEntry
+        Title="Fill random numbers"
+        Link="/Content/randomization/generate_random_numbers.htm" />
+    </TocEntry>
+    <TocEntry
+      Title="Cleaning and encoding"
+      Link="/Content/data_preparation/cleaning.htm">
+      <TocEntry
+        Title="Search and replace"
+        Link="/Content/data_preparation/search_replace.htm" />
+      <TocEntry
+        Title="Clear missing data"
+        Link="/Content/data_preparation/clear_missing_data.htm"></TocEntry>
+      <TocEntry
+        Title="Text to numbers"
+        Link="/Content/data_preparation/text_to_numbers.htm" />
+      <TocEntry
+        Title="Date and time intervals"
+        Link="/Content/data_preparation/date_time_intervals.htm" />
+      <TocEntry
+        Title="Categorise a continuous variable"
+        Link="/Content/data_preparation/categorise.htm"></TocEntry>
+    </TocEntry>
+    <TocEntry
+      Title="Transforming and deriving data"
+      Link="/Content/data_preparation/transforming_and_deriving.htm">
+      <TocEntry
+        Title="Common transforms"
+        Link="/Content/data_preparation/transformations.htm">
+        <TocEntry
+          Title="Log"
+          Link="/Content/data_preparation/transform_log.htm" />
+        <TocEntry
+          Title="Logit"
+          Link="/Content/data_preparation/transform_logit.htm"></TocEntry>
+        <TocEntry
+          Title="Probit"
+          Link="/Content/data_preparation/transform_probit.htm"></TocEntry>
+        <TocEntry
+          Title="Angular"
+          Link="/Content/data_preparation/transform_angle.htm" />
+        <TocEntry
+          Title="Cumulative"
+          Link="/Content/data_preparation/transform_cumulative.htm" />
+        <TocEntry
+          Title="Ladder of powers"
+          Link="/Content/data_preparation/transform_ladder_powers.htm" />
+        <TocEntry
+          Title="Empirical cumulative distribution"
+          Link="/Content/data_preparation/transform_empirical_cdf.htm" />
+        <TocEntry
+          Title="Z scores"
+          Link="/Content/data_preparation/transform_z_scores.htm" />
+      </TocEntry>
+      <TocEntry
+        Title="Pairwise"
+        Link="/Content/data_preparation/pairwise.htm">
+        <TocEntry
+          Title="Differences"
+          Link="/Content/data_preparation/pairwise_differences.htm"></TocEntry>
+        <TocEntry
+          Title="Means"
+          Link="/Content/data_preparation/pairwise_means.htm" />
+        <TocEntry
+          Title="Slopes"
+          Link="/Content/data_preparation/pairwise_slopes.htm" />
+      </TocEntry>
+      <TocEntry
+        Title="User-defined function"
+        Link="/Content/data_preparation/apply_function.htm" />
+      <TocEntry
+        Title="Normal scores"
+        Link="/Content/data_preparation/transform_normal_scores.htm" />
+      <TocEntry
+        Title="Standardization"
+        Link="/Content/data_preparation/standardization.htm" />
+      <TocEntry
+        Title="Anthropometric standardization"
+        Link="/Content/data_preparation/growth_charts.htm" />
+      <TocEntry
+        Title="Ranking"
+        Link="/Content/data_preparation/ranking.htm" />
+    </TocEntry>
+    <TocEntry
+      Title="Organizing data"
+      Link="/Content/data_preparation/organizing.htm">
+      <TocEntry
+        Title="Sort within worksheet"
+        Link="/Content/data_preparation/sorting_worksheet.htm" />
+      <TocEntry
+        Title="Sort data to new column"
+        Link="/Content/data_preparation/sorting_create.htm" />
+      <TocEntry
+        Title="Filter worksheet rows"
+        Link="/Content/data_preparation/filter_worksheet.htm"
+        StartSection="false"
+        SectionNumberReset="continue"
+        VolumeNumberReset="same"
+        ChapterNumberReset="continue"
+        ComputeToc="false"
+        ReplaceMergeNode="false" />
+      <TocEntry
+        Title="Rotate data block"
+        Link="/Content/data_preparation/rotate_block.htm" />
+      <TocEntry
+        Title="Combine groups"
+        Link="/Content/data_preparation/combine_groups.htm" />
+      <TocEntry
+        Title="Split groups"
+        Link="/Content/data_preparation/group_split.htm" />
+      <TocEntry
+        Title="Dummy variables"
+        Link="/Content/data_preparation/dummy_variables.htm" />
+      <TocEntry
+        Title="Extract a subset of data"
+        Link="/Content/data_preparation/extract_variables.htm"></TocEntry>
+      <TocEntry
+        Title="Tabulate"
+        Link="/Content/data_preparation/tabulate.htm" />
+      <TocEntry
+        Title="Detabulate"
+        Link="/Content/data_preparation/detabulate.htm" />
+      <TocEntry
+        Title="Expand observations"
+        Link="/Content/data_preparation/expand.htm" />
+      <TocEntry
+        Title="Contract observations"
+        Link="/Content/data_preparation/contract.htm" />
+    </TocEntry>
+  </TocEntry>
+  <TocEntry
+    Title="Drawing charts and graphs"
+    Link="/Content/graphics/graphics.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Bar plot"
+      Link="/Content/graphics/bar.htm" />
+    <TocEntry
+      Title="Box and whisker plot"
+      Link="/Content/graphics/box_whisker.htm" />
+    <TocEntry
+      Title="Box and whisker plot (text)"
+      Link="/Content/graphics/box_whisker_text.htm" />
+    <TocEntry
+      Title="Control plot"
+      Link="/Content/graphics/control.htm" />
+    <TocEntry
+      Title="Error bar plot"
+      Link="/Content/graphics/error_bar.htm" />
+    <TocEntry
+      Title="Forest (meta-analysis) plot"
+      Link="/Content/graphics/forest.htm" />
+    <TocEntry
+      Title="Histogram"
+      Link="/Content/graphics/histogram.htm" />
+    <TocEntry
+      Title="Histogram (text)"
+      Link="/Content/graphics/histogram_text.htm" />
+    <TocEntry
+      Title="Ladder plot"
+      Link="/Content/graphics/ladder.htm" />
+    <TocEntry
+      Title="Normal plot"
+      Link="/Content/graphics/normal.htm" />
+    <TocEntry
+      Title="Scatter plot"
+      Link="/Content/graphics/scatter.htm" />
+    <TocEntry
+      Title="Scatter plot (text)"
+      Link="/Content/graphics/scatter_text.htm" />
+    <TocEntry
+      Title="Spread plot"
+      Link="/Content/graphics/spread.htm" />
+    <TocEntry
+      Title="Survival plot"
+      Link="/Content/graphics/survival.htm" />
+    <TocEntry
+      Title="ROC plot"
+      Link="/Content/nonparametric_methods/roc.htm" />
+    <TocEntry
+      Title="Population pyramid"
+      Link="/Content/graphics/population_pyramid.htm" />
+    <TocEntry
+      Title="Graphics options"
+      Link="/Content/graphics/defaults.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Descriptive statistics and tabulations"
+    Link="/Content/basic_descriptive_statistics/descriptive_statistics.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Quick univariate summary"
+      Link="/Content/basic_descriptive_statistics/quick_summary.htm" />
+    <TocEntry
+      Title="Univariate summary"
+      Link="/Content/basic_descriptive_statistics/univariate_summary.htm" />
+    <TocEntry
+      Title="Central tendency"
+      Link="/Content/basic_descriptive_statistics/central_tendency.htm" />
+    <TocEntry
+      Title="Variance, standard deviation/error"
+      Link="/Content/basic_descriptive_statistics/standard_deviation.htm" />
+    <TocEntry
+      Title="Skewness"
+      Link="/Content/basic_descriptive_statistics/skewness.htm" />
+    <TocEntry
+      Title="Time series summary"
+      Link="/Content/basic_descriptive_statistics/time_series.htm" />
+    <TocEntry
+      Title="Frequencies"
+      Link="/Content/basic_descriptive_statistics/frequencies.htm" />
+    <TocEntry
+      Title="Crosstabs"
+      Link="/Content/basic_descriptive_statistics/crosstabs.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Agreement analysis"
+    Link="/Content/agreement/agreement_analyses.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Continuous agreement (intra-class correlation etc.)"
+      Link="/Content/agreement/intraclass.htm" />
+    <TocEntry
+      Title="Categorical agreement (kappa etc.)"
+      Link="/Content/agreement/kappa.htm" />
+    <TocEntry
+      Title="Reliability and reducibility (Cronbach alpha etc.)"
+      Link="/Content/regression_and_correlation/pca.htm" />
+    <TocEntry
+      Title="Method comparison regression"
+      Link="/Content/agreement/mcr.htm" />
+    <TocEntry
+      Title="Universal agreement R"
+      Link="/Content/agreement/universal_agreement.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Analysis of variance"
+    Link="/Content/analysis_of_variance/anova.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="One way"
+      Link="/Content/analysis_of_variance/one_way.htm" />
+    <TocEntry
+      Title="Two way"
+      Link="/Content/analysis_of_variance/two_way.htm" />
+    <TocEntry
+      Title="Two way with repeated measures"
+      Link="/Content/analysis_of_variance/two_way_replicate.htm" />
+    <TocEntry
+      Title="Multiple contrasts"
+      Link="/Content/analysis_of_variance/multiple_comparisons.htm" />
+    <TocEntry
+      Title="Fully nested random"
+      Link="/Content/analysis_of_variance/nested.htm" />
+    <TocEntry
+      Title="Latin square"
+      Link="/Content/analysis_of_variance/latin_square.htm" />
+    <TocEntry
+      Title="Crossover"
+      Link="/Content/analysis_of_variance/crossover.htm" />
+    <TocEntry
+      Title="Kruskal-Wallis"
+      Link="/Content/nonparametric_methods/kruskal_wallis.htm" />
+    <TocEntry
+      Title="Friedman"
+      Link="/Content/nonparametric_methods/friedman.htm" />
+    <TocEntry
+      Title="Equality of variance"
+      Link="/Content/analysis_of_variance/homogeneity_of_variance.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Chi-square tests"
+    Link="/Content/chi_square_tests/chisq_tests.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="2 by 2 chi-square test"
+      Link="/Content/chi_square_tests/22.htm" />
+    <TocEntry
+      Title="2 by k chi-square test"
+      Link="/Content/chi_square_tests/2k.htm" />
+    <TocEntry
+      Title="r by c contingency table analysis"
+      Link="/Content/chi_square_tests/rc.htm" />
+    <TocEntry
+      Title="McNemar chi-square and exact test for matched pairs"
+      Link="/Content/chi_square_tests/mcnemar.htm" />
+    <TocEntry
+      Title="Maxwell chi-square for k paired data"
+      Link="/Content/agreement/kappa.htm" />
+    <TocEntry
+      Title="Mantel-Haenszel test"
+      Link="/Content/meta_analysis/mh.htm" />
+    <TocEntry
+      Title="Generalised Cochran-Mantel-Haenszel tests"
+      Link="/Content/chi_square_tests/generalized_cochran_mantel_haenszel.htm" />
+    <TocEntry
+      Title="Woolf statistics"
+      Link="/Content/chi_square_tests/woolf.htm" />
+    <TocEntry
+      Title="Chi-square goodness of fit test"
+      Link="/Content/nonparametric_methods/chisq_goodness_fit.htm" />
+    <TocEntry
+      Title="Crosstabs"
+      Link="/Content/basic_descriptive_statistics/crosstabs.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Clinical epidemiology calculations"
+    Link="/Content/clinical_epidemiology/clinical_epidemiology.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Risk (prospective)"
+      Link="/Content/clinical_epidemiology/risk_prospective.htm" />
+    <TocEntry
+      Title="Risk (retrospective)"
+      Link="/Content/clinical_epidemiology/risk_retrospective.htm" />
+    <TocEntry
+      Title="Diagnostic tests"
+      Link="/Content/clinical_epidemiology/diagnostic.htm" />
+    <TocEntry
+      Title="Likelihood ratios"
+      Link="/Content/clinical_epidemiology/likelihood_ratios.htm" />
+    <TocEntry
+      Title="Number needed to treat"
+      Link="/Content/clinical_epidemiology/nnt.htm" />
+    <TocEntry
+      Title="Categorical agreement (kappa etc.)"
+      Link="/Content/agreement/kappa.htm" />
+    <TocEntry
+      Title="Screening test errors"
+      Link="/Content/clinical_epidemiology/screening_test.htm" />
+    <TocEntry
+      Title="Growth charts"
+      Link="/Content/data_preparation/growth_charts.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Probability distributions"
+    Link="/Content/distributions/distributions.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Normal distribution"
+      Link="/Content/distributions/normal.htm" />
+    <TocEntry
+      Title="Chi-square distribution"
+      Link="/Content/distributions/chisq.htm" />
+    <TocEntry
+      Title="Student's t distribution"
+      Link="/Content/distributions/t.htm" />
+    <TocEntry
+      Title="F (variance ratio) distribution"
+      Link="/Content/distributions/f.htm" />
+    <TocEntry
+      Title="Studentized range (Q)"
+      Link="/Content/distributions/studentized_range.htm" />
+    <TocEntry
+      Title="Spearman's rho distribution"
+      Link="/Content/distributions/rho.htm" />
+    <TocEntry
+      Title="Kendall's tau distribution"
+      Link="/Content/distributions/tau.htm" />
+    <TocEntry
+      Title="Binomial distribution"
+      Link="/Content/distributions/binomial.htm" />
+    <TocEntry
+      Title="Poisson distribution"
+      Link="/Content/distributions/poisson.htm" />
+    <TocEntry
+      Title="Non-central t distribution"
+      Link="/Content/distributions/non_central_t.htm" />
+    <TocEntry
+      Title="Gamma distribution"
+      Link="/Content/distributions/gamma.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Exact tests on counts"
+    Link="/Content/exact_tests_on_counts/exact_tests.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Sign test"
+      Link="/Content/exact_tests_on_counts/sign.htm" />
+    <TocEntry
+      Title="Fisher's exact test"
+      Link="/Content/exact_tests_on_counts/fisher_exact.htm" />
+    <TocEntry
+      Title="Fisher's exact test (expanded)"
+      Link="/Content/exact_tests_on_counts/fisher_exact_extended.htm" />
+    <TocEntry
+      Title="r by c contingency table analysis"
+      Link="/Content/chi_square_tests/rc.htm" />
+    <TocEntry
+      Title="Liddell exact test for matched pairs"
+      Link="/Content/chi_square_tests/mcnemar.htm" />
+    <TocEntry
+      Title="Confidence interval for 2 by 2 odds"
+      Link="/Content/exact_tests_on_counts/odds_ratio_ci.htm" />
+    <TocEntry
+      Title="Poisson rate confidence interval"
+      Link="/Content/rates/poisson_rate_ci.htm" />
+    <TocEntry
+      Title="Crosstabs"
+      Link="/Content/basic_descriptive_statistics/crosstabs.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Meta-analysis"
+    Link="/Content/meta_analysis/meta_analyses.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Odds ratio meta-analysis"
+      Link="/Content/meta_analysis/mh.htm" />
+    <TocEntry
+      Title="Peto odds ratio meta-analysis"
+      Link="/Content/meta_analysis/peto.htm" />
+    <TocEntry
+      Title="Relative risk meta-analysis"
+      Link="/Content/meta_analysis/relative_risk.htm" />
+    <TocEntry
+      Title="Risk difference meta-analysis"
+      Link="/Content/meta_analysis/risk_difference.htm" />
+    <TocEntry
+      Title="Summary meta-analysis"
+      Link="/Content/meta_analysis/summary.htm" />
+    <TocEntry
+      Title="Effect size meta-analysis"
+      Link="/Content/meta_analysis/effect_size.htm" />
+    <TocEntry
+      Title="Proportion meta-analysis"
+      Link="/Content/meta_analysis/proportion.htm" />
+    <TocEntry
+      Title="Incidence rate meta-analysis"
+      Link="/Content/meta_analysis/incidence_rate.htm" />
+    <TocEntry
+      Title="Correlation meta-analysis"
+      Link="/Content/meta_analysis/correlation.htm" />
+    <TocEntry
+      Title="Forest plot"
+      Link="/Content/graphics/forest.htm" />
+    <TocEntry
+      Title="L'Abbé plot"
+      Link="/Content/meta_analysis/labbe.htm" />
+    <TocEntry
+      Title="Meta-analysis options"
+      Link="/Content/meta_analysis/options.htm" />
+    <TocEntry
+      Title="Heterogeneity in meta-analysis"
+      Link="/Content/meta_analysis/heterogeneity.htm" />
+    <TocEntry
+      Title="Bias detection in meta-analysis"
+      Link="/Content/meta_analysis/bias_detection.htm" />
+    <TocEntry
+      Title="Further meta-analysis"
+      Link="/Content/meta_analysis/further.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Nonparametric methods"
+    Link="/Content/nonparametric_methods/nonmarametric_methods.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Mann-Whitney U test"
+      Link="/Content/nonparametric_methods/mann_whitney.htm" />
+    <TocEntry
+      Title="Wilcoxon signed ranks test"
+      Link="/Content/nonparametric_methods/wilcoxon_signed_ranks.htm" />
+    <TocEntry
+      Title="Kendall's rank correlation"
+      Link="/Content/nonparametric_methods/kendall_correlation.htm" />
+    <TocEntry
+      Title="Spearman's rank correlation"
+      Link="/Content/nonparametric_methods/spearman.htm" />
+    <TocEntry
+      Title="Non-parametric linear regression"
+      Link="/Content/nonparametric_methods/nonparametric_regression.htm" />
+    <TocEntry
+      Title="LOESS curve fitting"
+      Link="/Content/nonparametric_methods/loess.htm" />
+    <TocEntry
+      Title="Cuzick's test for trend"
+      Link="/Content/nonparametric_methods/cuzick.htm" />
+    <TocEntry
+      Title="Smirnov two sample test"
+      Link="/Content/nonparametric_methods/smirnov.htm" />
+    <TocEntry
+      Title="Quantile confidence interval"
+      Link="/Content/nonparametric_methods/quantile_ci.htm" />
+    <TocEntry
+      Title="Chi-square goodness of fit test"
+      Link="/Content/nonparametric_methods/chisq_goodness_fit.htm" />
+    <TocEntry
+      Title="Kruskal-Wallis test"
+      Link="/Content/nonparametric_methods/kruskal_wallis.htm" />
+    <TocEntry
+      Title="Friedman test"
+      Link="/Content/nonparametric_methods/friedman.htm" />
+    <TocEntry
+      Title="Homogeneity of variance"
+      Link="/Content/analysis_of_variance/homogeneity_of_variance.htm" />
+    <TocEntry
+      Title="Ranking"
+      Link="/Content/data_preparation/ranking.htm" />
+    <TocEntry
+      Title="Normal scores"
+      Link="/Content/data_preparation/transform_normal_scores.htm" />
+    <TocEntry
+      Title="Sorting"
+      Link="/Content/data_preparation/sorting_create.htm" />
+    <TocEntry
+      Title="Pairwise data manipulation"
+      Link="/Content/data_preparation/pairwise.htm" />
+    <TocEntry
+      Title="ROC curve analysis"
+      Link="/Content/nonparametric_methods/roc.htm" />
+    <TocEntry
+      Title="Gini coefficient of inequality"
+      Link="/Content/nonparametric_methods/gini.htm" />
+    <TocEntry
+      Title="Diversity of classes"
+      Link="/Content/nonparametric_methods/diversity.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Parametric methods"
+    Link="/Content/parametric_methods/parametric_methods.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Paired t test"
+      Link="/Content/parametric_methods/paired_t.htm" />
+    <TocEntry
+      Title="Single sample t test"
+      Link="/Content/parametric_methods/single_sample_t.htm" />
+    <TocEntry
+      Title="Unpaired (two sample) t test"
+      Link="/Content/parametric_methods/unpaired_t.htm" />
+    <TocEntry
+      Title="Summary t tests"
+      Link="/Content/parametric_methods/summary_t.htm" />
+    <TocEntry
+      Title="F (variance ratio) test"
+      Link="/Content/parametric_methods/f_variance_ratio.htm" />
+    <TocEntry
+      Title="z (normal distribution) tests"
+      Link="/Content/parametric_methods/z_normal.htm" />
+    <TocEntry
+      Title="Reference range"
+      Link="/Content/parametric_methods/reference_range.htm" />
+    <TocEntry
+      Title="Poisson confidence interval"
+      Link="/Content/parametric_methods/poisson_ci.htm" />
+    <TocEntry
+      Title="Normality tests"
+      Link="/Content/parametric_methods/normality.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Proportions analysis"
+    Link="/Content/proportions/proportions.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Single proportion"
+      Link="/Content/proportions/single.htm" />
+    <TocEntry
+      Title="Paired proportions"
+      Link="/Content/proportions/paired.htm" />
+    <TocEntry
+      Title="Two independent proportions"
+      Link="/Content/proportions/unpaired.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Randomization"
+    Link="/Content/randomization/randomization.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Randomize a series"
+      Link="/Content/randomization/x_y_series.htm" />
+    <TocEntry
+      Title="Randomization of intervention-control pairs"
+      Link="/Content/randomization/intervention_control_pairs.htm" />
+    <TocEntry
+      Title="Random allocation to two independent groups"
+      Link="/Content/randomization/two_independent_groups.htm" />
+    <TocEntry
+      Title="Block randomization"
+      Link="/Content/randomization/block.htm" />
+    <TocEntry
+      Title="Preference allocation"
+      Link="/Content/randomization/preference_group.htm" />
+    <TocEntry
+      Title="Random numbers"
+      Link="/Content/randomization/generate_random_numbers.htm" />
+    <TocEntry
+      Title="Random number generation"
+      Link="/Content/randomization/random_number_generator.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Rates analysis and standardization"
+    Link="/Content/rates/rates.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Poisson rate confidence interval"
+      Link="/Content/rates/poisson_rate_ci.htm" />
+    <TocEntry
+      Title="Compare two crude rates"
+      Link="/Content/rates/compare_crude_incidence_rates.htm" />
+    <TocEntry
+      Title="Standardize and compare two rates"
+      Link="/Content/rates/standardize_compare_two_rates.htm" />
+    <TocEntry
+      Title="Direct standardization"
+      Link="/Content/rates/direct_standardization.htm" />
+    <TocEntry
+      Title="Indirect standardization and SMR"
+      Link="/Content/rates/smr.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Regression and correlation"
+    Link="/Content/regression_and_correlation/regression_and_correlation.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Simple linear regression"
+      Link="/Content/regression_and_correlation/simple_linear.htm" />
+    <TocEntry
+      Title="Multiple (general) linear regression"
+      Link="/Content/regression_and_correlation/multiple_linear.htm" />
+    <TocEntry
+      Title="Partial correlation"
+      Link="/Content/regression_and_correlation/partial_correlation.htm" />
+    <TocEntry
+      Title="Grouped linear regression"
+      Link="/Content/regression_and_correlation/grouped.htm" />
+    <TocEntry
+      Title="Grouped linear regression with covariance analysis"
+      Link="/Content/regression_and_correlation/grouped_covariance.htm" />
+    <TocEntry
+      Title="Linearity of regression"
+      Link="/Content/regression_and_correlation/grouped_linearity_replicates.htm" />
+    <TocEntry
+      Title="Polynomial regression"
+      Link="/Content/regression_and_correlation/polynomial.htm" />
+    <TocEntry
+      Title="Linearized regression estimates"
+      Link="/Content/regression_and_correlation/linear_estimates.htm" />
+    <TocEntry
+      Title="Probit analysis"
+      Link="/Content/regression_and_correlation/probit_analysis.htm" />
+    <TocEntry
+      Title="Non-linear models"
+      Link="/Content/regression_and_correlation/nonlinear.htm" />
+    <TocEntry
+      Title="Principal components analysis"
+      Link="/Content/regression_and_correlation/pca.htm" />
+    <TocEntry
+      Title="Logistic regression"
+      Link="/Content/regression_and_correlation/logistic.htm" />
+    <TocEntry
+      Title="Conditional logistic regression"
+      Link="/Content/regression_and_correlation/conditional_logistic.htm" />
+    <TocEntry
+      Title="Poisson regression"
+      Link="/Content/regression_and_correlation/poisson.htm" />
+    <TocEntry
+      Title="Kendall's rank correlation"
+      Link="/Content/nonparametric_methods/kendall_correlation.htm" />
+    <TocEntry
+      Title="Spearman's rank correlation"
+      Link="/Content/nonparametric_methods/spearman.htm" />
+    <TocEntry
+      Title="Non-parametric linear regression"
+      Link="/Content/nonparametric_methods/nonparametric_regression.htm" />
+    <TocEntry
+      Title="Cox regression"
+      Link="/Content/survival_analysis/cox_regression.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Sample size estimation"
+    Link="/Content/sample_size/sample_size.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Sample size for paired t test"
+      Link="/Content/sample_size/paired_t_test.htm" />
+    <TocEntry
+      Title="Sample size for unpaired t test"
+      Link="/Content/sample_size/unpaired_t_test.htm" />
+    <TocEntry
+      Title="Sample size for independent case-control studies"
+      Link="/Content/sample_size/independent_case_control.htm" />
+    <TocEntry
+      Title="Sample size for matched case-control studies"
+      Link="/Content/sample_size/matched_case_control.htm" />
+    <TocEntry
+      Title="Sample size for independent cohort studies"
+      Link="/Content/sample_size/independent_cohort.htm" />
+    <TocEntry
+      Title="Sample size for paired cohort studies"
+      Link="/Content/sample_size/paired_cohort.htm" />
+    <TocEntry
+      Title="Sample size for population surveys"
+      Link="/Content/sample_size/population_survey.htm" />
+    <TocEntry
+      Title="Sample size for survival analysis"
+      Link="/Content/sample_size/survival.htm" />
+    <TocEntry
+      Title="Sample size for Pearson's correlation"
+      Link="/Content/sample_size/correlation.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="Survival analysis and time series"
+    Link="/Content/survival_analysis/survival.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Kaplan-Meier survival estimates"
+      Link="/Content/survival_analysis/kaplan_meier.htm" />
+    <TocEntry
+      Title="Survival plot"
+      Link="/Content/graphics/survival.htm" />
+    <TocEntry
+      Title="Follow-up life table"
+      Link="/Content/survival_analysis/follow_up_life_table.htm" />
+    <TocEntry
+      Title="Abridged life table"
+      Link="/Content/survival_analysis/abridged_life_table.htm" />
+    <TocEntry
+      Title="Log-Rank &amp; Wilcoxon tests"
+      Link="/Content/survival_analysis/logrank.htm" />
+    <TocEntry
+      Title="Wei-Lachin test"
+      Link="/Content/survival_analysis/wei_lachin.htm" />
+    <TocEntry
+      Title="Cox regression"
+      Link="/Content/survival_analysis/cox_regression.htm" />
+  </TocEntry>
+  <TocEntry
+    Title="References"
+    Link="/Content/references/reference_sources.htm"
+    BreakType="chapter"
+    StartSection="false"
+    PageNumberReset="continue">
+    <TocEntry
+      Title="Basic guide to selecting statistical methods"
+      Link="/Content/methods/method_selection.htm"
+      BreakType="chapter"
+      StartSection="false"
+      PageNumberReset="continue"></TocEntry>
+    <TocEntry
+      Title="References to underpinning methodology"
+      Link="/Content/references/reference_list.htm"></TocEntry>
+    <TocEntry
+      Title="Glossary of symbols and abbreviations"
+      Link="/Content/references/glossary.htm" />
+    <TocEntry
+      Title="Conversion factors between units"
+      Link="/Content/data_preparation/conversion_factors.htm" />
+    <TocEntry
+      Title="Support"
+      Link="/Content/references/support.htm" />
+  </TocEntry>
+</CatapultToc>

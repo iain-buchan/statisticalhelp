@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="3" MadCap:lastHeight="861" MadCap:lastWidth="2552" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Poisson Distribution - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Poisson distribution;Distributions: Poisson" />Poisson Distribution</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Distributions_Poisson</b>.</p>
+        <p>&#160;</p>
+        <p>A Poisson distribution is the distribution of the number of events in a fixed time interval, provided that the events occur at random, independently in time and at a constant rate.</p>
+        <p>&#160;</p>
+        <p>The event rate, µ, is the number of events per unit time. When µ is large, the shape of a Poisson distribution is very similar to that of the <a href="normal.htm">standard normal distribution</a>. The change in shape of a Poisson distribution with increasing n is very similar to the equivalent <a href="binomial.htm">binomial distribution</a>. Convergence of distributions in this way can be explained by the <a href="normal.htm">central limit theorem</a>.</p>
+        <p>&#160;</p>
+        <p>Consider a time interval divided into many sub-intervals of equal length such that the probability of an event in a sub-interval is small and the probability of more than one event is negligible. If the probability of an event in each sub-interval is the same as and independent of that probability for other sub-intervals then n sub-intervals can be thought of as n independent trials. This is why Poisson distributions are closely related to binomial distributions.</p>
+        <p>&#160;</p>
+        <p>Both the mean and variance of a Poisson distribution are equal to µ. The probability of r events happening in unit time with an event rate of µ is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(r)=\frac{e^{-\mu}\mu^r}{r!}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>The summation of this Poisson frequency function from zero to r will always be equal to one as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle e^\mu=\sum_{r=0}^\infty (\mu^r/r!)$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Analysis of mortality statistics often employs Poisson distributions on the assumption that deaths from most diseases occur independently and at random in populations (see <a href="../rates/poisson_rate_ci.htm">Poisson rate confidence interval</a>). Other common uses of Poisson are in Physics to model radioactive particle emission and in insurance companies to model accident rates.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect calculates cumulative probabilities that (≤,≥,=) r random events are contained in an interval when the average number of such events per interval is μ. The gamma function is a generalised factorial function and it is used to calculate each Poisson probability (<a href="../references/reference_list.htm">Knusel, 1986</a>). The core algorithm evaluates the logarithm of the gamma function (<a href="../references/reference_list.htm">Cody and Hillstrom, 1967; Abramowitz and Stegun 1972; Macleod, 1989</a>) to the limit of 64-bit precision. The inverse is found using a bisection algorithm to one order of magnitude larger than the limit of 64-bit precision.</p>
+        <p>&#160;</p>
+        <p>Γ(*) is the gamma function:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</MadCap:equation>
+        </p>
+        <p>Γ(1)=1</p>
+        <p>Γ(x+1)=xΓ(x)</p>
+        <p>Γ(n)=(n-1)!</p>
+    </body>
+</html>

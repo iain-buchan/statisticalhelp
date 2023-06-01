@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="6901.104" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Kaplan-Meier Survival Estimates (Survival Curves) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Survival analysis: Kaplan-Meier;Product limit estimates of survival;Kaplan-Meier analysis;Survival estimates (Kaplan-Meier);Survival curves (Kaplan-Meier)" />
+            Kaplan-Meier Survival Estimates</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Survival_Kaplan-Meier</b>.</p>
+        <p>&#160;</p>
+        <p>This function estimates survival rates and hazard from data that may be incomplete.</p>
+        <p>&#160;</p>
+        <p>The survival rate is expressed as the survivor function (S):</p>
+        <p>
+            <MadCap:equation>$\displaystyle S_t=\frac{\text{number of individuals surviving longer than t}}{\text{total number of individuals studied}}$</MadCap:equation>
+        </p>
+        <p>- where t is a time period known as the survival time, time to failure or time to event (such as death); e.g. 5 years in the context of 5 year survival rates. Some texts present S as the estimated probability of surviving to time t for those alive just before t multiplied by the proportion of subjects surviving to t. Thus it reflects the probability of no event before t. At t=0 S(t) = 1 and decreases toward 0 as t increases toward infinity.</p>
+        <p>&#160;</p>
+        <p>The product limit (PL) method of <a href="../references/reference_list.htm">Kaplan and Meier (1958)</a> is used to estimate S:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \hat{S}_t=\prod_{t_i \le t} \left[1-\frac{d_i}{n_i}\right]$</MadCap:equation>
+        </p>
+        <p>- where t<sub>i</sub> is duration of study at point i, d<sub>i</sub> is number of deaths up to point i and n<sub>i</sub> is number of individuals at risk just prior to t<sub>i</sub>. S is based upon the probability that an individual survives at the end of a time interval, on the condition that the individual was present at the start of the time interval. S is the product (P) of these conditional probabilities.</p>
+        <p>&#160;</p>
+        <p>If a subject is last followed up at time t<sub>i</sub> and then leaves the study for any reason (e.g. lost to follow up) ti is counted as their <a href="censorship.htm" target="_popup">censorship</a> time.</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <ul>
+            <li><a href="censorship.htm" target="_popup">Censored</a> individuals have the same prospect of survival as those who continue to be followed. This can not be tested for and can lead to a <a href="../basics/bias.htm">bias</a> that artificially reduces S.</li>
+            <li>Survival prospects are the same for early as for late recruits to the study (can be tested for).</li>
+            <li>The event studied (e.g. death) happens at the specified time. Late recording of the event studied will cause artificial inflation of S.</li>
+        </ul>
+        <p>&#160;</p>
+        <p>The instantaneous hazard function h(t) [also known as the hazard rate, conditional failure rate or force of mortality] is defined as the event rate at time t conditional on surviving up to or beyond time t. As h(t) is a rate, not a probability, it has units of 1/t.The cumulative hazard function H_hat (t) is the integral of the hazard rates from time 0 to t,which represents the accumulation of the hazard over time - mathematically this quantifies the number of times you would expect to see the failure event in a given time period, if the event was repeatable. So it is more accurate to think of hazards in terms of rates than probabilities.The cumulative hazard is estimated by the method of <a href="../references/reference_list.htm">Peterson (1977)</a> as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \hat{H}_t=-\ln({\hat{S}_t})$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>S and H with their standard errors and confidence intervals can be saved to a workbook for further analysis (see below).</p>
+        <p>&#160;</p>
+        <p><u>Median and mean survival time</u>
+        </p>
+        <p>The median survival time is calculated as the smallest survival time for which the survivor function is less than or equal to 0.5. Some data sets may not get this far, in which case their median survival time is not calculated. A confidence interval for the median survival time is constructed using a robust nonparametric method due to <a href="../references/reference_list.htm">Brookmeyer and Crowley (1982)</a>. Another confidence interval for the median survival time is constructed using a large sample estimate of the density function of the survival estimate (<a href="../references/reference_list.htm">Andersen, 1993</a>). If there are many tied survival times then the Brookmeyer-Crowley limits should not be used.</p>
+        <p>&#160;</p>
+        <p>Mean survival time is estimated as the area under the survival curve. The estimator is based upon the entire range of data. Note that some software uses only the data up to the last observed event; <a href="../references/reference_list.htm">Hosmer and Lemeshow (1999)</a> point out that this biases the estimate of the mean downwards, and they recommend that the entire range of data is used. A large sample method is used to estimate the variance of the mean survival time and thus to construct a confidence interval (<a href="../references/reference_list.htm">Andersen, 1993</a>).</p>
+        <p>&#160;</p>
+        <p>Samples of survival times are frequently highly skewed, therefore, in survival analysis, the median is generally a better measure of central location than the mean.</p>
+        <p>&#160;</p>
+        <p><u>Plots</u>
+        </p>
+        <p>StatsDirect can calculate S and H for more than one group at a time and plot the survival and hazard curves for the different groups together. Four different plots are given and certain distributions are indicated if these plots form a straight line pattern (<a href="../references/reference_list.htm">Lawless, 1982; Kalbfleisch and Prentice, 1980</a>). The plots and their associated distributions are:</p>
+        <p>&#160;</p>
+        <p><u>Plot&#160;Distribution indicated by a straight line pattern</u>
+        </p>
+        <p>H vs. t&#160;Exponential, through the origin with slope λ</p>
+        <p>ln(H) vs. ln(t)&#160;Weibull, intercept beta and slope ln(l)</p>
+        <p>z(S) vs. ln(t)&#160;Log-normal</p>
+        <p>H/t vs. t&#160;Linear hazard rate</p>
+        <p>&#160;</p>
+        <p>- where t is time, ln is natural (base e) logarithm, z(p) is the p quantile from the <a href="../distributions/normal.htm">standard normal distribution</a> and λ (lambda) is the real probability of event/death at time t.</p>
+        <p>&#160;</p>
+        <p>For survival plots that display confidence intervals, save the results of this function to a workbook and use the <a href="../graphics/survival.htm">Survival</a> function of the graphics menu.</p>
+        <p>&#160;</p>
+        <p>Note that censored times are marked with a small vertical tick on the survival curve; you have the option to turn this off. If you want to use markers for observed event/death/failure times then please check the box when prompted.</p>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The variance of S is estimated using the method of <a href="../references/reference_list.htm">Greenwood (1926)</a>:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{var}(\hat{S}_t) = \hat{S}_t^2 \sum_{t_i \le t} \frac{d_i}{n_i (n_i - d_i)}$</MadCap:equation>
+        </p>
+        <p>- The confidence interval for the survivor function is not calculated directly using Greenwood's variance estimate as this would give impossible results (&lt; 0 or &gt; 1) at extremes of S. The confidence interval for S uses an asymptotic maximum likelihood solution by log transformation as recommended by <a href="../references/reference_list.htm">Kalbfleisch and Prentice (1980)</a>.</p>
+        <p>&#160;</p>
+        <p>The cumulative hazard function is estimated as minus the natural logarithm of the product limit estimate of the survivor function as above (<a href="../references/reference_list.htm">Peterson, 1977</a>). Note that some statistical software calculates the simpler Nelson-Aalen estimate (<a href="../references/reference_list.htm">Nelson, 1972; Aalen, 1978</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle \tilde{H}_t = \sum_{t_i \le t} \frac{d_i}{n_i}$</MadCap:equation>
+        </p>
+        <p>A Nelson-Aalen hazard estimate will always be less than an equivalent Peterson estimate and there is no substantial case for using one in favour of the other.</p>
+        <p>&#160;</p>
+        <p>The variance of H hat is estimated as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{var}(\hat{H}_t) = \frac{\text{var}(\hat{S}_t)}{\hat{S}_t^2}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p><u>Further analysis</u>
+        </p>
+        <p>S and H do not assume specific distributions for survival or hazard curves. If survival plots indicate specific distributions then more powerful estimates of S and H might be achieved by modelling. The commonest model is exponential but Weibull, log-normal, log-logistic and Gamma often appear. An expert Statistician and specialist software (e.g. <a href="http://www.nag.co.uk">GLIM</a>, <a href="http://cran.r-project.org/">R</a>, <a href="http://www.nag.co.uk">MLP</a> and some of the <a href="http://www.sas.com">SAS</a> modules) should be employed to pursue this sort of work. In most situations, however, you should consider improving the estimates of S and H by using <a href="cox_regression.htm">Cox regression</a> rather than parametric models.</p>
+        <p>&#160;</p>
+        <p>If H is constant over time then a plot of the natural log of H vs. time will resemble a straight line with slope λ. If this is true then:</p>
+        <p>Probability of survival beyond t = exponent(-λ * t)</p>
+        <p>- this eases the calculation of relative risk from the ratio of hazard functions at time t on two survival curves. When the hazard function depends on time then you can usually calculate relative risk after fitting <a href="cox_regression.htm">Cox's proportional hazards model</a>. This model assumes that for each group the hazard functions are proportional at each time, it does not assume any particular distribution function for the hazard function. Proportional hazards modelling can be very useful, however, most researchers should seek statistical guidance with this.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Survival worksheet: Group Surv, Time Surv, Censor Surv).</p>
+        <p>&#160;</p>
+        <p>In a hypothetical example, death from a cancer after exposure to a particular carcinogen was measured in two groups of rats. Group 1 had a different pre-treatment régime to group 2. The time from pre-treatment to death is recorded. If a rat was still living at the end of the experiment or it had died from a different cause then that time is considered " <a href="censorship.htm" target="_popup">censored</a>". A censored observation is given the value 0 in the death/censorship variable to indicate a "non-event".</p>
+        <p>&#160;</p>
+        <p>Group 1: 143, 165, 188, 188, 190, 192, 206, 208, 212, 216, 220, 227, 230, 235, 246, 265, 303, 216*, 244*</p>
+        <p>&#160;</p>
+        <p>Group 2: 142, 157, 163, 198, 205, 232, 232, 232, 233, 233, 233, 233, 239, 240, 261, 280, 280, 295, 295, 323, 204*, 344*</p>
+        <p>&#160;</p>
+        <p>* = censored data</p>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first prepare them in three workbook columns appropriately labelled:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">Group Surv</td>
+                <td style="text-align: right;text-decoration: underline;">Time Surv</td>
+                <td style="text-align: right;text-decoration: underline;">Censor Surv</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">142</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">143</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">157</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">163</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">165</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">188</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">188</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">190</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">192</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">198</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">204</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">205</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">206</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">208</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">212</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">216</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">216</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">220</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">227</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">230</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">232</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">232</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">232</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">233</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">233</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">233</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">233</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">235</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">239</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">240</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">244</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">246</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">261</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">265</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">280</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">280</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">295</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">295</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">303</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">323</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">344</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Alternatively, open the test workbook using the file open function of the file menu. Then select Kaplan-Meier from the Survival Analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Group Surv" when asked for the group identifier, select "Time Surv" when asked for times and "Censor Surv" when asked for deaths/events. Click on No when you are asked whether or not you want to save various statistics to the workbook. Click on Yes when you are prompted about plotting PL estimates.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Kaplan-Meier survival estimates</u>
+        </p>
+        <p>&#160;</p>
+        <p>Group: 1 (Group Surv = 2)</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Time</td>
+                <td style="text-decoration: underline;">At risk</td>
+                <td style="text-decoration: underline;">Dead</td>
+                <td style="text-decoration: underline;">Censored</td>
+                <td style="text-decoration: underline;">S</td>
+                <td style="text-decoration: underline;">SE(S)</td>
+                <td style="text-decoration: underline;">H</td>
+                <td style="text-decoration: underline;">SE(H)</td>
+            </tr>
+            <tr>
+                <td>142</td>
+                <td>22</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.954545</td>
+                <td>0.044409</td>
+                <td>0.04652</td>
+                <td>0.046524</td>
+            </tr>
+            <tr>
+                <td>157</td>
+                <td>21</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.909091</td>
+                <td>0.061291</td>
+                <td>0.09531</td>
+                <td>0.06742</td>
+            </tr>
+            <tr>
+                <td>163</td>
+                <td>20</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.863636</td>
+                <td>0.073165</td>
+                <td>0.146603</td>
+                <td>0.084717</td>
+            </tr>
+            <tr>
+                <td>198</td>
+                <td>19</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.818182</td>
+                <td>0.08223</td>
+                <td>0.200671</td>
+                <td>0.100504</td>
+            </tr>
+            <tr>
+                <td>204</td>
+                <td>18</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0.818182</td>
+                <td>0.08223</td>
+                <td>0.200671</td>
+                <td>0.100504</td>
+            </tr>
+            <tr>
+                <td>205</td>
+                <td>17</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.770053</td>
+                <td>0.090387</td>
+                <td>0.261295</td>
+                <td>0.117378</td>
+            </tr>
+            <tr>
+                <td>232</td>
+                <td>16</td>
+                <td>3</td>
+                <td>0</td>
+                <td>0.625668</td>
+                <td>0.105069</td>
+                <td>0.468935</td>
+                <td>0.16793</td>
+            </tr>
+            <tr>
+                <td>233</td>
+                <td>13</td>
+                <td>4</td>
+                <td>0</td>
+                <td>0.433155</td>
+                <td>0.108192</td>
+                <td>0.836659</td>
+                <td>0.249777</td>
+            </tr>
+            <tr>
+                <td>239</td>
+                <td>9</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.385027</td>
+                <td>0.106338</td>
+                <td>0.954442</td>
+                <td>0.276184</td>
+            </tr>
+            <tr>
+                <td>240</td>
+                <td>8</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.336898</td>
+                <td>0.103365</td>
+                <td>1.087974</td>
+                <td>0.306814</td>
+            </tr>
+            <tr>
+                <td>261</td>
+                <td>7</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.28877</td>
+                <td>0.099172</td>
+                <td>1.242125</td>
+                <td>0.34343</td>
+            </tr>
+            <tr>
+                <td>280</td>
+                <td>6</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0.192513</td>
+                <td>0.086369</td>
+                <td>1.64759</td>
+                <td>0.44864</td>
+            </tr>
+            <tr>
+                <td>295</td>
+                <td>4</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0.096257</td>
+                <td>0.064663</td>
+                <td>2.340737</td>
+                <td>0.671772</td>
+            </tr>
+            <tr>
+                <td>323</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.048128</td>
+                <td>0.046941</td>
+                <td>3.033884</td>
+                <td>0.975335</td>
+            </tr>
+            <tr>
+                <td>344</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0.048128</td>
+                <td>0.046941</td>
+                <td>3.033884</td>
+                <td>0.975335</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Median survival time = 233</p>
+        <p>Andersen 95% CI for median survival time = 231.898503 to 234.101497</p>
+        <p>Brookmeyer-Crowley 95% CI for median survival time = 232 to 240</p>
+        <p>&#160;</p>
+        <p>Mean survival time (95% CI) [limit: 344 on 323] = 241.283422 (219.591463 to 262.975382)</p>
+        <p>&#160;</p>
+        <p>Group: 2 (Group Surv = 1)</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Time</td>
+                <td style="text-decoration: underline;">At risk</td>
+                <td style="text-decoration: underline;">Dead</td>
+                <td style="text-decoration: underline;">Censored</td>
+                <td style="text-decoration: underline;">S</td>
+                <td style="text-decoration: underline;">SE(S)</td>
+                <td style="text-decoration: underline;">H</td>
+                <td style="text-decoration: underline;">SE(H)</td>
+            </tr>
+            <tr>
+                <td>143</td>
+                <td>19</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.947368</td>
+                <td>0.051228</td>
+                <td>0.054067</td>
+                <td>0.054074</td>
+            </tr>
+            <tr>
+                <td>165</td>
+                <td>18</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.894737</td>
+                <td>0.070406</td>
+                <td>0.111226</td>
+                <td>0.078689</td>
+            </tr>
+            <tr>
+                <td>188</td>
+                <td>17</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0.789474</td>
+                <td>0.093529</td>
+                <td>0.236389</td>
+                <td>0.11847</td>
+            </tr>
+            <tr>
+                <td>190</td>
+                <td>15</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.736842</td>
+                <td>0.101023</td>
+                <td>0.305382</td>
+                <td>0.137102</td>
+            </tr>
+            <tr>
+                <td>192</td>
+                <td>14</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.684211</td>
+                <td>0.106639</td>
+                <td>0.37949</td>
+                <td>0.155857</td>
+            </tr>
+            <tr>
+                <td>206</td>
+                <td>13</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.631579</td>
+                <td>0.110665</td>
+                <td>0.459532</td>
+                <td>0.175219</td>
+            </tr>
+            <tr>
+                <td>208</td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.578947</td>
+                <td>0.113269</td>
+                <td>0.546544</td>
+                <td>0.195646</td>
+            </tr>
+            <tr>
+                <td>212</td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.526316</td>
+                <td>0.114549</td>
+                <td>0.641854</td>
+                <td>0.217643</td>
+            </tr>
+            <tr>
+                <td>216</td>
+                <td>10</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0.473684</td>
+                <td>0.114549</td>
+                <td>0.747214</td>
+                <td>0.241825</td>
+            </tr>
+            <tr>
+                <td>220</td>
+                <td>8</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.414474</td>
+                <td>0.114515</td>
+                <td>0.880746</td>
+                <td>0.276291</td>
+            </tr>
+            <tr>
+                <td>227</td>
+                <td>7</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.355263</td>
+                <td>0.112426</td>
+                <td>1.034896</td>
+                <td>0.316459</td>
+            </tr>
+            <tr>
+                <td>230</td>
+                <td>6</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.296053</td>
+                <td>0.108162</td>
+                <td>1.217218</td>
+                <td>0.365349</td>
+            </tr>
+            <tr>
+                <td>235</td>
+                <td>5</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.236842</td>
+                <td>0.10145</td>
+                <td>1.440362</td>
+                <td>0.428345</td>
+            </tr>
+            <tr>
+                <td>244</td>
+                <td>4</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0.236842</td>
+                <td>0.10145</td>
+                <td>1.440362</td>
+                <td>0.428345</td>
+            </tr>
+            <tr>
+                <td>246</td>
+                <td>3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.157895</td>
+                <td>0.093431</td>
+                <td>1.845827</td>
+                <td>0.591732</td>
+            </tr>
+            <tr>
+                <td>265</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0.078947</td>
+                <td>0.072792</td>
+                <td>2.538974</td>
+                <td>0.922034</td>
+            </tr>
+            <tr>
+                <td>303</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>*</td>
+                <td>infinity</td>
+                <td>*</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Median survival time = 216</p>
+        <p>Andersen 95% CI for median survival time = 199.619628 to 232.380372</p>
+        <p>Brookmeyer-Crowley 95% CI for median survival time = 192 to 230</p>
+        <p>&#160;</p>
+        <p>Mean survival time (95% CI) = 218.684211 (200.363485 to 237.004936)</p>
+        <p>&#160;</p>
+        <p>Below is the classical "survival plot" showing how survival declines with time. The approximate linearity of the log hazard vs. log time plot below indicates a Weibull distribution of survival.</p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/kaplanplot.gif" width="517" height="365" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/hazardplot.gif" width="517" height="365" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/loghazardplot.gif" width="517" height="365" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/lognormalsurvival.gif" width="517" height="365" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/hazardrate.gif" width="517" height="365" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p>At this point you might want to run a formal hypothesis test to see if there is any statistical evidence for two or more survival curves being different. This can be achieved using sensitive parametric methods if you have fitted a particular distribution curve to your data. More often you would use the <a href="logrank.htm">Log-rank and Wilcoxon</a> tests which do not assume any particular distribution of the survivor function.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

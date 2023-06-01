@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="4" MadCap:lastHeight="511" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Sample Size for Population Surveys - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Sample size: Population surveys" />
+            Sample Size for Population Survey</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Sample Size_Population Survey</b>.</p>
+        <p>&#160;</p>
+        <p>This function gives you the minimum number of subjects that you require for a survey of a population for the proportion of individuals in that population displaying a particular factor, with a specified tolerance (<a href="../references/reference_list.htm">Colton, 1974; Feinstein, 2002</a>).</p>
+        <p>&#160;</p>
+        <p><u>Information required</u>
+        </p>
+        <ul>
+            <li>cc: confidence level (1-alpha, where alpha is the <a href="../basics/p_values.htm">two sided</a> probability of detecting a false effect: double alpha if you need a <a href="../basics/p_values.htm">one sided</a> estimate).</li>
+            <li>N: population size.</li>
+            <li>p%: estimate of rate (as a percentage) at which characteristic occurs in the population.</li>
+            <li>d%: absolute deviation from p% that you would tolerate (i.e. p% give or take d%).</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The estimated sample size n is calculated, using simple Gaussian theory, as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle n=\frac{sn}{1+sn/N} \\
+\displaystyle sn=\frac{z^2 p(1-p)}{d^2}$</MadCap:equation>
+        </p>
+        <p>- where p is p%/100, d is d%/100, and z is a quantile from the standard normal distribution for a two tailed probability of 1-cc. n is rounded up to the closest integer.</p>
+    </body>
+</html>

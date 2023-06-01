@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Standardize and Compare Two Rates (Rate Ratio) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Standardise and compare two rates;Rates: Compare two standardized" />Standardize and Compare Two Rates</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Rates_Standardize and Compare Two Rates</b></p>
+        <p>&#160;</p>
+        <p>This function calculates directly standardized rates (DSR) for two study populations, and then compares the DSRs as a rate ratio. Stratum-specific rates are compared also.</p>
+        <p>&#160;</p>
+        <p>DSR is simply a weighted mean event rate for a study population, using the group/stratum sizes of a reference population as the weighting scheme. Standardized or adjusted rates are summary index measures for the purpose of comparison only; their magnitude has no intrinsic value.</p>
+        <p>&#160;</p>
+        <p>The choice of a reference or standard population is important; it must relate to the population under study naturally.</p>
+        <p>&#160;</p>
+        <p>Please note that standardization is not a substitute for individual comparisons of stratum-specific rates. This function produces a plot of stratum-specific rate ratios in addition to comparing the standardized rates.</p>
+        <p>&#160;</p>
+        <p>Direct standardization is not appropriate if there is not a consistent relationship between stratum-specific rates in different populations being compared. There are pitfalls in using directly standardized rates; if you have any doubts then please consult with an Epidemiologist and/or Statistician.</p>
+        <p>&#160;</p>
+        <p>Some of the methods used here are unreliable with small numbers; generally, there should be at least 25 events observed overall and at least one event in each stratum. If the number of events is small, consider aggregating strata.</p>
+        <p>&#160;</p>
+        <p>Note than an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
+        <p>&#160;</p>
+        <p>See also:</p>
+        <p><a href="direct_standardization.htm">Direct standardization</a>
+        </p>
+        <p><a href="compare_crude_incidence_rates.htm">Comparison of two crude rates</a>
+        </p>
+        <p><a href="poisson_rate_ci.htm">Poisson rate confidence interval</a>
+        </p>
+        <p>- which provide some of the calculations given here either in more detail or with more options.</p>
+        <p>&#160;</p>
+        <p><u>Data input</u>
+        </p>
+        <ul>
+            <li>Number of events for each group from index/study populations a and b</li>
+            <li>Person-time for each group from index/study populations a and b (e.g. size of each group if just one year observed and all subjects followed up)</li>
+            <li>Group sizes or weights from a reference/standard population</li>
+            <li>Group/stratum labels, e.g. age bands</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>Exact Poisson confidence limits for the crude rates in both study populations are found as the Poisson means, for distributions with the observed number of events and probabilities relevant to the chosen confidence level, divided by time at risk. The relationship between the Poisson and chi-square distributions is employed here (<a href="../references/reference_list.htm">Ulm, 1990</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{Y}_\text{l}=\frac{\chi^2_{2Y,\space \alpha/2}}{2} \\
+\displaystyle \text{Y}_\text{u}=\frac{\chi^2_{2(Y+1),\space 1-\alpha/2}}{2} \\$</MadCap:equation>
+        </p>
+        <p>- where Y is the observed number of events, Y<sub>l</sub> and Y<sub>u</sub> are lower and upper confidence limits for Y respectively, χ²<sub>ν, α</sub> is the chi-square quantile for upper tail probability α on ν degrees of freedom.</p>
+        <p>&#160;</p>
+        <p>The two crude rates are compared as a ratio using Poisson distribution and test-based methods (<a href="../references/reference_list.htm">Sahai and Kurshid, 1996</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle \widehat{\text{IRR}}=\frac{a}{PT_1}/\frac{b}{PT_2} \\
+
+\displaystyle \widehat{\text{IRR}}  \space \text{CI} = \left( \frac{PT_2}{PT_1}\right) \left( \frac{a}{b+1}\right) \frac{1}{F_{\alpha/2, \space 2(b+1), \space 2a}} \text{ to } \left( \frac{PT_2}{PT_1}\right) \left( \frac{a+1}{b}\right) \frac{1}{F_{\alpha/2, \space 2(a+1), \space 2b}}$</MadCap:equation>
+        </p>
+        <p>- where IRD hat and IRR hat are point estimates of incidence rate difference and ratio respectively, m is the total number of events observed, PT is the total person-time observed and F is a quantile of the F distribution (denominator degrees of freedom are quoted last).</p>
+        <p>&#160;</p>
+        <p>Approximate confidence intervals for the DSR are calculated firstly by Chiang's normal approximation to Poisson rate sums (<a href="../references/reference_list.htm">Chiang, 1961; Keyfitz, 1966; Breslow and Day, 1987; Armitage and Berry, 1994</a>) and secondly by an improved approximation adjusted for the total number of observed events (<a href="../references/reference_list.htm">Dobson et al., 1991</a>).</p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{DSR}=\frac{\displaystyle \sum_{i=1}^k N_ir_i}{\displaystyle \sum_{i=1}^k N_i} \\
+
+\displaystyle r_i=y_i/n_i \\
+
+\displaystyle w_i=\frac{N_i}{\displaystyle  \sum_{i=1}^k N_i} \\
+
+\displaystyle v=\frac{\displaystyle \sum_{i=1}^k N^2_ir_i/n_i}{\displaystyle \left( \sum_{i=1}^k N_i\right)^2} \\
+
+\displaystyle \text{CI}=\text{DSR}\pm z_{\alpha/2} \sqrt{v} \\
+
+\displaystyle \text{ICI}_l=\text{DSR} + (Y_l-Y) \sqrt{v/Y} \\
+
+\displaystyle \text{ICI}_u=\text{DSR} + (Y_u-Y) \sqrt{v/Y} \\$</MadCap:equation>
+        </p>
+        <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub> is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum,  y<sub>i</sub> is the number of events observed in the ith stratum of the study population, ni is the person-time for the ith stratum of the study population,  z&gt;<sub>α/2</sub> is the (100 * α/2) the centile of the standard normal distribution, Y is the total number of events observed, Y<sub>l</sub> and Y<sub>u</sub> are the exact lower and upper confidence limits for the Poisson count Y and ICI <sub>l to u</sub> is the improved confidence interval due to Dobson et al. For large rates, the binomial variance is used, where r(1-r)  is substituted for r in the variance formula above.</p>
+        <p>&#160;</p>
+        <p>Approximate confidence intervals for standardized rate ratios are calculated as follows (<a href="../references/reference_list.htm">Newman, 2001; Armitage et al., 2002</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{SRR}=\frac{\text{DSR}_\text{a}}{\text{DSR}_\text{b}} \\
+\displaystyle \text{var}(\log(\text{SRR}))=\frac{v_a}{\text{DSR}_a^2}+\frac{v_b}{\text{DSR}_b^2} \\
+\displaystyle \text{CI}=\exp \left[ \log(\text{SRR}) \pm z_{\alpha/2} \sqrt{\text{var(log(SRR))}} \right]$</MadCap:equation>
+        </p>
+        <p>- where SRR is the standardized rate ratio, var(log SRR) is the approximate variance of the natural logarithm of SRR, DSR and v are the directly standardized rate and its variance as above,  z<sub>α/2</sub> is the (100 * α/2) the centile of the standard normal distribution, and CI is the approximate confidence interval for SRR. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formulae above.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Newman (2001) p 254</a>:</p>
+        <p>Test workbook (Rates worksheet: d1, pt2, d2, pt2, ref, age strata).</p>
+        <p>&#160;</p>
+        <p>The following data relate to a retrospective cohort study of 2122 males who received treatment for schizophrenia in the province of Alberta, Canada during 1976-1985. The standard/reference population was taken as the Alberta general population in 1981.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: left;">Age group</td>
+                <td style="text-decoration: underline;text-align: right;">Deaths in Cohort</td>
+                <td style="text-decoration: underline;text-align: right;">Person-Years in Cohort</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">10-19</td>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">285.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">20-29</td>
+                <td style="text-align: right;">55</td>
+                <td style="text-align: right;">4,179.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">30-39</td>
+                <td style="text-align: right;">32</td>
+                <td style="text-align: right;">3,291.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">40-49</td>
+                <td style="text-align: right;">21</td>
+                <td style="text-align: right;">1,994.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">50-59</td>
+                <td style="text-align: right;">27</td>
+                <td style="text-align: right;">1,498.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">60-69</td>
+                <td style="text-align: right;">19</td>
+                <td style="text-align: right;">763.5</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">70-79</td>
+                <td style="text-align: right;">25</td>
+                <td style="text-align: right;">254.4</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">80 and over</td>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">46.7</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Age group</td>
+                <td style="text-decoration: underline;text-align: right;">Deaths in Alberta</td>
+                <td style="text-decoration: underline;text-align: right;">People in Alberta (reference size)</td>
+            </tr>
+            <tr>
+                <td>10-19</td>
+                <td style="text-align: right;">267</td>
+                <td style="text-align: right;">201,825</td>
+            </tr>
+            <tr>
+                <td>20-29</td>
+                <td style="text-align: right;">421</td>
+                <td style="text-align: right;">263,175</td>
+            </tr>
+            <tr>
+                <td>30-39</td>
+                <td style="text-align: right;">306</td>
+                <td style="text-align: right;">176,140</td>
+            </tr>
+            <tr>
+                <td>40-49</td>
+                <td style="text-align: right;">431</td>
+                <td style="text-align: right;">114,715</td>
+            </tr>
+            <tr>
+                <td>50-59</td>
+                <td style="text-align: right;">836</td>
+                <td style="text-align: right;">93,315</td>
+            </tr>
+            <tr>
+                <td>60-69</td>
+                <td style="text-align: right;">1,364</td>
+                <td style="text-align: right;">60,835</td>
+            </tr>
+            <tr>
+                <td>70-79</td>
+                <td style="text-align: right;">1,861</td>
+                <td style="text-align: right;">34,250</td>
+            </tr>
+            <tr>
+                <td>80 
+		 and over</td>
+                <td style="text-align: right;">1,797</td>
+                <td style="text-align: right;">12,990</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must select Standardize and Compare Two Rates from the rates section of the analysis menu. Note that annual mortality rates are often expressed as rates per 100000 population or units of person time (i.e. 100000 person years); .</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Comparison of two directly standardized rates</u>
+        </p>
+        <p>&#160;</p>
+        <table style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: left;">Stratum</td>
+                <td style="text-decoration: underline;text-align: left;">a</td>
+                <td style="text-decoration: underline;text-align: left;">Person-time exposed</td>
+                <td style="text-decoration: underline;text-align: left;">b</td>
+                <td style="text-decoration: underline;text-align: left;">Person-time not exposed</td>
+                <td style="text-align: left;"><u>Label</u>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">1</td>
+                <td style="text-align: left;">2</td>
+                <td style="text-align: left;">285.1</td>
+                <td style="text-align: left;">267</td>
+                <td style="text-align: left;">201825</td>
+                <td style="text-align: left;">10 to 19</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">2</td>
+                <td style="text-align: left;">55</td>
+                <td style="text-align: left;">4179.1</td>
+                <td style="text-align: left;">421</td>
+                <td style="text-align: left;">263175</td>
+                <td style="text-align: left;">20 to 29</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">3</td>
+                <td style="text-align: left;">32</td>
+                <td style="text-align: left;">3291.2</td>
+                <td style="text-align: left;">306</td>
+                <td style="text-align: left;">176140</td>
+                <td style="text-align: left;">30 to 39</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">4</td>
+                <td style="text-align: left;">21</td>
+                <td style="text-align: left;">1994.7</td>
+                <td style="text-align: left;">431</td>
+                <td style="text-align: left;">114715</td>
+                <td style="text-align: left;">40 to 49</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">5</td>
+                <td style="text-align: left;">27</td>
+                <td style="text-align: left;">1498.9</td>
+                <td style="text-align: left;">836</td>
+                <td style="text-align: left;">93315</td>
+                <td style="text-align: left;">50 to 59</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">6</td>
+                <td style="text-align: left;">19</td>
+                <td style="text-align: left;">763.5</td>
+                <td style="text-align: left;">1364</td>
+                <td style="text-align: left;">60835</td>
+                <td style="text-align: left;">60 to 69</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">7</td>
+                <td style="text-align: left;">25</td>
+                <td style="text-align: left;">254.4</td>
+                <td style="text-align: left;">1861</td>
+                <td style="text-align: left;">34250</td>
+                <td style="text-align: left;">70 to 79</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">8</td>
+                <td style="text-align: left;">9</td>
+                <td style="text-align: left;">46.7</td>
+                <td style="text-align: left;">1797</td>
+                <td style="text-align: left;">12990</td>
+                <td style="text-align: left;">80+</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Stratum</td>
+                <td style="text-decoration: underline;">RR</td>
+                <td colspan="2" style="text-decoration: underline;">95% CI (exact)</td>
+                <td style="text-decoration: underline;">Weight</td>
+                <td><u>Label</u>
+                </td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>5.302693</td>
+                <td>0.638882</td>
+                <td>19.343485</td>
+                <td>0.210839</td>
+                <td>10 to 19</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>8.227018</td>
+                <td>6.094736</td>
+                <td>10.916013</td>
+                <td>0.27493</td>
+                <td>20 to 29</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>5.596703</td>
+                <td>3.761033</td>
+                <td>8.069297</td>
+                <td>0.184007</td>
+                <td>30 to 39</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2.802107</td>
+                <td>1.716758</td>
+                <td>4.338327</td>
+                <td>0.119839</td>
+                <td>40 to 49</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2.010649</td>
+                <td>1.317034</td>
+                <td>2.946823</td>
+                <td>0.097483</td>
+                <td>50 to 59</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>1.1099</td>
+                <td>0.666146</td>
+                <td>1.740021</td>
+                <td>0.063552</td>
+                <td>60 to 69</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>1.808577</td>
+                <td>1.167342</td>
+                <td>2.678348</td>
+                <td>0.03578</td>
+                <td>70 to 79</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>1.393114</td>
+                <td>0.63598</td>
+                <td>2.650516</td>
+                <td>0.01357</td>
+                <td>80+</td>
+            </tr>
+            <tr>
+                <td>All</td>
+                <td>2.028063</td>
+                <td>1.746703</td>
+                <td>2.342474</td>
+                <td>1</td>
+                <td>All (crude)</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Analysis model for rates: Poisson (small rates)</u>
+        </p>
+        <p>Rates are expressed per 1,000 units of person time:</p>
+        <p>&#160;</p>
+        <p>Crude rate exposed = 15.430094</p>
+        <p>Exact 95% CI = 13.313979 to 17.786968</p>
+        <p>&#160;</p>
+        <p>Crude rate not exposed = 7.608293</p>
+        <p>Exact 95% CI = 7.434549 to 7.785072</p>
+        <p>&#160;</p>
+        <p>Standardized rate exposed = 17.616898</p>
+        <p>Approximate 95% CI = 14.217636 to 21.016159</p>
+        <p>&#160;</p>
+        <p>Standardized rate not exposed = 7.608293</p>
+        <p>Approximate 95% CI = 7.433557 to 7.783028</p>
+        <p>&#160;</p>
+        <p>Standardized rate ratio = 2.315486</p>
+        <p>Approximate 95% CI = 1.906565 to 2.812113</p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/rateratioplot.gif" width="517" height="365" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

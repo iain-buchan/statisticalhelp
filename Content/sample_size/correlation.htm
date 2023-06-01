@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="4" MadCap:lastHeight="1092" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Sample Size for Pearson's Correlation - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Sample size: Correlation" />Sample Size for Pearson's Correlation</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Sample Size_Correlation</b>.</p>
+        <p>&#160;</p>
+        <p>This function gives you the minimum number of pairs of subjects needed to detect a true difference in Pearson's correlation coefficient between the null (usually 0) and alternative hypothesis levels with power POWER and two sided type I error probability ALPHA (<a href="../references/reference_list.htm">Stuart and Ord, 1994; Draper and Smith, 1998</a>).</p>
+        <p>&#160;</p>
+        <p><u>Information required</u>
+        </p>
+        <ul>
+            <li>POWER: probability of detecting a true effect.</li>
+            <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
+            <li>R0: correlation coefficient under the null hypothesis (often 0).</li>
+            <li>R1: correlation coefficient under the alternative hypothesis.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Practical issues</u>
+        </p>
+        <ul>
+            <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
+            <li>5% is the usual choice for ALPHA.</li>
+            <li>Two sided in this context means R0 not equal to R1, one sided would be R1 either greater than or less than R0 which is rarely appropriate because you can seldom say that a difference in the unexpected direction would be of no interest at all.</li>
+            <li>Statistical correlation can be misleading, remember to think beyond the numerical association between two variables, and not to infer <a href="../basics/causality.htm">causality</a> too easily.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The sample size estimation uses Fisher's classic z-transformation to normalize the distribution of Pearson's correlation coefficient:</p>
+        <p>
+            <MadCap:equation>$\displaystyle z'=\frac{1}{2} \ln \left( \frac{1+r}{1-r}\right) \\
+\displaystyle z=z'-\frac{3z'+r}{4n}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>This gives rise to the usual test for an observed correlation coefficient (r1) to be tested for its difference from a pre-defined reference value (r0, often 0), and from this the power and sample size (n) can be determined:</p>
+        <p>
+            <MadCap:equation>$\displaystyle z_2=\sqrt{(n-3)} \left[ z_{r1}'-z_{r0}'\right]$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>StatsDirect makes an initial estimate of n as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle n=\left[\frac{z_{1-\alpha/2}+z_{1-\beta}}{|z_{r0}'-z_{r1}'|} \right]^2+3$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>StatsDirect then finds the value of n that satisfies the following power (1-β) equation:</p>
+        <p>
+            <MadCap:equation>$\displaystyle 1-\beta= \text{norm}[\delta \text{ var}(\delta)-z_{\alpha/2}] \\
+\displaystyle \text{var}(\delta)=\sqrt{n-1} \\
+\displaystyle \bar z=z-\frac{3z+r}{4n}+\frac{r}{2(n-1)}+\frac{3r}{8(n-1)^2}$</MadCap:equation>
+        </p>
+        <p>-where norm is the area under the standard normal distribution curve.</p>
+        <p>&#160;</p>
+        <p>The precise value of n is rounded up to the closest integer in the results given by StatsDirect.</p>
+    </body>
+</html>

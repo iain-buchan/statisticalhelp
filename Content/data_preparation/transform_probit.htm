@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="267" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Probit Transform - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Probit transform;Transformations: Probit" />Probit Transform</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Transforming and Deriving_Common Transforms_Probit</b>.</p>
+        <p>&#160;</p>
+        <p>Probit is a common transformation for linearising sigmoid distributions of proportions (<a href="../references/reference_list.htm">Armitage and Berry, 1994</a>). The probit is defined as 5 + the 1-p quantile from the standard <a href="../distributions/normal.htm">normal distribution</a>, where p is a proportion. For example, the number of insects killed by the log dose of an insecticide might describe a sigmoid relationship, which is a rectangular hyperbolic relationship to the non-log transformed dose. This sort of quantal response situation can be treated as a linear problem after probit transformation. <a href="../regression_and_correlation/probit_analysis.htm">Probit analysis</a> uses these principles.</p>
+        <p>&#160;</p>
+        <p>You can supply proportions or discrete data for logit transformation. If you specify discrete data then StatsDirect converts these to proportions by taking each value as a proportion of the maximum of the supplied data. The results are stored in a new column that is marked Probit:&lt;name&gt; where &lt;name&gt; is the original column label.</p>
+        <p>&#160;</p>
+        <p>StatsDirect marks indeterminable values as missing data, i.e. p=0 or p=1. StatsDirect probit analysis, on the other hand, treats p=0 and p=1 in a more complex way that includes them in the overall analysis.</p>
+    </body>
+</html>

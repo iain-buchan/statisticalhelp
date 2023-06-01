@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="3684.104" MadCap:lastWidth="2773" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Descriptive Statistics on Variables in StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="This function provides measures of location and dispersion which describe the data in a worksheet column. You are given the number, arithmetic mean, sum, variance, standard deviation, standard error of the arithmetic mean, coefficient of variance, confidence interval for the arithmetic mean, geometric mean, coefficient of skewness, coefficient of kurtosis, maximum, upper quartile, median, lower quartile, minimum and range for each selected variable. You can also choose to calculate an additional quantile and this is appended to the results listed above. Incalculable results are displayed as missing data using an asterisk (*)." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Summary statistics;Mean (summary);Average (summary);Centile (summary);Standard error (summary);Variance coefficient (summary);Variance (summary);Range (summary);Standard deviation (summary);Skewness: Summary statistics;Quartile (summary);Univariate summary;Median (summary);Minimum (summary);Missing data (summary);Mean (summary);Coefficient of variation (summary);Kurtosis (summary);Maximum (summary)" />
+            Univariate Summary</h1>
+        <p>&#160;</p>
+        <p>Menu locations:</p>
+        <p><b>Analysis_Descriptive_Univariate Summary</b>;</p>
+        <p><b>Analysis_Descriptive_Weighted Univariate Summary</b>.</p>
+        <p>&#160;</p>
+        <p>This function provides measures of location and dispersion which describe the data in a worksheet column. You are given the number, arithmetic mean, sum, variance, standard deviation, standard error of the arithmetic mean, coefficient of variance, confidence interval for the arithmetic mean, geometric mean, coefficient of skewness, coefficient of kurtosis, maximum, upper quartile, median, lower quartile, minimum and range for each selected variable. You can also choose to calculate an additional quantile and this is appended to the results listed above. Incalculable results are displayed as missing data using an asterisk (*).</p>
+        <p>&#160;</p>
+        <p>If you <a href="../workbook/selecting_data.htm">select</a> more than one column of data to describe then you are given an option to save the results to worksheet columns. Saved columns of results represent the statistics, mean, median etc., and their rows represent the variables/columns you selected to describe.</p>
+        <p>&#160;</p>
+        <p>Confidence limits (boundaries of the <a href="../basics/confidence_interval.htm">confidence interval</a>) are given for the arithmetic mean. Please see <a href="../nonparametric_methods/quantile_ci.htm">quantile confidence interval</a> for confidence intervals for the median and other measures of location.</p>
+        <p>&#160;</p>
+        <p>Some related topics:</p>
+        <ul>
+            <li><a href="central_tendency.htm">central tendency</a>
+            </li>
+            <li><a href="standard_deviation.htm">variance, standard deviation and spread</a>
+            </li>
+            <li><a href="skewness.htm">skewness</a>
+            </li>
+            <li><a href="../distributions/normal.htm">normal distribution</a>
+            </li>
+            <li><a href="../nonparametric_methods/quantiles.htm">quantiles</a>
+            </li>
+            <li><a href="../nonparametric_methods/quantile_ci.htm">quantile confidence intervals</a>
+            </li>
+            <li><a href="../graphics/histogram.htm">histogram</a>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p>Please refer to one of the general textbooks listed in the <a href="../references/reference_list.htm">reference section</a>for discussion of the application and relative merits of individual descriptive statistics.</p>
+        <p>&#160;</p>
+        <p><u style="font-weight: bold;">Definitions</u>
+        </p>
+        <p><u>Valid data and missing data</u>
+        </p>
+        <p>For each worksheet column that you select, the number of valid data are the number of cells that can be interpreted as numbers, the remaining cells that can not be interpreted as numbers are counted as missing (e.g. empty cell, asterisk or text label). The sample size used in the calculations below is the number of valid data.</p>
+        <p>&#160;</p>
+        <p><u>Sum, mean, variance, standard deviation, standard error and variance coefficient</u>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle \bar{x}=\frac{\displaystyle \sum_{i=1}^n x_i}{n} \\
+\displaystyle s^2=\frac{\displaystyle \sum_{i=1}^n \left(x-\bar{x}\right)^2}{n-1} \\
+\displaystyle \text{SEM}=\frac{s}{\sqrt{n}} \\
+\displaystyle \text{lower CL}=\bar{x}-\text{SEM} \space t_{\alpha, n-1} \\
+\displaystyle \text{upper CL}=\bar{x}+\text{SEM} \space t_{\alpha, n-1} \\
+\displaystyle \text{VC}=\frac{s}{\bar{x}}$</MadCap:equation>
+        </p>
+        <p>- where Σ is the summation for all observations (x<sub>i</sub>) in a sample, x bar is the sample (arithmetic) mean, n is the sample size, s² is the sample variance, s is the sample standard deviation, SEM is the standard error of the sample mean, upper and lower CL are the confidence limits of the confidence interval for the mean, t<sub>α, n-1</sub> is the (100*a)% two tailed quantile from the Student t distribution with n-1 degrees of freedom, and VC is the variance coefficient.</p>
+        <p>&#160;</p>
+        <p><u>Skewness and kurtosis</u>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{skewness}= \frac{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^3/n}{\displaystyle \left[\sum_{i=1}^n(x_i-\bar{x})^2/n\right]^{1.5}} \\
+\displaystyle \text{kurtosis}= \frac{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^4/n}{\displaystyle \left[\sum_{i=1}^n(x_i-\bar{x})^2/n\right]^2}$</MadCap:equation>
+        </p>
+        <p>- where Σ is the summation for all observations (x<sub>i</sub>) in a sample, x bar is the sample mean and n is the sample size. Note that there are other definitions of these coefficients used by some other statistical software. StatsDirect uses the standard definitions for which critical values are published in standard statistical tables (<a href="../references/reference_list.htm">Pearson and Hartley, 1970; Stuart and Ord, 1994</a>).</p>
+        <p>&#160;</p>
+        <p><u>Geometric mean</u>
+        </p>
+        <p>The geometric mean is a useful measure of central tendency for samples that are log-normally distributed (i.e. the logarithms of the observations are from an approximately normal distribution). The geometric mean is not calculated for samples that contain negative values.</p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{GM}=\exp \left[ \frac{\displaystyle \sum_{i=1}^n\ln (x_i)}{n} \right]$</MadCap:equation>
+        </p>
+        <p>- where Σ is the summation for all observations (x<sub>i</sub>) in a sample, ln is the natural (base e) logarithm, exp is the exponent (anti-logarithm for base e), GM is the sample geometric mean and n is the sample size.</p>
+        <p>&#160;</p>
+        <p><u>Weights</u>
+        </p>
+        <p>If weights are selected then the weights that you supply are first normalised so that they sum to the total number of observations n:</p>
+        <p>
+            <MadCap:equation>$\displaystyle V=\sum_{i=1}^nv_i \\
+\displaystyle w_i=v_i(n/V)$</MadCap:equation>
+        </p>
+        <p>- where v<sub>i</sub> is a user supplied weight and w<sub>i</sub> is the normalised weight.</p>
+        <p>&#160;</p>
+        <p>The following formulae replace the mean, variance and moments calculations defined above when weights are used:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \bar{x}=\frac{\displaystyle \sum_{i=1}^n w_i x_i}{n} \\
+\displaystyle s^2=\frac{\displaystyle \sum_{i=1}^n w_i(x_i-\bar{x})}{n-1} \\
+\displaystyle m'=\frac{\displaystyle \sum_{i=1}^n w_i(x_i-\bar{x})'}{n}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p><u>Median, quartiles and range</u>
+        </p>
+        <p>For samples that are not from an approximately normal distribution, for example when data are censored to remove very large and/or very small values, the following nonparametric statistics should be used in place of the arithmetic mean, its variance and the other parametric measures above.</p>
+        <p>&#160;</p>
+        <p>
+            Median (50th centile, quantile 0.5), lower quartile (25th centile, quantile 0.25) and upper quartile (75th centile, quantile 0.75) are defined generally as <a href="../nonparametric_methods/quantiles.htm">quantiles</a>:</p>
+        <p>&#160;</p>
+        <p>Two different quantile definitions (<a href="../references/reference_list.htm">Weisberg, 1992; Gleason, 1997; Stuart and Ord, 1994</a> are used in the summary statistics (see also: <a href="../nonparametric_methods/quantiles.htm">quantiles</a>): the first is the conventional quantile that is also used in the <a href="../nonparametric_methods/quantile_ci.htm">quantile confidence interval function</a> and the second allows for weights:</p>
+        <p><b>Method 1:</b>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle Q_p=(1-h)u_i+h \space u_{i+1} \\
+\displaystyle h=p(n+1)-\text{fix}(p(n+1)) \\
+\displaystyle i=\max(\min(\text{fix(p(n+1)),n,),1)}$</MadCap:equation>
+        </p>
+        <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), fix is the integer part of a real number, h is the fractional part of order statistic i, u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size.</p>
+        <p>&#160;</p>
+        <p><b>Method 2:</b>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle Q_p=\frac{u_{i-1}+u_i}{2} \space \text{if} \space W_{i-1}=P \\
+\displaystyle Q_p=u_i \space \text{otherwise} \\
+\displaystyle W_i=\sum_{j=1}^iw_j \\
+\displaystyle P=pn \\
+i=\text{first index where } W_i&gt;P$</MadCap:equation>
+        </p>
+        <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), u is an observation from a sample after it has been ordered from smallest to largest value, n is the sample size, w is a weight normalised so that it sums to n and</p>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The computational methods used in StatsDirect univariate summary statistics, including this function, provide 15 decimal places of precision. This is tested against known standards such as the reference data set used in the example below.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Parametric worksheet: Michelson).</p>
+        <p>&#160;</p>
+        <p>The data are 100 measurements of the speed (millions of meters per second) of light in air recorded by Michelson in 1879 (<a href="../references/reference_list.htm">Dorsey, 1944</a>). The American National Institute of Standards and Technology use these data as part of the Statistical Reference Datasets for testing statistical software (<a href="../references/reference_list.htm">McCullough and Wilson, 1999</a>; <a href="http://www.itl.nist.gov/div898/strd/">http://www.itl.nist.gov/div898/strd/</a>).</p>
+        <p>&#160;</p>
+        <p>Open the test workbook and <a href="../workbook/selecting_data.htm">select</a> the "Michelson" column. Choose Univariate Summary from the Descriptive section of the analysis menu and click on OK when you see a list of descriptive statistics options.</p>
+        <p>&#160;</p>
+        <p>Results from StatsDirect (with decimal places in Analysis_Options set to 12 and centile type 2 selected):</p>
+        <p>&#160;</p>
+        <p><u>Descriptive statistics</u>
+        </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td>Variables</td>
+                <td>Michelson</td>
+            </tr>
+            <tr>
+                <td>Valid data</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>Missing data</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Sum</td>
+                <td>29985.24</td>
+            </tr>
+            <tr>
+                <td>Mean</td>
+                <td>299.8524</td>
+            </tr>
+            <tr>
+                <td>Variance</td>
+                <td>0.006242666667</td>
+            </tr>
+            <tr>
+                <td>Standard deviation</td>
+                <td>0.079010547819</td>
+            </tr>
+            <tr>
+                <td>Variance coefficient</td>
+                <td>0.000263498134</td>
+            </tr>
+            <tr>
+                <td>Standard error of mean</td>
+                <td>0.007901054782</td>
+            </tr>
+            <tr>
+                <td>Upper 95% CL of mean</td>
+                <td>299.868077406834</td>
+            </tr>
+            <tr>
+                <td>Lower 95% CL of mean</td>
+                <td>299.836722593166</td>
+            </tr>
+            <tr>
+                <td>Geometric mean</td>
+                <td>299.852389694496</td>
+            </tr>
+            <tr>
+                <td>Skewness</td>
+                <td>-0.01825961396</td>
+            </tr>
+            <tr>
+                <td>Kurtosis</td>
+                <td>3.263530532311</td>
+            </tr>
+            <tr>
+                <td>Maximum</td>
+                <td>300.07</td>
+            </tr>
+            <tr>
+                <td>Upper quartile</td>
+                <td>299.895</td>
+            </tr>
+            <tr>
+                <td>Median</td>
+                <td>299.85</td>
+            </tr>
+            <tr>
+                <td>Lower quartile</td>
+                <td>299.805</td>
+            </tr>
+            <tr>
+                <td>Minimum</td>
+                <td>299.62</td>
+            </tr>
+            <tr>
+                <td>Range</td>
+                <td>0.45</td>
+            </tr>
+            <tr>
+                <td>Centile 95</td>
+                <td>299.98</td>
+            </tr>
+            <tr>
+                <td>Centile 5</td>
+                <td>299.73</td>
+            </tr>
+        </table>
+    </body>
+</html>

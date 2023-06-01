@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CatapultTarget
+  Version="2"
+  Comment="StatsDirect software help"
+  Type="HtmlHelp"
+  Destinations=""
+  GlossaryTermConversion="marked"
+  ConditionTagExpression="include[Primary.SWHELP] exclude[Primary.WEBHELP] "
+  DefaultUrl="/Content/contents.htm"
+  OutputFile="STATSDIRECT.chm"
+  Skin="/Project/Skins/HTML Help.flskn"
+  MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
+  BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
+  MasterStylesheet="/Content/resources/stylesheets/statsdirect2.css">
+  <Destinations>
+    <Destination
+      Link="/Project/Destinations/NewDestination.fldes" />
+  </Destinations>
+</CatapultTarget>

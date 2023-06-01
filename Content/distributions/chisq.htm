@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="3" MadCap:lastHeight="850" MadCap:lastWidth="2848" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Chi-square Distribution - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Chi-square distribution;Distributions: Chi-square" />
+            Chi-square Distribution</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Distributions_Chi-Square</b>.</p>
+        <p>&#160;</p>
+        <p>A variable from a chi-square distribution with n degrees of freedom is the sum of the squares of n independent <a href="normal.htm">standard normal variables</a> (z).</p>
+        <p>
+            <MadCap:equation>$\displaystyle \chi^2=z_1^2+z_2^2+...+z_n^2$</MadCap:equation>
+        </p>
+        <p>[chi (Greek χ) is pronounced ki as in kind]</p>
+        <p>&#160;</p>
+        <p>A chi-square variable with one degree of freedom is equal to the square of the standard normal variable. A chi-square with many degrees of freedom is approximately equal to the standard normal variable, as the <a href="normal.htm">central limit theorem</a> dictates.</p>
+        <p>&#160;</p>
+        <p>The so called "linear constraint" property of chi-square explains its application in many statistical methods: Suppose we consider one sub-set of all possible outcomes of n random variables (z). The sub-set is defined by a linear constraint:</p>
+        <p>
+            <MadCap:equation>$\displaystyle a_1 z_1+a_2z_2+...+a_n z_n=k$</MadCap:equation>
+        </p>
+        <p>- where a and k are constants. Here the sum of the squares of z follows a chi-square distribution with n-1 degrees of freedom. If there are m linear constraints then the total degrees of freedom is n-m. The number of linear constraints associated with the design of contingency tables explains the number of degrees of freedom used in contingency table tests (<a href="../references/reference_list.htm">Bland, 2000</a>).</p>
+        <p>&#160;</p>
+        <p>Another important relationship of chi-square is as follows: the sums of squares about the mean for a normal sample of size n will follow the distribution of the <a href="../basic_descriptive_statistics/standard_deviation.htm">sample variance</a> times chi-square with n-1 degrees of freedom. As the expected value of chi-square is n-1 here, the sample variance is estimated as the sums of squares about the mean divided by n-1.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect calculates the probability associated with a chi-square random variable with n degrees of freedom, for this a reliable approach to the incomplete gamma integral is used (<a href="../references/reference_list.htm">Shea, 1988</a>). Chi-square quantiles are calculated for n degrees of freedom and a given probability using the Taylor series expansion of <a href="../references/reference_list.htm">Best and Roberts (1975)</a> when P ≤ 0.999998 and P ≥ 0.000002, otherwise a root finding algorithm is applied to the incomplete gamma integral.</p>
+        <p>&#160;</p>
+        <p>Stat Direct agrees fully with all of the double precision reference values quoted by Shea (1988).</p>
+        <p>&#160;</p>
+        <p><u>Function Definition</u>
+        </p>
+        <p>The distribution function F(x) of a chi-square random variable x with n degrees of freedom is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle F(x)=\frac{1}{\displaystyle 2^{n/2} \Gamma(n/2)} \int_0^x t^{n/2-1}e^{-t/2} \space dt \\$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Γ(*) is the gamma function:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</MadCap:equation>
+        </p>
+    </body>
+</html>

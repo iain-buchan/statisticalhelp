@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="670" MadCap:lastWidth="1479" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Ranking Data and Correcting for Ties - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Ranking;Ties (ranks)" />
+            Ranking</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Transforming and Deriving_Ranks</b>.</p>
+        <p>&#160;</p>
+        <p>This function ranks the workbook data you select and saves the rankings into a new workbook column labelled Rank: Name where Name is the column label of the original data. You can calculate a correction factor for ties in the ranking; five formulae are offered for tie correction:</p>
+        <ol>
+            <li>Σ(t^3 - t /12)</li>
+            <li>Σ(t * (t-1)/2)</li>
+            <li>Σ(t * (t-1) * (2t+5))</li>
+            <li>Σ(t * (t-1) * (t-2))</li>
+            <li>Σ(t * (t-1) * (t+1))</li>
+        </ol>
+        <p>&#160;</p>
+        <p>Here t is the number of data tied at each tie and upper case sigma Σ is the summation across these ties.</p>
+        <p>&#160;</p>
+        <p>The use of tie corrections is a complex subject upon which learned statisticians sometimes disagree.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Nonparametric worksheet: First Born).</p>
+        <p>&#160;</p>
+        <p>Ranking the following agressivity scores for a sample of firstborn twins gives.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">First Born -----&gt;</td>
+                <td style="text-decoration: underline;">Rank: First Born</td>
+            </tr>
+            <tr>
+                <td>86</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>71</td>
+                <td>3.5</td>
+            </tr>
+            <tr>
+                <td>77</td>
+                <td>6.5</td>
+            </tr>
+            <tr>
+                <td>68</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>91</td>
+                <td>11.5</td>
+            </tr>
+            <tr>
+                <td>72</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>77</td>
+                <td>6.5</td>
+            </tr>
+            <tr>
+                <td>91</td>
+                <td>11.5</td>
+            </tr>
+            <tr>
+                <td>70</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>71</td>
+                <td>3.5</td>
+            </tr>
+            <tr>
+                <td>88</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>87</td>
+                <td>9</td>
+            </tr>
+        </table>
+    </body>
+</html>

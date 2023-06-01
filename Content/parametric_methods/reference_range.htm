@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="1403" MadCap:lastWidth="3249" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Reference Range (Normal Range) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Normal range;Reference range;Reference interval" />Reference Range</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Parametric_Reference Range</b>.</p>
+        <p>&#160;</p>
+        <p>
+            This function enables you to construct confidence intervals for a reference range (also known as reference interval or normal range) from a sample of observations drawn at random from a normal distribution. The nonparametric alternative (quantile reference range) is also given.</p>
+        <p>&#160;</p>
+        <p>The reference range and confidence interval for data from a normal distribution is calculated as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{RR}=\bar x\pm z_{\displaystyle(1-c)/2^s} \\
+
+\displaystyle \text{SE}=\sqrt{\frac{s^2}{n}+\frac{{z_{\displaystyle(1-c)/2^s}^2}}{2n}} \\
+
+\displaystyle \text{CI}=\text{RR}\pm z_{\alpha/2}\text{SE}$</MadCap:equation>
+        </p>
+        <p>- where x bar is the sample mean, s is the sample standard deviation, n is the sample size, rr is the reference range, se is the standard error of the reference range limits, ci is the confidence interval for the reference range limits, z is a quantile from the standard normal distribution and c is % range coverage/100 (e.g. 0.95 for a 95% reference range).</p>
+        <p>&#160;</p>
+        <p>For samples with no negative values, the above calculations are repeated on log-transformed data and the results are presented in the original measurement scale.</p>
+        <p>&#160;</p>
+        <p>The reference range and confidence interval for data that are not from a normal distribution should be calculated by the percentile method. For a c*100% reference range, the percentile method examines the 1-(c/2) and 1-(1-(c/2)) <a href="../nonparametric_methods/quantile_ci.htm">sample quantiles and their confidence intervals</a>.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Altman (1991, p. 421)</a>.</p>
+        <p>Test workbook (Parametric worksheet: IgM).</p>
+        <p>&#160;</p>
+        <p>Consider the serum IgM concentrations measured from blood samples from 298 healthy children aged six months to six years.</p>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu. Then select the reference range from the parametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "IgM" when prompted for data.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Reference range/interval</u>
+        </p>
+        <p>&#160;</p>
+        <p>Sample name:  IgM</p>
+        <p>Sample mean = 0.80302</p>
+        <p>Sample size n =  298</p>
+        <p>Sample sd =  0.469498</p>
+        <p>&#160;</p>
+        <p><u>For normal data</u>
+        </p>
+        <p>95% reference interval = -0.117179 to 1.72322</p>
+        <p>95% confidence interval for lower range limit = -0.20828 to -0.026079</p>
+        <p>95% confidence interval for upper range limit = 1.632119 to 1.81432</p>
+        <p>&#160;</p>
+        <p><u>For log-normal data</u>
+        </p>
+        <p>95% reference interval = 0.238102 to 2.031412</p>
+        <p>95% confidence interval for lower range limit = 0.214129 to 0.264758</p>
+        <p>95% confidence interval for upper range limit = 1.826887 to 2.258836</p>
+        <p>&#160;</p>
+        <p><u>For any data</u>
+        </p>
+        <p>Quantile 0.025 = 0.2</p>
+        <p>Approximate 95% confidence interval (non-conservative) = 0.1 to 0.3</p>
+        <p>Exact confidence level = 95.659155%</p>
+        <p>&#160;</p>
+        <p>Quantile 0.975 = 2</p>
+        <p>Approximate 95% confidence interval (non-conservative) = 1.7 to 2.5</p>
+        <p>Exact confidence level = 96.091704%</p>
+        <p>&#160;</p>
+        <p>These data are not from a normal distribution but are from an approximately log-normal distribution. This explains why the results for log-normal data are closer to the 2.5% and 97.5% percentiles.</p>
+    </body>
+</html>
