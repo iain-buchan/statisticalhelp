@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="3" MadCap:lastHeight="1245" MadCap:lastWidth="3229" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Binomial Distribution - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Binomial distribution;Distributions: Binomial" />Binomial Distribution</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Distributions_Binomial</b>.</p>
+        <p>&#160;</p>
+        <p>A binomial distribution occurs when there are only two mutually exclusive possible outcomes, for example the outcome of tossing a coin is heads or tails. It is usual to refer to one outcome as "success" and the other outcome as "failure".</p>
+        <p>&#160;</p>
+        <p>
+            If a coin is tossed n times then a binomial distribution can be used to determine the probability, P(r) of exactly r successes:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(r)=\left(\begin{array}{c}n\\ r\end{array}\right)p^r(1-p)^{n-r} \\
+
+\displaystyle P(r)=\frac{n!}{r!(n-r)!}p^r(1-p)^{n-r}$</MadCap:equation>
+        </p>
+        <p>Here p is the probability of success on each trial, in many situations this will be 0.5, for example the chance of a coin coming up heads is 50:50/equal/p=0.5. The assumptions of above calculation are that the n events are mutually exclusive, independent and randomly selected from a binomial population. Note that ! is a factorial and 0! is 1 as anything to the power of 0 is 1.</p>
+        <p>&#160;</p>
+        <p>In many situations the probability of interest is not that associated with exactly r successes but instead it is the probability of r or more (≥r) or at most r (≤r) successes. Here the cumulative probability is calculated:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(\ge r)=\sum_{i=r}^n P(r_i) \\
+
+\displaystyle P(\le r)=\sum_{i=1}^r P(r_i) \\$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>The mean of a binomial distribution is p and its standard deviation is sqr(p(1-p)/n). The shape of a binomial distribution is symmetrical when p=0.5 or when n is large.</p>
+        <p>
+            <img src="../resources/Images/binomialchart.gif" width="220" height="111" border="0" />
+        </p>
+        <p>
+            <img src="../resources/Images/binomialchart2.gif" width="213" height="117" border="0" />
+        </p>
+        <p>When n is large and p is close to 0.5, the binomial distribution can be approximated from the standard normal distribution; this is a special case of the <a href="../basic_descriptive_statistics/standard_deviation.htm">central limit theorem</a>:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(\ge r)= P(z)=P \left[ \frac{r/n-p}{\sqrt{p(1-p)/n}} \right] \\$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Please note that confidence intervals for binomial proportions with p = 0.5 are given with the <a href="../exact_tests_on_counts/sign.htm">sign test</a>.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect calculates the probability for exactly r and the cumulative probabilities for (≥,≤) r successes in n trials. The gamma function is a generalised factorial function and it is used to calculate each binomial probability. The core algorithm evaluates the logarithm of the gamma function (<a href="../references/reference_list.htm">Cody and Hillstrom, 1967; Abramowitz and Stegun 1972; Macleod, 1989</a>) to the limit of 64 bit precision.</p>
+        <p>&#160;</p>
+        <p>Γ(*) is the gamma function:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</MadCap:equation>
+        </p>
+        <p>Γ(1)=1</p>
+        <p>Γ(x+1)=xΓ(x)</p>
+        <p>Γ(n)=(n-1)!</p>
+    </body>
+</html>

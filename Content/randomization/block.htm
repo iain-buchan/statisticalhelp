@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="888" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Block Randomization - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Block randomization;Randomization: Block" />Block Randomization</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Randomization_Blocks</b></p>
+        <p>&#160;</p>
+        <p>This function randomizes n individuals into k treatments, in blocks of size m.</p>
+        <p>&#160;</p>
+        <p>Randomization reduces opportunities for <a href="../basics/bias.htm">bias</a> and <a href="../basics/confounding.htm">confounding</a> in experimental designs, and leads to treatment groups which are random samples of the population sampled, thus helping to meet assumptions of subsequent statistical analysis (<a href="../references/reference_list.htm">Bland, 2000</a>).</p>
+        <p>&#160;</p>
+        <p>Random allocation can be made in blocks in order to keep the sizes of treatment groups similar. In order to do this you must specify a sample size that is divisible by the block size you choose. In turn you must choose a block size that is divisible by the number of treatment groups you specify.</p>
+        <p>&#160;</p>
+        <p>An advantage of small block sizes is that treatment group sizes are very similar. A disadvantage of small block sizes is that it is possible to guess some allocations, thus reducing blinding in the trial. An alternative to using large block sizes is to use random sequences of block sizes, which can be done in StatsDirect by specifying a block size of zero. The random block size option selects block sizes of 2, 3, or 4 (at random) times the number of treatments.</p>
+        <p>&#160;</p>
+        <p>The randomization proceeds by allocating random permutations of treatments within each block.</p>
+        <p>&#160;</p>
+        <p><u>Random allocation in blocks</u>
+        </p>
+        <p>Randomized with seed: 10</p>
+        <p>Subjects: 20</p>
+        <p>Block size: random between 4 and 8</p>
+        <p>Treatments: 2</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">Subject</td>
+                <td style="text-align: right;text-decoration: underline;">Treatment</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">16</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">17</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">18</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">19</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">20</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>Robust (pseudo-)random number generation is used, see <a href="random_number_generator.htm">random number generation</a>.</p>
+    </body>
+</html>

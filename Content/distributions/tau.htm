@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="3" MadCap:lastHeight="691.6558" MadCap:lastWidth="3229" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Kendall's tau Distribution - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Kendall's tau distribution;Tau distribution;Distributions: Tau" />Kendall's Tau Distribution</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Distributions_Kendall's tau</b>.</p>
+        <p>&#160;</p>
+        <p>Given a value for the test statistic (S) associated with <a href="../nonparametric_methods/kendall_correlation.htm">Kendall's tau (t)</a> this function calculates the probability of obtaining a value greater than or equal to S for a given sample size.</p>
+        <p>&#160;</p>
+        <p>Consider two samples, x and y, each of size n. The total number of possible pairings of x with y observations is n(n-1)/2. Now consider ordering the pairs by the x values and then by the y values. If x3 &gt; y3 when ordered on both x and y then the third pair is concordant, otherwise the third pair is discordant. S is the difference between the number of concordant (ordered in the same way, n<sub>c</sub>) and discordant (ordered differently, n<sub>d</sub>) pairs.</p>
+        <p>&#160;</p>
+        <p>Tau (τ) is related to S by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \tau =\frac{n_c-n_d}{n(n-1)/2}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>If there are tied (same value) observations then τ<sub>b</sub> is used:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \tau_b=\frac{\displaystyle s}{\displaystyle\sqrt{\left[ n(n-1)/2-\sum_{i=1}^t t_i(t_i-1)/2\right] \left[ n(n-1)/2-\sum_{i=1}^u u_i(u_i-1)/2\right]}}$</MadCap:equation>
+        </p>
+        <p>- where t<sub>i</sub> is the number of observations tied at a particular rank of x and u is the number tied at a rank of y. When there are no ties τ<sub>b</sub> =  τ.</p>
+        <p>&#160;</p>
+        <p>This function does not calculate probabilities for τ<sub>b</sub>.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Probabilities are calculated by summation across all permutations when n ≤ 50 and by an Edgeworth series approximation when n &gt; 50 (<a href="../references/reference_list.htm">Best, 1974</a>). The two samples are assumed to have been ranked without ties.</p>
+        <p>&#160;</p>
+        <p>The inverse is calculated by finding the largest value of S that gives a calculated upper tail probability (using the method above) closest to but not less than the P value entered. Please note that the results may differ slightly from tables in textbooks because StatsDirect calculates the inverse of Kendall's statistic more accurately than the routines used to calculate Best's widely quoted 1974 table.</p>
+    </body>
+</html>

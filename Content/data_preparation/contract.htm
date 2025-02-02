@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="676" MadCap:lastWidth="1479" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="Data_Organizing_Expand">
+    <head>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>Contract Observations into Unique Values and Counts</h1>
+        <MadCap:keyword term="Contract observations;Collapse observations;Unique values" />
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Organizing_Contract</b>.</p>
+        <p>&#160;</p>
+        <p>This function takes a list of values recorded repeatedly for different observations and contracts them into a list of unique observations along with counts of the numbers of times each value was observed.</p>
+        <p>&#160;</p>
+        <p>This list can be expanded again by using the <a href="expand.htm">Data_Organizing_Expand</a> function.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>&#160;</p>
+        <p>The following measurement was observed on 12 subjects but only 5 different values were recorded:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">
+                    <p>Measurement</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>0.1</p>
+                </td>
+            </tr>
+            <tr>
+                <td>0.3</td>
+            </tr>
+            <tr>
+                <td>0.3</td>
+            </tr>
+            <tr>
+                <td>0.3</td>
+            </tr>
+            <tr>
+                <td>0.5</td>
+            </tr>
+            <tr>
+                <td>0.5</td>
+            </tr>
+            <tr>
+                <td>0.5</td>
+            </tr>
+            <tr>
+                <td>0.5</td>
+            </tr>
+            <tr>
+                <td>0.5</td>
+            </tr>
+            <tr>
+                <td>0.7</td>
+            </tr>
+            <tr>
+                <td>0.7</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>1.0</p>
+                </td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>In order to contract this list into a set of unique observations and counts choose Contract from the Organizing section of the Data menu.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col style="width: 64px;" />
+            <tr>
+                <td style="text-decoration: underline;">Measurement </td>
+                <td style="text-decoration: underline;">Counts</td>
+            </tr>
+            <tr>
+                <td>
+                    <p>0.1</p>
+                </td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>0.3</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>0.5</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>0.7</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>1.0</td>
+                <td>1</td>
+            </tr>
+        </table>
+    </body>
+</html>

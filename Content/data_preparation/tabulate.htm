@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="590" MadCap:lastWidth="1479" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Tabulating Data in StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Tabulate (two way)" />Tabulate</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Organizing_Tabulate</b>.</p>
+        <p>&#160;</p>
+        <p>This a simple two way cross tabulation function. If you have two columns of numbers that correspond to different classifications of the same individuals then you can use this function to give a two way frequency table for the cross classification.</p>
+        <p>&#160;</p>
+        <p>If you need to stratify by a third classification variable, or you want to perform analyses straight away on you cross tabulation, then please see the <a href="../basic_descriptive_statistics/crosstabs.htm">Analysis_Crosstabs</a> function instead.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>&#160;</p>
+        <p>A database of test scores contains two fields of interest, sex (M=1, F=0) and grade of skin reaction to an antigen (none = 0, weak + = 1, strong + = 2). Here is a list of those fields for 10 patients:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Sex</td>
+                <td style="text-decoration: underline;">Reaction</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>In order to get a cross tabulation of these from StatsDirect you should enter these data in two workbook columns. Then choose Tabulate from the Grouping section of the Data menu.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;">Reaction:0</td>
+                <td style="text-decoration: underline;">Reaction:1</td>
+                <td style="text-decoration: underline;">Reaction:2</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>sex:0</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>sex:1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+            </tr>
+        </table>
+    </body>
+</html>

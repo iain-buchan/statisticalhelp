@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="4" MadCap:lastHeight="897" MadCap:lastWidth="2828" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Transforming Variables in&#160;StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Transformations" />
+            Common Transforms</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Transforming and Deriving_Common Transforms</b>.</p>
+        <p>&#160;</p>
+        <p>This section deals with some common <a href="transforming_data.htm">transforms</a> for continuous variables:</p>
+        <ul>
+            <li><a href="transform_log.htm">Log (natural)</a>
+            </li>
+            <li><a href="transform_log.htm">Log (base 10)</a>
+            </li>
+            <li><a href="transform_logit.htm">Logit</a>
+            </li>
+            <li><a href="transform_probit.htm">Probit</a>
+            </li>
+            <li><a href="transform_angle.htm">Angular</a>
+            </li>
+            <li><a href="transform_cumulative.htm">Cumulative</a>
+            </li>
+            <li><a href="transform_ladder_powers.htm">Ladder of powers</a>
+            </li>
+            <li><a href="transform_empirical_cdf.htm">Empirical cumulative distribution</a>
+            </li>
+            <li><a href="transform_z_scores.htm">Z scores</a>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p>Please note that other transformations can be achieved by <a href="apply_function.htm">applying a function</a> to a column of data as described below.</p>
+        <p>&#160;</p>
+        <p>Transforming a variable changes its measurement scale. Reasons for transformation include stabilizing variance, linearising relationships, normalizing distributions and making data easier to handle numerically (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Bland and Altman, 1996c</a>). Details of the above transformations are discussed under their own titles, here we consider how to deal with other transformations, for example a power transform:</p>
+        <p>&#160;</p>
+        <p><u>Power</u>
+        </p>
+        <p>Example, for square root <a href="apply_function.htm">apply function</a> v1^.5 or sqr(v1), for standardized version (v1^.5-1)/.5</p>
+        <p>Limitation, v1 must be ≥ 0.</p>
+        <p>&#160;</p>
+        <p>Standardized form: y = (x^c-1) / c</p>
+        <p>&#160;</p>
+        <p>For c = 0.5 (square root):</p>
+        <p>Variance of x can be stabilized especially with Poisson distributed data.</p>
+        <p>&#160;</p>
+        <p>For c = -1 (reciprocal):</p>
+        <p>Variance of x can be stabilized with distant high outliers, e.g. very long survival times compared with mainly shorter ones.</p>
+        <p>&#160;</p>
+        <p>For c = 2 (square):</p>
+        <p>Variance can be stabilized when var(x) decreases with increasing x and with negatively skewed x.</p>
+    </body>
+</html>

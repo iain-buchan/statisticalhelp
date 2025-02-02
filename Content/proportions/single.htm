@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Binomial Proportion Confidence Interval and Test - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Single proportion;Bionmial proportion;Proportions: Single" />Single Proportion</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Proportions_Single</b>.</p>
+        <p>&#160;</p>
+        <p>This function compares an observed single <a href="binomial_proportions.htm" target="_popup">binomial proportion</a> with an expected proportion.</p>
+        <p>&#160;</p>
+        <p>expected proportion (binomial parameter) = pi</p>
+        <p>successes = r</p>
+        <p>observations/trials = n</p>
+        <p>observed proportion p = r / n</p>
+        <p>&#160;</p>
+        <p>The expected proportion (pi) is the probability of success on each trial, for example pi = 0.5 for coming up heads on the toss of a coin. The <a href="../exact_tests_on_counts/sign.htm">sign test</a> is basically a single proportion test based on pi = 0.5. Some authors refer to this method as a "binomial test".</p>
+        <p>&#160;</p>
+        <p>StatsDirect provides an exact confidence interval and an approximate mid-P confidence interval for the single proportion. You are also given exact P and exact mid-P hypothesis tests for the proportion in comparison with an expected proportion, i.e. null hypothesis that p = pi (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Gardner and Altman, 1989</a>).</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>two mutually exclusive outcomes</li>
+            <li>random sample</li>
+        </ul>
+        <p>&#160;</p>
+        <p>Consider using <a href="mid_p.htm">mid-P</a> values and intervals when you have several similar studies to consider within an overall investigation (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Barnard, 1989</a>).</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>The Clopper-Pearson method is used for the exact confidence interval and the Newcombe-Wilson method is used for the mid-P confidence interval (<a href="../references/reference_list.htm">Newcombe, 1998c</a>). Mid-P probabilities are found by subtracting half the exact probability for the observed count from the cumulative total; this subtraction is done on each side for the two sided result.</p>
+        <p>&#160;</p>
+        <p>If n is greater than one million then the normal approximation to the binomial distribution is used to calculate the P values, otherwise exact cumulative binomial probabilities are given.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 119)</a>.</p>
+        <p>&#160;</p>
+        <p>In a trial of two analgesics, X and Y, 100 patients tried each drug for a week. The trial order was randomized. 65 out of 100 preferred drug Y.</p>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must select single proportion from the proportions section of the analysis menu. To select a 95% confidence interval just press enter when you are presented with the confidence interval menu. Enter n as 100 and r as 65. Enter the binomial test proportion as 0.5, this is because you would expect 50% of an infinite number of patients to prefer drug Y if there was no difference between X and Y.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Total = 100, response = 65</p>
+        <p>Proportion = 0.65</p>
+        <p>&#160;</p>
+        <p>Exact (Clopper-Pearson) 95% confidence interval = 0.548151 to 0.742706</p>
+        <p>&#160;</p>
+        <p>Using null hypothesis that the population proportion equals .5</p>
+        <p>Binomial one sided P = .0018</p>
+        <p>Binomial two sided P = .0035</p>
+        <p>&#160;</p>
+        <p>Approximate (Wilson) 95% mid P confidence interval = 0.552544 to 0.736358</p>
+        <p>&#160;</p>
+        <p>Binomial one sided mid P = .0013</p>
+        <p>Binomial two sided mid P = .0027</p>
+        <p>&#160;</p>
+        <p>Here we can conclude that the proportion was statistically significantly different from 0.5. With 95% confidence we can state that the true population value for the proportion lies somewhere between 0.55 and 0.74.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

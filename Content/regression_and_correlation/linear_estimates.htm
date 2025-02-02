@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="3" MadCap:lastHeight="739" MadCap:lastWidth="2813" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Linearized Regression Estimates - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Linearized regression estimates;Curve fitting: Linearized estimates;Regression: Linearized curves" />
+            Linearized Estimates</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Regression and Correlation_Linearized Estimates</b>.</p>
+        <p>&#160;</p>
+        <p>This section provides simple (one predictor) regression estimates for three linearized functions (exponential, geometric and hyperbolic) by an unweighted least squares method.</p>
+        <p>&#160;</p>
+        <p>These functions should be used only to indicate that a more robust fit of the selected model is worth investigating with your data.</p>
+        <p>&#160;</p>
+        <p><u>Exponential</u>
+        </p>
+        <p>Data are linearized by logarithmic transformation of the predictor (x) variable. Simple linear regression of Y vs. ln(x) gives a = ln(intercept) and b = slope for the function:<br /><MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mstyle displaystyle="true" mathsize="1.2em"><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo>+</mo><msup><mrow><mi>e</mi></mrow><mrow><mi>b</mi><mi>x</mi></mrow></msup></mrow></mstyle></mrow></math></MadCap:equation></p>
+        <p>&#160;</p>
+        <p><u>Geometric</u>
+        </p>
+        <p>Data are linearized by logarithmic transformation of both variables. Simple linear regression of ln(Y) vs. ln(x) gives a = ln(intercept) and b = slope for the function:<br /><MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mstyle dispplaystle="true" mathsize="1.2em"><mrow><mi>y</mi><mo>=</mo><mi>a</mi><mo>+</mo><msup><mrow><mi>x</mi></mrow><mrow><mi>b</mi></mrow></msup></mrow></mstyle></mrow></math></MadCap:equation></p>
+        <p>&#160;</p>
+        <p><u>Hyperbolic</u>
+        </p>
+        <p>Data are linearized by reciprocal transformation of both variables. Simple linear regression of 1/Y vs. 1/x gives a = slope and b = intercept for the function:<br /><MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mstyle displaystyle="true" mathsize="1.2em"><mrow><mi>y</mi><mo>=</mo><mfrac><mrow><mi>x</mi></mrow><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mi>x</mi></mrow></mfrac></mrow></mstyle></mrow></math></MadCap:equation></p>
+        <p>&#160;</p>
+        <p>The standard error of the estimate is given for each of these regressions but please note that the errors of your outcome/response variable might not be from a normal distribution.</p>
+        <p>&#160;</p>
+        <p>This section of StatsDirect is intended only for those who are familiar with regression modelling and who use these linearized estimates as a springboard for further modelling. Generic modelling software such as R, S+ or GLIMM can be used for further modelling, which is best done by a Statistician.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+        <p><a href="nonlinear.htm">non-linear models</a>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="2805.104" MadCap:lastWidth="2773">
+    <head><title>Agreement Analysis (Continuous Data, Intra-class Correlation) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="This function calculates one way random effects intra-class correlation coefficient, estimated within-subjects standard deviation and a repeatability coefficient." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Reliability: Continuous;Inter-rater agreement: Intra-class correlation;Agreement analysis: Continuous;Homogeneity analysis;Intra-class correlation" />
+            Agreement of Continuous Measurements</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Agreement_Continuous (Intra-class)</b>.</p>
+        <p>&#160;</p>
+        <p>The function calculates one way random effects intra-class correlation coefficient, estimated within-subjects standard deviation and a repeatability coefficient (<a href="../references/reference_list.htm">Bland and Altman 1996a and 1996b, McGraw and Wong, 1996</a>).</p>
+        <p>&#160;</p>
+        <p>Intra-class correlation coefficient is calculated as:</p>
+        <p>
+            <MadCap:equation>$ \displaystyle r_I=\frac{m SS_B-SS_T}{(m-1) SS_T}$</MadCap:equation>
+        </p>
+        <p>- where m is the number of observations per subject, SS<sub>B</sub> is the sum of squared between subjects and SS<sub>T</sub> is the total sum of squares (as per one way ANOVA above).</p>
+        <p>&#160;</p>
+        <p>Within-subjects standard deviation is estimated as the square root of the residual mean square from one way ANOVA.</p>
+        <p>&#160;</p>
+        <p>The repeatability coefficient is calculated as:</p>
+        <p>
+            <MadCap:equation>$ \displaystyle C_r=\sqrt{m} \space z \space \zeta_w$</MadCap:equation>
+        </p>
+        <p>- where m is the number of observations per subject, z is a quantile from the standard normal distribution (usually taken as the 5% two tailed quantile of 1.96) and ζ<sub>w</sub> is the estimated within-subjects standard deviation (calculated as above).</p>
+        <p>&#160;</p>
+        <p>Intra-subject standard deviation is plotted against intra-subject means and Kendall's rank correlation is used to assess the interdependence of these two variables.</p>
+        <p>&#160;</p>
+        <p>An agreement plot is constructed by plotting the maximum differences from each possible intra-subject contrast against intra-subject means and the overall mean is marked as a line on this plot.</p>
+        <p>&#160;</p>
+        <p>A Q-Q plot is given; here the sum of the difference between intra-subject observations and their means are ordered and plotted against an equal order of chi-square quantiles.</p>
+        <p>&#160;</p>
+        <p>
+            Agreement analysis is best carried out under expert statistical guidance.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Bland and Altman (1996a)</a>.</p>
+        <p>Test workbook (Agreement worksheet: 1st, 2nd, 3rd, 4th).</p>
+        <p>&#160;</p>
+        <p>Five peak flow measurements were repeated for twenty children:</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">1st</td>
+                <td style="text-align: right;text-decoration: underline;">2nd</td>
+                <td style="text-align: right;text-decoration: underline;">3rd</td>
+                <td style="text-align: right;text-decoration: underline;">4th</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">190</td>
+                <td style="text-align: right;">220</td>
+                <td style="text-align: right;">200</td>
+                <td style="text-align: right;">200</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">220</td>
+                <td style="text-align: right;">200</td>
+                <td style="text-align: right;">240</td>
+                <td style="text-align: right;">230</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">260</td>
+                <td style="text-align: right;">260</td>
+                <td style="text-align: right;">240</td>
+                <td style="text-align: right;">280</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">210</td>
+                <td style="text-align: right;">300</td>
+                <td style="text-align: right;">280</td>
+                <td style="text-align: right;">265</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">270</td>
+                <td style="text-align: right;">265</td>
+                <td style="text-align: right;">280</td>
+                <td style="text-align: right;">270</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">280</td>
+                <td style="text-align: right;">280</td>
+                <td style="text-align: right;">270</td>
+                <td style="text-align: right;">275</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">260</td>
+                <td style="text-align: right;">280</td>
+                <td style="text-align: right;">280</td>
+                <td style="text-align: right;">300</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">275</td>
+                <td style="text-align: right;">275</td>
+                <td style="text-align: right;">275</td>
+                <td style="text-align: right;">305</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">280</td>
+                <td style="text-align: right;">290</td>
+                <td style="text-align: right;">300</td>
+                <td style="text-align: right;">290</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">320</td>
+                <td style="text-align: right;">290</td>
+                <td style="text-align: right;">300</td>
+                <td style="text-align: right;">290</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">300</td>
+                <td style="text-align: right;">300</td>
+                <td style="text-align: right;">310</td>
+                <td style="text-align: right;">300</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">270</td>
+                <td style="text-align: right;">250</td>
+                <td style="text-align: right;">330</td>
+                <td style="text-align: right;">370</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">320</td>
+                <td style="text-align: right;">330</td>
+                <td style="text-align: right;">330</td>
+                <td style="text-align: right;">330</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">335</td>
+                <td style="text-align: right;">320</td>
+                <td style="text-align: right;">335</td>
+                <td style="text-align: right;">375</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">350</td>
+                <td style="text-align: right;">320</td>
+                <td style="text-align: right;">340</td>
+                <td style="text-align: right;">365</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">360</td>
+                <td style="text-align: right;">320</td>
+                <td style="text-align: right;">350</td>
+                <td style="text-align: right;">345</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">330</td>
+                <td style="text-align: right;">340</td>
+                <td style="text-align: right;">380</td>
+                <td style="text-align: right;">390</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">335</td>
+                <td style="text-align: right;">385</td>
+                <td style="text-align: right;">360</td>
+                <td style="text-align: right;">370</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">400</td>
+                <td style="text-align: right;">420</td>
+                <td style="text-align: right;">425</td>
+                <td style="text-align: right;">420</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">430</td>
+                <td style="text-align: right;">460</td>
+                <td style="text-align: right;">480</td>
+                <td style="text-align: right;">470</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>
+            To analyse these data using StatsDirect you must first enter them into a workbook or open the test workbook. Then select Continuous from the Agreement section of the Analysis menu.</p>
+        <p>&#160;</p>
+        <p><u>Agreement</u>
+        </p>
+        <p>&#160;</p>
+        <p>Variables: 1st, 2nd, 3rd, 4th</p>
+        <p>&#160;</p>
+        <p>Intra-class correlation coefficient (one way random effects) = 0.882276</p>
+        <p>&#160;</p>
+        <p>Estimated within-subjects standard deviation = 21.459749</p>
+        <p>&#160;</p>
+        <p>For within-subjects sd vs. mean, Kendall's tau b = 0.164457 two sided P = .3296</p>
+        <p>&#160;</p>
+        <p>Repeatability (for alpha = 0.05) = 59.482297</p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/repeatability.gif" width="517" height="365" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/ebx_545344684.gif" width="517" height="365" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/qq.gif" width="517" height="365" border="0" />
+        </p>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="809.5519" MadCap:lastWidth="2868" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Degrees of Freedom - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="The concept of degrees of freedom is central to the principle of estimating statistics of populations from samples of them. &quot;Degrees of freedom&quot; is commonly abbreviated to df. Think of df as a mathematical restriction that needs to be put in place when estimating one statistic from an estimate of another." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Degrees of freedom" />Degrees of Freedom</h1>
+        <p>&#160;</p>
+        <p>The concept of degrees of freedom is central to the principle of estimating statistics of populations from samples of them. "Degrees of freedom" is commonly abbreviated to df.</p>
+        <p>&#160;</p>
+        <p>Think of df as a mathematical restriction that needs to be put in place when estimating one statistic from an estimate of another.</p>
+        <p>&#160;</p>
+        <p>Let us take an example of data that have been drawn at random from a normal distribution. Normal distributions need only two parameters (mean and standard deviation) for their definition; e.g. the standard normal distribution has a mean of 0 and standard deviation (sd) of 1. The population values of mean and sd are referred to as mu and sigma respectively, and the sample estimates are x-bar and s.</p>
+        <p>&#160;</p>
+        <p>In order to estimate sigma, we must first have estimated mu. Thus, mu is replaced by x-bar in the formula for sigma. In other words, we work with the deviations from mu estimated by the deviations from x-bar. At this point, we need to apply the restriction that the deviations must sum to zero. Thus, degrees of freedom are n-1 in the equation for s below:</p>
+        <p>&#160;</p>
+        <p>Standard deviation in a population is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \sigma^2=\frac{\displaystyle \sum(x-\mu)^2}{n}$</MadCap:equation>
+        </p>
+        <p>[x is a value from the population, μ is the mean of all x, n is the number of x in the population, Σ is the summation]</p>
+        <p>&#160;</p>
+        <p>The estimate of population standard deviation calculated from a random sample is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle s^2=\frac{\displaystyle \sum_{i=1}^n(x_i-\bar{x})^2}{n-1}$</MadCap:equation>
+        </p>
+        <p>[x<sub>i</sub> is the ith observation from a sample of the population, x-bar is the sample mean, n is the sample size, Σ is the summation]</p>
+        <p>&#160;</p>
+        <p>When this principle of restriction is applied to regression and analysis of variance, the general result is that you lose one degree of freedom for each parameter estimated prior to estimating the (residual) standard deviation.</p>
+        <p>&#160;</p>
+        <p>Another way of thinking about the restriction principle behind degrees of freedom is to imagine contingencies. For example, imagine you have four numbers (a, b, c and d) that must add up to a total of m; you are free to choose the first three numbers at random, but the fourth must be chosen so that it makes the total equal to m - thus your degree of freedom is three.</p>
+        <p>&#160;</p>
+        <p>See also:</p>
+        <p><a href="../distributions/normal.htm">normal distribution</a>
+        </p>
+        <p><a href="../basic_descriptive_statistics/standard_deviation.htm">standard deviation</a>
+        </p>
+    </body>
+</html>

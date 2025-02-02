@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2028" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Two Way Analysis of Variance (ANOVA) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="This function calculates ANOVA for a two way randomized block experiment. There are overall tests for differences between treatment means and between block means. Multiple comparison methods are provided for pairs of treatment means." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="ANOVA: Two way;Two way ANOVA" />Two Way Analysis of Variance</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Analysis of Variance_Two Way</b>.</p>
+        <p>&#160;</p>
+        <p>This function calculates <a href="anova.htm">ANOVA</a> for a two way <a href="randomized_blocks.htm">randomized block</a> experiment. There are overall tests for differences between treatment means and between block means. <a href="multiple_comparisons.htm">Multiple comparison</a> methods are provided for pairs of treatment means.</p>
+        <p>&#160;</p>
+        <p>Consider data classified by two factors such that each level of one factor can be combined with all levels of the other factor:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="4" style="text-align: center;"><u>Treatment (i, 1 to k)</u>
+                </td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-align: center;text-decoration: underline;">1</td>
+                <td style="text-align: center;text-decoration: underline;">2</td>
+                <td style="text-align: center;">...</td>
+                <td style="text-align: center;"><u>k</u>
+                </td>
+            </tr>
+            <tr>
+                <td>Block (j, 1 to b)</td>
+                <td>1</td>
+                <td style="text-align: center;">Y<sub>ij</sub></td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>2</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>3</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>.</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>b</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+                <td style="text-align: center;">&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>In the example below there is a study of different treatments on clotting times. Response/outcome variable Y is the observed clotting time for blood samples. Blocks are individuals who donated a blood sample. Treatments are different methods by which portions of each of the blood samples are processed.</p>
+        <p>&#160;</p>
+        <p>
+            Unlike one way ANOVA, the F tests for two way ANOVA are the same if either or both block and treatment factors are considered <a href="anova.htm">fixed or random</a>:</p>
+        <p>
+            <MadCap:equation>$\displaystyle F_\text{between treatments}=\frac{MST}{MSE}
+\\
+\displaystyle F_{\text{between blocks}}=\frac{MSB}{MSE}
+\\
+\displaystyle MST=\frac{\displaystyle b\sum_{i=1}^k(\bar{Y}_{i.}-\bar{Y}_{..})^2}{k-1}
+\\
+\displaystyle MSB=\frac{\displaystyle k\sum_{j=1}^b(\bar{Y}_{.j}-\bar{Y}_{..})^2}{b-1}
+\\
+\displaystyle MSE=\frac{\displaystyle \sum_{i=1}^k \sum_{j=1}^b (Y_{ij}-\bar{Y}_{i.}-\bar{Y}_{.j}+\bar{Y}_{..})^2} {(k-1)(b-1)}$</MadCap:equation>
+        </p>
+        <p>- where F is the variance ratio for tests of equality of treatment and block means, MST is the mean square due to treatments/groups (between groups), MSB is the mean square due to blocks (between blocks), MSE is the mean square due to error (within groups, residual mean square), Y<sub>ij</sub> is an observation, Y bar i. is a treatment group mean, Y bar .j is a block mean and Y bar .. is the grand mean of all observations.</p>
+        <p>&#160;</p>
+        <p>
+            If you wish to use a two way ANOVA but your data are clearly non-normal then you should consider using the <a href="../nonparametric_methods/friedman.htm">Friedman</a> test, a nonparametric alternative.</p>
+        <p>&#160;</p>
+        <p>Please note that many statistical software packages and texts present multiple comparison methods for treatment group means only in the context of one way ANOVA. StatsDirect extends this to two way ANOVA by using the treatment group mean square from two way ANOVA for multiple comparisons. Treatment effects must be <a href="anova.htm">fixed</a> for this use of multiple comparisons to be valid. See <a href="../references/reference_list.htm">Hsu (1996)</a> for further discussion.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 241)</a>.</p>
+        <p>Test workbook (ANOVA worksheet: Treatment 1, Treatment 2, Treatment 3, Treatment 4).</p>
+        <p>&#160;</p>
+        <p>The following data represent clotting times (mins) of plasma from eight subjects treated in four different ways. The eight subjects (blocks) were allocated at random to each of the four treatment groups.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">Treatment 1</td>
+                <td style="text-align: right;text-decoration: underline;">Treatment 2</td>
+                <td style="text-align: right;text-decoration: underline;">Treatment 3</td>
+                <td style="text-align: right;text-decoration: underline;">Treatment 4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8.4</td>
+                <td style="text-align: right;">9.4</td>
+                <td style="text-align: right;">9.8</td>
+                <td style="text-align: right;">12.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.8</td>
+                <td style="text-align: right;">15.2</td>
+                <td style="text-align: right;">12.9</td>
+                <td style="text-align: right;">14.4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9.6</td>
+                <td style="text-align: right;">9.1</td>
+                <td style="text-align: right;">11.2</td>
+                <td style="text-align: right;">9.8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9.8</td>
+                <td style="text-align: right;">8.8</td>
+                <td style="text-align: right;">9.9</td>
+                <td style="text-align: right;">12.0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8.4</td>
+                <td style="text-align: right;">8.2</td>
+                <td style="text-align: right;">8.5</td>
+                <td style="text-align: right;">8.5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8.6</td>
+                <td style="text-align: right;">9.9</td>
+                <td style="text-align: right;">9.8</td>
+                <td style="text-align: right;">10.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8.9</td>
+                <td style="text-align: right;">9.0</td>
+                <td style="text-align: right;">9.2</td>
+                <td style="text-align: right;">10.4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7.9</td>
+                <td style="text-align: right;">8.1</td>
+                <td style="text-align: right;">8.2</td>
+                <td style="text-align: right;">10.0</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first prepare them in four workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Two Way from the Analysis of Variance section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Treatment 1", "Treatment 2","Treatment 3" and "Treatment 4" in one action when prompted for data.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Two way randomized block analysis of variance&#160;</u>
+        </p>
+        <p>&#160;</p>
+        <p>Variables: Treatment 1, Treatment 2, Treatment 3, Treatment 4</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col style="width: 91px;" />
+            <tr>
+                <td style="text-decoration: underline;">Source of Variation</td>
+                <td style="text-decoration: underline;">Sum Squares</td>
+                <td style="text-decoration: underline;">DF</td>
+                <td style="text-decoration: underline;">Mean Square</td>
+            </tr>
+            <tr>
+                <td>Between blocks (rows)</td>
+                <td>78.98875</td>
+                <td>7</td>
+                <td>11.284107</td>
+            </tr>
+            <tr>
+                <td>Between treatments (columns)</td>
+                <td>13.01625</td>
+                <td>3</td>
+                <td>4.33875</td>
+            </tr>
+            <tr>
+                <td>Residual (error)</td>
+                <td>13.77375</td>
+                <td>21</td>
+                <td>0.655893</td>
+            </tr>
+            <tr>
+                <td>Corrected total</td>
+                <td>105.77875</td>
+                <td>31</td>
+                <td>&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>F (VR between blocks) = 17.204193 P &lt; .0001</p>
+        <p>&#160;</p>
+        <p>F (VR between treatments) = 6.615029 P = .0025</p>
+        <p>&#160;</p>
+        <p>Here we can see that there was a statistically highly significant difference between mean clotting times across the groups. The difference between subjects is of no particular interest here.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="multiple_comparisons.htm">multiple comparisons</a>
+        </p>
+        <p><a href="anova.htm">analysis of variance</a>
+        </p>
+    </body>
+</html>

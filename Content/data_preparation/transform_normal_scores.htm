@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1102" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Normal Scores Transform - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Normal scores;Transformations: Normal scores" />
+            Normal Scores</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Transforming and Deriving_Normal Scores</b>.</p>
+        <p>&#160;</p>
+        <p>This function saves the normal scores of workbook data you select into a new workbook column marked Nml Score: Name, where Name is the column label of the original data.</p>
+        <p>&#160;</p>
+        <p>Three different methods for calculating normal scores are provided:</p>
+        <p>1.&#160;<b>van der Waerden's</b> method (<a href="../references/reference_list.htm">Conover, 1999</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle s=\Phi\left(\frac{r}{n+1}\right)$</MadCap:equation>
+            <br />- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ(p) is the pth quantile from the standard normal distribution.</p>
+        <p>&#160;</p>
+        <p>2.&#160;<b>Blom's</b> method (<a href="../references/reference_list.htm">Altman, 1991</a>):<br /><MadCap:equation>$\displaystyle s=\Phi\left(\frac{r-3/8}{n+1/4}\right)$</MadCap:equation></p>
+        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ(p) is the pth quantile from the standard normal distribution.</p>
+        <p>&#160;</p>
+        <p>3.&#160;<b>Expected normal order scores</b> (<a href="../references/reference_list.htm">David, 1981; Royston, 1982; Harter, 1961</a>)<br /></p>
+        <p>
+            <MadCap:equation>$\displaystyle s=\frac{n!}{(r-1)!(n-r)!}\int_{-\infty}^\infty x[1-\Phi(x)]^{r-1}[\Phi(x)]^{n-r}\Phi(x) \space dx \\
+
+\displaystyle \Phi(x)=\frac{1}{\sqrt{2\pi}\exp(-0.5x^2)}$</MadCap:equation>
+        </p>
+        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size, Φ(p) is the standard normal density for p and Φ(p) is the pth quantile from the standard normal distribution. The solution is found by numerical integration. Calculation of expected normal order scores is not practical for very large samples, n of 2500 is the maximum permitted in StatsDirect.</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Nonparametric worksheet: First Born).</p>
+        <p>&#160;</p>
+        <p>Scoring the following agressivity scores for a sample of firstborn twins using the first method above gives:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">First Born -----&gt;</td>
+                <td style="text-align: right;text-decoration: underline;">Nml Score(vdW): First Born</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">86</td>
+                <td style="text-align: right;">0.2934</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">-0.6151</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">68</td>
+                <td style="text-align: right;">-1.4261</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">1.1984</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">-0.2933</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">1.1984</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">70</td>
+                <td style="text-align: right;">-1.0201</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">-0.6151</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">88</td>
+                <td style="text-align: right;">0.7363</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">87</td>
+                <td style="text-align: right;">0.5024</td>
+            </tr>
+        </table>
+    </body>
+</html>

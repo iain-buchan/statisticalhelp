@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="766" MadCap:lastWidth="961">
+    <head><title>Multiple Comparisons/Contrasts/Testing in ANOVA - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="StatsDirect provides functions for multiple comparison (simultaneous inference), specifically all pairwise comparisons and all comparisons with a control. For k groups there are k(k-1)/2 possible pairwise comparisons. &#xD;&#xA;Tukey (Tukey-Kramer if unequal group sizes), Scheffé, Bonferroni and Newman-Keuls methods are provided for all pairwise comparisons. Dunnett's method is used for multiple comparisons with a control group.&#xD;&#xA;" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="ANOVA: Multiple comparisons;Sifting data (warnings);Mutliple contrasts;Multiple comparisons with ANOVA;Dredging data (warnings);Fishing for contrasts (warning);Type I error (avoidance in multiple testing)" />
+            Multiple Comparisons in Analysis of Variance</h1>
+        <p>&#160;</p>
+        <p>StatsDirect provides functions for multiple comparison (simultaneous inference), specifically all pairwise comparisons and all comparisons with a control. For k groups there are k(k-1)/2 possible pairwise comparisons.</p>
+        <p>&#160;</p>
+        <p>
+            <MadCap:keyword term="Newman-Keuls" />
+            <MadCap:keyword term="Scheffé" />
+            <MadCap:keyword term="Tukey-Kramer" />Tukey (Tukey-Kramer if unequal group sizes), Scheffé, Bonferroni and Newman-Keuls methods are provided for all pairwise comparisons (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Wallenstein, 1980; Miller, 1981; Hsu, 1996; Kleinbaum et al., 1998</a><MadCap:keyword term="Dunnett" />). Dunnett's method is used for multiple comparisons with a control group (<a href="../references/reference_list.htm">Hsu, 1996</a>).</p>
+        <p>&#160;</p>
+        <p>For k groups, ANOVA can be used to look for a difference across k group means as a whole. If there is a statistically significant difference across k means then a multiple comparison method can be used to look for specific differences between pairs of groups. The reason that two sample methods should not be used to make multiple pairwise comparisons is that they are not designed for repeat testing in a "data dredging" manner.</p>
+        <p>&#160;</p>
+        <p>If 20 repeat pairwise tests are made then you can not accept the conventional 1 in 20 chance of being wrong as a cut off level for statistical inference, i.e. there is a higher risk of <a href="../basics/p_values.htm">type I error</a>. A simple solution to this problem is to reduce the cut-off for statistical significance with increasing numbers of contrasts made; Bonferroni's method does just this with multiple t tests. More sophisticated methods, such as Tukey(-Kramer), consider the statistical distributions associated with systematic repeated testing; both Tukey(-Kramer) and Newman-Keuls methods are based upon the <a href="../distributions/studentized_range.htm">Studentized range</a> statistic. Scheffé's method gives a very conservative/cautious weighting against the risk of type I error and is therefore less powerful for the detection of true differences. The most acceptable general method for all pairwise comparisons is Tukey(-Kramer), the P values for which are exact with balanced designs (<a href="../references/reference_list.htm">Hsu, 1996</a>).</p>
+        <p>&#160;</p>
+        <p>The outputs from the different multiple contrast methods are displayed in decreasing order based upon on the absolute value of the difference between the means of the two groups compared for each contrast. The word "stop" is shown next to the first non-significant P value, this indicates that you should not consider further contrasts if you are making a simultaneous analysis (similar to the Shaffer-Holm method).</p>
+        <p>&#160;</p>
+        <p>The following is a decision tree for selecting a multiple contrast method:</p>
+        <ul>
+            <li>pairwise<ul style="list-style-type: circle;"><li>equal groups sizes: <i>Tukey</i></li><li>unequal group sizes: <i>Tukey-Kramer</i> or <i>Scheffé</i></li></ul></li>
+            <li>not pairwise<ul style="list-style-type: circle;"><li>with a control: <i>Dunnett</i></li><li>planned: <i>Bonferroni</i></li><li>not planned: <i>Scheffé</i></li></ul></li>
+        </ul>
+        <p>&#160;</p>
+        <p>Note that Bonferroni and Scheffé methods are completely general; they can be used for unplanned (a posteriori) or planned (a priori) multiple comparisons.</p>
+        <p>&#160;</p>
+        <p>This is a controversial area in statistics and you would be wise to seek the advice of a statistician at the design stage of your study. In general you should design experiments so that you can avoid having to "dredge" groups of data for differences, decide which contrasts you are interested in at the outset. Note that multiple independent comparisons (e.g. multiple t or Mann-Whitney tests) may be justified if you identify the comparisons as valid at the design stage of your investigation.</p>
+        <p>&#160;</p>
+        <p>Other statistical software may refer to LSD (least significant difference) methods, please note that the Bonferroni technique described above is an LSD method.</p>
+        <p>&#160;</p>
+        <p><a href="anova.htm">analysis of variance</a>
+        </p>
+    </body>
+</html>

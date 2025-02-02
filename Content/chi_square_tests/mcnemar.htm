@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1435" MadCap:lastWidth="3153" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>McNemar Matched 2 by 2 Chi-square and Exact Test - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Matched pairs chi-square test;Liddell's test;McNemar's test;Chi-square tests: McNemar" />
+            McNemar Chi-square and Exact test for Matched Pairs</h1>
+        <p>&#160;</p>
+        <p>Menu locations:</p>
+        <p style="font-weight: bold;">Analysis_Exact_Matched Pairs;</p>
+        <p style="font-weight: bold;">Analysis_Chi-square_McNemar.</p>
+        <p>&#160;</p>
+        <p>Paired proportions have traditionally been compared using McNemar's test but an exact alternative due to <a href="../references/reference_list.htm">Liddell</a> (1983) is preferable. StatsDirect gives you both.</p>
+        <p>&#160;</p>
+        <p>The exact test is a special case of the sign test. The b count in the table below is treated as a binomial variable from the sample b+c. Using the ratio R' (R' = b/c) as a point estimate of relative risk, a two sided probability is calculated that R' = 1 (the null hypothesis). The test statistic F=b/(c+1).</p>
+        <p>&#160;</p>
+        <p>Confidence limits for R' are calculated as follows:</p>
+        <p>
+            <MadCap:equation>$\displaystyle R'_L=\frac{b}{(c+1)\space F_{\alpha/2,\space 2(c+1),\space 2b}} \\ 
+\space \\
+\displaystyle R'_U=\frac{(b+1)\space F_{\alpha/2,\space 2(b+1),\space 2c}}{c}$</MadCap:equation>
+        </p>
+        <p>- where F(α/2, n, d) is a quantile from the F distribution with n and d degrees of freedom.</p>
+        <p>&#160;</p>
+        <p>You should use the exact test for analysis; McNemar's test is included for interest only.</p>
+        <p>&#160;</p>
+        <p>If you need the exact confidence interval for the difference between a pair of proportions then please see <a href="../proportions/paired.htm">paired proportions</a>.</p>
+        <p>&#160;</p>
+        <p>DATA INPUT:</p>
+        <p>Observed frequencies should be entered as a paired fourfold table:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td colspan="2" style="text-decoration: underline;">
+                    <p align="center">Control/reference category:</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td style="text-decoration: underline;">
+                    <p align="right">outcome present</p>
+                </td>
+                <td style="text-decoration: underline;">
+                    <p align="right">outcome absent</p>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2">
+                    <p align="right">Case/index category:</p>
+                </td>
+                <td>
+                    <p align="right">outcome present:</p>
+                </td>
+                <td>
+                    <p align="center">a</p>
+                </td>
+                <td>
+                    <p align="center">b</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p align="right">outcome absent:</p>
+                </td>
+                <td>
+                    <p align="center">c</p>
+                </td>
+                <td>
+                    <p align="center">d</p>
+                </td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 127)</a>.</p>
+        <p>&#160;</p>
+        <p>The data below represent a comparison of two media for culturing Mycobacterium tuberculosis. Fifty suspect sputum specimens were plated up on both media and the following results were obtained:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td colspan="2" style="text-decoration: underline;">
+                    <p align="center">Medium B:</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td style="text-decoration: underline;">
+                    <p align="right">Growth</p>
+                </td>
+                <td style="text-decoration: underline;">
+                    <p align="right">No Growth</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p align="right">Medium A:</p>
+                </td>
+                <td>
+                    <p align="right">Growth:</p>
+                </td>
+                <td>
+                    <p align="right">20</p>
+                </td>
+                <td>
+                    <p align="right">12</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p align="right">&#160;</p>
+                </td>
+                <td>
+                    <p align="right">No Growth:</p>
+                </td>
+                <td>
+                    <p align="right">2</p>
+                </td>
+                <td>
+                    <p align="right">16</p>
+                </td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you should select the McNemar function from the chi-square section of the analysis menu. Select the default 95% confidence interval. Enter the counts into the table as shown above.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>McNemar's test:</p>
+        <p>Yates' continuity corrected Chi² = 5.785714 P = 0.0162</p>
+        <p>&#160;</p>
+        <p>After Liddell (1983)Refs:</p>
+        <p>Point estimate of relative risk (R') = 6</p>
+        <p>Exact 95% confidence interval = 1.335744 to 55.197091</p>
+        <p>&#160;</p>
+        <p>F = 4, P (two sided) = 0.0129</p>
+        <p>R' is significantly different from unity</p>
+        <p>&#160;</p>
+        <p>Here we can conclude that the tubercle bacilli in the experiment grew significantly better on medium A than on medium B. With 95% confidence we can state that the chances of a positive culture are between 1.34 and 55.20 times greater on medium A than on medium B.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

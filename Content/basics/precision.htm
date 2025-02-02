@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="4" MadCap:lastHeight="763" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Precision and Floating Point Arithmetic in StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="Floating point arithmetic and computational precision in StatsDirect statistical software." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Precision (arithmetic computation)" />Precision</h1>
+        <p>&#160;</p>
+        <p>StatsDirect calculates all of its functions in IEEE-754 double precision (8 byte, 64 bit) for floating point arithmetic and 4 byte (32 bit) integers for integer arithmetic.</p>
+        <p>&#160;</p>
+        <p>Results are displayed to the level of precision that you specify under Options in the analysis menu. The default number of decimal places shown is 6. Double precision numbers are accurate up to sixteen decimal places but after calculations have been done there may be some rounding errors to account for. In theory this should affect no more than the last significant digit but in practice it is safer to rely upon fewer decimal places.</p>
+        <p>&#160;</p>
+        <p>Some statistical software applications, including the statistical routines in widely used spreadsheets, produce inaccurate results due to the use of algorithms that do not handle precision properly (<a href="../references/reference_list.htm">McCullough and Wilson, 1999</a>). StatsDirect uses robust and reliable algorithms in order to maximise the accuracy of its results. The American National Institute of Standards and Technology produces reference data sets for testing the accuracy of statistical software (see <a href="http://www.nist.gov/itl/div898/strd/">http://www.nist.gov/itl/div898/strd/</a>).</p>
+        <p>&#160;</p>
+        <p>Double precision specifications:</p>
+        <ul>
+            <li>minimum = 2.22 * 10^-308</li>
+            <li>maximum = 1.79 * 10^308</li>
+            <li>closest to 0 without being 0 = +/- 10^323</li>
+            <li>precision = 2.22 * 10^-16</li>
+            <li>minimum exponent = -1022</li>
+            <li>maximum exponent = 1024</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Floating Point</u>
+        </p>
+        <p>In order to understand why rounding errors occur and why precision is an issue with mathematics on computers you need to understand how computers store numbers that are not integers (i.e. real numbers or numbers with a fractional part).</p>
+        <p>&#160;</p>
+        <p>Each number is stored in binary format (a series of 0 or 1 digits/bits). Double precision numbers have 64 of these bits with which to represent a real number. The first bit represents the sign of the number (s), the next 11 bits represent the exponent (E) and the other 53 bits (the mantissa, M) store the detail: A real number is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{real number}=s \times M \times B^{e-E}$</MadCap:equation>
+        </p>
+        <p>- where B (the radix) is 2 for all computers that StatsDirect runs on.</p>
+        <p>&#160;</p>
+        <p>Numbers that do no have a perfect binary representation are stored to the level of precision specified by the floating point model (16 decimal places in double precision). For example 0.1 is stored as 0.100000000000000014. If lots of numbers like this are added together then the sum of the parts beyond the 16th decimal place may add up to an error that creeps into the "accurate" zone causing results of some calculations to have less than 16 decimal places of precision.</p>
+        <p>&#160;</p>
+        <p>For more information see <a href="../references/reference_list.htm">Press et al. (1992)</a>.</p>
+    </body>
+</html>

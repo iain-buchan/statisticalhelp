@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="510" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Pairwise Slopes - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Pairwise: Slopes" />
+            Pairwise Slopes</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Transforming and Deriving_Pairwise_Slopes</b>.</p>
+        <p>&#160;</p>
+        <p>This function creates a column of all (n(n-1)/2) pairwise slopes from a pair of columns (Y the response variable and X the predictor variable):</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">X</td>
+                <td style="text-decoration: underline;">Y</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>6</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Slopes (X, Y)</u>
+        </p>
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+        <p>&#160;</p>
+        <p>All possible (n(n-1)/2) XiYi...(i=1 to n) are compared with XjYj...(j=i to n) where i&lt;&gt;j. Slope is (Yi-Yj)/(Xi-Xj).</p>
+        <p>&#160;</p>
+        <p>These values form intermediate steps in a number of nonparametric statistical methods. For example, in nonparametric linear regression (Theil type: <a href="../references/reference_list.htm">Conover, 1999</a>) the median slope would be 2 in the usual Y = bX +C, where C is the median intercept (i.e. median[Y - median b * X]).</p>
+        <p>&#160;</p>
+        <p>StatsDirect will calculate the median slope and its confidence interval for you if you select this option when prompted. The results are stored in the column label of the relevant list of pairwise slopes. The confidence interval is calculated using the distribution of Kendall's T as described in Conover (<a href="../references/reference_list.htm">Conover, 1999</a>). Please note that the results may differ slightly from Conover's text because StatsDirect calculates the inverse of Kendall's T more accurately than the routines used to calculate Best's widely quoted 1974 table for this statistic.</p>
+        <p>&#160;</p>
+        <p>A fuller <a href="../nonparametric_methods/nonparametric_regression.htm">nonparametric linear regression</a> function is given in the nonparametric methods and regression sections.</p>
+    </body>
+</html>

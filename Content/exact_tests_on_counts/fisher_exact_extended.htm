@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1422" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Fisher Exact Test (Expanded) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Fisher's exact test: 2 by 2 expanded;Mid-P (Fisher exact test)" />Fisher's Exact Test (Expanded)</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Exact_Expanded Fisher</b>.</p>
+        <p>&#160;</p>
+        <p>This allows you to see a conventional Fisher's exact (Fisher-Irwin) test in more detail, including mid-P values. The complete conditional distribution for the observed marginal totals is displayed (<a href="../references/reference_list.htm">Bailey, 1977</a>).</p>
+        <p>&#160;</p>
+        <p>Like the chi-square test for fourfold (2 by 2) tables, Fisher's exact test examines the relationship between the two dimensions of the table (classification into rows vs. classification into columns). The null hypothesis is that these two classifications are not different.</p>
+        <p>&#160;</p>
+        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the expected value of the first count A.</p>
+        <p>&#160;</p>
+        <p>This exact treatment of the fourfold table should be used instead of the chi-square test when any expected frequency is less than 1 or 20% of expected frequencies are less than or equal to 5. With StatsDirect, it is reasonable to use Fisher's exact test by default because the computational method used can cope with large numbers.</p>
+        <p>&#160;</p>
+        <p>StatsDirect uses the definition of a 2 sided P value described by <a href="../references/reference_list.htm">Bailey (1977)</a> (P values for all possible tables with P less than or equal to that for the observed table are summed). Many authors prefer to simply double the 1 sided P value (Armitage and Berry, 1994; Bland, 2000).</p>
+        <p>&#160;</p>
+        <p>Consider using <a href="../proportions/mid_p.htm">mid-P</a> values and intervals when you have several similar studies within an overall investigation (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Barnard, 1989</a>).</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <p>·&#160;&#160;&#160;each observation is classified into exactly one cell</p>
+        <p>·&#160;&#160;&#160;the row and column totals are fixed, not random</p>
+        <p>&#160;</p>
+        <p>The assumption of fixed marginal (row/column) totals is controversial and causes disagreements such as the best approach to two sided inference from this test.</p>
+        <p>&#160;</p>
+        <p>DATA INPUT:</p>
+        <p>Observed frequencies should be entered as a standard fourfold table:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">feature present</td>
+                <td style="text-decoration: underline;text-align: right;">feature absent</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome positive:</td>
+                <td style="text-align: right;">a</td>
+                <td style="text-align: right;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome negative:</td>
+                <td style="text-align: right;">c</td>
+                <td style="text-align: right;">d</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 138)</a>.</p>
+        <p>&#160;</p>
+        <p>The following data compare malocclusion of teeth with type of feeding received by infants.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">Normal teeth</td>
+                <td style="text-decoration: underline;text-align: right;">Malocclusion</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Breast fed:</td>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">16</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Bottle fed:</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">21</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must select the expanded Fisher's exact test function from the exact tests section of the analysis menu. Enter the frequencies into the contingency table on screen as shown above.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Rearranged table:</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">1</td>
+                <td style="font-weight: bold;text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="font-weight: bold;text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">16</td>
+                <td style="text-align: right;">21</td>
+                <td style="font-weight: bold;text-align: right;">37</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;text-align: right;">20</td>
+                <td style="font-weight: bold;text-align: right;">22</td>
+                <td style="font-weight: bold;text-align: right;">42</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Expectation of A = 2.380952</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">A</td>
+                <td style="text-decoration: underline;">Lower Tail</td>
+                <td style="text-decoration: underline;">Individual P</td>
+                <td style="text-decoration: underline;">Upper Tail</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>1.000000000000000</td>
+                <td>0.030956848030019</td>
+                <td>0.030956848030019</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>0.202939337085679</td>
+                <td>0.171982489055660</td>
+                <td>0.969043151969981</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>0.546904315196998</td>
+                <td>0.343964978111320</td>
+                <td>0.797060662914321</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>0.856472795497186</td>
+                <td>0.309568480300188</td>
+                <td>0.453095684803002</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>0.981774323237738</td>
+                <td>0.125301527740552</td>
+                <td>0.143527204502814</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>1.000000000000000</td>
+                <td>0.018225676762262</td>
+                <td>0.018225676762262</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>One sided (upper tail) P = 0.1435, (doubled one sided P = 0.2871)</p>
+        <p>Two sided (by summation) P = 0.1745</p>
+        <p>&#160;</p>
+        <p>One sided mid-P = 0.0809</p>
+        <p>Two sided mid-P = 0.1618</p>
+        <p>&#160;</p>
+        <p>Here we cannot reject the null hypothesis that there is no association between these two classifications, i.e. between feeding mode and malocclusion.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

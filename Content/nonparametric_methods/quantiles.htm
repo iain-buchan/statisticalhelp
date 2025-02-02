@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="2" MadCap:lastHeight="649" MadCap:lastWidth="3249">
+    <head><title>Quantiles, Centiles and Percentiles - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Quantiles;Centiles;Percentiles" />
+            Quantiles</h1>
+        <p>&#160;</p>
+        <p>Quantiles are points in a distribution that relate to the rank order of values in that distribution.</p>
+        <p>&#160;</p>
+        <p>For a sample, you can find any quantile by sorting the sample. The <a href="../basic_descriptive_statistics/central_tendency.htm">middle value</a> of the sorted sample (middle quantile, 50th percentile) is known as the median. The limits are the minimum and maximum values. Any other locations between these points can be described in terms of centiles/percentiles.</p>
+        <p>&#160;</p>
+        <p>Centiles/percentiles are descriptions of quantiles relative to 100; so the 75th percentile (upper quartile) is 75% or three quarters of the way up an ascending list of sorted values of a sample. The 25th percentile (lower quartile) is one quarter of the way up this rank order.</p>
+        <p>&#160;</p>
+        <p>Percentile rank is the proportion of values in a distribution that a particular value is greater than or equal to. For example, if a pupil is taller than or as tall as 79% of his classmates then the percentile rank of his height is 79, i.e. he is in the 79th percentile of heights in his class.</p>
+        <p>&#160;</p>
+        <p><u>Definition</u>
+        </p>
+        <p>StatsDirect gives the option of two different methods for calculating quantiles; only the first method can be used with observation weights:-</p>
+        <p>&#160;</p>
+        <p style="font-weight: normal;"><b>Method 1</b>: This is a common method that emulates the inverse of the empirical probability distribution with averaging where there are discontinuities (<a href="../references/reference_list.htm">Hyndman and Fan, 1996</a>), This is also the universal default method in Stata:-</p>
+        <p style="font-style: normal;">Take a sorted vector of observations u(i=1 to n) with weights w(i = 1 to n) or weights each equal to one if the sample is unweighted.</p>
+        <p style="font-style: normal;">Then find i = the first index point that is larger than pn, where p is the proportion of the quantile and n is the sample size.</p>
+        <p style="font-style: normal;">
+            <MadCap:equation>$\displaystyle \text{if }i=pn \text{ then } Q(p)=u_i \text { else } Q(p)=\frac{u_{i-1}+u_i}{2}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p style="font-weight: normal;"><b>Method 2</b>: This is the conventional definition used when calculating confidence intervals for quantiles (<a href="../references/reference_list.htm">Mood and Graybill, 1973</a>), This is also the universal default method in SPSS and Minitab:-</p>
+        <p style="font-weight: normal;">
+            <MadCap:equation>$\displaystyle Q(p)=h u_{i+1}+(1-h)u_i \\
+\displaystyle m=\max (\min(p(n+1),n)) \\
+\displaystyle i=\text{integer part(m)} \\
+\displaystyle h=m-1$</MadCap:equation>
+        </p>
+        <p style="font-style: normal;">- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), i is the order statistic, h is the fractional part of the order statistic (0 or 0.5), u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size.</p>
+    </body>
+</html>

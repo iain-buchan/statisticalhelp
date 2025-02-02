@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2240" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Diagnostic Tests (Sensitivity, Specificity etc.) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Diagnostic test errors;Likelihood ratios: 2 by 2;True positive;False positive;Predictive values;Diagnostic odds ratio;Odds ratio: Diagnostic" />
+            Diagnostic Test 2 by 2 Table</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Clinical Epidemiology_Diagnostic Test (2 by 2)</b>.</p>
+        <p>&#160;</p>
+        <p>This function gives predictive values (post-test likelihood) with change, prevalence (pre-test likelihood), sensitivity, specificity and likelihood ratios with robust confidence intervals (<a href="../references/reference_list.htm">Sackett et al., 1983, 1991; Zhou et al., 2002</a>).</p>
+        <p>&#160;</p>
+        <p>The quality of a diagnostic test is often expressed in terms of sensitivity and specificity. Sensitivity is the ability of the test to pick up what it is testing for and specificity is the ability of the test to reject what it is not testing for.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">DISEASE</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-align: center;text-decoration: underline;">Present</td>
+                <td style="text-align: center;text-decoration: underline;">Absent</td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: right;">TEST:</td>
+                <td style="text-align: right;">+:</td>
+                <td style="text-align: center;">a (true +ve)</td>
+                <td style="text-align: center;">b (false +ve)</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">-:</td>
+                <td style="text-align: center;">c (false -ve)</td>
+                <td style="text-align: center;">d (true -ve)</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Sensitivity = a/(a+c)</p>
+        <p>Specificity = d/(b+d)</p>
+        <p>&#160;</p>
+        <p>+ve predictive value = a/(a+b)</p>
+        <p>-ve predictive value = d/(d+c)</p>
+        <p>&#160;</p>
+        <p>Likelihood ratio of a positive test = [a/(a+c)]/[b/(b+d)]</p>
+        <p>Likelihood ratio of a negative test = [c/(a+c)]/[d/(b+d)]</p>
+        <p>&#160;</p>
+        <p>Likelihood ratios have become useful because they enable one to quantify the effect a particular test result has on the probability of a certain diagnosis or outcome. Using a simplified form of Bayes' theorem:</p>
+        <p>&#160;</p>
+        <p>posterior odds = prior odds * likelihood ratio</p>
+        <p>&#160;</p>
+        <p>where:</p>
+        <p>odds = probability/(1-probability)</p>
+        <p>probability = odds/(odds+1)</p>
+        <p>&#160;</p>
+        <p>This function is not truly Bayesian because it does not use any starting/prior probability. Likelihood ratios, however, are provided and these can be used to direct the flow of probabilities in Bayesian analysis. For an excellent account of this approach in medical diagnosis, see <a href="../references/reference_list.htm">Sackett (1991)</a>.</p>
+        <p>&#160;</p>
+        <p>Another way to summarise diagnostic test performace is via the diagnostic odds ratio:</p>
+        <p>&#160;</p>
+        <p>Diagnostic odds ratio = true/false = (a * d)/(b * c)</p>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The confidence intervals for the likelihood ratios are constructed using the likelihood-based approach to binomial proportions of <a href="../references/reference_list.htm">Koopman (1984)</a> suggested by <a href="../references/reference_list.htm">Gart and Nam (1988)</a>. The confidence intervals for all other statistics are exact binomial confidence intervals constructed using the method of Clopper and Pearson (<a href="../references/reference_list.htm">Newcombe, 1998c</a>).</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>In a hypothetical example of a diagnostic test, serum levels of a biochemical marker of a particular disease were compared with the known diagnosis of the disease. 100 international units of the marker or greater was taken as an arbitrary positive test result:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">Disease</td>
+                <td style="text-decoration: underline;text-align: right;">No Disease</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Marker ≥100:</td>
+                <td style="text-align: right;">431</td>
+                <td style="text-align: right;">30</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Marker &lt; 100:</td>
+                <td style="text-align: right;">29</td>
+                <td style="text-align: right;">116</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect select Diagnostic Test (2 by 2) from the Clinical Epidemiology section of the Analysis menu. Choose the default a 95% confidence interval. Then enter the above frequencies into the 2 by 2 table on the screen.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td colspan="3" style="text-decoration: underline;text-align: center;">Disease / Feature:</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">Present</td>
+                <td style="text-decoration: underline;text-align: right;">Absent</td>
+                <td style="text-decoration: underline;text-align: right;">Totals</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="text-align: right;">Test:</td>
+                <td style="text-align: right;">Positive:</td>
+                <td style="text-align: right;">431</td>
+                <td style="text-align: right;">30</td>
+                <td style="text-align: right;">461</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Negative:</td>
+                <td style="text-align: right;">29</td>
+                <td style="text-align: right;">116</td>
+                <td style="text-align: right;">145</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Totals:</td>
+                <td style="text-align: right;">460</td>
+                <td style="text-align: right;">146</td>
+                <td style="text-align: right;">606</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Including 95% confidence intervals:</p>
+        <p>&#160;</p>
+        <p><u>Prevalence (pre-test likelihood of disease)</u>
+        </p>
+        <p>0.759076 (0.722988 to 0.792617), 75.91% (72.3% to 79.26%)</p>
+        <p>&#160;</p>
+        <p><u>Predictive value of +ve test (post-test likelihood of disease)</u>
+        </p>
+        <p>0.934924 (0.908401 to 0.955666), 93.49% (90.84% to 95.57%), {change = 17%}</p>
+        <p>&#160;</p>
+        <p><u>Predictive values of -ve test</u>
+        </p>
+        <p>(post-test likelihood of no disease)</p>
+        <p>0.8 (0.725563 to 0.861777), 80% (72.56% to 86.18%), {change = 56%}</p>
+        <p>(post-test disease likelihood despite -ve test)</p>
+        <p>0.2 (0.274437 to 0.138223), 20% (27.44% to 13.82%), {change = -56%}</p>
+        <p>&#160;</p>
+        <p><u>Sensitivity (true positive rate)</u>
+        </p>
+        <p>0.936957 (0.910711 to 0.957376), 93.7% (91.07% to 95.74%)</p>
+        <p>&#160;</p>
+        <p><u>Specificity (true negative rate)</u>
+        </p>
+        <p>0.794521 (0.719844 to 0.856862), 79.45% (71.98% to 85.69%)</p>
+        <p>&#160;</p>
+        <p><u>Likelihood Ratio</u>
+        </p>
+        <p>LR (positive test) = 4.559855 (3.364957 to 6.340323)</p>
+        <p>LR (negative test) = 0.079348 (0.055211 to 0.113307)</p>
+        <p>&#160;</p>
+        <p><u>Diagnostic Odds Ratio</u>
+        </p>
+        <p>Observed odds ratio =   57.466667</p>
+        <p>Conditional maximum likelihood estimate = 56.64839 (32.064885 to 103.54465)</p>
+        <p>&#160;</p>
+        <p>Here we can say with 95% confidence that marker results of ≥ 100 are at least three (3.365) times more likely to come from patients with disease than those without disease. Also with 95% confidence we can say that marker results of &lt;100 are at most only about one tenth (0.133) as likely to come from patients with disease as from those without disease.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

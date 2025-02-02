@@ -1,0 +1,148 @@
+/*<meta />*/
+
+body
+{
+	margin-left: 0em;
+	padding-left: 1.5em;
+	padding-right: 1em;
+	font-size: 10pt;
+	font-family: sans-serif;
+}
+
+h1
+{
+	font-size: 125%;
+	clear: both;
+	background-color: #f5f5f5;
+	width: 100%;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	margin-left: 0em;
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+
+h2
+{
+	font-size: 110%;
+	clear: both;
+	margin-left: 0em;
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+
+h3
+{
+	font-size: 100%;
+	clear: both;
+	margin-left: 0em;
+	margin-bottom: 0em;
+	margin-top: 0em;
+}
+
+h4
+{
+	font-size: 100%;
+	clear: both;
+	margin-left: 0em;
+	margin-bottom: 0em;
+	margin-top: 0em;
+}
+
+a.Popup
+{
+	
+}
+
+p
+{
+	margin-left: 0em;
+	margin-bottom: 0.3em;
+	margin-top: 0em;
+}
+
+li
+{
+	left: 0em;
+	padding-left: 0em;
+	margin-left: 0em;
+	margin-bottom: 0.5em;
+	margin-top: 0em;
+}
+
+ol
+{
+	margin-right: 0;
+	padding-left: 0em;
+	margin-left: 20px;
+	margin-bottom: 0em;
+	margin-top: 0em;
+}
+
+ul
+{
+	list-style-type: disc;
+	left: 0em;
+	padding-left: 0em;
+	margin-left: 20px;
+	margin-bottom: 0em;
+	margin-top: 0.8em;
+}
+
+td
+{
+	margin-left: 0em;
+	padding-right: 1em;
+	border-left-width: .5em;
+	border-right-width: .5em;
+	border-top-width: .5em;
+	border-bottom-width: 0;
+	padding-left: 0em;
+}
+
+.TBLhead
+{
+	color: #002b00;
+	margin-top: 1.5em;
+	margin-bottom: .5em;
+	clear: both;
+	font-weight: bold;
+}
+
+img
+{
+	border: none;
+	padding-bottom: -0.5em;
+}
+
+MadCap|equation
+{
+	font-size: 120%;
+}
+
+a:link
+{
+	color: #0000D0;
+	text-decoration: underline;
+}
+
+a:visited
+{
+	color: #800080;
+	text-decoration: underline;
+}
+
+a:hover
+{
+	color: #FF0000;
+	cursor: hand;
+	text-decoration: underline;
+}
+
+a:active
+{
+	color: #FF0000;
+	cursor: hand;
+	text-decoration: underline;
+}
+

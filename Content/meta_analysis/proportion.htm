@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="4" MadCap:lastHeight="3421" MadCap:lastWidth="2793" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Proportion Meta-analysis - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Meta-analysis: Proportion;Proportion meta-analysis" />Proportion Meta-analysis</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Meta-Analysis_Proportion</b>.</p>
+        <p>&#160;</p>
+        <p>This function enables you to calculate an overall proportion from a set of proportions, for example from a systematic review of studies of adherence with a particular drug treatment.</p>
+        <p>&#160;</p>
+        <p>This function can also be applied to a review of diagnostic test studies to give an overall sensitivity or specificity as follows:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="2" style="text-align: center;"><u>DISEASE/OUTCOME</u>
+                </td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;text-align: center;">Present</td>
+                <td style="text-decoration: underline;text-align: center;">Absent</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">TEST:</td>
+                <td style="text-align: right;">+:</td>
+                <td style="text-align: left;">a (true +ve)</td>
+                <td style="text-align: left;">b (false +ve)</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">-:</td>
+                <td style="text-align: left;">c (false -ve)</td>
+                <td style="text-align: left;">d (true -ve)</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Sensitivity = a/(a+c)</p>
+        <p>Specificity = d/(b+d)</p>
+        <p>&#160;</p>
+        <p>Another way to summarise diagnostic test performance is via the diagnostic odds ratio:</p>
+        <p>&#160;</p>
+        <p>Diagnostic odds ratio = true/false = (a * d)/(b * c)</p>
+        <p>&#160;</p>
+        <p>In order to run a meta-analysis of diagnostic odds ratios simply use the <a href="mh.htm">odds ratio meta-analysis function</a> with the experimental group as the true (test correct)  outcomes and the control group as the false outcomes – enter a as experimental group responders; a+d as experimental group number; b as control group responders; and b+c as control group total.</p>
+        <p>&#160;</p>
+        <p>Many study designs can be expressed as a proportion, and relatively complex statistical models can be explored using sets of proportions – for example a random effects logistic regression. You should seek the assistance of a statistician if you want to pursue analyses deeper than the summaries that this StatsDirect function offers.</p>
+        <p>&#160;</p>
+        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
+        <p>&#160;</p>
+        <p>Beyond this meta-analysis function, <a href="../regression_and_correlation/logistic.htm">logistic regression</a> can be used to compare pooled proportions. Consult with a statistician if you are considering a random effects logistic model.</p>
+        <p>&#160;</p>
+        <p>DATA INPUT:</p>
+        <p>You enter the number of subjects responding (with the study outcome) and the total number of subjects studied. You may also enter a title for each study.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect first transforms proportions via the Freeman-Tukey double arcsine method (<a href="../references/reference_list.htm">Murray et al. 1950, Miller 1978</a>) then performs an inverse-variance weighted fixed and random effects meta-analysis by conventional methods (<a href="../references/reference_list.htm">DerSimonian and Laird, 1986</a>). The appropriate weight is n+0.5 but some other software uses n+1.  In our own simulation testing of the variance options within the formula 1/(n+c), varying c from 0.5 to 1, we found that the n+1 method (<a href="../references/reference_list.htm">Stuart and Ord, 1994</a>) is conservative, avoiding underestimation of the true variance of the transformed proportion, but the original n+0.5 method (<a href="../references/reference_list.htm">Freeman et al, 1950</a>) method is closer to the true variance in absolute terms. Note that there is no fixed transformation of a binomial proportion that provides optimal variance stabilization, which depends on your data - iterative variance stabilization methods may emerge with further research. The pooled proportion can be calculated as the back-transform of the weighted mean of the transformed proportions (<a href="../references/reference_list.htm">Miller 1978</a>):</p>
+        <p>&#160;</p>
+        <p>
+            <MadCap:equation>$\displaystyle \hat{p}=\left\{1-\text{sgn}⁡(\cos{(\hat{x})})\times\sqrt{1-{\left[\frac{(\sin{(\hat x)}+(\sin{(\hat x)}-1/\sin{(\hat x)})}n\right]}^2}\ \right\} \times 0.5$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle \hat x=\frac{\sum ⁢xw⁢}{\sum ⁢w}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle x=\sin^{-1}\left(\sqrt{r/(n+1)}\right)+\sin^{-1} \left( \sqrt{(r+1)/(n+1)}\right)$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle w=n+0.5$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle q=\sum w(x-\hat x)^2$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle \tau^2=\frac{q-(k-1)}{\sum w-\sum w^2/\sum w}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle w_r=\frac{1}{\tau^2+1/w}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle \hat x_r=\frac{\sum xw_r}{\sum w_r}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle \hat{p_r}=\left\{1-\text{sgn}⁡(\cos{(\hat{x}_r)})\times\sqrt{1-{\left[\sin{(\hat x_r)}+\frac{(\sin{(\hat x_r)}-1/\sin{(\hat x_r)})}n\right]}^2}\ \right\} \times 0.5$</MadCap:equation>
+        </p>
+        <p>- where p hat is the fixed effects pooled proportion, x is the Freeman-Tukey transformed proportion, w is the inverse variance weight for the transformed proportion, q is the Cochran q statistic, tau squared is the moment-based estimate of the between-studies variance, w r is the DerSimonian-Laird weight, and p hat r is the random effects estimate of the pooled proportion.</p>
+        <p>&#160;</p>
+        <p>An alternative, simpler, back transform, as used in previous versions of StatsDirect is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \hat p=\sin (\hat x/2)^2$</MadCap:equation>
+        </p>
+        <p>This form is strictly less accurate than the Miller method above but it is less susceptible to the bias effects of non-linear transformations, giving more credible estimates of pooled proportions where the true population value is close to 0 or 1.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>The following data represent adherence with medication from 22 fictitious trials of a class of drug:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: left;">Trial</td>
+                <td style="text-decoration: underline;text-align: right;">Adherent</td>
+                <td style="text-decoration: underline;text-align: right;">Total</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Brown</td>
+                <td style="text-align: right;">214</td>
+                <td style="text-align: right;">311</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Lamont</td>
+                <td style="text-align: right;">58</td>
+                <td style="text-align: right;">65</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Lally</td>
+                <td style="text-align: right;">59</td>
+                <td style="text-align: right;">67</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Orwell</td>
+                <td style="text-align: right;">182</td>
+                <td style="text-align: right;">285</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Wagner</td>
+                <td style="text-align: right;">65</td>
+                <td style="text-align: right;">73</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Werner</td>
+                <td style="text-align: right;">66</td>
+                <td style="text-align: right;">116</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Venner</td>
+                <td style="text-align: right;">99</td>
+                <td style="text-align: right;">183</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Adams</td>
+                <td style="text-align: right;">600</td>
+                <td style="text-align: right;">696</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Brenner</td>
+                <td style="text-align: right;">45</td>
+                <td style="text-align: right;">57</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Borrowdale</td>
+                <td style="text-align: right;">165</td>
+                <td style="text-align: right;">277</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Byers</td>
+                <td style="text-align: right;">32</td>
+                <td style="text-align: right;">35</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Daniels</td>
+                <td style="text-align: right;">49</td>
+                <td style="text-align: right;">60</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Darling</td>
+                <td style="text-align: right;">175</td>
+                <td style="text-align: right;">199</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Ehert</td>
+                <td style="text-align: right;">155</td>
+                <td style="text-align: right;">311</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Fern</td>
+                <td style="text-align: right;">64</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Mullen</td>
+                <td style="text-align: right;">526</td>
+                <td style="text-align: right;">537</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Orton</td>
+                <td style="text-align: right;">104</td>
+                <td style="text-align: right;">107</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Jones</td>
+                <td style="text-align: right;">97</td>
+                <td style="text-align: right;">102</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Ning</td>
+                <td style="text-align: right;">2310</td>
+                <td style="text-align: right;">4612</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Sherraton</td>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">91</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Zu</td>
+                <td style="text-align: right;">37</td>
+                <td style="text-align: right;">37</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Tarone</td>
+                <td style="text-align: right;">31</td>
+                <td style="text-align: right;">87</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect first prepare them in three workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select proportion from the meta-analysis section of the analysis menu, and then <a href="../workbook/selecting_data.htm">select</a> the columns 'Trial', 'Adherent', and 'Total' as prompted.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Method: Stuart-Ord (inverse double arcsine square root)</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Study</td>
+                <td style="text-decoration: underline;">Proportion</td>
+                <td colspan="2" style="text-decoration: underline;">95% CI (exact)</td>
+                <td colspan="3" style="text-decoration: underline;">% Weight (fixed, random)</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>0.688103</td>
+                <td>0.633392</td>
+                <td>0.739187</td>
+                <td>3.71</td>
+                <td>4.66</td>
+                <td>Brown</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>0.892308</td>
+                <td>0.790618</td>
+                <td>0.955591</td>
+                <td>0.78</td>
+                <td>4.46</td>
+                <td>Lamont</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>0.880597</td>
+                <td>0.778215</td>
+                <td>0.947015</td>
+                <td>0.80</td>
+                <td>4.46</td>
+                <td>Lally</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>0.638596</td>
+                <td>0.579853</td>
+                <td>0.694424</td>
+                <td>3.40</td>
+                <td>4.65</td>
+                <td>Orwell</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>0.890411</td>
+                <td>0.795436</td>
+                <td>0.951484</td>
+                <td>0.88</td>
+                <td>4.49</td>
+                <td>Wagner</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>0.568966</td>
+                <td>0.473763</td>
+                <td>0.660561</td>
+                <td>1.39</td>
+                <td>4.57</td>
+                <td>Werner</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>0.540984</td>
+                <td>0.465895</td>
+                <td>0.614723</td>
+                <td>2.18</td>
+                <td>4.62</td>
+                <td>Venner</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>0.862069</td>
+                <td>0.834196</td>
+                <td>0.886827</td>
+                <td>8.29</td>
+                <td>4.69</td>
+                <td>Adams</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>0.789474</td>
+                <td>0.66113</td>
+                <td>0.88621</td>
+                <td>0.68</td>
+                <td>4.43</td>
+                <td>Brenner</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>0.595668</td>
+                <td>0.5353</td>
+                <td>0.653966</td>
+                <td>3.30</td>
+                <td>4.65</td>
+                <td>Borrowdale</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>0.914286</td>
+                <td>0.769425</td>
+                <td>0.981962</td>
+                <td>0.42</td>
+                <td>4.27</td>
+                <td>Byers</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>0.816667</td>
+                <td>0.695604</td>
+                <td>0.904764</td>
+                <td>0.72</td>
+                <td>4.44</td>
+                <td>Daniels</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>0.879397</td>
+                <td>0.825884</td>
+                <td>0.921178</td>
+                <td>2.38</td>
+                <td>4.63</td>
+                <td>Darling</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>0.498392</td>
+                <td>0.441461</td>
+                <td>0.555354</td>
+                <td>3.71</td>
+                <td>4.66</td>
+                <td>Ehert</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>0.790123</td>
+                <td>0.685373</td>
+                <td>0.872724</td>
+                <td>0.97</td>
+                <td>4.51</td>
+                <td>Fern</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>0.979516</td>
+                <td>0.963644</td>
+                <td>0.989731</td>
+                <td>6.40</td>
+                <td>4.68</td>
+                <td>Mullen</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>0.971963</td>
+                <td>0.920245</td>
+                <td>0.99418</td>
+                <td>1.28</td>
+                <td>4.56</td>
+                <td>Orton</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>0.95098</td>
+                <td>0.889304</td>
+                <td>0.983894</td>
+                <td>1.22</td>
+                <td>4.55</td>
+                <td>Jones</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>0.500867</td>
+                <td>0.486332</td>
+                <td>0.515402</td>
+                <td>54.91</td>
+                <td>4.71</td>
+                <td>Ning</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>0.791209</td>
+                <td>0.693308</td>
+                <td>0.869362</td>
+                <td>1.09</td>
+                <td>4.53</td>
+                <td>Sherraton</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>1</td>
+                <td>0.905109</td>
+                <td>1</td>
+                <td>0.45</td>
+                <td>4.29</td>
+                <td>Zu</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>0.356322</td>
+                <td>0.256493</td>
+                <td>0.466236</td>
+                <td>1.04</td>
+                <td>4.52</td>
+                <td>Tarone</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Fixed effects (inverse variance)</u>
+        </p>
+        <p>Pooled proportion = 0.63958 (95% CI = 0.629281 to 0.649814)</p>
+        <p>&#160;</p>
+        <p><u>Non-combinability of studies</u>
+        </p>
+        <p>Cochran Q = 1553.004499 (df = 21) P &lt; 0.0001</p>
+        <p>Moment-based estimate of between studies variance = 0.268086</p>
+        <p>I² (inconsistency) = 98.6% (95% CI = 98.5% to 98.8%)</p>
+        <p>&#160;</p>
+        <p><u>Random effects (DerSimonian-Laird)</u>
+        </p>
+        <p>Pooled proportion = 0.785824 (95% CI = 0.689259 to 0.868571)</p>
+        <p>&#160;</p>
+        <p>The differences between trials are very large (99% inconsistency), therefore a random effects model should be followed. In order to change the weights displayed from fixed to random effects, go to the menu Analysis_Meta-Analysis_Calculation Options and select 'Random effects diagnostics' – this will show you that the weights used to calculate the pooled proportion are similar in the random effects approach, unlike the weights shown above for the fixed effects approach. We conclude that the adherence for this class of drug is approximately 79%, and with 95% confidence at least 69%.</p>
+    </body>
+</html>

@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="862" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Sort a Variable (Own or Other Variable's Order) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Sorting (create sorted variable)" />Create Sorted Variables</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Organizing_Sort_Create Sorted Variables</b>.</p>
+        <p>&#160;</p>
+        <p>StatsDirect enables you to create sorted copies of workbook columns or to manipulate data within a selected data range of a workbook. This section deals with creating new sorted workbook columns based on existing ones. See also <a href="sorting_worksheet.htm">workbook sort</a>.</p>
+        <p>&#160;</p>
+        <p>This function sorts workbook data you select and saves the sorted data into a new workbook column marked Sort: Name, where Name is the column label of the original data. Sorting may be ascending or descending. The sort may also be tied to other data, i.e. the data in column b may be sorted in the in the order of sorting the data in column a. Tied sorting can be repeated for any number of columns.</p>
+        <p>&#160;</p>
+        <p><u>Example 1</u>
+        </p>
+        <p>Test workbook (Nonparametric worksheet: First Born).</p>
+        <p>&#160;</p>
+        <p>Sorting the following agressivity scores for a sample of firstborn twins in ascending order gives.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">First Born -----&gt;</td>
+                <td style="text-align: right;text-decoration: underline;">Sort: First Born</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">86</td>
+                <td style="text-align: right;">68</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">70</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">71</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">68</td>
+                <td style="text-align: right;">71</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">77</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">77</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">86</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">70</td>
+                <td style="text-align: right;">87</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">88</td>
+                <td style="text-align: right;">91</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">87</td>
+                <td style="text-align: right;">91</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Example 2</u>
+        </p>
+        <p>Test workbook (Nonparametric worksheet: First Born, Second Born).</p>
+        <p>&#160;</p>
+        <p>Sorting the following agressivity scores for a sample of second born twins by the ascending order of the scores for firstborn twins gives.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">First Born</td>
+                <td style="text-align: right;text-decoration: underline;">Second Born -----&gt;</td>
+                <td style="text-align: right;text-decoration: underline;">Sr~Second Born~First Born</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">86</td>
+                <td style="text-align: right;">88</td>
+                <td style="text-align: right;">64</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">65</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">76</td>
+                <td style="text-align: right;">80</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">68</td>
+                <td style="text-align: right;">64</td>
+                <td style="text-align: right;">77</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">96</td>
+                <td style="text-align: right;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">76</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">65</td>
+                <td style="text-align: right;">65</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">90</td>
+                <td style="text-align: right;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">70</td>
+                <td style="text-align: right;">65</td>
+                <td style="text-align: right;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">80</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">88</td>
+                <td style="text-align: right;">81</td>
+                <td style="text-align: right;">96</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">87</td>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">90</td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="2805" MadCap:lastWidth="3189">
+    <head><title>Crossover Tests and Analysis of Variance (ANOVA) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="This function calculates a number of test statistics for simple crossover trials. &#xD;&#xA;If a group of subjects is exposed to two different treatments A and B then a crossover trial would involve half of the subjects being exposed to A then B and the other half to B then A. A washout period is allowed between the two exposures and the subjects are randomly allocated to one of the two orders of exposure. The periods when the groups are exposed to the treatments are known as period 1 and period 2. This function evaluated treatment effects, period effects and treatment-period interaction." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Crossover trial ANOVA/tests;ANOVA: Crossover" />Crossover Tests</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Analysis of Variance_Crossover</b>.</p>
+        <p>&#160;</p>
+        <p>This function calculates a number of test statistics for simple crossover trials.</p>
+        <p>&#160;</p>
+        <p>If a group of subjects is exposed to two different treatments A and B then a crossover trial would involve half of the subjects being exposed to A then B and the other half to B then A. A washout period is allowed between the two exposures and the subjects are randomly allocated to one of the two orders of exposure. The periods when the groups are exposed to the treatments are known as period 1 and period 2. This function evaluated treatment effects, period effects and treatment-period interaction. For further information please refer to <a href="../references/reference_list.htm">Armitage and Berry (1994)</a>.</p>
+        <p>&#160;</p>
+        <p>Please note that the treatment-period interaction statistic is included for interest only; two-stage procedures are not now recommended for crossover trials (<a href="../references/reference_list.htm">Senn, 1993</a>).</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Statistics for the analysis of crossover trials, with optional baseline run-in observations, are calculated as follows (Armitage and Berry, 1994; Senn, 1993):</p>
+        <p>
+            <MadCap:equation>$\displaystyle ds=\sum_{i=1}^m [X_{Di}-X_{Pi}]+\sum_{j=1}^n [X_{Dj}-X_{Pj}]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle dss=\sum_{i=1}^m[(X_{Di}-X_{Pi})^2]+\sum_{j=1}^n[(X_{Dj}-X_{Pj})^2]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle t_{\text{relative}}=\frac{ds/(m+n)}{\sqrt{[dss-ds^2/(n+m)]/(m+n-1)}}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle dsa=\sum_{i=1}^m[X_{Di}-X_{Pi}]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle dsb=\sum_{j=1}^n[X_{Dj}-X_{Pj}]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle dssa=\sum_{i=1}^m[(X_{Di}-X_{Pi})^2]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle dssb=\sum_{j=1}^n[(X_{Dj}-X_{Pj})^2]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle v=\frac{[dssa-dsa^2/m]+[dssb-dsb^2/n]}{n+m-2}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle t_{\text{treatment}}=\frac{ssa/m-ssb/n}{\sqrt{v(1/m+1/n)}}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle t_{\text{period}}=\frac{ssa/m+ssb/n}{\sqrt{v(1/m+1/n)}}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle ssa=\sum_{i=1}^m[X_{Di}+X_{Pi}]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle ssb=\sum_{j=1}^n[X_{Dj}+X_{Pj}]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle sssa=\sum_{i=1}^m[(X_{Di}+X_{Pi})^2]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle sssb=\sum_{j=1}^n[(X_{Dj}+X_{Pj})^2]$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle v_s=\frac{[sssa-ssa^2/m]+[sssb-ssb^2/n]}{n+m-2}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation>$\displaystyle t_{\text{tp}}=\frac{ssa/m+ssb/n}{\sqrt{v_s(1/m+1/n)}}$</MadCap:equation>
+        </p>
+        <p>- where m is the number of observations in the first group (say drug first); n is the number of observations in the second group (say placebo first); X<sub>Di</sub> is an observation from the drug treated arm in the first group; X<sub>Pi</sub> is an observation from the placebo arm in the first group; X<sub>Dj</sub> is an observation from the drug treated arm in the second group; X<sub>Pj</sub> is an observation from the placebo arm in the second group; t<sub>relative</sub> is the test statistic, distributed as Student t on n+m-1 degrees of freedom, for the relative effectiveness of drug vs. placebo; t<sub>tp</sub> is the test statistic, distributed as Student t on n+m-2 degrees of freedom, for the treatment-period interaction; and t<sub>treatment</sub> and t<sub>period</sub> are the test statistics, distributed as Student t on n+m-2 degrees of freedom for the treatment and period effect sizes respectively (null hypothesis = 0). Any baseline observations are subtracted from the relevant observations before the above are calculated.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 247)</a>.</p>
+        <p>
+            Test workbook (ANOVA worksheet: Drug 1, Placebo 1, Drug 2, Placebo 2).</p>
+        <p>&#160;</p>
+        <p>The following data represent the number of dry nights out of 14 in two groups of bedwetters. The first group were treated with drug X and then a placebo and the second group were treated with the placebo then drug x. An acceptable washout period was allowed between these two treatments.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Drug 1</td>
+                <td style="text-decoration: underline;text-align: right;">Placebo 1</td>
+                <td style="text-decoration: underline;text-align: right;">Drug 2</td>
+                <td style="text-decoration: underline;text-align: right;">Placebo 2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">11</td>
+                <td style="text-align: right;">12</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14</td>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">13</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11</td>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">14</td>
+                <td style="text-align: right;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13</td>
+                <td style="text-align: right;">12</td>
+                <td style="text-align: right;">13</td>
+                <td style="text-align: right;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13</td>
+                <td style="text-align: right;">13</td>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>
+            To analyse these data in StatsDirect you must first prepare them in four workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Crossover from the Analysis of Variance section of the analysis menu. Select the column labelled "Drug 1" when asked for drug 1, then "Placebo 1" for placebo 1. Click on the cancel button when you are asked for baseline levels. Repeat this process for drug 2 and placebo 2.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Crossover tests</u>
+        </p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;">Period 1</td>
+                <td style="text-decoration: underline;">Period 2</td>
+                <td style="text-decoration: underline;">Difference</td>
+            </tr>
+            <tr>
+                <td>Group 1</td>
+                <td>8.117647</td>
+                <td>5.294118</td>
+                <td>2.823529</td>
+            </tr>
+            <tr>
+                <td>Group 2</td>
+                <td>7.666667</td>
+                <td>8.916667</td>
+                <td>-1.25</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Test for relative effectiveness of drug / placebo:</p>
+        <p>combined diff = 2.172414, SE = 0.61602</p>
+        <p>t = 3.526533, DF = 28, P = .0015</p>
+        <p>&#160;</p>
+        <p>Test for treatment effect:</p>
+        <p>diff 1 - diff 2 = 4.073529, SE = 1.2372</p>
+        <p>effect magnitude = 2.036765, 95% CI = 0.767502 to 3.306027</p>
+        <p>t = 3.292539, DF = 27, P = .0028</p>
+        <p>&#160;</p>
+        <p>Test for period effect:</p>
+        <p>diff 1 + diff 2 = 1.573529, SE = 1.2372</p>
+        <p>t = 1.271847, DF = 27, P = .2143</p>
+        <p>&#160;</p>
+        <p>Test for treatment / period interaction:</p>
+        <p>sum 1 - sum 2 = -3.171569, SE = 2.440281</p>
+        <p>t = -1.299673, DF = 27, P = .2047</p>
+        <p>&#160;</p>
+        <p>The absence of a statistically significant period effect or treatment period interaction permits the use of the statistically highly significant statistic for effect of drug vs. placebo. With 95% confidence we can say that the true population value for the magnitude of the treatment effect lies somewhere between 0.77 and 3.31 extra dry nights each fortnight.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="anova.htm">analysis of variance</a>
+        </p>
+    </body>
+</html>

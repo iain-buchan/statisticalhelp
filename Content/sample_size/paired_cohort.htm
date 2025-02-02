@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="4" MadCap:lastHeight="915.5519" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Sample Size for Matched (Paired) Cohort Studies - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Sample size: Paired cohort/prospective studies" />
+            Sample Size for Paired Cohort Studies</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Sample Size_Paired Cohort</b>.</p>
+        <p>&#160;</p>
+        <p>This function gives you the minimum number of subject pairs that you require to detect a true <a href="../clinical_epidemiology/risk_prospective.htm">relative risk RR</a> with power POWER and <a href="../basics/p_values.htm">two sided type I error probability</a> ALPHA (<a href="../references/reference_list.htm">Dupont, 1990; Breslow and Day, 1980</a>).</p>
+        <p>&#160;</p>
+        <p><u>Information required</u>
+        </p>
+        <ul>
+            <li>POWER: probability of detecting a real effect.</li>
+            <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
+            <li>r: correlation coefficient for failure between paired subjects.</li>
+            <li>*: input either (P0 and RR) or (P0 and P1), where RR=P0/P1.</li>
+            <li>P0: event rate in the control group.</li>
+            <li>P1: event rate in experimental group.</li>
+            <li>RR: risk of failure of experimental subjects relative to controls.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Practical issues</u>
+        </p>
+        <ul>
+            <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
+            <li>5% is the usual choice for ALPHA.</li>
+            <li>r can be estimated from previous studies - note that r is the phi (correlation) coefficient that is given for a two by two table if you enter it into the StatsDirect <a href="../chi_square_tests/rc.htm">r by c chi-square</a> function. When r is not known from previous studies, some authors state that it is better to use a small arbitrary value for r, say 0.2, than it is to assume independence (a value of 0) (<a href="../references/reference_list.htm">Dupont, 1988</a>).</li>
+            <li>P0 can be estimated as the population event rate. Note, however, that due to matching, the control sample is not a random sample from the population therefore population event rate can be a poor estimate of P0 (especially if <a href="../basics/confounding.htm">confounders</a> are strongly associated with the event).</li>
+            <li>If possible, choose a range of relative risks that you want have the statistical power to detect.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The estimated sample size n is calculated as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle n=\frac{\left[ \frac{1}{2}z_{\alpha/2}+z_{\beta}\sqrt{p_a(1-p_a)}\right]^2}{(p_a-0.5)^2(p_xp_y)} \\
+\displaystyle p_a=\frac{p_y}{P_x+P_y}\\
+\displaystyle p_y=p_1(1-p_0)-r\sqrt{p_1(1-p_1)p_0(1-p_0)}\\
+\displaystyle p_x=p_0(1-p_1)-r\sqrt{p_1(1-p_1)p_0(1-p_0)}$</MadCap:equation>
+        </p>
+        <p>- where α = alpha, β = 1 - power and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer.</p>
+    </body>
+</html>

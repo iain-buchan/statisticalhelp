@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="4" MadCap:lastHeight="631.5519" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Sample Size for Paired t Test - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Sample size: Paired t test" />
+            Sample Size for Paired t Test</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Sample Size_Paired t</b>.</p>
+        <p>&#160;</p>
+        <p>This function gives you the minimum number of pairs of subjects needed to detect a true difference DELTA in population means with power POWER and two sided type I error probability ALPHA (<a href="../references/reference_list.htm">Dupont, 1990; Pearson and Hartley, 1970</a>).</p>
+        <p>&#160;</p>
+        <p><u>Information required</u>
+        </p>
+        <ul>
+            <li>POWER: probability of detecting a true effect.</li>
+            <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
+            <li>DELTA: difference in population means.</li>
+            <li>SD: estimated standard deviation of paired response differences.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Practical issues</u>
+        </p>
+        <ul>
+            <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
+            <li>5% is the usual choice for ALPHA.</li>
+            <li>SD is usually estimated from previous studies.</li>
+            <li>If possible, choose a range of mean differences that you want have the statistical power to detect.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The estimated sample size n is calculated as the solution of:</p>
+        <p>
+            <MadCap:equation>$\displaystyle n=\frac{(t_{n-1, \space \alpha/2}+t_{n-1, \space \beta)})^2}{d^2}$</MadCap:equation>
+        </p>
+        <p>- where d = delta/sd, α = alpha, β = 1 - power and t<sub>v,p</sub> is a Student t quantile with v degrees of freedom and probability p. n is rounded up to the closest integer.</p>
+    </body>
+</html>

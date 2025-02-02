@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2026" MadCap:lastWidth="2733" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Crosstabs (Cross Tabulation, Two or Three Way) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="This a two or three way cross tabulation function. If you have two columns of numbers that correspond to different classifications of the same individuals then you can use this function to give a two way frequency table for the cross classification. This can be stratified by a third classification variable.&#xD;&#xA;" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Crosstabs;Cross tabulation;Contingency tables (crosstabs);Tabulation (crosstabs)" />
+            Crosstabs</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Crosstabs</b>.</p>
+        <p>&#160;</p>
+        <p>
+            This a two or three way cross tabulation function. If you have two columns of numbers that correspond to different classifications of the same individuals then you can use this function to give a two way frequency table for the cross classification. This can be stratified by a third classification variable.</p>
+        <p>&#160;</p>
+        <p>For two way crosstabs, StatsDirect offers a range of analyses appropriate to the dimensions of the contingency table. For more information see <a href="../chi_square_tests/chisq_tests.htm">chi-square tests</a> and <a href="../exact_tests_on_counts/exact_tests.htm">exact tests</a>.</p>
+        <p>&#160;</p>
+        <p>For three way crosstabs, StatsDirect offers either <a href="../meta_analysis/mh.htm">odds ratio</a> (for case-control studies) or <a href="../meta_analysis/relative_risk.htm">relative risk</a> (for cohort studies) meta-analyses for 2 by 2 by k tables, and <a href="../chi_square_tests/generalized_cochran_mantel_haenszel.htm">generalised Cochran-Mantel-Haenszel tests</a> for r by c by k tables.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>&#160;</p>
+        <p>A database of test scores contains two fields of interest, sex (M=1, F=0) and grade of skin reaction to an antigen (none = 0, weak + = 1, strong + = 2). Here is a list of those fields for 10 patients:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Sex</td>
+                <td style="text-decoration: underline;text-align: right;">Reaction</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>In order to get a cross tabulation of these from StatsDirect you should enter these data in two workbook columns. Then choose crosstabs from the analysis menu.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="3" style="text-align: center;"><u>Reaction</u>
+                </td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-align: center;">0</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">2</td>
+            </tr>
+            <tr>
+                <td>Sex:</td>
+                <td>0</td>
+                <td style="text-align: center;">2</td>
+                <td style="text-align: center;">2</td>
+                <td style="text-align: center;">1</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">3</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>We could then proceed to an r by c (2 by 3) <a href="../chi_square_tests/rc.htm">contingency table analysis</a> to look for association between sex and reaction to this antigen:</p>
+        <p>&#160;</p>
+        <p>Contingency table analysis</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>Observed</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>% of row</td>
+                <td>40%</td>
+                <td>40%</td>
+                <td>20%</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>% of col</td>
+                <td>66.67%</td>
+                <td>66.67%</td>
+                <td>25%</td>
+                <td>50%</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>Observed</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>% of row</td>
+                <td>20%</td>
+                <td>20%</td>
+                <td>60%</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>% of col</td>
+                <td>33.33%</td>
+                <td>33.33%</td>
+                <td>75%</td>
+                <td>50%</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>3</td>
+                <td>3</td>
+                <td>4</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>% of n</td>
+                <td>30%</td>
+                <td>30%</td>
+                <td>40%</td>
+                <td>&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>TOTAL number of cells = 6</p>
+        <p>&#160;</p>
+        <p>WARNING: 6 out of 6 cells have EXPECTATION &lt; 5</p>
+        <p>&#160;</p>
+        <p>NOMINAL INDEPENDENCE</p>
+        <p>Chi-square = 1.666667, DF = 2, P = 0.4346</p>
+        <p>G-square = 1.726092, DF = 2, P = 0.4219</p>
+        <p>Fisher-Freeman-Halton exact P = 0.5714</p>
+        <p>&#160;</p>
+        <p>ANOVA</p>
+        <p>Chi-square for equality of mean column scores = 1.5</p>
+        <p>DF = 2, P = 0.4724</p>
+        <p>&#160;</p>
+        <p>LINEAR TREND</p>
+        <p>Sample correlation (r) = 0.361158</p>
+        <p>Chi-square for linear trend (M²) = 1.173913</p>
+        <p>DF = 1, P = 0.2786</p>
+        <p>&#160;</p>
+        <p>NOMINAL ASSOCIATION</p>
+        <p>Phi = 0.408248</p>
+        <p>Pearson's contingency = 0.377964</p>
+        <p>Cramér's V = 0.408248</p>
+        <p>&#160;</p>
+        <p>ORDINAL</p>
+        <p>Goodman-Kruskal gamma = 0.555556</p>
+        <p>Approximate test of gamma = 0: SE = 0.384107, P = 0.1481, 95% CI = -0.197281 to 1.308392</p>
+        <p>Approximate test of independence: SE = 0.437445, P = 0.2041, 95% CI = -0.301821 to 1.412932</p>
+        <p>&#160;</p>
+        <p>Kendall tau-b = 0.348155</p>
+        <p>Approximate test of tau-b = 0: SE = 0.275596, P = 0.2065, 95% CI = -0.192002 to 0.888313</p>
+        <p>Approximate test of independence: SE = 0.274138, P = 0.2041, 95% CI = -0.189145 to 0.885455</p>
+    </body>
+</html>

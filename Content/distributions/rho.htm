@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="507" MadCap:lastWidth="2572" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Spearman's rho Distribution - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Spearman's rho distribution;Functions;Hotelling-Pabst T distribution;Distributions: Rho" />Spearman's Rho and Hotelling-Pabst T distribution</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Distributions_Spearman's rho</b>.</p>
+        <p>&#160;</p>
+        <p>Given a value for the Hotelling-Pabst test statistic (T) or Spearman's rho (ρ) this function calculates the probability of obtaining a value greater than or equal to T.</p>
+        <p>&#160;</p>
+        <p>For two rankings (x1,x2...xn and y1,y2...yn) of n objects without ties:</p>
+        <p>
+            <MadCap:equation>$\displaystyle T=\sum_{i=1}^n(x_i-y_i)^2$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>T is related to the <a href="../nonparametric_methods/spearman.htm">Spearman rank correlation coefficient</a> (ρ) by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \rho=1-\frac{6T}{n^3-n}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Probabilities are calculated by summation across all permutations when n = 10 and by and Edgeworth series approximation when n &gt; 10 (<a href="../references/reference_list.htm">Best and Roberts, 1975</a>). The exact calculation employs a corrected version of the Best and Roberts (1975) algorithm. The Edgeworth series results for n &gt; 10 are accurate to at least four decimal places.</p>
+        <p>&#160;</p>
+        <p>The inverse is calculated by finding the largest value of T that gives a calculated probability (using the method above) closest to but not less than the P value entered.</p>
+    </body>
+</html>
