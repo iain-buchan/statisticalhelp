@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Randomized Blocks in Analysis of Variance (ANOVA) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <meta name="description" content="Blocking is an experimental design method used to reduce confounding." />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#analysis_of_variance/randomized_blocks.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor17"></a>Randomized Blocks</h1>
+        <p>&#160;</p>
+        <p>Blocking is an experimental design method used to reduce <a href="../basics/confounding.htm">confounding</a>.</p>
+        <p>&#160;</p>
+        <p><u>Similar to two group matching/pairing</u>
+        </p>
+        <p>Blocking is similar to the pairing/matching method (e.g. paired t test) where pairs of observations are matched up to prevent confounding factors (e.g. age, sex) from hiding a real difference between two groups (e.g. treatment and control).</p>
+        <p>&#160;</p>
+        <p><u>General heterogeneity</u>
+        </p>
+        <p>In general terms, blocking compensates for situations where known factors (e.g. age, sex) other than treatment group status are likely to affect what is being observed in the study. In other words, the analytical method accounts for the fact that the experimental units (e.g. people/subjects studied) are not homogeneous with regard to factors (other than treatment group status) likely to affect outcome.</p>
+        <p>&#160;</p>
+        <p><u>Design</u>
+        </p>
+        <p>The randomized block design takes account of known factors that affect outcome/response but are not of primary interest. The two steps in randomized block design are:</p>
+        <p>1.&#160;1.&#160;1.&#160;Collect together homogeneous experimental units (e.g. people) into a block.</p>
+        <p>2.&#160;2.&#160;2.&#160;Assign treatments at random to the experimental units within a block.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td width="112">&#160;</td>
+                <td width="27">&#160;</td>
+                <td colspan="4" width="209" style="text-align: center;"><u>Treatment (i, 1 to k)</u>
+                </td>
+            </tr>
+            <tr>
+                <td width="112">&#160;</td>
+                <td width="27">&#160;</td>
+                <td width="50" style="text-decoration: underline;text-align: center;">1</td>
+                <td width="53" style="text-decoration: underline;text-align: center;">2</td>
+                <td width="53" style="text-decoration: underline;text-align: center;"><span style="text-decoration: none;">...</span>
+                </td>
+                <td width="53" style="text-decoration: underline;text-align: center;">k</td>
+            </tr>
+            <tr>
+                <td width="112">Block (j, 1 to b:)</td>
+                <td width="27">1</td>
+                <td width="50" style="text-align: center;">Y<sub>ij</sub></td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td width="112">&#160;</td>
+                <td width="27">2</td>
+                <td width="50" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td width="112">&#160;</td>
+                <td width="27">3</td>
+                <td width="50" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td width="112">&#160;</td>
+                <td width="27">.</td>
+                <td width="50" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td width="112">&#160;</td>
+                <td width="27">b</td>
+                <td width="50" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+                <td width="53" style="text-align: center;">&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Examples</u>
+        </p>
+        <p>&#160;</p>
+        <ol>
+            <li value="1">Study of diet on serum cholesterol. Response/outcome variable Y is mean serum cholesterol for the people in the block. Blocks are age groups of men or women adjusted for Quetelet index (100 * weight / height²), e.g. block 1 as men over 50 with quetelet index over 3.5 and block as women over 50 with quetelet index of 3.5 or less. Treatments are different types of diet. See <a href="../references/reference_list.htm">Kleinbaum et al. (1998)</a>.</li>
+            <li value="2">Study of different treatments on clotting times. Response/outcome variable Y is the observed clotting time for blood samples. Blocks are individuals who donated a blood sample. Treatments are different methods by which portions of each of the blood samples are processed. See <a href="../references/reference_list.htm">Artmitage and Berry (1994)</a>.</li>
+            <li value="3">Example 2 (clotting times) can be extended to a repeated observation design by repeating the clotting time measurement z times for each block/treatment. With repeated observations, the table above becomes a cube with the z axis (repeats) coming out of the page. Accounting for repeated observations in this way allows you to subtract some of the noise due to systematic inconsistency in the measurement of observations from the contrast between treatments and between blocks.</li>
+        </ol>
+        <p>&#160;</p>
+        <p>StatsDirect calculates ANOVA for randomized block designs in <a href="two_way.htm">two way</a> and <a href="two_way_replicate.htm">repeated observation two way</a> situations.</p>
+    </body>
+</html>

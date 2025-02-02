@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="topic" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Nonparametric methods">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Mann-Whitney U Test (Wilcoxon Rank Sum) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#nonparametric_methods/mann_whitney.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor10"></a>Mann-Whitney U Test</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Nonparametric_Mann-Whitney</b>.</p>
+        <p>&#160;</p>
+        <p>This is a method for the comparison of two independent random samples (x and y):</p>
+        <p>The Mann Whitney U statistic is defined as:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation147.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where samples of size n<sub>1</sub> and n<sub>2</sub> are pooled and R<sub>i</sub> are the ranks.</p>
+        <p>&#160;</p>
+        <p>U can be resolved as the number of times observations in one sample precede observations in the other sample in the ranking.</p>
+        <p>&#160;</p>
+        <p>Wilcoxon rank sum,  Kendall's S and the Mann-Whitney U test are exactly equivalent tests. In the presence of ties the Mann-Whitney test is also equivalent to a chi-square test for trend.</p>
+        <p>&#160;</p>
+        <p>In most circumstances a two sided test is required; here the alternative hypothesis is that x values tend to be distributed differently to y values. For a lower side test the alternative hypothesis is that x values tend to be smaller than y values. For an upper side test the alternative hypothesis is that x values tend to be larger than y values.</p>
+        <p>&#160;</p>
+        <p>Assumptions of the Mann-Whitney test:</p>
+        <ul>
+            <li>random samples from populations</li>
+            <li>independence within samples and mutual independence between samples</li>
+            <li>measurement scale is at least ordinal</li>
+        </ul>
+        <p>&#160;</p>
+        <p>A confidence interval for the difference between two measures of location is provided with the sample medians. The assumptions of this method are slightly different from the assumptions of the Mann-Whitney test:</p>
+        <ul>
+            <li>random samples from populations</li>
+            <li>independence within samples and mutual independence between samples</li>
+            <li>two population distribution functions are identical apart from a possible difference in location parameters</li>
+        </ul>
+        <p>&#160;</p>
+        <p>The theta statistic [U/(n1*n2)] is provided as an additional effect size reflecting the distance between the two underlying frequency distributions from which the samples are drawn (<a href="../references/reference_list.htm">Newcombe, 2006a</a>). It is equivalent to the area under the receiver operating characteristic (ROC) curve.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect uses the sampling distribution of U to give exact probabilities. These calculations may take an appreciable time to complete when many data are tied.</p>
+        <p>&#160;</p>
+        <p>Confidence intervals are constructed for the difference between the means or medians (any measure of location in fact). The level of confidence used will be as close as is theoretically possible to the one you specify. StatsDirect approaches the selected confidence level from the conservative side via the Hodges-Lehman estimator (<a href="../references/reference_list.htm">Monahan, 1984</a>).</p>
+        <p>&#160;</p>
+        <p>When samples are large (either sample &gt; 80 or both samples &gt;30) a normal approximation is used for the hypothesis test and for the confidence interval. Note that StatsDirect uses more accurate P value calculations than some other statistical software, therefore, you may notice a difference in results (<a href="../references/reference_list.htm">Conover, 1999; Dineen and Blakesley, 1973; Harding, 1983; Neumann, 1988</a>).</p>
+        <p>&#160;</p>
+        <p>A confidence interval for theta is constructed using Newcombe's fifth method (<a href="../references/reference_list.htm">Newcombe, 2006b</a>). Note that the confidence interval for theta is directly comparable with the P value for the Mann-Whitney test whereas the confidence interval for the difference between the two measures of location (medians) is not.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Conover (1999, p. 218)</a>.</p>
+        <p>Test workbook (Nonparametric worksheet: Farm Boys, Town Boys).</p>
+        <p>&#160;</p>
+        <p>The following data represent fitness scores from two groups of boys of the same age, those from homes in the town and those from farm homes.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Farm Boys</td>
+                <td style="text-decoration: underline;text-align: right;">Town Boys</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14.8</td>
+                <td style="text-align: right;">12.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7.3</td>
+                <td style="text-align: right;">14.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5.6</td>
+                <td style="text-align: right;">12.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6.3</td>
+                <td style="text-align: right;">2.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9.0</td>
+                <td style="text-align: right;">17.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4.2</td>
+                <td style="text-align: right;">11.8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10.6</td>
+                <td style="text-align: right;">16.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.5</td>
+                <td style="text-align: right;">7.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.9</td>
+                <td style="text-align: right;">16.0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">16.1</td>
+                <td style="text-align: right;">10.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.4</td>
+                <td style="text-align: right;">5.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2.7</td>
+                <td style="text-align: right;">5.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">7.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">11.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">8.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">6.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">3.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">1.0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">2.4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">6.4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">9.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">6.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">18.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">3.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">6.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">6.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">15.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">10.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">1.8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">5.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">9.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">10.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">14.8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">5.0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">2.6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">4.0</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first enter them in two separate workbook columns. Alternatively, open the test workbook using the file open function of the file menu. Then select the Mann-Whitney from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Farm Boys" and "Town Boys" when prompted for data.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Mann-Whitney U test</u>
+        </p>
+        <p>&#160;</p>
+        <p>
+Observations (x) in Farm Boys = 12   median = 9.8   rank sum = 321</p>
+        <p>
+Observations (y) in Town Boys = 36   median = 7.75</p>
+        <p>&#160;</p>
+        <p>
+U = 243      U' = 189</p>
+        <p>Theta = 0.437500 (95% CI: 0.271772 to 0.621223)</p>
+        <p>&#160;</p>
+        <p>
+
+Exact probability (adjusted for ties):</p>
+        <p>
+Lower side P = 0.2645  (H1: x tends to be less than y)</p>
+        <p>
+Upper side P = 0.7355  (H1: x tends to be greater than y)</p>
+        <p>
+Two sided P = 0.529  (H1: x tends to be distributed differently to y)
+</p>
+        <p>&#160;</p>
+        <p>95.1% confidence interval for difference between medians or means:</p>
+        <p>
+K = 134   median difference = 0.8</p>
+        <p>
+CI = -2.3 to 4.4
+</p>
+        <p>&#160;</p>
+        <p>Here we have assumed that these groups are independent and that they represent at least hypothetical random samples of the sub-populations they represent. In this analysis, we are clearly unable to reject the null hypothesis that one group does NOT tend to yield different fitness scores to the other. This lack of statistical evidence of a difference is reflected in the confidence interval for the difference between population means, in that the interval spans zero. Note that the quoted 95.1% confidence interval is as close as you can get to 95% because of the very nature of the mathematics involved in nonparametric methods like this.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

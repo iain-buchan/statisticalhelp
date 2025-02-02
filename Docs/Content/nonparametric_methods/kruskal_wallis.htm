@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Nonparametric methods">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Kruskal-Wallis Test (Nonparametric One-way ANOVA) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#nonparametric_methods/kruskal_wallis.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor193"></a>Kruskal-Wallis Test</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Analysis of Variance_Kruskal-Wallis</b>.</p>
+        <p>&#160;</p>
+        <p>
+            This is a method for comparing several independent random samples and can be used as a nonparametric alternative to the one way ANOVA.</p>
+        <p>&#160;</p>
+        <p>The Kruskal-Wallis test statistic for k samples, each of size n<sub>i</sub> is:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation77.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where N is the total number (all n<sub>i</sub>) and R<sub>i</sub> is the sum of the ranks (from all samples pooled) for the ith sample and:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation78.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>The null hypothesis of the test is that all k distribution functions are equal. The alternative hypothesis is that at least one of the populations tends to yield larger values than at least one of the other populations.</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>random samples from populations</li>
+            <li>independence within each sample</li>
+            <li>mutual independence among samples</li>
+            <li>measurement scale is at least ordinal</li>
+            <li>either k population distribution functions are identical, or else some of the populations tend to yield larger values than other populations</li>
+        </ul>
+        <p>&#160;</p>
+        <p>If the test is significant, you can make multiple comparisons between the samples. You may choose the level of significance for these comparisons (default is a = 0.05). All pairwise comparisons are made and the probability of each presumed "non-difference" is indicated <a href="../references/reference_list.htm">(Conover, 1999; Critchlow and Fligner, 1991; Hollander and Wolfe, 1999)</a>. Two alternative methods are used to make all possible pairwise comparisons between groups; these are Dwass-Steel-Critchlow-Fligner and Conover-Inman. In most situations, you should use the Dwass-Steel-Critchlow-Fligner result.</p>
+        <p>&#160;</p>
+        <p>By the Dwass-Steel-Critchlow-Fligner procedure, a contrast is considered significant if the following inequality is satisfied:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation79.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where q is a quantile from the normal range distribution for k groups, n<sub>i</sub> is size of the ith group, n<sub>j</sub> is the size of the jth group, t<sub>b</sub> is the number of ties at rank b and W<sub>ij</sub> is the sum of the ranks for the ith group where observations for both groups have been ranked together. The values either side of the greater than sign are displayed in parentheses in StatsDirect results.</p>
+        <p>&#160;</p>
+        <p>The Conover-Inman procedure is simply Fisher's least significant difference method performed on ranks. A contrast is considered significant if the following inequality is satisfied:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation80.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where t is a quantile from the Student t distribution on N-k degrees of freedom. The values either side of the greater than sign are displayed in parentheses in StatsDirect results.</p>
+        <p>&#160;</p>
+        <p>An alternative to Kruskal-Wallis is to perform a one way ANOVA on the ranks of the observations.</p>
+        <p>&#160;</p>
+        <p>StatsDirect also gives you an homogeneity of variance test option with Kruskal-Wallis; this is marked as "Equality of variance (squared ranks)". Please refer to <a href="../analysis_of_variance/homogeneity_of_variance.htm">homogeneity of variance</a> for more details.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>The test statistic is an extension of the Mann-Whitney test and is calculated as above. In the presence of tied ranks the test statistic is given in adjusted and unadjusted forms, (opinion varies concerning the handling of ties). The test statistic follows approximately a chi-square distribution with k-1 degrees of freedom; P values are derived from this. For small samples you may wish to refer to tables of the Kruskal-Wallis test statistic but the chi-square approximation is highly satisfactory in most cases (<a href="../references/reference_list.htm">Conover, 1999</a>).</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Conover (1999, p. 291)</a>.</p>
+        <p>Test workbook (ANOVA worksheet: Method 1, Method 2, Method 3, Method 4).</p>
+        <p>&#160;</p>
+        <p>The following data represent corn yields per acre from four different fields where different farming methods were used.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Method 1</td>
+                <td style="text-decoration: underline;text-align: right;">Method 2</td>
+                <td style="text-decoration: underline;text-align: right;">Method 3</td>
+                <td style="text-decoration: underline;text-align: right;">Method 4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">83</td>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">101</td>
+                <td style="text-align: right;">78</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">90</td>
+                <td style="text-align: right;">100</td>
+                <td style="text-align: right;">82</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">94</td>
+                <td style="text-align: right;">81</td>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">89</td>
+                <td style="text-align: right;">83</td>
+                <td style="text-align: right;">93</td>
+                <td style="text-align: right;">77</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">89</td>
+                <td style="text-align: right;">84</td>
+                <td style="text-align: right;">96</td>
+                <td style="text-align: right;">79</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">96</td>
+                <td style="text-align: right;">83</td>
+                <td style="text-align: right;">95</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">88</td>
+                <td style="text-align: right;">94</td>
+                <td style="text-align: right;">80</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">92</td>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">90</td>
+                <td style="text-align: right;">89</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">84</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first prepare them in four workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Kruskal-Wallis from the Nonparametric section of the analysis menu. Then <a href="../workbook/selecting_data.htm">select</a> the columns marked "Method 1", "Method 2", "Method 3" and "Method 4" in one selection action.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Adjusted for ties: T = 25.62883 P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <p><u>All pairwise comparisons (Dwass-Steel-Chritchlow-Fligner)</u>
+        </p>
+        <p>Method 1 and Method 2&#160;, P = 0.1529</p>
+        <p>Method 1 and Method 3&#160;, P = 0.0782</p>
+        <p>Method 1 and Method 4&#160;, P = 0.0029</p>
+        <p>Method 2 and Method 3&#160;, P = 0.0048</p>
+        <p>Method 2 and Method 4&#160;, P = 0.0044</p>
+        <p>Method 3 and Method 4&#160;, P = 0.0063</p>
+        <p>&#160;</p>
+        <p><u>All pairwise comparisons (Conover-Inman)</u>
+        </p>
+        <p>Method 1 and Method 2, P = 0.0078</p>
+        <p>Method 1 and Method 3, P = 0.0044</p>
+        <p>Method 1 and Method 4, P &lt; 0.0001</p>
+        <p>Method 2 and Method 3, P &lt; 0.0001</p>
+        <p>Method 2 and Method 4, P = 0.0001</p>
+        <p>Method 3 and Method 4, P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <p>From the overall T we see a statistically highly significant tendency for at least one group to give higher values than at least one of the others. Subsequent contrasts show a significant separation of all groups with the Conover-Inman method and all but method 1 vs. methods 2 and 3 with the Dwass-Steel-Chritchlow-Fligner method. In most situations, it is best to use only the Dwass-Steel-Chritchlow-Fligner result.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../analysis_of_variance/anova.htm">analysis of variance</a>
+        </p>
+    </body>
+</html>

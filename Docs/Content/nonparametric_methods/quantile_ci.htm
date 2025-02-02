@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Nonparametric methods">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Quantile (Median etc.) Confidence Interval - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#nonparametric_methods/quantile_ci.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor253"></a>Quantile Confidence Interval</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Nonparametric_Quantile Confidence Interval</b>.</p>
+        <p>&#160;</p>
+        <p>This function provides a confidence interval for any quantile or (per)centile.</p>
+        <p>&#160;</p>
+        <p>As with all nonparametric confidence intervals, the exact confidence level is not always attainable but the level which is exact to the interval constructed is displayed (<a href="../references/reference_list.htm">Conover, 1999; Gardner and Altman, 1989</a>).</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>random sample</li>
+            <li>measurement scale is at least ordinal</li>
+        </ul>
+        <p>&#160;</p>
+        <p>A presentation of medians and their confidence intervals is often more meaningful than the time honoured (abused) tradition of presenting means and standard deviations. Researchers sometimes quote means and their confidence intervals in situations where a median with confidence interval would be more appropriate (e.g. when outliers have a biasing effect on the mean but there is insufficient evidence to exclude them from the analysis). A <a href="../graphics/box_whisker.htm">box and whisker plot</a> is a useful accompaniment to this function.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>For sample sizes greater than 200 an approximation to the binomial distribution is used otherwise the critical values of the binomial distribution used in this calculation are found by an exact method (<a href="../references/reference_list.htm">Conover, 1999</a>). If the conservative option is not selected or the sample size is greater than 200 then for a c*100% confidence interval the binomial quantiles closest to a cumulative probability of (1-c)/2 and 1-(1-c)/2 are used. If the conservative option is selected and the sample size is not greater than 200 then for a c*100% confidence interval the binomial quantiles closest to and less than or equal to a cumulative probability of (1-c)/2, and closest to and greater than or equal to a cumulative probability of 1-(1-c)/2 are used. Note that the conservative interval calculates each side, not just the overall interval, on a conservative basis.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Conover (1999, p. 145)</a>.</p>
+        <p>Test workbook (Nonparametric worksheet: Tubes).</p>
+        <p>&#160;</p>
+        <p>The following represent times to failure in hours for a set of pentode radio valves.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <tr>
+                <td style="text-align: right;"><u>Tubes</u>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">46.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">47.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">49.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">56.5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">56.8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">59.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">59.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">63.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">63.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">63.4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">63.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">64.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">67.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">67.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">73.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">78.5</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first enter them into a workbook column and label it appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select Quantile Confidence Interval from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a>the column marked "Tubes" when prompted for data. Choose 90% as the confidence level. Then enter 0.75 to specify that the quantile you want is the upper quartile or 75th percentile.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>upper quartile = 66.35</p>
+        <p>&#160;</p>
+        <p>Approximate 90% CI (non-conservative) = 63.3 to 73.3</p>
+        <p>exact confidence level = 90.94%</p>
+        <p>&#160;</p>
+        <p>Approximate 90% CI (conservative) = 63.3 to 78.5</p>
+        <p>exact confidence level = 96.28%</p>
+        <p>&#160;</p>
+        <p>We may conclude with 91% confidence that the population value of the upper quartile lies between 63.3 and 73.3 hours.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

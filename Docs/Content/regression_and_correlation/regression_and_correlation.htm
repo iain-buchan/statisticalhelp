@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Regression and Correlation Methods in&#160;StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#regression_and_correlation/regression_and_correlation.htm">Open topic with navigation</a>
+        </p><a name="kanchor38"></a>
+        <h1>Regression and Correlation</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Regression and Correlation</b></p>
+        <ul>
+            <li><a href="simple_linear.htm">Simple linear and correlation</a>
+            </li>
+            <li><a href="multiple_linear.htm">Multiple (general) linear</a>
+            </li>
+            <li><a href="grouped.htm">Regression in groups</a>
+            </li>
+            <li><a href="pca.htm">Principal components</a>
+            </li>
+            <li><a href="linear_estimates.htm">Linearized</a>
+            </li>
+            <li><a href="polynomial.htm">Polynomial</a>
+            </li>
+            <li><a href="logistic.htm">Logistic regression</a>
+            </li>
+            <li><a href="conditional_logistic.htm">Conditional logistic regression</a>
+            </li>
+            <li><a href="poisson.htm">Poisson regression</a>
+            </li>
+            <li><a href="probit_analysis.htm">Probit analysis</a>
+            </li>
+            <li><a href="../nonparametric_methods/spearman.htm">Spearman's rank correlation</a>
+            </li>
+            <li><a href="../nonparametric_methods/kendall_correlation.htm">Kendall's rank correlation</a>
+            </li>
+            <li><a href="../nonparametric_methods/nonparametric_regression.htm">Nonparametric linear regression</a>
+            </li>
+            <li><a href="../survival_analysis/cox_regression.htm">Cox regression</a>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Regression</u>
+        </p>
+        <p>Regression is a way of describing how one variable, the outcome, is numerically related to predictor variables. The dependent variable is also referred to as Y, dependent or response and is plotted on the vertical axis (ordinate) of a graph. The predictor variable(s) is(are) also referred to as X, independent, prognostic or explanatory variables. The horizontal axis (abscissa) of a graph is used for plotting X.</p>
+        <p>
+            <img src="../resources/Images/polynomialregression.gif" width="517" height="365" border="0" />
+        </p>
+        <p>Looking at a plot of the data is an essential first step. The graph above suggests that lower birth weight babies grow faster from 70 to 100 than higher birth weight babies. Linear regression can be used to fit a straight line to these data:</p>
+        <p>&#160;</p>
+        <p>Equation: Y = a + bx</p>
+        <ul type="disc">
+            <li class="p">
+                <p>b is the gradient, slope or regression coefficient</p>
+            </li>
+            <li class="p">
+                <p>a is the intercept of the line at Y axis or regression constant</p>
+            </li>
+            <li class="p">
+                <p>Y is a value for the outcome</p>
+            </li>
+            <li class="p">
+                <p>x is a value for the predictor</p>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p>The fitted equation describes the best linear relationship between the population values of X and Y that can be found using this method.</p>
+        <p>The method used to fit the regression equation is called least squares. This minimises the sum of the squares of the errors associated with each Y point by differentiation. This error is the difference between the observed Y point and the Y point predicted by the regression equation. In linear regression this error is also the error term of the Y distribution, the residual error.</p>
+        <p>&#160;</p>
+        <p>The simple linear regression equation can be generalised to take account of k predictors:</p>
+        <p>&#160;</p>
+        <p>Y = b0 + b1x1 + b2x2 +...+ bkxk</p>
+        <p>&#160;</p>
+        <p>Assumptions of general linear regression:</p>
+        <ul type="disc">
+            <li class="p">
+                <p>Y is <b>linearly related</b> to all x or linear transformations of them</p>
+            </li>
+            <li class="p">
+                <p>all <b>error terms</b> are <b>independent</b></p>
+            </li>
+            <li class="p">
+                <p>deviations from the regression line (<b>residuals</b>) follow a <b>normal distribution</b></p>
+            </li>
+            <li class="p">
+                <p>deviations from the regression line (<b>residuals</b>) have <b>uniform variance</b></p>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p>A residual for a Y point is the difference between the observed and fitted value for that point, i.e. it is the distance of the point from the fitted regression line. If the pattern of residuals changes along the regression line then consider using <a href="../nonparametric_methods/nonparametric_regression.htm">rank methods</a> or linear regression after an appropriate <a href="../data_preparation/transformations.htm">transformation</a> of your data.</p>
+        <p>&#160;</p>
+        <p><u>Correlation</u>
+        </p>
+        <p>Correlation refers to the interdependence or co-relationship of variables.</p>
+        <p>&#160;</p>
+        <p>In the context of regression examples, correlation reflects the closeness of the linear relationship between x and Y. Pearson's product moment correlation coefficient rho is a measure of this linear relationship. Rho is referred to as R when it is estimated from a sample of data.</p>
+        <ul type="disc">
+            <li class="p">
+                <p>R lies between -1 and 1 with</p>
+            </li>
+            <li class="p">
+                <p>R = 0 is no linear correlation</p>
+            </li>
+            <li class="p">
+                <p>R = 1 is perfect positive (slope up from bottom left to top right) linear correlation</p>
+            </li>
+            <li class="p">
+                <p>R = -1 is perfect negative (slope down from top left to bottom right) linear correlation</p>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p>Assumption of Pearson's correlation:</p>
+        <ul type="disc">
+            <li class="p">
+                <p><b>at least one variable must follow a normal distribution</b>
+                </p>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p>N.B. If R is close to ± 1 then this does NOT mean that there is a good causal relationship between x and Y. It shows only that the sample data is close to a straight line. R is a much abused statistic.</p>
+        <p>&#160;</p>
+        <p>r² is the proportion of the total variance (s²) of Y that can be explained by the linear regression of Y on x. 1-r² is the proportion that is not explained by the regression. Thus 1-r² = s²xY / s²Y.</p>
+    </body>
+</html>

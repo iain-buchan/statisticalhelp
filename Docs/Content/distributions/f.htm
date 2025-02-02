@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Probability distributions">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>F (Variance Ratio) Distribution - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#distributions/f.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor101"></a>F (Variance Ratio) Distribution</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Distributions_F (Variance Ratio)</b>.</p>
+        <p>&#160;</p>
+        <p>Fisher-Snedecor F is the distribution of the ratio of two independent estimates of <a href="../basic_descriptive_statistics/standard_deviation.htm">variance</a>. The variance estimates should be made from two samples from a normal distribution. The size of these two samples is reflected in two degrees of freedom.</p>
+        <p>&#160;</p>
+        <p>F has two degrees of freedom, n (numerator) and d (denominator), because it represents the distribution of two independent chi-square variables each divided by its degrees of freedom:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation110.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>F can be used to <a href="../parametric_methods/f_variance_ratio.htm">compare two estimates of variance</a> but it is mainly used to compare groups of means and to examine the combined effect of several factors (ways of grouping data) in <a href="../analysis_of_variance/anova.htm">analysis of variance</a>. For a simple one way analysis of variance (one factor between subjects) there is one grouping of observations into k groups, here n = k-1 and d = N-k where N is the total number of subjects observed. The denominator degrees of freedom, d, is sometimes referred to as the error degrees of freedom. When degrees of freedom are small, larger F values are required to reach significance:</p>
+        <p>
+            <img src="../resources/Images/fcurves.gif" width="225" height="213" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p>When there is one numerator degree of freedom and d denominator degrees of freedom then F is equal to the square of Student's t with d degrees of freedom. Both F and t are related mathematically by the beta function.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect calculates tail areas and percentage points for given numerator and denominator degrees of freedom. Soper's reduction method is used to integrate the incomplete beta function (<a href="../references/reference_list.htm">Majumder and Bhttacharjee, 1973a, 1973b; Morris, 1992</a>). A hybrid of conventional root finding methods is used to invert the function. Conventional root finding proved more reliable than some other methods such as Newton Raphson iteration on Wilson Hilferty starting estimates (<a href="../references/reference_list.htm">Berry et al., 1990; Cran et al., 1977</a>).</p>
+        <p>&#160;</p>
+        <p><u>Function Definition</u>
+        </p>
+        <p>An F variable with ν<sub>1</sub> and ν<sub>2</sub> degrees of freedom can be transformed to a beta variable with parameters p=ν<sub>1</sub>/2 and q=ν<sub>2</sub>/2 as beta=ν<sub>1</sub>F(ν<sub>2</sub>+ν<sub>1</sub>F). The beta distribution with parameters p and q is:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation111.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>Γ(*) is the gamma function:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation112.svg" alt="" class="mcReset" />
+        </p>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Probability distributions">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Normal Distribution and Standard Normal (Gaussian) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#distributions/normal.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor73"></a>Normal Distribution(s)</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Distributions_Normal</b>.</p>
+        <p>&#160;</p>
+        <p>The standard normal distribution is the most important continuous probability distribution. It was first described by De Moivre in 1733 and subsequently by the German mathematician C. F. Gauss (1777 - 1885). StatsDirect gives you tail areas and percentage points for this distribution (<a href="../references/reference_list.htm">Hill, 1973; Odeh and Evans, 1974; Wichura, 1988; Johnson and Kotz, 1970</a>).</p>
+        <p>&#160;</p>
+        <p>Normal distributions are a family of distributions with a symmetrical bell shape:-</p>
+        <p>
+            <img src="../resources/Images/normalcurves.gif" width="223" height="177" border="0" />
+        </p>
+        <p>The area under each of the curves above is the same and most of the values occur in the middle of the curve. The mean and standard deviation of a normal distribution control how tall and wide it is.</p>
+        <p>&#160;</p>
+        <p>The standard normal distribution (z distribution) is a normal distribution with a mean of 0 and a standard deviation of 1. Any point (x) from a normal distribution can be converted to the standard normal distribution (z) with the formula z = (x-mean) / standard deviation. z for any particular x value shows how many standard deviations x is away from the mean for all x values. For example, if 1.4m is the height of a school pupil where the mean for pupils of his age/sex/ethnicity is 1.2m with a standard deviation of 0.4 then z = (1.4-1.2) / 0.4 = 0.5, i.e. the pupil is half a standard deviation from the mean (value at centre of curve).</p>
+        <p>
+            <img src="../resources/Images/normalhistogram.gif" width="516" height="364" border="0" />
+        </p>
+        <p>The diagram above shows the bell shaped curve of a normal (Gaussian) distribution superimposed on a <a href="../graphics/histogram.htm">histogram</a> of a sample from a normal distribution. Many populations display normal or near normal distributions. There are also many mathematical relationships between normal and other distributions. Most statistical methods make "normal approximations" when samples are sufficiently large.</p>
+        <p>&#160;</p>
+        <p><u>Central Limit Theorem</u>
+        </p>
+        <p>In order to understand why "normal approximations" can be made, consider the central limit theorem. The central limit theorem may be explained as follows: If you take a sample from a population with some arbitrary distribution, the sample mean will, in the limit, tend to be normally distributed with the same mean as the population and with a variance equal to the population variance divided by the sample size. A histogram plot of the means of many samples drawn from one population will therefore form a normal (bell shaped) curve regardless of the distribution of the population values.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>The tail area of the normal distribution is evaluated to 15 decimal places of accuracy using the complement of the error function (<a href="../references/reference_list.htm">Abramowitz and Stegun, 1964; Johnson and Kotz, 1970</a>). The quantiles of the normal distribution are calculated to 15 decimal places using a method based upon AS 241 (<a href="../references/reference_list.htm">Wichura, 1988</a>).</p>
+        <p>&#160;</p>
+        <p>z0.001 = -3.09023230616781</p>
+        <p>Lower tail P(z= -3.09023230616781) = 0.001</p>
+        <p>z0.25 = -0.674489750196082</p>
+        <p>Lower tail P(z= 0.674489750196082) = 0.25</p>
+        <p>z1E-20 = -9.26234008979841</p>
+        <p>Lower tail P(z= -9.26234008979841) = 9.99999999999962E-21</p>
+        <p>&#160;</p>
+        <p>The first two StatsDirect results above agree to 15 decimal places with the reference data of Wichura (1988). The extreme value (lower tail P of 1E-20) evaluates correctly to 14 decimal places.</p>
+        <p>&#160;</p>
+        <p><u>Function Definition</u>
+        </p>
+        <p>Distribution function, Φ(z), of a standard normal variable z:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation100.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>StatsDirect calculates Φ(z) from the complement of the error function (errc):</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation101.svg" alt="" class="mcReset" />
+        </p>
+    </body>
+</html>

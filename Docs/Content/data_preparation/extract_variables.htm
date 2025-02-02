@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Preparing your data|Organizing data">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Extract a Subset of Data (Filters) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#data_preparation/extract_variables.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor228"></a>
+            Extract a Subset of Data</h1>
+        <p>&#160;</p>
+        <p style="font-weight: bold;"><span style="font-weight: normal;">Menu locations:</span>
+            <br /><b>Data_Organizing_Extract Subset of Data<br />Data_Cleaning and Encoding_Extract</b> Subset of Data.</p>
+        <p>&#160;</p>
+        <p>This function enables you to extract subsets of data from a column of numbers by using an expression that refers to either: (1) the cells in the selected block of data; or (2) one or more indicator variables that are different columns from the data you are selecting from but in corresponding rows.</p>
+        <p>&#160;</p>
+        <p>For example (1), you might want to remove all of the negative values in a data set where this was used to indicate missing data:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: left;">Rat</td>
+                <td style="text-decoration: underline;text-align: left;">Drug</td>
+                <td style="text-decoration: underline;text-align: left;">Placebo</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">1</td>
+                <td style="text-align: left;">67</td>
+                <td style="text-align: left;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">2</td>
+                <td style="text-align: left;">72</td>
+                <td style="text-align: left;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">3</td>
+                <td style="text-align: left;">81</td>
+                <td style="text-align: left;">-9</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">4</td>
+                <td style="text-align: left;">56</td>
+                <td style="text-align: left;">66</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">5</td>
+                <td style="text-align: left;">-7</td>
+                <td style="text-align: left;">91</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">6</td>
+                <td style="text-align: left;">121</td>
+                <td style="text-align: left;">170</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">7</td>
+                <td style="text-align: left;">44</td>
+                <td style="text-align: left;">66</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Use the Data_Grouping_Extract menu item with Drug and Placebo as the data variables to create a new variable with the expression "X&lt;0" and a replace value of "":</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: left;">Rat</td>
+                <td style="text-decoration: underline;text-align: left;">Drug</td>
+                <td style="text-decoration: underline;text-align: left;">Placebo</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">1</td>
+                <td style="text-align: left;">67</td>
+                <td style="text-align: left;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">2</td>
+                <td style="text-align: left;">72</td>
+                <td style="text-align: left;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">3</td>
+                <td style="text-align: left;">81</td>
+                <td style="text-align: left;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">4</td>
+                <td style="text-align: left;">56</td>
+                <td style="text-align: left;">66</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">5</td>
+                <td style="text-align: left;">&#160;</td>
+                <td style="text-align: left;">91</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">6</td>
+                <td style="text-align: left;">121</td>
+                <td style="text-align: left;">170</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">7</td>
+                <td style="text-align: left;">44</td>
+                <td style="text-align: left;">66</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>For example (2), you might want to select only the rows from a score data column for which sex=2 and age&gt;30; i.e. extract into one new variable, all data for females over 30:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: left;">Sex</td>
+                <td style="text-decoration: underline;text-align: left;">Age</td>
+                <td style="text-decoration: underline;text-align: left;">Score</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">1</td>
+                <td style="text-align: left;">23</td>
+                <td style="text-align: left;">2.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">1</td>
+                <td style="text-align: left;">33</td>
+                <td style="text-align: left;">3.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">1</td>
+                <td style="text-align: left;">19</td>
+                <td style="text-align: left;">3.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">2</td>
+                <td style="text-align: left;">21</td>
+                <td style="text-align: left;">1.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">2</td>
+                <td style="text-align: left;">43</td>
+                <td style="text-align: left;">4.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">2</td>
+                <td style="text-align: left;">39</td>
+                <td style="text-align: left;">5.0</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">2</td>
+                <td style="text-align: left;">26</td>
+                <td style="text-align: left;">1.1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Use the Data_Grouping_Extract menu item with Score as the data variable and Sex and Age and the indicator variables to create a new variable with the expression "X1=1 and X2&gt;30":</p>
+        <p>&#160;</p>
+        <p>Score [Sex=2 AND Age&gt;30]</p>
+        <p>4.2</p>
+        <p>5</p>
+        <p>&#160;</p>
+        <p>You can compose an expression using X1, X2 etc. and any of the functions, operators and logical expressions described under <a href="apply_function.htm">user-defined function</a>. Here are some examples of expressions for the example of the two indicators mentioned above:</p>
+        <p>&#160;</p>
+        <p>X1: Sex</p>
+        <p>X2 Age</p>
+        <p>&#160;</p>
+        <p>"X1=1" (not all of the selected/listed indicator variables have to be used)</p>
+        <p>"X2&lt;&gt;21 and X2&gt;16"</p>
+        <p>"X1=2 or X2&gt;25"</p>
+        <p>"(X1=1 and X2&lt;=25) or (X1=2 and X2&lt;=30)"</p>
+    </body>
+</html>

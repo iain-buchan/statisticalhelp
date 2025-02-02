@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Basic statistical principles">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Calculator App in StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <meta name="description" content="A Windows calculator replacement that takes algebraic expressions and evaluates statistical functions." />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#basics/calculator.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor11"></a>Calculator</h1>
+        <p>&#160;</p>
+        <p>Menu location: Tools_StatsDirect Calculator.</p>
+        <p>&#160;</p>
+        <p>
+        The StatsDirect calculator can be used both within StatsDirect and independently as a replacement for the Windows calculator. The calculator evaluates expressions in the form of simple arithmetic or more complex algebra.</p>
+        <p>&#160;</p>
+        <p>All calculations are performed in IEEE-754 double precision (64-bit).</p>
+        <p>&#160;</p>
+        <p>The 'save' button copies the expression currently evaluated and its result to a list from which you can select saved expressions to paste into new ones.</p>
+        <p>&#160;</p>
+        <p>When you close the calculator it will paste saved expressions and results into a report in StatsDirect if the "save results to report on exit" box at the bottom left of the calculator is checked.</p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/sigma.gif" width="30" height="30" border="0" />
+        </p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td><u>Constants</u>
+                </td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>PI</td>
+                <td>3.14159265358979323846 (p)</td>
+            </tr>
+            <tr>
+                <td>EE</td>
+                <td>2.71828182845904523536 (e)</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>
+                    Arithmetic Functions</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>ABS</td>
+                <td>absolute value</td>
+            </tr>
+            <tr>
+                <td>CLOG</td>
+                <td>common (base 10) logarithm</td>
+            </tr>
+            <tr>
+                <td>CEXP</td>
+                <td>anti log (base 10)</td>
+            </tr>
+            <tr>
+                <td>EXP</td>
+                <td>anti log (base e)</td>
+            </tr>
+            <tr>
+                <td>LOG</td>
+                <td>natural (base e, Napieran) logarithm</td>
+            </tr>
+            <tr>
+                <td>LOGIT</td>
+                <td>logit: log(p/(1-p), p=proportion</td>
+            </tr>
+            <tr>
+                <td>ALOGIT</td>
+                <td>antilogit: exp(l)/1+exp(l), l=logit</td>
+            </tr>
+            <tr>
+                <td>SQR or SQRT</td>
+                <td>square root</td>
+            </tr>
+            <tr>
+                <td>!</td>
+                <td>factorial (maximum 170.569)</td>
+            </tr>
+            <tr>
+                <td>LOG!</td>
+                <td>log factorial</td>
+            </tr>
+            <tr>
+                <td>IZ</td>
+                <td>normal deviate for a p value</td>
+            </tr>
+            <tr>
+                <td>UZ</td>
+                <td>upper tail p for a normal deviate</td>
+            </tr>
+            <tr>
+                <td>LZ</td>
+                <td>lower tail p for a normal deviate</td>
+            </tr>
+            <tr>
+                <td>TRUNC or FIX</td>
+                <td>integer part of a real number</td>
+            </tr>
+            <tr>
+                <td>CINT</td>
+                <td>real number rounded to nearest integer</td>
+            </tr>
+            <tr>
+                <td>INT</td>
+                <td>real number truncated to integer closest to zero</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Please note that the largest factorial allowed is 170.569398315538748, but you can work with Log factorials via the LOG! function, e.g. LOG!(272).</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td><u>Arithmetic Operators</u>
+                </td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>^</td>
+                <td>exponentiation (to the power of)</td>
+            </tr>
+            <tr>
+                <td>+</td>
+                <td>addition</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>subtraction</td>
+            </tr>
+            <tr>
+                <td>*</td>
+                <td>multiplication</td>
+            </tr>
+            <tr>
+                <td>/</td>
+                <td>division</td>
+            </tr>
+            <tr>
+                <td>\</td>
+                <td>integer division</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Calculations give an order of priority to arithmetic operators, this must be considered when entering expressions. For example, the result of the expression "6 - 3/2" is 4.5 and not 1.5 because division takes priority over subtraction.</p>
+        <p>&#160;</p>
+        <p>Priority of arithmetic operators in descending order</p>
+        <ol>
+            <li value="1">Exponentiation (^)</li>
+            <li value="2">Negation (-X) (Exception = x^-y; i.e. 4^-2 is 0.0625 and not -16)</li>
+            <li value="3">Multiplication and Division (*, /)</li>
+            <li value="4">Integer Division (\)</li>
+            <li value="5">Addition and Subtraction (+, -)</li>
+        </ol>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td><u>Trigonometric Functions</u>
+                </td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>ARCCOS</td>
+                <td>arc cosine</td>
+            </tr>
+            <tr>
+                <td>ARCCOSH</td>
+                <td>arc hyperbolic cosine</td>
+            </tr>
+            <tr>
+                <td>ARCCOT</td>
+                <td>arc cotangent</td>
+            </tr>
+            <tr>
+                <td>ARCCOTH</td>
+                <td>arc hyperbolic cotangent</td>
+            </tr>
+            <tr>
+                <td>ARCCSC</td>
+                <td>arc cosecant</td>
+            </tr>
+            <tr>
+                <td>ARCCSCH</td>
+                <td>arc hyperbolic cosecant</td>
+            </tr>
+            <tr>
+                <td>ARCTANH</td>
+                <td>arc hyperbolic tangent</td>
+            </tr>
+            <tr>
+                <td>ARCSEC</td>
+                <td>arc secant</td>
+            </tr>
+            <tr>
+                <td>ARCSECH</td>
+                <td>arc hyperbolic secant</td>
+            </tr>
+            <tr>
+                <td>ARCSIN</td>
+                <td>arc sine</td>
+            </tr>
+            <tr>
+                <td>ARCSINH</td>
+                <td>arc hyperbolic sine</td>
+            </tr>
+            <tr>
+                <td>ATN</td>
+                <td>arc tangent</td>
+            </tr>
+            <tr>
+                <td>COS</td>
+                <td>cosine</td>
+            </tr>
+            <tr>
+                <td>COT</td>
+                <td>cotangent</td>
+            </tr>
+            <tr>
+                <td>COTH</td>
+                <td>hyperbolic cotangent</td>
+            </tr>
+            <tr>
+                <td>CSC</td>
+                <td>cosecant</td>
+            </tr>
+            <tr>
+                <td>CSCH</td>
+                <td>hyperbolic cosecant</td>
+            </tr>
+            <tr>
+                <td>SIN</td>
+                <td>sine</td>
+            </tr>
+            <tr>
+                <td>SINH</td>
+                <td>hyperbolic sine</td>
+            </tr>
+            <tr>
+                <td>SECH</td>
+                <td>hyperbolic secant</td>
+            </tr>
+            <tr>
+                <td>SEC</td>
+                <td>secant</td>
+            </tr>
+            <tr>
+                <td>TAN</td>
+                <td>tangent</td>
+            </tr>
+            <tr>
+                <td>TANH</td>
+                <td>hyperbolic tangent</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To convert degrees to radians, multiply degrees by pi/180. To convert radians to degrees, multiply radians by 180/pi.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td><u>Logical Functions</u>
+                </td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>AND</td>
+                <td>logical AND</td>
+            </tr>
+            <tr>
+                <td>NOT</td>
+                <td>logical NOT</td>
+            </tr>
+            <tr>
+                <td>OR</td>
+                <td>logical OR</td>
+            </tr>
+            <tr>
+                <td>&lt;</td>
+                <td>less than</td>
+            </tr>
+            <tr>
+                <td>=</td>
+                <td>equal to</td>
+            </tr>
+            <tr>
+                <td>&gt;</td>
+                <td>greater than</td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="topic" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Randomization">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Randomization by Preference Group - StatsDirect </title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#randomization/preference_group.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor263"></a>Preference Group Allocation</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Randomization_Preference Allocation</b>.</p>
+        <p>&#160;</p>
+        <p>This function allocates subjects to groups according to their preferences. A uniform <a href="random_number_generator.htm">random</a> allocation procedure is used to select subjects for inclusion in groups which are over-subscribed. The procedure is best explained by example:</p>
+        <p>&#160;</p>
+        <p>Suppose ten students were asked to apply for a choice of four courses. The first three courses have a capacity of three and the fourth can accommodate five students if necessary. The students are asked to list their top three course preferences in order.</p>
+        <p>&#160;</p>
+        <p>StatsDirect can allocate the students to a course based on their preferences and on a uniform random selection procedure for over-subscribed courses. Their is no weighting procedure for any round of selections as this would encourage tactical preference choice, i.e. the probability that a student is allocated his/her first preference is not influenced by the subscription rates for his/her other preferences.</p>
+        <p>&#160;</p>
+        <p>Say our ten students mark the following preferences for courses 1 to 5:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Student</td>
+                <td style="text-decoration: underline;text-align: right;">Preference 1</td>
+                <td style="text-decoration: underline;text-align: right;">Preference 2</td>
+                <td style="text-decoration: underline;text-align: right;">Preference 3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>The maximum capacity of each group is as follows:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">Group</td>
+                <td style="text-align: right;text-decoration: underline;">Capacity/Places</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To use StatsDirect to allocate the students to groups you must first enter the above columns of data into a workbook. Then select preference allocation from the randomization section of the analysis menu. When asked for columns of preferences you must select the columns in the correct order, i.e. preference 1, 2, 3. Then select the group capacity column, in this column the rows represent the allocation groups to which the preference data refer (i.e. if the entry in row 3 of the capacity column was 5 this would mean that group 3 can hold a maximum of 5 subjects). For this example the random allocation procedure yielded the results below. If you run this example more than once you are likely to get different results each time as the random number generator is re-seeded for each run.</p>
+        <p>&#160;</p>
+        <p>An example output is:</p>
+        <p>&#160;</p>
+        <p><u>Random allocation to groups by preference</u>
+        </p>
+        <p>&#160;</p>
+        <p>Groups = 5</p>
+        <p>&#160;</p>
+        <p>Total group capacity = 13</p>
+        <p>Subjects = 10</p>
+        <p>&#160;</p>
+        <p>Randomized with seed: 10</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Subject</td>
+                <td style="text-decoration: underline;text-align: right;">Group</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Regression and correlation">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Simple Linear Regression and Pearson Correlation - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#regression_and_correlation/simple_linear.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor26"></a>Simple Linear Regression and Correlation</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Regression and Correlation_Simple Linear and Correlation</b>.</p>
+        <p>&#160;</p>
+        <p>This function provides simple linear regression and Pearson's correlation.</p>
+        <p>&#160;</p>
+        <p>Regression parameters for a straight line model (Y = a + bx) are calculated by the least squares method (minimisation of the sum of squares of deviations from a straight line). This differentiates to the following formulae for the slope (b) and the Y intercept (a) of the line:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation181.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>Regression assumptions:</p>
+        <ul type="disc">
+            <li class="p">
+                <p>Y is linearly related to x or a transformation of x</p>
+            </li>
+            <li class="p">
+                <p>deviations from the regression line (residuals) follow a normal distribution</p>
+            </li>
+            <li class="p">
+                <p>deviations from the regression line (residuals) have uniform variance</p>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p>A residual for a Y point is the difference between the observed and fitted value for that point, i.e. it is the distance of the point from the fitted regression line. If the pattern of residuals changes along the regression line then consider using <a href="../nonparametric_methods/nonparametric_regression.htm">rank methods</a> or linear regression after an appropriate <a href="../data_preparation/transformations.htm">transformation</a> of your data.</p>
+        <p>&#160;</p>
+        <p>Pearson's product moment correlation coefficient (r) is given as a measure of linear association between the two variables:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation182.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>r² is the proportion of the total variance (s²) of Y that can be explained by the linear regression of Y on x. 1-r² is the proportion that is not explained by the regression. Thus 1-r² = s²xY / s²Y.</p>
+        <p>&#160;</p>
+        <p>Confidence limits are constructed for r using Fisher's z transformation. The null hypothesis that r = 0 (i.e. no association) is evaluated using a modified t test (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Altman, 1991</a>).</p>
+        <p>&#160;</p>
+        <p>Pearson's correlation assumption:</p>
+        <p>·&#160;&#160;&#160;at least one variable must follow a normal distribution</p>
+        <p>&#160;</p>
+        <p>The estimated regression line may be plotted and belts representing the standard error and confidence interval for the population value of the slope can be displayed. These belts represent the reliability of the regression estimate, the tighter the belt the more reliable the estimate (<a href="../references/reference_list.htm">Gardner and Altman, 1989</a>).</p>
+        <p>&#160;</p>
+        <p>N.B. If you require a weighted linear regression then please use the multiple linear regression function in StatsDirect; it will allow you to use just one predictor variable i.e. the simple linear regression situation. Note also that the multiple regression option will also enable you to estimate a regression without an intercept i.e. forced through the origin.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 161)</a>.</p>
+        <p>Test workbook (Regression worksheet: Birth Weight, % Increase).</p>
+        <p>&#160;</p>
+        <p>The following data represent birth weights (oz) of babies and their percentage increase between 70 and 100 days after birth.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Birth Weight</td>
+                <td style="text-decoration: underline;text-align: right;">% Increase</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">68</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">112</td>
+                <td style="text-align: right;">63</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">111</td>
+                <td style="text-align: right;">66</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">107</td>
+                <td style="text-align: right;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">119</td>
+                <td style="text-align: right;">52</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">92</td>
+                <td style="text-align: right;">75</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">126</td>
+                <td style="text-align: right;">76</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">80</td>
+                <td style="text-align: right;">118</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">81</td>
+                <td style="text-align: right;">120</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">84</td>
+                <td style="text-align: right;">114</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">115</td>
+                <td style="text-align: right;">29</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">118</td>
+                <td style="text-align: right;">42</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">128</td>
+                <td style="text-align: right;">48</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">128</td>
+                <td style="text-align: right;">50</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">123</td>
+                <td style="text-align: right;">69</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">116</td>
+                <td style="text-align: right;">59</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">125</td>
+                <td style="text-align: right;">27</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">126</td>
+                <td style="text-align: right;">60</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">122</td>
+                <td style="text-align: right;">71</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">126</td>
+                <td style="text-align: right;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">127</td>
+                <td style="text-align: right;">63</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">86</td>
+                <td style="text-align: right;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">142</td>
+                <td style="text-align: right;">53</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">132</td>
+                <td style="text-align: right;">50</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">87</td>
+                <td style="text-align: right;">111</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">123</td>
+                <td style="text-align: right;">59</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">133</td>
+                <td style="text-align: right;">76</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">106</td>
+                <td style="text-align: right;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">103</td>
+                <td style="text-align: right;">90</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">118</td>
+                <td style="text-align: right;">68</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">114</td>
+                <td style="text-align: right;">93</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">94</td>
+                <td style="text-align: right;">91</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Simple Linear and Correlation from the Regression and Correlation section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "% Increase" when prompted for the response (Y) variable and then select "Birth weight" when prompted for the predictor (x) variable.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Simple linear regression</u>
+        </p>
+        <p>&#160;</p>
+        <p>Equation: % Increase = -0.86433 Birth Weight +167.870079</p>
+        <p>&#160;</p>
+        <p>Standard Error of slope = 0.175684</p>
+        <p>95% CI for population value of slope = -1.223125 to -0.505535</p>
+        <p>&#160;</p>
+        <p>Correlation coefficient (r) = -0.668236 (r²= 0.446539)</p>
+        <p>&#160;</p>
+        <p>95% CI for r (Fisher's z transformed) = -0.824754 to -0.416618</p>
+        <p>&#160;</p>
+        <p>t with 30 DF = -4.919791</p>
+        <p>Two sided P &lt; .0001</p>
+        <p>Power (for 5% significance) = 99.01%</p>
+        <p>&#160;</p>
+        <p>Correlation coefficient is significantly different from zero</p>
+        <p>&#160;</p>
+        <p>From this analysis we have gained the equation for a straight line forced through our data i.e. % increase in weight = 167.87 - 0.864 * birth weight. The r square value tells us that about 42% of the total variation about the Y mean is explained by the regression line. The analysis of variance test for the regression, summarised by the ratio F, shows that the regression itself was statistically highly significant. This is equivalent to a t test with the null hypothesis that the slope is equal to zero. The confidence interval for the slope shows that with 95% confidence the population value for the slope lies somewhere between -0.5 and -1.2. The correlation coefficient r was statistically highly significantly different from zero. Its negative value indicates that there is an inverse relationship between X and Y i.e. lower birth weight babies show greater % increases in weight at 70 to 100 days after birth. With 95% confidence the population value for r lies somewhere between -0.4 and -0.8.</p>
+        <p>&#160;</p>
+        <p><a href="regression_and_correlation.htm">regression and correlation</a>
+        </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

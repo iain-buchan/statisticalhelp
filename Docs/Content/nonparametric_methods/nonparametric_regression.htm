@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Regression and correlation">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Nonparametric Linear Regression - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#nonparametric_methods/nonparametric_regression.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor160"></a>
+            Nonparametric Linear Regression</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Nonparametric_Nonparametric Linear Regression</b>.</p>
+        <p>&#160;</p>
+        <p>This is a distribution free method for investigating a linear relationship between two variables Y (dependent, outcome) and X (predictor, independent).</p>
+        <p>&#160;</p>
+        <p>The slope b of the regression (Y=bX+a) is calculated as the median of the gradients from all possible pairwise contrasts of your data. A confidence interval based upon <a href="kendall_correlation.htm">Kendall's</a> t is constructed for the slope.</p>
+        <p>&#160;</p>
+        <p>Nonparametric linear regression is much less sensitive to extreme observations (outliers) than is <a href="../regression_and_correlation/simple_linear.htm">simple linear regression</a> based upon the least squares method. If your data contain extreme observations which may be erroneous but you do not have sufficient reason to exclude them from the analysis then nonparametric linear regression may be appropriate.</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>The sample is random (X can be non-random provided that Ys are independent with identical conditional distributions).</li>
+            <li>The regression of Y on X is linear (this implies an interval measurement scale for both X and Y).</li>
+        </ul>
+        <p>&#160;</p>
+        <p>This function also provides you with an approximate two sided Kendall's rank correlation test for independence between the variables.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Note that the two sided confidence interval for the slope is the inversion of the two sided Kendall's test. The approximate two sided P value for Kendall's t or tb is given but the <a href="../distributions/tau.htm">exact quantile from Kendall's distribution</a> is used to construct the confidence interval, therefore, there may be slight disagreement between the P value and confidence interval. If there are many ties then this situation is compounded (<a href="../references/reference_list.htm">Conover, 1999</a>).</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Conover (1999, p. 338)</a>.</p>
+        <p>Test workbook (Nonparametric worksheet: GPA, GMAT).</p>
+        <p>&#160;</p>
+        <p>The following data represent test scores for 12 graduates respectively:</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">GPA</td>
+                <td style="text-decoration: underline;text-align: right;">GMTA</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4.0</td>
+                <td style="text-align: right;">710</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4.0</td>
+                <td style="text-align: right;">610</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.9</td>
+                <td style="text-align: right;">640</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.8</td>
+                <td style="text-align: right;">580</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.7</td>
+                <td style="text-align: right;">545</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.6</td>
+                <td style="text-align: right;">560</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.5</td>
+                <td style="text-align: right;">610</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.5</td>
+                <td style="text-align: right;">530</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.5</td>
+                <td style="text-align: right;">560</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.3</td>
+                <td style="text-align: right;">540</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.2</td>
+                <td style="text-align: right;">570</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.2</td>
+                <td style="text-align: right;">560</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select Nonparametric Linear Regression from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "GPA" and "GMTA" when prompted for Y and X variables respectively.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>GPA vs. GMTA</p>
+        <p>Observations per sample = 12</p>
+        <p>&#160;</p>
+        <p>Median slope (95% CI) = 0.003485 (0 to 0.0075)</p>
+        <p>Y-intercept = 1.581061</p>
+        <p>&#160;</p>
+        <p>Kendall's rank correlation coefficient tau b = 0.439039</p>
+        <p>Two sided (on continuity corrected z) P = .0678</p>
+        <p>&#160;</p>
+        <p>If you plot GPA against GMTA scores using the scatter plot function in the graphics menu, you will see that there is a reasonably straight line relationship between GPA and GMTA. Here we can infer with 95% confidence that the true population value of the slope of a linear regression line for these two variables lies between 0 and 0.008. The regression equation is estimated at Y = 1.5811 + 0.0035X.</p>
+        <p>&#160;</p>
+        <p>From the two sided Kendall's rank correlation test, we can not reject the null hypothesis of mutual independence between the pairs of results for the twelve graduates. Note that the zero lower confidence interval is a marginal result and we may have rejected the null hypothesis had we used a different method for testing independence.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

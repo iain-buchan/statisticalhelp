@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Nonparametric methods">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Gini Coefficient of Inequality - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#nonparametric_methods/gini.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor192"></a>Gini Coefficient of Inequality</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Nonparametric_Gini Coefficient of Inequality</b></p>
+        <p>&#160;</p>
+        <p>This method calculates the Gini coefficient (G) of inequality with bootstrap confidence intervals. A Lorenz plot is produced when a single variable is specified for analysis, otherwise the summary statistics alone are displayed for a group of variables.</p>
+        <p>&#160;</p>
+        <p>The Gini coefficient was developed by the Italian Statistician Corrado Gini (<a href="../references/reference_list.htm">Gini, 1912</a>) as a summary measure of income inequality in society. It is usually associated with the plot of wealth concentration introduced a few years earlier by Max Lorenz (<a href="../references/reference_list.htm">Lorenz, 1905</a>). Since these measures were introduced, they have been applied to topics other than income and wealth, but mostly within Economics (<a href="../references/reference_list.htm">Cowell, 1995, 2000; Jenkins, 1991; Sen, 1973</a>).</p>
+        <p>&#160;</p>
+        <p>G is a measure of inequality, defined as the mean of absolute differences between all pairs of individuals for some measure. The minimum value is 0 when all measurements are equal and the theoretical maximum is 1 for an infinitely large set of observations where all measurements but one has a value of 0, which is the ultimate inequality (<a href="../references/reference_list.htm">Stuart and Ord, 1994</a>).</p>
+        <p>&#160;</p>
+        <p>When G is based on the Lorenz curve of income distribution, it can be interpreted as the expected income gap between two individuals randomly selected from the population (<a href="../references/reference_list.htm">Sen, 1973</a>).</p>
+        <p>&#160;</p>
+        <p>The classical definition of G appears in the notation of the theory of relative mean difference:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation153.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where x is an observed value,  n is the number of values observed and x bar is the mean value.</p>
+        <p>&#160;</p>
+        <p>If the x values are first placed in ascending order, such that each x has rank i, the some of the comparisons above can be avoided and computation is quicker:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation154.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where x is an observed value, n is the number of values observed and i is the rank of values in ascending order.</p>
+        <p>&#160;</p>
+        <p>Note that only positive non-zero values are used.</p>
+        <p>&#160;</p>
+        <p>The small sample variance properties of G are not known, and large sample approximations to the variance of G are poor (<a href="../references/reference_list.htm">Mills and Zandvakili, 1997; Glasser, 1962; Dixon et al., 1987</a>), therefore confidence intervals are calculated via bootstrap re-sampling methods (<a href="../references/reference_list.htm">Efron and Tibshirani, 1997</a>).</p>
+        <p>&#160;</p>
+        <p>StatsDirect calculates two types of bootstrap confidence intervals, these are percentile and bias-corrected (<a href="../references/reference_list.htm">Mills and Zandvakili, 1997; Dixon et al., 1987; Efron and Tibshirani, 1997</a>). The bias-corrected intervals are most appropriate for most applications.</p>
+        <p>&#160;</p>
+        <p>In order for G to be an unbiased estimate of the true population value, it should be multiplied by n/(n-1) (<a href="../references/reference_list.htm">Dixon, 1987; Mills and Zandvakili, 1997</a>). This corrected form of G does not appear most literature, but there are few situations when it is not the most appropriate form to use.</p>
+        <p>&#160;</p>
+        <p>In the context of measuring inequalities in health, <a href="../references/reference_list.htm">Brown (1994)</a> presents a Gini-style index, seemingly calculated from two variables instead of one. The two variables comprise distinct indicators of health (y, e.g. infant deaths) and population (x, live births) for n groups sorted by a composite measure of health and population (e.g. infant mortality rate).</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation155.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>G<sub>b</sub> based on two variables (e.g. infant deaths and live births) will be very similar to G calculated from a composite measure (e.g. infant mortality rate). In most situations it is more natural to think of inequality of the composite measure. Another reason not to use G<sub>b</sub> is that its statistical characteristics are not well studied.</p>
+        <p>&#160;</p>
+        <p>StatsDirect does not provide a separate function to handle distinct health and population variables when calculating Gini coefficients, instead you should use the single composite health/population measure.</p>
+        <p>&#160;</p>
+        <p>The <a href="../references/reference_list.htm">Pan American Health Organisation (2001)</a> gave the following illustration:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Country</td>
+                <td style="text-decoration: underline;">GNP per capita</td>
+                <td style="text-decoration: underline;">infant mortality rate (IMR)</td>
+                <td style="text-decoration: underline;">live births</td>
+                <td style="text-decoration: underline;">infant deaths</td>
+            </tr>
+            <tr>
+                <td>Bolivia</td>
+                <td>2860</td>
+                <td>59</td>
+                <td>250</td>
+                <td>14750</td>
+            </tr>
+            <tr>
+                <td>Peru</td>
+                <td>4410</td>
+                <td>43</td>
+                <td>621</td>
+                <td>26703</td>
+            </tr>
+            <tr>
+                <td>Ecuador</td>
+                <td>4730</td>
+                <td>39</td>
+                <td>308</td>
+                <td>12012</td>
+            </tr>
+            <tr>
+                <td>Colombia</td>
+                <td>6720</td>
+                <td>24</td>
+                <td>889</td>
+                <td>21336</td>
+            </tr>
+            <tr>
+                <td>Venezuela</td>
+                <td>8130</td>
+                <td>22</td>
+                <td>568</td>
+                <td>12496</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Positive non-zero observations = 5</p>
+        <p>Bootstrap re-samples = 2000</p>
+        <p>Bias = 0.057218</p>
+        <p>&#160;</p>
+        <p>Brown's G<sub>b</sub> = 0.1904</p>
+        <p>&#160;</p>
+        <p>Gini coefficient = 0.19893</p>
+        <p>Percentile 95% CI = 0.023645 to 0.219277</p>
+        <p>Bias-corrected 95% CI = 0.151456 to 0.241304</p>
+        <p>&#160;</p>
+        <p>Unbiased estimator of population Gini coefficient = 0.248663</p>
+        <p>Percentile 95% CI = 0.029557 to 0.274096</p>
+        <p>Bias-corrected 95% CI = 0.18932 to 0.30163</p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/lorenz.gif" width="517" height="365" border="0" />
+        </p>
+        <p>&#160;</p>
+        <p>This example uses too few groups for reliable inference from G.</p>
+        <p>&#160;</p>
+        <p><u>Technical notes</u>
+        </p>
+        <p>The percentile confidence interval is defined as:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation156.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where g* is a Gini coefficient estimated from a bootstrap sample and a is (100-confidence level)/100.</p>
+        <p>&#160;</p>
+        <p>The bias-corrected confidence interval is defined as:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation157.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where g* is a Gini coefficient estimated from a bootstrap sample, G is the observed Gini coefficient, α is (100-confidence level)/100, ϕ is the standard normal distribution and k is the number of re-samples in the bootstrap.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

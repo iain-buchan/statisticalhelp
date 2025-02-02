@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Analysis options</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#menus/analysis_options.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor219"></a>
+            Analysis Options</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Options</b>.</p>
+        <p>&#160;</p>
+        <p>This function enables you to set the default behaviour of StatsDirect analysis operations. The following three settings are covered:-</p>
+        <p>&#160;</p>
+        <p><u>DEFAULT CONFIDENCE INTERVAL</u>
+        </p>
+        <p>In most circumstances you should have the "use a default CI" box checked and the "default 95% CI" option specified. These options mean that each time StatsDirect calculates a confidence interval, it will use a default level (e.g. 95%) instead of asking you to select one.</p>
+        <p>&#160;</p>
+        <p><u>DATA SELECTION BY GROUP IDENTIFIERS</u>
+        </p>
+        <p>This option controls the way that StatsDirect asks for data for analysis. When this option is selected StatsDirect asks you to specify one or more columns of numbers or text labels that identify the groups to which data in specific rows of a matching 'data column' belong. When this option is not selected (default) StatsDirect asks you to supply separate groups of data in separate data columns for each group.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (ANOVA worksheet: Expt 1, Expt 2, Expt 3, Expt 4).</p>
+        <p>&#160;</p>
+        <p>In multiple column mode (default) you would supply the following data for the example given for one way analysis of variance:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td width="92" style="text-decoration: underline;">Expt 1</td>
+                <td width="92" style="text-decoration: underline;">Expt 2</td>
+                <td style="text-decoration: underline;">Expt 3</td>
+                <td width="92" style="text-decoration: underline;">Expt 4</td>
+            </tr>
+            <tr>
+                <td width="92">279</td>
+                <td width="92">378</td>
+                <td>172</td>
+                <td width="92">381</td>
+            </tr>
+            <tr>
+                <td width="92">338</td>
+                <td width="92">275</td>
+                <td>335</td>
+                <td width="92">346</td>
+            </tr>
+            <tr>
+                <td width="92">334</td>
+                <td width="92">412</td>
+                <td>335</td>
+                <td width="92">340</td>
+            </tr>
+            <tr>
+                <td width="92">198</td>
+                <td width="92">265</td>
+                <td>282</td>
+                <td width="92">471</td>
+            </tr>
+            <tr>
+                <td width="92">303</td>
+                <td width="92">286</td>
+                <td>250</td>
+                <td width="92">318</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>In group ID mode you should supply these data in the following format:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Data</td>
+                <td style="text-decoration: underline;">Group 
+		 ID</td>
+            </tr>
+            <tr>
+                <td>279</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>338</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>334</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>198</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>303</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>378</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>275</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>412</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>265</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>286</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>172</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>335</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>282</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>250</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>381</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>346</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>340</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>471</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>318</td>
+                <td>4</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Most statistical software uses the group ID format as it is closer to database formats (i.e. Data field and Group ID field). StatsDirect uses the multiple column format as the default format because it is closer to text book representation of data and this facilitates understanding.</p>
+        <p>&#160;</p>
+        <p>N.B. If a column contains group ID data then it is best to use the first selected row as a column title (at least three characters long). If the first entry is unique and is four or more characters long then it is treated as a column title, otherwise it is treated as categorical data.</p>
+        <p>&#160;</p>
+        <p><u>DECIMAL PLACES</u>
+        </p>
+        <p>This option sets the number decimal places that StatsDirect shows when displaying results. Separate options are given for statistics and P values. As the value of P &lt; 0.001 is considered to be "statistically highly significant" it is best to quote P values not beyond three decimal places for most reports.</p>
+    </body>
+</html>

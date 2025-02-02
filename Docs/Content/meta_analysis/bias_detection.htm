@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Meta-analysis">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Bias in Meta-analyses (Funnel Plots and Tests) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#meta_analysis/bias_detection.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor147"></a>Bias Detection in Meta-analysis</h1>
+        <p>&#160;</p>
+        <ul>
+            <li>Systematic review of randomized trials is a gold standard for appraising evidence from trials, however, some meta-analyses were later contradicted by large trials (<a href="../references/reference_list.htm">Sterne et al. 2001a</a>).<br /></li>
+            <li>Plots of trials' variability or sample size against effect size are usually skewed and asymmetrical in the presence of publication bias and other biases (<a href="../references/reference_list.htm">Sterne and Egger, 2001</a>).<br /></li>
+            <li>Publication bias arises when trials with statistically significant results are more likely to be published and cited, and are preferentially published in English language journals and those indexed in Medline (<a href="../references/reference_list.htm">Jüni et al, 2002</a>).<br /></li>
+            <li>Publication and selection biased in meta-analysis are more likely to affect small trials.<br /></li>
+            <li>Small trials are more likely to be of poorer quality, for example inadequate blinding due to use of open random number tables.<br /></li>
+            <li>Small trials are more likely to show larger treatment effects due to case-mix differences (e.g. higher risk patients) than larger trials.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><a name="kanchor148"></a>If there is no 'small sample' bias across a series of studies in a meta-analysis then the estimates of effect should vary (due to random error) most with the small studies and least with the large studies. This fact lead to the use of plots of sample size against effect estimate (the original funnel plot). Bias is likely to cause asymmetry in such plots.</p>
+        <p>&#160;</p>
+        <p>As sample size is not the only determinant of the precision of an effect estimate, richer information for detecting bias can be gained from plotting the standard errors against their effect estimates. The reciprocal of the standard error is referred to as precision. Again, lateral asymmetry indicates bias.</p>
+        <p>&#160;</p>
+        <p>StatsDirect offers the following choice of Y axes:</p>
+        <ul>
+            <li>standard error</li>
+            <li>precision (1/standard error)</li>
+            <li>sample size</li>
+            <li>1/sample size</li>
+            <li>log(sample size)</li>
+            <li>log(1/sample size)</li>
+            <li>Mantel-Haenszel weight</li>
+        </ul>
+        <p>&#160;</p>
+        <p>The direction of the Y axis is reversed in some cases, such as the default setting, standard error, in order to make the shape of each plot an inverted cone because this has become the convention in the literature (<a href="../references/reference_list.htm">Sterne and Egger, 2001</a>). The most widely accepted plot is standard error (scale reversed) against effect estimate with 95% confidence intervals outlining the inverted cone. You should examine the left-right symmetry of the plot, asymmetrical plots denote small sample bias.</p>
+        <p>&#160;</p>
+        <p>The best choice of x axis for detecting the small sample effect is the log odds ratio (<a href="../references/reference_list.htm">Sterne and Egger, 2001</a>). This is because the scale is not constrained and because the plot will be the same shape whether the outcome is defined as occurrence or non-occurrence of event.</p>
+        <p>&#160;</p>
+        <p>Note that you must have more than three trials/strata in your meta-analysis for the StatsDirect bias assessment functions to work.</p>
+        <p>&#160;</p>
+        <p>The following plots are from biased and unbiased meta-analyses respectively:</p>
+        <p>
+            <img src="../resources/Images/bias1_wmf.gif" width="517" height="365" border="0" />
+        </p>
+        <p><u>Bias indicators</u>
+        </p>
+        <p>Begg-Mazumdar: Kendall's tau = 0.15 P = 0.4503</p>
+        <p>Egger: bias = -1.599085 (95% CI = -2.191985 to -1.006186) P &lt; 0.0001</p>
+        <p>Harbord-Egger: bias = -1.759404 (90% CI = -2.302334 to -1.216475) P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/bias2_wmf.gif" width="517" height="365" border="0" />
+        </p>
+        <p><u>Bias indicators</u>
+        </p>
+        <p>Begg-Mazumdar: Kendall's tau = 0.111111 P = 0.7275 (low power)</p>
+        <p>Egger: bias = 0.580646 (95% CI = -0.88656 to 2.047852) P = 0.3881</p>
+        <p>Harbord-Egger: bias = 0.805788 (90% CI = -0.550241 to 2.161817) P = 0.3013</p>
+        <p>&#160;</p>
+        <p><a href="../references/reference_list.htm">Egger et al. (1997)</a>  proposed a test for asymmetry of the funnel plot. This is a test for the Y intercept = 0 from a linear regression of normalized effect estimate (estimate divided by its standard error) against precision (reciprocal of the standard error of the estimate). StatsDirect provides this bias indicator method with all meta-analyses. Please note that the power of this method to detect bias will be low with small numbers of studies.</p>
+        <p>&#160;</p>
+        <p><a href="../references/reference_list.htm">Harbord (2005)</a><a name="kanchor149"></a> developed a test that maintains the power of the Egger test whilst reducing the false positive rate, which is a problem with the Egger test when there are large treatment effects, few events per trial or all trials are of similar sizes. The original Egger test should be used instead of the Harbord method if there is a large imbalance between the sizes of treatment and control groups – the same is true for the <a href="peto.htm">Peto odds ratio</a>, to which this test is mathematically related.</p>
+        <p>&#160;</p>
+        <p><a href="../references/reference_list.htm">Begg and Mazumdar (1994)</a>  proposed testing the interdependence of variance and effect size using <a href="../nonparametric_methods/kendall_correlation.htm">Kendall's method</a>. This bias indicator makes fewer assumptions than that of Egger et al. but it is insensitive to many types of bias to which the Egger test is sensitive. Unless you have many studies in your meta-analysis, the Begg method has very low power to detect biases (<a href="../references/reference_list.htm">Sterne et al., 2000</a>).</p>
+        <p>&#160;</p>
+        <p>Other statistical methods can be used to investigate the effects of study characteristics other than sample size upon effects (<a href="../references/reference_list.htm">Sterne et al., 2002</a>). Please seek the advice of a Statistician with regard to this.</p>
+        <p>&#160;</p>
+        <p>Note that when the between-study heterogeneity is large, none of the bias detection tests work well.</p>
+        <p>&#160;</p>
+        <p>See <a href="options.htm">meta-analysis options</a> for details of how to set the bias detection plot type.</p>
+    </body>
+</html>

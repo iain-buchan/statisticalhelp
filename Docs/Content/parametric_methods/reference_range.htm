@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Parametric methods">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Reference Range (Normal Range) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#parametric_methods/reference_range.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor139"></a>Reference Range</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Parametric_Reference Range</b>.</p>
+        <p>&#160;</p>
+        <p>
+            This function enables you to construct confidence intervals for a reference range (also known as reference interval or normal range) from a sample of observations drawn at random from a normal distribution. The nonparametric alternative (quantile reference range) is also given.</p>
+        <p>&#160;</p>
+        <p>The reference range and confidence interval for data from a normal distribution is calculated as:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation172.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where x bar is the sample mean, s is the sample standard deviation, n is the sample size, rr is the reference range, se is the standard error of the reference range limits, ci is the confidence interval for the reference range limits, z is a quantile from the standard normal distribution and c is % range coverage/100 (e.g. 0.95 for a 95% reference range).</p>
+        <p>&#160;</p>
+        <p>For samples with no negative values, the above calculations are repeated on log-transformed data and the results are presented in the original measurement scale.</p>
+        <p>&#160;</p>
+        <p>The reference range and confidence interval for data that are not from a normal distribution should be calculated by the percentile method. For a c*100% reference range, the percentile method examines the 1-(c/2) and 1-(1-(c/2)) <a href="../nonparametric_methods/quantile_ci.htm">sample quantiles and their confidence intervals</a>.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Altman (1991, p. 421)</a>.</p>
+        <p>Test workbook (Parametric worksheet: IgM).</p>
+        <p>&#160;</p>
+        <p>Consider the serum IgM concentrations measured from blood samples from 298 healthy children aged six months to six years.</p>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu. Then select the reference range from the parametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "IgM" when prompted for data.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Reference range/interval</u>
+        </p>
+        <p>&#160;</p>
+        <p>Sample name:  IgM</p>
+        <p>Sample mean = 0.80302</p>
+        <p>Sample size n =  298</p>
+        <p>Sample sd =  0.469498</p>
+        <p>&#160;</p>
+        <p><u>For normal data</u>
+        </p>
+        <p>95% reference interval = -0.117179 to 1.72322</p>
+        <p>95% confidence interval for lower range limit = -0.20828 to -0.026079</p>
+        <p>95% confidence interval for upper range limit = 1.632119 to 1.81432</p>
+        <p>&#160;</p>
+        <p><u>For log-normal data</u>
+        </p>
+        <p>95% reference interval = 0.238102 to 2.031412</p>
+        <p>95% confidence interval for lower range limit = 0.214129 to 0.264758</p>
+        <p>95% confidence interval for upper range limit = 1.826887 to 2.258836</p>
+        <p>&#160;</p>
+        <p><u>For any data</u>
+        </p>
+        <p>Quantile 0.025 = 0.2</p>
+        <p>Approximate 95% confidence interval (non-conservative) = 0.1 to 0.3</p>
+        <p>Exact confidence level = 95.659155%</p>
+        <p>&#160;</p>
+        <p>Quantile 0.975 = 2</p>
+        <p>Approximate 95% confidence interval (non-conservative) = 1.7 to 2.5</p>
+        <p>Exact confidence level = 96.091704%</p>
+        <p>&#160;</p>
+        <p>These data are not from a normal distribution but are from an approximately log-normal distribution. This explains why the results for log-normal data are closer to the 2.5% and 97.5% percentiles.</p>
+    </body>
+</html>

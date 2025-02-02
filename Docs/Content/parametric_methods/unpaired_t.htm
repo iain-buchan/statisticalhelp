@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Parametric methods">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Unpaired (Two Sample) t Test - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#parametric_methods/unpaired_t.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor174"></a>Unpaired (Two Sample) t Test</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Parametric_Unpaired t</b>.</p>
+        <p>&#160;</p>
+        <p>This function gives an unpaired two sample <a href="../distributions/t.htm">Student t</a> test with a confidence interval for the difference between the means.</p>
+        <p>&#160;</p>
+        <p>The unpaired t method tests the null hypothesis that the population means related to two independent, random samples from an approximately normal distribution are equal (<a href="../references/reference_list.htm">Altman, 1991; Armitage and Berry, 1994</a>).</p>
+        <p>&#160;</p>
+        <p>Assuming equal variances, the test statistic is calculated as:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation167.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where x bar 1 and x bar 2 are the sample means, s² is the pooled sample variance, n<sub>1</sub> and n<sub>2</sub> are the sample sizes and t is a Student t quantile with n<sub>1</sub> + n<sub>2</sub> - 2 degrees of freedom.</p>
+        <p>&#160;</p>
+        <p>Power is calculated as the power achieved with the given sample sizes and variances for detecting the observed difference between means with a two-sided <a href="../basics/p_values.htm">type I error</a> probability of (100-CI%)% (<a href="../references/reference_list.htm">Dupont, 1990</a>).</p>
+        <p>&#160;</p>
+        <p>The unpaired t test should not be used if there is a significant difference between the variances of the two samples; StatsDirect tests for this and gives appropriate warnings. For the situation of unequal variances, StatsDirect calculates Satterthwaite's approximate t test; a method in the Behrens-Welch family (<a href="../references/reference_list.htm">Armitage and Berry, 1994</a>).</p>
+        <p>&#160;</p>
+        <p>Assuming unequal variances, the test statistic is calculated as:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation168.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where x bar 1 and x bar 2 are the sample means, s² is the sample variance, n<sub>1</sub> and n<sub>2</sub> are the sample sizes, d is the Behrens-Welch test statistic evaluated as a Student t quantile with df freedom using Satterthwaite's approximation.</p>
+        <p>&#160;</p>
+        <p>Note that is often more robust to use the nonparametric <a href="../nonparametric_methods/mann_whitney.htm">Mann-Whitney</a> test as an alternative method in the presence of unequal variances.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 111)</a>.</p>
+        <p>Test workbook (Parametric worksheet: Low Protein, Heigh Protein).</p>
+        <p>&#160;</p>
+        <p>Consider the gain in weight of 19 female rats between 28 and 84 days after birth. 12 were fed on a high protein diet and 7 on a low protein diet.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">High protein</td>
+                <td style="text-align: right;text-decoration: underline;">Low protein</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">134</td>
+                <td style="text-align: right;">70</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">146</td>
+                <td style="text-align: right;">118</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">104</td>
+                <td style="text-align: right;">101</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">119</td>
+                <td style="text-align: right;">85</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">124</td>
+                <td style="text-align: right;">107</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">161</td>
+                <td style="text-align: right;">132</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">107</td>
+                <td style="text-align: right;">94</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">83</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">113</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">129</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">97</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">123</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect first prepare them in two workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select the unpaired t test from the parametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "High protein" and "Low protein" when prompted for data.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Unpaired t test</u>
+        </p>
+        <p>Mean of High Protein = 120 (n = 12)</p>
+        <p>Mean of Low Protein = 101 (n = 7)</p>
+        <p>&#160;</p>
+        <p><u>Assuming equal variances</u>
+        </p>
+        <p>Combined standard error = 10.045276</p>
+        <p>df = 17</p>
+        <p>t = 1.891436</p>
+        <p>One sided P = 0.0379</p>
+        <p>Two sided P = 0.0757</p>
+        <p>&#160;</p>
+        <p>95% confidence interval for difference between means = -2.193679 to 40.193679</p>
+        <p>&#160;</p>
+        <p>Power (for 5% significance) = 82.25%</p>
+        <p>&#160;</p>
+        <p><u>Assuming unequal variances</u>
+        </p>
+        <p>Combined standard error = 9.943999</p>
+        <p>df = 13.081702</p>
+        <p>t(d) = 1.9107</p>
+        <p>One sided P = 0.0391</p>
+        <p>Two sided P = 0.0782</p>
+        <p>&#160;</p>
+        <p>95% confidence interval for difference between means = -1.980004 to 39.980004</p>
+        <p>&#160;</p>
+        <p>Power (for 5% significance) = 40.39%</p>
+        <p>&#160;</p>
+        <p><u>Comparison of variances</u>
+        </p>
+        <p>Two sided F test is not significant</p>
+        <p>No need to assume unequal variances</p>
+        <p>&#160;</p>
+        <p>Thus we have a difference that is not quite significant at the 5% level. The most important information is, however, conveyed by the confidence interval. The 95% CI includes zero therefore we can not be confident (at the 95% level) that these data show any difference in weight gain. As most of the interval is toward weight gain and as the test result is in the grey "suggestive" 5%-10% zone we have good evidence for repeating this experiment with larger numbers. Bigger samples will probably shrink the range of uncertainty so that the confidence interval contracts to a narrower band that excludes zero.</p>
+        <p>&#160;</p>
+        <p>N.B. We did not consider a one sided P value here because we could not be absolutely certain that the rats would all benefit from a high protein diet in comparison with those on a low protein diet.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

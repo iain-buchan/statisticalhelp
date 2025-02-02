@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Probability distributions">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Student t Distribution - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#distributions/t.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor20"></a>Student's t Distribution</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Distributions_Student's t</b>.</p>
+        <p>&#160;</p>
+        <p>Student's t is the distribution with n degrees of freedom of :</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation106.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where z is the <a href="normal.htm">standard normal</a> variable and χ² is a <a href="chisq.htm">chi-square</a> random variable with n degrees of freedom.</p>
+        <p>&#160;</p>
+        <p>When n is large the distribution of t is close to normal. The largest differences between standard normal and t distributions occurs in the tails which is the most important area in statistical tests. You can see from the diagram below that a t distribution with fewer degrees of freedom has more of its values in the tails:</p>
+        <p>
+            <img src="../resources/Images/tcurves.gif" width="370" height="228" border="0" />
+        </p>
+        <p>For samples from a normal distribution, the ratio of the mean and its standard error follow a t distribution. The number of degrees of freedom used should be equal to the sample size minus the number of estimated parameters. In t tests the estimated parameter is the standard deviation about the mean, therefore, degrees of freedom are n-1.</p>
+        <p>&#160;</p>
+        <p>This family of distributions is associated with W. S. Gosset who, at the turn of the century, published his work under the pseudonym Student.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect uses the relationship between Student's t and the beta distribution in its calculation of tail areas and percentage points for t distributions. Soper's reduction method is used to integrate the incomplete beta function (<a href="../references/reference_list.htm">Majumder and Bhttacharjee, 1973a, 1973b; Morris, 1992</a>). A hybrid of conventional root finding methods is used to invert the function. Conventional root finding proved more reliable than some other methods such as Newton Raphson iteration on Wilson Hilferty starting estimates (<a href="../references/reference_list.htm">Berry et al., 1990; Cran et al., 1977</a>). StatsDirect does not use the beta distribution for the calculation of t percentage points when there are more than 60 degrees of freedom (n) (<a href="../references/reference_list.htm">Hill 1970</a>), when n is 2 then t=sqr(2/(P*(2-P))-2) and when n is 1 then t=cos((P*π)/2)/sin((P*p)/2).</p>
+        <p>&#160;</p>
+        <p><u>Function Definition</u>
+        </p>
+        <p>The distribution function of a t distribution with n degrees of freedom is:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation107.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>Γ(*) is the gamma function:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation108.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>A t variable with n degrees of freedom can be transformed to an F variable with 1 and n degrees of freedom as t²=F. An F variable with ν<sub>1</sub> and ν<sub>2</sub> degrees of freedom can be transformed to a beta variable with parameters p=ν<sub>1</sub>/2 and q= ν<sub>2</sub>/2 as beta = ν<sub>1</sub>F(ν<sub>1</sub>+v<sub>2</sub> F). The beta distribution with parameters p and q is:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation109.svg" alt="" class="mcReset" />
+        </p>
+    </body>
+</html>

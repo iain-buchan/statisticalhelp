@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Meta-analysis">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Risk Difference Meta-analysis - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#meta_analysis/risk_difference.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor143"></a>
+            Risk Difference Meta-analysis</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Meta-Analysis_Risk Difference</b>.</p>
+        <p>&#160;</p>
+        <p>Case-control studies of dichotomous outcomes (e.g. dead or alive) can by represented by arranging the observed counts into fourfold (2 by 2) tables. Meta-analysis may be used to investigate the combination or interaction of a group of independent studies, for example a series of fourfold tables from similar studies conducted at different centres. This StatsDirect function examines the risk difference within each stratum (a single fourfold table) and across all of the studies/strata.</p>
+        <p>&#160;</p>
+        <p>For a single stratum risk difference is defined as follows:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">EXPOSURE</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;text-align: center;">Exposed</td>
+                <td style="text-decoration: underline;text-align: center;">Non-Exposed</td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: right;">OUTCOME:</td>
+                <td style="text-align: right;">Cases:</td>
+                <td style="text-align: center;">a</td>
+                <td style="text-align: center;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Non-cases:</td>
+                <td style="text-align: center;">c</td>
+                <td style="text-align: center;">d</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Risk difference = [a/(a+c)] - [b/(b+d)]</p>
+        <p>&#160;</p>
+        <p>For each table the observed risk difference is displayed with a confidence interval. The ’near exact’ method of Miettinen and Nurminen is used to construct the confidence interval (<a href="../references/reference_list.htm">Mee, 1984; Anbar, 1983; Gart and Nam, 1990; Miettinen and Nurminen, 1985; Sahai and Kurshid, 1991</a>). If the ’try exact’ <a href="options.htm">option</a> is not selected then a normal approximation to the confidence interval is given instead.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>The Mantel-Haenszel type method of Greenland and Robins (<a href="../references/reference_list.htm">Greenland and Robins, 1985; Sahai and Kurshid, 1991</a>) is used to estimate the pooled risk difference for all strata, assuming a fixed effects model:</p>
+        <p>
+            <img src="../GeneratedImages/Equations/Equation131.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where n<sub>i</sub> =  a<sub>i</sub>+b<sub>i</sub>+c<sub>i</sub>+d<sub>i</sub>.</p>
+        <p>&#160;</p>
+        <p>A confidence interval for the pooled risk difference is calculated using the Greenland-Robins variance formula (<a href="../references/reference_list.htm">Greenland and Robins, 1985</a>). A chi-square test statistic is given with associated probability of the pooled risk difference being equal to zero. Note that some packages give a z statistic; this is equal to the square root of the chi-square statistic with one degree of freedom, i.e. it is equivalent.</p>
+        <p>&#160;</p>
+        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
+        <p>&#160;</p>
+        <p>Note that the results from StatsDirect may differ slightly from other software or from those quoted in papers; this is due to differences in the variance formulae. StatsDirect employs the most robust practical approaches to variance according to accepted statistical literature.</p>
+        <p>&#160;</p>
+        <p>DATA INPUT:</p>
+        <p>Observed frequencies should be entered in a workbook as follows:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">Exposed/Experimental</td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">Non-exposed/Non-experimental</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">Total number</td>
+                <td style="text-align: center;">Number of cases</td>
+                <td style="text-align: center;">Total number</td>
+                <td style="text-align: center;">Number of cases</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>...where total number = cases + non-cases</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Fleiss and Gross (1991)</a>.</p>
+        <p>Test workbook (Meta-analysis worksheet:  Exposed total, Exposed cases, Non-exposed total, Non-exposed cases, Study).</p>
+        <p>&#160;</p>
+        <p>The following data combine seven placebo-controlled randomized trials of the effect of aspirin in preventing death after myocardial infarction:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">&#160;</td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">Aspirin</td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">Placebo</td>
+            </tr>
+            <tr>
+                <td style="text-decoration: underline;">Trial</td>
+                <td style="text-decoration: underline;text-align: right;">patients</td>
+                <td style="text-decoration: underline;text-align: right;">deaths</td>
+                <td style="text-decoration: underline;text-align: right;">patients</td>
+                <td style="text-decoration: underline;text-align: right;">deaths</td>
+            </tr>
+            <tr>
+                <td>MRC-1</td>
+                <td style="text-align: right;">615</td>
+                <td style="text-align: right;">49</td>
+                <td style="text-align: right;">624</td>
+                <td style="text-align: right;">67</td>
+            </tr>
+            <tr>
+                <td>CDP</td>
+                <td style="text-align: right;">758</td>
+                <td style="text-align: right;">44</td>
+                <td style="text-align: right;">771</td>
+                <td style="text-align: right;">64</td>
+            </tr>
+            <tr>
+                <td>MRC-2</td>
+                <td style="text-align: right;">832</td>
+                <td style="text-align: right;">102</td>
+                <td style="text-align: right;">850</td>
+                <td style="text-align: right;">126</td>
+            </tr>
+            <tr>
+                <td>GASP</td>
+                <td style="text-align: right;">317</td>
+                <td style="text-align: right;">32</td>
+                <td style="text-align: right;">309</td>
+                <td style="text-align: right;">38</td>
+            </tr>
+            <tr>
+                <td>PARIS</td>
+                <td style="text-align: right;">810</td>
+                <td style="text-align: right;">85</td>
+                <td style="text-align: right;">406</td>
+                <td style="text-align: right;">52</td>
+            </tr>
+            <tr>
+                <td>AMIS</td>
+                <td style="text-align: right;">2267</td>
+                <td style="text-align: right;">246</td>
+                <td style="text-align: right;">2257</td>
+                <td style="text-align: right;">219</td>
+            </tr>
+            <tr>
+                <td>ISIS-2</td>
+                <td style="text-align: right;">8587</td>
+                <td style="text-align: right;">1570</td>
+                <td style="text-align: right;">8600</td>
+                <td style="text-align: right;">1720</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect first prepare them in four workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select risk difference from the meta-analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Exposed total", "Exposed cases", "Non-exposed total" and "Non-exposed cases" when prompted for data. Note that "exposed" and "experimental" groups are the same.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Study</td>
+                <td style="text-decoration: underline;">Risk difference</td>
+                <td colspan="2" style="text-decoration: underline;">95% CI (Miettinen)</td>
+                <td colspan="2" style="text-decoration: underline;">% Weight (fixed, random)</td>
+            </tr>
+            <tr>
+                <td>MRC-1</td>
+                <td>-0.0277</td>
+                <td>-0.0606</td>
+                <td>0.0048</td>
+                <td>4.4457</td>
+                <td>10.8419</td>
+            </tr>
+            <tr>
+                <td>CDP</td>
+                <td>-0.025</td>
+                <td>-0.0511</td>
+                <td>0.0007</td>
+                <td>5.4861</td>
+                <td>14.7560</td>
+            </tr>
+            <tr>
+                <td>MRC-2</td>
+                <td>-0.0256</td>
+                <td>-0.0585</td>
+                <td>0.0071</td>
+                <td>6.0348</td>
+                <td>10.7025</td>
+            </tr>
+            <tr>
+                <td>GASP</td>
+                <td>-0.022</td>
+                <td>-0.0726</td>
+                <td>0.0278</td>
+                <td>2.2459</td>
+                <td>5.5797</td>
+            </tr>
+            <tr>
+                <td>PARIS</td>
+                <td>-0.0231</td>
+                <td>-0.0641</td>
+                <td>0.014</td>
+                <td>3.8817</td>
+                <td>8.2922</td>
+            </tr>
+            <tr>
+                <td>AMIS</td>
+                <td>0.0115</td>
+                <td>-0.0062</td>
+                <td>0.0292</td>
+                <td>16.2334</td>
+                <td>21.5868</td>
+            </tr>
+            <tr>
+                <td>ISIS-2</td>
+                <td>-0.0172</td>
+                <td>-0.0289</td>
+                <td>-0.0054</td>
+                <td>61.6722</td>
+                <td>28.2409</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Fixed effects (Mantel-Haenszel, Greenland-Robins)</u>
+        </p>
+        <p>Pooled risk difference = -0.014263 (95% CI = -0.022765 to -0.005762)</p>
+        <p>Chi²  (test risk difference differs from 0) = 10.812247 (df = 1) P = 0.001</p>
+        <p>&#160;</p>
+        <p><u>Non-combinability of studies</u>
+        </p>
+        <p>Cochran Q = 10.461119 (df = 6) P = 0.1065</p>
+        <p>Moment-based estimate of between studies variance = 0.000112</p>
+        <p>I² (inconsistency) = 42.6% (95% CI = 0% to 74.4%)</p>
+        <p>&#160;</p>
+        <p><u>Random effects (DerSimonian-Laird)</u>
+        </p>
+        <p>Pooled risk difference = -0.014947 (95% CI = -0.0276 to -0.002295)</p>
+        <p>Chi² (test risk difference differs from 0) = 5.361139 (df = 1) P = 0.0206</p>
+        <p>&#160;</p>
+        <p><u>Bias indicators</u>
+        </p>
+        <p>Begg-Mazumdar: Kendall's tau = 0.333333 P = 0.3813 (low power)</p>
+        <p>Egger: bias = -0.804119 (95% CI = -3.724382 to 2.116144) P = 0.5107</p>
+        <p>&#160;</p>
+        <p>Here we can say with 95% confidence, assuming a random effects model, that for those given aspirin the true population risk of dying in the specified interval after a heart attack is at least 0.003 less than the risk for those not given aspirin. Assuming a fixed effects model a stronger inference could be made about a risk difference of 0.006 (the lower absolute confidence limit) but the high inter-study variation makes the fixed effects model less appropriate.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

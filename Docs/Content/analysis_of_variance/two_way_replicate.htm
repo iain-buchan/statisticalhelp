@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Analysis of variance">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Two Way (Repeated Measures) Analysis of Variance (ANOVA) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <meta name="description" content="This function calculates analysis of variance (ANOVA) for a two way randomized block experiment with repeated observations for each treatment/block cell. There are overall tests for differences between treatment means, between block means and block/treatment interaction. Multiple comparison methods are provided for pairs of treatment means." />
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../index.html#analysis_of_variance/two_way_replicate.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor221"></a>Two Way Replicate (Repeated Measures) Analysis of Variance</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Analysis of Variance_Replicate Two Way</b>.</p>
+        <p>&#160;</p>
+        <p>This function calculates <a href="anova.htm">ANOVA</a> for a two way <a href="randomized_blocks.htm">randomized block</a> experiment with repeated observations for each treatment/block cell. There are overall tests for differences between treatment means, between block means and block/treatment interaction. <a href="multiple_comparisons.htm">Multiple comparison</a> methods are provided for pairs of treatment means.</p>
+        <p>&#160;</p>
+        <p>Consider data classified by two factors such that each level of one factor can be combined with all levels of the other factor:</p>
+        <p>&#160;</p>
+        <p>For repeated Y observations 1 to r:</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td width="24">&#160;</td>
+                <td colspan="4" width="168" style="text-align: center;text-decoration: underline;">Treatment (i, 1 to k)</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td width="24">&#160;</td>
+                <td width="42" style="text-align: center;text-decoration: underline;">1</td>
+                <td width="42" style="text-align: center;text-decoration: underline;">2</td>
+                <td width="42" style="text-align: center;text-decoration: underline;"><span style="text-decoration: none;">...</span>
+                </td>
+                <td width="42" style="text-align: center;text-decoration: underline;">k</td>
+            </tr>
+            <tr>
+                <td>Block 
+		 (j, 1 to b):</td>
+                <td width="24">1</td>
+                <td width="42" style="text-align: center;">Y<sub>ijr</sub></td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td width="24">2</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td width="24">3</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td width="24">.</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td width="24">b</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+                <td width="42" style="text-align: center;">&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>In the example below there is a study of different treatments on clotting times. Response/outcome variable Y is the measured r times for clotting time for blood samples. Blocks are individuals who donated a blood sample. Treatments are different methods by which portions of each of the blood samples are processed.</p>
+        <p>&#160;</p>
+        <p>The simple two way randomized block design assumes that the block (row) and treatment (column) effects are additive. This means that apart from experimental error, the difference in effect between any two blocks is the same for all treatment and vice versa. If these effects are not additive then there is a row-column interaction that should be investigated by repeating the observations for each block.</p>
+        <p>&#160;</p>
+        <p>StatsDirect compensates for missing observations in the replicates (repeat observations) by estimating them as the mean of the replicates present and by reducing the degrees of freedom, you should avoid this situation if possible.</p>
+        <p>&#160;</p>
+        <p><u>Data preparation</u>
+        </p>
+        <p>Enter each set of replicates as a separate two way table of treatment columns and block rows.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 243)</a>.</p>
+        <p>Test workbook (ANOVA worksheet: T1(rep 1), T2(rep 1), T3(rep 1), T1(rep 2), T2(rep 2), T3(rep 2), T1(rep 3), T2(rep 3), T3(rep 3)).</p>
+        <p>&#160;</p>
+        <p>The following data represent clotting times (mins) from three subjects treated in three different ways. The plasma samples were allocated randomly to the treatments and the analysis was repeated three times for each sample.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col style="width: 52px;" />
+            <tr>
+                <td style="text-decoration: underline;">Treatment</td>
+                <td style="text-decoration: underline;text-align: right;">A</td>
+                <td style="text-decoration: underline;text-align: right;">B</td>
+                <td style="text-decoration: underline;text-align: right;">C</td>
+            </tr>
+            <tr>
+                <td>Subject 1:</td>
+                <td style="text-align: right;">9.8</td>
+                <td style="text-align: right;">9.9</td>
+                <td style="text-align: right;">11.3</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td style="text-align: right;">10.1</td>
+                <td style="text-align: right;">9.5</td>
+                <td style="text-align: right;">10.7</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td style="text-align: right;">9.8</td>
+                <td style="text-align: right;">10.0</td>
+                <td style="text-align: right;">10.7</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Subject 2:</td>
+                <td style="text-align: right;">9.2</td>
+                <td style="text-align: right;">9.1</td>
+                <td style="text-align: right;">10.3</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td style="text-align: right;">8.6</td>
+                <td style="text-align: right;">9.1</td>
+                <td style="text-align: right;">10.7</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td style="text-align: right;">9.2</td>
+                <td style="text-align: right;">9.4</td>
+                <td style="text-align: right;">10.2</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Subject 3:</td>
+                <td style="text-align: right;">8.4</td>
+                <td style="text-align: right;">8.6</td>
+                <td style="text-align: right;">9.8</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td style="text-align: right;">7.9</td>
+                <td style="text-align: right;">8.0</td>
+                <td style="text-align: right;">10.1</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td style="text-align: right;">8.0</td>
+                <td style="text-align: right;">8.0</td>
+                <td style="text-align: right;">10.1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first prepare them in nine workbook columns:</p>
+        <p>&#160;</p>
+        <p>r = repeat/replicate observation</p>
+        <p>T = treatment</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">T1 (r 1)</td>
+                <td style="text-decoration: underline;text-align: right;">T2 (r 1)</td>
+                <td style="text-decoration: underline;text-align: right;">T3 (r 1)</td>
+                <td style="text-decoration: underline;text-align: right;">T1 (r 2)</td>
+                <td style="text-decoration: underline;text-align: right;">T2 (r 2)</td>
+                <td style="text-decoration: underline;text-align: right;">T3 (r 2)</td>
+                <td style="text-decoration: underline;text-align: right;">T1 (r 3)</td>
+                <td style="text-decoration: underline;text-align: right;">T2 (r 3)</td>
+                <td style="text-decoration: underline;text-align: right;">T3 (r 3)</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9.8</td>
+                <td style="text-align: right;">9.9</td>
+                <td style="text-align: right;">11.3</td>
+                <td style="text-align: right;">10.1</td>
+                <td style="text-align: right;">9.5</td>
+                <td style="text-align: right;">10.7</td>
+                <td style="text-align: right;">9.8</td>
+                <td style="text-align: right;">10.0</td>
+                <td style="text-align: right;">10.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9.2</td>
+                <td style="text-align: right;">9.1</td>
+                <td style="text-align: right;">10.3</td>
+                <td style="text-align: right;">8.6</td>
+                <td style="text-align: right;">9.1</td>
+                <td style="text-align: right;">10.7</td>
+                <td style="text-align: right;">9.2</td>
+                <td style="text-align: right;">9.4</td>
+                <td style="text-align: right;">10.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8.4</td>
+                <td style="text-align: right;">8.6</td>
+                <td style="text-align: right;">9.8</td>
+                <td style="text-align: right;">7.9</td>
+                <td style="text-align: right;">8.0</td>
+                <td style="text-align: right;">10.1</td>
+                <td style="text-align: right;">8.0</td>
+                <td style="text-align: right;">8.0</td>
+                <td style="text-align: right;">10.1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Alternatively, open the test workbook using the file open function of the file menu. Then select Replicate Two Way from the analysis of variance section of the analysis menu. Enter the number of repeats as three and <a href="../workbook/selecting_data.htm">select</a> the columns marked "T1 (rep 1)" etc. when prompted for the subject (row) by treatment (column) data for each repeat.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Two way randomized block analysis of variance with repeated observations</u>
+        </p>
+        <p>&#160;</p>
+        <p>Variables: (T1 (rep 1), T2 (rep 1), T3 (rep 1)) (T1 (rep 2), T2 (rep 2), T3 (rep 2)) (T1 (rep 3), T2 (rep 3), T3 (rep 3))</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Source of Variation</td>
+                <td style="text-decoration: underline;">Sum Squares</td>
+                <td style="text-decoration: underline;">DF</td>
+                <td style="text-decoration: underline;">Mean Square</td>
+            </tr>
+            <tr>
+                <td>Blocks (rows)</td>
+                <td>9.26</td>
+                <td>2</td>
+                <td>4.63</td>
+            </tr>
+            <tr>
+                <td>Treatments (columns)</td>
+                <td>11.78</td>
+                <td>2</td>
+                <td>5.89</td>
+            </tr>
+            <tr>
+                <td>Interaction</td>
+                <td>0.74</td>
+                <td>4</td>
+                <td>0.185</td>
+            </tr>
+            <tr>
+                <td>Residual (error)</td>
+                <td>1.32</td>
+                <td>18</td>
+                <td>0.073333</td>
+            </tr>
+            <tr>
+                <td>Corrected total</td>
+                <td>23.1</td>
+                <td>26</td>
+                <td>&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>F (VR blocks) = 63.136364 P &lt; .0001</p>
+        <p>F (VR treatments) = 80.318182 P &lt; .0001</p>
+        <p>F (VR interaction) = 2.522727 P = .0771</p>
+        <p>&#160;</p>
+        <p>Here we see a statistically highly significant difference between mean clotting times across the groups. If the F statistic for interaction had been significant then there would have been little point in drawing conclusions about independent block and treatment effects from the other F statistics.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="multiple_comparisons.htm">multiple comparisons</a>
+        </p>
+        <p><a href="anova.htm">analysis of variance</a>
+        </p>
+    </body>
+</html>
