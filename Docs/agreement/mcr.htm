@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="topic" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Agreement analysis" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="topic _Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Agreement analysis" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
@@ -15,6 +15,11 @@
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -24,7 +29,7 @@
         </script>
         <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
         </script>
-        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
         </script>
         <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
         </script>
@@ -32,107 +37,188 @@
         </script>
     </head>
     <body>
-        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#agreement/mcr.htm">Open topic with navigation</a>
-        </p>
-        <div role="main" id="mc-main-content"><a name="kanchor262"></a>
-            <h1>Method Comparison Regression</h1>
-            <p>&#160;</p>
-            <p>Menu location: <b>Analysis_Agreement_Method Comparison Regression</b>.</p>
-            <p>&#160;</p>
-            <p>This function compares two methods of measurement using linear regression techniques that can accommodate errors in both dimensions (test method Y vs. reference method X).</p>
-            <p>&#160;</p>
-            <p>Two main types of regression are offered: Deming and Passing-Bablok.</p>
-            <p>&#160;</p>
-            <p>Deming regression is an extension of simple linear regression to handle random measurement errors in X as well as Y variables (<a href="http://www.clinchem.org/content/25/3/432.long">Cornbleet &amp; Gochman, 1979</a>). So Deming regression considers both X and Y to be subject to measurement error whereas simple regression allows only the Y variable to be measured with error. The X and Y variables in Deming regression may contain repeated measurements or may be single measurements from each subject. You should not use this method with small samples (less than 40).</p>
-            <p>&#160;</p>
-            <p>Deming regression can accommodate differences in measurement errors between the test and reference methods. The default procedure assumes no difference, in other words an "error ratio" of 1. If there is a difference then change this value to the variance ratio between the methods (see <a href="../parametric_methods/f_variance_ratio.htm">F test</a>).</p>
-            <p>&#160;</p>
-            <p>If the differences between the test and reference observations tend to be different with higher or lower values of the factor being measured then the data are heteroscedastic. In this case a Deming regression breaks an important linear regression assumption about the distribution of residuals. To overcome this problem a weighted Deming regression is offered, using weights equal to the reciprocal of the square of the reference value - which is more robust to heteroscedasticity.</p>
-            <p>&#160;</p>
-            <p>Where Deming regression expects errors to be from a normal distribution, Passing-Bablok regression is a non-parametric method that does not make any assumptions about the distributions of the samples or their measurement errors (<a href="http://www.ncbi.nlm.nih.gov/pubmed/6655447">Passing and Bablok, 1983</a>). The method does, however, assume the two variables are highly correlated and have a linear relationship.</p>
-            <p>&#160;</p>
-            <p>Different methods for calculating confidence intervals are offered. For Deming and weighted Deming regression <a href="http://www.clinchem.org/content/39/3/424.long">Linnet (1993)</a> recommends the jackknife (leave one out resampling) method. For Passing-Bablok regression a nested bootstrap (bias corrected and accelerated) interval is preferred, but this can take a very long time with large datasets, where an approximate Passing-Bablok procedure may be more practical.</p>
-            <p>&#160;</p>
-            <p>If the confidence interval for the slope does not contain the value 1 then you reject the null hypothesis that the slope is equal to 1 - in other words there is statistically significant evidence of at least a proportional difference between the two methods.</p>
-            <p>&#160;</p>
-            <p>If the confidence interval for the intercept does not contain the value 0 then you reject the null hypothesis that the intercept is equal to 0 - in other words there is statistically significant evidence that the methods differ by at least a constant amount.</p>
-            <p>&#160;</p>
-            <p>A scatter plot is given with each regression by default, showing the fitted regression line with a confidence interval, the identity line (methods equal) and the regression equation. This plot enables you to see the observations and how well the methods of measuring them agree, with the disagreement reflecting the bias and likely range of bias.</p>
-            <p>&#160;</p>
-            <p> You can select a residual plot, which is useful for spotting outliers and non linear patterns, and for checking how the agreement varies over the range of measurement.</p>
-            <p>&#160;</p>
-            <p>You can also select a Bland-Altman agreement plot displaying differences vs. means within standard limits of agreement.</p>
-            <p>&#160;</p>
-            <p><u>Technical Validation</u>
-            </p>
-            <p>StatsDirect produces a R script to execute these methods via the MCR package developed by E. Manuilova, A. Schuetzenmeister and F. Model at the pharmaceutical company Roche.</p>
-            <p>&#160;</p>
-            <p>Source: <a href="http://cran.r-project.org/web/packages/mcr/">cran.r-project.org/web/packages/mcr/</a></p>
-            <p>&#160;</p>
-            <p>Standard: The MCR package implements the <a href="http://www.clsi.org/">Clinical Laboratory and Standards Institute</a> guidance EP09-A2 (Method Comparison and Bias Estimation Using Patient Samples; Approved Guideline – Second Edition.).</p>
-            <p>&#160;</p>
-            <p>Further analysis in R: You can choose to save the intermediate R script to your StatsDirect report. You can then run supplementary analyses. For example to estimate the bias and confidence interval at a given series of measurement levels (1 to 5) you could run the command calcBias(model1,x.levels=c(1,2,3,4,5)) for absolute bias or calcBias(model1,x.levels=c(1,2,3,4,5),type="proportional") for proportional bias. calcCUSUM(model1) will give a cumulative sum test with which you can assess linearity.</p>
-            <p>&#160;</p>
-            <p><u>Example</u>
-            </p>
-            <p>From <a href="http://cran.r-project.org/web/packages/mcr">MCR R package</a>.</p>
-            <p>Data: Test workbook (Agreement worksheet: Plasma Creatinine, Serum Creatinine).</p>
-            <p>&#160;</p>
-            <p>To run this example in StatsDirect: select the menu item (Analysis_Agreement_Method Comparison Regression); when asked to "Select Data for Test Method" highlight the Plasma Creatinine column of the Agreement worksheet in the Test workbook (test.xlsx) and right click on the mouse to select the data; when asked for the "Reference Method" choose Serum Creatinine in the same way; when presented with options select Regression Method: Deming and Charts: Test vs. Reference.</p>
-            <p>&#160;</p>
-            <p><u>Method Comparison Regression</u>
-            </p>
-            <p>&#160;</p>
-            <p>Test method: Plasma Creatinine</p>
-            <p>Reference method: Serum Creatinine</p>
-            <p>Sample size: 108</p>
-            <p>Error ratio: 1</p>
-            <p>&#160;</p>
-            <p>Deming regression (analytic CI):</p>
-            <table style="caption-side: top;">
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <tbody>
-                    <tr>
-                        <td>&#160;</td>
-                        <td style="text-decoration: underline;">Estimate</td>
-                        <td style="text-decoration: underline;">Standard Error</td>
-                        <td colspan="2" style="text-decoration: underline;">95% CI</td>
-                        <td style="text-decoration: underline;">Meaning</td>
-                    </tr>
-                    <tr>
-                        <td>Slope:</td>
-                        <td>1.054539</td>
-                        <td>0.024883</td>
-                        <td colspan="2">1.005207 to 1.103872</td>
-                        <td>Proportional differences</td>
-                    </tr>
-                    <tr>
-                        <td>Intercept:</td>
-                        <td>-0.058913</td>
-                        <td>0.034375</td>
-                        <td colspan="2">-0.127066 to 0.009239</td>
-                        <td>Systematic differences</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>&#160;</p>
-            <p>
-                <img src="../resources/images/deming_regression_678x684.png" style="width: 678;height: 684;" />
-            </p>
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-right" role="navigation" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" aria-label="title tab bar" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <div class="central-account-wrapper">
+                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" role="navigation" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="central-account-wrapper">
+                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
+                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
+                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
+                                                    </div>
+                                                    <div class="search-filter-content" id="sf-content">
+                                                        <ul>
+                                                            <li>
+                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <nav class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="body-container">
+                                <div data-mc-content-body="True">
+                                    <div role="main" id="mc-main-content"><a name="kanchor178"></a>
+                                        <h1>Method Comparison Regression</h1>
+                                        <p>&#160;</p>
+                                        <p>Menu location: <b>Analysis_Agreement_Method Comparison Regression</b>.</p>
+                                        <p>&#160;</p>
+                                        <p>This function compares two methods of measurement using linear regression techniques that can accommodate errors in both dimensions (test method Y vs. reference method X).</p>
+                                        <p>&#160;</p>
+                                        <p>Two main types of regression are offered: Deming and Passing-Bablok.</p>
+                                        <p>&#160;</p>
+                                        <p>Deming regression is an extension of simple linear regression to handle random measurement errors in X as well as Y variables (<a href="http://www.clinchem.org/content/25/3/432.long">Cornbleet &amp; Gochman, 1979</a>). So Deming regression considers both X and Y to be subject to measurement error whereas simple regression allows only the Y variable to be measured with error. The X and Y variables in Deming regression may contain repeated measurements or may be single measurements from each subject. You should not use this method with small samples (less than 40).</p>
+                                        <p>&#160;</p>
+                                        <p>Deming regression can accommodate differences in measurement errors between the test and reference methods. The default procedure assumes no difference, in other words an "error ratio" of 1. If there is a difference then change this value to the variance ratio between the methods (see <a href="../parametric_methods/f_variance_ratio.htm">F test</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>If the differences between the test and reference observations tend to be different with higher or lower values of the factor being measured then the data are heteroscedastic. In this case a Deming regression breaks an important linear regression assumption about the distribution of residuals. To overcome this problem a weighted Deming regression is offered, using weights equal to the reciprocal of the square of the reference value - which is more robust to heteroscedasticity.</p>
+                                        <p>&#160;</p>
+                                        <p>Where Deming regression expects errors to be from a normal distribution, Passing-Bablok regression is a non-parametric method that does not make any assumptions about the distributions of the samples or their measurement errors (<a href="http://www.ncbi.nlm.nih.gov/pubmed/6655447">Passing and Bablok, 1983</a>). The method does, however, assume the two variables are highly correlated and have a linear relationship.</p>
+                                        <p>&#160;</p>
+                                        <p>Different methods for calculating confidence intervals are offered. For Deming and weighted Deming regression <a href="http://www.clinchem.org/content/39/3/424.long">Linnet (1993)</a> recommends the jackknife (leave one out resampling) method. For Passing-Bablok regression a nested bootstrap (bias corrected and accelerated) interval is preferred, but this can take a very long time with large datasets, where an approximate Passing-Bablok procedure may be more practical.</p>
+                                        <p>&#160;</p>
+                                        <p>If the confidence interval for the slope does not contain the value 1 then you reject the null hypothesis that the slope is equal to 1 - in other words there is statistically significant evidence of at least a proportional difference between the two methods.</p>
+                                        <p>&#160;</p>
+                                        <p>If the confidence interval for the intercept does not contain the value 0 then you reject the null hypothesis that the intercept is equal to 0 - in other words there is statistically significant evidence that the methods differ by at least a constant amount.</p>
+                                        <p>&#160;</p>
+                                        <p>A scatter plot is given with each regression by default, showing the fitted regression line with a confidence interval, the identity line (methods equal) and the regression equation. This plot enables you to see the observations and how well the methods of measuring them agree, with the disagreement reflecting the bias and likely range of bias.</p>
+                                        <p>&#160;</p>
+                                        <p> You can select a residual plot, which is useful for spotting outliers and non linear patterns, and for checking how the agreement varies over the range of measurement.</p>
+                                        <p>&#160;</p>
+                                        <p>You can also select a Bland-Altman agreement plot displaying differences vs. means within standard limits of agreement.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Technical Validation</u>
+                                        </p>
+                                        <p>StatsDirect produces a R script to execute these methods via the MCR package developed by E. Manuilova, A. Schuetzenmeister and F. Model at the pharmaceutical company Roche.</p>
+                                        <p>&#160;</p>
+                                        <p>Source: <a href="http://cran.r-project.org/web/packages/mcr/">cran.r-project.org/web/packages/mcr/</a></p>
+                                        <p>&#160;</p>
+                                        <p>Standard: The MCR package implements the <a href="http://www.clsi.org/">Clinical Laboratory and Standards Institute</a> guidance EP09-A2 (Method Comparison and Bias Estimation Using Patient Samples; Approved Guideline – Second Edition.).</p>
+                                        <p>&#160;</p>
+                                        <p>Further analysis in R: You can choose to save the intermediate R script to your StatsDirect report. You can then run supplementary analyses. For example to estimate the bias and confidence interval at a given series of measurement levels (1 to 5) you could run the command calcBias(model1,x.levels=c(1,2,3,4,5)) for absolute bias or calcBias(model1,x.levels=c(1,2,3,4,5),type="proportional") for proportional bias. calcCUSUM(model1) will give a cumulative sum test with which you can assess linearity.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>From <a href="http://cran.r-project.org/web/packages/mcr">MCR R package</a>.</p>
+                                        <p>Data: Test workbook (Agreement worksheet: Plasma Creatinine, Serum Creatinine).</p>
+                                        <p>&#160;</p>
+                                        <p>To run this example in StatsDirect: select the menu item (Analysis_Agreement_Method Comparison Regression); when asked to "Select Data for Test Method" highlight the Plasma Creatinine column of the Agreement worksheet in the Test workbook (test.xlsx) and right click on the mouse to select the data; when asked for the "Reference Method" choose Serum Creatinine in the same way; when presented with options select Regression Method: Deming and Charts: Test vs. Reference.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Method Comparison Regression</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Test method: Plasma Creatinine</p>
+                                        <p>Reference method: Serum Creatinine</p>
+                                        <p>Sample size: 108</p>
+                                        <p>Error ratio: 1</p>
+                                        <p>&#160;</p>
+                                        <p>Deming regression (analytic CI):</p>
+                                        <table style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tbody>
+                                                <tr>
+                                                    <td>&#160;</td>
+                                                    <td style="text-decoration: underline;">Estimate</td>
+                                                    <td style="text-decoration: underline;">Standard Error</td>
+                                                    <td colspan="2" style="text-decoration: underline;">95% CI</td>
+                                                    <td style="text-decoration: underline;">Meaning</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Slope:</td>
+                                                    <td>1.054539</td>
+                                                    <td>0.024883</td>
+                                                    <td colspan="2">1.005207 to 1.103872</td>
+                                                    <td>Proportional differences</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Intercept:</td>
+                                                    <td>-0.058913</td>
+                                                    <td>0.034375</td>
+                                                    <td colspan="2">-0.127066 to 0.009239</td>
+                                                    <td>Systematic differences</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>
+                                            <img src="../resources/images/deming_regression_678x684.png" style="width: 678;height: 684;" />
+                                        </p>
+                                    </div>
+                                    <p>
+                                        <MadCap:pageFooter>
+                                            <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                                            <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                                            <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                                            </p>
+                                        </MadCap:pageFooter>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><a data-close="true"></a>
+                </div>
+            </div>
         </div>
-        <p>
-            <MadCap:pageFooter>
-                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
-                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
-                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
-                </p>
-            </MadCap:pageFooter>
-        </p>
     </body>
     <script type="text/javascript">/* <![CDATA[ */
 		var _gaq = _gaq || [];

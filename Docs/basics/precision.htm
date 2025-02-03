@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
@@ -15,6 +15,11 @@
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -24,7 +29,7 @@
         </script>
         <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
         </script>
-        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
         </script>
         <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
         </script>
@@ -32,49 +37,130 @@
         </script>
     </head>
     <body>
-        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#basics/precision.htm">Open topic with navigation</a>
-        </p>
-        <div role="main" id="mc-main-content">
-            <h1><a name="kanchor135"></a>Precision</h1>
-            <p>&#160;</p>
-            <p>StatsDirect calculates all of its functions in IEEE-754 double precision (8 byte, 64 bit) for floating point arithmetic and 4 byte (32 bit) integers for integer arithmetic.</p>
-            <p>&#160;</p>
-            <p>Results are displayed to the level of precision that you specify under Options in the analysis menu. The default number of decimal places shown is 6. Double precision numbers are accurate up to sixteen decimal places but after calculations have been done there may be some rounding errors to account for. In theory this should affect no more than the last significant digit but in practice it is safer to rely upon fewer decimal places.</p>
-            <p>&#160;</p>
-            <p>Some statistical software applications, including the statistical routines in widely used spreadsheets, produce inaccurate results due to the use of algorithms that do not handle precision properly (<a href="../references/reference_list.htm">McCullough and Wilson, 1999</a>). StatsDirect uses robust and reliable algorithms in order to maximise the accuracy of its results. The American National Institute of Standards and Technology produces reference data sets for testing the accuracy of statistical software (see <a href="http://www.nist.gov/itl/div898/strd/">http://www.nist.gov/itl/div898/strd/</a>).</p>
-            <p>&#160;</p>
-            <p>Double precision specifications:</p>
-            <ul>
-                <li>minimum = 2.22 * 10^-308</li>
-                <li>maximum = 1.79 * 10^308</li>
-                <li>closest to 0 without being 0 = +/- 10^323</li>
-                <li>precision = 2.22 * 10^-16</li>
-                <li>minimum exponent = -1022</li>
-                <li>maximum exponent = 1024</li>
-            </ul>
-            <p>&#160;</p>
-            <p><u>Floating Point</u>
-            </p>
-            <p>In order to understand why rounding errors occur and why precision is an issue with mathematics on computers you need to understand how computers store numbers that are not integers (i.e. real numbers or numbers with a fractional part).</p>
-            <p>&#160;</p>
-            <p>Each number is stored in binary format (a series of 0 or 1 digits/bits). Double precision numbers have 64 of these bits with which to represent a real number. The first bit represents the sign of the number (s), the next 11 bits represent the exponent (E) and the other 53 bits (the mantissa, M) store the detail: A real number is:</p>
-            <p>
-                <img src="../generatedimages/equations/equation258.svg" alt="" class="mcReset" />
-            </p>
-            <p>- where B (the radix) is 2 for all computers that StatsDirect runs on.</p>
-            <p>&#160;</p>
-            <p>Numbers that do no have a perfect binary representation are stored to the level of precision specified by the floating point model (16 decimal places in double precision). For example 0.1 is stored as 0.100000000000000014. If lots of numbers like this are added together then the sum of the parts beyond the 16th decimal place may add up to an error that creeps into the "accurate" zone causing results of some calculations to have less than 16 decimal places of precision.</p>
-            <p>&#160;</p>
-            <p>For more information see <a href="../references/reference_list.htm">Press et al. (1992)</a>.</p>
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-right" role="navigation" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" aria-label="title tab bar" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <div class="central-account-wrapper">
+                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" role="navigation" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="central-account-wrapper">
+                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
+                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
+                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
+                                                    </div>
+                                                    <div class="search-filter-content" id="sf-content">
+                                                        <ul>
+                                                            <li>
+                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <nav class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="body-container">
+                                <div data-mc-content-body="True">
+                                    <div role="main" id="mc-main-content">
+                                        <h1><a name="kanchor220"></a>Precision</h1>
+                                        <p>&#160;</p>
+                                        <p>StatsDirect calculates all of its functions in IEEE-754 double precision (8 byte, 64 bit) for floating point arithmetic and 4 byte (32 bit) integers for integer arithmetic.</p>
+                                        <p>&#160;</p>
+                                        <p>Results are displayed to the level of precision that you specify under Options in the analysis menu. The default number of decimal places shown is 6. Double precision numbers are accurate up to sixteen decimal places but after calculations have been done there may be some rounding errors to account for. In theory this should affect no more than the last significant digit but in practice it is safer to rely upon fewer decimal places.</p>
+                                        <p>&#160;</p>
+                                        <p>Some statistical software applications, including the statistical routines in widely used spreadsheets, produce inaccurate results due to the use of algorithms that do not handle precision properly (<a href="../references/reference_list.htm">McCullough and Wilson, 1999</a>). StatsDirect uses robust and reliable algorithms in order to maximise the accuracy of its results. The American National Institute of Standards and Technology produces reference data sets for testing the accuracy of statistical software (see <a href="http://www.nist.gov/itl/div898/strd/">http://www.nist.gov/itl/div898/strd/</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>Double precision specifications:</p>
+                                        <ul>
+                                            <li>minimum = 2.22 * 10^-308</li>
+                                            <li>maximum = 1.79 * 10^308</li>
+                                            <li>closest to 0 without being 0 = +/- 10^323</li>
+                                            <li>precision = 2.22 * 10^-16</li>
+                                            <li>minimum exponent = -1022</li>
+                                            <li>maximum exponent = 1024</li>
+                                        </ul>
+                                        <p>&#160;</p>
+                                        <p><u>Floating Point</u>
+                                        </p>
+                                        <p>In order to understand why rounding errors occur and why precision is an issue with mathematics on computers you need to understand how computers store numbers that are not integers (i.e. real numbers or numbers with a fractional part).</p>
+                                        <p>&#160;</p>
+                                        <p>Each number is stored in binary format (a series of 0 or 1 digits/bits). Double precision numbers have 64 of these bits with which to represent a real number. The first bit represents the sign of the number (s), the next 11 bits represent the exponent (E) and the other 53 bits (the mantissa, M) store the detail: A real number is:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation254.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where B (the radix) is 2 for all computers that StatsDirect runs on.</p>
+                                        <p>&#160;</p>
+                                        <p>Numbers that do no have a perfect binary representation are stored to the level of precision specified by the floating point model (16 decimal places in double precision). For example 0.1 is stored as 0.100000000000000014. If lots of numbers like this are added together then the sum of the parts beyond the 16th decimal place may add up to an error that creeps into the "accurate" zone causing results of some calculations to have less than 16 decimal places of precision.</p>
+                                        <p>&#160;</p>
+                                        <p>For more information see <a href="../references/reference_list.htm">Press et al. (1992)</a>.</p>
+                                    </div>
+                                    <p>
+                                        <MadCap:pageFooter>
+                                            <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                                            <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                                            <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                                            </p>
+                                        </MadCap:pageFooter>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><a data-close="true"></a>
+                </div>
+            </div>
         </div>
-        <p>
-            <MadCap:pageFooter>
-                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
-                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
-                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
-                </p>
-            </MadCap:pageFooter>
-        </p>
     </body>
     <script type="text/javascript">/* <![CDATA[ */
 		var _gaq = _gaq || [];
