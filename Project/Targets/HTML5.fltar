@@ -4,7 +4,7 @@
   Comment="For GitHub"
   Type="WebHelp2"
   Destinations=""
-  ShowMadCapBacklink="true"
+  ShowMadCapBacklink="false"
   GlossaryTermConversion="marked"
   DefaultUrl="/Content/contents.htm"
   MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
@@ -14,7 +14,12 @@
   MasterStylesheet="/Content/resources/stylesheets/statsdirect.css"
   BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
   EnableSitemap="true"
-  SitemapWebUrl="http://www.statsdirect.com/help/">
+  SitemapWebUrl="http://www.statsdirect.com/help/"
+  MoveOutputContentToRoot="true"
+  MakeFileLowerCase="true"
+  ReplaceSpacesWithUnderscores="true"
+  ResolveCssVariables="true"
+  RemoveMadCapStyles="false">
   <PrintedOutput
     CollapseMargins="true"
     GenerateTOCProxy="true"
