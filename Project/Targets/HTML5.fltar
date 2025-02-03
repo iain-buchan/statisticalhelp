@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CatapultTarget
+  Version="2"
+  Comment="For GitHub"
+  Type="WebHelp2"
+  Destinations=""
+  ShowMadCapBacklink="true"
+  GlossaryTermConversion="marked"
+  DefaultUrl="/Content/contents.htm"
+  MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
+  GetLatestBeforeCompile="false"
+  OutputFile="index.html"
+  OutputFolder="C:\Develop\SD3Help\StatsDirect\Output"
+  MasterStylesheet="/Content/resources/stylesheets/statsdirect.css"
+  BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs">
+  <PrintedOutput
+    CollapseMargins="true"
+    GenerateTOCProxy="true"
+    GenerateIndexProxy="true"
+    GenerateGlossaryProxy="true"
+    OutputFormat="docx" />
+  <PDF
+    Tagged="true"
+    TitleBar="DocumentTitle" />
+  <Destinations>
+    <Destination
+      Link="/Project/Destinations/NewDestination1.fldes"
+      Publish="true"
+      IsResource="false" />
+  </Destinations>
+</CatapultTarget>

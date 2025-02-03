@@ -1,11 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CatapultConditionTagSet>
-  <ConditionTag
-    Name="SWHELP"
-    BackgroundColor="#00ff00"
-    Comment="Embedded" />
-  <ConditionTag
-    Name="WEBHELP"
-    BackgroundColor="#ff0000"
-    Comment="Web" />
-</CatapultConditionTagSet>
+<CatapultConditionTagSet></CatapultConditionTagSet>
