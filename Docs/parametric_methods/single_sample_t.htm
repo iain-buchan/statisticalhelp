@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Parametric methods">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Parametric methods" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Single Sample t Test - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Single Sample t Test - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,100 +33,120 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#parametric_methods/single_sample_t.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor55"></a>Single Sample t Test</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Analysis_Parametric_Single Sample t</b>.</p>
-        <p>&#160;</p>
-        <p>This function gives a single sample <a href="../distributions/t.htm">Student t</a> test with a confidence interval for the mean difference.</p>
-        <p>&#160;</p>
-        <p>The single sample t method tests a null hypothesis that the population mean is equal to a specified value. If this value is zero (or not entered) then the confidence interval for the sample mean is given (<a href="../references/reference_list.htm">Altman, 1991; Armitage and Berry, 1994</a>).</p>
-        <p>&#160;</p>
-        <p>The test statistic is calculated as:</p>
-        <p>
-            <img src="../generatedimages/equations/equation166.svg" alt="" class="mcReset" />
-        </p>
-        <p>- where x bar is the sample mean, s² is the sample variance, n is the sample size, µ is the specified population mean and t is a Student t quantile with n-1 degrees of freedom.</p>
-        <p>&#160;</p>
-        <p>Power is calculated as the power achieved with the given sample size and variance for detecting the observed mean difference with a two-sided <a href="../basics/p_values.htm">type I error</a> probability of (100-CI%)% (<a href="../references/reference_list.htm">Dupont, 1990</a>).</p>
-        <p>&#160;</p>
-        <p><u>Example</u>
-        </p>
-        <p>Test workbook (Parametric worksheet: Systolic BP).</p>
-        <p>&#160;</p>
-        <p>Consider 20 first year resident female doctors drawn at random from one area, resting systolic blood pressures measured using an electronic sphygmomanometer were:</p>
-        <table style="caption-side: top;">
-            <col />
-            <col />
-            <tr>
-                <td style="text-align: left;">128</td>
-                <td style="text-align: left;">127</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">118</td>
-                <td style="text-align: left;">115</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">144</td>
-                <td style="text-align: left;">142</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">133</td>
-                <td style="text-align: left;">140</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">132</td>
-                <td style="text-align: left;">131</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">111</td>
-                <td style="text-align: left;">132</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">149</td>
-                <td style="text-align: left;">122</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">139</td>
-                <td style="text-align: left;">119</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">136</td>
-                <td style="text-align: left;">129</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">126</td>
-                <td style="text-align: left;">128</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor10"></a>Single Sample t Test</h1>
+            <p>&#160;</p>
+            <p>Menu location: <b>Analysis_Parametric_Single Sample t</b>.</p>
+            <p>&#160;</p>
+            <p>This function gives a single sample <a href="../distributions/t.htm">Student t</a> test with a confidence interval for the mean difference.</p>
+            <p>&#160;</p>
+            <p>The single sample t method tests a null hypothesis that the population mean is equal to a specified value. If this value is zero (or not entered) then the confidence interval for the sample mean is given (<a href="../references/reference_list.htm">Altman, 1991; Armitage and Berry, 1994</a>).</p>
+            <p>&#160;</p>
+            <p>The test statistic is calculated as:</p>
+            <p>
+                <img src="../generatedimages/equations/equation166.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where x bar is the sample mean, s² is the sample variance, n is the sample size, µ is the specified population mean and t is a Student t quantile with n-1 degrees of freedom.</p>
+            <p>&#160;</p>
+            <p>Power is calculated as the power achieved with the given sample size and variance for detecting the observed mean difference with a two-sided <a href="../basics/p_values.htm">type I error</a> probability of (100-CI%)% (<a href="../references/reference_list.htm">Dupont, 1990</a>).</p>
+            <p>&#160;</p>
+            <p><u>Example</u>
+            </p>
+            <p>Test workbook (Parametric worksheet: Systolic BP).</p>
+            <p>&#160;</p>
+            <p>Consider 20 first year resident female doctors drawn at random from one area, resting systolic blood pressures measured using an electronic sphygmomanometer were:</p>
+            <table style="caption-side: top;">
+                <col />
+                <col />
+                <tr>
+                    <td style="text-align: left;">128</td>
+                    <td style="text-align: left;">127</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">118</td>
+                    <td style="text-align: left;">115</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">144</td>
+                    <td style="text-align: left;">142</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">133</td>
+                    <td style="text-align: left;">140</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">132</td>
+                    <td style="text-align: left;">131</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">111</td>
+                    <td style="text-align: left;">132</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">149</td>
+                    <td style="text-align: left;">122</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">139</td>
+                    <td style="text-align: left;">119</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">136</td>
+                    <td style="text-align: left;">129</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">126</td>
+                    <td style="text-align: left;">128</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>
             From previous large studies of women drawn at random from the healthy general public, a resting systolic blood pressure of 120 mm Hg was predicted as the population mean for the relevant age group. To analyse these data in StatsDirect first prepare a workbook column containing the 20 data above or open the test workbook and select the single sample t test from the parametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Systolic BP" when prompted and enter the population mean as 120.</p>
-        <p>&#160;</p>
-        <p>For this example:</p>
-        <p>&#160;</p>
-        <p><u>Single sample t test</u>
-        </p>
-        <p>Sample name: Systolic BP</p>
-        <p>Sample mean = 130.05</p>
-        <p>Population mean = 120</p>
-        <p>Sample size n = 20</p>
-        <p>Sample sd = 9.960316</p>
-        <p>&#160;</p>
-        <p>95% confidence interval for mean difference = 5.388429 to 14.711571</p>
-        <p>&#160;</p>
-        <p>df = 19</p>
-        <p>t = 4.512404</p>
-        <p>&#160;</p>
-        <p>One sided P = .0001</p>
-        <p>Two sided P = .0002</p>
-        <p>&#160;</p>
-        <p>Power (for 5% significance) = 98.71%</p>
-        <p>&#160;</p>
-        <p>A null hypothesis of no difference between sample and population means has clearly been rejected. Using the 95% CI we expect the mean systolic BP for this population of doctors to be at least 5 mm Hg greater than the age and sex matched general public, lying somewhere between 125 and 135 mm Hg.</p>
-        <p>&#160;</p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+            <p>&#160;</p>
+            <p>For this example:</p>
+            <p>&#160;</p>
+            <p><u>Single sample t test</u>
+            </p>
+            <p>Sample name: Systolic BP</p>
+            <p>Sample mean = 130.05</p>
+            <p>Population mean = 120</p>
+            <p>Sample size n = 20</p>
+            <p>Sample sd = 9.960316</p>
+            <p>&#160;</p>
+            <p>95% confidence interval for mean difference = 5.388429 to 14.711571</p>
+            <p>&#160;</p>
+            <p>df = 19</p>
+            <p>t = 4.512404</p>
+            <p>&#160;</p>
+            <p>One sided P = .0001</p>
+            <p>Two sided P = .0002</p>
+            <p>&#160;</p>
+            <p>Power (for 5% significance) = 98.71%</p>
+            <p>&#160;</p>
+            <p>A null hypothesis of no difference between sample and population means has clearly been rejected. Using the 95% CI we expect the mean systolic BP for this population of doctors to be at least 5 mm Hg greater than the age and sex matched general public, lying somewhere between 125 and 135 mm Hg.</p>
+            <p>&#160;</p>
+            <p><a href="../basics/p_values.htm">P values</a>
+            </p>
+            <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+            </p>
+        </div>
+        <p>
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

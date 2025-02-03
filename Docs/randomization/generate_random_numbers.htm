@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Randomization">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Randomization" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Random Number Generation (by Distribution) - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Random Number Generation (by Distribution) - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,158 +33,178 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#randomization/generate_random_numbers.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor132"></a>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor65"></a>
             Random Numbers</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Data_Generating_Random Numbers</b>.</p>
-        <p>&#160;</p>
-        <p>This function enables you to create one or more series of random numbers from given distributions.</p>
-        <p>&#160;</p>
-        <p>A <a href="random_number_generator.htm">robust generator</a> of uniform (pseudo)random numbers is used as the basis for generating deviates from the probability distributions described below. You are given the opportunity to enter your own seed number to be used by the random number generator but you should use the default seed (based upon your computer's clock) in most cases. Please note that each seed generates its own series and that series is the same if you use the seed again. You have very little chance of using the same seed twice if you select the seed that StatsDirect suggests.</p>
-        <p>&#160;</p>
-        <p>These functions are intended for simulation work; they employ widely cited and debated algorithms (<a href="../references/reference_list.htm">Gentle, 2003</a>).</p>
-        <p>&#160;</p>
-        <p><u>Uniform (continuous uniform, rectangular)</u>
-        </p>
-        <p>The continuous uniform distribution has a constant density function of the interval (a, b) and thus a rectangular shape from a to b:</p>
+            <p>&#160;</p>
+            <p>Menu location: <b>Data_Generating_Random Numbers</b>.</p>
+            <p>&#160;</p>
+            <p>This function enables you to create one or more series of random numbers from given distributions.</p>
+            <p>&#160;</p>
+            <p>A <a href="random_number_generator.htm">robust generator</a> of uniform (pseudo)random numbers is used as the basis for generating deviates from the probability distributions described below. You are given the opportunity to enter your own seed number to be used by the random number generator but you should use the default seed (based upon your computer's clock) in most cases. Please note that each seed generates its own series and that series is the same if you use the seed again. You have very little chance of using the same seed twice if you select the seed that StatsDirect suggests.</p>
+            <p>&#160;</p>
+            <p>These functions are intended for simulation work; they employ widely cited and debated algorithms (<a href="../references/reference_list.htm">Gentle, 2003</a>).</p>
+            <p>&#160;</p>
+            <p><u>Uniform (continuous uniform, rectangular)</u>
+            </p>
+            <p>The continuous uniform distribution has a constant density function of the interval (a, b) and thus a rectangular shape from a to b:</p>
+            <p>
+                <img src="../generatedimages/equations/equation3.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where a and b lie between minus and plus infinity.</p>
+            <p>&#160;</p>
+            <p>The interval most commonly used is 0 to 1</p>
+            <p>&#160;</p>
+            <p><u>Normal (Gaussian)</u>
+            </p>
+            <p>The commonly used standard <a href="../distributions/normal.htm">normal distribution</a> (mean of 0 and standard deviation of 1) is one of a family of normal distributions defined by the density function:</p>
+            <p>
+                <img src="../generatedimages/equations/equation4.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
+            <p>&#160;</p>
+            <p>Algorithm: inversion of the cumulative distribution function (<a href="../references/reference_list.htm">Wichura, 1988; Gentle 2003</a>)</p>
+            <p>&#160;</p>
+            <p><u>Lognormal</u>
+            </p>
+            <p>The density of a lognormal distribution is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation5.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
+            <p>&#160;</p>
+            <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ).</p>
+            <p>&#160;</p>
+            <p>Algorithm: transformed inversion of the cumulative distribution function (<a href="../references/reference_list.htm">Wichura, 1988; Gentle 2003</a>)</p>
+            <p>&#160;</p>
+            <p><u>Exponential</u>
+            </p>
+            <p>The (negative) exponential distribution is a special case (shaping parameter of 1) of the gamma distribution. Its density is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation6.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where the parameter λ must be greater than zero.</p>
+            <p>&#160;</p>
+            <p>Algorithm: transformation (<a href="../references/reference_list.htm">Ahrens and Dieter, 1972</a>).</p>
+            <p>&#160;</p>
+            <p><u>Gamma</u>
+            </p>
+            <p>The density function of the gamma distribution is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation7.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where the parameters λ and r (shaping parameter) must be greater than zero.</p>
+            <p>&#160;</p>
+            <p>G(*) is the gamma function:</p>
+            <p>
+                <img src="../generatedimages/equations/equation8.svg" alt="" class="mcReset" />
+            </p>
+            <p>&#160;</p>
+            <p>Please note that gamma deviates with a shaping parameter of 0.5 are half the square of normal deviates and gamma deviates with a shaping parameter of 1 are exponential deviates.</p>
+            <p>&#160;</p>
+            <p>Algorithm: acceptance-rejection methods GD and GS (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b</a>).</p>
+            <p>&#160;</p>
+            <p><u>Binomial</u>
+            </p>
+            <p>The density function of the <a href="../distributions/binomial.htm">binomial distribution</a> is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation9.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where p lies between 0 and 1 in n ranges.</p>
+            <p>&#160;</p>
+            <p>Algorithm: acceptance-rejection method BTPEC (<a href="../references/reference_list.htm">Kachitvichyanukul and Schmeiser, 1988</a>).</p>
+            <p>&#160;</p>
+            <p><u>Poisson</u>
+            </p>
+            <p>The density function of the <a href="../distributions/poisson.htm">Poisson distribution</a> is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation10.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where parameter l is greater than zero.</p>
+            <p>&#160;</p>
+            <p>Algorithm: acceptance-rejection (<a href="../references/reference_list.htm">Ahrens and Dieter, 1982a</a>).</p>
+            <p>&#160;</p>
+            <p><u>Chi-square</u>
+            </p>
+            <p>The density function of the <a href="../distributions/chisq.htm">chi-square distribution</a> is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation11.svg" alt="" class="mcReset" />
+            </p>
+            <p>The deviates are calculated as gamma deviates with parameters n/2 and 2, where n is degrees of freedom.</p>
+            <p>&#160;</p>
+            <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974,1982b; Gentle 2003</a>).</p>
+            <p>&#160;</p>
+            <p><u>F (variance ratio)</u>
+            </p>
+            <p>The density function of the <a href="../distributions/f.htm">F distribution</a> is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation12.svg" alt="" class="mcReset" />
+            </p>
+            <p>The deviates are calculated as nx/dz where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
+            <p>&#160;</p>
+            <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b; Gentle 2003</a>).</p>
+            <p>&#160;</p>
+            <p><u>Student's t</u>
+            </p>
+            <p>The density function of <a href="../distributions/t.htm">Student's t distribution</a>  is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation13.svg" alt="" class="mcReset" />
+            </p>
+            <p>The deviates are calculated as a standard normal deviate multiplied by the square root of the degrees of freedom (n) divided by a gamma deviate with parameters n/2 and 2 (a chi-square deviate with n degrees of freedom).</p>
+            <p>&#160;</p>
+            <p>Algorithm: Transformed standard normal and gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b; Gentle 2003</a>).</p>
+            <p>&#160;</p>
+            <p><u>Beta</u>
+            </p>
+            <p>The density function of the beta distribution is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation14.svg" alt="" class="mcReset" />
+            </p>
+            <p>&#160;</p>
+            <p>Algorithm: Acceptance-rejection methods BB and BC (<a href="../references/reference_list.htm">Cheng 1978</a>).</p>
+            <p>&#160;</p>
+            <p><u>Logistic</u>
+            </p>
+            <p>The density function of the beta distribution is given by:</p>
+            <p>
+                <img src="../generatedimages/equations/equation15.svg" alt="" class="mcReset" />
+            </p>
+            <p>&#160;</p>
+            <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
+            <p>&#160;</p>
+            <p><u>Cauchy</u>
+            </p>
+            <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
+            <p>&#160;</p>
+            <p><u>Weibull</u>
+            </p>
+            <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
+            <p>&#160;</p>
+            <p><u>Geometric</u>
+            </p>
+            <p>Algorithm: Transformed Poisson and exponential deviates (<a href="../references/reference_list.htm">Devroye, 1986; Gentle 2003; Ahrens and Dieter, 1972, 1982a</a>).</p>
+            <p>&#160;</p>
+            <p><u>Negative binomial</u>
+            </p>
+            <p>Algorithm: Transformed Poisson and gamma deviates (<a href="../references/reference_list.htm">Devroye, 1986; Gentle 2003; Ahrens and Dieter, 1974, 1982b, 1982a</a>).</p>
+        </div>
         <p>
-            <img src="../generatedimages/equations/equation3.svg" alt="" class="mcReset" />
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p>- where a and b lie between minus and plus infinity.</p>
-        <p>&#160;</p>
-        <p>The interval most commonly used is 0 to 1</p>
-        <p>&#160;</p>
-        <p><u>Normal (Gaussian)</u>
-        </p>
-        <p>The commonly used standard <a href="../distributions/normal.htm">normal distribution</a> (mean of 0 and standard deviation of 1) is one of a family of normal distributions defined by the density function:</p>
-        <p>
-            <img src="../generatedimages/equations/equation4.svg" alt="" class="mcReset" />
-        </p>
-        <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
-        <p>&#160;</p>
-        <p>Algorithm: inversion of the cumulative distribution function (<a href="../references/reference_list.htm">Wichura, 1988; Gentle 2003</a>)</p>
-        <p>&#160;</p>
-        <p><u>Lognormal</u>
-        </p>
-        <p>The density of a lognormal distribution is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation5.svg" alt="" class="mcReset" />
-        </p>
-        <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
-        <p>&#160;</p>
-        <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ).</p>
-        <p>&#160;</p>
-        <p>Algorithm: transformed inversion of the cumulative distribution function (<a href="../references/reference_list.htm">Wichura, 1988; Gentle 2003</a>)</p>
-        <p>&#160;</p>
-        <p><u>Exponential</u>
-        </p>
-        <p>The (negative) exponential distribution is a special case (shaping parameter of 1) of the gamma distribution. Its density is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation6.svg" alt="" class="mcReset" />
-        </p>
-        <p>- where the parameter λ must be greater than zero.</p>
-        <p>&#160;</p>
-        <p>Algorithm: transformation (<a href="../references/reference_list.htm">Ahrens and Dieter, 1972</a>).</p>
-        <p>&#160;</p>
-        <p><u>Gamma</u>
-        </p>
-        <p>The density function of the gamma distribution is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation7.svg" alt="" class="mcReset" />
-        </p>
-        <p>- where the parameters λ and r (shaping parameter) must be greater than zero.</p>
-        <p>&#160;</p>
-        <p>G(*) is the gamma function:</p>
-        <p>
-            <img src="../generatedimages/equations/equation8.svg" alt="" class="mcReset" />
-        </p>
-        <p>&#160;</p>
-        <p>Please note that gamma deviates with a shaping parameter of 0.5 are half the square of normal deviates and gamma deviates with a shaping parameter of 1 are exponential deviates.</p>
-        <p>&#160;</p>
-        <p>Algorithm: acceptance-rejection methods GD and GS (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b</a>).</p>
-        <p>&#160;</p>
-        <p><u>Binomial</u>
-        </p>
-        <p>The density function of the <a href="../distributions/binomial.htm">binomial distribution</a> is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation9.svg" alt="" class="mcReset" />
-        </p>
-        <p>- where p lies between 0 and 1 in n ranges.</p>
-        <p>&#160;</p>
-        <p>Algorithm: acceptance-rejection method BTPEC (<a href="../references/reference_list.htm">Kachitvichyanukul and Schmeiser, 1988</a>).</p>
-        <p>&#160;</p>
-        <p><u>Poisson</u>
-        </p>
-        <p>The density function of the <a href="../distributions/poisson.htm">Poisson distribution</a> is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation10.svg" alt="" class="mcReset" />
-        </p>
-        <p>- where parameter l is greater than zero.</p>
-        <p>&#160;</p>
-        <p>Algorithm: acceptance-rejection (<a href="../references/reference_list.htm">Ahrens and Dieter, 1982a</a>).</p>
-        <p>&#160;</p>
-        <p><u>Chi-square</u>
-        </p>
-        <p>The density function of the <a href="../distributions/chisq.htm">chi-square distribution</a> is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation11.svg" alt="" class="mcReset" />
-        </p>
-        <p>The deviates are calculated as gamma deviates with parameters n/2 and 2, where n is degrees of freedom.</p>
-        <p>&#160;</p>
-        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974,1982b; Gentle 2003</a>).</p>
-        <p>&#160;</p>
-        <p><u>F (variance ratio)</u>
-        </p>
-        <p>The density function of the <a href="../distributions/f.htm">F distribution</a> is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation12.svg" alt="" class="mcReset" />
-        </p>
-        <p>The deviates are calculated as nx/dz where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
-        <p>&#160;</p>
-        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b; Gentle 2003</a>).</p>
-        <p>&#160;</p>
-        <p><u>Student's t</u>
-        </p>
-        <p>The density function of <a href="../distributions/t.htm">Student's t distribution</a>  is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation13.svg" alt="" class="mcReset" />
-        </p>
-        <p>The deviates are calculated as a standard normal deviate multiplied by the square root of the degrees of freedom (n) divided by a gamma deviate with parameters n/2 and 2 (a chi-square deviate with n degrees of freedom).</p>
-        <p>&#160;</p>
-        <p>Algorithm: Transformed standard normal and gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b; Gentle 2003</a>).</p>
-        <p>&#160;</p>
-        <p><u>Beta</u>
-        </p>
-        <p>The density function of the beta distribution is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation14.svg" alt="" class="mcReset" />
-        </p>
-        <p>&#160;</p>
-        <p>Algorithm: Acceptance-rejection methods BB and BC (<a href="../references/reference_list.htm">Cheng 1978</a>).</p>
-        <p>&#160;</p>
-        <p><u>Logistic</u>
-        </p>
-        <p>The density function of the beta distribution is given by:</p>
-        <p>
-            <img src="../generatedimages/equations/equation15.svg" alt="" class="mcReset" />
-        </p>
-        <p>&#160;</p>
-        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
-        <p>&#160;</p>
-        <p><u>Cauchy</u>
-        </p>
-        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
-        <p>&#160;</p>
-        <p><u>Weibull</u>
-        </p>
-        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
-        <p>&#160;</p>
-        <p><u>Geometric</u>
-        </p>
-        <p>Algorithm: Transformed Poisson and exponential deviates (<a href="../references/reference_list.htm">Devroye, 1986; Gentle 2003; Ahrens and Dieter, 1972, 1982a</a>).</p>
-        <p>&#160;</p>
-        <p><u>Negative binomial</u>
-        </p>
-        <p>Algorithm: Transformed Poisson and gamma deviates (<a href="../references/reference_list.htm">Devroye, 1986; Gentle 2003; Ahrens and Dieter, 1974, 1982b, 1982a</a>).</p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

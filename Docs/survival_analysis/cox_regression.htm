@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Survival analysis and time series">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Survival analysis and time series" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Cox Regression (Proportional Hazards, Hazard Ratio) - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Cox Regression (Proportional Hazards, Hazard Ratio) - StatsDirect</title>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -30,542 +33,562 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#survival_analysis/cox_regression.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor193"></a>Cox (Proportional Hazards) Regression</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Analysis_Survival_Cox Regression</b>.</p>
-        <p>&#160;</p>
-        <p>This function fits Cox's proportional hazards model for survival-time (time-to-event) outcomes on one or more predictors.</p>
-        <p>&#160;</p>
-        <p>Cox regression (or proportional hazards regression) is method for investigating the effect of several variables upon the time a specified event takes to happen. In the context of an outcome such as death this is known as Cox regression for survival analysis. The method does not assume any particular "survival model" but it is not truly nonparametric because it does assume that <b>the effects of the predictor variables upon survival are constant over time and are additive in one scale</b>. You should not use Cox regression without the guidance of a Statistician.</p>
-        <p>&#160;</p>
-        <p>Provided that the assumptions of Cox regression are met, this function will provide better estimates of survival probabilities and cumulative hazard than those provided by the <a href="kaplan_meier.htm">Kaplan-Meier</a> function.</p>
-        <p>&#160;</p>
-        <p><u>Hazard and hazard-ratios</u>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor74"></a>Cox (Proportional Hazards) Regression</h1>
+            <p>&#160;</p>
+            <p>Menu location: <b>Analysis_Survival_Cox Regression</b>.</p>
+            <p>&#160;</p>
+            <p>This function fits Cox's proportional hazards model for survival-time (time-to-event) outcomes on one or more predictors.</p>
+            <p>&#160;</p>
+            <p>Cox regression (or proportional hazards regression) is method for investigating the effect of several variables upon the time a specified event takes to happen. In the context of an outcome such as death this is known as Cox regression for survival analysis. The method does not assume any particular "survival model" but it is not truly nonparametric because it does assume that <b>the effects of the predictor variables upon survival are constant over time and are additive in one scale</b>. You should not use Cox regression without the guidance of a Statistician.</p>
+            <p>&#160;</p>
+            <p>Provided that the assumptions of Cox regression are met, this function will provide better estimates of survival probabilities and cumulative hazard than those provided by the <a href="kaplan_meier.htm">Kaplan-Meier</a> function.</p>
+            <p>&#160;</p>
+            <p><u>Hazard and hazard-ratios</u>
+            </p>
+            <p>Cumulative hazard at a time t is the risk of dying between time 0 and time t, and the survivor function at time t is the probability of surviving to time t (see also <a href="kaplan_meier.htm">Kaplan-Meier</a> estimates).</p>
+            <p>&#160;</p>
+            <p>The coefficients in a Cox regression relate to hazard; a positive coefficient indicates a worse prognosis and a negative coefficient indicates a protective effect of the variable with which it is associated.</p>
+            <p>&#160;</p>
+            <p>The hazards ratio associated with a predictor variable is given by the exponent of its coefficient; this is given with a confidence interval under the "coefficient details" option in StatsDirect. The hazards ratio may also be thought of as the relative death rate, see <a href="../references/reference_list.htm">Armitage and Berry (1994)</a>. The interpretation of the hazards ratio depends upon the measurement scale of the predictor variable in question, see <a href="../references/reference_list.htm">Sahai and Kurshid (1996)</a> for further information on relative risk of hazards.</p>
+            <p>&#160;</p>
+            <p><u>Time-dependent and fixed covariates</u>
+            </p>
+            <p>In prospective studies, when individuals are followed over time, the values of covariates may change with time. Covariates can thus be divided into fixed and time-dependent. A covariate is time dependent if the difference between its values for two different subjects changes with time; e.g. serum cholesterol. A covariate is fixed if its values can not change with time, e.g. sex or race. Lifestyle factors and physiological measurements such as blood pressure are usually time-dependent. Cumulative exposures such as smoking are also time-dependent but are often forced into an imprecise dichotomy, i.e. "exposed" vs. "not-exposed" instead of the more meaningful "time of exposure". There are no hard and fast rules about the handling of time dependent covariates. If you are considering using Cox regression you should seek the help of a Statistician, preferably at the design stage of the investigation.</p>
+            <p>&#160;</p>
+            <p><u>Model analysis and deviance</u>
+            </p>
+            <p>A test of the overall statistical significance of the model is given under the "model analysis" option. Here the likelihood chi-square statistic is calculated by comparing the deviance (- 2 * log likelihood) of your model, with all of the covariates you have specified, against the model with all covariates dropped. The individual contribution of covariates to the model can be assessed from the significance test given with each coefficient in the main output; this assumes a reasonably large sample size.</p>
+            <p>&#160;</p>
+            <p>Deviance is minus twice the log of the likelihood ratio for models fitted by maximum likelihood (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989 and 1999; Cox and Snell, 1989; Pregibon, 1981</a>). The value of adding a parameter to a Cox model is tested by subtracting the deviance of the model with the new parameter from the deviance of the model without the new parameter, the difference is then tested against a chi-square distribution with degrees of freedom equal to the difference between the degrees of freedom of the old and new models. The model analysis option tests the model you specify against a model with only one parameter, the intercept; this tests the combined value of the specified predictors/covariates in the model.</p>
+            <p>&#160;</p>
+            <p>Some statistical packages offer stepwise Cox regression that performs systematic tests for different combinations of predictors/covariates. Automatic model building procedures such as these can be misleading as they do not consider the real-world importance of each predictor, for this reason StatsDirect does not include stepwise selection.</p>
+            <p>&#160;</p>
+            <p><u>Survival and cumulative hazard rates</u>
+            </p>
+            <p>The survival/survivorship function and the cumulative hazard function (as discussed under <a href="kaplan_meier.htm">Kaplan-Meier</a>) are calculated relative to the baseline (lowest value of covariates) at each time point. Cox regression provides a better estimate of these functions than the Kaplan-Meier method when the assumptions of the Cox model are met and the fit of the model is strong.</p>
+            <p>&#160;</p>
+            <p>You are given the option to 'centre continuous covariates' – this makes survival and hazard functions relative to the mean of continuous variables rather than relative to the minimum, which is usually the most meaningful comparison.</p>
+            <p>&#160;</p>
+            <p>If you have binary/dichotomous predictors in your model you are given the option to calculate survival and cumulative hazards for each variable separately.</p>
+            <p>&#160;</p>
+            <p><u>Data preparation</u>
+            </p>
+            <ul>
+                <li>Time-to-event, e.g. time a subject in a trial survived.<br /> </li>
+                <li>Event / <a href="censorship.htm" class="MCTopicPopup MCTopicPopupHotSpot a">censor</a> code - this must be ≥1 (event(s) happened) or 0 (no event at the end of the study, i.e. "right censored").<br /> </li>
+                <li>Strata - e.g. centre code for a multi-centre trial. Be careful with your choice of strata; seek the advice of a Statistician.<br /> </li>
+                <li>Predictors - these are also referred to as covariates, which can be a number of variables that are thought to be related to the event under study. If a predictor is a classifier variable with more than two classes (i.e. ordinal or nominal) then you must first use the <a href="../data_preparation/dummy_variables.htm">dummy variable</a> function to convert it to a series of binary classes.</li>
+            </ul>
+            <p>&#160;</p>
+            <p><u>Technical validation</u>
+            </p>
+            <p>StatsDirect optimises the log likelihood associated with a Cox regression model until the change in log likelihood with iterations is less than the accuracy that you specify in the dialog box that is displayed just before the calculation takes place (<a href="../references/reference_list.htm">Lawless, 1982; Kalbfleisch and Prentice, 1980; Harris, 1991; Cox and Oakes, 1984; Le, 1997; Hosmer and Lemeshow, 1999</a>).</p>
+            <p>&#160;</p>
+            <p>The calculation options dialog box sets a value (default is 10000) for "SPLITTING RATIO"; this is the ratio in proportionality constant at a time t above which StatsDirect will split your data into more strata and calculate an extended likelihood solution, see <a href="../references/reference_list.htm">Bryson and Johnson, (1981)</a>.</p>
+            <p>&#160;</p>
+            <p>Ties are handled by Breslow's approximation (<a href="../references/reference_list.htm">Breslow, 1974</a>).</p>
+            <p>&#160;</p>
+            <p>Cox-Snell residuals are calculated as specified by <a href="../references/reference_list.htm">Cox and Oakes (1984)</a>. Cox-Snell, Martingale and deviance residuals are calculated as specified by <a href="../references/reference_list.htm">Collett (1994)</a>.</p>
+            <p>&#160;</p>
+            <p>Baseline survival and cumulative hazard rates are calculated at each time. Maximum likelihood methods are used, which are iterative when there is more than one death/event at an observed time (<a href="../references/reference_list.htm">Kalbfleisch and Prentice, 1973</a>). Other software may use the less precise Breslow estimates for these functions.</p>
+            <p>&#160;</p>
+            <p><u>Example</u>
+            </p>
+            <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 479)</a>.</p>
+            <p>Test workbook (Survival worksheet: Stage Group, Time, Censor).</p>
+            <p>&#160;</p>
+            <p>The following data represent the survival in days since entry to the trial of patients with diffuse histiocytic lymphoma. Two different groups of patients, those with stage III and those with stage IV disease, are compared.</p>
+            <p>&#160;</p>
+            <p>Stage 3: 6, 19, 32, 42, 42, 43*, 94, 126*, 169*, 207, 211*, 227*, 253, 255*, 270*, 310*, 316*, 335*, 346*</p>
+            <p>&#160;</p>
+            <p>Stage 4: 4, 6, 10, 11, 11, 11, 13, 17, 20, 20, 21, 22, 24, 24, 29, 30, 30, 31, 33, 34, 35, 39, 40, 41*, 43*, 45, 46, 50, 56, 61*, 61*, 63, 68, 82, 85, 88, 89, 90, 93, 104, 110, 134, 137, 160*, 169, 171, 173, 175, 184, 201, 222, 235*, 247*, 260*, 284*, 290*, 291*, 302*, 304*, 341*, 345*</p>
+            <p>&#160;</p>
+            <p>* = censored data (patient still alive or died from an unrelated cause)</p>
+            <p>&#160;</p>
+            <p>To analyse these data in StatsDirect you must first prepare them in three workbook columns as shown below:</p>
+            <p>&#160;</p>
+            <table cellspacing="0" style="caption-side: top;">
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td style="text-align: right;text-decoration: underline;">Stage group</td>
+                    <td style="text-align: right;text-decoration: underline;">Time</td>
+                    <td style="text-align: right;text-decoration: underline;">Censor</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">6</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">19</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">32</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">42</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">42</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">43</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">94</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">126</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">169</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">207</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">211</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">227</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">253</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">255</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">270</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">310</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">316</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">335</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">346</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">4</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">6</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">10</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">11</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">11</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">11</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">13</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">17</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">20</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">20</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">21</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">22</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">24</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">24</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">29</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">30</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">30</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">31</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">33</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">34</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">35</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">39</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">40</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">41</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">43</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">45</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">46</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">50</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">56</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">61</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">61</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">63</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">68</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">82</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">85</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">88</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">89</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">90</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">93</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">104</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">110</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">134</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">137</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">160</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">169</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">171</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">173</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">175</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">184</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">201</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">222</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">235</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">247</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">260</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">284</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">290</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">291</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">302</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">304</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">341</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">345</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>Alternatively, open the test workbook using the file open function of the file menu. Then select Cox regression from the survival analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Time" when asked for the times, select "Censor" when asked for death/ <a href="censorship.htm" class="MCTopicPopup MCTopicPopupHotSpot a">censorship</a>, click on the cancel button when asked about strata and when asked about predictors and select the column marked "Stage group".</p>
+            <p>&#160;</p>
+            <p>For this example:</p>
+            <p>&#160;</p>
+            <p><u>Cox (proportional hazards) regression</u>
+            </p>
+            <p>80 subjects with 54 events</p>
+            <p>Deviance (likelihood ratio) chi-square = 7.634383 df = 1 P = 0.0057</p>
+            <p>&#160;</p>
+            <p>Stage group&#160;b1 = 0.96102&#160;z = 2.492043&#160;P = 0.0127</p>
+            <p>&#160;</p>
+            <p><u>Cox regression - hazard ratios</u>
+            </p>
+            <p>&#160;</p>
+            <table cellspacing="0" style="caption-side: top;">
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td style="text-decoration: underline;">Parameter</td>
+                    <td style="text-decoration: underline;">Hazard ratio</td>
+                    <td style="text-decoration: underline;">95% CI</td>
+                </tr>
+                <tr>
+                    <td>Stage group</td>
+                    <td>2.614362</td>
+                    <td>1.227756 to 5.566976</td>
+                </tr>
+                <tr>
+                    <td>&#160;</td>
+                    <td>&#160;</td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td style="text-decoration: underline;">Parameter</td>
+                    <td style="text-decoration: underline;">Coefficient</td>
+                    <td style="text-decoration: underline;">Standard Error</td>
+                </tr>
+                <tr>
+                    <td>Stage group</td>
+                    <td>0.96102</td>
+                    <td>0.385636</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p><u>Cox regression - model analysis</u>
+            </p>
+            <p>Log likelihood with no covariates = -207.554801</p>
+            <p>Log likelihood with all model covariates = -203.737609</p>
+            <p>Deviance (likelihood ratio) chi-square = 7.634383 df = 1 P = 0.0057</p>
+            <p>&#160;</p>
+            <p>The significance test for the coefficient b1 tests the null hypothesis that it equals zero and thus that its exponent equals one. The confidence interval for exp(b1) is therefore the confidence interval for the relative death rate or hazard ratio; we may therefore infer with 95% confidence that the death rate from stage 4 cancers is approximately 3 times, and at least 1.2 times, the risk from stage 3 cancers.</p>
+        </div>
+        <p>
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p>Cumulative hazard at a time t is the risk of dying between time 0 and time t, and the survivor function at time t is the probability of surviving to time t (see also <a href="kaplan_meier.htm">Kaplan-Meier</a> estimates).</p>
-        <p>&#160;</p>
-        <p>The coefficients in a Cox regression relate to hazard; a positive coefficient indicates a worse prognosis and a negative coefficient indicates a protective effect of the variable with which it is associated.</p>
-        <p>&#160;</p>
-        <p>The hazards ratio associated with a predictor variable is given by the exponent of its coefficient; this is given with a confidence interval under the "coefficient details" option in StatsDirect. The hazards ratio may also be thought of as the relative death rate, see <a href="../references/reference_list.htm">Armitage and Berry (1994)</a>. The interpretation of the hazards ratio depends upon the measurement scale of the predictor variable in question, see <a href="../references/reference_list.htm">Sahai and Kurshid (1996)</a> for further information on relative risk of hazards.</p>
-        <p>&#160;</p>
-        <p><u>Time-dependent and fixed covariates</u>
-        </p>
-        <p>In prospective studies, when individuals are followed over time, the values of covariates may change with time. Covariates can thus be divided into fixed and time-dependent. A covariate is time dependent if the difference between its values for two different subjects changes with time; e.g. serum cholesterol. A covariate is fixed if its values can not change with time, e.g. sex or race. Lifestyle factors and physiological measurements such as blood pressure are usually time-dependent. Cumulative exposures such as smoking are also time-dependent but are often forced into an imprecise dichotomy, i.e. "exposed" vs. "not-exposed" instead of the more meaningful "time of exposure". There are no hard and fast rules about the handling of time dependent covariates. If you are considering using Cox regression you should seek the help of a Statistician, preferably at the design stage of the investigation.</p>
-        <p>&#160;</p>
-        <p><u>Model analysis and deviance</u>
-        </p>
-        <p>A test of the overall statistical significance of the model is given under the "model analysis" option. Here the likelihood chi-square statistic is calculated by comparing the deviance (- 2 * log likelihood) of your model, with all of the covariates you have specified, against the model with all covariates dropped. The individual contribution of covariates to the model can be assessed from the significance test given with each coefficient in the main output; this assumes a reasonably large sample size.</p>
-        <p>&#160;</p>
-        <p>Deviance is minus twice the log of the likelihood ratio for models fitted by maximum likelihood (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989 and 1999; Cox and Snell, 1989; Pregibon, 1981</a>). The value of adding a parameter to a Cox model is tested by subtracting the deviance of the model with the new parameter from the deviance of the model without the new parameter, the difference is then tested against a chi-square distribution with degrees of freedom equal to the difference between the degrees of freedom of the old and new models. The model analysis option tests the model you specify against a model with only one parameter, the intercept; this tests the combined value of the specified predictors/covariates in the model.</p>
-        <p>&#160;</p>
-        <p>Some statistical packages offer stepwise Cox regression that performs systematic tests for different combinations of predictors/covariates. Automatic model building procedures such as these can be misleading as they do not consider the real-world importance of each predictor, for this reason StatsDirect does not include stepwise selection.</p>
-        <p>&#160;</p>
-        <p><u>Survival and cumulative hazard rates</u>
-        </p>
-        <p>The survival/survivorship function and the cumulative hazard function (as discussed under <a href="kaplan_meier.htm">Kaplan-Meier</a>) are calculated relative to the baseline (lowest value of covariates) at each time point. Cox regression provides a better estimate of these functions than the Kaplan-Meier method when the assumptions of the Cox model are met and the fit of the model is strong.</p>
-        <p>&#160;</p>
-        <p>You are given the option to 'centre continuous covariates' – this makes survival and hazard functions relative to the mean of continuous variables rather than relative to the minimum, which is usually the most meaningful comparison.</p>
-        <p>&#160;</p>
-        <p>If you have binary/dichotomous predictors in your model you are given the option to calculate survival and cumulative hazards for each variable separately.</p>
-        <p>&#160;</p>
-        <p><u>Data preparation</u>
-        </p>
-        <ul>
-            <li>Time-to-event, e.g. time a subject in a trial survived.<br /> </li>
-            <li>Event / <a href="censorship.htm" class="MCTopicPopup MCTopicPopupHotSpot a">censor</a> code - this must be ≥1 (event(s) happened) or 0 (no event at the end of the study, i.e. "right censored").<br /> </li>
-            <li>Strata - e.g. centre code for a multi-centre trial. Be careful with your choice of strata; seek the advice of a Statistician.<br /> </li>
-            <li>Predictors - these are also referred to as covariates, which can be a number of variables that are thought to be related to the event under study. If a predictor is a classifier variable with more than two classes (i.e. ordinal or nominal) then you must first use the <a href="../data_preparation/dummy_variables.htm">dummy variable</a> function to convert it to a series of binary classes.</li>
-        </ul>
-        <p>&#160;</p>
-        <p><u>Technical validation</u>
-        </p>
-        <p>StatsDirect optimises the log likelihood associated with a Cox regression model until the change in log likelihood with iterations is less than the accuracy that you specify in the dialog box that is displayed just before the calculation takes place (<a href="../references/reference_list.htm">Lawless, 1982; Kalbfleisch and Prentice, 1980; Harris, 1991; Cox and Oakes, 1984; Le, 1997; Hosmer and Lemeshow, 1999</a>).</p>
-        <p>&#160;</p>
-        <p>The calculation options dialog box sets a value (default is 10000) for "SPLITTING RATIO"; this is the ratio in proportionality constant at a time t above which StatsDirect will split your data into more strata and calculate an extended likelihood solution, see <a href="../references/reference_list.htm">Bryson and Johnson, (1981)</a>.</p>
-        <p>&#160;</p>
-        <p>Ties are handled by Breslow's approximation (<a href="../references/reference_list.htm">Breslow, 1974</a>).</p>
-        <p>&#160;</p>
-        <p>Cox-Snell residuals are calculated as specified by <a href="../references/reference_list.htm">Cox and Oakes (1984)</a>. Cox-Snell, Martingale and deviance residuals are calculated as specified by <a href="../references/reference_list.htm">Collett (1994)</a>.</p>
-        <p>&#160;</p>
-        <p>Baseline survival and cumulative hazard rates are calculated at each time. Maximum likelihood methods are used, which are iterative when there is more than one death/event at an observed time (<a href="../references/reference_list.htm">Kalbfleisch and Prentice, 1973</a>). Other software may use the less precise Breslow estimates for these functions.</p>
-        <p>&#160;</p>
-        <p><u>Example</u>
-        </p>
-        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 479)</a>.</p>
-        <p>Test workbook (Survival worksheet: Stage Group, Time, Censor).</p>
-        <p>&#160;</p>
-        <p>The following data represent the survival in days since entry to the trial of patients with diffuse histiocytic lymphoma. Two different groups of patients, those with stage III and those with stage IV disease, are compared.</p>
-        <p>&#160;</p>
-        <p>Stage 3: 6, 19, 32, 42, 42, 43*, 94, 126*, 169*, 207, 211*, 227*, 253, 255*, 270*, 310*, 316*, 335*, 346*</p>
-        <p>&#160;</p>
-        <p>Stage 4: 4, 6, 10, 11, 11, 11, 13, 17, 20, 20, 21, 22, 24, 24, 29, 30, 30, 31, 33, 34, 35, 39, 40, 41*, 43*, 45, 46, 50, 56, 61*, 61*, 63, 68, 82, 85, 88, 89, 90, 93, 104, 110, 134, 137, 160*, 169, 171, 173, 175, 184, 201, 222, 235*, 247*, 260*, 284*, 290*, 291*, 302*, 304*, 341*, 345*</p>
-        <p>&#160;</p>
-        <p>* = censored data (patient still alive or died from an unrelated cause)</p>
-        <p>&#160;</p>
-        <p>To analyse these data in StatsDirect you must first prepare them in three workbook columns as shown below:</p>
-        <p>&#160;</p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-align: right;text-decoration: underline;">Stage group</td>
-                <td style="text-align: right;text-decoration: underline;">Time</td>
-                <td style="text-align: right;text-decoration: underline;">Censor</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">6</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">19</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">32</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">42</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">42</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">43</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">94</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">126</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">169</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">207</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">211</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">227</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">253</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">255</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">270</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">310</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">316</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">335</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">346</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">4</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">6</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">10</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">11</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">11</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">11</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">13</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">17</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">20</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">20</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">21</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">22</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">24</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">24</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">29</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">30</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">30</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">31</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">33</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">34</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">35</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">39</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">40</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">41</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">43</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">45</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">46</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">50</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">56</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">61</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">61</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">63</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">68</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">82</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">85</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">88</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">89</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">90</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">93</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">104</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">110</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">134</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">137</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">160</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">169</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">171</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">173</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">175</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">184</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">201</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">222</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">235</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">247</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">260</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">284</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">290</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">291</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">302</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">304</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">341</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">345</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>Alternatively, open the test workbook using the file open function of the file menu. Then select Cox regression from the survival analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Time" when asked for the times, select "Censor" when asked for death/ <a href="censorship.htm" class="MCTopicPopup MCTopicPopupHotSpot a">censorship</a>, click on the cancel button when asked about strata and when asked about predictors and select the column marked "Stage group".</p>
-        <p>&#160;</p>
-        <p>For this example:</p>
-        <p>&#160;</p>
-        <p><u>Cox (proportional hazards) regression</u>
-        </p>
-        <p>80 subjects with 54 events</p>
-        <p>Deviance (likelihood ratio) chi-square = 7.634383 df = 1 P = 0.0057</p>
-        <p>&#160;</p>
-        <p>Stage group&#160;b1 = 0.96102&#160;z = 2.492043&#160;P = 0.0127</p>
-        <p>&#160;</p>
-        <p><u>Cox regression - hazard ratios</u>
-        </p>
-        <p>&#160;</p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;">Parameter</td>
-                <td style="text-decoration: underline;">Hazard ratio</td>
-                <td style="text-decoration: underline;">95% CI</td>
-            </tr>
-            <tr>
-                <td>Stage group</td>
-                <td>2.614362</td>
-                <td>1.227756 to 5.566976</td>
-            </tr>
-            <tr>
-                <td>&#160;</td>
-                <td>&#160;</td>
-                <td>&#160;</td>
-            </tr>
-            <tr>
-                <td style="text-decoration: underline;">Parameter</td>
-                <td style="text-decoration: underline;">Coefficient</td>
-                <td style="text-decoration: underline;">Standard Error</td>
-            </tr>
-            <tr>
-                <td>Stage group</td>
-                <td>0.96102</td>
-                <td>0.385636</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p><u>Cox regression - model analysis</u>
-        </p>
-        <p>Log likelihood with no covariates = -207.554801</p>
-        <p>Log likelihood with all model covariates = -203.737609</p>
-        <p>Deviance (likelihood ratio) chi-square = 7.634383 df = 1 P = 0.0057</p>
-        <p>&#160;</p>
-        <p>The significance test for the coefficient b1 tests the null hypothesis that it equals zero and thus that its exponent equals one. The confidence interval for exp(b1) is therefore the confidence interval for the relative death rate or hazard ratio; we may therefore infer with 95% confidence that the death rate from stage 4 cancers is approximately 3 times, and at least 1.2 times, the risk from stage 3 cancers.</p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

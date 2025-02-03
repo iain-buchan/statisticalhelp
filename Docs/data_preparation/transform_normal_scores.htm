@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Nonparametric methods">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Nonparametric methods" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Normal Scores Transform - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Normal Scores Transform - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,88 +33,108 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#data_preparation/transform_normal_scores.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor192"></a>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor43"></a>
             Normal Scores</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Data_Transforming and Deriving_Normal Scores</b>.</p>
-        <p>&#160;</p>
-        <p>This function saves the normal scores of workbook data you select into a new workbook column marked Nml Score: Name, where Name is the column label of the original data.</p>
-        <p>&#160;</p>
-        <p>Three different methods for calculating normal scores are provided:</p>
-        <p>1.&#160;<b>van der Waerden's</b> method (<a href="../references/reference_list.htm">Conover, 1999</a>):</p>
+            <p>&#160;</p>
+            <p>Menu location: <b>Data_Transforming and Deriving_Normal Scores</b>.</p>
+            <p>&#160;</p>
+            <p>This function saves the normal scores of workbook data you select into a new workbook column marked Nml Score: Name, where Name is the column label of the original data.</p>
+            <p>&#160;</p>
+            <p>Three different methods for calculating normal scores are provided:</p>
+            <p>1.&#160;<b>van der Waerden's</b> method (<a href="../references/reference_list.htm">Conover, 1999</a>):</p>
+            <p>
+                <img src="../generatedimages/equations/equation16.svg" alt="" class="mcReset" />
+                <br />- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ(p) is the pth quantile from the standard normal distribution.</p>
+            <p>&#160;</p>
+            <p>2.&#160;<b>Blom's</b> method (<a href="../references/reference_list.htm">Altman, 1991</a>):<br /><img src="../generatedimages/equations/equation17.svg" alt="" class="mcReset" /></p>
+            <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ(p) is the pth quantile from the standard normal distribution.</p>
+            <p>&#160;</p>
+            <p>3.&#160;<b>Expected normal order scores</b> (<a href="../references/reference_list.htm">David, 1981; Royston, 1982; Harter, 1961</a>)<br /></p>
+            <p>
+                <img src="../generatedimages/equations/equation18.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size, Φ(p) is the standard normal density for p and Φ(p) is the pth quantile from the standard normal distribution. The solution is found by numerical integration. Calculation of expected normal order scores is not practical for very large samples, n of 2500 is the maximum permitted in StatsDirect.</p>
+            <p><u>Example</u>
+            </p>
+            <p>Test workbook (Nonparametric worksheet: First Born).</p>
+            <p>&#160;</p>
+            <p>Scoring the following agressivity scores for a sample of firstborn twins using the first method above gives:</p>
+            <p>&#160;</p>
+            <table>
+                <col />
+                <col />
+                <tr>
+                    <td style="text-align: right;text-decoration: underline;">First Born -----&gt;</td>
+                    <td style="text-align: right;text-decoration: underline;">Nml Score(vdW): First Born</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">86</td>
+                    <td style="text-align: right;">0.2934</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">71</td>
+                    <td style="text-align: right;">-0.6151</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">77</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">68</td>
+                    <td style="text-align: right;">-1.4261</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">91</td>
+                    <td style="text-align: right;">1.1984</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">72</td>
+                    <td style="text-align: right;">-0.2933</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">77</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">91</td>
+                    <td style="text-align: right;">1.1984</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">70</td>
+                    <td style="text-align: right;">-1.0201</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">71</td>
+                    <td style="text-align: right;">-0.6151</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">88</td>
+                    <td style="text-align: right;">0.7363</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">87</td>
+                    <td style="text-align: right;">0.5024</td>
+                </tr>
+            </table>
+        </div>
         <p>
-            <img src="../generatedimages/equations/equation16.svg" alt="" class="mcReset" />
-            <br />- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ(p) is the pth quantile from the standard normal distribution.</p>
-        <p>&#160;</p>
-        <p>2.&#160;<b>Blom's</b> method (<a href="../references/reference_list.htm">Altman, 1991</a>):<br /><img src="../generatedimages/equations/equation17.svg" alt="" class="mcReset" /></p>
-        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ(p) is the pth quantile from the standard normal distribution.</p>
-        <p>&#160;</p>
-        <p>3.&#160;<b>Expected normal order scores</b> (<a href="../references/reference_list.htm">David, 1981; Royston, 1982; Harter, 1961</a>)<br /></p>
-        <p>
-            <img src="../generatedimages/equations/equation18.svg" alt="" class="mcReset" />
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size, Φ(p) is the standard normal density for p and Φ(p) is the pth quantile from the standard normal distribution. The solution is found by numerical integration. Calculation of expected normal order scores is not practical for very large samples, n of 2500 is the maximum permitted in StatsDirect.</p>
-        <p><u>Example</u>
-        </p>
-        <p>Test workbook (Nonparametric worksheet: First Born).</p>
-        <p>&#160;</p>
-        <p>Scoring the following agressivity scores for a sample of firstborn twins using the first method above gives:</p>
-        <p>&#160;</p>
-        <table>
-            <col />
-            <col />
-            <tr>
-                <td style="text-align: right;text-decoration: underline;">First Born -----&gt;</td>
-                <td style="text-align: right;text-decoration: underline;">Nml Score(vdW): First Born</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">86</td>
-                <td style="text-align: right;">0.2934</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">71</td>
-                <td style="text-align: right;">-0.6151</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">77</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">68</td>
-                <td style="text-align: right;">-1.4261</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">91</td>
-                <td style="text-align: right;">1.1984</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">72</td>
-                <td style="text-align: right;">-0.2933</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">77</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">91</td>
-                <td style="text-align: right;">1.1984</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">70</td>
-                <td style="text-align: right;">-1.0201</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">71</td>
-                <td style="text-align: right;">-0.6151</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">88</td>
-                <td style="text-align: right;">0.7363</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">87</td>
-                <td style="text-align: right;">0.5024</td>
-            </tr>
-        </table>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

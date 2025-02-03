@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Preparing your data|Organizing data">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Preparing your data|Organizing data" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Dummy or Indicator Variables - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Dummy or Indicator Variables - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,96 +33,116 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#data_preparation/dummy_variables.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor238"></a>Dummy Variables</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Data_Dummy Variables</b></p>
-        <p>&#160;</p>
-        <p>This function creates dummy (or design) variables from one categorical variable.</p>
-        <p>&#160;</p>
-        <p>The reference cell coding model is used (<a href="../references/reference_list.htm">Kleinbaum et al., 1998</a>):</p>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor261"></a>Dummy Variables</h1>
+            <p>&#160;</p>
+            <p>Menu location: <b>Data_Dummy Variables</b></p>
+            <p>&#160;</p>
+            <p>This function creates dummy (or design) variables from one categorical variable.</p>
+            <p>&#160;</p>
+            <p>The reference cell coding model is used (<a href="../references/reference_list.htm">Kleinbaum et al., 1998</a>):</p>
+            <p>
+                <img src="../generatedimages/equations/equation19.svg" alt="" class="mcReset" />
+            </p>
+            <p>- the source data may be numerical or text, representing categories. The coding scheme shown above is applied to your data in reverse alphanumeric order for the k categories found, so for three categories, say race equal to black, white or other, white (being the last in an alphabetical sorting) is coded 1,0,0 which reduces to dummy variables X (3) = 1, X (2) = 0.</p>
+            <p>&#160;</p>
+            <p>In order to represent a categorical variable with more than two levels in a regression model you may wish to convert it to a series of dummy variables using this function.</p>
+            <p>&#160;</p>
+            <p>Say a linear regression model is specified with three predictors; the first and third predictors are continuous data, and the second predictor is a classifier (categorical data) with three levels. The second predictor should be converted to two dummy dichotomous variables (e.g. the example below) and put into a multiple linear regression as two predictors.</p>
+            <p>&#160;</p>
+            <p>The naming scheme for dummy variables is the original variable name suffixed with (1) if there are only two categories, or suffixed with (j+1) where there are j+1 categories giving rise to j dummy variables.</p>
+            <p>&#160;</p>
+            <p>In general form, a regression model where the jth predictor variable is a classifier with k levels can be interpreted as follows, provided the jth variable is converted to dummy variables:</p>
+            <p>
+                <img src="../generatedimages/equations/equation20.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where Y is the outcome variable, b is a regression coefficient, D is a dummy variable for a classifier variable of k levels and x is a non-classifier predictor variable.</p>
+            <p>&#160;</p>
+            <p><u>Example</u>
+            </p>
+            <table cellspacing="0" style="caption-side: top;">
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td style="text-align: right;text-decoration: underline;">Group ID ---&gt;</td>
+                    <td style="text-align: right;text-decoration: underline;">Group ID (2)</td>
+                    <td style="text-align: right;text-decoration: underline;">Group ID (3)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">0</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">0</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">0</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">0</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">2</td>
+                    <td style="text-align: right;">1</td>
+                    <td style="text-align: right;">0</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">3</td>
+                    <td style="text-align: right;">0</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">3</td>
+                    <td style="text-align: right;">0</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">3</td>
+                    <td style="text-align: right;">0</td>
+                    <td style="text-align: right;">1</td>
+                </tr>
+            </table>
+        </div>
         <p>
-            <img src="../generatedimages/equations/equation19.svg" alt="" class="mcReset" />
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p>- the source data may be numerical or text, representing categories. The coding scheme shown above is applied to your data in reverse alphanumeric order for the k categories found, so for three categories, say race equal to black, white or other, white (being the last in an alphabetical sorting) is coded 1,0,0 which reduces to dummy variables X (3) = 1, X (2) = 0.</p>
-        <p>&#160;</p>
-        <p>In order to represent a categorical variable with more than two levels in a regression model you may wish to convert it to a series of dummy variables using this function.</p>
-        <p>&#160;</p>
-        <p>Say a linear regression model is specified with three predictors; the first and third predictors are continuous data, and the second predictor is a classifier (categorical data) with three levels. The second predictor should be converted to two dummy dichotomous variables (e.g. the example below) and put into a multiple linear regression as two predictors.</p>
-        <p>&#160;</p>
-        <p>The naming scheme for dummy variables is the original variable name suffixed with (1) if there are only two categories, or suffixed with (j+1) where there are j+1 categories giving rise to j dummy variables.</p>
-        <p>&#160;</p>
-        <p>In general form, a regression model where the jth predictor variable is a classifier with k levels can be interpreted as follows, provided the jth variable is converted to dummy variables:</p>
-        <p>
-            <img src="../generatedimages/equations/equation20.svg" alt="" class="mcReset" />
-        </p>
-        <p>- where Y is the outcome variable, b is a regression coefficient, D is a dummy variable for a classifier variable of k levels and x is a non-classifier predictor variable.</p>
-        <p>&#160;</p>
-        <p><u>Example</u>
-        </p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-align: right;text-decoration: underline;">Group ID ---&gt;</td>
-                <td style="text-align: right;text-decoration: underline;">Group ID (2)</td>
-                <td style="text-align: right;text-decoration: underline;">Group ID (3)</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">3</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">3</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">3</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-        </table>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

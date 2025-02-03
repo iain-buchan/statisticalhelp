@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Clinical epidemiology calculations">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Clinical epidemiology calculations" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Screening Test Errors (Bayes' Theorem) - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Screening Test Errors (Bayes' Theorem) - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,101 +33,121 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#clinical_epidemiology/screening_test.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor167"></a>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor90"></a>
             Screening Test Errors</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Analysis_Clinical Epidemiology_Screening Test Errors</b>.</p>
-        <p>&#160;</p>
-        <p>This function gives the probability of false positive and false negative results with a test of given true and false positive rates and a given prevalence of disease (<a href="../references/reference_list.htm">Fleiss, 1981</a>).</p>
-        <p>&#160;</p>
-        <p>When considering a diagnostic test for screening populations it is important to consider the number of false negative and false positive results you will have to deal with. The quality of a diagnostic test is often expressed in terms of sensitivity and specificity. Sensitivity is the ability of the test to pick up what you are looking for and specificity is the ability of the test to reject what you are not looking for.</p>
-        <p>&#160;</p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td>&#160;</td>
-                <td>&#160;</td>
-                <td colspan="2" style="text-align: center;text-decoration: underline;">DISEASE</td>
-            </tr>
-            <tr>
-                <td>&#160;</td>
-                <td>&#160;</td>
-                <td style="text-align: center;text-decoration: underline;">Present</td>
-                <td style="text-align: center;text-decoration: underline;">Absent</td>
-            </tr>
-            <tr>
-                <td rowspan="2" style="text-align: right;">TEST:</td>
-                <td style="text-align: right;">+:</td>
-                <td style="text-align: center;">a (true +ve)</td>
-                <td style="text-align: center;">b (false +ve)</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">-:</td>
-                <td style="text-align: center;">c (false -ve)</td>
-                <td style="text-align: center;">d (true -ve)</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>Sensitivity = a/(a+c)</p>
-        <p>Specificity = d/(b+d)</p>
-        <p>&#160;</p>
-        <p>We can apply Bayes' theorem if we know the approximate likelihood that a subject has the disease before they come for screening, this is given by the prevalence of the disease. For low prevalence diseases the false negative rate will be low and the false positive rate will be high. For high prevalence diseases the false negative rate will be high and the false positive rate will be lower. People are often surprised by the high numbers of projected false positives, you need a highly specific test to keep this number low. The false positive rate of a screening test can be reduced by repeating the test. In some cases a test is performed three times and the patient is declared positive if at least two out of the three component tests were positive.</p>
-        <p>&#160;</p>
-        <p><u>Technical Validation</u>
-        </p>
-        <p>Results are calculated as:</p>
+            <p>&#160;</p>
+            <p>Menu location: <b>Analysis_Clinical Epidemiology_Screening Test Errors</b>.</p>
+            <p>&#160;</p>
+            <p>This function gives the probability of false positive and false negative results with a test of given true and false positive rates and a given prevalence of disease (<a href="../references/reference_list.htm">Fleiss, 1981</a>).</p>
+            <p>&#160;</p>
+            <p>When considering a diagnostic test for screening populations it is important to consider the number of false negative and false positive results you will have to deal with. The quality of a diagnostic test is often expressed in terms of sensitivity and specificity. Sensitivity is the ability of the test to pick up what you are looking for and specificity is the ability of the test to reject what you are not looking for.</p>
+            <p>&#160;</p>
+            <table>
+                <col />
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td>&#160;</td>
+                    <td>&#160;</td>
+                    <td colspan="2" style="text-align: center;text-decoration: underline;">DISEASE</td>
+                </tr>
+                <tr>
+                    <td>&#160;</td>
+                    <td>&#160;</td>
+                    <td style="text-align: center;text-decoration: underline;">Present</td>
+                    <td style="text-align: center;text-decoration: underline;">Absent</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="text-align: right;">TEST:</td>
+                    <td style="text-align: right;">+:</td>
+                    <td style="text-align: center;">a (true +ve)</td>
+                    <td style="text-align: center;">b (false +ve)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">-:</td>
+                    <td style="text-align: center;">c (false -ve)</td>
+                    <td style="text-align: center;">d (true -ve)</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>Sensitivity = a/(a+c)</p>
+            <p>Specificity = d/(b+d)</p>
+            <p>&#160;</p>
+            <p>We can apply Bayes' theorem if we know the approximate likelihood that a subject has the disease before they come for screening, this is given by the prevalence of the disease. For low prevalence diseases the false negative rate will be low and the false positive rate will be high. For high prevalence diseases the false negative rate will be high and the false positive rate will be lower. People are often surprised by the high numbers of projected false positives, you need a highly specific test to keep this number low. The false positive rate of a screening test can be reduced by repeating the test. In some cases a test is performed three times and the patient is declared positive if at least two out of the three component tests were positive.</p>
+            <p>&#160;</p>
+            <p><u>Technical Validation</u>
+            </p>
+            <p>Results are calculated as:</p>
+            <p>
+                <img src="../generatedimages/equations/equation99.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where P<sub>F+</sub> is the false positive rate, P<sub>F-</sub>  is the false negative rate, P(A|B) is the probability of A given B, A is a positive test result, A bar is a negative test result, B is disease present and B bar is disease absent.</p>
+            <p>&#160;</p>
+            <p><u>Example</u>
+            </p>
+            <p>In a hypothetical example 4000 patients were tested with a screening test for a disease. Of these 4000 patients 2000 were known to have the disease and 2000 were known to be free of the disease:</p>
+            <table>
+                <col />
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td>&#160;</td>
+                    <td>&#160;</td>
+                    <td colspan="2" style="text-align: center;text-decoration: underline;">DISEASE</td>
+                </tr>
+                <tr>
+                    <td>&#160;</td>
+                    <td>&#160;</td>
+                    <td style="text-align: center;text-decoration: underline;">Present</td>
+                    <td style="text-align: center;text-decoration: underline;">Absent</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="text-align: right;">TEST:</td>
+                    <td style="text-align: right;">+:</td>
+                    <td style="text-align: center;">1902 (true +ve)</td>
+                    <td style="text-align: center;">22 (false +ve)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">-:</td>
+                    <td style="text-align: center;">98 (false -ve)</td>
+                    <td style="text-align: center;">1978 (true -ve)</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>To analyse these data in StatsDirect select Screening Test Errors from the Clinical Epidemiology section of the Analysis menu. Enter the true +ve rate as 0.951 (1902/(1902+98)) and the false +ve rate as 0.011 (22/(1978+22)). Enter the prevalence as 1 in 100 by entering n as 100.</p>
+            <p>&#160;</p>
+            <p>For this example:</p>
+            <p>&#160;</p>
+            <p>For an overall case rate of 100 per ten thousand population tested:</p>
+            <p>&#160;</p>
+            <p>Test SENSITIVITY = 95.1%</p>
+            <p>Probability of a FALSE POSITIVE result = 0.533824</p>
+            <p>&#160;</p>
+            <p>Test SPECIFICITY = 98.9%</p>
+            <p>Probability of a FALSE NEGATIVE result = 0.0005</p>
+            <p>&#160;</p>
+            <p>Here we see that more than half of the patients tested will give a positive test when they do not have the disease. This is clearly not acceptable for a full screening method but could be used as pre-screening before further tests if there was no better initial test available.</p>
+        </div>
         <p>
-            <img src="../generatedimages/equations/equation99.svg" alt="" class="mcReset" />
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p>- where P<sub>F+</sub> is the false positive rate, P<sub>F-</sub>  is the false negative rate, P(A|B) is the probability of A given B, A is a positive test result, A bar is a negative test result, B is disease present and B bar is disease absent.</p>
-        <p>&#160;</p>
-        <p><u>Example</u>
-        </p>
-        <p>In a hypothetical example 4000 patients were tested with a screening test for a disease. Of these 4000 patients 2000 were known to have the disease and 2000 were known to be free of the disease:</p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td>&#160;</td>
-                <td>&#160;</td>
-                <td colspan="2" style="text-align: center;text-decoration: underline;">DISEASE</td>
-            </tr>
-            <tr>
-                <td>&#160;</td>
-                <td>&#160;</td>
-                <td style="text-align: center;text-decoration: underline;">Present</td>
-                <td style="text-align: center;text-decoration: underline;">Absent</td>
-            </tr>
-            <tr>
-                <td rowspan="2" style="text-align: right;">TEST:</td>
-                <td style="text-align: right;">+:</td>
-                <td style="text-align: center;">1902 (true +ve)</td>
-                <td style="text-align: center;">22 (false +ve)</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">-:</td>
-                <td style="text-align: center;">98 (false -ve)</td>
-                <td style="text-align: center;">1978 (true -ve)</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>To analyse these data in StatsDirect select Screening Test Errors from the Clinical Epidemiology section of the Analysis menu. Enter the true +ve rate as 0.951 (1902/(1902+98)) and the false +ve rate as 0.011 (22/(1978+22)). Enter the prevalence as 1 in 100 by entering n as 100.</p>
-        <p>&#160;</p>
-        <p>For this example:</p>
-        <p>&#160;</p>
-        <p>For an overall case rate of 100 per ten thousand population tested:</p>
-        <p>&#160;</p>
-        <p>Test SENSITIVITY = 95.1%</p>
-        <p>Probability of a FALSE POSITIVE result = 0.533824</p>
-        <p>&#160;</p>
-        <p>Test SPECIFICITY = 98.9%</p>
-        <p>Probability of a FALSE NEGATIVE result = 0.0005</p>
-        <p>&#160;</p>
-        <p>Here we see that more than half of the patients tested will give a positive test when they do not have the disease. This is clearly not acceptable for a full screening method but could be used as pre-screening before further tests if there was no better initial test available.</p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

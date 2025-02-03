@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Exact tests on counts">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Exact tests on counts" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>McNemar Matched 2 by 2 Chi-square and Exact Test - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>McNemar Matched 2 by 2 Chi-square and Exact Test - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,171 +33,191 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#chi_square_tests/mcnemar.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor78"></a>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor205"></a>
             McNemar Chi-square and Exact test for Matched Pairs</h1>
-        <p>&#160;</p>
-        <p>Menu locations:</p>
-        <p style="font-weight: bold;">Analysis_Exact_Matched Pairs;</p>
-        <p style="font-weight: bold;">Analysis_Chi-square_McNemar.</p>
-        <p>&#160;</p>
-        <p>Paired proportions have traditionally been compared using McNemar's test but an exact alternative due to <a href="../references/reference_list.htm">Liddell</a> (1983) is preferable. StatsDirect gives you both.</p>
-        <p>&#160;</p>
-        <p>The exact test is a special case of the sign test. The b count in the table below is treated as a binomial variable from the sample b+c. Using the ratio R' (R' = b/c) as a point estimate of relative risk, a two sided probability is calculated that R' = 1 (the null hypothesis). The test statistic F=b/(c+1).</p>
-        <p>&#160;</p>
-        <p>Confidence limits for R' are calculated as follows:</p>
+            <p>&#160;</p>
+            <p>Menu locations:</p>
+            <p style="font-weight: bold;">Analysis_Exact_Matched Pairs;</p>
+            <p style="font-weight: bold;">Analysis_Chi-square_McNemar.</p>
+            <p>&#160;</p>
+            <p>Paired proportions have traditionally been compared using McNemar's test but an exact alternative due to <a href="../references/reference_list.htm">Liddell</a> (1983) is preferable. StatsDirect gives you both.</p>
+            <p>&#160;</p>
+            <p>The exact test is a special case of the sign test. The b count in the table below is treated as a binomial variable from the sample b+c. Using the ratio R' (R' = b/c) as a point estimate of relative risk, a two sided probability is calculated that R' = 1 (the null hypothesis). The test statistic F=b/(c+1).</p>
+            <p>&#160;</p>
+            <p>Confidence limits for R' are calculated as follows:</p>
+            <p>
+                <img src="../generatedimages/equations/equation96.svg" alt="" class="mcReset" />
+            </p>
+            <p>- where F(α/2, n, d) is a quantile from the F distribution with n and d degrees of freedom.</p>
+            <p>&#160;</p>
+            <p>You should use the exact test for analysis; McNemar's test is included for interest only.</p>
+            <p>&#160;</p>
+            <p>If you need the exact confidence interval for the difference between a pair of proportions then please see <a href="../proportions/paired.htm">paired proportions</a>.</p>
+            <p>&#160;</p>
+            <p>DATA INPUT:</p>
+            <p>Observed frequencies should be entered as a paired fourfold table:</p>
+            <p>&#160;</p>
+            <table cellspacing="0" style="caption-side: top;">
+                <col />
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td>
+                        <p align="right">&#160;</p>
+                    </td>
+                    <td>
+                        <p align="right">&#160;</p>
+                    </td>
+                    <td colspan="2" style="text-decoration: underline;">
+                        <p align="center">Control/reference category:</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p align="right">&#160;</p>
+                    </td>
+                    <td>
+                        <p align="right">&#160;</p>
+                    </td>
+                    <td style="text-decoration: underline;">
+                        <p align="right">outcome present</p>
+                    </td>
+                    <td style="text-decoration: underline;">
+                        <p align="right">outcome absent</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">
+                        <p align="right">Case/index category:</p>
+                    </td>
+                    <td>
+                        <p align="right">outcome present:</p>
+                    </td>
+                    <td>
+                        <p align="center">a</p>
+                    </td>
+                    <td>
+                        <p align="center">b</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p align="right">outcome absent:</p>
+                    </td>
+                    <td>
+                        <p align="center">c</p>
+                    </td>
+                    <td>
+                        <p align="center">d</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p><u>Example</u>
+            </p>
+            <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 127)</a>.</p>
+            <p>&#160;</p>
+            <p>The data below represent a comparison of two media for culturing Mycobacterium tuberculosis. Fifty suspect sputum specimens were plated up on both media and the following results were obtained:</p>
+            <p>&#160;</p>
+            <table cellspacing="0" style="caption-side: top;">
+                <col />
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td>
+                        <p align="right">&#160;</p>
+                    </td>
+                    <td>
+                        <p align="right">&#160;</p>
+                    </td>
+                    <td colspan="2" style="text-decoration: underline;">
+                        <p align="center">Medium B:</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p align="right">&#160;</p>
+                    </td>
+                    <td>
+                        <p align="right">&#160;</p>
+                    </td>
+                    <td style="text-decoration: underline;">
+                        <p align="right">Growth</p>
+                    </td>
+                    <td style="text-decoration: underline;">
+                        <p align="right">No Growth</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p align="right">Medium A:</p>
+                    </td>
+                    <td>
+                        <p align="right">Growth:</p>
+                    </td>
+                    <td>
+                        <p align="right">20</p>
+                    </td>
+                    <td>
+                        <p align="right">12</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p align="right">&#160;</p>
+                    </td>
+                    <td>
+                        <p align="right">No Growth:</p>
+                    </td>
+                    <td>
+                        <p align="right">2</p>
+                    </td>
+                    <td>
+                        <p align="right">16</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>To analyse these data in StatsDirect you should select the McNemar function from the chi-square section of the analysis menu. Select the default 95% confidence interval. Enter the counts into the table as shown above.</p>
+            <p>&#160;</p>
+            <p>For this example:</p>
+            <p>McNemar's test:</p>
+            <p>Yates' continuity corrected Chi² = 5.785714 P = 0.0162</p>
+            <p>&#160;</p>
+            <p>After Liddell (1983)Refs:</p>
+            <p>Point estimate of relative risk (R') = 6</p>
+            <p>Exact 95% confidence interval = 1.335744 to 55.197091</p>
+            <p>&#160;</p>
+            <p>F = 4, P (two sided) = 0.0129</p>
+            <p>R' is significantly different from unity</p>
+            <p>&#160;</p>
+            <p>Here we can conclude that the tubercle bacilli in the experiment grew significantly better on medium A than on medium B. With 95% confidence we can state that the chances of a positive culture are between 1.34 and 55.20 times greater on medium A than on medium B.</p>
+            <p>&#160;</p>
+            <p><a href="../basics/p_values.htm">P values</a>
+            </p>
+            <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+            </p>
+        </div>
         <p>
-            <img src="../generatedimages/equations/equation96.svg" alt="" class="mcReset" />
-        </p>
-        <p>- where F(α/2, n, d) is a quantile from the F distribution with n and d degrees of freedom.</p>
-        <p>&#160;</p>
-        <p>You should use the exact test for analysis; McNemar's test is included for interest only.</p>
-        <p>&#160;</p>
-        <p>If you need the exact confidence interval for the difference between a pair of proportions then please see <a href="../proportions/paired.htm">paired proportions</a>.</p>
-        <p>&#160;</p>
-        <p>DATA INPUT:</p>
-        <p>Observed frequencies should be entered as a paired fourfold table:</p>
-        <p>&#160;</p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td>
-                    <p align="right">&#160;</p>
-                </td>
-                <td>
-                    <p align="right">&#160;</p>
-                </td>
-                <td colspan="2" style="text-decoration: underline;">
-                    <p align="center">Control/reference category:</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p align="right">&#160;</p>
-                </td>
-                <td>
-                    <p align="right">&#160;</p>
-                </td>
-                <td style="text-decoration: underline;">
-                    <p align="right">outcome present</p>
-                </td>
-                <td style="text-decoration: underline;">
-                    <p align="right">outcome absent</p>
-                </td>
-            </tr>
-            <tr>
-                <td rowspan="2">
-                    <p align="right">Case/index category:</p>
-                </td>
-                <td>
-                    <p align="right">outcome present:</p>
-                </td>
-                <td>
-                    <p align="center">a</p>
-                </td>
-                <td>
-                    <p align="center">b</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p align="right">outcome absent:</p>
-                </td>
-                <td>
-                    <p align="center">c</p>
-                </td>
-                <td>
-                    <p align="center">d</p>
-                </td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p><u>Example</u>
-        </p>
-        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 127)</a>.</p>
-        <p>&#160;</p>
-        <p>The data below represent a comparison of two media for culturing Mycobacterium tuberculosis. Fifty suspect sputum specimens were plated up on both media and the following results were obtained:</p>
-        <p>&#160;</p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td>
-                    <p align="right">&#160;</p>
-                </td>
-                <td>
-                    <p align="right">&#160;</p>
-                </td>
-                <td colspan="2" style="text-decoration: underline;">
-                    <p align="center">Medium B:</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p align="right">&#160;</p>
-                </td>
-                <td>
-                    <p align="right">&#160;</p>
-                </td>
-                <td style="text-decoration: underline;">
-                    <p align="right">Growth</p>
-                </td>
-                <td style="text-decoration: underline;">
-                    <p align="right">No Growth</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p align="right">Medium A:</p>
-                </td>
-                <td>
-                    <p align="right">Growth:</p>
-                </td>
-                <td>
-                    <p align="right">20</p>
-                </td>
-                <td>
-                    <p align="right">12</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p align="right">&#160;</p>
-                </td>
-                <td>
-                    <p align="right">No Growth:</p>
-                </td>
-                <td>
-                    <p align="right">2</p>
-                </td>
-                <td>
-                    <p align="right">16</p>
-                </td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>To analyse these data in StatsDirect you should select the McNemar function from the chi-square section of the analysis menu. Select the default 95% confidence interval. Enter the counts into the table as shown above.</p>
-        <p>&#160;</p>
-        <p>For this example:</p>
-        <p>McNemar's test:</p>
-        <p>Yates' continuity corrected Chi² = 5.785714 P = 0.0162</p>
-        <p>&#160;</p>
-        <p>After Liddell (1983)Refs:</p>
-        <p>Point estimate of relative risk (R') = 6</p>
-        <p>Exact 95% confidence interval = 1.335744 to 55.197091</p>
-        <p>&#160;</p>
-        <p>F = 4, P (two sided) = 0.0129</p>
-        <p>R' is significantly different from unity</p>
-        <p>&#160;</p>
-        <p>Here we can conclude that the tubercle bacilli in the experiment grew significantly better on medium A than on medium B. With 95% confidence we can state that the chances of a positive culture are between 1.34 and 55.20 times greater on medium A than on medium B.</p>
-        <p>&#160;</p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

@@ -4,15 +4,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Functions: Logical</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Functions: Logical</title>
-        <script type="text/javascript">/*<![CDATA[*//*]]>*/</script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">/*<![CDATA[*//*]]>*/</script>
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
         <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
@@ -31,146 +34,166 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#workbook/functions_logical.htm">Open topic with navigation</a>
         </p>
-        <h1>Workbook Functions: Logical</h1>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">AND</span><span style="color: #000000;">(logical list)</span>
-        </p>
-        <p><span style="color: #000000;">True if all arguments are true, false if at least one is false.</span>
-        </p>
-        <p><span style="color: #000000;">e.g. AND(A1+B1&gt;5, A1+C1&lt;10) true if A1=4, B1=2 and C1=5, false if C1=6.</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">ERROR.TYPE</span><span style="color: #000000;">(reference)</span>
-        </p>
-        <p><span style="color: #000000;">Number corresponding to an error occurring in the specified reference cell.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISERR, ISERROR</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">EXACT</span><span style="color: #000000;">(expresion1, expression2)</span>
-        </p>
-        <p><span style="color: #000000;">True if the two text expressions are identical (case-sensitive); False if not.</span>
-        </p>
-        <p><span style="color: #000000;">See also: LEN, SEARCH</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">FALSE</span><span style="color: #000000;">( )</span>
-        </p>
-        <p><span style="color: #000000;">Logical value False.</span>
-        </p>
-        <p><span style="color: #000000;">See also: TRUE</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">IF</span><span style="color: #000000;">(condition, true_value, false_value)</span>
-        </p>
-        <p><span style="color: #000000;">Tests the condition and returns the true_value if condition is TRUE or false_value if condition is FALSE.</span>
-        </p>
-        <p><span style="color: #000000;">See also: AND, FALSE, NOT, OR, TRUE</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">ISBLANK</span><span style="color: #000000;">(reference)</span>
-        </p>
-        <p><span style="color: #000000;">Returns TRUE if the specified reference cell is blank and FALSE otherwise.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">ISERR</span><span style="color: #000000;">(expression)</span>
-        </p>
-        <p><span style="color: #000000;">Returns TRUE if the specified expression returns an error and FALSE otherwise.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISBLANK, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">ISLOGICAL</span><span style="color: #000000;">(expression)</span>
-        </p>
-        <p><span style="color: #000000;">Returns TRUE if the expression returns a logical value and FALSE otherwise.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">ISNA</span><span style="color: #000000;">(expression)</span>
-        </p>
-        <p><span style="color: #000000;">Returns TRUE if the expression returns the #N/A! error and FALSE otherwise.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">ISNONTEXT</span><span style="color: #000000;">(expression)</span>
-        </p>
-        <p><span style="color: #000000;">Returns TRUE if there is a non-text value in the expression and FALSE otherwise.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNUMBER, ISREF, ISTEXT</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">ISNUMBER</span><span style="color: #000000;">(expression)</span>
-        </p>
-        <p><span style="color: #000000;">Returns TRUE if the expression returns a number and FALSE otherwise.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISREF, ISTEXT</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">ISREF</span><span style="color: #000000;">(expression)</span>
-        </p>
-        <p><span style="color: #000000;">Returns TRUE if the expression returns a range reference and FALSE otherwise.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISTEXT</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">ISTEXT</span><span style="color: #000000;">(expression)</span>
-        </p>
-        <p><span style="color: #000000;">Returns TRUE if the expression text and FALSE otherwise.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">N</span><span style="color: #000000;">(value)</span>
-        </p>
-        <p><span style="color: #000000;">Tests the supplied value and returns the value if it is a number or 1 if the value is the logical function TRUE(). All other values are returned as 0.</span>
-        </p>
-        <p><span style="color: #000000;">See also: T, VALUE</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">NA</span><span style="color: #000000;">()</span>
-        </p>
-        <p><span style="color: #000000;">Returns the error value #N/A (not available)</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISNA</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">NOT</span><span style="color: #000000;">(logical)</span>
-        </p>
-        <p><span style="color: #000000;">Returns TRUE if logical is FALSE and vice-versa.</span>
-        </p>
-        <p><span style="color: #000000;">See also: AND, IF, OR</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">OR</span><span style="color: #000000;">(logical list)</span>
-        </p>
-        <p><span style="color: #000000;">TRUE if at least one of a series of logical arguments in the list is true.</span>
-        </p>
-        <p><span style="color: #000000;">See also: AND, IF, NOT</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">T</span><span style="color: #000000;">(value)</span>
-        </p>
-        <p><span style="color: #000000;">Returns the value if it is a text.</span>
-        </p>
-        <p><span style="color: #000000;">See also: CELL, N, VALUE</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">TRUE</span><span style="color: #000000;">()</span>
-        </p>
-        <p><span style="color: #000000;">Logical value TRUE.</span>
-        </p>
-        <p><span style="color: #000000;">See also: FALSE</span>
-        </p>
-        <p>&#160;</p>
-        <p><span style="font-weight: bold;color: #000000;">TYPE</span><span style="color: #000000;">(expression)</span>
-        </p>
-        <p><span style="color: #000000;">Argument type of the given expression: 1 for numbers, 2 for text strings, 4 for logical values and 16 for error values.</span>
-        </p>
-        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+        <div role="main" id="mc-main-content">
+            <h1>Workbook Functions: Logical</h1>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">AND</span><span style="color: #000000;">(logical list)</span>
+            </p>
+            <p><span style="color: #000000;">True if all arguments are true, false if at least one is false.</span>
+            </p>
+            <p><span style="color: #000000;">e.g. AND(A1+B1&gt;5, A1+C1&lt;10) true if A1=4, B1=2 and C1=5, false if C1=6.</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">ERROR.TYPE</span><span style="color: #000000;">(reference)</span>
+            </p>
+            <p><span style="color: #000000;">Number corresponding to an error occurring in the specified reference cell.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISERR, ISERROR</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">EXACT</span><span style="color: #000000;">(expresion1, expression2)</span>
+            </p>
+            <p><span style="color: #000000;">True if the two text expressions are identical (case-sensitive); False if not.</span>
+            </p>
+            <p><span style="color: #000000;">See also: LEN, SEARCH</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">FALSE</span><span style="color: #000000;">( )</span>
+            </p>
+            <p><span style="color: #000000;">Logical value False.</span>
+            </p>
+            <p><span style="color: #000000;">See also: TRUE</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">IF</span><span style="color: #000000;">(condition, true_value, false_value)</span>
+            </p>
+            <p><span style="color: #000000;">Tests the condition and returns the true_value if condition is TRUE or false_value if condition is FALSE.</span>
+            </p>
+            <p><span style="color: #000000;">See also: AND, FALSE, NOT, OR, TRUE</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">ISBLANK</span><span style="color: #000000;">(reference)</span>
+            </p>
+            <p><span style="color: #000000;">Returns TRUE if the specified reference cell is blank and FALSE otherwise.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">ISERR</span><span style="color: #000000;">(expression)</span>
+            </p>
+            <p><span style="color: #000000;">Returns TRUE if the specified expression returns an error and FALSE otherwise.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISBLANK, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">ISLOGICAL</span><span style="color: #000000;">(expression)</span>
+            </p>
+            <p><span style="color: #000000;">Returns TRUE if the expression returns a logical value and FALSE otherwise.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">ISNA</span><span style="color: #000000;">(expression)</span>
+            </p>
+            <p><span style="color: #000000;">Returns TRUE if the expression returns the #N/A! error and FALSE otherwise.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">ISNONTEXT</span><span style="color: #000000;">(expression)</span>
+            </p>
+            <p><span style="color: #000000;">Returns TRUE if there is a non-text value in the expression and FALSE otherwise.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNUMBER, ISREF, ISTEXT</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">ISNUMBER</span><span style="color: #000000;">(expression)</span>
+            </p>
+            <p><span style="color: #000000;">Returns TRUE if the expression returns a number and FALSE otherwise.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISREF, ISTEXT</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">ISREF</span><span style="color: #000000;">(expression)</span>
+            </p>
+            <p><span style="color: #000000;">Returns TRUE if the expression returns a range reference and FALSE otherwise.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISTEXT</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">ISTEXT</span><span style="color: #000000;">(expression)</span>
+            </p>
+            <p><span style="color: #000000;">Returns TRUE if the expression text and FALSE otherwise.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">N</span><span style="color: #000000;">(value)</span>
+            </p>
+            <p><span style="color: #000000;">Tests the supplied value and returns the value if it is a number or 1 if the value is the logical function TRUE(). All other values are returned as 0.</span>
+            </p>
+            <p><span style="color: #000000;">See also: T, VALUE</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">NA</span><span style="color: #000000;">()</span>
+            </p>
+            <p><span style="color: #000000;">Returns the error value #N/A (not available)</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISNA</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">NOT</span><span style="color: #000000;">(logical)</span>
+            </p>
+            <p><span style="color: #000000;">Returns TRUE if logical is FALSE and vice-versa.</span>
+            </p>
+            <p><span style="color: #000000;">See also: AND, IF, OR</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">OR</span><span style="color: #000000;">(logical list)</span>
+            </p>
+            <p><span style="color: #000000;">TRUE if at least one of a series of logical arguments in the list is true.</span>
+            </p>
+            <p><span style="color: #000000;">See also: AND, IF, NOT</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">T</span><span style="color: #000000;">(value)</span>
+            </p>
+            <p><span style="color: #000000;">Returns the value if it is a text.</span>
+            </p>
+            <p><span style="color: #000000;">See also: CELL, N, VALUE</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">TRUE</span><span style="color: #000000;">()</span>
+            </p>
+            <p><span style="color: #000000;">Logical value TRUE.</span>
+            </p>
+            <p><span style="color: #000000;">See also: FALSE</span>
+            </p>
+            <p>&#160;</p>
+            <p><span style="font-weight: bold;color: #000000;">TYPE</span><span style="color: #000000;">(expression)</span>
+            </p>
+            <p><span style="color: #000000;">Argument type of the given expression: 1 for numbers, 2 for text strings, 4 for logical values and 16 for error values.</span>
+            </p>
+            <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+            </p>
+        </div>
+        <p>
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

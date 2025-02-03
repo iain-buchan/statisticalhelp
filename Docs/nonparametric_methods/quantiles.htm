@@ -4,15 +4,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Quantiles, Centiles and Percentiles - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Quantiles, Centiles and Percentiles - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,32 +33,52 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#nonparametric_methods/quantiles.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor180"></a>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor46"></a>
             Quantiles</h1>
-        <p>&#160;</p>
-        <p>Quantiles are points in a distribution that relate to the rank order of values in that distribution.</p>
-        <p>&#160;</p>
-        <p>For a sample, you can find any quantile by sorting the sample. The <a href="../basic_descriptive_statistics/central_tendency.htm">middle value</a> of the sorted sample (middle quantile, 50th percentile) is known as the median. The limits are the minimum and maximum values. Any other locations between these points can be described in terms of centiles/percentiles.</p>
-        <p>&#160;</p>
-        <p>Centiles/percentiles are descriptions of quantiles relative to 100; so the 75th percentile (upper quartile) is 75% or three quarters of the way up an ascending list of sorted values of a sample. The 25th percentile (lower quartile) is one quarter of the way up this rank order.</p>
-        <p>&#160;</p>
-        <p>Percentile rank is the proportion of values in a distribution that a particular value is greater than or equal to. For example, if a pupil is taller than or as tall as 79% of his classmates then the percentile rank of his height is 79, i.e. he is in the 79th percentile of heights in his class.</p>
-        <p>&#160;</p>
-        <p><u>Definition</u>
+            <p>&#160;</p>
+            <p>Quantiles are points in a distribution that relate to the rank order of values in that distribution.</p>
+            <p>&#160;</p>
+            <p>For a sample, you can find any quantile by sorting the sample. The <a href="../basic_descriptive_statistics/central_tendency.htm">middle value</a> of the sorted sample (middle quantile, 50th percentile) is known as the median. The limits are the minimum and maximum values. Any other locations between these points can be described in terms of centiles/percentiles.</p>
+            <p>&#160;</p>
+            <p>Centiles/percentiles are descriptions of quantiles relative to 100; so the 75th percentile (upper quartile) is 75% or three quarters of the way up an ascending list of sorted values of a sample. The 25th percentile (lower quartile) is one quarter of the way up this rank order.</p>
+            <p>&#160;</p>
+            <p>Percentile rank is the proportion of values in a distribution that a particular value is greater than or equal to. For example, if a pupil is taller than or as tall as 79% of his classmates then the percentile rank of his height is 79, i.e. he is in the 79th percentile of heights in his class.</p>
+            <p>&#160;</p>
+            <p><u>Definition</u>
+            </p>
+            <p>StatsDirect gives the option of two different methods for calculating quantiles; only the first method can be used with observation weights:-</p>
+            <p>&#160;</p>
+            <p style="font-weight: normal;"><b>Method 1</b>: This is a common method that emulates the inverse of the empirical probability distribution with averaging where there are discontinuities (<a href="../references/reference_list.htm">Hyndman and Fan, 1996</a>), This is also the universal default method in Stata:-</p>
+            <p style="font-style: normal;">Take a sorted vector of observations u(i=1 to n) with weights w(i = 1 to n) or weights each equal to one if the sample is unweighted.</p>
+            <p style="font-style: normal;">Then find i = the first index point that is larger than pn, where p is the proportion of the quantile and n is the sample size.</p>
+            <p style="font-style: normal;">
+                <img src="../generatedimages/equations/equation254.svg" alt="" class="mcReset" />
+            </p>
+            <p>&#160;</p>
+            <p style="font-weight: normal;"><b>Method 2</b>: This is the conventional definition used when calculating confidence intervals for quantiles (<a href="../references/reference_list.htm">Mood and Graybill, 1973</a>), This is also the universal default method in SPSS and Minitab:-</p>
+            <p style="font-weight: normal;">
+                <img src="../generatedimages/equations/equation255.svg" alt="" class="mcReset" />
+            </p>
+            <p style="font-style: normal;">- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), i is the order statistic, h is the fractional part of the order statistic (0 or 0.5), u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size.</p>
+        </div>
+        <p>
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p>StatsDirect gives the option of two different methods for calculating quantiles; only the first method can be used with observation weights:-</p>
-        <p>&#160;</p>
-        <p style="font-weight: normal;"><b>Method 1</b>: This is a common method that emulates the inverse of the empirical probability distribution with averaging where there are discontinuities (<a href="../references/reference_list.htm">Hyndman and Fan, 1996</a>), This is also the universal default method in Stata:-</p>
-        <p style="font-style: normal;">Take a sorted vector of observations u(i=1 to n) with weights w(i = 1 to n) or weights each equal to one if the sample is unweighted.</p>
-        <p style="font-style: normal;">Then find i = the first index point that is larger than pn, where p is the proportion of the quantile and n is the sample size.</p>
-        <p style="font-style: normal;">
-            <img src="../generatedimages/equations/equation254.svg" alt="" class="mcReset" />
-        </p>
-        <p>&#160;</p>
-        <p style="font-weight: normal;"><b>Method 2</b>: This is the conventional definition used when calculating confidence intervals for quantiles (<a href="../references/reference_list.htm">Mood and Graybill, 1973</a>), This is also the universal default method in SPSS and Minitab:-</p>
-        <p style="font-weight: normal;">
-            <img src="../generatedimages/equations/equation255.svg" alt="" class="mcReset" />
-        </p>
-        <p style="font-style: normal;">- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), i is the order statistic, h is the fractional part of the order statistic (0 or 0.5), u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size.</p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

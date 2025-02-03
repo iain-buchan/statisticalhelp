@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Nonparametric methods">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Nonparametric methods" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>ROC Curve Analysis (Area Under Curve) - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>ROC Curve Analysis (Area Under Curve) - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,88 +33,108 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#nonparametric_methods/roc.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor53"></a>ROC Curve Analysis</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Graphics_ROC</b>.</p>
-        <p>&#160;</p>
-        <p>This plots a Receiver Operating Characteristic (ROC) curve from two sets of raw data.</p>
-        <p>&#160;</p>
-        <p>ROC plots were first used to define detection cut-off points for radar equipment with different operators. These plots can be used in a similar way to define cut-off points for diagnostic tests, for example the level of prostate specific antigen in a blood sample indicating a diagnosis of prostatic carcinoma. Defining cut-off levels for diagnostic tests is a difficult process which should combine ethical and practical considerations with numerical evidence. It is wise to involve a statistician in studies of new diagnostic tests (<a href="../references/reference_list.htm">Altman, 1991</a>).</p>
-        <p>&#160;</p>
-        <p>StatsDirect requires two columns of data for each ROC plot, one with test results in cases where the condition tested for is known to be present and another for test results in known negative cases. Sensitivity (probability of +ve test when disease is present) is then plotted against 1-specificity (probability of +ve test when disease is absent). See <a href="../clinical_epidemiology/diagnostic.htm">diagnostic test</a> for more information.</p>
-        <p>&#160;</p>
-        <p>When you have a number of ROC curves to compare, the area under the curve is usually the best discriminator (<a href="../references/reference_list.htm">Metz, 1978</a>).</p>
-        <p>&#160;</p>
-        <p>StatsDirect calculates the area under the ROC curve directly by an extended trapezoidal rule (<a href="../references/reference_list.htm">Press et al. 1992</a>) and by a nonparametric method analogous to the Wilcoxon/Mann-Whitney test (<a href="../references/reference_list.htm">Hanley and McNeil 1982</a>). A confidence interval is constructed using DeLong’s variance estimate (<a href="../references/reference_list.htm">DeLong et al, 1988</a>).</p>
-        <p>&#160;</p>
-        <p><u>Example</u>
-        </p>
-        <p>From <a href="../references/reference_list.htm">Aziz et al. (1996)</a>.</p>
-        <p>Test workbook (SDI (conceived), SDI (not conceived)).</p>
-        <p>&#160;</p>
-        <p>The following are Sperm Deformity Index (SDI) values from semen samples of men in an infertility study. They are divided into a "condition" present group defined as those whose partners achieved pregnancy and "condition" absent where there was no pregnancy.</p>
-        <p>&#160;</p>
-        <p><u>SDI (conceived)</u>
-        </p>
-        <p>165, 140, 154, 139, 134, 154, 120, 133, 150, 146, 140, 114, 128, 131, 116, 128, 122, 129, 145, 117, 140, 149, 116, 147, 125, 149, 129, 157, 144, 123, 107, 129, 152, 164, 134, 120, 148, 151, 149, 138, 159, 169, 137, 151, 141, 145, 135, 135, 153, 125, 159, 148, 142, 130, 111, 140, 136, 142, 139, 137, 187, 154, 151, 149, 148, 157, 159, 143, 124, 141, 114, 136, 110, 129, 145, 132, 125, 149, 146, 138, 151, 147, 154, 147, 158, 156, 156, 128, 151, 138, 193, 131, 127, 129, 120, 159, 147, 159, 156, 143, 149, 160, 126, 136, 150, 136, 151, 140, 145, 140, 134, 140, 138, 144, 140, 140</p>
-        <p>&#160;</p>
-        <p><u>SDI (not conceived)</u>
-        </p>
-        <p>159, 136, 149, 156, 191, 169, 194, 182, 163, 152, 145, 176, 122, 141, 172, 162, 165, 184, 239, 178, 178, 164, 185, 154, 164, 140, 207, 214, 165, 183, 218, 142, 161, 168, 181, 162, 166, 150, 205, 163, 166, 176</p>
-        <p>&#160;</p>
-        <p>To analyse these data using StatsDirect you must first enter them into two columns in a workbook. Enter the number of plots as 1. Then select ROC from the graphics menu and select the appropriate columns for condition present and absent from the workbook. Leave the weighting option as 1 and leave the cut-off calculator as checked. You are then presented with the cut-off calculator, try pressing the up and down arrow keys to display diagnostic test statistics for different cut-offs. Then press "Reset" and "Ok". The ROC plot is then drawn with the optimised cut-off point marked. The plot should look like a stepped curve convex to the top left hand corner, if it is upside down then you have probably selected "condition present" and "condition absent" the wrong way around.</p>
-        <p>&#160;</p>
-        <p>For this example:</p>
-        <p>&#160;</p>
-        <p>The optimised cut-off for equally important sensitivity and specificity was calculated at 160 with these data. A cut-off of 161 was gained with sensitivity weighted twice as important as specificity. After a similar analysis of a larger study &gt; 160 was subsequently chosen as the SDI level for selecting patients for a type of infertility treatment.</p>
-        <p>&#160;</p>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor127"></a>ROC Curve Analysis</h1>
+            <p>&#160;</p>
+            <p>Menu location: <b>Graphics_ROC</b>.</p>
+            <p>&#160;</p>
+            <p>This plots a Receiver Operating Characteristic (ROC) curve from two sets of raw data.</p>
+            <p>&#160;</p>
+            <p>ROC plots were first used to define detection cut-off points for radar equipment with different operators. These plots can be used in a similar way to define cut-off points for diagnostic tests, for example the level of prostate specific antigen in a blood sample indicating a diagnosis of prostatic carcinoma. Defining cut-off levels for diagnostic tests is a difficult process which should combine ethical and practical considerations with numerical evidence. It is wise to involve a statistician in studies of new diagnostic tests (<a href="../references/reference_list.htm">Altman, 1991</a>).</p>
+            <p>&#160;</p>
+            <p>StatsDirect requires two columns of data for each ROC plot, one with test results in cases where the condition tested for is known to be present and another for test results in known negative cases. Sensitivity (probability of +ve test when disease is present) is then plotted against 1-specificity (probability of +ve test when disease is absent). See <a href="../clinical_epidemiology/diagnostic.htm">diagnostic test</a> for more information.</p>
+            <p>&#160;</p>
+            <p>When you have a number of ROC curves to compare, the area under the curve is usually the best discriminator (<a href="../references/reference_list.htm">Metz, 1978</a>).</p>
+            <p>&#160;</p>
+            <p>StatsDirect calculates the area under the ROC curve directly by an extended trapezoidal rule (<a href="../references/reference_list.htm">Press et al. 1992</a>) and by a nonparametric method analogous to the Wilcoxon/Mann-Whitney test (<a href="../references/reference_list.htm">Hanley and McNeil 1982</a>). A confidence interval is constructed using DeLong’s variance estimate (<a href="../references/reference_list.htm">DeLong et al, 1988</a>).</p>
+            <p>&#160;</p>
+            <p><u>Example</u>
+            </p>
+            <p>From <a href="../references/reference_list.htm">Aziz et al. (1996)</a>.</p>
+            <p>Test workbook (SDI (conceived), SDI (not conceived)).</p>
+            <p>&#160;</p>
+            <p>The following are Sperm Deformity Index (SDI) values from semen samples of men in an infertility study. They are divided into a "condition" present group defined as those whose partners achieved pregnancy and "condition" absent where there was no pregnancy.</p>
+            <p>&#160;</p>
+            <p><u>SDI (conceived)</u>
+            </p>
+            <p>165, 140, 154, 139, 134, 154, 120, 133, 150, 146, 140, 114, 128, 131, 116, 128, 122, 129, 145, 117, 140, 149, 116, 147, 125, 149, 129, 157, 144, 123, 107, 129, 152, 164, 134, 120, 148, 151, 149, 138, 159, 169, 137, 151, 141, 145, 135, 135, 153, 125, 159, 148, 142, 130, 111, 140, 136, 142, 139, 137, 187, 154, 151, 149, 148, 157, 159, 143, 124, 141, 114, 136, 110, 129, 145, 132, 125, 149, 146, 138, 151, 147, 154, 147, 158, 156, 156, 128, 151, 138, 193, 131, 127, 129, 120, 159, 147, 159, 156, 143, 149, 160, 126, 136, 150, 136, 151, 140, 145, 140, 134, 140, 138, 144, 140, 140</p>
+            <p>&#160;</p>
+            <p><u>SDI (not conceived)</u>
+            </p>
+            <p>159, 136, 149, 156, 191, 169, 194, 182, 163, 152, 145, 176, 122, 141, 172, 162, 165, 184, 239, 178, 178, 164, 185, 154, 164, 140, 207, 214, 165, 183, 218, 142, 161, 168, 181, 162, 166, 150, 205, 163, 166, 176</p>
+            <p>&#160;</p>
+            <p>To analyse these data using StatsDirect you must first enter them into two columns in a workbook. Enter the number of plots as 1. Then select ROC from the graphics menu and select the appropriate columns for condition present and absent from the workbook. Leave the weighting option as 1 and leave the cut-off calculator as checked. You are then presented with the cut-off calculator, try pressing the up and down arrow keys to display diagnostic test statistics for different cut-offs. Then press "Reset" and "Ok". The ROC plot is then drawn with the optimised cut-off point marked. The plot should look like a stepped curve convex to the top left hand corner, if it is upside down then you have probably selected "condition present" and "condition absent" the wrong way around.</p>
+            <p>&#160;</p>
+            <p>For this example:</p>
+            <p>&#160;</p>
+            <p>The optimised cut-off for equally important sensitivity and specificity was calculated at 160 with these data. A cut-off of 161 was gained with sensitivity weighted twice as important as specificity. After a similar analysis of a larger study &gt; 160 was subsequently chosen as the SDI level for selecting patients for a type of infertility treatment.</p>
+            <p>&#160;</p>
+            <p>
+                <img src="../resources/images/ebx_1266835018_517x365.gif" border="0" style="width: 517;height: 365;" />
+            </p>
+            <p><u>ROC Analysis</u>
+            </p>
+            <p>&#160;</p>
+            <p>Data set: SDI(+ve), SDI(-ve)</p>
+            <p>&#160;</p>
+            <p>Area under ROC curve by extended trapezoidal rule = 0.875411</p>
+            <p>&#160;</p>
+            <p>Wilcoxon estimate of area under ROC curve = 0.875411</p>
+            <p>DeLong standard error = 0.034862: 95% CI = 0.807082 to 0.943739</p>
+            <p>&#160;</p>
+            <p>Optimum cut-off point selected = 160.064</p>
+            <p>&#160;</p>
+            <table>
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td style="text-align: right;">Table at cut-off:</td>
+                    <td style="text-align: right;">a</td>
+                    <td style="text-align: right;">b</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">&#160;</td>
+                    <td style="text-align: right;">30</td>
+                    <td style="text-align: right;">5</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">&#160;</td>
+                    <td style="text-align: right;">&#160;</td>
+                    <td style="text-align: right;">&#160;</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">&#160;</td>
+                    <td style="text-align: right;">c</td>
+                    <td style="text-align: right;">d</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">&#160;</td>
+                    <td style="text-align: right;">12</td>
+                    <td style="text-align: right;">111</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>sensitivity (95% CI) = 0.714286 (0.554161 to 0.842809)</p>
+            <p>specificity (95% CI) = 0.956897 (0.902275 to 0.985858)</p>
+        </div>
         <p>
-            <img src="../resources/images/ebx_1266835018_517x365.gif" border="0" style="width: 517;height: 365;" />
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p><u>ROC Analysis</u>
-        </p>
-        <p>&#160;</p>
-        <p>Data set: SDI(+ve), SDI(-ve)</p>
-        <p>&#160;</p>
-        <p>Area under ROC curve by extended trapezoidal rule = 0.875411</p>
-        <p>&#160;</p>
-        <p>Wilcoxon estimate of area under ROC curve = 0.875411</p>
-        <p>DeLong standard error = 0.034862: 95% CI = 0.807082 to 0.943739</p>
-        <p>&#160;</p>
-        <p>Optimum cut-off point selected = 160.064</p>
-        <p>&#160;</p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-align: right;">Table at cut-off:</td>
-                <td style="text-align: right;">a</td>
-                <td style="text-align: right;">b</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">&#160;</td>
-                <td style="text-align: right;">30</td>
-                <td style="text-align: right;">5</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">&#160;</td>
-                <td style="text-align: right;">&#160;</td>
-                <td style="text-align: right;">&#160;</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">&#160;</td>
-                <td style="text-align: right;">c</td>
-                <td style="text-align: right;">d</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">&#160;</td>
-                <td style="text-align: right;">12</td>
-                <td style="text-align: right;">111</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>sensitivity (95% CI) = 0.714286 (0.554161 to 0.842809)</p>
-        <p>specificity (95% CI) = 0.956897 (0.902275 to 0.985858)</p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

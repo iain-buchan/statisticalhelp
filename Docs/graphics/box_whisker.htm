@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Drawing charts and graphs">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Drawing charts and graphs" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Box and Whisker Plot (Box Plot, Quantile Plot) - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Box and Whisker Plot (Box Plot, Quantile Plot) - StatsDirect</title>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -30,26 +33,46 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#graphics/box_whisker.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor7"></a>Box and Whisker Plot</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Graphics_Box and Whisker</b>.</p>
-        <p>&#160;</p>
-        <p>Box and Whisker <a href="text_vector.htm" class="MCTopicPopup MCTopicPopupHotSpot a">plots</a>, described by <a href="../references/reference_list.htm">Tukey (1977)</a>, give a pictorial representation of nonparametric descriptive statistics.</p>
-        <p>&#160;</p>
-        <p>In nonparametric terms, the central "box" represents the distance between the first and third quartiles with the median between them marked with a diamond, with the minimum as the origin of the leading "whisker" and with the maximum as the limit of the trailing "whisker".</p>
-        <p>&#160;</p>
-        <p>Note that some software plots the upper and lower hinge and not the upper and lower quartile in box and whisker plots. The upper hinge is the 3(n+1)/4th value whereas the upper quartile is the (3n+1)/4th value.</p>
-        <p>&#160;</p>
-        <p>This convention can also be extended to parametric representation of data using the arithmetic mean bounded by one standard deviation or by its confidence interval. StatsDirect enables you to choose one of these two parametric schemes or the nonparametric scheme for each plot. See <a href="../basic_descriptive_statistics/univariate_summary.htm">descriptive statistics</a>  for the formulae used.</p>
-        <p>&#160;</p>
-        <p>This is a useful way to present data to an audience; it is often easier to convey the central location and spread of values pictorially than by quoting a list of descriptive statistics.</p>
-        <p>&#160;</p>
-        <p>If you specify lower and upper gate values that lie between the limits of the box and within the range of the data then whiskers will be drawn as straight lines at the gate values and any data points outside those boundaries will be plotted as circles. This form of box and whisker plot is often used to represent outliers. If you check the fence option then gate values will be calculated automatically for each variable plotted. For the nonparametric plot, the fence values are defined as lower and upper quartiles minus and plus 1.5 times the interquartile range respectively. For the parametric plots, the fence values are defined as the mean plus and minus 2 standard deviations.</p>
-        <p>&#160;</p>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor147"></a>Box and Whisker Plot</h1>
+            <p>&#160;</p>
+            <p>Menu location: <b>Graphics_Box and Whisker</b>.</p>
+            <p>&#160;</p>
+            <p>Box and Whisker <a href="text_vector.htm" class="MCTopicPopup MCTopicPopupHotSpot a">plots</a>, described by <a href="../references/reference_list.htm">Tukey (1977)</a>, give a pictorial representation of nonparametric descriptive statistics.</p>
+            <p>&#160;</p>
+            <p>In nonparametric terms, the central "box" represents the distance between the first and third quartiles with the median between them marked with a diamond, with the minimum as the origin of the leading "whisker" and with the maximum as the limit of the trailing "whisker".</p>
+            <p>&#160;</p>
+            <p>Note that some software plots the upper and lower hinge and not the upper and lower quartile in box and whisker plots. The upper hinge is the 3(n+1)/4th value whereas the upper quartile is the (3n+1)/4th value.</p>
+            <p>&#160;</p>
+            <p>This convention can also be extended to parametric representation of data using the arithmetic mean bounded by one standard deviation or by its confidence interval. StatsDirect enables you to choose one of these two parametric schemes or the nonparametric scheme for each plot. See <a href="../basic_descriptive_statistics/univariate_summary.htm">descriptive statistics</a>  for the formulae used.</p>
+            <p>&#160;</p>
+            <p>This is a useful way to present data to an audience; it is often easier to convey the central location and spread of values pictorially than by quoting a list of descriptive statistics.</p>
+            <p>&#160;</p>
+            <p>If you specify lower and upper gate values that lie between the limits of the box and within the range of the data then whiskers will be drawn as straight lines at the gate values and any data points outside those boundaries will be plotted as circles. This form of box and whisker plot is often used to represent outliers. If you check the fence option then gate values will be calculated automatically for each variable plotted. For the nonparametric plot, the fence values are defined as lower and upper quartiles minus and plus 1.5 times the interquartile range respectively. For the parametric plots, the fence values are defined as the mean plus and minus 2 standard deviations.</p>
+            <p>&#160;</p>
+            <p>
+                <img src="../resources/images/boxwhisker.gif" width="517" height="365" border="0" />
+            </p>
+            <p>&#160;</p>
+            <p>See also the <a href="box_whisker_text.htm">Box and whisker plot (text)</a>.</p>
+        </div>
         <p>
-            <img src="../resources/images/boxwhisker.gif" width="517" height="365" border="0" />
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p>&#160;</p>
-        <p>See also the <a href="box_whisker_text.htm">Box and whisker plot (text)</a>.</p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

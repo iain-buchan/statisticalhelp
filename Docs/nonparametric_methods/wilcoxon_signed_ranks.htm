@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Nonparametric methods">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Nonparametric methods" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Wilcoxon Signed Ranks Test - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Wilcoxon Signed Ranks Test - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -31,114 +32,134 @@
     </head>
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#nonparametric_methods/wilcoxon_signed_ranks.htm">Open topic with navigation</a>
-        </p><a name="kanchor4"></a>
-        <h1>Wilcoxon's Signed Ranks Test</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Analysis_Nonparametric_Wilcoxon Signed Ranks</b>.</p>
-        <p>&#160;</p>
-        <p>This is a method for the comparison of a pair of samples.</p>
-        <p>&#160;</p>
-        <p>The Wilcoxon signed ranks test statistic T<sup>+</sup> is the sum of the ranks of the positive, non-zero differences (D<sub>i</sub>) between a pair of samples.</p>
-        <p>&#160;</p>
-        <p>Assumptions of tests on T<sup>+</sup>:</p>
-        <ul>
-            <li>distribution of each D<sub>i</sub> is symmetrical</li>
-            <li>all D<sub>i</sub> are mutually independent</li>
-            <li>all D<sub>i</sub> have the same mean</li>
-            <li>measurement scale of D<sub>i</sub> is at least interval</li>
-        </ul>
-        <p>&#160;</p>
-        <p>In most situations you should use a two sided test. A two sided test is based upon the null hypothesis that the common median of the differences is zero. The approximate alternative hypothesis in this case is that the differences tend not to be zero. For a lower side test the approximate alternative hypothesis is that differences tend to be less than zero. For an upper side test the approximate alternative hypothesis is that differences tend to be greater than zero.</p>
-        <p>&#160;</p>
-        <p>A confidence interval is constructed for the difference between the population medians. In sample terms this is called the confidence interval for the median or mean difference. It is also known as the Hodges-Lehmann estimate of shift. The assumptions of this method are:</p>
-        <ul>
-            <li>distribution of each D<sub>i</sub> is symmetrical</li>
-            <li>all D<sub>i</sub> are mutually independent</li>
-            <li>all D<sub>i</sub> have the same median</li>
-            <li>measurement scale of D<sub>i</sub> is at least interval</li>
-        </ul>
-        <p>&#160;</p>
-        <p><u>Technical Validation</u>
         </p>
-        <p>Exact permutational probability associated with the test statistic is calculated for sample sizes of less than 50. A normal approximation is used with sample sizes of 50 or more. Note that StatsDirect uses more accurate methods than some other statistical software for calculating probabilities associated with this statistic, therefore, you may notice a difference in results, especially where there are tied observations - you should find that StatsDirect and StatExact give the same answers. Confidence limits are calculated using critical values for k with sample sizes up to 30 or by calculating K* for samples with more than 30 observations (<a href="../references/reference_list.htm">Conover, 1999; Neumann, 1988</a>).</p>
-        <p>&#160;</p>
-        <p><u>Example</u>
-        </p>
-        <p>From <a href="../references/reference_list.htm">Conover (1999)</a>.</p>
-        <p>Test workbook (Nonparametric worksheet: First Born, Second Born).</p>
-        <p>&#160;</p>
-        <p>The following data represent agressivity scores for 12 pairs of monozygotic twins.</p>
-        <p>&#160;</p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;text-align: right;">First Born</td>
-                <td style="text-decoration: underline;text-align: right;">Second Born</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">86</td>
-                <td style="text-align: right;">88</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">71</td>
-                <td style="text-align: right;">77</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">77</td>
-                <td style="text-align: right;">76</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">68</td>
-                <td style="text-align: right;">64</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">91</td>
-                <td style="text-align: right;">96</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">72</td>
-                <td style="text-align: right;">72</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">77</td>
-                <td style="text-align: right;">65</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">91</td>
-                <td style="text-align: right;">90</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">70</td>
-                <td style="text-align: right;">65</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">71</td>
-                <td style="text-align: right;">80</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">88</td>
-                <td style="text-align: right;">81</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">87</td>
-                <td style="text-align: right;">72</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select the Wilcoxon Signed Ranks from the Nonparametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Firstborn" and "Second twin" when prompted for data.</p>
-        <p>&#160;</p>
-        <p>For this example:</p>
-        <p>&#160;</p>
-        <p>two sided P = 0.4756</p>
-        <p>median difference = 1.5</p>
-        <p>95.8% confidence interval for the difference between population medians = -2.5 to 6.5</p>
-        <p>&#160;</p>
-        <p>Assuming that the paired differences come from a symmetrical distribution then these results show that one group did not tend to yield different results to the other group which was paired with it, i.e. there was no statistically significant difference between the agressivity scores of the first born as compared with the second twin. The extent of this lack of difference is shown well by the confidence interval which clearly encompasses zero. Note that the quoted 95.1% confidence interval is as close as you can get to 95% because of the mathematics involved in nonparametric methods like this.</p>
-        <p>&#160;</p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        <div role="main" id="mc-main-content"><a name="kanchor257"></a>
+            <h1>Wilcoxon's Signed Ranks Test</h1>
+            <p>&#160;</p>
+            <p>Menu location: <b>Analysis_Nonparametric_Wilcoxon Signed Ranks</b>.</p>
+            <p>&#160;</p>
+            <p>This is a method for the comparison of a pair of samples.</p>
+            <p>&#160;</p>
+            <p>The Wilcoxon signed ranks test statistic T<sup>+</sup> is the sum of the ranks of the positive, non-zero differences (D<sub>i</sub>) between a pair of samples.</p>
+            <p>&#160;</p>
+            <p>Assumptions of tests on T<sup>+</sup>:</p>
+            <ul>
+                <li>distribution of each D<sub>i</sub> is symmetrical</li>
+                <li>all D<sub>i</sub> are mutually independent</li>
+                <li>all D<sub>i</sub> have the same mean</li>
+                <li>measurement scale of D<sub>i</sub> is at least interval</li>
+            </ul>
+            <p>&#160;</p>
+            <p>In most situations you should use a two sided test. A two sided test is based upon the null hypothesis that the common median of the differences is zero. The approximate alternative hypothesis in this case is that the differences tend not to be zero. For a lower side test the approximate alternative hypothesis is that differences tend to be less than zero. For an upper side test the approximate alternative hypothesis is that differences tend to be greater than zero.</p>
+            <p>&#160;</p>
+            <p>A confidence interval is constructed for the difference between the population medians. In sample terms this is called the confidence interval for the median or mean difference. It is also known as the Hodges-Lehmann estimate of shift. The assumptions of this method are:</p>
+            <ul>
+                <li>distribution of each D<sub>i</sub> is symmetrical</li>
+                <li>all D<sub>i</sub> are mutually independent</li>
+                <li>all D<sub>i</sub> have the same median</li>
+                <li>measurement scale of D<sub>i</sub> is at least interval</li>
+            </ul>
+            <p>&#160;</p>
+            <p><u>Technical Validation</u>
+            </p>
+            <p>Exact permutational probability associated with the test statistic is calculated for sample sizes of less than 50. A normal approximation is used with sample sizes of 50 or more. Note that StatsDirect uses more accurate methods than some other statistical software for calculating probabilities associated with this statistic, therefore, you may notice a difference in results, especially where there are tied observations - you should find that StatsDirect and StatExact give the same answers. Confidence limits are calculated using critical values for k with sample sizes up to 30 or by calculating K* for samples with more than 30 observations (<a href="../references/reference_list.htm">Conover, 1999; Neumann, 1988</a>).</p>
+            <p>&#160;</p>
+            <p><u>Example</u>
+            </p>
+            <p>From <a href="../references/reference_list.htm">Conover (1999)</a>.</p>
+            <p>Test workbook (Nonparametric worksheet: First Born, Second Born).</p>
+            <p>&#160;</p>
+            <p>The following data represent agressivity scores for 12 pairs of monozygotic twins.</p>
+            <p>&#160;</p>
+            <table cellspacing="0" style="caption-side: top;">
+                <col />
+                <col />
+                <tr>
+                    <td style="text-decoration: underline;text-align: right;">First Born</td>
+                    <td style="text-decoration: underline;text-align: right;">Second Born</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">86</td>
+                    <td style="text-align: right;">88</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">71</td>
+                    <td style="text-align: right;">77</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">77</td>
+                    <td style="text-align: right;">76</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">68</td>
+                    <td style="text-align: right;">64</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">91</td>
+                    <td style="text-align: right;">96</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">72</td>
+                    <td style="text-align: right;">72</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">77</td>
+                    <td style="text-align: right;">65</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">91</td>
+                    <td style="text-align: right;">90</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">70</td>
+                    <td style="text-align: right;">65</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">71</td>
+                    <td style="text-align: right;">80</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">88</td>
+                    <td style="text-align: right;">81</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">87</td>
+                    <td style="text-align: right;">72</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select the Wilcoxon Signed Ranks from the Nonparametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Firstborn" and "Second twin" when prompted for data.</p>
+            <p>&#160;</p>
+            <p>For this example:</p>
+            <p>&#160;</p>
+            <p>two sided P = 0.4756</p>
+            <p>median difference = 1.5</p>
+            <p>95.8% confidence interval for the difference between population medians = -2.5 to 6.5</p>
+            <p>&#160;</p>
+            <p>Assuming that the paired differences come from a symmetrical distribution then these results show that one group did not tend to yield different results to the other group which was paired with it, i.e. there was no statistically significant difference between the agressivity scores of the first born as compared with the second twin. The extent of this lack of difference is shown well by the confidence interval which clearly encompasses zero. Note that the quoted 95.1% confidence interval is as close as you can get to 95% because of the mathematics involved in nonparametric methods like this.</p>
+            <p>&#160;</p>
+            <p><a href="../basics/p_values.htm">P values</a>
+            </p>
+            <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+            </p>
+        </div>
+        <p>
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

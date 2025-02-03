@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Preparing your data|Cleaning and encoding">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Preparing your data|Cleaning and encoding" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Clearing Out Missing Data in StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Clearing Out Missing Data in StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,153 +33,173 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#data_preparation/clear_missing_data.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor1"></a>Clear Missing Data</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Data_Cleaning and Encoding_Clear Missing Data</b></p>
-        <p>&#160;</p>
-        <p>This function enables you to clear missing data values from a selection of cells, and to optionally preserve the matching of rows in that selection.</p>
-        <p>&#160;</p>
-        <p>For example, you might want to ignore incomplete records. Here, each row is a record for one individual, so you would normally choose to preserve the matching of rows when prompted:</p>
-        <p>&#160;</p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;">Sex</td>
-                <td style="text-decoration: underline;">Age</td>
-                <td style="text-decoration: underline;">Score</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>23</td>
-                <td>2.3</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>33</td>
-                <td>3.1</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>19</td>
-                <td>&#160;</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>21</td>
-                <td>1.9</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>43</td>
-                <td>&#160;</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>39</td>
-                <td>5.0</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>26</td>
-                <td>1.1</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>Clearing missing data with the row matching option ON would produce:</p>
-        <p>&#160;</p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;">Sex</td>
-                <td style="text-decoration: underline;">Age</td>
-                <td style="text-decoration: underline;">Score</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>23</td>
-                <td>2.3</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>33</td>
-                <td>3.1</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>21</td>
-                <td>1.9</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>39</td>
-                <td>5.0</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>26</td>
-                <td>1.1</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>…and clearing missing data with the row matching option OFF would produce:</p>
-        <p>&#160;</p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;">Sex</td>
-                <td style="text-decoration: underline;">Age</td>
-                <td style="text-decoration: underline;">Score</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>23</td>
-                <td>2.3</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>33</td>
-                <td>3.1</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>19</td>
-                <td>1.9</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>21</td>
-                <td>5.0</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>43</td>
-                <td>1.1</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>39</td>
-                <td>&#160;</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>26</td>
-                <td>&#160;</td>
-            </tr>
-        </table>
-        <p>&#160;</p>
-        <p>StatsDirect treats the following number, characters and text as missing data:</p>
-        <p>3E+300</p>
-        <p>*</p>
-        <p>.</p>
-        <p>missing</p>
-        <p>&lt;just spaces&gt;</p>
-        <p>&#160;</p>
-        <p>You may additionally define missing numbers or text codes when prompted. This is often useful when you have been given data with missing values coded in a specific way, e.g. a score of -1 in the example above.</p>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor132"></a>Clear Missing Data</h1>
+            <p>&#160;</p>
+            <p>Menu location: <b>Data_Cleaning and Encoding_Clear Missing Data</b></p>
+            <p>&#160;</p>
+            <p>This function enables you to clear missing data values from a selection of cells, and to optionally preserve the matching of rows in that selection.</p>
+            <p>&#160;</p>
+            <p>For example, you might want to ignore incomplete records. Here, each row is a record for one individual, so you would normally choose to preserve the matching of rows when prompted:</p>
+            <p>&#160;</p>
+            <table>
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td style="text-decoration: underline;">Sex</td>
+                    <td style="text-decoration: underline;">Age</td>
+                    <td style="text-decoration: underline;">Score</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>23</td>
+                    <td>2.3</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>33</td>
+                    <td>3.1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>19</td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>21</td>
+                    <td>1.9</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>43</td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>39</td>
+                    <td>5.0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>26</td>
+                    <td>1.1</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>Clearing missing data with the row matching option ON would produce:</p>
+            <p>&#160;</p>
+            <table cellspacing="0" style="caption-side: top;">
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td style="text-decoration: underline;">Sex</td>
+                    <td style="text-decoration: underline;">Age</td>
+                    <td style="text-decoration: underline;">Score</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>23</td>
+                    <td>2.3</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>33</td>
+                    <td>3.1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>21</td>
+                    <td>1.9</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>39</td>
+                    <td>5.0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>26</td>
+                    <td>1.1</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>…and clearing missing data with the row matching option OFF would produce:</p>
+            <p>&#160;</p>
+            <table cellspacing="0" style="caption-side: top;">
+                <col />
+                <col />
+                <col />
+                <tr>
+                    <td style="text-decoration: underline;">Sex</td>
+                    <td style="text-decoration: underline;">Age</td>
+                    <td style="text-decoration: underline;">Score</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>23</td>
+                    <td>2.3</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>33</td>
+                    <td>3.1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>19</td>
+                    <td>1.9</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>21</td>
+                    <td>5.0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>43</td>
+                    <td>1.1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>39</td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>26</td>
+                    <td>&#160;</td>
+                </tr>
+            </table>
+            <p>&#160;</p>
+            <p>StatsDirect treats the following number, characters and text as missing data:</p>
+            <p>3E+300</p>
+            <p>*</p>
+            <p>.</p>
+            <p>missing</p>
+            <p>&lt;just spaces&gt;</p>
+            <p>&#160;</p>
+            <p>You may additionally define missing numbers or text codes when prompted. This is often useful when you have been given data with missing values coded in a specific way, e.g. a score of -1 in the example above.</p>
+        </div>
+        <p>
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
+        </p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

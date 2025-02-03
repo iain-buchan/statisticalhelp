@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Probability distributions">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Probability distributions" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Binomial Distribution - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Binomial Distribution - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,48 +33,68 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#distributions/binomial.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor232"></a>Binomial Distribution</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Analysis_Distributions_Binomial</b>.</p>
-        <p>&#160;</p>
-        <p>A binomial distribution occurs when there are only two mutually exclusive possible outcomes, for example the outcome of tossing a coin is heads or tails. It is usual to refer to one outcome as "success" and the other outcome as "failure".</p>
-        <p>&#160;</p>
-        <p>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor218"></a>Binomial Distribution</h1>
+            <p>&#160;</p>
+            <p>Menu location: <b>Analysis_Distributions_Binomial</b>.</p>
+            <p>&#160;</p>
+            <p>A binomial distribution occurs when there are only two mutually exclusive possible outcomes, for example the outcome of tossing a coin is heads or tails. It is usual to refer to one outcome as "success" and the other outcome as "failure".</p>
+            <p>&#160;</p>
+            <p>
             If a coin is tossed n times then a binomial distribution can be used to determine the probability, P(r) of exactly r successes:</p>
+            <p>
+                <img src="../generatedimages/equations/equation117.svg" alt="" class="mcReset" />
+            </p>
+            <p>Here p is the probability of success on each trial, in many situations this will be 0.5, for example the chance of a coin coming up heads is 50:50/equal/p=0.5. The assumptions of above calculation are that the n events are mutually exclusive, independent and randomly selected from a binomial population. Note that ! is a factorial and 0! is 1 as anything to the power of 0 is 1.</p>
+            <p>&#160;</p>
+            <p>In many situations the probability of interest is not that associated with exactly r successes but instead it is the probability of r or more (≥r) or at most r (≤r) successes. Here the cumulative probability is calculated:</p>
+            <p>
+                <img src="../generatedimages/equations/equation118.svg" alt="" class="mcReset" />
+            </p>
+            <p>&#160;</p>
+            <p>The mean of a binomial distribution is p and its standard deviation is sqr(p(1-p)/n). The shape of a binomial distribution is symmetrical when p=0.5 or when n is large.</p>
+            <p>
+                <img src="../resources/images/binomialchart.gif" width="220" height="111" border="0" />
+            </p>
+            <p>
+                <img src="../resources/images/binomialchart2.gif" width="213" height="117" border="0" />
+            </p>
+            <p>When n is large and p is close to 0.5, the binomial distribution can be approximated from the standard normal distribution; this is a special case of the <a href="../basic_descriptive_statistics/standard_deviation.htm">central limit theorem</a>:</p>
+            <p>
+                <img src="../generatedimages/equations/equation119.svg" alt="" class="mcReset" />
+            </p>
+            <p>&#160;</p>
+            <p>Please note that confidence intervals for binomial proportions with p = 0.5 are given with the <a href="../exact_tests_on_counts/sign.htm">sign test</a>.</p>
+            <p>&#160;</p>
+            <p><u>Technical Validation</u>
+            </p>
+            <p>StatsDirect calculates the probability for exactly r and the cumulative probabilities for (≥,≤) r successes in n trials. The gamma function is a generalised factorial function and it is used to calculate each binomial probability. The core algorithm evaluates the logarithm of the gamma function (<a href="../references/reference_list.htm">Cody and Hillstrom, 1967; Abramowitz and Stegun 1972; Macleod, 1989</a>) to the limit of 64 bit precision.</p>
+            <p>&#160;</p>
+            <p>Γ(*) is the gamma function:</p>
+            <p>
+                <img src="../generatedimages/equations/equation120.svg" alt="" class="mcReset" />
+            </p>
+            <p>Γ(1)=1</p>
+            <p>Γ(x+1)=xΓ(x)</p>
+            <p>Γ(n)=(n-1)!</p>
+        </div>
         <p>
-            <img src="../generatedimages/equations/equation117.svg" alt="" class="mcReset" />
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p>Here p is the probability of success on each trial, in many situations this will be 0.5, for example the chance of a coin coming up heads is 50:50/equal/p=0.5. The assumptions of above calculation are that the n events are mutually exclusive, independent and randomly selected from a binomial population. Note that ! is a factorial and 0! is 1 as anything to the power of 0 is 1.</p>
-        <p>&#160;</p>
-        <p>In many situations the probability of interest is not that associated with exactly r successes but instead it is the probability of r or more (≥r) or at most r (≤r) successes. Here the cumulative probability is calculated:</p>
-        <p>
-            <img src="../generatedimages/equations/equation118.svg" alt="" class="mcReset" />
-        </p>
-        <p>&#160;</p>
-        <p>The mean of a binomial distribution is p and its standard deviation is sqr(p(1-p)/n). The shape of a binomial distribution is symmetrical when p=0.5 or when n is large.</p>
-        <p>
-            <img src="../resources/images/binomialchart.gif" width="220" height="111" border="0" />
-        </p>
-        <p>
-            <img src="../resources/images/binomialchart2.gif" width="213" height="117" border="0" />
-        </p>
-        <p>When n is large and p is close to 0.5, the binomial distribution can be approximated from the standard normal distribution; this is a special case of the <a href="../basic_descriptive_statistics/standard_deviation.htm">central limit theorem</a>:</p>
-        <p>
-            <img src="../generatedimages/equations/equation119.svg" alt="" class="mcReset" />
-        </p>
-        <p>&#160;</p>
-        <p>Please note that confidence intervals for binomial proportions with p = 0.5 are given with the <a href="../exact_tests_on_counts/sign.htm">sign test</a>.</p>
-        <p>&#160;</p>
-        <p><u>Technical Validation</u>
-        </p>
-        <p>StatsDirect calculates the probability for exactly r and the cumulative probabilities for (≥,≤) r successes in n trials. The gamma function is a generalised factorial function and it is used to calculate each binomial probability. The core algorithm evaluates the logarithm of the gamma function (<a href="../references/reference_list.htm">Cody and Hillstrom, 1967; Abramowitz and Stegun 1972; Macleod, 1989</a>) to the limit of 64 bit precision.</p>
-        <p>&#160;</p>
-        <p>Γ(*) is the gamma function:</p>
-        <p>
-            <img src="../generatedimages/equations/equation120.svg" alt="" class="mcReset" />
-        </p>
-        <p>Γ(1)=1</p>
-        <p>Γ(x+1)=xΓ(x)</p>
-        <p>Γ(n)=(n-1)!</p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>

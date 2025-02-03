@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Meta-analysis">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-toc-path="Meta-analysis" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Forest (Meta-analysis, Cochrane, Blobogram) Plot - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Forest (Meta-analysis, Cochrane, Blobogram) Plot - StatsDirect</title>
-        <script type="text/javascript">
-        </script>
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
         <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
         </script>
@@ -32,27 +33,47 @@
     <body>
         <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#graphics/forest.htm">Open topic with navigation</a>
         </p>
-        <h1><a name="kanchor228"></a>Forest (Meta-analysis) Plot</h1>
-        <p>&#160;</p>
-        <p>Menu location: <b>Graphics_Forest (Cochrane)</b>.</p>
-        <p>&#160;</p>
-        <p>This plots a series of lines and symbols representing a meta-analysis or overview analysis.</p>
-        <p>&#160;</p>
-        <p>StatsDirect uses a line to represent the confidence interval of an effect (e.g. odds ratio) estimate. The effect estimate is marked with a solid black square. The size of the square represents the weight that the corresponding study exerts in the meta-analysis; this is the Mantel-Haenszel weight.</p>
-        <p>&#160;</p>
-        <p>The pooled estimate is marked with an unfilled diamond that has an ascending dotted line from its upper point. Confidence intervals of pooled estimates are displayed as a horizontal line through the diamond; this line might be contained within the diamond if the confidence interval is narrow. You may define more than one pooled effect estimate to represent sub-groups (use a value &gt; 0 in the pooling indicator to do this).</p>
-        <p>&#160;</p>
-        <p>To prepare a forest plot in StatsDirect you must first enter a list of effect estimates in a workbook. You must also prepare matching columns of lower and upper confidence limits. Thus we have three columns of equal length in a workbook for these data. You can also prepare a matching column of sample sizes or weights but this is optional.</p>
-        <p>&#160;</p>
-        <p>A further optional column can be used to indicate which of the effect estimates and their confidence limits are pooled. A pooling indicator of 0 represents an individual study, &lt; 0 (e.g. -1) indicates an overall pooled result (there should be only one) and &gt; 0 (e.g. 1) indicates a pooled subgroup. If no pooling indicator variable is selected then all are assumed to be individual studies.</p>
+        <div role="main" id="mc-main-content">
+            <h1><a name="kanchor16"></a>Forest (Meta-analysis) Plot</h1>
+            <p>&#160;</p>
+            <p>Menu location: <b>Graphics_Forest (Cochrane)</b>.</p>
+            <p>&#160;</p>
+            <p>This plots a series of lines and symbols representing a meta-analysis or overview analysis.</p>
+            <p>&#160;</p>
+            <p>StatsDirect uses a line to represent the confidence interval of an effect (e.g. odds ratio) estimate. The effect estimate is marked with a solid black square. The size of the square represents the weight that the corresponding study exerts in the meta-analysis; this is the Mantel-Haenszel weight.</p>
+            <p>&#160;</p>
+            <p>The pooled estimate is marked with an unfilled diamond that has an ascending dotted line from its upper point. Confidence intervals of pooled estimates are displayed as a horizontal line through the diamond; this line might be contained within the diamond if the confidence interval is narrow. You may define more than one pooled effect estimate to represent sub-groups (use a value &gt; 0 in the pooling indicator to do this).</p>
+            <p>&#160;</p>
+            <p>To prepare a forest plot in StatsDirect you must first enter a list of effect estimates in a workbook. You must also prepare matching columns of lower and upper confidence limits. Thus we have three columns of equal length in a workbook for these data. You can also prepare a matching column of sample sizes or weights but this is optional.</p>
+            <p>&#160;</p>
+            <p>A further optional column can be used to indicate which of the effect estimates and their confidence limits are pooled. A pooling indicator of 0 represents an individual study, &lt; 0 (e.g. -1) indicates an overall pooled result (there should be only one) and &gt; 0 (e.g. 1) indicates a pooled subgroup. If no pooling indicator variable is selected then all are assumed to be individual studies.</p>
+            <p>
+                <img src="../resources/images/forest.gif" width="517" height="365" border="0" />
+            </p>
+            <p>
+                <img src="../resources/images/forest2.gif" width="517" height="475" border="0" />
+            </p>
+            <p>This plot can be put to other uses. Please note that you can annotate it using an external presentation package such as Microsoft Powerpoint. To annotate a StatsDirect graph in Microsoft Word just <a href="../menus/copy.htm">copy</a> it from StatsDirect to Word using the clipboard and double click on it in Word.</p>
+            <p>&#160;</p>
+            <p>Note that <a href="../meta_analysis/labbe.htm">L'Abbé plots</a> can be more useful that the plots above for exploring the heterogeneity of effects in a meta-analysis (<a href="../references/reference_list.htm">Song, 1999</a>).</p>
+        </div>
         <p>
-            <img src="../resources/images/forest.gif" width="517" height="365" border="0" />
+            <MadCap:pageFooter>
+                <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                </p>
+            </MadCap:pageFooter>
         </p>
-        <p>
-            <img src="../resources/images/forest2.gif" width="517" height="475" border="0" />
-        </p>
-        <p>This plot can be put to other uses. Please note that you can annotate it using an external presentation package such as Microsoft Powerpoint. To annotate a StatsDirect graph in Microsoft Word just <a href="../menus/copy.htm">copy</a> it from StatsDirect to Word using the clipboard and double click on it in Word.</p>
-        <p>&#160;</p>
-        <p>Note that <a href="../meta_analysis/labbe.htm">L'Abbé plots</a> can be more useful that the plots above for exploring the heterogeneity of effects in a meta-analysis (<a href="../references/reference_list.htm">Song, 1999</a>).</p>
     </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
 </html>
