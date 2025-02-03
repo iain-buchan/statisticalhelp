@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Probability distributions">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Spearman's rho Distribution - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#distributions/rho.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor58"></a>Spearman's Rho and Hotelling-Pabst T distribution</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Distributions_Spearman's rho</b>.</p>
+        <p>&#160;</p>
+        <p>Given a value for the Hotelling-Pabst test statistic (T) or Spearman's rho (ρ) this function calculates the probability of obtaining a value greater than or equal to T.</p>
+        <p>&#160;</p>
+        <p>For two rankings (x1,x2...xn and y1,y2...yn) of n objects without ties:</p>
+        <p>
+            <img src="../generatedimages/equations/equation113.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>T is related to the <a href="../nonparametric_methods/spearman.htm">Spearman rank correlation coefficient</a> (ρ) by:</p>
+        <p>
+            <img src="../generatedimages/equations/equation114.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Probabilities are calculated by summation across all permutations when n = 10 and by and Edgeworth series approximation when n &gt; 10 (<a href="../references/reference_list.htm">Best and Roberts, 1975</a>). The exact calculation employs a corrected version of the Best and Roberts (1975) algorithm. The Edgeworth series results for n &gt; 10 are accurate to at least four decimal places.</p>
+        <p>&#160;</p>
+        <p>The inverse is calculated by finding the largest value of T that gives a calculated probability (using the method above) closest to but not less than the P value entered.</p>
+    </body>
+</html>

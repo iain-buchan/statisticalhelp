@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Clinical epidemiology calculations">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <MadCap:keyword term="Anthropometric standardization;Z scores (LMS: child growth);Growth charts;BMI z score;Height z score;Weight z score;Head circumference z score;Skin fold z scores;Child growth;Standard deviation scores (child growth)" /><title>Anthropometric Standardization (Growth Charts) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#data_preparation/growth_charts.htm">Open topic with navigation</a>
+        </p>
+        <h1>Anthropometric Standardization (Growth Charts)</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Transforming and Deriving_Anthropometric Standardization; Clinical Epidemiology_Growth Charts</b></p>
+        <p>&#160;</p>
+        <p>This function provides standard deviation scores (z scores) for common anthropometric measures in children, such as height, weight, and BMI, with reference to British, US&#160;and WHO growth standards.</p>
+        <p>&#160;</p>
+        <p>The method of standardisation is LMS (lambda, mu, sigma) of <a href="../references/reference_list.htm">Cole et al. (1992)</a> with extensions (<a href="../references/reference_list.htm">World Health Organisation 2006, 2007; Vidmar et al. 2013</a>).</p>
+        <p>&#160;</p>
+        <p>You provide:</p>
+        <ul>
+            <li> the measure (e.g. height) that needs standardising to make it comparable across children of different ages<sup>*</sup>;</li>
+            <li> the age<sup>*</sup> of the child (optionally with gestational age for some growth charts to adjust for the 'catch-up growth' of children born before 40 weeks);</li>
+            <li> the sex of the child; and</li>
+            <li> a reference standard appropriate for your study population (the available reference standards are described below).</li>
+        </ul>
+        <p>&#160;</p>
+        <p>[<sup>*</sup> weight can be standardised for length or height as well as age: see reference standards below]</p>
+        <p>&#160;</p>
+        <p>StatsDirect returns the z score for the measure, which is the number of standard deviations the child's measurement is from the average child of equivalent age (+ gestational age) and sex in the reference population.</p>
+        <p>&#160;</p>
+        <p>The standard deviation score z ranges from -5 to +5 because StatsDirect considers more extreme values to be erroneous, so returns them as missing values.</p>
+        <p>&#160;</p>
+        <p>In terms of percentiles: z = 0 is the 50th percentile, or exactly average; z = 1 would be the 84th percentile and z = -1 would be the 16th percentile. The percentile is calculated using the standard normal distribution function (lower tail), which is the proportion of normal children expected to have that measurement or a lower measurement.</p>
+        <p>&#160;</p>
+        <p>For BMI, in addition to a z score, StatsDirect returns a category [G3 Thin = grade 3 thinness; G2 Thin = grade 2 thinness; G1 Thin = grade 1 thinness; Normal = normal weight; Overweight = overweight; Obese = obese]. The adult equivalent BMI cut-off levels for these categories are: &lt;16 = G3 Thin; 16 to &lt;17 = G2 Thin; 17 to &lt;18.5 = G1 Thin; 18.5 to &lt;25 = Normal; 25 to &lt;30 = Overweight; &gt;30 = Obese.</p>
+        <p>&#160;</p>
+        <p>The growth reference standards included are:</p>
+        <p>&#160;</p>
+        <p><u>British Growth Reference 1990: UK</u>
+        </p>
+        <p>Height/length (0-23 years)<sup>*</sup></p>
+        <p>Weight (0-23 years)<sup>**</sup></p>
+        <p>BMI (0-23 years)<sup>*</sup></p>
+        <p>Head circumference (0-18 years for males, 0-17 years for females)<sup>**</sup></p>
+        <p>Sitting height (0-23 years)</p>
+        <p>Leg length (0-23 years)</p>
+        <p>Waist circumference (3-17 years)</p>
+        <p>Body fat percentage (4.75-19.83 years)</p>
+        <p>&#160;</p>
+        <p>[<sup>*</sup> can be adjusted for gestational age from 33 weeks; or <sup>**</sup> 23 weeks]</p>
+        <p>&#160;</p>
+        <p><u>Centres for Disease Control (CDC) 2000: US</u>
+        </p>
+        <p>Length (0-35.5 months)</p>
+        <p>Height (2-20 years)</p>
+        <p>Weight (0-20 years) or (45-103.5 cm length) or (77-121.5 cm height)</p>
+        <p>BMI (2-20 years)</p>
+        <p>Head circumference (0-36 months)</p>
+        <p>&#160;</p>
+        <p style="text-decoration: underline;">World Health Organisation (WHO) 2007: Term gestation</p>
+        <p>Height/length (0-19 years)</p>
+        <p>Weight (0-10 years) or (45-110 cm length) or 65-120 cm height)</p>
+        <p>BMI (0-19 years)</p>
+        <p>Head circumference (0-5 years)</p>
+        <p>Arm circumference (0.25-5 years)</p>
+        <p>Subscapular skin fold (0.25-5 years)</p>
+        <p>Triceps skin fold (0.25-5 years)</p>
+        <p>&#160;</p>
+        <p style="text-decoration: underline;">WHO 2007: Pre-term</p>
+        <p>Height/length (0-20 years)<sup>*</sup></p>
+        <p>Weight (0-20 years)<sup>**</sup></p>
+        <p>BMI (0.038-20 years)</p>
+        <p>Head circumference (0-18 years for males, 0-17 years for females)<sup>**</sup></p>
+        <p>&#160;</p>
+        <p>[<sup>*</sup> can be adjusted for gestational age from 25 weeks; or <sup>**</sup> 23 weeks]</p>
+        <p>&#160;</p>
+        <p style="text-decoration: underline;">WHO 2009: Term</p>
+        <p>Height/length (0-20 years)<sup>*</sup></p>
+        <p>Weight (0-20 years)<sup>*</sup></p>
+        <p>BMI (0.038-20 years)</p>
+        <p>Head circumference (0-18 years for males, 0-17 years for females)<sup>*</sup></p>
+        <p>&#160;</p>
+        <p>[<sup>*</sup> can be adjusted for gestational age from 37 weeks]</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Other worksheet: BMI, Age (Years), Sex).</p>
+        <p>&#160;</p>
+        <p>Selecting the British 1990 Growth Reference standard for the above gives:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="text-decoration: underline;">BMI</td>
+                    <td style="text-decoration: underline;">Age (Years)</td>
+                    <td style="text-decoration: underline;">Sex</td>
+                    <td style="text-decoration: underline;">Z BMI</td>
+                    <td style="text-decoration: underline;">BMI Category</td>
+                </tr>
+                <tr>
+                    <td>12.9836</td>
+                    <td>13.23</td>
+                    <td>M</td>
+                    <td>-3.92786</td>
+                    <td>G3 Thin</td>
+                </tr>
+                <tr>
+                    <td>16.6044</td>
+                    <td>13.45</td>
+                    <td>M</td>
+                    <td>-.9190669</td>
+                    <td>Normal</td>
+                </tr>
+                <tr>
+                    <td>16.3571</td>
+                    <td>13.95</td>
+                    <td>M</td>
+                    <td>-1.251696</td>
+                    <td>G1 Thin</td>
+                </tr>
+                <tr>
+                    <td>19.3618</td>
+                    <td>13.66</td>
+                    <td>F</td>
+                    <td>.0688321</td>
+                    <td>Normal</td>
+                </tr>
+                <tr>
+                    <td>19.9865</td>
+                    <td>13.37</td>
+                    <td>M</td>
+                    <td>.7128484</td>
+                    <td>Normal</td>
+                </tr>
+                <tr>
+                    <td>23.9573</td>
+                    <td>13.91</td>
+                    <td>M</td>
+                    <td>1.752847</td>
+                    <td>Overweight</td>
+                </tr>
+                <tr>
+                    <td>25.6782</td>
+                    <td>13.27</td>
+                    <td>M</td>
+                    <td>2.220984</td>
+                    <td>Overweight</td>
+                </tr>
+                <tr>
+                    <td>18.1122</td>
+                    <td>13.39</td>
+                    <td>M</td>
+                    <td>-.0810537</td>
+                    <td>Normal</td>
+                </tr>
+                <tr>
+                    <td>18.5931</td>
+                    <td>13.35</td>
+                    <td>F</td>
+                    <td>-.168254</td>
+                    <td>Normal</td>
+                </tr>
+                <tr>
+                    <td>31.8787</td>
+                    <td>13.72</td>
+                    <td>F</td>
+                    <td>2.89563</td>
+                    <td>Obese</td>
+                </tr>
+                <tr>
+                    <td>18.5544</td>
+                    <td>13.95</td>
+                    <td>F</td>
+                    <td>-.3408737</td>
+                    <td>Normal</td>
+                </tr>
+                <tr>
+                    <td>21.7519</td>
+                    <td>13.67</td>
+                    <td>M</td>
+                    <td>1.223346</td>
+                    <td>Normal</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

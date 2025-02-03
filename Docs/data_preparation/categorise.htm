@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Preparing your data|Cleaning and encoding">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Categorising Continuous Data (Quantiles, Grouping) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#data_preparation/categorise.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor184"></a>Categorise</h1>
+        <p>&#160;</p>
+        <p>Menu location: Menu location: <b>Data_Cleaning and Encoding_Categorise</b>.</p>
+        <p>&#160;</p>
+        <p>This function enables you to categorise any set of data into groups that you specify, for example ages into age groups.</p>
+        <p>&#160;</p>
+        <p>Typically, a <a href="../basics/measurement_scales.htm">continuous </a>variable might be divided into categories or groups. Take the IgM variable in the parametric sheet of the test workbook for example; this has 298 observations which you might want to summarise in ranges of values. In order to do this, simply select the Data_Grouping_Categorise menu item then select the IgM column of data. You are presented with different ways to group your data into bins (intervals) of counts:</p>
+        <ul>
+            <li>Quartiles: 4 bins (&lt; lower quartile, lower quartile to median, median to upper quartile, &gt;= upper quartile)</li>
+            <li>Quintiles: 5 bins (&lt; first quintile… &gt;=	fourth quintile)</li>
+            <li>Deciles: 10 bins (&lt;first decile… &gt;=ninth decile)</li>
+            <li>Age groups: one of four common groupings (&lt;15, 15-19… five yearly bands to 85+; &lt;15, 15-24… ten yearly bands to 85+; &lt;1, 1-4… five yearly bands to 85+; &lt;1, 1-4… ten yearly bands to 75+)</li>
+            <li>User-defined: from minimum min, in k intervals of equal size = step (&lt;min + 1 * step, &gt;= min + 1 * step to &lt; min + 2 * step… in k intervals to &gt;= min + k * step)</li>
+        </ul>
+        <p>&#160;</p>
+        <p>Using the IgM example in quartiles:</p>
+        <table style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">category</td>
+                <td style="text-decoration: underline;text-align: right;">count</td>
+            </tr>
+            <tr>
+                <td>&lt; 0.5</td>
+                <td style="text-align: right;">56</td>
+            </tr>
+            <tr>
+                <td>&gt;= 0.5; &lt; 0.7</td>
+                <td style="text-align: right;">67</td>
+            </tr>
+            <tr>
+                <td>&gt;= 0.7; &lt; 1</td>
+                <td style="text-align: right;">98</td>
+            </tr>
+            <tr>
+                <td>&gt;= 1</td>
+                <td style="text-align: right;">77</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Using the IgM example in 10 intervals of 0.5 from:</p>
+        <table style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">category</td>
+                <td style="text-decoration: underline;text-align: right;">count</td>
+            </tr>
+            <tr>
+                <td>&lt; 0.5</td>
+                <td style="text-align: right;">56</td>
+            </tr>
+            <tr>
+                <td>&gt;= 0.5; &lt; 1</td>
+                <td style="text-align: right;">165</td>
+            </tr>
+            <tr>
+                <td>&gt;= 1; &lt; 1.5</td>
+                <td style="text-align: right;">54</td>
+            </tr>
+            <tr>
+                <td>&gt;= 1.5; &lt; 2</td>
+                <td style="text-align: right;">14</td>
+            </tr>
+            <tr>
+                <td>&gt;= 2; &lt; 2.5</td>
+                <td style="text-align: right;">6</td>
+            </tr>
+            <tr>
+                <td>&gt;= 2.5; &lt; 3</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td>&gt;= 3; &lt; 3.5</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td>&gt;= 3.5; &lt; 4</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td>&gt;= 4; &lt; 4.5</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td>&gt;= 4.5</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>A quick look at the counts above shows a similar picture to that you would see from a <a href="../graphics/histogram.htm">histogram</a>, namely that the data are not evenly <a href="../basic_descriptive_statistics/central_tendency.htm">spread </a>into ranges of values, i.e. they are <a href="../basic_descriptive_statistics/skewness.htm">skewed</a>. The <a href="../graphics/histogram_text.htm">text-based histogram </a>will give you counts, but note that the bin values in a histogram are the mid-point of the bin and not the cut-off value between bins, i.e. they are the same as a user-defined bin cut-off values minus half of the step size.</p>
+        <p>&#160;</p>
+        <p><u>Technical note</u>
+        </p>
+        <p>Two different options are presented for calculating quantiles for use as cut points in this categorisation function. The methods are described under the <a href="../nonparametric_methods/quantiles.htm">Quantiles</a> page. Method 1 (default) corresponds to the default method used in Stata and Method 2 is equivalent to the alternative definition used in Stata.</p>
+    </body>
+</html>

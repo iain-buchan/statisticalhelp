@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Working with Dates and Times in StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#data_preparation/dates_and_times.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor140"></a>Dates and Times</h1>
+        <p>&#160;</p>
+        <p>StatsDirect accepts date and time entries in its workbooks. When you enter say 1/3/67 it will be recognised as the first of March 1967. This is then stored as a code by the workbook. If you were to enter 1/3/67 10:00 then the code stored would have an integer part which represents the date and a decimal part which represents the time, here 10 AM.</p>
+        <p>&#160;</p>
+        <p>You may enter years as a two or four code number. If you enter a two figure date from 00 to 29 then it will be interpreted as 2000 to 2029, all other two figure dates are treated as 19XX.</p>
+        <p>&#160;</p>
+        <p>A column of dates can be treated as a column of date codes and analysed in the way you would treat, say Julian numbers. If you ask for descriptive statistics on a column of date entries then you will get the descriptive statistics of the date codes. The difference between two date codes represents the number of days between the dates and any fractional part would represent the number of seconds between the two entries.</p>
+        <p>&#160;</p>
+        <p>The simplest way to handle dates is to let StatsDirect transform then into intervals. For example, say you started a study on day X and recorded the dates when a particular event happened to any of the study subjects. If no event happened to a study subject then you could enter the date the study finished, and in a separate column enter a censorship code of 0 to denote no event. Then use the "<a href="date_time_intervals.htm">Date and Time Interval</a>" function in the "Data" menu to work out the number of days, weeks, months etc which elapsed between the start of the study and the event time or ending time. The intervals can be used for survival analysis.</p>
+        <p>&#160;</p>
+        <p>You may also use the workbook to handle date or time intervals. Say you had one column of starting dates (column A) and one column of finishing dates (column B) in a workbook. In the first row of column C enter =A1-A2 and move your mouse to the bottom right hand corner of the C1 cell. The mouse cursor will change to a fine cross at this point and you can now drag the first cell of column C down until you reach the bottom of the A and B columns. Now column C will represent all of the differences in days between A and B. If you want the difference in weeks then you would enter =TRUNC((A1-A2)/7) as the first expression, or for months =TRUNC((A1/A2)/(365/12)) and =TRUNC((A1/A2)/365) for years. The TRUNC function is used here to truncate any fractional part of a result to an integer, see <a href="../workbook/worksheet_functions.htm">workbook functions</a> for more details.</p>
+    </body>
+</html>

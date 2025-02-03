@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Nonparametric Methods in StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#nonparametric_methods/nonmarametric_methods.htm">Open topic with navigation</a>
+        </p><a name="kanchor161"></a>
+        <h1>Nonparametric Methods</h1>
+        <p>&#160;</p>
+        <p>Menu location:  <b>Analysis_Nonparametric</b></p>
+        <ul>
+            <li><a href="mann_whitney.htm">Mann-Whitney U (Wilcoxon's rank sum) test</a> (compare two independent samples)</li>
+            <li><a href="wilcoxon_signed_ranks.htm">Wilcoxon's signed ranks test</a> (compare a pair of samples)</li>
+            <li><a href="spearman.htm">Spearman's rank correlation</a> (relate two variables from a sample)</li>
+            <li><a href="kendall_correlation.htm">Kendall's rank correlation</a> (relate two variables from a sample)</li>
+            <li><a href="nonparametric_regression.htm">Nonparametric linear regression</a> (straight line relationship for two variables from a sample)</li>
+            <li><a href="loess.htm">LOESS</a> (local polynomial regression for smooth curve fitting)</li>
+            <li><a href="cuzick.htm">Cuzick's test for trend</a> (detect trend across several samples)</li>
+            <li><a href="smirnov.htm">Two sample Smirnov test</a> (compare distributions of two samples)</li>
+            <li><a href="quantile_ci.htm">Quantile confidence interval</a> (e.g. median and its 95% confidence interval)</li>
+            <li><a href="chisq_goodness_fit.htm">Chi-square goodness of fit test</a> (compare observed and expected counts)</li>
+            <li><a href="kruskal_wallis.htm">Kruskal-Wallis</a> (compare several independent samples)</li>
+            <li><a href="friedman.htm">Friedman</a> (compare several samples with row by row relationship)</li>
+            <li><a href="../analysis_of_variance/homogeneity_of_variance.htm">Homogeneity of variance</a> (test the similarity of data spread for several samples)</li>
+            <li><a href="../data_preparation/ranking.htm">Ranking</a> (save the ranks of a column of numbers)</li>
+            <li><a href="../data_preparation/sorting_create.htm">Sorting</a> (sort a column of numbers)</li>
+            <li><a href="../data_preparation/transform_normal_scores.htm">Normal scores</a>(save the normal scores of a column of numbers)</li>
+            <li><a href="../data_preparation/pairwise.htm">Pairwise data manipulation</a> (various treatments of all possible pairs of two variables)</li>
+            <li><a href="roc.htm">ROC curve analysis</a> (analyse areas under receiver operating characteristic curves)</li>
+            <li><a href="gini.htm">Gini coefficient</a> (bootstrap confidence intervals for a coefficient of inequality)</li>
+            <li><a href="diversity.htm">Diversity indices</a> (examine diversity in a list of counts)</li>
+        </ul>
+        <p>&#160;</p>
+        <p>This section provides various rank-based hypothesis tests and descriptive functions which do not assume that your data are from normal distributions.</p>
+        <p>&#160;</p>
+        <p><u>Rank-based methods</u>
+        </p>
+        <ul type="disc">
+            <li class="p">
+                <p>assume that your data have an underlying <a href="../distributions/distributions.htm">continuous distribution</a>.</p>
+            </li>
+            <li class="p">
+                <p>assume that for groups being compared, their parent distributions are similar in all characteristics other than <a href="../basic_descriptive_statistics/central_tendency.htm">location</a>.</p>
+            </li>
+            <li class="p">
+                <p>are usually less sensitive than <a href="../parametric_methods/parametric_methods.htm">parametric methods</a>.</p>
+            </li>
+            <li class="p">
+                <p>are often more robust than parametric methods when their assumptions are properly met.</p>
+            </li>
+            <li class="p">
+                <p>are preferred less by some statisticians and more by others in comparison with the use of parametric methods on <a href="../data_preparation/transformations.htm">transformed</a> data.</p>
+            </li>
+            <li class="p">
+                <p>can run into problems when there are many ties (data with the same value).</p>
+            </li>
+            <li class="p">
+                <p>that take into account the magnitude of the difference between categories (e.g. Wilcoxon signed ranks test) are more powerful than those that do not (e.g. sign test).</p>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p>The numerical methods used in rank-based calculations have progressed in recent years. StatsDirect utilises modern developments, including some calculations of exact probability in the presence of tied data. An excellent account of nonparametric methods is given by <a href="../references/reference_list.htm">Conover (1999)</a>.</p>
+    </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="topic" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Nonparametric methods" data-mc-ignored-words="NETLIB">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>LOESS Curve Fitting (Local Regression) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#nonparametric_methods/loess.htm">Open topic with navigation</a>
+        </p><a name="kanchor138"></a>
+        <h1>LOESS Curve Fitting (Local Polynomial Regression)</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_LOESS</b>.</p>
+        <p>&#160;</p>
+        <p>This is a method for fitting a smooth curve between two variables, or fitting a smooth surface between an outcome and up to four predictor variables.</p>
+        <p>&#160;</p>
+        <p>The procedure originated as LOWESS (LOcally WEighted Scatter-plot Smoother). Since then it has been extended as a modelling tool because it has some useful statistical properties (<a href="../references/reference_list.htm">Cleveland, 1998</a>).</p>
+        <p>&#160;</p>
+        <p>This is a nonparametric method because the linearity assumptions of conventional regression methods have been relaxed. Instead of estimating parameters like m and c in y = mx +c, a nonparametric regression focuses on the fitted curve. The fitted points and their standard errors represent are estimated with respect to the whole curve rather than a particular estimate. So, the overall uncertainty is measured as how well the estimated curve fits the population curve.</p>
+        <p>&#160;</p>
+        <p>It is called local regression because the fitting at say point x is weighted toward the data nearest to x. The distance from x that is considered near to it is controlled by the span setting, α.When α is less than 1 it represents the proportion of the data that is considered to be neighbouring x, and the weighting that is used is proportional to 1-(distance/maximum distance)^3)^3, which is known as tricubic.When α is greater than 1 all of the points are used and the maximum distance is taken as α^(1/p) times the observed maximum distance for p predictors. The default span is α = 0.75. If you choose a span that is too small then there will be insufficient data near x for an accurate fit, resulting in a large variance. If the span is too large than the regression will be over-smoothed, resulting in a loss of information, hence a large bias.</p>
+        <p>&#160;</p>
+        <p>The trade-off between bias and variance also depends on the degree of the polynomial selected. A high degree will provide a better approximation of the population mean, so less bias, but there are more factors to consider in the model, resulting in greater variance. The default degree is 2 (quadratic). Higher degrees don't improve the fit much. The lower degree (i.e. 1, linear) has more bias but pulls back variance at the boundaries.</p>
+        <p>&#160;</p>
+        <p>There is no substitute for thinking carefully about what you are plotting, testing different settings of span and polynomial degree, and selecting the most plausible fit by eye. The summary statistics also give an indication of how well the model fits.</p>
+        <p>&#160;</p>
+        <p>The concept of degrees of freedom for nonparametric models is complex. They approximate the parametric concept of degrees of freedom empirically and result in numbers that are not necessarily integers.</p>
+        <p>&#160;</p>
+        <p>The assumptions are:</p>
+        <ul>
+            <li>Around point x the mean of y can be approximated by a small class of parametric functions in polynomial regression.</li>
+            <li>The errors in estimating y are independent and randomly distributed with a mean of zero.</li>
+            <li>Bias and variance are traded off by the choices for the settings of span and degree of polynomial.</li>
+        </ul>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>The LOESS function in the {stats} package of R is called. You must have R installed on the computer from which you are running StatsDirect. You can download and install R <a href="http://cran.r-project.org/">here</a>. The R implementation is based on the cloess algorithm, for which the original authors have a <a href="http://www.netlib.org/a/dloess">NETLIB</a> site.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Nonparametric worksheet: Hgb, eGFR).</p>
+        <p>&#160;</p>
+        <p>The data are red blood cell concentrations (Hgb) and kidney function estimates (eGFR) taken from a cohort of type 2 diabetics. The hypothesis is that as diabetes causes chronic kidney disease patients become anaemic as their kidneys are sending less of a signal to their bone marrow to produce more red blood cells.</p>
+        <p>&#160;</p>
+        <p>Open the test workbook using the file open function of the file menu. Then select LOESS from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Hgb" and "eGFR" when prompted for outcome and predictor variables respectively.</p>
+        <p>&#160;</p>
+        <p>Accept the default span of 0.75 and polynomial degree = 2. Check the box for the plot and edit the title and axis labels to "Anaemia vs. Kidney Function in Diabetics"; "Haemoglobin Concentration (g/L)" for the vertical axis; and "Estimated Glomerular Filtration Rate (ml/min/1.73m²)" for the horizontal axis.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>Hgb vs. eGFR</p>
+        <p>Number of Observations: 804</p>
+        <p>Polynomial degree: 2, Span: 0.75</p>
+        <p>Equivalent Number of Parameters: 5.464141</p>
+        <p>
+Residual Standard Error: 15.159968
+</p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/images/loess.png" />
+        </p>
+    </body>
+</html>

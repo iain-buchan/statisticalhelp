@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Functions I-N</title>
+        <script type="text/javascript">/*<![CDATA[*//*]]>*/</script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#workbook/functions_in.htm">Open topic with navigation</a>
+        </p>
+        <h1>Workbook Functions I-N</h1>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">IF</span><span style="color: #000000;">(condition, true_value, false_value)</span>
+        </p>
+        <p><span style="color: #000000;">Tests the condition and returns the true_value if condition is TRUE or false_value if condition is FALSE.</span>
+        </p>
+        <p><span style="color: #000000;">See also: AND, FALSE, NOT, OR, TRUE</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">INDEX</span><span style="color: #000000;">(reference [,row] [,column] [,range number])</span>
+        </p>
+        <p><span style="color: #000000;">Returns the contents of a cell in a specified reference range. If there is more than one range, each reference is separated by commas and the whole reference enclosed in parentheses (e.g. (A1:C6, B7:E14)).In this case, range number refers to the range from which data is returned.</span>
+        </p>
+        <p><span style="color: #000000;">See also: CHOOSE, HLOOKUP, LOOKUP, MATCH, VLOOKUP</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">INDIRECT</span><span style="color: #000000;">(reference)</span>
+        </p>
+        <p><span style="color: #000000;">Returns the contents of the cell referenced by the specified cell.</span>
+        </p>
+        <p><span style="color: #000000;">e.g. INDIRECT(C1) returns the contents of cell D1 if cell C1 contains "D1"</span>
+        </p>
+        <p><span style="color: #000000;">See also: OFFSET</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">INT</span><span style="color: #000000;">(Any number)</span>
+        </p>
+        <p><span style="color: #000000;">Rounds the number to the nearest integer</span>
+        </p>
+        <p><span style="color: #000000;">See also: CEILING, FLOOR, MOD, ROUND, TRUNC</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">IPMT</span><span style="color: #000000;">(interest rate, period, number of payments, present value [,future value] [,type])</span>
+        </p>
+        <p><span style="color: #000000;">Interest payment of an annuity for a given period based on regular payments and a fixed periodic interest rate. Present value and future value (default is 0) refer to the values which the annuity is worth currently and after all the payments have been made. Type=0 if the payments are due at the end of each period and Type=1 if they are due at the beginning.</span>
+        </p>
+        <p><span style="color: #000000;">See also: FV, PMT, PPMT, RATE</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">IRR</span><span style="color: #000000;">(cash flow [,guess])</span>
+        </p>
+        <p><span style="color: #000000;">Internal rate of return for a series of periodic cash flows given as a reference to a range (e.g. IRR(B1:B6)). Guess (default is 10%) is the estimate of the internal rate of return.</span>
+        </p>
+        <p><span style="color: #000000;">See also: MIRR, NPV, RATE</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">ISBLANK</span><span style="color: #000000;">(reference)</span>
+        </p>
+        <p><span style="color: #000000;">Returns TRUE if the specified reference cell is blank and FALSE otherwise.</span>
+        </p>
+        <p><span style="color: #000000;">See also: ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">ISERR</span><span style="color: #000000;">(expression)</span>
+        </p>
+        <p><span style="color: #000000;">Returns TRUE if the specified expression returns an error and FALSE otherwise.</span>
+        </p>
+        <p><span style="color: #000000;">See also: ISBLANK, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">ISLOGICAL</span><span style="color: #000000;">(expression)</span>
+        </p>
+        <p><span style="color: #000000;">Returns TRUE if the expression returns a logical value and FALSE otherwise.</span>
+        </p>
+        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISNA, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">ISNA</span><span style="color: #000000;">(expression)</span>
+        </p>
+        <p><span style="color: #000000;">Returns TRUE if the expression returns the #N/A! error and FALSE otherwise.</span>
+        </p>
+        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNONTEXT, ISNUMBER, ISREF, ISTEXT</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">ISNONTEXT</span><span style="color: #000000;">(expression)</span>
+        </p>
+        <p><span style="color: #000000;">Returns TRUE if there is a non-text value in the expression and FALSE otherwise.</span>
+        </p>
+        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNUMBER, ISREF, ISTEXT</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">ISNUMBER</span><span style="color: #000000;">(expression)</span>
+        </p>
+        <p><span style="color: #000000;">Returns TRUE if the expression returns a number and FALSE otherwise.</span>
+        </p>
+        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISREF, ISTEXT</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">ISREF</span><span style="color: #000000;">(expression)</span>
+        </p>
+        <p><span style="color: #000000;">Returns TRUE if the expression returns a range reference and FALSE otherwise.</span>
+        </p>
+        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISTEXT</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">ISTEXT</span><span style="color: #000000;">(expression)</span>
+        </p>
+        <p><span style="color: #000000;">Returns TRUE if the expression text and FALSE otherwise.</span>
+        </p>
+        <p><span style="color: #000000;">See also: ISBLANK, ISERR, ISERROR, ISLOGICAL, ISNA, ISNONTEXT, ISNUMBER, ISREF</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">LEFT</span><span style="color: #000000;">(text [,numchars])</span>
+        </p>
+        <p><span style="color: #000000;">Returns the leftmost characters in the text string. Numchars is the number of characters to return.</span>
+        </p>
+        <p><span style="color: #000000;">See also: MID, RIGHT</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">LEN</span><span style="color: #000000;">(text)</span>
+        </p>
+        <p><span style="color: #000000;">Number of characters in the text string, spaces included.</span>
+        </p>
+        <p><span style="color: #000000;">See also: EXACT, SEARCH</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">LN</span><span style="color: #000000;">(positive real number)</span>
+        </p>
+        <p><span style="color: #000000;">Natural (based on the constant e) logarithm.</span>
+        </p>
+        <p><span style="color: #000000;">See also: EXP, LOG, LOG10</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">LOG</span><span style="color: #000000;">(positive real number [,base])</span>
+        </p>
+        <p><span style="color: #000000;">Logarithm of the number. Base default value is 10.</span>
+        </p>
+        <p><span style="color: #000000;">See also: EXP, LN, LOG10</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">LOG10</span><span style="color: #000000;">(positive real number)</span>
+        </p>
+        <p><span style="color: #000000;">Base-10 logarithm.</span>
+        </p>
+        <p><span style="color: #000000;">See also: EXP, LN, LOG</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">LOOKUP</span><span style="color: #000000;">(value, lookup range, result range)</span>
+        </p>
+        <p><span style="color: #000000;">Searches for the value in the lookup range and returns the contents of corresponding position in the result range. The sizes of both ranges have to be the same and both ranges can only contain one row or column.</span>
+        </p>
+        <p><span style="color: #000000;">See also: HLOOKUP, INDEX, VLOOKUP</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">LOWER</span><span style="color: #000000;">(text)</span>
+        </p>
+        <p><span style="color: #000000;">Changes the characters in the specified text to lowercase.</span>
+        </p>
+        <p><span style="color: #000000;">See also: PROPER, UPPER</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">MATCH</span><span style="color: #000000;">(lookup value, lookup range, comparison)</span>
+        </p>
+        <p><span style="color: #000000;">Compares the lookup value against values in the lookup range and returns the position of the matching value in that range. Comparison represents the type of comparison: 1 matches the largest value that is less than or equal to the lookup value, 0 matches the same value and -1 matches the smallest value that is greater than or equal to the lookup value.</span>
+        </p>
+        <p><span style="color: #000000;">See also: HLOOKUP, INDEX, LOOKUP, VLOOKUP</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">MAX</span><span style="color: #000000;">(number list)</span>
+        </p>
+        <p><span style="color: #000000;">Largest value in the specified list of numbers. The list can be a cell range.</span>
+        </p>
+        <p><span style="color: #000000;">See also: AVERAGE, MIN</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">MID</span><span style="color: #000000;">(text, start position, numchars)</span>
+        </p>
+        <p><span style="color: #000000;">Returns the specified number of characters in the text string, beginning at the specified start position.</span>
+        </p>
+        <p><span style="color: #000000;">See also: CODE, FIND, LEFT, RIGHT, SEARCH</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">MIN</span><span style="color: #000000;">(number list)</span>
+        </p>
+        <p><span style="color: #000000;">Smallest value in the specified list of numbers. The list can be a cell range.</span>
+        </p>
+        <p><span style="color: #000000;">See also: AVERAGE, MAX</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">MINUTE</span><span style="color: #000000;">(serial number)</span>
+        </p>
+        <p><span style="color: #000000;">Minute component of the specified time (given as serial number) as an integer between 0 and 59.</span>
+        </p>
+        <p><span style="color: #000000;">See also: DATE, DAY, HOUR, MONTH, NOW, SECOND, WEEKDAY, YEAR</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">MIRR</span><span style="color: #000000;">(cash flows, finance rate, reinvest rate)</span>
+        </p>
+        <p><span style="color: #000000;">Modified internal rate of return for a series (given as a reference to a range)of periodic cash flows. Cash received and cash paid have positive and negative values, respectively. The order of calculation is the order in which the values appear. Finance rate is the interest rate paid on money used in the cash flow and reinvest rate is the interest rate received on money reinvested from the cash flow.</span>
+        </p>
+        <p><span style="color: #000000;">See also: IRR, NPV, RATE</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">MOD</span><span style="color: #000000;">(any number, divisor)</span>
+        </p>
+        <p><span style="color: #000000;">Remainder after dividing a number by the specified divisor.</span>
+        </p>
+        <p><span style="color: #000000;">See also: INT, ROUND, TRUNC</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">MONTH</span><span style="color: #000000;">(serial number)</span>
+        </p>
+        <p><span style="color: #000000;">Month correspondent to the specified date (given as serial number) as an integer between 1 (January) and 12 (December).</span>
+        </p>
+        <p><span style="color: #000000;">See also: DAY, DATE, MINUTE, HOUR, NOW, SECOND, WEEKDAY, YEAR</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">N</span><span style="color: #000000;">(value)</span>
+        </p>
+        <p><span style="color: #000000;">Tests the supplied value and returns the value if it is a number or 1 if the value is the logical function TRUE(). All other values are returned as 0.</span>
+        </p>
+        <p><span style="color: #000000;">See also: T, VALUE</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">NA</span><span style="color: #000000;">()</span>
+        </p>
+        <p><span style="color: #000000;">Returns the error value #N/A (not available).</span>
+        </p>
+        <p><span style="color: #000000;">See also: ISNA</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">NOT</span><span style="color: #000000;">(logical)</span>
+        </p>
+        <p><span style="color: #000000;">Returns TRUE if logical is FALSE and vice-versa.</span>
+        </p>
+        <p><span style="color: #000000;">See also: AND, IF, OR</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">NOW</span><span style="color: #000000;">()</span>
+        </p>
+        <p><span style="color: #000000;">Current date and time as a serial number. The numbers to the left of the decimal point represent the date; to the right represent the time.</span>
+        </p>
+        <p><span style="color: #000000;">See also: DATE, DAY, HOUR, MINUTE, MONTH, SECOND, TODAY, WEEKDAY, YEAR</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">NPER</span><span style="color: #000000;">(interest rate, pmt, pf, [,fv] [,type])</span>
+        </p>
+        <p><span style="color: #000000;">Number of periods of an investment based on regular periodic payments and a fixed interest rate. Pmt is the fixed payment made each period, pf is the present value that a series of future payments is currently worth, fv is the balance to attain after the final payment (default is 0) and type indicates when the payments are due: 0 refers to payments due at the end of the period and 1 at the beginning.</span>
+        </p>
+        <p><span style="color: #000000;">See also: FV, IPMT, PMT, PPMT, PV, RATE</span>
+        </p>
+        <p>&#160;</p>
+        <p><span style="font-weight: bold;color: #000000;">NPV</span><span style="color: #000000;">(discount rate, value list)</span>
+        </p>
+        <p><span style="color: #000000;">Net present value of an investment based on a series of periodic payments and a discount rate. Value list contains values that represent payments and income.</span>
+        </p>
+        <p><span style="color: #000000;">See also: FV, IRR, PV</span>
+        </p>
+    </body>
+</html>
