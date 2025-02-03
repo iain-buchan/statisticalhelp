@@ -18,7 +18,8 @@
   ReplaceSpacesWithUnderscores="true"
   ResolveCssVariables="true"
   RemoveMadCapStyles="false"
-  MasterPage="/Content/resources/masterpages/masterfooter.flmsp">
+  MasterPage="/Content/resources/masterpages/masterfooter.flmsp"
+  Skin="/Project/Skins/SD Web Skin.flskn">
   <PrintedOutput
     CollapseMargins="true"
     GenerateTOCProxy="true"
