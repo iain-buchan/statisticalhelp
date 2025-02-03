@@ -5,12 +5,10 @@
   Type="WebHelp2"
   Destinations=""
   ShowMadCapBacklink="false"
-  GlossaryTermConversion="marked"
   DefaultUrl="/Content/contents.htm"
   MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
   GetLatestBeforeCompile="false"
   OutputFile="index.html"
-  OutputFolder="C:\Develop\SD3Help\StatsDirect\Output"
   MasterStylesheet="/Content/resources/stylesheets/statsdirect.css"
   BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
   EnableSitemap="true"
@@ -19,7 +17,8 @@
   MakeFileLowerCase="true"
   ReplaceSpacesWithUnderscores="true"
   ResolveCssVariables="true"
-  RemoveMadCapStyles="false">
+  RemoveMadCapStyles="false"
+  MasterPage="/Content/resources/masterpages/masterfooter.flmsp">
   <PrintedOutput
     CollapseMargins="true"
     GenerateTOCProxy="true"

@@ -7,7 +7,7 @@
   Password=""
   Directory="C:\Develop\SD3Help\StatsDirect\Docs"
   Port=""
-  ViewUrl="http://www.madcapsoftware.com/"
+  ViewUrl="https://iain-buchan.github.io/statisticalhelp/"
   Type="scm"
   ProviderType="Git"
   Database="file:///C:/Develop/SD3Help/StatsDirect/.git/"
