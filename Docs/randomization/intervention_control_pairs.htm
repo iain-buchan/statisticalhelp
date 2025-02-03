@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="topic" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Randomization">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Randomization of Intervention-Control Pair Orders - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#randomization/intervention_control_pairs.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor5"></a>Randomization of Intervention-control Pairs</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Randomization_Intervention-control Pairs</b></p>
+        <p>&#160;</p>
+        <p>This function provides random allocation into intervention or control arms of a trial for a paired/matched experimental design. Each subject will experience both intervention and control treatment at some stage during the trial, the paired randomization determines the treatment order.</p>
+        <p>&#160;</p>
+        <p>Randomization reduces opportunities for <a href="../basics/bias.htm">bias</a> and <a href="../basics/confounding.htm">confounding</a> in experimental designs, and leads to treatment groups which are random samples of the population sampled, thus helping to meet assumptions of subsequent statistical analysis (<a href="../references/reference_list.htm">Bland, 2000</a>). A particular bias in this design might be intervention having some carry-over effect on control treatment.</p>
+        <p>&#160;</p>
+        <p>Example: randomization of 50 patients into treatment (intervention) and placebo (control) arms of a trial of a new drug. This would give 50 pairs of INTERVENTION - CONTROL or CONTROL - INTERVENTION. If this was a randomized crossover study then you would give drug first if the order was INTERVENTION - CONTROL and you would give placebo first if the order was CONTROL - INTERVENTION:</p>
+        <p>&#160;</p>
+        <p><u>Randomized intervention-control pairs</u>
+        </p>
+        <p>Randomized with seed: 10, balanced allocation:</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">1 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">16 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">17 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">18 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">19 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">20 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">21 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">22 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">23 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">24 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">25 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">26 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">27 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">28 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">29 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">30 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">31 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">32 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">33 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">34 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">35 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">36 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">37 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">38 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">39 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">40 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">41 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">42 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">43 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">44 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">45 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">46 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">47 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">48 </td>
+                <td style="text-align: right;">Control - Intervention</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">49 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">50 </td>
+                <td style="text-align: right;">Intervention - Control</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>Robust (pseudo-)random number generation is used, see <a href="random_number_generator.htm">random number generation</a>.</p>
+    </body>
+</html>

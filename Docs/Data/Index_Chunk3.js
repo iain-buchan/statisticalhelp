@@ -1,0 +1,1 @@
+define({'Z scores':{l:[{u:'/data_preparation/transform_z_scores.htm#kanchor133',t:'Z Score (Standard Deviation Score) Transform - StatsDirect'}]},'Z scores (LMS':{e:{'child growth)':{l:[{u:'/data_preparation/growth_charts.htm',t:'Anthropometric Standardization (Growth Charts) - StatsDirect'}]}}}});

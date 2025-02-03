@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Regression and correlation">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Kendall's Rank Correlation - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#nonparametric_methods/kendall_correlation.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor164"></a>
+            Kendall's Rank Correlation</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Nonparametric_Kendall Rank Correlation</b>.</p>
+        <p>&#160;</p>
+        <p>Kendall's rank correlation provides a distribution free test of independence and a measure of the strength of dependence between two variables.</p>
+        <p>&#160;</p>
+        <p>Spearman's rank correlation is satisfactory for testing a null hypothesis of independence between two variables but it is difficult to interpret when the null hypothesis is rejected. Kendall's rank correlation improves upon this by reflecting the strength of the dependence between the variables being compared.</p>
+        <p>&#160;</p>
+        <p>Consider two samples, x and y, each of size n. The total number of possible pairings of x with y observations is n(n-1)/2. Now consider ordering the pairs by the x values and then by the y values. If x3 &gt; y3 when ordered on both x and y then the third pair is concordant, otherwise the third pair is discordant. S is the difference between the number of concordant (ordered in the same way, nc) and discordant (ordered differently, nd) pairs.</p>
+        <p>&#160;</p>
+        <p>Tau (τ) is related to S by:</p>
+        <p>
+            <img src="../generatedimages/equations/equation148.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>If there are tied (same value) observations then τ<sub>b</sub> is used:</p>
+        <p>
+            <img src="../generatedimages/equations/equation149.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where t<sub>i</sub> is the number of observations tied at a particular rank of x and u<sub>i</sub> is the number tied at a rank of y.</p>
+        <p>&#160;</p>
+        <p>In the presence of ties the statistic τ<sub>b</sub> is given as a variant of τ adjusted for ties (Kendall, 1970). When there are no ties τ<sub>b</sub> = τ. An approximate confidence interval is given for τ<sub>b</sub> or τ. Please note that the confidence interval does not correspond exactly to the P values of the tests because slightly different assumptions are made (<a href="../references/reference_list.htm">Samra and Randles, 1988</a>).</p>
+        <p>&#160;</p>
+        <p>The gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):</p>
+        <p>
+            <img src="../generatedimages/equations/equation150.svg" alt="" class="mcReset" />
+        </p>
+        <p>&#160;</p>
+        <p>Tests for Kendall's test statistic being zero are calculated in exact form when there are no tied data, and in approximate form through a normalised statistic with and without a continuity correction (Kendall's score reduced by 1).</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>An asymptotically distribution-free confidence interval is constructed for τ<sub>b</sub> or τ using the variant of the method of <a href="../references/reference_list.htm">Samra and Randles (1988)</a> described by <a href="../references/reference_list.htm">Hollander and Wolfe (1999)</a>.</p>
+        <p>&#160;</p>
+        <p>In the presence of ties, the normalised statistic is calculated using the extended variance formula given by <a href="../references/reference_list.htm">Hollander and Wolfe (1999)</a>. In the absence of ties, the probability of null S (and thus τ) is evaluated using a recurrence formula when n &lt; 9 and an Edgeworth series expansion when n ≥ 9 (<a href="../references/reference_list.htm">Best and Gipps, 1974</a>). In the presence of ties you are guided to make inferences from the normal approximation (<a href="../references/reference_list.htm">Kendall and Gibbons, 1990; Conover, 1999; Hollander and Wolfe, 1999</a>).  Note that StatsDirect uses more accurate methods for calculating the P values associated with τ than does most other statistical software, therefore, there may be differences in results.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 466)</a>.</p>
+        <p>Test workbook (Nonparametric worksheet: Career, Psychology).</p>
+        <p>&#160;</p>
+        <p>The following data represent a tutor's ranking of ten clinical psychology students as to their suitability for their career and their knowledge of psychology:</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">Career</td>
+                <td style="text-align: right;text-decoration: underline;">Psychology</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select Kendall Rank Correlation from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Career" and "Psychology" when prompted for data.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Kendall's tau = 0.5111</p>
+        <p>Approximate 95% CI = 0.1352 to 0.8870</p>
+        <p>Upper side (H1 concordance) P = .0233</p>
+        <p>Lower side (H1 discordance) P = .9767</p>
+        <p>Two sided (H1 dependence) P = .0466</p>
+        <p>&#160;</p>
+        <p>From these results we reject the null hypothesis of mutual independence between the career suitability and psychology knowledge rankings for the students. With a two sided test we are considering the possibility of concordance or discordance (akin to positive or negative correlation). A one sided test would have been restricted to either discordance or concordance, this would be an unusual assumption. In our example we can conclude that there is a statistically significant lack of independence between career suitability and psychology knowledge rankings of the students by the tutor. The tutor tended to rank students with apparently greater knowledge as more suitable to their career than those with apparently less knowledge and vice versa.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/p_values.htm">reference list</a>
+        </p>
+    </body>
+</html>

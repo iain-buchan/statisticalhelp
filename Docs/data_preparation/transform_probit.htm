@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Preparing your data|Transforming and deriving data|Common transforms">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Probit Transform - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#data_preparation/transform_probit.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor170"></a>Probit Transform</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Transforming and Deriving_Common Transforms_Probit</b>.</p>
+        <p>&#160;</p>
+        <p>Probit is a common transformation for linearising sigmoid distributions of proportions (<a href="../references/reference_list.htm">Armitage and Berry, 1994</a>). The probit is defined as 5 + the 1-p quantile from the standard <a href="../distributions/normal.htm">normal distribution</a>, where p is a proportion. For example, the number of insects killed by the log dose of an insecticide might describe a sigmoid relationship, which is a rectangular hyperbolic relationship to the non-log transformed dose. This sort of quantal response situation can be treated as a linear problem after probit transformation. <a href="../regression_and_correlation/probit_analysis.htm">Probit analysis</a> uses these principles.</p>
+        <p>&#160;</p>
+        <p>You can supply proportions or discrete data for logit transformation. If you specify discrete data then StatsDirect converts these to proportions by taking each value as a proportion of the maximum of the supplied data. The results are stored in a new column that is marked Probit:&lt;name&gt; where &lt;name&gt; is the original column label.</p>
+        <p>&#160;</p>
+        <p>StatsDirect marks indeterminable values as missing data, i.e. p=0 or p=1. StatsDirect probit analysis, on the other hand, treats p=0 and p=1 in a more complex way that includes them in the overall analysis.</p>
+    </body>
+</html>

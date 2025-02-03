@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="topic" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Randomization">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Random Number Generation in StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#randomization/random_number_generator.htm">Open topic with navigation</a>
+        </p>
+        <h1>
+            Random Number Generator</h1>
+        <p>&#160;</p>
+        <p><a name="kanchor57"></a>Random number generation by well researched algorithms should be able to provide extremely long series of numbers for which there is an infinitesimally small probability of finding a repeating pattern. StatsDirect uses such an algorithm (see below).</p>
+        <p>&#160;</p>
+        <p>If you want to get down to basics you might ask, what is random?. A lecture theatre filled with Mathematicians, Philosophers and Elemental Physicists would love to debate this, enough said. Rather than getting suck in debate over what is random, a practical approach is to look for evidence of non-randomness such as repeated patterns. Various methods have been employed to look for non-randomness from 'random' number generators since they began to emerge in the 1960s. Most "quick and dirty" random number generators, including those supplied with computer language compilers, use over simple methods which produce sequences of numbers with repeating patterns, they are unacceptable for statistical use.</p>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>StatsDirect uses the Mersenne Twister algorithm of <a href="../references/reference_list.htm">Matsumoto and Nisimura (1998)</a>, with updates to its initialisation suggested by the authors via their website in February 2002. Prior to version 2.2.0, StatsDirect used the RANROT type W and Mother-of-All algorithm described by <a href="../references/reference_list.htm">Agner Fog (2000)</a>. Both algorithms pass all of the all of the DIEHARD tests (<a href="../references/reference_list.htm">Marsaglia, 1997</a>) and perform well in the theoretical spectral tests (<a href="../references/reference_list.htm">Knuth, 1998</a>). The Mersenne Twister, however, has a stronger theoretical basis for the uniformity of its output, and is well studied. The Mersenne Twister generator has a resolution of 32-bits and a period of 2^19937 - 1. For more information on the strengths and weaknesses of random number generation by computer see <a href="../references/reference_list.htm">Marsaglia (1993, 1996)</a>.</p>
+        <p>&#160;</p>
+        <p><u>Seeds</u>
+        </p>
+        <p>Most random number generators require a seed number. If the generator is given the same seed each time it is called then it will produce the same series of numbers. This is not acceptable for many purposes, therefore, StatsDirect seeds the random number generator with a number taken from the computer's clock (the number of hundredths of a second which have elapsed since midnight). It is highly improbable that StatsDirect will produce the same "random" sequence more than once, the time is stamped on randomization output so that you can validate this. The random number generation section of the data menu enables you to specify seeds.</p>
+    </body>
+</html>

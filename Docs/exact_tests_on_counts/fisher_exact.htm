@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Exact tests on counts">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Fisher Exact Test - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#exact_tests_on_counts/fisher_exact.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor73"></a>
+            Fisher's Exact Test</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Exact_Fisher</b>.</p>
+        <p>&#160;</p>
+        <p>Like the chi-square test for fourfold (2 by 2) tables, Fisher's exact test examines the relationship between the two dimensions of the table (classification into rows vs. classification into columns). The null hypothesis is that these two classifications are not different.</p>
+        <p>&#160;</p>
+        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the expected value of the first count A.</p>
+        <p>&#160;</p>
+        <p>This exact treatment of the fourfold table should be used instead of the chi-square test when any expected frequency is less than 1 or 20% of expected frequencies are less than or equal to 5. With StatsDirect, it is reasonable to use Fisher's exact test by default because the computational method used can cope with large numbers.</p>
+        <p>&#160;</p>
+        <p>StatsDirect uses the definition of a two sided P value described by <a href="../references/reference_list.htm">Bailey (1977)</a> (P values for all possible tables with P less than or equal to that for the observed table are summed). Some authors prefer simply to double the one sided P value <a href="../references/reference_list.htm">(Armitage and Berry, 1994; Bland, 2000)</a>.</p>
+        <p>&#160;</p>
+        <p>Consider using <a href="../proportions/mid_p.htm">mid-P</a> values and intervals when you have several similar studies within an overall investigation (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Barnard, 1989</a>). Mid-P results are not shown for very large tables; if you want to calculate mid-P for large numbers then please use the <a href="odds_ratio_ci.htm">odds ratio confidence interval</a> function.</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <p>·&#160;&#160;&#160;each observation is classified into exactly one cell</p>
+        <p>·&#160;&#160;&#160;the row and column totals are fixed, not random</p>
+        <p>&#160;</p>
+        <p>The assumption of fixed marginal (row/column) totals is controversial and causes disagreements such as the best approach to two sided inference from this test.</p>
+        <p>&#160;</p>
+        <p>DATA INPUT:</p>
+        <p>Observed frequencies should be entered as a standard fourfold table:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">feature present</td>
+                <td style="text-decoration: underline;text-align: right;">feature absent</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome positive:</td>
+                <td style="text-align: right;">a</td>
+                <td style="text-align: right;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome negative:</td>
+                <td style="text-align: right;">c</td>
+                <td style="text-align: right;">d</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 138)</a>.</p>
+        <p>&#160;</p>
+        <p>The following data compare malocclusion of teeth with method of feeding infants.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;text-decoration: underline;">Normal teeth</td>
+                <td style="text-align: right;text-decoration: underline;">Malocclusion</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Breast fed:</td>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">16</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Bottle fed:</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">21</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must select Fisher's exact test from the exact tests section of the analysis menu. Enter the frequencies into the contingency table on screen as shown above.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Rearranged table:</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;font-weight: bold;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;font-weight: bold;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">16</td>
+                <td style="text-align: right;">21</td>
+                <td style="text-align: right;font-weight: bold;">37</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;font-weight: bold;">20</td>
+                <td style="text-align: right;font-weight: bold;">22</td>
+                <td style="text-align: right;font-weight: bold;">42</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Expectation of A = 2.380952</p>
+        <p>&#160;</p>
+        <p>One sided (upper tail) P = 0.1435 (doubled one sided P = 0.2871)</p>
+        <p>Two sided (by summation) P = 0.1745</p>
+        <p>&#160;</p>
+        <p>One sided mid-P = 0.0809</p>
+        <p>Two sided mid-P = 0.1618</p>
+        <p>&#160;</p>
+        <p>Here we cannot reject the null hypothesis that there is no association between these two classifications, i.e. between feeding method and malocclusion.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

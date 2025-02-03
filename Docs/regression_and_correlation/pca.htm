@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Regression and correlation">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Principal Components Analysis (PCA) and Alpha Reliability - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#regression_and_correlation/pca.htm">Open topic with navigation</a>
+        </p><a name="kanchor253"></a>
+        <h1>Principal Components Analysis and Cronbach's Alpha Reliability Coefficient</h1>
+        <p>&#160;</p>
+        <p>Menu locations:</p>
+        <p style="font-weight: bold;">Analysis_Regression and Correlation_Principal Components</p>
+        <p style="font-weight: bold;">Analysis_Agreement_Reliability and Reducibility</p>
+        <p>&#160;</p>
+        <p>This function provides principal components analysis (PCA), based upon correlation or covariance, and Cronbach's coefficient alpha for scale reliability.</p>
+        <p>&#160;</p>
+        <p>See <a href="questionnaire_design.htm">questionnaire design</a> for more information on how to use these methods in designing questionnaires or other study methods with multiple elements.</p>
+        <p>&#160;</p>
+        <p>Principal components analysis is most often used as a data reduction technique for selecting a subset of "highly predictive" variables from a larger group of variables. For example, in order to select a sample of questions from a thirty-question questionnaire you could use this method to find a subset that gave the "best overall summary" of the questionnaire (<a href="../references/reference_list.htm">Johnson and Wichern, 1998; Armitage and Berry, 1994; Everitt and Dunn, 1991; Krzanowski, 1988</a>).</p>
+        <p>&#160;</p>
+        <p>There are problems with this approach, and principal components analysis is often wrongly applied and badly interpreted. Please consult a statistician before using this method.</p>
+        <p>&#160;</p>
+        <p>PCA does not assume any particular distribution of your original data but it is very sensitive to variance differences between variables. These differences might lead you to the wrong conclusions. For example, you might be selecting variables on the basis of sampling differences and not their "real" contributions to the group. <a href="../references/reference_list.htm">Armitage and Berry (1994)</a> give an example of visual analogue scale results to which principal components analysis was applied after the data had been <a href="../data_preparation/transformations.htm">transformed</a> to angles as a way of stabilising variances.</p>
+        <p>&#160;</p>
+        <p>Another problem area with this method is the aim for an orthogonal or uncorrelated subset of variables. Consider the questionnaire problem again: it is fair to say that a pair of highly correlated questions are serving much the same purpose, thus one of them should be dropped. The component dropped is most often the one that has the lower correlation with the overall score. It is not reasonable, however, to seek optimal non-correlation in the selected subset of questions. There may be many "real world" reasons why particular questions should remain in your final questionnaire. It is almost impossible to design a questionnaire where all of the questions have the same importance to every subject studied. For these reasons you should cast a net of questions that cover what you are trying to measure as a whole. This sort of design requires strong knowledge of what you are studying combined with strong appreciation of the limitations of the statistical methods used.</p>
+        <p>&#160;</p>
+        <p><a href="../references/reference_list.htm">Everitt and Dunn (1991)</a> outline PCA and other multivariate methods. <a href="../references/reference_list.htm">McDowell and Newell (1996)</a> and <a href="../references/reference_list.htm">Streiner and Norman (1995)</a> offer practical guidance on the design and analysis of questionnaires.</p>
+        <p>&#160;</p>
+        <p><u>Factor analysis vs. principal components</u>
+        </p>
+        <p>Factor analysis (FA) is a child of PCA, and the results of PCA are often wrongly labelled as FA. A factor is simply another word for a component. In short, PCA begins with observations and looks for components, i.e. working from data toward a hypothetical model, whereas FA works the other way around. Technically, FA is PCA with some rotation of axes. There are different types of rotations, e.g. varimax (axes are kept orthogonal/perpendicular during rotations) and oblique Procrustean (axes are allowed to form oblique patterns during rotations), and there is disagreement over which to use and how to implement them. Unsurprisingly, FA is misused a lot. There is usually a better analytical route that avoids FA; you should seek the advice of a statistician if you are considering it.</p>
+        <p>&#160;</p>
+        <p><u>Data preparation</u>
+        </p>
+        <p>To prepare data for principal components analysis in StatsDirect you must first enter them in the workbook. Use a separate column for each variable (component) and make sure that each row corresponds to the observations from one subject. Missing data values in a row will cause that row / subject to be dropped from the analysis. You have the option of investigating either correlation or covariance matrices; most often you will need the correlation matrix. As discussed above, it might be appropriate to <a href="../data_preparation/transformations.htm">transform</a> your data before applying this method.</p>
+        <p>&#160;</p>
+        <p>For the example of 0 to 7 scores from a questionnaire you would enter your data in the workbook in the following format. You might want to transform these data first (<a href="../references/reference_list.htm">Armitage and Berry, 1994</a>).</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;">Question 1</td>
+                <td style="text-decoration: underline;">Question 2</td>
+                <td style="text-decoration: underline;">Question 3</td>
+                <td style="text-decoration: underline;">Question 4</td>
+                <td style="text-decoration: underline;">Question 5</td>
+            </tr>
+            <tr>
+                <td>subject 1:</td>
+                <td>5</td>
+                <td>7</td>
+                <td>4</td>
+                <td>1</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>subject 2:</td>
+                <td>3</td>
+                <td>3</td>
+                <td>2</td>
+                <td>2</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>subject 3:</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>3</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>subject 4:</td>
+                <td>0</td>
+                <td>0</td>
+                <td>5</td>
+                <td>4</td>
+                <td>2</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Internal consistency and deletion of individual components</u>
+        </p>
+        <p>Cronbach's alpha is a useful statistic for investigating the internal consistency of a questionnaire. If each variable selected for PCA represents test scores from an element of a questionnaire, StatsDirect gives the overall alpha and the alpha that would be obtained if each element in turn were dropped. If you are using weights then you should use the weighted scores. You should not enter the overall test score as this is assumed to be the sum of the elements you have specified. For most purposes alpha should be above 0.8 to support reasonable internal consistency. If the deletion of an element causes a considerable increase in alpha then you should consider dropping that element from the test. StatsDirect highlights increases of more than 0.1 but this must be considered along with the "real world" relevance of that element to your test. A standardised version of alpha is calculated by standardising all items in the scale so that their mean is 0 and variance is 1 before the summation part of the calculation is done (<a href="../references/reference_list.htm">Streiner and Norman, 1995; McDowell and Newell, 1996; Cronbach, 1951</a>). You should use standardised alpha if there are substantial differences in the variances of the elements of your test/questionnaire.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Singular value decomposition (SVD) is used to calculate the variance contribution of each component of a correlation or covariance matrix (<a href="../references/reference_list.htm">Krzanowski,1988; Chan, 1982</a>):</p>
+        <p>&#160;</p>
+        <p>The SVD of an n by m matrix <b>X</b> is <b>UΣV' = X</b>. <b>U</b> and <b>V</b> are orthogonal matrices, i.e. <b>V' V = V V</b>' where <b>V'</b> is the transpose of <b>V</b>. <b>U</b> is a matrix formed from column vectors (m elements each) and <b>V</b> is a matrix formed from row vectors (n elements each). <b>Σ</b> is a symmetrical matrix with positive diagonal entries in non-increasing order. If <b>X</b> is a mean-centred, n by m matrix where n&gt;m and rank r = m (i.e. full rank) then the first r columns of <b>V</b> are the first r principal components of <b>X</b>. The positive eigenvalues of <b>X'X</b> on <b>XX</b> are the squares of the diagonals in <b>Σ</b>. The coefficients or latent vectors are contained in <b>V</b>.</p>
+        <p>&#160;</p>
+        <p>Principal component scores are derived from <b>U</b> and <b>Σ</b> via a <b>Σ</b> as trace{<b>(X-Y)(X-Y)'</b>}. For a correlation matrix, the principal component score is calculated for the standardized variable, i.e. the original datum minus the mean of the variable then divided by its standard deviation.</p>
+        <p>&#160;</p>
+        <p>Scale reversal is detected by assessing the correlation between the input variables and the scores for the first principal component.</p>
+        <p>&#160;</p>
+        <p>A lower confidence limit for Cronbach's alpha is calculated using the sampling theory of <a href="../references/reference_list.htm">Kristoff (1963) and Feldt (1965)</a>:</p>
+        <p>
+            <img src="../generatedimages/equations/equation53.svg" alt="" class="mcReset" />
+        </p>
+        <p>- where F is the F distribution quantile for a 100(1-p)% confidence limit, k is the number of variables and n is the number of observations per variable.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Agreement worksheet: Question 1, Question 2, Question 3, and Question 4). Note you need to click Run with the "Cronbach's alpha for deletions" option selected after the main results are shown.</p>
+        <p>&#160;</p>
+        <p><u>Principal components (correlation)</u>
+        </p>
+        <p>&#160;</p>
+        <p>Sign was reversed for: Question 3; Question 4</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Component</td>
+                <td style="text-decoration: underline;">Eigenvalue (SVD)</td>
+                <td style="text-decoration: underline;">Proportion</td>
+                <td style="text-decoration: underline;">Cumulative</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>1.92556</td>
+                <td>48.14%</td>
+                <td>48.14%</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1.305682</td>
+                <td>32.64%</td>
+                <td>80.78%</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>0.653959</td>
+                <td>16.35%</td>
+                <td>97.13%</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>0.114799</td>
+                <td>2.87%</td>
+                <td>100%</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>With raw variables:</p>
+        <p>&#160;</p>
+        <p>Scale reliability alpha = 0.54955 (95% lower confidence limit = 0.370886)</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Variable dropped</td>
+                <td style="text-decoration: underline;">Alpha</td>
+                <td style="text-decoration: underline;">Change</td>
+            </tr>
+            <tr>
+                <td>Question 1</td>
+                <td>0.525396</td>
+                <td>-0.024155</td>
+            </tr>
+            <tr>
+                <td>Question 2</td>
+                <td>0.608566</td>
+                <td>0.059015</td>
+            </tr>
+            <tr>
+                <td>Question 3</td>
+                <td>0.411591</td>
+                <td>-0.13796</td>
+            </tr>
+            <tr>
+                <td>Question 4</td>
+                <td>0.348084</td>
+                <td>-0.201466</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>With standardized variables:</p>
+        <p>&#160;</p>
+        <p>Scale reliability alpha = 0.572704 (95% lower confidence limit = 0.403223)</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Variable dropped</td>
+                <td style="text-decoration: underline;">Alpha</td>
+                <td style="text-decoration: underline;">Change</td>
+            </tr>
+            <tr>
+                <td>Question 1</td>
+                <td>0.569121</td>
+                <td>-0.003584</td>
+            </tr>
+            <tr>
+                <td>Question 2</td>
+                <td>0.645305</td>
+                <td>0.072601</td>
+            </tr>
+            <tr>
+                <td>Question 3</td>
+                <td>0.398328</td>
+                <td>-0.174376</td>
+            </tr>
+            <tr>
+                <td>Question 4</td>
+                <td>0.328003</td>
+                <td>-0.244701</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>You can see from the results above that questions 2 and 3 seemed to have scales going in opposite directions to the other two questions, so they were reversed before the final analysis. Dropping question 2 improves the internal consistency of the overall set of questions, but this does not bring the standardised alpha coefficient to the conventionally acceptable level of 0.8 and above. It may be necessary to rethink this questionnaire.</p>
+    </body>
+</html>

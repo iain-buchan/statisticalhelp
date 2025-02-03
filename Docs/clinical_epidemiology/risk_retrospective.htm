@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Clinical epidemiology calculations">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Odds Ratio and Attributable Risk (Retrospective) - StatsDirect</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#clinical_epidemiology/risk_retrospective.htm">Open topic with navigation</a>
+        </p>
+        <h1><a name="kanchor104"></a>
+            Risk (Retrospective)</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Clinical Epidemiology_Risk (Retrospective)</b>.</p>
+        <p>&#160;</p>
+        <p>This function calculates odds ratios and population attributable risk with confidence intervals.</p>
+        <p>&#160;</p>
+        <p>You can examine the likelihood of an outcome such as disease in relation to an exposure such as a suspected risk or protection factor. The study design considered here is <a href="../basics/prospective.htm">retrospective</a> and usually a case-control study. If you need information on prospective studies see <a href="risk_prospective.htm">risk (prospective)</a>.</p>
+        <p>&#160;</p>
+        <p>The type of data used by this function is counts or frequencies (number of individuals with a study characteristic). You should organize these data into a fourfold table divided by outcome (e.g. disease status) in one dimension and the presence or absence of a characteristic factor (e.g. risk factor) in the other:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">EXPOSURE</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-align: center;text-decoration: underline;">EXPOSED</td>
+                <td style="text-align: center;text-decoration: underline;">UNEXPOSED</td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: right;">OUTCOME:</td>
+                <td style="text-align: right;">YES:</td>
+                <td style="text-align: center;">a</td>
+                <td style="text-align: center;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">NO:</td>
+                <td style="text-align: center;">c</td>
+                <td style="text-align: center;">d</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Odds ratio (OR) = (a*d)/(b*c)</p>
+        <p>&#160;</p>
+        <p>Estimate of population exposure (Px) = c/(c+d)</p>
+        <p>Estimate of population attributable risk% = 100*(Px*(OR-1))/(1+(Px*(OR-1)))</p>
+        <p>&#160;</p>
+        <p>In retrospective studies you select subjects by outcome and look back to see if they have a characteristic factor such as a risk factor or a protection factor for a disease. The odds ratio ((a/c)/(b/d)) looks at the likelihood of an outcome in relation to a characteristic factor. In epidemiological terms, the odds ratio is used as a point estimate of the relative risk in retrospective studies. Odds ratio is the key statistic for most case-control studies.</p>
+        <p>&#160;</p>
+        <p>In prospective studies, <a href="../basics/attributable_risk.htm">Attributable risk</a>  or risk difference is used to quantify risk in the exposed group that is attributable to the exposure. In retrospective studies, attributable risk can not be calculated directly but population attributable risk can be estimated. Population attributable risk estimates the proportion of disease in the study population that is attributable to the exposure. In order to calculate population attributable risk, the incidence of exposure in the study population must be known or estimated, StatsDirect prompts you to enter this value or to default to an estimate made from your study data. Population attributable risk is presented as a percentage with a confidence interval when the odds ratio is greater than or equal to one (<a href="../references/reference_list.htm">Sahai and Kurshid, 1996</a>).</p>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>A confidence interval (CI) for the odds ratio is calculated using an exact conditional likelihood method (<a href="../references/reference_list.htm">Martin and Austin, 1991</a>). The exact calculations can take an appreciable amount of time with large numbers.</p>
+        <p>&#160;</p>
+        <p>Approximate power is calculated as the power achieved with the given sample size to detect the observed effect with a two-sided probability of <a href="../basics/p_values.htm">type I error</a>  of (100-CI%)% based on analysis with Fisher's exact test or a continuity corrected chi-square test of independence in a fourfold contingency table (<a href="../references/reference_list.htm">Dupont, 1990</a>).</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm">Sahai and Kurshid (1996, p. 209)</a>.</p>
+        <p>&#160;</p>
+        <p>The following data represent a retrospective investigation of smoking in relation to oral cancer.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td colspan="2" style="text-decoration: underline;text-align: right;">Smoking status (cigarettes per day)</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">≥ 16</td>
+                <td style="text-decoration: underline;text-align: right;">&lt; 16</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Cases:</td>
+                <td style="text-align: right;">255</td>
+                <td style="text-align: right;">49</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Controls:</td>
+                <td style="text-align: right;">93</td>
+                <td style="text-align: right;">46</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect select Risk (Retrospective) from the Clinical Epidemiology section of the Analysis menu. Choose the default 95% confidence interval. Then enter the above frequencies into the 2 by 2 table on the screen.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Risk analysis (retrospective)</u>
+        </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td colspan="2" style="text-decoration: underline;text-align: right;">Characteristic/factor</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">Present</td>
+                <td style="text-decoration: underline;text-align: right;">Absent</td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: right;">Outcome:</td>
+                <td style="text-align: right;">Positive:</td>
+                <td style="text-align: right;">255</td>
+                <td style="text-align: right;">49</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Negative:</td>
+                <td style="text-align: right;">93</td>
+                <td style="text-align: right;">46</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Observed odds ratio = 2.574062</p>
+        <p>Approximate power (for 5% significance) = 96.84%</p>
+        <p>&#160;</p>
+        <p>Approximate (Woolf, logit) 95% confidence interval = 1.613302 &#160;to &#160;4.106976</p>
+        <p>&#160;</p>
+        <p>Conditional maximum likelihood estimates:</p>
+        <p>Conditional estimate of odds ratio = 2.56799</p>
+        <p>Exact Fisher 95% confidence interval = 1.566572 &#160;to &#160;4.213082</p>
+        <p>Exact Fisher one sided P &lt; 0.0001, two sided P &lt; 0.0001</p>
+        <p>Exact mid-P 95% confidence interval = 1.606435 &#160;to &#160;4.107938</p>
+        <p>Exact mid-P one sided P &lt; 0.0001, two sided P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <p>Population exposure % =78.555305</p>
+        <p>Population attributable risk % = 55.287461</p>
+        <p>Approximate 95% confidence interval = 38.300819  to  72.274103</p>
+        <p>&#160;</p>
+        <p>From these data we have evidence that the odds of developing oral cancer is around two and a half times higher for heavy smokers compared with lighter (less than 16 per day) or non-smokers of cigarettes. With 95% confidence we infer that the true population value for this statistic lies between one and a half and four times. Using an estimate of 67% heavy smoking, for the population studied in this 1957 investigation, we can infer with 95% confidence that the proportion of oral cancer cases in that population that were due to heavy smoking lay between 34 and 68 percent.</p>
+        <p>&#160;</p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

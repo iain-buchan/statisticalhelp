@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Working with data in worksheets</title>
+        <script type="text/javascript">
+        </script>
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../index.html#workbook/working_with_data_in_worksheets.htm">Open topic with navigation</a>
+        </p>
+        <h1>Working with Data in Worksheets</h1>
+        <p>&#160;</p>
+        <p><u>ENTERING DATA</u>
+        </p>
+        <p>Cells can contain two types of information: constant values and formulas. Constant values are numbers (including dates and times), logical values, error values, and text. Formulas are groups of constant values, cell references, names, functions, and operators that result in a new value when calculated or evaluated.</p>
+        <p>&#160;</p>
+        <p><u>ENTERING CONSTANT VALUES</u>
+        </p>
+        <p><b>Numbers</b>. Numeric entries can contain numeric characters (e.g., 1, 2, 3, 4, 5, 6, 7, 8, 9, and 0) and the special characters (e.g., +, -, (, ), /, $, %, ., E, and e).</p>
+        <ul>
+            <li>Negative numbers can be preceded by a minus sign or enclosed in parentheses.</li>
+            <li>Commas can be included in numeric entries as thousands separators.</li>
+            <li>Numeric entries containing leading dollar signs (or other currency signs, such as £ pounds) are formatted as currency.</li>
+            <li>Numeric entries containing trailing percent signs are formatted as percentages.</li>
+        </ul>
+        <p>&#160;</p>
+        <p>The worksheet numeric entries as fractions. If the fraction contains a leading integer (e.g., 1 1/3) it can be entered directly. If there is no leading integer, the fraction should be preceded by a zero (e.g., 0 2/3).</p>
+        <p>&#160;</p>
+        <p>Numbers larger than the cell in which they are entered are converted to scientific notation unless a specific format is applied.</p>
+        <p>&#160;</p>
+        <p>Use the Format_Column_Auto-Fit Width menu function to automatically set the column width to the correct size for all data in the column.</p>
+        <p>&#160;</p>
+        <p><b>Dates and Times</b>. Dates and times are automatically recognized by the worksheet. They are entered in the cell as values and automatically formatted. The following date and time formats are automatically recognized:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr valign="top">
+                <td>3/15/94</td>
+                <td>m/d/yy *</td>
+            </tr>
+            <tr valign="top">
+                <td>15-Mar-94</td>
+                <td>d-mmm-yy</td>
+            </tr>
+            <tr valign="top">
+                <td>15-Mar</td>
+                <td>d-mmm</td>
+            </tr>
+            <tr valign="top">
+                <td>Mar-94</td>
+                <td>mmm-yy</td>
+            </tr>
+            <tr valign="top">
+                <td>9:55 PM</td>
+                <td>h:mm AM/PM</td>
+            </tr>
+            <tr valign="top">
+                <td>9:55:33 PM</td>
+                <td>h:mm:ss AM/PM</td>
+            </tr>
+            <tr valign="top">
+                <td>21:55</td>
+                <td>h:mm</td>
+            </tr>
+            <tr valign="top">
+                <td>21:55:33</td>
+                <td>h:mm:ss</td>
+            </tr>
+            <tr valign="top">
+                <td>3/15/94 21:55</td>
+                <td>m/d/yy h:mm *</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>* That these formats are locale-dependent. For example, in the United Kingdom, 15/3/94 would be recognized as the date format d/m/yy. Your locale is your country setting in the Windows control panel.</p>
+        <p>&#160;</p>
+        <p><b>Text</b>. Text is any set of characters that the worksheet does not recognize as a number, date, or time. Text that is wider than a cell ordinarily spills over into the cell immediately to the right. You can specify that text should wrap within the cell by enabling word wrap in your alignment format settings.</p>
+        <p>&#160;</p>
+        <p><b>Logical and Error Values</b>. Logical and error values are not normally entered directly in cells; they are usually the result of a formula. However, entering these values can be useful for testing formulas. The logical values that can be entered are TRUE and FALSE. The error values that can be entered are #N/A, #VALUE!, #REF!, NULL!, #DIV/0!, #NUM!, and #NAME?.</p>
+        <p>&#160;</p>
+        <p><u>ENTERING MULTI-LINE DATA</u>
+        </p>
+        <p>A single cell can contain as many as nine lines or 16 kilobytes of data. When entering the data, new lines of data are specified within the cell by entering carriage return/line feeds. When entering data, press F2 when editing a cell. The Cell Text dialog box is displayed in which you can enter the cell data. To enter a line feed, press RETURN. Click the OK button to accept the entry and return to normal worksheet editing.</p>
+        <p>&#160;</p>
+        <p><u>ENTERING FORMULAS</u>
+        </p>
+        <p>A formula is a string containing numbers, operators, worksheet functions, cell references, and names. A formula can contain as many as 1024 characters. When entering a formula you must start with an equal sign (=). The worksheet then recognizes this entry as a formula.</p>
+        <p>&#160;</p>
+        <p>Numbers in formulas can be followed by a percent sign (%). Numbers with trailing percent signs are treated as percentages (e.g., 100% is evaluated as 1).</p>
+        <p>&#160;</p>
+        <p>If text is encountered when a number is expected, the text is converted to a number. For example, the formula 1 + "3" returns 4, because "3" is converted to a number. If the text cannot be converted to a valid number (e.g., 1 + "Text"), #VALUE! Is returned. Likewise, if a number is encountered when text is expected, the number is converted to text. The formula "The number is "&amp;3 converts to the text string "The number is 3".</p>
+        <p>&#160;</p>
+        <p>The value TRUE always converts to 1; FALSE converts to 0. If a number is encountered when a logical value is expected, a zero is converted to FALSE. All other numbers are converted to TRUE. If text is encountered when a logical value is expected, "TRUE" is converted to TRUE; "FALSE" is converted to FALSE. All other text returns #VALUE!.</p>
+        <p>&#160;</p>
+        <p>Dates and times are recognized and converted to their serial values. For example, "10/10/94" - "10/1/94" equals 9.</p>
+        <p>&#160;</p>
+        <p>If you want to display formulas as text rather than the values they produce, use the menu function Format_Sheet Settings to set the Show Formulas property of the worksheet.</p>
+        <p>&#160;</p>
+        <p><u>USING FORMULA OPERATORS</u>
+        </p>
+        <p>When creating formulas, the worksheet provides a set of operators for specifying the type of calculation or evaluation to be performed on the formula data. The following table lists the formula operators:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr valign="top">
+                <td style="text-decoration: underline;">Operator type</td>
+                <td style="text-decoration: underline;">Operator</td>
+                <td style="text-decoration: underline;">Operator Description</td>
+            </tr>
+            <tr valign="top">
+                <td>Arithmetic</td>
+                <td>+</td>
+                <td>Addition</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>-</td>
+                <td>Subtraction</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>/</td>
+                <td>Division</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>*</td>
+                <td>Multiplication</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>%</td>
+                <td>Percentage</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>^</td>
+                <td>Exponentiation</td>
+            </tr>
+            <tr valign="top">
+                <td>Text</td>
+                <td>&amp;</td>
+                <td>Concatenation</td>
+            </tr>
+            <tr valign="top">
+                <td>Comparison</td>
+                <td>=</td>
+                <td>Equal to</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&gt;</td>
+                <td>Greater than</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&lt;</td>
+                <td>Less than</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&gt;=</td>
+                <td>Greater than or equal to</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&lt;=</td>
+                <td>Less then or equal to</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&lt;&gt;</td>
+                <td>Not equal to</td>
+            </tr>
+            <tr valign="top">
+                <td>Reference</td>
+                <td>:, .., .</td>
+                <td>Range - produces a reference that includes all the cells</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>between the two references (e.g., A1:A5 includes cells A1 and</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>A5 and all cells in between).</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>,</td>
+                <td>Union - produces one reference that includes the two</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>references (e.g., A1:A10,C1:C10).</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Operator precedence</u>
+        </p>
+        <p>When combining operators in a formula, the worksheet uses a specific order of precedence to calculate the formula. The following table lists the order of precedence for formula operators.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr valign="top">
+                <td style="text-decoration: underline;">Operator</td>
+                <td style="text-decoration: underline;">Description</td>
+            </tr>
+            <tr valign="top">
+                <td>( )</td>
+                <td>Parentheses</td>
+            </tr>
+            <tr valign="top">
+                <td>:, .., .</td>
+                <td>Range</td>
+            </tr>
+            <tr valign="top">
+                <td>,</td>
+                <td>Union</td>
+            </tr>
+            <tr valign="top">
+                <td>-</td>
+                <td>Negation (single operand)</td>
+            </tr>
+            <tr valign="top">
+                <td>%</td>
+                <td>Percentage</td>
+            </tr>
+            <tr valign="top">
+                <td>^</td>
+                <td>Exponentiation</td>
+            </tr>
+            <tr valign="top">
+                <td>* and /</td>
+                <td>Multiplication and Division</td>
+            </tr>
+            <tr valign="top">
+                <td>+ and -</td>
+                <td>Addition and Subtraction</td>
+            </tr>
+            <tr valign="top">
+                <td>&amp;</td>
+                <td>Text concatenation</td>
+            </tr>
+            <tr valign="top">
+                <td>= &lt; &gt; &lt;= &gt;= &lt;&gt;</td>
+                <td>Comparison</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Operators of like precedence are evaluated left to right. Parentheses should be used when it is necessary to change the order of evaluation. The following example illustrates how the result of a formula can be altered by adding parentheses to change the order of precedence.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr valign="top">
+                <td style="text-decoration: underline;">Formula</td>
+                <td style="text-decoration: underline;">Result</td>
+            </tr>
+            <tr valign="top">
+                <td>1+2*37</td>
+                <td>75</td>
+            </tr>
+            <tr valign="top">
+                <td>(1+2)*37</td>
+                <td>111</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>As illustrated in the previous table, the multiplication operator (*) has higher precedence than the addition operator (+). It is evaluated first unless parentheses are used to force the addition to take place first.</p>
+        <p>&#160;</p>
+        <p><u>UNDERSTANDING CELL REFERENCES</u>
+        </p>
+        <p>A reference identifies a cell by referring to the row and column coordinates of the cell. References are based on the row and column headings. For example, A1 refers to the cell at the intersection of row 1 and column A. References can be used in formulas to access data from a worksheet.</p>
+        <p>&#160;</p>
+        <p>A range of cells is specified by placing a colon (:) between two cell references. For example, the reference A1:C3 refers to the range anchored by cells A1 and C3. The range includes all cells in columns A, B, and C of rows 1, 2, and 3.</p>
+        <p>&#160;</p>
+        <p><b>Absolute and Relative References</b>
+        </p>
+        <p>There are two types of cell references: relative and absolute.</p>
+        <ol>
+            <li value="1">Relative references point to a cell based on its relative position to the current cell. When the cell containing the reference is copied, the reference is adjusted to point to a new cell with the same relative offset as the originally referenced cell.</li>
+            <li value="2">Absolute references point to a cell at an exact location. When the cell containing the formula is copied, the reference does not change. Absolute references are designated by placing a dollar sign ($) in front of the row and column that is to be absolute.</li>
+        </ol>
+        <p>&#160;</p>
+        <p>References can be part absolute and part relative. These are called mixed references. The following table lists the reference types.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr valign="top">
+                <td style="text-decoration: underline;">Reference</td>
+                <td style="text-decoration: underline;">Type</td>
+            </tr>
+            <tr valign="top">
+                <td>A1</td>
+                <td>Relative reference pointing to cell A1.</td>
+            </tr>
+            <tr valign="top">
+                <td>$A$1</td>
+                <td>Absolute reference pointing to cell A1.</td>
+            </tr>
+            <tr valign="top">
+                <td>$A1</td>
+                <td>Absolute column reference, relative row reference pointing to cell A1.</td>
+            </tr>
+            <tr valign="top">
+                <td>A$1</td>
+                <td>Relative column reference, absolute row reference pointing to cell A1.</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>The reference operators can be used to specify multiple ranges in the same reference. For example, A1:C1,A10:C10 specifies the three cells A1, B1, and C1 and the three cells A10, B10, and C10. The formula =SUM(A1:C1,A10:C10) adds the values in all six cells.</p>
+        <p>&#160;</p>
+        <p><b>References to Other Worksheets</b>
+        </p>
+        <p>You can reference cells in other worksheets in the same or different workbooks.</p>
+        <p>&#160;</p>
+        <p>To reference a worksheet in the same workbook, use the following syntax:</p>
+        <p>Sheet3!A1</p>
+        <p>&#160;</p>
+        <p>To reference a worksheet in a different workbook, use the following syntax:</p>
+        <p>[F1Book1]Sheet1!A1:B2</p>
+        <p>&#160;</p>
+        <p>Workbooks are referenced by the value of their Title property, and must be loaded for the reference to work.</p>
+        <p>&#160;</p>
+        <p><b>References to Multiple Worksheets</b>
+        </p>
+        <p>You can also refer to multiple worksheets, or ranges in multiple worksheets. The following example references cell A1 in Sheet1 and cell A1 in Sheet2.</p>
+        <p>Sheet1:Sheet2!A1</p>
+        <p>&#160;</p>
+        <p>Important. Worksheets must be referenced in index order. For example, the reference to the sheet indexed 1 must come before the reference to the sheet indexed 2. Remember that the worksheet index is usually different that the sheet name that appears on the sheet tab. Worksheets are indexed from left to right, beginning with 1.</p>
+        <p>&#160;</p>
+        <p>The following syntax references the range A1 to B2 in Sheet1 and the range A1 to B2 in Sheet2.</p>
+        <p>Sheet1:Sheet2!A1:B2</p>
+        <p>&#160;</p>
+        <p>You can also reference multiple worksheet ranges in different workbooks by referencing the workbook name at the beginning of the syntax.</p>
+        <p>[F1Book1]Sheet1:Sheet2!A1</p>
+        <p>[SSView2]Sheet1:Sheet2!A1:B2</p>
+        <p>&#160;</p>
+        <p><b>External References</b>
+        </p>
+        <p>References can point to cells in other workbooks. This type of reference is called an external reference. An external reference is created by placing a workbook name in brackets, followed by the worksheet name and an exclamation point, and finally a cell reference. The following table shows examples of external references.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr valign="top">
+                <td style="text-decoration: underline;">Reference</td>
+                <td style="text-decoration: underline;">Type</td>
+            </tr>
+            <tr valign="top">
+                <td>[Sales]Sheet1!A1</td>
+                <td>Relative reference pointing to cell A1 in the first</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>worksheet of a workbook titled Sales.</td>
+            </tr>
+            <tr valign="top">
+                <td>[FY91]Sheet2!$A$1</td>
+                <td>Absolute reference pointing to cell A1 in the second</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>worksheet of a workbook titled FY91.</td>
+            </tr>
+            <tr valign="top">
+                <td>[Q1]Sheet1:Sheet2!$A1</td>
+                <td>Absolute column reference, relative row reference</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>pointing to cell A1 in the first and second worksheets</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>in a workbook titled Q1.</td>
+            </tr>
+            <tr valign="top">
+                <td>[Store1]Sheet1:Sheet4!A1:F1</td>
+                <td>Relative row and column reference, pointing to the</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>range A1 to F1 in a workbook titled Store1.</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><b>Automatically Entering Cell References</b>
+        </p>
+        <p>Cell references can be automatically entered as you enter a formula.</p>
+        <p>&#160;</p>
+        <p>To automatically enter a cell reference:</p>
+        <ol>
+            <li value="1">Enter the formula to the point of the range reference.</li>
+            <li value="2">With the mouse, select the cell or range you want to reference. The reference of the range you select is automatically placed in the formula.</li>
+        </ol>
+        <p>&#160;</p>
+        <p>When you enter a cell reference in this manner, the workbook assumes it is a relative reference.</p>
+        <p>&#160;</p>
+        <p><u>UNDERSTANDING WORKSHEET ERRORS</u>
+        </p>
+        <p>When a formula cannot be properly calculated, an error is returned in the cell. The following table lists the errors that can be generated.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr valign="top">
+                <td style="text-decoration: underline;">Error</td>
+                <td style="text-decoration: underline;">Cause</td>
+            </tr>
+            <tr valign="top">
+                <td>#ARRAY_FORMULA!</td>
+                <td>The workbook read an Excel file that contained an array formula.</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>Since this feature is not supported in the StatsDirect workbook, this</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>error value is placed in the cell that used to contain the array formula.</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr valign="top">
+                <td>#DIV/0!</td>
+                <td>Divide by zero. May be caused by a reference to a blank cell or</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>a cell containing zero.</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr valign="top">
+                <td>#N/A</td>
+                <td>No value is available. May be caused by inappropriate values in</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>the formula or a reference to a cell containing the #N/A value.</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr valign="top">
+                <td>#NAME?</td>
+                <td>Name is not recognized. May be caused by a user defined name</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>that is not defined.</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr valign="top">
+                <td>#NULL!</td>
+                <td>Null intersection. An intersection of two ranges was defined that</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>does not intersect.</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr valign="top">
+                <td>#NUM!</td>
+                <td>Number problem. May be caused by inappropriate numbers in</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>functions, an iteration that cannot solve for a value, or a formula</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>that results in a number too large or too small to represent.</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr valign="top">
+                <td>#REF!</td>
+                <td>Reference error. May be caused by referring to a cell that was</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>deleted.</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr valign="top">
+                <td>#VALUE!</td>
+                <td>Wrong argument type. May be caused by entering text where a</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>number was expected, or supplying a range to an operator or</td>
+            </tr>
+            <tr valign="top">
+                <td>&#160;</td>
+                <td>function that was expecting a single value.</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>UNDERSTANDING FUNCTIONS</u>
+        </p>
+        <p>Most worksheet functions are composed of keywords and arguments. Every worksheet function contains a keyword, but not all functions require arguments.</p>
+        <p>&#160;</p>
+        <p>The keyword identifies the function and tells the worksheet what type of calculation or evaluation is performed. Each function keyword is unique.</p>
+        <p>&#160;</p>
+        <p>Arguments provide the data for the function to calculate or evaluate. The arguments for a function immediately follow the function keyword and are enclosed in parentheses.</p>
+        <p>&#160;</p>
+        <p><b>Entering Functions</b>
+        </p>
+        <p>When entering functions in a worksheet, all functions are preceded by an equal sign (=). The leading equal sign tells the worksheet that the following information is to be evaluated or calculated.</p>
+        <p>&#160;</p>
+        <p>The function keyword follows the equal sign. It can be entered in lowercase or uppercase characters. After the function is entered, the worksheet records the function keyword in uppercase characters, regardless of how it was entered.</p>
+        <p>&#160;</p>
+        <p>If a function requires multiple arguments, the arguments are separated by commas. Some functions contain optional arguments. If you omit an optional argument, a default value is assumed for the argument.</p>
+        <p>&#160;</p>
+        <p>Functions that do not require arguments still require a set of parentheses following the function keyword.</p>
+        <p>&#160;</p>
+        <p><b>Nesting Functions</b>
+        </p>
+        <p>A function can be used as an argument for another function. When a function is used in this manner, you are nesting functions. The nested function must return the appropriate type of data for the function in which it is nested. You must also provide the necessary arguments for the nested function.</p>
+        <p>&#160;</p>
+        <p>In the following example, the AVE RAGE function is used as an argument for the SUM function. In this case, AVE RAGE is nested in SUM.</p>
+        <p>=SUM(5.23, 6.82, AVERAGE(2.45, 5.62, 7.74), 8.95, 9.01)</p>
+        <p>&#160;</p>
+        <p><b>Entering Arguments</b>
+        </p>
+        <p>The arguments for a function can be:</p>
+        <ul>
+            <li>Numerical values</li>
+            <li>Logical values</li>
+            <li>Text strings</li>
+            <li>Error values</li>
+            <li>References to cells or ranges</li>
+        </ul>
+        <p>&#160;</p>
+        <p>Each argument requires a specific type of data. Refer to <a href="worksheet_functions.htm">Worksheet Functions</a>, to determine the type of data required for the function you are entering.</p>
+        <p>&#160;</p>
+        <p>For most arguments, you can substitute a cell or range reference for the data required by an argument. For example, if an argument requires a number, you can substitute a reference to a cell that contains a number. The number in the referenced cell is used in the calculation of the function. The data in the referenced cell must be appropriate for the argument for which it is used.</p>
+        <p>&#160;</p>
+        <p><b>Syntax Errors</b>
+        </p>
+        <p>If the worksheet function you enter contains syntax errors, the workbook does not allow the function to be entered. You must correct the errors before proceeding with other tasks.</p>
+        <p>&#160;</p>
+        <p><b>Calculating Worksheets</b>
+        </p>
+        <p>The workbook calculates cells in natural order. In natural order calculation, formulas are calculated in such a way that all dependencies are calculated before their dependents. This ensures that the formula results are always correct.</p>
+        <p>&#160;</p>
+        <p>When a worksheet is edited, the workbook first adjusts formula references so they point to the correct cells. Then, the workbook determines the natural order of the formulas.</p>
+        <p>&#160;</p>
+        <p>When a change is made to a cell, the formulas are recalculated to keep all worksheets in the workbook current, ensuring that data is always valid.</p>
+        <p>&#160;</p>
+        <p><b>Setting Automatic Recalculation</b>
+        </p>
+        <p>Normally, automatic recalculation is enabled, which means the worksheet is recalculated each time a cell is changed and system processing is idle. For moderately sized worksheets, recalculation operations happen in a fraction of a second. But for large worksheets or situations where many cells are changed by code, this reorganization and recalculation process can slow system processing.</p>
+        <p>&#160;</p>
+        <p>In these situations, you may disable automatic recalculation while your code operates on the worksheet. After the operation is completed, you may enable automatic recalculation to update the worksheet. Automatic recalculation can be disabled using the Format_Workbook Options menu function.</p>
+        <p>&#160;</p>
+        <p><b>Setting Minimal Recalculation</b>
+        </p>
+        <p>Minimal recalculation means that, when the workbook needs to recalculate the formulas on the worksheet, it only recalculates cells that refer to cells that have changed. Cells and references to cells that have not changed are left alone. This will often cause a dramatic improvement in recalculation speed. By default, minimal recalculation is on.</p>
+        <p>&#160;</p>
+        <p>Whether or not minimal recalculation happens is determined by the setting of the AutoRecalc property. When AutoRecalc is set to True, minimal recalc will be called whenever the worksheet changes. If AutoRecalc is off, minimal recalc will be called when you press F9.</p>
+        <p>&#160;</p>
+        <p>The CALL, COLUMNS, INDEX, INDIRECT, NOW, OFFSET, RAND, ROWS, and TODAY worksheet functions must be re-evaluated during every recalc to ensure accurate results. Formulas that use these functions are re-evaluated during every recalc operation regardless of whether minimal recalc is on or off.</p>
+        <p>&#160;</p>
+        <p>You may encounter an unusual instance where minimal recalculation slows worksheet processing speed. In these cases, you may want to turn minimal recalculation off.</p>
+        <p>&#160;</p>
+        <p>Use the Format_Workbook Options menu function to set the MinimalRecalc property.</p>
+        <p>&#160;</p>
+        <p><b>Solving Circular References</b>
+        </p>
+        <p>In some circumstances, a formula refers to its own cell, either directly or indirectly. This is called a circular reference. To solve a formula that contains a circular reference, iteration must be used. Iteration is the process of repeatedly calculating a worksheet until a specific condition is met.</p>
+        <p>&#160;</p>
+        <p>The workbook supports iteration that you can configure using the menu Format_Workbook Options. The iteration properties allow you to specify the maximum number of iterations and the maximum change between iterations. The iteration continues until one of those two conditions is met.</p>
+        <p>&#160;</p>
+        <p>The following example involves a circular reference:</p>
+        <p>Suppose a small business has 10,000 shares of stock owned by four shareholders. A fifth shareholder enters. In return for his investment, you give him 10 percent of the company. How many more shares will the company have to issue to give the new investor 10% of the company?</p>
+        <p>&#160;</p>
+        <p>Old shares = 10,000</p>
+        <p>Total shares = old shares + new shares</p>
+        <p>New shares = total shares * 10%</p>
+        <p>&#160;</p>
+        <p>Old shares = 10, 000</p>
+        <p>Total shares = 11,111</p>
+        <p>New shares = 1,111</p>
+        <p>&#160;</p>
+        <p><u>LIMITING DATA ENTRY</u>
+        </p>
+        <p>&#160;</p>
+        <p><b>Denying Access to Cells</b>
+        </p>
+        <p>To deny access to one, a few, or all of the cells in a worksheet, lock the cells and enable worksheet protection. Locked cells may be selected, but they cannot be changed, moved, resized, or deleted. You may protect the entire worksheet or just certain cells in the worksheet.</p>
+        <p>&#160;</p>
+        <p>Protecting the worksheet is a two-step process: First you choose which cells you want to be locked. Then you enable worksheet protection. Locking the cells has no effect until you enable the protection. By default, worksheet cells are locked and protection is disabled.</p>
+        <p>&#160;</p>
+        <p>To protect the worksheet:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Select the cells you want to lock or unlock.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Use the menu item Format_Cells and click the Protection tab.</p>
+            </li>
+            <li class="p" value="3">
+                <p>Check the Locked check box to lock the selected cells. Uncheck the Locked check box to unlock the selected cells. Click OK.</p>
+            </li>
+            <li class="p" value="4">
+                <p>Use the menu item Format_Sheet Settings. A check by the Protection menu item means that protection is enabled and locked cells cannot be entered and changed.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p><b>Working With Locked Cells</b>
+        </p>
+        <p>By default, when a user selects a locked cell and tries to enter data, the worksheet will beep and display the message "Locked cells cannot be modified." You can turn off the error message so that the worksheet just beeps in this situation. To turn off the error message, uncheck the Show "Locked Cells" Error Message in the Edit tab under the Format_Sheet Settings menu function.</p>
+        <p>&#160;</p>
+        <p>Also, when a locked cell is selected, the ENTER, SHIFT-ENTER, TAB, and SHIFT-TAB keys advance the selection to the next unlocked cell.</p>
+        <p>&#160;</p>
+        <p><b>Denying Access to Row and Column Headings</b>
+        </p>
+        <p>You may keep the user from changing row and column heading text in a worksheet.</p>
+        <p>&#160;</p>
+        <p>To deny access to row and column headings:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Select the worksheet(s) you want to restrict access to headings in.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Choose Format_Sheet Settings and click the Edit tab.</p>
+            </li>
+            <li class="p" value="3">
+                <p>Uncheck the Edit Headings box and click OK.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p><b>Restricting Cell Data to Certain Values</b>
+        </p>
+        <p>You can restrict the user to entering only specific values in a cell by specifying a validation rule for the cell. A validation rule consists of a formula to test, and text to display if the validation fails. If the formula returns True, the value is entered. If the formula returns a text string, the string is displayed and the value is not entered. If the formula returns False, the value is not entered and the validation text is displayed in an error dialog box.</p>
+        <p>&#160;</p>
+        <p>For example, you can limit the range of values a user can enter in a cell by creating a rule that fails if the user enters a number under 100 and displays the message "Enter a value greater than 100."</p>
+        <p>&#160;</p>
+        <p>You can use relative references in validation rules. These references are considered to be relative to the active cell. This allows a validation rule to be properly applied to an entire range.</p>
+        <p>&#160;</p>
+        <p>Note that the workbook's validation rules are incompatible with Microsoft Excel’s validation rules.</p>
+        <p>&#160;</p>
+        <p>To create a validation rule:</p>
+        <ol>
+            <li value="1">Select the cell for which you want to create a validation rule.</li>
+            <li value="2">Select Format_Cells to display the Format Cells dialog box.</li>
+            <li value="3">Select the Validation tab.</li>
+            <li value="4">Enter a validation formula in the Rule text box.</li>
+            <li value="5">Enter text to be displayed if the data fails the validation test in the Text box.</li>
+            <li value="6">Click OK.</li>
+        </ol>
+        <p>&#160;</p>
+        <p><b>The Validation Formula</b>
+        </p>
+        <p>The validation formula must also be a worksheet formula that evaluates to True or False. Following are a number of examples of validation formulas.</p>
+        <p>&#160;</p>
+        <p>SUM(A6:A7) &gt; A5</p>
+        <p>AND(A6&gt;1, A6 &lt;100)</p>
+        <p>IF (A7&gt;1,A7&lt;100,A7&gt;0)</p>
+        <p>OR(ISLOGICAL (A7), A7=1,A7=0)</p>
+        <p>&#160;</p>
+        <p>Denying Entry of Formulas in a Worksheet</p>
+        <p>You may prevent users from entering formulas in a worksheet while still allowing them to enter constant values.</p>
+        <p>&#160;</p>
+        <p>To deny users the ability to enter formulas:</p>
+        <ol>
+            <li value="1">Select the worksheet(s) in which you don’t want users to enter formulas.</li>
+            <li value="2">Choose Format_Sheet Settings and click the Edit tab.</li>
+            <li value="3">Uncheck the Enter Formulas box and click OK.</li>
+        </ol>
+        <p>&#160;</p>
+        <p><b>Restricting the Use of Certain Keys</b>
+        </p>
+        <p>You may enable and disable a variety of navigation and data entry keys for particular worksheets.</p>
+        <p>&#160;</p>
+        <p>To disable the use of certain keys:</p>
+        <p>&#160;</p>
+        <p>Select the worksheets to which you want to apply the changes.</p>
+        <ol>
+            <li value="1">Select Format_Sheet Settings and click the Edit tab.</li>
+            <li value="2">To disable use of the arrow, delete, and/or tab keys, unselect the Enable Arrow Keys, Enable Delete Key, and/or Enable Tab Key options.</li>
+            <li value="3">To prevent the Cell Text dialog box from appearing when the user presses F2 twice, unselect the Enable Cell Text Dialog option. (The Cell Text dialog allows the user to enter multi-line data.)</li>
+            <li value="4">To leave the active cell selected when a user presses Enter, unselect the Enter Moves Down option. To move the active cell down one row when the user presses Enter, check the enter Moves Down box.</li>
+            <li value="5">Click OK.</li>
+        </ol>
+        <p>&#160;</p>
+        <p><u>COPYING, MOVING, AND PASTING SELECTIONS</u>
+        </p>
+        <p>You can copy, move, and paste selections interactively. Selections in a worksheet contain many attributes such as:</p>
+        <ul type="disc">
+            <li class="p">
+                <p>Formulas. Establish the value in a cell. Formulas are displayed in the formula bar when the cell is active.</p>
+            </li>
+            <li class="p">
+                <p>Values. What displays in the cell.</p>
+            </li>
+            <li class="p">
+                <p>Formats. How the cells and values are shown, such as red text applied to a selection.</p>
+            </li>
+        </ul>
+        <p>&#160;</p>
+        <p>Note. The workbook maintains its own internal clipboard and also supports text on the Windows clipboard. The internal clipboard is more flexible than the Windows clipboard. The internal clipboard retains formulas and allows cell references to be adjusted when cells are pasted. The Windows clipboard only holds text and formatting; cell references are not maintained by the Windows clipboard.</p>
+        <p>&#160;</p>
+        <p><b>Using Dragging to Move, Copy, and Paste Selections</b>
+        </p>
+        <p>If you are moving or copying a selection within the same worksheet, dragging or dragging-and-dropping are the most simple techniques to use.</p>
+        <p>&#160;</p>
+        <p><b>Copying a Selection Using Dragging</b>
+        </p>
+        <p>You can copy a selection to the right or down by dragging the copy handle of a selection. The copy handle is the small knob in the lower right corner of a selection. When you copy data using the copy handle, the pointer changes to a small crosshair.</p>
+        <p>&#160;</p>
+        <p>You can also copy a selected range in a worksheet. If an autofill list is defined for the data in the range, the data is copied using the autofill list.</p>
+        <p>&#160;</p>
+        <p><b>Moving or Copying a Selection Using Drag-and-Drop</b>
+        </p>
+        <p>The workbook's drag-and-drop functionality is different from this type of functionality in other applications.</p>
+        <p>&#160;</p>
+        <p>To move or copy a selection using drag-and-drop:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Select the cells that contain the data you want to move or copy.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Position the pointer on the border of the selection.</p>
+            </li>
+            <li class="p" value="3">
+                <p>When the pointer changes to an arrow,<br />- to move the selection, hold down the mouse button and drag-and-drop the selection to the new location.<br />- to copy the selection, hold down the CTRL key and drag-and-drop the selection to the new location.</p>
+            </li>
+            <li class="p" value="4">
+                <p>When the pointer is at the appropriate location, release the mouse button. The original selection is not moved if you hold down the CTRL key. However, the original selection is moved to the new location if do not hold down the CTRL key.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p><b>Using Drag-and-Drop with Other Applications</b>
+        </p>
+        <p>You can easily drag text and Windows metafile pictures onto a worksheet from other Windows applications, such as Excel. The mouse pointer changes to indicate that the data cannot be placed in the selected location. For example, if you select data and drag it to the Desktop, the pointer indicates that the data cannot be dropped onto the desktop.</p>
+        <p>&#160;</p>
+        <p>To drag information from another application and drop it into a worksheet:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Arrange the application windows so that the source and destination documents are open and visible. You must be able to see the information you want to drag and the StatsDirect worksheet you want to place it on.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Select the information you want to move or copy.</p>
+            </li>
+            <li class="p" value="3">
+                <p>To move the information, point to the selected information, and then hold down the mouse button. When the pointer appears, drag the pointer to the new location, and then release the mouse button. The pointer changes to indicate a move.</p>
+            </li>
+            <li class="p" value="4">
+                <p>To copy the information, hold down the CTRL key, point to the selected information, and then hold down the mouse button. When the pointer appears, drag the pointer to the new location, and then release both the mouse button and the CTRL key. The pointer changes to indicate a copy.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p>To drag a selection from a worksheet to another application:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Arrange the application windows so that the source and destination documents are open and visible. You must be able to see the data on the StatsDirect worksheet.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Select the information you want to move or copy.</p>
+            </li>
+            <li class="p" value="3">
+                <p>To move the selection, point to it, and then hold down the mouse button.</p>
+            </li>
+            <li class="p" value="4">
+                <p>When the pointer appears, drag the pointer to the new location, and then release the mouse button. The pointer changes to indicate a move.</p>
+            </li>
+            <li class="p" value="5">
+                <p>To copy the selection, hold down the CTRL key, point to the selection, and then hold down the mouse button. When the pointer appears, drag the pointer to the new location, and then release both the mouse button and the CTRL key. The pointer changes to indicate a copy.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p><b>Using Menu Commands to Move, Copy, and Paste Selections</b>
+        </p>
+        <p>If you are moving or copying a selection for a longer distance, such as another workbook, worksheet, or application you might want to use menu commands. Also, in some instances you might not want to paste all cell attributes to the other location. The StatsDirect workbook allows you to choose whether to paste formulas, values, or formats. Furthermore, the workbook allows you to copy formatting from a cell or range and apply that formatting to another cell or range.</p>
+        <p>&#160;</p>
+        <p>To move or copy a selection using menu commands:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Select the cells that you want to cut.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Select Edit_Cut to move a selection. Alternatively, select Edit_Copy to copy a selection.</p>
+            </li>
+            <li class="p" value="3">
+                <p>Select the upper left cell where you want to move or paste the selection and select Edit_Paste. This pastes all cell attributes.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p>To paste individual cell attributes:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Select the upper left cell of where you want to paste the selection and select Edit_Paste Special.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Press OK when you have selected the attributes to paste.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p><b>Finding and Replacing Data</b>
+        </p>
+        <p>The StatsDirect workbook enables you to find and replace data within a worksheet in formulas and values. You may invoke the Find dialog and a separate Replace dialog within a worksheet.</p>
+        <p>&#160;</p>
+        <p>You may search by row or by column; you may search for values or formulas or both; and you may specify search options like matching case.</p>
+        <p>&#160;</p>
+        <p>To find data in a worksheet:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Choose Edit_Find or issue the Ctrl F keyboard shortcut. The Find dialog will appear.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Enter the data you want to search for in the Find What dialog box.</p>
+            </li>
+            <li class="p" value="3">
+                <p>Choose any special search options you want, then click the Find Next button.</p>
+            </li>
+            <li class="p" value="4">
+                <p>The workbook will select the first cell that contains the search string you chose. If it finds no instances of the string, it will display the message "Cannot find matching data."</p>
+            </li>
+            <li class="p" value="5">
+                <p>If you want to replace the data, click Replace.</p>
+            </li>
+            <li class="p" value="6">
+                <p>Click Close when you finish.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p>To replace data in a worksheet using the Workbook Designer:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Choose Edit_Replace or issue the Ctrl H keyboard shortcut. The Replace dialog will appear.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Enter the data you want StatsDirect to search for in the Find What dialog box.</p>
+            </li>
+            <li class="p" value="3">
+                <p>Enter the data you want to replace that data with in the Replace With box. Choose any special search options you want, then click Find Next.</p>
+            </li>
+            <li class="p" value="4">
+                <p>StatsDirect will select the first cell that contains the search string you chose. If it finds no instances of the string, it will display the message "Cannot find matching data."</p>
+            </li>
+            <li class="p" value="5">
+                <p>Click Replace if you want to replace the data, or click the Find Next button to search for the next instance of the search string.</p>
+            </li>
+            <li class="p" value="6">
+                <p>Click Close when you finish.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p><b>Inserting Cells, Rows, and Columns</b>
+        </p>
+        <p>&#160;</p>
+        <p>To insert cells:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Select a range of cells in the size and place of the new cells that you want to insert.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Select Insert_Cells to display the Insert dialog box.</p>
+            </li>
+            <li class="p" value="3">
+                <p>Select an Insert option button to specify a direction that you want the surrounding rows, columns, or cells to shift.</p>
+            </li>
+            <li class="p" value="4">
+                <p>Click OK.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p>To insert rows:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Select the same number of columns directly below where you want to add the new row or rows.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Select Insert_Rows.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p>To insert columns:</p>
+        <ol>
+            <li class="p" value="1">
+                <p>Select the same number of columns directly to the right of where you want to add the new column or columns.</p>
+            </li>
+            <li class="p" value="2">
+                <p>Select Insert_Columns.</p>
+            </li>
+        </ol>
+        <p>&#160;</p>
+        <p>When new cells are inserted, cell references in formulas are adjusted so the formulas</p>
+        <p>remain correct.</p>
+        <p>&#160;</p>
+        <p><b>Clearing and Deleting Cells, Rows, and Columns</b>
+        </p>
+        <p>Deleting cells removes the cells and shifts the surrounding data to fill the space. Clearing cells leaves the cells but deletes the data.</p>
+        <p>&#160;</p>
+        <p>To delete cells:</p>
+        <ol>
+            <li value="1">Select the cells, rows, or columns you want to delete.</li>
+            <li value="2">Select Edit &gt; Delete to display the Delete dialog box.</li>
+            <li value="3">Select a Delete option button to specify a direction you want the surrounding rows, columns, or cells to shift.</li>
+            <li value="4">Click OK.</li>
+        </ol>
+        <p>&#160;</p>
+        <p>To clear cells:</p>
+        <ol>
+            <li value="1">Select the cells, rows, or columns you want to clear.</li>
+            <li value="2">Choose Edit_Clear Selection and choose what you want to clear from the Clear dialog box.</li>
+            <li value="3">Click OK.</li>
+        </ol>
+    </body>
+</html>
