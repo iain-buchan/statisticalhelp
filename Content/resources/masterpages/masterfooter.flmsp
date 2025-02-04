@@ -16,8 +16,8 @@
         </p>
 
         <!-- Google tag (gtag.js) -->
-        <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D"></script>
-        <script>
+        <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D"></script>
+        <script type="text/javascript">
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
