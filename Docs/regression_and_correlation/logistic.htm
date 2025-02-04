@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="topic _Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Regression and correlation" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="google-site-verification" content="u8VujUYHtRg-etTtMaOxGADUJTyzVkeViXdOFtgt1nU" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Logistic Regression (Multiple Logistic, Odds Ratio) - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/Images/sd3.ico" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-right" role="navigation" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" aria-label="title tab bar" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <div class="central-account-wrapper">
+                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" role="navigation" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="central-account-wrapper">
+                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
+                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
+                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
+                                                    </div>
+                                                    <div class="search-filter-content" id="sf-content">
+                                                        <ul>
+                                                            <li>
+                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <nav class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="body-container">
+                                <div data-mc-content-body="True">
+                                    <div role="main" id="mc-main-content">
+                                        <h1><a name="kanchor23"></a>Logistic Regression</h1>
+                                        <p>&#160;</p>
+                                        <p>Menu location: <b>Analysis_Regression and Correlation_Logistic</b>.</p>
+                                        <p>&#160;</p>
+                                        <p>This function fits and analyses logistic models for binary outcome/response data with one or more predictors.</p>
+                                        <p>&#160;</p>
+                                        <p><a href="../distributions/binomial.htm">Binomial distributions</a> are used for handling the errors associated with regression models for binary/dichotomous responses (i.e. yes/no, dead/alive) in the same way that the <a href="../distributions/normal.htm">standard normal distribution</a> is used in <a href="multiple_linear.htm">general linear regression</a>. Other, less commonly used binomial models include normit/probit and complimentary log-log. The logistic model is widely used and has many desirable properties (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989; Armitage and Berry, 1994; Altman 1991; McCullagh and Nelder, 1989; Cox and Snell, 1989; Pregibon, 1981</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>Odds = π/(1-π)</p>
+                                        <p>[p = proportional response, i.e. r out of n responded so π = r/n]</p>
+                                        <p>Logit = log odds = log(π/(1-π))</p>
+                                        <p>&#160;</p>
+                                        <p>When a logistic regression model has been fitted, estimates of π are marked with a hat symbol above the Greek letter pi to denote that the proportion is estimated from the fitted regression model. Fitted proportional responses are often referred to as event probabilities (i.e. p hat n events out of n trials).</p>
+                                        <p>&#160;</p>
+                                        <p>The following information about the difference between two logits demonstrates one of the important uses of logistic regression models:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation197.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Logistic models provide important information about the relationship between response/outcome and exposure. It makes no difference to logistic models, whether outcomes have been sampled prospectively or retrospectively, this is not the case with other binomial models.</p>
+                                        <p>&#160;</p>
+                                        <p>The general form of a logistic regression is:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation198.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where p hat is the expected proportional response for the logistic model with regression coefficients b1 to k and intercept b0 when the values for the predictor variables are x1 to k.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Classifier predictors</u>
+                                        </p>
+                                        <p>If one of the predictors in a regression model classifies observations into more than two classes (e.g. blood group) then you should consider splitting it into separate dichotomous variables as described under <a href="../data_preparation/dummy_variables.htm">dummy variables</a>.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Data preparation</u>
+                                        </p>
+                                        <p>For individual responses that are dichotomous (e.g. yes/no), enter the total number as 1 and the response as 1 or 0 for each observation (usually 1 for yes and 0 for no).</p>
+                                        <p>&#160;</p>
+                                        <p>For responses that are proportional, either enter the total number then the number responding or enter the total number as 1 and then a proportional response (r/n).</p>
+                                        <p>&#160;</p>
+                                        <p>Rows with missing data are left out of the model. If missing data are encountered you are warned that missing data can cause <a href="../basics/bias.htm">bias</a>.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Deviance and model analysis</u>
+                                        </p>
+                                        <p>Deviance is minus twice the log of the likelihood ratio for models fitted by maximum likelihood (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989; Cox and Snell, 1989; Pregibon, 1981</a>). Log likelihood and deviance are given under the model analysis option of logistic regression in StatsDirect.</p>
+                                        <p>&#160;</p>
+                                        <p>The value of adding parameter to a logistic model can be tested by subtracting the deviance of the model with the new parameter from the deviance of the model without the new parameter, this difference is then tested against a chi-square distribution with degrees of freedom equal to the difference between the degrees of freedom of the old and new models. The model analysis option tests the model you specify against a model with only one parameter, the intercept; this tests the combined value of the specified predictors/covariates in the model.</p>
+                                        <p>&#160;</p>
+                                        <p>Some statistical packages offer stepwise logistic regression that performs systematic tests for different combinations of predictors/covariates. Automatic model building procedures such as these can be erroneous as they do not consider the real world importance of each predictor, for this reason StatsDirect does not include stepwise selection.</p>
+                                        <p>&#160;</p>
+                                        <p>Three goodness of fit tests are given for the overall fit of a model: Pearson, deviance and Hosmer-Lemeshow (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989</a>). Note that the Hosmer-Lemeshow (decile of risk) test is only applicable when the number of observations tied at any one covariate pattern is small in comparison with the total number of observations, and when all predictors are continuous variables.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Influential data and odds ratios</u>
+                                        </p>
+                                        <p>The following are provided under the fits and residuals option for the purpose of identifying influential data:</p>
+                                        <ul>
+                                            <li>leverages (diagonal elements of the logistic "hat" matrix)</li>
+                                            <li>deviance residuals</li>
+                                            <li>Pearson residuals</li>
+                                            <li>standardized variances</li>
+                                            <li>deletion displacements</li>
+                                            <li>covariance</li>
+                                        </ul>
+                                        <p>&#160;</p>
+                                        <p>Approximate confidence intervals are given for the odds ratios derived from the covariates.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Bootstrap estimates</u>
+                                        </p>
+                                        <p>A bootstrap procedure may be used to cross-validate confidence intervals calculated for odds ratios derived from fitted logistic models (<a href="../references/reference_list.htm">Efron and Tibshirani, 1997; Gong, 1986</a>). The bootstrap confidence intervals used here are the 'bias-corrected' type.</p>
+                                        <p>&#160;</p>
+                                        <p>The mechanism that StatsDirect uses is to draw a specified number of random samples (with replacement, i.e. some observations are drawn once only, others more than once and some not at all) from your data. These 're-samples' are fed back into the logistic regression and bootstrap' estimates of confidence intervals for the model parameters are made by examining the model parameters calculated at each cycle of the process. The bias statistic shows how much each mean model parameter from the bootstrap distribution deviates from observed model parameters.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Classification and ROC curve</u>
+                                        </p>
+                                        <p>The confidence interval given with the likelihood ratios in the classification option is constructed using the robust approximation given by <a href="../references/reference_list.htm">Koopman (1984)</a> for ratios of binomial proportions. The 'near' cut-off in the classification option is the rounding cut-off that gives the maximum sum of sensitivity and specificity. This value should be the shoulder at the top left of the ROC (<a href="../nonparametric_methods/roc.htm">receiver operating characteristic curve</a>).</p>
+                                        <p>&#160;</p>
+                                        <p><u>Prediction and adjusted means</u>
+                                        </p>
+                                        <p>The prediction option allows you to calculate values of the outcome (as response proportion) using your fitted logistic model coefficients with a specified set of values for the predictors (X1…p). A confidence interval is given for each prediction.</p>
+                                        <p>&#160;</p>
+                                        <p>The default X values shown are those required to calculate the overall regression mean for the model, which is the mean of Y adjusted for all X. For continuous predictors the mean of X is used. For categorical predictors you should use X as 1/k, where k is the number of categories. StatsDirect attempts to identify categorical variables but you should check the values against these rules if you are using categorical predictors in this way.</p>
+                                        <p>&#160;</p>
+                                        <p>For example, if a model of Y = logit(proportion of population who are hypertensive), X1 = sex, X2 = age was fitted, and you wanted to know the age and sex adjusted prevalence of hypertension in the population that you sampled, you could use the prediction function to give the regression mean as the answer, i.e. with X1 as 0.5 and X2 as mean age. If you wanted to know the age-adjusted prevalence of hypertension for males in your population then you would set X1 to 1 (if male sex is coded as 1 in your data).</p>
+                                        <p>&#160;</p>
+                                        <p><u>Further methods</u>
+                                        </p>
+                                        <p><a href="http://www.nag.co.uk">GLIM</a> provides many generalised linear models with link functions including binomial (see <a href="nonlinear.htm">non-linear models</a>). <a href="http://www.sas.com">SAS</a> provides an extension of logistic regression to ordinal responses, this is known as ordered logistic regression. Generic modelling software such as R and S+ can also be used. Exploratory regression modelling should be attempted only under the expert guidance of a Statistician.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Technical validation</u>
+                                        </p>
+                                        <p>The logits of the response data are fitted using an iteratively re-weighted least squares method to find maximum likelihood estimates of the parameters in the logistic model (<a href="../references/reference_list.htm">McCullagh and Nelder, 1989; Cox and Snell, 1989; Pregibon, 1981</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>Residuals and case-wise diagnostic statistics are calculated as follows (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989</a>):</p>
+                                        <p>&#160;</p>
+                                        <p>Leverages are the diagonal elements of the logistic equivalent of the hat matrix in general linear regression (where leverages are proportional to the distances of the jth covariate pattern from the mean of the data). The jth diagonal element of the logistic equivalent of the hat matrix is calculated as:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation199.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, p hat is the expected proportional response, x<sub>j</sub> is the jth covariate pattern, X is the design matrix containing all covariates (first column as 1 if intercept calculated) and V is a matrix with the general element π hat(1 - π hat).</p>
+                                        <p>&#160;</p>
+                                        <p><b>Deviance residuals</b> are used to detect ill-fitting covariate patterns, and they are calculated as:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation200.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, π hat is the expected proportional response and y<sub>j</sub> is the number of successes with the jth covariate pattern.</p>
+                                        <p>&#160;</p>
+                                        <p><b>Pearson residuals</b> are used to detect ill-fitting covariate patterns, and they are calculated as:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation201.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, π hat is the expected proportional response and y<sub>j</sub> is the number of successes with the jth covariate pattern.</p>
+                                        <p>&#160;</p>
+                                        <p><b>Standardized Pearson residuals</b> are used to detect ill-fitting covariate patterns, and they are calculated as:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation202.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where r<sub>j</sub> is the Pearson residual for the jth covariate pattern and h<sub>j</sub> is the leverage for the jth covariate pattern.</p>
+                                        <p>&#160;</p>
+                                        <p><b>Deletion displacement (delta beta)</b> measures the change caused by deleting all observations with the jth covariate pattern. The statistic is used to detect observations that have a strong influence upon the regression estimates. This change in regression coefficients is calculated as:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation203.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where r<sub>j</sub> is the Pearson residual for the jth covariate pattern and h<sub>j</sub> is the leverage for the jth covariate pattern.</p>
+                                        <p>&#160;</p>
+                                        <p><b>Standardized deletion displacement (std delta beta)</b> measures the change caused by deleting all observations with the jth covariate pattern. The statistic is used to detect observations that have a strong influence upon the regression estimates. This change in regression coefficients is calculated as:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation204.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where rs<sub>j</sub> is the standardized Pearson residual for the jth covariate pattern and h<sub>j</sub> is the leverage for the jth covariate pattern.</p>
+                                        <p>&#160;</p>
+                                        <p><b>Deletion chi-square (delta chi-square)</b> measures the change in the Pearson chi-square statistic (for the fit of the regression) caused by deleting all observations with the jth covariate pattern. The statistic is used to detect ill-fitting covariate patterns. This change in chi-square is calculated as:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation205.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where r<sub>j</sub> is the Pearson residual for the jth covariate pattern and h<sub>j</sub> is the leverage for the jth covariate pattern.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>From <a href="../references/reference_list.htm">Altman (1991)</a>.</p>
+                                        <p>Test workbook (Regression worksheet: Men, Hypertensive, Smoking, Obesity, Snoring).</p>
+                                        <p>&#160;</p>
+                                        <p>Smoking, obesity and snoring were related to hypertension in 433 men aged 40 or over.</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td width="92" style="text-decoration: underline;text-align: right;">Men</td>
+                                                <td width="92" style="text-decoration: underline;text-align: right;">Hypertensive</td>
+                                                <td width="92" style="text-decoration: underline;text-align: right;">Smoking</td>
+                                                <td width="92" style="text-decoration: underline;text-align: right;">Obesity</td>
+                                                <td width="92" style="text-decoration: underline;text-align: right;">Snoring</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="92" style="text-align: right;">60</td>
+                                                <td width="92" style="text-align: right;">5</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="92" style="text-align: right;">17</td>
+                                                <td width="92" style="text-align: right;">2</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="92" style="text-align: right;">8</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="92" style="text-align: right;">2</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="92" style="text-align: right;">187</td>
+                                                <td width="92" style="text-align: right;">35</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="92" style="text-align: right;">85</td>
+                                                <td width="92" style="text-align: right;">13</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="92" style="text-align: right;">51</td>
+                                                <td width="92" style="text-align: right;">15</td>
+                                                <td width="92" style="text-align: right;">0</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="92" style="text-align: right;">23</td>
+                                                <td width="92" style="text-align: right;">8</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                                <td width="92" style="text-align: right;">1</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>To analyse these data using StatsDirect you must first enter them into five columns of a workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select Logistic from the Regression and Correlation section of the analysis menu. Choose the option to enter grouped data when prompted. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Men" when asked for total number and select "Hypertensives" when asked for response. Then select "Smoking", "Obesity" and "Snoring" in one action when you are asked for predictors. Make sure the intercept option is checked and the weighted analysis option is unchecked.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Logistic regression</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tbody>
+                                                <tr>
+                                                    <td>Deviance goodness of fit chi-square =
+1.618403</td>
+                                                    <td>df = 4
+</td>
+                                                    <td>P = 0.8055</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Deviance (likelihood ratio) chi-square =
+12.507498</td>
+                                                    <td> df = 3
+</td>
+                                                    <td>P = 0.0058
+</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;">Parameter</td>
+                                                <td style="text-decoration: underline;">Odds Ratio</td>
+                                                <td>95% Conf. Int.</td>
+                                                <td style="text-decoration: underline;">Z Value</td>
+                                                <td><u>P(&gt;|Z|)</u>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Intercept</td>
+                                                <td>n/a</td>
+                                                <td>&#160;</td>
+                                                <td>-6.253967</td>
+                                                <td>P &lt; .0001</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Smoking</td>
+                                                <td>0.934471</td>
+                                                <td>(0.541784 to 1.611779)</td>
+                                                <td>-0.243686</td>
+                                                <td>P = .8075</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Obesity</td>
+                                                <td>2.00433</td>
+                                                <td>(1.146316 to 3.504564)</td>
+                                                <td>2.438954</td>
+                                                <td>P = .0147</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Snoring</td>
+                                                <td>2.391544</td>
+                                                <td>(1.097143 to 5.213072)</td>
+                                                <td>2.193152</td>
+                                                <td>P = .0283</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>logit Hypertensive = -2.377661 -0.067775 Smoking +0.69531 Obesity +0.871939 Snoring</p>
+                                        <p>&#160;</p>
+                                        <p>Thus with 95% confidence we can infer that the risk of hypertension in obese people is between 1.15 and 3.5 times greater than in non-obese people.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Logistic regression - model analysis</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Accuracy = 1.00E-07</p>
+                                        <p>Log likelihood with all covariates = -199.4582</p>
+                                        <p>&#160;</p>
+                                        <p>Deviance with all covariates = 1.618403, df = 4, rank = 4</p>
+                                        <p>Akaike = 9.618403</p>
+                                        <p>Schwartz = 12.01561</p>
+                                        <p>&#160;</p>
+                                        <p>Deviance with no covariates = 14.1259</p>
+                                        <p>&#160;</p>
+                                        <p>Deviance (likelihood ratio) chi-square = 12.507498, df = 3, P = 0.0058</p>
+                                        <p>&#160;</p>
+                                        <p>Pearson chi-square goodness of fit = 1.364272, df = 4, P = 0.8504</p>
+                                        <p>Deviance goodness of fit = 1.618403, df = 4, P = 0.8055</p>
+                                        <p>Hosmer-Lemeshow test = 0.453725, df = 2, P = 0.797</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;">Parameter</td>
+                                                <td style="text-decoration: underline;">Coefficient</td>
+                                                <td style="text-decoration: underline;">Standard Error</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Constant</td>
+                                                <td>-2.377661</td>
+                                                <td>0.380185</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Smoking</td>
+                                                <td>-0.067775</td>
+                                                <td>0.278124</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Obesity</td>
+                                                <td>0.69531</td>
+                                                <td>0.285085</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Snoring</td>
+                                                <td>0.871939</td>
+                                                <td>0.397574</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>We can infer that smoking has no association with hypertension from this evidence and drop it from our model. Remember that there may be important interactions between predictors. The fits and residuals option gives you the covariances. It would be prudent to seek statistical advice on the interpretation of covariance and influential data.</p>
+                                        <p>&#160;</p>
+                                        <p><a href="../basics/p_values.htm">P values</a>
+                                        </p>
+                                        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+                                        </p>
+                                    </div>
+                                    <p>
+                                        <MadCap:pageFooter>
+                                            <p style="font-family: sans-serif;font-size: 6pt;">&#160;</p>
+                                            <p style="font-family: sans-serif;font-size: 8pt;">&#160;</p>
+                                            <p style="font-family: sans-serif;font-size: 8pt;"><span style="font-size: 8pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. </span><a href="https://www.statsdirect.com/Download.aspx" style="font-size: 8pt;">Download software here</a><span style="font-size: 8pt;">.</span>
+                                            </p>
+                                        </MadCap:pageFooter>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><a data-close="true"></a>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">/* <![CDATA[ */
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45008526-2']);
+		_gaq.push(['_trackPageview']);
+		(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	/* ]]> */</script>
+</html>

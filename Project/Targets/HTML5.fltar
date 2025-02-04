@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CatapultTarget
+  Version="2"
+  Comment="For GitHub"
+  Type="WebHelp2"
+  Destinations=""
+  ShowMadCapBacklink="false"
+  DefaultUrl="/Content/contents.htm"
+  MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
+  GetLatestBeforeCompile="false"
+  OutputFile="index.html"
+  MasterStylesheet="/Content/resources/stylesheets/statsdirect.css"
+  BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
+  EnableSitemap="true"
+  SitemapWebUrl="http://www.statsdirect.com/help/"
+  MoveOutputContentToRoot="true"
+  MakeFileLowerCase="true"
+  ReplaceSpacesWithUnderscores="true"
+  ResolveCssVariables="true"
+  RemoveMadCapStyles="false"
+  MasterPage="/Content/resources/masterpages/masterfooter.flmsp"
+  Skin="/Project/Skins/SD Web Skin.flskn">
+  <PrintedOutput
+    CollapseMargins="true"
+    GenerateTOCProxy="true"
+    GenerateIndexProxy="true"
+    GenerateGlossaryProxy="true"
+    OutputFormat="docx" />
+  <PDF
+    Tagged="true"
+    TitleBar="DocumentTitle" />
+  <Destinations>
+    <Destination
+      Link="/Project/Destinations/NewDestination1.fldes"
+      Publish="true"
+      IsResource="false" />
+  </Destinations>
+  <MicroContentSearch>
+    <FeaturedSnippets
+      type="AllFiles"
+      numberOfResults="1">
+      <microContentSubset />
+    </FeaturedSnippets>
+    <KnowledgePanel
+      type="Empty"
+      numberOfResults="1">
+      <microContentSubset />
+    </KnowledgePanel>
+  </MicroContentSearch>
+</CatapultTarget>
