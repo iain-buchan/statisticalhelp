@@ -132,18 +132,20 @@
         </p>
         <p>The density function of the beta distribution is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\Lambda(x)[1-\Lambda(x] \\
-\displaystyle \Lambda(x)=\frac{1}{1+\exp(-x)}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle f(x)=\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \space x^{a-1}(1-x)^{b-1} \space \text{if} \space 0&lt;x&lt;1; f(x)=0 \space \text{otherwise}$</MadCap:equation>
         </p>
+        <p>- where a and b are the two shape parameters.</p>
         <p>&#160;</p>
         <p>Algorithm: Acceptance-rejection methods BB and BC (<a href="../references/reference_list.htm">Cheng 1978</a>).</p>
         <p>&#160;</p>
         <p><u>Logistic</u>
         </p>
-        <p>The density function of the beta distribution is given by:</p>
+        <p>The density function of the standard logistic distribution is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\frac{\Gamma(p+q)}{\Gamma(p)\Gamma(q)}\frac{x^{p-1}}{c} 1-\frac{x^{q-1}}{c}\frac{1}{c}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle f(x)=\Lambda(x)[1-\Lambda(x)] \\
+\displaystyle \Lambda(x)=\frac{1}{1+\exp(-x)}$</MadCap:equation>
         </p>
+        <p>The deviates are calculated as location + scale * ln(u/(1-u)), where u is a uniform deviate.</p>
         <p>&#160;</p>
         <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
         <p>&#160;</p>
