@@ -37,13 +37,13 @@
     <body>
         <div class="foundation-wrap off-canvas-wrapper">
             <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
-                <aside class="off-canvas position-right" role="navigation" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
-                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
                     </ul>
                 </aside>
                 <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
                     <div data-sticky-container="" class="title-bar-container">
-                        <nav class="title-bar tab-bar sticky" aria-label="title tab bar" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
                             <div class="middle title-bar-section outer-row clearfix">
                                 <div class="menu-icon-container relative clearfix">
                                     <div class="central-account-wrapper">
@@ -61,7 +61,7 @@
                                 <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
                                 </div>
                                 <div class="navigation-wrapper nocontent">
-                                    <ul class="navigation clearfix" role="navigation" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
                                         <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
                                         </li>
                                     </ul>
@@ -105,14 +105,14 @@
                         <div class="row outer-row sidenav-layout">
                             <nav class="sidenav-wrapper">
                                 <div class="sidenav-container">
-                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
                                     </ul>
                                 </div>
                             </nav>
                             <div class="body-container">
                                 <div data-mc-content-body="True">
                                     <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor228"></a>Diversity of Classes</h1>
+                                        <h1><a name="kanchor89"></a>Diversity of Classes</h1>
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Nonparametric_Diversity of Classes</b></p>
                                         <p>&#160;</p>
@@ -160,7 +160,7 @@
                                         </p>
                                         <p>- where G is the estimated bootstrap distribution of the absolute value of the studentized sample diversity index.</p>
                                         <p>&#160;</p>
-                                        <p>The resampling scheme used for the bootstrap intervals above is the allocation of one observation to each of s classes followed by allocation at random of the remaining N-s observations to the s classes. This scheme keeps a constant number of classes in each bootstrap sample.</p>
+                                        <p>The resampling scheme used for the bootstrap intervals above draws N individuals at random with replacement from the N observed, each draw falling in class i with probability ni/N (a multinomial resample of the observed counts); a class may therefore be absent from a bootstrap sample, so the number of classes is not held constant.</p>
                                         <p>&#160;</p>
                                         <p><a href="../references/reference_list.htm">Vives et al. (2002)</a> showed that percentile methods (including BCa) do not perform well for Shannon's index, they advise using a symmetrized bootstrap-t confidence interval.</p>
                                         <p>&#160;</p>
@@ -242,21 +242,21 @@
                                         <p>Standard error (large sample) = 0.016826</p>
                                         <p>Standard error (small sample) = 0.017173</p>
                                         <p>Normal (large sample) 95% CI = 0.866373 to 0.932331</p>
-                                        <p>Re-samples = 2000, bias = -0.022018, standard error (bootstrap) = 0.011455</p>
-                                        <p>Normal (bootstrap) 95% CI = 0.876886 to 0.921817</p>
+                                        <p>Re-samples = 2000, bias = 0.007847, standard error (bootstrap) = 0.017454</p>
+                                        <p>Normal (bootstrap) 95% CI = 0.865121 to 0.933582</p>
                                         <p>&#160;</p>
                                         <p><b>Shannon H' (base e)</b> = 2.656515</p>
                                         <p>Standard error (large sample) = 0.095839</p>
                                         <p>Standard error (small sample) = 0.10049</p>
                                         <p>Normal (large sample) 95% CI = 2.468673 to 2.844356</p>
-                                        <p>Re-samples = 2000, bias = -0.16601, standard error (bootstrap) = 0.065119</p>
-                                        <p>Normal (bootstrap) 95% CI = 2.528806 to 2.784223</p>
+                                        <p>Re-samples = 2000, bias = 0.124793, standard error (bootstrap) = 0.100998</p>
+                                        <p>Normal (bootstrap) 95% CI = 2.458442 to 2.854588</p>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>
                                     </div>
                                     <MadCap:pageFooter>
-                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx">Download software here</a>.</p>
+                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx">Download software here</a>.</p>
                                     </MadCap:pageFooter>
                                     <!-- Google tag (gtag.js) -->
                                     <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">

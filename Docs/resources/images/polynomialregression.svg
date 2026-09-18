@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="566" viewBox="0 0 1132 800" xmlns="http://www.w3.org/2000/svg" height="400">
+  <line x1="140" y1="689" x2="1052" y2="689" style="stroke:#868686;" />
+  <line x1="140" y1="80" x2="140" y2="689" style="stroke:#868686;" />
+  <g transform="translate(140,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">70</tspan>
+    </text>
+  </g>
+  <line x1="140" y1="696" x2="140" y2="689" style="stroke:#868686;" />
+  <g transform="translate(266.66666666666674,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">80</tspan>
+    </text>
+  </g>
+  <line x1="266.66666666666674" y1="696" x2="266.66666666666674" y2="689" style="stroke:#868686;" />
+  <g transform="translate(393.33333333333337,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">90</tspan>
+    </text>
+  </g>
+  <line x1="393.33333333333337" y1="696" x2="393.33333333333337" y2="689" style="stroke:#868686;" />
+  <g transform="translate(519.9999999999999,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">100</tspan>
+    </text>
+  </g>
+  <line x1="519.9999999999999" y1="696" x2="519.9999999999999" y2="689" style="stroke:#868686;" />
+  <g transform="translate(646.6666666666666,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">110</tspan>
+    </text>
+  </g>
+  <line x1="646.6666666666666" y1="696" x2="646.6666666666666" y2="689" style="stroke:#868686;" />
+  <g transform="translate(773.3333333333334,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">120</tspan>
+    </text>
+  </g>
+  <line x1="773.3333333333334" y1="696" x2="773.3333333333334" y2="689" style="stroke:#868686;" />
+  <g transform="translate(900.0000000000001,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">130</tspan>
+    </text>
+  </g>
+  <line x1="900.0000000000001" y1="696" x2="900.0000000000001" y2="689" style="stroke:#868686;" />
+  <g transform="translate(1026.6666666666665,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">140</tspan>
+    </text>
+  </g>
+  <line x1="1026.6666666666665" y1="696" x2="1026.6666666666665" y2="689" style="stroke:#868686;" />
+  <g transform="translate(125,689)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">25.0</tspan>
+    </text>
+  </g>
+  <line x1="133" y1="689" x2="140" y2="689" style="stroke:#868686;" />
+  <g transform="translate(125,536.75)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">50.0</tspan>
+    </text>
+  </g>
+  <line x1="133" y1="536.75" x2="140" y2="536.75" style="stroke:#868686;" />
+  <g transform="translate(125,384.5)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">75.0</tspan>
+    </text>
+  </g>
+  <line x1="133" y1="384.5" x2="140" y2="384.5" style="stroke:#868686;" />
+  <g transform="translate(125,232.25)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">100.0</tspan>
+    </text>
+  </g>
+  <line x1="133" y1="232.25" x2="140" y2="232.25" style="stroke:#868686;" />
+  <g transform="translate(125,80)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">125.0</tspan>
+    </text>
+  </g>
+  <line x1="133" y1="80" x2="140" y2="80" style="stroke:#868686;" />
+  <text x="596" y="723">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Birth Weight</tspan>
+  </text>
+  <g transform="translate(77,384.5)">
+    <text x="0" y="0" transform="rotate(-90)">
+      <tspan dy="0" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">% Increase</tspan>
+    </text>
+  </g>
+  <text x="596" y="20">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">% growth (70-100 days) vs. birth weight</tspan>
+  </text>
+  <ellipse cx="165.3333282470703" cy="427.1300048828125" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="266.6666564941406" cy="122.6300048828125" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="279.3333435058594" cy="110.45001220703125" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="317.3333435058594" cy="146.989990234375" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="342.6666564941406" cy="305.3299865722656" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="355.3333435058594" cy="165.260009765625" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="418.6666564941406" cy="384.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="444" cy="287.05999755859375" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="558" cy="293.1499938964844" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="596" cy="402.7699890136719" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="608.6666870117188" cy="402.7699890136719" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="659.3333129882812" cy="439.30999755859375" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="672" cy="457.5799865722656" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="697.3333129882812" cy="274.8800048828125" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="710" cy="664.6399993896484" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="722.6666870117188" cy="481.94000244140625" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="748" cy="585.4700012207031" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="748" cy="427.1300048828125" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="760.6666870117188" cy="524.5700073242188" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="798.6666870117188" cy="408.8599853515625" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="811.3333129882812" cy="481.94000244140625" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="811.3333129882812" cy="421.0400085449219" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="836.6666870117188" cy="676.8199996948242" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.3333129882812" cy="475.8500061035156" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.3333129882812" cy="378.4100036621094" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.3333129882812" cy="305.3299865722656" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="862" cy="457.5799865722656" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="874.6666870117188" cy="548.9299926757812" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="874.6666870117188" cy="536.75" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="925.3333129882812" cy="536.75" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="938" cy="378.4100036621094" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1052" cy="518.4800109863281" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+</svg>

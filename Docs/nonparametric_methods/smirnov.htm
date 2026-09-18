@@ -37,13 +37,13 @@
     <body>
         <div class="foundation-wrap off-canvas-wrapper">
             <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
-                <aside class="off-canvas position-right" role="navigation" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
-                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
                     </ul>
                 </aside>
                 <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
                     <div data-sticky-container="" class="title-bar-container">
-                        <nav class="title-bar tab-bar sticky" aria-label="title tab bar" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
                             <div class="middle title-bar-section outer-row clearfix">
                                 <div class="menu-icon-container relative clearfix">
                                     <div class="central-account-wrapper">
@@ -61,7 +61,7 @@
                                 <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
                                 </div>
                                 <div class="navigation-wrapper nocontent">
-                                    <ul class="navigation clearfix" role="navigation" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
                                         <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
                                         </li>
                                     </ul>
@@ -105,14 +105,14 @@
                         <div class="row outer-row sidenav-layout">
                             <nav class="sidenav-wrapper">
                                 <div class="sidenav-container">
-                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
                                     </ul>
                                 </div>
                             </nav>
                             <div class="body-container">
                                 <div data-mc-content-body="True">
                                     <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor245"></a>Two Sample Smirnov Test</h1>
+                                        <h1><a name="kanchor23"></a>Two Sample Smirnov Test</h1>
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Nonparametric_Smirnov Two Sample</b>.</p>
                                         <p>&#160;</p>
@@ -133,12 +133,12 @@
                                             <li>samples are random</li>
                                             <li>two samples are mutually independent</li>
                                             <li>measurement scale is at least ordinal</li>
-                                            <li>for exact test, random variables are assumed to be continuous</li>
+                                            <li>tied values are permitted: the exact P values are calculated conditional on the ties observed in the pooled sample</li>
                                         </ul>
                                         <p>&#160;</p>
                                         <p><u>Technical Validation</u>
                                         </p>
-                                        <p>P values for the test statistics are calculated by permutation of the exact distribution whenever possible (<a href="../references/reference_list.htm">Conover, 1999; Nikiforov, 1994; Kim and Jennrich 1973</a>).</p>
+                                        <p>P values for the test statistics are calculated from the exact permutation distribution of the statistic over all relabellings of the pooled sample, conditional on any tied values, as in the ks.test function of R (<a href="../references/reference_list.htm">Conover, 1999; Nikiforov, 1994; Kim and Jennrich 1973</a>). The one sided P values are the exact upper tail probabilities of D<sup>+</sup> and D<sup>−</sup>, not half of the two sided P value.</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
@@ -224,11 +224,11 @@
                                         <p>&#160;</p>
                                         <p>One sided test (suspecting Xi shifted left of Yi):</p>
                                         <p>D = 0.4</p>
-                                        <p>P = .1326</p>
+                                        <p>P = .1328</p>
                                         <p>&#160;</p>
                                         <p>One sided test (suspecting Xi shifted right of Yi):</p>
                                         <p>D = 0.333333</p>
-                                        <p>P = .2432</p>
+                                        <p>P = .2462</p>
                                         <p>&#160;</p>
                                         <p>Thus we can not reject the null hypothesis that the two populations from which our samples were drawn have the same distribution function.</p>
                                         <p>&#160;</p>
@@ -238,7 +238,7 @@
                                         </p>
                                     </div>
                                     <MadCap:pageFooter>
-                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2025 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx">Download software here</a>.</p>
+                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx">Download software here</a>.</p>
                                     </MadCap:pageFooter>
                                     <!-- Google tag (gtag.js) -->
                                     <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
