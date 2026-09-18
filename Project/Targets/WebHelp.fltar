@@ -4,7 +4,7 @@
   Type="WebHelp2"
   DefaultUrl="/Content/contents.htm"
   MasterPage="/Content/resources/MasterPages/MasterFooter.flmsp"
-  PreCompileScaledImages="true"
+  PreCompileScaledImages="false"
   EnableSitemap="true"
   GenerateWebSafeImages="false"
   SitemapWebUrl="http://www.statsdirect.com/help/"
@@ -19,7 +19,7 @@
   BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
   MasterStylesheet="/Content/resources/stylesheets/statsdirect.css"
   MoveOutputContentToRoot="true"
-  ConditionTagExpression=""
+  ConditionTagExpression="include[Primary.WEBHELP] exclude[Primary.SWHELP]"
   ResolveCssVariables="true">
   <MicroContentSearch>
     <FeaturedSnippets

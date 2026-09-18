@@ -173,7 +173,7 @@
         <p>&#160;</p>
         <p>The Pearson goodness of fit test statistic is:</p>
         <p>
-            <MadCap:equation>$\displaystyle \chi^2=\sum_{i=1}^n \frac{y_i-\hat{\mu}_i}{\sqrt{\hat{\mu}_i}}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle \chi^2=\sum_{i=1}^n \frac{(y_i-\hat{\mu}_i)^2}{\hat{\mu}_i}$</MadCap:equation>
         </p>
         <p>&#160;</p>
         <p>The deviance residual is (<a href="../references/reference_list.htm">Cook and Weisberg, 1982</a>):</p>
@@ -184,12 +184,12 @@
         <p>&#160;</p>
         <p>The Freeman-Tukey, variance stabilized, residual is (<a href="../references/reference_list.htm">Freeman and Tukey, 1950</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle r_{ft}=\sqrt{y_i}+\sqrt{y_i+1}+\sqrt{4\hat{\mu}_i+1}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle r_{ft}=\sqrt{y_i}+\sqrt{y_i+1}-\sqrt{4\hat{\mu}_i+1}$</MadCap:equation>
         </p>
         <p>&#160;</p>
         <p>The standardized residual is:</p>
         <p>
-            <MadCap:equation>$\displaystyle r_s=\frac{y_i-\hat{\mu}_i}{\sqrt{1-h_i}}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle r_s=\frac{y_i-\hat{\mu}_i}{\sqrt{\hat{\mu}_i(1-h_i)}}$</MadCap:equation>
         </p>
         <p>- where h is the leverage (diagonal of the Hat matrix).</p>
         <p>&#160;</p>

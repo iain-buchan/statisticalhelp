@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="634" viewBox="0 0 1262 800" xmlns="http://www.w3.org/2000/svg" height="400">
+  <line x1="235" y1="689" x2="1182" y2="689" style="stroke:#868686;" />
+  <line x1="235" y1="80" x2="235" y2="689" style="stroke:#868686;" />
+  <g transform="translate(236.57309289393817,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.4</tspan>
+    </text>
+  </g>
+  <line x1="236.57309289393817" y1="696" x2="236.57309289393817" y2="689" style="stroke:#868686;" />
+  <g transform="translate(393.88207755653434,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.6</tspan>
+    </text>
+  </g>
+  <line x1="393.88207755653434" y1="696" x2="393.88207755653434" y2="689" style="stroke:#868686;" />
+  <g transform="translate(551.191038778267,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.8</tspan>
+    </text>
+  </g>
+  <line x1="551.191038778267" y1="696" x2="551.191038778267" y2="689" style="stroke:#868686;" />
+  <g transform="translate(708.5,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">1.0</tspan>
+    </text>
+  </g>
+  <line x1="708.5" y1="696" x2="708.5" y2="689" style="stroke:#868686;" />
+  <g transform="translate(865.8090081034595,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">1.2</tspan>
+    </text>
+  </g>
+  <line x1="865.8090081034595" y1="696" x2="865.8090081034595" y2="689" style="stroke:#868686;" />
+  <g transform="translate(1023.1179224434657,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">1.4</tspan>
+    </text>
+  </g>
+  <line x1="1023.1179224434657" y1="696" x2="1023.1179224434657" y2="689" style="stroke:#868686;" />
+  <g transform="translate(1180.426930546925,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">1.6</tspan>
+    </text>
+  </g>
+  <line x1="1180.426930546925" y1="696" x2="1180.426930546925" y2="689" style="stroke:#868686;" />
+  <g transform="translate(220,689)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0</tspan>
+    </text>
+  </g>
+  <line x1="228" y1="689" x2="235" y2="689" style="stroke:#868686;" />
+  <g transform="translate(220,536.75)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">1</tspan>
+    </text>
+  </g>
+  <line x1="228" y1="536.75" x2="235" y2="536.75" style="stroke:#868686;" />
+  <g transform="translate(220,384.5)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">2</tspan>
+    </text>
+  </g>
+  <line x1="228" y1="384.5" x2="235" y2="384.5" style="stroke:#868686;" />
+  <g transform="translate(220,232.25)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">3</tspan>
+    </text>
+  </g>
+  <line x1="228" y1="232.25" x2="235" y2="232.25" style="stroke:#868686;" />
+  <g transform="translate(220,80)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">4</tspan>
+    </text>
+  </g>
+  <line x1="228" y1="80" x2="235" y2="80" style="stroke:#868686;" />
+  <text x="708.5" y="723">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Log Dose</tspan>
+  </text>
+  <g transform="translate(207,384.5)">
+    <text x="0" y="0" transform="rotate(-90)">
+      <tspan dy="0" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Mean Response</tspan>
+    </text>
+  </g>
+  <text x="708.5" y="20">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">Scatter Plot</tspan>
+  </text>
+  <ellipse cx="27" cy="92" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <text x="42" y="92">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">Preparation S</tspan>
+  </text>
+  <rect x="21" y="116" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <text x="42" y="122">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">Preparation I</tspan>
+  </text>
+  <line x1="586.5855712890625" y1="184.671875" x2="349.8355712890625" y2="414.95001220703125" style="stroke:#40699C;" />
+  <line x1="823.3355712890625" y1="167.8365478515625" x2="586.5855712890625" y2="184.671875" style="stroke:#40699C;" />
+  <ellipse cx="349.8355712890625" cy="414.95001220703125" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="586.5855712890625" cy="184.671875" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="823.3355712890625" cy="167.8365478515625" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="471.75" y1="524.0625" x2="235" y2="650.9375" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="708.5" y1="435.25" x2="471.75" y2="524.0625" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="945.25" y1="257.625" x2="708.5" y2="435.25" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="1182" y1="143.4375" x2="945.25" y2="257.625" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <rect x="229" y="644.9375" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="465.75" y="518.0625" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="702.5" y="429.25" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="939.25" y="251.625" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="1176" y="137.4375" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+</svg>

@@ -1,2 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CatapultConditionTagSet></CatapultConditionTagSet>
+<CatapultConditionTagSet>
+    <ConditionTag
+        Name="WEBHELP"
+        BackgroundColor="#40ffff"
+        Comment="Content for the browser outputs only (HTML5 and WebHelp targets): the SVG chart pictures." />
+    <ConditionTag
+        Name="SWHELP"
+        BackgroundColor="#ffff00"
+        Comment="Content for the compiled HTML Help (STATSDIRECT.chm, SWHelp target) only: the PNG chart pictures, because the CHM viewer does not render SVG." />
+</CatapultConditionTagSet>

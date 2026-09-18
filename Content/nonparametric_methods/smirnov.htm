@@ -28,12 +28,12 @@
             <li>samples are random</li>
             <li>two samples are mutually independent</li>
             <li>measurement scale is at least ordinal</li>
-            <li>for exact test, random variables are assumed to be continuous</li>
+            <li>tied values are permitted: the exact P values are calculated conditional on the ties observed in the pooled sample</li>
         </ul>
         <p>&#160;</p>
         <p><u>Technical Validation</u>
         </p>
-        <p>P values for the test statistics are calculated by permutation of the exact distribution whenever possible (<a href="../references/reference_list.htm">Conover, 1999; Nikiforov, 1994; Kim and Jennrich 1973</a>).</p>
+        <p>P values for the test statistics are calculated from the exact permutation distribution of the statistic over all relabellings of the pooled sample, conditional on any tied values, as in the ks.test function of R (<a href="../references/reference_list.htm">Conover, 1999; Nikiforov, 1994; Kim and Jennrich 1973</a>). The one sided P values are the exact upper tail probabilities of D<sup>+</sup> and D<sup>&#8722;</sup>, not half of the two sided P value.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
@@ -119,11 +119,11 @@
         <p>&#160;</p>
         <p>One sided test (suspecting Xi shifted left of Yi):</p>
         <p>D = 0.4</p>
-        <p>P = .1326</p>
+        <p>P = .1328</p>
         <p>&#160;</p>
         <p>One sided test (suspecting Xi shifted right of Yi):</p>
         <p>D = 0.333333</p>
-        <p>P = .2432</p>
+        <p>P = .2462</p>
         <p>&#160;</p>
         <p>Thus we can not reject the null hypothesis that the two populations from which our samples were drawn have the same distribution function.</p>
         <p>&#160;</p>

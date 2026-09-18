@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="566" viewBox="0 0 1132 800" xmlns="http://www.w3.org/2000/svg" height="400">
+  <line x1="120" y1="689" x2="1052" y2="689" style="stroke:#868686;" />
+  <line x1="120" y1="80" x2="120" y2="689" style="stroke:#868686;" />
+  <line x1="1052" y1="80" x2="120" y2="80" style="stroke:#868686;" />
+  <line x1="1052" y1="80" x2="1052" y2="689" style="stroke:#868686;" />
+  <g transform="translate(120,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.0</tspan>
+    </text>
+  </g>
+  <line x1="120" y1="696" x2="120" y2="689" style="stroke:#868686;" />
+  <g transform="translate(306.40000277757645,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.2</tspan>
+    </text>
+  </g>
+  <line x1="306.40000277757645" y1="696" x2="306.40000277757645" y2="689" style="stroke:#868686;" />
+  <g transform="translate(492.8000055551529,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.4</tspan>
+    </text>
+  </g>
+  <line x1="492.8000055551529" y1="696" x2="492.8000055551529" y2="689" style="stroke:#868686;" />
+  <g transform="translate(679.2000222206116,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.6</tspan>
+    </text>
+  </g>
+  <line x1="679.2000222206116" y1="696" x2="679.2000222206116" y2="689" style="stroke:#868686;" />
+  <g transform="translate(865.6000111103058,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.8</tspan>
+    </text>
+  </g>
+  <line x1="865.6000111103058" y1="696" x2="865.6000111103058" y2="689" style="stroke:#868686;" />
+  <g transform="translate(1052,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">1.0</tspan>
+    </text>
+  </g>
+  <line x1="1052" y1="696" x2="1052" y2="689" style="stroke:#868686;" />
+  <g transform="translate(105,689)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.0</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="689" x2="120" y2="689" style="stroke:#868686;" />
+  <g transform="translate(105,567.1999981850386)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.2</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="567.1999981850386" x2="120" y2="567.1999981850386" style="stroke:#868686;" />
+  <g transform="translate(105,445.39999637007713)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.4</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="445.39999637007713" x2="120" y2="445.39999637007713" style="stroke:#868686;" />
+  <g transform="translate(105,323.59998548030853)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.6</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="323.59998548030853" x2="120" y2="323.59998548030853" style="stroke:#868686;" />
+  <g transform="translate(105,201.79999274015427)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.8</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="201.79999274015427" x2="120" y2="201.79999274015427" style="stroke:#868686;" />
+  <g transform="translate(105,80)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">1.0</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="80" x2="120" y2="80" style="stroke:#868686;" />
+  <text x="586" y="723">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Proportion of sample</tspan>
+  </text>
+  <g transform="translate(77,384.5)">
+    <text x="0" y="0" transform="rotate(-90)">
+      <tspan dy="0" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Proportion of variable</tspan>
+    </text>
+  </g>
+  <text x="586" y="20">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">Lorenz plot for Infant Mortality Rate</tspan>
+  </text>
+  <line x1="120" y1="689" x2="1052" y2="80" style="stroke:#FF0000;" />
+  <line x1="120" y1="689" x2="306.40000277757645" y2="617.3529409095645" style="stroke:#008000;" />
+  <line x1="306.40000277757645" y1="617.3529409095645" x2="492.8000055551529" y2="539.1925115734339" style="stroke:#008000;" />
+  <line x1="492.8000055551529" y1="539.1925115734339" x2="679.2000222206116" y2="412.1818099319935" style="stroke:#008000;" />
+  <line x1="679.2000222206116" y1="412.1818099319935" x2="865.6000111103058" y2="272.14437687397003" style="stroke:#008000;" />
+  <line x1="865.6000111103058" y1="272.14437687397003" x2="1052" y2="80" style="stroke:#008000;" />
+</svg>

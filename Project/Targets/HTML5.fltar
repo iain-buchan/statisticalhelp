@@ -3,6 +3,8 @@
   Version="2"
   Comment="For GitHub"
   Type="WebHelp2"
+  PreCompileScaledImages="false"
+  ConditionTagExpression="include[Primary.WEBHELP] exclude[Primary.SWHELP]"
   Destinations=""
   ShowMadCapBacklink="false"
   DefaultUrl="/Content/contents.htm"

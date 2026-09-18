@@ -2,13 +2,15 @@
 <CatapultDestination
   Version="1"
   Comment="This is my publish destination"
-  Host="ftp.myftpserver.com"
-  User="MyAccountId"
+  Host=""
+  User="iain-buchan"
   Password=""
   Directory="C:\Develop\SD3Help\StatsDirect\Docs"
   Port=""
   ViewUrl="https://iain-buchan.github.io/statisticalhelp/"
   Type="scm"
   ProviderType="Git"
-  Database="file:///C:/Develop/SD3Help/StatsDirect/.git/"
-  DatabaseRoot="file:///C:/Develop/SD3Help/StatsDirect/Docs"></CatapultDestination>
+  Database="https://github.com/iain-buchan/statisticalhelp.git"
+  DatabaseRoot="file:///C:/Develop/SD3Help/StatsDirect/Docs"
+  PushToRemote="true"
+  RemoteRepository="origin"></CatapultDestination>

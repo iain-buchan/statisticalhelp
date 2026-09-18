@@ -16,7 +16,7 @@
         <p>&#160;</p>
         <p>The methods presented here are more commonly applied to peaked data than to growth data (<a href="../references/reference_list.htm">Matthews et al. 1990</a>).</p>
         <p>&#160;</p>
-        <p>The area under the curve (AUC) is calculated using the linear trapezoidal rule and the variance of a family of AUCs is calculated as the weighted mean variance of observations over the time points used in each subject studied (<a href="../references/reference_list.htm">Wolfsegger 2007 equation 4</a>).</p>
+        <p>The area under the curve (AUC) is calculated using the linear trapezoidal rule for each subject. The mean AUC of a group is summarised with the standard deviation of the subjects' AUCs and its standard error SD/&#8730;n; the t interval uses n &#8722; 1 degrees of freedom (Bland 2000). The weighted variance of <a href="../references/reference_list.htm">Wolfsegger 2007 equation 4</a> is for serial-sampling designs in which each subject contributes a single time point and is not used for complete profiles.</p>
         <p>&#160;</p>
         <p>
             <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">
@@ -292,125 +292,11 @@
         </p>
         <p>...where t 1-J are times of observations in a series from 1 to J, AUC is the area under the curve for the kth subject from baseline to the last measured time point, w are the weights applied to the observations (X), n is the number of observations at each time point,and sigma squared is the variance of the observations at each time point.</p>
         <p>&#160;</p>
-        <p>For the t distribution methods the degrees of freedom are calculated as:</p>
-        <p>
-            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">
-                <math xmlns="http://www.w3.org/1998/Math/MathML">
-                    <mstyle displaystyle="true">
-                        <mrow>
-                            <mi>d</mi>
-                            <mi>f</mi>
-                            <mo>=</mo>
-                            <msup>
-                                <mrow>
-                                    <mi>var</mi>
-                                    <mo>⁡</mo>
-                                    <mo>[</mo>
-                                    <msub>
-                                        <mrow>
-                                            <mover>
-                                                <mrow>
-                                                    <mi>A</mi>
-                                                    <mi>U</mi>
-                                                    <mi>C</mi>
-                                                </mrow>
-                                                <mrow>
-                                                    <mo>^</mo>
-                                                </mrow>
-                                            </mover>
-                                        </mrow>
-                                        <mrow>
-                                            <mi>k</mi>
-                                        </mrow>
-                                    </msub>
-                                    <mo>]</mo>
-                                </mrow>
-                                <mrow>
-                                    <mn>2</mn>
-                                </mrow>
-                            </msup>
-                            <mo>/</mo>
-                            <mrow>
-                                <mo>[</mo>
-                                <munderover>
-                                    <mrow>
-                                        <mo>∑</mo>
-                                    </mrow>
-                                    <mrow>
-                                        <mi>j</mi>
-                                        <mo>=</mo>
-                                        <mn>1</mn>
-                                    </mrow>
-                                    <mrow>
-                                        <mi>J</mi>
-                                    </mrow>
-                                </munderover>
-                                <mfrac>
-                                    <mrow>
-                                        <msubsup>
-                                            <mrow>
-                                                <mi>w</mi>
-                                            </mrow>
-                                            <mrow>
-                                                <mi>j</mi>
-                                                <mi>k</mi>
-                                            </mrow>
-                                            <mrow>
-                                                <mn>4</mn>
-                                            </mrow>
-                                        </msubsup>
-                                        <msubsup>
-                                            <mrow>
-                                                <mi>σ</mi>
-                                            </mrow>
-                                            <mrow>
-                                                <mi>j</mi>
-                                                <mi>k</mi>
-                                            </mrow>
-                                            <mrow>
-                                                <mn>4</mn>
-                                            </mrow>
-                                        </msubsup>
-                                    </mrow>
-                                    <mrow>
-                                        <msubsup>
-                                            <mrow>
-                                                <mi>n</mi>
-                                            </mrow>
-                                            <mrow>
-                                                <mi>j</mi>
-                                                <mi>k</mi>
-                                            </mrow>
-                                            <mrow>
-                                                <mn>2</mn>
-                                            </mrow>
-                                        </msubsup>
-                                        <mo>(</mo>
-                                        <msub>
-                                            <mrow>
-                                                <mi>n</mi>
-                                            </mrow>
-                                            <mrow>
-                                                <mi>j</mi>
-                                                <mi>k</mi>
-                                            </mrow>
-                                        </msub>
-                                        <mo>−</mo>
-                                        <mn>1</mn>
-                                        <mo>)</mo>
-                                    </mrow>
-                                </mfrac>
-                                <mo>]</mo>
-                            </mrow>
-                        </mrow>
-                    </mstyle>
-                </math>
-            </MadCap:equation>
-        </p>
+        <p>For the t interval of a group's mean AUC the degrees of freedom are n &#8722; 1, where n is the number of subjects in the group; for the comparison of two groups the Welch-Satterthwaite degrees of freedom are df = (v<sub>1</sub> + v<sub>2</sub>)&#178; / [v<sub>1</sub>&#178;/(n<sub>1</sub> &#8722; 1) + v<sub>2</sub>&#178;/(n<sub>2</sub> &#8722; 1)], where v = SD&#178;/n is the variance of each group's mean AUC calculated from the subjects' AUCs.</p>
         <p>&#160;</p>
-        <p>A bootstrap-t confidence interval may also be calculated: A random sample of observations at each time point is drawn with replacement; the average area under the curve across all subjects, and its variance, is calculated for each bootstrap sample and the standardised statistic z=(AUC-AUC*)/sqrt(var_AUC*) is collected in a vector; the alpha/2 and 1-alpha/2 centiles from this empirical t distribution are then used to calculate the confidence interval as usual.</p>
+        <p>A bootstrap-t confidence interval may also be calculated: whole subjects (each with their observations at every time point) are resampled with replacement within the group; for each bootstrap sample the mean AUC and its standard error SE* = SD*/sqrt(n) are calculated from the resampled subjects' AUCs and the standardised statistic t* = (AUC - AUC*)/SE* is collected; the alpha/2 and 1-alpha/2 centiles of these t* values are then used to form the interval from AUC + t*(alpha/2) SE to AUC + t*(1-alpha/2) SE.</p>
         <p>&#160;</p>
-        <p>When there are two groups the AUCs are compared using an independent two sample t test incorporating the weighted variance estimates calculated as above. A bootstrap t test is also performed using the resampling scheme above, but also stratified by group.</p>
+        <p>When there are two groups the AUCs are compared using a two sample t test on the subjects' AUCs with unequal variances (Welch, Satterthwaite degrees of freedom). A bootstrap t test is also performed resampling whole subjects within each group.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
@@ -820,16 +706,17 @@
         <p>&#160;</p>
         <p>Subjects:			9</p>
         <p>Observations (mean per time point):			108	(9)</p>
-        <p>Mean (SD) area under curve (AUC):			459.73	(34.85)</p>
-        <p>95% t-interval for AUC:			388.86	to	530.60</p>
-        <p>95% bootstrap-t interval for AUC (1000000 iterations, seed 2944296): 396.60 to 542.57</p>
-        <p>95% z-interval for AUC:			391.42	to	528.05</p>
+        <p>Mean (SD) area under curve (AUC):			459.73	(151.28)</p>
+        <p>SE of mean AUC:			50.43</p>
+        <p>95% t-interval for mean AUC:			343.45	to	576.01</p>
+        <p>95% bootstrap-t interval for mean AUC (1000000 iterations, seed 2944296): 335.19 to 575.80</p>
+        <p>95% z-interval for mean AUC:			360.90	to	558.56</p>
         <p>Median (IQR) area under curve:			505.88	(263.63)</p>
         <p>Median (IQR) time to maximum			45	(30)</p>
         <p>Median (IQR) slope to maximum			0.13	(0.18)</p>
-        <p>Mean (SD) slope to maximum			0.21	(0.26)</p>
+        <p>Mean (SD) slope to maximum			0.22	(0.26)</p>
         <p>
-            <img src="../resources/Images/time_series_summary_malabsorbtion.png" />
+            <img src="../resources/Images/time_series_summary_malabsorbtion.svg" width="566" height="400" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_malabsorbtion.png" width="566" height="400" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p><u>Group: Normal</u>
@@ -866,7 +753,7 @@
                     <td>15</td>
                     <td>5</td>
                     <td>6.98</td>
-                    <td>4.78</td>
+                    <td>4.87</td>
                     <td>2.18</td>
                     <td>6.72</td>
                     <td>6.26</td>
@@ -1034,45 +921,46 @@
         <p>&#160;</p>
         <p>Subjects:			5</p>
         <p>Observations (mean per time point):			60	(	5	)</p>
-        <p>Mean (SD) area under curve (AUC):			774.02	(72.22)</p>
-        <p>95% t-interval for AUC:			628.53	to	919.50</p>
-        <p>95% bootstrap-t interval for AUC (1000000 iterations, seed 2944296): 633.67 to 938.73</p>
-        <p>95% z-interval for AUC:			632.48	to	915.55</p>
+        <p>Mean (SD) area under curve (AUC):			774.02	(381.58)</p>
+        <p>SE of mean AUC:			170.65</p>
+        <p>95% t-interval for mean AUC:			300.22	to	1247.81</p>
+        <p>95% bootstrap-t interval for mean AUC (1000000 iterations, seed 2944296): 448.85 to 2699.11</p>
+        <p>95% z-interval for mean AUC:			439.55	to	1108.48</p>
         <p>Median (IQR) area under curve:			599.85	(420.38)</p>
         <p>Median (IQR) time to maximum			30	(15)</p>
         <p>Median (IQR) slope to maximum			0.53	(	0.14	)</p>
         <p>Mean (SD) slope to maximum			0.49	(	0.16	)</p>
         <p>
-            <img src="../resources/Images/time_series_summary_normal.png" />
+            <img src="../resources/Images/time_series_summary_normal.svg" width="566" height="400" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_normal.png" width="566" height="400" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p><u>AUC Distribution</u>
         </p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/time_series_summary_normal_plot.png" />
+            <img src="../resources/Images/time_series_summary_normal_plot.svg" width="566" height="400" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_normal_plot.png" width="566" height="400" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
-        <p>R-square for AUC vs. normal scores: 0.90
+        <p>R-square for AUC vs. normal scores: 0.80
 </p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/time_series_summary_normal_plot_log.png" />
+            <img src="../resources/Images/time_series_summary_normal_plot_log.svg" width="566" height="400" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_normal_plot_log.png" width="566" height="400" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
-        <p>R-square for log(AUC) vs. normal scores: 0.98
+        <p>R-square for log(AUC) vs. normal scores: 0.94
 </p>
         <p>&#160;</p>
         <p><u>Group comparison: Malabsorbtion vs. Normal</u>
         </p>
         <p>&#160;</p>
-        <p>t (SE):		-3.92	(80.19)</p>
-        <p>DF:		32.71</p>
-        <p>P (two tailed):		0.0004</p>
-        <p>AUC difference (95% CI):		-314.28	(-477.48	to	-151.09)</p>
+        <p>Welch t (SE of difference):		-1.77	(177.94)</p>
+        <p>DF (Satterthwaite):		4.71</p>
+        <p>P (two tailed):		0.1412</p>
+        <p>AUC difference (95% CI):		-314.28	(-780.27	to	151.70)</p>
         <p>Bootstrapped with 1000000 iterations, seed 2944296</p>
-        <p>Two sided bootstrap P = 0.0007</p>
-        <p>95% bootstrap-t interval: -485.34 to -156.86</p>
+        <p>Two sided bootstrap P = 0.1809</p>
+        <p>95% bootstrap-t interval: -1240.73 to 35.45</p>
         <p>
-            <img src="../resources/Images/time_series_summary_compare.png" />
+            <img src="../resources/Images/time_series_summary_compare.svg" width="566" height="430" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_compare.png" width="566" height="430" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
     </body>

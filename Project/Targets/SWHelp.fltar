@@ -3,6 +3,7 @@
   Version="2"
   Comment="StatsDirect software help"
   Type="HtmlHelp"
+  PreCompileScaledImages="false"
   Destinations=""
   GlossaryTermConversion="marked"
   ConditionTagExpression="include[Primary.SWHELP] exclude[Primary.WEBHELP] "
