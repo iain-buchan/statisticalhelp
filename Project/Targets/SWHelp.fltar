@@ -18,4 +18,6 @@
     <Destination
       Link="/Project/Destinations/NewDestination.fldes" />
   </Destinations>
+  <PostBuild>ver &gt;NUL 2&gt;NUL
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDirectory)BuildTools\sharpen-chm-equations.ps1" -OutputDirectory "$(OutputDirectory)." -TargetName "$(TargetName)"</PostBuild>
 </CatapultTarget>
