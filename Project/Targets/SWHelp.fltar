@@ -12,7 +12,8 @@
   Skin="/Project/Skins/HTML Help.flskn"
   MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
   BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
-  MasterStylesheet="/Content/resources/stylesheets/statsdirect2.css">
+  MasterStylesheet="/Content/resources/stylesheets/statsdirect2.css"
+  MasterPage="/Content/resources/masterpages/chm.flmsp">
   <Destinations>
     <Destination
       Link="/Project/Destinations/NewDestination.fldes" />
