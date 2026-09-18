@@ -31,6 +31,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      # Flare's publish step commits its own build records into Docs: a zipped build log, which names folders of the
+      # PC that built the help, and a list of the output files. They are no part of the help, so they are taken out of
+      # this checkout before it is uploaded. (They stay in the repository, where Flare expects to find them.)
+      - name: Leave Flare's build records off the site
+        run: rm -f Docs/*.log.zip Docs/Data/*.output
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
