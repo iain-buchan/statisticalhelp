@@ -15,7 +15,10 @@
     }
 
     function fit() {
-        var room = (document.documentElement.clientWidth || document.body.clientWidth) - 48;
+        var page = document.documentElement.clientWidth || document.body.clientWidth;
+        var scrolled = document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+        // The stylesheet keeps 1em of the 10pt text clear at the right of the page, and that margin grows with the display scaling as the text does.
+        var margin = Math.round(16 * factor);
         var pictures = document.getElementsByTagName("img");
         for (var i = 0; i < pictures.length; i++) {
             var picture = pictures[i];
@@ -26,11 +29,17 @@
                 picture.sdWidth = picture.offsetWidth;
                 picture.sdHeight = picture.offsetHeight;
             }
-            var scale = factor;
-            if (room > 100 && picture.sdWidth * scale > room)
-                scale = Math.max(1, room / picture.sdWidth);
-            picture.style.width = Math.round(picture.sdWidth * scale) + "px";
-            picture.style.height = Math.round(picture.sdHeight * scale) + "px";
+            picture.style.width = Math.round(picture.sdWidth * factor) + "px";
+            picture.style.height = Math.round(picture.sdHeight * factor) + "px";
+            // Too wide for the window?  How much room a picture has depends on where it starts (one in an indented paragraph starts further right), and that
+            // is known only once it has been laid out at full size: so ask now.  Never go below the authored size: the equation pictures carry two dots to the
+            // pixel, and this viewer drops thin strokes (the bars of a small "=") from a picture it has to shrink by more than two to one.
+            var room = page - (picture.getBoundingClientRect().left + scrolled) - margin;
+            if (room > 100 && picture.sdWidth * factor > room) {
+                var scale = Math.max(1, room / picture.sdWidth);
+                picture.style.width = Math.round(picture.sdWidth * scale) + "px";
+                picture.style.height = Math.round(picture.sdHeight * scale) + "px";
+            }
         }
     }
 
