@@ -121,10 +121,10 @@
                                         <p><a href="../distributions/binomial.htm">Binomial distributions</a> are used for handling the errors associated with regression models for binary/dichotomous responses (i.e. yes/no, dead/alive) in the same way that the <a href="../distributions/normal.htm">standard normal distribution</a> is used in <a href="multiple_linear.htm">general linear regression</a>. Other, less commonly used binomial models include normit/probit and complimentary log-log. The logistic model is widely used and has many desirable properties (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman 1991</a>; <a href="../references/reference_list.htm#ref-mccullagh-1989">McCullagh and Nelder, 1989</a>; <a href="../references/reference_list.htm#ref-cox-1989">Cox and Snell, 1989</a>; <a href="../references/reference_list.htm#ref-pregibon-1981">Pregibon, 1981</a>).</p>
                                         <p>&#160;</p>
                                         <p>Odds = π/(1-π)</p>
-                                        <p>[p = proportional response, i.e. r out of n responded so π = r/n]</p>
+                                        <p>[π = proportional response, i.e. r out of n responded so π = r/n]</p>
                                         <p>Logit = log odds = log(π/(1-π))</p>
                                         <p>&#160;</p>
-                                        <p>When a logistic regression model has been fitted, estimates of π are marked with a hat symbol above the Greek letter pi to denote that the proportion is estimated from the fitted regression model. Fitted proportional responses are often referred to as event probabilities (i.e. p hat n events out of n trials).</p>
+                                        <p>When a logistic regression model has been fitted, estimates of π are marked with a hat symbol above the Greek letter pi to denote that the proportion is estimated from the fitted regression model. Fitted proportional responses are often referred to as event probabilities (i.e. π hat n events out of n trials).</p>
                                         <p>&#160;</p>
                                         <p>The following information about the difference between two logits demonstrates one of the important uses of logistic regression models:</p>
                                         <p>
@@ -137,7 +137,7 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation198.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where p hat is the expected proportional response for the logistic model with regression coefficients b1 to k and intercept b0 when the values for the predictor variables are x1 to k.</p>
+                                        <p>- where π hat is the expected proportional response for the logistic model with regression coefficients b1 to k and intercept b0 when the values for the predictor variables are x1 to k.</p>
                                         <p>&#160;</p>
                                         <p><u>Classifier predictors</u>
                                         </p>
@@ -207,7 +207,7 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation199.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, p hat is the expected proportional response, x<sub>j</sub> is the jth covariate pattern, X is the design matrix containing all covariates (first column as 1 if intercept calculated) and V is a matrix with the general element π hat(1 - π hat).</p>
+                                        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, π hat is the expected proportional response, x<sub>j</sub> is the jth covariate pattern, X is the design matrix containing all covariates (first column as 1 if intercept calculated) and V is a diagonal matrix with the general element m<sub>j</sub>π hat(1 - π hat).</p>
                                         <p>&#160;</p>
                                         <p><b>Deviance residuals</b> are used to detect ill-fitting covariate patterns, and they are calculated as:</p>
                                         <p>
@@ -399,7 +399,7 @@
                                         <p>&#160;</p>
                                         <p>logit Hypertensive = -2.377661 -0.067775 Smoking +0.69531 Obesity +0.871939 Snoring</p>
                                         <p>&#160;</p>
-                                        <p>Thus with 95% confidence we can infer that the risk of hypertension in obese people is between 1.15 and 3.5 times greater than in non-obese people.</p>
+                                        <p>Thus with 95% confidence we can infer that the odds of hypertension in obese people are between 1.15 and 3.5 times those in non-obese people.</p>
                                         <p>&#160;</p>
                                         <p><u>Logistic regression - model analysis</u>
                                         </p>

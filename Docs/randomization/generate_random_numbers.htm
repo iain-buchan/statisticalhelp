@@ -151,7 +151,7 @@
                                         </p>
                                         <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
                                         <p>&#160;</p>
-                                        <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ).</p>
+                                        <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ<sup>2</sup>).</p>
                                         <p>&#160;</p>
                                         <p>Algorithm: transformed inversion of the cumulative distribution function (<a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>)</p>
                                         <p>&#160;</p>
@@ -171,9 +171,9 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation7.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where the parameters λ and r (shaping parameter) must be greater than zero.</p>
+                                        <p>- where the parameters λ and r (shaping parameter) must be greater than zero. StatsDirect asks for A (shaping parameter, r) and B (scaling parameter, 1/λ).</p>
                                         <p>&#160;</p>
-                                        <p>G(*) is the gamma function:</p>
+                                        <p>Γ(*) is the gamma function:</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation8.svg" alt="" class="mcReset" />
                                         </p>
@@ -188,7 +188,7 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation9.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where p lies between 0 and 1 in n ranges.</p>
+                                        <p>- where p lies between 0 and 1 and n is the number of trials.</p>
                                         <p>&#160;</p>
                                         <p>Algorithm: acceptance-rejection method BTPEC (<a href="../references/reference_list.htm#ref-kachitvichyanukul-1988">Kachitvichyanukul and Schmeiser, 1988</a>).</p>
                                         <p>&#160;</p>
@@ -198,7 +198,7 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation10.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where parameter l is greater than zero.</p>
+                                        <p>- where parameter λ is greater than zero.</p>
                                         <p>&#160;</p>
                                         <p>Algorithm: acceptance-rejection (<a href="../references/reference_list.htm#ref-ahrens-1982-a">Ahrens and Dieter, 1982a</a>).</p>
                                         <p>&#160;</p>
@@ -218,7 +218,7 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation12.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>The deviates are calculated as nx/dz where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
+                                        <p>The deviates are calculated as (x/n)/(z/d) where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
                                         <p>&#160;</p>
                                         <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
                                         <p>&#160;</p>

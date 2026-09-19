@@ -154,12 +154,12 @@
                                         <p>&#160;</p>
                                         <p>Odds ratio (OR) = (a*d)/(b*c)</p>
                                         <p>&#160;</p>
-                                        <p>Estimate of population exposure (Px) = (a+c)/(a+b+c+d)</p>
+                                        <p>Estimate of population exposure (Px) = c/(c+d), unless you enter a value</p>
                                         <p>Estimate of population attributable risk% = 100*(Px*(OR-1))/(1+(Px*(OR-1)))</p>
                                         <p>&#160;</p>
                                         <p>In retrospective studies you select subjects by outcome and look back to see if they have a characteristic factor such as a risk factor or a protection factor for a disease. The odds ratio ((a/c)/(b/d)) looks at the likelihood of an outcome in relation to a characteristic factor. In epidemiological terms, the odds ratio is used as a point estimate of the relative risk in retrospective studies. Odds ratio is the key statistic for most case-control studies.</p>
                                         <p>&#160;</p>
-                                        <p>In prospective studies, <a href="../basics/attributable_risk.htm">Attributable risk</a>  or risk difference is used to quantify risk in the exposed group that is attributable to the exposure. In retrospective studies, attributable risk can not be calculated directly but population attributable risk can be estimated. Population attributable risk estimates the proportion of disease in the study population that is attributable to the exposure. In order to calculate population attributable risk, the incidence of exposure in the study population must be known or estimated, StatsDirect prompts you to enter this value or to default to an estimate made from your study data. Population attributable risk is presented as a percentage with a confidence interval when the odds ratio is greater than or equal to one (<a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>).</p>
+                                        <p>In prospective studies, <a href="../basics/attributable_risk.htm">Attributable risk</a>  or risk difference is used to quantify risk in the exposed group that is attributable to the exposure. In retrospective studies, attributable risk can not be calculated directly but population attributable risk can be estimated. Population attributable risk estimates the proportion of disease in the study population that is attributable to the exposure. In order to calculate population attributable risk, the prevalence of exposure in the study population must be known or estimated, StatsDirect prompts you to enter this value or to default to an estimate made from your study data. The default is the proportion of the controls that were exposed, c/(c+d), which represents the population when the outcome is rare and does not depend upon the number of controls you sampled per case (versions before 5 pooled the cases and controls for this estimate). The confidence interval is that of Walter for the default estimate; if you enter the population exposure then the interval is calculated from the confidence limits of the odds ratio. Population attributable risk is presented as a percentage with a confidence interval when the odds ratio is greater than one (<a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>).</p>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
                                         </p>
@@ -245,11 +245,11 @@
                                         <p>Exact mid-P 95% confidence interval = 1.606435 &#160;to &#160;4.107938</p>
                                         <p>Exact mid-P one sided P &lt; 0.0001, two sided P &lt; 0.0001</p>
                                         <p>&#160;</p>
-                                        <p>Population exposure % =78.555305</p>
-                                        <p>Population attributable risk % = 55.287461</p>
-                                        <p>Approximate 95% confidence interval = 38.300819  to  72.274103</p>
+                                        <p>Population exposure % = 66.906475 (exposure among the controls)</p>
+                                        <p>Population attributable risk % = 51.294336</p>
+                                        <p>Approximate 95% confidence interval = 34.307694  to  68.280978</p>
                                         <p>&#160;</p>
-                                        <p>From these data we have evidence that the odds of developing oral cancer is around two and a half times higher for heavy smokers compared with lighter (less than 16 per day) or non-smokers of cigarettes. With 95% confidence we infer that the true population value for this statistic lies between one and a half and four times. Using an estimate of 79% heavy smoking, for the population studied in this 1957 investigation, we can infer with 95% confidence that the proportion of oral cancer cases in that population that were due to heavy smoking lay between 38 and 72 percent.</p>
+                                        <p>From these data we have evidence that the odds of developing oral cancer is around two and a half times higher for heavy smokers compared with lighter (less than 16 per day) or non-smokers of cigarettes. With 95% confidence we infer that the true population value for this statistic lies between one and a half and four times. Using an estimate of 67% heavy smoking (the proportion among the controls), for the population studied in this 1957 investigation, we can infer with 95% confidence that the proportion of oral cancer cases in that population that were due to heavy smoking lay between 34 and 68 percent.</p>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>
