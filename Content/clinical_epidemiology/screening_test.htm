@@ -12,7 +12,7 @@
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Clinical Epidemiology_Screening Test Errors</b>.</p>
         <p>&#160;</p>
-        <p>This function gives the probability of false positive and false negative results with a test of given true and false positive rates and a given prevalence of disease (<a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>).</p>
+        <p>This function gives the probability of false positive and false negative results with a test of given sensitivity and specificity and a given prevalence of disease (<a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>).</p>
         <p>&#160;</p>
         <p>When considering a diagnostic test for screening populations it is important to consider the number of false negative and false positive results you will have to deal with. The quality of a diagnostic test is often expressed in terms of sensitivity and specificity. Sensitivity is the ability of the test to pick up what you are looking for and specificity is the ability of the test to reject what you are not looking for.</p>
         <p>&#160;</p>
@@ -48,7 +48,7 @@
         <p>Sensitivity = a/(a+c)</p>
         <p>Specificity = d/(b+d)</p>
         <p>&#160;</p>
-        <p>We can apply Bayes' theorem if we know the approximate likelihood that a subject has the disease before they come for screening, this is given by the prevalence of the disease. For low prevalence diseases the false negative rate will be low and the false positive rate will be high. For high prevalence diseases the false negative rate will be high and the false positive rate will be lower. People are often surprised by the high numbers of projected false positives, you need a highly specific test to keep this number low. The false positive rate of a screening test can be reduced by repeating the test. In some cases a test is performed three times and the patient is declared positive if at least two out of the three component tests were positive.</p>
+        <p>We can apply Bayes' theorem if we know the approximate likelihood that a subject has the disease before they come for screening, this is given by the prevalence of the disease. Here the false positive rate is the proportion of positive results that are false and the false negative rate is the proportion of negative results that are false. For low prevalence diseases the false negative rate will be low and the false positive rate will be high. For high prevalence diseases the false negative rate will be high and the false positive rate will be lower. People are often surprised by the high numbers of projected false positives, you need a highly specific test to keep this number low. The false positive rate of a screening test can be reduced by repeating the test. In some cases a test is performed three times and the patient is declared positive if at least two out of the three component tests were positive.</p>
         <p>&#160;</p>
         <p><u>Technical Validation</u>
         </p>
@@ -58,7 +58,7 @@
 \space \\
 \displaystyle P_{F-}=\frac{[1-P(A|B)]P(B)}{1-P(A|\bar{B})-P(B)[P(A|B)-P(A|\bar{B})]} \\$</MadCap:equation>
         </p>
-        <p>- where P<sub>F+</sub> is the false positive rate, P<sub>F-</sub>  is the false negative rate, P(A|B) is the probability of A given B, A is a positive test result, A bar is a negative test result, B is disease present and B bar is disease absent.</p>
+        <p>- where P<sub>F+</sub> is the false positive rate P(B bar|A), P<sub>F-</sub> is the false negative rate P(B|A bar), P(A|B) is the probability of A given B, A is a positive test result, A bar is a negative test result, B is disease present and B bar is disease absent.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
@@ -92,7 +92,7 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>To analyse these data in StatsDirect select Screening Test Errors from the Clinical Epidemiology section of the Analysis menu. Enter the true +ve rate as 0.951 (1902/(1902+98)) and the false +ve rate as 0.011 (22/(1978+22)). Enter the prevalence as 1 in 100 by entering n as 100.</p>
+        <p>To analyse these data in StatsDirect select Screening Test Errors from the Clinical Epidemiology section of the Analysis menu. Enter sensitivity as 0.951 (1902/(1902+98)) and 1-specificity as 0.011 (22/(1978+22)). Enter the prevalence as 1 in 100 by entering n as 100.</p>
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
@@ -104,6 +104,6 @@
         <p>Test SPECIFICITY = 98.9%</p>
         <p>Probability of a FALSE NEGATIVE result = 0.0005</p>
         <p>&#160;</p>
-        <p>Here we see that more than half of the patients tested will give a positive test when they do not have the disease. This is clearly not acceptable for a full screening method but could be used as pre-screening before further tests if there was no better initial test available.</p>
+        <p>Here we see that more than half of the patients who give a positive test will not have the disease (about 1% of all patients tested will give a false positive result). This is clearly not acceptable for a full screening method but could be used as pre-screening before further tests if there was no better initial test available.</p>
     </body>
 </html>
