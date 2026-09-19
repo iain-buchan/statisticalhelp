@@ -45,7 +45,7 @@
 \displaystyle s^2_{_-i}= \frac{(n-p)s^2-e^2_i /(1-h_i)}{{n-p-1}}\\
 \displaystyle r_{-i}= \frac{e_i}{\sqrt{s^2_{_-i} (1-h_i)}}\\
 \displaystyle d_i=\left[\frac{e_i}{s\sqrt{1-h_i}} \right]^2 \left[ \frac{h_i}{1-h_i} \right] \frac{1}{p} \\
-\displaystyle \text{DFIT}_i=\sqrt{d_ip_i\frac{s^2}{s_i^2}}$</MadCap:equation>
+\displaystyle \text{DFIT}_i=r_{-i}\sqrt{\frac{h_i}{1-h_i}}$</MadCap:equation>
         </p>
         <p>- where p is the number of parameters in the model, n is the number of observations, e<sub>i</sub> is a residual, r<sub>i</sub> is a Studentized residual, r-i is a jackknife residual, s² is the residual mean square, s²-i is an estimate of s² after deletion of the ith residual, h<sub>i</sub> is the leverage (ith diagonal element of the hat or XXi matrix), d<sub>i</sub> is Cook's distance and DFIT<sub>i</sub>is DFFITS.</p>
         <p>&#160;</p>
@@ -94,9 +94,9 @@
         </p>
         <p>The multiple correlation coefficient (R) is Pearson's product moment correlation between the predicted values and the observed values (Y' and Y). Just as r² is the proportion of the total variance (s²) of Y that can be explained by the linear regression of Y on x, R² is the proportion of the variance explained by the multiple regression. The significance of R is tested by the F statistic of the analysis of variance for the regression.</p>
         <p>&#160;</p>
-        <p>An adjusted value of R² is given as Ra²:</p>
+        <p>An adjusted value of R² is given as Ra² (n observations, p parameters including the intercept):</p>
         <p>
-            <MadCap:equation>$\displaystyle R_a^2=1-(1-R^2)\frac{n-1}{p-1}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle R_a^2=1-(1-R^2)\frac{n-1}{n-p}$</MadCap:equation>
         </p>
         <p>The adjustment allows comparison of Ra² between different regression models by compensating for the fact that R² is bound to increase with the number of predictors in the model.</p>
         <p>&#160;</p>

@@ -117,9 +117,9 @@
         <p>ANOVA for a three factor fully random nested (split-plot) model is calculated as follows (Snedecor and Cochran, 1989):</p>
         <p>
             <MadCap:equation>$\displaystyle CF=\frac{\displaystyle (\sum_{i=1}^g \sum_{j=1}^{s_i} \sum_{k=1}^{n_{ij}}X_{ijk})^2}{N} \\
-\displaystyle SS_{\text{total}}=\sum_{i=1}^g \sum_{j=1}^{s_i} \sum_{k=1}^{n_{ij}} X_{ijk}-CF \\
-\displaystyle SS_{\text{groups}}=\sum_{i=1}^{g} \frac{\displaystyle (\sum_{j=1}^{s_i}\sum_{k=1}^{n_{ji}} X_{ijk})^2}{s_in_{ij}}-CF \\
-\displaystyle SS_{\text{subgroups (group i)}}=\sum_{i=1}^{s_i} \frac{\displaystyle (\sum_{k=1}^{n_{ij}}X_{ijk})^2}{n_{ij}}-\frac{\displaystyle (\sum_{j=1}^{s_i}\sum_{k=1}^{n_{ji}} X_{ijk})^2}{s_in_{ij}}$</MadCap:equation>
+\displaystyle SS_{\text{total}}=\sum_{i=1}^g \sum_{j=1}^{s_i} \sum_{k=1}^{n_{ij}} X_{ijk}^2-CF \\
+\displaystyle SS_{\text{groups}}=\sum_{i=1}^{g} \frac{\displaystyle (\sum_{j=1}^{s_i}\sum_{k=1}^{n_{ij}} X_{ijk})^2}{\displaystyle \sum_{j=1}^{s_i}n_{ij}}-CF \\
+\displaystyle SS_{\text{subgroups (group i)}}=\sum_{j=1}^{s_i} \frac{\displaystyle (\sum_{k=1}^{n_{ij}}X_{ijk})^2}{n_{ij}}-\frac{\displaystyle (\sum_{j=1}^{s_i}\sum_{k=1}^{n_{ij}} X_{ijk})^2}{\displaystyle \sum_{j=1}^{s_i}n_{ij}}$</MadCap:equation>
         </p>
         <p>- where X<sub>ijk</sub> is the kth observation from the jth subgroup of the ith group, g is the number of groups, SS<sub>total</sub> is the total sum of squares, SS<sub>groups</sub> is the sum of squares due to the group factor, SS<sub>subgroups (group i)</sub> is the sum of squares due to the subgroup factor of group i, si is the number of subgroups in the ith group, n<sub>ij</sub> is the number of observations in the jth subgroup of the ith group and N is the total number of observations.</p>
         <p>&#160;</p>

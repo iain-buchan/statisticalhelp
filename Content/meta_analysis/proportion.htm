@@ -69,7 +69,7 @@
         <p>StatsDirect first transforms proportions via the Freeman-Tukey double arcsine method (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman and Tukey, 1950</a>, <a href="../references/reference_list.htm#ref-miller-1978">Miller 1978</a>) then performs an inverse-variance weighted fixed and random effects meta-analysis by conventional methods (<a href="../references/reference_list.htm#ref-dersimonian-1986">DerSimonian and Laird, 1986</a>). The appropriate weight is n+0.5 but some other software uses n+1.  In our own simulation testing of the variance options within the formula 1/(n+c), varying c from 0.5 to 1, we found that the n+1 method (<a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>) is conservative, avoiding underestimation of the true variance of the transformed proportion, but the original n+0.5 method (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman et al, 1950</a>) method is closer to the true variance in absolute terms. Note that there is no fixed transformation of a binomial proportion that provides optimal variance stabilization, which depends on your data - iterative variance stabilization methods may emerge with further research. The pooled proportion can be calculated as the back-transform of the weighted mean of the transformed proportions (<a href="../references/reference_list.htm#ref-miller-1978">Miller 1978</a>):</p>
         <p>&#160;</p>
         <p>
-            <MadCap:equation>$\displaystyle \hat{p}=\left\{1-\text{sgn}⁡(\cos{(\hat{x})})\times\sqrt{1-{\left[\frac{(\sin{(\hat x)}+(\sin{(\hat x)}-1/\sin{(\hat x)})}n\right]}^2}\ \right\} \times 0.5$</MadCap:equation>
+            <MadCap:equation>$\displaystyle \hat{p}=\left\{1-\text{sgn}⁡(\cos{(\hat{x})})\times\sqrt{1-{\left[\sin{(\hat x)}+\frac{(\sin{(\hat x)}-1/\sin{(\hat x)})}n\right]}^2}\ \right\} \times 0.5$</MadCap:equation>
         </p>
         <p>
             <MadCap:equation>$\displaystyle \hat x=\frac{\sum ⁢xw⁢}{\sum ⁢w}$</MadCap:equation>
@@ -95,9 +95,9 @@
         <p>
             <MadCap:equation>$\displaystyle \hat{p_r}=\left\{1-\text{sgn}⁡(\cos{(\hat{x}_r)})\times\sqrt{1-{\left[\sin{(\hat x_r)}+\frac{(\sin{(\hat x_r)}-1/\sin{(\hat x_r)})}n\right]}^2}\ \right\} \times 0.5$</MadCap:equation>
         </p>
-        <p>- where p hat is the fixed effects pooled proportion, x is the Freeman-Tukey transformed proportion, w is the inverse variance weight for the transformed proportion, q is the Cochran q statistic, tau squared is the moment-based estimate of the between-studies variance, w r is the DerSimonian-Laird weight, and p hat r is the random effects estimate of the pooled proportion.</p>
+        <p>- where p hat is the fixed effects pooled proportion, x is the Freeman-Tukey transformed proportion, w is the inverse variance weight for the transformed proportion, q is the Cochran q statistic, tau squared is the moment-based estimate of the between-studies variance, w r is the DerSimonian-Laird weight, p hat r is the random effects estimate of the pooled proportion, and n in the back-transforms to p hat and p hat r is the harmonic mean of the study sample sizes.</p>
         <p>&#160;</p>
-        <p>An alternative, simpler, back transform, as used in previous versions of StatsDirect is:</p>
+        <p>An alternative, simpler, back transform (Stuart-Ord), which is the default choice of inverse transform in StatsDirect, is:</p>
         <p>
             <MadCap:equation>$\displaystyle \hat p=\sin (\hat x/2)^2$</MadCap:equation>
         </p>
@@ -451,7 +451,7 @@
         <p>&#160;</p>
         <p><u>Fixed effects (inverse variance)</u>
         </p>
-        <p>Pooled proportion = 0.640993 (95% CI = 0.63059 to 0.651331)</p>
+        <p>Pooled proportion = 0.63958 (95% CI = 0.629281 to 0.649814)</p>
         <p>&#160;</p>
         <p><u>Non-combinability of studies</u>
         </p>
@@ -461,7 +461,7 @@
         <p>&#160;</p>
         <p><u>Random effects (DerSimonian-Laird)</u>
         </p>
-        <p>Pooled proportion = 0.788712 (95% CI = 0.691175 to 0.872282)</p>
+        <p>Pooled proportion = 0.785824 (95% CI = 0.689259 to 0.868571)</p>
         <p>&#160;</p>
         <p>The differences between trials are very large (99% inconsistency), therefore a random effects model should be followed. The weights table shows both the fixed and random effects weights – the random effects weights used to calculate the pooled proportion are similar across the studies, unlike the fixed effects weights. We conclude that the adherence for this class of drug is approximately 79%, and with 95% confidence at least 69%.</p>
     </body>

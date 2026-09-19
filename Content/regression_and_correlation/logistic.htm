@@ -16,16 +16,16 @@
         <p><a href="../distributions/binomial.htm">Binomial distributions</a> are used for handling the errors associated with regression models for binary/dichotomous responses (i.e. yes/no, dead/alive) in the same way that the <a href="../distributions/normal.htm">standard normal distribution</a> is used in <a href="multiple_linear.htm">general linear regression</a>. Other, less commonly used binomial models include normit/probit and complimentary log-log. The logistic model is widely used and has many desirable properties (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman 1991</a>; <a href="../references/reference_list.htm#ref-mccullagh-1989">McCullagh and Nelder, 1989</a>; <a href="../references/reference_list.htm#ref-cox-1989">Cox and Snell, 1989</a>; <a href="../references/reference_list.htm#ref-pregibon-1981">Pregibon, 1981</a>).</p>
         <p>&#160;</p>
         <p>Odds = π/(1-π)</p>
-        <p>[p = proportional response, i.e. r out of n responded so π = r/n]</p>
+        <p>[π = proportional response, i.e. r out of n responded so π = r/n]</p>
         <p>Logit = log odds = log(π/(1-π))</p>
         <p>&#160;</p>
-        <p>When a logistic regression model has been fitted, estimates of π are marked with a hat symbol above the Greek letter pi to denote that the proportion is estimated from the fitted regression model. Fitted proportional responses are often referred to as event probabilities (i.e. p hat n events out of n trials).</p>
+        <p>When a logistic regression model has been fitted, estimates of π are marked with a hat symbol above the Greek letter pi to denote that the proportion is estimated from the fitted regression model. Fitted proportional responses are often referred to as event probabilities (i.e. π hat n events out of n trials).</p>
         <p>&#160;</p>
         <p>The following information about the difference between two logits demonstrates one of the important uses of logistic regression models:</p>
         <p>
             <MadCap:equation>$\displaystyle \text{logit}_a-\text{logit}_b=\log \left( \frac{\hat{\pi}_a}{1-\hat{\pi}_a}\right)-\log \left( \frac{\hat{\pi}_b}{1-\hat{\pi}_b}\right) \\
 \displaystyle \text{logit}_a-\text{logit}_b=\log \left( \frac{\hat{\pi}_a}{1-\hat{\pi}_a} \bigg/\frac{\hat{\pi}_b}{1-\hat{\pi}_b} \right) \\
-\displaystyle \text{logit}_a-\text{logit}_b= \text{odds ratio}$</MadCap:equation>
+\displaystyle \text{logit}_a-\text{logit}_b= \log(\text{odds ratio})$</MadCap:equation>
         </p>
         <p>&#160;</p>
         <p>Logistic models provide important information about the relationship between response/outcome and exposure. It makes no difference to logistic models, whether outcomes have been sampled prospectively or retrospectively, this is not the case with other binomial models.</p>
@@ -34,7 +34,7 @@
         <p>
             <MadCap:equation>$\displaystyle \ln\left( \frac{\hat{\pi}}{1-\hat{\pi}}\right)=b_0+b_1x_1+b_2x_2+...+b_kx_k$</MadCap:equation>
         </p>
-        <p>- where p hat is the expected proportional response for the logistic model with regression coefficients b1 to k and intercept b0 when the values for the predictor variables are x1 to k.</p>
+        <p>- where π hat is the expected proportional response for the logistic model with regression coefficients b1 to k and intercept b0 when the values for the predictor variables are x1 to k.</p>
         <p>&#160;</p>
         <p><u>Classifier predictors</u>
         </p>
@@ -102,16 +102,16 @@
         <p>&#160;</p>
         <p>Leverages are the diagonal elements of the logistic equivalent of the hat matrix in general linear regression (where leverages are proportional to the distances of the jth covariate pattern from the mean of the data). The jth diagonal element of the logistic equivalent of the hat matrix is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle h_j=m_j\hat{\pi}(\textbf{x}_j)[1-\hat{\pi}(\textbf{x}_j)(1,\textbf{x}_j')(\textbf{X}'\textbf{V}\textbf{X})^{-1}(1,\textbf{x}_j')')]$</MadCap:equation>
+            <MadCap:equation>$\displaystyle h_j=m_j\hat{\pi}(\textbf{x}_j)[1-\hat{\pi}(\textbf{x}_j)](1,\textbf{x}_j')(\textbf{X}'\textbf{V}\textbf{X})^{-1}(1,\textbf{x}_j')'$</MadCap:equation>
         </p>
-        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, p hat is the expected proportional response, x<sub>j</sub> is the jth covariate pattern, X is the design matrix containing all covariates (first column as 1 if intercept calculated) and V is a matrix with the general element π hat(1 - π hat).</p>
+        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, π hat is the expected proportional response, x<sub>j</sub> is the jth covariate pattern, X is the design matrix containing all covariates (first column as 1 if intercept calculated) and V is a diagonal matrix with the general element m<sub>j</sub>π hat(1 - π hat).</p>
         <p>&#160;</p>
         <p><b>Deviance residuals</b> are used to detect ill-fitting covariate patterns, and they are calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle d_j=\pm\sqrt{2\left[ y_i \ln \left(\frac{y_j}{m_j\hat{\pi}_j} \right)+(m_j-y_j)\ln \left(\frac{m_j-y_j}{m_j(1-\hat{\pi}_j)} \right)\right]} \\
+            <MadCap:equation>$\displaystyle d_j=\pm\sqrt{2\left[ y_j \ln \left(\frac{y_j}{m_j\hat{\pi}_j} \right)+(m_j-y_j)\ln \left(\frac{m_j-y_j}{m_j(1-\hat{\pi}_j)} \right)\right]} \\
 \displaystyle \text{sign for } d_j \text{ is same as} (y_j-m_j\hat{\pi}_j) \\
-\text{if }y_j=0 \text{ then } d_j=-\sqrt{2m_j|\ln(1-\hat{\pi}_j)}\\
-\text{if }y_j=m_j \text{ then } d_j=\sqrt{2m_j|\ln(\hat{\pi}_j)}\\$</MadCap:equation>
+\text{if }y_j=0 \text{ then } d_j=-\sqrt{2m_j|\ln(1-\hat{\pi}_j)|}\\
+\text{if }y_j=m_j \text{ then } d_j=\sqrt{2m_j|\ln(\hat{\pi}_j)|}\\$</MadCap:equation>
         </p>
         <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, π hat is the expected proportional response and y<sub>j</sub> is the number of successes with the jth covariate pattern.</p>
         <p>&#160;</p>
@@ -299,7 +299,7 @@
         <p>&#160;</p>
         <p>logit Hypertensive = -2.377661 -0.067775 Smoking +0.69531 Obesity +0.871939 Snoring</p>
         <p>&#160;</p>
-        <p>Thus with 95% confidence we can infer that the risk of hypertension in obese people is between 1.15 and 3.5 times greater than in non-obese people.</p>
+        <p>Thus with 95% confidence we can infer that the odds of hypertension in obese people are between 1.15 and 3.5 times those in non-obese people.</p>
         <p>&#160;</p>
         <p><u>Logistic regression - model analysis</u>
         </p>
