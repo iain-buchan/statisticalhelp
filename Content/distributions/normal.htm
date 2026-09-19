@@ -11,7 +11,7 @@
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Normal</b>.</p>
         <p>&#160;</p>
-        <p>The standard normal distribution is the most important continuous probability distribution. It was first described by De Moivre in 1733 and subsequently by the German mathematician C. F. Gauss (1777 - 1885). StatsDirect gives you tail areas and percentage points for this distribution (<a href="../references/reference_list.htm#ref-hill-1973">Hill, 1973</a>; <a href="../references/reference_list.htm#ref-odeh-1974">Odeh and Evans, 1974</a>; <a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-johnson-1970">Johnson and Kotz, 1970</a>).</p>
+        <p>The standard normal distribution is the most important continuous probability distribution. It was first described by De Moivre in 1733 and subsequently by the German mathematician C. F. Gauss (1777 - 1855). StatsDirect gives you tail areas and percentage points for this distribution (<a href="../references/reference_list.htm#ref-hill-1973">Hill, 1973</a>; <a href="../references/reference_list.htm#ref-odeh-1974">Odeh and Evans, 1974</a>; <a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-johnson-1970">Johnson and Kotz, 1970</a>).</p>
         <p>&#160;</p>
         <p>Normal distributions are a family of distributions with a symmetrical bell shape:-</p>
         <p>
@@ -36,7 +36,7 @@
         <p>z0.001 = -3.09023230616781</p>
         <p>Lower tail P(z= -3.09023230616781) = 0.001</p>
         <p>z0.25 = -0.674489750196082</p>
-        <p>Lower tail P(z= 0.674489750196082) = 0.25</p>
+        <p>Lower tail P(z= -0.674489750196082) = 0.25</p>
         <p>z1E-20 = -9.26234008979841</p>
         <p>Lower tail P(z= -9.26234008979841) = 9.99999999999962E-21</p>
         <p>&#160;</p>
@@ -46,13 +46,13 @@
         </p>
         <p>Distribution function, Φ(z), of a standard normal variable z:</p>
         <p>
-            <MadCap:equation>$\displaystyle \Phi(z)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^z e^{-t/2} \space dt$</MadCap:equation>
+            <MadCap:equation>$\displaystyle \Phi(z)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^z e^{-t^2/2} \space dt$</MadCap:equation>
         </p>
         <p>&#160;</p>
-        <p>StatsDirect calculates Φ(z) from the complement of the error function (errc):</p>
+        <p>StatsDirect calculates Φ(z) from the complement of the error function (erfc):</p>
         <p>
             <MadCap:equation>$\displaystyle \Phi(z)=\frac{1}{2}\text{erfc} \left( \frac{-z}{\sqrt{2}} \right) \\
-\displaystyle \text{erfc}=\frac{2}{\sqrt{\pi}}\int_x^\infty e^{-t^2} \space dt$</MadCap:equation>
+\displaystyle \text{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_x^\infty e^{-t^2} \space dt$</MadCap:equation>
         </p>
     </body>
 </html>

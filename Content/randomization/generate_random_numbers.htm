@@ -22,7 +22,7 @@
         </p>
         <p>The continuous uniform distribution has a constant density function of the interval (a, b) and thus a rectangular shape from a to b:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\frac{1}{a+b} \\
+            <MadCap:equation>$\displaystyle f(x)=\frac{1}{b-a} \\
 \displaystyle \text{var}(x)=\frac{(b-a)^2}{12}$</MadCap:equation>
         </p>
         <p>- where a and b lie between minus and plus infinity.</p>
@@ -33,7 +33,7 @@
         </p>
         <p>The commonly used standard <a href="../distributions/normal.htm">normal distribution</a> (mean of 0 and standard deviation of 1) is one of a family of normal distributions defined by the density function:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\frac{1}{\sqrt{2\pi\sigma}}\exp{\left(\frac{\displaystyle -(x-\mu)^2}{2\sigma^2}\right)}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(x-\mu)^2}{2\sigma^2}\right)}$</MadCap:equation>
         </p>
         <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
         <p>&#160;</p>
@@ -43,11 +43,11 @@
         </p>
         <p>The density of a lognormal distribution is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\frac{1}{x\sqrt{2\pi\sigma}}\exp{\left(\frac{\displaystyle 1}{2\sigma^2}(\ln{(x)-\mu)^2}\right)}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle f(x)=\frac{1}{x\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(\ln(x)-\mu)^2}{2\sigma^2}\right)}$</MadCap:equation>
         </p>
         <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
         <p>&#160;</p>
-        <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ).</p>
+        <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ<sup>2</sup>).</p>
         <p>&#160;</p>
         <p>Algorithm: transformed inversion of the cumulative distribution function (<a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>)</p>
         <p>&#160;</p>
@@ -67,9 +67,9 @@
         <p>
             <MadCap:equation>$\displaystyle f(x)=\frac{\lambda}{\Gamma(r)}(\lambda x)^{r-1} \exp (-\lambda x)$</MadCap:equation>
         </p>
-        <p>- where the parameters λ and r (shaping parameter) must be greater than zero.</p>
+        <p>- where the parameters λ and r (shaping parameter) must be greater than zero. StatsDirect asks for A (shaping parameter, r) and B (scaling parameter, 1/λ).</p>
         <p>&#160;</p>
-        <p>G(*) is the gamma function:</p>
+        <p>Γ(*) is the gamma function:</p>
         <p>
             <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}\exp(-t) \space dt, \space x&gt;0 \\$</MadCap:equation>
         </p>
@@ -84,7 +84,7 @@
         <p>
             <MadCap:equation>$\displaystyle P(x)=\left(\begin{array}{c}n\\ x\end{array}\right)p^x(1-p)^{n-x} \\$</MadCap:equation>
         </p>
-        <p>- where p lies between 0 and 1 in n ranges.</p>
+        <p>- where p lies between 0 and 1 and n is the number of trials.</p>
         <p>&#160;</p>
         <p>Algorithm: acceptance-rejection method BTPEC (<a href="../references/reference_list.htm#ref-kachitvichyanukul-1988">Kachitvichyanukul and Schmeiser, 1988</a>).</p>
         <p>&#160;</p>
@@ -94,7 +94,7 @@
         <p>
             <MadCap:equation>$\displaystyle P(x)=\frac{\exp (-\lambda)\lambda^x}{x!}$</MadCap:equation>
         </p>
-        <p>- where parameter l is greater than zero.</p>
+        <p>- where parameter λ is greater than zero.</p>
         <p>&#160;</p>
         <p>Algorithm: acceptance-rejection (<a href="../references/reference_list.htm#ref-ahrens-1982-a">Ahrens and Dieter, 1982a</a>).</p>
         <p>&#160;</p>
@@ -114,7 +114,7 @@
         <p>
             <MadCap:equation>$\displaystyle P(x)=\frac{\left( \frac{\displaystyle  n+d-2}{\displaystyle 2}\right)! \space x^{n/2-1}}{(n/2-1)!(d/2-1)!\left( 1+\frac{\displaystyle n}{\displaystyle d}x\right)^{(n+d)/2}} \left( \frac{n}{d}\right)^{n/2} \space \text{if}\space x&gt;0; P(x)=0 \space \text{otherwise}$</MadCap:equation>
         </p>
-        <p>The deviates are calculated as nx/dz where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
+        <p>The deviates are calculated as (x/n)/(z/d) where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
         <p>&#160;</p>
         <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
         <p>&#160;</p>
