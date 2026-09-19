@@ -18,7 +18,7 @@
         </p>
         <p>- where t is a time period known as the survival time, time to failure or time to event (such as death); e.g. 5 years in the context of 5 year survival rates. Some texts present S as the estimated probability of surviving to time t for those alive just before t multiplied by the proportion of subjects surviving to t. Thus it reflects the probability of no event before t. At t=0 S(t) = 1 and decreases toward 0 as t increases toward infinity.</p>
         <p>&#160;</p>
-        <p>The product limit (PL) method of <a href="../references/reference_list.htm">Kaplan and Meier (1958)</a> is used to estimate S:</p>
+        <p>The product limit (PL) method of <a href="../references/reference_list.htm#ref-kaplan-1958">Kaplan and Meier (1958)</a> is used to estimate S:</p>
         <p>
             <MadCap:equation>$\displaystyle \hat{S}_t=\prod_{t_i \le t} \left[1-\frac{d_i}{n_i}\right]$</MadCap:equation>
         </p>
@@ -33,7 +33,7 @@
             <li>The event studied (e.g. death) happens at the specified time. Late recording of the event studied will cause artificial inflation of S.</li>
         </ul>
         <p>&#160;</p>
-        <p>The instantaneous hazard function h(t) [also known as the hazard rate, conditional failure rate or force of mortality] is defined as the event rate at time t conditional on surviving up to or beyond time t. As h(t) is a rate, not a probability, it has units of 1/t.The cumulative hazard function H_hat (t) is the integral of the hazard rates from time 0 to t,which represents the accumulation of the hazard over time - mathematically this quantifies the number of times you would expect to see the failure event in a given time period, if the event was repeatable. So it is more accurate to think of hazards in terms of rates than probabilities.The cumulative hazard is estimated by the method of <a href="../references/reference_list.htm">Peterson (1977)</a> as:</p>
+        <p>The instantaneous hazard function h(t) [also known as the hazard rate, conditional failure rate or force of mortality] is defined as the event rate at time t conditional on surviving up to or beyond time t. As h(t) is a rate, not a probability, it has units of 1/t.The cumulative hazard function H_hat (t) is the integral of the hazard rates from time 0 to t,which represents the accumulation of the hazard over time - mathematically this quantifies the number of times you would expect to see the failure event in a given time period, if the event was repeatable. So it is more accurate to think of hazards in terms of rates than probabilities.The cumulative hazard is estimated by the method of <a href="../references/reference_list.htm#ref-peterson-1977">Peterson (1977)</a> as:</p>
         <p>
             <MadCap:equation>$\displaystyle \hat{H}_t=-\ln({\hat{S}_t})$</MadCap:equation>
         </p>
@@ -42,15 +42,15 @@
         <p>&#160;</p>
         <p><u>Median and mean survival time</u>
         </p>
-        <p>The median survival time is calculated as the smallest survival time for which the survivor function is less than or equal to 0.5. Some data sets may not get this far, in which case their median survival time is not calculated. A confidence interval for the median survival time is constructed using a robust nonparametric method due to <a href="../references/reference_list.htm">Brookmeyer and Crowley (1982)</a>. Another confidence interval for the median survival time is constructed using a large sample estimate of the density function of the survival estimate (<a href="../references/reference_list.htm">Andersen, 1993</a>). If there are many tied survival times then the Brookmeyer-Crowley limits should not be used.</p>
+        <p>The median survival time is calculated as the smallest survival time for which the survivor function is less than or equal to 0.5. Some data sets may not get this far, in which case their median survival time is not calculated. A confidence interval for the median survival time is constructed using a robust nonparametric method due to <a href="../references/reference_list.htm#ref-brookmeyer-1982">Brookmeyer and Crowley (1982)</a>. Another confidence interval for the median survival time is constructed using a large sample estimate of the density function of the survival estimate (<a href="../references/reference_list.htm#ref-andersen-1993">Andersen, 1993</a>). If there are many tied survival times then the Brookmeyer-Crowley limits should not be used.</p>
         <p>&#160;</p>
-        <p>Mean survival time is estimated as the area under the survival curve. The estimator is based upon the entire range of data. Note that some software uses only the data up to the last observed event; <a href="../references/reference_list.htm">Hosmer and Lemeshow (1999)</a> point out that this biases the estimate of the mean downwards, and they recommend that the entire range of data is used. A large sample method is used to estimate the variance of the mean survival time and thus to construct a confidence interval (<a href="../references/reference_list.htm">Andersen, 1993</a>).</p>
+        <p>Mean survival time is estimated as the area under the survival curve. The estimator is based upon the entire range of data. Note that some software uses only the data up to the last observed event; <a href="../references/reference_list.htm#ref-hosmer-1999">Hosmer and Lemeshow (1999)</a> point out that this biases the estimate of the mean downwards, and they recommend that the entire range of data is used. A large sample method is used to estimate the variance of the mean survival time and thus to construct a confidence interval (<a href="../references/reference_list.htm#ref-andersen-1993">Andersen, 1993</a>).</p>
         <p>&#160;</p>
         <p>Samples of survival times are frequently highly skewed, therefore, in survival analysis, the median is generally a better measure of central location than the mean.</p>
         <p>&#160;</p>
         <p><u>Plots</u>
         </p>
-        <p>StatsDirect can calculate S and H for more than one group at a time and plot the survival and hazard curves for the different groups together. Four different plots are given and certain distributions are indicated if these plots form a straight line pattern (<a href="../references/reference_list.htm">Lawless, 1982; Kalbfleisch and Prentice, 1980</a>). The plots and their associated distributions are:</p>
+        <p>StatsDirect can calculate S and H for more than one group at a time and plot the survival and hazard curves for the different groups together. Four different plots are given and certain distributions are indicated if these plots form a straight line pattern (<a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>). The plots and their associated distributions are:</p>
         <p>&#160;</p>
         <p><u>Plot&#160;Distribution indicated by a straight line pattern</u>
         </p>
@@ -67,13 +67,13 @@
         <p>&#160;</p>
         <p><u>Technical validation</u>
         </p>
-        <p>The variance of S is estimated using the method of <a href="../references/reference_list.htm">Greenwood (1926)</a>:</p>
+        <p>The variance of S is estimated using the method of <a href="../references/reference_list.htm#ref-greenwood-1926">Greenwood (1926)</a>:</p>
         <p>
             <MadCap:equation>$\displaystyle \text{var}(\hat{S}_t) = \hat{S}_t^2 \sum_{t_i \le t} \frac{d_i}{n_i (n_i - d_i)}$</MadCap:equation>
         </p>
-        <p>- The confidence interval for the survivor function is not calculated directly using Greenwood's variance estimate as this would give impossible results (&lt; 0 or &gt; 1) at extremes of S. The confidence interval for S uses an asymptotic maximum likelihood solution by log transformation as recommended by <a href="../references/reference_list.htm">Kalbfleisch and Prentice (1980)</a>.</p>
+        <p>- The confidence interval for the survivor function is not calculated directly using Greenwood's variance estimate as this would give impossible results (&lt; 0 or &gt; 1) at extremes of S. The confidence interval for S uses an asymptotic maximum likelihood solution by log transformation as recommended by <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice (1980)</a>.</p>
         <p>&#160;</p>
-        <p>The cumulative hazard function is estimated as minus the natural logarithm of the product limit estimate of the survivor function as above (<a href="../references/reference_list.htm">Peterson, 1977</a>). Note that some statistical software calculates the simpler Nelson-Aalen estimate (<a href="../references/reference_list.htm">Nelson, 1972; Aalen, 1978</a>):</p>
+        <p>The cumulative hazard function is estimated as minus the natural logarithm of the product limit estimate of the survivor function as above (<a href="../references/reference_list.htm#ref-peterson-1977">Peterson, 1977</a>). Note that some statistical software calculates the simpler Nelson-Aalen estimate (<a href="../references/reference_list.htm#ref-nelson-1972">Nelson, 1972</a>; <a href="../references/reference_list.htm#ref-aalen-1978">Aalen, 1978</a>):</p>
         <p>
             <MadCap:equation>$\displaystyle \tilde{H}_t = \sum_{t_i \le t} \frac{d_i}{n_i}$</MadCap:equation>
         </p>

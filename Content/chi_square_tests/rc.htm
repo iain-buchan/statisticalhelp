@@ -16,7 +16,7 @@
         <p>&#160;</p>
         <p>Tests of independence of the categories in a table are the chi-square test, the G-square (likelihood-ratio chi-square) test and the generalised Fisher exact (Fisher-Freeman-Halton) test. All three tests indicate the degree of independence between the variables that make up the table.</p>
         <p>&#160;</p>
-        <p>The generalised Fisher exact test is difficult to compute (<a href="../references/reference_list.htm">Mehta and Patel, 1983, 1986a</a>); it may take a long time and it may not be computed for the table that you enter. If the Fisher exact method cannot be computed practically then a hybrid method based upon Cochrane rules is used (<a href="../references/reference_list.htm">Mehta and Patel, 1986b</a>); this may also fail with large tables and/or numbers. The Fisher-Freeman-Halton result is quoted with just one P value as it is implicitly two-sided.</p>
+        <p>The generalised Fisher exact test is difficult to compute (<a href="../references/reference_list.htm#ref-mehta-1983">Mehta and Patel, 1983</a>, <a href="../references/reference_list.htm#ref-mehta-1986-a">1986a</a>); it may take a long time and it may not be computed for the table that you enter. If the Fisher exact method cannot be computed practically then a hybrid method based upon Cochrane rules is used (<a href="../references/reference_list.htm#ref-mehta-1986-b">Mehta and Patel, 1986b</a>); this may also fail with large tables and/or numbers. The Fisher-Freeman-Halton result is quoted with just one P value as it is implicitly two-sided.</p>
         <p>&#160;</p>
         <p>Relating the Fisher-Freeman-Halton statistic to the Pearson Chi-square statistic:</p>
         <ul>
@@ -29,7 +29,7 @@
         <p>&#160;</p>
         <p>The G-square statistic is less reliable than the chi-square statistic when you have small numbers. In general, you should use the chi-square statistic if the Fisher exact test is not computable. If you consult a statistician then it would be useful to provide the G-square statistic also.</p>
         <p>&#160;</p>
-        <p>These tests of independence are suitable for nominal data. If your data are ordinal then you should use the more powerful tests for trend (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Agresti, 2002, 1996</a>).</p>
+        <p>These tests of independence are suitable for nominal data. If your data are ordinal then you should use the more powerful tests for trend (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-agresti-2002">Agresti, 2002</a>, <a href="../references/reference_list.htm#ref-agresti-1996">1996</a>).</p>
         <p>&#160;</p>
         <p>Assumptions of the tests of independence:</p>
         <ul>
@@ -52,18 +52,18 @@
         </p>
         <p>- where P is the two sided Fisher probability, P<sub>f</sub> is the conditional probability for the observed table given fixed row and column totals (f<sub>i.</sub> and f<sub>.j</sub> respectively), f<sub>..</sub> is the total count and ! represents factorial.</p>
         <p>&#160;</p>
-        <p>Analysis of trend in r by c tables indicates how much of the general independence between scores is accounted for by linear trend. StatsDirect uses equally spaced scores for this purpose unless you specify otherwise. If you wish to experiment with other scoring systems then expert statistical guidance is advisable. <a href="../references/reference_list.htm">Armitage and Berry (1994)</a> quote an example where extent of grief of mothers suffering a perinatal death, graded I to IV, is compared with the degree of support received by these women. In this example the overall statistic is non-significant but a significant trend is demonstrated.</p>
+        <p>Analysis of trend in r by c tables indicates how much of the general independence between scores is accounted for by linear trend. StatsDirect uses equally spaced scores for this purpose unless you specify otherwise. If you wish to experiment with other scoring systems then expert statistical guidance is advisable. <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994)</a> quote an example where extent of grief of mothers suffering a perinatal death, graded I to IV, is compared with the degree of support received by these women. In this example the overall statistic is non-significant but a significant trend is demonstrated.</p>
         <p>&#160;</p>
         <p>
             <MadCap:equation>$\displaystyle r=\frac{\displaystyle \sum_{i=1}^r \sum_{j=1}^cu_i v_jO_{ij}-\left( \sum_{i=1}^r u_i O_{i+}\right) \left( \sum_{j=1}^c v_j O_{j+}\right)/n}{\displaystyle \sqrt{\left[ \sum_{i=1}^r u_i^2 O_{i+} -\frac{\displaystyle \left( \sum_{i=1}^r u_i O_{i+}\right)^2}{n}\right] \left[ \sum_{j=1}^c v_j^2 O_{j+}-\frac{\displaystyle \left( \sum_{j=1}^c v_j O_{j+}\right)^2}{n}\right]}} \\$</MadCap:equation>
         </p>
         <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n). Row scores are u, column scores are v, row totals are O<sub>j+</sub> and column totals are O<sub>i+</sub>.</p>
         <p>&#160;</p>
-        <p>The sample correlation coefficient r reflects the direction and closeness of linear trend in your table. r may vary between -1 and 1 just like Pearson's product moment correlation coefficient. Total independence of the categories in your table would mean that r = 0. The test for linear trend is related to r by M²=(n-1)r² and this is numerically identical to Armitage's chi-square for linear trend (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Agresti, 1996</a>). If you interchange the rows and columns in your table then the value of M² will be the same</p>
+        <p>The sample correlation coefficient r reflects the direction and closeness of linear trend in your table. r may vary between -1 and 1 just like Pearson's product moment correlation coefficient. Total independence of the categories in your table would mean that r = 0. The test for linear trend is related to r by M²=(n-1)r² and this is numerically identical to Armitage's chi-square for linear trend (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>). If you interchange the rows and columns in your table then the value of M² will be the same</p>
         <p>&#160;</p>
-        <p>The ANOVA output applies techniques similar to analysis of variance to an r by c table. Here the equality of mean column and row scores is tested. StatsDirect uses equally spaced scores for this purpose unless you specify otherwise. See Armitage for more information (<a href="../references/reference_list.htm">Armitage and Berry, 1994</a>). </p>
+        <p>The ANOVA output applies techniques similar to analysis of variance to an r by c table. Here the equality of mean column and row scores is tested. StatsDirect uses equally spaced scores for this purpose unless you specify otherwise. See Armitage for more information (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>). </p>
         <p>&#160;</p>
-        <p>Pearson's and Cramér's (V) coefficients of contingency and the phi (f, correlation) coefficient reflect the strength of the association in a contingency table (<a href="../references/reference_list.htm">Agresti, 1996; Fleiss, 1981; Stuart and Ord, 1994</a>):</p>
+        <p>Pearson's and Cramér's (V) coefficients of contingency and the phi (f, correlation) coefficient reflect the strength of the association in a contingency table (<a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>; <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>):</p>
         <p>
             <MadCap:equation>$\displaystyle \phi=\sqrt{\chi^2/n} \\
 
@@ -78,7 +78,7 @@
         <p>&#160;</p>
         <p>Observed values, expected values and totals are given for the table when c ≤ 8 and r ≤ 10.</p>
         <p>&#160;</p>
-        <p>If your data categories are both ordered then you will gain more power in tests of independence by using the ordinal methods due to Goodman and Kruskal (gamma) and <a href="../nonparametric_methods/kendall_correlation.htm">Kendall (tau-b)</a>. Large sample, asymptotically normal variance estimates are used; the simple form is used for independence testing (<a href="../references/reference_list.htm">Agresti, 1984; Conover, 1999; Goodman and Kruskal, 1963, 1972</a>). Tau-b tends to be less sensitive than gamma to the choice of response categories.</p>
+        <p>If your data categories are both ordered then you will gain more power in tests of independence by using the ordinal methods due to Goodman and Kruskal (gamma) and <a href="../nonparametric_methods/kendall_correlation.htm">Kendall (tau-b)</a>. Large sample, asymptotically normal variance estimates are used; the simple form is used for independence testing (<a href="../references/reference_list.htm#ref-agresti-1984">Agresti, 1984</a>; <a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-goodman-1963">Goodman and Kruskal, 1963</a>, <a href="../references/reference_list.htm#ref-goodman-1972">1972</a>). Tau-b tends to be less sensitive than gamma to the choice of response categories.</p>
         <p>
             <MadCap:equation>$\displaystyle \gamma=\frac{\displaystyle P-Q}{P+Q} \\
 
@@ -99,7 +99,7 @@
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
-        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 408)</a>.</p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 408)</a>.</p>
         <p>&#160;</p>
         <p>The following data (as above) describe the state of grief of 66 mothers who had suffered a neonatal death. The table relates this to the amount of support given to these women:</p>
         <p>&#160;</p>
