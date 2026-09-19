@@ -118,7 +118,7 @@
                                         <p>&#160;</p>
                                         <p>This function fits and analyses logistic models for binary outcome/response data with one or more predictors.</p>
                                         <p>&#160;</p>
-                                        <p><a href="../distributions/binomial.htm">Binomial distributions</a> are used for handling the errors associated with regression models for binary/dichotomous responses (i.e. yes/no, dead/alive) in the same way that the <a href="../distributions/normal.htm">standard normal distribution</a> is used in <a href="multiple_linear.htm">general linear regression</a>. Other, less commonly used binomial models include normit/probit and complimentary log-log. The logistic model is widely used and has many desirable properties (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989; Armitage and Berry, 1994; Altman 1991; McCullagh and Nelder, 1989; Cox and Snell, 1989; Pregibon, 1981</a>).</p>
+                                        <p><a href="../distributions/binomial.htm">Binomial distributions</a> are used for handling the errors associated with regression models for binary/dichotomous responses (i.e. yes/no, dead/alive) in the same way that the <a href="../distributions/normal.htm">standard normal distribution</a> is used in <a href="multiple_linear.htm">general linear regression</a>. Other, less commonly used binomial models include normit/probit and complimentary log-log. The logistic model is widely used and has many desirable properties (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman 1991</a>; <a href="../references/reference_list.htm#ref-mccullagh-1989">McCullagh and Nelder, 1989</a>; <a href="../references/reference_list.htm#ref-cox-1989">Cox and Snell, 1989</a>; <a href="../references/reference_list.htm#ref-pregibon-1981">Pregibon, 1981</a>).</p>
                                         <p>&#160;</p>
                                         <p>Odds = π/(1-π)</p>
                                         <p>[p = proportional response, i.e. r out of n responded so π = r/n]</p>
@@ -153,13 +153,13 @@
                                         <p>&#160;</p>
                                         <p><u>Deviance and model analysis</u>
                                         </p>
-                                        <p>Deviance is minus twice the log of the likelihood ratio for models fitted by maximum likelihood (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989; Cox and Snell, 1989; Pregibon, 1981</a>). Log likelihood and deviance are given under the model analysis option of logistic regression in StatsDirect.</p>
+                                        <p>Deviance is minus twice the log of the likelihood ratio for models fitted by maximum likelihood (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>; <a href="../references/reference_list.htm#ref-cox-1989">Cox and Snell, 1989</a>; <a href="../references/reference_list.htm#ref-pregibon-1981">Pregibon, 1981</a>). Log likelihood and deviance are given under the model analysis option of logistic regression in StatsDirect.</p>
                                         <p>&#160;</p>
                                         <p>The value of adding parameter to a logistic model can be tested by subtracting the deviance of the model with the new parameter from the deviance of the model without the new parameter, this difference is then tested against a chi-square distribution with degrees of freedom equal to the difference between the degrees of freedom of the old and new models. The model analysis option tests the model you specify against a model with only one parameter, the intercept; this tests the combined value of the specified predictors/covariates in the model.</p>
                                         <p>&#160;</p>
                                         <p>Some statistical packages offer stepwise logistic regression that performs systematic tests for different combinations of predictors/covariates. Automatic model building procedures such as these can be erroneous as they do not consider the real world importance of each predictor, for this reason StatsDirect does not include stepwise selection.</p>
                                         <p>&#160;</p>
-                                        <p>Three goodness of fit tests are given for the overall fit of a model: Pearson, deviance and Hosmer-Lemeshow (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989</a>). Note that the Hosmer-Lemeshow (decile of risk) test is only applicable when the number of observations tied at any one covariate pattern is small in comparison with the total number of observations, and when all predictors are continuous variables.</p>
+                                        <p>Three goodness of fit tests are given for the overall fit of a model: Pearson, deviance and Hosmer-Lemeshow (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>). Note that the Hosmer-Lemeshow (decile of risk) test is only applicable when the number of observations tied at any one covariate pattern is small in comparison with the total number of observations, and when all predictors are continuous variables.</p>
                                         <p>&#160;</p>
                                         <p><u>Influential data and odds ratios</u>
                                         </p>
@@ -177,13 +177,13 @@
                                         <p>&#160;</p>
                                         <p><u>Bootstrap estimates</u>
                                         </p>
-                                        <p>A bootstrap procedure may be used to cross-validate confidence intervals calculated for odds ratios derived from fitted logistic models (<a href="../references/reference_list.htm">Efron and Tibshirani, 1997; Gong, 1986</a>). The bootstrap confidence intervals used here are the 'bias-corrected' type.</p>
+                                        <p>A bootstrap procedure may be used to cross-validate confidence intervals calculated for odds ratios derived from fitted logistic models (<a href="../references/reference_list.htm#ref-efron-1997">Efron and Tibshirani, 1997</a>; <a href="../references/reference_list.htm#ref-gong-1986">Gong, 1986</a>). The bootstrap confidence intervals used here are the 'bias-corrected' type.</p>
                                         <p>&#160;</p>
                                         <p>The mechanism that StatsDirect uses is to draw a specified number of random samples (with replacement, i.e. some observations are drawn once only, others more than once and some not at all) from your data. These 're-samples' are fed back into the logistic regression and bootstrap' estimates of confidence intervals for the model parameters are made by examining the model parameters calculated at each cycle of the process. The bias statistic shows how much each mean model parameter from the bootstrap distribution deviates from observed model parameters.</p>
                                         <p>&#160;</p>
                                         <p><u>Classification and ROC curve</u>
                                         </p>
-                                        <p>The confidence interval given with the likelihood ratios in the classification option is constructed using the robust approximation given by <a href="../references/reference_list.htm">Koopman (1984)</a> for ratios of binomial proportions. The 'near' cut-off in the classification option is the rounding cut-off that gives the maximum sum of sensitivity and specificity. This value should be the shoulder at the top left of the ROC (<a href="../nonparametric_methods/roc.htm">receiver operating characteristic curve</a>).</p>
+                                        <p>The confidence interval given with the likelihood ratios in the classification option is constructed using the robust approximation given by <a href="../references/reference_list.htm#ref-koopman-1984">Koopman (1984)</a> for ratios of binomial proportions. The 'near' cut-off in the classification option is the rounding cut-off that gives the maximum sum of sensitivity and specificity. This value should be the shoulder at the top left of the ROC (<a href="../nonparametric_methods/roc.htm">receiver operating characteristic curve</a>).</p>
                                         <p>&#160;</p>
                                         <p><u>Prediction and adjusted means</u>
                                         </p>
@@ -199,9 +199,9 @@
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
                                         </p>
-                                        <p>The logits of the response data are fitted using an iteratively re-weighted least squares method to find maximum likelihood estimates of the parameters in the logistic model (<a href="../references/reference_list.htm">McCullagh and Nelder, 1989; Cox and Snell, 1989; Pregibon, 1981</a>).</p>
+                                        <p>The logits of the response data are fitted using an iteratively re-weighted least squares method to find maximum likelihood estimates of the parameters in the logistic model (<a href="../references/reference_list.htm#ref-mccullagh-1989">McCullagh and Nelder, 1989</a>; <a href="../references/reference_list.htm#ref-cox-1989">Cox and Snell, 1989</a>; <a href="../references/reference_list.htm#ref-pregibon-1981">Pregibon, 1981</a>).</p>
                                         <p>&#160;</p>
-                                        <p>Residuals and case-wise diagnostic statistics are calculated as follows (<a href="../references/reference_list.htm">Hosmer and Lemeshow, 1989</a>):</p>
+                                        <p>Residuals and case-wise diagnostic statistics are calculated as follows (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>):</p>
                                         <p>&#160;</p>
                                         <p>Leverages are the diagonal elements of the logistic equivalent of the hat matrix in general linear regression (where leverages are proportional to the distances of the jth covariate pattern from the mean of the data). The jth diagonal element of the logistic equivalent of the hat matrix is calculated as:</p>
                                         <p>
@@ -247,7 +247,7 @@
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
-                                        <p>From <a href="../references/reference_list.htm">Altman (1991)</a>.</p>
+                                        <p>From <a href="../references/reference_list.htm#ref-altman-1991">Altman (1991)</a>.</p>
                                         <p>Test workbook (Regression worksheet: Men, Hypertensive, Smoking, Obesity, Snoring).</p>
                                         <p>&#160;</p>
                                         <p>Smoking, obesity and snoring were related to hypertension in 433 men aged 40 or over.</p>

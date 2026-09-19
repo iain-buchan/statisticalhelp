@@ -118,7 +118,7 @@
                                         <p>&#160;</p>
                                         <p>This function fits a Poisson regression model for multivariate analysis of numbers of uncommon events in <a href="../basics/prospective.htm">cohort studies</a>.</p>
                                         <p>&#160;</p>
-                                        <p>The multiplicative Poisson regression model is fitted as a log-linear regression (i.e. a log link and a Poisson error distribution), with an offset equal to the natural logarithm of person-time if person-time is specified (<a href="../references/reference_list.htm">McCullagh and Nelder, 1989; Frome, 1983; Agresti, 2002</a>). With the multiplicative Poisson model, the exponents of coefficients are equal to the incidence rate ratio (relative risk). These baseline relative risks give values relative to named covariates for the whole population. You can define relative risks for a sub-population by multiplying that sub-population's baseline relative risk with the relative risks due to other covariate groupings, for example the relative risk of dying from lung cancer if you are a smoker who has lived in a high radon area. StatsDirect offers sub-population relative risks for <a href="../basics/measurement_scales.htm">dichotomous</a> covariates.</p>
+                                        <p>The multiplicative Poisson regression model is fitted as a log-linear regression (i.e. a log link and a Poisson error distribution), with an offset equal to the natural logarithm of person-time if person-time is specified (<a href="../references/reference_list.htm#ref-mccullagh-1989">McCullagh and Nelder, 1989</a>; <a href="../references/reference_list.htm#ref-frome-1983">Frome, 1983</a>; <a href="../references/reference_list.htm#ref-agresti-2002">Agresti, 2002</a>). With the multiplicative Poisson model, the exponents of coefficients are equal to the incidence rate ratio (relative risk). These baseline relative risks give values relative to named covariates for the whole population. You can define relative risks for a sub-population by multiplying that sub-population's baseline relative risk with the relative risks due to other covariate groupings, for example the relative risk of dying from lung cancer if you are a smoker who has lived in a high radon area. StatsDirect offers sub-population relative risks for <a href="../basics/measurement_scales.htm">dichotomous</a> covariates.</p>
                                         <p>&#160;</p>
                                         <p>The outcome/response variable is assumed to come from a <a href="../distributions/poisson.htm">Poisson distribution</a>. Note that a Poisson distribution is the distribution of the number of events in a fixed time interval, provided that the events occur at random, independently in time and at a constant rate. Poisson distributions are used for modelling events per unit space as well as time, for example number of particles per square centimetre.</p>
                                         <p>&#160;</p>
@@ -281,13 +281,13 @@
                                             <img src="../generatedimages/equations/equation210.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>&#160;</p>
-                                        <p>The deviance residual is (<a href="../references/reference_list.htm">Cook and Weisberg, 1982</a>):</p>
+                                        <p>The deviance residual is (<a href="../references/reference_list.htm#ref-cook-1982">Cook and Weisberg, 1982</a>):</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation211.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>-where D(observation, fit) is the deviance and sgn(x) is the sign of x.</p>
                                         <p>&#160;</p>
-                                        <p>The Freeman-Tukey, variance stabilized, residual is (<a href="../references/reference_list.htm">Freeman and Tukey, 1950</a>):</p>
+                                        <p>The Freeman-Tukey, variance stabilized, residual is (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman and Tukey, 1950</a>):</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation212.svg" alt="" class="mcReset" />
                                         </p>
@@ -300,7 +300,7 @@
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
-                                        <p><a href="../references/reference_list.htm">From Armitage et al. (2001)</a>:</p>
+                                        <p><a href="../references/reference_list.htm#ref-armitage-2001">From Armitage et al. (2001)</a>:</p>
                                         <p>Test workbook (Regression worksheet: Cancers, Subject-years, Veterans, Age group).</p>
                                         <p>&#160;</p>
                                         <p>To analyse these data using StatsDirect you must first open the test workbook using the file open function of the file menu. Next generate a set of dummy variables to represent the levels of the "Age group" variable using the <a href="../data_preparation/dummy_variables.htm">Dummy Variables</a> function of the Data menu. Then select Poisson from the Regression and Correlation section of the Analysis menu. Click on the option "Counts of events and exposure (person-time), and select the response data type as "Individual". <a href="../workbook/selecting_data.htm">Select</a> the column marked "Cancers" when asked for the response. Then select "Subject-years" when asked for person-time. Then select "Veterans", "Age group (25-29)" , "Age group (30-34)" etc. in one action when you are asked for predictors.</p>

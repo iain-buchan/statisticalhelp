@@ -11,19 +11,19 @@
         <p>&#160;</p>
         <p>This function provides methods for comparing two or more survival curves where some of the observations may be <a href="censorship.htm" target="_popup">censored</a> and where the overall grouping may be stratified. The methods are nonparametric in that they do not make assumptions about the distributions of survival estimates.</p>
         <p>&#160;</p>
-        <p>In the absence of censorship (e.g. loss to follow up, alive at end of study) the methods presented here reduce to a <a href="../nonparametric_methods/mann_whitney.htm">Mann-Whitney</a> (two sample Wilcoxon) test for two groups of survival times and a <a href="../nonparametric_methods/kruskal_wallis.htm">Kruskal-Wallis test</a> for more than two groups of survival times. StatsDirect gives a comprehensive set of tests for the comparison of survival data that may be censored (<a href="../references/reference_list.htm">Tarone and Ware, 1977; Kalbfleisch and Prentice, 1980; Cox and Oakes, 1984; Le, 1997</a>).</p>
+        <p>In the absence of censorship (e.g. loss to follow up, alive at end of study) the methods presented here reduce to a <a href="../nonparametric_methods/mann_whitney.htm">Mann-Whitney</a> (two sample Wilcoxon) test for two groups of survival times and a <a href="../nonparametric_methods/kruskal_wallis.htm">Kruskal-Wallis test</a> for more than two groups of survival times. StatsDirect gives a comprehensive set of tests for the comparison of survival data that may be censored (<a href="../references/reference_list.htm#ref-tarone-1977">Tarone and Ware, 1977</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>; <a href="../references/reference_list.htm#ref-cox-1984">Cox and Oakes, 1984</a>; <a href="../references/reference_list.htm#ref-le-1997">Le, 1997</a>).</p>
         <p>&#160;</p>
         <p>The null hypothesis tested here is that the risk of death/event is the same in all groups.</p>
         <p>&#160;</p>
-        <p>Peto's log-rank test is generally the most appropriate method but the Prentice modified Wilcoxon test is more sensitive when the ratio of hazards is higher at early survival times than at late ones (<a href="../references/reference_list.htm">Peto and Peto, 1972; Kalbfleisch and Prentice, 1980</a>). The log-rank test is similar to the <a href="../meta_analysis/mh.htm">Mantel-Haenszel</a> test and some authors refer to it as the Cox-Mantel test (<a href="../references/reference_list.htm">Mantel and Haenszel, 1959; Cox, 1972</a>).</p>
+        <p>Peto's log-rank test is generally the most appropriate method but the Prentice modified Wilcoxon test is more sensitive when the ratio of hazards is higher at early survival times than at late ones (<a href="../references/reference_list.htm#ref-peto-1972">Peto and Peto, 1972</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>). The log-rank test is similar to the <a href="../meta_analysis/mh.htm">Mantel-Haenszel</a> test and some authors refer to it as the Cox-Mantel test (<a href="../references/reference_list.htm#ref-mantel-1959">Mantel and Haenszel, 1959</a>; <a href="../references/reference_list.htm#ref-cox-1972">Cox, 1972</a>).</p>
         <p>&#160;</p>
         <p><u>Strata</u>
         </p>
-        <p>An optional variable, strata, allows you to sub-classify the groups specified in the group identifier variable and to test the significance of this sub-classification (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Lawless, 1982; Kalbfleisch and Prentice, 1980</a>).</p>
+        <p>An optional variable, strata, allows you to sub-classify the groups specified in the group identifier variable and to test the significance of this sub-classification (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>).</p>
         <p>&#160;</p>
         <p><u>Wilcoxon weights</u>
         </p>
-        <p>StatsDirect gives you a choice of three different weighting methods for the generalised Wilcoxon test, these are Peto-Prentice, Gehan-Breslow and Tarone-Ware. The Peto-Prentice method is generally more robust than the others but the Gehan statistic is calculated routinely by many statistical software packages (<a href="../references/reference_list.htm">Breslow, 1974; Tarone and Ware, 1977; Kalbfleisch and Prentice, 1980; Miller, 1981; Hosmer and Lemeshow 1999</a>). You should seek statistical guidance if you plan to use any weighting method other than Peto-Prentice.</p>
+        <p>StatsDirect gives you a choice of three different weighting methods for the generalised Wilcoxon test, these are Peto-Prentice, Gehan-Breslow and Tarone-Ware. The Peto-Prentice method is generally more robust than the others but the Gehan statistic is calculated routinely by many statistical software packages (<a href="../references/reference_list.htm#ref-breslow-1974">Breslow, 1974</a>; <a href="../references/reference_list.htm#ref-tarone-1977">Tarone and Ware, 1977</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>; <a href="../references/reference_list.htm#ref-miller-1981-a">Miller, 1981</a>; <a href="../references/reference_list.htm#ref-hosmer-1999">Hosmer and Lemeshow 1999</a>). You should seek statistical guidance if you plan to use any weighting method other than Peto-Prentice.</p>
         <p>&#160;</p>
         <p><u>Hazard-ratios</u>
         </p>
@@ -31,13 +31,13 @@
         <p>
             <MadCap:equation>$\displaystyle \text{SE}=\sqrt{\sum_{i=1}^k\frac{1}{e_{ij}}}$</MadCap:equation>
         </p>
-        <p>- where e<sub>ij</sub> is the extent of exposure to risk of death (sometimes called expected deaths) for group i of k at the jth distinct observed time (sometimes called expected deaths) for group i of k (<a href="../references/reference_list.htm">Armitage and Berry, 1994</a>).</p>
+        <p>- where e<sub>ij</sub> is the extent of exposure to risk of death (sometimes called expected deaths) for group i of k at the jth distinct observed time (sometimes called expected deaths) for group i of k (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
         <p>&#160;</p>
         <p>An exact conditional maximum likelihood estimate of the hazard ratio is optionally given. The exact estimate and its confidence interval (Fisher or mid-P) should be routinely used in preference to the above approximation. The exponents of <a href="cox_regression.htm">Cox regression</a> parameters are also exact estimators of the hazard ratio, but please note that they are not exact if Breslow's method has been used to correct for ties in the regression. Please consult with a statistician if you are considering using Cox regression.</p>
         <p>&#160;</p>
         <p><u>Trend test</u>
         </p>
-        <p>If you have more than two groups then StatsDirect will calculate a variant of the log-rank test for trend. If you choose not to enter group scores then they are allocated as 1,2,3 ... n in group order (<a href="../references/reference_list.htm">Armitage and Berry, 1994; Lawless, 1982; Kalbfleisch and Prentice, 1980</a>).</p>
+        <p>If you have more than two groups then StatsDirect will calculate a variant of the log-rank test for trend. If you choose not to enter group scores then they are allocated as 1,2,3 ... n in group order (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>).</p>
         <p>&#160;</p>
         <p><u>Technical validation</u>
         </p>
@@ -63,7 +63,7 @@
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
-        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 479)</a>.</p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 479)</a>.</p>
         <p>Test workbook (Survival worksheet: Stage Group, Time, Censor).</p>
         <p>&#160;</p>
         <p>The following data represent the survival in days since entry to the trial of patients with diffuse histiocytic lymphoma. Two different groups of patients, those with stage III and those with stage IV disease, are compared.</p>
@@ -562,7 +562,7 @@
         <p>&#160;</p>
         <p><u>Stratified example</u>
         </p>
-        <p>From <a href="../references/reference_list.htm">Peto et al. (1977)</a>:</p>
+        <p>From <a href="../references/reference_list.htm#ref-peto-1977">Peto et al. (1977)</a>:</p>
         <p>&#160;</p>
         <table cellspacing="0" style="caption-side: top;">
             <col />
@@ -731,7 +731,7 @@
         <p>Stratum 1 = renal impairment</p>
         <p>Stratum 2 = no renal impairment</p>
         <p>&#160;</p>
-        <p>The table above shows you how to prepare data for a stratified log-rank test in StatsDirect. This example is worked through in the second of two classic papers by Richard Peto and colleagues (<a href="../references/reference_list.htm">Peto et al., 1977, 1976</a>). Please note that StatsDirect uses the more accurate variance formulae mentioned in the statistical notes section at the end of <a href="../references/reference_list.htm">Peto et al. (1977)</a>.</p>
+        <p>The table above shows you how to prepare data for a stratified log-rank test in StatsDirect. This example is worked through in the second of two classic papers by Richard Peto and colleagues (<a href="../references/reference_list.htm#ref-peto-1977">Peto et al., 1977</a>, <a href="../references/reference_list.htm#ref-peto-1976">1976</a>). Please note that StatsDirect uses the more accurate variance formulae mentioned in the statistical notes section at the end of <a href="../references/reference_list.htm#ref-peto-1977">Peto et al. (1977)</a>.</p>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>
