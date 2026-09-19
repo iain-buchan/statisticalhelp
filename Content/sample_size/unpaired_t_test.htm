@@ -37,8 +37,8 @@
         </p>
         <p>The estimated sample size n is calculated as the solution of:</p>
         <p>
-            <MadCap:equation>$\displaystyle n=\frac{(t_{n(m+1)-2, \space \alpha/2} + t_{n(m+1)-2, \space \beta} )^2}{d^2}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle n=\frac{(1+1/m)(t_{n(m+1)-2, \space \alpha/2} + t_{n(m+1)-2, \space \beta} )^2}{d^2}$</MadCap:equation>
         </p>
-        <p>- where d = delta/sd, α = alpha, β = 1 - power, m is the number of control subjects per experimental subject, and t<sub>v,p</sub> is a Student t quantile with v degrees of freedom and probability p. n is rounded up to the closest integer.</p>
+        <p>- where d = delta/sd, α = alpha, β = 1 - power, m is the number of control subjects per experimental subject, and t<sub>v,p</sub> is a Student t quantile with v degrees of freedom and probability p. n is rounded up to the closest integer, then adjusted if necessary to the smallest n for which the power calculated from the non-central t distribution reaches POWER.</p>
     </body>
 </html>

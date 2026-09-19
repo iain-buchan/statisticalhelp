@@ -20,7 +20,7 @@
             <li>POWER: probability of detecting a real effect.</li>
             <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
             <li>r: correlation coefficient for failure between paired subjects.</li>
-            <li>*: input either (P0 and RR) or (P0 and P1), where RR=P0/P1.</li>
+            <li>*: input either (P0 and RR) or (P0 and P1), where RR=P1/P0.</li>
             <li>P0: event rate in the control group.</li>
             <li>P1: event rate in experimental group.</li>
             <li>RR: risk of failure of experimental subjects relative to controls.</li>
@@ -40,8 +40,8 @@
         </p>
         <p>The estimated sample size n is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle n=\frac{\left[ \frac{1}{2}z_{\alpha/2}+z_{\beta}\sqrt{p_a(1-p_a)}\right]^2}{(p_a-0.5)^2(p_xp_y)} \\
-\displaystyle p_a=\frac{p_y}{P_x+P_y}\\
+            <MadCap:equation>$\displaystyle n=\frac{\left[ \frac{1}{2}z_{\alpha/2}+z_{\beta}\sqrt{p_a(1-p_a)}\right]^2}{(p_a-0.5)^2(p_x+p_y)} \\
+\displaystyle p_a=\frac{p_y}{p_x+p_y}\\
 \displaystyle p_y=p_1(1-p_0)-r\sqrt{p_1(1-p_1)p_0(1-p_0)}\\
 \displaystyle p_x=p_0(1-p_1)-r\sqrt{p_1(1-p_1)p_0(1-p_0)}$</MadCap:equation>
         </p>

@@ -29,10 +29,10 @@
         <p>&#160;</p>
         <p>The general univariate statistic for comparing the time to event (of component type k out of m multivariate components) of the two groups is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle T_k=\frac{\displaystyle \sum_{j=1}^{n_1}w_j\Delta_{1kj}e_{2k}\sum_{j=1}^{n_2}w_j\Delta_{2kj}e_{1k}}{\sqrt{n}} \\
+            <MadCap:equation>$\displaystyle T_k=\frac{\displaystyle \sum_{j=1}^{n_1}w_j\Delta_{1kj}e_{2k}-\sum_{j=1}^{n_2}w_j\Delta_{2kj}e_{1k}}{\sqrt{n}} \\
 \displaystyle e_{ik}=\frac{r_{ik}}{r_{1k}+r_{2k}}$</MadCap:equation>
         </p>
-        <p>- where n<sub>1</sub> is the number of event times per component in group 1; n<sup style="vertical-align: sub;">2</sup> is the number of event times per component in group 2; n is the total number of event times per component; r<sub>ik</sub> is the number at risk at time t(i) in the kth component; Δ is equal to 0 if an observation is censored or 1 otherwise; e<sub>ik</sub> is the expected proportion of events in group i for the kth component; and w<sub>j</sub> is equal to 1 for the log-rank method or (r<sub>1k</sub>+r<sub>2k</sub>)/n for the Gehan-Breslow generalised Wilcoxon method.</p>
+        <p>- where n<sub>1</sub> is the number of event times per component in group 1; n<sup style="vertical-align: sub;">2</sup> is the number of event times per component in group 2; n is the total number of event times per component; r<sub>ik</sub> is the number at risk in group i at the jth event time in the kth component; Δ is equal to 0 if an observation is censored or 1 otherwise; e<sub>ik</sub> is the expected proportion of events in group i for the kth component; and w<sub>j</sub> is equal to 1 for the log-rank method or (r<sub>1k</sub>+r<sub>2k</sub>)/n for the Gehan-Breslow generalised Wilcoxon method.</p>
         <p>&#160;</p>
         <p>The univariate statistic for the kth component of the multivariate survival data is calculated as:</p>
         <p>
@@ -52,7 +52,7 @@
         </p>
         <p>Note that the P value given with the stochastic ordering (linear combination) statistic is two sided, some authors prefer one sided inference (<a href="../references/reference_list.htm#ref-davis-1994">Davis, 1994</a>). If you make a one sided inference then you are considering only ascending or only descending ordering, and you are assuming that observing an order in the opposite direction to that expected would be unimportant to your conclusions.</p>
         <p>&#160;</p>
-        <p>The test statistics are all asymptotically normally distributed.</p>
+        <p>The univariate and stochastic ordering statistics are asymptotically normally distributed; the omnibus statistic is asymptotically chi-square distributed on m degrees of freedom.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>

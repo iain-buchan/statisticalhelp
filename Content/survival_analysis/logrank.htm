@@ -29,9 +29,9 @@
         </p>
         <p>An approximate confidence interval for the log hazard-ratio is calculated using the following estimate of standard error (SE):</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{SE}=\sqrt{\sum_{i=1}^k\frac{1}{e_{ij}}}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle \text{SE}=\sqrt{\frac{1}{e_1}+\frac{1}{e_2}}$</MadCap:equation>
         </p>
-        <p>- where e<sub>ij</sub> is the extent of exposure to risk of death (sometimes called expected deaths) for group i of k at the jth distinct observed time (sometimes called expected deaths) for group i of k (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
+        <p>- where e<sub>1</sub> and e<sub>2</sub> are the extents of exposure to risk of death (sometimes called expected deaths) in the two groups compared, each summed over the distinct observed times (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
         <p>&#160;</p>
         <p>An exact conditional maximum likelihood estimate of the hazard ratio is optionally given. The exact estimate and its confidence interval (Fisher or mid-P) should be routinely used in preference to the above approximation. The exponents of <a href="cox_regression.htm">Cox regression</a> parameters are also exact estimators of the hazard ratio, but please note that they are not exact if Breslow's method has been used to correct for ties in the regression. Please consult with a statistician if you are considering using Cox regression.</p>
         <p>&#160;</p>
@@ -45,13 +45,13 @@
         <p>
             <MadCap:equation>$\displaystyle e_{ij}=\frac{n_{ij}d_j}{n_j} \\
 \displaystyle \text {diagonal } (\widehat{\textbf{V}}_j)_{ii}=\frac{n_{ij}(n_j-n_{ij})d_j(n_j-d_j)}{n_j^2(n_j-1)}, \space i=1,2,...k-1 \\
-\displaystyle \text {off diagonal } (\widehat{\textbf{V}}_j)_{ii}=\frac{n_{ij}n_{ij}d_j(n_j-d_j)}{n_j^2(n_j-1)}, \space i,l=1,2,...k-1,k \ne l \\
-\displaystyle \textbf{U}_j =\sum_{i=1}^kw_j(d_{ij}-e_{ij}) \\
+\displaystyle \text {off diagonal } (\widehat{\textbf{V}}_j)_{il}=-\frac{n_{ij}n_{lj}d_j(n_j-d_j)}{n_j^2(n_j-1)}, \space i,l=1,2,...k-1, \space i \ne l \\
+\displaystyle U_i =\sum_{j}w_j(d_{ij}-e_{ij}) \\
 \displaystyle \widehat{\textbf{V}}_w=\textbf{w}\hat{\textbf{V}}\textbf{w} \\
 \displaystyle \chi_{k-1}^2=\textbf{U}'\textbf{V}_w^{-1}\textbf{U} \\
 \displaystyle \chi_{1\text{ trend}}^2 =\frac{(\textbf{c}'\textbf{U})^2}{\textbf c'\widehat{\textbf{V}}_w \textbf c}$</MadCap:equation>
         </p>
-        <p>- where the weight w<sub>j</sub> for the log-rank test is equal to 1, and w<sub>j</sub> for the generalised Wilcoxon test is n<sub>i</sub> (Gehan-Breslow method); for the Tarone-Ware method w<sub>j</sub> is the square root of n<sub>i</sub>; and for the Peto-Prentice method w<sub>j</sub> is the Kaplan-Meier survivor function multiplied by (n<sub>i</sub> divided by n<sub>i</sub> +1). e<sub>ij</sub> is the expectation of death in group i at the jth distinct observed time where d<sub>j</sub> events/deaths occurred. n<sub>ij</sub> is the number at risk in group i just before the jth distinct observed time. The test statistic for equality of survival across the k groups (populations sampled) is approximately chi-square distributed on k-1 degrees of freedom. The test statistic for monotone trend is approximately chi-square distributed on 1 degree of freedom. <b>c</b> is a vector of scores that are either defined by the user or allocated as 1 to k.</p>
+        <p>- where the weight w<sub>j</sub> for the log-rank test is equal to 1, and w<sub>j</sub> for the generalised Wilcoxon test is n<sub>j</sub> (Gehan-Breslow method); for the Tarone-Ware method w<sub>j</sub> is the square root of n<sub>j</sub>; and for the Peto-Prentice method w<sub>j</sub> is the Kaplan-Meier survivor function multiplied by (n<sub>j</sub> divided by n<sub>j</sub> +1). e<sub>ij</sub> is the expectation of death in group i at the jth distinct observed time where d<sub>j</sub> events/deaths occurred. n<sub>ij</sub> is the number at risk in group i just before the jth distinct observed time, and n<sub>j</sub> is the total number at risk at that time. The test statistic for equality of survival across the k groups (populations sampled) is approximately chi-square distributed on k-1 degrees of freedom. The test statistic for monotone trend is approximately chi-square distributed on 1 degree of freedom. <b>c</b> is a vector of scores that are either defined by the user or allocated as 1 to k.</p>
         <p>&#160;</p>
         <p>Variance is estimated by the method that Peto (1977) refers to as "exact".</p>
         <p>&#160;</p>

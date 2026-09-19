@@ -23,10 +23,10 @@
             <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
             <li>A: accrual time during which subjects are recruited to the study.</li>
             <li>F: additional follow-up time after the end of recruitment.</li>
-            <li>*: input either (C and r) or (C and E), where r=E/C.</li>
+            <li>*: input either (C and r) or (C and E), where r=C/E.</li>
             <li>C: median survival time for control group.</li>
             <li>E: median survival time for experimental group.</li>
-            <li>r: hazard ratio or ratio of median survival times.</li>
+            <li>r: hazard ratio for experimental subjects relative to controls, which is C/E with exponential survival.</li>
             <li>M: number of controls per experimental subject.</li>
         </ul>
         <p>&#160;</p>
@@ -41,13 +41,13 @@
         <p>&#160;</p>
         <p><u>Technical validation</u>
         </p>
-        <p>The estimated sample size per group n is calculated as:</p>
+        <p>The estimated number of experimental subjects n (with mn controls) is calculated as:</p>
         <p>
             <MadCap:equation>$\displaystyle n=\left( z_{\alpha/2}+z_{\beta}\right)^2\left( \frac{(1+1/m)/p}{\ln(r)^2}\right) \\
-\displaystyle p=1-p_a \exp(-\ln(2)F/m) \\
-\displaystyle p_a=1-\frac{\exp(-\ln(2)A/m)}{\ln(2)A/m}\\
-\displaystyle m=(C+E)/2$</MadCap:equation>
+\displaystyle p=1-p_a \exp(-\ln(2)F/\bar t) \\
+\displaystyle p_a=\frac{1-\exp(-\ln(2)A/\bar t)}{\ln(2)A/\bar t}\\
+\displaystyle \bar t=(C+E)/2$</MadCap:equation>
         </p>
-        <p>- where α = alpha, β = 1 - power and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer. (1+1/m)/p is equivalent to 2/p in the first equation if the experimental and control group sizes are unequal.</p>
+        <p>- where α = alpha, β = 1 - power, m is the number of controls per experimental subject and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer. (1+1/m)/p is equivalent to 2/p in the first equation if the experimental and control group sizes are equal (m = 1).</p>
     </body>
 </html>
