@@ -22,20 +22,20 @@
         </p>
         <p>StatsDirect gives the option of two different methods for calculating quantiles; only the first method can be used with observation weights:-</p>
         <p>&#160;</p>
-        <p style="font-weight: normal;"><b>Method 1</b>: This is a common method that emulates the inverse of the empirical probability distribution with averaging where there are discontinuities (<a href="../references/reference_list.htm#ref-hyndman-1996">Hyndman and Fan, 1996</a>), This is also the universal default method in Stata:-</p>
+        <p style="font-weight: normal;"><b>Method 1</b> (centile type 1 in the descriptive statistics options): This is a common method that emulates the inverse of the empirical probability distribution with averaging where there are discontinuities (<a href="../references/reference_list.htm#ref-hyndman-1996">Hyndman and Fan, 1996</a>), This is also the universal default method in Stata:-</p>
         <p style="font-style: normal;">Take a sorted vector of observations u(i=1 to n) with weights w(i = 1 to n) or weights each equal to one if the sample is unweighted.</p>
-        <p style="font-style: normal;">Then find i = the first index point that is larger than pn, where p is the proportion of the quantile and n is the sample size.</p>
+        <p style="font-style: normal;">Then find i = the first index point at which the cumulative weight W<sub>i</sub> = w<sub>1</sub> + ... + w<sub>i</sub> is larger than pn, where p is the proportion of the quantile, n is the sample size and the weights have been normalised to sum to n.</p>
         <p style="font-style: normal;">
-            <MadCap:equation>$\displaystyle \text{if }i=pn \text{ then } Q(p)=u_i \text { else } Q(p)=\frac{u_{i-1}+u_i}{2}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle \text{if }W_{i-1}=pn \text{ then } Q(p)=\frac{u_{i-1}+u_i}{2} \text { else } Q(p)=u_i$</MadCap:equation>
         </p>
         <p>&#160;</p>
-        <p style="font-weight: normal;"><b>Method 2</b>: This is the conventional definition used when calculating confidence intervals for quantiles (<a href="../references/reference_list.htm#ref-mood-1974">Mood et al., 1974</a>), This is also the universal default method in SPSS and Minitab:-</p>
+        <p style="font-weight: normal;"><b>Method 2</b> (centile type 2 in the descriptive statistics options): This is the conventional definition used when calculating confidence intervals for quantiles (<a href="../references/reference_list.htm#ref-mood-1974">Mood et al., 1974</a>), This is also the universal default method in SPSS and Minitab:-</p>
         <p style="font-weight: normal;">
             <MadCap:equation>$\displaystyle Q(p)=h u_{i+1}+(1-h)u_i \\
-\displaystyle m=\max (\min(p(n+1),n)) \\
+\displaystyle m=\max (\min(p(n+1),n),1) \\
 \displaystyle i=\text{integer part(m)} \\
-\displaystyle h=m-1$</MadCap:equation>
+\displaystyle h=m-i$</MadCap:equation>
         </p>
-        <p style="font-style: normal;">- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), i is the order statistic, h is the fractional part of the order statistic (0 or 0.5), u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size.</p>
+        <p style="font-style: normal;">- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), i is the order statistic, h is the fractional part of the order statistic, u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size.</p>
     </body>
 </html>

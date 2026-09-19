@@ -21,7 +21,7 @@
         <p>&#160;</p>
         <p>Simpson's index Ds (equal to one minus Simpson's original measure of dominance, l, later proposed by Hurlbert as PIE, the probability of inter-specific encounter) is the most meaningful measure of evenness. D<sub>s</sub> is the probability that two randomly sampled individuals are from two different classes. This is equivalent to the genetic calculation of heterozygosity, H, being the probability that two alleles are not identical by descent. It follows that 1-D<sub>s</sub>, or dominance l, is the probability that two randomly sampled individuals are from the same class.</p>
         <p>
-            <MadCap:equation>$\displaystyle l=\frac{\displaystyle \sum_{l=1}^s n_i(n_i-1)}{N(N-1)} \\
+            <MadCap:equation>$\displaystyle l=\frac{\displaystyle \sum_{i=1}^s n_i(n_i-1)}{N(N-1)} \\
 D_s=1-l$</MadCap:equation>
         </p>
         <p>- where s is the number of classes observed, n<sub>i</sub> is the number observed from the ith class and N is the total number of individuals observed in the sample. Note that Hurlbert (1971) gives a different form of this equation and that the one above is better because it reduces rounding error by reducing the amount of intermediate division.</p>
@@ -36,7 +36,7 @@ D_s=1-l$</MadCap:equation>
         <p>&#160;</p>
         <p>Shannon's index of diversity H' is derived from information theory, originally in the context of information in telephone systems (<a href="../references/reference_list.htm#ref-shannon-1948">Shannon, 1948</a>). It combines both evenness and richness in a single measure. H' has no intuitive interpretation in terms of probability and is sensitive to sample size. H' was once thought to be a measure of entropy, but this is no longer supported (<a href="../references/reference_list.htm#ref-hurlbert-1971">Hurlbert, 1971</a>, <a href="../references/reference_list.htm#ref-goodman-1975">Goodman 1975</a>). H' can lead to confounded comparisons where the investigator can not infer whether or not differences in H' are due to differences in richness, diversity or just sampling differences. StatsDirect calculates H' solely for consistency because it has been used widely in the past.</p>
         <p>
-            <MadCap:equation>$\displaystyle H'=\sum_{i=1}^s\frac{n_i}{N}\ln \left(\frac{n_i}{N}\right)$</MadCap:equation>
+            <MadCap:equation>$\displaystyle H'=-\sum_{i=1}^s\frac{n_i}{N}\ln \left(\frac{n_i}{N}\right)$</MadCap:equation>
         </p>
         <p>- where s is the number of classes observed,  n<sub>i</sub> is the number observed from the ith class and N is the total number of individuals observed in the sample. Note that some authors use different bases for the logarithms, giving differently scaled results, but it makes no difference which is used provided you are consistent. If you want to convert the natural log results of StatsDirect to log (base 10) results then simply multiply H' by 0.4343.</p>
         <p>&#160;</p>
@@ -57,7 +57,7 @@ D_s=1-l$</MadCap:equation>
         <p>…and a the symmetrized bootstrap-t interval (<a href="../references/reference_list.htm#ref-vives-2001">Vives et al., 2001</a>; <a href="../references/reference_list.htm#ref-hall-1988">Hall 1988</a>):</p>
         <p>
             <MadCap:equation>$\displaystyle g \space \pm G(\alpha /2)\sqrt{\text{var}(g)} \\
-\displaystyle G=\left| \frac{(g-g^*)}{\text{var}(g)}\right|$</MadCap:equation>
+\displaystyle G=\left| \frac{(g-g^*)}{\sqrt{\text{var}(g^*)}}\right|$</MadCap:equation>
         </p>
         <p>- where G is the estimated bootstrap distribution of the absolute value of the studentized sample diversity index.</p>
         <p>&#160;</p>
@@ -69,9 +69,9 @@ D_s=1-l$</MadCap:equation>
         <p>
             <MadCap:equation>$\displaystyle S=s+\frac{a^2}{2b} \\
 
-\displaystyle \text{var}(S)=b[(a/b/4)^4+(a/b)^3+(a/b/2)^2]$</MadCap:equation>
+\displaystyle \text{var}(S)=b\left[\frac{(a/b)^4}{4}+(a/b)^3+\frac{(a/b)^2}{2}\right]$</MadCap:equation>
         </p>
-        <p>- where S is the estimate of the total number of classes in the population, s is the number of classes observed in the sample, a is the number of classes with exactly one individual (singletons), b is the number of classes with exactly two individuals (doubletons), and where 1 is substituted for a or b if either has no singletons or doubletons.</p>
+        <p>- where S is the estimate of the total number of classes in the population, s is the number of classes observed in the sample, a is the number of classes with exactly one individual (singletons), b is the number of classes with exactly two individuals (doubletons), and where 1 is substituted for a or b if either has no singletons or doubletons. The lower confidence limit is not allowed below the number of classes observed.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
@@ -138,8 +138,8 @@ D_s=1-l$</MadCap:equation>
         <p>Number of classes observed (richness) = 26</p>
         <p>&#160;</p>
         <p>Estimated total number of classes = 54</p>
-        <p>Standard error (large sample) = 16.196498</p>
-        <p>Normal (large sample) 95% CI = 22 to 86</p>
+        <p>Standard error (large sample) = 23.167466</p>
+        <p>Normal (large sample) 95% CI = 26 to 99</p>
         <p>&#160;</p>
         <p><b>Simpson Ds (Hurlburt PIE)</b> = 0.899352, (dominance l = 0.100648,  ds = 9.935578)</p>
         <p>Standard error (large sample) = 0.016826</p>

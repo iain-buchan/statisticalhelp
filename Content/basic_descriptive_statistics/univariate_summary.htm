@@ -87,8 +87,8 @@
         <p>The following formulae replace the mean, variance and moments calculations defined above when weights are used:</p>
         <p>
             <MadCap:equation>$\displaystyle \bar{x}=\frac{\displaystyle \sum_{i=1}^n w_i x_i}{n} \\
-\displaystyle s^2=\frac{\displaystyle \sum_{i=1}^n w_i(x_i-\bar{x})}{n-1} \\
-\displaystyle m'=\frac{\displaystyle \sum_{i=1}^n w_i(x_i-\bar{x})'}{n}$</MadCap:equation>
+\displaystyle s^2=\frac{\displaystyle \sum_{i=1}^n w_i(x_i-\bar{x})^2}{n-1} \\
+\displaystyle m_r=\frac{\displaystyle \sum_{i=1}^n w_i(x_i-\bar{x})^r}{n}$</MadCap:equation><br />- where m<sub>r</sub> is the rth moment about the mean; skewness is m<sub>3</sub>/m<sub>2</sub><sup>1.5</sup> and kurtosis is m<sub>4</sub>/m<sub>2</sub><sup>2</sup>.
         </p>
         <p>&#160;</p>
         <p><u>Median, quartiles and range</u>
@@ -99,16 +99,16 @@
             Median (50th centile, quantile 0.5), lower quartile (25th centile, quantile 0.25) and upper quartile (75th centile, quantile 0.75) are defined generally as <a href="../nonparametric_methods/quantiles.htm">quantiles</a>:</p>
         <p>&#160;</p>
         <p>Two different quantile definitions (<a href="../references/reference_list.htm#ref-weisberg-1992">Weisberg, 1992</a>; <a href="../references/reference_list.htm#ref-gleason-1997">Gleason, 1997</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>) are used in the summary statistics (see also: <a href="../nonparametric_methods/quantiles.htm">quantiles</a>): the first (selected as centile type 2 in the descriptive statistics options) is the conventional quantile that is also used in the <a href="../nonparametric_methods/quantile_ci.htm">quantile confidence interval function</a> and the second (centile type 1, always used for weighted summaries) allows for weights:</p>
-        <p><b>Method 1:</b>
+        <p><b>Centile type 2:</b>
         </p>
         <p>
             <MadCap:equation>$\displaystyle Q_p=(1-h)u_i+h \space u_{i+1} \\
-\displaystyle h=p(n+1)-\text{fix}(p(n+1)) \\
-\displaystyle i=\max(\min(\text{fix(p(n+1)),n,),1)}$</MadCap:equation>
+\displaystyle h=m-i \\
+\displaystyle i=\text{fix}(m) \\ \displaystyle m=\max(\min(p(n+1),n),1)$</MadCap:equation>
         </p>
         <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), fix is the integer part of a real number, h is the fractional part of order statistic i, u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size.</p>
         <p>&#160;</p>
-        <p><b>Method 2:</b>
+        <p><b>Centile type 1:</b>
         </p>
         <p>
             <MadCap:equation>$\displaystyle Q_p=\frac{u_{i-1}+u_i}{2} \space \text{if} \space W_{i-1}=P \\
@@ -117,7 +117,7 @@
 \displaystyle P=pn \\
 i=\text{first index where } W_i&gt;P$</MadCap:equation>
         </p>
-        <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), u is an observation from a sample after it has been ordered from smallest to largest value, n is the sample size, w is a weight normalised so that it sums to n and</p>
+        <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), u is an observation from a sample after it has been ordered from smallest to largest value, n is the sample size, w is a weight normalised so that it sums to n and W<sub>i</sub> is the sum of the weights of the first i ordered observations.</p>
         <p>&#160;</p>
         <p><u>Technical validation</u>
         </p>

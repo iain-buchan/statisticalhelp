@@ -16,9 +16,9 @@
         <p>&#160;</p>
         <p>The Kruskal-Wallis test statistic for k samples, each of size n<sub>i</sub> is:</p>
         <p>
-            <MadCap:equation>$\displaystyle T=\frac{1}{s^2}\left[\sum_{i=1}^k \frac{R_i}{n_i}-N \frac{(N+1)^2}{4}\right]$</MadCap:equation>
+            <MadCap:equation>$\displaystyle T=\frac{1}{S^2}\left[\sum_{i=1}^k \frac{R_i^2}{n_i}-N \frac{(N+1)^2}{4}\right]$</MadCap:equation>
         </p>
-        <p>- where N is the total number (all n<sub>i</sub>) and R<sub>i</sub> is the sum of the ranks (from all samples pooled) for the ith sample and:</p>
+        <p>- where N is the total number (all n<sub>i</sub>) and R<sub>i</sub> is the sum of the ranks (from all samples pooled) for the ith sample, R<sub>ij</sub> is the rank of the jth observation in the ith sample and:</p>
         <p>
             <MadCap:equation>$\displaystyle S^2=\frac{1}{N-1}\left[\sum_{\text{all}} R_{ij}^2-N \frac{(N+1)^2}{4}\right]$</MadCap:equation>
         </p>
@@ -38,7 +38,7 @@
         <p>&#160;</p>
         <p>By the Dwass-Steel-Critchlow-Fligner procedure, a contrast is considered significant if the following inequality is satisfied:</p>
         <p>
-            <MadCap:equation>$\displaystyle W_{ij}=-\frac{n_i(n_i+n_j+1)}{2}/\frac{n_i n_j}{24}\left[ n_i+n_j+1-\frac{\displaystyle \sum_{b=1}^{g_{ij}} (t_b-1)t_b(t_b+1)} {(n_i+n_j)(n_i+n_j-1)} \right]&gt;q_{\alpha,k} \space, \space \text{for} \space 1\le i \le j \le k$</MadCap:equation>
+            <MadCap:equation>$\displaystyle \left| W_{ij}-\frac{n_i(n_i+n_j+1)}{2}\right| / \sqrt{\frac{n_i n_j}{24}\left[ n_i+n_j+1-\frac{\displaystyle \sum_{b=1}^{g_{ij}} (t_b-1)t_b(t_b+1)} {(n_i+n_j)(n_i+n_j-1)} \right]}&gt;q_{\alpha,k} \space, \space \text{for} \space 1\le i \lt j \le k$</MadCap:equation>
         </p>
         <p>- where q is a quantile from the normal range distribution for k groups, n<sub>i</sub> is size of the ith group, n<sub>j</sub> is the size of the jth group, t<sub>b</sub> is the number of ties at rank b and W<sub>ij</sub> is the sum of the ranks for the ith group where observations for both groups have been ranked together. The values either side of the greater than sign are displayed in parentheses in StatsDirect results.</p>
         <p>&#160;</p>

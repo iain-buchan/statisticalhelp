@@ -17,19 +17,19 @@
         <p>Three different methods for calculating normal scores are provided:</p>
         <p>1.&#160;<b>van der Waerden's</b> method (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle s=\Phi\left(\frac{r}{n+1}\right)$</MadCap:equation>
-            <br />- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ(p) is the pth quantile from the standard normal distribution.</p>
+            <MadCap:equation>$\displaystyle s=\Phi^{-1}\left(\frac{r}{n+1}\right)$</MadCap:equation>
+            <br />- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ<sup>-1</sup>(p) is the pth quantile from the standard normal distribution.</p>
         <p>&#160;</p>
-        <p>2.&#160;<b>Blom's</b> method (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>):<br /><MadCap:equation>$\displaystyle s=\Phi\left(\frac{r-3/8}{n+1/4}\right)$</MadCap:equation></p>
-        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ(p) is the pth quantile from the standard normal distribution.</p>
+        <p>2.&#160;<b>Blom's</b> method (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>):<br /><MadCap:equation>$\displaystyle s=\Phi^{-1}\left(\frac{r-3/8}{n+1/4}\right)$</MadCap:equation></p>
+        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ<sup>-1</sup>(p) is the pth quantile from the standard normal distribution.</p>
         <p>&#160;</p>
         <p>3.&#160;<b>Expected normal order scores</b> (<a href="../references/reference_list.htm#ref-david-1981">David, 1981</a>; <a href="../references/reference_list.htm#ref-royston-1982-a">Royston, 1982</a>; <a href="../references/reference_list.htm#ref-harter-1961">Harter, 1961</a>)<br /></p>
         <p>
-            <MadCap:equation>$\displaystyle s=\frac{n!}{(r-1)!(n-r)!}\int_{-\infty}^\infty x[1-\Phi(x)]^{r-1}[\Phi(x)]^{n-r}\Phi(x) \space dx \\
+            <MadCap:equation>$\displaystyle s=\frac{n!}{(r-1)!(n-r)!}\int_{-\infty}^\infty x[\Phi(x)]^{r-1}[1-\Phi(x)]^{n-r}\phi(x) \space dx \\
 
-\displaystyle \Phi(x)=\frac{1}{\sqrt{2\pi}\exp(-0.5x^2)}$</MadCap:equation>
+\displaystyle \phi(x)=\frac{\exp(-0.5x^2)}{\sqrt{2\pi}}$</MadCap:equation>
         </p>
-        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size, Φ(p) is the standard normal density for p and Φ(p) is the pth quantile from the standard normal distribution. The solution is found by numerical integration. Calculation of expected normal order scores is not practical for very large samples, n of 2500 is the maximum permitted in StatsDirect.</p>
+        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size, φ(x) is the standard normal density and Φ(x) is the standard normal distribution function. The solution is found by numerical integration. Calculation of expected normal order scores is not practical for very large samples, n of 2500 is the maximum permitted in StatsDirect.</p>
         <p><u>Example</u>
         </p>
         <p>Test workbook (Nonparametric worksheet: First Born).</p>
@@ -65,7 +65,7 @@
             </tr>
             <tr>
                 <td style="text-align: right;">72</td>
-                <td style="text-align: right;">-0.2933</td>
+                <td style="text-align: right;">-0.2934</td>
             </tr>
             <tr>
                 <td style="text-align: right;">77</td>
