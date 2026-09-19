@@ -112,7 +112,7 @@
                             <div class="body-container">
                                 <div data-mc-content-body="True">
                                     <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor74"></a>
+                                        <h1><a name="kanchor121"></a>
             Spearman's Rank Correlation</h1>
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Nonparametric_Spearman Rank Correlation</b>.</p>
@@ -127,11 +127,11 @@
                                         <p>&#160;</p>
                                         <p><u>Technical Validation</u>
                                         </p>
-                                        <p> Rho is calculated as Pearson's r based on ranks and average ranks using the above formula. The probability associated with r, when there are no tied ranks present, is evaluated using an exact permutational method when n ≤ 10 and an Edgeworth series approximation when n &gt; 10 (<a href="../references/reference_list.htm">Best and Roberts, 1975</a>). The exact probability calculation employs a corrected version of the Best and Roberts (1975) algorithm, which was further improved in version 3 of StatsDirect. When ties are present the standard asymptotic approximation [2_tailed_t(df=n-2,t=|rho|sqrt(n-2)/sqrt(1-rho^2)]) is used. A confidence interval for rho is constructed using Fisher's z transformation (<a href="../references/reference_list.htm">Conover, 1999; Gardner and Altman, 1989; Hollander and Wolfe, 1973</a>). Note that StatsDirect uses more accurate definitions of rho and the probabilities associated with it than some other statistical software, therefore, there may be differences in results: for example, using the data below in version 3.2.2 of R will give different P values from the corr.test function compared with the spearman.test function of the pspearman package because the mistake in AS89 has been carried over from the original FORTRAN.</p>
+                                        <p> Rho is calculated as Pearson's r based on ranks and average ranks using the above formula. The probability associated with r, when there are no tied ranks present, is evaluated using an exact permutational method when n ≤ 10 and an Edgeworth series approximation when n &gt; 10 (<a href="../references/reference_list.htm#ref-best-1975-a">Best and Roberts, 1975</a>). The exact probability calculation employs a corrected version of the Best and Roberts (1975) algorithm, which was further improved in version 3 of StatsDirect. When ties are present the standard asymptotic approximation [2_tailed_t(df=n-2,t=|rho|sqrt(n-2)/sqrt(1-rho^2)]) is used. A confidence interval for rho is constructed using Fisher's z transformation (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-gardner-1989">Gardner and Altman, 1989</a>; <a href="../references/reference_list.htm#ref-hollander-1973">Hollander and Wolfe, 1973</a>). Note that StatsDirect uses more accurate definitions of rho and the probabilities associated with it than some other statistical software, therefore, there may be differences in results: for example, using the data below in version 3.2.2 of R will give different P values from the corr.test function compared with the spearman.test function of the pspearman package because the mistake in AS89 has been carried over from the original FORTRAN.</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
-                                        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 466)</a>.</p>
+                                        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 466)</a>.</p>
                                         <p>Test workbook (Nonparametric worksheet: Career, Psychology).</p>
                                         <p>&#160;</p>
                                         <p>The following data represent a tutor's ranking of ten clinical psychology students as to their suitability for their career and their knowledge of psychology:</p>

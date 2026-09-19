@@ -112,7 +112,7 @@
                             <div class="body-container">
                                 <div data-mc-content-body="True">
                                     <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor68"></a>
+                                        <h1><a name="kanchor36"></a>
             Multiple (General) Linear Regression</h1>
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Regression and Correlation_Multiple Linear</b>.</p>
@@ -142,7 +142,7 @@
                                         <p>&#160;</p>
                                         <p>The influential data option in StatsDirect gives an analysis of residuals and allows you to save the residuals and their associated statistics to a workbook. It is good practice to examine a scatter plot of the residuals against fitted Y values. You might also wish to inspect a <a href="../graphics/normal.htm">normal plot</a> of the residuals and perform a <a href="../parametric_methods/normality.htm">Shapiro-Wilk</a> test to look for evidence of non-normality.</p>
                                         <p>&#160;</p>
-                                        <p>Standard error for the predicted Y, leverage hi (the ith diagonal element of the hat (XXi) matrix), Studentized residuals, jackknife residuals, Cook's distance and DFIT are also given with the residuals. For further information on analysis of residuals please see <a href="../references/reference_list.htm">Belsley et al. (1980)</a>, <a href="../references/reference_list.htm">Kleinbaum et al. (1998)</a> or <a href="../references/reference_list.htm">Draper and Smith (1998)</a>.</p>
+                                        <p>Standard error for the predicted Y, leverage hi (the ith diagonal element of the hat (XXi) matrix), Studentized residuals, jackknife residuals, Cook's distance and DFIT are also given with the residuals. For further information on analysis of residuals please see <a href="../references/reference_list.htm#ref-belsley-1980">Belsley et al. (1980)</a>, <a href="../references/reference_list.htm#ref-kleinbaum-1998">Kleinbaum et al. (1998)</a> or <a href="../references/reference_list.htm#ref-draper-1998">Draper and Smith (1998)</a>.</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation183.svg" alt="" class="mcReset" />
                                         </p>
@@ -172,11 +172,11 @@
                                         <p>&#160;</p>
                                         <p>If you detect multicollinearity you should aim to clarify the cause and remove it. For example, an unnecessary collinear predictor might be dropped from your model, or predictors might meaningfully be combined, e.g. combining height and weight as body mass index. Increasing your sample size reduces the impact of multicollinearity. More complex statistical techniques exist for dealing with multicollinearity, but these should be used under the expert guidance of a Statistician.</p>
                                         <p>&#160;</p>
-                                        <p><a href="../references/reference_list.htm">Chatterjee et al (2000)</a> suggest that multicollinearity is present if the mean VIF is considerably larger than 1, and the largest VIF is greater than 10 (others choose larger values, StatsDirect uses 20 as the threshold for marking the result with a red asterisk).</p>
+                                        <p><a href="../references/reference_list.htm#ref-chatterjee-2000">Chatterjee et al (2000)</a> suggest that multicollinearity is present if the mean VIF is considerably larger than 1, and the largest VIF is greater than 10 (others choose larger values, StatsDirect uses 20 as the threshold for marking the result with a red asterisk).</p>
                                         <p>&#160;</p>
                                         <p><u>Prediction and adjusted means</u>
                                         </p>
-                                        <p>The prediction option allows you to calculate values of the outcome (Y) using your fitted linear model coefficients with a specified set of values for the predictors (X1…p). A confidence interval and a prediction interval (<a href="../references/reference_list.htm">Altman, 1991</a>) are given for each prediction.</p>
+                                        <p>The prediction option allows you to calculate values of the outcome (Y) using your fitted linear model coefficients with a specified set of values for the predictors (X1…p). A confidence interval and a prediction interval (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>) are given for each prediction.</p>
                                         <p>&#160;</p>
                                         <p>The default X values shown are those required to calculate the least squares mean for the model, which is the mean of Y adjusted for all X. For continuous predictors the mean of X is used. For categorical predictors you should use X as 1/k, where k is the number of categories. StatsDirect attempts to identify categorical variables but you should check the values against these rules if you are using categorical predictors in this way.</p>
                                         <p>&#160;</p>
@@ -199,11 +199,11 @@
                                         </p>
                                         <p>The adjustment allows comparison of Ra² between different regression models by compensating for the fact that R² is bound to increase with the number of predictors in the model.</p>
                                         <p>&#160;</p>
-                                        <p>The Durbin Watson test statistic can be used to test for certain types of serial correlation (autocorrelation). For example, if a critical instrument gradually drifted off scale during collection of the outcome variable then there would be correlations due to the drift; in time ordered data these may be detected by autocorrelation tests such as Durbin Watson. See <a href="../references/reference_list.htm">Draper and Smith (1998)</a> for more information, including critical values of the test statistic.</p>
+                                        <p>The Durbin Watson test statistic can be used to test for certain types of serial correlation (autocorrelation). For example, if a critical instrument gradually drifted off scale during collection of the outcome variable then there would be correlations due to the drift; in time ordered data these may be detected by autocorrelation tests such as Durbin Watson. See <a href="../references/reference_list.htm#ref-draper-1998">Draper and Smith (1998)</a> for more information, including critical values of the test statistic.</p>
                                         <p>&#160;</p>
                                         <p><u>Automatic selection of predictors</u>
                                         </p>
-                                        <p>There are a number of methods for selecting a subset of predictors that produce the "best" regression. Many statisticians discourage general use of these methods because they can detract from the real-world importance of predictors in a model. Examples of predictor selection methods are step-up selection, step-down selection, stepwise regression and best subset selection. The fact that there is no predominant method indicates that none of them are broadly satisfactory, a good discussion is given by <a href="../references/reference_list.htm">Draper and Smith (1998)</a>. StatsDirect provides best subset selection by examination of all possible regressions. You have the option of either minimum Mallow's Cp or maximum overall F as base statistic for subset selection. You may also force the inclusion of variables in this selection procedure if you consider their exclusion to be illogical in "real world" terms. Subset selection is best performed under expert statistical guidance.</p>
+                                        <p>There are a number of methods for selecting a subset of predictors that produce the "best" regression. Many statisticians discourage general use of these methods because they can detract from the real-world importance of predictors in a model. Examples of predictor selection methods are step-up selection, step-down selection, stepwise regression and best subset selection. The fact that there is no predominant method indicates that none of them are broadly satisfactory, a good discussion is given by <a href="../references/reference_list.htm#ref-draper-1998">Draper and Smith (1998)</a>. StatsDirect provides best subset selection by examination of all possible regressions. You have the option of either minimum Mallow's Cp or maximum overall F as base statistic for subset selection. You may also force the inclusion of variables in this selection procedure if you consider their exclusion to be illogical in "real world" terms. Subset selection is best performed under expert statistical guidance.</p>
                                         <p>&#160;</p>
                                         <p><u>Weights for outcome observations</u>
                                         </p>
@@ -212,11 +212,11 @@
                                         <p>&#160;</p>
                                         <p><u>Technical Validation</u>
                                         </p>
-                                        <p>StatsDirect uses QR decomposition by Givens rotations to solve the linear equations to a high level of accuracy (<a href="../references/reference_list.htm">Gentleman, 1974; Golub and Van Loan, 1983</a>). Predictors that are highly correlated with other predictors are dropped from the model (you are warned of this in the results). If the QR method fails (rare) then StatsDirect will solve the system by singular value decomposition (<a href="../references/reference_list.htm">Chan, 1982</a>).</p>
+                                        <p>StatsDirect uses QR decomposition by Givens rotations to solve the linear equations to a high level of accuracy (<a href="../references/reference_list.htm#ref-gentleman-1974">Gentleman, 1974</a>; <a href="../references/reference_list.htm#ref-golub-1983">Golub and Van Loan, 1983</a>). Predictors that are highly correlated with other predictors are dropped from the model (you are warned of this in the results). If the QR method fails (rare) then StatsDirect will solve the system by singular value decomposition (<a href="../references/reference_list.htm#ref-chan-1982">Chan, 1982</a>).</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
-                                        <p>From <a href="../references/reference_list.htm">Armitage and Berry (1994, p. 316)</a>.</p>
+                                        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 316)</a>.</p>
                                         <p>Test workbook (Regression worksheet: X1, X2, YY).</p>
                                         <p>&#160;</p>
                                         <p>The following data are from a trial of a hypotensive drug used to lower blood pressure during surgery. The outcome/dependent variable (YY) is minutes taken to recover an acceptable (100mmHg) systolic blood pressure and the two predictor or explanatory variables are, log dose of drug (X1) and mean systolic blood pressure during the induced hypotensive episode (X2).</p>
@@ -606,7 +606,7 @@
                                         <p>&#160;</p>
                                         <p><u>Technical validation results</u>
                                         </p>
-                                        <p>The American National Institute of Standards and Technology provide Statistical Reference Datasets for testing statistical software (<a href="../references/reference_list.htm">McCullough and Wilson, 1999</a>; <a href="http://www.itl.nist.gov/div898/strd/" target="_blank">http://www.itl.nist.gov/div898/strd/</a>). The results below for the Longley data set (<a href="../references/reference_list.htm">Longley, 1967</a>) are given to 12 decimal places:</p>
+                                        <p>The American National Institute of Standards and Technology provide Statistical Reference Datasets for testing statistical software (<a href="../references/reference_list.htm#ref-mccullough-1999">McCullough and Wilson, 1999</a>; <a href="http://www.itl.nist.gov/div898/strd/" target="_blank">http://www.itl.nist.gov/div898/strd/</a>). The results below for the Longley data set (<a href="../references/reference_list.htm#ref-longley-1967">Longley, 1967</a>) are given to 12 decimal places:</p>
                                         <p>&#160;</p>
                                         <p><u>Multiple linear regression</u>
                                         </p>
