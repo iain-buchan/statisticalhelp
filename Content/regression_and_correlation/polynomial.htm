@@ -18,7 +18,7 @@
         <p>
             <MadCap:equation>$\displaystyle \hat Y=b_0+b_1x_1 + b_2x_2^2+...+b_kx_k^k$</MadCap:equation>
         </p>
-        <p>- where Y caret is the predicted outcome value for the polynomial model with regression coefficients b<sub>1</sub> to k for each degree and Y intercept b<sub>0</sub>. The model is simply a <a href="multiple_linear.htm">general linear regression</a> model with k predictors raised to the power of i where i=1 to k. A second order (k=2) polynomial forms a quadratic expression (parabolic curve), a third order (k=3) polynomial forms a cubic expression and a fourth order (k=4) polynomial forms a quartic expression. See <a href="../references/reference_list.htm">Kleinbaum et al. (1998)</a> and <a href="../references/reference_list.htm">Armitage and Berry (1994)</a> for more information.</p>
+        <p>- where Y caret is the predicted outcome value for the polynomial model with regression coefficients b<sub>1</sub> to k for each degree and Y intercept b<sub>0</sub>. The model is simply a <a href="multiple_linear.htm">general linear regression</a> model with k predictors raised to the power of i where i=1 to k. A second order (k=2) polynomial forms a quadratic expression (parabolic curve), a third order (k=3) polynomial forms a cubic expression and a fourth order (k=4) polynomial forms a quartic expression. See <a href="../references/reference_list.htm#ref-kleinbaum-1998">Kleinbaum et al. (1998)</a> and <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994)</a> for more information.</p>
         <p>&#160;</p>
         <p>Some general principles:</p>
         <ul>
@@ -42,11 +42,11 @@
         <p>&#160;</p>
         <p><u>Technical Validation</u>
         </p>
-        <p>StatsDirect uses QR decomposition by Givens rotations to solve the linear equations to a high level of accuracy (<a href="../references/reference_list.htm">Gentleman, 1974; Golub and Van Loan, 1983</a>). If the QR method fails (rare) then StatsDirect will solve the system by singular value decomposition (<a href="../references/reference_list.htm">Chan, 1982</a>).</p>
+        <p>StatsDirect uses QR decomposition by Givens rotations to solve the linear equations to a high level of accuracy (<a href="../references/reference_list.htm#ref-gentleman-1974">Gentleman, 1974</a>; <a href="../references/reference_list.htm#ref-golub-1983">Golub and Van Loan, 1983</a>). If the QR method fails (rare) then StatsDirect will solve the system by singular value decomposition (<a href="../references/reference_list.htm#ref-chan-1982">Chan, 1982</a>).</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
-        <p>From <a href="../references/reference_list.htm">McClave and Deitrich (1991, p. 753)</a>.</p>
+        <p>From <a href="../references/reference_list.htm#ref-mcclave-1991">McClave and Dietrich (1991, p. 753)</a>.</p>
         <p>Test workbook (Regression worksheet: Home Size, KW Hrs/Mnth).</p>
         <p>&#160;</p>
         <p>Here we use an example from the physical sciences to emphasise the point that polynomial regression is mostly applicable to studies where environments are highly controlled and observations are made to a specified level of tolerance. The data below are the electricity consumptions in kilowatt-hours per month from ten houses and the areas in square feet of those houses:</p>

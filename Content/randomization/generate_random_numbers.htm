@@ -16,7 +16,7 @@
         <p>&#160;</p>
         <p>A <a href="random_number_generator.htm">robust generator</a> of uniform (pseudo)random numbers is used as the basis for generating deviates from the probability distributions described below. You are given the opportunity to enter your own seed number to be used by the random number generator but you should use the default seed (based upon your computer's clock) in most cases. Please note that each seed generates its own series and that series is the same if you use the seed again. You have very little chance of using the same seed twice if you select the seed that StatsDirect suggests.</p>
         <p>&#160;</p>
-        <p>These functions are intended for simulation work; they employ widely cited and debated algorithms (<a href="../references/reference_list.htm">Gentle, 2003</a>).</p>
+        <p>These functions are intended for simulation work; they employ widely cited and debated algorithms (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle, 2003</a>).</p>
         <p>&#160;</p>
         <p><u>Uniform (continuous uniform, rectangular)</u>
         </p>
@@ -37,7 +37,7 @@
         </p>
         <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
         <p>&#160;</p>
-        <p>Algorithm: inversion of the cumulative distribution function (<a href="../references/reference_list.htm">Wichura, 1988; Gentle 2003</a>)</p>
+        <p>Algorithm: inversion of the cumulative distribution function (<a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>)</p>
         <p>&#160;</p>
         <p><u>Lognormal</u>
         </p>
@@ -49,7 +49,7 @@
         <p>&#160;</p>
         <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ).</p>
         <p>&#160;</p>
-        <p>Algorithm: transformed inversion of the cumulative distribution function (<a href="../references/reference_list.htm">Wichura, 1988; Gentle 2003</a>)</p>
+        <p>Algorithm: transformed inversion of the cumulative distribution function (<a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>)</p>
         <p>&#160;</p>
         <p><u>Exponential</u>
         </p>
@@ -59,7 +59,7 @@
         </p>
         <p>- where the parameter λ must be greater than zero.</p>
         <p>&#160;</p>
-        <p>Algorithm: transformation (<a href="../references/reference_list.htm">Ahrens and Dieter, 1972</a>).</p>
+        <p>Algorithm: transformation (<a href="../references/reference_list.htm#ref-ahrens-1972">Ahrens and Dieter, 1972</a>).</p>
         <p>&#160;</p>
         <p><u>Gamma</u>
         </p>
@@ -76,7 +76,7 @@
         <p>&#160;</p>
         <p>Please note that gamma deviates with a shaping parameter of 0.5 are half the square of normal deviates and gamma deviates with a shaping parameter of 1 are exponential deviates.</p>
         <p>&#160;</p>
-        <p>Algorithm: acceptance-rejection methods GD and GS (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b</a>).</p>
+        <p>Algorithm: acceptance-rejection methods GD and GS (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>).</p>
         <p>&#160;</p>
         <p><u>Binomial</u>
         </p>
@@ -86,7 +86,7 @@
         </p>
         <p>- where p lies between 0 and 1 in n ranges.</p>
         <p>&#160;</p>
-        <p>Algorithm: acceptance-rejection method BTPEC (<a href="../references/reference_list.htm">Kachitvichyanukul and Schmeiser, 1988</a>).</p>
+        <p>Algorithm: acceptance-rejection method BTPEC (<a href="../references/reference_list.htm#ref-kachitvichyanukul-1988">Kachitvichyanukul and Schmeiser, 1988</a>).</p>
         <p>&#160;</p>
         <p><u>Poisson</u>
         </p>
@@ -96,7 +96,7 @@
         </p>
         <p>- where parameter l is greater than zero.</p>
         <p>&#160;</p>
-        <p>Algorithm: acceptance-rejection (<a href="../references/reference_list.htm">Ahrens and Dieter, 1982a</a>).</p>
+        <p>Algorithm: acceptance-rejection (<a href="../references/reference_list.htm#ref-ahrens-1982-a">Ahrens and Dieter, 1982a</a>).</p>
         <p>&#160;</p>
         <p><u>Chi-square</u>
         </p>
@@ -106,7 +106,7 @@
         </p>
         <p>The deviates are calculated as gamma deviates with parameters n/2 and 2, where n is degrees of freedom.</p>
         <p>&#160;</p>
-        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974,1982b; Gentle 2003</a>).</p>
+        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>,<a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
         <p>&#160;</p>
         <p><u>F (variance ratio)</u>
         </p>
@@ -116,7 +116,7 @@
         </p>
         <p>The deviates are calculated as nx/dz where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
         <p>&#160;</p>
-        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b; Gentle 2003</a>).</p>
+        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
         <p>&#160;</p>
         <p><u>Student's t</u>
         </p>
@@ -126,7 +126,7 @@
         </p>
         <p>The deviates are calculated as a standard normal deviate multiplied by the square root of the degrees of freedom (n) divided by a gamma deviate with parameters n/2 and 2 (a chi-square deviate with n degrees of freedom).</p>
         <p>&#160;</p>
-        <p>Algorithm: Transformed standard normal and gamma deviates (<a href="../references/reference_list.htm">Ahrens and Dieter, 1974, 1982b; Gentle 2003</a>).</p>
+        <p>Algorithm: Transformed standard normal and gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
         <p>&#160;</p>
         <p><u>Beta</u>
         </p>
@@ -136,7 +136,7 @@
         </p>
         <p>- where a and b are the two shape parameters.</p>
         <p>&#160;</p>
-        <p>Algorithm: Acceptance-rejection methods BB and BC (<a href="../references/reference_list.htm">Cheng 1978</a>).</p>
+        <p>Algorithm: Acceptance-rejection methods BB and BC (<a href="../references/reference_list.htm#ref-cheng-1978">Cheng 1978</a>).</p>
         <p>&#160;</p>
         <p><u>Logistic</u>
         </p>
@@ -147,22 +147,22 @@
         </p>
         <p>The deviates are calculated as location + scale * ln(u/(1-u)), where u is a uniform deviate.</p>
         <p>&#160;</p>
-        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
         <p>&#160;</p>
         <p><u>Cauchy</u>
         </p>
-        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
         <p>&#160;</p>
         <p><u>Weibull</u>
         </p>
-        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm">Gentle 2003</a>).</p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
         <p>&#160;</p>
         <p><u>Geometric</u>
         </p>
-        <p>Algorithm: Transformed Poisson and exponential deviates (<a href="../references/reference_list.htm">Devroye, 1986; Gentle 2003; Ahrens and Dieter, 1972, 1982a</a>).</p>
+        <p>Algorithm: Transformed Poisson and exponential deviates (<a href="../references/reference_list.htm#ref-devroye-1986">Devroye, 1986</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>; <a href="../references/reference_list.htm#ref-ahrens-1972">Ahrens and Dieter, 1972</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-a">1982a</a>).</p>
         <p>&#160;</p>
         <p><u>Negative binomial</u>
         </p>
-        <p>Algorithm: Transformed Poisson and gamma deviates (<a href="../references/reference_list.htm">Devroye, 1986; Gentle 2003; Ahrens and Dieter, 1974, 1982b, 1982a</a>).</p>
+        <p>Algorithm: Transformed Poisson and gamma deviates (<a href="../references/reference_list.htm#ref-devroye-1986">Devroye, 1986</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>; <a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-a">1982a</a>).</p>
     </body>
 </html>
