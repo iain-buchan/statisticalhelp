@@ -11,7 +11,7 @@ real page exists, so nothing is overwritten.
 
 | Part | What it holds |
 |---|---|
-| `help\...\*.htm` (140) | Former names of help topics, e.g. `help\parametric_methods\utt.htm` sends the reader to `unpaired_t.htm`. Plain pages with an instant refresh, a visible link, and "noindex, follow" for search engines. |
+| `help\...\*.htm` (142) | Former names of help topics, e.g. `help\parametric_methods\utt.htm` sends the reader to `unpaired_t.htm`. Plain pages with an instant refresh, a visible link, and "noindex, follow" for search engines. |
 | `help\resources\images\*.gif` (3) | Pictures that other sites display directly; the present help has them as .png. |
 | root `*.aspx` (4) | `sd3technology.aspx` to `Technology.aspx`; `buy.aspx`, `buyoptions.aspx`, `licence.aspx` to `Download.aspx`. They answer with a permanent (301) redirect. |
 | root `*.htm` (10) | `buy.htm`, `licence.htm` to `Download.aspx`; `info.htm` to `Specifications.aspx`; `try.htm`, `faq.htm`, `support.htm`, `uses.htm`, `contacts.htm`, `reviews.htm`, `revisions.htm` to the pages of the same name. |
