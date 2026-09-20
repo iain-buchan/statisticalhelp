@@ -54,16 +54,16 @@ D_s=1-l$</MadCap:equation>
         </p>
         <p>- where g is either the Simpson or Shannon statistic calculated from the observed sample, k is the number bootstrap resamples, g star is the statistic of interest calculated from a bootstrap sample, SE<sub>b</sub> is the bootstrap estimate of standard error and t is a quantile of the Student t distribution.</p>
         <p>&#160;</p>
-        <p>…and a the symmetrized bootstrap-t interval (<a href="../references/reference_list.htm#ref-vives-2001">Vives et al., 2001</a>; <a href="../references/reference_list.htm#ref-hall-1988">Hall 1988</a>):</p>
+        <p>…and a centred bootstrap-t interval (after <a href="../references/reference_list.htm#ref-vives-2001">Vives et al., 2001</a>; <a href="../references/reference_list.htm#ref-hall-1988">Hall 1988</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle g \space \pm G(\alpha /2)\sqrt{\text{var}(g)} \\
-\displaystyle G=\left| \frac{(g-g^*)}{\sqrt{\text{var}(g^*)}}\right|$</MadCap:equation>
+            <MadCap:equation>$\displaystyle g \space \pm \frac{z^*_{1-\alpha /2}-z^*_{\alpha /2}}{2}\sqrt{\text{var}(g)} \\
+\displaystyle z^*=\frac{(g^*-g)}{\sqrt{\text{var}(g^*)}}$</MadCap:equation>
         </p>
-        <p>- where G is the estimated bootstrap distribution of the absolute value of the studentized sample diversity index.</p>
+        <p>- where z star is the studentized statistic from a bootstrap sample, using the large sample variance calculated from that sample, and z star with a subscript is a quantile of its bootstrap distribution. The equal-tailed bootstrap-t limits are centred on g by putting half of the distance between them on each side.</p>
         <p>&#160;</p>
         <p>The resampling scheme used for the bootstrap intervals above draws N individuals at random with replacement from the N observed, each draw falling in class i with probability ni/N (a multinomial resample of the observed counts); a class may therefore be absent from a bootstrap sample, so the number of classes is not held constant.</p>
         <p>&#160;</p>
-        <p><a href="../references/reference_list.htm#ref-vives-2001">Vives et al. (2001)</a> showed that percentile methods (including BCa) do not perform well for Shannon's index, they advise using a symmetrized bootstrap-t confidence interval.</p>
+        <p><a href="../references/reference_list.htm#ref-vives-2001">Vives et al. (2001)</a> showed that percentile methods (including BCa) do not perform well for Shannon's index, they advise using a symmetrized bootstrap-t confidence interval, which takes a quantile of the absolute studentized values. The centred bootstrap-t interval of StatsDirect is close to that interval but is not the same.</p>
         <p>&#160;</p>
         <p>StatsDirect also extrapolates the richness (number of classes) in your sample in order to give an estimate of the number of classes in the population. There are different approaches to this extrapolation, a well-founded method that does not assume a model of class abundance is that of <a href="../references/reference_list.htm#ref-chao-1984">Chao (1984)</a> as discussed by <a href="../references/reference_list.htm#ref-colwell-1994">Colwell and Coddington (1994)</a>.</p>
         <p>
@@ -71,7 +71,7 @@ D_s=1-l$</MadCap:equation>
 
 \displaystyle \text{var}(S)=b\left[\frac{(a/b)^4}{4}+(a/b)^3+\frac{(a/b)^2}{2}\right]$</MadCap:equation>
         </p>
-        <p>- where S is the estimate of the total number of classes in the population, s is the number of classes observed in the sample, a is the number of classes with exactly one individual (singletons), b is the number of classes with exactly two individuals (doubletons), and where 1 is substituted for a or b if either has no singletons or doubletons. The lower confidence limit is not allowed below the number of classes observed.</p>
+        <p>- where S is the estimate of the total number of classes in the population, s is the number of classes observed in the sample, a is the number of classes with exactly one individual (singletons), b is the number of classes with exactly two individuals (doubletons), and where 1 is substituted for a or b if either has no singletons or doubletons. The confidence interval for S is the log-normal interval of <a href="../references/reference_list.htm#ref-chao-1987">Chao (1987)</a>: s + (S - s)/C to s + (S - s)*C, where C = exp(z*sqrt(ln(1 + var(S)/(S - s)<sup>2</sup>))) and z is a quantile of the standard normal distribution. It treats the number of classes not seen, S - s, as log-normal, so the lower limit cannot fall below the number of classes observed.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
@@ -139,7 +139,7 @@ D_s=1-l$</MadCap:equation>
         <p>&#160;</p>
         <p>Estimated total number of classes = 54</p>
         <p>Standard error (large sample) = 23.167466</p>
-        <p>Normal (large sample) 95% CI = 26 to 99</p>
+        <p>Log-normal (Chao) 95% CI = 33 to 141</p>
         <p>&#160;</p>
         <p><b>Simpson Ds (Hurlburt PIE)</b> = 0.899352, (dominance l = 0.100648,  ds = 9.935578)</p>
         <p>Standard error (large sample) = 0.016826</p>
