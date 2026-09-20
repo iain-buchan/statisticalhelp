@@ -48,7 +48,7 @@
         <p>Sensitivity = a/(a+c)</p>
         <p>Specificity = d/(b+d)</p>
         <p>&#160;</p>
-        <p>We can apply Bayes' theorem if we know the approximate likelihood that a subject has the disease before they come for screening, this is given by the prevalence of the disease. Here the false positive rate is the proportion of positive results that are false and the false negative rate is the proportion of negative results that are false. For low prevalence diseases the false negative rate will be low and the false positive rate will be high. For high prevalence diseases the false negative rate will be high and the false positive rate will be lower. People are often surprised by the high numbers of projected false positives, you need a highly specific test to keep this number low. The false positive rate of a screening test can be reduced by repeating the test. In some cases a test is performed three times and the patient is declared positive if at least two out of the three component tests were positive.</p>
+        <p>We can apply Bayes' theorem if we know the approximate likelihood that a subject has the disease before they come for screening, this is given by the prevalence of the disease. Here the false positive rate is the proportion of positive results that are false, P(no disease | positive test), which is 1 - positive predictive value; the false negative rate is the proportion of negative results that are false, P(disease | negative test), which is 1 - negative predictive value. Note that many texts use these two names for 1 - specificity and 1 - sensitivity, which are different quantities: the proportion of disease-free people who test positive and the proportion of diseased people who test negative. For low prevalence diseases the false negative rate will be low and the false positive rate will be high. For high prevalence diseases the false negative rate will be high and the false positive rate will be lower. People are often surprised by the high numbers of projected false positives, you need a highly specific test to keep this number low. The false positive rate of a screening test can be reduced by repeating the test. In some cases a test is performed three times and the patient is declared positive if at least two out of the three component tests were positive.</p>
         <p>&#160;</p>
         <p><u>Technical Validation</u>
         </p>
@@ -58,7 +58,7 @@
 \space \\
 \displaystyle P_{F-}=\frac{[1-P(A|B)]P(B)}{1-P(A|\bar{B})-P(B)[P(A|B)-P(A|\bar{B})]} \\$</MadCap:equation>
         </p>
-        <p>- where P<sub>F+</sub> is the false positive rate P(B bar|A), P<sub>F-</sub> is the false negative rate P(B|A bar), P(A|B) is the probability of A given B, A is a positive test result, A bar is a negative test result, B is disease present and B bar is disease absent.</p>
+        <p>- where P<sub>F+</sub> is the false positive rate P(B bar|A) (= 1 - positive predictive value), P<sub>F-</sub> is the false negative rate P(B|A bar) (= 1 - negative predictive value), P(A|B) is the probability of A given B, A is a positive test result, A bar is a negative test result, B is disease present and B bar is disease absent.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
