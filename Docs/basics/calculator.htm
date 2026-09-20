@@ -241,7 +241,7 @@
                                             </tr>
                                             <tr>
                                                 <td>-</td>
-                                                <td>subtraction</td>
+                                                <td>subtraction; in front of a value it is negation, e.g. -5, -PI, -(3+2), -LOG(2)</td>
                                             </tr>
                                             <tr>
                                                 <td>*</td>
@@ -261,11 +261,10 @@
                                         <p>&#160;</p>
                                         <p>Priority of arithmetic operators in descending order</p>
                                         <ol>
-                                            <li value="1">Exponentiation (^)</li>
-                                            <li value="2">Negation (-X) (Exception = x^-y; i.e. 4^-2 is 0.0625 and not -16)</li>
-                                            <li value="3">Multiplication and Division (*, /)</li>
-                                            <li value="4">Integer Division (\)</li>
-                                            <li value="5">Addition and Subtraction (+, -)</li>
+                                            <li value="1">Factorial (!) and Exponentiation (^ or **): factorial first, so 2^3! is 2^6 = 64; a chain of powers is worked from left to right, so 2^3^2 is (2^3)^2 = 64</li>
+                                            <li value="2">Negation (-X): -2^2 is -(2^2) = -4 and -3! is -(3!) = -6; write (-2)^2 for 4. Exception = x^-y: a minus sign straight after ^ belongs to the exponent, i.e. 4^-2 is 4^(-2) = 0.0625. Formulas typed into worksheet cells follow the Excel convention instead, where =-2^2 is 4. Versions before 5 understood a minus sign only as part of a number, so they gave -2^2 = 4 and could not evaluate -PI or -(3+2)</li>
+                                            <li value="3">Multiplication, Division and Integer Division (*, /, \)</li>
+                                            <li value="4">Addition and Subtraction (+, -)</li>
                                         </ol>
                                         <p>&#160;</p>
                                         <table cellspacing="0" style="caption-side: top;">

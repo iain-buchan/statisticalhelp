@@ -147,7 +147,7 @@
                                         <p>&#160;</p>
                                         <p><u>Technical Validation</u>
                                         </p>
-                                        <p>StatsDirect uses the sampling distribution of U to give exact probabilities. These calculations may take an appreciable time to complete when many data are tied.</p>
+                                        <p>StatsDirect uses the sampling distribution of U to give exact probabilities. Each one sided probability includes the observed value of U, so the two add up to more than one; the two sided probability is twice the smaller of them. These calculations may take an appreciable time to complete when many data are tied.</p>
                                         <p>&#160;</p>
                                         <p>Confidence intervals are constructed for the difference between the means or medians (any measure of location in fact). The level of confidence used will be as close as is theoretically possible to the one you specify. StatsDirect approaches the selected confidence level from the conservative side via the Hodges-Lehman estimator (<a href="../references/reference_list.htm#ref-monahan-1984">Monahan, 1984</a>).</p>
                                         <p>&#160;</p>
@@ -335,9 +335,9 @@ U = 243      U' = 189</p>
 
 Exact probability (adjusted for ties):</p>
                                         <p>
-Lower side P = 0.2645  (H1: x tends to be less than y)</p>
+Lower side P = 0.7394  (H1: x tends to be less than y)</p>
                                         <p>
-Upper side P = 0.7355  (H1: x tends to be greater than y)</p>
+Upper side P = 0.2645  (H1: x tends to be greater than y)</p>
                                         <p>
 Two sided P = 0.529  (H1: x tends to be distributed differently to y)
 </p>
