@@ -106,7 +106,7 @@
 \displaystyle h=m-i \\
 \displaystyle i=\text{fix}(m) \\ \displaystyle m=\max(\min(p(n+1),n),1)$</MadCap:equation>
         </p>
-        <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), fix is the integer part of a real number, h is the fractional part of order statistic i, u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size.</p>
+        <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), fix is the integer part of a real number, h is the fractional part of order statistic i, u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size. When i = n the quantile is u<sub>n</sub> (h is then zero, and there is no u<sub>n+1</sub> to evaluate), so Q(0) = u<sub>1</sub> and Q(1) = u<sub>n</sub>.</p>
         <p>&#160;</p>
         <p><b>Centile type 1:</b>
         </p>
@@ -117,7 +117,7 @@
 \displaystyle P=pn \\
 i=\text{first index where } W_i&gt;P$</MadCap:equation>
         </p>
-        <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), u is an observation from a sample after it has been ordered from smallest to largest value, n is the sample size, w is a weight normalised so that it sums to n and W<sub>i</sub> is the sum of the weights of the first i ordered observations.</p>
+        <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), u is an observation from a sample after it has been ordered from smallest to largest value, n is the sample size, w is a weight normalised so that it sums to n and W<sub>i</sub> is the sum of the weights of the first i ordered observations. At the two ends, Q(0) is the smallest observation u<sub>1</sub> and Q(1) is the largest, u<sub>n</sub>.</p>
         <p>&#160;</p>
         <p><u>Technical validation</u>
         </p>

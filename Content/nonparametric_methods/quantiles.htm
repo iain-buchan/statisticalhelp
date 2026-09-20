@@ -24,7 +24,7 @@
         <p>&#160;</p>
         <p style="font-weight: normal;"><b>Method 1</b> (centile type 1 in the descriptive statistics options): This is a common method that emulates the inverse of the empirical probability distribution with averaging where there are discontinuities (<a href="../references/reference_list.htm#ref-hyndman-1996">Hyndman and Fan, 1996</a>), This is also the universal default method in Stata:-</p>
         <p style="font-style: normal;">Take a sorted vector of observations u(i=1 to n) with weights w(i = 1 to n) or weights each equal to one if the sample is unweighted.</p>
-        <p style="font-style: normal;">Then find i = the first index point at which the cumulative weight W<sub>i</sub> = w<sub>1</sub> + ... + w<sub>i</sub> is larger than pn, where p is the proportion of the quantile, n is the sample size and the weights have been normalised to sum to n.</p>
+        <p style="font-style: normal;">Then find i = the first index point at which the cumulative weight W<sub>i</sub> = w<sub>1</sub> + ... + w<sub>i</sub> is larger than pn, where p is the proportion of the quantile, n is the sample size and the weights have been normalised to sum to n. At the two ends, Q(0) is the smallest observation u<sub>1</sub> and Q(1) is the largest, u<sub>n</sub>.</p>
         <p style="font-style: normal;">
             <MadCap:equation>$\displaystyle \text{if }W_{i-1}=pn \text{ then } Q(p)=\frac{u_{i-1}+u_i}{2} \text { else } Q(p)=u_i$</MadCap:equation>
         </p>
@@ -36,6 +36,6 @@
 \displaystyle i=\text{integer part(m)} \\
 \displaystyle h=m-i$</MadCap:equation>
         </p>
-        <p style="font-style: normal;">- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), i is the order statistic, h is the fractional part of the order statistic, u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size.</p>
+        <p style="font-style: normal;">- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), i is the order statistic, h is the fractional part of the order statistic, u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size. When i = n the quantile is u<sub>n</sub> (h is then zero, and there is no u<sub>n+1</sub> to evaluate), so Q(0) = u<sub>1</sub> and Q(1) = u<sub>n</sub>.</p>
     </body>
 </html>
