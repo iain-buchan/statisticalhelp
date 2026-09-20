@@ -14,7 +14,7 @@
         <p>&#160;</p>
         <p>This applies an algebraic expression to any selection of data. The workbook column(s) you select are given the variable names X1, X2 ... Xn in the order that they are selected from left to right across the workbook. You can then create a new column as a function of those selected. You do this by entering an algebraic expression that can use any of the functions, operators and constants below. For example X1/SQR(X2) would produce a column where each row entry was that of the first selected column divided by the square root of the corresponding row entry in the second selected column.</p>
         <p>&#160;</p>
-        <p>The same results can be achieved using intrinsic functions within a StatsDirect workbook. Large complex functions may be handled faster by the <a href="../workbook/worksheet_functions.htm">intrinsic workbook functions</a> of StatsDirect.</p>
+        <p>The same results can be achieved using intrinsic functions within a StatsDirect workbook, with one difference: worksheet formulas follow the Excel convention that negation comes before exponentiation, so =-A1^2 is the square of minus A1, whereas here -X1^2 is minus the square of X1. Large complex functions may be handled faster by the <a href="../workbook/worksheet_functions.htm">intrinsic workbook functions</a> of StatsDirect.</p>
         <p>&#160;</p>
         <table>
             <col style="width: 165px;" />
@@ -127,7 +127,7 @@
             </tr>
             <tr>
                 <td>-</td>
-                <td>subtraction</td>
+                <td>subtraction; in front of a value it is negation, e.g. -X1, -(X1+X2), -LOG(X1)</td>
             </tr>
             <tr>
                 <td>*</td>
@@ -147,10 +147,9 @@
         <p>&#160;</p>
         <p>Priority of arithmetic operators in descending order</p>
         <ol>
-            <li>Exponentiation (^ or **)</li>
-            <li>Negation (-X) (Exception = x^-y; i.e. 4^-2 is 0.0625 and not -16)</li>
-            <li>Multiplication and Division (*, /)</li>
-            <li>Integer Division (\)</li>
+            <li>Factorial (!) and Exponentiation (^ or **): factorial first, so 2^3! is 2^6 = 64; a chain of powers is worked from left to right, so 2^3^2 is (2^3)^2 = 64</li>
+            <li>Negation (-X): -X1^2 is -(X1^2), so with X1 = 3 it is -9; write (-X1)^2 for 9. Exception = x^-y: a minus sign straight after ^ belongs to the exponent, i.e. 4^-2 is 4^(-2) = 0.0625 and X1^-X2 is X1^(-X2). Versions before 5 understood a minus sign only as part of a number, so -X1 had to be written 0-X1 and -2^2 gave 4</li>
+            <li>Multiplication, Division and Integer Division (*, /, \)</li>
             <li>Addition and Subtraction (+, -)</li>
         </ol>
         <p>&#160;</p>
