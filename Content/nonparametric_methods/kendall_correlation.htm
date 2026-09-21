@@ -105,13 +105,97 @@
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
-        <p>Kendall's tau = 0.5111</p>
-        <p>Approximate 95% CI = 0.1352 to 0.8870</p>
-        <p>Upper side (H1 concordance) P = .0233</p>
-        <p>Lower side (H1 discordance) P = .9857</p>
-        <p>Two sided (H1 dependence) P = .0466</p>
+        <p><u>Kendall's rank correlation</u></p>
+        <p>&#160;</p>
+        <p>Career vs. Psychology</p>
+        <p>Observations per sample = 10</p>
+        <p>Concordant pairs = 34</p>
+        <p>Discordant pairs = 11</p>
+        <p>Tied pairs = 0</p>
+        <p>Kendall's score = 23   (standard error = 11.18034)</p>
+        <p>Gamma = 0.511111</p>
+        <p>&#160;</p>
+        <p>Kendall's tau = 0.511111</p>
+        <p>Approximate 95% CI = 0.135203 to 0.887019</p>
+        <p>&#160;</p>
+        <p><u>Approximate tests</u></p>
+        <p>Sample size too small for reliable inference from z, use exact test</p>
+        <p>z = 2.057183</p>
+        <p>Upper side P = 0.0198 (H<sub>1</sub>: concordance)</p>
+        <p>Lower side P = 0.9802 (H<sub>1</sub>: discordance)</p>
+        <p>Two sided P = 0.0397 (H<sub>1</sub>: dependence)</p>
+        <p>&#160;</p>
+        <p>z (continuity corrected) = 1.96774</p>
+        <p>Upper side P = 0.0245 (H<sub>1</sub>: concordance)</p>
+        <p>Lower side P = 0.9755 (H<sub>1</sub>: discordance)</p>
+        <p>Two sided P = 0.0491 (H<sub>1</sub>: dependence)</p>
+        <p>&#160;</p>
+        <p><u>Exact test</u></p>
+        <p>Upper side P = 0.0233 (H<sub>1</sub>: concordance)</p>
+        <p>Lower side P = 0.9857 (H<sub>1</sub>: discordance)</p>
+        <p>Two sided P = 0.0466 (H<sub>1</sub>: dependence)</p>
         <p>&#160;</p>
         <p>From these results we reject the null hypothesis of mutual independence between the career suitability and psychology knowledge rankings for the students. With a two sided test we are considering the possibility of concordance or discordance (akin to positive or negative correlation). A one sided test would have been restricted to either discordance or concordance, this would be an unusual assumption. In our example we can conclude that there is a statistically significant lack of independence between career suitability and psychology knowledge rankings of the students by the tutor. The tutor tended to rank students with apparently greater knowledge as more suitable to their career than those with apparently less knowledge and vice versa.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Kendall's rank correlation: the StatsDirect help example (Armitage and Berry
+# 1994, p. 466) in R
+career     &lt;- c(4, 10, 3, 1, 9, 2, 6, 7, 8, 5)
+psychology &lt;- c(5, 8, 6, 2, 10, 3, 9, 4, 7, 1)
+n &lt;- length(career)
+
+# R's standard test. Its T is the number of concordant pairs (34). Without ties
+# and with fewer than 50 pairs its P is exact, as is StatsDirect's.
+# Use alternative = "greater" for the upper side P and "less" for the lower.
+print(cor.test(career, psychology, method = "kendall"))
+
+# The rest of this code is for data without ties. With ties R's P is no longer
+# exact, tau b replaces tau, and the variance of the score needs an adjustment.
+stopifnot(!anyDuplicated(career), !anyDuplicated(psychology))
+upper &lt;- cor.test(career, psychology, method = "kendall",
+                  alternative = "greater")$p.value
+lower &lt;- cor.test(career, psychology, method = "kendall",
+                  alternative = "less")$p.value
+cat("Exact test:  Upper side P =", round(upper, 4), "  Lower side P =",
+    round(lower, 4), "  Two sided P =", round(min(1, 2 * min(upper, lower)), 4),
+    "\n")
+
+# Concordant and discordant pairs, Kendall's score and tau
+q &lt;- sign(outer(career, career, "-")) * sign(outer(psychology, psychology, "-"))
+concordant &lt;- sum(q[upper.tri(q)] &gt; 0)
+discordant &lt;- sum(q[upper.tri(q)] &lt; 0)
+score &lt;- concordant - discordant
+se &lt;- sqrt(n * (n - 1) * (2 * n + 5) / 18)     # standard error of the score
+tau &lt;- score / (n * (n - 1) / 2)
+tied &lt;- n * (n - 1) / 2 - concordant - discordant
+cat("Concordant pairs =", concordant, "  Discordant pairs =", discordant,
+    "  Tied pairs =", tied, "\n")
+cat(sprintf("Kendall's score = %d   (standard error = %.5f)\n", score, se))
+cat(sprintf("Gamma = %.6f\n", score / (concordant + discordant)))
+
+# Approximate 95% confidence interval for tau: the method of Samara and Randles
+# (1988) as given by Hollander and Wolfe (1999)
+ci &lt;- rowSums(q)                                # each observation's own score
+v &lt;- 2 / (n * (n - 1)) *
+  (2 * (n - 2) / (n * (n - 1)^2) * sum((ci - mean(ci))^2) + 1 - tau^2)
+limits &lt;- tau + c(-1, 1) * qnorm(0.975) * sqrt(v)
+cat(sprintf("Kendall's tau = %.6f   Approximate 95%% CI = %.6f to %.6f\n",
+            tau, limits[1], limits[2]))
+
+# Approximate tests from the normal distribution, without and with a continuity
+# correction (StatsDirect advises the exact test for a sample as small as this)
+for (cc in c(0, 1)) {
+  z &lt;- (score - cc * sign(score)) / se
+  cat(sprintf("z = %.6f   Upper side P = %.4f   Lower side P = %.4f   %s%.4f\n",
+              z, 1 - pnorm(z), pnorm(z), "Two sided P = ", 2 * pnorm(-abs(z))))
+}</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>
