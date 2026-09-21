@@ -97,10 +97,37 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>Chi-square = 17.0481 df = 3</p>
-        <p>P = .0007</p>
+        <p>Chi-square = 17.048101 df = 3</p>
+        <p>P = 0.0007</p>
         <p>&#160;</p>
         <p>Here we may report a statistically highly significant difference between the distribution of blood groups from patients undergoing this surgical procedure and that which would be expected from a random sample of the general population.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Chi-square goodness of fit: the StatsDirect help example (blood groups of 187
+# consecutive patients against the distribution expected in the population) in R
+observed &lt;- c(O = 67, A = 83, B = 29, AB = 8)
+expected &lt;- c(0.44, 0.45, 0.08, 0.03)     # proportions expected; they add up to 1
+
+# R's standard test. With p given it compares the counts with those proportions;
+# rescale.p = TRUE lets p be percentages or expected counts instead.
+test &lt;- chisq.test(observed, p = expected)
+print(test)
+
+# Observed and expected frequencies, and the result as StatsDirect reports it
+cat("N =", sum(observed), "\n")
+print(cbind("Observed frequency" = observed, "Expected frequency" = test$expected))
+cat(sprintf("Chi-square = %.6f  df = %d\nP = %.4f\n", test$statistic,
+            test$parameter, test$p.value))
+
+# Like StatsDirect, R warns when the expected frequencies are small: the
+# chi-square approximation is then unreliable.</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

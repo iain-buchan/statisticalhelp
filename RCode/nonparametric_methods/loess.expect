@@ -1,0 +1,5 @@
+# LOESS, haemoglobin against eGFR (test workbook, 804 rows; data file RCode/data/hgb_egfr.csv).
+# StatsDirect runs R for this analysis, so there is no separate program report to compare.
+RH: Number of Observations: 804
+RH: Equivalent Number of Parameters: 5.464141
+RH: Residual Standard Error: 15.159968

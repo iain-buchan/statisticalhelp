@@ -34,7 +34,7 @@
             <li>either k population distribution functions are identical, or else some of the populations tend to yield larger values than other populations</li>
         </ul>
         <p>&#160;</p>
-        <p>If the test is significant, you can make multiple comparisons between the samples. You may choose the level of significance for these comparisons (default is a = 0.05). All pairwise comparisons are made and the probability of each presumed "non-difference" is indicated (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-critchlow-1991">Critchlow and Fligner, 1991</a>; <a href="../references/reference_list.htm#ref-hollander-1999">Hollander and Wolfe, 1999</a>). Two alternative methods are used to make all possible pairwise comparisons between groups; these are Dwass-Steel-Critchlow-Fligner and Conover-Inman. In most situations, you should use the Dwass-Steel-Critchlow-Fligner result.</p>
+        <p>If the test is significant, you can make multiple comparisons between the samples. You may choose the level of significance for these comparisons (default is a = 0.05). All pairwise comparisons are made and the probability of each presumed "non-difference" is indicated (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-critchlow-1991">Critchlow and Fligner, 1991</a>; <a href="../references/reference_list.htm#ref-hollander-1999">Hollander and Wolfe, 1999</a>). Two alternative methods are used to make all possible pairwise comparisons between groups; these are Dwass-Steel-Critchlow-Fligner and Conover-Iman. In most situations, you should use the Dwass-Steel-Critchlow-Fligner result.</p>
         <p>&#160;</p>
         <p>By the Dwass-Steel-Critchlow-Fligner procedure, a contrast is considered significant if the following inequality is satisfied:</p>
         <p>
@@ -42,7 +42,7 @@
         </p>
         <p>- where q is a quantile from the normal range distribution for k groups, n<sub>i</sub> is size of the ith group, n<sub>j</sub> is the size of the jth group, t<sub>b</sub> is the number of ties at rank b and W<sub>ij</sub> is the sum of the ranks for the ith group where observations for both groups have been ranked together. The values either side of the greater than sign are displayed in parentheses in StatsDirect results.</p>
         <p>&#160;</p>
-        <p>The Conover-Inman procedure is simply Fisher's least significant difference method performed on ranks. A contrast is considered significant if the following inequality is satisfied:</p>
+        <p>The Conover-Iman procedure is simply Fisher's least significant difference method performed on ranks. A contrast is considered significant if the following inequality is satisfied:</p>
         <p>
             <MadCap:equation>$\displaystyle \left| \frac{R_j}{n_j}-\frac{R_i}{n_i}\right|&gt;t_{1-\alpha/2} \sqrt{S^2\frac{N-1-T}{N-k}}\sqrt{\frac{1}{n_i}+\frac{1}{n_j}}$</MadCap:equation>
         </p>
@@ -140,27 +140,111 @@
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
-        <p>Adjusted for ties: T = 25.62883 P &lt; 0.0001</p>
+        <p><u>Kruskal-Wallis test</u></p>
         <p>&#160;</p>
-        <p><u>All pairwise comparisons (Dwass-Steel-Chritchlow-Fligner)</u>
-        </p>
-        <p>Method 1 and Method 2&#160;, P = 0.1529</p>
-        <p>Method 1 and Method 3&#160;, P = 0.0782</p>
-        <p>Method 1 and Method 4&#160;, P = 0.0029</p>
-        <p>Method 2 and Method 3&#160;, P = 0.0048</p>
-        <p>Method 2 and Method 4&#160;, P = 0.0044</p>
-        <p>Method 3 and Method 4&#160;, P = 0.0063</p>
+        <p>Variables: Method 1, Method 2, Method 3, Method 4</p>
+        <p>Mean rank: 21.83, 15.3, 29.57, 4.81</p>
+        <p>Groups = 4</p>
+        <p>df = 3</p>
+        <p>Total observations = 34</p>
         <p>&#160;</p>
-        <p><u>All pairwise comparisons (Conover-Inman)</u>
-        </p>
-        <p>Method 1 and Method 2, P = 0.0071</p>
-        <p>Method 1 and Method 3, P = 0.004</p>
-        <p>Method 1 and Method 4, P &lt; 0.0001</p>
-        <p>Method 2 and Method 3, P &lt; 0.0001</p>
-        <p>Method 2 and Method 4, P &lt; 0.0001</p>
-        <p>Method 3 and Method 4, P &lt; 0.0001</p>
+        <p>T = 25.464373</p>
+        <p>P &lt; 0.0001</p>
         <p>&#160;</p>
-        <p>From the overall T we see a statistically highly significant tendency for at least one group to give higher values than at least one of the others. Subsequent contrasts show a significant separation of all groups with the Conover-Inman method and all but method 1 vs. methods 2 and 3 with the Dwass-Steel-Chritchlow-Fligner method. In most situations, it is best to use only the Dwass-Steel-Chritchlow-Fligner result.</p>
+        <p>Adjusted for ties:</p>
+        <p>T = 25.628836</p>
+        <p>P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <p>At least one of your sample populations tends to yield larger observations than at least one other sample population.</p>
+        <p>&#160;</p>
+        <p><u>Kruskal-Wallis: all pairwise comparisons (Dwass-Steel-Critchlow-Fligner, 2-sided)</u></p>
+        <p>&#160;</p>
+        <p>Critical q (range) = 3.63316</p>
+        <p>Method 1 vs Method 2: not significant (|2.97066| &gt; 3.63316), P = 0.1529</p>
+        <p>Method 1 vs Method 3: not significant (|3.385636| &gt; 3.63316), P = 0.0782</p>
+        <p>Method 1 vs Method 4: significant (|-4.91709| &gt; 3.63316), P = 0.0029</p>
+        <p>Method 2 vs Method 3: significant (|4.709793| &gt; 3.63316), P = 0.0048</p>
+        <p>Method 2 vs Method 4: significant (|-4.744037| &gt; 3.63316), P = 0.0044</p>
+        <p>Method 3 vs Method 4: significant (|4.59903| &gt; 3.63316), P = 0.0063</p>
+        <p>&#160;</p>
+        <p><u>Kruskal-Wallis: all pairwise comparisons (Conover-Iman, 2-sided)</u></p>
+        <p>&#160;</p>
+        <p>Critical t (30 df, 2-sided) = 2.042272</p>
+        <p>Method 1 vs Method 2: significant (6.533333 &gt; 4.617018), P = 0.0071</p>
+        <p>Method 1 vs Method 3: significant (7.738095 &gt; 5.064024), P = 0.004</p>
+        <p>Method 1 vs Method 4: significant (17.020833 &gt; 4.882747), P &lt; 0.0001</p>
+        <p>Method 2 vs Method 3: significant (14.271429 &gt; 4.952009), P &lt; 0.0001</p>
+        <p>Method 2 vs Method 4: significant (10.4875 &gt; 4.766474), P &lt; 0.0001</p>
+        <p>Method 3 vs Method 4: significant (24.758929 &gt; 5.20065), P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <p>From the overall T we see a statistically highly significant tendency for at least one group to give higher values than at least one of the others. Subsequent contrasts show a significant separation of all groups with the Conover-Iman method and all but method 1 vs. methods 2 and 3 with the Dwass-Steel-Critchlow-Fligner method. In most situations, it is best to use only the Dwass-Steel-Critchlow-Fligner result.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above, including both sets of pairwise comparisons. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Kruskal-Wallis test: the StatsDirect help example (Conover 1999, p. 291) in R
+yield &lt;- list("Method 1" = c(83, 91, 94, 89, 89, 96, 91, 92, 90),
+              "Method 2" = c(91, 90, 81, 83, 84, 83, 88, 91, 89, 84),
+              "Method 3" = c(101, 100, 91, 93, 96, 95, 94),
+              "Method 4" = c(78, 82, 81, 77, 79, 81, 80, 81))
+yield &lt;- lapply(yield, function(v) v[!is.na(v)])    # missing values are left out
+y &lt;- unlist(yield)
+g &lt;- factor(rep(names(yield), lengths(yield)))
+k &lt;- nlevels(g)
+N &lt;- length(y)
+ni &lt;- lengths(yield)
+
+# R's standard test. Its chi-squared is StatsDirect's T adjusted for ties.
+print(kruskal.test(y, g))
+pv &lt;- function(p) if (p &lt; 0.0001) "P &lt; 0.0001" else paste("P =", round(p, 4))
+
+# Mean ranks, and T before and after the adjustment for ties
+r &lt;- rank(y)
+meanrank &lt;- tapply(r, g, mean)
+T0 &lt;- 12 / (N * (N + 1)) * sum(ni * meanrank^2) - 3 * (N + 1)
+ties &lt;- table(y)
+Tadj &lt;- T0 / (1 - sum(ties^3 - ties) / (N^3 - N))
+cat("Mean rank:", round(meanrank, 2), "\n")
+cat(sprintf("T = %.6f   Adjusted for ties: T = %.6f   P = %.3g\n",
+            T0, Tadj, pchisq(Tadj, k - 1, lower.tail = FALSE)))
+
+# All pairwise comparisons (Dwass-Steel-Critchlow-Fligner): for each pair a
+# Mann-Whitney statistic from the ranks within the pair, with its variance
+# adjusted for ties, referred to the studentized range for k groups
+pairs &lt;- combn(k, 2)
+cat("Critical q (range) =", round(qtukey(0.95, k, Inf), 5), "\n")
+for (j in seq_len(ncol(pairs))) {
+  a &lt;- yield[[pairs[1, j]]]
+  b &lt;- yield[[pairs[2, j]]]
+  na &lt;- length(a)
+  nb &lt;- length(b)
+  rp &lt;- rank(c(a, b))
+  tp &lt;- table(c(a, b))
+  v &lt;- na * nb / 12 * (na + nb + 1 - sum(tp^3 - tp) / ((na + nb) * (na + nb - 1)))
+  q &lt;- sqrt(2) * (sum(rp[1:na]) - na * (na + nb + 1) / 2) / sqrt(v)
+  cat(sprintf("%s vs %s:  |q| = %.6f  %s\n", names(yield)[pairs[1, j]],
+              names(yield)[pairs[2, j]], abs(q),
+              pv(ptukey(abs(q), k, Inf, lower.tail = FALSE))))
+}
+
+# All pairwise comparisons (Conover-Iman): differences between mean ranks
+# against t with N - k degrees of freedom, using the adjusted T
+s2 &lt;- (sum(r^2) - N * (N + 1)^2 / 4) / (N - 1)
+cat("Critical t (", N - k, " df) = ", round(qt(0.975, N - k), 6), "\n", sep = "")
+for (j in seq_len(ncol(pairs))) {
+  i1 &lt;- pairs[1, j]
+  i2 &lt;- pairs[2, j]
+  d &lt;- abs(meanrank[i1] - meanrank[i2])
+  se &lt;- sqrt(s2 * (N - 1 - Tadj) / (N - k)) * sqrt(1 / ni[i1] + 1 / ni[i2])
+  cat(sprintf("%s vs %s:  %.6f against %.6f  %s\n", names(yield)[i1],
+              names(yield)[i2], d, qt(0.975, N - k) * se,
+              pv(2 * pt(d / se, N - k, lower.tail = FALSE))))
+}</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

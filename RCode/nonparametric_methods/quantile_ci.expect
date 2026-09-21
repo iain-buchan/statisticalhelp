@@ -1,0 +1,6 @@
+# Quantile confidence interval, Conover (1999) tubes. One fragment per line.
+Quantile (0.75) = 66.35
+Approximate 90% CI (non-conservative) = 63.3 to 73.3
+Exact confidence level = 90.93936%
+Approximate 90% CI (conservative) = 63.3 to 78.5
+Exact confidence level = 96.284745%

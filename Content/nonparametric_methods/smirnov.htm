@@ -115,19 +115,58 @@
         <p>&#160;</p>
         <p>Two sided test:</p>
         <p>D = 0.4</p>
-        <p>P = .2653</p>
+        <p>P = 0.2653</p>
         <p>&#160;</p>
         <p>One sided test (suspecting Xi shifted left of Yi):</p>
         <p>D = 0.4</p>
-        <p>P = .1328</p>
+        <p>P = 0.1328</p>
         <p>&#160;</p>
         <p>One sided test (suspecting Xi shifted right of Yi):</p>
         <p>D = 0.333333</p>
-        <p>P = .2462</p>
+        <p>P = 0.2462</p>
         <p>&#160;</p>
         <p>Thus we can not reject the null hypothesis that the two populations from which our samples were drawn have the same distribution function.</p>
         <p>&#160;</p>
         <p>If we were interested in a one sided test then we would need good reason for expecting one group to yield values above (distribution shifted to the right of) or below (distribution shifted to the left of) the other group. For these data neither of the one sided tests reached significance.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Two sample Smirnov test: the StatsDirect help example (Conover 1999) in R
+xi &lt;- c(7.6, 8.4, 8.6, 8.7, 9.3, 9.9, 10.1, 10.6, 11.2)
+yi &lt;- c(5.2, 5.7, 5.9, 6.5, 6.8, 8.2, 9.1, 9.8, 10.8, 11.3, 11.5, 12.3, 12.5,
+        13.4, 14.6)
+
+# R's standard test, which it calls the two-sample Kolmogorov-Smirnov test. D is
+# the largest vertical distance between the two sample distribution functions.
+# StatsDirect's P is always exact. R's is exact by default when the product of
+# the sample sizes is less than 10000; exact = TRUE asks for it at any size.
+two &lt;- ks.test(xi, yi, exact = TRUE)
+print(two)
+cat(sprintf("Two sided test:          D = %g   P = %.4f\n",
+            two$statistic, two$p.value))
+
+# One sided tests. "greater" asks whether the distribution function of xi lies
+# above that of yi, which is what happens when xi is shifted left of yi (its
+# values tend to be smaller); "less" asks whether xi is shifted right of yi.
+left &lt;- ks.test(xi, yi, alternative = "greater", exact = TRUE)
+right &lt;- ks.test(xi, yi, alternative = "less", exact = TRUE)
+cat(sprintf("Xi shifted left of Yi:   D = %g   P = %.4f\n",
+            left$statistic, left$p.value))
+cat(sprintf("Xi shifted right of Yi:  D = %g   P = %.4f\n",
+            right$statistic, right$p.value))
+
+# The three D statistics from the sample distribution functions
+v &lt;- sort(c(xi, yi))
+fx &lt;- ecdf(xi)(v)                         # proportion of xi at or below each value
+fy &lt;- ecdf(yi)(v)
+cat("D =", max(abs(fx - fy)), "  D (left) =", max(fx - fy),
+    "  D (right) =", round(max(fy - fx), 6), "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

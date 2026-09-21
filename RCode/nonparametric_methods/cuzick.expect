@@ -1,0 +1,18 @@
+# Cuzick's trend test, Cuzick (1985) lung metastases by cell line. One fragment per line.
+Groups = 5
+Ez = 3.022222
+Var(z) = 1.93284
+z = 2.110386
+One sided P = 0.0174
+Two sided P = 0.0348
+z = 2.114639
+One sided P = 0.0172
+Two sided P = 0.0345
+R: T = 3386.5
+R: Var(T) = 15003.666667
+R: VarT = 14943.375253
+HP: T = 3,386.5
+HP: ET = 3,128
+HP: Var(T) = 15,003.666667
+HP: Var(T) = 14,943.375253
+HP: Order: CMT 64 (1), CMT 167 (2), CMT 170 (3), CMT 175 (4), CMT 181 (5)
