@@ -13,7 +13,7 @@
         <p>&#160;</p>
         <p>This is a method for the comparison of a pair of samples.</p>
         <p>&#160;</p>
-        <p>The Wilcoxon signed ranks test statistic T<sup>+</sup> is the sum of the ranks of the positive, non-zero differences (D<sub>i</sub>) between a pair of samples.</p>
+        <p>The Wilcoxon signed ranks test statistic T<sup>+</sup> is the sum of the ranks of the positive, non-zero differences (D<sub>i</sub>) between a pair of samples. Zero differences are set aside before the other differences are ranked, as in <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999)</a>. Some other software ranks the zero differences with the rest before setting them aside (<a href="../references/reference_list.htm#ref-pratt-1959">Pratt, 1959</a>), which can give a different P value when some differences are zero.</p>
         <p>&#160;</p>
         <p>Assumptions of tests on T<sup>+</sup>:</p>
         <ul>
@@ -35,14 +35,14 @@
         <p>&#160;</p>
         <p><u>Technical Validation</u>
         </p>
-        <p>Exact permutational probability associated with the test statistic is calculated for up to 200 pairs. A normal approximation is used with more than 200 pairs. Note that StatsDirect uses more accurate methods than some other statistical software for calculating probabilities associated with this statistic, therefore, you may notice a difference in results, especially where there are tied observations - you should find that StatsDirect and StatExact give the same answers. Confidence limits are calculated using the exact critical value k from the signed rank distribution for samples of 4 to 199 observations, or by calculating the normal approximation K* for samples of 200 or more observations; the exact confidence level attained is evaluated for samples of up to 1000 observations (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-neumann-1988">Neumann, 1988</a>).</p>
+        <p>Exact permutational probability associated with the test statistic is calculated for up to 200 pairs. A normal approximation is used with more than 200 pairs. Note that StatsDirect uses more accurate methods than some other statistical software for calculating probabilities associated with this statistic, therefore, you may notice a difference in results, especially where there are tied observations - you should find that StatsDirect and StatXact give the same answers. Confidence limits are calculated using the exact critical value k from the signed rank distribution for samples of 4 to 199 observations, or by calculating the normal approximation K* for samples of 200 or more observations; the exact confidence level attained is evaluated for samples of up to 1000 observations (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-neumann-1988">Neumann, 1988</a>).</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
         <p>From <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999)</a>.</p>
         <p>Test workbook (Nonparametric worksheet: First Born, Second Born).</p>
         <p>&#160;</p>
-        <p>The following data represent agressivity scores for 12 pairs of monozygotic twins.</p>
+        <p>The following data represent aggressivity scores for 12 pairs of monozygotic twins.</p>
         <p>&#160;</p>
         <table cellspacing="0" style="caption-side: top;">
             <col />
@@ -101,15 +101,89 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select the Wilcoxon Signed Ranks from the Nonparametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Firstborn" and "Second twin" when prompted for data.</p>
+        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select the Wilcoxon Signed Ranks from the Nonparametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "First Born" and "Second Born" when prompted for data.</p>
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
-        <p>two sided P = 0.4756</p>
-        <p>median difference = 1.5</p>
-        <p>95.8% confidence interval for the difference between population medians = -2.5 to 6.5</p>
+        <p><u>Wilcoxon's signed ranks test</u></p>
         <p>&#160;</p>
-        <p>Assuming that the paired differences come from a symmetrical distribution then these results show that one group did not tend to yield different results to the other group which was paired with it, i.e. there was no statistically significant difference between the agressivity scores of the first born as compared with the second twin. The extent of this lack of difference is shown well by the confidence interval which clearly encompasses zero. Note that the quoted 95.8% confidence interval is as close as you can get to 95% because of the mathematics involved in nonparametric methods like this.</p>
+        <p>First Born vs. Second Born</p>
+        <p>Number of non-zero differences ranked = 11</p>
+        <p>Sum of ranks for positive differences = 41.5</p>
+        <p>&#160;</p>
+        <p>Exact probability (adjusted for ties):</p>
+        <p>Lower side P = 0.7739 (H<sub>1</sub>: differences tend to be less than zero)</p>
+        <p>Upper side P = 0.2378 (H<sub>1</sub>: differences tend to be greater than zero)</p>
+        <p>Two sided P = 0.4756 (H<sub>1</sub>: differences tend not to be zero)</p>
+        <p>&#160;</p>
+        <p>95.8% confidence interval for difference between population medians:</p>
+        <p>K = 14   Median difference = 1.5 (-2.5 to 6.5)</p>
+        <p>&#160;</p>
+        <p>Assuming that the paired differences come from a symmetrical distribution then these results show that one group did not tend to yield different results to the other group which was paired with it, i.e. there was no statistically significant difference between the aggressivity scores of the first born as compared with the second twin. The extent of this lack of difference is shown well by the confidence interval which clearly encompasses zero. Note that the quoted 95.8% confidence interval is as close as you can get to 95% because of the mathematics involved in nonparametric methods like this.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Wilcoxon signed ranks test: the StatsDirect help example (Conover 1999) in R
+first  &lt;- c(86, 71, 77, 68, 91, 72, 77, 91, 70, 71, 88, 87)
+second &lt;- c(88, 77, 76, 64, 96, 72, 65, 90, 65, 80, 81, 72)
+d &lt;- first - second                       # one difference is 0 and some are tied
+n &lt;- length(d)
+
+# R's standard test. Its V is the sum of ranks for positive differences. R 4.6.0
+# or later gives exact results that allow for the zero and the ties, but it ranks
+# the zero with the other differences before setting it aside (the method of
+# Pratt, 1959): V = 48.5 and two sided P = 0.458. StatsDirect, like Conover, sets
+# zeros aside before ranking: the sum is 41.5 and two sided P = 0.4756. Each P is
+# exact for its own method. Older versions of R warn and use a normal
+# approximation with continuity correction, as exact = FALSE does (V = 41.5,
+# two sided P = 0.4765).
+print(wilcox.test(first, second, paired = TRUE, conf.int = TRUE))
+
+# With zeros set aside first, R 4.6.0 or later gives StatsDirect's two sided P.
+# Use alternative = "less" for the lower side P and "greater" for the upper.
+# Keep the confidence interval from the first call: it needs every difference.
+nz &lt;- d[d != 0]
+print(wilcox.test(nz))
+
+# Number of non-zero differences and the sum of ranks for positive differences
+r &lt;- rank(abs(nz))                        # tied values share a mid-rank
+Tplus &lt;- sum(r[nz &gt; 0])
+cat("Number of non-zero differences ranked =", length(nz), "\n")
+cat("Sum of ranks for positive differences =", Tplus, "\n")
+
+# Exact P given the ties, in any version of R: each rank is as likely to belong
+# to a positive as to a negative difference, so build the distribution of the
+# sum one rank at a time. Ranks are doubled to make mid-ranks whole numbers.
+p &lt;- 1                                    # P(doubled sum = 0), before any rank
+for (v in 2 * r) p &lt;- (c(p, numeric(v)) + c(numeric(v), p)) / 2
+w &lt;- 2 * Tplus + 1                        # position of the observed value
+lower &lt;- sum(p[1:w])                      # each side includes the observed sum
+upper &lt;- sum(p[w:length(p)])
+cat("Lower side P =", round(lower, 4), "  Upper side P =", round(upper, 4),
+    "  Two sided P =", round(min(1, 2 * min(lower, upper)), 4), "\n")
+
+# Confidence interval, from all n differences: K from the exact distribution of
+# the statistic without ties, then the Kth smallest and Kth largest of the
+# n(n + 1)/2 averages of two differences (each is also averaged with itself).
+# With fewer than 6 differences K is 0 and there is no 95% interval.
+# StatsDirect's median difference is the median of these averages, which R calls
+# the (pseudo)median; it is not median(d), which is 1 here.
+# R 4.6.0 or later gives the same limits for these data but works out the level
+# given the ties (96.2 percent in R 4.6.1). For other tied data its limits can
+# differ.
+K &lt;- qsignrank(0.025, n)
+a &lt;- outer(d, d, "+") / 2
+a &lt;- sort(a[upper.tri(a, diag = TRUE)])
+cat(sprintf("%.1f%% confidence interval for difference between population medians:\n",
+            100 * (1 - 2 * psignrank(K - 1, n))))
+cat(sprintf("K = %g   Median difference = %g (%g to %g)\n",
+            K, median(a), a[K], rev(a)[K]))</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

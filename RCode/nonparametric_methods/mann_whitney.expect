@@ -1,0 +1,17 @@
+# Mann-Whitney U test, Conover (1999) farm boys v town boys. One fragment per line.
+median = 9.8
+rank sum = 321
+median = 7.75
+U = 243
+U' = 189
+0.271772 to 0.621223
+Lower side P = 0.7394
+Upper side P = 0.2645
+Two sided P = 0.529
+K = 134
+median difference = 0.8
+-2.3 to 4.4
+95.14% confidence interval for
+# the report drops trailing zeros where the R script prints theta to 6 places
+HP: Theta (U'/mn) = 0.4375 (95% CI: 0.271772 to 0.621223)
+R: Theta = 0.437500 (95% CI: 0.271772 to 0.621223)
