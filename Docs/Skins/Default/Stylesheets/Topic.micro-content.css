@@ -504,62 +504,6 @@
 	font-size: 12pt;
 }
 
-.micro-response-1583592702 .dropDown.dropDownrcode
-{
-	margin-top: 1em;
-	margin-bottom: 1em;
-}
-
-.micro-response-1583592702 .dropDownHotspot
-{
-	text-decoration: none;
-}
-
-.micro-response-1583592702 .dropDownHotspot:link
-{
-	text-decoration: none;
-}
-
-.micro-response-1583592702 .dropDownHotspot.dropDownHotspotrcode
-{
-	color: #2c5f8a;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.micro-response-1583592702 .dropDownHotspot.dropDownHotspotrcode:link
-{
-	color: #2c5f8a;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.micro-response-1583592702 .MCDropDown_Open .MCDropDownHotSpot_.MCHotSpotImage.MCDropDownHotSpot_rcode
-{
-	background-position: left;
-	background-image: url('DropDownOpen.gif');
-	padding-left: 1px;
-	padding-right: 0;
-}
-
-.micro-response-1583592702 .MCDropDown_Closed .MCDropDownHotSpot_.MCHotSpotImage.MCDropDownHotSpot_rcode
-{
-	background-position: left;
-	background-image: url('DropDownClosed.gif');
-	padding-left: 0px;
-	padding-right: 0;
-}
-
-.micro-response-1583592702 .dropDownHead
-{
-	text-decoration: none;
-}
-
-.micro-response-1583592702 .dropDownHead.dropDownHeadrcode
-{
-	font-weight: bold;
-}
-
 .micro-response-1583592702 .MCWebHelpFramesetLink a
 {
 	
