@@ -189,15 +189,72 @@
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
-                                        <p>Spearman's rank correlation coefficient (Rho)= 0.684848</p>
+                                        <p><u>Spearman's rank correlation</u>
+                                        </p>
                                         <p>&#160;</p>
-                                        <p>95% CI for rho (Fisher's z transformed)= 0.097085 to 0.918443</p>
+                                        <p>Career vs. Psychology</p>
+                                        <p>Observations per sample = 10</p>
+                                        <p>Spearman's score = 52</p>
                                         <p>&#160;</p>
-                                        <p>Upper side (H1 positive correlation) P = .0173</p>
-                                        <p>Lower side (H1 negative correlation) P = .9847</p>
-                                        <p>Two sided (H1 any correlation) P = .0347</p>
+                                        <p>Spearman's rank correlation coefficient (Rho) = 0.684848</p>
+                                        <p>&#160;</p>
+                                        <p>95% CI for rho (Fisher's Z transformed) = 0.097085 to 0.918443</p>
+                                        <p>&#160;</p>
+                                        <p>Upper side P = 0.0173 (H<sub>1</sub>: positive correlation)</p>
+                                        <p>Lower side P = 0.9847 (H<sub>1</sub>: negative correlation)</p>
+                                        <p>Two sided P = 0.0347 (H<sub>1</sub>: any correlation)</p>
                                         <p>&#160;</p>
                                         <p>From these results we reject the null hypothesis of mutual independence between the tutor's ranking of students suitability for their career and their knowledge of psychology. With a two sided test we are considering the possibility of a positive or a negative correlation, i.e. we can't be sure of this direction at the outset. A one sided test would have been restricted to correlation in one direction only i.e. large values of one group associated with big values of the other (positive correlation) or large values of one group associated with small values of the other (negative correlation). In our example we can conclude that there is a statistically significant lack of independence between career suitability and psychology knowledge rankings of the students by the tutor. The tutor tended to rank students with apparently greater knowledge as more suitable to their career than those with apparently less knowledge and vice versa.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Spearman's rank correlation: the StatsDirect help example (Armitage and Berry
+# 1994, p. 466) in R
+career     &lt;- c(4, 10, 3, 1, 9, 2, 6, 7, 8, 5)
+psychology &lt;- c(5, 8, 6, 2, 10, 3, 9, 4, 7, 1)
+n &lt;- length(career)
+
+# R's standard test. Its S is the sum of squared differences between the ranks,
+# which StatsDirect calls Spearman's score (52). With 10 or more pairs R takes
+# P from a series approximation (two sided P = 0.0351 here); with fewer it is
+# exact. StatsDirect's P is exact for 10 or fewer pairs (0.0347).
+# Use alternative = "greater" for the upper side P and "less" for the lower.
+print(cor.test(career, psychology, method = "spearman"))
+
+# Rho, the score and a 95% confidence interval by Fisher's z transformation
+rx &lt;- rank(career)
+ry &lt;- rank(psychology)
+rho &lt;- cor(rx, ry)
+score &lt;- sum((rx - ry)^2)
+ci &lt;- tanh(atanh(rho) + c(-1, 1) * qnorm(0.975) / sqrt(n - 3))
+cat("Spearman's score =", score, "\n")
+cat(sprintf("Rho = %.6f   95%% CI = %.6f to %.6f\n", rho, ci[1], ci[2]))
+
+# Exact P, for data without ties and up to 12 pairs: count, for every way of
+# pairing the ranks, the sum of squared differences. Pairs are added one at a
+# time; a row of 'ways' is the set of ranks of y already used and a column is
+# the sum so far.
+stopifnot(!anyDuplicated(career), !anyDuplicated(psychology), n &lt;= 12)
+maxsum &lt;- n * (n^2 - 1) / 3
+ways &lt;- matrix(0, 2^n, maxsum + 1)
+ways[1, 1] &lt;- 1
+for (set in 0:(2^n - 2)) {
+  used &lt;- bitwAnd(set, 2^(0:(n - 1))) &gt; 0
+  i &lt;- sum(used) + 1                      # the next rank of x to be paired
+  for (j in which(!used)) {
+    s &lt;- (i - j)^2
+    to &lt;- set + 2^(j - 1) + 1
+    ways[to, (s + 1):(maxsum + 1)] &lt;- ways[to, (s + 1):(maxsum + 1)] +
+      ways[set + 1, 1:(maxsum + 1 - s)]
+  }
+}
+p &lt;- ways[2^n, ] / factorial(n)           # P(score = 0, 1, ... maxsum)
+upper &lt;- sum(p[1:(score + 1)])            # a small score is a large rho
+lower &lt;- sum(p[(score + 1):(maxsum + 1)]) # each side includes the observed score
+cat("Upper side P =", round(upper, 4), "  Lower side P =", round(lower, 4),
+    "  Two sided P =", round(min(1, 2 * min(upper, lower)), 4), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

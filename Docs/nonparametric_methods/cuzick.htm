@@ -236,9 +236,67 @@
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
-                                        <p>one sided p (corrected for ties) = 0.0172</p>
+                                        <p><u>Cuzick's trend test</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Groups = 5</p>
+                                        <p>Observations = 45</p>
+                                        <p>Order: CMT 64 (1), CMT 167 (2), CMT 170 (3), CMT 175 (4), CMT 181 (5)</p>
+                                        <p>&#160;</p>
+                                        <p>Ez = 3.022222</p>
+                                        <p>Var(z) = 1.93284</p>
+                                        <p>T = 3,386.5</p>
+                                        <p>ET = 3,128</p>
+                                        <p>Var(T) = 15,003.666667</p>
+                                        <p>&#160;</p>
+                                        <p>z = 2.110386</p>
+                                        <p>One sided P = 0.0174</p>
+                                        <p>Two sided P = 0.0348</p>
+                                        <p>&#160;</p>
+                                        <p>Corrected for ties:</p>
+                                        <p>Var(T) = 14,943.375253</p>
+                                        <p>z = 2.114639</p>
+                                        <p>One sided P = 0.0172</p>
+                                        <p>Two sided P = 0.0345</p>
                                         <p>&#160;</p>
                                         <p>With these data we are interested in a trend in one direction only, therefore, we can use a one sided test for trend. We have shown a statistically significant trend for increasing number of metastases across these malignant cell lines in this order.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Cuzick's trend test: the StatsDirect help example (Cuzick 1985) in R
+mets &lt;- list("CMT 64"  = c(0, 0, 1, 1, 2, 2, 4, 9),
+             "CMT 167" = c(0, 0, 5, 7, 8, 11, 13, 23, 25, 97),
+             "CMT 170" = c(2, 3, 6, 9, 10, 11, 11, 12, 21),
+             "CMT 175" = c(0, 3, 5, 6, 10, 19, 56, 100, 132),
+             "CMT 181" = c(2, 4, 6, 6, 6, 7, 18, 39, 60))
+score &lt;- 1:5                              # the order of the groups: 1, 2, 3 ...
+mets &lt;- lapply(mets, function(v) v[!is.na(v)])    # missing values are left out
+
+# R has no standard function for this test. It is a Wilcoxon-type test for trend
+# across ordered groups: T is the sum over all observations of group score
+# times rank, compared with its expectation under no trend.
+y &lt;- unlist(mets)
+z &lt;- rep(score, lengths(mets))            # each observation's group score
+N &lt;- length(y)
+r &lt;- rank(y)                              # tied values share a mid-rank
+Tstat &lt;- sum(z * r)
+Ez &lt;- mean(z)
+ET &lt;- (N + 1) / 2 * sum(z)
+varz &lt;- mean(z^2) - Ez^2
+varT &lt;- N^2 * (N + 1) / 12 * varz
+ties &lt;- table(y)
+varTties &lt;- varT * (1 - sum(ties^3 - ties) / (N^3 - N))
+cat("Groups =", length(mets), "  Observations =", N, "\n")
+cat(sprintf("Ez = %.6f   Var(z) = %.5f\n", Ez, varz))
+cat(sprintf("T = %g   ET = %g   Var(T) = %.6f\n", Tstat, ET, varT))
+for (v in c(varT, varTties)) {
+  zstat &lt;- (Tstat - ET) / sqrt(v)
+  cat(sprintf("%sz = %.6f   One sided P = %.4f   Two sided P = %.4f\n",
+              if (v == varT) "" else sprintf("Corrected for ties: VarT = %.6f   ", v),
+              zstat, pnorm(-abs(zstat)), 2 * pnorm(-abs(zstat))))
+}</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

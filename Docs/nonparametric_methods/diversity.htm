@@ -242,15 +242,80 @@
                                         <p>Standard error (large sample) = 0.016826</p>
                                         <p>Standard error (small sample) = 0.017173</p>
                                         <p>Normal (large sample) 95% CI = 0.866373 to 0.932331</p>
-                                        <p>Re-samples = 2000, bias = 0.007847, standard error (bootstrap) = 0.017454</p>
-                                        <p>Normal (bootstrap) 95% CI = 0.865121 to 0.933582</p>
+                                        <p>Re-samples = 2000, bias = 0.008511, standard error (bootstrap) = 0.017316</p>
+                                        <p>Normal (bootstrap) 95% CI = 0.865392 to 0.933311</p>
+                                        <p>Centred bootstrap-t 95% CI = 0.867335 to 0.931368</p>
                                         <p>&#160;</p>
                                         <p><b>Shannon H' (base e)</b> = 2.656515</p>
                                         <p>Standard error (large sample) = 0.095839</p>
                                         <p>Standard error (small sample) = 0.10049</p>
                                         <p>Normal (large sample) 95% CI = 2.468673 to 2.844356</p>
-                                        <p>Re-samples = 2000, bias = 0.124793, standard error (bootstrap) = 0.100998</p>
-                                        <p>Normal (bootstrap) 95% CI = 2.458442 to 2.854588</p>
+                                        <p>Re-samples = 2000, bias = 0.122259, standard error (bootstrap) = 0.100035</p>
+                                        <p>Normal (bootstrap) 95% CI = 2.46033 to 2.852699</p>
+                                        <p>Centred bootstrap-t 95% CI = 2.448466 to 2.864564</p>
+                                        <p>&#160;</p>
+                                        <p>The bootstrap results depend on the random numbers drawn, so they differ a little from one run to the next.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above; its bootstrap figures differ a little from run to run, as those of StatsDirect do. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Diversity of classes: the StatsDirect help example (strains of Staphylococcus
+# aureus in hospital samples, Grundmann et al. 2001) in R
+counts &lt;- c(30, 13, 9, 8, 7, 7, 7, 6, 6, 5, 2, 2, 2, rep(1, 13))
+N &lt;- sum(counts)
+S &lt;- length(counts)                       # classes observed (richness)
+p &lt;- counts / N
+z &lt;- qnorm(0.975)
+cat("Total number of counts =", N, "  Number of classes observed =", S, "\n")
+
+# R has no standard function for these indices; each is a line or two.
+# Estimated total number of classes (Chao 1987), from the numbers of classes
+# seen once (f1) and twice (f2), with a log-normal confidence interval that
+# cannot fall below the number observed
+f1 &lt;- sum(counts == 1)
+f2 &lt;- sum(counts == 2)
+extra &lt;- f1^2 / (2 * f2)
+se &lt;- sqrt(f2 * ((f1 / f2)^4 / 4 + (f1 / f2)^3 + (f1 / f2)^2 / 2))
+K &lt;- exp(z * sqrt(log(1 + se^2 / extra^2)))
+cat(sprintf("Estimated total number of classes = %.0f   Standard error = %.6f\n",
+            S + extra, se))
+cat(sprintf("Log-normal (Chao) 95%% CI = %.0f to %.0f\n", S + extra / K,
+            S + extra * K))
+
+# Simpson's index as Hurlbert's PIE: the chance that two individuals taken at
+# random belong to different classes
+l &lt;- sum(counts * (counts - 1)) / (N * (N - 1))       # dominance
+Ds &lt;- 1 - l
+seL &lt;- sqrt(4 / N * (sum(p^3) - sum(p^2)^2))
+seS &lt;- sqrt((4 * N * (N - 1) * (N - 2) * sum(p^3) + 2 * N * (N - 1) * sum(p^2) -
+             2 * N * (N - 1) * (2 * N - 3) * sum(p^2)^2) / (N * (N - 1))^2)
+cat(sprintf("Simpson Ds = %.6f  (dominance l = %.6f, ds = %.6f)\n", Ds, l, 1 / l))
+cat(sprintf("Standard error: large sample = %.6f   small sample = %.6f\n", seL, seS))
+cat(sprintf("Normal (large sample) 95%% CI = %.6f to %.6f\n", Ds - z * seL,
+            Ds + z * seL))
+
+# Shannon's index
+H &lt;- -sum(p * log(p))
+hL &lt;- sqrt((sum(p * log(p)^2) - H^2) / N)
+hS &lt;- sqrt(hL^2 + (S - 1) / (2 * N^2))
+cat(sprintf("Shannon H' (base e) = %.6f\n", H))
+cat(sprintf("Standard error: large sample = %.6f   small sample = %.6f\n", hL, hS))
+cat(sprintf("Normal (large sample) 95%% CI = %.6f to %.6f\n", H - z * hL, H + z * hL))
+
+# Bootstrap: draw N individuals again and again from the observed proportions.
+# The results depend on the random numbers, so they differ a little from run to
+# run and from StatsDirect's.
+set.seed(1)
+boot &lt;- replicate(2000, {
+  b &lt;- as.vector(rmultinom(1, N, p))
+  b &lt;- b[b &gt; 0]
+  c(1 - sum(b * (b - 1)) / (N * (N - 1)), -sum(b / N * log(b / N)))
+})
+cat(sprintf("Bootstrap, Simpson: bias = %.6f  standard error = %.6f\n",
+            Ds - mean(boot[1, ]), sd(boot[1, ])))
+cat(sprintf("Bootstrap, Shannon: bias = %.6f  standard error = %.6f\n",
+            H - mean(boot[2, ]), sd(boot[2, ])))</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>

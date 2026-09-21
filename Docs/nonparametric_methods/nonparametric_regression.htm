@@ -146,7 +146,7 @@
                                             <col />
                                             <tr>
                                                 <td style="text-decoration: underline;text-align: right;">GPA</td>
-                                                <td style="text-decoration: underline;text-align: right;">GMTA</td>
+                                                <td style="text-decoration: underline;text-align: right;">GMAT</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">4.0</td>
@@ -198,21 +198,59 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select Nonparametric Linear Regression from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "GPA" and "GMTA" when prompted for Y and X variables respectively.</p>
+                                        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select Nonparametric Linear Regression from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "GPA" and "GMAT" when prompted for Y and X variables respectively.</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
-                                        <p>GPA vs. GMTA</p>
+                                        <p>GPA vs. GMAT</p>
                                         <p>Observations per sample = 12</p>
                                         <p>&#160;</p>
-                                        <p>Median slope (95% CI) = 0.003485 (0 to 0.0075)</p>
+                                        <p>Median slope (95% CI) = 0.003485 (0 to 0.008)</p>
                                         <p>Y-intercept = 1.581061</p>
                                         <p>&#160;</p>
                                         <p>Kendall's rank correlation coefficient tau b = 0.439039</p>
-                                        <p>Two sided (on continuity corrected z) P = .0678</p>
+                                        <p>Two sided (on continuity corrected z) P = 0.0678 (H<sub>1</sub>: any correlation)</p>
                                         <p>&#160;</p>
-                                        <p>If you plot GPA against GMTA scores using the scatter plot function in the graphics menu, you will see that there is a reasonably straight line relationship between GPA and GMTA. Here we can infer with 95% confidence that the true population value of the slope of a linear regression line for these two variables lies between 0 and 0.008. The regression equation is estimated at Y = 1.5811 + 0.0035X.</p>
+                                        <p>If you plot GPA against GMAT scores using the scatter plot function in the graphics menu, you will see that there is a reasonably straight line relationship between GPA and GMAT. Here we can infer with 95% confidence that the true population value of the slope of a linear regression line for these two variables lies between 0 and 0.008. The regression equation is estimated at Y = 1.5811 + 0.0035X.</p>
                                         <p>&#160;</p>
                                         <p>From the two sided Kendall's rank correlation test, we can not reject the null hypothesis of mutual independence between the pairs of results for the twelve graduates. Note that the zero lower confidence interval is a marginal result and we may have rejected the null hypothesis had we used a different method for testing independence.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Nonparametric linear regression: the StatsDirect help example (Conover 1999,
+# p. 338) in R
+gpa  &lt;- c(4.0, 4.0, 3.9, 3.8, 3.7, 3.6, 3.5, 3.5, 3.5, 3.3, 3.2, 3.2)   # outcome
+gmat &lt;- c(710, 610, 640, 580, 545, 560, 610, 530, 560, 540, 570, 560)   # predictor
+n &lt;- length(gpa)
+
+# R has no standard function for this method (Theil's regression). The slope is
+# the median of the slopes between all pairs of points that differ in x, and the
+# intercept makes the line pass through the two medians.
+s &lt;- outer(gpa, gpa, "-") / outer(gmat, gmat, "-")
+s &lt;- sort(s[upper.tri(s) &amp; outer(gmat, gmat, "!=")])
+N &lt;- length(s)                            # 62 slopes: 4 of the 66 pairs tie in x
+slope &lt;- median(s)
+cat("Observations per sample =", n, "\n")
+cat(sprintf("Median slope = %.6f   Y-intercept = %.6f\n", slope,
+            median(gpa) - slope * median(gmat)))
+
+# 95% confidence interval for the slope (Conover 1999): with w the 0.975 quantile
+# of Kendall's statistic (concordant minus discordant pairs) for n pairs, the
+# limits are the rth smallest and rth largest slope, r = (N - w) / 2 rounded down.
+# The null distribution of the statistic comes from the number of inversions of
+# a random ordering: multiply the polynomials 1 + q + ... + q^i for i below n.
+ways &lt;- 1
+for (i in 1:(n - 1)) ways &lt;- convolve(ways, rep(1, i + 1), type = "open")
+S &lt;- n * (n - 1) / 2 - 2 * (seq_along(ways) - 1)      # the statistic, largest first
+upper &lt;- cumsum(round(ways)) / factorial(n)           # P(statistic &gt;= S)
+w &lt;- max(S[upper &gt; 0.025])                # 28: P(statistic &gt; 28) is 0.0224
+r &lt;- floor((N - w) / 2)
+cat(sprintf("95%% CI for the slope = %g to %g\n", s[r], s[N + 1 - r]))
+
+# Kendall's rank correlation between outcome and predictor. With ties R gives
+# tau b and a normal approximation; continuity = TRUE matches StatsDirect's P.
+print(cor.test(gmat, gpa, method = "kendall", exact = FALSE, continuity = TRUE))</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

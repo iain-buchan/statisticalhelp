@@ -499,6 +499,62 @@ a.glossaryTerm
 	outline: thin dotted invert;
 }
 
+.dropDown.dropDownrcode
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.dropDownHotspot
+{
+	text-decoration: none;
+}
+
+.dropDownHotspot:link
+{
+	text-decoration: none;
+}
+
+.dropDownHotspot.dropDownHotspotrcode
+{
+	color: #2c5f8a;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.dropDownHotspot.dropDownHotspotrcode:link
+{
+	color: #2c5f8a;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.MCDropDown_Open .MCDropDownHotSpot_.MCHotSpotImage.MCDropDownHotSpot_rcode
+{
+	background-position: left;
+	background-image: url('DropDownOpen.gif');
+	padding-left: 1px;
+	padding-right: 0;
+}
+
+.MCDropDown_Closed .MCDropDownHotSpot_.MCHotSpotImage.MCDropDownHotSpot_rcode
+{
+	background-position: left;
+	background-image: url('DropDownClosed.gif');
+	padding-left: 0px;
+	padding-right: 0;
+}
+
+.dropDownHead
+{
+	text-decoration: none;
+}
+
+.dropDownHead.dropDownHeadrcode
+{
+	font-weight: bold;
+}
+
 img._MCEquation_0
 {
 	font-size: 12pt;
