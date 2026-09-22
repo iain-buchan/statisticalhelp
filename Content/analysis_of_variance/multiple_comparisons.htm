@@ -36,6 +36,561 @@
         <p>&#160;</p>
         <p>Other statistical software may refer to LSD (least significant difference) methods, please note that the Bonferroni technique described above is an LSD method.</p>
         <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (ANOVA worksheet: Substance 1, Substance 2, Substance 3, Substance 4).</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>Substance 1</td>
+                <td>Substance 2</td>
+                <td>Substance 3</td>
+                <td>Substance 4</td>
+            </tr>
+            <tr>
+                <td>29</td>
+                <td>17</td>
+                <td>17</td>
+                <td>18</td>
+            </tr>
+            <tr>
+                <td>28</td>
+                <td>25</td>
+                <td>16</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>24</td>
+                <td>21</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>26</td>
+                <td>19</td>
+                <td>22</td>
+                <td>24</td>
+            </tr>
+            <tr>
+                <td>26</td>
+                <td>28</td>
+                <td>23</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>21</td>
+                <td>18</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>25</td>
+                <td>20</td>
+                <td>20</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>29</td>
+                <td>25</td>
+                <td>17</td>
+                <td>17</td>
+            </tr>
+            <tr>
+                <td>26</td>
+                <td>19</td>
+                <td>25</td>
+                <td>19</td>
+            </tr>
+            <tr>
+                <td>28</td>
+                <td>24</td>
+                <td>21</td>
+                <td>17</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>This illustration uses four columns of the test workbook, made up for the purpose: a response measured ten times under each of four substances, as tabulated above. Select One Way from the Analysis of Variance section of the analysis menu, select the four columns in one action, and then choose each multiple comparison method in turn from the options offered after the analysis (Bonferroni asks for the two groups to compare, here Substance 1 and Substance 4, and for the number of comparisons planned, here 6 for all the pairs; Dunnett asks for the control group, here Substance 1).</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>One way analysis of variance</u>
+        </p>
+        <p>&#160;</p>
+        <p>Variables: Substance 1, Substance 2, Substance 3, Substance 4</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Source of Variation</td>
+                <td style="text-decoration: underline;">Sum Squares</td>
+                <td style="text-decoration: underline;">DF</td>
+                <td style="text-decoration: underline;">Mean Square</td>
+            </tr>
+            <tr>
+                <td>Between Groups</td>
+                <td>249.875</td>
+                <td>3</td>
+                <td>83.291667</td>
+            </tr>
+            <tr>
+                <td>Within Groups</td>
+                <td>350.9</td>
+                <td>36</td>
+                <td>9.747222</td>
+            </tr>
+            <tr>
+                <td>Corrected Total</td>
+                <td>600.775</td>
+                <td>39</td>
+                <td>&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>F (variance ratio) = 8.54517 P = 0.0002</p>
+        <p>&#160;</p>
+        <p><u>Tukey multiple comparisons</u>
+        </p>
+        <p>&#160;</p>
+        <p>Critical value (Studentized range) = 3.808798, |q<sup>*</sup>| = 2.693227</p>
+        <p>Pooled standard deviation = 3.122054</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Comparison</td>
+                <td style="text-decoration: underline;">Mean difference L (95% CI)</td>
+                <td style="text-decoration: underline;">q</td>
+                <td style="text-decoration: underline;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Substance 1 vs. Substance 4</td>
+                <td>6.3 (2.539649 to 10.060351)</td>
+                <td>6.381167</td>
+                <td>P = 0.0004</td>
+            </tr>
+            <tr>
+                <td>Substance 1 vs. Substance 3</td>
+                <td>5.9 (2.139649 to 9.660351)</td>
+                <td>5.976014</td>
+                <td>P = 0.0009</td>
+            </tr>
+            <tr>
+                <td>Substance 1 vs. Substance 2</td>
+                <td>3.7 (-0.060351 to 7.460351)</td>
+                <td>3.74767</td>
+                <td>P = 0.0552 stop</td>
+            </tr>
+            <tr>
+                <td>Substance 2 vs. Substance 4</td>
+                <td>2.6 (-1.160351 to 6.360351)</td>
+                <td>2.633498</td>
+                <td>P = 0.2621</td>
+            </tr>
+            <tr>
+                <td>Substance 2 vs. Substance 3</td>
+                <td>2.2 (-1.560351 to 5.960351)</td>
+                <td>2.228344</td>
+                <td>P = 0.4049</td>
+            </tr>
+            <tr>
+                <td>Substance 3 vs. Substance 4</td>
+                <td>0.4 (-3.360351 to 4.160351)</td>
+                <td>0.405153</td>
+                <td>P = 0.9917</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Variable</td>
+                <td style="text-decoration: underline;">Mean</td>
+                <td style="text-decoration: underline;">Significant contrasts</td>
+            </tr>
+            <tr>
+                <td>Substance 1</td>
+                <td>25.9</td>
+                <td>Substance 4, Substance 3</td>
+            </tr>
+            <tr>
+                <td>Substance 4</td>
+                <td>19.6</td>
+                <td>Substance 1</td>
+            </tr>
+            <tr>
+                <td>Substance 3</td>
+                <td>20</td>
+                <td>Substance 1</td>
+            </tr>
+            <tr>
+                <td>Substance 2</td>
+                <td>22.2</td>
+                <td>none</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>The statistic tabulated for Tukey and Newman-Keuls is the Studentized range q: the difference between the two means divided by the standard error of a mean, s/&#8730;n (or its Tukey-Kramer form for unequal sizes), which is compared with the critical value. Scheff&#233;&#39;s statistic is the difference divided by the standard error of the difference, s&#8730;(2/n), compared with its own critical value.</p>
+        <p>&#160;</p>
+        <p><u>Scheff&#233; multiple comparisons</u>
+        </p>
+        <p>&#160;</p>
+        <p>Critical value = 2.93237</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Comparison</td>
+                <td style="text-decoration: underline;">Mean difference L (95% CI)</td>
+                <td style="text-decoration: underline;">|L/SE(L)|</td>
+                <td style="text-decoration: underline;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Substance 1 vs. Substance 4</td>
+                <td>6.3 (2.205751 to 10.394249)</td>
+                <td>4.512167</td>
+                <td>P = 0.001</td>
+            </tr>
+            <tr>
+                <td>Substance 1 vs. Substance 3</td>
+                <td>5.9 (1.805751 to 9.994249)</td>
+                <td>4.22568</td>
+                <td>P = 0.0021</td>
+            </tr>
+            <tr>
+                <td>Substance 1 vs. Substance 2</td>
+                <td>3.7 (-0.394249 to 7.794249)</td>
+                <td>2.650003</td>
+                <td>P = 0.0896 stop</td>
+            </tr>
+            <tr>
+                <td>Substance 2 vs. Substance 4</td>
+                <td>2.6 (-1.494249 to 6.694249)</td>
+                <td>1.862164</td>
+                <td>P = 0.34</td>
+            </tr>
+            <tr>
+                <td>Substance 2 vs. Substance 3</td>
+                <td>2.2 (-1.894249 to 6.294249)</td>
+                <td>1.575677</td>
+                <td>P = 0.4874</td>
+            </tr>
+            <tr>
+                <td>Substance 3 vs. Substance 4</td>
+                <td>0.4 (-3.694249 to 4.494249)</td>
+                <td>0.286487</td>
+                <td>P = 0.9938</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Variable</td>
+                <td style="text-decoration: underline;">Mean</td>
+                <td style="text-decoration: underline;">Significant contrasts</td>
+            </tr>
+            <tr>
+                <td>Substance 1</td>
+                <td>25.9</td>
+                <td>Substance 4, Substance 3</td>
+            </tr>
+            <tr>
+                <td>Substance 4</td>
+                <td>19.6</td>
+                <td>Substance 1</td>
+            </tr>
+            <tr>
+                <td>Substance 3</td>
+                <td>20</td>
+                <td>Substance 1</td>
+            </tr>
+            <tr>
+                <td>Substance 2</td>
+                <td>22.2</td>
+                <td>none</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Newman-Keuls multiple comparisons</u>
+        </p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Comparison</td>
+                <td style="text-decoration: underline;">Mean difference L</td>
+                <td style="text-decoration: underline;">Separation</td>
+                <td style="text-decoration: underline;">q</td>
+                <td style="text-decoration: underline;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Substance 1 vs. Substance 4</td>
+                <td>6.3</td>
+                <td>4</td>
+                <td>6.381167</td>
+                <td>P = 0.0004</td>
+            </tr>
+            <tr>
+                <td>Substance 1 vs. Substance 3</td>
+                <td>5.9</td>
+                <td>3</td>
+                <td>5.976014</td>
+                <td>P = 0.0004</td>
+            </tr>
+            <tr>
+                <td>Substance 1 vs. Substance 2</td>
+                <td>3.7</td>
+                <td>2</td>
+                <td>3.74767</td>
+                <td>P = 0.0119</td>
+            </tr>
+            <tr>
+                <td>Substance 2 vs. Substance 4</td>
+                <td>2.6</td>
+                <td>3</td>
+                <td>2.633498</td>
+                <td>P = 0.1644</td>
+            </tr>
+            <tr>
+                <td>Substance 2 vs. Substance 3</td>
+                <td>2.2</td>
+                <td>2</td>
+                <td>2.228344</td>
+                <td>P = 0.1238 not tested</td>
+            </tr>
+            <tr>
+                <td>Substance 3 vs. Substance 4</td>
+                <td>0.4</td>
+                <td>2</td>
+                <td>0.405153</td>
+                <td>P = 0.7761 not tested</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Variable</td>
+                <td style="text-decoration: underline;">Mean</td>
+                <td style="text-decoration: underline;">Significant contrasts</td>
+            </tr>
+            <tr>
+                <td>Substance 1</td>
+                <td>25.9</td>
+                <td>Substance 4, Substance 3, Substance 2</td>
+            </tr>
+            <tr>
+                <td>Substance 4</td>
+                <td>19.6</td>
+                <td>Substance 1</td>
+            </tr>
+            <tr>
+                <td>Substance 3</td>
+                <td>20</td>
+                <td>Substance 1</td>
+            </tr>
+            <tr>
+                <td>Substance 2</td>
+                <td>22.2</td>
+                <td>Substance 1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Bonferroni comparison</u>
+        </p>
+        <p>&#160;</p>
+        <p>Variable A: Substance 1</p>
+        <p>Variable B: Substance 4</p>
+        <p>Mean A - Mean B = 6.3</p>
+        <p>Estimated std. error = 1.396225</p>
+        <p>Number of groups = 4</p>
+        <p>95% confidence interval = 3.468324 to 9.131676</p>
+        <p>Bonferroni-adjusted (simultaneous) 95% confidence interval for 6 comparisons = 2.401779 to 10.198221 (each comparison at 99.17%)</p>
+        <p>&#160;</p>
+        <p>t = 4.512167</p>
+        <p>df = 36</p>
+        <p>P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <p>Bonferroni critical P for 6 comparisons = 0.008333</p>
+        <p>&#160;</p>
+        <p><u>Dunnett multiple comparisons with a control</u>
+        </p>
+        <p>&#160;</p>
+        <p>Critical value (|d|) = 2.452127</p>
+        <p>Pooled standard deviation = 3.122054</p>
+        <p>&#160;</p>
+        <p>Control (n) = Substance 1 (10)</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Comparison (n)</td>
+                <td style="text-decoration: underline;">Mean difference (95% CI)</td>
+                <td style="text-decoration: underline;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Substance 4 (10)</td>
+                <td>-6.3 (-9.723721 to -2.876279)</td>
+                <td>P = 0.0002</td>
+            </tr>
+            <tr>
+                <td>Substance 3 (10)</td>
+                <td>-5.9 (-9.323721 to -2.476279)</td>
+                <td>P = 0.0004</td>
+            </tr>
+            <tr>
+                <td>Substance 2 (10)</td>
+                <td>-3.7 (-7.123721 to -0.276279)</td>
+                <td>P = 0.0316</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Every method finds the response to Substance 1 higher than to Substances 3 and 4. Whether it also differs from Substance 2 depends on the method: Newman-Keuls says so (P = 0.0119), Tukey (P = 0.0552) and Scheff&#233; (P = 0.0896) do not, and the word "stop" marks where each of those two sequences of contrasts ends; in the Newman-Keuls table the two pairs inside the non-significant range from Substance 4 to Substance 2 are marked as not tested. With Substance 1 as the control, Dunnett&#39;s method finds all three of the other substances to give a lower response.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Multiple comparisons after one way analysis of variance: an illustration with
+# the Substance 1 to 4 columns of the StatsDirect test workbook (ANOVA worksheet)
+s1 &lt;- c(29, 28, 23, 26, 26, 19, 25, 29, 26, 28)
+s2 &lt;- c(17, 25, 24, 19, 28, 21, 20, 25, 19, 24)
+s3 &lt;- c(17, 16, 21, 22, 23, 18, 20, 17, 25, 21)
+s4 &lt;- c(18, 20, 25, 24, 16, 20, 20, 17, 19, 17)
+y &lt;- c(s1, s2, s3, s4)
+group &lt;- factor(rep(paste("Substance", 1:4), each = 10))
+fit &lt;- aov(y ~ group)
+print(summary(fit))
+
+# Tukey: R's TukeyHSD gives every pairwise difference with its simultaneous
+# confidence interval and P value, the figures in StatsDirect's table, but with
+# the opposite sign (R subtracts the first level from the second, so the limits
+# are swapped too) and in a different order
+print(TukeyHSD(fit))
+
+# The pieces of the table, calculated. The groups are of equal size here; the
+# Tukey-Kramer form for unequal sizes replaces 1 / n by (1 / ni + 1 / nj) / 2
+# in the standard error
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+a &lt;- anova(fit)
+mse &lt;- a$"Mean Sq"[2]                      # the pooled variance
+nu &lt;- a$Df[2]                              # its degrees of freedom, 36
+k &lt;- nlevels(group)
+n &lt;- 10
+means &lt;- tapply(y, group, mean)
+pairs &lt;- combn(k, 2)                       # every pair i &lt; j, 6 of them
+delta &lt;- means[pairs[1, ]] - means[pairs[2, ]]
+ord &lt;- order(-abs(delta))                  # the report's order
+label &lt;- paste(names(means)[pairs[1, ]], "vs.", names(means)[pairs[2, ]])
+q &lt;- qtukey(0.95, k, nu)
+cat("Tukey: Critical value (Studentized range) =", six(q), " |q*| =", six(q / sqrt(2)),
+    "\n")
+cat("Pooled standard deviation =", six(sqrt(mse)), "\n")
+se &lt;- sqrt(mse / n)                        # the difference divided by this is the
+for (i in ord) {                           # Studentized range statistic
+  cat(label[i], six(delta[i]), six(delta[i] - q * se), "to", six(delta[i] + q * se),
+      six(abs(delta[i]) / se),
+      pv(ptukey(abs(delta[i]) / se, k, nu, lower.tail = FALSE)), "\n")
+}
+
+# Scheffe: the critical value is the square root of (k - 1) times the F
+# quantile, applied to the standard error of a difference between two means
+crit &lt;- sqrt((k - 1) * qf(0.95, k - 1, nu))
+cat("Scheffe: Critical value =", six(crit), "\n")
+sed &lt;- sqrt(mse * (2 / n))
+for (i in ord) {
+  tstat &lt;- abs(delta[i]) / sed
+  cat(label[i], six(delta[i]), six(delta[i] - crit * sed), "to",
+      six(delta[i] + crit * sed), six(tstat),
+      pv(pf(tstat^2 / (k - 1), k - 1, nu, lower.tail = FALSE)), "\n")
+}
+
+# Newman-Keuls: the same statistic as Tukey's, but referred to the Studentized
+# range for the number of ordered means that the two groups span (separation)
+rnk &lt;- rank(means)
+for (i in ord) {
+  span &lt;- abs(rnk[pairs[1, i]] - rnk[pairs[2, i]]) + 1
+  cat(label[i], six(delta[i]), span, six(abs(delta[i]) / se),
+      pv(ptukey(abs(delta[i]) / se, span, nu, lower.tail = FALSE)), "\n")
+}
+
+# Bonferroni: an ordinary t test of one planned comparison (Substance 1 with
+# Substance 4) using the pooled variance, judged against a critical P of 1 minus
+# the confidence level (0.05 here) divided by the number of comparisons; the
+# simultaneous interval uses the same division. R's pairwise.t.test gives the P
+# values so multiplied instead.
+d14 &lt;- means[1] - means[4]
+tstat &lt;- d14 / sed
+comparisons &lt;- 6
+cat("Bonferroni: Mean A - Mean B =", six(d14), " Estimated std. error =", six(sed),
+    "\n")
+cat("95% confidence interval =", six(d14 - qt(0.975, nu) * sed), "to",
+    six(d14 + qt(0.975, nu) * sed), "\n")
+alpha &lt;- 0.05 / comparisons
+cat("Bonferroni-adjusted (simultaneous) 95% confidence interval for", comparisons,
+    "comparisons =", six(d14 - qt(1 - alpha / 2, nu) * sed), "to",
+    six(d14 + qt(1 - alpha / 2, nu) * sed),
+    paste0("(each comparison at ", formatC(100 * (1 - alpha), digits = 2, format = "f"),
+           "%)"), "\n")
+cat("t =", six(tstat), " df =", nu, " ", pv(2 * pt(-abs(tstat), nu)), "\n")
+cat("Bonferroni critical P for", comparisons, "comparisons =", six(alpha), "\n")
+print(pairwise.t.test(y, group, p.adjust.method = "bonferroni"))
+
+# Dunnett (each substance against Substance 1 as the control): base R has no
+# Dunnett test (the multcomp package has one). Its critical value is the 95%
+# point of the largest absolute value of the three t statistics, which share
+# the control mean and so are correlated; with equal group sizes that
+# probability is a double integral over the standard normal and the residual
+# standard deviation, evaluated here numerically
+m &lt;- k - 1
+chi &lt;- function(u) exp(nu / 2 * log(nu) + (nu - 1) * log(u) - nu * u^2 / 2 -
+                       (nu / 2 - 1) * log(2) - lgamma(nu / 2))   # density of s / sigma
+inner &lt;- function(u, d) sapply(u, function(ui) integrate(function(z) {
+  dnorm(z) * (pnorm(z + sqrt(2) * d * ui) - pnorm(z - sqrt(2) * d * ui))^m
+}, -Inf, Inf, rel.tol = 1e-10)$value)
+pmax_abs_t &lt;- function(d) integrate(function(u) chi(u) * inner(u, d), 0, Inf,
+                                    rel.tol = 1e-9)$value
+d &lt;- uniroot(function(x) pmax_abs_t(x) - 0.95, c(1, 5), tol = 1e-9)$root
+cat("Dunnett: Critical value (|d|) =", six(d), "\n")
+for (j in c(4, 3, 2)) {
+  dj &lt;- means[j] - means[1]
+  cat(names(means)[j], six(dj), six(dj - d * sed), "to", six(dj + d * sed),
+      pv(1 - pmax_abs_t(abs(dj) / sed)), "\n")
+}</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
         <p><a href="anova.htm">analysis of variance</a>
         </p>
     </body>

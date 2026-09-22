@@ -1,0 +1,9 @@
+# Two way ANOVA with replicates, Armitage and Berry (1994) clotting times repeated. One fragment per line.
+Blocks (rows) 9.26 2 4.63
+Treatments (columns) 11.78 2 5.89
+Interaction 0.74 4 0.185
+Residual (error) 1.32 18 0.073333
+Corrected total 23.1 26
+F (VR blocks) = 63.136364 P < 0.0001
+F (VR treatments) = 80.318182 P < 0.0001
+F (VR interaction) = 2.522727 P = 0.0771

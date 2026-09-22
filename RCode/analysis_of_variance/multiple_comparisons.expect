@@ -1,0 +1,73 @@
+# Multiple comparisons on the Substance 1 to 4 columns of the test workbook (an illustration). One fragment per line.
+HP: Between Groups 249.875 3 83.291667
+HP: Within Groups 350.9 36 9.747222
+HP: F (variance ratio) = 8.54517 P = 0.0002
+Critical value (Studentized range) = 3.808798
+|q*| = 2.693227
+Pooled standard deviation = 3.122054
+2.539649 to 10.060351
+R: Substance 1 vs. Substance 4 6.3 2.539649 to 10.060351 6.381167 P = 0.0004
+H: 6.3 (2.539649 to 10.060351)
+P: 6.3(2.539649 to 10.060351)
+6.381167 P = 0.0004
+2.139649 to 9.660351
+5.976014 P = 0.0009
+-0.060351 to 7.460351
+3.74767 P = 0.0552
+-1.160351 to 6.360351
+2.633498 P = 0.2621
+-1.560351 to 5.960351
+2.228344 P = 0.4049
+-3.360351 to 4.160351
+0.405153 P = 0.9917
+Critical value = 2.93237
+2.205751 to 10.394249
+4.512167 P = 0.001
+1.805751 to 9.994249
+4.22568 P = 0.0021
+-0.394249 to 7.794249
+2.650003 P = 0.0896
+-1.494249 to 6.694249
+1.862164 P = 0.34
+-1.894249 to 6.294249
+1.575677 P = 0.4874
+-3.694249 to 4.494249
+0.286487 P = 0.9938
+6.3 4 6.381167 P = 0.0004
+5.9 3 5.976014 P = 0.0004
+3.7 2 3.74767 P = 0.0119
+2.6 3 2.633498 P = 0.1644
+2.2 2 2.228344 P = 0.1238
+0.4 2 0.405153 P = 0.7761
+Mean A - Mean B = 6.3
+Estimated std. error = 1.396225
+95% confidence interval = 3.468324 to 9.131676
+Bonferroni-adjusted (simultaneous) 95% confidence interval for 6 comparisons = 2.401779 to 10.198221 (each comparison at 99.17%)
+t = 4.512167
+df = 36
+P < 0.0001
+Bonferroni critical P for 6 comparisons = 0.008333
+Critical value (|d|) = 2.452127
+-9.723721 to -2.876279
+P = 0.0002
+-9.323721 to -2.476279
+P = 0.0004
+-7.123721 to -0.276279
+P = 0.0316
+HP: Corrected Total 600.775 39
+HP: Substance 1 25.9 Substance 4, Substance 3
+HP: Substance 2 22.2 none
+HP: Substance 2 22.2 Substance 1
+HP: P = 0.0552 stop
+HP: P = 0.0896 stop
+HP: P = 0.1644
+HP: P = 0.1238 not tested
+HP: P = 0.7761 not tested
+HP: Number of groups = 4
+HP: Control (n) = Substance 1 (10)
+H: -6.3 (-9.723721 to -2.876279)
+P: -6.3(-9.723721 to -2.876279)
+H: -5.9 (-9.323721 to -2.476279)
+P: -5.9(-9.323721 to -2.476279)
+H: -3.7 (-7.123721 to -0.276279)
+P: -3.7(-7.123721 to -0.276279)

@@ -111,11 +111,11 @@
             </tr>
             <tr>
                 <td style="text-align: right;">&#160;</td>
-                <td style="text-align: right;">18.8</td>
+                <td style="text-align: right;">10.8</td>
             </tr>
         </table>
         <p>&#160;</p>
-        <p>To analyse these data in StatsDirect you must first prepare them in two workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Kruskal-Wallis from the Nonparametric section of the analysis menu. Then <a href="../workbook/selecting_data.htm">select</a> the columns marked "Machine X" and "Machine Y" in one selection action. Ignore the Kruskal-Wallis test result and select the squared ranks variance equality test option then click on the calculate button.</p>
+        <p>To analyse these data in StatsDirect you must first prepare them in two workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Kruskal-Wallis from the Nonparametric section of the analysis menu. Then <a href="../workbook/selecting_data.htm">select</a> the columns marked "Machine X" and "Machine Y" in one selection action. Ignore the Kruskal-Wallis test result and choose "Equality of variance (squared ranks)" from the options offered after the analysis.</p>
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
@@ -123,10 +123,80 @@
         </p>
         <p>&#160;</p>
         <p>z = 2.327331</p>
-        <p>Two tailed P = .0199</p>
-        <p>One tailed P = .01</p>
+        <p>Two tailed P = 0.0199</p>
+        <p>One tailed P = 0.01</p>
         <p>&#160;</p>
         <p>Here we reject the null hypothesis that the samples are from identical distributions (except for possibly different means) and we infer a statistically significant difference between the variances.</p>
+        <p>&#160;</p>
+        <p>The parametric tests are given as an option of One Way Analysis of Variance. For the one way example (Expt 1 to Expt 4 in the ANOVA worksheet of the test workbook), selecting the equality of variance option gives:</p>
+        <p>&#160;</p>
+        <p><u>Approximate equality of variance tests and adjusted ANOVA</u>
+        </p>
+        <p>&#160;</p>
+        <p>Levene's (W50) F = 0.090165  (df = 3, 16)  P = 0.9644</p>
+        <p>Bartlett's chi-square = 0.155706  df = 3  P = 0.9844</p>
+        <p>Welch adjusted ANOVA F = 2.059491  (df = 3, 8.867108)  P = 0.177</p>
+        <p>&#160;</p>
+        <p>Here there is no evidence that the variances differ, and the Welch adjustment does not change the conclusion of the one way analysis (P = 0.177 against P = 0.1195).</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the two examples above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Squared ranks test for equality of variance: the StatsDirect help example
+# (Conover 1999, weights of cereal boxes filled by two machines) in R
+x &lt;- c(10.8, 11.1, 10.4, 10.1, 11.3)                    # Machine X
+y &lt;- c(10.8, 10.5, 11.0, 10.9, 10.8, 10.7, 10.8)        # Machine Y
+
+# R has no squared ranks test, so it is calculated as Conover (1999) describes:
+# each observation's absolute deviation from its sample mean is ranked over
+# both samples together (mid-ranks for ties), and the test statistic is the
+# sum of the squared ranks of the first sample, standardised with the
+# correction for ties
+u &lt;- c(abs(x - mean(x)), abs(y - mean(y)))
+r &lt;- rank(u)
+n1 &lt;- length(x)
+n2 &lt;- length(y)
+N &lt;- n1 + n2
+ssq &lt;- sum(r[1:n1]^2)
+r2bar &lt;- mean(r^2)
+z &lt;- (ssq - n1 * r2bar) /
+  sqrt(n1 * n2 / (N * (N - 1)) * sum(r^4) - n1 * n2 / (N - 1) * r2bar^2)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+cat("z =", six(z), "\n")
+cat("Two tailed", pv(2 * pnorm(-abs(z))), "\n")
+cat("One tailed", pv(pnorm(-abs(z))), "\n")
+
+# The parametric tests, illustrated with the one way ANOVA example (Armitage
+# and Berry 1994, worms recovered from four groups of rats): StatsDirect gives
+# them as an option of One Way, in one report with the Welch adjusted ANOVA
+worms &lt;- c(279, 338, 334, 198, 303, 378, 275, 412, 265, 286,
+           172, 335, 335, 282, 250, 381, 346, 340, 471, 318)
+group &lt;- factor(rep(paste("Expt", 1:4), each = 5))
+
+# Levene's test in its W50 form (Brown and Forsythe 1974) is a one way ANOVA
+# of the absolute deviations from the group medians
+dev &lt;- abs(worms - ave(worms, group, FUN = median))
+lev &lt;- anova(aov(dev ~ group))
+dfs &lt;- function(a, b) paste0("(df = ", a, ", ", b, ")")
+cat("Levene's (W50) F =", six(lev$"F value"[1]), "", dfs(lev$Df[1], lev$Df[2]), "",
+    pv(lev$"Pr(&gt;F)"[1]), "\n")
+
+# Bartlett's test and the Welch ANOVA are standard R functions
+b &lt;- bartlett.test(worms, group)
+cat("Bartlett's chi-square =", six(b$statistic), " df =", b$parameter, "",
+    pv(b$p.value), "\n")
+w &lt;- oneway.test(worms ~ group)                         # var.equal = FALSE is Welch
+cat("Welch adjusted ANOVA F =", six(w$statistic), "",
+    dfs(w$parameter[1], six(w$parameter[2])), "", pv(w$p.value), "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

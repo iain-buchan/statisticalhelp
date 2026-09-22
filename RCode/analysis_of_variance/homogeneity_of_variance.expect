@@ -1,0 +1,7 @@
+# Squared ranks test, Conover (1999) cereal boxes, and Levene, Bartlett and Welch on the one way example. One fragment per line.
+z = 2.327331
+Two tailed P = 0.0199
+One tailed P = 0.01
+Levene's (W50) F = 0.090165 (df = 3, 16) P = 0.9644
+Bartlett's chi-square = 0.155706 df = 3 P = 0.9844
+Welch adjusted ANOVA F = 2.059491 (df = 3, 8.867108) P = 0.177

@@ -1,0 +1,9 @@
+# Latin square ANOVA, Armitage and Berry (1994) rabbit blistering. One fragment per line.
+Rows 3.833333 5 0.766667
+Columns 12.833333 5 2.566667
+Treatments 0.563333 5 0.112667
+Residual 13.13 20 0.6565
+Total 30.36 35
+F (rows) = 1.167809 P = 0.3592
+F (columns) = 3.909622 P = 0.0124
+F (treatments) = 0.171617 P = 0.9701

@@ -1,0 +1,7 @@
+# Two way randomized block ANOVA, Armitage and Berry (1994) clotting times. One fragment per line.
+Between blocks (rows) 78.98875 7 11.284107
+Between treatments (columns) 13.01625 3 4.33875
+Residual (error) 13.77375 21 0.655893
+Corrected total 105.77875 31
+F (VR between blocks) = 17.204193 P < 0.0001
+F (VR between treatments) = 6.615029 P = 0.0025
