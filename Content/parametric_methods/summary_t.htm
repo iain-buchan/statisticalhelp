@@ -14,6 +14,132 @@
         <p>
             StatsDirect enables you to calculate t tests from summary data. These data are entered as means and standard deviations on screen instead of being calculated from selected workbook columns.</p>
         <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>The <a href="single_sample_t.htm">single sample t test</a> example (20 systolic blood pressures) and the <a href="unpaired_t.htm">unpaired t test</a> example (weight gain of 19 rats) can be repeated from their summary statistics. Select Summary Data t from the Parametric section of the Analysis menu, then Single Sample, and enter a sample size of 20, a sample mean of 130.05, a sample standard deviation of 9.960316 and a population mean of 120:</p>
+        <p>&#160;</p>
+        <p><u>Single sample t test</u>
+        </p>
+        <p>&#160;</p>
+        <p>Sample name: * from summary data</p>
+        <p>Sample mean = 130.05</p>
+        <p>Population mean = 120</p>
+        <p>Sample size n = 20</p>
+        <p>Sample sd = 9.960316</p>
+        <p>&#160;</p>
+        <p>95% confidence interval for mean difference = 5.388429 to 14.711571</p>
+        <p>&#160;</p>
+        <p>df = 19</p>
+        <p>t = 4.512404</p>
+        <p>&#160;</p>
+        <p>One sided P = 0.0001</p>
+        <p>Two sided P = 0.0002</p>
+        <p>&#160;</p>
+        <p>Power (for 5% significance) = 98.97%</p>
+        <p>&#160;</p>
+        <p>For the unpaired test select Summary Data t, then Unpaired, and enter sample sizes of 12 and 7, means of 120 and 101 and standard deviations of 21.38819 and 20.62361:</p>
+        <p>&#160;</p>
+        <p><u>Unpaired t test</u>
+        </p>
+        <p>&#160;</p>
+        <p>Mean of * sample 1 from summary = 120  (n = 12)</p>
+        <p>Mean of * sample 2 from summary = 101  (n = 7)</p>
+        <p>&#160;</p>
+        <p>Assuming equal variances</p>
+        <p>Combined standard error = 10.045276</p>
+        <p>df = 17</p>
+        <p>t = 1.891436</p>
+        <p>One sided P = 0.0379</p>
+        <p>Two sided P = 0.0757</p>
+        <p>&#160;</p>
+        <p>95% confidence interval for difference between means = -2.193681 to 40.193681</p>
+        <p>&#160;</p>
+        <p>Power (for 5% significance) = 43.05%</p>
+        <p>&#160;</p>
+        <p>Assuming unequal variances</p>
+        <p>Combined standard error = 9.943999</p>
+        <p>df = 13.081704</p>
+        <p>t(d) = 1.9107</p>
+        <p>One sided P = 0.0391</p>
+        <p>Two sided P = 0.0782</p>
+        <p>&#160;</p>
+        <p>95% confidence interval for difference between means = -2.469073 to 40.469073</p>
+        <p>&#160;</p>
+        <p>Power (for 5% significance) = 42.49%</p>
+        <p>&#160;</p>
+        <p>Comparison of variances</p>
+        <p>Two sided F test is not significant</p>
+        <p>No need to assume unequal variances</p>
+        <p>&#160;</p>
+        <p>These are the results of the two examples calculated from the data, apart from the last digits of the equal variances confidence interval and the unequal variances degrees of freedom, because the standard deviations were entered to five decimal places.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># t tests from summary statistics: the StatsDirect help example (the single sample
+# and unpaired t test examples again, from their means and standard deviations) in R
+# R's t.test needs the data themselves, so the report's lines are calculated here.
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+power &lt;- function(t, df) {                # two sided test at the 5% level, from the
+  tc &lt;- qt(0.975, df)                     # noncentral t distribution with the t
+  pt(-tc, df, ncp = t) + pt(tc, df, ncp = t, lower.tail = FALSE)  # observed as ncp
+}
+
+# Single sample: 20 systolic blood pressures with mean 130.05 and sd 9.960316,
+# against a population mean of 120
+n &lt;- 20
+m &lt;- 130.05
+s &lt;- 9.960316
+mu &lt;- 120
+se &lt;- s / sqrt(n)
+t &lt;- (m - mu) / se
+p &lt;- 2 * pt(-abs(t), n - 1)
+cat("Single sample: mean =", m, " n =", n, " sd =", s, " population mean =", mu,
+    "\n")
+ci &lt;- m - mu + c(-1, 1) * qt(0.975, n - 1) * se
+cat("95% confidence interval for mean difference =", six(ci[1]), "to", six(ci[2]), "\n")
+cat("df =", n - 1, "  t =", six(t), "\n")
+cat(sprintf("One sided P = %.4f   Two sided P = %.4f\n", p / 2, p))
+cat(sprintf("Power (for 5%% significance) = %.2f%%\n", 100 * power(t, n - 1)))
+
+# Unpaired: 12 rats on a high protein diet, mean 120 and sd 21.38819, and 7 on a
+# low protein diet, mean 101 and sd 20.62361
+n1 &lt;- 12
+m1 &lt;- 120
+s1 &lt;- 21.38819
+n2 &lt;- 7
+m2 &lt;- 101
+s2 &lt;- 20.62361
+delta &lt;- m1 - m2
+report &lt;- function(se, df, label, name) {
+  t &lt;- delta / se
+  p &lt;- 2 * pt(-abs(t), df)
+  cat(label, "\n")
+  cat("Combined standard error =", six(se), "  df =", six(df), " ", name, "=", six(t),
+      "\n")
+  cat(sprintf("One sided P = %.4f   Two sided P = %.4f\n", p / 2, p))
+  cat("95% confidence interval for difference between means =",
+      six(delta - qt(0.975, df) * se), "to", six(delta + qt(0.975, df) * se), "\n")
+  cat(sprintf("Power (for 5%% significance) = %.2f%%\n", 100 * power(t, df)))
+}
+# Assuming equal variances: the pooled variance
+pooled &lt;- ((n1 - 1) * s1^2 + (n2 - 1) * s2^2) / (n1 + n2 - 2)
+report(sqrt(pooled * (1 / n1 + 1 / n2)), n1 + n2 - 2, "Assuming equal variances", "t")
+# Assuming unequal variances: Welch's standard error and degrees of freedom
+se2 &lt;- sqrt(s1^2 / n1 + s2^2 / n2)
+df2 &lt;- se2^4 / ((s1^2 / n1)^2 / (n1 - 1) + (s2^2 / n2)^2 / (n2 - 1))
+report(se2, df2, "Assuming unequal variances", "t(d)")
+# The F test of the variances, larger over smaller, with its upper tail P doubled
+f &lt;- max(s1, s2)^2 / min(s1, s2)^2
+pf2 &lt;- 2 * pf(f, if (s1 &gt; s2) n1 - 1 else n2 - 1, if (s1 &gt; s2) n2 - 1 else n1 - 1,
+              lower.tail = FALSE)
+cat("Two sided F test is", if (pf2 &lt; 0.05) "significant" else "not significant", "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
         <p><a href="single_sample_t.htm">Single sample t test</a>
         </p>
         <p><a href="unpaired_t.htm">Unpaired (two sample) t test</a>

@@ -1,0 +1,18 @@
+# z tests, Michelson's 100 measurements of the speed of light: single sample against 299.792458, then the first and last 50. One fragment per line.
+Sample mean = 299.8524
+Sample size n = 100
+Sample sd = 0.079011
+95% confidence interval for mean difference = 0.044456 to 0.075428
+Standard normal deviate (z) = 7.586582
+One sided P < 0.0001
+Two sided P < 0.0001
+Geometric mean = 299.85239 (95% reference range = 299.697571 to 300.007288)
+Mean = 299.8728
+Variance = 0.008951
+Mean = 299.832
+Variance = 0.002812
+Combined standard error = 0.015338
+95% confidence interval for difference between means = 0.010737 to 0.070863
+Standard normal deviate (z) = 2.659979
+One sided P = 0.0039
+Two sided P = 0.0078

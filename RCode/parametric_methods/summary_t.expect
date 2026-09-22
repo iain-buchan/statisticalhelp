@@ -1,0 +1,22 @@
+# t tests from summary statistics: the single sample (n 20, mean 130.05, sd 9.960316 v 120) and unpaired (12, 120, 21.38819 v 7, 101, 20.62361) examples. One fragment per line.
+95% confidence interval for mean difference = 5.388429 to 14.711571
+df = 19
+t = 4.512404
+One sided P = 0.0001
+Two sided P = 0.0002
+Power (for 5% significance) = 98.97%
+Combined standard error = 10.045276
+df = 17
+t = 1.891436
+One sided P = 0.0379
+Two sided P = 0.0757
+95% confidence interval for difference between means = -2.193681 to 40.193681
+Power (for 5% significance) = 43.05%
+Combined standard error = 9.943999
+df = 13.081704
+t(d) = 1.9107
+One sided P = 0.0391
+Two sided P = 0.0782
+95% confidence interval for difference between means = -2.469073 to 40.469073
+Power (for 5% significance) = 42.49%
+Two sided F test is not significant
