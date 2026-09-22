@@ -103,25 +103,35 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>Positive non-zero observations = 5</p>
-        <p>Bootstrap re-samples = 2000</p>
-        <p>Bias = 0.039168</p>
+        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu, then select Gini Coefficient of Inequality from the Nonparametric section of the Analysis menu. Select the column marked "Infant Mortality Rate (IMR)" when prompted for data, skip the frequency weights, and enter 2000 bootstrap replications to match the figures below (the default is 100,000).</p>
         <p>&#160;</p>
-        <p>Brown's G<sub>b</sub> = 0.1904</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Gini coefficient of inequality</u>
+        </p>
+        <p>&#160;</p>
+        <p>Analysis for Infant Mortality Rate (IMR):</p>
+        <p>&#160;</p>
+        <p>Positive non-zero observations = 5</p>
+        <p>Variance coefficient = 0.404884</p>
+        <p>&#160;</p>
+        <p>Re-samples = 2000</p>
+        <p>Bias = 0.040361</p>
+        <p>Standard error (bootstrap) = 0.046722</p>
         <p>&#160;</p>
         <p>Gini coefficient = 0.19893</p>
-        <p>Percentile 95% CI = 0.058182 to 0.22619</p>
-        <p>Bias-corrected 95% CI = 0.13037 to 0.241304</p>
+        <p>Percentile 95% CI = 0.070485 to 0.223529</p>
+        <p>BCa 95% CI = 0.132331 to 0.241304</p>
         <p>&#160;</p>
         <p>Unbiased estimator of population Gini coefficient = 0.248663</p>
-        <p>Percentile 95% CI = 0.072727 to 0.282738</p>
-        <p>Bias-corrected 95% CI = 0.162963 to 0.30163</p>
+        <p>Percentile 95% CI = 0.088106 to 0.279412</p>
+        <p>BCa 95% CI = 0.165414 to 0.30163</p>
         <p>&#160;</p>
         <p>
             <img src="../resources/images/lorenz.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/images/lorenz.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
-        <p>This example uses too few groups for reliable inference from G.</p>
+        <p>The bias, standard error and confidence limits come from random re-samples, so they differ a little each time the analysis is run. Brown's G<sub>b</sub> = 0.1904 for these data, from the live births and infant deaths. This example uses too few groups for reliable inference from G.</p>
         <p>&#160;</p>
         <p><u>Technical notes</u>
         </p>
@@ -144,6 +154,74 @@
 \displaystyle a=\frac{\sum_{i=1}^n (\bar g_{(\cdot)}-g_{(i)})^3}{6\left[\sum_{i=1}^n (\bar g_{(\cdot)}-g_{(i)})^2\right]^{3/2}} \\$</MadCap:equation>
         </p>
         <p>- where g* is a Gini coefficient estimated from a bootstrap sample, G is the observed Gini coefficient, g<sub>(i)</sub> is the Gini coefficient with the ith observation left out and g&#772;<sub>(&#183;)</sub> is the mean of these jackknife values (a is the acceleration), α is (100-confidence level)/100, ϕ is the standard normal distribution and k is the number of re-samples in the bootstrap.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It uses the boot package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Gini coefficient of inequality: the StatsDirect help example (Pan American
+# Health Organisation 2001, infant mortality in five countries) in R
+imr &lt;- c(59, 43, 39, 24, 22)              # infant deaths per 1000 live births
+n &lt;- length(imr)
+
+# The Gini coefficient from the values in ascending order (the argument i lets
+# boot() below pass in a re-sample)
+gini &lt;- function(x, i = seq_along(x)) {
+  x &lt;- sort(x[i])
+  n &lt;- length(x)
+  sum((2 * seq_len(n) - n - 1) * x) / (n * sum(x))
+}
+G &lt;- gini(imr)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("Positive non-zero observations =", n, "\n")
+cat("Variance coefficient =", six(sd(imr) / mean(imr)), "\n")
+cat("Gini coefficient =", six(G), "\n")
+cat("Unbiased estimator of population Gini coefficient =", six(G * n / (n - 1)), "\n")
+
+# Bootstrap confidence intervals with the boot package, which comes with R: 2000
+# re-samples as in the example (StatsDirect's default is 100,000). The limits
+# depend on the random re-samples, so they differ a little from run to run and
+# from StatsDirect's. R's bias is the mean re-sampled coefficient less G, the
+# opposite way round to StatsDirect's. The BCa interval is given the jackknife
+# influence values, so its acceleration is the one StatsDirect uses (Efron and
+# Tibshirani 1993). With so few values R warns that the BCa limits are unstable.
+library(boot)
+set.seed(2001)
+b &lt;- boot(imr, gini, R = 2000)
+cat("Re-samples =", b$R, "\n")
+print(b)
+ci &lt;- boot.ci(b, type = c("perc", "bca"), L = empinf(b, type = "jack"))
+print(ci)
+
+# StatsDirect multiplies the limits, like the coefficient, by n / (n - 1) for the
+# unbiased estimator
+cat("Unbiased percentile 95% CI =", six(ci$percent[4] * n / (n - 1)), "to",
+    six(ci$percent[5] * n / (n - 1)), "\n")
+cat("Unbiased BCa 95% CI =", six(ci$bca[4] * n / (n - 1)), "to",
+    six(ci$bca[5] * n / (n - 1)), "\n")
+
+# Brown's (1994) index from the two components, live births and infant deaths,
+# with the countries in ascending order of the rate
+births &lt;- c(250, 621, 308, 889, 568)
+deaths &lt;- c(14750, 26703, 12012, 21336, 12496)
+o &lt;- order(imr)
+X &lt;- c(0, cumsum(births[o]) / sum(births))
+Y &lt;- c(0, cumsum(deaths[o]) / sum(deaths))
+gb &lt;- 1 - sum((Y[-1] + Y[-(n + 1)]) * (X[-1] - X[-(n + 1)]))
+cat("Brown's G b =", formatC(gb, digits = 4, format = "f"), "\n")
+
+# The Lorenz plot at the end of the report: the cumulative share of the variable
+# against the cumulative share of the sample (green), with the line of equality
+# (red)
+x &lt;- sort(imr)
+plot(c(0, seq_len(n) / n), c(0, cumsum(x) / sum(x)), type = "b", col = "green",
+     xlim = c(0, 1), ylim = c(0, 1), xlab = "Proportion of sample",
+     ylab = "Proportion of variable")
+abline(0, 1, col = "red")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>
