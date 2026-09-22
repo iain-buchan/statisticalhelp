@@ -1,0 +1,36 @@
+# Univariate summary, Michelson's speed of light measurements at 12 decimal places, then the weighted example. One fragment per line.
+Valid data 100
+R: Sum 29985.24
+HP: 29,985.24
+Mean 299.8524
+Variance 0.006242666667
+Standard deviation 0.079010547819
+Variance coefficient 0.000263498134
+Standard error of mean 0.007901054782
+Upper 95% CL of mean 299.868077406834
+Lower 95% CL of mean 299.836722593166
+Geometric mean 299.852389694496
+Skewness -0.01825961396
+Kurtosis 3.263530532311
+Maximum 300.07
+Upper quartile 299.8975
+Median 299.85
+Lower quartile 299.8025
+Interquartile range 0.095
+Minimum 299.62
+Range 0.45
+Centile 95 299.98
+Centile 5 299.721
+Sum of weights 8
+Mean 2.75
+Variance 2.109375
+Standard deviation 1.452369
+Variance coefficient 0.528134
+Standard error of mean 0.649519
+Upper 95% CL of mean 4.553354
+Lower 95% CL of mean 0.946646
+Geometric mean 2.394297
+Skewness 0.1283
+Kurtosis 2.069959
+Upper quartile 3.5
+Lower quartile 1.5

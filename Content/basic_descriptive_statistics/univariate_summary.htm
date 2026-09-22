@@ -152,7 +152,7 @@ i=\text{first index where } W_i&gt;P$</MadCap:equation>
             </tr>
             <tr>
                 <td>Sum</td>
-                <td>29985.24</td>
+                <td>29,985.24</td>
             </tr>
             <tr>
                 <td>Mean</td>
@@ -211,6 +211,10 @@ i=\text{first index where } W_i&gt;P$</MadCap:equation>
                 <td>299.8025</td>
             </tr>
             <tr>
+                <td>Interquartile range</td>
+                <td>0.095</td>
+            </tr>
+            <tr>
                 <td>Minimum</td>
                 <td>299.62</td>
             </tr>
@@ -227,5 +231,201 @@ i=\text{first index where } W_i&gt;P$</MadCap:equation>
                 <td>299.721</td>
             </tr>
         </table>
+        <p>&#160;</p>
+        <p><u>Weighted example</u>
+        </p>
+        <p>Suppose that the five possible responses to a question, 1 to 5, are to be summarised with weights 2, 1, 3, 1 and 1 (an illustration). Enter the values in one column and the weights in another, select Weighted Univariate Summary from the Descriptive section of the Analysis menu, and select the values column and then the weights column. The weights are scaled to sum to the number of values, 5, and n is 5 in the formulae above, so this is not the same as the unweighted summary of eight responses of which two are 1, one is 2 and so on.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td>Variables</td>
+                <td>Value (weight: Frequency)</td>
+            </tr>
+            <tr>
+                <td>Valid data</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Missing data</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Sum of weights</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>Mean</td>
+                <td>2.75</td>
+            </tr>
+            <tr>
+                <td>Variance</td>
+                <td>2.109375</td>
+            </tr>
+            <tr>
+                <td>Standard deviation</td>
+                <td>1.452369</td>
+            </tr>
+            <tr>
+                <td>Variance coefficient</td>
+                <td>0.528134</td>
+            </tr>
+            <tr>
+                <td>Standard error of mean</td>
+                <td>0.649519</td>
+            </tr>
+            <tr>
+                <td>Upper 95% CL of mean</td>
+                <td>4.553354</td>
+            </tr>
+            <tr>
+                <td>Lower 95% CL of mean</td>
+                <td>0.946646</td>
+            </tr>
+            <tr>
+                <td>Geometric mean</td>
+                <td>2.394297</td>
+            </tr>
+            <tr>
+                <td>Skewness</td>
+                <td>0.1283</td>
+            </tr>
+            <tr>
+                <td>Kurtosis</td>
+                <td>2.069959</td>
+            </tr>
+            <tr>
+                <td>Maximum</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Upper quartile</td>
+                <td>3.5</td>
+            </tr>
+            <tr>
+                <td>Median</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Lower quartile</td>
+                <td>1.5</td>
+            </tr>
+            <tr>
+                <td>Interquartile range</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Minimum</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Range</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Centile 95</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Centile 5</td>
+                <td>1</td>
+            </tr>
+        </table>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the two examples above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Univariate summary: the StatsDirect help example (Michelson's 100 measurements
+# of the speed of light in air, millions of metres per second) in R
+speed &lt;- c(299.85, 299.74, 299.90, 300.07, 299.93, 299.85, 299.95, 299.98, 299.98,
+           299.88, 300.00, 299.98, 299.93, 299.65, 299.76, 299.81, 300.00, 300.00,
+           299.96, 299.96, 299.96, 299.94, 299.96, 299.94, 299.88, 299.80, 299.85,
+           299.88, 299.90, 299.84, 299.83, 299.79, 299.81, 299.88, 299.88, 299.83,
+           299.80, 299.79, 299.76, 299.80, 299.88, 299.88, 299.88, 299.86, 299.72,
+           299.72, 299.62, 299.86, 299.97, 299.95, 299.88, 299.91, 299.85, 299.87,
+           299.84, 299.84, 299.85, 299.84, 299.84, 299.84, 299.89, 299.81, 299.81,
+           299.82, 299.80, 299.77, 299.76, 299.74, 299.75, 299.76, 299.91, 299.92,
+           299.89, 299.86, 299.88, 299.72, 299.84, 299.85, 299.85, 299.78, 299.89,
+           299.84, 299.78, 299.81, 299.76, 299.81, 299.79, 299.81, 299.82, 299.85,
+           299.87, 299.87, 299.81, 299.74, 299.81, 299.94, 299.95, 299.80, 299.81,
+           299.87)
+n &lt;- length(speed)
+
+# R's standard summary, then each statistic of the report, printed to 12 places
+# as the example shows them (decimal places set to 12 in Analysis_Options)
+print(summary(speed))
+twelve &lt;- function(x) {
+  formatC(round(x, 12), digits = 12, format = "f", drop0trailing = TRUE)
+}
+cat("Valid data", n, "  Missing data", sum(is.na(speed)), "\n")
+cat("Sum", twelve(sum(speed)), "\n")
+cat("Mean", twelve(mean(speed)), "\n")
+cat("Variance", twelve(var(speed)), "\n")
+cat("Standard deviation", twelve(sd(speed)), "\n")
+cat("Variance coefficient", twelve(sd(speed) / mean(speed)), "\n")
+se &lt;- sd(speed) / sqrt(n)
+cat("Standard error of mean", twelve(se), "\n")
+cat("Upper 95% CL of mean", twelve(mean(speed) + qt(0.975, n - 1) * se), "\n")
+cat("Lower 95% CL of mean", twelve(mean(speed) - qt(0.975, n - 1) * se), "\n")
+cat("Geometric mean", twelve(exp(mean(log(speed)))), "\n")
+
+# Skewness and kurtosis are sqrt(b1) and b2, from the moments about the mean
+# with n as the divisor, as in the normality tests
+m &lt;- function(k) mean((speed - mean(speed))^k)
+cat("Skewness", twelve(m(3) / m(2)^1.5), "\n")
+cat("Kurtosis", twelve(m(4) / m(2)^2), "\n")
+
+# Centile type 2 interpolates between the ordered values at p(n + 1): type 6 in
+# R, whose default, type 7, interpolates at 1 + p(n - 1) instead
+q &lt;- quantile(speed, c(0.05, 0.25, 0.5, 0.75, 0.95), type = 6)
+cat("Maximum", max(speed), "\n")
+cat("Upper quartile", twelve(q[4]), "\n")
+cat("Median", twelve(q[3]), "\n")
+cat("Lower quartile", twelve(q[2]), "\n")
+cat("Interquartile range", twelve(q[4] - q[2]), "\n")
+cat("Minimum", min(speed), "\n")
+cat("Range", twelve(max(speed) - min(speed)), "\n")
+cat("Centile 95", twelve(q[5]), "\n")
+cat("Centile 5", twelve(q[1]), "\n")
+
+# Weighted univariate summary: five values with weights, as a second example.
+# StatsDirect first scales the weights to sum to the number of values n, then
+# uses n - 1 for the variance and n for the moments and the standard error, so a
+# weighted summary is not the summary of the values repeated by their weights.
+value &lt;- 1:5
+weight &lt;- c(2, 1, 3, 1, 1)
+n &lt;- length(value)
+w &lt;- weight * n / sum(weight)
+m &lt;- weighted.mean(value, w)
+v &lt;- sum(w * (value - m)^2) / (n - 1)
+six &lt;- function(x) formatC(round(x, 6), digits = 6, format = "f", drop0trailing = TRUE)
+cat("Valid data", n, "  Sum of weights", sum(weight), "\n")
+cat("Mean", six(m), "  Variance", six(v), "  Standard deviation", six(sqrt(v)), "\n")
+cat("Variance coefficient", six(sqrt(v) / m), "  Standard error of mean",
+    six(sqrt(v / n)), "\n")
+cat("Upper 95% CL of mean", six(m + qt(0.975, n - 1) * sqrt(v / n)),
+    "  Lower 95% CL of mean", six(m - qt(0.975, n - 1) * sqrt(v / n)), "\n")
+cat("Geometric mean", six(exp(sum(w * log(value)) / n)), "\n")
+mom &lt;- function(k) sum(w * (value - m)^k) / n
+cat("Skewness", six(mom(3) / mom(2)^1.5), "  Kurtosis", six(mom(4) / mom(2)^2), "\n")
+
+# Centile type 1 with weights: the ordered value at which the cumulative scaled
+# weight first exceeds pn, or the average of it and the value before when the
+# cumulative weight reaches pn exactly
+centile &lt;- function(p) {
+  cum &lt;- cumsum(w)
+  i &lt;- which(cum &gt; p * n)[1]
+  if (i &gt; 1 &amp;&amp; isTRUE(all.equal(cum[i - 1], p * n))) (value[i - 1] + value[i]) / 2
+  else value[i]
+}
+cat("Upper quartile", centile(0.75), "  Median", centile(0.5), "  Lower quartile",
+    centile(0.25), "  Centile 95", centile(0.95), "  Centile 5", centile(0.05), "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+
     </body>
 </html>

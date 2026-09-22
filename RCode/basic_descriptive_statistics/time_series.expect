@@ -1,0 +1,24 @@
+# Time series summary, Bland (2000) zidovudine levels in two groups of patients, at 2 decimal places. One fragment per line. The bootstrap lines are random in R and are not checked.
+Subjects: 9
+Total (mean per time point) observations: 108 (9)
+Mean (SD) area under curve (AUC): 459.73 (151.28)
+SE of mean AUC: 50.43
+95% t-interval for mean AUC: 343.45 to 576.01
+HP: 335.19 to 575.8
+Median (IQR) area under curve: 505.88 (263.63)
+Median (IQR) time to maximum: 45 (30)
+Median (IQR) slope to maximum: 0.13 (0.18)
+Mean (SD) slope to maximum: 0.22 (0.26)
+Subjects: 5
+Total (mean per time point) observations: 60 (5)
+Mean (SD) area under curve (AUC): 774.02 (381.58)
+SE of mean AUC: 170.65
+HP: 448.85 to 2,699.11
+Median (IQR) area under curve: 599.85 (420.38)
+Median (IQR) time to maximum: 30 (15)
+Median (IQR) slope to maximum: 0.53 (0.14)
+Mean (SD) slope to maximum: 0.49 (0.16)
+Welch t (SE of difference): -1.77 (177.94)
+DF (Satterthwaite): 4.71
+Two sided P = 0.1412
+AUC difference (95% CI): -314.28 (-780.27 to 151.7

@@ -32,7 +32,9 @@
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
-        <p>N = 8</p>
+        <p>Frequency analysis for Response</p>
+        <p>&#160;</p>
+        <p>Total = 8</p>
         <p>&#160;</p>
         <table cellspacing="0" style="caption-side: top;">
             <col />
@@ -83,5 +85,33 @@
                 <td>100</td>
             </tr>
         </table>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Frequencies: the StatsDirect help example (eight responses on a Likert scale)
+# in R
+response &lt;- c(3, 3, 4, 1, 1, 2, 5, 3)
+n &lt;- length(response)
+
+# R's standard table of counts
+counts &lt;- table(response)
+print(counts)
+
+# The report's table: each value with its frequency, relative frequency as a
+# percentage, cumulative frequency and cumulative percentage
+cat("Total =", n, "\n")
+cat("Value  Frequency  Relative %  Cumulative  Cumulative Relative %\n")
+cumulative &lt;- cumsum(counts)
+for (i in seq_along(counts)) {
+  cat(names(counts)[i], counts[i], 100 * counts[i] / n, cumulative[i],
+      100 * cumulative[i] / n, "\n")
+}</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+
     </body>
 </html>
