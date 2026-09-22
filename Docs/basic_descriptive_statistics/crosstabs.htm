@@ -331,6 +331,102 @@
                                         <p>Kendall tau-b = 0.348155</p>
                                         <p>Approximate test of tau-b = 0: SE = 0.275596, P = 0.2065, 95% CI = -0.192002 to 0.888313</p>
                                         <p>Approximate test of independence: SE = 0.274138, P = 0.2041, 95% CI = -0.189145 to 0.885455</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Crosstabs: the StatsDirect help example (sex and grade of skin reaction to an
+# antigen in 10 patients) in R, with the contingency table analysis that follows
+sex &lt;- c(0, 1, 1, 0, 1, 0, 0, 0, 1, 1)           # M = 1, F = 0
+reaction &lt;- c(0, 1, 2, 2, 2, 1, 0, 1, 2, 0)      # none = 0, weak = 1, strong = 2
+
+# R's standard cross tabulation, with the percentages of each row and column
+tab &lt;- table(Sex = sex, Reaction = reaction)
+print(tab)
+print(round(100 * prop.table(tab, 1), 2))       # % of row
+print(round(100 * prop.table(tab, 2), 2))       # % of col
+n &lt;- sum(tab)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+
+# Nominal independence: Pearson's chi-square without Yates' correction (R warns
+# about the small expected counts, as the report does), the likelihood ratio
+# G-square, and the Fisher-Freeman-Halton exact test, which fisher.test gives
+# for a table larger than 2 by 2
+chi &lt;- suppressWarnings(chisq.test(tab, correct = FALSE))
+cat("Chi-square =", six(chi$statistic), " DF =", chi$parameter, " ", pv(chi$p.value),
+    "\n")
+g2 &lt;- 2 * sum(tab * log(tab / chi$expected), na.rm = TRUE)   # 0 log 0 counts as 0
+cat("G-square =", six(g2), " DF =", chi$parameter, " ",
+    pv(pchisq(g2, chi$parameter, lower.tail = FALSE)), "\n")
+cat("Fisher-Freeman-Halton exact", pv(fisher.test(tab)$p.value), "\n")
+cat("Expected counts below 5:", sum(chi$expected &lt; 5), "of", length(tab), "\n")
+
+# ANOVA: a chi-square comparing the mean row score (the sex code) between the
+# columns, (n - 1) times the between-column sum of squares over the total sum of
+# squares, with the number of columns less 1 as its degrees of freedom
+between &lt;- sum(tapply(sex, reaction, function(v) length(v) * (mean(v) - mean(sex))^2))
+chi_eq &lt;- (n - 1) * between / sum((sex - mean(sex))^2)
+df_eq &lt;- ncol(tab) - 1
+cat("Chi-square for equality of mean column scores =", six(chi_eq), " DF =", df_eq, " ",
+    pv(pchisq(chi_eq, df_eq, lower.tail = FALSE)), "\n")
+
+# Linear trend: the correlation between the row and column scores, and
+# Mantel-Haenszel's chi-square (n - 1) r^2 with one degree of freedom
+r &lt;- cor(sex, reaction)
+m2 &lt;- (n - 1) * r^2
+cat("Sample correlation (r) =", six(r), "\n")
+cat("Chi-square for linear trend (M2) =", six(m2), " DF = 1 ",
+    pv(pchisq(m2, 1, lower.tail = FALSE)), "\n")
+
+# Nominal association: phi, Pearson's contingency coefficient and Cramer's V
+x2 &lt;- as.numeric(chi$statistic)
+cat("Phi =", six(sqrt(x2 / n)), "\n")
+cat("Pearson's contingency =", six(sqrt(x2 / (x2 + n))), "\n")
+cat("Cramer's V =", six(sqrt(x2 / (n * (min(dim(tab)) - 1)))), "\n")
+
+# Ordinal association: Goodman and Kruskal's gamma and Kendall's tau-b from the
+# concordant and discordant pairs, each with two standard errors (Agresti 2002,
+# Brown and Benedetti 1977): one for a test that the measure is 0, one under
+# independence
+o &lt;- unclass(tab)
+R &lt;- nrow(o)
+C &lt;- ncol(o)
+conc &lt;- disc &lt;- o * 0
+for (i in 1:R) for (j in 1:C) {
+  conc[i, j] &lt;- sum(o[(1:R) &gt; i, (1:C) &gt; j]) + sum(o[(1:R) &lt; i, (1:C) &lt; j])
+  disc[i, j] &lt;- sum(o[(1:R) &gt; i, (1:C) &lt; j]) + sum(o[(1:R) &lt; i, (1:C) &gt; j])
+}
+cc &lt;- sum(o * conc)                       # concordant pairs, counted twice
+dc &lt;- sum(o * disc)                       # discordant pairs, counted twice
+gamma &lt;- (cc - dc) / (cc + dc)
+se_gamma &lt;- 4 / (cc + dc)^2 * sqrt(sum(o * (dc * conc - cc * disc)^2))
+v_ind &lt;- sum(o * (conc - disc)^2) - (cc - dc)^2 / n
+se_gamma_ind &lt;- 2 / (cc + dc) * sqrt(v_ind)
+rows &lt;- rowSums(o)
+cols &lt;- colSums(o)
+dr &lt;- n^2 - sum(rows^2)
+dcl &lt;- n^2 - sum(cols^2)
+taub &lt;- (cc - dc) / sqrt(dr * dcl)
+vij &lt;- outer(rows, cols, function(a, b) a * dcl + b * dr)
+vt &lt;- sum(o * (2 * sqrt(dr * dcl) * (conc - disc) + taub * vij)^2) -
+      n^3 * taub^2 * (dr + dcl)^2
+se_taub &lt;- sqrt(vt) / (dr * dcl)
+se_taub_ind &lt;- 2 * sqrt(v_ind / (dr * dcl))
+z &lt;- qnorm(0.975)
+show &lt;- function(label, est, se) {
+  cat(label, " SE =", six(se), " ", pv(2 * pnorm(-abs(est / se))),
+      " 95% CI =", six(est - z * se), "to", six(est + z * se), "\n")
+}
+cat("Goodman-Kruskal gamma =", six(gamma), "\n")
+show("Approximate test of gamma = 0:", gamma, se_gamma)
+show("Approximate test of independence:", gamma, se_gamma_ind)
+cat("Kendall tau-b =", six(taub), "\n")
+show("Approximate test of tau-b = 0:", taub, se_taub)
+show("Approximate test of independence:", taub, se_taub_ind)</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
