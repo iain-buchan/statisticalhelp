@@ -378,15 +378,58 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>F (VR between groups) = 378.727406 P &lt; .0001</p>
+                                        <p>F (VR between groups) = 378.727406 P &lt; 0.0001</p>
                                         <p>&#160;</p>
-                                        <p>F (using group/subgroup msqr) = 7.665167 P = .0097</p>
+                                        <p>F (using group/subgroup msqr) = 7.665167 P = 0.0097</p>
                                         <p>&#160;</p>
-                                        <p>F (VR between subgroups within groups) = 49.408892 P &lt; .0001</p>
+                                        <p>F (VR between subgroups within groups) = 49.408892 P &lt; 0.0001</p>
                                         <p>&#160;</p>
-                                        <p>The "F (VR between groups)" statistic assumes a fixed effects model. For this example, which assumes random effects, use the "F (using group/subgroup msqr)" statistic, this treats the residual sum of squares as the samples sum of squares. For the null hypothesis of zero group variance, consider 2.5201/0.3288 (= 7.66 on an F(3,8) distribution) instead of 2.5201/0.0067 (= 379 on an F(3,12) distribution) because the point of randomization has been re-defined. The " F (VR between subgroups within groups" statistic clearly rejects the null hypothesis of zero subgroup-in-group variance.</p>
+                                        <p>The "F (VR between groups)" statistic assumes a fixed effects model. For this example, which assumes random effects, use the "F (using group/subgroup msqr)" statistic, this treats the residual sum of squares as the samples sum of squares. For the null hypothesis of zero group variance, consider 2.5201/0.3288 (= 7.66 on an F(3,8) distribution) instead of 2.5201/0.00665 (= 379 on an F(3,12) distribution) because the point of randomization has been re-defined. The "F (VR between subgroups within groups)" statistic clearly rejects the null hypothesis of zero subgroup-in-group variance.</p>
                                         <p>&#160;</p>
                                         <p>The analysis shows that the plants contribute most to the overall variability and the leaves also have a statistically significant contribution. The samples from each leaf, as reflected by the residual sum of squares, contribute relatively little to the overall variability. Sampling further plants or leaves is, therefore, more important than taking multiple samples per leaf.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Fully nested (hierarchical) analysis of variance: the StatsDirect help example
+# (Snedecor and Cochran 1989, calcium in the leaves of turnip greens: four
+# plants, three leaves from each plant, two samples from each leaf) in R
+calcium &lt;- c(3.28, 3.09, 3.52, 3.48, 2.88, 2.80,
+             2.46, 2.44, 1.87, 1.92, 2.19, 2.19,
+             2.77, 2.66, 3.74, 3.44, 2.55, 2.55,
+             3.78, 3.87, 4.07, 4.12, 3.31, 3.31)     # by plant, then leaf
+plant &lt;- factor(rep(1:4, each = 6))
+leaf &lt;- factor(rep(rep(1:3, each = 2), times = 4))
+
+# R's standard analysis: leaves are nested within plants, written plant/leaf.
+# The F ratios that summary() prints all use the residual mean square
+fit &lt;- aov(calcium ~ plant/leaf)
+print(summary(fit))
+
+# The report's table to 6 places, and its three F ratios: StatsDirect also
+# tests the groups (plants) against the subgroups within groups (leaves within
+# plants), the appropriate test when the leaves are a random sample
+a &lt;- anova(fit)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else paste("P =", formatC(p, digits = 4, format = "f"))
+}
+ms &lt;- a$"Mean Sq"
+df &lt;- a$Df
+cat("Between Groups", six(a$"Sum Sq"[1]), df[1], six(ms[1]), "\n")
+cat("Between Subgroups within Groups", six(a$"Sum Sq"[2]), df[2], six(ms[2]), "\n")
+cat("Residual", six(a$"Sum Sq"[3]), df[3], six(ms[3]), "\n")
+cat("Total", six(sum(a$"Sum Sq")), sum(df), "\n")
+f1 &lt;- ms[1] / ms[3]
+f2 &lt;- ms[1] / ms[2]
+f3 &lt;- ms[2] / ms[3]
+p1 &lt;- pf(f1, df[1], df[3], lower.tail = FALSE)
+p2 &lt;- pf(f2, df[1], df[2], lower.tail = FALSE)
+p3 &lt;- pf(f3, df[2], df[3], lower.tail = FALSE)
+cat("F (VR between groups) =", six(f1), " ", pv(p1), "\n")
+cat("F (using group/subgroup msqr) =", six(f2), " ", pv(p2), "\n")
+cat("F (VR between subgroups within groups) =", six(f3), " ", pv(p3), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

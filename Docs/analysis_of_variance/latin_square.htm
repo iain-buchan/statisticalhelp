@@ -150,19 +150,19 @@
                                                 <td height="17">&#160;</td>
                                                 <td height="17">1</td>
                                                 <td height="17">A</td>
-                                                <td height="17">E</td>
+                                                <td height="17">B</td>
                                                 <td height="17">C</td>
                                                 <td height="17">D</td>
-                                                <td height="17">A</td>
+                                                <td height="17">E</td>
                                             </tr>
                                             <tr>
                                                 <td height="17">&#160;</td>
                                                 <td height="17">2</td>
-                                                <td height="17">E</td>
-                                                <td height="17">B</td>
-                                                <td height="17">A</td>
                                                 <td height="17">B</td>
                                                 <td height="17">C</td>
+                                                <td height="17">D</td>
+                                                <td height="17">E</td>
+                                                <td height="17">A</td>
                                             </tr>
                                             <tr>
                                                 <td height="17" style="text-align: right;">Cage</td>
@@ -170,26 +170,26 @@
                                                 <td height="17">C</td>
                                                 <td height="17">D</td>
                                                 <td height="17">E</td>
-                                                <td height="17">D</td>
-                                                <td height="17">D</td>
+                                                <td height="17">A</td>
+                                                <td height="17">B</td>
                                             </tr>
                                             <tr>
                                                 <td height="17">&#160;</td>
                                                 <td height="17">4</td>
                                                 <td height="17">D</td>
-                                                <td height="17">C</td>
+                                                <td height="17">E</td>
+                                                <td height="17">A</td>
                                                 <td height="17">B</td>
                                                 <td height="17">C</td>
-                                                <td height="17">B</td>
                                             </tr>
                                             <tr>
                                                 <td height="17">&#160;</td>
                                                 <td height="17">5</td>
-                                                <td height="17">B</td>
-                                                <td height="17">A</td>
-                                                <td height="17">D</td>
-                                                <td height="17">A</td>
                                                 <td height="17">E</td>
+                                                <td height="17">A</td>
+                                                <td height="17">B</td>
+                                                <td height="17">C</td>
+                                                <td height="17">D</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
@@ -660,7 +660,7 @@
                                         <p><u>Latin square test</u>
                                         </p>
                                         <p>&#160;</p>
-                                        <p>Factors: Rabbit, Position, Order.</p>
+                                        <p>Column, row and treatment factors: Rabbit, Position, Order.</p>
                                         <p>&#160;</p>
                                         <table cellspacing="0" style="caption-side: top;">
                                             <col />
@@ -705,13 +705,48 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>F (rows) = 1.167809, P = .3592</p>
+                                        <p>F (rows) = 1.167809 P = 0.3592</p>
                                         <p>&#160;</p>
-                                        <p>F (columns) = 3.909622, P = .0124</p>
+                                        <p>F (columns) = 3.909622 P = 0.0124</p>
                                         <p>&#160;</p>
-                                        <p>F (treatments) = 0.171617, P = .9701</p>
+                                        <p>F (treatments) = 0.171617 P = 0.9701</p>
                                         <p>&#160;</p>
                                         <p>Here we see that the order of administration does not have a statistically significant effect on blistering but that inter-rabbit variation was significant.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Latin square analysis of variance: the StatsDirect help example (Armitage and
+# Berry 1994, blistering of rabbits' skin at six sites in six rabbits, with the
+# order of inoculation as the Latin factor) in R
+blister &lt;- c(7.9, 6.1, 7.5, 6.9, 6.7, 7.3, 8.7, 8.2, 8.1, 8.5, 9.9, 8.3,
+             7.4, 7.7, 6.0, 6.8, 7.3, 7.3, 7.4, 7.1, 6.4, 7.7, 6.4, 5.8,
+             7.1, 8.1, 6.2, 8.5, 6.4, 6.4, 8.2, 5.9, 7.5, 8.5, 7.3, 7.7)
+rabbit &lt;- factor(rep(1:6, each = 6))              # the columns of the square
+position &lt;- factor(rep(1:6, times = 6))           # the rows
+order &lt;- factor(c(3, 4, 1, 6, 2, 5, 5, 2, 3, 1, 4, 6, 4, 6, 5, 3, 1, 2,
+                  1, 5, 6, 2, 3, 4, 6, 3, 2, 4, 5, 1, 2, 1, 4, 5, 6, 3))
+
+# R's standard analysis: the three factors are orthogonal in a Latin square, so
+# each sum of squares is the same whatever the order of the terms
+fit &lt;- aov(blister ~ position + rabbit + order)
+print(summary(fit))
+
+# The report's lines to 6 places
+a &lt;- anova(fit)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else paste("P =", formatC(p, digits = 4, format = "f"))
+}
+cat("Rows", six(a$"Sum Sq"[1]), a$Df[1], six(a$"Mean Sq"[1]), "\n")
+cat("Columns", six(a$"Sum Sq"[2]), a$Df[2], six(a$"Mean Sq"[2]), "\n")
+cat("Treatments", six(a$"Sum Sq"[3]), a$Df[3], six(a$"Mean Sq"[3]), "\n")
+cat("Residual", six(a$"Sum Sq"[4]), a$Df[4], six(a$"Mean Sq"[4]), "\n")
+cat("Total", six(sum(a$"Sum Sq")), sum(a$Df), "\n")
+cat("F (rows) =", six(a$"F value"[1]), " ", pv(a$"Pr(&gt;F)"[1]), "\n")
+cat("F (columns) =", six(a$"F value"[2]), " ", pv(a$"Pr(&gt;F)"[2]), "\n")
+cat("F (treatments) =", six(a$"F value"[3]), " ", pv(a$"Pr(&gt;F)"[3]), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

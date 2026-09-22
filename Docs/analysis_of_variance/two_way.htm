@@ -197,14 +197,14 @@
                                         <p>
             If you wish to use a two way ANOVA but your data are clearly non-normal then you should consider using the <a href="../nonparametric_methods/friedman.htm">Friedman</a> test, a nonparametric alternative.</p>
                                         <p>&#160;</p>
-                                        <p>Please note that many statistical software packages and texts present multiple comparison methods for treatment group means only in the context of one way ANOVA. StatsDirect extends this to two way ANOVA by using the treatment group mean square from two way ANOVA for multiple comparisons. Treatment effects must be <a href="anova.htm">fixed</a> for this use of multiple comparisons to be valid. See <a href="../references/reference_list.htm#ref-hsu-1996">Hsu (1996)</a> for further discussion.</p>
+                                        <p>Please note that many statistical software packages and texts present multiple comparison methods for treatment group means only in the context of one way ANOVA. StatsDirect extends this to two way ANOVA by using the residual mean square, and its degrees of freedom, from the two way ANOVA for the multiple comparisons. Treatment effects must be <a href="anova.htm">fixed</a> for this use of multiple comparisons to be valid. See <a href="../references/reference_list.htm#ref-hsu-1996">Hsu (1996)</a> for further discussion.</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
                                         <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 241)</a>.</p>
                                         <p>Test workbook (ANOVA worksheet: Treatment 1, Treatment 2, Treatment 3, Treatment 4).</p>
                                         <p>&#160;</p>
-                                        <p>The following data represent clotting times (mins) of plasma from eight subjects treated in four different ways. The eight subjects (blocks) were allocated at random to each of the four treatment groups.</p>
+                                        <p>The following data represent clotting times (mins) of plasma from eight subjects treated in four different ways. Portions of each subject's plasma were allocated at random to the four treatments, so that each subject is a block.</p>
                                         <p>&#160;</p>
                                         <table cellspacing="0" style="caption-side: top;">
                                             <col />
@@ -271,10 +271,10 @@
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
-                                        <p><u>Two way randomized block analysis of variance&#160;</u>
+                                        <p><u>Two way randomized block analysis of variance</u>
                                         </p>
                                         <p>&#160;</p>
-                                        <p>Variables: Treatment 1, Treatment 2, Treatment 3, Treatment 4</p>
+                                        <p>Treatments: Treatment 1, Treatment 2, Treatment 3, Treatment 4</p>
                                         <p>&#160;</p>
                                         <table cellspacing="0" style="caption-side: top;">
                                             <col />
@@ -313,11 +313,49 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>F (VR between blocks) = 17.204193 P &lt; .0001</p>
+                                        <p>F (VR between blocks) = 17.204193 P &lt; 0.0001</p>
                                         <p>&#160;</p>
-                                        <p>F (VR between treatments) = 6.615029 P = .0025</p>
+                                        <p>F (VR between treatments) = 6.615029 P = 0.0025</p>
                                         <p>&#160;</p>
                                         <p>Here we can see that there was a statistically highly significant difference between mean clotting times across the groups. The difference between subjects is of no particular interest here.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Two way randomized block analysis of variance: the StatsDirect help example
+# (Armitage and Berry 1994, clotting times of plasma from eight subjects treated
+# in four ways) in R
+clotting &lt;- c(8.4, 9.4, 9.8, 12.2,
+              12.8, 15.2, 12.9, 14.4,
+              9.6, 9.1, 11.2, 9.8,
+              9.8, 8.8, 9.9, 12.0,
+              8.4, 8.2, 8.5, 8.5,
+              8.6, 9.9, 9.8, 10.9,
+              8.9, 9.0, 9.2, 10.4,
+              7.9, 8.1, 8.2, 10.0)                # by subject, then treatment
+subject &lt;- factor(rep(1:8, each = 4))             # the blocks (rows)
+treatment &lt;- factor(rep(paste("Treatment", 1:4), times = 8))
+
+# R's standard analysis, with the blocks first so that each factor's sum of
+# squares is the one StatsDirect prints (the design is balanced, so the order
+# makes no difference here)
+fit &lt;- aov(clotting ~ subject + treatment)
+print(summary(fit))
+
+# The report's lines to 6 places
+a &lt;- anova(fit)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else paste("P =", formatC(p, digits = 4, format = "f"))
+}
+cat("Between blocks (rows)", six(a$"Sum Sq"[1]), a$Df[1], six(a$"Mean Sq"[1]), "\n")
+cat("Between treatments (columns)", six(a$"Sum Sq"[2]), a$Df[2], six(a$"Mean Sq"[2]),
+    "\n")
+cat("Residual (error)", six(a$"Sum Sq"[3]), a$Df[3], six(a$"Mean Sq"[3]), "\n")
+cat("Corrected total", six(sum(a$"Sum Sq")), sum(a$Df), "\n")
+cat("F (VR between blocks) =", six(a$"F value"[1]), " ", pv(a$"Pr(&gt;F)"[1]), "\n")
+cat("F (VR between treatments) =", six(a$"F value"[2]), " ", pv(a$"Pr(&gt;F)"[2]), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

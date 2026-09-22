@@ -138,11 +138,11 @@
                                             <li>equal variance of observations in each population</li>
                                         </ul>
                                         <p>&#160;</p>
-                                        <p>- the <a href="homogeneity_of_variance.htm">homogeneity of variance</a> option (marked as "Equality of variance tests (Levene, Bartlett)" in the ANOVA results window) can be used to test the variance assumption. The <a href="../parametric_methods/normality.htm">Shapiro-Wilk</a> test can be used to look for evidence of non-normality. The most commonly unacceptable deviation from the assumptions is inequality of variance when the groups are of unequal sizes.</p>
+                                        <p>- the <a href="homogeneity_of_variance.htm">homogeneity of variance</a> option (marked as "Equality of variance (Levene, Bartlett) and Welch's F" in the ANOVA results window) can be used to test the variance assumption. The <a href="../parametric_methods/normality.htm">Shapiro-Wilk</a> test can be used to look for evidence of non-normality. The most commonly unacceptable deviation from the assumptions is inequality of variance when the groups are of unequal sizes.</p>
                                         <p>&#160;</p>
                                         <p>A significant overall test indicates a difference between the population means for the groups as a whole; you may then go on to make <a href="multiple_comparisons.htm">multiple comparisons</a> between the groups but this "dredging" should be avoided if possible.</p>
                                         <p>&#160;</p>
-                                        <p>If the groups in this example had been a series of treatments/exposures to which subjects were randomly allocated then a <a href="two_way.htm">two way randomized block</a> design ANOVA should have been used.</p>
+                                        <p>If the subjects in this example had been grouped into blocks (for example by litter) before being allocated at random to the treatments, a <a href="two_way.htm">two way randomized block</a> design ANOVA would have been used.</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
@@ -216,25 +216,25 @@
                                             </tr>
                                             <tr>
                                                 <td>Between Groups</td>
-                                                <td>27234.2</td>
+                                                <td>27,234.2</td>
                                                 <td>3</td>
-                                                <td>9078.066667</td>
+                                                <td>9,078.066667</td>
                                             </tr>
                                             <tr>
                                                 <td>Within Groups</td>
-                                                <td>63953.6</td>
+                                                <td>63,953.6</td>
                                                 <td>16</td>
-                                                <td>3997.1</td>
+                                                <td>3,997.1</td>
                                             </tr>
                                             <tr>
                                                 <td>Corrected Total</td>
-                                                <td>91187.8</td>
+                                                <td>91,187.8</td>
                                                 <td>19</td>
                                                 <td>&#160;</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>F (variance ratio) = 2.271163 P = .1195</p>
+                                        <p>F (variance ratio) = 2.271163 P = 0.1195</p>
                                         <p>&#160;</p>
                                         <p>The null hypothesis that there is no difference in mean worm counts across the four groups is held. If we had rejected this null hypothesis then we would have had to take a close look at the experimental conditions to make sure that all control groups were exposed to the same conditions.</p>
                                         <p>&#160;</p>
@@ -247,7 +247,7 @@
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
                                         </p>
-                                        <p>The American National Institute of Standards and Technology provide Statistical Reference Datasets for testing statistical software (<a href="../references/reference_list.htm#ref-mccullough-1999">McCullough and Wilson, 1999</a>; <a href="http://www.itl.nist.gov/div898/strd/" target="_blank">http://www.itl.nist.gov/div898/strd/</a>). The results below for the SiResits data set are given to 12 decimal places, StatsDirect provides 15 decimal places of accuracy internally.</p>
+                                        <p>The American National Institute of Standards and Technology provide Statistical Reference Datasets for testing statistical software (<a href="../references/reference_list.htm#ref-mccullough-1999">McCullough and Wilson, 1999</a>; <a href="http://www.itl.nist.gov/div898/strd/" target="_blank">http://www.itl.nist.gov/div898/strd/</a>). The results below for the SiRstv data set are given to 12 decimal places. The sums of squares and mean squares agree with the certified values exactly; the F ratio, certified as 1.18046237440255, agrees to 11 decimal places, the twelfth being beyond the precision of double precision arithmetic for these data (their deviations from the mean have only four significant figures).</p>
                                         <p>&#160;</p>
                                         <p><u>One way analysis of variance</u>
                                         </p>
@@ -285,7 +285,55 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>F (variance ratio) = 1.180462374402 P = .3494</p>
+                                        <p>F (variance ratio) = 1.180462374402 P = 0.3494</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example and the technical validation above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># One way analysis of variance: the StatsDirect help example (Armitage and Berry
+# 1994, worms recovered from four groups of rats) in R
+expt1 &lt;- c(279, 338, 334, 198, 303)
+expt2 &lt;- c(378, 275, 412, 265, 286)
+expt3 &lt;- c(172, 335, 335, 282, 250)
+expt4 &lt;- c(381, 346, 340, 471, 318)
+worms &lt;- c(expt1, expt2, expt3, expt4)
+group &lt;- factor(rep(c("Expt 1", "Expt 2", "Expt 3", "Expt 4"), each = 5))
+
+# R's standard analysis gives the same table: its "group" line is Between
+# Groups and its "Residuals" line is Within Groups
+fit &lt;- aov(worms ~ group)
+print(summary(fit))
+
+# The report's lines to 6 places
+a &lt;- anova(fit)
+six &lt;- function(x) {
+  formatC(x, digits = 6, format = "f", big.mark = ",", drop0trailing = TRUE)
+}
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+cat("Between Groups", six(a$"Sum Sq"[1]), a$Df[1], six(a$"Mean Sq"[1]), "\n")
+cat("Within Groups", six(a$"Sum Sq"[2]), a$Df[2], six(a$"Mean Sq"[2]), "\n")
+cat("Corrected Total", six(sum(a$"Sum Sq")), sum(a$Df), "\n")
+cat("F (variance ratio) =", six(a$"F value"[1]), " ", pv(a$"Pr(&gt;F)"[1]), "\n")
+
+# The technical validation example: the NIST SiRstv data (five instruments), to
+# 12 places as the help shows them. The twelfth decimal place of F is at the
+# limit of double precision for these data, as the topic notes.
+inst &lt;- c(196.3052, 196.1240, 196.1890, 196.2569, 196.3403,
+          196.3042, 196.3825, 196.1669, 196.3257, 196.0422,
+          196.1303, 196.2005, 196.2889, 196.0343, 196.1811,
+          196.2795, 196.1748, 196.1494, 196.1485, 195.9885,
+          196.2119, 196.1051, 196.1850, 196.0052, 196.2090)
+instrument &lt;- factor(rep(1:5, each = 5))
+b &lt;- anova(aov(inst ~ instrument))
+twelve &lt;- function(x) formatC(x, digits = 12, format = "f", drop0trailing = TRUE)
+cat("Between Groups", twelve(b$"Sum Sq"[1]), b$Df[1], twelve(b$"Mean Sq"[1]), "\n")
+cat("Within Groups", twelve(b$"Sum Sq"[2]), b$Df[2], twelve(b$"Mean Sq"[2]), "\n")
+cat("Corrected Total", twelve(sum(b$"Sum Sq")), sum(b$Df), "\n")
+cat("F (variance ratio) =", twelve(b$"F value"[1]), " ", pv(b$"Pr(&gt;F)"[1]), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

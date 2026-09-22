@@ -333,23 +333,93 @@
                                         </table>
                                         <p>&#160;</p>
                                         <p>Test for relative effectiveness of drug / placebo:</p>
-                                        <p>combined diff = 2.172414, SE = 0.61602</p>
-                                        <p>t = 3.526533, DF = 28, P = .0015</p>
+                                        <p>combined diff = 2.172414</p>
+                                        <p>SE = 0.61602</p>
+                                        <p>t = 3.526533</p>
+                                        <p>DF = 28</p>
+                                        <p>P = 0.0015</p>
                                         <p>&#160;</p>
                                         <p>Test for treatment effect:</p>
-                                        <p>diff 1 - diff 2 = 4.073529, SE = 1.2372</p>
-                                        <p>effect magnitude = 2.036765, 95% CI = 0.767502 to 3.306027</p>
-                                        <p>t = 3.292539, DF = 27, P = .0028</p>
+                                        <p>diff 1 - diff 2 = 4.073529</p>
+                                        <p>SE = 1.2372</p>
+                                        <p>effect magnitude = 2.036765</p>
+                                        <p>95% CI = 0.767502 to 3.306027</p>
+                                        <p>t = 3.292539</p>
+                                        <p>DF = 27</p>
+                                        <p>P = 0.0028</p>
                                         <p>&#160;</p>
                                         <p>Test for period effect:</p>
-                                        <p>diff 1 + diff 2 = 1.573529, SE = 1.2372</p>
-                                        <p>t = 1.271847, DF = 27, P = .2143</p>
+                                        <p>diff 1 + diff 2 = 1.573529</p>
+                                        <p>SE = 1.2372</p>
+                                        <p>t = 1.271847</p>
+                                        <p>DF = 27</p>
+                                        <p>P = 0.2143</p>
                                         <p>&#160;</p>
-                                        <p>Test for treatment / period interaction:</p>
-                                        <p>sum 1 - sum 2 = -3.171569, SE = 2.440281</p>
-                                        <p>t = -1.299673, DF = 27, P = .2047</p>
+                                        <p>Test for treatment-period interaction:</p>
+                                        <p>sum 1 - sum 2 = -3.171569</p>
+                                        <p>SE = 2.440281</p>
+                                        <p>t = -1.299673</p>
+                                        <p>DF = 27</p>
+                                        <p>P = 0.2047</p>
                                         <p>&#160;</p>
                                         <p>The absence of a statistically significant period effect or treatment period interaction permits the use of the statistically highly significant statistic for effect of drug vs. placebo. With 95% confidence we can say that the true population value for the magnitude of the treatment effect lies somewhere between 0.77 and 3.31 extra dry nights each fortnight.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Crossover trial: the StatsDirect help example (Armitage and Berry 1994, dry
+# nights out of 14 in two groups of bedwetters, drug then placebo or placebo
+# then drug) in R
+drug1 &lt;- c(8, 14, 8, 9, 11, 3, 6, 0, 13, 10, 7, 13, 8, 7, 9, 10, 2)   # group 1
+placebo1 &lt;- c(5, 10, 0, 7, 6, 5, 0, 0, 12, 2, 5, 13, 10, 7, 0, 6, 2)
+drug2 &lt;- c(11, 8, 9, 8, 9, 8, 14, 4, 13, 7, 10, 6)                   # group 2
+placebo2 &lt;- c(12, 6, 13, 8, 8, 4, 8, 2, 8, 9, 7, 7)
+
+# Each group's mean in each period and its mean difference, period 1 less
+# period 2
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else paste("P =", formatC(p, digits = 4, format = "f"))
+}
+d1 &lt;- drug1 - placebo1                    # group 1 had the drug in period 1
+d2 &lt;- placebo2 - drug2                    # group 2 had the placebo first
+cat("Group 1", six(mean(drug1)), six(mean(placebo1)), six(mean(d1)), "\n")
+cat("Group 2", six(mean(placebo2)), six(mean(drug2)), six(mean(d2)), "\n")
+
+# StatsDirect's four tests are t tests (Armitage and Berry 1994), which R's
+# standard t.test gives. Relative effectiveness: drug against placebo, paired
+# within subjects and pooled over both groups
+est &lt;- function(label, value, r) {
+  cat(label, "=", six(value), "  SE =", six(r$stderr), "\n")
+}
+tline &lt;- function(r) {
+  cat("t =", six(r$statistic), "  DF =", r$parameter, " ", pv(r$p.value), "\n")
+}
+r &lt;- t.test(c(drug1, drug2), c(placebo1, placebo2), paired = TRUE)
+est("combined diff", r$estimate, r)
+tline(r)
+
+# Treatment effect: the two groups' period differences compared with an unpaired
+# test assuming equal variances. Their difference is twice the treatment effect,
+# so the effect and its confidence interval are half of what t.test gives.
+r &lt;- t.test(d1, d2, var.equal = TRUE)
+est("diff 1 - diff 2", r$estimate[1] - r$estimate[2], r)
+cat("effect magnitude =", six((r$estimate[1] - r$estimate[2]) / 2), "  95% CI =",
+    six(r$conf.int[1] / 2), "to", six(r$conf.int[2] / 2), "\n")
+tline(r)
+
+# Period effect: the same differences with group 2's sign reversed, so that the
+# test compares the sum of the two mean differences with zero
+r &lt;- t.test(d1, -d2, var.equal = TRUE)
+est("diff 1 + diff 2", r$estimate[1] - r$estimate[2], r)
+tline(r)
+
+# Treatment-period interaction: each subject's total over the two periods,
+# compared between the groups
+r &lt;- t.test(drug1 + placebo1, drug2 + placebo2, var.equal = TRUE)
+est("sum 1 - sum 2", r$estimate[1] - r$estimate[2], r)
+tline(r)</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

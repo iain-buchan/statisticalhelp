@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" />
-        <meta name="description" content="This function calculates analysis of variance (ANOVA) for a two way randomized block experiment with repeated observations for each treatment/block cell. There are overall tests for differences between treatment means, between block means and block/treatment interaction. Multiple comparison methods are provided for pairs of treatment means." /><title>Two Way (Repeated Measures) Analysis of Variance (ANOVA) - StatsDirect</title>
+        <meta name="description" content="This function calculates analysis of variance (ANOVA) for a two way randomized block experiment with repeated observations for each treatment/block cell. There are overall tests for differences between treatment means, between block means and block/treatment interaction. Multiple comparison methods are provided for pairs of treatment means." /><title>Two Way (Repeated Observations) Analysis of Variance (ANOVA) - StatsDirect</title>
         <link rel="shortcut icon" href="../resources/images/sd3.ico" />
         <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
@@ -113,7 +113,7 @@
                             <div class="body-container">
                                 <div data-mc-content-body="True">
                                     <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor42"></a>Two Way Replicate (Repeated Measures) Analysis of Variance</h1>
+                                        <h1><a name="kanchor42"></a>Two Way Replicate (Repeated Observations) Analysis of Variance</h1>
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Analysis of Variance_Replicate Two Way</b>.</p>
                                         <p>&#160;</p>
@@ -395,11 +395,50 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>F (VR blocks) = 63.136364 P &lt; .0001</p>
-                                        <p>F (VR treatments) = 80.318182 P &lt; .0001</p>
-                                        <p>F (VR interaction) = 2.522727 P = .0771</p>
+                                        <p>F (VR blocks) = 63.136364 P &lt; 0.0001</p>
+                                        <p>F (VR treatments) = 80.318182 P &lt; 0.0001</p>
+                                        <p>F (VR interaction) = 2.522727 P = 0.0771</p>
                                         <p>&#160;</p>
                                         <p>Here we see a statistically highly significant difference between mean clotting times across the groups. If the F statistic for interaction had been significant then there would have been little point in drawing conclusions about independent block and treatment effects from the other F statistics.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Two way randomized block analysis of variance with repeated observations: the
+# StatsDirect help example (Armitage and Berry 1994, clotting times of plasma
+# from three subjects treated in three ways, each measurement repeated three
+# times) in R. Each replicate is a table of treatment columns by subject rows.
+rep1 &lt;- c(9.8, 9.2, 8.4,   9.9, 9.1, 8.6,   11.3, 10.3, 9.8)
+rep2 &lt;- c(10.1, 8.6, 7.9,  9.5, 9.1, 8.0,   10.7, 10.7, 10.1)
+rep3 &lt;- c(9.8, 9.2, 8.0,   10.0, 9.4, 8.0,  10.7, 10.2, 10.1)
+clotting &lt;- c(rep1, rep2, rep3)
+subject &lt;- factor(rep(1:3, times = 9))                        # the blocks (rows)
+treatment &lt;- factor(rep(rep(c("A", "B", "C"), each = 3), times = 3))
+
+# R's standard analysis: subject * treatment fits both main effects and their
+# interaction, and each F ratio uses the residual mean square
+fit &lt;- aov(clotting ~ subject * treatment)
+print(summary(fit))
+
+# The report's lines to 6 places
+a &lt;- anova(fit)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+row &lt;- function(label, i) {
+  cat(label, six(a$"Sum Sq"[i]), a$Df[i], six(a$"Mean Sq"[i]), "\n")
+}
+row("Blocks (rows)", 1)
+row("Treatments (columns)", 2)
+row("Interaction", 3)
+row("Residual (error)", 4)
+cat("Corrected total", six(sum(a$"Sum Sq")), sum(a$Df), "\n")
+cat("F (VR blocks) =", six(a$"F value"[1]), " ", pv(a$"Pr(&gt;F)"[1]), "\n")
+cat("F (VR treatments) =", six(a$"F value"[2]), " ", pv(a$"Pr(&gt;F)"[2]), "\n")
+cat("F (VR interaction) =", six(a$"F value"[3]), " ", pv(a$"Pr(&gt;F)"[3]), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>
