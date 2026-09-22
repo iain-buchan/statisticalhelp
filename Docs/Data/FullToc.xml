@@ -110,7 +110,7 @@
     <TocEntry Title="Analysis of variance" Link="/analysis_of_variance/anova.htm" BreakType="chapter" StartSection="false" PageNumberReset="continue" ComputedResetPageLayout="true" ComputedFirstTopic="false" DescendantCount="10">
         <TocEntry Title="One way" Link="/analysis_of_variance/one_way.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Two way" Link="/analysis_of_variance/two_way.htm" ComputedFirstTopic="false" DescendantCount="0" />
-        <TocEntry Title="Two way with repeated measures" Link="/analysis_of_variance/two_way_replicate.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="Two way with repeated observations" Link="/analysis_of_variance/two_way_replicate.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Multiple contrasts" Link="/analysis_of_variance/multiple_comparisons.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Fully nested random" Link="/analysis_of_variance/nested.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Latin square" Link="/analysis_of_variance/latin_square.htm" ComputedFirstTopic="false" DescendantCount="0" />

@@ -124,7 +124,7 @@
                                         <p>&#160;</p>
                                         <p>If 20 repeat pairwise tests are made then you can not accept the conventional 1 in 20 chance of being wrong as a cut off level for statistical inference, i.e. there is a higher risk of <a href="../basics/p_values.htm">type I error</a>. A simple solution to this problem is to reduce the cut-off for statistical significance with increasing numbers of contrasts made; Bonferroni's method does just this with multiple t tests. More sophisticated methods, such as Tukey(-Kramer), consider the statistical distributions associated with systematic repeated testing; both Tukey(-Kramer) and Newman-Keuls methods are based upon the <a href="../distributions/studentized_range.htm">Studentized range</a> statistic. Scheffé's method gives a very conservative/cautious weighting against the risk of type I error and is therefore less powerful for the detection of true differences. The most acceptable general method for all pairwise comparisons is Tukey(-Kramer), the P values for which are exact with balanced designs (<a href="../references/reference_list.htm#ref-hsu-1996">Hsu, 1996</a>).</p>
                                         <p>&#160;</p>
-                                        <p>The contrasts in each table are listed in decreasing order of the absolute standardized difference between the two group means, |L/SE(L)|; with equal group sizes this is the order of the differences themselves, and the Newman-Keuls and Dunnett tables are ordered by the difference. The word "stop" is shown next to the first non-significant P value: you should not consider further contrasts if you are making a simultaneous analysis (similar to the Shaffer-Holm method). In the Newman-Keuls table a pair of means counts as different, in the summary of significant contrasts, only if every wider range of ordered means that contains the pair is also significant.</p>
+                                        <p>The contrasts in each table are listed in decreasing order of the absolute standardized difference between the two group means, |L/SE(L)|; with equal group sizes this is the order of the differences themselves, and the Newman-Keuls and Dunnett tables are ordered by the difference. In the Tukey and Scheffé tables the word "stop" is shown next to the first non-significant P value: you should not consider further contrasts if you are making a simultaneous analysis (similar to the Shaffer-Holm method). In the Newman-Keuls table each P value is referred to the range of ordered means that its pair spans, so the P values are not in order; a pair that lies inside a wider range that is not significant is marked "not tested" and does not count as different whatever its own P value, and the summary of significant contrasts shows which pairs differ.</p>
                                         <p>&#160;</p>
                                         <p>The following is a decision tree for selecting a multiple contrast method:</p>
                                         <ul>
@@ -472,21 +472,21 @@
                                                 <td>2.6</td>
                                                 <td>3</td>
                                                 <td>2.633498</td>
-                                                <td>P = 0.1644 stop</td>
+                                                <td>P = 0.1644</td>
                                             </tr>
                                             <tr>
                                                 <td>Substance 2 vs. Substance 3</td>
                                                 <td>2.2</td>
                                                 <td>2</td>
                                                 <td>2.228344</td>
-                                                <td>P = 0.1238</td>
+                                                <td>P = 0.1238 not tested</td>
                                             </tr>
                                             <tr>
                                                 <td>Substance 3 vs. Substance 4</td>
                                                 <td>0.4</td>
                                                 <td>2</td>
                                                 <td>0.405153</td>
-                                                <td>P = 0.7761</td>
+                                                <td>P = 0.7761 not tested</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
@@ -572,7 +572,7 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>Every method finds the response to Substance 1 higher than to Substances 3 and 4. Whether it also differs from Substance 2 depends on the method: Newman-Keuls says so (P = 0.0119), Tukey (P = 0.0552) and Scheffé (P = 0.0896) do not, and the word "stop" marks where each of those sequences of contrasts ends. With Substance 1 as the control, Dunnett's method finds all three of the other substances to give a lower response.</p>
+                                        <p>Every method finds the response to Substance 1 higher than to Substances 3 and 4. Whether it also differs from Substance 2 depends on the method: Newman-Keuls says so (P = 0.0119), Tukey (P = 0.0552) and Scheffé (P = 0.0896) do not, and the word "stop" marks where each of those two sequences of contrasts ends; in the Newman-Keuls table the two pairs inside the non-significant range from Substance 4 to Substance 2 are marked as not tested. With Substance 1 as the control, Dunnett's method finds all three of the other substances to give a lower response.</p>
                                         <p>&#160;</p>
                                         <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
                                             <div class="MCDropDownBody dropDownBody">
