@@ -351,7 +351,17 @@ cat("Shapiro-Francia W'", paste0(six(Wf), ","),
 p &lt;- min(sw$p.value, psf)
 cat(if (p &lt; 0.05) "Sample unlikely to be from a normal distribution"
     else if (p &lt; 0.1) "Tests not quite significant but do not assume normality"
-    else "No non-normality detected by tests: examine plot", "\n")</pre>
+    else "No non-normality detected by tests: examine plot", "\n")
+
+# The normal plot at the end of the report: each value against its Blom normal
+# score put on the scale of the data (mean + z sd, with sd taken over n), and the
+# line of equality
+z &lt;- qnorm((rank(yield) - 0.375) / (n + 0.25))
+expected &lt;- mean(yield) + z * sqrt(m2)
+lim &lt;- range(expected, yield)
+plot(expected, yield, xlim = lim, ylim = lim, xlab = "Normal (Penicillin)",
+     ylab = "Observed (Penicillin)")
+abline(0, 1)</pre>
                                             </div>
                                         </div>
                                         <p>&#160;</p>

@@ -257,7 +257,15 @@ cat(sprintf("Power (for 5%% significance) = %.2f%%\n", 100 * pw$power))
 # StatsDirect's agreement analysis option adds the 95% limits of agreement of
 # Bland and Altman: the mean difference plus or minus 1.96 standard deviations.
 loa &lt;- mean(d) + c(-1, 1) * qnorm(0.975) * sd(d)
-cat("95% Limits of agreement =", six(loa[1]), "to", six(loa[2]), "\n")</pre>
+cat("95% Limits of agreement =", six(loa[1]), "to", six(loa[2]), "\n")
+
+# The agreement plot that follows in the report: each difference against the mean
+# of its pair, with the mean difference (black) and the limits of agreement (red)
+plot((before + after) / 2, d, xlab = "Mean ((PEFR Before + PEFR After) / 2)",
+     ylab = "Difference (PEFR Before - PEFR After)", ylim = range(d, loa))
+abline(h = mean(d))
+abline(h = loa, col = "red")
+legend("topright", "mean difference +/- 95% limits of agreement", bty = "n")</pre>
                                             </div>
                                         </div>
                                         <p>&#160;</p>

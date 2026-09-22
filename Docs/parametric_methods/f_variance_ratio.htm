@@ -122,6 +122,117 @@
                                         <p>&#160;</p>
                                         <p>Only the upper tail probability need be considered because the larger variance is always used as the numerator in the variance ratio F (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>). In most situations this probability should be doubled to give a two sided test. Analysis of variance can utilise a one sided probability because the numerator and denominator of the variance ratio are predetermined.</p>
                                         <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Test workbook (Parametric worksheet: Slight/no symptoms, Marked symptoms).</p>
+                                        <p>&#160;</p>
+                                        <p>Consider the following scores, on a scale of 0 to 100, from nine patients with slight or no symptoms and seven patients with marked symptoms (an illustration rather than a real study). The question is whether the scores vary more in one group than in the other.</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <th>Slight/no symptoms</th>
+                                                <th>Marked symptoms</th>
+                                            </tr>
+                                            <tr>
+                                                <td>34</td>
+                                                <td>5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>45</td>
+                                                <td>8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>49</td>
+                                                <td>18</td>
+                                            </tr>
+                                            <tr>
+                                                <td>55</td>
+                                                <td>24</td>
+                                            </tr>
+                                            <tr>
+                                                <td>58</td>
+                                                <td>60</td>
+                                            </tr>
+                                            <tr>
+                                                <td>59</td>
+                                                <td>84</td>
+                                            </tr>
+                                            <tr>
+                                                <td>60</td>
+                                                <td>96</td>
+                                            </tr>
+                                            <tr>
+                                                <td>62</td>
+                                                <td>&#160;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>86</td>
+                                                <td>&#160;</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu. Then select F (Variance Ratio) from the Parametric section of the Analysis menu. Select the columns marked "Slight/no symptoms" and "Marked symptoms" when prompted for data.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Variance ratio/F test</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td>Variable Name</td>
+                                                <td>DF (n-1)</td>
+                                                <td>Variance</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Marked symptoms</td>
+                                                <td>6</td>
+                                                <td>1,404.809524</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Slight/no symptoms</td>
+                                                <td>8</td>
+                                                <td>202.277778</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>F = 6.944952</p>
+                                        <p>&#160;</p>
+                                        <p>Upper side P = 0.0077</p>
+                                        <p>Two sided P = 0.0153</p>
+                                        <p>&#160;</p>
+                                        <p>The variance of the scores is nearly seven times larger in the patients with marked symptoms, and the two sided test is significant at the 5% level. The equal variances assumed by the ordinary unpaired t test would be doubtful for these data, so the unequal variances form of that test, or a nonparametric method, would be safer.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># F (variance ratio) test: the StatsDirect help example (scores of patients with
+# slight or no symptoms and with marked symptoms) in R
+slight &lt;- c(34, 45, 49, 55, 58, 59, 60, 62, 86)
+marked &lt;- c(5, 8, 18, 24, 60, 84, 96)
+
+# R's standard test. Its F is the first sample's variance over the second's, so
+# the sample with the larger variance goes first to get StatsDirect's F; its P is
+# two sided.
+f &lt;- var.test(marked, slight)
+print(f)
+
+# The report's lines: each variance with its degrees of freedom, F, the upper
+# tail P and its double, the two sided P
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("Marked symptoms   DF =", length(marked) - 1, "  Variance =", six(var(marked)),
+    "\n")
+cat("Slight/no symptoms   DF =", length(slight) - 1, "  Variance =", six(var(slight)),
+    "\n")
+cat("F =", six(f$statistic), "\n")
+p &lt;- pf(f$statistic, f$parameter[1], f$parameter[2], lower.tail = FALSE)
+cat(sprintf("Upper side P = %.4f   Two sided P = %.4f\n", p, 2 * p))</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
