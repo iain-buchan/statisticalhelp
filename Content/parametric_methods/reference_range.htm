@@ -63,12 +63,75 @@
         </p>
         <p>Quantile 0.025 = 0.2</p>
         <p>Approximate 95% confidence interval (non-conservative) = 0.1 to 0.3</p>
-        <p>Exact confidence level = 95.659155%</p>
+        <p>Exact confidence level = 94.120331%</p>
         <p>&#160;</p>
         <p>Quantile 0.975 = 2</p>
         <p>Approximate 95% confidence interval (non-conservative) = 1.7 to 2.5</p>
-        <p>Exact confidence level = 96.091704%</p>
+        <p>Exact confidence level = 94.120331%</p>
         <p>&#160;</p>
         <p>These data are not from a normal distribution but are from an approximately log-normal distribution. This explains why the results for log-normal data are closer to the 2.5% and 97.5% percentiles.</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. The data are in the StatsDirect test workbook: see the first comment in the code.</p>
+                <pre class="rcode" xml:space="preserve"># Reference range: the StatsDirect help example (Altman 1991, serum IgM in 298
+# children) in R
+# The data are the IgM column of the Parametric worksheet of the StatsDirect test
+# workbook. Save that column, with its heading, as igm.csv in R's working
+# directory first.
+igm &lt;- read.csv("igm.csv")$IgM
+n &lt;- length(igm)
+z &lt;- qnorm(0.975)                   # for a 95% range and 95% confidence intervals
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("Sample mean =", six(mean(igm)), "  Sample size n =", n,
+    "  Sample sd =", six(sd(igm)), "\n")
+
+# R has no standard function for a reference range. For data from a normal
+# distribution the range is the mean plus or minus z standard deviations, and
+# each limit has standard error s * sqrt(1/n + z^2/(2n)) (Altman 1991).
+normal_range &lt;- function(x, back = identity) {
+  m &lt;- mean(x)
+  s &lt;- sd(x)
+  limits &lt;- m + c(-1, 1) * z * s
+  se &lt;- s * sqrt(1 / n + z^2 / (2 * n))
+  cat("95% reference interval =", six(back(limits[1])), "to", six(back(limits[2])),
+      "\n")
+  cat("95% confidence interval for lower range limit =", six(back(limits[1] - z * se)),
+      "to", six(back(limits[1] + z * se)), "\n")
+  cat("95% confidence interval for upper range limit =", six(back(limits[2] - z * se)),
+      "to", six(back(limits[2] + z * se)), "\n")
+}
+cat("For normal data\n")
+normal_range(igm)
+# For log-normal data, the same on the logarithms with the results taken back to
+# the original scale (StatsDirect gives this only when no value is 0 or less)
+cat("For log-normal data\n")
+normal_range(log(igm), exp)
+
+# For any data: the 2.5th and 97.5th percentiles (type 6 in R, as in the quantile
+# confidence interval topic) with confidence intervals whose limits are ordered
+# values. The number of observations below a population quantile is binomial
+# (n, p). With more than 200 observations StatsDirect takes the limits from the
+# normal approximation to that distribution, at np plus or minus z sqrt(np(1-p)),
+# and then gives the exact probability that they cover the quantile; with fewer
+# it searches the binomial distribution itself, as in the quantile topic.
+stopifnot(n &gt; 200)
+cat("For any data\n")
+x &lt;- sort(igm)
+for (p in c(0.025, 0.975)) {
+  lo &lt;- floor(n * p - z * sqrt(n * p * (1 - p)))   # numbers of values below
+  hi &lt;- floor(n * p + z * sqrt(n * p * (1 - p)))
+  cat("Quantile", p, "=", quantile(igm, p, type = 6), "\n")
+  cat("Approximate 95% confidence interval (non-conservative) =", x[lo + 1], "to",
+      x[hi + 1], "\n")
+  cat(sprintf("Exact confidence level = %s%%\n",
+              six(100 * (pbinom(hi, n, p) - pbinom(lo, n, p)))))
+}</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+
     </body>
 </html>

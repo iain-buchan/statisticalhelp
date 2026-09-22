@@ -143,6 +143,55 @@
         <p>&#160;</p>
         <p>N.B. We did not consider a one sided P value here because we could not be absolutely certain that the rats would all benefit from a high protein diet in comparison with those on a low protein diet.</p>
         <p>&#160;</p>
+        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Unpaired t test: the StatsDirect help example (Armitage and Berry 1994, weight
+# gain of 19 rats on high or low protein diets) in R
+high &lt;- c(134, 146, 104, 119, 124, 161, 107, 83, 113, 129, 97, 123)
+low &lt;- c(70, 118, 101, 85, 107, 132, 94)
+
+# R's standard test, first assuming equal variances and then not (R's default,
+# the Welch test, whose t and df are StatsDirect's t(d) and its fractional df).
+# Each gives t, df, the two sided P and the confidence interval.
+equal &lt;- t.test(high, low, var.equal = TRUE)
+print(equal)
+unequal &lt;- t.test(high, low)
+print(unequal)
+
+# The F test that StatsDirect uses to compare the variances
+f &lt;- var.test(high, low)
+print(f)
+
+# The report's other lines, to 6 decimal places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat(sprintf("Mean of High Protein = %s  (n = %d)\n", six(mean(high)), length(high)))
+cat(sprintf("Mean of Low Protein = %s  (n = %d)\n", six(mean(low)), length(low)))
+delta &lt;- mean(high) - mean(low)
+report &lt;- function(r, label, t) {
+  cat(label, "\n")
+  cat("Combined standard error =", six(delta / r$statistic), "  df =",
+      six(r$parameter), " ", t, "=", six(r$statistic), "\n")
+  cat(sprintf("One sided P = %.4f   Two sided P = %.4f\n", r$p.value / 2, r$p.value))
+  cat("95% confidence interval for difference between means =", six(r$conf.int[1]),
+      "to", six(r$conf.int[2]), "\n")
+  # Power of a two sided test at the 5% level to detect the difference seen, from
+  # the noncentral t distribution: the noncentrality parameter is the t observed
+  tc &lt;- qt(0.975, r$parameter)
+  pw &lt;- pt(-tc, r$parameter, ncp = r$statistic) +
+        pt(tc, r$parameter, ncp = r$statistic, lower.tail = FALSE)
+  cat(sprintf("Power (for 5%% significance) = %.2f%%\n", 100 * pw))
+}
+report(equal, "Assuming equal variances", "t")
+report(unequal, "Assuming unequal variances", "t(d)")
+cat("Two sided F test is", if (f$p.value &lt; 0.05) "significant" else "not significant",
+    "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>

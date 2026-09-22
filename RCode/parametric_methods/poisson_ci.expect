@@ -1,0 +1,5 @@
+# Poisson confidence interval, patients arriving at a reception desk in 23 five minute intervals. One fragment per line.
+Size = 23
+Mean = 1.173913
+Approximate two sided 95% CI = 0.773616 to 1.707982
+Approximate one sided 90% CI = 0.828613 to 1.618877

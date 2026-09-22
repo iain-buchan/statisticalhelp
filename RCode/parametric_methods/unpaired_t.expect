@@ -1,0 +1,18 @@
+# Unpaired t test, Armitage and Berry (1994) rats on high and low protein diets. One fragment per line.
+Mean of High Protein = 120 (n = 12)
+Mean of Low Protein = 101 (n = 7)
+Combined standard error = 10.045276
+df = 17
+t = 1.891436
+One sided P = 0.0379
+Two sided P = 0.0757
+95% confidence interval for difference between means = -2.193679 to 40.193679
+Power (for 5% significance) = 43.05%
+Combined standard error = 9.943999
+df = 13.081702
+t(d) = 1.9107
+One sided P = 0.0391
+Two sided P = 0.0782
+95% confidence interval for difference between means = -2.469073 to 40.469073
+Power (for 5% significance) = 42.49%
+Two sided F test is not significant

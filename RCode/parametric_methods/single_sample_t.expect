@@ -1,0 +1,10 @@
+# Single sample t test, systolic BP of 20 doctors against a population mean of 120. One fragment per line.
+Sample mean = 130.05
+Sample size n = 20
+Sample sd = 9.960316
+95% confidence interval for mean difference = 5.388429 to 14.711571
+df = 19
+t = 4.512404
+One sided P = 0.0001
+Two sided P = 0.0002
+Power (for 5% significance) = 98.97%
