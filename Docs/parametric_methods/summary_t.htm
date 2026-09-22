@@ -176,7 +176,7 @@
                                         <p>Two sided F test is not significant</p>
                                         <p>No need to assume unequal variances</p>
                                         <p>&#160;</p>
-                                        <p>These are the results of the two examples calculated from the data, apart from the last digits of the unpaired confidence intervals and degrees of freedom, because the standard deviations were entered to five decimal places.</p>
+                                        <p>These are the results of the two examples calculated from the data, apart from the last digits of the equal variances confidence interval and the unequal variances degrees of freedom, because the standard deviations were entered to five decimal places.</p>
                                         <p>&#160;</p>
                                         <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
                                             <div class="MCDropDownBody dropDownBody">
@@ -200,8 +200,8 @@ t &lt;- (m - mu) / se
 p &lt;- 2 * pt(-abs(t), n - 1)
 cat("Single sample: mean =", m, " n =", n, " sd =", s, " population mean =", mu,
     "\n")
-cat("95% confidence interval for mean difference =", six(m - mu - qt(0.975, n - 1) * se),
-    "to", six(m - mu + qt(0.975, n - 1) * se), "\n")
+ci &lt;- m - mu + c(-1, 1) * qt(0.975, n - 1) * se
+cat("95% confidence interval for mean difference =", six(ci[1]), "to", six(ci[2]), "\n")
 cat("df =", n - 1, "  t =", six(t), "\n")
 cat(sprintf("One sided P = %.4f   Two sided P = %.4f\n", p / 2, p))
 cat(sprintf("Power (for 5%% significance) = %.2f%%\n", 100 * power(t, n - 1)))
