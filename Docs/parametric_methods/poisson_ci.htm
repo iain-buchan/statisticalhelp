@@ -138,12 +138,40 @@
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
-                                        <p><u>Poisson Estimates</u>
+                                        <p><u>Poisson confidence interval</u>
                                         </p>
                                         <p>&#160;</p>
-                                        <p>Poisson analysis for Reception:</p>
-                                        <p>n = 23,  mean = 1.173913</p>
+                                        <p>Sample name: Reception</p>
+                                        <p>Size = 23</p>
+                                        <p>Mean = 1.173913</p>
                                         <p>Approximate two sided 95% CI = 0.773616 to 1.707982</p>
+                                        <p>Approximate one sided 90% CI = 0.828613 to 1.618877</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Poisson confidence interval: the StatsDirect help example (patients arriving at
+# a reception desk in 23 five minute intervals) in R
+counts &lt;- c(2, 1, 1, 0, 2, 1, 0, 2, 3, 1, 0, 1, 2, 2, 1, 0, 0, 1, 1, 2, 2, 1, 1)
+n &lt;- length(counts)
+
+# R's standard function takes the total count as one Poisson observation over a
+# time base of n intervals, so its event rate is the mean count per interval and
+# its confidence interval, from the chi-square distribution, has the limits
+# StatsDirect reports.
+r &lt;- poisson.test(sum(counts), n)
+print(r)
+
+# The report's lines, to 6 decimal places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("Size =", n, "  Mean =", six(mean(counts)), "\n")
+cat("Approximate two sided 95% CI =", six(r$conf.int[1]), "to", six(r$conf.int[2]),
+    "\n")
+# StatsDirect also gives the one sided 95% lower and upper limits, which are the
+# ends of a two sided 90% interval, under the heading "one sided 90% CI"
+ci &lt;- poisson.test(sum(counts), n, conf.level = 0.9)$conf.int
+cat("Approximate one sided 90% CI =", six(ci[1]), "to", six(ci[2]), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>
