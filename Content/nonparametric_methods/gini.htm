@@ -140,6 +140,7 @@
             <MadCap:equation>$\displaystyle g^*_{\alpha/2} \space, \space g^*_{1-\alpha/2}$</MadCap:equation>
         </p>
         <p>- where g* is a Gini coefficient estimated from a bootstrap sample and a is (100-confidence level)/100.</p>
+        <p>A re-sample whose coefficient equals G is not counted in z<sub>0</sub> (Efron and Tibshirani 1993; the boot package in R counts the same way). When no re-sample lies below G, or every one does, z<sub>0</sub> is infinite and the BCa interval is reported as not defined.</p>
         <p>&#160;</p>
         <p>The bias-corrected and accelerated (BCa) confidence interval is defined as:</p>
         <p>
@@ -149,7 +150,7 @@
 
 \displaystyle p_2=\phi\left[z_0+\frac{z_0+z_{1-\alpha/2}}{1-a(z_0+z_{1-\alpha/2})}\right] \\
 
-\displaystyle z_0=\phi^{-1}[\#(g^*\le G)/k] \\
+\displaystyle z_0=\phi^{-1}[\#(g^*&lt;G)/k] \\
 
 \displaystyle a=\frac{\sum_{i=1}^n (\bar g_{(\cdot)}-g_{(i)})^3}{6\left[\sum_{i=1}^n (\bar g_{(\cdot)}-g_{(i)})^2\right]^{3/2}} \\$</MadCap:equation>
         </p>
