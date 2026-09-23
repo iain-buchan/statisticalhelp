@@ -267,6 +267,52 @@
                                         <p>&#160;</p>
                                         <p>Note that the selection of predictors for regression models such as this can be complex and is best done with the help of a Statistician. <a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow (1989)</a> give a good discussion of the example above, but with non-standard dummy variables (StatsDirect uses a standard dummy/design variable coding scheme adopted by most other statistical software). The optimal selection of predictors depends not only upon their numerical performance in the model, with or without appropriate transformations or study of interactions, but also upon their biophysical importance in the study.</p>
                                         <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It uses the survival package, which comes with R, and reads the data from lowbwt_matched.csv, the test workbook's columns saved with their headings as a csv file (see the first comment in the code); it was checked with R 4.6.1.</p><pre class="rcode" xml:space="preserve"># Conditional logistic regression: the StatsDirect help example (Hosmer and Lemeshow
+# 1989, low birth weight in 56 matched pairs) in R. Save the test workbook's
+# Regression worksheet columns PAIRID, LBWT, RACE, LWT, SMOKE, PTD, HT and UI, with
+# their headings, as lowbwt_matched.csv in R's working directory first
+lowbwt &lt;- read.csv("lowbwt_matched.csv")
+lowbwt$black &lt;- as.numeric(lowbwt$RACE == "black")   # the dummy variable RACE (b)
+
+# R's conditional logistic regression is in the survival package, which comes with
+# R: the strata are the matched pairs. The last place of the widest odds ratio
+# limits depends on where the iterations stop, in R as in StatsDirect
+library(survival)
+fit &lt;- clogit(LBWT ~ black + SMOKE + HT + UI + PTD + LWT + strata(PAIRID),
+              data = lowbwt)
+print(summary(fit))
+
+# The report's lines to 6 places. The deviance is -2 times the log likelihood, the
+# likelihood ratio chi-square compares it with the model of no predictors (whose
+# log likelihood is -56 log 2 for 56 pairs), and McFadden's pseudo R-square is 1
+# minus the ratio of the two log likelihoods
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+ll &lt;- fit$loglik[2]
+ll0 &lt;- fit$loglik[1]
+cat("Deviance (-2 log likelihood) =", six(-2 * ll), "\n")
+cat("Deviance (likelihood ratio) chi-square =", six(2 * (ll - ll0)), " ",
+    pv(pchisq(2 * (ll - ll0), 6, lower.tail = FALSE)), "\n")
+cat("Pseudo (McFadden) R-square =", six(1 - ll / ll0), "\n")
+s &lt;- summary(fit)$coefficients
+lab &lt;- c("RACE (b)", "SMOKE", "HT", "UI", "PTD", "LWT")
+for (i in 1:6) {
+  cat(lab[i], six(s[i, "coef"]), six(s[i, "se(coef)"]), " z =", six(s[i, "z"]), " ",
+      pv(s[i, "Pr(&gt;|z|)"]), "\n")
+}
+ci &lt;- summary(fit)$conf.int
+for (i in 1:6) {
+  cat(lab[i], six(ci[i, "exp(coef)"]), six(ci[i, "lower .95"]), "to",
+      six(ci[i, "upper .95"]), "\n")
+}</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>

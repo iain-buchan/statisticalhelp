@@ -545,14 +545,14 @@
                                                 <td>166.193185</td>
                                                 <td>25.927266</td>
                                                 <td>8.580791</td>
-                                                <td>8</td>
+                                                <td>75</td>
                                             </tr>
                                             <tr>
                                                 <td>Total</td>
                                                 <td>183.792468</td>
                                                 <td>22.604465</td>
                                                 <td>9.569306</td>
-                                                <td>10</td>
+                                                <td>77</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
@@ -575,44 +575,190 @@
                                                 <td>42.543829</td>
                                                 <td>2</td>
                                                 <td>21.271915</td>
-                                                <td>1.694921</td>
+                                                <td>17.917733</td>
                                             </tr>
                                             <tr>
                                                 <td>Within</td>
                                                 <td>87.852727</td>
-                                                <td>7</td>
-                                                <td>12.55039</td>
+                                                <td>74</td>
+                                                <td>1.187199</td>
                                                 <td>&#160;</td>
                                             </tr>
                                             <tr>
                                                 <td>Total</td>
                                                 <td>130.396557</td>
-                                                <td>9</td>
+                                                <td>76</td>
                                                 <td>&#160;</td>
                                                 <td>&#160;</td>
                                             </tr>
                                         </table>
-                                        <p>P = 0.251</p>
+                                        <p>P &lt; 0.0001</p>
                                         <p>&#160;</p>
                                         <p>Corrected Y means ± SE for baseline mean predictor of 0.884372:</p>
-                                        <p>Y' = 2.901917	± 2.045389</p>
-                                        <p>Y' = 1.533957	± 1.590482</p>
-                                        <p>Y' = 3.398345	± 2.057601</p>
+                                        <p>Y' = 2.901917	± 0.195733</p>
+                                        <p>Y' = 1.533957	± 0.203527</p>
+                                        <p>Y' = 3.398345	± 0.273111</p>
                                         <p>&#160;</p>
                                         <p>Line separations (common slope =3.021547):</p>
                                         <p>line 1 (Log Dose_Std) vs line 2 (Log Dose_I) Vertical separation = 1.367959</p>
-                                        <p>95% CI = -4.760348 to 7.496267</p>
-                                        <p>t = 0.527831, (7 df), P = 0.6139</p>
+                                        <p>95% CI = 0.804164 to 1.931754</p>
+                                        <p>t = 4.834592, (74 df), P &lt; 0.0001</p>
                                         <p>line 1 (Log Dose_Std) vs line 3 (Log Dose_F) Vertical separation = -0.496428</p>
-                                        <p>95% CI = -7.354566 to 6.36171</p>
-                                        <p>t = -0.171164, (7 df), P = 0.8689</p>
+                                        <p>95% CI = -1.164377 to 0.171521</p>
+                                        <p>t = -1.480883, (74 df), P = 0.1429</p>
                                         <p>line 2 (Log Dose_I) vs line 3 (Log Dose_F) Vertical separation = -1.864388</p>
-                                        <p>95% CI = -8.042375 to 4.3136</p>
-                                        <p>t = -0.713594, (7 df), P = 0.4986</p>
+                                        <p>95% CI = -2.560193 to -1.168583</p>
+                                        <p>t = -5.338959, (74 df), P &lt; 0.0001</p>
                                         <p>&#160;</p>
                                         <p>The common slope is highly significant and the test for difference between the slopes overall was non-significant. If our assumption of linearity holds true we can conclude that these lines are reasonably parallel. Looking more closely at the individual slopes preparation F is almost shown to be significantly different from the other two but this difference was not large enough to throw the overall slope comparison into a significant heterogeneity.</p>
                                         <p>&#160;</p>
-                                        <p>The analysis of covariance did not show any significant vertical separation of the three regression lines.</p>
+                                        <p>The analysis of covariance shows a highly significant vertical separation of the lines: at a given log dose, preparation I gave lower bone density scores than the standard and than preparation F, while the standard and preparation F did not differ significantly. (Earlier versions of StatsDirect counted the degrees of freedom of this analysis from the dose levels rather than the rats when the scores were entered as replicates, and found no separation.)</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Grouped linear regression with covariance analysis: the StatsDirect help example
+# (Armitage and Berry 1994, bone density of rats given three preparations of
+# vitamin D at several log doses, with replicate scores at each dose; the test
+# workbook's columns Log Dose_Std, BD 1_Std to BD 3_Std, Log Dose_I, BD 1_I to
+# BD 5_I, Log Dose_F and BD 1_F to BD 3_F) in R
+std &lt;- list(x = c(0.544, 0.845, 1.146),
+            y = list(c(0, 0, 1, 2.75, 2.75, 1.75, 2.75, 2.25, 2.25, 2.5),
+                     c(1.5, 2.5, 5, 6, 4.25, 2.75, 1.5, 3),
+                     c(2, 2.5, 5, 4, 5, 4, 2.5, 3.5, 3, 2, 3, 4, 4)))
+prep_i &lt;- list(x = c(0.398, 0.699, 1, 1.301, 1.602),
+               y = list(c(0, 1, 0, 0, 0, 0.5), c(1, 1.5, 1.5, 1, 1, 0.5),
+                        c(1.5, 1, 2, 3.5, 2, 0), c(3, 3, 5.5, 2.5, 1, 2),
+                        c(3.5, 3.5, 4.5, 3.5, 3.5, 3)))
+prep_f &lt;- list(x = c(0.398, 0.699, 1),
+               y = list(c(2.75, 2, 1.25, 2, 0, 0.5), c(2.5, 2.75, 2.25, 2.25, 3.75),
+                        c(3.75, 5.25, 6, 5.5, 2.25, 3.5)))
+groups &lt;- list("Log Dose_Std" = std, "Log Dose_I" = prep_i, "Log Dose_F" = prep_f)
+
+# One row per rat: its group, log dose and score
+d &lt;- do.call(rbind, lapply(names(groups), function(g) {
+  data.frame(group = g, x = rep(groups[[g]]$x, lengths(groups[[g]]$y)),
+             y = unlist(groups[[g]]$y))
+}))
+d$group &lt;- factor(d$group, levels = names(groups))
+
+# R's standard comparison of the regression lines: separate lines against a
+# common slope (the "group:x" line is the between slopes test) and the common
+# slope itself, each against the residual about the separate lines
+separate &lt;- lm(y ~ group * x, data = d)
+print(anova(lm(y ~ group + x, data = d), separate))
+print(anova(separate))
+
+# The report's table to 6 places: the common slope, the difference between the
+# slopes, the residual about the separate lines and the within groups total
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+a &lt;- anova(separate)
+ss_common &lt;- a["x", "Sum Sq"]
+ss_between &lt;- a["group:x", "Sum Sq"]
+ss_res &lt;- a["Residuals", "Sum Sq"]
+df_res &lt;- a["Residuals", "Df"]
+ms_res &lt;- ss_res / df_res
+cat("Common slope", six(ss_common), 1, six(ss_common), six(ss_common / ms_res),
+    pv(pf(ss_common / ms_res, 1, df_res, lower.tail = FALSE)), "\n")
+vr_between &lt;- ss_between / 2 / ms_res
+cat("Between slopes", six(ss_between), 2, six(ss_between / 2), six(vr_between),
+    pv(pf(vr_between, 2, df_res, lower.tail = FALSE)), "\n")
+cat("Separate residuals", six(ss_res), df_res, six(ms_res), "\n")
+within &lt;- sum(tapply(d$y, d$group, function(v) sum((v - mean(v))^2)))
+cat("Within groups", six(within), nrow(d) - 3, "\n")
+
+# Each pair of slopes: their difference with its confidence interval and t test on
+# the residual mean square about the separate lines
+slope &lt;- function(g) coef(lm(y ~ x, data = d[d$group == g, ]))[2]
+ssx &lt;- function(g) with(d[d$group == g, ], sum((x - mean(x))^2))
+tcrit &lt;- qt(0.975, df_res)
+for (pair in list(1:2, c(1, 3), 2:3)) {
+  g1 &lt;- names(groups)[pair[1]]
+  g2 &lt;- names(groups)[pair[2]]
+  se &lt;- sqrt(ms_res * (1 / ssx(g1) + 1 / ssx(g2)))
+  dif &lt;- abs(slope(g1) - slope(g2))
+  t &lt;- (slope(g1) - slope(g2)) / se
+  cat("slope", pair[1], "(", g1, ") v slope", pair[2], "(", g2, ") =",
+      six(slope(g1)), "v", six(slope(g2)), "\n")
+  cat("  Difference (95% CI) =", six(dif), "(", six(dif - tcrit * se), "to",
+      six(dif + tcrit * se), ")  t =", six(t), " ", pv(2 * pt(-abs(t), df_res)), "\n")
+}
+
+# The covariance analysis compares the groups at the same log dose, with the lines
+# made parallel. The uncorrected table holds the sums of squares and products of
+# the scores (YY), the products with log dose (xY) and the log doses (xx): between
+# the groups, within them and in total, over every rat
+k &lt;- 3
+n_g &lt;- table(d$group)
+sy_g &lt;- tapply(d$y, d$group, sum)
+sx_g &lt;- tapply(d$x, d$group, sum)
+syy_b &lt;- sum(sy_g^2 / n_g) - sum(d$y)^2 / nrow(d)
+sxx_b &lt;- sum(sx_g^2 / n_g) - sum(d$x)^2 / nrow(d)
+sxy_b &lt;- sum(sx_g * sy_g / n_g) - sum(d$x) * sum(d$y) / nrow(d)
+syy_t &lt;- sum((d$y - mean(d$y))^2)
+sxx_t &lt;- sum((d$x - mean(d$x))^2)
+sxy_t &lt;- sum((d$x - mean(d$x)) * (d$y - mean(d$y)))
+cat("Uncorrected: Between groups", six(syy_b), six(sxy_b), six(sxx_b), k - 1, "\n")
+cat("Uncorrected: Within", six(syy_t - syy_b), six(sxy_t - sxy_b), six(sxx_t - sxx_b),
+    nrow(d) - k, "\n")
+cat("Uncorrected: Total", six(syy_t), six(sxy_t), six(sxx_t), nrow(d) - 1, "\n")
+
+# The corrected table is R's comparison of the parallel lines model with a single
+# line: the drop in residual sum of squares is the between groups sum of squares,
+# and the parallel lines model's residual is the corrected within groups sum
+common &lt;- lm(y ~ x, data = d)
+parallel &lt;- lm(y ~ x + group, data = d)
+print(anova(common, parallel))
+cv &lt;- anova(common, parallel)
+css_w &lt;- cv$RSS[2]
+df_w &lt;- cv$Res.Df[2]
+css_b &lt;- cv$"Sum of Sq"[2]
+vr &lt;- (css_b / (k - 1)) / (css_w / df_w)
+cat("Corrected: Between groups", six(css_b), k - 1, six(css_b / (k - 1)), six(vr), "\n")
+cat("Corrected: Within", six(css_w), df_w, six(css_w / df_w), "\n")
+cat("Corrected: Total", six(cv$RSS[1]), cv$Res.Df[1], "\n")
+cat(pv(pf(vr, k - 1, df_w, lower.tail = FALSE)), "\n")
+
+# Corrected means: each group's line at the mean log dose of all the rats, with
+# the standard error R gives for a prediction from the parallel lines model
+mx0 &lt;- mean(d$x)
+at_mean &lt;- predict(parallel, newdata = data.frame(x = mx0, group = names(groups)),
+                   se.fit = TRUE)
+cat("Corrected Y means +/- SE for baseline mean predictor of", six(mx0), ":\n")
+for (g in 1:3) cat("  Y' =", six(at_mean$fit[g]), "+/-", six(at_mean$se.fit[g]), "\n")
+
+# The vertical separations of the lines are the differences between the group
+# terms of the parallel lines model (the first group is the baseline, so its
+# term is zero), with their standard errors from the model's covariance matrix
+bs &lt;- coef(parallel)["x"]
+cat("Line separations (common slope =", six(bs), "):\n")
+term &lt;- c(0, coef(parallel)[c("groupLog Dose_I", "groupLog Dose_F")])
+v &lt;- matrix(0, 3, 3)
+v[2:3, 2:3] &lt;- vcov(parallel)[c("groupLog Dose_I", "groupLog Dose_F"),
+                              c("groupLog Dose_I", "groupLog Dose_F")]
+tcrit &lt;- qt(0.975, df_w)
+for (pair in list(1:2, c(1, 3), 2:3)) {
+  g1 &lt;- pair[1]
+  g2 &lt;- pair[2]
+  sep &lt;- term[g1] - term[g2]
+  se &lt;- sqrt(v[g1, g1] + v[g2, g2] - 2 * v[g1, g2])
+  cat("  line", g1, "vs line", g2, "Vertical separation =", six(sep), " 95% CI =",
+      six(sep - tcrit * se), "to", six(sep + tcrit * se), " t =", six(sep / se),
+      paste0("(", df_w, " df)"), pv(2 * pt(-abs(sep / se), df_w)), "\n")
+}
+
+# The report ends with a plot of the scores against log dose with the three fitted
+# lines
+plot(d$x, d$y, pch = as.numeric(d$group), col = as.numeric(d$group),
+     xlab = "Log Dose_Std Log Dose_I Log Dose_F", ylab = "Y Replicates",
+     main = "Grouped linear regression")
+for (g in 1:3) abline(lm(y ~ x, data = d[d$group == names(groups)[g], ]), col = g)
+legend("bottomright", legend = names(groups), pch = 1:3, col = 1:3, bty = "n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

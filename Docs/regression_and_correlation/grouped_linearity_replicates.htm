@@ -295,6 +295,47 @@
                                         <p>&#160;</p>
                                         <p>Thus the regression itself (meaning the slope) was statistically highly significant. If the deviations from x means had been significant then we should have rejected our assumption of linearity, as it stands they were not.</p>
                                         <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Linearity with replicates of Y: the StatsDirect help example (Armitage and Berry
+# 1994, bone density of rats at three log doses of vitamin D; the test workbook's
+# columns BD 1_Std, BD 2_Std and BD 3_Std hold the replicates at each dose) in R
+dose &lt;- c(0.544, 0.845, 1.146)
+bd &lt;- list(c(0, 0, 1, 2.75, 2.75, 1.75, 2.75, 2.25, 2.25, 2.5),
+           c(1.5, 2.5, 5, 6, 4.25, 2.75, 1.5, 3),
+           c(2, 2.5, 5, 4, 5, 4, 2.5, 3.5, 3, 2, 3, 4, 4))
+x &lt;- rep(dose, lengths(bd))
+y &lt;- unlist(bd)
+
+# The test of linearity compares the straight line with the model of a separate
+# mean for each dose: R's anova of the two fits gives the deviation from linearity
+# (its "Residuals" line is the within dose residual) and the regression line is
+# the straight line's own analysis of variance
+linear &lt;- lm(y ~ x)
+means &lt;- lm(y ~ factor(x))
+print(anova(linear, means))
+print(anova(linear))
+
+# The report's table to 6 places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+ssreg &lt;- anova(linear)$"Sum Sq"[1]
+ssdev &lt;- anova(linear, means)$"Sum of Sq"[2]
+sswithin &lt;- anova(means)$"Sum Sq"[2]
+dfwithin &lt;- anova(means)$Df[2]
+mswithin &lt;- sswithin / dfwithin
+cat("Due to regression", six(ssreg), 1, six(ssreg), six(ssreg / mswithin),
+    pv(pf(ssreg / mswithin, 1, dfwithin, lower.tail = FALSE)), "\n")
+cat("Deviation of x means", six(ssdev), 1, six(ssdev), six(ssdev / mswithin),
+    pv(pf(ssdev / mswithin, 1, dfwithin, lower.tail = FALSE)), "\n")
+cat("Within x residual", six(sswithin), dfwithin, six(mswithin), "\n")
+cat("Total", six(ssreg + ssdev + sswithin), length(y) - 1, "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>
                                         <p><a href="nonlinear.htm">non-linear models</a>

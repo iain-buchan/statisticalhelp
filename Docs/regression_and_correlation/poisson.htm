@@ -391,7 +391,7 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>log Cancers [offset log(Veterans)] = -9.324832 -0.003528 Veterans +0.679314 Age group (25-29) +1.371085 Age group (30-34) +1.939619 Age group (35-39) +2.034323 Age group (40-44) +2.726551 Age group (45-49) +3.202873 Age group (50-54) +3.716187 Age group (55-59) +4.092676 Age group (60-64) +4.23621 Age group (65-69) +4.363717 Age group (70+)</p>
+                                        <p>log Cancers [offset log(Subject-years)] = -9.324832 -0.003528 Veterans +0.679314 Age group (25-29) +1.371085 Age group (30-34) +1.939619 Age group (35-39) +2.034323 Age group (40-44) +2.726551 Age group (45-49) +3.202873 Age group (50-54) +3.716187 Age group (55-59) +4.092676 Age group (60-64) +4.23621 Age group (65-69) +4.363717 Age group (70+)</p>
                                         <p>&#160;</p>
                                         <p><u>Poisson regression - incidence rate ratios</u>
                                         </p>
@@ -487,8 +487,8 @@
                                         <p>&#160;</p>
                                         <p>Deviance with no covariates = 2072.917496</p>
                                         <p>Deviance (likelihood ratio, G²) = 2067.700372, df = 11, P &lt; 0.0001</p>
-                                        <p>Pseudo (McFadden) R-square = 0.997483</p>
-                                        <p>Pseudo (likelihood ratio index) R-square = 0.939986</p>
+                                        <p>Pseudo (deviance based) R-square = 0.997483</p>
+                                        <p>Pseudo (McFadden, likelihood ratio index) R-square = 0.939986</p>
                                         <p>&#160;</p>
                                         <p>Pearson goodness of fit = 5.086063, df = 10, P = 0.8854</p>
                                         <p>Deviance goodness of fit = 5.217124, df = 10, P = 0.8762</p>
@@ -655,6 +655,109 @@
                                         </table>
                                         <p>&#160;</p>
                                         <p>With 95% confidence you can infer that the risk of cancer in these veterans compared with non-veterans lies between 0.89 and 1.11, i.e. a statistically non-significant effect.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Poisson regression: the StatsDirect help example (Armitage, Berry and Matthews
+# 2001, cancers in veterans and non-veterans by age group, with the subject-years
+# of exposure) in R
+cancers &lt;- c(6, 21, 54, 118, 97, 58, 56, 54, 34, 9, 2,
+             18, 60, 122, 191, 108, 74, 88, 120, 141, 108, 99)
+years &lt;- c(60840, 157175, 176134, 186514, 135475, 42620, 25001, 13710, 6163, 1575, 273,
+           208487, 303832, 325421, 312242, 165597, 54396, 40716, 33801, 26618, 17404,
+           14146)
+veterans &lt;- rep(c(1, 0), each = 11)
+ages &lt;- c("24 &lt;=", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59",
+          "60-64", "65-69", "70+")
+agegroup &lt;- factor(rep(ages, 2), levels = ages)
+
+# R's standard model: a Poisson regression of the counts with the log of the
+# exposure as an offset; the age group factor gives the same dummy variables as
+# the report, with the youngest group as the baseline
+fit &lt;- glm(cancers ~ veterans + agegroup + offset(log(years)), family = poisson)
+print(summary(fit))
+
+# The report's lines to 6 places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+dev &lt;- fit$deviance
+lr &lt;- fit$null.deviance - dev
+cat("Deviance goodness of fit chi-square =", six(dev), " df =", fit$df.residual, " ",
+    pv(pchisq(dev, fit$df.residual, lower.tail = FALSE)), "\n")
+df_lr &lt;- fit$df.null - fit$df.residual
+cat("Deviance (likelihood ratio) chi-square =", six(lr), " df =", df_lr, " ",
+    pv(pchisq(lr, df_lr, lower.tail = FALSE)), "\n")
+s &lt;- summary(fit)$coefficients
+lab &lt;- c("Intercept", "Veterans", paste0("Age group (", ages[-1], ")"))
+for (i in 1:12) {
+  cat(lab[i], " b", i - 1, " = ", six(s[i, 1]), "  z = ", six(s[i, 3]), "  ",
+      pv(s[i, 4]), "\n", sep = "")
+}
+
+signed &lt;- paste0(ifelse(s[3:12, 1] &gt;= 0, "+", ""), six(s[3:12, 1]), " ", lab[3:12])
+cat("log Cancers [offset log(Subject-years)] =", six(s[1, 1]), six(s[2, 1]), "Veterans",
+    paste(signed, collapse = " "), "\n")
+
+# Incidence rate ratios: exp of the coefficients, with Wald limits (the intercept's
+# row is the baseline rate per subject-year)
+ci &lt;- confint.default(fit)
+for (i in 1:12) {
+  cat(lab[i], six(s[i, 1]), six(exp(s[i, 1])), six(exp(ci[i, 1])), "to",
+      six(exp(ci[i, 2])), "\n")
+}
+
+# The report also gives the ratios in each veteran status: among the veterans
+# each age group's rate relative to the youngest non-veterans is exp of the age
+# coefficient plus the veteran coefficient, with the standard error of that sum
+# from the covariance matrix; among the non-veterans they are the ratios above
+vc &lt;- vcov(fit)
+for (i in 3:12) {
+  est &lt;- s[i, 1] + s[2, 1]
+  se_sum &lt;- sqrt(vc[i, i] + vc[2, 2] + 2 * vc[i, 2])
+  half &lt;- qnorm(0.975) * se_sum
+  cat("Veterans = 1:", lab[i], six(s[i, 1]), six(exp(est)), six(exp(est - half)), "to",
+      six(exp(est + half)), "\n")
+}
+
+# The model analysis: the log likelihood (as R's logLik gives it), the information
+# criteria on the deviance scale, the two pseudo R-squares (1 minus the ratio of
+# the deviances; 1 minus the ratio of the log likelihoods, McFadden's, with the
+# offset alone as the null model), Pearson's chi-square and the over-dispersion
+# scale, which is Pearson's chi-square over its degrees of freedom
+ll &lt;- as.numeric(logLik(fit))
+ll0 &lt;- as.numeric(logLik(glm(cancers ~ offset(log(years)), family = poisson)))
+k &lt;- length(coef(fit))
+n &lt;- length(cancers)
+cat("Log likelihood with all covariates =", six(ll), "\n")
+cat("Deviance with all covariates =", six(dev), " df =", fit$df.residual,
+    " rank =", k, "\n")
+cat("Akaike information criterion =", six(dev + 2 * k), "\n")
+cat("Schwarz information criterion =", six(dev + k * log(n)), "\n")
+cat("Deviance with no covariates =", six(fit$null.deviance), "\n")
+cat("Pseudo (deviance based) R-square =", six(1 - dev / fit$null.deviance), "\n")
+cat("Pseudo (McFadden, likelihood ratio index) R-square =", six(1 - ll / ll0), "\n")
+pearson &lt;- sum(residuals(fit, type = "pearson")^2)
+cat("Pearson goodness of fit =", six(pearson), " df =", fit$df.residual, " ",
+    pv(pchisq(pearson, fit$df.residual, lower.tail = FALSE)), "\n")
+scale &lt;- pearson / fit$df.residual
+cat("Over-dispersion scale parameter =", six(scale), "\n")
+cat("Scaled G2 =", six(lr / scale), " df =", df_lr, " ",
+    pv(pchisq(lr / scale, df_lr, lower.tail = FALSE)), "\n")
+cat("Scaled Pearson goodness of fit =", six(pearson / scale), " df =", fit$df.residual,
+    " ", pv(pchisq(pearson / scale, fit$df.residual, lower.tail = FALSE)), "\n")
+cat("Scaled Deviance goodness of fit =", six(dev / scale), " df =", fit$df.residual,
+    " ", pv(pchisq(dev / scale, fit$df.residual, lower.tail = FALSE)), "\n")
+cat("Coefficients, standard errors, then the scaled standard errors and Wald z:\n")
+for (i in 1:12) {
+  cat(lab[i], six(s[i, 1]), six(s[i, 2]), six(s[i, 2] * sqrt(scale)),
+      six(s[i, 1] / (s[i, 2] * sqrt(scale))),
+      pv(2 * pnorm(-abs(s[i, 1] / (s[i, 2] * sqrt(scale))))), "\n")
+}</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

@@ -116,11 +116,11 @@
                                         <p>&#160;</p>
                                         <p>Partial correlation is a method used to describe the relationship between two variables whilst taking away the effects of another variable, or several other variables, on this relationship.</p>
                                         <p>&#160;</p>
-                                        <p>Partial correlation is best thought of in terms of multiple regression; StatsDirect shows the partial correlation coefficient r with its main results from <a href="../analysis_of_variance/multiple_comparisons.htm">multiple linear regression</a>.</p>
+                                        <p>Partial correlation is best thought of in terms of multiple regression; StatsDirect shows the partial correlation coefficient r with its main results from <a href="multiple_linear.htm">multiple linear regression</a>.</p>
                                         <p>&#160;</p>
                                         <p>A different way to calculate partial correlation coefficients, which does not require a full multiple regression, is show below for the sake of further explanation of the principles:</p>
                                         <p>&#160;</p>
-                                        <p>Consider a correlation matrix for variables A, B and C (note that the multiple line regression function in StatsDirect will output correlation matrices for you as one of its options):</p>
+                                        <p>Consider a correlation matrix for variables A, B and C (note that the multiple linear regression function in StatsDirect will output correlation matrices for you as one of its options):</p>
                                         <p>&#160;</p>
                                         <table>
                                             <col />
@@ -169,6 +169,62 @@
                                             <img src="../generatedimages/equations/equation188.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>- where t<sub>k</sub> is the Student t statistic for the kth term in the linear model.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>For the <a href="multiple_linear.htm">multiple linear regression</a> example (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>: recovery time YY after a hypotensive drug against the log dose X1 and the mean blood pressure X2 of 53 patients) the multiple regression report gives the partial correlation of each predictor with the outcome, adjusted for the other predictor, beside its coefficient:</p>
+                                        <p>&#160;</p>
+                                        <p>X1: r = 0.438695, t = 3.45194, P = 0.0011</p>
+                                        <p>X2: r = -0.317915, t = -2.371006, P = 0.0216</p>
+                                        <p>&#160;</p>
+                                        <p>The first formula above gives the same values from the three pairwise correlations of YY, X1 and X2, and the second gives them from the t statistics with the 50 residual degrees of freedom.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Partial correlation: the multiple linear regression topic's example (Armitage and
+# Berry 1994, recovery time YY after a hypotensive drug against the log dose X1 and
+# the mean blood pressure X2 of 53 patients) in R
+yy &lt;- c(7, 10, 18, 4, 10, 13, 21, 12, 9, 65, 20, 31, 23, 22, 13, 9, 50, 12, 11, 8, 26,
+        16, 23, 7, 11, 8, 14, 39, 28, 12, 60, 10, 60, 22, 21, 14, 4, 27, 26, 28, 15, 8,
+        46, 24, 12, 25, 45, 72, 25, 28, 10, 25, 44)
+x1 &lt;- c(2.26, 1.81, 1.78, 1.54, 2.06, 1.74, 2.56, 2.29, 1.80, 2.32, 2.04, 1.88, 1.18,
+        2.08, 1.70, 1.74, 1.90, 1.79, 2.11, 1.72, 1.74, 1.60, 2.15, 2.26, 1.65, 1.63,
+        2.40, 2.70, 1.90, 2.78, 2.27, 1.74, 2.62, 1.80, 1.81, 1.58, 2.41, 1.65, 2.24,
+        1.70, 2.45, 1.72, 2.37, 2.23, 1.92, 1.99, 1.99, 2.35, 1.80, 2.36, 1.59, 2.10,
+        1.80)
+x2 &lt;- c(66, 52, 72, 67, 69, 71, 88, 68, 59, 73, 68, 58, 61, 68, 69, 55, 67, 67, 68, 59,
+        68, 63, 65, 72, 58, 69, 70, 73, 56, 83, 67, 84, 68, 64, 60, 62, 76, 60, 60, 59,
+        84, 66, 68, 65, 69, 72, 63, 56, 70, 69, 60, 51, 61)
+
+# From the correlation matrix, as the topic's first formula: the partial
+# correlation of YY and X1 adjusted for X2
+r &lt;- cor(cbind(yy, x1, x2))
+partial &lt;- function(ab, ac, bc) (ab - ac * bc) / sqrt((1 - ac^2) * (1 - bc^2))
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("r(YY, X1 | X2) =", six(partial(r["yy", "x1"], r["yy", "x2"], r["x1", "x2"])), "\n")
+cat("r(YY, X2 | X1) =", six(partial(r["yy", "x2"], r["yy", "x1"], r["x1", "x2"])), "\n")
+
+# From the multiple regression, as the topic's second formula: t over root(t squared
+# plus the residual degrees of freedom), the r the report prints beside each term
+fit &lt;- lm(yy ~ x1 + x2)
+t &lt;- summary(fit)$coefficients[, "t value"]
+df &lt;- fit$df.residual
+cat("From the regression: X1 r =", six(t["x1"] / sqrt(t["x1"]^2 + df)), " X2 r =",
+    six(t["x2"] / sqrt(t["x2"]^2 + df)), "\n")
+
+# The test of a partial correlation has n - 3 degrees of freedom here (one
+# adjusting variable); its P is the t test of the term in the regression
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+for (term in c("x1", "x2")) {
+  cat(toupper(term), ": t =", six(t[term]), "on", df, "DF, two sided",
+      pv(2 * pt(-abs(t[term]), df)), "\n")
+}</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

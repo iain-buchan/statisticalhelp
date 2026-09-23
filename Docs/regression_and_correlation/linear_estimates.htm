@@ -123,19 +123,102 @@
                                         <p>&#160;</p>
                                         <p><u>Exponential</u>
                                         </p>
-                                        <p>Data are linearized by logarithmic transformation of the predictor (x) variable. Simple linear regression of Y vs. ln(x) gives a = ln(intercept) and b = slope for the function:<br /><img src="../generatedimages/equations/equation193.svg" alt="" class="mcReset" /></p>
+                                        <p>Data are linearized by logarithmic transformation of the outcome (Y) variable. Simple linear regression of ln(Y) vs. x gives ln(a) as the intercept and b as the slope for the function:<br /><img src="../generatedimages/equations/equation193.svg" alt="" class="mcReset" /></p>
                                         <p>&#160;</p>
                                         <p><u>Geometric</u>
                                         </p>
-                                        <p>Data are linearized by logarithmic transformation of both variables. Simple linear regression of ln(Y) vs. ln(x) gives a = ln(intercept) and b = slope for the function:<br /><img src="../generatedimages/equations/equation194.svg" alt="" class="mcReset" /></p>
+                                        <p>Data are linearized by logarithmic transformation of both variables. Simple linear regression of ln(Y) vs. ln(x) gives ln(a) as the intercept and b as the slope for the function:<br /><img src="../generatedimages/equations/equation194.svg" alt="" class="mcReset" /></p>
                                         <p>&#160;</p>
                                         <p><u>Hyperbolic</u>
                                         </p>
-                                        <p>Data are linearized by reciprocal transformation of both variables. Simple linear regression of 1/Y vs. 1/x gives a = slope and b = intercept for the function:<br /><img src="../generatedimages/equations/equation195.svg" alt="" class="mcReset" /></p>
+                                        <p>Data are linearized by reciprocal transformation of both variables. Simple linear regression of 1/Y vs. 1/x gives a as the slope and b as the intercept for the function:<br /><img src="../generatedimages/equations/equation195.svg" alt="" class="mcReset" /></p>
                                         <p>&#160;</p>
                                         <p>The standard error of the estimate is given for each of these regressions but please note that the errors of your outcome/response variable might not be from a normal distribution.</p>
                                         <p>&#160;</p>
                                         <p>This section of StatsDirect is intended only for those who are familiar with regression modelling and who use these linearized estimates as a springboard for further modelling. Generic modelling software such as R, S+ or GLIMM can be used for further modelling, which is best done by a Statistician.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>An illustration with the electricity consumption and home size data of the <a href="polynomial.htm">polynomial regression</a> example (<a href="../references/reference_list.htm#ref-mcclave-1991">McClave and Dietrich, 1991</a>).</p>
+                                        <p>Test workbook (Regression worksheet: Home Size, KW Hrs/Mnth).</p>
+                                        <p>&#160;</p>
+                                        <p>Select Linearized Estimates from the Regression and Correlation section of the analysis menu, choose each model in turn, and select the columns marked "KW Hrs/Mnth" and "Home Size" when asked for the outcome and predictor.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Linearized Estimates</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Model : (Exponential)  Y = a * exp(b * x)</p>
+                                        <p>Method: unweighted least squares</p>
+                                        <p>For KW Hrs/Mnth vs Home Size</p>
+                                        <p>&#160;</p>
+                                        <p>A = 816.912669</p>
+                                        <p>B = 0.000346</p>
+                                        <p>&#160;</p>
+                                        <p>Correlation coefficient (r) = 0.892077    (r² = 0.795802)</p>
+                                        <p>&#160;</p>
+                                        <p>Standard error of estimate  = 0.09634</p>
+                                        <p>&#160;</p>
+                                        <p>Model : (Geometric / Power)  Y = a * x^b</p>
+                                        <p>Method: unweighted least squares</p>
+                                        <p>For KW Hrs/Mnth vs Home Size</p>
+                                        <p>&#160;</p>
+                                        <p>A = 7.27571</p>
+                                        <p>B = 0.715637</p>
+                                        <p>&#160;</p>
+                                        <p>Correlation coefficient (r) = 0.938647    (r² = 0.881058)</p>
+                                        <p>&#160;</p>
+                                        <p>Standard error of estimate  = 0.073527</p>
+                                        <p>&#160;</p>
+                                        <p>Model : (Hyperbolic)  Y = x / (a + b * x)</p>
+                                        <p>Method: unweighted least squares</p>
+                                        <p>For KW Hrs/Mnth vs Home Size</p>
+                                        <p>&#160;</p>
+                                        <p>A = 0.907439</p>
+                                        <p>B = 0.000137</p>
+                                        <p>&#160;</p>
+                                        <p>Correlation coefficient (r) = 0.957812    (r² = 0.917405)</p>
+                                        <p>&#160;</p>
+                                        <p>Standard error of estimate  = 0.000041</p>
+                                        <p>&#160;</p>
+                                        <p>The hyperbolic model fits these data best of the three on its own scale, but the standard errors are on different scales and none of the models should be used beyond the observed home sizes: these estimates suggest which non-linear model might be worth fitting properly.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Linearized regression estimates: an illustration with the electricity
+# consumption and home size data of the polynomial regression topic (McClave and
+# Dietrich 1991, the test workbook's Home Size and KW Hrs/Mnth) in R
+size &lt;- c(1290, 1350, 1470, 1600, 1710, 1840, 1980, 2230, 2400, 2930)
+kwh &lt;- c(1182, 1172, 1264, 1493, 1571, 1711, 1804, 1840, 1956, 1954)
+
+# Each model is a straight line after a transformation, fitted by ordinary least
+# squares on the transformed scale; R's standard regression gives the line, its
+# correlation coefficient and the standard error of the estimate (the residual
+# standard error on the transformed scale)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+report &lt;- function(model, fit, a, b) {
+  cat(model, "\n")
+  cat("A =", six(a), "  B =", six(b), "\n")
+  r &lt;- sqrt(summary(fit)$r.squared)
+  cat("Correlation coefficient (r) =", six(r), "  (r2 =", six(r^2), ")\n")
+  cat("Standard error of estimate =", six(summary(fit)$sigma), "\n")
+}
+
+# Exponential, Y = a exp(b x): log Y against x, so A is exp of the intercept
+fit &lt;- lm(log(kwh) ~ size)
+report("(Exponential)  Y = a * exp(b * x)", fit, exp(coef(fit)[1]), coef(fit)[2])
+
+# Geometric (power), Y = a x^b: log Y against log x
+fit &lt;- lm(log(kwh) ~ log(size))
+report("(Geometric / Power)  Y = a * x^b", fit, exp(coef(fit)[1]), coef(fit)[2])
+
+# Hyperbolic, Y = x / (a + b x): 1/Y against 1/x, so a is the slope and b the
+# intercept
+fit &lt;- lm(I(1 / kwh) ~ I(1 / size))
+report("(Hyperbolic)  Y = x / (a + b * x)", fit, coef(fit)[2], coef(fit)[1])</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

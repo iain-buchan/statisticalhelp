@@ -331,11 +331,11 @@
                                         <p>z (for k = 0) = 11.899574</p>
                                         <p>P &lt; 0.0001</p>
                                         <p>&#160;</p>
-                                        <p style="text-decoration: underline;">Cohen's kappa (weighted by 1-Abs(i-j)/(1 - k))</p>
+                                        <p style="text-decoration: underline;">Cohen's kappa (weighted by 1-abs(i-j)/(k-1))</p>
                                         <p>Observed agreement = 80.51%</p>
                                         <p>Expected agreement = 55.81%</p>
                                         <p>Kappa = 0.558953 (se_0 = 0.038019, se = 0.028507)</p>
-                                        <p>95% confidence interval = 0.503081 to 0.614826</p>
+                                        <p>95% confidence interval for kappa = 0.503081 to 0.614826</p>
                                         <p>z (for kw = 0) = 14.701958</p>
                                         <p>P &lt; 0.0001</p>
                                         <p>&#160;</p>
@@ -345,7 +345,7 @@
                                         <p>Pi = 0.30701</p>
                                         <p>&#160;</p>
                                         <p style="text-decoration: underline;">Gwet's AC1</p>
-                                        <p>Observed agreement = 35.06%</p>
+                                        <p>Observed agreement = 47.38%</p>
                                         <p>Chance-independent agreement = 18.98%</p>
                                         <p>AC1 = 0.350552 (se = 0.033046)</p>
                                         <p>95% confidence interval = 0.285782 to 0.415322</p>
@@ -361,6 +361,124 @@
                                         <p>Note that Gwet's agreement coefficient does not depend upon the hypothesis of independence between raters, therefore you can use it to reflect the extent of agreement in more contexts than kappa.</p>
                                         <p>&#160;</p>
                                         <p>The statistically highly significant Maxwell test statistic above indicates that the raters disagree significantly in at least one category. The generalised McNemar statistic indicates the disagreement is not spread evenly.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Agreement of categorical measurements: the StatsDirect help example (Altman 1991,
+# the RAST and MAST tests of 363 sera graded in five categories) in R
+grades &lt;- c("negative", "weak", "moderate", "high", "very high")
+counts &lt;- matrix(c(86, 3, 14, 0, 2,
+                   26, 0, 10, 4, 0,
+                   20, 2, 22, 4, 1,
+                   11, 1, 37, 16, 14,
+                   3, 0, 15, 24, 48), 5, 5, byrow = TRUE,
+                 dimnames = list(MAST = grades, RAST = grades))
+print(counts)
+
+# Base R has no kappa function, so the statistics are computed from the table as the
+# formulae above give them: the proportions in the cells, the row and column margins
+# and the proportion of sera the two tests graded alike
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+pc2 &lt;- function(x) paste0(formatC(100 * x, digits = 2, format = "f"), "%")
+g &lt;- nrow(counts)
+n &lt;- sum(counts)
+p &lt;- counts / n
+row_p &lt;- rowSums(p)
+col_p &lt;- colSums(p)
+po &lt;- sum(diag(p))
+
+# Cohen's kappa, with the standard error for testing kappa = 0 (se_0) and the
+# standard error of Fleiss, Cohen and Everitt (1969) for the confidence interval (se)
+pe &lt;- sum(row_p * col_p)
+kappa &lt;- (po - pe) / (1 - pe)
+se0 &lt;- sqrt(pe + pe^2 - sum(row_p * col_p * (row_p + col_p))) / ((1 - pe) * sqrt(n))
+a &lt;- sum(diag(p) * (1 - pe - (row_p + col_p) * (1 - po))^2)
+b &lt;- 0
+for (i in 1:g) for (j in 1:g) if (i != j) b &lt;- b + p[i, j] * (col_p[i] + row_p[j])^2
+se &lt;- sqrt((a + (1 - po)^2 * b - (po * pe - 2 * pe + po)^2) / (n * (1 - pe)^4))
+z &lt;- qnorm(0.975)
+cat("Cohen's kappa (unweighted)\n")
+cat("Observed agreement =", pc2(po), "\n")
+cat("Expected agreement =", pc2(pe), "\n")
+cat("Kappa = ", six(kappa), " (se_0 = ", six(se0), ", se = ", six(se), ")\n", sep = "")
+cat("95% confidence interval =", six(kappa - z * se), "to", six(kappa + z * se), "\n")
+cat("z (for k = 0) =", six(kappa / se0), " ",
+    pv(pnorm(kappa / se0, lower.tail = FALSE)), "\n")
+
+# Weighted kappa with the default linear weights: a disagreement of one grade counts
+# three quarters of full agreement, and so on down to zero across the whole scale
+w &lt;- 1 - abs(outer(1:g, 1:g, "-")) / (g - 1)
+print(w)
+pow &lt;- sum(w * p)
+pew &lt;- sum(w * outer(row_p, col_p))
+kappaw &lt;- (pow - pew) / (1 - pew)
+wi &lt;- as.vector(w %*% col_p)     # the mean weight of each row grade
+wj &lt;- as.vector(t(w) %*% row_p)  # and of each column grade
+se0w &lt;- sqrt(sum(outer(row_p, col_p) * (w - outer(wi, wj, "+"))^2) - pew^2) /
+  ((1 - pew) * sqrt(n))
+s &lt;- 0
+for (i in 1:g) for (j in 1:g) {
+  s &lt;- s + p[i, j] * (w[i, j] * (1 - pew) - (wi[i] + wj[j]) * (1 - pow))^2
+}
+sew &lt;- sqrt((s - (pow * pew - 2 * pew + pow)^2) / (n * (1 - pew)^4))
+cat("Cohen's kappa (weighted by 1-abs(i-j)/(k-1))\n")
+cat("Observed agreement =", pc2(pow), "\n")
+cat("Expected agreement =", pc2(pew), "\n")
+cat("Kappa = ", six(kappaw), " (se_0 = ", six(se0w), ", se = ", six(sew), ")\n",
+    sep = "")
+cat("95% confidence interval for kappa =", six(kappaw - z * sew), "to",
+    six(kappaw + z * sew), "\n")
+cat("z (for kw = 0) =", six(kappaw / se0w), " ",
+    pv(pnorm(kappaw / se0w, lower.tail = FALSE)), "\n")
+
+# Scott's pi: chance agreement from the margins averaged over the two tests
+margin &lt;- (row_p + col_p) / 2
+spe &lt;- sum(margin^2)
+cat("Scott's pi\n")
+cat("Observed agreement =", pc2(po), "\n")
+cat("Expected agreement =", pc2(spe), "\n")
+cat("Pi =", six((po - spe) / (1 - spe)), "\n")
+
+# Gwet's AC1, with its variance (Gwet 2008)
+pe1 &lt;- sum(margin * (1 - margin)) / (g - 1)
+ac1 &lt;- (po - pe1) / (1 - pe1)
+pog &lt;- sum(diag(p) * (1 - margin))
+soma &lt;- sum(p * (1 - outer(margin, margin, "+") / 2)^2)
+v &lt;- (po * (1 - po) - 4 * (1 - ac1) * (pog / (g - 1) - po * pe1) +
+        4 * (1 - ac1)^2 * (soma / (g - 1)^2 - pe1^2)) / (n * (1 - pe1)^2)
+cat("Gwet's AC1\n")
+cat("Observed agreement =", pc2(po), "\n")
+cat("Chance-independent agreement =", pc2(pe1), "\n")
+cat("AC1 = ", six(ac1), " (se = ", six(sqrt(v)), ")\n", sep = "")
+cat("95% confidence interval =", six(ac1 - z * sqrt(v)), "to", six(ac1 + z * sqrt(v)),
+    "\n")
+
+# Maxwell's test of marginal homogeneity: the differences between the row and column
+# totals of the first g - 1 grades against their covariance matrix
+d &lt;- (rowSums(counts) - colSums(counts))[-g]
+V &lt;- -(counts + t(counts))
+diag(V) &lt;- rowSums(counts) + colSums(counts) - 2 * diag(counts)
+V &lt;- V[-g, -g]
+x2 &lt;- as.numeric(t(d) %*% solve(V) %*% d)
+cat("Marginal homogeneity (Maxwell) chi-square =", six(x2), " df =", g - 1, " ",
+    pv(pchisq(x2, g - 1, lower.tail = FALSE)), "\n")
+
+# The generalised McNemar (Bowker) test of symmetry, as mcnemar.test(counts) computes
+# it, except that the pair of cells that are both empty (weak MAST, very high RAST and
+# the reverse) is left out rather than making the statistic undefined
+above &lt;- counts[upper.tri(counts)]
+below &lt;- t(counts)[upper.tri(counts)]
+filled &lt;- above + below &gt; 0
+x2m &lt;- sum((above - below)[filled]^2 / (above + below)[filled])
+dfm &lt;- g * (g - 1) / 2
+cat("Symmetry (generalised McNemar) chi-square =", six(x2m), " df =", dfm, " ",
+    pv(pchisq(x2m, dfm, lower.tail = FALSE)), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>
