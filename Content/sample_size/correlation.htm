@@ -35,8 +35,7 @@
         </p>
         <p>The sample size estimation uses Fisher's classic z-transformation to normalize the distribution of Pearson's correlation coefficient:</p>
         <p>
-            <MadCap:equation>$\displaystyle z'=\frac{1}{2} \ln \left( \frac{1+r}{1-r}\right) \\
-\displaystyle z=z'-\frac{3z'+r}{4n}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle z'=\frac{1}{2} \ln \left( \frac{1+r}{1-r}\right)$</MadCap:equation>
         </p>
         <p>&#160;</p>
         <p>This gives rise to the usual test for an observed correlation coefficient (r1) to be tested for its difference from a pre-defined reference value (r0, often 0), and from this the power and sample size (n) can be determined:</p>
@@ -51,9 +50,7 @@
         <p>&#160;</p>
         <p>StatsDirect then finds the value of n that satisfies the following power (1-β) equation:</p>
         <p>
-            <MadCap:equation>$\displaystyle 1-\beta= \text{norm}[\delta \text{ var}(\delta)-z_{\alpha/2}] \\
-\displaystyle \text{var}(\delta)=\sqrt{n-1} \\
-\displaystyle \bar z=z-\frac{3z+r}{4n}+\frac{r}{2(n-1)}+\frac{3r}{8(n-1)^2}$</MadCap:equation>
+            <MadCap:equation>$\displaystyle 1-\beta= \text{norm}\left[|z_{r1}'-z_{r0}'| \sqrt{n-3}-z_{1-\alpha/2}\right]+\text{norm}\left[-|z_{r1}'-z_{r0}'| \sqrt{n-3}-z_{1-\alpha/2}\right]$</MadCap:equation>
         </p>
         <p>-where norm is the area under the standard normal distribution curve.</p>
         <p>&#160;</p>
