@@ -190,7 +190,7 @@
                                         <p>&#160;</p>
                                         <p>The simple two way randomized block design assumes that the block (row) and treatment (column) effects are additive. This means that apart from experimental error, the difference in effect between any two blocks is the same for all treatment and vice versa. If these effects are not additive then there is a row-column interaction that should be investigated by repeating the observations for each block.</p>
                                         <p>&#160;</p>
-                                        <p>StatsDirect compensates for missing observations in the replicates (repeat observations) by estimating them as the mean of the replicates present and by reducing the degrees of freedom, you should avoid this situation if possible.</p>
+                                        <p>StatsDirect compensates for missing observations in the replicates (repeat observations) by estimating them as the mean of the replicates present and by reducing the degrees of freedom, you should avoid this situation if possible. The multiple comparison methods that follow then take, for each treatment, its equivalent number of observations (the number of blocks squared, divided by the sum across the blocks of one over the number of observations present in the cell), so that their standard errors reflect the observations present and not the substituted values; the Newman-Keuls method, which needs equal group sizes, is not available when these equivalent sizes differ.</p>
                                         <p>&#160;</p>
                                         <p><u>Data preparation</u>
                                         </p>
