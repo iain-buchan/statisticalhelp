@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# Adds the empty, web-only "R code" section to a help topic if it has none yet.
+# Adds the empty "R code" section for web and compiled help to a help topic if it has none yet.
 # It goes before the run of see-also links at the end of the topic (after the example's discussion).
 # Then insert-rcode.pl fills it.   usage: perl add-rcode-section.pl <topic.htm>
 use strict;
@@ -15,7 +15,7 @@ my $eol = $html =~ /\r\n/ ? "\r\n" : "\n";
 
 # depth of the logo path: topics sit one folder below Content
 my @lines = (
-    '        <MadCap:dropDown class="rcode" MadCap:conditions="Primary.WEBHELP">',
+    '        <MadCap:dropDown class="rcode">',
     '            <MadCap:dropDownHead class="rcode">',
     '                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>',
     '            </MadCap:dropDownHead>',

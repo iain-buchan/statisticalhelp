@@ -146,7 +146,7 @@ a:active
 	text-decoration: underline;
 }
 
-/* "R code" section at the end of a topic (web help only): R code that reproduces the worked example, closed until its heading is clicked. */
+/* "R code" section at the end of a topic (web and compiled help): R code that reproduces the worked example, closed until its heading is clicked. */
 
 MadCap|dropDown.rcode
 {
