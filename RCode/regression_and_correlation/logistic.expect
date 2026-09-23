@@ -1,0 +1,33 @@
+# Logistic regression, Altman (1991) hypertension and smoking, obesity and snoring in 433 men. One fragment per line.
+1.618403
+df = 4
+P = 0.8055
+12.507498
+df = 3
+P = 0.0058
+0.934471
+0.541784 to 1.611779
+-0.243686
+RP: P = 0.8075
+H: P = .8075
+2.00433
+1.146316 to 3.504564
+2.438954
+2.391544
+1.097143 to 5.213072
+2.193152
+logit Hypertensive = -2.377661 -0.067775 Smoking +0.69531 Obesity +0.871939 Snoring
+-199.4582
+9.618403
+9.936169
+14.1259
+1.364272
+P = 0.8504
+Hosmer-Lemeshow test = 0.453725
+P = 0.797
+RP: Pseudo (deviance based) R-square = 0.88543
+RP: Pseudo (McFadden, likelihood ratio index) R-square = 0.030401
+0.380185
+0.278124
+0.285085
+0.397574

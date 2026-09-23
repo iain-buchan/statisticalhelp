@@ -1,0 +1,10 @@
+# Simple linear regression and correlation, Armitage and Berry (1994) birth weight and weight gain of 32 babies. One fragment per line.
+-0.86433 Birth Weight
+167.870079
+Standard Error of slope = 0.175684
+95% CI for population value of slope = -1.223125 to -0.505535
+Correlation coefficient (r) = -0.668236
+0.446539
+95% CI for r (Fisher's z transformed) = -0.824754 to -0.416618
+t with 30 DF = -4.919791
+Power (for 5% significance) = 99.15%
