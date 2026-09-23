@@ -1,0 +1,19 @@
+# Agreement of categorical measurements, Altman (1991) RAST and MAST grades of 363 sera. One fragment per line.
+Observed agreement = 47.38%
+Expected agreement = 22.78%
+Kappa = 0.318628 (se_0 = 0.026776, se = 0.030423)
+95% confidence interval = 0.259 to 0.378256
+z (for k = 0) = 11.899574
+weighted by 1-abs(i-j)/(k-1)
+Observed agreement = 80.51%
+Expected agreement = 55.81%
+Kappa = 0.558953 (se_0 = 0.038019, se = 0.028507)
+95% confidence interval for kappa = 0.503081 to 0.614826
+z (for kw = 0) = 14.701958
+Expected agreement = 24.07%
+Pi = 0.30701
+Chance-independent agreement = 18.98%
+AC1 = 0.350552 (se = 0.033046)
+95% confidence interval = 0.285782 to 0.415322
+Marginal homogeneity (Maxwell) chi-square = 73.013451
+Symmetry (generalised McNemar) chi-square = 79.076091
