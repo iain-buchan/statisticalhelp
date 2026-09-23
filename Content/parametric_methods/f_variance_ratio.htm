@@ -15,7 +15,7 @@
         <p>&#160;</p>
         <p>F is the ratio of variances (largest as numerator) from samples of size n1 and n2. Degrees of freedom are n1-1 and n2-1 corresponding to the numerator and denominator sample variances.</p>
         <p>&#160;</p>
-        <p>Only the upper tail probability need be considered because the larger variance is always used as the numerator in the variance ratio F (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>). In most situations this probability should be doubled to give a two sided test. Analysis of variance can utilise a one sided probability because the numerator and denominator of the variance ratio are predetermined.</p>
+        <p>Only the upper tail probability need be considered because the larger variance is always used as the numerator in the variance ratio F (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>). For a two sided test the smaller of the two tail probabilities is doubled; with the larger variance on top that is usually the upper tail, but not always when the degrees of freedom differ. Analysis of variance can utilise a one sided probability because the numerator and denominator of the variance ratio are predetermined.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
@@ -128,7 +128,7 @@ cat("Slight/no symptoms   DF =", length(slight) - 1, "  Variance =", six(var(sli
     "\n")
 cat("F =", six(f$statistic), "\n")
 p &lt;- pf(f$statistic, f$parameter[1], f$parameter[2], lower.tail = FALSE)
-cat(sprintf("Upper side P = %.4f   Two sided P = %.4f\n", p, 2 * p))</pre>
+cat(sprintf("Upper side P = %.4f   Two sided P = %.4f\n", p, 2 * min(p, 1 - p)))</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
         <p>&#160;</p>

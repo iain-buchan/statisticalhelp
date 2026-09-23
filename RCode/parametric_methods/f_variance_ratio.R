@@ -18,4 +18,4 @@ cat("Slight/no symptoms   DF =", length(slight) - 1, "  Variance =", six(var(sli
     "\n")
 cat("F =", six(f$statistic), "\n")
 p <- pf(f$statistic, f$parameter[1], f$parameter[2], lower.tail = FALSE)
-cat(sprintf("Upper side P = %.4f   Two sided P = %.4f\n", p, 2 * p))
+cat(sprintf("Upper side P = %.4f   Two sided P = %.4f\n", p, 2 * min(p, 1 - p)))
