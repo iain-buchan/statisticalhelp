@@ -160,9 +160,9 @@
                                         </p>
                                         <p>Consider a fair coin (p = 0.5) tossed 10 times. To calculate the probability of 5 heads in StatsDirect select Binomial from the Distributions section of the Analysis menu, enter 0.5 as the probability of success per trial, 10 as the number of trials and 5 as the number of successes. StatsDirect shows the probability of exactly 5 successes, of 5 or more and of 5 or fewer, and reports the three on one line:</p>
                                         <p>&#160;</p>
-                                        <p>P(binomial p 0.5, 10 trials) = 0.246093750000001 [5 successes], 0.623046874999998 [&gt;=5 successes], 0.623046875000003 [&lt;=5 successes]</p>
+                                        <p>P(binomial p 0.5, 10 trials) = 0.24609375 [5 successes], 0.623046875 [&gt;=5 successes], 0.623046875 [&lt;=5 successes]</p>
                                         <p>&#160;</p>
-                                        <p>The exact values are 252/1024 = 0.24609375 and 638/1024 = 0.623046875; StatsDirect's figures differ from these by one to three units in the fifteenth decimal place, rounding error in its log-gamma arithmetic.</p>
+                                        <p>These are the exact values, 252/1024 = 0.24609375 and 638/1024 = 0.623046875, shown without trailing zeros.</p>
                                         <p>&#160;</p>
                                         <p>Exactly 5 heads is the most likely single outcome, but its probability is just under a quarter. The probabilities of 5 or more and of 5 or fewer heads are equal because the distribution is symmetrical when p = 0.5, and each is more than a half because both include the case of exactly 5 heads. The expected number of heads is np = 5 and the standard deviation is sqr(np(1-p)) = 1.581139.</p>
                                         <p>&#160;</p>
@@ -172,7 +172,7 @@
                                         <p>&#160;</p>
                                         <p>If the treatment really succeeded in one patient in four, 8 or more successes among 20 would occur about one time in ten (P = 0.1018), so this result is only weak evidence that the treatment does better than that. The probability of 8 or more successes is the one sided P value of an exact binomial test of 8 successes in 20 against a success rate of 0.25.</p>
                                         <p>&#160;</p>
-                                        <p>The two report lines are what StatsDirect prints, to 15 decimal places. The R code below recomputes the probabilities; R's values can differ from StatsDirect's in the last digit or two by rounding, as in the first case.</p>
+                                        <p>The two report lines are what StatsDirect prints, to 15 decimal places. The R code below recomputes the probabilities.</p>
                                         <p>&#160;</p>
                                         <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
                                             <div class="MCDropDownBody dropDownBody">
@@ -185,8 +185,7 @@ dbinom(5, 10, 0.5)                          # exactly 5 heads in 10 tosses of a 
 pbinom(5, 10, 0.5)                          # 5 or fewer heads
 pbinom(4, 10, 0.5, lower.tail = FALSE)      # 5 or more heads
 
-# The dialog's report line, its probabilities to 15 decimal places (the dialog's own
-# arithmetic can differ from R's in the last digit or two, as in the illustration)
+# The dialog's report line, its probabilities to 15 decimal places
 fifteen &lt;- function(x) formatC(x, digits = 15, format = "f", drop0trailing = TRUE)
 six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
 binomial &lt;- function(p, n, r) {
