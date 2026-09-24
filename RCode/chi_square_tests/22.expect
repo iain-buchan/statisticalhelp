@@ -1,0 +1,26 @@
+# 2 by 2 chi-square test, Armitage and Berry (1994) mortality with treatments A and B. One fragment per line.
+41
+216
+64
+180
+257
+244
+105
+396
+501
+53.862275
+203.137725
+51.137725
+192.862275
+= 7.978869
+P = 0.0047
+= 7.370595
+P = 0.0066
+Pearson's contingency = 0.125205
+V (signed) = -0.126198
+Odds Ratio = 0.533854
+Approximate 95% confidence interval = 0.344118 to 0.828206
+Fisher exact 95% confidence interval = 0.334788 to 0.846292
+Exact Fisher one sided P = 0.0033, two sided P = 0.0059
+mid-P exact 95% confidence interval = 0.342636 to 0.828071
+Exact mid-P one sided P = 0.0024, two sided P = 0.0049
