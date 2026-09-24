@@ -1,0 +1,11 @@
+# Single proportion, Armitage and Berry (1994) 65 of 100 patients preferred analgesic Y. One fragment per line.
+Total = 100, response = 65
+Proportion = 0.65
+Exact (Clopper-Pearson) 95% confidence interval = 0.548151 to 0.742706
+# the null hypothesis line is a label in the report and the help; the script takes pi0 = 0.5 as an input
+HP: Using null hypothesis that the population proportion equals 0.5
+Binomial one sided P = 0.0018
+Binomial two sided P = 0.0035
+Approximate (Wilson) 95% mid-P confidence interval = 0.552544 to 0.736358
+Binomial one sided mid-P = 0.0013
+Binomial two sided mid-P = 0.0027
