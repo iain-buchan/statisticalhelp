@@ -14,7 +14,7 @@
         <p style="font-weight: bold;">&#160;Analysis_Chi-square_Mantel Haenszel;</p>
         <p style="font-weight: bold;">&#160;Analysis_Meta-analysis_Odds Ratio.</p>
         <p>&#160;</p>
-        <p>Case-control studies of dichotomous outcomes (e.g. healed or not healed) can by represented by arranging the observed counts into fourfold (2 by 2) tables. The separation of data into different tables or strata represents a sub-grouping, e.g. into age bands. Stratification of this kind is sometimes used to reduce <a href="../basics/confounding.htm">confounding</a>.</p>
+        <p>Case-control studies of dichotomous outcomes (e.g. healed or not healed) can be represented by arranging the observed counts into fourfold (2 by 2) tables. The separation of data into different tables or strata represents a sub-grouping, e.g. into age bands. Stratification of this kind is sometimes used to reduce <a href="../basics/confounding.htm">confounding</a>.</p>
         <p>&#160;</p>
         <p>The Mantel-Haenszel method provides a pooled odds ratio across the strata of fourfold tables. Meta-analysis is used to investigate the combination or interaction of a group of independent studies, for example a series of fourfold tables from similar studies conducted at different centres.</p>
         <p>&#160;</p>
@@ -61,7 +61,7 @@
         </p>
         <p>- where n<sub>i</sub> =  a<sub>i</sub>+b<sub>i</sub>+c<sub>i</sub>+d<sub>i</sub>.</p>
         <p>&#160;</p>
-        <p>Alternative methods, such Woolf and inverse variance, can be used to estimate the pooled odds ratio with fixed effects but the Mantel-Haenszel method is generally the most robust. A confidence interval for the Mantel-Haenszel odds ratio in StatsDirect is calculated using the Robins, Breslow and Greenland variance formula (<a href="../references/reference_list.htm#ref-robins-1986">Robins et al., 1986</a>) or by the method of <a href="../references/reference_list.htm#ref-sato-1990">Sato (1990)</a> if the estimate of the odds ratio can not be determined. A chi-square test statistic is given with its associated probability that the pooled odds ratio is equal to one.</p>
+        <p>Alternative methods, such as Woolf and inverse variance, can be used to estimate the pooled odds ratio with fixed effects but the Mantel-Haenszel method is generally the most robust. A confidence interval for the Mantel-Haenszel odds ratio in StatsDirect is calculated using the Robins, Breslow and Greenland variance formula (<a href="../references/reference_list.htm#ref-robins-1986">Robins et al., 1986</a>) or by the method of <a href="../references/reference_list.htm#ref-sato-1990">Sato (1990)</a> if the estimate of the odds ratio can not be determined. A chi-square test statistic is given with its associated probability that the pooled odds ratio is equal to one.</p>
         <p>&#160;</p>
         <p>If any cell count in a table is zero then a continuity correction is applied to each cell in that table – if you have selected the ’delay continuity correction’ <a href="options.htm">option</a> then no continuity correction is applied to the Mantel-Haenszel calculation unless all of the ’a’ cells or all of the ’d’ cells are zero across the studies. The type of continuity correction used is set in the <a href="options.htm">options</a>.</p>
         <p>&#160;</p>
@@ -203,7 +203,7 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>... this is then repeated for each of the ten rows.</p>
+        <p>... this is then repeated for each of the ten rows. Alternatively, open the test workbook, select the odds ratio function from the meta-analysis section of the analysis menu, and select the Meta-analysis worksheet columns "Smokers total", "Smokers cancer", "Control total" and "Control cancer" when prompted for the experimental (smokers) and control (non-smokers) totals and numbers with lung cancer.</p>
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
@@ -225,7 +225,7 @@
         <p>Breslow-Day = 6.766765 (df = 9) P = 0.6614</p>
         <p>Cochran Q = 6.641235 (df = 9) P = 0.6744</p>
         <p>Moment-based estimate of between studies variance = 0</p>
-        <p>I² (inconsistency) = 0% (95% CI = 0% to 52.7%)</p>
+        <p>I² (inconsistency) = 0% (95% CI = 0% to 51.7%)</p>
         <p>&#160;</p>
         <p><u>Random effects (DerSimonian-Laird)</u>
         </p>

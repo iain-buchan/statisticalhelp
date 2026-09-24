@@ -511,7 +511,7 @@
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
-        <p>The example looks at mortality by sex and age for patients with trigeminal neuralgia (<a href="../references/reference_list.htm#ref-rothman-1973">Rothman et al., 1973</a>). The person-time data are person-years.</p>
+        <p>The example looks at mortality by sex and age for patients with trigeminal neuralgia (<a href="../references/reference_list.htm#ref-rothman-1973">Rothman and Monson, 1973</a>). The person-time data are person-years.</p>
         <p>&#160;</p>
         <table>
             <col />
@@ -539,7 +539,7 @@
                 <td style="text-align: right;">1701</td>
             </tr>
             <tr>
-                <td style="text-align: right;">Age ³ 65:</td>
+                <td style="text-align: right;">Age &gt;= 65:</td>
                 <td style="text-align: right;">76</td>
                 <td style="text-align: right;">949</td>
                 <td style="text-align: right;">121</td>
@@ -547,7 +547,7 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>To analyse these data in StatsDirect first prepare them in four workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select incidence rate difference from the meta-analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Exposed cases", "Exposed person-time", "Non-exposed cases" and "Non-exposed person-time" when prompted for data. Note that "exposed" and "experimental" groups are the same.</p>
+        <p>To analyse these data in StatsDirect first prepare them in four workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select incidence rate difference from the meta-analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Exposed cases", "Exposed person-time", "Control cases" and "Control person-time" when prompted for data, and the column marked "Age split" for the stratum labels. Note that "exposed" and "experimental" groups are the same.</p>
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
@@ -560,10 +560,10 @@
             <col />
             <col />
             <col />
-            <col />
             <tr>
-                <td style="text-decoration: underline;text-align: right;">Study</td>
-                <td colspan="6" style="text-decoration: underline;text-align: right;">Table (a, person-time exposed, b, person-time not exposed)</td>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
+                <td colspan="4" style="text-decoration: underline;text-align: right;">Table (a, person-time exposed, b, person-time not exposed)</td>
+                <td>&#160;</td>
             </tr>
             <tr>
                 <td style="text-align: right;">1</td>
@@ -571,8 +571,7 @@
                 <td style="text-align: right;">1516</td>
                 <td style="text-align: right;">10</td>
                 <td style="text-align: right;">1701</td>
-                <td style="text-align: right;">&#160;</td>
-                <td style="text-align: right;">age &lt;65</td>
+                <td style="text-align: right;">Age &lt; 65</td>
             </tr>
             <tr>
                 <td style="text-align: right;">2</td>
@@ -580,39 +579,67 @@
                 <td style="text-align: right;">949</td>
                 <td style="text-align: right;">121</td>
                 <td style="text-align: right;">2245</td>
-                <td style="text-align: right;">&#160;</td>
-                <td style="text-align: right;">age &gt;=65</td>
+                <td style="text-align: right;">Age &gt;= 65</td>
             </tr>
         </table>
         <p>&#160;</p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
+        <table>
             <col />
             <col />
             <col />
             <col />
             <col />
             <tr>
-                <td style="text-decoration: underline;text-align: right;">Study</td>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
                 <td style="text-decoration: underline;text-align: right;">IRD</td>
                 <td colspan="2" style="text-decoration: underline;text-align: right;">95% CI (approximate)</td>
-                <td colspan="2" style="text-decoration: underline;text-align: right;">% Weights (fixed, random)</td>
+                <td>&#160;</td>
             </tr>
             <tr>
                 <td style="text-align: right;">1</td>
-                <td style="text-align: right;">0.0034</td>
-                <td style="text-align: right;">-0.0026</td>
-                <td style="text-align: right;">0.0093</td>
-                <td style="text-align: right;">91.9048</td>
-                <td style="text-align: right;">59.4819</td>
+                <td style="text-align: right;">0.003356</td>
+                <td style="text-align: right;">-0.002623</td>
+                <td style="text-align: right;">0.009335</td>
+                <td style="text-align: right;">Age &lt; 65</td>
             </tr>
             <tr>
                 <td style="text-align: right;">2</td>
-                <td style="text-align: right;">0.0262</td>
-                <td style="text-align: right;">0.0073</td>
-                <td style="text-align: right;">0.045</td>
-                <td style="text-align: right;">8.0952</td>
-                <td style="text-align: right;">40.5181</td>
+                <td style="text-align: right;">0.026187</td>
+                <td style="text-align: right;">0.00734</td>
+                <td style="text-align: right;">0.045034</td>
+                <td style="text-align: right;">Age &gt;= 65</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
+                <td style="text-decoration: underline;text-align: right;">Standardized effect</td>
+                <td style="text-decoration: underline;text-align: right;">Variance</td>
+                <td colspan="2" style="text-decoration: underline;text-align: right;">% Weights (fixed, random)</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">0.003356</td>
+                <td style="text-align: right;">0.000009</td>
+                <td style="text-align: right;">91.904848</td>
+                <td style="text-align: right;">59.481911</td>
+                <td style="text-align: right;">Age &lt; 65</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">0.026187</td>
+                <td style="text-align: right;">0.000092</td>
+                <td style="text-align: right;">8.095152</td>
+                <td style="text-align: right;">40.518089</td>
+                <td style="text-align: right;">Age &gt;= 65</td>
             </tr>
         </table>
         <p>&#160;</p>
@@ -623,7 +650,7 @@
         <p>&#160;</p>
         <p><u>Non-combinability of studies</u>
         </p>
-        <p>Cohran Q = 4.419452 (df = 1) P = 0.0355</p>
+        <p>Cochran Q = 4.419452 (df = 1) P = 0.0355</p>
         <p>Moment-based estimate of between studies variance = 0.000202</p>
         <p>I² (inconsistency) =  77.4% (95% CI = *% to *%)</p>
         <p>&#160;</p>
@@ -632,14 +659,9 @@
         <p>Pooled IRD = 0.012607 (95% CI = -0.009361 to 0.034574)</p>
         <p>Z (test IRD differs from 0) = 1.124754 P = 0.2607</p>
         <p>&#160;</p>
-        <p>Here we infer with 95% confidence, assuming a fixed effects model, that the true size of the difference between incidence rates was somewhere between -0.0006 and 0.01 person-years for the exposed group compared with the non-exposed group; i.e. not statistically significant.</p>
+        <p>Here we infer with 95% confidence, assuming a fixed effects model, that the true size of the difference between incidence rates was somewhere between -0.0006 and 0.011 deaths per person-year for the exposed group compared with the non-exposed group; i.e. not statistically significant.</p>
         <p>&#160;</p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-        </p>
-    </body>
-</html>        <MadCap:dropDown class="rcode">
+        <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
@@ -821,3 +843,10 @@ forest(irr, exact[1, ], exact[2, ], exp(res_r$random),
        "incidence rate ratio (95% confidence interval)", 1, log = "x")</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

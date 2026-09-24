@@ -11,9 +11,9 @@
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Meta-Analysis_Peto Odds Ratio</b>.</p>
         <p>&#160;</p>
-        <p>Case-control studies of dichotomous outcomes (e.g. healed or not healed) can by represented by arranging the observed frequencies into fourfold (2 by 2) tables. The separation of data into different tables or strata represents a sub-grouping, e.g. into age bands. Stratification of this kind is sometimes used to reduce <a href="../basics/confounding.htm">confounding</a>.</p>
+        <p>Case-control studies of dichotomous outcomes (e.g. healed or not healed) can be represented by arranging the observed frequencies into fourfold (2 by 2) tables. The separation of data into different tables or strata represents a sub-grouping, e.g. into age bands. Stratification of this kind is sometimes used to reduce <a href="../basics/confounding.htm">confounding</a>.</p>
         <p>&#160;</p>
-        <p>Peto and colleagues presented an alternative method to the usual <a href="mh.htm">Mantel-Haenszel</a> method for pooling odds ratios across the strata of fourfold tables (<a href="../references/reference_list.htm#ref-yusuf-1985">Yusuf et al. 1985</a>). This method is not mathematically equal to the classical odds ratio but it has come to be known as the ’Peto odds ratio’. The Peto odds ratio can cause bias, especially when there is a substantial difference between the treatment and control group sizes, but it peforms well in many situations – seek the help of a statistician if you are considering using it (<a href="../references/reference_list.htm#ref-greenland-1990">Greenland and Salvan, 1990</a>; <a href="../references/reference_list.htm#ref-fleiss-1993">Fleiss, 1993</a>).</p>
+        <p>Peto and colleagues presented an alternative method to the usual <a href="mh.htm">Mantel-Haenszel</a> method for pooling odds ratios across the strata of fourfold tables (<a href="../references/reference_list.htm#ref-yusuf-1985">Yusuf et al. 1985</a>). This method is not mathematically equal to the classical odds ratio but it has come to be known as the ’Peto odds ratio’. The Peto odds ratio can cause bias, especially when there is a substantial difference between the treatment and control group sizes, but it performs well in many situations – seek the help of a statistician if you are considering using it (<a href="../references/reference_list.htm#ref-greenland-1990">Greenland and Salvan, 1990</a>; <a href="../references/reference_list.htm#ref-fleiss-1993">Fleiss, 1993</a>).</p>
         <p>&#160;</p>
         <p>Meta-analysis is used to investigate the combination or interaction of a group of independent studies, for example a series of fourfold tables from similar studies conducted at different centres.</p>
         <p>&#160;</p>
@@ -65,7 +65,7 @@
         <p>
             <MadCap:equation>$\displaystyle \hat{\psi}_{\text{pool}}=\exp \left( \frac{\displaystyle \sum_{i=1}^k (O_i-E_i)}{\displaystyle \sum_{i=1}^kV_i}\right)\\
 
-\displaystyle \text{CI}_{\text{pool}}=\exp \left( \frac{\displaystyle \sum_{i=1}^k (O_i-E_i)\pm z_{\alpha/2}\sqrt{\sum_{i=1}^k}V_i}{\displaystyle \sum_{i=1}^kV_i}\right)$</MadCap:equation>
+\displaystyle \text{CI}_{\text{pool}}=\exp \left( \frac{\displaystyle \sum_{i=1}^k (O_i-E_i)\pm z_{\alpha/2}\sqrt{\sum_{i=1}^kV_i}}{\displaystyle \sum_{i=1}^kV_i}\right)$</MadCap:equation>
         </p>
         <p>- where the intermediate statistics are defined as above for individual strata.</p>
         <p>&#160;</p>
@@ -112,8 +112,8 @@
             <col />
             <col />
             <tr>
-                <td style="text-decoration: underline;text-align: right;">Study</td>
-                <td colspan="4" style="text-decoration: underline;text-align: right;">Table (xt, xc, nt, nc)</td>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
+                <td colspan="4" style="text-decoration: underline;text-align: right;">Table (exposed +ve, control +ve, exposed -ve, control -ve)</td>
                 <td style="text-align: right;">&#160;</td>
             </tr>
             <tr>
@@ -181,13 +181,11 @@
             <col />
             <col />
             <col />
-            <col />
             <tr>
-                <td style="text-decoration: underline;text-align: right;">Study</td>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
                 <td style="text-decoration: underline;text-align: right;">O-E</td>
                 <td style="text-decoration: underline;text-align: right;">Odds ratio</td>
                 <td colspan="2" style="text-decoration: underline;text-align: right;">95% CI</td>
-                <td style="text-decoration: underline;text-align: right;">Peto weight (V)</td>
                 <td style="text-align: right;">&#160;</td>
             </tr>
             <tr>
@@ -196,7 +194,6 @@
                 <td style="text-align: right;">0.721713</td>
                 <td style="text-align: right;">0.492493</td>
                 <td style="text-align: right;">1.057619</td>
-                <td style="text-align: right;">26.304751</td>
                 <td style="text-align: right;">MRC-1</td>
             </tr>
             <tr>
@@ -205,7 +202,6 @@
                 <td style="text-align: right;">0.68386</td>
                 <td style="text-align: right;">0.462479</td>
                 <td style="text-align: right;">1.011214</td>
-                <td style="text-align: right;">25.107478</td>
                 <td style="text-align: right;">CDP</td>
             </tr>
             <tr>
@@ -214,7 +210,6 @@
                 <td style="text-align: right;">0.803583</td>
                 <td style="text-align: right;">0.607852</td>
                 <td style="text-align: right;">1.062341</td>
-                <td style="text-align: right;">49.29715</td>
                 <td style="text-align: right;">MRC-2</td>
             </tr>
             <tr>
@@ -223,7 +218,6 @@
                 <td style="text-align: right;">0.80134</td>
                 <td style="text-align: right;">0.487603</td>
                 <td style="text-align: right;">1.316943</td>
-                <td style="text-align: right;">15.565457</td>
                 <td style="text-align: right;">GASP</td>
             </tr>
             <tr>
@@ -232,7 +226,6 @@
                 <td style="text-align: right;">0.793516</td>
                 <td style="text-align: right;">0.544402</td>
                 <td style="text-align: right;">1.156621</td>
-                <td style="text-align: right;">27.058869</td>
                 <td style="text-align: right;">PARIS</td>
             </tr>
             <tr>
@@ -241,7 +234,6 @@
                 <td style="text-align: right;">1.132558</td>
                 <td style="text-align: right;">0.934809</td>
                 <td style="text-align: right;">1.372138</td>
-                <td style="text-align: right;">104.323777</td>
                 <td style="text-align: right;">AMIS</td>
             </tr>
             <tr>
@@ -250,7 +242,6 @@
                 <td style="text-align: right;">0.895032</td>
                 <td style="text-align: right;">0.829531</td>
                 <td style="text-align: right;">0.965705</td>
-                <td style="text-align: right;">665.092282</td>
                 <td style="text-align: right;">ISIS-2</td>
             </tr>
         </table>
@@ -260,50 +251,123 @@
             <col />
             <col />
             <col />
+            <col />
             <tr>
-                <td style="text-decoration: underline;text-align: right;">Study</td>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
+                <td style="text-decoration: underline;text-align: right;">Standardized effect</td>
+                <td style="text-decoration: underline;text-align: right;">Variance</td>
+                <td style="text-decoration: underline;text-align: right;">% Weights</td>
+                <td style="text-align: right;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">-0.326127</td>
+                <td style="text-align: right;">0.038016</td>
+                <td style="text-align: right;">2.881924</td>
+                <td style="text-align: right;">MRC-1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">-0.380001</td>
+                <td style="text-align: right;">0.039829</td>
+                <td style="text-align: right;">2.750752</td>
+                <td style="text-align: right;">CDP</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">-0.218674</td>
+                <td style="text-align: right;">0.020285</td>
+                <td style="text-align: right;">5.400949</td>
+                <td style="text-align: right;">MRC-2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">-0.22147</td>
+                <td style="text-align: right;">0.064245</td>
+                <td style="text-align: right;">1.705337</td>
+                <td style="text-align: right;">GASP</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">-0.231282</td>
+                <td style="text-align: right;">0.036956</td>
+                <td style="text-align: right;">2.964544</td>
+                <td style="text-align: right;">PARIS</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">0.124479</td>
+                <td style="text-align: right;">0.009586</td>
+                <td style="text-align: right;">11.429614</td>
+                <td style="text-align: right;">AMIS</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">-0.110896</td>
+                <td style="text-align: right;">0.001504</td>
+                <td style="text-align: right;">72.866881</td>
+                <td style="text-align: right;">ISIS-2</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
+                <td style="text-decoration: underline;text-align: right;">V</td>
                 <td style="text-decoration: underline;text-align: right;">z</td>
                 <td style="text-decoration: underline;text-align: right;">P(two sided)</td>
                 <td style="text-align: right;">&#160;</td>
             </tr>
             <tr>
                 <td style="text-align: right;">1</td>
+                <td style="text-align: right;">26.304751</td>
                 <td style="text-align: right;">-1.672646</td>
                 <td style="text-align: right;">P = 0.0944</td>
                 <td style="text-align: right;">MRC-1</td>
             </tr>
             <tr>
                 <td style="text-align: right;">2</td>
+                <td style="text-align: right;">25.107478</td>
                 <td style="text-align: right;">-1.904087</td>
                 <td style="text-align: right;">P = 0.0569</td>
                 <td style="text-align: right;">CDP</td>
             </tr>
             <tr>
                 <td style="text-align: right;">3</td>
+                <td style="text-align: right;">49.29715</td>
                 <td style="text-align: right;">-1.535355</td>
                 <td style="text-align: right;">P = 0.1247</td>
                 <td style="text-align: right;">MRC-2</td>
             </tr>
             <tr>
                 <td style="text-align: right;">4</td>
+                <td style="text-align: right;">15.565457</td>
                 <td style="text-align: right;">-0.873768</td>
                 <td style="text-align: right;">P = 0.3822</td>
                 <td style="text-align: right;">GASP</td>
             </tr>
             <tr>
                 <td style="text-align: right;">5</td>
+                <td style="text-align: right;">27.058869</td>
                 <td style="text-align: right;">-1.203085</td>
                 <td style="text-align: right;">P = 0.2289</td>
                 <td style="text-align: right;">PARIS</td>
             </tr>
             <tr>
                 <td style="text-align: right;">6</td>
+                <td style="text-align: right;">104.323777</td>
                 <td style="text-align: right;">1.271412</td>
                 <td style="text-align: right;">P = 0.2036</td>
                 <td style="text-align: right;">AMIS</td>
             </tr>
             <tr>
                 <td style="text-align: right;">7</td>
+                <td style="text-align: right;">665.092282</td>
                 <td style="text-align: right;">-2.859927</td>
                 <td style="text-align: right;">P = 0.0042</td>
                 <td style="text-align: right;">ISIS-2</td>
@@ -311,20 +375,20 @@
         </table>
         <p>&#160;</p>
         <p>Pooled odds ratio = 0.896843 (95% CI = 0.840508 to 0.956954)</p>
-        <p>Z (test of odds ratio differs from 1)= -3.289276 P = 0.001</p>
+        <p>Z (test of odds ratio differs from 1) = -3.289276 P = 0.001</p>
         <p>&#160;</p>
         <p>Non-combinability of studies</p>
         <p>Cochran Q = 9.967823 (df = 6) P = 0.126</p>
-        <p>I² (inconsistency) = 39.8% (95% CI = 0% to 73.3%)</p>
+        <p>I² (inconsistency) = 39.8% (95% CI = 0% to 76.7%)</p>
+        <p>&#160;</p>
+        <p>Bias indicators</p>
+        <p>Begg-Mazumdar: Kendall's tau = -0.428571 P = 0.2389 (low power)</p>
+        <p>Egger: bias = -0.725878 (90% CI = -2.313249 to 0.861493) P = 0.3991</p>
+        <p>Harbord-Egger: bias = -0.725878 (90% CI = -2.313249 to 0.861493) P = 0.3991</p>
         <p>&#160;</p>
         <p>Here we can say with 95% confidence that the true population odds of death for those who received aspirin after a heart attack from this set of studies is between 0.84 and 0.96 of the same odds for those not receiving aspirin.</p>
         <p>&#160;</p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-        </p>
-    </body>
-</html>        <MadCap:dropDown class="rcode">
+        <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
@@ -504,3 +568,9 @@ abline(0, log(pooled))</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
         <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

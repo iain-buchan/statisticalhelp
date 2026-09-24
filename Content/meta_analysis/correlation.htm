@@ -64,12 +64,11 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>To analyse these data in StatsDirect first prepare them in three workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select correlation from the meta-analysis section of the analysis menu, and then <a href="../workbook/selecting_data.htm">select</a> the columns 'Correlation' and 'Sample size' as prompted.</p>
+        <p>To analyse these data in StatsDirect first prepare them in two workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select correlation from the meta-analysis section of the analysis menu, and then <a href="../workbook/selecting_data.htm">select</a> the columns 'Correlation' and 'Sample size' as prompted.</p>
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
         <table cellspacing="0" style="caption-side: top;">
-            <col />
             <col />
             <col />
             <col />
@@ -80,7 +79,6 @@
                 <td style="text-decoration: underline;">Size</td>
                 <td style="text-decoration: underline;">Correlation</td>
                 <td colspan="2" style="text-decoration: underline;">Approximate 95% CI</td>
-                <td style="text-decoration: underline;">% Weight (fixed, random, size)</td>
             </tr>
             <tr>
                 <td>1</td>
@@ -88,7 +86,6 @@
                 <td>0.51</td>
                 <td>0.370922</td>
                 <td>0.626703</td>
-                <td>12.812813, &#160;12.609861, &#160;12.805474</td>
             </tr>
             <tr>
                 <td>2</td>
@@ -96,7 +93,6 @@
                 <td>0.48</td>
                 <td>0.334935</td>
                 <td>0.602837</td>
-                <td>12.612613, &#160;12.559901, &#160;12.609971</td>
             </tr>
             <tr>
                 <td>3</td>
@@ -104,7 +100,6 @@
                 <td>0.30</td>
                 <td>0.149418</td>
                 <td>0.436981</td>
-                <td>15.215215, &#160;13.129365, &#160;15.151515 </td>
             </tr>
             <tr>
                 <td>4</td>
@@ -112,7 +107,6 @@
                 <td>0.21</td>
                 <td>0.03273</td>
                 <td>0.37446</td>
-                <td>11.811812, &#160;12.347632, &#160;11.827957</td>
             </tr>
             <tr>
                 <td>5</td>
@@ -120,7 +114,6 @@
                 <td>0.60</td>
                 <td>0.465688</td>
                 <td>0.707292</td>
-                <td>10.810811, &#160;12.050626, &#160;10.85044</td>
             </tr>
             <tr>
                 <td>6</td>
@@ -128,7 +121,6 @@
                 <td>0.46</td>
                 <td>0.305281</td>
                 <td>0.591057</td>
-                <td>11.611612, &#160;12.291224, &#160;11.632454</td>
             </tr>
             <tr>
                 <td>7</td>
@@ -136,7 +128,6 @@
                 <td>0.22</td>
                 <td>0.03591</td>
                 <td>0.389649</td>
-                <td>10.910911, &#160;12.082088, &#160;10.948192</td>
             </tr>
             <tr>
                 <td>8</td>
@@ -144,7 +135,85 @@
                 <td>0.25</td>
                 <td>0.090686</td>
                 <td>0.396837</td>
-                <td>14.214214, &#160;12.929303, &#160;14.173998</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Stratum</td>
+                <td style="text-decoration: underline;">Standardized effect</td>
+                <td style="text-decoration: underline;">Variance</td>
+                <td colspan="3" style="text-decoration: underline;">% Weights (fixed, random, size)</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>0.56273</td>
+                <td>0.007813</td>
+                <td>12.812813</td>
+                <td>12.609861</td>
+                <td>12.805474</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>0.522984</td>
+                <td>0.007937</td>
+                <td>12.612613</td>
+                <td>12.559901</td>
+                <td>12.609971</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>0.30952</td>
+                <td>0.006579</td>
+                <td>15.215215</td>
+                <td>13.129365</td>
+                <td>15.151515</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>0.213171</td>
+                <td>0.008475</td>
+                <td>11.811812</td>
+                <td>12.347632</td>
+                <td>11.827957</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>0.693147</td>
+                <td>0.009259</td>
+                <td>10.810811</td>
+                <td>12.050626</td>
+                <td>10.85044</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>0.497311</td>
+                <td>0.008621</td>
+                <td>11.611612</td>
+                <td>12.291224</td>
+                <td>11.632454</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>0.223656</td>
+                <td>0.009174</td>
+                <td>10.910911</td>
+                <td>12.082088</td>
+                <td>10.948192</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>0.255413</td>
+                <td>0.007042</td>
+                <td>14.214214</td>
+                <td>12.929303</td>
+                <td>14.173998</td>
             </tr>
         </table>
         <p>&#160;</p>
@@ -157,12 +226,12 @@
         </p>
         <p>Cochran Q = 27.382264 &#160;(df = 7) &#160;P = 0.0003</p>
         <p>Moment-based estimate of between studies variance = 0.023363</p>
-        <p>I² (inconsistency) = 74.4% (95% CI = 37% to 85.7%) </p>
+        <p>I² (inconsistency) = 74.4% (95% CI = 46.2% to 86.5%) </p>
         <p>&#160;</p>
         <p><u>Hedges-Olkin random effects</u>
         </p>
         <p>Pooled correlation = 0.387032 (95% CI = 0.277911 to 0.486292)</p>
-        <p>Z (test Correlation) = 6.512137 &#160;P &lt; 0.0001</p>
+        <p>Z (test correlation differs from 0) = 6.512137 &#160;P &lt; 0.0001</p>
         <p>&#160;</p>
         <p><u>Bias indicators</u>
         </p>
@@ -172,7 +241,7 @@
         <p><u>Schmidt-Hunter</u>
         </p>
         <p>Weighted mean correlation (95% CI): 0.374262 (0.278809 to 0.469714)</p>
-        <p>Test of association for weighted mean correlation: 7.684871 P &lt; 0.0001</p>
+        <p>Z (test correlation differs from 0) = 7.684871 P &lt; 0.0001</p>
         <p>&#160;</p>
         <p>Observed variance across studies: 0.018974</p>
         <p>Variance due to sampling error: 0.005828</p>
@@ -186,9 +255,8 @@
             <li>3. Chi-square test of heterogeneity: 26.044144 P = 0.0005</li>
         </ol>
         <p>&#160;</p>
-        <p>Here we cannot make a confident statement about the pooled correlation coefficient because the set of studies is clearly not homogeneous and the number of studies to too small for standard correlation meta-analysis methods to be reliable.</p>
-    </body>
-</html>        <MadCap:dropDown class="rcode">
+        <p>Here we cannot make a confident statement about the pooled correlation coefficient because the set of studies is clearly not homogeneous and the number of studies is too small for standard correlation meta-analysis methods to be reliable.</p>
+        <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
@@ -356,3 +424,7 @@ forest(random, "Correlation (Hedges-Olkin random effects) meta-analysis plot")
 forest(sh, "Correlation (Schmidt-Hunter) meta-analysis plot")</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
+        <p>&#160;</p>
+
+    </body>
+</html>
