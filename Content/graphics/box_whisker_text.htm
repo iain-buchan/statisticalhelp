@@ -11,26 +11,36 @@
         <p>&#160;</p>
         <p>Box and Whisker <a href="text_vector.htm" target="_popup">plots</a>, described by <a href="../references/reference_list.htm#ref-tukey-1977">Tukey (1977)</a>, give a pictorial representation of nonparametric descriptive statistics.</p>
         <p>&#160;</p>
-        <p>In nonparametric terms, the central "box" represents the distance between the first and third quartiles with the median between them marked with a diamond, with the minimum as the origin of the leading "whisker" and with the maximum as the limit of the trailing "whisker".</p>
+        <p>In nonparametric terms, the central "box" represents the distance between the first and third quartiles with the median between them marked with a diamond (an asterisk in the text-based plot), with the minimum as the origin of the leading "whisker" and with the maximum as the limit of the trailing "whisker".</p>
         <p>&#160;</p>
-        <p>Note that some software plots the upper and lower hinge and not the upper and lower quartile in box and whisker plots. The upper hinge is the 3(n+1)/4th value whereas the upper quartile is the (3n+1)/4th value.</p>
+        <p>The quartiles are calculated by the conventional definition used in the descriptive statistics (centile type 2): with the data sorted into ascending order, the lower quartile is the (n+1)/4th value and the upper quartile the 3(n+1)/4th value, interpolating between neighbouring values when this is not a whole number. Note that some software plots the upper and lower hinges (the medians of the upper and lower halves of the data) rather than the quartiles; hinges can differ slightly from quartiles.</p>
         <p>&#160;</p>
         <p>This convention can also be extended to parametric representation of data using the arithmetic mean bounded by one standard deviation or by its confidence interval. StatsDirect enables you to choose one of these two parametric schemes or the nonparametric scheme for each plot. See <a href="../basic_descriptive_statistics/univariate_summary.htm">descriptive statistics</a> for the formulae used.</p>
         <p>&#160;</p>
         <p>This is a useful way to present data to an audience; it is often easier to convey the central location and spread of values pictorially than by quoting a list of descriptive statistics.</p>
         <p>&#160;</p>
-        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Box and whisker plot from Test workbook</p>
-        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;+</p>
-        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;Town Boys | &#160;&#160;&#160;&gt;----------[........*.............]-----------------&lt;</p>
-        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;+</p>
-        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;Farm Boys | &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&gt;-------[............*........]--------&lt;</p>
-        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/+--------------+--------------+--------------+--------------+</p>
-        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 5&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 10&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 15&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 20</p>
-        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;min -[ lower quartile - median - upper quartile ]- max</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Nonparametric worksheet: Town Boys, Farm Boys).</p>
         <p>&#160;</p>
-        <p>See also the graphical <a href="box_whisker.htm">box and whisker plot</a>.</p>
-    </body>
-</html>        <MadCap:dropDown class="rcode">
+        <p>These are the fitness scores of 36 boys from homes in the town and 12 boys from farm homes that are used in the <a href="../nonparametric_methods/mann_whitney.htm">Mann-Whitney U test</a> example (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>).</p>
+        <p>&#160;</p>
+        <p>To draw this plot in StatsDirect open the test workbook using the file open function of the file menu. Then select Box and Whisker (Text) from the Graphics menu. Select the columns marked "Town Boys" and "Farm Boys" when prompted for data, and accept the default options (median, quartiles and range, with fences). The plot is written to the report window in a fixed-width font; the columns are listed from the top of the plot downwards, in the order they were selected.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Box&#160;&amp;&#160;whisker&#160;plot&#160;from&#160;test</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;+</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;Town&#160;Boys&#160;|&#160;&#160;&#160;&gt;-------------[.......*..............]-------------------&lt;</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;+</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;Farm&#160;Boys&#160;|&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&gt;---------[............*........]----------&lt;</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/+-------+-------+-------+-------+-------+-------+-------+---</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0.0&#160;&#160;&#160;&#160;&#160;2.5&#160;&#160;&#160;&#160;&#160;5.0&#160;&#160;&#160;&#160;&#160;7.5&#160;&#160;&#160;&#160;&#160;10.0&#160;&#160;&#160;&#160;12.5&#160;&#160;&#160;&#160;15.0&#160;&#160;&#160;&#160;17.5</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;min&#160;&lt;&#160;LQ&#160;&lt;&#160;median&#160;&gt;&#160;UQ&#160;&gt;&#160;max,&#160;fences&#160;(1.5&#160;&amp;&#160;3.0&#160;IQR)</p>
+        <p>&#160;</p>
+        <p>Each row is one column of data: the box runs from the lower quartile ([) to the upper quartile (]) with the median marked by an asterisk, and the whiskers run from the minimum (&gt;) to the maximum (&lt;). For Town Boys (n = 36) the minimum is 1, the lower quartile 5.15, the median 7.75, the upper quartile 12.4 and the maximum 18.6; for Farm Boys (n = 12) they are 2.7, 5.775, 9.8, 12.8 and 16.1. A value more than 1.5 interquartile ranges beyond a quartile, that is outside the inner fences (-5.725 to 23.275 for Town Boys and -4.7625 to 23.3375 for Farm Boys), would be plotted as a point (o) beyond a whisker that ends in a bar (|) at the fence, and a value more than three interquartile ranges beyond a quartile, outside the outer fences (-16.6 to 34.15 for Town Boys and -15.3 to 33.875 for Farm Boys), as a dot (.); there is none here, so the whiskers run to the extremes. The two groups of scores spread over similar ranges, with the farm boys' median the higher.</p>
+        <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
@@ -86,3 +96,7 @@ for (i in 1:2) {
 }</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
+        <p>&#160;</p>
+        <p>See also the graphical <a href="box_whisker.htm">box and whisker plot</a>.</p>
+    </body>
+</html>

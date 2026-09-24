@@ -16,9 +16,20 @@
             <img src="../resources/Images/linechart.svg" width="634" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/linechart.png" width="634" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
-        <p>There is an <a href="scatter_text.htm">scatter plot (text-based)</a>  for single Y vs. X character based plots.</p>
-    </body>
-</html>        <MadCap:dropDown class="rcode">
+        <p>There is a <a href="scatter_text.htm">scatter plot (text-based)</a>  for single Y vs. X character based plots.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Graphics worksheet: PImax (cm H2O), Subject's Age (years)).</p>
+        <p>&#160;</p>
+        <p>Consider the maximal static inspiratory pressure (PImax, in cm of water) and the age of 25 patients with cystic fibrosis (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>). A scatter plot is the first thing to draw when asking how two measurements are related.</p>
+        <p>&#160;</p>
+        <p>To draw this plot in StatsDirect open the test workbook using the file open function of the file menu. Then select Scatter from the Graphics menu. Enter 1 as the number of series to plot, then select the column marked "PImax (cm H2O)" when prompted for the Y axis data and the column marked "Subject's Age (years)" when prompted for the X axis data.</p>
+        <p>&#160;</p>
+        <p>For this example the plot has 25 points, two of which coincide (8 years, 95 cm H2O): age from 7 to 23 years; PImax from 40 to 150 cm H2O. Each point is an open circle, the chart is titled "Scatter plot" and the axes take the titles of the columns.</p>
+        <p>&#160;</p>
+        <p>The plot shows PImax rising with age, but with much scatter about that trend: patients of the same age differ by up to 75 cm H2O (at 23 years), and the two lowest pressures (40 and 45 cm H2O) belong to patients of 19 and 11 years, not to the youngest. A relationship this loose is worth seeing before it is summarised as a correlation coefficient or a regression line.</p>
+        <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
@@ -56,3 +67,7 @@ cat("Age from", min(age), "to", max(age), "years; PImax from", min(pimax), "to",
 # (pch) and a legend, as StatsDirect does when more than one series is plotted.</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
+        <p>&#160;</p>
+
+    </body>
+</html>
