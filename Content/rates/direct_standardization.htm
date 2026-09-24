@@ -33,7 +33,7 @@
             <li>Group/stratum labels, e.g. age bands</li>
         </ul>
         <p>&#160;</p>
-        <p>Note than an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
+        <p>Note that an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
         <p>&#160;</p>
         <p><u>Technical validation</u>
         </p>
@@ -54,7 +54,7 @@
 
 \displaystyle \text{ICI}_u=\text{DSR} + (Y_u-Y) \sqrt{v/Y} \\$</MadCap:equation>
         </p>
-        <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub>  is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum, y<sub>i</sub> is the number of events observed in the ith stratum of the study population, n<sub>i</sub> is the person-time for the ith stratum of the study population, z<sub>α/2</sub> is the (100 * α/2) the centile of the standard normal distribution, Y is the total number of events observed, Y<sub>l</sub> and Y<sub>u</sub> are the exact lower and upper confidence limits for the Poisson count Y and ICI <sub>l to u</sub> is the improved confidence interval due to <a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al</a>. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formula above.</p>
+        <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub>  is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum, y<sub>i</sub> is the number of events observed in the ith stratum of the study population, n<sub>i</sub> is the person-time for the ith stratum of the study population, z<sub>α/2</sub> is the 100(1 - α/2) centile of the standard normal distribution, Y is the total number of events observed, Y<sub>l</sub> and Y<sub>u</sub> are the exact lower and upper confidence limits for the Poisson count Y and ICI <sub>l to u</sub> is the improved confidence interval due to <a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al</a>. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formula above.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
@@ -311,8 +311,6 @@
         <p>&#160;</p>
         <p>Total events = 1019</p>
         <p>Adjusted events = 766.55342</p>
-        <p>&#160;</p>
-        <p>Rates are expressed per 100,000 units of person time:</p>
         <p>Crude rate = 43.809114</p>
         <p>Adjusted rate R = 32.955865</p>
         <p>&#160;</p>
@@ -323,6 +321,8 @@
         <p>Small rates (Poisson model)</p>
         <p>Approximate standard error of R = 1.053213</p>
         <p>Approximate 95% confidence interval = 30.891605 to 35.020125</p>
+        <p>Improved approximate (Dobson) 95% confidence interval = 30.923031 to 35.085201</p>
+        <p>&#160;</p>
         <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
@@ -401,8 +401,6 @@ cat("Improved approximate (Dobson) 95% confidence interval =",
     six(dobson[1] * per), "to", six(dobson[2] * per), "\n")</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
-        <p>&#160;</p>
-        <p>Improved approximate (Dobson) 95% confidence interval = 30.923031 to 35.085201</p>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>
