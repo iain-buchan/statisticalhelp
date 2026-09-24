@@ -272,28 +272,28 @@
                 <td>n/a</td>
                 <td>&#160;</td>
                 <td>-6.253967</td>
-                <td>P &lt; .0001</td>
+                <td>P &lt; 0.0001</td>
             </tr>
             <tr>
                 <td>Smoking</td>
                 <td>0.934471</td>
                 <td>(0.541784 to 1.611779)</td>
                 <td>-0.243686</td>
-                <td>P = .8075</td>
+                <td>P = 0.8075</td>
             </tr>
             <tr>
                 <td>Obesity</td>
                 <td>2.00433</td>
                 <td>(1.146316 to 3.504564)</td>
                 <td>2.438954</td>
-                <td>P = .0147</td>
+                <td>P = 0.0147</td>
             </tr>
             <tr>
                 <td>Snoring</td>
                 <td>2.391544</td>
                 <td>(1.097143 to 5.213072)</td>
                 <td>2.193152</td>
-                <td>P = .0283</td>
+                <td>P = 0.0283</td>
             </tr>
         </table>
         <p>&#160;</p>
@@ -308,12 +308,14 @@
         <p>Log likelihood with all covariates = -199.4582</p>
         <p>&#160;</p>
         <p>Deviance with all covariates = 1.618403, df = 4, rank = 4</p>
-        <p>Akaike = 9.618403</p>
-        <p>Schwarz = 9.936169</p>
+        <p>Akaike information criterion = 9.618403</p>
+        <p>Schwarz information criterion = 9.936169</p>
         <p>&#160;</p>
         <p>Deviance with no covariates = 14.1259</p>
         <p>&#160;</p>
         <p>Deviance (likelihood ratio) chi-square = 12.507498, df = 3, P = 0.0058</p>
+        <p>Pseudo (deviance based) R-square = 0.88543</p>
+        <p>Pseudo (McFadden, likelihood ratio index) R-square = 0.030401</p>
         <p>&#160;</p>
         <p>Pearson chi-square goodness of fit = 1.364272, df = 4, P = 0.8504</p>
         <p>Deviance goodness of fit = 1.618403, df = 4, P = 0.8055</p>
@@ -410,8 +412,8 @@ ll0 &lt;- sum(hypertensive * log(p0) + (men - hypertensive) * log(1 - p0))
 cat("Log likelihood with all covariates =", formatC(ll, digits = 4, format = "f"), "\n")
 cat("Deviance with all covariates =", six(dev), " df =", fit$df.residual,
     " rank =", k, "\n")
-cat("Akaike =", six(dev + 2 * k), "\n")
-cat("Schwarz =", six(dev + k * log(n)), "\n")
+cat("Akaike information criterion =", six(dev + 2 * k), "\n")
+cat("Schwarz information criterion =", six(dev + k * log(n)), "\n")
 cat("Deviance with no covariates =", six(fit$null.deviance), "\n")
 cat("Pseudo (deviance based) R-square =", six(1 - dev / fit$null.deviance), "\n")
 cat("Pseudo (McFadden, likelihood ratio index) R-square =", six(1 - ll / ll0), "\n")
