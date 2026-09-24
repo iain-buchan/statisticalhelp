@@ -170,34 +170,35 @@
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
-        <p>Statistics from combined values without <a href="haldane_correction.htm" target="_popup">Haldane</a> correction:</p>
+        <p>For combined tables without <a href="haldane_correction.htm" target="_popup">Haldane</a> correction:</p>
         <p>&#160;</p>
-        <p>Odds ratio = 4.625084</p>
+        <p>Number of tables = 10</p>
+        <p>Mean log odds ratio = 1.531495 giving odds ratio = 4.625084</p>
+        <p>Variance of mean log odds ratio = 0.009478 standard error = 0.097355</p>
         <p>&#160;</p>
-        <p>Approximate 95% CI = 3.821652 to 5.597423</p>
+        <p>Approximate 95% CI for mean log odds ratio = 1.340683 to 1.722306</p>
+        <p>Giving odds ratio of 3.821652 to 5.597423</p>
         <p>&#160;</p>
-        <p>Chi² for E(LOR) = 0 is 247.4667, P &lt; 0.0001</p>
-        <p>Chi² for Heterogeneity = 6.62565, P = 0.676</p>
+        <p>Chi² for expected log odds ratio = 0 is 247.466729 Chi = 15.731075 P &lt; 0.0001</p>
+        <p>Chi² for heterogeneity = 6.62565 DF = 9 P = 0.676</p>
         <p>&#160;</p>
-        <p>Statistics from combined values with Haldane correction:</p>
+        <p>For combined tables with Haldane correction:</p>
         <p>&#160;</p>
-        <p>Odds ratio = 4.510211</p>
+        <p>Number of tables = 10</p>
+        <p>Mean log odds ratio = 1.506344 giving odds ratio = 4.510211</p>
+        <p>Variance of mean log odds ratio = 0.00893 standard error = 0.0945</p>
         <p>&#160;</p>
-        <p>Approximate 95% CI = 3.747642 to 5.427948</p>
+        <p>Approximate 95% CI for mean log odds ratio = 1.321127 to 1.691561</p>
+        <p>Giving odds ratio of 3.747641 to 5.427948</p>
         <p>&#160;</p>
-        <p>Chi² for E(LOR) = 0 is 254.0865, P &lt; 0.0001</p>
-        <p>Chi² for Heterogeneity = 6.532642, P = 0.6857</p>
+        <p>Chi² for expected log odds ratio = 0 is 254.086475 Chi = 15.94009 P &lt; 0.0001</p>
+        <p>Chi² for heterogeneity = 6.532642 DF = 9 P = 0.6857</p>
         <p>&#160;</p>
-        <p>Here we can say that there was no convincing evidence of heterogeneity between the separate estimates of relative risk from each of the different studies. The pooled estimate suggested that with 95% confidence that the true population odds for being a smoker were between 3.7 and 5.4 times greater in lung cancer patients compared with controls.</p>
+        <p>Here we can say that there was no convincing evidence of heterogeneity between the separate estimates of relative risk from each of the different studies. The pooled estimate suggested with 95% confidence that the true population odds for being a smoker were between 3.7 and 5.4 times greater in lung cancer patients compared with controls.</p>
         <p>&#160;</p>
         <p>The equivalent analysis using the Mantel-Haenszel method gave a confidence interval for the pooled odds ratio of 3.9 to 5.7; the difference is partly accounted for by the Haldane correction. You should use the more robust Mantel-Haenszel for most analyses of this kind. Woolf's method is included for further investigation of inter-table relationships under expert statistical guidance.</p>
         <p>&#160;</p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-        </p>
-    </body>
-</html>        <MadCap:dropDown class="rcode">
+        <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
@@ -263,3 +264,9 @@ print(mantelhaen.test(tables, correct = FALSE))</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
         <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

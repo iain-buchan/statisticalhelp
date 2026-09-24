@@ -16,14 +16,14 @@
         <p>&#160;</p>
         <p>Tests of independence of the categories in a table are the chi-square test, the G-square (likelihood-ratio chi-square) test and the generalised Fisher exact (Fisher-Freeman-Halton) test. All three tests indicate the degree of independence between the variables that make up the table.</p>
         <p>&#160;</p>
-        <p>The generalised Fisher exact test is difficult to compute (<a href="../references/reference_list.htm#ref-mehta-1983">Mehta and Patel, 1983</a>, <a href="../references/reference_list.htm#ref-mehta-1986-a">1986a</a>); it may take a long time and it may not be computed for the table that you enter. If the Fisher exact method cannot be computed practically then a hybrid method based upon Cochrane rules is used (<a href="../references/reference_list.htm#ref-mehta-1986-b">Mehta and Patel, 1986b</a>); this may also fail with large tables and/or numbers. The Fisher-Freeman-Halton result is quoted with just one P value as it is implicitly two-sided.</p>
+        <p>The generalised Fisher exact test is difficult to compute (<a href="../references/reference_list.htm#ref-mehta-1983">Mehta and Patel, 1983</a>, <a href="../references/reference_list.htm#ref-mehta-1986-a">1986a</a>); it may take a long time and it may not be computed for the table that you enter. If the Fisher exact method cannot be computed practically then a hybrid method based upon Cochran rules is used (<a href="../references/reference_list.htm#ref-mehta-1986-b">Mehta and Patel, 1986b</a>); this may also fail with large tables and/or numbers. The Fisher-Freeman-Halton result is quoted with just one P value as it is implicitly two-sided.</p>
         <p>&#160;</p>
         <p>Relating the Fisher-Freeman-Halton statistic to the Pearson Chi-square statistic:</p>
         <ul>
             <li>The null hypothesis is independence between row and column categories.</li>
             <li>Let <b>t</b> denote a table from the set of all tables with the same row and column margins.</li>
             <li>Let D(<b>t</b>) be the measure of discrepancy.</li>
-            <li>The exact two sided P value = P [D(<b>t</b>) gt;= D(<b>t</b><sub>observed</sub>)] = sum of hypergeometric probabilities of those tables where D(<b>t</b>) is larger than or equal to the observed table.</li>
+            <li>The exact two sided P value = P [D(<b>t</b>) &gt;= D(<b>t</b><sub>observed</sub>)] = sum of hypergeometric probabilities of those tables where D(<b>t</b>) is larger than or equal to the observed table.</li>
             <li>In large samples the distribution of D(<b>t</b>) conditional on fixed row and column margins converges to the chi-square distribution with (r-1)(c-1) degrees of freedom.</li>
         </ul>
         <p>&#160;</p>
@@ -41,7 +41,7 @@
         <p>
             <MadCap:equation>$\displaystyle \chi^2=\sum_{i=1}^r \sum_{j=1}^c \frac{\displaystyle (O_{ij}-E_{ij})^2}{E_{ij}} \\
 
-\displaystyle G^2=2\sum_{i=1}^r \sum_{j=1}^c n_{ij} \log \left(\frac{\displaystyle O_{ij}}{E_{ij}} \right) \\$</MadCap:equation>
+\displaystyle G^2=2\sum_{i=1}^r \sum_{j=1}^c O_{ij} \log \left(\frac{\displaystyle O_{ij}}{E_{ij}} \right) \\$</MadCap:equation>
         </p>
         <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n).</p>
         <p>&#160;</p>
@@ -57,13 +57,13 @@
         <p>
             <MadCap:equation>$\displaystyle r=\frac{\displaystyle \sum_{i=1}^r \sum_{j=1}^cu_i v_jO_{ij}-\left( \sum_{i=1}^r u_i O_{i+}\right) \left( \sum_{j=1}^c v_j O_{j+}\right)/n}{\displaystyle \sqrt{\left[ \sum_{i=1}^r u_i^2 O_{i+} -\frac{\displaystyle \left( \sum_{i=1}^r u_i O_{i+}\right)^2}{n}\right] \left[ \sum_{j=1}^c v_j^2 O_{j+}-\frac{\displaystyle \left( \sum_{j=1}^c v_j O_{j+}\right)^2}{n}\right]}} \\$</MadCap:equation>
         </p>
-        <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n). Row scores are u, column scores are v, row totals are O<sub>j+</sub> and column totals are O<sub>i+</sub>.</p>
+        <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n). Row scores are u, column scores are v, row totals are O<sub>i+</sub> and column totals are O<sub>j+</sub>.</p>
         <p>&#160;</p>
-        <p>The sample correlation coefficient r reflects the direction and closeness of linear trend in your table. r may vary between -1 and 1 just like Pearson's product moment correlation coefficient. Total independence of the categories in your table would mean that r = 0. The test for linear trend is related to r by M²=(n-1)r² and this is numerically identical to Armitage's chi-square for linear trend (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>). If you interchange the rows and columns in your table then the value of M² will be the same</p>
+        <p>The sample correlation coefficient r reflects the direction and closeness of linear trend in your table. r may vary between -1 and 1 just like Pearson's product moment correlation coefficient. Total independence of the categories in your table would mean that r = 0. The test for linear trend is related to r by M²=(n-1)r² and this is numerically identical to Armitage's chi-square for linear trend (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>). If you interchange the rows and columns in your table then the value of M² will be the same.</p>
         <p>&#160;</p>
         <p>The ANOVA output applies techniques similar to analysis of variance to an r by c table. Here the equality of mean column and row scores is tested. StatsDirect uses equally spaced scores for this purpose unless you specify otherwise. See Armitage for more information (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>). </p>
         <p>&#160;</p>
-        <p>Pearson's and Cramér's (V) coefficients of contingency and the phi (f, correlation) coefficient reflect the strength of the association in a contingency table (<a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>; <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>):</p>
+        <p>Pearson's and Cramér's (V) coefficients of contingency and the phi (&#966;, correlation) coefficient reflect the strength of the association in a contingency table (<a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>; <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>):</p>
         <p>
             <MadCap:equation>$\displaystyle \phi=\sqrt{\chi^2/n} \\
 
@@ -76,7 +76,7 @@
             <MadCap:equation>$\displaystyle \text{Cram}\acute{\text{e}}\text{r } V=\frac{\displaystyle ad-bc}{\displaystyle \sqrt{(a+b)(c+d)(a+c)(b+d)}} \\$</MadCap:equation>
         </p>
         <p>&#160;</p>
-        <p>Observed values, expected values and totals are given for the table when c ≤ 8 and r ≤ 10.</p>
+        <p>Observed values and totals are given for the table, with expected values and cell chi-square contributions if you ask for them.</p>
         <p>&#160;</p>
         <p>If your data categories are both ordered then you will gain more power in tests of independence by using the ordinal methods due to Goodman and Kruskal (gamma) and <a href="../nonparametric_methods/kendall_correlation.htm">Kendall (tau-b)</a>. Large sample, asymptotically normal variance estimates are used; the simple form is used for independence testing (<a href="../references/reference_list.htm#ref-agresti-1984">Agresti, 1984</a>; <a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-goodman-1963">Goodman and Kruskal, 1963</a>, <a href="../references/reference_list.htm#ref-goodman-1972">1972</a>). Tau-b tends to be less sensitive than gamma to the choice of response categories.</p>
         <p>
@@ -148,7 +148,7 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>To analyse these data in StatsDirect you must select r by c from the chi-square section of the analysis menu. Choose the default 95% confidence interval. Check the boxes marked "Show expected counts" and "Show cell chi-square". Then enter the above data as directed by the screen.</p>
+        <p>To analyse these data in StatsDirect you must select r by c from the chi-square section of the analysis menu. Choose the default 95% confidence interval. Check the boxes marked "Try Fisher-Freeman-Halton exact test", "Show expected counts" and "Show cell chi-square", and clear "Show percentages". Then enter the above data as directed by the screen.</p>
         <p>&#160;</p>
         <p>For this example:</p>
         <table cellspacing="0" style="caption-side: top;">
@@ -166,16 +166,16 @@
             </tr>
             <tr>
                 <td>Expected</td>
-                <td>13.91</td>
-                <td>10.82</td>
-                <td>9.27</td>
+                <td>13.909091</td>
+                <td>10.818182</td>
+                <td>9.272727</td>
                 <td style="font-weight: bold;">&#160;</td>
             </tr>
             <tr>
                 <td>DChi²</td>
-                <td>0.69</td>
-                <td>0.31</td>
-                <td>0.17</td>
+                <td>0.686869</td>
+                <td>0.305577</td>
+                <td>0.174688</td>
                 <td style="font-weight: bold;">&#160;</td>
             </tr>
             <tr>
@@ -187,16 +187,16 @@
             </tr>
             <tr>
                 <td>Expected</td>
-                <td>4.91</td>
-                <td>3.82</td>
-                <td>3.27</td>
+                <td>4.909091</td>
+                <td>3.818182</td>
+                <td>3.272727</td>
                 <td style="font-weight: bold;">&#160;</td>
             </tr>
             <tr>
                 <td>DChi²</td>
-                <td>0.24</td>
-                <td>0.37</td>
-                <td>1.58</td>
+                <td>0.242424</td>
+                <td>0.365801</td>
+                <td>1.578283</td>
                 <td style="font-weight: bold;">&#160;</td>
             </tr>
             <tr>
@@ -208,16 +208,16 @@
             </tr>
             <tr>
                 <td>Expected</td>
-                <td>4.91</td>
-                <td>3.82</td>
-                <td>3.27</td>
+                <td>4.909091</td>
+                <td>3.818182</td>
+                <td>3.272727</td>
                 <td style="font-weight: bold;">&#160;</td>
             </tr>
             <tr>
                 <td>DChi²</td>
-                <td>0.74</td>
-                <td>0.37</td>
-                <td>0.16</td>
+                <td>0.742424</td>
+                <td>0.365801</td>
+                <td>0.161616</td>
                 <td style="font-weight: bold;">&#160;</td>
             </tr>
             <tr>
@@ -229,16 +229,16 @@
             </tr>
             <tr>
                 <td>Expected</td>
-                <td>3.27</td>
-                <td>2.55</td>
-                <td>2.18</td>
+                <td>3.272727</td>
+                <td>2.545455</td>
+                <td>2.181818</td>
                 <td style="font-weight: bold;">&#160;</td>
             </tr>
             <tr>
                 <td>DChi²</td>
-                <td>1.58</td>
-                <td>0.12</td>
-                <td>3.64</td>
+                <td>1.578283</td>
+                <td>0.116883</td>
+                <td>3.640152</td>
                 <td style="font-weight: bold;">&#160;</td>
             </tr>
             <tr>
@@ -251,7 +251,7 @@
         </table>
         <p>&#160;</p>
         <p>TOTAL number of cells = 12</p>
-        <p>WARNING: 9 out of 12 cells have EXPECTATION &lt; 5</p>
+        <p>Warning: 9 out of 12 cells have EXPECTATION &lt; 5</p>
         <p>&#160;</p>
         <p><u>NOMINAL INDEPENDENCE</u>
         </p>
