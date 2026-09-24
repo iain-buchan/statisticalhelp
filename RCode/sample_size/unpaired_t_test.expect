@@ -1,0 +1,15 @@
+# Sample size for an unpaired t test, an invented example: difference 5, SD 12, 90% power, 5% alpha, then 1 and 2 controls per experimental subject. One fragment per line.
+HP:Sample size for an unpaired two sample Student t test
+Alpha = 0.05
+Power = 0.9
+Difference between means = 5
+Standard deviation = 12
+Controls per experimental subject 1
+Estimated minimum sample size = 123 experimental subjects and 123 controls.
+Degrees of freedom = 244
+Controls per experimental subject 2
+Estimated minimum sample size = 92 experimental subjects and 184 controls.
+Degrees of freedom = 274
+R:n = 122.0139
+R:Power at this sample size = 0.902293
+R:Power at this sample size = 0.901774

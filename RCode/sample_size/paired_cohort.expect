@@ -1,0 +1,7 @@
+# Sample size for a paired cohort study, an invented example: control event rate 0.1, relative risk 2 (experimental rate 0.2), correlation 0.2, 90% power, 5% alpha. One fragment per line.
+Event rate in control group = 0.1
+Event rate in experimental group = 0.2
+Correlation for failure between experimental and control subjects = 0.2
+Alpha = 0.05
+Power = 0.9
+Estimated minimum sample size = 203 pairs

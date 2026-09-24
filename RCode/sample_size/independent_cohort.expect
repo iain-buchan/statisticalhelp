@@ -1,0 +1,11 @@
+# Sample size for an independent cohort study, an invented example: 10% event rate in the controls, relative risk 2, one control per case subject, 80% power, 5% two sided alpha. One fragment per line.
+Probability of event in control group = 0.1
+Probability of event in experimental group = 0.2
+Controls per case subject = 1
+Alpha = 0.05
+Power = 0.8
+For uncorrected chi-square test:
+N = 199 case subjects and 199 controls
+For corrected chi-square and Fisher's exact tests:
+N = 219 case subjects and 219 controls
+R:n = 198.9634

@@ -1,0 +1,11 @@
+# Sample size for a paired t test, an invented example: a fall of 20 L/min in PEFR to detect, sd of differences 35, 80% and 90% power, 5% alpha. One fragment per line.
+Alpha = 0.05
+Power = 0.8
+Difference of mean from zero = 20
+Standard deviation = 35
+Estimated minimum sample size = 27 pairs
+Degrees of freedom = 26
+Power = 0.9
+Estimated minimum sample size = 35 pairs
+Degrees of freedom = 34
+R:Power with 27 pairs = 0.815417 and with 26 pairs = 0.799621
