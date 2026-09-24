@@ -1,0 +1,7 @@
+# Exact confidence interval for a 2 by 2 odds ratio, Thomas (1971) criminal convictions of twins. One fragment per line.
+Observed odds ratio = 25
+Conditional maximum likelihood estimate of odds ratio = 21.305318
+Exact Fisher 95% confidence interval = 2.753383 to 301.462338
+Exact Fisher one sided P = 0.0005, two sided P = 0.0005
+Exact mid-P 95% confidence interval = 3.379906 to 207.270568
+Exact mid-P one sided P = 0.0002, two sided P = 0.0005
