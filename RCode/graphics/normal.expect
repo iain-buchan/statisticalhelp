@@ -1,0 +1,12 @@
+# Normal plot: an illustration written for the help (PImax of 25 cystic fibrosis patients, Altman 1991). One fragment per line.
+# The program report is the text of the rendered chart (its labels); the figures are checked in the script and the help.
+HP: Normal scores (van der Waerden)
+HP: Observed (PImax (cm H2O))
+HP: Normal plot
+RH: Sample size = 25
+RH: van der Waerden scores from -1.768825 (PImax 40) to 1.768825 (PImax 150)
+RH: The four values of 75 have rank 5.5 and score -0.801095
+RH: Blom scores from -1.964217 to 1.964217
+RH: Expected normal order scores from -1.965315 to 1.965315
+RH: W = 0.971698
+RH: P = 0.6883

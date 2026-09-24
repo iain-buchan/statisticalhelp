@@ -1,0 +1,26 @@
+# Box and whisker plot (text-based), the fitness scores of town and farm boys (Conover 1999): the plot's labels and the statistics it draws. One fragment per line.
+HP: Box & whisker plot
+HP: min < LQ < median > UQ > max, fences (1.5 & 3.0 IQR)
+HP: Town Boys | >-------------[.......*..............]-------------------<
+HP: Farm Boys | >---------[............*........]----------<
+Town Boys
+Farm Boys
+RH: n = 36
+RH: 5.15
+RH: 7.75
+RH: 12.4
+RH: 18.6
+RH: n = 12
+RH: 2.7
+RH: 5.775
+RH: 9.8
+RH: 12.8
+RH: 16.1
+RH: -5.725
+RH: 23.275
+RH: -4.7625
+RH: 23.3375
+RH: -16.6
+RH: 34.15
+RH: -15.3
+RH: 33.875

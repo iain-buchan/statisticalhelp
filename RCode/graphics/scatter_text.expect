@@ -1,0 +1,19 @@
+# Scatter plot (text-based), the help illustration: birth weight (oz) and % increase in weight of 32 babies, the test workbook's Regression worksheet columns "Birth Weight" and "% Increase". The lines of the chart are the fragments (the check squashes runs of spaces). The point on the x axis line (birth weight 125 oz, 27%) is drawn over the axis by the program, the R code and the help alike.
+Scatter plot
+% Increase
+125.0+
+| * *
+100.0+
+| * * * *
+| * *
+75.0+ * ** *
+| * * *
+| ** *
+| * *
+50.0+ 2 *
+25.0++-------+--------+-------+-------+--------+---*---+-------+-
+70 80 90 100 110 120 130 140
+Birth Weight
+RH: 32 points
+RH: from 72 to 142 oz
+RH: from 27 to 120

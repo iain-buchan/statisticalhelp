@@ -1,0 +1,11 @@
+# Survival plot illustration: Kaplan-Meier estimates of survival in two groups of rats (test workbook, Survival worksheet), saved to the worksheet by the Kaplan-Meier function and drawn from the Graphics menu. Chart only: no program report text (the probe cannot run the chart operation), so the fragments are checked in the script output and the help.
+RH: Group Surv
+RH: Times
+RH: Survival proportion
+RH: Survival Proportion (S)
+RH: 95% LCI S
+RH: 95% UCI S
+RH: Survival plot
+RH: Group Surv = 2: 20 deaths, 2 censored; at time 233 S = 0.433155 (95% CI 0.222686 to 0.627477)
+RH: Group Surv = 1: 17 deaths, 2 censored; at time 216 S = 0.473684 (95% CI 0.244377 to 0.672841)
+RH: 0.048128

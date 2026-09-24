@@ -1,0 +1,10 @@
+# Histogram, serum IgM of 298 children (Altman 1991; the test workbook's Other worksheet columns IgM and Log(base 10): IgM). One fragment per line.
+# The operation draws a chart and prints no report, so every fragment is checked against the script output and the help only.
+RH: Distribution of IgM
+RH: Bins = 13 (Doane's rule), width = 0.338462
+RH: Mid-points: 0.27 0.61 0.95 1.28 1.62 1.96 2.30 2.64 2.98 3.32 3.65 3.99 4.33
+RH: Counts: 56 105 92 22 11 8 1 2 0 0 0 0 1
+RH: Distribution of Log(base 10): IgM
+RH: Bins = 11 (Doane's rule), width = 0.150292
+RH: Mid-points: -0.925 -0.775 -0.624 -0.474 -0.324 -0.173 -0.023 0.127 0.277 0.428 0.578
+RH: Counts: 3 0 7 19 59 73 92 28 14 2 1

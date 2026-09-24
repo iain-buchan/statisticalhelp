@@ -1,0 +1,12 @@
+# Forest (Cochrane) plot of the seven aspirin trials (Fleiss 1993) and a pooled row, the Graphics worksheet columns Odds Ratio, LCI, UCI, Number, Pool and Study. The chart's title, axis label and the row labels (name, estimate and limits to 2 places), as the program's rendered chart text, the help's illustration and the script print them. One fragment per line.
+H: Odds Ratio, LCI, UCI, Number, Pool
+HP: Forest plot
+HP: Odds Ratio (95% confidence interval)
+MRC-1 0.72 (0.48, 1.08)
+CDP 0.68 (0.45, 1.03)
+MRC-2 0.80 (0.60, 1.07)
+GASP 0.80 (0.47, 1.36)
+PARIS 0.80 (0.55, 1.18)
+AMIS 1.13 (0.93, 1.38)
+ISIS-2 0.89 (0.83, 0.97)
+Pooled 0.90 (0.84, 0.96)
