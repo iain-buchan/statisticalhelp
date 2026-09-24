@@ -14,7 +14,7 @@
         <p>&#160;</p>
         <p>Like the chi-square test for fourfold (2 by 2) tables, Fisher's exact test examines the relationship between the two dimensions of the table (classification into rows vs. classification into columns). The null hypothesis is that these two classifications are not different.</p>
         <p>&#160;</p>
-        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm#ref-conover-1999">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the expected value of the first count A.</p>
+        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm#ref-conover-1999">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the first count A; the report shows its expected value.</p>
         <p>&#160;</p>
         <p>This exact treatment of the fourfold table should be used instead of the chi-square test when any expected frequency is less than 1 or 20% of expected frequencies are less than or equal to 5. With StatsDirect, it is reasonable to use Fisher's exact test by default because the computational method used can cope with large numbers.</p>
         <p>&#160;</p>

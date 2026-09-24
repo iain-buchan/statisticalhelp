@@ -18,7 +18,7 @@
         <p>&#160;</p>
         <p>Null hypothesis: observed proportion is not different from 0.5</p>
         <p>&#160;</p>
-        <p>StatsDirect gives you one and two sided cumulative probabilities from a binomial distribution (based on an expected proportion of 0.5) for the null hypothesis. A normal approximation is used with large numbers. You are also given an exact confidence interval for the proportion r/n (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-vollset-1993">Vollset, 1993</a>).</p>
+        <p>StatsDirect gives you one and two sided cumulative probabilities from a binomial distribution (based on an expected proportion of 0.5) for the null hypothesis. A normal approximation (with continuity correction) is also given, and is the only test given for very large samples. You are also given an exact confidence interval for the proportion r/n (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-vollset-1993">Vollset, 1993</a>).</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
@@ -29,23 +29,24 @@
         <p>To analyse these data in StatsDirect you must select the sign test from the exact tests section of the analysis menu. Then choose the default 95% two sided confidence interval.</p>
         <p>&#160;</p>
         <p>For this example:</p>
-        <p>For 11 pairs with 9 on one side.</p>
+        <p>For 11 observations with 9 on one side:</p>
         <p>&#160;</p>
-        <p>Cumulative probability (2-sided) = 0.06543, (1-sided) = 0.032715</p>
+        <p>Cumulative probability</p>
+        <p>Two sided P = 0.0654</p>
+        <p>One sided P = 0.0327</p>
         <p>&#160;</p>
-        <p>Exact (Clopper-Pearson) 95% Confidence limits for the Proportion:</p>
+        <p>Normal approximate z = 1.809068</p>
+        <p>Two sided P = 0.0704</p>
+        <p>One sided P = 0.0352</p>
+        <p>&#160;</p>
+        <p>Exact (Clopper-Pearson) 95% confidence interval for the proportion:</p>
         <p>Lower Limit = 0.482244</p>
         <p>Proportion = 0.818182</p>
         <p>Upper Limit = 0.977169</p>
         <p>&#160;</p>
         <p>If we were confident that this group could only realistically be expected to have a lower caloric intake and we would not be interested in higher caloric intakes then we could make inference from the one sided P value. We do not, however, have evidence for such an assumption so we can not reject the null hypothesis that the proportion is not significantly different from 0.5. We can say with 95% confidence that the true population value of the proportion lies somewhere between 0.48 and 0.98. The most sensible response to these results would be to go back and collect more data.</p>
         <p>&#160;</p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-        </p>
-    </body>
-</html>        <MadCap:dropDown class="rcode">
+        <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
@@ -89,3 +90,9 @@ cat("Upper Limit =", six(ci[2]), "\n")</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
         <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

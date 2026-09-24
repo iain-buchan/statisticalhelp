@@ -15,7 +15,7 @@
         <p>&#160;</p>
         <p>Like the chi-square test for fourfold (2 by 2) tables, Fisher's exact test examines the relationship between the two dimensions of the table (classification into rows vs. classification into columns). The null hypothesis is that these two classifications are not different.</p>
         <p>&#160;</p>
-        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm#ref-conover-1999">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the expected value of the first count A.</p>
+        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm#ref-conover-1999">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the first count A; its expectation is shown.</p>
         <p>&#160;</p>
         <p>This exact treatment of the fourfold table should be used instead of the chi-square test when any expected frequency is less than 1 or 20% of expected frequencies are less than or equal to 5. With StatsDirect, it is reasonable to use Fisher's exact test by default because the computational method used can cope with large numbers.</p>
         <p>&#160;</p>
@@ -84,7 +84,7 @@
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
-        <p>Rearranged table:</p>
+        <p>Arranged table and totals:</p>
         <table>
             <col />
             <col />
@@ -131,43 +131,43 @@
             </tr>
             <tr>
                 <td>0</td>
-                <td>1.000000000000000</td>
-                <td>0.030956848030019</td>
-                <td>0.030956848030019</td>
+                <td>0.03095684803002</td>
+                <td>0.03095684803002</td>
+                <td>1.00000000000000</td>
             </tr>
             <tr>
                 <td>1</td>
-                <td>0.202939337085679</td>
-                <td>0.171982489055660</td>
-                <td>0.969043151969981</td>
+                <td>0.20293933708568</td>
+                <td>0.17198248905566</td>
+                <td>0.96904315196998</td>
             </tr>
             <tr>
                 <td>2</td>
-                <td>0.546904315196998</td>
-                <td>0.343964978111320</td>
-                <td>0.797060662914321</td>
+                <td>0.54690431519700</td>
+                <td>0.34396497811132</td>
+                <td>0.79706066291432</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td>0.856472795497186</td>
-                <td>0.309568480300188</td>
-                <td>0.453095684803002</td>
+                <td>0.85647279549719</td>
+                <td>0.30956848030019</td>
+                <td>0.45309568480300</td>
             </tr>
             <tr>
                 <td>4</td>
-                <td>0.981774323237738</td>
-                <td>0.125301527740552</td>
-                <td>0.143527204502814</td>
+                <td>0.98177432323774</td>
+                <td>0.12530152774055</td>
+                <td>0.14352720450281</td>
             </tr>
             <tr>
                 <td>5</td>
-                <td>1.000000000000000</td>
-                <td>0.018225676762262</td>
-                <td>0.018225676762262</td>
+                <td>1.00000000000000</td>
+                <td>0.01822567676226</td>
+                <td>0.01822567676226</td>
             </tr>
         </table>
         <p>&#160;</p>
-        <p>One sided (upper tail) P = 0.1435, (doubled one sided P = 0.2871)</p>
+        <p>One sided (upper tail) P = 0.1435 (doubled: P = 0.2871)</p>
         <p>Two sided (by summation) P = 0.1745</p>
         <p>&#160;</p>
         <p>One sided mid-P = 0.0809</p>
