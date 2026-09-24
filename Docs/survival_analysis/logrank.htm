@@ -140,11 +140,11 @@
                                         </p>
                                         <p>- where e<sub>1</sub> and e<sub>2</sub> are the extents of exposure to risk of death (sometimes called expected deaths) in the two groups compared, each summed over the distinct observed times (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
                                         <p>&#160;</p>
-                                        <p>An exact conditional maximum likelihood estimate of the hazard ratio is optionally given. The exact estimate and its confidence interval (Fisher or mid-P) should be routinely used in preference to the above approximation. The exponents of <a href="cox_regression.htm">Cox regression</a> parameters are also exact estimators of the hazard ratio, but please note that they are not exact if Breslow's method has been used to correct for ties in the regression. Please consult with a statistician if you are considering using Cox regression.</p>
+                                        <p>An exact conditional maximum likelihood estimate of the hazard ratio is also given when there are two groups. The exact estimate and its confidence interval (Fisher or mid-P) should be routinely used in preference to the above approximation. The exponents of <a href="cox_regression.htm">Cox regression</a> parameters are also exact estimators of the hazard ratio, but please note that they are not exact if Breslow's method has been used to correct for ties in the regression. Please consult with a statistician if you are considering using Cox regression.</p>
                                         <p>&#160;</p>
                                         <p><u>Trend test</u>
                                         </p>
-                                        <p>If you have more than two groups then StatsDirect will calculate a variant of the log-rank test for trend. If you choose not to enter group scores then they are allocated as 1,2,3 ... n in group order (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>).</p>
+                                        <p>If you have more than two groups then StatsDirect will calculate a variant of the log-rank test for trend. If you choose not to enter group scores then they are allocated as 1,2,3 ... n in group order, the order in which the groups first appear in the data and are numbered in the report (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>).</p>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
                                         </p>
@@ -152,7 +152,7 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation238.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where the weight w<sub>j</sub> for the log-rank test is equal to 1, and w<sub>j</sub> for the generalised Wilcoxon test is n<sub>j</sub> (Gehan-Breslow method); for the Tarone-Ware method w<sub>j</sub> is the square root of n<sub>j</sub>; and for the Peto-Prentice method w<sub>j</sub> is the Kaplan-Meier survivor function multiplied by (n<sub>j</sub> divided by n<sub>j</sub> +1). e<sub>ij</sub> is the expectation of death in group i at the jth distinct observed time where d<sub>j</sub> events/deaths occurred. n<sub>ij</sub> is the number at risk in group i just before the jth distinct observed time, and n<sub>j</sub> is the total number at risk at that time. The test statistic for equality of survival across the k groups (populations sampled) is approximately chi-square distributed on k-1 degrees of freedom. The test statistic for monotone trend is approximately chi-square distributed on 1 degree of freedom. <b>c</b> is a vector of scores that are either defined by the user or allocated as 1 to k.</p>
+                                        <p>- where the weight w<sub>j</sub> for the log-rank test is equal to 1, and w<sub>j</sub> for the generalised Wilcoxon test is n<sub>j</sub> (Gehan-Breslow method; StatsDirect divides this weight by the number of observations in the stratum plus one, which leaves the chi-square unchanged); for the Tarone-Ware method w<sub>j</sub> is the square root of n<sub>j</sub>; and for the Peto-Prentice method w<sub>j</sub> is a survivor function estimate, the product over the earlier distinct times of (n<sub>j</sub> - d<sub>j</sub> + 1) divided by (n<sub>j</sub> + 1), multiplied by (n<sub>j</sub> divided by n<sub>j</sub> + 1). e<sub>ij</sub> is the expectation of death in group i at the jth distinct observed time where d<sub>j</sub> events/deaths occurred. n<sub>ij</sub> is the number at risk in group i just before the jth distinct observed time, and n<sub>j</sub> is the total number at risk at that time. The test statistic for equality of survival across the k groups (populations sampled) is approximately chi-square distributed on k-1 degrees of freedom. The test statistic for monotone trend is approximately chi-square distributed on 1 degree of freedom. <b>c</b> is a vector of scores that are either defined by the user or allocated as 1 to k.</p>
                                         <p>&#160;</p>
                                         <p>Variance is estimated by the method that Peto (1977) refers to as "exact".</p>
                                         <p>&#160;</p>
@@ -165,7 +165,7 @@
                                         <p><u>Example</u>
                                         </p>
                                         <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 479)</a>.</p>
-                                        <p>Test workbook (Survival worksheet: Stage Group, Time, Censor).</p>
+                                        <p>Test workbook (Survival worksheet: Stage group, Time, Censor).</p>
                                         <p>&#160;</p>
                                         <p>The following data represent the survival in days since entry to the trial of patients with diffuse histiocytic lymphoma. Two different groups of patients, those with stage III and those with stage IV disease, are compared.</p>
                                         <p>Stage 3: 6, 19, 32, 42, 42, 43*, 94, 126*, 169*, 207, 211*, 227*, 253, 255*, 270*, 310*, 316*, 335*, 346*</p>
@@ -594,7 +594,7 @@
                                         <p><u>Logrank and Wilcoxon tests</u>
                                         </p>
                                         <p>&#160;</p>
-                                        <p><u>Log Rank (Peto)</u>:</p>
+                                        <p><u>Log-rank (Peto)</u>:</p>
                                         <p>&#160;</p>
                                         <p><u>For group 1 (Stage group = 1)</u>
                                         </p>
@@ -627,9 +627,9 @@
                                         <p>&#160;</p>
                                         <p>Chi-square for equivalence of death rates = 6.70971 P = 0.0096</p>
                                         <p>&#160;</p>
-                                        <p><u>Hazard Ratio, (approximate 95% confidence interval)</u>
+                                        <p><u>Hazard Ratio (approximate 95% confidence interval)</u>
                                         </p>
-                                        <p>Group 1 vs. Group 2 = 0.388878, (0.218343 to 0.692607)</p>
+                                        <p>Group 1 vs. Group 2 = 0.388878 (0.218343 to 0.692607)</p>
                                         <p>&#160;</p>
                                         <p>Conditional maximum likelihood estimates:</p>
                                         <p>Hazard Ratio = 0.381485</p>
@@ -833,6 +833,386 @@
                                         <p>Stratum 2 = no renal impairment</p>
                                         <p>&#160;</p>
                                         <p>The table above shows you how to prepare data for a stratified log-rank test in StatsDirect. This example is worked through in the second of two classic papers by Richard Peto and colleagues (<a href="../references/reference_list.htm#ref-peto-1977">Peto et al., 1977</a>, <a href="../references/reference_list.htm#ref-peto-1976">1976</a>). Please note that StatsDirect uses the more accurate variance formulae mentioned in the statistical notes section at the end of <a href="../references/reference_list.htm#ref-peto-1977">Peto et al. (1977)</a>.</p>
+                                        <p>&#160;</p>
+                                        <p>These data are in the test workbook (Survival worksheet: Group, Trial Time, Censorship, Strat). Select "Group" when asked for the group identifier, "Trial Time" for times, "Censorship" for censorship and "Strat" when asked about strata.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Logrank and Wilcoxon tests</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p><u>Log-rank (Peto) * [STRATUM 1 of 2: Strat=1]</u>:</p>
+                                        <p>&#160;</p>
+                                        <p><u>For group 1 (Group = 1)</u>
+                                        </p>
+                                        <p>Observed deaths = 4</p>
+                                        <p>Extent of exposure to risk of death = 5.421429</p>
+                                        <p>Relative rate = 0.737813</p>
+                                        <p>&#160;</p>
+                                        <p><u>For group 2 (Group = 2)</u>
+                                        </p>
+                                        <p>Observed deaths = 3</p>
+                                        <p>Extent of exposure to risk of death = 1.578571</p>
+                                        <p>Relative rate = 1.900452</p>
+                                        <p>&#160;</p>
+                                        <p>test statistics:</p>
+                                        <p>-1.421429, 1.421429</p>
+                                        <p>&#160;</p>
+                                        <p>variance-covariance matrix:</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td>0.922398</td>
+                                                <td>-0.922398</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-0.922398</td>
+                                                <td>0.922398</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>Chi-square for equivalence of death rates = 2.190442 P = 0.1389</p>
+                                        <p>&#160;</p>
+                                        <p><u>Generalised Wilcoxon (Peto-Prentice) * [STRATUM 1 of 2: Strat=1]</u>:</p>
+                                        <p>&#160;</p>
+                                        <p>test statistics:</p>
+                                        <p>-0.75, 0.75</p>
+                                        <p>&#160;</p>
+                                        <p>variance-covariance matrix:</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td>0.46875</td>
+                                                <td>-0.46875</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-0.46875</td>
+                                                <td>0.46875</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>Chi-square for equivalence of death rates = 1.2 P = 0.2733</p>
+                                        <p>&#160;</p>
+                                        <p><u>Log-rank (Peto) * [STRATUM 2 of 2: Strat=2]</u>:</p>
+                                        <p>&#160;</p>
+                                        <p><u>For group 1 (Group = 1)</u>
+                                        </p>
+                                        <p>Observed deaths = 2</p>
+                                        <p>Extent of exposure to risk of death = 4.98342</p>
+                                        <p>Relative rate = 0.401331</p>
+                                        <p>&#160;</p>
+                                        <p><u>For group 2 (Group = 2)</u>
+                                        </p>
+                                        <p>Observed deaths = 8</p>
+                                        <p>Extent of exposure to risk of death = 5.01658</p>
+                                        <p>Relative rate = 1.594712</p>
+                                        <p>&#160;</p>
+                                        <p>test statistics:</p>
+                                        <p>-2.98342, 2.98342</p>
+                                        <p>&#160;</p>
+                                        <p>variance-covariance matrix:</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td>2.433343</td>
+                                                <td>-2.433343</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-2.433343</td>
+                                                <td>2.433343</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>Chi-square for equivalence of death rates = 3.657846 P = 0.0558</p>
+                                        <p>&#160;</p>
+                                        <p><u>Log-rank (Peto) for COMBINED STRATA</u>:</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <th>Group</th>
+                                                <th>Deaths</th>
+                                                <th>Extent of exposure to risk of death</th>
+                                                <th>Relative rate</th>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>6</td>
+                                                <td>10.404848</td>
+                                                <td>0.576654</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>11</td>
+                                                <td>6.595152</td>
+                                                <td>1.667892</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>overall chi-square = 5.781939 P = 0.0162</p>
+                                        <p>&#160;</p>
+                                        <p><u>Hazard Ratio (approximate 95% confidence interval)</u>
+                                        </p>
+                                        <p>Group 1 vs. Group 2 = 0.345738 (0.13034 to 0.9171)</p>
+                                        <p>&#160;</p>
+                                        <p><u>Generalised Wilcoxon (Peto-Prentice) * [STRATUM 2 of 2: Strat=2]</u>:</p>
+                                        <p>&#160;</p>
+                                        <p>test statistics:</p>
+                                        <p>-1.885167, 1.885167</p>
+                                        <p>&#160;</p>
+                                        <p>variance-covariance matrix:</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td>1.287751</td>
+                                                <td>-1.287751</td>
+                                            </tr>
+                                            <tr>
+                                                <td>-1.287751</td>
+                                                <td>1.287751</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>Chi-square for equivalence of death rates = 2.759739 P = 0.0967</p>
+                                        <p>&#160;</p>
+                                        <p><u>Generalised Wilcoxon (Peto-Prentice) for COMBINED STRATA</u>:</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <th>Group</th>
+                                                <th>Deaths</th>
+                                                <th>Extent of exposure to risk of death</th>
+                                                <th>Relative rate</th>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>6</td>
+                                                <td>10.404848</td>
+                                                <td>0.576654</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>11</td>
+                                                <td>6.595152</td>
+                                                <td>1.667892</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>overall chi-square = 3.953375 P = 0.0468</p>
+                                        <p>&#160;</p>
+                                        <p>Allowing for renal impairment, the death rate differed between the two groups (stratified log-rank test P = 0.0162): the hazard in group 1 was about a third of that in group 2, with a wide confidence interval from so few deaths. Neither stratum alone gave a statistically significant difference.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the two examples above. It uses the survival package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Log-rank and Wilcoxon tests: the StatsDirect help example (Armitage and Berry 1994,
+# survival in days of lymphoma patients with stage III or stage IV disease; the test
+# workbook's Survival worksheet columns Stage group, Time and Censor) in R
+library(survival)
+stage &lt;- rep(c(1, 2), c(19, 61))
+time &lt;- c(6, 19, 32, 42, 42, 43, 94, 126, 169, 207, 211, 227, 253, 255, 270, 310, 316,
+          335, 346, 4, 6, 10, 11, 11, 11, 13, 17, 20, 20, 21, 22, 24, 24, 29, 30, 30,
+          31, 33, 34, 35, 39, 40, 41, 43, 45, 46, 50, 56, 61, 61, 63, 68, 82, 85, 88,
+          89, 90, 93, 104, 110, 134, 137, 160, 169, 171, 173, 175, 184, 201, 222, 235,
+          247, 260, 284, 290, 291, 302, 304, 341, 345)
+dead &lt;- c(1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0)
+
+# R's standard test: the log-rank test. Its Observed and Expected are the report's
+# observed deaths and extents of exposure to risk of death, and its chi-square is the
+# report's, both using the hypergeometric variance at each death time
+print(survdiff(Surv(time, dead) ~ stage))
+
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+
+# The report's statistics from the formulae above, for groups numbered 1 to k. At each
+# distinct time the numbers at risk and the deaths in each group give the expected
+# deaths, the weighted score U and its variance matrix V. The log-rank weight is 1.
+# The Peto-Prentice weight is a survivor function estimate: the product over the
+# earlier distinct times of (n - d + 1) / (n + 1), multiplied by n / (n + 1) at the
+# current time. The chi-square drops the last group's row and column, as V is singular.
+rank_test &lt;- function(time, dead, group, wilcoxon = FALSE) {
+  k &lt;- max(group)
+  O &lt;- tabulate(group[dead == 1], k)
+  E &lt;- numeric(k)
+  U &lt;- numeric(k)
+  V &lt;- matrix(0, k, k)
+  surv &lt;- 1
+  for (t in sort(unique(time))) {
+    atrisk &lt;- time &gt;= t
+    n &lt;- sum(atrisk)
+    ni &lt;- tabulate(group[atrisk], k)
+    d &lt;- sum(dead[time == t])
+    di &lt;- tabulate(group[time == t &amp; dead == 1], k)
+    w &lt;- if (wilcoxon) surv * n / (n + 1) else 1
+    E &lt;- E + d * ni / n
+    U &lt;- U + w * (di - d * ni / n)
+    if (n &gt; 1) {
+      V &lt;- V + w^2 * (diag(ni * n, k) - outer(ni, ni)) * d * (n - d) / (n^2 * (n - 1))
+    }
+    surv &lt;- surv * (n - d + 1) / (n + 1)
+  }
+  chi &lt;- as.numeric(t(U[-k]) %*% solve(V[-k, -k]) %*% U[-k])
+  p &lt;- pchisq(chi, k - 1, lower.tail = FALSE)
+  list(O = O, E = E, U = U, V = V, chi = chi, p = p)
+}
+show_test &lt;- function(r, groups = TRUE) {
+  if (groups) {
+    for (i in seq_along(r$O)) {
+      cat("For group", i, "\n")
+      cat("Observed deaths =", r$O[i], "\n")
+      cat("Extent of exposure to risk of death =", six(r$E[i]), "\n")
+      cat("Relative rate =", six(r$O[i] / r$E[i]), "\n")
+    }
+  }
+  cat("test statistics:", six(r$U), "\n")
+  cat("variance-covariance matrix:\n")
+  for (i in seq_along(r$O)) cat(six(r$V[i, ]), "\n")
+  cat("Chi-square for equivalence of death rates =", six(r$chi), " ", pv(r$p), "\n")
+}
+cat("Log-rank (Peto):\n")
+lr &lt;- rank_test(time, dead, stage)
+show_test(lr)
+
+# Hazard ratio: the ratio of the relative rates, with the approximate interval from the
+# standard error of its log given above
+hazard_ratio &lt;- function(O, E, i, j, level = 0.95) {
+  hr &lt;- (O[i] / E[i]) / (O[j] / E[j])
+  half &lt;- qnorm((1 + level) / 2) * sqrt(1 / E[i] + 1 / E[j])
+  cat("Group ", i, " vs. Group ", j, " = ", six(hr), " (", six(hr * exp(-half)), " to ",
+      six(hr * exp(half)), ")\n", sep = "")
+}
+cat("Hazard Ratio (approximate 95% confidence interval)\n")
+hazard_ratio(lr$O, lr$E, 1, 2)
+
+# Conditional maximum likelihood estimate: a 2 by 2 table at each death time (deaths
+# and survivors by group among those at risk) and the exact test of a common odds
+# ratio across the tables. R's estimate, interval and two sided P agree with the
+# report's Fisher figures to five decimal places
+death_tables &lt;- function(time, dead, group) {
+  cells &lt;- NULL
+  for (t in sort(unique(time[dead == 1]))) {
+    atrisk &lt;- time &gt;= t
+    ni &lt;- tabulate(group[atrisk], 2)
+    di &lt;- tabulate(group[time == t &amp; dead == 1], 2)
+    if (all(ni &gt; 0)) cells &lt;- c(cells, di, ni - di)
+  }
+  array(cells, c(2, 2, length(cells) / 4))
+}
+tables &lt;- death_tables(time, dead, stage)
+print(mantelhaen.test(tables, exact = TRUE))
+
+# The same from the conditional distribution of the total deaths in group 1 given the
+# margins of every table: the product of the hypergeometric polynomials of the tables,
+# scaled as it grows to stay within range. Each side's P counts the observed value in
+# full (Fisher) or by half (mid-P); the two sided Fisher P sums the probabilities no
+# larger than the observed value's, and the two sided mid-P is twice the smaller side.
+# A limit is the ratio at which a tail probability equals half of one minus the level
+poly &lt;- 1
+low &lt;- 0
+for (i in seq_len(dim(tables)[3])) {
+  n1 &lt;- sum(tables[1, , i])
+  n0 &lt;- sum(tables[2, , i])
+  m1 &lt;- sum(tables[, 1, i])
+  a &lt;- max(0, m1 - n0):min(m1, n1)
+  coef &lt;- choose(n1, a) * choose(n0, m1 - a)
+  product &lt;- numeric(length(poly) + length(coef) - 1)
+  for (j in seq_along(coef)) {
+    at &lt;- j - 1 + seq_along(poly)
+    product[at] &lt;- product[at] + poly * coef[j]
+  }
+  poly &lt;- product / max(product)
+  low &lt;- low + a[1]
+}
+support &lt;- low + seq_along(poly) - 1
+A &lt;- sum(tables[1, 1, ])
+observed &lt;- which(support == A)
+prob &lt;- function(ratio) {
+  lp &lt;- log(poly) + (support - low) * log(ratio)
+  p &lt;- exp(lp - max(lp))
+  p / sum(p)
+}
+p &lt;- prob(1)
+upper &lt;- sum(p[observed:length(p)])
+lower &lt;- sum(p[1:observed])
+upper_mid &lt;- upper - p[observed] / 2
+tail &lt;- function(log_ratio, target, half) {
+  q &lt;- prob(exp(log_ratio))
+  sum(q[observed:length(q)]) - half * q[observed] - target
+}
+limit &lt;- function(target, half) {
+  exp(uniroot(tail, c(-30, 30), target = target, half = half, tol = 1e-12)$root)
+}
+mean_deaths &lt;- function(log_ratio) sum(prob(exp(log_ratio)) * support) - A
+cmle &lt;- exp(uniroot(mean_deaths, c(-30, 30), tol = 1e-12)$root)
+cat("Conditional maximum likelihood estimates:\n")
+cat("Hazard Ratio =", six(cmle), "\n")
+cat("Exact Fisher 95% confidence interval =", six(limit(0.025, 0)), "to",
+    six(limit(0.975, 1)), "\n")
+cat("Exact Fisher one sided ", pv(min(upper, lower)), ", two sided ",
+    pv(sum(p[p &lt;= p[observed]])), "\n", sep = "")
+cat("Exact mid-P 95% confidence interval =", six(limit(0.025, 0.5)), "to",
+    six(limit(0.975, 0.5)), "\n")
+cat("Exact mid-P one sided ", pv(min(upper_mid, 1 - upper_mid)), ", two sided ",
+    pv(min(1, 2 * min(upper_mid, 1 - upper_mid))), "\n", sep = "")
+
+# Generalised Wilcoxon test. R's nearest is the Peto and Peto modification, with the
+# Kaplan-Meier estimate as the weight (rho = 1): chi-square 5.45, against the report's
+# 5.445 with the Peto-Prentice weight described above
+print(survdiff(Surv(time, dead) ~ stage, rho = 1))
+cat("Generalised Wilcoxon (Peto-Prentice):\n")
+show_test(rank_test(time, dead, stage, wilcoxon = TRUE), groups = FALSE)
+
+# The stratified example (Peto et al. 1977; the test workbook's Survival worksheet
+# columns Group, Trial Time, Censorship and Strat): the test within each stratum, then
+# the scores and variance matrices summed over the strata for the combined test
+trial &lt;- c(8, 8, 13, 18, 23, 52, 63, 63, 70, 70, 180, 195, 210, 220, 365, 632, 700,
+           852, 1296, 1296, 1328, 1460, 1976, 1990, 2240)
+event &lt;- c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0)
+arm &lt;- c(1, 1, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 2, 2, 1, 2, 1, 1, 1, 1, 2, 2)
+stratum &lt;- c(1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+print(survdiff(Surv(trial, event) ~ arm + strata(stratum)))
+combined &lt;- function(wilcoxon) {
+  total &lt;- NULL
+  for (s in 1:2) {
+    r &lt;- rank_test(trial[stratum == s], event[stratum == s], arm[stratum == s],
+                   wilcoxon)
+    cat("STRATUM", s, "of 2\n")
+    show_test(r, groups = !wilcoxon)
+    total &lt;- if (is.null(total)) r else Map("+", total, r)
+  }
+  cat("COMBINED STRATA: group, deaths, extent of exposure to risk of death,",
+      "relative rate\n")
+  for (i in 1:2) cat(i, total$O[i], six(total$E[i]), six(total$O[i] / total$E[i]), "\n")
+  chi &lt;- total$U[1]^2 / total$V[1, 1]
+  cat("overall chi-square =", six(chi), " ", pv(pchisq(chi, 1, lower.tail = FALSE)),
+      "\n")
+  total
+}
+cat("Log-rank (Peto), stratified:\n")
+total &lt;- combined(wilcoxon = FALSE)
+cat("Hazard Ratio (approximate 95% confidence interval)\n")
+hazard_ratio(total$O, total$E, 1, 2)
+cat("Generalised Wilcoxon (Peto-Prentice), stratified:\n")
+total &lt;- combined(wilcoxon = TRUE)</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

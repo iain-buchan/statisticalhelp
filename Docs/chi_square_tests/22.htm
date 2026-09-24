@@ -117,7 +117,7 @@
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Chi-square_2 by 2</b>.</p>
                                         <p>&#160;</p>
-                                        <p>The two by two or fourfold contingency table represents two classifications of a set of counts or frequencies. The rows represent two classifications of one variable (e.g. outcome positive/outcome negative) and the columns represent two classifications of another variable (e.g. intervention/no intervention). These classifications must be independent. Paired results (e.g. outcomes for same group of individuals before and after intervention) should be analysed using a test for <a href="mcnemar.htm">matched pairs</a>. The chi-square statistic calculated from the table test the independence between the two classifications.</p>
+                                        <p>The two by two or fourfold contingency table represents two classifications of a set of counts or frequencies. The rows represent two classifications of one variable (e.g. outcome positive/outcome negative) and the columns represent two classifications of another variable (e.g. intervention/no intervention). These classifications must be independent. Paired results (e.g. outcomes for same group of individuals before and after intervention) should be analysed using a test for <a href="mcnemar.htm">matched pairs</a>. The chi-square statistic calculated from the table tests the independence between the two classifications.</p>
                                         <p>&#160;</p>
                                         <p>Assumptions of the tests of independence:</p>
                                         <ul type="disc">
@@ -158,7 +158,7 @@
                                         <p>When a is small in comparison to c and b is small in comparison to d (i.e. relatively small numbers of outcome positive observations or low prevalence) then c can be substituted for a+c and d can be substituted for d+b in the above. With a little rearrangement this gives the odds ratio (cross ratio, approximate relative risk):</p>
                                         <p>OR = (a*d)/(b*c).</p>
                                         <p>&#160;</p>
-                                        <p>A confidence interval (CI) for the odds ratio is calculated using two different methods. The Wolf (logit) method for large samples is given first followed by an exact conditional maximum likelihood method (<a href="../references/reference_list.htm#ref-fleiss-1979-a">Fleiss, 1979</a>; <a href="../references/reference_list.htm#ref-gardner-1989">Gardner and Altman, 1989</a>; <a href="../references/reference_list.htm#ref-martin-1991">Martin and Austin, 1991</a>). Please note that the exact calculations may take an appreciable amount of time with large numbers.</p>
+                                        <p>A confidence interval (CI) for the odds ratio is calculated using two different methods. The Woolf (logit) method for large samples is given first followed by an exact conditional maximum likelihood method (<a href="../references/reference_list.htm#ref-fleiss-1979-a">Fleiss, 1979</a>; <a href="../references/reference_list.htm#ref-gardner-1989">Gardner and Altman, 1989</a>; <a href="../references/reference_list.htm#ref-martin-1991">Martin and Austin, 1991</a>). Please note that the exact calculations may take an appreciable amount of time with large numbers.</p>
                                         <p>&#160;</p>
                                         <p>If you specify that your results are from a cohort study then StatsDirect adds a relative risk analysis. See <a href="../clinical_epidemiology/risk_prospective.htm">risk (prospective)</a> for more details.</p>
                                         <p>&#160;</p>
@@ -283,6 +283,88 @@
                                         <p>Exact mid-P one sided P = 0.0024, two sided P = 0.0049</p>
                                         <p>&#160;</p>
                                         <p>Here we can see a statistically significant relationship between treatment and mortality. The strength of that relationship is reflected by the coefficient of contingency. The odds ratio tells us that the odds in favour of dying after treatment A are about half of the odds of dying after treatment B. With 95% confidence we put the true population value for this ratio of odds somewhere between 0.33 and 0.85. If you need to phrase the arguments with odds ratios the other way around then just quote the reciprocals, i.e. here we would say that the odds of dying after treatment B are 1.9 times greater than after treatment A.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># 2 by 2 chi-square test: the StatsDirect help example (Armitage and Berry 1994, deaths
+# among 257 patients given treatment A and 244 given treatment B) in R
+counts &lt;- matrix(c(41, 216, 64, 180), 2, byrow = TRUE,
+                 dimnames = list(Treatment = c("A", "B"), Outcome = c("Dead", "Alive")))
+print(addmargins(counts))
+n &lt;- sum(counts)
+
+# R's standard test: chisq.test applies Yates' continuity correction to a 2 by 2
+# table by default and leaves it out when correct = FALSE. The expected values are
+# the row total times the column total divided by n.
+uncorrected &lt;- chisq.test(counts, correct = FALSE)
+yates &lt;- chisq.test(counts, correct = TRUE)
+print(uncorrected)
+print(yates)
+
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+x2 &lt;- unname(uncorrected$statistic)
+cat("Expected values:", six(t(uncorrected$expected)), "\n")
+cat("Uncorrected Chi-square =", six(x2), " ", pv(uncorrected$p.value), "\n")
+cat("Yates-corrected Chi-square =", six(unname(yates$statistic)), " ",
+    pv(yates$p.value), "\n")
+
+# Measures of association: Pearson's coefficient of contingency, and Cramer's V
+# carrying the sign of ad - bc (negative here: fewer deaths with A than expected)
+a &lt;- counts[1, 1]
+b &lt;- counts[1, 2]
+c &lt;- counts[2, 1]
+d &lt;- counts[2, 2]
+margins &lt;- prod(rowSums(counts), colSums(counts))
+cat("Pearson's contingency =", six(sqrt(x2 / (x2 + n))), "\n")
+cat("Cramer's V (signed) =", six((a * d - b * c) / sqrt(margins)), "\n")
+
+# Odds ratio analysis (a case-control study): the sample odds ratio ad/bc with
+# Woolf's (logit) interval from the standard error of its logarithm
+or &lt;- a * d / (b * c)
+z &lt;- qnorm(0.975)
+se &lt;- sqrt(1 / a + 1 / b + 1 / c + 1 / d)
+cat("Odds Ratio =", six(or), "\n")
+cat("Approximate 95% confidence interval =", six(exp(log(or) - z * se)), "to",
+    six(exp(log(or) + z * se)), "\n")
+
+# fisher.test: its P value is the two sided P by summation of the tables no more
+# probable than the one observed, and alternative = "less" gives the one sided P for
+# the lower tail (41 or fewer deaths with A). Its interval is the exact conditional
+# one, agreeing with the report to four decimal places, and its estimate is the
+# conditional maximum likelihood odds ratio rather than the sample odds ratio above.
+print(fisher.test(counts))
+cat("Exact Fisher one sided ", pv(fisher.test(counts, alternative = "less")$p.value),
+    ", two sided ", pv(fisher.test(counts)$p.value), "\n", sep = "")
+
+# The exact limits to six places, and the mid-P versions: with the margins fixed,
+# a has the hypergeometric distribution weighted by psi^a at odds ratio psi. A limit
+# is the psi at which one tail is 2.5%, counting the probability of the observed a
+# in full (Fisher) or by half (mid-P). The one sided P is the smaller tail at psi = 1
+# and the two sided mid-P is twice it.
+k &lt;- max(0, a + b - (b + d)):min(a + b, a + c)     # the possible values of a
+pr &lt;- function(psi) {
+  lw &lt;- dhyper(k, a + c, b + d, a + b, log = TRUE) + k * log(psi)   # on the log scale
+  w &lt;- exp(lw - max(lw))
+  w / sum(w)
+}
+lower &lt;- function(psi, w) sum(pr(psi)[k &lt; a]) + w * pr(psi)[k == a]
+upper &lt;- function(psi, w) sum(pr(psi)[k &gt; a]) + w * pr(psi)[k == a]
+limit &lt;- function(tail, w) {
+  uniroot(function(psi) tail(psi, w) - 0.025, c(0.001, 1000), tol = 1e-10)$root
+}
+cat("Fisher exact 95% confidence interval =", six(limit(upper, 1)), "to",
+    six(limit(lower, 1)), "\n")
+cat("mid-P exact 95% confidence interval =", six(limit(upper, 0.5)), "to",
+    six(limit(lower, 0.5)), "\n")
+mid &lt;- min(lower(1, 0.5), upper(1, 0.5))
+cat("Exact mid-P one sided ", pv(mid), ", two sided ", pv(min(1, 2 * mid)), "\n",
+    sep = "")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

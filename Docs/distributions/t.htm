@@ -150,6 +150,56 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation109.svg" alt="" class="mcReset" />
                                         </p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>An illustration with chosen figures. Select Student's t from the Distributions section of the Analysis menu, enter 2 as Student's t and 10 as the degrees of freedom, then click Calculate. StatsDirect fills the upper tail, lower tail and two tailed P boxes; when you complete the calculator the report reads:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Probability distribution calculations</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>P(t 2, df 10) = 0.03669401738537 upper, 0.96330598261463 lower, 0.07338803477074 two sided</p>
+                                        <p>&#160;</p>
+                                        <p>So, when the null hypothesis holds, a t statistic of 2 or more arises by chance in about 3.7% of samples, and a t of 2 or more in either direction in about 7.3%. The two tailed P is twice the smaller tail. The distribution is symmetric, so a negative t swaps the tails: with -2.5 as Student's t and 15 degrees of freedom:</p>
+                                        <p>&#160;</p>
+                                        <p>P(t -2.5, df 15) = 0.987747098376743 upper, 0.012252901623257 lower, 0.024505803246514 two sided</p>
+                                        <p>&#160;</p>
+                                        <p>The function also works in reverse: enter a probability in one of the P boxes and click Invert, and StatsDirect finds the t that gives it. With 0.05 as the two tailed P and 10 degrees of freedom, the upper tail P becomes 0.025 and the report reads:</p>
+                                        <p>&#160;</p>
+                                        <p>t(upper P 0.025, df 10) = 2.22813885198627</p>
+                                        <p>&#160;</p>
+                                        <p>This is the critical value of t for a two sided test at the 5% level with 10 degrees of freedom, and the multiplier of the standard error in a 95% confidence interval based on 10 degrees of freedom.</p>
+                                        <p>&#160;</p>
+                                        <p>The figures above were calculated in R with the functions shown below; StatsDirect calculates the same values and shows them to the same 15 decimal places (15 significant figures for t).</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Student's t distribution: the StatsDirect help illustration (tail areas for t = 2
+# with 10 degrees of freedom and for t = -2.5 with 15, then the t with an upper tail
+# of 0.025 for 10 degrees of freedom, the 5% two sided critical value) in R
+
+# StatsDirect's calculator shows tail areas to 15 decimal places and t to 15
+# significant figures; these helpers print R's values the same way.
+p15 &lt;- function(p) formatC(p, digits = 15, format = "f", drop0trailing = TRUE)
+t15 &lt;- function(x) formatC(x, digits = 15, format = "g", drop0trailing = TRUE)
+
+# Tail areas from t: pt() gives the lower tail P(T &lt;= t) by default, and the upper
+# tail P(T &gt; t) with lower.tail = FALSE. The two sided P is twice the smaller tail.
+tails &lt;- function(t, df) {
+  upper &lt;- pt(t, df, lower.tail = FALSE)
+  lower &lt;- pt(t, df)
+  cat("P(t ", t, ", df ", df, ") = ", p15(upper), " upper, ", p15(lower), " lower, ",
+      p15(2 * min(upper, lower)), " two sided\n", sep = "")
+}
+tails(2, 10)
+tails(-2.5, 15)      # a negative t: the distribution is symmetric, so the tails swap
+
+# t from a tail area (the calculator's Invert): qt() gives the t below which a given
+# area lies, so the t with 0.025 above it (0.05 in the two tails together) is
+cat("t(upper P 0.025, df 10) =", t15(qt(0.025, 10, lower.tail = FALSE)), "\n")
+# which is the same as qt(0.975, 10)</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

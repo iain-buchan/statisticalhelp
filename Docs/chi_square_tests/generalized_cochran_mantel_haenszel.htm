@@ -133,13 +133,13 @@
                                         <p>&#160;</p>
                                         <p><u>Data entry</u>
                                         </p>
-                                        <p>Note the potentially confusing terminology over row and column scores: The 'row scores' are the scores associated with the column classification; these are applied to the entries (by column) in each row. The 'column scores' are the scores associated with the row classification; these are applied to the entries (by row) in each column.</p>
+                                        <p>When you give a third classifier and the table is not 2 by 2, StatsDirect asks for scores in a grid with a column headed by the name of each classifier: enter one score for each category of the row classifier under its name, and one score for each category of the column classifier under its name, in the order in which the categories appear in the table. The report repeats the scores used.</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
                                         <p>From <a href="../references/reference_list.htm#ref-agresti-2002">Agresti (2002)</a>.</p>
                                         <p>&#160;</p>
-                                        <p>The data can be found in the Tables worksheet of the Test workbook. Use the menu item Analysis_Crosstabs to generate a cross tabulation of the job satisfaction, income and gender variables. Use the row (income) scores as 3, 10, 20 and 35. Use the column (job satisfaction) scores as 1, 3, 4 and 5.</p>
+                                        <p>The data can be found in the Tables worksheet of the Test workbook. Use the menu item Analysis_Crosstabs to generate a cross tabulation with income as the first classifier (rows), job satisfaction as the second classifier (columns) and gender as the third classifier (strata). Use the row (income) scores as 3, 10, 20 and 35. Use the column (job satisfaction) scores as 1, 3, 4 and 5.</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
@@ -187,6 +187,73 @@
                                         <p>Sample size = 104</p>
                                         <p>&#160;</p>
                                         <p>From the results above you can see that the strongest effect detected is ordinal association (i.e. association between greater job satisfaction with greater income), after controlling for gender.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. It reads the data from job_satisfaction.csv, the test workbook's columns saved with their headings as a csv file (see the first comment in the code). Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Generalised Cochran-Mantel-Haenszel tests: the StatsDirect help example (Agresti
+# 2002, job satisfaction by income in 104 people, controlling for gender) in R
+# The data are the Income, Job Satisfaction and Gender columns of the Tables
+# worksheet of the StatsDirect test workbook. Save those columns, with their
+# headings, as job_satisfaction.csv in R's working directory first.
+d &lt;- read.csv("job_satisfaction.csv")
+tab &lt;- table(Income = d$Income, Satisfaction = d$Job.Satisfaction, Gender = d$Gender)
+print(tab)                        # one income by satisfaction table per gender
+u &lt;- c(3, 10, 20, 35)             # scores for the income categories (the rows)
+v &lt;- c(1, 3, 4, 5)                # scores for the satisfaction categories (columns)
+
+# R's mantelhaen.test gives the third of the report's tests, the generalised
+# Cochran-Mantel-Haenszel test of nominal association for a stratified r by c
+# table (Landis, Heyman and Koch 1978); its continuity correction applies only to
+# 2 by 2 by k tables, so none is made here
+print(mantelhaen.test(tab))
+
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+
+# All three tests are the same quadratic form (Landis et al. 1978, Agresti 2002):
+# within each stratum the cell counts, stacked column by column, are compared with
+# their expected values given the margins, and the differences are summed over the
+# strata along with their covariance under the multiple hypergeometric distribution.
+# A linear transformation A chooses what is compared: the counts themselves (nominal
+# association), the row totals of the column scores (nominal rows, ordinal columns)
+# or the sum of the products of the row and column scores (ordinal association).
+cmh &lt;- function(A) {
+  s &lt;- 0
+  V &lt;- 0
+  for (k in seq_len(dim(tab)[3])) {
+    n &lt;- tab[, , k]
+    N &lt;- sum(n)
+    if (N &lt; 2) next                 # a stratum of one observation adds nothing
+    rs &lt;- rowSums(n)
+    cs &lt;- colSums(n)
+    m &lt;- as.vector(outer(rs, cs) / N)
+    cov &lt;- kronecker(N * diag(cs) - cs %*% t(cs), N * diag(rs) - rs %*% t(rs)) /
+      (N^2 * (N - 1))
+    s &lt;- s + A %*% (as.vector(n) - m)
+    V &lt;- V + A %*% cov %*% t(A)
+  }
+  as.numeric(t(s) %*% solve(V) %*% s)   # solve() fails if V is singular
+}
+r &lt;- dim(tab)[1]
+cc &lt;- dim(tab)[2]
+drop_last &lt;- function(k) cbind(diag(k - 1), 0)   # the last category is redundant
+A_nominal &lt;- kronecker(drop_last(cc), drop_last(r))
+A_rows &lt;- kronecker(matrix(v, 1), drop_last(r))
+A_ordinal &lt;- kronecker(matrix(v, 1), matrix(u, 1))
+show &lt;- function(label, q, df) {
+  cat(label, "=", six(q), " DF =", df, " ", pv(pchisq(q, df, lower.tail = FALSE)), "\n")
+}
+cat("Income scores:", paste(u, collapse = ", "), "\n")
+cat("Job Satisfaction scores:", paste(v, collapse = ", "), "\n")
+show("Ordinal association", cmh(A_ordinal), 1)
+show("Nominal rows vs. ordinal columns association", cmh(A_rows), r - 1)
+show("Nominal association", cmh(A_nominal), (r - 1) * (cc - 1))
+cat("Sample size =", sum(tab), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

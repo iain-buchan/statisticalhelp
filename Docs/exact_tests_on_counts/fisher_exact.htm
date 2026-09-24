@@ -119,7 +119,7 @@
                                         <p>&#160;</p>
                                         <p>Like the chi-square test for fourfold (2 by 2) tables, Fisher's exact test examines the relationship between the two dimensions of the table (classification into rows vs. classification into columns). The null hypothesis is that these two classifications are not different.</p>
                                         <p>&#160;</p>
-                                        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm#ref-conover-1999">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the expected value of the first count A.</p>
+                                        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm#ref-conover-1999">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the first count A; the report shows its expected value.</p>
                                         <p>&#160;</p>
                                         <p>This exact treatment of the fourfold table should be used instead of the chi-square test when any expected frequency is less than 1 or 20% of expected frequencies are less than or equal to 5. With StatsDirect, it is reasonable to use Fisher's exact test by default because the computational method used can cope with large numbers.</p>
                                         <p>&#160;</p>
@@ -229,6 +229,70 @@
                                         <p>Two sided mid-P = 0.1618</p>
                                         <p>&#160;</p>
                                         <p>Here we cannot reject the null hypothesis that there is no association between these two classifications, i.e. between feeding method and malocclusion.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Fisher's exact test: the StatsDirect help example (Armitage and Berry 1994, p. 138,
+# malocclusion of teeth by method of feeding infants) in R
+teeth &lt;- matrix(c(4, 16,
+                  1, 21), 2, byrow = TRUE,
+                dimnames = list(feeding = c("Breast fed", "Bottle fed"),
+                                teeth = c("Normal", "Malocclusion")))
+print(addmargins(teeth))
+
+# R's standard test. Its two sided P is the report's "by summation": the probabilities
+# of every table with the same margins that is no more likely than the observed one are
+# added up. R also estimates the odds ratio conditional on the margins, with a
+# confidence interval, which the report does not show. For a one sided P use
+# alternative = "greater" (upper tail for the top left count) or "less" (lower tail).
+print(fisher.test(teeth))
+
+# The report's other lines come from the hypergeometric distribution of the top left
+# count A given the margins: dhyper(x, m, n, k) is the probability that A = x when m
+# is the first column total, n the second column total and k the first row total.
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+counts &lt;- as.vector(t(teeth))        # a, b, c, d row by row
+# StatsDirect turns the table so that its A is the smaller of the two diagonal counts
+# (for this example it only transposes the table, which changes nothing). The P values
+# are the same whichever way the table is turned; the expectation is that of A.
+if (counts[1] &gt; counts[4]) counts &lt;- rev(counts)
+a &lt;- counts[1]
+m &lt;- counts[1] + counts[3]
+n &lt;- counts[2] + counts[4]
+k &lt;- counts[1] + counts[2]
+expected &lt;- k * m / (m + n)
+cat("Expectation of A =", six(expected), "\n")
+x &lt;- max(0, k - n):min(k, m)         # the values A can take with these margins
+pr &lt;- dhyper(x, m, n, k)
+observed &lt;- pr[x == a]
+
+# One sided P: the tail in which A lies, upper when A exceeds its expectation. Turning
+# the table never changes which side of its expectation A lies (A - E(A) = (ad - bc)/n).
+if (a &gt; expected) {
+  tail &lt;- "(upper tail)"
+  one_sided &lt;- sum(pr[x &gt;= a])
+} else {
+  tail &lt;- "(lower tail)"
+  one_sided &lt;- sum(pr[x &lt;= a])
+}
+cat("One sided", tail, pv(one_sided), "  (doubled one sided",
+    paste0(pv(min(1, 2 * one_sided)), ")"), "\n")
+
+# Two sided P by summation (Bailey 1977), as fisher.test gives it: the tables no more
+# probable than the observed one, allowing a little rounding in the comparison
+two_sided &lt;- sum(pr[pr &lt;= observed * (1 + 1e-7)])
+cat("Two sided (by summation)", pv(min(1, two_sided)), "\n")
+
+# Mid-P: only half the probability of the observed table is counted in its tail
+mid_p &lt;- one_sided - observed / 2
+cat("One sided mid-", pv(mid_p), "\n", sep = "")
+cat("Two sided mid-", pv(min(1, 2 * mid_p)), "\n", sep = "")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

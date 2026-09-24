@@ -120,7 +120,7 @@
                                         <p>&#160;</p>
                                         <p>Like the chi-square test for fourfold (2 by 2) tables, Fisher's exact test examines the relationship between the two dimensions of the table (classification into rows vs. classification into columns). The null hypothesis is that these two classifications are not different.</p>
                                         <p>&#160;</p>
-                                        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm#ref-conover-1999">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the expected value of the first count A.</p>
+                                        <p>The P values in this test are computed by considering all possible tables that could give the row and column totals observed. A mathematical short cut relates these permutations to factorials; a form shown in many textbooks. StatsDirect uses the hypergeometric distribution for the calculation (<a href="../references/reference_list.htm#ref-conover-1999">Conover 1999</a>). The test statistic that is hypergeometrically distributed is the first count A; its expectation is shown.</p>
                                         <p>&#160;</p>
                                         <p>This exact treatment of the fourfold table should be used instead of the chi-square test when any expected frequency is less than 1 or 20% of expected frequencies are less than or equal to 5. With StatsDirect, it is reasonable to use Fisher's exact test by default because the computational method used can cope with large numbers.</p>
                                         <p>&#160;</p>
@@ -189,7 +189,7 @@
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
-                                        <p>Rearranged table:</p>
+                                        <p>Arranged table and totals:</p>
                                         <table>
                                             <col />
                                             <col />
@@ -236,49 +236,124 @@
                                             </tr>
                                             <tr>
                                                 <td>0</td>
-                                                <td>1.000000000000000</td>
-                                                <td>0.030956848030019</td>
-                                                <td>0.030956848030019</td>
+                                                <td>0.03095684803002</td>
+                                                <td>0.03095684803002</td>
+                                                <td>1.00000000000000</td>
                                             </tr>
                                             <tr>
                                                 <td>1</td>
-                                                <td>0.202939337085679</td>
-                                                <td>0.171982489055660</td>
-                                                <td>0.969043151969981</td>
+                                                <td>0.20293933708568</td>
+                                                <td>0.17198248905566</td>
+                                                <td>0.96904315196998</td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>0.546904315196998</td>
-                                                <td>0.343964978111320</td>
-                                                <td>0.797060662914321</td>
+                                                <td>0.54690431519700</td>
+                                                <td>0.34396497811132</td>
+                                                <td>0.79706066291432</td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
-                                                <td>0.856472795497186</td>
-                                                <td>0.309568480300188</td>
-                                                <td>0.453095684803002</td>
+                                                <td>0.85647279549719</td>
+                                                <td>0.30956848030019</td>
+                                                <td>0.45309568480300</td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
-                                                <td>0.981774323237738</td>
-                                                <td>0.125301527740552</td>
-                                                <td>0.143527204502814</td>
+                                                <td>0.98177432323774</td>
+                                                <td>0.12530152774055</td>
+                                                <td>0.14352720450281</td>
                                             </tr>
                                             <tr>
                                                 <td>5</td>
-                                                <td>1.000000000000000</td>
-                                                <td>0.018225676762262</td>
-                                                <td>0.018225676762262</td>
+                                                <td>1.00000000000000</td>
+                                                <td>0.01822567676226</td>
+                                                <td>0.01822567676226</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>One sided (upper tail) P = 0.1435, (doubled one sided P = 0.2871)</p>
+                                        <p>One sided (upper tail) P = 0.1435 (doubled: P = 0.2871)</p>
                                         <p>Two sided (by summation) P = 0.1745</p>
                                         <p>&#160;</p>
                                         <p>One sided mid-P = 0.0809</p>
                                         <p>Two sided mid-P = 0.1618</p>
                                         <p>&#160;</p>
                                         <p>Here we cannot reject the null hypothesis that there is no association between these two classifications, i.e. between feeding mode and malocclusion.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Fisher's exact test (expanded): the StatsDirect help example (Armitage and Berry 1994,
+# p. 138, malocclusion of the teeth by the type of feeding received by infants) in R
+teeth &lt;- matrix(c(4, 16, 1, 21), 2, byrow = TRUE,
+                dimnames = list(fed = c("breast", "bottle"),
+                                teeth = c("normal", "malocclusion")))
+print(addmargins(teeth))
+
+# R's standard test. Its two sided P sums the probabilities of every table with the
+# observed margins that is no more probable than the observed table (0.1745), the
+# definition of Bailey (1977) that the report uses. With alternative = "greater" the P
+# value is the probability of the observed count of breast-fed infants with normal
+# teeth (the top left cell, A) or of a larger one: the upper tail of A (0.1435).
+# fisher.test also gives a conditional odds ratio and its confidence interval, which
+# the expanded report leaves out.
+print(fisher.test(teeth))
+print(fisher.test(teeth, alternative = "greater"))
+
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+
+# Given the margins, A is hypergeometric: the k = 20 breast-fed infants are a sample of
+# the 42, of whom m = 5 have normal teeth and n = 37 malocclusion, and A counts the
+# normal teeth in the sample
+a &lt;- teeth[1, 1]
+m &lt;- sum(teeth[, 1])
+n &lt;- sum(teeth[, 2])
+k &lt;- sum(teeth[1, ])
+cat("Expectation of A =", six(k * m / (m + n)), "\n")
+
+# The whole conditional distribution to 14 places, as the report tabulates it: for each
+# possible A the probability of that value (individual P, dhyper), of that value or a
+# smaller one (lower tail, phyper) and of that value or a larger one (upper tail: the
+# probability above A - 1, which phyper gives with lower.tail = FALSE). Each individual
+# probability is a ratio of counts of tables, choose(m, A) * choose(n, k - A) divided
+# by choose(m + n, k).
+A &lt;- max(0, k - n):min(k, m)
+prob &lt;- dhyper(A, m, n, k)
+lower &lt;- phyper(A, m, n, k)
+upper &lt;- phyper(A - 1, m, n, k, lower.tail = FALSE)
+fourteen &lt;- function(x) formatC(x, digits = 14, format = "f")
+cat("A  Lower Tail  Individual P  Upper Tail\n")
+for (i in seq_along(A)) {
+  cat(A[i], fourteen(lower[i]), fourteen(prob[i]), fourteen(upper[i]), "\n")
+}
+
+# One sided P: the tail that holds the observed A, the upper tail here as A = 4 is
+# above its expectation; doubling it is the other common two sided P. The two sided P
+# by summation adds up every value of A that is no more probable than the observed one
+# (a tolerance of one part in ten million allows for rounding in the probabilities).
+p_obs &lt;- prob[A == a]
+if (a &gt; k * m / (m + n)) {
+  tail &lt;- "(upper tail)"
+  p1 &lt;- upper[A == a]
+} else {
+  tail &lt;- "(lower tail)"
+  p1 &lt;- lower[A == a]
+}
+p2 &lt;- sum(prob[prob &lt;= p_obs * (1 + 1e-7)])
+cat("One sided ", tail, " ", pv(p1), "   (doubled: ", pv(min(1, 2 * p1)), ")\n",
+    sep = "")
+cat("Two sided (by summation)", pv(p2), "\n")
+
+# Mid-P: the one sided P less half the probability of the observed table (Armitage and
+# Berry 1994), and twice that, at most 1, for the two sided mid-P
+mid_p &lt;- p1 - p_obs / 2
+cat("One sided mid-", pv(mid_p), "\n", sep = "")
+cat("Two sided mid-", pv(min(1, 2 * mid_p)), "\n", sep = "")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

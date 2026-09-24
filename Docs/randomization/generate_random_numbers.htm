@@ -133,6 +133,8 @@
                                         <p>&#160;</p>
                                         <p>The interval most commonly used is 0 to 1</p>
                                         <p>&#160;</p>
+                                        <p>For an interval a to b, StatsDirect asks for the number type: interval (any value between a and b) or count (whole numbers from a to b inclusive, each equally likely).</p>
+                                        <p>&#160;</p>
                                         <p><u>Normal (Gaussian)</u>
                                         </p>
                                         <p>The commonly used standard <a href="../distributions/normal.htm">normal distribution</a> (mean of 0 and standard deviation of 1) is one of a family of normal distributions defined by the density function:</p>
@@ -267,6 +269,92 @@
                                         <p><u>Negative binomial</u>
                                         </p>
                                         <p>Algorithm: Transformed Poisson and gamma deviates (<a href="../references/reference_list.htm#ref-devroye-1986">Devroye, 1986</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>; <a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-a">1982a</a>).</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>To fill a column with ten random numbers from the standard normal distribution, select Normal from the Random Numbers section of the Generating section of the Data menu. Enter 1 as the number of columns to fill and 10 as the number of rows, keep the population mean of 0 and the population standard deviation of 1, and enter 1234 as the seed in place of the one suggested.</p>
+                                        <p>&#160;</p>
+                                        <p>StatsDirect puts these ten numbers (shown here to six decimal places) into a new column of the worksheet, under the heading:</p>
+                                        <p>&#160;</p>
+                                        <p>Normal (seed 1234, mean = 0, sd = 1)</p>
+                                        <p>-0.872311</p>
+                                        <p>0.311024</p>
+                                        <p>-0.156733</p>
+                                        <p>0.790419</p>
+                                        <p>0.772112</p>
+                                        <p>-0.604991</p>
+                                        <p>-0.593378</p>
+                                        <p>0.848327</p>
+                                        <p>1.729491</p>
+                                        <p>1.154892</p>
+                                        <p>&#160;</p>
+                                        <p>The ten values have mean 0.337885 and standard deviation 0.864366: a sample this small from a normal distribution with mean 0 and standard deviation 1 need not look like one. Running the function again with seed 1234 gives the same ten numbers, and any other seed gives a different series. The seed used is always in the column heading, so a series can be repeated even when you accept the seed that StatsDirect suggests.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above in its structure: R's random number generator gives a different series for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Random numbers by distribution: the StatsDirect help illustration (ten standard
+# normal deviates from seed 1234, then samples from the other distributions that the
+# Data_Generating_Random Numbers menu offers) in R
+# StatsDirect and R both use the Mersenne Twister generator, but each seeds it in
+# its own way, so the same seed gives a different series in each program. Within one
+# program a seed always repeats its own series: set.seed() then the r* function.
+set.seed(1234)
+x &lt;- rnorm(10, mean = 0, sd = 1)
+cat("Normal (seed 1234, mean = 0, sd = 1), from R's generator:\n")
+print(round(x, 6))
+cat("Mean of the ten =", round(mean(x), 6), " sd =", round(sd(x), 6), "\n")
+print(summary(x))
+
+# The menu's other distributions and R's function for each, with StatsDirect's
+# parameter names in the comment; n is the number of rows to fill. R's runif and
+# StatsDirect's uniform generator both leave out the end points 0 and 1.
+n &lt;- 1000
+set.seed(1234)
+u01 &lt;- runif(n)                            # Uniform 0 to 1
+uab &lt;- runif(n, min = 2, max = 5)          # Uniform A to B, interval type
+cnt &lt;- sample(1:6, n, replace = TRUE)      # Uniform A to B, count type: whole numbers
+ln &lt;- rlnorm(n, meanlog = 0, sdlog = 1)    # Lognormal: log mean, log sd
+bi &lt;- rbinom(n, size = 10, prob = 0.3)     # Binomial: number of trials, probability
+po &lt;- rpois(n, lambda = 4)                 # Poisson: mean
+ga &lt;- rgamma(n, shape = 2, scale = 3)      # Gamma: A (shape), B (scale, 1/lambda)
+ex &lt;- rexp(n, rate = 2)                    # Exponential: rate
+ch &lt;- rchisq(n, df = 3)                    # Chi-square: degrees of freedom
+fv &lt;- rf(n, df1 = 4, df2 = 10)             # F: numerator, denominator df
+st &lt;- rt(n, df = 5)                        # Student's t: degrees of freedom
+lo &lt;- rlogis(n, location = 0, scale = 1)   # Logistic: mu, sigma
+ge &lt;- rgeom(n, prob = 0.3)                 # Geometric: P (failures before a success)
+nb &lt;- rnbinom(n, size = 2, prob = 0.5)     # Negative binomial: N, P (failures before
+                                           #   the Nth success)
+ca &lt;- rcauchy(n, location = 0, scale = 1)  # Cauchy: L (location), S (scale)
+we &lt;- rweibull(n, shape = 1.5, scale = 2)  # Weibull: A (shape), sigma (scale)
+be &lt;- rbeta(n, shape1 = 2, shape2 = 5)     # Beta: A, B
+
+# A sample's summary should sit close to the distribution's mean and variance: for
+# the gamma distribution A * B and A * B^2, for the lognormal exp(mu + sigma^2 / 2)
+# and exp(2 * mu + 2 * sigma^2) - exp(2 * mu + sigma^2), for the Poisson its mean
+cat("Uniform 0 to 1 (mean 0.5, variance 1/12):\n")
+print(summary(u01))
+cat("Sample variance =", round(var(u01), 4), "\n")
+cat("Gamma (A = 2, B = 3; mean 6, variance 18):\n")
+print(summary(ga))
+cat("Sample variance =", round(var(ga), 4), "\n")
+cat("Lognormal (log mean 0, log sd 1; mean", round(exp(0.5), 4), "variance",
+    paste0(round(exp(2) - exp(1), 4), "):"), "\n")
+print(summary(ln))
+cat("Sample variance =", round(var(ln), 4), "\n")
+cat("Poisson (mean 4, variance 4):\n")
+print(summary(po))
+cat("Sample variance =", round(var(po), 4), "\n")
+cat("Binomial (10 trials, p = 0.3; mean 3, variance 2.1):\n")
+print(summary(bi))
+cat("Sample variance =", round(var(bi), 4), "\n")
+
+# The gamma sample against its density
+hist(ga, freq = FALSE, breaks = 30, main = "Gamma (A = 2, B = 3)", xlab = "x")
+curve(dgamma(x, shape = 2, scale = 3), add = TRUE, col = "red")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

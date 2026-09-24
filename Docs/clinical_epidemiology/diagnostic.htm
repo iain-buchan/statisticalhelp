@@ -169,7 +169,7 @@
                                         <p>&#160;</p>
                                         <p>This function is not truly Bayesian because it does not use any starting/prior probability. Likelihood ratios, however, are provided and these can be used to direct the flow of probabilities in Bayesian analysis. For an excellent account of this approach in medical diagnosis, see <a href="../references/reference_list.htm#ref-sackett-1991">Sackett (1991)</a>.</p>
                                         <p>&#160;</p>
-                                        <p>Another way to summarise diagnostic test performace is via the diagnostic odds ratio:</p>
+                                        <p>Another way to summarise diagnostic test performance is via the diagnostic odds ratio:</p>
                                         <p>&#160;</p>
                                         <p>Diagnostic odds ratio = true/false = (a * d)/(b * c)</p>
                                         <p>&#160;</p>
@@ -202,7 +202,7 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect select Diagnostic Test (2 by 2) from the Clinical Epidemiology section of the Analysis menu. Choose the default a 95% confidence interval. Then enter the above frequencies into the 2 by 2 table on the screen.</p>
+                                        <p>To analyse these data in StatsDirect select Diagnostic Test (2 by 2) from the Clinical Epidemiology section of the Analysis menu. Choose the default 95% confidence interval. Then enter the above frequencies into the 2 by 2 table on the screen.</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <table>
@@ -279,7 +279,120 @@
                                         <p>Observed odds ratio =   57.466667</p>
                                         <p>Conditional maximum likelihood estimate = 56.64839 (32.064885 to 103.54465)</p>
                                         <p>&#160;</p>
-                                        <p>Here we can say with 95% confidence that marker results of ≥ 100 are at least three (3.365) times more likely to come from patients with disease than those without disease. Also with 95% confidence we can say that marker results of &lt;100 are at most only about one tenth (0.133) as likely to come from patients with disease as from those without disease.</p>
+                                        <p>Here we can say with 95% confidence that marker results of ≥ 100 are at least three (3.365) times more likely to come from patients with disease than those without disease. Also with 95% confidence we can say that marker results of &lt;100 are at most only about one tenth (0.113) as likely to come from patients with disease as from those without disease.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Diagnostic test 2 by 2 table: the StatsDirect help example (a hypothetical serum
+# marker of disease, positive at 100 units or more: 431 diseased and 30 disease-free
+# patients tested positive, 29 and 116 tested negative) in R
+tp &lt;- 431   # a: test positive, disease present
+fp &lt;- 30    # b: test positive, disease absent
+fn &lt;- 29    # c: test negative, disease present
+tn &lt;- 116   # d: test negative, disease absent
+n &lt;- tp + fp + fn + tn
+counts &lt;- matrix(c(tp, fp, fn, tn), 2, byrow = TRUE,
+                 dimnames = list(Test = c("Positive", "Negative"),
+                                 Disease = c("Present", "Absent")))
+print(addmargins(counts))
+
+# Each rate in the report is a binomial proportion with the exact (Clopper-Pearson)
+# confidence interval that binom.test gives; the prevalence, for instance:
+print(binom.test(tp + fn, n))
+
+# The report prints each rate as a proportion and as a percentage
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pc &lt;- function(x) {
+  paste0(formatC(100 * x, digits = 2, format = "f", drop0trailing = TRUE), "%")
+}
+rate &lt;- function(x, n) {
+  ci &lt;- binom.test(x, n)$conf.int
+  paste0(six(x / n), " (", six(ci[1]), " to ", six(ci[2]), "), ", pc(x / n), " (",
+         pc(ci[1]), " to ", pc(ci[2]), ")")
+}
+prevalence &lt;- (tp + fn) / n
+cat("Prevalence (pre-test likelihood of disease)\n")
+cat(rate(tp + fn, n), "\n")
+
+# The change, in braces, is from the pre-test to the post-test likelihood, in whole
+# percentages (halves round to even, as the program does; the pre-test rate is
+# evaluated as the program evaluates it, so that both round alike)
+ppv &lt;- tp / (tp + fp)
+cat("Predictive value of +ve test (post-test likelihood of disease)\n")
+cat(rate(tp, tp + fp), ", {change = ", round(100 * ppv) - round(100 * prevalence),
+    "%}\n", sep = "")
+npv &lt;- tn / (tn + fn)
+cat("Predictive values of -ve test\n")
+cat("(post-test likelihood of no disease)\n")
+cat(rate(tn, tn + fn), ", {change = ", round(100 * npv) - round((fp + tn) / n * 100),
+    "%}\n", sep = "")
+# 1 - npv, whose exact interval is that of the false negatives among the test negatives
+cat("(post-test disease likelihood despite -ve test)\n")
+cat(rate(fn, tn + fn), ", {change = ",
+    round(100 * (1 - npv)) - round(100 * prevalence), "%}\n", sep = "")
+sens &lt;- tp / (tp + fn)
+cat("Sensitivity (true positive rate)\n")
+cat(rate(tp, tp + fn), "\n")
+spec &lt;- tn / (fp + tn)
+cat("Specificity (true negative rate)\n")
+cat(rate(tn, fp + tn), "\n")
+
+# A likelihood ratio is a ratio of two binomial proportions: the positive rate among
+# the diseased over the positive rate among the disease-free, and the negative rate
+# among the diseased over the negative rate among the disease-free. Its interval is
+# Koopman's (1984) score interval: the ratios at which the score chi-square, with the
+# proportions estimated under the constraint that they have that ratio, reaches
+# the 95% critical value
+koopman &lt;- function(x1, n1, x0, n0, level = 0.95) {
+  chi2 &lt;- function(theta) {
+    A &lt;- (n0 + n1) * theta
+    B &lt;- -((x0 + n1) * theta + x1 + n0)
+    p0 &lt;- (-B - sqrt(B^2 - 4 * A * (x0 + x1))) / (2 * A)  # constrained estimate
+    p1 &lt;- theta * p0
+    (x1 - n1 * p1)^2 / (n1 * p1 * (1 - p1)) *
+      (1 + n1 * (theta - p1) / (n0 * (1 - p1)))
+  }
+  est &lt;- (x1 / n1) / (x0 / n0)                             # both counts non-zero here
+  f &lt;- function(lt) chi2(exp(lt)) - qchisq(level, 1)
+  lower &lt;- exp(uniroot(f, c(log(est) - 20, log(est)), tol = 1e-12)$root)
+  upper &lt;- exp(uniroot(f, c(log(est), log(est) + 20), tol = 1e-12)$root)
+  c(est, lower, upper)
+}
+cat("Likelihood Ratio\n")
+lr_pos &lt;- koopman(tp, tp + fn, fp, fp + tn)
+cat("LR (positive test) = ", six(lr_pos[1]), " (", six(lr_pos[2]), " to ",
+    six(lr_pos[3]), ")\n", sep = "")
+lr_neg &lt;- koopman(fn, tp + fn, tn, fp + tn)
+cat("LR (negative test) = ", six(lr_neg[1]), " (", six(lr_neg[2]), " to ",
+    six(lr_neg[3]), ")\n", sep = "")
+
+# The diagnostic odds ratio: observed, then the conditional maximum likelihood
+# estimate with its exact interval, which fisher.test gives
+cat("Diagnostic Odds Ratio\n")
+cat("Observed odds ratio =", six(tp * tn / (fp * fn)), "\n")
+print(fisher.test(counts))
+
+# fisher.test's estimate and limits agree with the report's to about four significant
+# figures. Solving the same equations closely reproduces the report: given the
+# margins, the true positive count follows the non-central hypergeometric
+# distribution with the odds ratio as its parameter; the estimate makes its mean the
+# observed count, and each limit puts a tail probability of 2.5% at the observed count
+m1 &lt;- tp + fp
+n1 &lt;- tp + fn
+x &lt;- max(0, m1 - (n - n1)):min(m1, n1)
+logd &lt;- dhyper(x, n1, n - n1, m1, log = TRUE)
+dens &lt;- function(log_or) {
+  w &lt;- exp(logd + x * log_or - max(logd + x * log_or))
+  w / sum(w)
+}
+solve_or &lt;- function(f) exp(uniroot(f, c(-40, 40), tol = 1e-13)$root)
+cmle &lt;- solve_or(function(lo) sum(x * dens(lo)) - tp)
+cmle_lower &lt;- solve_or(function(lo) sum(dens(lo)[x &gt;= tp]) - 0.025)
+cmle_upper &lt;- solve_or(function(lo) sum(dens(lo)[x &lt;= tp]) - 0.025)
+cat("Conditional maximum likelihood estimate = ", six(cmle), " (", six(cmle_lower),
+    " to ", six(cmle_upper), ")\n", sep = "")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>

@@ -206,7 +206,7 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect select Risk (Prospective) from the Clinical Epidemiology of the Analysis menu. Choose the default 95% confidence interval. Then enter the above frequencies into the 2 by 2 table on the screen.</p>
+                                        <p>To analyse these data in StatsDirect select Risk (Prospective) from the Clinical Epidemiology section of the Analysis menu. Choose the default 95% confidence interval. Then enter the above frequencies into the 2 by 2 table on the screen.</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
@@ -224,6 +224,125 @@
                                         <p>Here we can say that the risk of CHD in men of this age is around two and a half times greater for those of them with serum cholesterol above 220 mg% compared with those with lower cholesterol levels. The confidence interval excludes one, indicating a significant result, and with 97.5% confidence we can say that this relative risk is at least 1.69 if the cohort is typical of men of this age in the wider population to which we are applying these results.</p>
                                         <p>&#160;</p>
                                         <p>The population attributable risk estimates the proportion of disease (or other outcome) in the population that is attributable to the exposure. From these results we can say, with 95% confidence, that somewhere between 30% and 70% of the cases of CHD in 40 to 59 year old men are associated with high cholesterol (above 220 mg%).</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Risk (prospective): the StatsDirect help example (Sahai and Khurshid 1996, coronary
+# heart disease after six years in 1329 Framingham men aged 40 to 59, by serum
+# cholesterol at the start) in R
+counts &lt;- matrix(c(72, 20,
+                   684, 553), 2, byrow = TRUE,
+                 dimnames = list(CHD = c("Yes", "No"),
+                                 Cholesterol = c("220 or more", "Under 220")))
+print(addmargins(counts))
+a &lt;- counts[1, 1]   # exposed with the outcome
+b &lt;- counts[1, 2]   # unexposed with the outcome
+c &lt;- counts[2, 1]   # exposed without it
+d &lt;- counts[2, 2]   # unexposed without it
+n1 &lt;- a + c         # exposed
+n2 &lt;- b + d         # unexposed
+m1 &lt;- a + b         # with the outcome
+n &lt;- n1 + n2
+
+# R's standard test compares the two outcome rates, 72 of 756 and 20 of 573, with
+# a chi-square test (uncorrected here). The two rates it prints are the risks in the
+# exposed and the unexposed, but its interval for their difference is the simple
+# normal (Wald) one, not the Miettinen and Nurminen interval of the report
+print(prop.test(t(counts), correct = FALSE))
+
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+p1 &lt;- a / n1
+p0 &lt;- b / n2
+rr &lt;- p1 / p0
+cat("Risk ratio (relative risk in incidence study) =", six(rr), "\n")
+
+# Base R has no function for the confidence interval of a ratio of two binomial
+# proportions, so the limits are found as Koopman (1984) defines them: the ratios at
+# which the score chi-square, with the two rates estimated under the constraint that
+# they have that ratio, reaches the 95% critical value. Every count in the example is
+# greater than zero, which this function assumes.
+koopman &lt;- function(x1, n1, x0, n0, level = 0.95) {
+  chi2 &lt;- function(theta) {
+    A &lt;- (n0 + n1) * theta
+    B &lt;- -((x0 + n1) * theta + x1 + n0)
+    q0 &lt;- (-B - sqrt(B^2 - 4 * A * (x0 + x1))) / (2 * A)  # constrained estimate
+    q1 &lt;- theta * q0
+    (x1 - n1 * q1)^2 / (n1 * q1 * (1 - q1)) *
+      (1 + n1 * (theta - q1) / (n0 * (1 - q1)))
+  }
+  est &lt;- (x1 / n1) / (x0 / n0)
+  f &lt;- function(lt) chi2(exp(lt)) - qchisq(level, 1)
+  lower &lt;- exp(uniroot(f, c(log(est) - 20, log(est)), tol = 1e-12)$root)
+  upper &lt;- exp(uniroot(f, c(log(est), log(est) + 20), tol = 1e-12)$root)
+  c(lower, upper)
+}
+k &lt;- koopman(a, n1, b, n2)
+cat("Approximate (Koopman) 95% confidence interval =", six(k[1]), "to", six(k[2]),
+    "\n")
+
+# Approximate power: the power with which Fisher's exact test on groups of this size
+# (756 exposed, 573 unexposed) would detect the observed difference between the two
+# rates at the two sided 5% level. It is the power at which the continuity corrected
+# sample size formula of Casagrande, Pike and Smith (1978), in the form given by
+# Fleiss, returns the size of the exposed group.
+alpha &lt;- 0.05
+m &lt;- n2 / n1                              # unexposed per exposed subject
+z &lt;- qnorm(1 - alpha / 2)
+pbar &lt;- (p1 + m * p0) / (m + 1)
+size_for_power &lt;- function(power) {
+  zb &lt;- qnorm(power)
+  np &lt;- (z * sqrt((1 + 1 / m) * pbar * (1 - pbar)) +
+           zb * sqrt(p0 * (1 - p0) / m + p1 * (1 - p1)))^2 / (p0 - p1)^2
+  np * (1 + sqrt(1 + 2 * (m + 1) / (np * m * abs(p0 - p1))))^2 / 4
+}
+power &lt;- uniroot(function(pw) size_for_power(pw) - n1, c(alpha, 1 - 1e-12),
+                 tol = 1e-10)$root         # the size falls as the power asked for falls
+cat("Approximate power (for 5% significance) = ",
+    formatC(100 * power, digits = 2, format = "f"), "%\n", sep = "")
+
+# The risk difference, with the score interval of Miettinen and Nurminen (1985): the
+# differences at which the chi-square, with the two rates estimated by maximum
+# likelihood under the constraint that they differ by that amount, reaches the 95%
+# critical value. The variance carries their factor of N / (N - 1).
+cat("Risk difference =", six(p1 - p0), "\n")
+miettinen &lt;- function(x1, n1, x0, n0, level = 0.95) {
+  dhat &lt;- x1 / n1 - x0 / n0
+  chi2 &lt;- function(delta) {
+    loglik &lt;- function(q0) {
+      q1 &lt;- q0 + delta
+      x1 * log(q1) + (n1 - x1) * log(1 - q1) + x0 * log(q0) + (n0 - x0) * log(1 - q0)
+    }
+    q0 &lt;- optimize(loglik, c(max(0, -delta), min(1, 1 - delta)), maximum = TRUE,
+                   tol = 1e-12)$maximum
+    q1 &lt;- q0 + delta
+    (dhat - delta)^2 /
+      ((q1 * (1 - q1) / n1 + q0 * (1 - q0) / n0) * (n1 + n0) / (n1 + n0 - 1))
+  }
+  f &lt;- function(delta) chi2(delta) - qchisq(level, 1)
+  lower &lt;- uniroot(f, c(-1 + 1e-9, dhat), tol = 1e-12)$root
+  upper &lt;- uniroot(f, c(dhat, 1 - 1e-9), tol = 1e-12)$root
+  c(lower, upper)
+}
+mn &lt;- miettinen(a, n1, b, n2)
+cat("Approximate (Miettinen) 95% confidence interval =", six(mn[1]), "to", six(mn[2]),
+    "\n")
+
+# Population attributable risk, reported when the relative risk exceeds 1. With no
+# population figure entered, the proportion exposed is estimated from the cohort as
+# (a + c) / n, and the attributable fraction Px (RR - 1) / (1 + Px (RR - 1)) is then
+# the same as 1 - (b / (b + d)) / ((a + b) / n): the share of the overall incidence
+# that would go if the whole cohort had the rate of the unexposed. Its large sample
+# variance is Walter's (1978). All three are printed as percentages.
+px &lt;- n1 / n
+par &lt;- px * (rr - 1) / (1 + px * (rr - 1))
+var_par &lt;- b * n * (a * d * (n - b) + b^2 * c) / (m1^3 * n2^3)
+cat("Population exposure % =", six(100 * px), "\n")
+cat("Population attributable risk % =", six(100 * par), "\n")
+cat("Approximate (Walter) 95% confidence interval =",
+    six(100 * (par - z * sqrt(var_par))), "to", six(100 * (par + z * sqrt(var_par))),
+    "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>

@@ -467,38 +467,6 @@ a.glossaryTerm
 	text-align: inherit;
 }
 
-.a:link
-{
-	color: #0000D0;
-	text-decoration: underline;
-}
-
-.a:visited
-{
-	color: #800080;
-	text-decoration: underline;
-}
-
-.a:hover
-{
-	color: #FF0000;
-	cursor: hand;
-	text-decoration: underline;
-}
-
-.a:active
-{
-	color: #FF0000;
-	cursor: hand;
-	text-decoration: underline;
-	outline: thin dotted invert;
-}
-
-.a:focus
-{
-	outline: thin dotted invert;
-}
-
 .dropDown.dropDownrcode
 {
 	margin-top: 1em;
@@ -553,6 +521,38 @@ a.glossaryTerm
 .dropDownHead.dropDownHeadrcode
 {
 	font-weight: bold;
+}
+
+.a:link
+{
+	color: #0000D0;
+	text-decoration: underline;
+}
+
+.a:visited
+{
+	color: #800080;
+	text-decoration: underline;
+}
+
+.a:hover
+{
+	color: #FF0000;
+	cursor: hand;
+	text-decoration: underline;
+}
+
+.a:active
+{
+	color: #FF0000;
+	cursor: hand;
+	text-decoration: underline;
+	outline: thin dotted invert;
+}
+
+.a:focus
+{
+	outline: thin dotted invert;
 }
 
 img._MCEquation_0

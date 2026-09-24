@@ -131,7 +131,7 @@
                                         </p>
                                         <p>- where t<sub>i</sub> is duration of study at point i, d<sub>i</sub> is number of deaths up to point i and n<sub>i</sub> is number of individuals at risk just prior to t<sub>i</sub>. S is based upon the probability that an individual survives at the end of a time interval, on the condition that the individual was present at the start of the time interval. S is the product (P) of these conditional probabilities.</p>
                                         <p>&#160;</p>
-                                        <p>If a subject is last followed up at time t<sub>i</sub> and then leaves the study for any reason (e.g. lost to follow up) ti is counted as their <a href="censorship.htm" class="MCTopic MCTopicPopupHotSpot a">censorship</a> time.</p>
+                                        <p>If a subject is last followed up at time t<sub>i</sub> and then leaves the study for any reason (e.g. lost to follow up) t<sub>i</sub> is counted as their <a href="censorship.htm" class="MCTopic MCTopicPopupHotSpot a">censorship</a> time.</p>
                                         <p>&#160;</p>
                                         <p>Assumptions:</p>
                                         <ul>
@@ -140,7 +140,7 @@
                                             <li>The event studied (e.g. death) happens at the specified time. Late recording of the event studied will cause artificial inflation of S.</li>
                                         </ul>
                                         <p>&#160;</p>
-                                        <p>The instantaneous hazard function h(t) [also known as the hazard rate, conditional failure rate or force of mortality] is defined as the event rate at time t conditional on surviving up to or beyond time t. As h(t) is a rate, not a probability, it has units of 1/t.The cumulative hazard function H_hat (t) is the integral of the hazard rates from time 0 to t,which represents the accumulation of the hazard over time - mathematically this quantifies the number of times you would expect to see the failure event in a given time period, if the event was repeatable. So it is more accurate to think of hazards in terms of rates than probabilities.The cumulative hazard is estimated by the method of <a href="../references/reference_list.htm#ref-peterson-1977">Peterson (1977)</a> as:</p>
+                                        <p>The instantaneous hazard function h(t) [also known as the hazard rate, conditional failure rate or force of mortality] is defined as the event rate at time t conditional on surviving up to or beyond time t. As h(t) is a rate, not a probability, it has units of 1/t. The cumulative hazard function H_hat (t) is the integral of the hazard rates from time 0 to t, which represents the accumulation of the hazard over time - mathematically this quantifies the number of times you would expect to see the failure event in a given time period, if the event was repeatable. So it is more accurate to think of hazards in terms of rates than probabilities. The cumulative hazard is estimated by the method of <a href="../references/reference_list.htm#ref-peterson-1977">Peterson (1977)</a> as:</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation228.svg" alt="" class="mcReset" />
                                         </p>
@@ -162,7 +162,7 @@
                                         <p><u>Plot&#160;Distribution indicated by a straight line pattern</u>
                                         </p>
                                         <p>H vs. t&#160;Exponential, through the origin with slope λ</p>
-                                        <p>ln(H) vs. ln(t)&#160;Weibull, intercept beta and slope ln(l)</p>
+                                        <p>ln(H) vs. ln(t)&#160;Weibull, slope beta and intercept beta ln(lambda)</p>
                                         <p>z(S) vs. ln(t)&#160;Log-normal</p>
                                         <p>H/t vs. t&#160;Linear hazard rate</p>
                                         <p>&#160;</p>
@@ -195,7 +195,7 @@
                                         </p>
                                         <p>S and H do not assume specific distributions for survival or hazard curves. If survival plots indicate specific distributions then more powerful estimates of S and H might be achieved by modelling. The commonest model is exponential but Weibull, log-normal, log-logistic and Gamma often appear. An expert Statistician and specialist software (e.g. GLIM, <a href="http://cran.r-project.org/" target="_blank">R</a>, MLP and some of the <a href="http://www.sas.com" target="_blank">SAS</a> modules) should be employed to pursue this sort of work. In most situations, however, you should consider improving the estimates of S and H by using <a href="cox_regression.htm">Cox regression</a> rather than parametric models.</p>
                                         <p>&#160;</p>
-                                        <p>If H is constant over time then a plot of the natural log of H vs. time will resemble a straight line with slope λ. If this is true then:</p>
+                                        <p>If the hazard is constant over time then a plot of H vs. time will resemble a straight line with slope λ. If this is true then:</p>
                                         <p>Probability of survival beyond t = exponent(-λ * t)</p>
                                         <p>- this eases the calculation of relative risk from the ratio of hazard functions at time t on two survival curves. When the hazard function depends on time then you can usually calculate relative risk after fitting <a href="cox_regression.htm">Cox's proportional hazards model</a>. This model assumes that for each group the hazard functions are proportional at each time, it does not assume any particular distribution function for the hazard function. Proportional hazards modelling can be very useful, however, most researchers should seek statistical guidance with this.</p>
                                         <p>&#160;</p>
@@ -429,14 +429,14 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>Alternatively, open the test workbook using the file open function of the file menu. Then select Kaplan-Meier from the Survival Analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Group Surv" when asked for the group identifier, select "Time Surv" when asked for times and "Censor Surv" when asked for deaths/events. Click on No when you are asked whether or not you want to save various statistics to the workbook. Click on Yes when you are prompted about plotting PL estimates.</p>
+                                        <p>Alternatively, open the test workbook using the file open function of the file menu. Then select Kaplan-Meier from the Survival Analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Group Surv" when asked for the group identifier, select "Time Surv" when asked for times and "Censor Surv" when asked for deaths/events. Click on No when you are asked whether or not you want to save the estimates and confidence intervals to the workbook.</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
                                         <p><u>Kaplan-Meier survival estimates</u>
                                         </p>
                                         <p>&#160;</p>
-                                        <p>Group: 1 (Group Surv = 2)</p>
+                                        <p>Group Surv = 2</p>
                                         <table cellspacing="0" style="caption-side: top;">
                                             <col />
                                             <col />
@@ -614,7 +614,7 @@
                                         <p>&#160;</p>
                                         <p>Mean survival time (95% CI) [limit: 344 on 323] = 241.283422 (219.591463 to 262.975382)</p>
                                         <p>&#160;</p>
-                                        <p>Group: 2 (Group Surv = 1)</p>
+                                        <p>Group Surv = 1</p>
                                         <table cellspacing="0" style="caption-side: top;">
                                             <col />
                                             <col />
@@ -836,6 +836,120 @@
                                         </p>
                                         <p>&#160;</p>
                                         <p>At this point you might want to run a formal hypothesis test to see if there is any statistical evidence for two or more survival curves being different. This can be achieved using sensitive parametric methods if you have fitted a particular distribution curve to your data. More often you would use the <a href="logrank.htm">Log-rank and Wilcoxon</a> tests which do not assume any particular distribution of the survivor function.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It uses the survival package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Kaplan-Meier survival estimates: the StatsDirect help example (a hypothetical study
+# of death from cancer in two groups of rats given different pre-treatments; the test
+# workbook's Survival worksheet columns Group Surv, Time Surv and Censor Surv) in R
+library(survival)
+group &lt;- c(2, 1, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2,
+           2, 2, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 2, 1, 2, 2)
+time &lt;- c(142, 143, 157, 163, 165, 188, 188, 190, 192, 198, 204, 205, 206, 208, 212,
+          216, 216, 220, 227, 230, 232, 232, 232, 233, 233, 233, 233, 235, 239, 240,
+          244, 246, 261, 265, 280, 280, 295, 295, 303, 323, 344)
+event &lt;- c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+           1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)   # 1 = death, 0 = censored
+
+# The groups in the order in which they first occur, as StatsDirect lists them
+g &lt;- factor(group, levels = unique(group))
+
+# R's standard estimate: survfit gives the product limit estimate of S with Greenwood's
+# variance. conf.type = "plain" makes its limits S +/- z SE(S), the scale on which the
+# Brookmeyer-Crowley interval for the median is set (R's default is the log scale).
+# print(fit) gives the median (the first time at which S falls to 0.5 or below; R
+# takes the midpoint when S equals 0.5 exactly) and, with rmean = "individual", the
+# mean survival time restricted to each group's own longest time, as in the report.
+# R's limits for the median are where the confidence band of S crosses 0.5, so its
+# upper limit is the first time at which the upper limit of S is 0.5 or below, where
+# StatsDirect's is the last time whose S is within z standard errors of 0.5.
+fit &lt;- survfit(Surv(time, event) ~ g, conf.type = "plain")
+print(fit, rmean = "individual")
+print(summary(fit, censored = TRUE))
+
+# The report's tables: every distinct time, with the cumulative hazard H = -ln(S)
+# (Peterson) and its standard error from Greenwood's sum, which is SE(S) / S
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+z &lt;- qnorm(0.975)
+s &lt;- summary(fit, censored = TRUE)
+H &lt;- log(1 / s$surv)
+means &lt;- summary(fit, rmean = "individual")$table
+for (k in levels(s$strata)) {
+  i &lt;- s$strata == k
+  t &lt;- s$time[i]
+  n &lt;- s$n.risk[i]
+  d &lt;- s$n.event[i]
+  S &lt;- s$surv[i]
+  seS &lt;- s$std.err[i]
+  seH &lt;- sqrt(cumsum(d / (n * (n - d))))   # infinite once S reaches 0
+  cat("\nGroup Surv =", sub("^g=", "", k), "\n")
+  print(data.frame(Time = t, "At risk" = n, Dead = d, Censored = s$n.censor[i],
+                   S = six(S), "SE(S)" = ifelse(S &gt; 0, six(seS), "*"),
+                   H = ifelse(S &gt; 0, six(H[i]), "infinity"),
+                   "SE(H)" = ifelse(S &gt; 0, six(seH), "*"), check.names = FALSE),
+        row.names = FALSE)
+
+  # The median: the first time at which S is 0.5 or below (this example has no run of
+  # S exactly 0.5, so R's midpoint rule gives the same value)
+  m &lt;- which(S &lt;= 0.5)[1]
+  # (a group whose S never falls to 0.5 has no median; the two intervals below need one)
+  cat("Median survival time =", t[m], "\n")
+
+  # Andersen's interval: the median +/- z SE(S at the median) / f, where f estimates the
+  # density of the survival times at the median by the slope of S between the last time
+  # with S &gt;= 0.5 + 0.05 and the first time with S &lt;= 0.5 - 0.05 (0.05 = 1 - 0.95)
+  hi &lt;- max(which(S &gt;= 0.55))
+  lo &lt;- min(which(S &lt;= 0.45))
+  f &lt;- (S[hi] - S[lo]) / (t[lo] - t[hi])
+  cat("Andersen 95% CI for median survival time =", six(t[m] - z * seS[m] / f), "to",
+      six(t[m] + z * seS[m] / f), "\n")
+
+  # Brookmeyer-Crowley: the times whose S is within z standard errors of 0.5
+  bc &lt;- range(t[S &gt; 0 &amp; abs(S - 0.5) / seS &lt;= z])
+  cat("Brookmeyer-Crowley 95% CI for median survival time =", bc[1], "to", bc[2], "\n")
+
+  # The mean survival time (the area under S up to the longest time), with the
+  # standard error R gives it multiplied by sqrt(m / (m - 1)) for m deaths, the
+  # correction of Hosmer and Lemeshow (1999) that StatsDirect applies
+  deaths &lt;- means[k, "events"]   # the factor needs at least two deaths
+  mu &lt;- means[k, "rmean"]
+  se &lt;- means[k, "se(rmean)"] * sqrt(deaths / (deaths - 1))
+  last_death &lt;- max(t[d &gt; 0])
+  lim &lt;- ""
+  if (max(t) &gt; last_death) lim &lt;- sprintf("[limit: %s on %s] ", max(t), last_death)
+  cat(sprintf("Mean survival time (95%% CI) %s= %s (%s to %s)\n", lim, six(mu),
+              six(mu - z * se), six(mu + z * se)))
+}
+
+# The survival plot that follows in the report, with a tick at each censored time
+plot(fit, mark.time = TRUE, pch = "|", col = 1:2, xlab = "Times", ylab = "Survivor",
+     main = "Survival Plot (PL estimates)")
+legend("topright", levels(g), col = 1:2, lty = 1, title = "Group Surv", bty = "n")
+
+# The hazard plots: each group's H against time as a step function, then the plots
+# whose straight line would indicate a Weibull (log H against log time), log-normal
+# (z(S) against log time) or linear hazard rate (H / t against time) distribution.
+# Rows where H is infinite, or where the transform is undefined, are left out. The
+# hazard plot starts at H = 0 on the left of the axis, as StatsDirect draws it.
+km_plot &lt;- function(x, y, keep, xlab, ylab, main, where = "topleft", from = NULL) {
+  x &lt;- split(x[keep], s$strata[keep])
+  y &lt;- split(y[keep], s$strata[keep])
+  plot(range(unlist(x)), range(unlist(y)), type = "n", xlab = xlab, ylab = ylab,
+       main = main)
+  for (k in seq_along(x)) {
+    if (is.null(from)) lines(x[[k]], y[[k]], type = "s", col = k)
+    else lines(c(min(unlist(x)), x[[k]]), c(from, y[[k]]), type = "s", col = k)
+  }
+  legend(where, levels(g), col = seq_along(x), lty = 1, title = "Group Surv", bty = "n")
+}
+km_plot(s$time, H, is.finite(H), "Times", "Hazard", "Hazard Plot", from = 0)
+km_plot(log(s$time), log(H), is.finite(H) &amp; H &gt; 0, "Log Times", "Log Hazard",
+        "Log Hazard Plot")
+km_plot(log(s$time), qnorm(s$surv), is.finite(qnorm(s$surv)), "Log Times",
+        "Z (Survivor)", "Lognormal Survival Plot", "topright")
+km_plot(s$time, H / s$time, is.finite(H), "Times", "Hazard / Time", "Hazard Rate Plot")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>

@@ -121,6 +121,68 @@
                                         <p><u>Technical Validation</u>
                                         </p>
                                         <p>StatsDirect calculates tail areas and percentage points for a given number of samples and sample sizes (<a href="../references/reference_list.htm#ref-copenhaver-1988">Copenhaver and Holland, 1988</a>). These calculations are highly iterative therefore you may notice a delay during their computation. Other software and web sites might produce different results to StatsDirect; this is likely to be due to their use of less precise or more restricted algorithms (<a href="../references/reference_list.htm#ref-gleason-1999">Gleason, 1999</a>; <a href="../references/reference_list.htm#ref-lund-1983">Lund and Lund, 1983</a>; <a href="../references/reference_list.htm#ref-royston-1987">Royston, 1987</a>).</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Consider the <a href="../analysis_of_variance/multiple_comparisons.htm">multiple comparisons</a> example, in which four groups of ten observations are compared after a one way analysis of variance with 36 residual degrees of freedom. The Tukey table gives the Studentized range statistic q = 3.74767 for the contrast between Substance 1 and Substance 2, with P = 0.0552, and a critical value of 3.808798 at the 5% level.</p>
+                                        <p>&#160;</p>
+                                        <p>To evaluate this in StatsDirect select Studentized Range (Q) from the Distributions section of the Analysis menu. Enter 3.74767 as the Studentized range Q, 36 as the degrees of freedom and 4 as the number of samples, then click Calculate. To find the Q for a given upper tail P instead, enter the P in the upper tail box, the degrees of freedom and the number of samples and click Invert. The results are shown to seven decimal places and are written to the report as probability distribution calculations.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p>P(Q 3.74767, df 36, samples 4) = 0.0551754 upper,  0.9448246 lower</p>
+                                        <p>&#160;</p>
+                                        <p>This upper tail P, 0.0552 to four decimal places, is the Tukey P for the contrast. Inverting for an upper tail P of 0.05 with the same degrees of freedom and number of samples gives the 5% critical value of Q that the Tukey table shows:</p>
+                                        <p>&#160;</p>
+                                        <p>Q(upper P 0.05, df 36, samples 4) = 3.8087984</p>
+                                        <p>&#160;</p>
+                                        <p>With two samples the range of the two means is their difference, so Q is √2 times Student's t. Inverting for an upper tail P of 0.05 with 36 degrees of freedom and 2 samples gives:</p>
+                                        <p>&#160;</p>
+                                        <p>Q(upper P 0.05, df 36, samples 2) = 2.868158</p>
+                                        <p>&#160;</p>
+                                        <p>which is √2 times 2.028094, the two sided 5% point of Student's t with 36 degrees of freedom. These figures were computed in R (ptukey and qtukey) and agree with the values StatsDirect gives, to the precision shown.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Studentized range (Q) distribution: the StatsDirect help illustration (the Tukey P
+# and the 5% critical value from the multiple comparisons example, and the link with
+# Student's t when there are two samples) in R
+
+# The dialog shows its results to 7 decimal places, so these do too
+seven &lt;- function(x) formatC(x, digits = 7, format = "f", drop0trailing = TRUE)
+
+# 1. Tail probabilities of Q = 3.74767 for 4 samples (means) with 36 residual degrees
+# of freedom (the Tukey contrast between Substance 1 and Substance 2): ptukey() gives
+# the lower tail unless told otherwise
+q &lt;- 3.74767
+k &lt;- 4
+df &lt;- 36
+upper &lt;- ptukey(q, nmeans = k, df = df, lower.tail = FALSE)
+lower &lt;- ptukey(q, nmeans = k, df = df)
+cat("P(Q 3.74767, df 36, samples 4) =", seven(upper), "upper, ", seven(lower),
+    "lower\n")
+
+# 2. The inverse: the Q with 5% in its upper tail (the 5% critical value) for 4
+# samples with 36 degrees of freedom. qtukey() is documented as accurate to the 4th
+# decimal place, so its value is refined to the 7 places shown by solving
+# ptukey() = 0.95
+crit &lt;- qtukey(0.95, nmeans = k, df = df)
+crit &lt;- uniroot(function(x) ptukey(x, nmeans = k, df = df) - 0.95,
+                c(crit - 0.05, crit + 0.05), tol = 1e-10)$root
+cat("Q(upper P 0.05, df 36, samples 4) =", seven(crit), "\n")
+
+# 3. With two samples the range of the means is their difference, so Q is root 2
+# times |t|: the 5% point of Q for 2 samples with 36 degrees of freedom is root 2 times
+# the two sided 5% point of Student's t on 36 degrees of freedom (2.5% in each tail)
+crit2 &lt;- qtukey(0.95, nmeans = 2, df = df)
+crit2 &lt;- uniroot(function(x) ptukey(x, nmeans = 2, df = df) - 0.95,
+                 c(crit2 - 0.05, crit2 + 0.05), tol = 1e-10)$root
+t &lt;- qt(0.975, df = df)
+cat("Q(upper P 0.05, df 36, samples 2) =", seven(crit2), "\n")
+cat("Student's t (two sided 5% point, df 36) =", seven(t), "  times root 2 =",
+    seven(sqrt(2) * t), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

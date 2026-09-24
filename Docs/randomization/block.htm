@@ -122,9 +122,11 @@
                                         <p>&#160;</p>
                                         <p>Random allocation can be made in blocks in order to keep the sizes of treatment groups similar. In order to do this you must specify a sample size that is divisible by the block size you choose. In turn you must choose a block size that is divisible by the number of treatment groups you specify.</p>
                                         <p>&#160;</p>
-                                        <p>An advantage of small block sizes is that treatment group sizes are very similar. A disadvantage of small block sizes is that it is possible to guess some allocations, thus reducing blinding in the trial. An alternative to using large block sizes is to use random sequences of block sizes, which can be done in StatsDirect by specifying a block size of zero. The random block size option selects block sizes of 2, 3, or 4 (at random) times the number of treatments.</p>
+                                        <p>An advantage of small block sizes is that treatment group sizes are very similar. A disadvantage of small block sizes is that it is possible to guess some allocations, thus reducing blinding in the trial. An alternative to using large block sizes is to use random sequences of block sizes, which is done in StatsDirect by leaving the block size blank when it is asked for. The random block size option selects block sizes of 2, 3, or 4 (at random) times the number of treatments.</p>
                                         <p>&#160;</p>
                                         <p>The randomization proceeds by allocating random permutations of treatments within each block.</p>
+                                        <p>&#160;</p>
+                                        <p>For example, to allocate 20 subjects to two treatments in blocks of random size, select Blocks from the Randomization section of the Analysis menu, enter 20 as the number of subjects, leave the block size blank, enter 2 as the number of treatments and enter 10 as the seed. StatsDirect prints:</p>
                                         <p>&#160;</p>
                                         <p><u>Random allocation in blocks</u>
                                         </p>
@@ -145,11 +147,11 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">2</td>
-                                                <td style="text-align: right;">B</td>
+                                                <td style="text-align: right;">A</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">3</td>
-                                                <td style="text-align: right;">A</td>
+                                                <td style="text-align: right;">B</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">4</td>
@@ -161,7 +163,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">6</td>
-                                                <td style="text-align: right;">A</td>
+                                                <td style="text-align: right;">B</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">7</td>
@@ -169,7 +171,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">8</td>
-                                                <td style="text-align: right;">B</td>
+                                                <td style="text-align: right;">A</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">9</td>
@@ -185,7 +187,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">12</td>
-                                                <td style="text-align: right;">B</td>
+                                                <td style="text-align: right;">A</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">13</td>
@@ -193,37 +195,86 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">14</td>
-                                                <td style="text-align: right;">A</td>
+                                                <td style="text-align: right;">B</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">15</td>
-                                                <td style="text-align: right;">A</td>
+                                                <td style="text-align: right;">B</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">16</td>
-                                                <td style="text-align: right;">B</td>
+                                                <td style="text-align: right;">A</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">17</td>
-                                                <td style="text-align: right;">A</td>
+                                                <td style="text-align: right;">B</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">18</td>
-                                                <td style="text-align: right;">B</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">19</td>
                                                 <td style="text-align: right;">A</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">20</td>
+                                                <td style="text-align: right;">19</td>
                                                 <td style="text-align: right;">B</td>
                                             </tr>
+                                            <tr>
+                                                <td style="text-align: right;">20</td>
+                                                <td style="text-align: right;">A</td>
+                                            </tr>
                                         </table>
+                                        <p>&#160;</p>
+                                        <p>Each block holds the same number of subjects on each treatment, so the two groups are of equal size (10 each) here and at the end of every block. Running the function again with the same seed gives the same allocation. With the seed left blank, StatsDirect takes a seed from the computer's clock and prints it, so that the allocation can be repeated.</p>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
                                         </p>
                                         <p>Robust (pseudo-)random number generation is used, see <a href="random_number_generator.htm">random number generation</a>.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above in its structure: R's random number generator gives a different allocation for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Block randomization: the StatsDirect help illustration (20 subjects allocated to
+# 2 treatments in blocks of random size, seed 10) in R
+n &lt;- 20                                   # subjects
+t &lt;- 2                                    # treatments, labelled A, B, ...
+seed &lt;- 10
+if (n %% t != 0) {
+  stop("the number of subjects must be a multiple of the number of treatments")
+}
+
+# Each block holds the treatments in equal numbers, in an order drawn at random by
+# sample(). StatsDirect and R each have their own Mersenne Twister generator and
+# their own way of turning its output into a permutation, so the same seed gives a
+# different allocation in R: the structure of the output is the same, the sequence
+# is not. Keep the seed with the allocation, as either program can then repeat it.
+set.seed(seed)
+treatments &lt;- LETTERS[1:t]
+allocation &lt;- character(0)
+sizes &lt;- integer(0)
+while (length(allocation) &lt; n) {
+  left &lt;- n - length(allocation)
+  # a block of 2, 3 or 4 times the number of treatments, chosen at random; the
+  # last block takes whatever is left once fewer than 4 times t subjects remain
+  size &lt;- if (left &lt; 4 * t) left else t * sample(2:4, 1)
+  sizes &lt;- c(sizes, size)
+  allocation &lt;- c(allocation, sample(rep(treatments, size / t)))
+}
+cat("Random allocation in blocks\n")
+cat("Randomized with seed:", seed, "\n")
+cat("Subjects:", n, "\n")
+cat("Block size: random between", 2 * t, "and", 4 * t, "\n")
+cat("Treatments:", t, "\n")
+print(data.frame(Subject = 1:n, Treatment = allocation), row.names = FALSE)
+cat("Block sizes drawn:", sizes, "\n")
+print(table(allocation))
+
+# Blocks of one fixed size instead (4 here): n must be a multiple of the block
+# size, and the block size a multiple of the number of treatments.
+b &lt;- 4
+set.seed(seed)
+fixed &lt;- unlist(lapply(seq_len(n / b), function(i) sample(rep(treatments, b / t))))
+cat("\nBlock size:", b, "\n")
+print(data.frame(Subject = 1:n, Treatment = fixed), row.names = FALSE)</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

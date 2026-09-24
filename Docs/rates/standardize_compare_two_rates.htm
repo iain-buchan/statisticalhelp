@@ -128,7 +128,7 @@
                                         <p>&#160;</p>
                                         <p>Some of the methods used here are unreliable with small numbers; generally, there should be at least 25 events observed overall and at least one event in each stratum. If the number of events is small, consider aggregating strata.</p>
                                         <p>&#160;</p>
-                                        <p>Note than an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
+                                        <p>Note that an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
                                         <p>&#160;</p>
                                         <p>See also:</p>
                                         <p><a href="direct_standardization.htm">Direct standardization</a>
@@ -160,19 +160,19 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation176.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where IRD hat and IRR hat are point estimates of incidence rate difference and ratio respectively, m is the total number of events observed, PT is the total person-time observed and F is a quantile of the F distribution (denominator degrees of freedom are quoted last).</p>
+                                        <p>- where IRR hat is the point estimate of the incidence rate ratio, a and b are the events observed in the exposed and non-exposed populations, PT<sub>1</sub> and PT<sub>2</sub> are their person-time and F is a quantile of the F distribution (denominator degrees of freedom are quoted last).</p>
                                         <p>&#160;</p>
-                                        <p>Approximate confidence intervals for the DSR are calculated firstly by Chiang's normal approximation to Poisson rate sums (<a href="../references/reference_list.htm#ref-chiang-1961">Chiang, 1961</a>; <a href="../references/reference_list.htm#ref-keyfitz-1966">Keyfitz, 1966</a>; <a href="../references/reference_list.htm#ref-breslow-1987">Breslow and Day, 1987</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>) and secondly by an improved approximation adjusted for the total number of observed events (<a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al., 1991</a>).</p>
+                                        <p>Approximate confidence intervals for the DSR are calculated firstly by Chiang's normal approximation to Poisson rate sums (<a href="../references/reference_list.htm#ref-chiang-1961">Chiang, 1961</a>; <a href="../references/reference_list.htm#ref-keyfitz-1966">Keyfitz, 1966</a>; <a href="../references/reference_list.htm#ref-breslow-1987">Breslow and Day, 1987</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>); the improved approximation adjusted for the total number of observed events (<a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al., 1991</a>) is given by the <a href="direct_standardization.htm">direct standardization</a> function.</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation177.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub> is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum,  y<sub>i</sub> is the number of events observed in the ith stratum of the study population, ni is the person-time for the ith stratum of the study population,  z&gt;<sub>α/2</sub> is the (100 * α/2) the centile of the standard normal distribution, Y is the total number of events observed, Y<sub>l</sub> and Y<sub>u</sub> are the exact lower and upper confidence limits for the Poisson count Y and ICI <sub>l to u</sub> is the improved confidence interval due to Dobson et al. For large rates, the binomial variance is used, where r(1-r)  is substituted for r in the variance formula above.</p>
+                                        <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub> is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum,  y<sub>i</sub> is the number of events observed in the ith stratum of the study population, n<sub>i</sub> is the person-time for the ith stratum of the study population,  z<sub>α/2</sub> is the 100(1 - α/2) centile of the standard normal distribution. For large rates, the binomial variance is used, where r(1-r)  is substituted for r in the variance formula above.</p>
                                         <p>&#160;</p>
                                         <p>Approximate confidence intervals for standardized rate ratios are calculated as follows (<a href="../references/reference_list.htm#ref-newman-2001">Newman, 2001</a>; <a href="../references/reference_list.htm#ref-armitage-2001">Armitage et al., 2001</a>):</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation178.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where SRR is the standardized rate ratio, var(log SRR) is the approximate variance of the natural logarithm of SRR, DSR and v are the directly standardized rate and its variance as above,  z<sub>α/2</sub> is the (100 * α/2) the centile of the standard normal distribution, and CI is the approximate confidence interval for SRR. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formulae above.</p>
+                                        <p>- where SRR is the standardized rate ratio, var(log SRR) is the approximate variance of the natural logarithm of SRR, DSR and v are the directly standardized rate and its variance as above,  z<sub>α/2</sub> is the 100(1 - α/2) centile of the standard normal distribution, and CI is the approximate confidence interval for SRR. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formulae above.</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
@@ -277,14 +277,13 @@
                                                 <td style="text-align: right;">34,250</td>
                                             </tr>
                                             <tr>
-                                                <td>80 
-		 and over</td>
+                                                <td>80 and over</td>
                                                 <td style="text-align: right;">1,797</td>
                                                 <td style="text-align: right;">12,990</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect you must select Standardize and Compare Two Rates from the rates section of the analysis menu. Note that annual mortality rates are often expressed as rates per 100000 population or units of person time (i.e. 100000 person years); .</p>
+                                        <p>To analyse these data in StatsDirect you must select Standardize and Compare Two Rates from the rates section of the analysis menu. Note that annual mortality rates are often expressed as rates per 100000 population or units of person time (i.e. 100000 person years).</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
@@ -382,8 +381,8 @@
                                             <col />
                                             <tr>
                                                 <td style="text-decoration: underline;">Stratum</td>
-                                                <td style="text-decoration: underline;">RR</td>
-                                                <td colspan="2" style="text-decoration: underline;">95% CI (exact)</td>
+                                                <td style="text-decoration: underline;">Rate ratio</td>
+                                                <td colspan="2" style="text-decoration: underline;">95% CI (exact Poisson)</td>
                                                 <td style="text-decoration: underline;">Weight</td>
                                                 <td><u>Label</u>
                                                 </td>
@@ -484,6 +483,99 @@
                                         <p>
                                             <img src="../resources/images/rateratioplot.svg" width="566" height="400" border="0" data-mc-conditions="Primary.WEBHELP" />
                                         </p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Standardize and compare two rates: the StatsDirect help example (Newman 2001, deaths
+# in a cohort of men treated for schizophrenia and in the Alberta population, in eight
+# age strata; the test workbook's Rates worksheet columns d1, pt1, d2, pt2, ref and
+# age strata) in R
+a &lt;- c(2, 55, 32, 21, 27, 19, 25, 9)                       # deaths in the cohort
+pt1 &lt;- c(285.1, 4179.1, 3291.2, 1994.7, 1498.9, 763.5, 254.4, 46.7)  # its person-years
+b &lt;- c(267, 421, 306, 431, 836, 1364, 1861, 1797)          # deaths in Alberta
+pt2 &lt;- c(201825, 263175, 176140, 114715, 93315, 60835, 34250, 12990)  # its people
+ref &lt;- pt2                                                 # the reference population
+strata &lt;- c("10 to 19", "20 to 29", "30 to 39", "40 to 49", "50 to 59", "60 to 69",
+            "70 to 79", "80+")
+k &lt;- length(a)
+per &lt;- 1000           # rates are shown per 1,000 person-years
+z &lt;- qnorm(0.975)     # for 95% confidence intervals
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+
+# R's standard test compares the two crude rates: its estimate is the ratio of the
+# rates and its confidence interval is the exact one of the report, from the binomial
+# distribution of the exposed deaths among all deaths, conditional on their total
+crude &lt;- poisson.test(c(sum(a), sum(b)), c(sum(pt1), sum(pt2)))
+print(crude)
+
+# The same test on each stratum gives the stratum rate ratios with their exact
+# intervals; the weight of a stratum is its share of the reference population
+rr &lt;- (a / pt1) / (b / pt2)
+exact &lt;- sapply(1:k, function(i) {
+  poisson.test(c(a[i], b[i]), c(pt1[i], pt2[i]))$conf.int
+})
+w &lt;- ref / sum(ref)
+cat("Stratum rate ratios with exact Poisson 95% CI and weights\n")
+print(data.frame(stratum = c(1:k, "All"), RR = six(c(rr, crude$estimate)),
+                 lower = six(c(exact[1, ], crude$conf.int[1])),
+                 upper = six(c(exact[2, ], crude$conf.int[2])), weight = six(c(w, 1)),
+                 label = c(strata, "All (crude)")), row.names = FALSE)
+
+# The crude rates with exact Poisson intervals: poisson.test on one count gives the same
+# limits as the chi-square (gamma) quantiles of the report's formula
+crude_ci &lt;- function(events, time) {
+  r &lt;- poisson.test(events, time)
+  per * c(r$estimate, r$conf.int)
+}
+e &lt;- crude_ci(sum(a), sum(pt1))
+cat("Crude rate exposed =", six(e[1]), "\n")
+cat("Exact 95% CI =", six(e[2]), "to", six(e[3]), "\n")
+ne &lt;- crude_ci(sum(b), sum(pt2))
+cat("Crude rate not exposed =", six(ne[1]), "\n")
+cat("Exact 95% CI =", six(ne[2]), "to", six(ne[3]), "\n")
+
+# Base R has no standardisation function, so the directly standardised rates follow
+# the formulae above: each population's stratum rates weighted by the reference
+# population, with the Poisson variance of that weighted sum (Chiang) and a normal
+# interval; the ratio of the two rates has a normal interval on the log scale
+dsr &lt;- function(events, time) {
+  rate &lt;- sum(w * events / time)
+  v &lt;- sum(w^2 * events / time^2)
+  c(rate = rate, v = v, lower = rate - z * sqrt(v), upper = rate + z * sqrt(v))
+}
+s1 &lt;- dsr(a, pt1)
+s2 &lt;- dsr(b, pt2)
+cat("Standardized rate exposed =", six(per * s1["rate"]), "\n")
+cat("Approximate 95% CI =", six(per * s1["lower"]), "to", six(per * s1["upper"]), "\n")
+cat("Standardized rate not exposed =", six(per * s2["rate"]), "\n")
+cat("Approximate 95% CI =", six(per * s2["lower"]), "to", six(per * s2["upper"]), "\n")
+srr &lt;- s1["rate"] / s2["rate"]
+se_log &lt;- sqrt(s1["v"] / s1["rate"]^2 + s2["v"] / s2["rate"]^2)
+cat("Standardized rate ratio =", six(srr), "\n")
+cat("Approximate 95% CI =", six(exp(log(srr) - z * se_log)), "to",
+    six(exp(log(srr) + z * se_log)), "\n")
+
+# The plot that follows in the report: each stratum's rate ratio and exact interval,
+# a square that grows with the stratum's weight, then the crude and the standardized
+# ratios as diamonds, on a log scale with a line at a ratio of one
+# (a stratum with no exposed events has lower limit 0, which a log axis cannot show)
+est &lt;- c(rr, crude$estimate, srr)
+lower &lt;- c(exact[1, ], crude$conf.int[1], exp(log(srr) - z * se_log))
+upper &lt;- c(exact[2, ], crude$conf.int[2], exp(log(srr) + z * se_log))
+y &lt;- (k + 2):1
+par(mar = c(5, 7, 4, 2))
+plot(NA, xlim = range(lower, upper), ylim = c(0.5, k + 2.5), log = "x", yaxt = "n",
+     ylab = "", xlab = "rate ratio (95% confidence interval)",
+     main = "Stratified rate ratio plot (direct standardization)")
+axis(2, at = y, labels = c(strata, "All (crude)", "Standardized"), las = 1,
+     tick = FALSE)
+abline(v = 1, lty = 3)
+segments(lower, y, upper, y)
+points(rr, y[1:k], pch = 15, cex = 0.5 + 2 * sqrt(w / max(w)))
+points(est[k + 1:2], y[k + 1:2], pch = 18, cex = 2.5)
+abline(v = srr, lty = 2)</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>

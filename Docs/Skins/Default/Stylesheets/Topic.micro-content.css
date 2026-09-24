@@ -467,38 +467,6 @@
 	text-align: inherit;
 }
 
-.micro-response-1583592702 .a:link
-{
-	color: #0000D0;
-	text-decoration: underline;
-}
-
-.micro-response-1583592702 .a:visited
-{
-	color: #800080;
-	text-decoration: underline;
-}
-
-.micro-response-1583592702 .a:hover
-{
-	color: #FF0000;
-	cursor: hand;
-	text-decoration: underline;
-}
-
-.micro-response-1583592702 .a:active
-{
-	color: #FF0000;
-	cursor: hand;
-	text-decoration: underline;
-	outline: thin dotted invert;
-}
-
-.micro-response-1583592702 .a:focus
-{
-	outline: thin dotted invert;
-}
-
 .micro-response-1583592702 .dropDown.dropDownrcode
 {
 	margin-top: 1em;
@@ -553,6 +521,38 @@
 .micro-response-1583592702 .dropDownHead.dropDownHeadrcode
 {
 	font-weight: bold;
+}
+
+.micro-response-1583592702 .a:link
+{
+	color: #0000D0;
+	text-decoration: underline;
+}
+
+.micro-response-1583592702 .a:visited
+{
+	color: #800080;
+	text-decoration: underline;
+}
+
+.micro-response-1583592702 .a:hover
+{
+	color: #FF0000;
+	cursor: hand;
+	text-decoration: underline;
+}
+
+.micro-response-1583592702 .a:active
+{
+	color: #FF0000;
+	cursor: hand;
+	text-decoration: underline;
+	outline: thin dotted invert;
+}
+
+.micro-response-1583592702 .a:focus
+{
+	outline: thin dotted invert;
 }
 
 .micro-response-1583592702 img._MCEquation_0

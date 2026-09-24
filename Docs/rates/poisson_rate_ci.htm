@@ -130,18 +130,18 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation127.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where Y is the observed number of events, Y<sub>l</sub> and Y<sub>u</sub> are lower and upper confidence limits for Y respectively, χ<sup>2</sup><sub>ν,a</sub> is the chi-square quantile for upper tail probability on ν degrees of freedom.</p>
+                                        <p>- where Y is the observed number of events, Y<sub>l</sub> and Y<sub>u</sub> are lower and upper confidence limits for Y respectively, χ<sup>2</sup><sub>ν,a</sub> is the chi-square quantile for lower tail probability a on ν degrees of freedom.</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
-                                        <p>Say that 14 events are observed in 200 people studied for 1 year and 100 people studies for 2 years.</p>
+                                        <p>Say that 14 events are observed in 200 people studied for 1 year and 100 people studied for 2 years.</p>
                                         <p>&#160;</p>
                                         <p>The person time at risk is 200 + 100 x 2 = 400 person years</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
                                         <p>Events observed = 14</p>
-                                        <p>Time at risk of event = 400</p>
+                                        <p>Time spent at risk of event = 400</p>
                                         <p>&#160;</p>
                                         <p>Poisson (e.g. incidence) rate estimate = 0.035</p>
                                         <p>Exact 95% confidence interval = 0.019135 to 0.058724</p>
@@ -149,6 +149,33 @@
                                         <p>Here we can say with 95% confidence that the true population incidence rate for this event lies between 0.02 and 0.06 events per person year.</p>
                                         <p>&#160;</p>
                                         <p>See also <a href="compare_crude_incidence_rates.htm">incidence rate comparisons</a></p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Poisson rate confidence interval: the StatsDirect help example (14 events in 400
+# person-years of observation, an incidence rate) in R
+events &lt;- 14
+time_at_risk &lt;- 400                       # 200 people for 1 year and 100 for 2 years
+
+# poisson.test gives the exact limits for the rate (a whole number of events), the
+# same as the chi-square quantile formulae above: its estimate is events / time
+print(poisson.test(events, time_at_risk, conf.level = 0.95))
+
+# The report's lines to 6 places. The limits are also the Poisson means whose
+# cumulative probabilities reach the tails: qgamma(alpha / 2, events) and
+# qgamma(1 - alpha / 2, events + 1), divided by the time at risk. With no events the
+# lower limit is 0.
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+alpha &lt;- 0.05
+rate &lt;- events / time_at_risk
+lower &lt;- if (events == 0) 0 else qgamma(alpha / 2, events) / time_at_risk
+upper &lt;- qgamma(1 - alpha / 2, events + 1) / time_at_risk
+cat("Events observed =", events, "\n")
+cat("Time spent at risk of event =", time_at_risk, "\n")
+cat("Poisson (e.g. incidence) rate estimate =", six(rate), "\n")
+cat("Exact 95% confidence interval =", six(lower), "to", six(upper), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>

@@ -145,6 +145,75 @@
                                         <p>Γ(1)=1</p>
                                         <p>Γ(x+1)=xΓ(x)</p>
                                         <p>Γ(n)=(n-1)!</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>An illustration with invented figures. Suppose that deaths from a cause in a district have averaged 8 a year, and that 14 were recorded in the latest year. If the deaths occur independently and at random at a constant rate, the number in a year follows a Poisson distribution with mean 8.</p>
+                                        <p>&#160;</p>
+                                        <p>To calculate the probabilities in StatsDirect select Poisson from the Distributions section of the Analysis menu, enter 14 as the number of random events and 8 as the mean, then click Calculate.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example StatsDirect shows the probability of exactly 14 events, of 14 or more and of 14 or fewer, and reports the three on one line:</p>
+                                        <p>&#160;</p>
+                                        <p>P(Poisson n 14, µ 8) = 0.016923711395853 for n events,  0.034180701793823 for n or more events,  0.98274300960203 for n or fewer events</p>
+                                        <p>&#160;</p>
+                                        <p>The exact values to 15 decimal places are 0.016923711395853, 0.034180701793819 and 0.982743009602034; the last digit or two of the two cumulative probabilities in StatsDirect's display are rounding error from summing the series term by term.</p>
+                                        <p>&#160;</p>
+                                        <p>So 14 or more deaths would be seen in about 3.4% of years if the underlying rate had not changed: unusual, but not so rare that a rise in the rate can be inferred from one year alone.</p>
+                                        <p>&#160;</p>
+                                        <p>The function also works in reverse: enter a probability in the "or more" or the "or fewer" box and click Invert, and StatsDirect finds the mean that gives that probability for the number of events entered. The Lower CL and Upper CL buttons do this for the two tail probabilities of the confidence level in the box beside them. With 14 events and 95%, the mean at which 14 or more events has probability 0.025 is shown as 7.65393027630061 and the mean at which 14 or fewer events has probability 0.025 as 23.4896211218356 (a mean is shown to 15 significant figures; the exact values to that precision are 7.6539302763006 and 23.4896211218356, the first differing in its last figure because the bisection solves StatsDirect's own cumulative probability, which carries the rounding error noted above); these are the exact 95% confidence limits for a Poisson count of 14 (see <a href="../rates/poisson_rate_ci.htm">Poisson rate confidence interval</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>With a mean of 3 the probability of no events is 0.049787068367864, which is e<sup>-3</sup>, as the formula above gives for r = 0.</p>
+                                        <p>&#160;</p>
+                                        <p>The exact figures above were calculated in R with the code below; StatsDirect calculates them with its own routines and shows a probability to 15 decimal places and a mean to 15 significant figures, the last digit or two of which can differ by rounding as noted.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Poisson distribution: the StatsDirect help illustration (probabilities for a count of
+# events with a given mean, and the mean that gives a chosen tail probability) in R
+
+# StatsDirect shows the probabilities of exactly n, of n or more and of n or fewer
+# events to 15 decimal places, and a mean to 15 significant figures; these helpers
+# print R's values the same way.
+p15 &lt;- function(x) formatC(x, digits = 15, format = "f", drop0trailing = TRUE)
+s15 &lt;- function(x) trimws(formatC(x, digits = 15, format = "fg", drop0trailing = TRUE))
+
+# 14 events when the mean is 8. dpois(n, mean) is the probability of exactly n events
+# and ppois(n, mean) that of n or fewer; with lower.tail = FALSE ppois gives the
+# probability of MORE than n events, so the probability of n or more events is
+# ppois(n - 1, mean, lower.tail = FALSE)
+n &lt;- 14
+mu &lt;- 8
+cat("Probability of", n, "events =", p15(dpois(n, mu)), "\n")
+cat("Probability of", n, "or more events =", p15(ppois(n - 1, mu, lower.tail = FALSE)),
+    "\n")
+cat("Probability of", n, "or fewer events =", p15(ppois(n, mu)), "\n")
+
+# The inverse: the mean at which n or more events has probability 0.025 and the mean at
+# which n or fewer events has probability 0.025 (StatsDirect's Lower CL and Upper CL
+# buttons with 95 in the confidence box, found by bisection on the cumulative
+# probability). In R they come from the gamma distribution: n or more events with mean
+# m has the same probability as the n-th event of a unit-rate process occurring by time
+# m, so P(n or more) = pgamma(m, n) and P(n or fewer) = 1 - pgamma(m, n + 1).
+lower &lt;- qgamma(0.025, n)
+upper &lt;- qgamma(0.975, n + 1)
+cat("Mean at which", n, "or more events has probability 0.025 =", s15(lower), "\n")
+cat("Mean at which", n, "or fewer events has probability 0.025 =", s15(upper), "\n")
+# a check against ppois; these are also the exact 95% limits for a Poisson count of n
+cat("  check:", p15(ppois(n - 1, lower, lower.tail = FALSE)), p15(ppois(n, upper)),
+    "\n")
+cat("  exact 95% confidence interval for a Poisson count of", n, "=", s15(lower), "to",
+    s15(upper), "\n")
+
+# No events when the mean is 3: P(0) = exp(-mean)
+cat("Probability of 0 events with mean 3 =", p15(dpois(0, 3)), "\n")
+cat("  which is exp(-3) =", p15(exp(-3)), "\n")
+
+# R's qpois inverts the other way, for the count: the smallest number of events whose
+# probability of that many or fewer is at least the probability given
+cat("Smallest count with probability at least 0.95 of that many or fewer, mean 8 =",
+    qpois(0.95, mu), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

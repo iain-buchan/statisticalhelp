@@ -123,7 +123,7 @@
                                         <ul>
                                             <li>POWER: probability of detecting a true effect.</li>
                                             <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
-                                            <li>R0: correlation coefficient under the null hypothesis (often 0).</li>
+                                            <li>R0: correlation coefficient under the null hypothesis (often 0; StatsDirect takes R0 and R1 between 0 and 1, so if both are negative enter their absolute values).</li>
                                             <li>R1: correlation coefficient under the alternative hypothesis.</li>
                                         </ul>
                                         <p>&#160;</p>
@@ -138,7 +138,7 @@
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
                                         </p>
-                                        <p>The sample size estimation uses Fisher's classic z-transformation to normalize the distribution of Pearson's correlation coefficient:</p>
+                                        <p>The sample size estimation uses Fisher's classic z-transformation to normalise the distribution of Pearson's correlation coefficient:</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation222.svg" alt="" class="mcReset" />
                                         </p>
@@ -159,7 +159,70 @@
                                         </p>
                                         <p>-where norm is the area under the standard normal distribution curve.</p>
                                         <p>&#160;</p>
-                                        <p>The precise value of n is rounded up to the closest integer in the results given by StatsDirect.</p>
+                                        <p>The initial estimate is rounded up to a whole number and then moved to the smallest number of pairs at which the power equation gives at least the required power; this is the sample size given by StatsDirect.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Suppose that you are planning a study of the association between two measurements, and that a correlation of 0.4 or more would matter in practice. This is an invented example: you want an 80% chance of detecting a true correlation of 0.4 at the two sided 5% level of significance, against the null hypothesis of no correlation (R0 = 0).</p>
+                                        <p>&#160;</p>
+                                        <p>To calculate this in StatsDirect select Correlation from the Sample Size section of the Analysis menu. Enter 0 as the correlation coefficient under the null hypothesis and 0.4 as the correlation coefficient under the alternative hypothesis, then 80% as the power and 5% as alpha.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for Pearson correlation</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Alpha = 0.05</p>
+                                        <p>Power = 0.8</p>
+                                        <p>Correlation coefficient under null hypothesis = 0</p>
+                                        <p>Correlation coefficient under alternative hypothesis = 0.4</p>
+                                        <p>Estimated minimum sample size = 47</p>
+                                        <p>&#160;</p>
+                                        <p>The initial estimate from the formula above is 46.73 pairs, which is rounded up to 47. With 47 pairs the power equation gives 80.2%, and with 46 pairs 79.3%, so 47 is the smallest number of pairs that meets the target: the study should include at least 47 pairs of measurements.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Sample size for Pearson's correlation: the StatsDirect help example (an invented
+# study that should detect a correlation of 0.4 or more, r1 = 0.4 against the null
+# value r0 = 0, with 80% power at the two sided 5% level) in R
+r0 &lt;- 0
+r1 &lt;- 0.4
+power &lt;- 0.8
+alpha &lt;- 0.05
+stopifnot(r0 != r1, abs(r0) &lt; 1, abs(r1) &lt; 1)  # Fisher's z needs |r| &lt; 1, r0 != r1
+
+# Base R has no function for this sample size, so the topic's method is used here.
+# Fisher's z transformation, atanh(r) = 0.5 * log((1 + r) / (1 - r)), makes a sample
+# correlation from n pairs approximately normal with mean atanh(rho) and variance
+# 1 / (n - 3), which gives the two sided power of a test between the two hypotheses.
+dif &lt;- abs(atanh(r1) - atanh(r0))
+z_alpha &lt;- qnorm(1 - alpha / 2)
+z_power &lt;- qnorm(power)
+size_power &lt;- function(n) {
+  z &lt;- dif * sqrt(n - 3)
+  pnorm(z - z_alpha) + pnorm(-z - z_alpha)
+}
+
+# The initial estimate ((z_alpha + z_power) / dif)^2 + 3 is rounded up, then moved to
+# the smallest whole number of pairs (at least 4) at which the power reaches the target
+n0 &lt;- ((z_alpha + z_power) / dif)^2 + 3
+n &lt;- max(ceiling(n0), 4)
+while (n &gt; 4 &amp;&amp; size_power(n - 1) &gt;= power) n &lt;- n - 1
+while (size_power(n) &lt; power) n &lt;- n + 1
+cat("Alpha =", alpha, "\n")
+cat("Power =", power, "\n")
+cat("Correlation coefficient under null hypothesis =", r0, "\n")
+cat("Correlation coefficient under alternative hypothesis =", r1, "\n")
+cat("Estimated minimum sample size =", n, "\n")
+
+# The working: the initial estimate and the power either side of the answer
+pct &lt;- function(x) paste0(formatC(100 * x, digits = 1, format = "f"), "%")
+cat("Initial estimate of n =", formatC(n0, digits = 2, format = "f"), "\n")
+cat("Power with", n - 1, "pairs =", paste0(pct(size_power(n - 1)), ","), "with", n,
+    "pairs =", pct(size_power(n)), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

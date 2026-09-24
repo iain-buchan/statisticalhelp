@@ -145,6 +145,66 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation112.svg" alt="" class="mcReset" />
                                         </p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Consider the <a href="../parametric_methods/f_variance_ratio.htm">F (variance ratio) test</a> example, which gives F = 6.944952 with 6 numerator and 8 denominator degrees of freedom.</p>
+                                        <p>&#160;</p>
+                                        <p>To evaluate this in StatsDirect select F (Variance Ratio) from the Distributions section of the Analysis menu. Enter 6.944952 as the variance ratio F, 6 as the numerator degrees of freedom and 8 as the denominator degrees of freedom, then click Calculate. To find the F for a given upper tail P instead, enter the P and the two degrees of freedom and click Invert. The P is shown to 15 decimal places and F to 15 significant figures, and each result is written to the report as a probability distribution calculation.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p>P(F 6.944952, dfn 6, dfd 8) = 0.007667699178732 upper</p>
+                                        <p>&#160;</p>
+                                        <p>This upper tail P, 0.0077 to four decimal places, is the upper side P of the F test. Inverting for an upper tail P of 0.05 with the same degrees of freedom gives the 5% critical value of F:</p>
+                                        <p>&#160;</p>
+                                        <p>F(upper P 0.05, dfn 6, dfd 8) = 3.58058031976146</p>
+                                        <p>&#160;</p>
+                                        <p>With one numerator degree of freedom, F is the square of Student's t. Inverting for an upper tail P of 0.05 with 1 and 20 degrees of freedom gives:</p>
+                                        <p>&#160;</p>
+                                        <p>F(upper P 0.05, dfn 1, dfd 20) = 4.35124350332929</p>
+                                        <p>&#160;</p>
+                                        <p>which is the square of 2.08596344726586, the two sided 5% point of Student's t with 20 degrees of freedom.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># F (variance ratio) distribution: the StatsDirect help illustration (the upper tail
+# P of the F test example, a 5% critical value, and the link with Student's t) in R
+
+# The dialog shows tail areas to 15 decimal places and F to 15 significant figures
+# (with a thousands separator above 999); p15() and x15() print R's values the same
+# way. For ordinary degrees of freedom the program's integration and R's agree to
+# about 14 figures, so the last digit can differ.
+p15 &lt;- function(p) formatC(p, digits = 15, format = "f", drop0trailing = TRUE)
+x15 &lt;- function(x) formatC(x, digits = 15, format = "g", drop0trailing = TRUE)
+
+# 1. Upper tail P for F = 6.944952 on 6 and 8 degrees of freedom (the F test
+# example): pf() gives the lower tail unless told otherwise
+p &lt;- pf(6.944952, df1 = 6, df2 = 8, lower.tail = FALSE)
+cat("P(F 6.944952, dfn 6, dfd 8) =", p15(p), "upper\n")
+cat("To four decimal places, the F test's upper side P =",
+    formatC(p, digits = 4, format = "f"), "\n")
+
+# The same by the beta transformation given in the topic: the upper tail of F
+# is the lower tail of a beta variable at dfd / (dfd + dfn F)
+pb &lt;- pbeta(8 / (8 + 6 * 6.944952), shape1 = 8 / 2, shape2 = 6 / 2)
+cat("Via the beta distribution:", p15(pb), "\n")
+
+# 2. The inverse: the F with 5% in its upper tail (the 5% critical value) for
+# 6 and 8 degrees of freedom
+f &lt;- qf(0.05, df1 = 6, df2 = 8, lower.tail = FALSE)
+cat("F(upper P 0.05, dfn 6, dfd 8) =", x15(f), "\n")
+
+# 3. With one numerator degree of freedom F is the square of Student's t: the
+# 5% point of F on 1 and 20 degrees of freedom is the square of the two sided
+# 5% point of t on 20 degrees of freedom (2.5% in each tail)
+f120 &lt;- qf(0.05, df1 = 1, df2 = 20, lower.tail = FALSE)
+t20 &lt;- qt(0.975, df = 20)
+cat("F(upper P 0.05, dfn 1, dfd 20) =", x15(f120), "\n")
+cat("Student's t (two sided 5% point, df 20) =", x15(t20), "  squared =",
+    x15(t20^2), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

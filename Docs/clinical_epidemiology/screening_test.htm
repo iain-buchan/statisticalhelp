@@ -208,6 +208,56 @@
                                         <p>Probability of a FALSE NEGATIVE result = 0.0005</p>
                                         <p>&#160;</p>
                                         <p>Here we see that more than half of the patients who give a positive test will not have the disease (about 1% of all patients tested will give a false positive result). This is clearly not acceptable for a full screening method but could be used as pre-screening before further tests if there was no better initial test available.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Screening test errors (Bayes' theorem): the StatsDirect help example (a hypothetical
+# screening test tried on 4000 patients, 2000 with the disease and 2000 without) in R
+tp &lt;- 1902   # a: test positive, disease present
+fp &lt;- 22     # b: test positive, disease absent
+fn &lt;- 98     # c: test negative, disease present
+tn &lt;- 1978   # d: test negative, disease absent
+counts &lt;- matrix(c(tp, fp, fn, tn), 2, byrow = TRUE,
+                 dimnames = list(Test = c("Positive", "Negative"),
+                                 Disease = c("Present", "Absent")))
+print(addmargins(counts))
+
+# The test's sensitivity and specificity come from the trial; the prevalence of the
+# disease in the population to be screened is entered as 1 in n
+sensitivity &lt;- tp / (tp + fn)                    # P(positive test | disease)
+specificity &lt;- tn / (fp + tn)                    # P(negative test | no disease)
+n &lt;- 100
+prevalence &lt;- 1 / n                              # P(disease) before the test
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("For an overall case rate of", six(prevalence * 10000),
+    "per ten thousand population tested:\n")
+
+# Base R has no function for this, so Bayes' theorem is applied directly. The false
+# positive rate is the probability that a positive result is wrong, P(no disease |
+# positive test), which is 1 - positive predictive value; the false negative rate is
+# P(disease | negative test), which is 1 - negative predictive value
+p_positive &lt;- sensitivity * prevalence + (1 - specificity) * (1 - prevalence)
+false_positive &lt;- (1 - specificity) * (1 - prevalence) / p_positive
+false_negative &lt;- (1 - sensitivity) * prevalence / (1 - p_positive)
+cat("Test SENSITIVITY = ", six(100 * sensitivity), "%\n", sep = "")
+cat("Probability of a FALSE POSITIVE result =", six(false_positive), "\n")
+cat("Test SPECIFICITY = ", six(100 * specificity), "%\n", sep = "")
+cat("Probability of a FALSE NEGATIVE result =", six(false_negative), "\n")
+
+# The same answers from the expected counts in 10000 people screened: 100 have the
+# disease, of whom 95.1 test positive, and 9900 do not, of whom 108.9 test positive
+screened &lt;- 10000
+diseased &lt;- screened * prevalence
+expected &lt;- matrix(c(diseased * sensitivity, (screened - diseased) * (1 - specificity),
+                     diseased * (1 - sensitivity), (screened - diseased) * specificity),
+                   2, byrow = TRUE, dimnames = dimnames(counts))
+print(addmargins(expected))
+cat("False positives among the positive results =",
+    six(expected["Positive", "Absent"] / sum(expected["Positive", ])), "\n")
+cat("False negatives among the negative results =",
+    six(expected["Negative", "Present"] / sum(expected["Negative", ])), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

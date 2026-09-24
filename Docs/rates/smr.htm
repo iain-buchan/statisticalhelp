@@ -152,7 +152,7 @@
                                         <p><u>Example</u>
                                         </p>
                                         <p>From <a href="../references/reference_list.htm#ref-bland-2000">Bland (2000)</a>.</p>
-                                        <p>Test workbook (Rates worksheet: Reference Mortality, Index Group Sizes, Age Groups).</p>
+                                        <p>Test workbook (Rates worksheet: Reference Mortality, the five-row Index Group Sizes column beside it, Age Groups).</p>
                                         <p>&#160;</p>
                                         <p>The following data represent the age-specific mortality rates for liver cirrhosis in men and the number of male doctors in each age stratum:</p>
                                         <p>&#160;</p>
@@ -192,7 +192,7 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect you must select indirect standardization and SMR from the rates section of the analysis menu. Enter the mortality rate and group size for each age group. Note that group size refers to the study sample of doctors and not to the male population used to derive mortality data. Enter the mortality denominator as 1000000. Enter the observed deaths as 14.</p>
+                                        <p>To analyse these data in StatsDirect you must select indirect standardization and SMR from the rates section of the analysis menu. Enter the mortality rate and group size for each age group. Note that group size refers to the study sample of doctors and not to the male population used to derive mortality data. Select per 1,000,000 as the multiplier for the reference rates. Enter the observed deaths as 14.</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
@@ -203,41 +203,49 @@
                                             <col />
                                             <col />
                                             <col />
+                                            <col />
                                             <tr>
                                                 <td style="font-weight: normal;text-decoration: underline;text-align: right;">Reference rate</td>
                                                 <td style="font-weight: normal;text-decoration: underline;text-align: right;">Observed person-time</td>
                                                 <td style="font-weight: normal;text-decoration: underline;text-align: right;">Expected deaths</td>
+                                                <td style="font-weight: normal;text-decoration: underline;text-align: right;">&#160;</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">0.000006</td>
                                                 <td style="text-align: right;">1080</td>
                                                 <td style="text-align: right;">0.006328</td>
+                                                <td style="text-align: right;">15-24</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">0.000013</td>
                                                 <td style="text-align: right;">12860</td>
                                                 <td style="text-align: right;">0.167823</td>
+                                                <td style="text-align: right;">25-34</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">0.000047</td>
                                                 <td style="text-align: right;">11510</td>
                                                 <td style="text-align: right;">0.540245</td>
+                                                <td style="text-align: right;">35-44</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">0.000162</td>
                                                 <td style="text-align: right;">10330</td>
                                                 <td style="text-align: right;">1.668326</td>
+                                                <td style="text-align: right;">45-54</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">0.000271</td>
                                                 <td style="text-align: right;">7790</td>
                                                 <td style="text-align: right;">2.113879</td>
+                                                <td style="text-align: right;">55-64</td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right;">&#160;</td>
                                                 <td style="text-align: right;">&#160;</td>
-                                                <td style="text-align: right;"><b>Total = 4.4966004</b>
+                                                <td style="text-align: right;"><b>Total = 4.4966</b>
                                                 </td>
+                                                <td style="text-align: right;">&#160;</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
@@ -245,10 +253,63 @@
                                         <p>SMR (*100 as integer) = 311</p>
                                         <p>Exact 95% confidence interval = 1.702159 to 5.223862 (170 to 522)</p>
                                         <p>&#160;</p>
-                                        <p>Probability of observing 14 or more deaths by chance P = .0002</p>
-                                        <p>Probability of observing 14 or fewer deaths by chance P &gt; .9999</p>
+                                        <p>Probability of observing 14 or more deaths by chance P = 0.0002</p>
+                                        <p>Probability of observing 14 or fewer deaths by chance P &gt; 0.9999</p>
                                         <p>&#160;</p>
                                         <p>Here we can see that the total expected deaths from liver cirrhosis in male doctors is 4.5 per year. The observed number, 14, was statistically highly significantly greater than expected. With 95% confidence we can state that male doctors in this country exhibit between 1.7 and 5.2 times the number of deaths from liver cirrhosis than expected from the general male population of a similar age distribution.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Indirect standardization and SMR: the StatsDirect help example (Bland 2000, deaths
+# from liver cirrhosis among male doctors against the age-specific rates for all men;
+# the test workbook's Rates worksheet columns Reference Mortality, Index Group Sizes
+# and Age Groups) in R
+rate &lt;- c(5.859, 13.050, 46.937, 161.503, 271.358)  # deaths per million men per year
+doctors &lt;- c(1080, 12860, 11510, 10330, 7790)       # male doctors in each age group
+age &lt;- c("15-24", "25-34", "35-44", "45-54", "55-64")
+per &lt;- 1000000                                      # the multiplier of the rates
+observed &lt;- 14                                      # deaths seen among the doctors
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else if (p &gt; 0.9999) "P &gt; 0.9999" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+
+# Expected deaths: each stratum's reference rate times its person-time, here one
+# year of follow-up of each doctor, so the group sizes
+expected &lt;- rate / per * doctors
+e &lt;- sum(expected)
+print(data.frame(reference_rate = six(rate / per), person_time = doctors,
+                 expected_deaths = six(expected), stratum = age), row.names = FALSE)
+cat("Total =", six(e), "\n")
+
+# R's standard test: the observed count as a Poisson count over e units of "time",
+# so its estimate is observed / e, the SMR, and its confidence interval is the exact
+# one from the chi-square (gamma) quantiles computed below. Its P value is two
+# sided, for the null hypothesis that the rate is 1, that is that the SMR is 1
+print(poisson.test(observed, T = e, r = 1, conf.level = 0.95))
+
+# The report's lines to 6 places, with the SMR and its limits also as integers
+alpha &lt;- 0.05
+smr &lt;- observed / e
+lower &lt;- if (observed == 0) 0 else qchisq(alpha / 2, 2 * observed) / (2 * e)
+upper &lt;- qchisq(1 - alpha / 2, 2 * (observed + 1)) / (2 * e)
+cat("Standardized Mortality Ratio (SMR) =", six(smr), "\n")
+# (an exact .5 here: the program rounds it up, R's round() takes the even integer)
+cat("SMR (*100 as integer) =", round(100 * smr), "\n")
+cat("Exact 95% confidence interval =", six(lower), "to", six(upper),
+    paste0("(", round(100 * lower), " to ", round(100 * upper), ")"), "\n")
+
+# The one sided probabilities: the Poisson tails, with e as the mean, at and beyond
+# the observed count in each direction (the upper tail is 1 minus the probability of
+# fewer than the count observed)
+p_more &lt;- ppois(observed - 1, e, lower.tail = FALSE)
+p_fewer &lt;- ppois(observed, e)
+cat("Probability of observing", observed, "or more deaths by chance", pv(p_more), "\n")
+cat("Probability of observing", observed, "or fewer deaths by chance", pv(p_fewer),
+    "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>

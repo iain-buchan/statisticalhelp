@@ -172,12 +172,11 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect first prepare them in three workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select correlation from the meta-analysis section of the analysis menu, and then <a href="../workbook/selecting_data.htm">select</a> the columns 'Correlation' and 'Sample size' as prompted.</p>
+                                        <p>To analyse these data in StatsDirect first prepare them in two workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select correlation from the meta-analysis section of the analysis menu, and then <a href="../workbook/selecting_data.htm">select</a> the columns 'Correlation' and 'Sample size' as prompted.</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
                                         <table cellspacing="0" style="caption-side: top;">
-                                            <col />
                                             <col />
                                             <col />
                                             <col />
@@ -188,7 +187,6 @@
                                                 <td style="text-decoration: underline;">Size</td>
                                                 <td style="text-decoration: underline;">Correlation</td>
                                                 <td colspan="2" style="text-decoration: underline;">Approximate 95% CI</td>
-                                                <td style="text-decoration: underline;">% Weight (fixed, random, size)</td>
                                             </tr>
                                             <tr>
                                                 <td>1</td>
@@ -196,7 +194,6 @@
                                                 <td>0.51</td>
                                                 <td>0.370922</td>
                                                 <td>0.626703</td>
-                                                <td>12.812813, &#160;12.609861, &#160;12.805474</td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
@@ -204,7 +201,6 @@
                                                 <td>0.48</td>
                                                 <td>0.334935</td>
                                                 <td>0.602837</td>
-                                                <td>12.612613, &#160;12.559901, &#160;12.609971</td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
@@ -212,7 +208,6 @@
                                                 <td>0.30</td>
                                                 <td>0.149418</td>
                                                 <td>0.436981</td>
-                                                <td>15.215215, &#160;13.129365, &#160;15.151515 </td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
@@ -220,7 +215,6 @@
                                                 <td>0.21</td>
                                                 <td>0.03273</td>
                                                 <td>0.37446</td>
-                                                <td>11.811812, &#160;12.347632, &#160;11.827957</td>
                                             </tr>
                                             <tr>
                                                 <td>5</td>
@@ -228,7 +222,6 @@
                                                 <td>0.60</td>
                                                 <td>0.465688</td>
                                                 <td>0.707292</td>
-                                                <td>10.810811, &#160;12.050626, &#160;10.85044</td>
                                             </tr>
                                             <tr>
                                                 <td>6</td>
@@ -236,7 +229,6 @@
                                                 <td>0.46</td>
                                                 <td>0.305281</td>
                                                 <td>0.591057</td>
-                                                <td>11.611612, &#160;12.291224, &#160;11.632454</td>
                                             </tr>
                                             <tr>
                                                 <td>7</td>
@@ -244,7 +236,6 @@
                                                 <td>0.22</td>
                                                 <td>0.03591</td>
                                                 <td>0.389649</td>
-                                                <td>10.910911, &#160;12.082088, &#160;10.948192</td>
                                             </tr>
                                             <tr>
                                                 <td>8</td>
@@ -252,7 +243,85 @@
                                                 <td>0.25</td>
                                                 <td>0.090686</td>
                                                 <td>0.396837</td>
-                                                <td>14.214214, &#160;12.929303, &#160;14.173998</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;">Stratum</td>
+                                                <td style="text-decoration: underline;">Standardized effect</td>
+                                                <td style="text-decoration: underline;">Variance</td>
+                                                <td colspan="3" style="text-decoration: underline;">% Weights (fixed, random, size)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>0.56273</td>
+                                                <td>0.007813</td>
+                                                <td>12.812813</td>
+                                                <td>12.609861</td>
+                                                <td>12.805474</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>0.522984</td>
+                                                <td>0.007937</td>
+                                                <td>12.612613</td>
+                                                <td>12.559901</td>
+                                                <td>12.609971</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>0.30952</td>
+                                                <td>0.006579</td>
+                                                <td>15.215215</td>
+                                                <td>13.129365</td>
+                                                <td>15.151515</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>0.213171</td>
+                                                <td>0.008475</td>
+                                                <td>11.811812</td>
+                                                <td>12.347632</td>
+                                                <td>11.827957</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>0.693147</td>
+                                                <td>0.009259</td>
+                                                <td>10.810811</td>
+                                                <td>12.050626</td>
+                                                <td>10.85044</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>0.497311</td>
+                                                <td>0.008621</td>
+                                                <td>11.611612</td>
+                                                <td>12.291224</td>
+                                                <td>11.632454</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>0.223656</td>
+                                                <td>0.009174</td>
+                                                <td>10.910911</td>
+                                                <td>12.082088</td>
+                                                <td>10.948192</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>0.255413</td>
+                                                <td>0.007042</td>
+                                                <td>14.214214</td>
+                                                <td>12.929303</td>
+                                                <td>14.173998</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
@@ -265,12 +334,12 @@
                                         </p>
                                         <p>Cochran Q = 27.382264 &#160;(df = 7) &#160;P = 0.0003</p>
                                         <p>Moment-based estimate of between studies variance = 0.023363</p>
-                                        <p>I² (inconsistency) = 74.4% (95% CI = 37% to 85.7%) </p>
+                                        <p>I² (inconsistency) = 74.4% (95% CI = 46.2% to 86.5%) </p>
                                         <p>&#160;</p>
                                         <p><u>Hedges-Olkin random effects</u>
                                         </p>
                                         <p>Pooled correlation = 0.387032 (95% CI = 0.277911 to 0.486292)</p>
-                                        <p>Z (test Correlation) = 6.512137 &#160;P &lt; 0.0001</p>
+                                        <p>Z (test correlation differs from 0) = 6.512137 &#160;P &lt; 0.0001</p>
                                         <p>&#160;</p>
                                         <p><u>Bias indicators</u>
                                         </p>
@@ -280,7 +349,7 @@
                                         <p><u>Schmidt-Hunter</u>
                                         </p>
                                         <p>Weighted mean correlation (95% CI): 0.374262 (0.278809 to 0.469714)</p>
-                                        <p>Test of association for weighted mean correlation: 7.684871 P &lt; 0.0001</p>
+                                        <p>Z (test correlation differs from 0) = 7.684871 P &lt; 0.0001</p>
                                         <p>&#160;</p>
                                         <p>Observed variance across studies: 0.018974</p>
                                         <p>Variance due to sampling error: 0.005828</p>
@@ -294,7 +363,172 @@
                                             <li value="3">3. Chi-square test of heterogeneity: 26.044144 P = 0.0005</li>
                                         </ol>
                                         <p>&#160;</p>
-                                        <p>Here we cannot make a confident statement about the pooled correlation coefficient because the set of studies is clearly not homogeneous and the number of studies to too small for standard correlation meta-analysis methods to be reliable.</p>
+                                        <p>Here we cannot make a confident statement about the pooled correlation coefficient because the set of studies is clearly not homogeneous and the number of studies is too small for standard correlation meta-analysis methods to be reliable.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Correlation meta-analysis: the StatsDirect help example (eight studies of the
+# relationship between drug misuse and delinquency; the test workbook's meta worksheet
+# columns Correlation and Sample size) in R
+r &lt;- c(0.51, 0.48, 0.30, 0.21, 0.60, 0.46, 0.22, 0.25)
+n &lt;- c(131, 129, 155, 121, 111, 119, 112, 145)
+
+# Base R has no meta-analysis function, so the Hedges-Olkin method is computed as the
+# report describes it: each correlation becomes Fisher's z (atanh), whose variance is
+# 1 / (n - 3); the studies are pooled on the z scale with weights n - 3, and the pooled
+# z and its limits are transformed back to correlations (tanh)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+k &lt;- length(r)
+z &lt;- atanh(r)
+v &lt;- 1 / (n - 3)
+cit &lt;- qnorm(0.975)
+lower &lt;- tanh(z - cit * sqrt(v))
+upper &lt;- tanh(z + cit * sqrt(v))
+w &lt;- 1 / v
+z_fixed &lt;- sum(w * z) / sum(w)
+se_fixed &lt;- 1 / sqrt(sum(w))
+fixed &lt;- tanh(z_fixed + c(0, -1, 1) * cit * se_fixed)
+
+# Cochran's Q on the z scale, and the DerSimonian-Laird moment estimate of the
+# between-studies variance that the random effects weights add to each variance
+Q &lt;- sum(w * (z - z_fixed)^2)
+df &lt;- k - 1
+tau2 &lt;- max(0, (Q - df) / (sum(w) - sum(w^2) / sum(w)))
+w_random &lt;- 1 / (v + tau2)
+z_random &lt;- sum(w_random * z) / sum(w_random)
+se_random &lt;- 1 / sqrt(sum(w_random))
+random &lt;- tanh(z_random + c(0, -1, 1) * cit * se_random)
+
+# The report's two tables: each correlation with its approximate 95% interval, then
+# its Fisher z, variance and percentage weights (fixed effects, random effects, and by
+# sample size as the Schmidt-Hunter method below weights)
+print(data.frame(Study = 1:k, Size = n, Correlation = r, Lower = six(lower),
+                 Upper = six(upper)), row.names = FALSE)
+# (study 1's variance is exactly 1/128, printed 0.007812 here and 0.007813 by the
+# program, which squares the standard error)
+print(data.frame(Study = 1:k, Fisher_z = six(z), Variance = six(v),
+                 Fixed = six(100 * w / sum(w)),
+                 Random = six(100 * w_random / sum(w_random)),
+                 Size = six(100 * n / sum(n))), row.names = FALSE)
+
+cat("Hedges-Olkin fixed effects\n")
+cat("Pooled correlation = ", six(fixed[1]), " (95% CI = ", six(fixed[2]), " to ",
+    six(fixed[3]), ")\n", sep = "")
+cat("Z (test correlation differs from 0) =", six(z_fixed / se_fixed), " ",
+    pv(2 * pnorm(-abs(z_fixed / se_fixed))), "\n")
+
+# I-squared is the percentage of Q beyond its degrees of freedom. Its confidence
+# interval is the non-central chi-square method of Hedges and Pigott (2001) that the
+# report uses: Q is treated as a non-central chi-square variable on df degrees of
+# freedom, and each limit is the non-centrality parameter at which the observed Q sits
+# at the 97.5th (lower limit) or the 2.5th (upper limit) percentile, found with uniroot
+# and pchisq; a limit is 0 when the central distribution already puts Q below that
+# percentile. A non-centrality lambda gives I-squared = lambda / (df + lambda)
+cat("Non-combinability of studies\n")
+cat("Cochran Q = ", six(Q), "  (df = ", df, ")  ",
+    pv(pchisq(Q, df, lower.tail = FALSE)), "\n", sep = "")
+cat("Moment-based estimate of between studies variance =", six(tau2), "\n")
+one &lt;- function(x) formatC(x, digits = 1, format = "f", drop0trailing = TRUE)
+ncp_limit &lt;- function(p) {
+  if (pchisq(Q, df) &lt;= p) return(0)
+  # the bracket Q + 1000 is ample: the distribution function there is near 0
+  uniroot(function(l) pchisq(Q, df, ncp = l) - p, c(0, Q + 1000), tol = 1e-10)$root
+}
+lambda &lt;- c(ncp_limit(0.975), ncp_limit(0.025))
+i2_ci &lt;- 100 * lambda / (df + lambda)
+cat("I-squared (inconsistency) = ", one(max(0, 100 * (Q - df) / Q)), "% (95% CI = ",
+    one(i2_ci[1]), "% to ", one(i2_ci[2]), "%)\n", sep = "")
+
+cat("Hedges-Olkin random effects\n")
+cat("Pooled correlation = ", six(random[1]), " (95% CI = ", six(random[2]), " to ",
+    six(random[3]), ")\n", sep = "")
+cat("Z (test correlation differs from 0) =", six(z_random / se_random), " ",
+    pv(2 * pnorm(-abs(z_random / se_random))), "\n")
+
+# Begg-Mazumdar: Kendall's rank correlation between each study's standardised
+# deviation from the fixed effects pooled z and its variance. With no tied variances
+# cor.test gives the exact two sided P, as the report does; with tied sample sizes the
+# report instead uses a continuity corrected normal approximation, which cor.test
+# does not. The test has low power with fewer than 11 studies, as the report notes.
+cat("Bias indicators\n")
+deviation &lt;- (z - z_fixed) / sqrt(v - 1 / sum(w))
+bm &lt;- cor.test(deviation, v, method = "kendall")
+cat("Begg-Mazumdar: Kendall's tau =", six(bm$estimate), " ", pv(bm$p.value),
+    if (k &lt; 11) "(low power)\n" else "\n")
+
+# Egger: each standardised effect (z / se) regressed on its precision (1 / se); the
+# bias is the intercept, with a t test on k - 2 degrees of freedom and a 90% interval
+egger &lt;- lm(I(z / sqrt(v)) ~ I(1 / sqrt(v)))
+egger_ci &lt;- confint(egger, level = 0.9)[1, ]
+cat("Egger: bias = ", six(coef(egger)[1]), " (90% CI = ", six(egger_ci[1]), " to ",
+    six(egger_ci[2]), ")  ", pv(summary(egger)$coefficients[1, 4]), "\n", sep = "")
+
+# Schmidt-Hunter: the mean correlation weighted by sample size, the variance of the
+# correlations about it, the part of that variance expected from sampling error alone
+# and the remainder, attributed to real differences between the populations studied
+wmc &lt;- sum(n * r) / sum(n)
+var_r &lt;- sum(n * (r - wmc)^2) / sum(n)
+var_e &lt;- (1 - wmc^2)^2 / (mean(n) - 1)
+var_p &lt;- max(0, var_r - var_e)
+se_wmc &lt;- sqrt(var_r / k)
+sh &lt;- wmc + c(0, -1, 1) * cit * se_wmc
+cat("Schmidt-Hunter\n")
+cat("Weighted mean correlation (95% CI): ", six(sh[1]), " (", six(sh[2]), " to ",
+    six(sh[3]), ")\n", sep = "")
+cat("Z (test correlation differs from 0) =", six(wmc / se_wmc),
+    pv(2 * pnorm(-abs(wmc / se_wmc))), "\n")
+cat("Observed variance across studies:", six(var_r), "\n")
+cat("Variance due to sampling error:", six(var_e), "\n")
+cat("Variance in the population correlations:", six(var_p), "\n")
+# the credibility interval spreads the population correlations about the mean by
+# their standard deviation, the square root of var_p (the report leaves it out when
+# that is zero)
+cat("95% Credibility interval for weighted mean correlation:",
+    six(wmc - cit * sqrt(var_p)), "to", six(wmc + cit * sqrt(var_p)), "\n")
+cat("Indicators of homogeneity/heterogeneity:\n")
+cat("1. Residual standard deviation (should be smaller than 1/4 WMC: ", six(wmc / 4),
+    "): ", six(sqrt(var_p)), "\n", sep = "")
+cat("2. Percent of observed variance accounted for by sampling error",
+    "(should be at least 75%):", six(100 * var_e / var_r), "\n")
+het &lt;- k * var_r / var_e
+cat("3. Chi-square test of heterogeneity:", six(het),
+    pv(pchisq(het, df, lower.tail = FALSE)), "\n")
+
+# The report's charts: the bias assessment (funnel) plot of each study's Fisher z
+# against its standard error, the most precise studies at the top, with the fixed
+# effects pooled z and the limits within which 95% of studies of each precision would
+# fall; then a forest plot for each of the three pooled correlations, the studies'
+# squares scaled by the square root of their fixed effects weights
+se &lt;- sqrt(v)
+top &lt;- max(se) * 1.05
+plot(z, se, ylim = c(top, 0), xlim = z_fixed + c(-1, 1) * cit * top,
+     xlab = "Fisher Z(Correlation)", ylab = "Standard error",
+     main = "Bias assessment plot", pch = 16)
+abline(v = z_fixed)
+lines(z_fixed + cit * c(0, top), c(0, top))
+lines(z_fixed - cit * c(0, top), c(0, top))
+forest &lt;- function(pooled, title) {
+  y &lt;- rev(seq_len(k + 1))   # study 1 at the top, the pooled correlation at the foot
+  par(mar = c(5, 8, 4, 2))
+  # the axis runs from -1 when a study or limit is negative, as the program draws it
+  left &lt;- if (min(lower, pooled[2]) &lt; 0) -1 else 0
+  right &lt;- if (max(upper, pooled[3]) &lt;= 0) 0 else 1
+  plot(c(r, pooled[1]), y, xlim = c(left, right), yaxt = "n", ylab = "",
+       xlab = "Correlation (95% confidence interval)", main = title,
+       pch = c(rep(15, k), 18), cex = c(2 * sqrt(w / max(w)), 3))
+  segments(c(lower, pooled[2]), y, c(upper, pooled[3]), y)
+  abline(v = pooled[1], lty = 2)
+  axis(2, at = y, labels = c(paste("study", 1:k), "combined"), las = 1, tick = FALSE)
+}
+forest(fixed, "Correlation (Hedges-Olkin fixed effects) meta-analysis plot")
+forest(random, "Correlation (Hedges-Olkin random effects) meta-analysis plot")
+forest(sh, "Correlation (Schmidt-Hunter) meta-analysis plot")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

@@ -138,6 +138,121 @@
                                         <p>Probabilities are calculated by summation across all permutations when n ≤ 50 and by an Edgeworth series approximation when n &gt; 50 (<a href="../references/reference_list.htm#ref-best-1974">Best and Gipps, 1974</a>). The two samples are assumed to have been ranked without ties.</p>
                                         <p>&#160;</p>
                                         <p>The inverse is calculated by finding the largest value of S that gives a calculated upper tail probability (using the method above) closest to but not less than the P value entered. Please note that the results may differ slightly from tables in textbooks because StatsDirect calculates the inverse of Kendall's statistic more accurately than the routines used to calculate Best's widely quoted 1974 table.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Illustration</u>
+                                        </p>
+                                        <p>Consider the ten pairs of rankings in the <a href="../nonparametric_methods/kendall_correlation.htm">Kendall rank correlation</a> example, a tutor's rankings of ten students for suitability to their career and for knowledge of psychology. There are 34 concordant and 11 discordant pairs, so S = 23 and τ = 23/45 = 0.511111. To calculate the probability of an S at least this large when the two rankings are independent, select Kendall's tau from the Distributions section of the Analysis menu, enter 10 as the sample size and 23 as S (or enter 0.511111 as tau, from which StatsDirect calculates S) and click Calculate. StatsDirect shows the upper tail probability and reports it as:</p>
+                                        <p>&#160;</p>
+                                        <p>P(Kendall's T 23, n 10) = 0.023311287477954 upper tail</p>
+                                        <p>&#160;</p>
+                                        <p>Of the 10! = 3,628,800 equally likely orderings of one ranking against the other, 84,592 give an S of 23 or more. This is the upper side P of the exact test in the Kendall rank correlation report (P = 0.0233); the distribution of S is symmetrical about zero, so the two sided P is twice it (P = 0.0466).</p>
+                                        <p>&#160;</p>
+                                        <p>For the inverse, enter 10 as the sample size and 0.05 as the upper tail P and click Invert. StatsDirect finds the largest S whose upper tail probability is not less than 0.05, shows it with its tau (S = 19, τ = 0.422222 to six places) and reports the probability that it cuts off:</p>
+                                        <p>&#160;</p>
+                                        <p>Kendall's T (upper tail P 0.05, n 10) = 0.054156746031746</p>
+                                        <p>&#160;</p>
+                                        <p>So with ten pairs an S of 19 does not quite reach the one sided 5% level. The next possible value, S = 21 (τ = 0.466667), is the smallest that does, with an upper tail probability of 0.036275077160494: with so few pairs the attainable significance levels are coarse.</p>
+                                        <p>&#160;</p>
+                                        <p>StatsDirect displays the probabilities in this illustration to 15 decimal places; the R code below reproduces them.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Kendall's tau distribution: the StatsDirect help illustration (S = 23 for the 10 pairs
+# of rankings of the Kendall rank correlation example, Armitage and Berry 1994, p. 466,
+# the test workbook's Nonparametric worksheet columns Career and Psychology; and the S
+# that cuts off an upper tail of 0.05) in R
+career &lt;- c(4, 10, 3, 1, 9, 2, 6, 7, 8, 5)
+psychology &lt;- c(5, 8, 6, 2, 10, 3, 9, 4, 7, 1)
+n &lt;- length(career)                       # 10 pairs
+
+# For each pair of students, +1 if the two rankings order them the same way (a
+# concordant pair), -1 if they order them differently (discordant); S is the sum
+q &lt;- sign(outer(career, career, "-")) * sign(outer(psychology, psychology, "-"))
+concordant &lt;- sum(q[upper.tri(q)] &gt; 0)
+discordant &lt;- sum(q[upper.tri(q)] &lt; 0)
+S &lt;- concordant - discordant
+cat(concordant, "concordant and", discordant, "discordant pairs, so S =", S, "\n")
+
+# The distribution of S for n pairs ranked without ties when the two rankings are
+# independent: each of the n! orderings of one ranking against the other is equally
+# likely. For n = 5 all 120 orderings can be listed and S counted for each
+perms &lt;- function(m) {
+  if (m == 1) return(matrix(1))
+  p &lt;- perms(m - 1)
+  do.call(rbind, lapply(1:m, function(i) cbind(i, p + (p &gt;= i))))
+}
+score &lt;- function(y) {
+  q &lt;- sign(outer(seq_along(y), seq_along(y), "-")) * sign(outer(y, y, "-"))
+  sum(q[upper.tri(q)])
+}
+print(table(apply(perms(5), 1, score)))   # S takes the values -10, -8, ..., 10
+
+# Listing the orderings is impractical for larger n (10! is 3,628,800), but the
+# counts follow from a recurrence: adding the mth item to an ordering of m - 1 items
+# adds 0 to m - 1 discordant pairs, each equally often, so the counts of orderings
+# by their number of discordant pairs (0 to n(n-1)/2) are the coefficients of the
+# product of the polynomials 1 + x + ... + x^(m-1) for m = 2 to n. S is the number
+# of concordant pairs less the number discordant: n(n-1)/2 - 2 * discordant
+discordant_counts &lt;- function(n) {
+  f &lt;- 1
+  for (m in 2:n) {
+    g &lt;- numeric(length(f) + m - 1)
+    for (j in 1:m) g[j:(j + length(f) - 1)] &lt;- g[j:(j + length(f) - 1)] + f
+    f &lt;- g
+  }
+  f
+}
+stopifnot(all(rev(discordant_counts(5)) == table(apply(perms(5), 1, score))))
+upper &lt;- function(k, n) {                 # P(S &gt;= k), the upper tail probability
+  f &lt;- discordant_counts(n)
+  s &lt;- n * (n - 1) / 2 - 2 * (seq_along(f) - 1)
+  sum(f[s &gt;= k]) / sum(f)
+}
+f &lt;- discordant_counts(n)
+at_least_S &lt;- sum(f[n * (n - 1) / 2 - 2 * (seq_along(f) - 1) &gt;= S])
+cat(format(at_least_S, big.mark = ","), "of the", format(sum(f), big.mark = ","),
+    "orderings give S of", S, "or more\n")
+
+fifteen &lt;- function(x) formatC(x, digits = 15, format = "f", drop0trailing = TRUE)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else paste("P =", formatC(p, digits = 4, format = "f"))
+}
+
+# The line the StatsDirect dialog reports for S = 23 with 10 pairs, to 15 decimal
+# places, with the tau it shows (S divided by the n(n-1)/2 pairs)
+cat("Kendall's tau =", fifteen(S / (n * (n - 1) / 2)), "\n")
+cat("P(Kendall's T ", S, ", n ", n, ") = ", fifteen(upper(S, n)), " upper tail\n",
+    sep = "")
+cat("Upper tail", pv(upper(S, n)), "\n")
+# The distribution is symmetrical about 0, so the two sided P is twice the upper tail
+cat("Two sided", pv(2 * upper(S, n)), "\n")
+
+# cor.test gives the same upper tail P from the two rankings themselves: without
+# ties and with fewer than 50 pairs its P for Kendall's tau is exact. (StatsDirect
+# sums the exact distribution up to 50 pairs and uses an Edgeworth series above
+# that, where cor.test uses a normal approximation, so the two then differ a little.)
+print(cor.test(career, psychology, method = "kendall", alternative = "greater"))
+
+# The inverse: the largest S whose upper tail probability is not less than the P
+# entered, here 0.05 for 10 pairs. StatsDirect shows that S and its tau, and reports
+# the probability it actually cuts off
+critical &lt;- function(P, n) {
+  f &lt;- discordant_counts(n)
+  s &lt;- n * (n - 1) / 2 - 2 * (seq_along(f) - 1)
+  tail &lt;- cumsum(f) / sum(f)              # P(S &gt;= s) for each possible s
+  max(s[tail &gt;= P])
+}
+k &lt;- critical(0.05, n)
+cat("S =", k, "  Kendall's tau =", fifteen(k / (n * (n - 1) / 2)), "\n")
+cat("Kendall's T (upper tail P 0.05, n ", n, ") = ", fifteen(upper(k, n)), "\n",
+    sep = "")
+# The next larger possible S cuts off less than 0.05: the smallest S that is
+# significant at the one sided 5% level
+cat("S = ", k + 2, " (tau = ", six((k + 2) / (n * (n - 1) / 2)), "): P(Kendall's T ",
+    k + 2, ", n ", n, ") = ", fifteen(upper(k + 2, n)), " upper tail\n", sep = "")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

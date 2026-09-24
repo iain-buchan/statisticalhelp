@@ -160,14 +160,14 @@
                                             </li>
                                             <li><b>% Survivors (lx)</b>
                                                 <ul style="list-style-type: circle;">
-                                                    <li>Probability of an individual surviving beyond the current interval.</li>
-                                                    <li>Proportion of survivors after the current interval.</li>
+                                                    <li>Probability of an individual surviving to the start of the current interval (beyond all earlier intervals).</li>
+                                                    <li>Proportion of survivors at the start of the current interval.</li>
                                                     <li>Life table survival rate.</li>
                                                 </ul>
                                             </li>
-                                            <li><b>Var(lx%)</b>
+                                            <li><b>SD of lx%</b>
                                                 <ul style="list-style-type: circle;">
-                                                    <li>Estimated variance of lx.</li>
+                                                    <li>Standard deviation of lx% from Greenwood's formula. The confidence interval is calculated on the log(-log lx) scale, so it is not lx% plus or minus 1.96 times this.</li>
                                                 </ul>
                                             </li>
                                             <li><b>*% CI for lx%</b>
@@ -184,73 +184,78 @@
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
                                         </p>
-                                        <p>The Berkson and Gage method is used to construct the basic table (<a href="../references/reference_list.htm#ref-berkson-1950">Berkson and Gage, 1950</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>; <a href="../references/reference_list.htm#ref-le-1997">Le, 1997</a>). The confidence interval for lx is not a simple application of the estimated variance for Ix, instead it uses a maximum likelihood solution from an asymptotic distribution by the transformation of lx suggested by <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice (1980)</a>. This treatment of lx avoids impossible values (i.e. &gt;1 or &lt;0).</p>
+                                        <p>The Berkson and Gage method is used to construct the basic table (<a href="../references/reference_list.htm#ref-berkson-1950">Berkson and Gage, 1950</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>; <a href="../references/reference_list.htm#ref-le-1997">Le, 1997</a>). The confidence interval for lx is not a simple application of the estimated variance for lx, instead it uses a maximum likelihood solution from an asymptotic distribution by the transformation of lx suggested by <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice (1980)</a>. This treatment of lx avoids impossible values (i.e. &gt;1 or &lt;0).</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
                                         <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 473)</a>.</p>
                                         <p>Test workbook (Survival worksheet: Year, Died, Withdrawn).</p>
                                         <p>&#160;</p>
-                                        <p>The following data represent the survival of a 374 patients who had one type of surgery for a particular malignancy.</p>
+                                        <p>The following data represent the survival of 374 patients who had one type of surgery for a particular malignancy.</p>
                                         <p>&#160;</p>
                                         <table cellspacing="0" width="407">
                                             <col />
                                             <col />
                                             <col />
                                             <tr>
-                                                <td style="text-decoration: underline;text-align: right;">Years since operation</td>
+                                                <td style="text-decoration: underline;text-align: right;">Years since operation (start of interval)</td>
                                                 <td style="text-decoration: underline;text-align: right;">Died in this interval</td>
                                                 <td style="text-decoration: underline;text-align: right;">Lost to follow-up</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">1</td>
+                                                <td style="text-align: right;">0</td>
                                                 <td style="text-align: right;">90</td>
                                                 <td style="text-align: right;">0</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">2</td>
+                                                <td style="text-align: right;">1</td>
                                                 <td style="text-align: right;">76</td>
                                                 <td style="text-align: right;">0</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">3</td>
+                                                <td style="text-align: right;">2</td>
                                                 <td style="text-align: right;">51</td>
                                                 <td style="text-align: right;">0</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">4</td>
+                                                <td style="text-align: right;">3</td>
                                                 <td style="text-align: right;">25</td>
                                                 <td style="text-align: right;">12</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">5</td>
+                                                <td style="text-align: right;">4</td>
                                                 <td style="text-align: right;">20</td>
                                                 <td style="text-align: right;">5</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">6</td>
+                                                <td style="text-align: right;">5</td>
                                                 <td style="text-align: right;">7</td>
                                                 <td style="text-align: right;">9</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">7</td>
+                                                <td style="text-align: right;">6</td>
                                                 <td style="text-align: right;">4</td>
                                                 <td style="text-align: right;">9</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">8</td>
+                                                <td style="text-align: right;">7</td>
                                                 <td style="text-align: right;">1</td>
                                                 <td style="text-align: right;">3</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">9</td>
+                                                <td style="text-align: right;">8</td>
                                                 <td style="text-align: right;">3</td>
                                                 <td style="text-align: right;">5</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right;">10</td>
+                                                <td style="text-align: right;">9</td>
                                                 <td style="text-align: right;">2</td>
                                                 <td style="text-align: right;">5</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">10</td>
+                                                <td style="text-align: right;">21</td>
+                                                <td style="text-align: right;">26</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
@@ -390,75 +395,126 @@
                                                 <td>1 to 2</td>
                                                 <td>0.732394</td>
                                                 <td>75.935829</td>
-                                                <td>10.57424</td>
+                                                <td>2.210411</td>
                                                 <td>71.271289 to 79.951252</td>
                                             </tr>
                                             <tr>
                                                 <td>2 to 3</td>
                                                 <td>0.754808</td>
                                                 <td>55.614973</td>
-                                                <td>7.87331</td>
+                                                <td>2.569084</td>
                                                 <td>50.428392 to 60.482341</td>
                                             </tr>
                                             <tr>
                                                 <td>3 to 4</td>
                                                 <td>0.834437</td>
                                                 <td>41.97861</td>
-                                                <td>7.003571</td>
+                                                <td>2.551951</td>
                                                 <td>36.945565 to 46.922332</td>
                                             </tr>
                                             <tr>
                                                 <td>4 to 5</td>
                                                 <td>0.829787</td>
                                                 <td>35.028509</td>
-                                                <td>6.747202</td>
+                                                <td>2.479272</td>
                                                 <td>30.200182 to 39.889161</td>
                                             </tr>
                                             <tr>
                                                 <td>5 to 6</td>
                                                 <td>0.922652</td>
                                                 <td>29.066209</td>
-                                                <td>6.651959</td>
+                                                <td>2.388987</td>
                                                 <td>24.47156 to 33.805</td>
                                             </tr>
                                             <tr>
                                                 <td>6 to 7</td>
                                                 <td>0.946309</td>
                                                 <td>26.817994</td>
-                                                <td>6.659494</td>
+                                                <td>2.350474</td>
                                                 <td>22.322081 to 31.504059</td>
                                             </tr>
                                             <tr>
                                                 <td>7 to 8</td>
                                                 <td>0.984496</td>
                                                 <td>25.378102</td>
-                                                <td>6.700832</td>
+                                                <td>2.331928</td>
                                                 <td>20.935141 to 30.043836</td>
                                             </tr>
                                             <tr>
                                                 <td>8 to 9</td>
                                                 <td>0.94958</td>
                                                 <td>24.984643</td>
-                                                <td>6.720449</td>
+                                                <td>2.328731</td>
                                                 <td>20.552912 to 29.648834</td>
                                             </tr>
                                             <tr>
                                                 <td>9 to 10</td>
                                                 <td>0.961165</td>
                                                 <td>23.724913</td>
-                                                <td>6.803396</td>
+                                                <td>2.322116</td>
                                                 <td>19.323326 to 28.39237</td>
                                             </tr>
                                             <tr>
                                                 <td>10 up</td>
                                                 <td>*</td>
                                                 <td>22.803557</td>
-                                                <td>6.886886</td>
+                                                <td>2.321531</td>
                                                 <td>18.417247 to 27.483099</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
                                         <p>We conclude with 95% confidence that the true population survival rate 5 years after the surgical operation studied is between 24.5% and 33.8% for people diagnosed as having this cancer.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Follow-up (actuarial) life table: the StatsDirect help example (Armitage and Berry
+# 1994, the survival of 374 patients after surgery for a malignancy; the test workbook's
+# Survival worksheet columns Year, Died and Withdrawn) in R
+year &lt;- 0:10
+died &lt;- c(90, 76, 51, 25, 20, 7, 4, 1, 3, 2, 21)
+withdrawn &lt;- c(0, 0, 0, 12, 5, 9, 9, 3, 5, 5, 26)
+alive_at_start &lt;- 374         # StatsDirect's default: the deaths plus the withdrawals
+
+# Base R and the survival package have no actuarial life table (survfit() gives the
+# Kaplan-Meier estimate, which treats each death time individually), so the Berkson and
+# Gage table is computed from its formulae: the number at risk in an interval is reduced
+# by half the withdrawals of that interval, and the probability of surviving beyond an
+# interval is the product of the interval survival probabilities up to it. The last
+# interval is open ended, so its probability of death is not estimated and the table
+# stops at the survival to its start (StatsDirect prints * for these cells)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+star &lt;- function(x) ifelse(is.na(x), "*", six(x))
+k &lt;- length(year)
+closed &lt;- 1:(k - 1)
+at_risk &lt;- alive_at_start - c(0, cumsum(died + withdrawn)[-k])
+adj_at_risk &lt;- at_risk - withdrawn / 2
+q &lt;- died[closed] / adj_at_risk[closed]
+p &lt;- 1 - q
+lx &lt;- cumprod(p)
+interval &lt;- c(paste(year[closed], "to", year[-1]), paste(year[k], "up"))
+cat("Follow-up life table\n")
+print(data.frame(Interval = interval, Deaths = died, Withdrawn = withdrawn,
+                 "At risk" = at_risk, "Adj. at risk" = star(c(adj_at_risk[closed], NA)),
+                 "P(death)" = star(c(q, NA)), check.names = FALSE), row.names = FALSE)
+
+# Greenwood's formula gives the variance of lx, and the report's column "SD of lx%" is
+# 100 times its square root. The confidence interval is on the scale of log(-log(lx)),
+# the transformation of Kalbfleisch and Prentice (1980), so that its limits stay between
+# 0 and 100%. lx and its interval in each row are the survival to the start of the row.
+# These lines hold while some die and some survive in every closed interval (0 &lt; q &lt; 1),
+# as here; StatsDirect prints * for the cells that are not estimable otherwise
+var_lx &lt;- lx^2 * cumsum(q / (adj_at_risk[closed] * p))
+s &lt;- sqrt(var_lx) / (-lx * log(lx))
+z &lt;- qnorm(0.975)
+lower &lt;- 100 * lx^exp(z * s)
+upper &lt;- 100 * lx^exp(-z * s)
+ci &lt;- c("* to *", paste(six(lower), "to", six(upper)))
+print(data.frame(Interval = interval, "P(survival)" = star(c(p, NA)),
+                 "Survivors (lx%)" = six(100 * c(1, lx)),
+                 "SD of lx%" = star(c(NA, 100 * sqrt(var_lx))),
+                 "95% CI for lx%" = ci, check.names = FALSE), row.names = FALSE)</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>

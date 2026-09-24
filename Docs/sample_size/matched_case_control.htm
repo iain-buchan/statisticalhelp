@@ -137,7 +137,7 @@
                                             <li>5% is the usual choice for ALPHA.</li>
                                             <li>r can be estimated from previous studies - note that r is the phi (correlation) coefficient that is given for a two by two table if you enter it into the StatsDirect <a href="../chi_square_tests/rc.htm">r by c chi-square</a> function. When r is not known from previous studies, some authors state that it is better to use a small arbitrary value for r, say 0.2, than it is to assume independence (a value of 0) (<a href="../references/reference_list.htm#ref-dupont-1988">Dupont, 1988</a>).</li>
                                             <li>P0 can be estimated as the population prevalence of exposure. Note, however, that due to matching, the control sample is not a random sample from the population therefore population prevalence of exposure can be a poor estimate of P0 (especially if <a href="../basics/confounding.htm">confounders</a> are strongly associated with exposure, <a href="../references/reference_list.htm#ref-dupont-1988">Dupont, 1988</a>).</li>
-                                            <li>If possible, choose a range of odds ratios that you want have the statistical power to detect.</li>
+                                            <li>If possible, choose a range of odds ratios that you want to have the statistical power to detect.</li>
                                         </ul>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
@@ -147,6 +147,110 @@
                                             <img src="../generatedimages/equations/equation217.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>- where α = alpha, β = 1 - power, ψ = odds ratio, ϕ is the correlation coefficient for exposure between matched cases and controls, and Zp is the standard normal deviate for probability p. n is rounded up to the closest integer.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Suppose you plan a case-control study of whether an exposure in childhood raises the odds of a disease in adult life, with three controls matched to each case for age and sex. From earlier surveys you expect 30% of the controls to have been exposed, you want to be able to detect an odds ratio of 2, and you allow for a correlation of 0.2 for exposure between a case and its matched controls rather than assuming independence. You want 80% power with a two sided alpha of 5%. The figures are invented for this illustration.</p>
+                                        <p>&#160;</p>
+                                        <p>To run this in StatsDirect select Matched Case-Control from the Sample Size section of the Analysis menu. Enter 0.2 as the correlation coefficient, 0.3 as the probability of exposure in the control group, 2 as the odds ratio and 3 as the number of controls per case, then 80% as the power and 5% as alpha.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for matched case-control study</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>case-control correlation = 0.2</p>
+                                        <p>probability of exposure in controls = 0.3</p>
+                                        <p>odds ratio = 2</p>
+                                        <p>controls per case subject = 3</p>
+                                        <p>alpha = 0.05</p>
+                                        <p>power = 0.8</p>
+                                        <p>&#160;</p>
+                                        <p>Estimated minimum sample size (cases required) = 108</p>
+                                        <p>&#160;</p>
+                                        <p>Reduction in sample size, relative to paired design,</p>
+                                        <p>when using 3 controls per case = 0.6</p>
+                                        <p>&#160;</p>
+                                        <p>Running the function again with 1 as the number of controls per case, the other entries unchanged, gives:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for matched case-control study</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>case-control correlation = 0.2</p>
+                                        <p>probability of exposure in controls = 0.3</p>
+                                        <p>odds ratio = 2</p>
+                                        <p>controls per case subject = 1</p>
+                                        <p>alpha = 0.05</p>
+                                        <p>power = 0.8</p>
+                                        <p>&#160;</p>
+                                        <p>Estimated minimum sample size (cases required) = 180</p>
+                                        <p>&#160;</p>
+                                        <p>With three controls per case, 108 cases (and 324 controls) would give 80% power to detect an odds ratio of 2. With one control per case 180 cases would be needed, so the extra controls reduce the number of cases to 60% of that of the paired design. The saving diminishes as further controls are added to each case.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Sample size for a matched case-control study: the StatsDirect help example (an
+# invented study with three controls matched to each case, exposure in 30% of the
+# controls, an odds ratio of 2 to detect and a correlation of 0.2 for exposure
+# between a case and its controls) in R
+phi &lt;- 0.2                                # correlation of exposure within a matched set
+p0 &lt;- 0.3                                 # probability of exposure in the controls
+psi &lt;- 2                                  # odds ratio to be detected
+m &lt;- 3                                    # controls matched to each case
+power &lt;- 0.8
+alpha &lt;- 0.05                             # two sided
+
+# Base R has no function for this design, so the formulae in the topic (Dupont 1988)
+# are used. First the probability of exposure in the cases, p1: the odds ratio is
+# that of the discordant case-control pairs, p10 / p01, where p01 is as the topic
+# gives it and p10 = p1 q0 - phi sqrt(p1 q1 p0 q0), so p1 is the value that makes
+# this ratio equal to psi (found numerically here; the program solves the same
+# equation)
+exposure_odds &lt;- function(p1) {
+  s &lt;- phi * sqrt(p1 * (1 - p1) * p0 * (1 - p0))
+  (p1 * (1 - p0) - s) - psi * ((1 - p1) * p0 - s)
+}
+p1 &lt;- uniroot(exposure_odds, c(1e-8, 1 - 1e-8), tol = 1e-12)$root
+q0 &lt;- 1 - p0
+q1 &lt;- 1 - p1
+s &lt;- phi * sqrt(p1 * q1 * p0 * q0)
+# every cell of the case-control exposure table must be a probability
+stopifnot(p1 * p0 + s &gt;= 0, p1 * q0 - s &gt;= 0, q1 * p0 - s &gt;= 0, q1 * q0 + s &gt;= 0)
+p0_plus &lt;- (p1 * p0 + s) / p1             # exposure in a control of an exposed case
+p0_minus &lt;- (q1 * p0 - s) / q1            # exposure in a control of an unexposed case
+
+# The cases needed with m controls per case: t_k is the probability that k of the m + 1
+# members of a matched set are exposed (sets with none or all exposed carry no
+# information); the score statistic has mean E and variance V per matched set, at the
+# odds ratio to detect and, for the null hypothesis, at an odds ratio of 1
+cases_needed &lt;- function(m) {
+  k &lt;- 1:m
+  t_k &lt;- p1 * choose(m, k - 1) * p0_plus^(k - 1) * (1 - p0_plus)^(m - k + 1) +
+    q1 * choose(m, k) * p0_minus^k * (1 - p0_minus)^(m - k)
+  E &lt;- function(psi) sum(k * t_k * psi / (k * psi + m - k + 1))
+  V &lt;- function(psi) sum(k * t_k * psi * (m - k + 1) / (k * psi + m - k + 1)^2)
+  z_alpha &lt;- qnorm(1 - alpha / 2)
+  z_beta &lt;- qnorm(power)
+  (z_alpha * sqrt(V(1)) + z_beta * sqrt(V(psi)))^2 / (E(psi) - E(1))^2
+}
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+n_m &lt;- ceiling(cases_needed(m))           # rounded up to a whole number of cases
+n_1 &lt;- ceiling(cases_needed(1))           # the paired design, one control per case
+cat("case-control correlation =", phi, "\n")
+cat("probability of exposure in controls =", p0, "\n")
+cat("odds ratio =", psi, "\n")
+cat("controls per case subject =", m, "\n")
+cat("alpha =", alpha, "\n")
+cat("power =", power, "\n")
+cat("Estimated minimum sample size (cases required) =", n_m, "\n")
+cat("Reduction in sample size, relative to paired design,\n")
+cat("when using", m, "controls per case =", six(n_m / n_1), "\n")
+
+# The paired design itself, for comparison
+cat("controls per case subject = 1\n")
+cat("Estimated minimum sample size (cases required) =", n_1, "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

@@ -116,19 +116,85 @@
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Distributions_Non-Central t</b>.</p>
                                         <p>&#160;</p>
-                                        <p>Non-central t (T) represents a family of distributions which are shaped by ν degrees of freedom and a non-centrality parameter (σ).</p>
+                                        <p>Non-central t (T) represents a family of distributions which are shaped by ν degrees of freedom and a non-centrality parameter (δ).</p>
                                         <p>&#160;</p>
                                         <p>Non-central t may be expressed in terms of a normal and a chi-square distribution:</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation124.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where z is a normal variable with mean d and variance 1 and χ² is a chi-square random variable with degrees of freedom (<a href="../references/reference_list.htm#ref-owen-1965">Owen, 1965</a>).</p>
+                                        <p>- where z is a normal variable with mean δ and variance 1 and χ² is a chi-square random variable with ν degrees of freedom (<a href="../references/reference_list.htm#ref-owen-1965">Owen, 1965</a>).</p>
                                         <p>&#160;</p>
                                         <p>In the field of meta-analysis some effect size statistics display a non-central t distribution. This function may therefore be useful in hypothesis testing and confidence interval construction for effect sizes (<a href="../references/reference_list.htm#ref-greenland-1985">Greenland and Robins, 1985</a>).</p>
                                         <p>&#160;</p>
                                         <p><u>Technical Validation</u>
                                         </p>
-                                        <p>StatsDirect evaluates the cumulative probability that a t random variable is less than or equal to a given value of T with n degrees of freedom and non-centrality parameter d (<a href="../references/reference_list.htm#ref-lenth-1989">Lenth, 1989</a>; <a href="../references/reference_list.htm#ref-owen-1965">Owen, 1965</a>; <a href="../references/reference_list.htm#ref-young-1974">Young and Minder, 1974</a>; <a href="../references/reference_list.htm#ref-thomas-1979">Thomas, 1979</a>; <a href="../references/reference_list.htm#ref-chou-1985">Chou, 1985</a>; <a href="../references/reference_list.htm#ref-boys-1989">Boys 1989</a>; <a href="../references/reference_list.htm#ref-goedhart-1992">Goedhart and Jansen, 1992</a>). The inverse of T is found by conventional root finding methods to six decimal places of accuracy.</p>
+                                        <p>StatsDirect evaluates the cumulative probability that a t random variable is less than or equal to a given value of T with n degrees of freedom and non-centrality parameter δ (<a href="../references/reference_list.htm#ref-lenth-1989">Lenth, 1989</a>; <a href="../references/reference_list.htm#ref-owen-1965">Owen, 1965</a>; <a href="../references/reference_list.htm#ref-young-1974">Young and Minder, 1974</a>; <a href="../references/reference_list.htm#ref-thomas-1979">Thomas, 1979</a>; <a href="../references/reference_list.htm#ref-chou-1985">Chou, 1985</a>; <a href="../references/reference_list.htm#ref-boys-1989">Boys 1989</a>; <a href="../references/reference_list.htm#ref-goedhart-1992">Goedhart and Jansen, 1992</a>). The inverse of T is found by conventional root finding methods to the precision shown.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Illustration</u>
+                                        </p>
+                                        <p>Select Non-Central t from the Distributions section of the Analysis menu. Enter a value of t, its degrees of freedom (a whole number) and the non-centrality parameter, then press Calculate to see the probability that a non-central t random variable is at or below that value (P for t &lt;= t, the lower tail) and the probability that it is above it (P for t &gt; t, the upper tail). Alternatively enter a lower tail probability with the degrees of freedom and non-centrality, then press Invert to see the value of t that has that probability below it; the report labels that line with the upper tail probability.</p>
+                                        <p>&#160;</p>
+                                        <p>For example:</p>
+                                        <p>&#160;</p>
+                                        <p>P(non-central t &lt; 2.5, df 10, delta 1) = 0.103454395602356 upper, 0.896545604397644 lower</p>
+                                        <p>non-central t(P 0.1, df 10, delta 1) = 2.52607989706019</p>
+                                        <p>&#160;</p>
+                                        <p>A non-central t with 10 degrees of freedom and non-centrality 1 falls below 2.5 with probability 0.8965, and below 2.526080 with probability 0.9.</p>
+                                        <p>&#160;</p>
+                                        <p>The power of a t test comes from this distribution. A paired or single sample t test on 20 observations at the two sided 5% level rejects when the absolute value of t exceeds 2.093024, the critical value of Student's t on 19 degrees of freedom. If the true mean difference is half a standard deviation, t follows a non-central t distribution with 19 degrees of freedom and non-centrality 0.5 × √20 = 2.236068, so:</p>
+                                        <p>&#160;</p>
+                                        <p>P(non-central t &lt; 2.093024, df 19, delta 2.236068) = 0.564482925241891 upper, 0.435517074758109 lower</p>
+                                        <p>P(non-central t &lt; -2.093024, df 19, delta 2.236068) = 0.999978478237757 upper, 0.000021521762243 lower</p>
+                                        <p>&#160;</p>
+                                        <p>The power of the test is the probability of exceeding 2.093024, 0.5644829, plus the probability of falling below -2.093024, 0.0000215: in all 0.5645044 (R's power.t.test gives power = 0.5645044 from the unrounded critical value). Twenty observations give only a 56% chance of detecting a difference of half a standard deviation at the 5% level. These are the values StatsDirect gives: direct numerical integration of the distribution confirms them to the precision shown, and R's pt and qt (see the R code below) agree with them to 12 decimal places.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above to 12 decimal places (R's non-central t functions are accurate to about that many places here; StatsDirect shows up to 15 decimal places). It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Non-central t distribution: the illustration in the StatsDirect help (a tail
+# probability, its inverse, and the power of a t test, as the Distributions dialog
+# computes them) in R
+# StatsDirect shows these to up to 15 decimal places. R's pt evaluates the non-central t
+# distribution by the series of Lenth (1989) and qt inverts it (see the help for pt);
+# here they agree with StatsDirect's values to 12 decimal places, so 12 are printed.
+twelve &lt;- function(x) formatC(x, digits = 12, format = "f", drop0trailing = TRUE)
+seven &lt;- function(x) formatC(x, digits = 7, format = "f", drop0trailing = TRUE)
+
+# Tail probabilities of t = 2.5 on 10 degrees of freedom with non-centrality 1:
+# pt(q, df, ncp) is the lower tail (P for t &lt;= t); lower.tail = FALSE gives the upper
+cat("P(non-central t &lt; 2.5, df 10, delta 1) =",
+    twelve(pt(2.5, 10, ncp = 1, lower.tail = FALSE)), "upper,",
+    twelve(pt(2.5, 10, ncp = 1)), "lower\n")
+
+# The inverse: the value of t below which the distribution has probability 0.9 (Invert
+# with 0.9 as P for t &lt;= t; the report labels the line with the upper tail, 0.1)
+cat("non-central t(P 0.1, df 10, delta 1) =", twelve(qt(0.9, 10, ncp = 1)), "\n")
+
+# Power of a paired or single sample t test on n = 20 observations at the two sided 5%
+# level when the true mean difference is d = 0.5 standard deviations: under that
+# alternative t has 19 degrees of freedom and non-centrality d * sqrt(n). The critical
+# value and the non-centrality are rounded to the 6 places typed into the dialog.
+n &lt;- 20
+d &lt;- 0.5
+delta &lt;- round(d * sqrt(n), 6)              # 2.236068
+crit &lt;- round(qt(0.975, n - 1), 6)          # 2.093024
+upper &lt;- pt(crit, n - 1, ncp = delta, lower.tail = FALSE)
+cat(paste0("P(non-central t &lt; ", crit, ", df ", n - 1, ", delta ", delta, ") ="),
+    twelve(upper), "upper,", twelve(pt(crit, n - 1, ncp = delta)), "lower\n")
+lower &lt;- pt(-crit, n - 1, ncp = delta)
+cat(paste0("P(non-central t &lt; ", -crit, ", df ", n - 1, ", delta ", delta, ") ="),
+    twelve(pt(-crit, n - 1, ncp = delta, lower.tail = FALSE)), "upper,",
+    twelve(lower), "lower\n")
+# The test rejects when |t| exceeds the critical value, so its power is the upper tail
+# beyond crit plus the lower tail below -crit
+cat("Power =", seven(upper + lower), "=", seven(upper), "+", seven(lower), "\n")
+
+# power.t.test does the same with the unrounded critical value; strict = TRUE counts
+# rejections in the other tail too, as StatsDirect's sample size calculations for t
+# tests do (without it only the tail on the side of the difference is counted)
+print(power.t.test(n = n, delta = d, sd = 1, sig.level = 0.05, type = "one.sample",
+                   strict = TRUE))</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

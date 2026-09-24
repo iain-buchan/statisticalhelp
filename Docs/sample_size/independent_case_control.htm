@@ -137,7 +137,7 @@
                                             <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
                                             <li>5% is the usual choice for ALPHA.</li>
                                             <li>P0 can be estimated as the population prevalence of exposure.</li>
-                                            <li>If possible, choose a range of odds ratios that you want have the statistical power to detect.</li>
+                                            <li>If possible, choose a range of odds ratios that you want to have the statistical power to detect.</li>
                                         </ul>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
@@ -147,6 +147,73 @@
                                             <img src="../generatedimages/equations/equation216.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>- where α = alpha, β = 1 - power, ψ = odds ratio, n<sub>c</sub> is the continuity corrected sample size, m is the number of control subjects per case, and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Suppose that 20% of the population from which the controls will be drawn are exposed to the factor under study, and that you plan a study with one control per case to detect an odds ratio of 2 with 80% power at the 5% two sided significance level. The figures are invented for this illustration.</p>
+                                        <p>&#160;</p>
+                                        <p>To run this in StatsDirect select Independent Case-Control from the Sample Size section of the Analysis menu. Enter 0.2 as the probability of exposure in controls, choose Odds Ratio and enter 2 as the odds ratio, enter 1 as the number of controls per case, and accept 80% power and 5% alpha.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for independent case-control study</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Probability of exposure in controls = 0.2</p>
+                                        <p>Probability of exposure in cases = 0.333333</p>
+                                        <p>Controls per case subject = 1</p>
+                                        <p>Alpha = 0.05</p>
+                                        <p>Power = 0.8</p>
+                                        <p>&#160;</p>
+                                        <p>For uncorrected chi-square test:</p>
+                                        <p>N = 172 case subjects and 172 controls</p>
+                                        <p>&#160;</p>
+                                        <p>For corrected chi-square and Fisher's exact tests:</p>
+                                        <p>N = 187 case subjects and 187 controls</p>
+                                        <p>&#160;</p>
+                                        <p>An odds ratio of 2 with 20% of controls exposed means that a third of the cases are expected to be exposed. 172 cases and 172 controls would be enough for the uncorrected chi-square test, or 187 of each if the analysis will use the continuity-corrected chi-square test or Fisher's exact test. With two controls per case the same study needs 126 cases and 252 controls (137 and 274 with the correction): more controls per case reduce the number of cases needed, with diminishing returns beyond about four per case.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Sample size for an independent case-control study: the StatsDirect help example
+# (invented figures: 20% of the controls are exposed and an odds ratio of 2 is to be
+# detected, one control per case, 80% power, 5% two sided alpha) in R
+p0 &lt;- 0.2                                 # probability of exposure in the controls
+or &lt;- 2                                   # the odds ratio to detect
+p1 &lt;- p0 * or / (1 + p0 * (or - 1))       # the probability of exposure in the cases
+m &lt;- 1                                    # controls per case
+power &lt;- 0.8
+alpha &lt;- 0.05
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("Probability of exposure in controls =", six(p0), "\n")
+cat("Probability of exposure in cases =", six(p1), "\n")
+cat("Controls per case subject =", m, "\n")
+cat("Alpha =", alpha, "\n")
+cat("Power =", power, "\n")
+
+# power.prop.test (two sided, its default strict = FALSE) gives the same n as the
+# formula below when m = 1: it takes one size per group, so it applies only to one
+# control per case
+print(power.prop.test(p1 = p0, p2 = p1, power = power, sig.level = alpha))
+
+# The report's figures, from the formula in the topic, for any number m of controls per
+# case: n is rounded up to a whole number, and the number of controls is m times that,
+# rounded down
+z_alpha &lt;- qnorm(1 - alpha / 2)
+z_beta &lt;- qnorm(power)
+pbar &lt;- (p1 + m * p0) / (1 + m)
+n &lt;- (z_alpha * sqrt((1 + 1 / m) * pbar * (1 - pbar)) +
+      z_beta * sqrt(p1 * (1 - p1) + p0 * (1 - p0) / m))^2 / (p1 - p0)^2
+cat("For uncorrected chi-square test:\n")
+cat("N =", ceiling(n), "case subjects and", floor(m * ceiling(n)), "controls\n")
+
+# The continuity-corrected size for the corrected chi-square and Fisher's exact tests
+# (Casagrande et al. 1978), calculated from the unrounded n
+nc &lt;- n / 4 * (1 + sqrt(1 + 2 * (m + 1) / (n * m * abs(p0 - p1))))^2
+cat("For corrected chi-square and Fisher's exact tests:\n")
+cat("N =", ceiling(nc), "case subjects and", floor(m * ceiling(nc)), "controls\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

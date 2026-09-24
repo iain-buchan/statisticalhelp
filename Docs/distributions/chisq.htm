@@ -150,6 +150,45 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation105.svg" alt="" class="mcReset" />
                                         </p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Select Chi-Square from the Distributions section of the Analysis menu. Enter a chi-square value and its degrees of freedom, then click Calculate to see the probability in the upper tail of the distribution beyond that value (the P value of a chi-square test). Alternatively enter an upper tail probability and the degrees of freedom, then click Invert to see the chi-square value that cuts off that tail (the critical value for that P).</p>
+                                        <p>&#160;</p>
+                                        <p>For example:</p>
+                                        <p>&#160;</p>
+                                        <p>P(chi-sq 3.84, df 1) = 0.050043521248705 upper tail</p>
+                                        <p>P(chi-sq 15.2, df 6) = 0.018756919725354 upper tail</p>
+                                        <p>chi-sq(upper P 0.01, df 3) = 11.3448667301444</p>
+                                        <p>&#160;</p>
+                                        <p>A chi-square of 3.84 on one degree of freedom, as from a 2 by 2 table, falls just short of the 5% level, whose critical value is 3.841459; 15.2 on six degrees of freedom, as from a 3 by 4 table, is significant at the 2% level; and a chi-square on three degrees of freedom must exceed 11.3449 to be significant at the 1% level. StatsDirect shows the P to 15 decimal places and the chi-square to 15 significant figures, and writes each result to the report as a probability distribution calculation.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Chi-square distribution: the example in the StatsDirect help (the upper tail
+# probabilities of two chi-square statistics and the 1% critical value on 3 degrees of
+# freedom, as the Distributions dialog computes them) in R
+fifteen &lt;- function(x) formatC(x, digits = 15, format = "f", drop0trailing = TRUE)
+
+# The upper tail probability of a chi-square statistic, the P value of a chi-square
+# test: pchisq with lower.tail = FALSE (pchisq(x, df) gives the lower tail; subtracting
+# that from 1 would lose accuracy far into the upper tail)
+cat("P(chi-sq 3.84, df 1) =", fifteen(pchisq(3.84, 1, lower.tail = FALSE)),
+    "upper tail\n")
+cat("P(chi-sq 15.2, df 6) =", fifteen(pchisq(15.2, 6, lower.tail = FALSE)),
+    "upper tail\n")
+
+# With one degree of freedom chi-square is the square of a standard normal deviate, so
+# its upper tail is the two sided normal tail beyond the square root of the statistic
+cat("Two sided normal P beyond sqrt(3.84) =", fifteen(2 * pnorm(-sqrt(3.84))), "\n")
+
+# The chi-square value that cuts off a given upper tail (the critical value for a P):
+# qchisq. StatsDirect shows it to at most 15 decimal places and 15 significant figures
+# (13 decimal places for a value above 10), so it is printed the same way here
+x15 &lt;- function(x) formatC(x, digits = 15, format = "g", drop0trailing = TRUE)
+cat("chi-sq(upper P 0.01, df 3) =", x15(qchisq(0.01, 3, lower.tail = FALSE)), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

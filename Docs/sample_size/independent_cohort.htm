@@ -137,7 +137,7 @@
                                             <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
                                             <li>5% is the usual choice for ALPHA.</li>
                                             <li>P0 can be estimated as the population prevalence of the event under investigation.</li>
-                                            <li>If possible, choose a range of relative risks that you want have the statistical power to detect.</li>
+                                            <li>If possible, choose a range of relative risks that you want to have the statistical power to detect.</li>
                                         </ul>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
@@ -147,6 +147,75 @@
                                             <img src="../generatedimages/equations/equation218.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>- where α = alpha, β = 1 - power, n<sub>c</sub> is the continuity corrected sample size and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Suppose you plan a cohort study to find out whether an exposure doubles the risk of a disease. About 10% of unexposed people develop the disease over the period of follow-up, so a relative risk of 2 means that 20% of exposed people would. You will recruit one unexposed subject for each exposed subject, and you want 80% power to detect this relative risk at the 5% two sided level. The figures are invented for this illustration.</p>
+                                        <p>&#160;</p>
+                                        <p>To run this in StatsDirect select Independent Cohort from the Sample Size section of the Analysis menu. Enter 0.1 as the probability of the event in the control group, choose the second option (it asks for the relative risk of events between subjects and controls) and enter 2, enter 1 as the number of controls per experimental subject, then 80% as the power and 5% as alpha.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for independent cohort study</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Probability of event in control group = 0.1</p>
+                                        <p>Probability of event in experimental group = 0.2</p>
+                                        <p>Controls per case subject = 1</p>
+                                        <p>Alpha = 0.05</p>
+                                        <p>Power = 0.8</p>
+                                        <p>&#160;</p>
+                                        <p>For uncorrected chi-square test:</p>
+                                        <p>N = 199 case subjects and 199 controls</p>
+                                        <p>&#160;</p>
+                                        <p>For corrected chi-square and Fisher's exact tests:</p>
+                                        <p>N = 219 case subjects and 219 controls</p>
+                                        <p>&#160;</p>
+                                        <p>If the groups are to be compared with an uncorrected chi-square test, 199 exposed and 199 unexposed subjects are needed; for a continuity corrected chi-square test or Fisher's exact test, 219 of each. These are the numbers to be followed up, so recruit more to allow for losses.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Sample size for an independent cohort study: the StatsDirect help example (invented
+# figures: 10% of unexposed subjects develop the disease and a relative risk of 2 is to
+# be detected, one control per exposed subject, 80% power, 5% two sided alpha) in R
+p0 &lt;- 0.1                                 # probability of the event in the controls
+rr &lt;- 2                                   # the relative risk to detect
+p1 &lt;- p0 * rr                             # probability of the event in exposed subjects
+m &lt;- 1                                    # controls per experimental subject
+power &lt;- 0.8
+alpha &lt;- 0.05
+
+# power.prop.test with its defaults (two sided, strict = FALSE) uses the same normal
+# approximation as the report's uncorrected sample size (the variance pooled under the
+# null hypothesis, separate variances under the alternative) but for two groups of
+# equal size, so it applies when m = 1; it solves for n numerically and prints the
+# unrounded n per group
+print(power.prop.test(p1 = p0, p2 = p1, power = power, sig.level = alpha))
+
+# The report's figures, from the formula in the topic, for any number m of controls
+# per experimental subject: n is rounded up to a whole number, and the number of
+# controls is m times that, rounded down
+z_alpha &lt;- qnorm(1 - alpha / 2)
+z_beta &lt;- qnorm(power)
+pbar &lt;- (p1 + m * p0) / (m + 1)
+n &lt;- (z_alpha * sqrt((1 + 1 / m) * pbar * (1 - pbar)) +
+      z_beta * sqrt(p0 * (1 - p0) / m + p1 * (1 - p1)))^2 / (p0 - p1)^2
+cat("Probability of event in control group =", p0, "\n")
+cat("Probability of event in experimental group =", p1, "\n")
+cat("Controls per case subject =", m, "\n")
+cat("Alpha =", alpha, "\n")
+cat("Power =", power, "\n")
+cat("For uncorrected chi-square test:\n")
+cat("N =", ceiling(n), "case subjects and", floor(m * ceiling(n)), "controls\n")
+
+# The continuity-corrected size for the corrected chi-square and Fisher's exact tests
+# (Casagrande et al. 1978; Fleiss 1981), calculated from the unrounded n
+nc &lt;- n / 4 * (1 + sqrt(1 + 2 * (m + 1) / (n * m * abs(p0 - p1))))^2
+cat("For corrected chi-square and Fisher's exact tests:\n")
+cat("N =", ceiling(nc), "case subjects and", floor(m * ceiling(nc)), "controls\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

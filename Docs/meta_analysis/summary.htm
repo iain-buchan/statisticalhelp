@@ -116,7 +116,7 @@
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Meta-Analysis_Summary</b>.</p>
                                         <p>&#160;</p>
-                                        <p>This function provides a substitute for a proper meta-analysis when only summary statistics (odds ratio, relative, risk difference - with confidence intervals or standard errors) are known from a group of related studies.</p>
+                                        <p>This function provides a substitute for a proper meta-analysis when only summary statistics (odds ratio, relative risk or risk difference, with confidence intervals or standard errors) are known from a group of related studies.</p>
                                         <p>&#160;</p>
                                         <p>Please do not use this function if the raw data from original studies are available, as the pooled estimates will be much more precise when using the original raw data. Better alternatives to this function are <a href="mh.htm">odds ratio</a>, <a href="relative_risk.htm">relative risk</a> or <a href="risk_difference.htm">risk difference</a> meta-analysis based on counts from the included studies.</p>
                                         <p>&#160;</p>
@@ -125,6 +125,328 @@
                                         <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
                                         <p>&#160;</p>
                                         <p>Please consult with a Statistician before using this method.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Test workbook (Meta-analysis worksheet: Odds Ratio, LCI, UCI, Study).</p>
+                                        <p>&#160;</p>
+                                        <p>The data are the odds ratio of death after heart attack, with its 95% confidence interval, from each of the seven trials of aspirin given by <a href="../references/reference_list.htm#ref-fleiss-1993">Fleiss (1993)</a> and used in the other meta-analysis examples, i.e. the summary statistics that a published report would usually give when the counts are not available. They are provided in the test workbook in the columns marked "Odds Ratio", "LCI", "UCI" and "Study".</p>
+                                        <p>&#160;</p>
+                                        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu. Then select Summary from the Meta-Analysis section of the Analysis menu. Choose Odds Ratio as the type of summary statistic and Confidence Interval as the input data type, then select the columns marked "Odds Ratio", "LCI", "UCI" and "Study" when prompted for the summary statistic, its lower and upper confidence limits and the study names.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>Summary meta-analysis</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;text-align: right;">Study</td>
+                                                <td style="text-decoration: underline;text-align: right;">Odds Ratio</td>
+                                                <td style="text-decoration: underline;text-align: right;">SE</td>
+                                                <td colspan="2" style="text-decoration: underline;text-align: right;">Approximate 95% CI</td>
+                                                <td style="text-align: right;">&#160;</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">1</td>
+                                                <td style="text-align: right;">0.719714</td>
+                                                <td style="text-align: right;">0.207152</td>
+                                                <td style="text-align: right;">0.47831</td>
+                                                <td style="text-align: right;">1.077371</td>
+                                                <td style="text-align: right;">MRC-1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">2</td>
+                                                <td style="text-align: right;">0.68076</td>
+                                                <td style="text-align: right;">0.213469</td>
+                                                <td style="text-align: right;">0.446423</td>
+                                                <td style="text-align: right;">1.030758</td>
+                                                <td style="text-align: right;">CDP</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">3</td>
+                                                <td style="text-align: right;">0.80287</td>
+                                                <td style="text-align: right;">0.148339</td>
+                                                <td style="text-align: right;">0.599864</td>
+                                                <td style="text-align: right;">1.072965</td>
+                                                <td style="text-align: right;">MRC-2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">4</td>
+                                                <td style="text-align: right;">0.800739</td>
+                                                <td style="text-align: right;">0.270977</td>
+                                                <td style="text-align: right;">0.46972</td>
+                                                <td style="text-align: right;">1.358784</td>
+                                                <td style="text-align: right;">GASP</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">5</td>
+                                                <td style="text-align: right;">0.798143</td>
+                                                <td style="text-align: right;">0.19656</td>
+                                                <td style="text-align: right;">0.545041</td>
+                                                <td style="text-align: right;">1.177753</td>
+                                                <td style="text-align: right;">PARIS</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">6</td>
+                                                <td style="text-align: right;">1.132736</td>
+                                                <td style="text-align: right;">0.100512</td>
+                                                <td style="text-align: right;">0.930385</td>
+                                                <td style="text-align: right;">1.37967</td>
+                                                <td style="text-align: right;">AMIS</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">7</td>
+                                                <td style="text-align: right;">0.894969</td>
+                                                <td style="text-align: right;">0.039192</td>
+                                                <td style="text-align: right;">0.828783</td>
+                                                <td style="text-align: right;">0.966411</td>
+                                                <td style="text-align: right;">ISIS-2</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;text-align: right;">Stratum</td>
+                                                <td style="text-decoration: underline;text-align: right;">Standardized Effect</td>
+                                                <td style="text-decoration: underline;text-align: right;">Standard Error</td>
+                                                <td colspan="2" style="text-decoration: underline;text-align: right;">% Weights (fixed, random)</td>
+                                                <td style="text-align: right;">&#160;</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">1</td>
+                                                <td style="text-align: right;">-0.328901</td>
+                                                <td style="text-align: right;">0.207152</td>
+                                                <td style="text-align: right;">2.647516</td>
+                                                <td style="text-align: right;">7.569774</td>
+                                                <td style="text-align: right;">MRC-1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">2</td>
+                                                <td style="text-align: right;">-0.384545</td>
+                                                <td style="text-align: right;">0.213469</td>
+                                                <td style="text-align: right;">2.493139</td>
+                                                <td style="text-align: right;">7.198172</td>
+                                                <td style="text-align: right;">CDP</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">3</td>
+                                                <td style="text-align: right;">-0.219562</td>
+                                                <td style="text-align: right;">0.148339</td>
+                                                <td style="text-align: right;">5.163037</td>
+                                                <td style="text-align: right;">12.748104</td>
+                                                <td style="text-align: right;">MRC-2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">4</td>
+                                                <td style="text-align: right;">-0.22222</td>
+                                                <td style="text-align: right;">0.270977</td>
+                                                <td style="text-align: right;">1.547221</td>
+                                                <td style="text-align: right;">4.75221</td>
+                                                <td style="text-align: right;">GASP</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">5</td>
+                                                <td style="text-align: right;">-0.225467</td>
+                                                <td style="text-align: right;">0.19656</td>
+                                                <td style="text-align: right;">2.940518</td>
+                                                <td style="text-align: right;">8.255604</td>
+                                                <td style="text-align: right;">PARIS</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">6</td>
+                                                <td style="text-align: right;">0.124636</td>
+                                                <td style="text-align: right;">0.100512</td>
+                                                <td style="text-align: right;">11.245456</td>
+                                                <td style="text-align: right;">20.878635</td>
+                                                <td style="text-align: right;">AMIS</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">7</td>
+                                                <td style="text-align: right;">-0.110966</td>
+                                                <td style="text-align: right;">0.039192</td>
+                                                <td style="text-align: right;">73.963113</td>
+                                                <td style="text-align: right;">38.597502</td>
+                                                <td style="text-align: right;">ISIS-2</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>Fixed effects (inverse variance)</p>
+                                        <p>Pooled odds ratio = 0.897845 (95% CI = 0.840448 to 0.959163)</p>
+                                        <p>Z (test Odds Ratio differs from 1) = -3.196974 P = 0.0014</p>
+                                        <p>&#160;</p>
+                                        <p>Non-combinability of studies</p>
+                                        <p>Cochran Q = 9.278463 (df = 6) P = 0.1585</p>
+                                        <p>Moment-based estimate of between studies variance = 0.008558</p>
+                                        <p>I² (inconsistency) = 35.3% (95% CI = 0% to 75.6%)</p>
+                                        <p>&#160;</p>
+                                        <p>Random effects (DerSimonian-Laird)</p>
+                                        <p>Pooled odds ratio = 0.881131 (95% CI = 0.779666 to 0.995799)</p>
+                                        <p>Z (test Odds Ratio) = -2.027405 P = 0.0426</p>
+                                        <p>&#160;</p>
+                                        <p>Bias indicators</p>
+                                        <p>Begg-Mazumdar: Kendall's tau = -0.428571 P = 0.2389 (low power)</p>
+                                        <p>Egger: bias = -0.671627 (90% CI = -2.183157 to 0.839904) P = 0.4116</p>
+                                        <p>&#160;</p>
+                                        <p>The standard error of each log odds ratio is recovered from the study's confidence limits, and the studies are then combined by inverse variance weighting on the log scale. Here the fixed effects pooled odds ratio, 0.90 with 95% confidence limits of 0.84 and 0.96, is close to the Peto odds ratio calculated from the counts of the same trials. The inconsistency between the studies is moderate (I² = 35%), and the random effects model, which allows for it, gives a wider interval whose upper limit approaches 1.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Summary data meta-analysis: the StatsDirect help example (the odds ratio of each of
+# seven trials of aspirin after heart attack, Fleiss 1993, with its 95% confidence
+# limits; the test workbook's Meta-analysis worksheet columns Odds Ratio, LCI, UCI and
+# Study) in R
+study &lt;- c("MRC-1", "CDP", "MRC-2", "GASP", "PARIS", "AMIS", "ISIS-2")
+or &lt;- c(0.719714, 0.68076, 0.80287, 0.800739, 0.798143, 1.132736, 0.894969)
+lower &lt;- c(0.47831, 0.446423, 0.599864, 0.46972, 0.545041, 0.930385, 0.828783)
+upper &lt;- c(1.077371, 1.030758, 1.072965, 1.358784, 1.177753, 1.37967, 0.966411)
+k &lt;- length(or)
+z &lt;- qnorm(0.975)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+one &lt;- function(x) formatC(x, digits = 1, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+
+# Base R has no meta-analysis function, so the report is built from the formulae.
+# A ratio is analysed on the log scale: each study's standard error of the log odds
+# ratio is recovered from its limits as their log difference over twice the normal
+# deviate (had standard errors been given instead, the limits would be recovered
+# from them the other way round), and the inverse variance weights follow
+y &lt;- log(or)
+se &lt;- (log(upper) - log(lower)) / (2 * z)
+w &lt;- 1 / se^2
+cat("Study  Odds ratio  SE  Approximate 95% CI\n")
+for (i in 1:k) {
+  cat(i, six(or[i]), six(se[i]), six(lower[i]), six(upper[i]), study[i], "\n")
+}
+
+# Fixed effects: the weighted mean of the log odds ratios, its standard error the
+# root of the reciprocal of the total weight, transformed back to the ratio scale
+pooled &lt;- sum(w * y) / sum(w)
+se_pooled &lt;- 1 / sqrt(sum(w))
+z_fixed &lt;- pooled / se_pooled
+
+# Cochran's Q about the pooled log odds ratio, then the DerSimonian-Laird moment
+# estimate of the between studies variance, which inflates each study's variance
+# for the random effects weights
+q &lt;- sum(w * (y - pooled)^2)
+tau2 &lt;- max(0, (q - (k - 1)) / (sum(w) - sum(w^2) / sum(w)))
+w_dl &lt;- 1 / (tau2 + se^2)
+pooled_dl &lt;- sum(w_dl * y) / sum(w_dl)
+se_dl &lt;- 1 / sqrt(sum(w_dl))
+z_dl &lt;- pooled_dl / se_dl
+
+# The report's second table: each study's standardised effect, the log odds ratio on
+# which the pooling is done, with its standard error on that scale and its share of
+# the fixed and random weights
+cat("Stratum  Standardized effect  Standard error  % Weights (fixed, random)\n")
+for (i in 1:k) {
+  cat(i, six(y[i]), six(se[i]), six(100 * w[i] / sum(w)),
+      six(100 * w_dl[i] / sum(w_dl)), study[i], "\n")
+}
+
+cat("Fixed effects (inverse variance)\n")
+cat("Pooled odds ratio = ", six(exp(pooled)), " (95% CI = ",
+    six(exp(pooled - z * se_pooled)), " to ", six(exp(pooled + z * se_pooled)), ")\n",
+    sep = "")
+cat("Z (test Odds Ratio differs from 1) =", six(z_fixed), " ",
+    pv(2 * pnorm(-abs(z_fixed))), "\n")
+
+# I-squared = (Q - df) / Q, with the interval of the heterogeneity topic's default
+# 'exact' option (the iterative method it credits to Hedges and Pigott, 2001): Q is
+# treated as non-central chi-square and its distribution function at the observed Q
+# is inverted for the non-centrality parameter lambda, the lower limit where that
+# probability is 0.975 (0 when even the central distribution gives less) and the
+# upper where it is 0.025; each limit becomes I-squared as lambda / (df + lambda)
+cat("Non-combinability of studies\n")
+dfree &lt;- k - 1
+cat("Cochran Q = ", six(q), "  (df = ", dfree, ")  ",
+    pv(pchisq(q, dfree, lower.tail = FALSE)), "\n", sep = "")
+cat("Moment-based estimate of between studies variance =", six(tau2), "\n")
+i2 &lt;- max(0, 100 * (q - dfree) / q)
+lambda &lt;- function(p) {
+  if (pchisq(q, dfree) &lt; p) 0 else
+    uniroot(function(l) pchisq(q, dfree, ncp = l) - p, c(0, 10 * q + 100),
+            tol = 1e-10)$root
+}
+lim &lt;- c(lambda(0.975), lambda(0.025))
+cat("I2 (inconsistency) = ", one(i2), "% (95% CI = ",
+    one(100 * lim[1] / (dfree + lim[1])), "% to ",
+    one(100 * lim[2] / (dfree + lim[2])), "%)\n", sep = "")
+
+cat("Random effects (DerSimonian-Laird)\n")
+cat("Pooled odds ratio = ", six(exp(pooled_dl)), " (95% CI = ",
+    six(exp(pooled_dl - z * se_dl)), " to ", six(exp(pooled_dl + z * se_dl)), ")\n",
+    sep = "")
+cat("Z (test Odds Ratio) =", six(z_dl), " ", pv(2 * pnorm(-abs(z_dl))), "\n")
+
+# Bias indicators. Begg and Mazumdar's test is Kendall's tau between each study's
+# deviation from the pooled log odds ratio, standardised by its variance less the
+# pooled variance, and that variance; with no ties among seven studies cor.test
+# gives the exact two sided P (with tied standard errors it would give tau-b and a
+# normal approximation, which the report corrects for continuity); the report marks
+# the test as low in power when there are fewer than eleven studies
+dev &lt;- (y - pooled) / sqrt(se^2 - se_pooled^2)
+kt &lt;- cor.test(dev, se^2, method = "kendall")
+cat("Bias indicators\n")
+cat("Begg-Mazumdar: Kendall's tau =", six(kt$estimate), " ", pv(kt$p.value),
+    "(low power)\n")
+
+# Egger's test regresses each study's standardised effect (log odds ratio over its
+# standard error) on its precision (one over that standard error); the bias is the
+# intercept, judged by a t test on k - 2 degrees of freedom; the interval is at
+# twice the analysis's alpha, 90% for this 95% analysis
+fit &lt;- lm(I(y / se) ~ I(1 / se))
+bias &lt;- coef(fit)[1]
+se_bias &lt;- sqrt(vcov(fit)[1, 1])
+cat("Egger: bias = ", six(bias), " (90% CI = ", six(bias - qt(0.95, k - 2) * se_bias),
+    " to ", six(bias + qt(0.95, k - 2) * se_bias), ")  ",
+    pv(2 * pt(-abs(bias / se_bias), k - 2)), "\n", sep = "")
+
+# The report's bias assessment (funnel) plot: each log odds ratio against its
+# standard error, the axis reversed so that the 95% cone about the pooled log odds
+# ratio opens downwards
+se_top &lt;- max(se) * 1.05
+plot(y, se, ylim = c(se_top, 0), xlim = range(y, pooled + c(-1, 1) * z * se_top),
+     xlab = "Log(odds ratio)", ylab = "Standard error", main = "Bias assessment plot")
+abline(v = pooled)
+lines(pooled + c(-1, 0, 1) * z * se_top, c(se_top, 0, se_top))
+
+# The two forest plots: each study's odds ratio (the symbol size growing with its
+# weight) with its interval on a log scale, the line of no effect at 1 and the
+# pooled estimate as a diamond at the foot
+forest &lt;- function(weights, est, se_est, title) {
+  yy &lt;- rev(seq_len(k)) + 1
+  limits &lt;- exp(est + c(-1, 1) * z * se_est)
+  par(mar = c(5, 8, 4, 8))
+  plot(or, yy, log = "x", xlim = range(lower, upper, limits), ylim = c(0.5, k + 1.5),
+       pch = 15, cex = 0.5 + 2 * sqrt(weights / max(weights)), yaxt = "n", ylab = "",
+       xlab = "odds ratio (95% confidence interval)", main = title)
+  segments(lower, yy, upper, yy)
+  polygon(c(limits[1], exp(est), limits[2], exp(est)), c(1, 1.3, 1, 0.7), col = "grey")
+  segments(exp(est), 1, exp(est), k + 1, lty = 3)
+  abline(v = 1)
+  axis(2, at = c(yy, 1), labels = c(study, "combined"), las = 1, tick = FALSE)
+  axis(4, at = c(yy, 1), las = 1, tick = FALSE,
+       labels = sprintf("%.2f (%.2f, %.2f)", c(or, exp(est)), c(lower, limits[1]),
+                        c(upper, limits[2])))
+}
+forest(w, pooled, se_pooled, "Summary meta-analysis plot [fixed effects]")
+forest(w_dl, pooled_dl, se_dl, "Summary meta-analysis plot [random effects]")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

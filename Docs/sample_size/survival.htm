@@ -117,7 +117,7 @@
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Sample Size_Survival Times</b>.</p>
                                         <p>&#160;</p>
-                                        <p>This function gives you the minimum number of subjects that you require to detect a true ratio of median survival times (hr) with power POWER and <a href="../basics/p_values.htm">two sided type I error probability</a> ALPHA (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>; <a href="../references/reference_list.htm#ref-schoenfeld-1982">Schoenfeld and Richter, 1982</a>).</p>
+                                        <p>This function gives you the minimum number of subjects that you require to detect a true hazard ratio (hr) for experimental subjects relative to controls with power POWER and <a href="../basics/p_values.htm">two sided type I error probability</a> ALPHA (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>; <a href="../references/reference_list.htm#ref-schoenfeld-1982">Schoenfeld and Richter, 1982</a>).</p>
                                         <p>&#160;</p>
                                         <p>The method used here is suitable for calculating sample sizes for studies that will be analysed by the log-rank test.</p>
                                         <p>&#160;</p>
@@ -141,7 +141,7 @@
                                             <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
                                             <li>5% is the usual choice for ALPHA.</li>
                                             <li>C is usually estimated from previous studies.</li>
-                                            <li>If possible, choose a range of hazard ratios that you want have the statistical power to detect.</li>
+                                            <li>If possible, choose a range of hazard ratios that you want to have the statistical power to detect.</li>
                                         </ul>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
@@ -150,7 +150,78 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation221.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where α = alpha, β = 1 - power, m is the number of controls per experimental subject and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer. (1+1/m)/p is equivalent to 2/p in the first equation if the experimental and control group sizes are equal (m = 1).</p>
+                                        <p>- where α = alpha, β = 1 - power, m is the number of controls per experimental subject and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the next whole number. (1+1/m)/p is equivalent to 2/p in the first equation if the experimental and control group sizes are equal (m = 1).</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Suppose you plan a trial of a new treatment against the usual one, with death as the endpoint. From earlier studies the median survival on the usual treatment is about 12 months, and you want to be able to detect an improvement to a median of 18 months on the new treatment (a hazard ratio of 0.67), with 80% power at the 5% two sided level. You expect to recruit for 24 months and to follow the subjects for another 12 months after the last one is recruited, allocating one control per experimental subject. The figures are invented for this illustration.</p>
+                                        <p>&#160;</p>
+                                        <p>To run this in StatsDirect select Survival Times from the Sample Size section of the Analysis menu. Enter 12 as the median survival time in the control group, choose to enter two median survival times and enter 18 for the experimental group, then 24 as the accrual time, 12 as the additional follow-up time, 1 as the number of controls per experimental subject, 80% as the power and 5% as alpha.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for survival analysis</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>median survival time for controls = 12</p>
+                                        <p>median survival time for experimental subjects = 18</p>
+                                        <p>hazard ratio (experimental vs. control) = 0.666667</p>
+                                        <p>accrual time for recruitment = 24</p>
+                                        <p>additional follow-up time after recruitment = 12</p>
+                                        <p>alpha = 0.05</p>
+                                        <p>power = 0.8</p>
+                                        <p>&#160;</p>
+                                        <p>Estimated minimum sample size = 147 experimental subjects and 147 controls</p>
+                                        <p>&#160;</p>
+                                        <p>The trial would need 147 subjects in each group, 294 in all. The number depends on how many deaths the study will observe, not only on how many subjects it recruits: if instead the trial recruited for 36 months and closed as soon as recruitment ended, so that the last subjects recruited were hardly followed at all, 187 in each group would be needed for the same power.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Sample size for survival analysis: the StatsDirect help example (an invented trial
+# of a new treatment against the usual one: median survival 12 months on the usual
+# treatment, 18 months hoped for on the new one, two years of recruitment and one
+# more year of follow-up) in R
+ct &lt;- 12                                  # median survival time in the control group
+et &lt;- 18                                  # median survival time, experimental group
+at &lt;- 24                                  # accrual time, when subjects are recruited
+fut &lt;- 12                                 # further follow-up time after recruitment
+m &lt;- 1                                    # controls per experimental subject
+power &lt;- 0.8
+alpha &lt;- 0.05                             # two sided
+
+# Neither base R nor the survival package has a function for this sample size, so the
+# topic's formula (Schoenfeld and Richter 1982) is written out here. Survival is taken
+# to be exponential in both groups, so the hazard ratio is the inverse ratio of the
+# median survival times. A subject recruited at a uniformly distributed time during
+# accrual is followed for less than the whole study, and the power of the log-rank test
+# depends on how many deaths are seen before the study ends.
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+size_survival &lt;- function(ct, et, at, fut, m, power, alpha) {
+  hr &lt;- ct / et                           # experimental hazard relative to controls
+  tbar &lt;- (ct + et) / 2                   # the average of the two median survival times
+  k &lt;- log(2) * at / tbar
+  pa &lt;- (1 - exp(-k)) / k                 # probability of surviving the accrual period,
+                                          # averaged over the recruitment times
+  p &lt;- 1 - pa * exp(-log(2) * fut / tbar) # probability of dying before the study ends
+  n &lt;- (qnorm(1 - alpha / 2) + qnorm(power))^2 * ((1 + 1 / m) / p) / log(hr)^2
+  n &lt;- floor(n) + 1                       # next whole number (one above an exact n)
+  cat("median survival time for controls =", six(ct), "\n")
+  cat("median survival time for experimental subjects =", six(et), "\n")
+  cat("hazard ratio (experimental vs. control) =", six(hr), "\n")
+  cat("accrual time for recruitment =", six(at), "\n")
+  cat("additional follow-up time after recruitment =", six(fut), "\n")
+  cat("alpha =", six(alpha), "\n")
+  cat("power =", six(power), "\n")
+  cat("Estimated minimum sample size =", n, "experimental subjects and",
+      ceiling(n * m), "controls\n\n")
+}
+size_survival(ct, et, at, fut, m, power, alpha)
+
+# The same trial recruiting for three years and closing as soon as recruitment ends:
+# fewer of the deaths are seen by then, so more subjects are needed for the same power
+size_survival(ct, et, at = 36, fut = 0, m, power, alpha)</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

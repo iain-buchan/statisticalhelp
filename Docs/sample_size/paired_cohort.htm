@@ -138,7 +138,7 @@
                                             <li>5% is the usual choice for ALPHA.</li>
                                             <li>r can be estimated from previous studies - note that r is the phi (correlation) coefficient that is given for a two by two table if you enter it into the StatsDirect <a href="../chi_square_tests/rc.htm">r by c chi-square</a> function. When r is not known from previous studies, some authors state that it is better to use a small arbitrary value for r, say 0.2, than it is to assume independence (a value of 0) (<a href="../references/reference_list.htm#ref-dupont-1988">Dupont, 1988</a>).</li>
                                             <li>P0 can be estimated as the population event rate. Note, however, that due to matching, the control sample is not a random sample from the population therefore population event rate can be a poor estimate of P0 (especially if <a href="../basics/confounding.htm">confounders</a> are strongly associated with the event).</li>
-                                            <li>If possible, choose a range of relative risks that you want have the statistical power to detect.</li>
+                                            <li>If possible, choose a range of relative risks that you want to have the statistical power to detect.</li>
                                         </ul>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
@@ -148,6 +148,63 @@
                                             <img src="../generatedimages/equations/equation219.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>- where α = alpha, β = 1 - power and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Consider a planned cohort study in which each worker exposed to a solvent is matched, on age and sex, with an unexposed worker from the same industry, and both are followed for the same period for a skin condition. Earlier studies suggest that about 10% of unexposed workers develop the condition. The investigators want a 90% chance of detecting a doubling of the risk with exposure (a relative risk of 2) with a two sided test at the 5% level. The correlation for failure between the paired subjects is not known, so it is taken as 0.2 as suggested above. These figures are invented for illustration.</p>
+                                        <p>&#160;</p>
+                                        <p>To calculate the sample size in StatsDirect select Paired Cohort from the Sample Size section of the Analysis menu. Enter 0.1 as the event rate in the control group, choose Relative Risk and enter 2, enter 0.2 as the correlation coefficient, then 90% for power and 5% for alpha.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for paired cohort study</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Event rate in control group = 0.1</p>
+                                        <p>Event rate in experimental group = 0.2</p>
+                                        <p>Correlation for failure between experimental and control subjects = 0.2</p>
+                                        <p>Alpha = 0.05</p>
+                                        <p>Power = 0.9</p>
+                                        <p>&#160;</p>
+                                        <p>Estimated minimum sample size = 203 pairs</p>
+                                        <p>&#160;</p>
+                                        <p>So 203 matched pairs, 406 workers in all, are needed. Entering the event rate in the experimental group as 0.2 instead of the relative risk gives the same result. Try other values of power, alpha and correlation to see how sensitive the size is to them.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Sample size for a paired cohort study: the StatsDirect help example (an invented study
+# of exposed workers each matched with an unexposed worker, 10% of controls with the
+# event, a relative risk of 2 to be detected) in R
+p0 &lt;- 0.1                                 # event rate in the control group
+rr &lt;- 2                                   # relative risk to be detected
+p1 &lt;- rr * p0                             # event rate in the experimental group, 0.2
+r &lt;- 0.2                                  # correlation for failure within a pair
+power &lt;- 0.9
+alpha &lt;- 0.05                             # two sided
+
+# Base R's power.prop.test() is for two independent groups and takes no account of the
+# pairing, so the topic's formula (Dupont 1990, from Breslow and Day 1980) is used: the
+# probabilities of the two kinds of discordant pair, the proportion of discordant pairs
+# in which the experimental subject is the one who fails, then the number of pairs,
+# rounded up. It needs p1 to differ from p0 and both discordant probabilities to be
+# positive (r not too large), which is why StatsDirect refuses some inputs.
+z_alpha &lt;- qnorm(1 - alpha / 2)           # two sided: 1.959964 for alpha 0.05
+z_beta &lt;- qnorm(power)                    # 1.281552 for 90% power
+s &lt;- r * sqrt(p1 * (1 - p1) * p0 * (1 - p0))
+py &lt;- p1 * (1 - p0) - s                   # experimental subject fails, control does not
+px &lt;- p0 * (1 - p1) - s                   # control fails, experimental subject does not
+stopifnot(p1 != p0, px &gt; 0, py &gt; 0)
+pa &lt;- py / (px + py)
+n &lt;- (z_alpha / 2 + z_beta * sqrt(pa * (1 - pa)))^2 / ((pa - 0.5)^2 * (px + py))
+cat("Event rate in control group =", p0, "\n")
+cat("Event rate in experimental group =", p1, "\n")
+cat("Correlation for failure between experimental and control subjects =", r, "\n")
+cat("Alpha =", alpha, "\n")
+cat("Power =", power, "\n")
+cat("Estimated minimum sample size =", ceiling(n), "pairs\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

@@ -277,27 +277,95 @@
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
-                                        <p>Statistics from combined values without <a href="haldane_correction.htm" class="MCTopic MCTopicPopupHotSpot a">Haldane</a> correction:</p>
+                                        <p>For combined tables without <a href="haldane_correction.htm" class="MCTopic MCTopicPopupHotSpot a">Haldane</a> correction:</p>
                                         <p>&#160;</p>
-                                        <p>Odds ratio = 4.625084</p>
+                                        <p>Number of tables = 10</p>
+                                        <p>Mean log odds ratio = 1.531495 giving odds ratio = 4.625084</p>
+                                        <p>Variance of mean log odds ratio = 0.009478 standard error = 0.097355</p>
                                         <p>&#160;</p>
-                                        <p>Approximate 95% CI = 3.821652 to 5.597423</p>
+                                        <p>Approximate 95% CI for mean log odds ratio = 1.340683 to 1.722306</p>
+                                        <p>Giving odds ratio of 3.821652 to 5.597423</p>
                                         <p>&#160;</p>
-                                        <p>Chi² for E(LOR) = 0 is 247.4667, P &lt; 0.0001</p>
-                                        <p>Chi² for Heterogeneity = 6.62565, P = 0.676</p>
+                                        <p>Chi² for expected log odds ratio = 0 is 247.466729 Chi = 15.731075 P &lt; 0.0001</p>
+                                        <p>Chi² for heterogeneity = 6.62565 DF = 9 P = 0.676</p>
                                         <p>&#160;</p>
-                                        <p>Statistics from combined values with Haldane correction:</p>
+                                        <p>For combined tables with Haldane correction:</p>
                                         <p>&#160;</p>
-                                        <p>Odds ratio = 4.510211</p>
+                                        <p>Number of tables = 10</p>
+                                        <p>Mean log odds ratio = 1.506344 giving odds ratio = 4.510211</p>
+                                        <p>Variance of mean log odds ratio = 0.00893 standard error = 0.0945</p>
                                         <p>&#160;</p>
-                                        <p>Approximate 95% CI = 3.747642 to 5.427948</p>
+                                        <p>Approximate 95% CI for mean log odds ratio = 1.321127 to 1.691561</p>
+                                        <p>Giving odds ratio of 3.747641 to 5.427948</p>
                                         <p>&#160;</p>
-                                        <p>Chi² for E(LOR) = 0 is 254.0865, P &lt; 0.0001</p>
-                                        <p>Chi² for Heterogeneity = 6.532642, P = 0.6857</p>
+                                        <p>Chi² for expected log odds ratio = 0 is 254.086475 Chi = 15.94009 P &lt; 0.0001</p>
+                                        <p>Chi² for heterogeneity = 6.532642 DF = 9 P = 0.6857</p>
                                         <p>&#160;</p>
-                                        <p>Here we can say that there was no convincing evidence of heterogeneity between the separate estimates of relative risk from each of the different studies. The pooled estimate suggested that with 95% confidence that the true population odds for being a smoker were between 3.7 and 5.4 times greater in lung cancer patients compared with controls.</p>
+                                        <p>Here we can say that there was no convincing evidence of heterogeneity between the separate estimates of relative risk from each of the different studies. The pooled estimate suggested with 95% confidence that the true population odds for being a smoker were between 3.7 and 5.4 times greater in lung cancer patients compared with controls.</p>
                                         <p>&#160;</p>
                                         <p>The equivalent analysis using the Mantel-Haenszel method gave a confidence interval for the pooled odds ratio of 3.9 to 5.7; the difference is partly accounted for by the Haldane correction. You should use the more robust Mantel-Haenszel for most analyses of this kind. Woolf's method is included for further investigation of inter-table relationships under expert statistical guidance.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Woolf chi-square analysis of 2 by 2 series: the StatsDirect help example (Armitage
+# and Berry 1994, p. 516, smoking among lung cancer patients and controls in ten
+# studies; the test workbook's Meta worksheet columns Smokers total, Smokers cancer,
+# Control total and Control cancer) in R
+# a = Smokers cancer, b = Control cancer, c = Smokers total - a, d = Control total - b
+a &lt;- c(83, 90, 129, 412, 1350, 60, 459, 499, 451, 260)     # lung cancer, smoker
+b &lt;- c(3, 3, 7, 32, 7, 3, 18, 19, 39, 5)                   # lung cancer, non-smoker
+c &lt;- c(72, 227, 81, 299, 1296, 106, 534, 462, 1729, 259)   # control, smoker
+d &lt;- c(14, 43, 19, 131, 61, 27, 81, 56, 636, 28)           # control, non-smoker
+k &lt;- length(a)
+
+# Base R has no Woolf function, so the statistics are computed by Woolf's formulae: each
+# table's log odds ratio is weighted by the reciprocal of its variance, the weighted
+# mean is the pooled log odds ratio, and the weighted sum of squares about that mean
+# is the chi-square for heterogeneity between the tables, as Woolf proposed
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+z &lt;- qnorm(0.975)
+woolf &lt;- function(lor, v) {
+  w &lt;- 1 / v
+  mean_lor &lt;- sum(w * lor) / sum(w)
+  se &lt;- sqrt(1 / sum(w))
+  ci &lt;- mean_lor + c(-1, 1) * z * se
+  chi2 &lt;- (mean_lor / se)^2
+  het &lt;- sum(w * lor^2) - sum(w * lor)^2 / sum(w)
+  cat("Number of tables =", k, "\n")
+  cat("Mean log odds ratio =", six(mean_lor), "giving odds ratio =",
+      six(exp(mean_lor)), "\n")
+  cat("Variance of mean log odds ratio =", six(se^2), " standard error =", six(se),
+      "\n")
+  cat("Approximate 95% CI for mean log odds ratio =", six(ci[1]), "to", six(ci[2]),
+      "\n")
+  cat("Giving odds ratio of", six(exp(ci[1])), "to", six(exp(ci[2])), "\n")
+  cat("Chi-square for expected log odds ratio = 0 is", six(chi2), "Chi =",
+      six(mean_lor / se), pv(pchisq(chi2, 1, lower.tail = FALSE)), "\n")
+  cat("Chi-square for heterogeneity =", six(het), "DF =", k - 1,
+      pv(pchisq(het, k - 1, lower.tail = FALSE)), "\n")
+}
+
+# Without the Haldane correction: log(ad/bc) with variance 1/a + 1/b + 1/c + 1/d,
+# which needs every cell of every table to be greater than zero
+cat("For combined tables without Haldane correction:\n")
+woolf(log(a * d / (b * c)), 1 / a + 1 / b + 1 / c + 1 / d)
+
+# With the Haldane correction: 0.5 is added to each cell for the log odds ratio, and
+# its variance is 1/(a+1) + 1/(b+1) + 1/(c+1) + 1/(d+1)
+cat("For combined tables with Haldane correction:\n")
+woolf(log((a + 0.5) * (d + 0.5) / ((b + 0.5) * (c + 0.5))),
+      1 / (a + 1) + 1 / (b + 1) + 1 / (c + 1) + 1 / (d + 1))
+
+# The Mantel-Haenszel pooled odds ratio that the text compares with, from R's standard
+# test, without its continuity correction
+tables &lt;- array(rbind(a, c, b, d), c(2, 2, k))   # each table filled column by column
+print(mantelhaen.test(tables, correct = FALSE))</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

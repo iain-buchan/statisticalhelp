@@ -120,11 +120,15 @@
                                         <p>&#160;</p>
                                         <p>Randomization reduces opportunities for <a href="../basics/bias.htm">bias</a> and <a href="../basics/confounding.htm">confounding</a> in experimental designs, and leads to treatment groups which are random samples of the population sampled, thus helping to meet assumptions of subsequent statistical analysis (<a href="../references/reference_list.htm#ref-bland-2000">Bland, 2000</a>). A particular bias in this design might be intervention having some carry-over effect on control treatment.</p>
                                         <p>&#160;</p>
-                                        <p>Example: randomization of 50 patients into treatment (intervention) and placebo (control) arms of a trial of a new drug. This would give 50 pairs of INTERVENTION - CONTROL or CONTROL - INTERVENTION. If this was a randomized crossover study then you would give drug first if the order was INTERVENTION - CONTROL and you would give placebo first if the order was CONTROL - INTERVENTION:</p>
+                                        <p>Example: randomization of 50 patients into treatment (intervention) and placebo (control) arms of a trial of a new drug. This would give 50 pairs of INTERVENTION - CONTROL or CONTROL - INTERVENTION. If this was a randomized crossover study then you would give drug first if the order was INTERVENTION - CONTROL and you would give placebo first if the order was CONTROL - INTERVENTION.</p>
+                                        <p>&#160;</p>
+                                        <p>To reproduce this allocation in StatsDirect select Intervention-control Pairs from the Randomization section of the Analysis menu, enter 50 as the number of pairs, enter 10 as the seed and answer yes to 'Try balanced allocation'. A seed gives the same allocation each time it is used; leave it blank for a seed taken from the clock. Balanced allocation gives each order to exactly half of the pairs, in a random arrangement, and needs an even number of pairs; without it (or with an odd number of pairs) each pair's order is decided independently with an equal chance of either, and the report's heading then shows the seed alone.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
                                         <p>&#160;</p>
                                         <p><u>Randomized intervention-control pairs</u>
                                         </p>
-                                        <p>Randomized with seed: 10, balanced allocation:</p>
+                                        <p>Randomized with seed: 10, balanced allocation</p>
                                         <table>
                                             <col />
                                             <col />
@@ -333,6 +337,43 @@
                                         <p><u>Technical validation</u>
                                         </p>
                                         <p>Robust (pseudo-)random number generation is used, see <a href="random_number_generator.htm">random number generation</a>.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above with R's own random number generator, so the same seed gives a different arrangement of the pairs. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Randomization of intervention-control pairs: the StatsDirect help example (50
+# patients, each given both treatments, allocated to the order intervention then
+# control or control then intervention, seed 10, balanced allocation) in R
+pairs &lt;- 50
+seed &lt;- 10
+orders &lt;- c("Intervention - Control", "Control - Intervention")
+
+# StatsDirect and R each have their own random number generator, so the same seed
+# gives a different sequence in each program: this script repeats its own
+# allocation every time it is run, but it does not repeat the table above.
+# Balanced allocation gives each order to exactly half of the pairs (so the
+# number of pairs must be even) in a random arrangement: sample() without
+# replacement returns the 25 copies of each order in a random permutation.
+set.seed(seed)
+balanced &lt;- sample(rep(orders, pairs / 2))
+cat("Randomized intervention-control pairs\n")
+cat(paste0("Randomized with seed: ", seed, ", balanced allocation"), "\n")
+print(data.frame(pair = seq_len(pairs), order = balanced), row.names = FALSE)
+cat("Pairs allocated Intervention - Control =", sum(balanced == orders[1]), "\n")
+cat("Pairs allocated Control - Intervention =", sum(balanced == orders[2]), "\n")
+
+# Every arrangement of 25 of each order is equally likely: there are choose(50, 25)
+cat("Equally likely balanced arrangements =",
+    formatC(choose(pairs, pairs / 2), format = "f", digits = 0), "\n")
+
+# Without balancing, each pair's order is decided independently, like a coin
+# toss, so the two orders need not be equally frequent (with this seed they happen
+# to be): sample() with replacement
+set.seed(seed)
+tossed &lt;- sample(orders, pairs, replace = TRUE)
+cat("Unbalanced: Intervention - Control =", sum(tossed == orders[1]),
+    "  Control - Intervention =", sum(tossed == orders[2]), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

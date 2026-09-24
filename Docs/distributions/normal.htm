@@ -158,6 +158,74 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation101.svg" alt="" class="mcReset" />
                                         </p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>An illustration with chosen figures. Select Normal from the Distributions section of the Analysis menu, enter 3 as the normal deviate (z) and click Calculate. StatsDirect fills the upper tail, lower tail and two tailed P boxes, and the report reads:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Probability distribution calculations</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>P(z 3) = 0.00134989803163 upper,  0.99865010196837 lower,  0.00269979606326 two sided</p>
+                                        <p>&#160;</p>
+                                        <p>So about 0.13% of a normal distribution lies more than three standard deviations above its mean, and about 0.27% lies more than three standard deviations from the mean in either direction: the two tailed P is twice the smaller tail. Nearer the middle of the distribution, with 0.67 as z:</p>
+                                        <p>&#160;</p>
+                                        <p>P(z 0.67) = 0.25142889509531 upper,  0.74857110490469 lower,  0.50285779019062 two sided</p>
+                                        <p>&#160;</p>
+                                        <p>The function also works in reverse: enter a probability in one of the P boxes and click Invert, and StatsDirect finds the z that gives it. With 0.05 as the two tailed P, the upper tail P becomes 0.025 and the report reads:</p>
+                                        <p>&#160;</p>
+                                        <p>z(upper P 0.025) = 1.95996398454005</p>
+                                        <p>&#160;</p>
+                                        <p>This is the familiar 1.96: the critical value of z for a two sided test at the 5% level, and the multiplier of the standard error in a 95% confidence interval based on the normal distribution. With 0.25 as the upper tail P:</p>
+                                        <p>&#160;</p>
+                                        <p>z(upper P 0.25) = 0.674489750196082</p>
+                                        <p>&#160;</p>
+                                        <p>This is the upper quartile of the standard normal distribution: a quarter of any normal distribution lies more than 0.674 standard deviations above its mean, and half lies within 0.674 standard deviations of the mean.</p>
+                                        <p>&#160;</p>
+                                        <p>The figures above were calculated in R with the functions shown below; StatsDirect calculates the same values and shows them to the same 15 decimal places (15 significant figures for z).</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Normal distribution: the StatsDirect help illustration (tail areas of the standard
+# normal deviates 3 and 0.67, and the deviates that cut off upper tails of 0.025 and
+# 0.25, as the Distributions calculator reports them) in R
+
+# StatsDirect shows each figure to 15 significant figures and at most 15 decimal places
+s15 &lt;- function(x) {
+  formatC(signif(x, 15), digits = 15, format = "f", drop0trailing = TRUE)
+}
+
+# Tail areas of a normal deviate z: pnorm(z) is the lower tail P(Z &lt;= z), and with
+# lower.tail = FALSE it is the upper tail P(Z &gt; z). The two sided P is twice the
+# smaller tail.
+tails &lt;- function(z) {
+  lower &lt;- pnorm(z)
+  upper &lt;- pnorm(z, lower.tail = FALSE)
+  cat("P(z ", z, ") = ", s15(upper), " upper, ", s15(lower), " lower, ",
+      s15(2 * min(lower, upper)), " two sided\n", sep = "")
+}
+tails(3)                  # three standard deviations above the mean
+tails(0.67)               # close to the upper quartile of the distribution
+
+# Deviates for a tail area: qnorm(p) is the deviate whose lower tail area is p, so
+# qnorm(p, lower.tail = FALSE) is the deviate whose upper tail area is p. StatsDirect
+# names each inverse by its upper tail P, whichever of its P boxes the P was typed in.
+deviate &lt;- function(upper) {
+  z &lt;- qnorm(upper, lower.tail = FALSE)
+  cat("z(upper P ", s15(upper), ") = ", s15(z), "\n", sep = "")
+}
+deviate(0.025)            # also from a two tailed P of 0.05: 0.025 in each tail
+deviate(0.25)             # the upper quartile
+
+# The technical validation figures above, to the 15 significant figures the help shows
+z1 &lt;- qnorm(0.001)
+cat("z0.001 = ", s15(z1), "\n", sep = "")
+cat("Lower tail P(z= ", s15(z1), ") = ", s15(pnorm(z1)), "\n", sep = "")
+z2 &lt;- qnorm(0.25)
+cat("z0.25 = ", s15(z2), "\n", sep = "")
+cat("Lower tail P(z= ", s15(z2), ") = ", s15(pnorm(z2)), "\n", sep = "")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

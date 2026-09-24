@@ -125,6 +125,94 @@
                                         <p>
                                             <img src="../resources/images/scatter.svg" width="566" height="400" border="0" data-mc-conditions="Primary.WEBHELP" />
                                         </p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Test workbook (Graphics worksheet: PImax (cm H2O)).</p>
+                                        <p>&#160;</p>
+                                        <p>Consider the maximal static inspiratory pressure (PImax, in cm of water) of 25 patients with cystic fibrosis (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>To draw this plot in StatsDirect open the test workbook using the file open function of the file menu. Then select Normal from the Graphics menu. Select the column marked "PImax (cm H2O)" when prompted for data, and leave the score method as van der Waerden and the scaling as raw normal scores.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Normal plot</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Sample size = 25</p>
+                                        <p>van der Waerden scores from -1.768825 (PImax 40) to 1.768825 (PImax 150)</p>
+                                        <p>The four values of 75 have rank 5.5 and score -0.801095</p>
+                                        <p>Blom scores from -1.964217 to 1.964217</p>
+                                        <p>Expected normal order scores from -1.965315 to 1.965315</p>
+                                        <p>&#160;</p>
+                                        <p>The chart plots each pressure (vertical axis, "Observed (PImax (cm H2O))") against its van der Waerden normal score (horizontal axis, "Normal scores (van der Waerden)"), the standard normal quantile at rank/(n+1). Tied values share their mid-rank and so plot at the same point: the 25 observations give 13 points. The points lie close to a straight line with no systematic curve at either end, so these data show no sign of departure from a normal distribution; the Shapiro-Wilk test on the same column (Analysis_Parametric_Normality) gives W = 0.971698, P = 0.6883.</p>
+                                        <p>&#160;</p>
+                                        <p>Selecting Blom or expected normal order as the score method changes only the horizontal positions (their scores for the smallest and largest values are given above). Selecting scaled normal scores puts the scores on the scale of the data (mean + score × SD, with SD taken over n) with the axis label "Normal (PImax (cm H2O))", and draws the line of equality, as in the normal plot of the Shapiro-Wilk test.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Normal plot: an illustration for the StatsDirect help (maximal static inspiratory
+# pressure, PImax, of 25 patients with cystic fibrosis, Altman 1991; the test
+# workbook's Graphics worksheet column "PImax (cm H2O)") in R
+pimax &lt;- c(80, 85, 110, 95, 95, 100, 45, 95, 130, 75, 80, 70, 80, 100, 120, 110,
+           125, 75, 100, 40, 75, 110, 150, 75, 95)
+n &lt;- length(pimax)
+
+# R's standard normal probability plot puts the theoretical quantiles at the
+# plotting positions (i - 1/2) / n for the ith ordered value (Blom's
+# (i - 3/8) / (n + 1/4) when n is 10 or less) and gives tied values separate
+# positions.
+qqnorm(pimax)
+qqline(pimax)
+
+# StatsDirect's default plot: each value against its van der Waerden normal score,
+# the standard normal quantile at rank / (n + 1). Tied values share their mid-rank,
+# as rank() gives it, and so plot at the same point.
+r &lt;- rank(pimax)
+vdw &lt;- qnorm(r / (n + 1))
+plot(vdw, pimax, xlab = "Normal scores (van der Waerden)",
+     ylab = "Observed (PImax (cm H2O))", main = "Normal plot")
+
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+cat("Sample size =", n, "\n")
+cat("van der Waerden scores from", six(min(vdw)), paste0("(PImax ", min(pimax), ")"),
+    "to", six(max(vdw)), paste0("(PImax ", max(pimax), ")"), "\n")
+cat("The four values of 75 have rank", r[pimax == 75][1], "and score",
+    six(vdw[pimax == 75][1]), "\n")
+
+# The other score methods offered in the chart options: Blom's scores, the
+# quantiles at (rank - 3/8) / (n + 1/4), and expected normal order scores, the
+# expected value of the rth smallest of n standard normal variates, found here by
+# numerical integration (StatsDirect rounds a mid-rank to a whole rank for these).
+blom &lt;- qnorm((r - 0.375) / (n + 0.25))
+enos &lt;- function(r, n) {
+  f &lt;- function(z) z * dnorm(z) * pnorm(z)^(r - 1) * pnorm(-z)^(n - r)
+  integrate(f, -Inf, Inf)$value / beta(r, n - r + 1)
+}
+eno &lt;- sapply(round(r), enos, n = n)
+cat("Blom scores from", six(min(blom)), "to", six(max(blom)), "\n")
+cat("Expected normal order scores from", six(min(eno)), "to", six(max(eno)), "\n")
+
+# With scaled normal scores selected in the chart options the scores are put on
+# the scale of the data (mean + score * SD, with SD taken over n) and the line of
+# equality is drawn, as in the normal plot of the Shapiro-Wilk test: here with
+# Blom's scores.
+scaled &lt;- mean(pimax) + blom * sqrt(mean((pimax - mean(pimax))^2))
+lim &lt;- range(scaled, pimax)
+plot(scaled, pimax, xlim = lim, ylim = lim, xlab = "Normal (PImax (cm H2O))",
+     ylab = "Observed (PImax (cm H2O))", main = "Normal plot")
+abline(0, 1)
+
+# A straight plot is what a normal sample gives; the Shapiro-Wilk test on the same
+# data (Parametric_Normality in StatsDirect) puts a P value on the impression.
+sw &lt;- shapiro.test(pimax)
+cat("Shapiro-Wilk W =", six(sw$statistic), " ", pv(sw$p.value), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

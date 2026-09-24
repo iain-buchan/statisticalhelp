@@ -131,7 +131,7 @@
                                         <p>&#160;</p>
                                         <p>Note that an exact test of independence is provided in the <a href="rc.htm">r by c table analysis</a> function; you should use this instead of the chi-square statistic when you have small numbers (say expected frequency less than 5) in any of the table cells.</p>
                                         <p>&#160;</p>
-                                        <p>If there is a meaningful order to your k groups (e.g. sequential age bands) then the chi-square test for trend provides a more powerful test than the unordered independence test above. StatsDirect automatically performs a test for linear trend across the k groups. You can enter your own scores for the trend test. For example, if a variable was categorised as mild, moderate or severe pain then scores 1, 2 and 3 are likely to be a reasonable, so leave StatsDirect to assign scores. If, instead, the categories were mild, moderate and worst ever pain then you might enter a linear score system as 1, 2 and 5 respectively (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>).</p>
+                                        <p>If there is a meaningful order to your k groups (e.g. sequential age bands) then the chi-square test for trend provides a more powerful test than the unordered independence test above. StatsDirect automatically performs a test for linear trend across the k groups. You can enter your own scores for the trend test. For example, if a variable was categorised as mild, moderate or severe pain then scores 1, 2 and 3 are likely to be reasonable, so leave StatsDirect to assign scores. If, instead, the categories were mild, moderate and worst ever pain then you might enter a linear score system as 1, 2 and 5 respectively (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>).</p>
                                         <p>&#160;</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation89.svg" alt="" class="mcReset" />
@@ -176,7 +176,7 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect you must select 2 by k (scores 1 to k) from the chi-square section of the analysis menu. Then select the middle option from the 2 by k chi-square test menu. Choose the default 95% confidence interval. Then select the number of rows as 3. You then enter the above data as directed by the screen. Use carriers as successes and non-carriers as failures.</p>
+                                        <p>To analyse these data in StatsDirect you must select Trend Scores 1 to K from the 2 by K sub-menu of the chi-square section of the analysis menu. Enter the numbers of carriers in the success column and the numbers of non-carriers in the failure column, one row for each tonsil size in the order above, and do not ask for a simulated exact P.</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
@@ -198,12 +198,12 @@
                                                 <td>19</td>
                                                 <td>497</td>
                                                 <td>516</td>
-                                                <td>3.682171</td>
+                                                <td>3.68</td>
                                             </tr>
                                             <tr>
                                                 <td>Expected:</td>
-                                                <td>26.57511</td>
-                                                <td>489.4249</td>
+                                                <td>26.575107</td>
+                                                <td>489.424893</td>
                                                 <td>&#160;</td>
                                                 <td>&#160;</td>
                                             </tr>
@@ -212,12 +212,12 @@
                                                 <td>29</td>
                                                 <td>560</td>
                                                 <td>589</td>
-                                                <td>4.923599</td>
+                                                <td>4.92</td>
                                             </tr>
                                             <tr>
                                                 <td>Expected:</td>
-                                                <td>30.33476</td>
-                                                <td>558.6652</td>
+                                                <td>30.334764</td>
+                                                <td>558.665236</td>
                                                 <td>&#160;</td>
                                                 <td>&#160;</td>
                                             </tr>
@@ -226,12 +226,12 @@
                                                 <td>24</td>
                                                 <td>269</td>
                                                 <td>293</td>
-                                                <td>8.191126</td>
+                                                <td>8.19</td>
                                             </tr>
                                             <tr>
                                                 <td>Expected:</td>
-                                                <td>15.09013</td>
-                                                <td>277.9099</td>
+                                                <td>15.090129</td>
+                                                <td>277.909871</td>
                                                 <td>&#160;</td>
                                                 <td>&#160;</td>
                                             </tr>
@@ -240,17 +240,74 @@
                                                 <td>72</td>
                                                 <td>1326</td>
                                                 <td>1398</td>
-                                                <td>5.150215</td>
+                                                <td>5.15</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>Total Chi² = 7.884843 |Chi| = 2.807996, (2 DF), P = .0194</p>
+                                        <p>Total Chi² = 7.884843  |Chi| = 2.807996 (2 DF)  P = 0.0194</p>
                                         <p>&#160;</p>
-                                        <p>Chi² for linear trend = 7.19275 |Chi| = 2.68193, (1 DF), P = .0073</p>
+                                        <p>Chi² for linear trend = 7.19275  |Chi| = 2.68193 (1 DF)  P = 0.0073</p>
                                         <p>&#160;</p>
-                                        <p>Remaining Chi² (non-linearity) = 0.692093, (1 DF), P = .4055</p>
+                                        <p>Remaining Chi² (non-linearity) = 0.692093 (1 DF)  P = 0.4055</p>
                                         <p>&#160;</p>
                                         <p>Here the total chi-square test shows a statistically significant association between the classifications, i.e. between tonsil size and Strep. pyogenes carrier status. We have also shown a significant linear trend which enables us to refine our conclusions to a suggestion that the proportion of Strep. pyogenes carriers increases with tonsil size.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># 2 by k chi-square test with a test for linear trend: the StatsDirect help example
+# (Armitage and Berry 1994, palatine tonsil size and carrier status for Strep.
+# pyogenes in 1398 children) in R
+tonsils &lt;- c("not enlarged", "enlarged", "enlarged greatly")
+carriers &lt;- c(19, 29, 24)
+non_carriers &lt;- c(497, 560, 269)
+counts &lt;- rbind(Carriers = carriers, "Non-carriers" = non_carriers)
+colnames(counts) &lt;- tonsils
+print(counts)
+
+# R's standard test of independence. chisq.test applies its continuity correction to
+# 2 by 2 tables only; it is switched off here because StatsDirect does not use it.
+fit &lt;- chisq.test(counts, correct = FALSE)
+print(fit)
+
+# The table as the report lays it out: each group's observed counts, total and
+# percentage of successes, and the expected frequencies from chisq.test (row total
+# times column total divided by the grand total)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+pc &lt;- function(x) formatC(100 * x, digits = 2, format = "f", drop0trailing = TRUE)
+total &lt;- carriers + non_carriers
+k &lt;- length(carriers)
+for (i in 1:k) {
+  cat("Observed:", carriers[i], non_carriers[i], total[i], pc(carriers[i] / total[i]),
+      "\n")
+  cat("Expected:", six(fit$expected[1, i]), six(fit$expected[2, i]), "\n")
+}
+cat("Total:", sum(carriers), sum(non_carriers), sum(total),
+    pc(sum(carriers) / sum(total)), "\n")
+x2 &lt;- unname(fit$statistic)
+cat("Total chi-square =", six(x2), " |Chi| =", six(sqrt(x2)),
+    paste0("(", k - 1, " DF) "), pv(fit$p.value), "\n")
+
+# The chi-square for linear trend. prop.trend.test gives the statistic of the formula
+# above; its scores are 1 to k unless others are given, as score = c(1, 2, 5) would.
+trend &lt;- prop.trend.test(carriers, total, score = 1:k)
+print(trend)
+x2_lin &lt;- unname(trend$statistic)
+# Its square root is a normal deviate; the report prints its absolute value under
+# the |Chi| label, so this script does too.
+cat("Chi-square for linear trend =", six(x2_lin), " |Chi| =", six(sqrt(x2_lin)),
+    "(1 DF) ", pv(trend$p.value), "\n")
+
+# What the trend leaves of the total chi-square tests departure from a linear trend
+# on k - 2 degrees of freedom (Armitage and Berry 1994), so it needs k of 3 or more
+x2_non &lt;- x2 - x2_lin
+cat("Remaining chi-square (non-linearity) =", six(x2_non), paste0("(", k - 2, " DF) "),
+    pv(pchisq(x2_non, k - 2, lower.tail = FALSE)), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>

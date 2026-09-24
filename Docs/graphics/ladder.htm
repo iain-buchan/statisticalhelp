@@ -121,6 +121,49 @@
                                         <p>
                                             <img src="../resources/images/ladder.svg" width="566" height="400" border="0" data-mc-conditions="Primary.WEBHELP" />
                                         </p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Test workbook (Parametric worksheet: PEFR Before, PEFR After).</p>
+                                        <p>&#160;</p>
+                                        <p>Consider the peak expiratory flow rate (PEFR) of 9 asthmatics before and after a walk on a cold winter's day, the data of the paired t test example.</p>
+                                        <p>&#160;</p>
+                                        <p>To draw this plot in StatsDirect open the test workbook using the file open function of the file menu. Then select Ladder from the Graphics menu and select the columns marked "PEFR Before" and "PEFR After" when prompted for the data. StatsDirect draws the first column a quarter of the way along the horizontal axis and the second three quarters of the way along it, with a circle for each value in the first column, a square for each value in the second and a black line joining each pair: the rung of the ladder. A pair with a blank cell in either column is left out. The chart is titled "Ladder plot" and the two ends are labelled with the column titles; the title, the vertical axis and the markers can be changed through the chart options, as the title of the plot above was.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example the plot above shows that the peak flow fell in 8 of the 9 pairs, rose in 1 (254 to 256) and was unchanged in none: the rungs slope down to the right rather than lying parallel. Mean of differences = 56.111111, the quantity the paired t test examines (two sided P = 0.0012 in that example).</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Ladder plot: the StatsDirect help illustration (peak expiratory flow rate before
+# and after a walk on a cold day in 9 asthmatics, the paired t test example; the test
+# workbook's Parametric worksheet columns PEFR Before and PEFR After) in R
+before &lt;- c(312, 242, 340, 388, 296, 254, 391, 402, 290)
+after &lt;- c(300, 201, 232, 312, 220, 256, 328, 330, 231)
+
+# StatsDirect puts the first column a quarter of the way along the x axis and the
+# second three quarters of the way, a circle for each "before" value and a square for
+# each "after" value, and joins each pair with a black line, the rung of the ladder.
+# A pair with a blank in either column is left out. The axes are not boxed and the y
+# axis has no title.
+ok &lt;- !is.na(before) &amp; !is.na(after)
+plot(c(0, 1), range(before, after, na.rm = TRUE), type = "n", xaxt = "n", bty = "l",
+     xlab = "", ylab = "", main = "Ladder plot")
+axis(1, at = c(0.25, 0.75), labels = c("PEFR Before", "PEFR After"))
+segments(0.25, before[ok], 0.75, after[ok])
+points(rep(0.25, sum(ok)), before[ok], pch = 1, col = "#40699C")
+points(rep(0.75, sum(ok)), after[ok], pch = 0, col = "#9E413E")
+
+# What the rungs show: the direction of change in each pair, and the mean difference
+# that the paired t test examines
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+d &lt;- before[ok] - after[ok]
+cat("Ladder plot of PEFR Before (circles) to PEFR After (squares)\n")
+cat("Pairs plotted =", length(d), "\n")
+cat("The peak flow fell in", sum(d &gt; 0), "of the", length(d), "pairs, rose in",
+    sum(d &lt; 0), "and was unchanged in", sum(d == 0), "\n")
+cat("Mean of differences =", six(mean(d)), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

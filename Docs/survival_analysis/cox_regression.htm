@@ -118,7 +118,7 @@
                                         <p>&#160;</p>
                                         <p>This function fits Cox's proportional hazards model for survival-time (time-to-event) outcomes on one or more predictors.</p>
                                         <p>&#160;</p>
-                                        <p>Cox regression (or proportional hazards regression) is method for investigating the effect of several variables upon the time a specified event takes to happen. In the context of an outcome such as death this is known as Cox regression for survival analysis. The method does not assume any particular "survival model" but it is not truly nonparametric because it does assume that <b>the effects of the predictor variables upon survival are constant over time and are additive in one scale</b>. You should not use Cox regression without the guidance of a Statistician.</p>
+                                        <p>Cox regression (or proportional hazards regression) is a method for investigating the effect of several variables upon the time a specified event takes to happen. In the context of an outcome such as death this is known as Cox regression for survival analysis. The method does not assume any particular "survival model" but it is not truly nonparametric because it does assume that <b>the effects of the predictor variables upon survival are constant over time and are additive in one scale</b>. You should not use Cox regression without the guidance of a Statistician.</p>
                                         <p>&#160;</p>
                                         <p>Provided that the assumptions of Cox regression are met, this function will provide better estimates of survival probabilities and cumulative hazard than those provided by the <a href="kaplan_meier.htm">Kaplan-Meier</a> function.</p>
                                         <p>&#160;</p>
@@ -144,7 +144,7 @@
                                         <p>&#160;</p>
                                         <p><u>Survival and cumulative hazard rates</u>
                                         </p>
-                                        <p>The survival/survivorship function and the cumulative hazard function (as discussed under <a href="kaplan_meier.htm">Kaplan-Meier</a>) are calculated relative to the baseline (lowest value of covariates) at each time point. Cox regression provides a better estimate of these functions than the Kaplan-Meier method when the assumptions of the Cox model are met and the fit of the model is strong.</p>
+                                        <p>The survival/survivorship function and the cumulative hazard function (as discussed under <a href="kaplan_meier.htm">Kaplan-Meier</a>) are calculated relative to a baseline at which every covariate is zero (or at its mean, for a continuous covariate that is centred) at each time point. Cox regression provides a better estimate of these functions than the Kaplan-Meier method when the assumptions of the Cox model are met and the fit of the model is strong.</p>
                                         <p>&#160;</p>
                                         <p>You are given the option to 'centre continuous covariates' – this makes survival and hazard functions relative to the mean of continuous variables rather than relative to the minimum, which is usually the most meaningful comparison.</p>
                                         <p>&#160;</p>
@@ -163,7 +163,7 @@
                                         </p>
                                         <p>StatsDirect optimises the log likelihood associated with a Cox regression model until the change in log likelihood with iterations is less than the accuracy that you specify in the dialog box that is displayed just before the calculation takes place (<a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>; <a href="../references/reference_list.htm#ref-harris-1991">Harris, 1991</a>; <a href="../references/reference_list.htm#ref-cox-1984">Cox and Oakes, 1984</a>; <a href="../references/reference_list.htm#ref-le-1997">Le, 1997</a>; <a href="../references/reference_list.htm#ref-hosmer-1999">Hosmer and Lemeshow, 1999</a>).</p>
                                         <p>&#160;</p>
-                                        <p>The calculation options dialog box sets a value (default is 10000) for "SPLITTING RATIO"; this is the ratio in proportionality constant at a time t above which StatsDirect will split your data into more strata and calculate an extended likelihood solution, see <a href="../references/reference_list.htm#ref-bryson-1981">Bryson and Johnson, (1981)</a>.</p>
+                                        <p>The calculation options dialog box sets a value (default is 1000) for "SPLITTING RATIO"; this is the ratio in proportionality constant at a time t above which StatsDirect will split your data into more strata and calculate an extended likelihood solution, see <a href="../references/reference_list.htm#ref-bryson-1981">Bryson and Johnson, (1981)</a>.</p>
                                         <p>&#160;</p>
                                         <p>Ties are handled by Breslow's approximation (<a href="../references/reference_list.htm#ref-breslow-1974">Breslow, 1974</a>).</p>
                                         <p>&#160;</p>
@@ -649,6 +649,75 @@
                                         <p>Deviance (likelihood ratio) chi-square = 7.634383 df = 1 P = 0.0057</p>
                                         <p>&#160;</p>
                                         <p>The significance test for the coefficient b1 tests the null hypothesis that it equals zero and thus that its exponent equals one. The confidence interval for exp(b1) is therefore the confidence interval for the relative death rate or hazard ratio; we may therefore infer with 95% confidence that the death rate from stage 4 cancers is approximately 3 times, and at least 1.2 times, the risk from stage 3 cancers.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It uses the survival package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Cox (proportional hazards) regression: the StatsDirect help example (Armitage and
+# Berry 1994, survival in days of lymphoma patients by stage of disease; the test
+# workbook's Survival worksheet columns Stage group, Time and Censor) in R
+library(survival)
+stage &lt;- c(rep(1, 19), rep(2, 61))
+time &lt;- c(6, 19, 32, 42, 42, 43, 94, 126, 169, 207, 211, 227, 253, 255, 270, 310,
+          316, 335, 346, 4, 6, 10, 11, 11, 11, 13, 17, 20, 20, 21, 22, 24, 24, 29, 30,
+          30, 31, 33, 34, 35, 39, 40, 41, 43, 45, 46, 50, 56, 61, 61, 63, 68, 82, 85,
+          88, 89, 90, 93, 104, 110, 134, 137, 160, 169, 171, 173, 175, 184, 201, 222,
+          235, 247, 260, 284, 290, 291, 302, 304, 341, 345)
+censor &lt;- c(1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0)
+
+# R's standard model. The report handles tied event times by Breslow's
+# approximation, so ties = "breslow" is given (R's default is Efron's method, which
+# gives b = 0.961322 here). The report's z and P are the Wald test of each
+# coefficient, its deviance chi-square is R's likelihood ratio test, and its hazard
+# ratio and 95% limits are exp(coef) with the lower .95 and upper .95 limits.
+fit &lt;- coxph(Surv(time, censor) ~ stage, ties = "breslow")
+print(summary(fit))
+
+# The report's lines to 6 places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+ll &lt;- fit$loglik                     # log likelihood without, then with, the covariates
+dev &lt;- 2 * (ll[2] - ll[1])
+df &lt;- length(coef(fit))
+cat(fit$n, "subjects with", fit$nevent, "events\n")
+cat("Deviance (likelihood ratio) chi-square =", six(dev), " df =", df, " ",
+    pv(pchisq(dev, df, lower.tail = FALSE)), "\n")
+s &lt;- summary(fit)$coefficients
+cat("Stage group b1 =", six(s[1, "coef"]), " z =", six(s[1, "z"]), " ",
+    pv(s[1, "Pr(&gt;|z|)"]), "\n")
+
+# Hazard ratios: exp of the coefficient, with Wald limits on the log scale
+half &lt;- qnorm(0.975) * s[1, "se(coef)"]
+cat("Stage group hazard ratio =", six(exp(s[1, "coef"])), " 95% CI =",
+    six(exp(s[1, "coef"] - half)), "to", six(exp(s[1, "coef"] + half)), "\n")
+cat("Stage group coefficient =", six(s[1, "coef"]), " standard error =",
+    six(s[1, "se(coef)"]), "\n")
+
+# Model analysis: the log likelihoods and their deviance chi-square
+cat("Log likelihood with no covariates =", six(ll[1]), "\n")
+cat("Log likelihood with all model covariates =", six(ll[2]), "\n")
+cat("Deviance (likelihood ratio) chi-square =", six(dev), " df =", df, " ",
+    pv(pchisq(dev, df, lower.tail = FALSE)), "\n")
+
+# The report's "baseline survival and hazard" option gives, at each event time,
+# the survival probability for a subject with every predictor at zero (or at its
+# mean when it is continuous and centred) by the product-limit method of
+# Kalbfleisch and Prentice, and the cumulative hazard by the Breslow estimator.
+# In R these are survfit's stype = 1 and ctype = 1 at that covariate value. R's
+# direct estimate agrees with the report's to 6 places here, though the two can
+# differ at a time when everyone still at risk dies at the same time.
+base &lt;- survfit(fit, newdata = data.frame(stage = 0), stype = 1, ctype = 1)
+at_event &lt;- base$n.event &gt; 0
+cat("First baseline rows: time, survival probability, cumulative hazard\n")
+print(data.frame(time = base$time[at_event], survival = six(base$surv[at_event]),
+                 hazard = six(base$cumhaz[at_event]))[1:5, ], row.names = FALSE)</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

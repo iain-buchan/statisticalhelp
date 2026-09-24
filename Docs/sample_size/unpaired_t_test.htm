@@ -135,7 +135,7 @@
                                             <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
                                             <li>5% is the usual choice for ALPHA.</li>
                                             <li>SD is usually estimated from previous studies.</li>
-                                            <li>If possible, choose a range of differences between means that you want have the statistical power to detect.</li>
+                                            <li>If possible, choose a range of differences between means that you want to have the statistical power to detect.</li>
                                         </ul>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
@@ -145,6 +145,91 @@
                                             <img src="../generatedimages/equations/equation215.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>- where d = delta/sd, α = alpha, β = 1 - power, m is the number of control subjects per experimental subject, and t<sub>v,p</sub> is a Student t quantile with v degrees of freedom and probability p. n is rounded up to the closest integer, then adjusted if necessary to the smallest n for which the power calculated from the non-central t distribution reaches POWER.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Suppose you plan a trial in which a new treatment is compared with placebo and the outcome is systolic blood pressure at the end of treatment. A reduction of 5 mmHg would be worth detecting, and from earlier studies the standard deviation of systolic blood pressure among such patients is about 12 mmHg. You want 90% power at a two sided significance level of 5%, with one control for each treated patient. The figures are invented for this illustration.</p>
+                                        <p>&#160;</p>
+                                        <p>To run this in StatsDirect select Unpaired t from the Sample Size section of the Analysis menu. Enter 5 as the difference in population means, 12 as the estimate of population SD, 1 as the number of controls per experimental subject, 90% as the power and 5% as alpha.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for an unpaired two sample Student t test</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Alpha = 0.05</p>
+                                        <p>Power = 0.9</p>
+                                        <p>Difference between means = 5</p>
+                                        <p>Standard deviation = 12</p>
+                                        <p>Controls per experimental subject 1</p>
+                                        <p>&#160;</p>
+                                        <p>Estimated minimum sample size = 123 experimental subjects and 123 controls.</p>
+                                        <p>&#160;</p>
+                                        <p>Degrees of freedom = 244</p>
+                                        <p>&#160;</p>
+                                        <p>So 123 patients would be needed in each group, 246 in all; the power with these numbers is just over 90%. If two controls were recruited for each treated patient, entering 2 as the number of controls per experimental subject would give:</p>
+                                        <p>&#160;</p>
+                                        <p>Controls per experimental subject 2</p>
+                                        <p>&#160;</p>
+                                        <p>Estimated minimum sample size = 92 experimental subjects and 184 controls.</p>
+                                        <p>&#160;</p>
+                                        <p>Degrees of freedom = 274</p>
+                                        <p>&#160;</p>
+                                        <p>Fewer treated patients would then be needed (92 rather than 123) but more patients in all (276 rather than 246): for a given total, groups of unequal size have less power, so an unequal ratio is usually chosen only when experimental subjects are scarce or costly.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Sample size for an unpaired t test: the StatsDirect help example (a planned trial
+# of a treatment expected to lower systolic blood pressure by 5 mmHg, SD 12 mmHg,
+# made up for the help) in R
+delta &lt;- 5          # difference in population means worth detecting
+sd &lt;- 12            # estimated standard deviation within each group
+power &lt;- 0.9
+alpha &lt;- 0.05       # two sided
+m &lt;- 1              # controls per experimental subject
+
+# power.t.test solves the same two sided non-central t power equation as the report,
+# but only for two groups of the same size (m = 1). Its n is per group and is not a
+# whole number: the report gives the next whole number, the smallest n whose power
+# reaches the target. strict = TRUE counts a rejection in either tail as power, as
+# the report does; here the lower tail adds almost nothing.
+print(power.t.test(delta = delta, sd = sd, sig.level = alpha, power = power,
+                   type = "two.sample", alternative = "two.sided", strict = TRUE))
+
+# For m controls per experimental subject the power of the unpaired t test with n
+# experimental subjects (n(m + 1) - 2 degrees of freedom) comes from the non-central
+# t distribution, and the report gives the smallest whole n whose power reaches the
+# target. The search starts from n = 2, or from the smallest n giving at least one
+# degree of freedom when m is below 0.5.
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+size_unpaired &lt;- function(delta, sd, m, power, alpha) {
+  stopifnot(delta != 0, m &gt; 0)  # a zero difference or ratio has no finite answer
+  power_of &lt;- function(n) {
+    df &lt;- n * (m + 1) - 2
+    ncp &lt;- abs(delta) / (sd * sqrt((1 + 1 / m) / n))
+    tcrit &lt;- qt(1 - alpha / 2, df)
+    pt(tcrit, df, ncp, lower.tail = FALSE) + pt(-tcrit, df, ncp)
+  }
+  n &lt;- max(2, ceiling(3 / (m + 1)))
+  while (power_of(n) &lt; power) n &lt;- n + 1
+  cat("Alpha =", six(alpha), "\n")
+  cat("Power =", six(power), "\n")
+  cat("Difference between means =", six(delta), "\n")
+  cat("Standard deviation =", six(sd), "\n")
+  cat("Controls per experimental subject", six(m), "\n")
+  # the report rounds the control count down; the power uses m n controls exactly
+  cat("Estimated minimum sample size =", n, "experimental subjects and",
+      floor(m * n), "controls.\n")
+  cat("Degrees of freedom =", six(n * (m + 1) - 2), "\n")
+  cat("Power at this sample size =", six(power_of(n)), "\n\n")
+}
+size_unpaired(delta, sd, m, power, alpha)
+
+# The same trial with two controls for each experimental subject: fewer experimental
+# subjects are needed, but more subjects in all
+size_unpaired(delta, sd, m = 2, power, alpha)</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

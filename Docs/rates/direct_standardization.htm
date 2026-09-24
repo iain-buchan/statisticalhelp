@@ -138,7 +138,7 @@
                                             <li>Group/stratum labels, e.g. age bands</li>
                                         </ul>
                                         <p>&#160;</p>
-                                        <p>Note than an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
+                                        <p>Note that an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
                                         </p>
@@ -147,7 +147,7 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation179.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub>  is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum, y<sub>i</sub> is the number of events observed in the ith stratum of the study population, n<sub>i</sub> is the person-time for the ith stratum of the study population, z<sub>α/2</sub> is the (100 * α/2) the centile of the standard normal distribution, Y is the total number of events observed, Y<sub>l</sub> and Y<sub>u</sub> are the exact lower and upper confidence limits for the Poisson count Y and ICI <sub>l to u</sub> is the improved confidence interval due to <a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al</a>. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formula above.</p>
+                                        <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub>  is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum, y<sub>i</sub> is the number of events observed in the ith stratum of the study population, n<sub>i</sub> is the person-time for the ith stratum of the study population, z<sub>α/2</sub> is the 100(1 - α/2) centile of the standard normal distribution, Y is the total number of events observed, Y<sub>l</sub> and Y<sub>u</sub> are the exact lower and upper confidence limits for the Poisson count Y and ICI <sub>l to u</sub> is the improved confidence interval due to <a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al</a>. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formula above.</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>
@@ -404,8 +404,6 @@
                                         <p>&#160;</p>
                                         <p>Total events = 1019</p>
                                         <p>Adjusted events = 766.55342</p>
-                                        <p>&#160;</p>
-                                        <p>Rates are expressed per 100,000 units of person time:</p>
                                         <p>Crude rate = 43.809114</p>
                                         <p>Adjusted rate R = 32.955865</p>
                                         <p>&#160;</p>
@@ -417,6 +415,81 @@
                                         <p>Approximate standard error of R = 1.053213</p>
                                         <p>Approximate 95% confidence interval = 30.891605 to 35.020125</p>
                                         <p>Improved approximate (Dobson) 95% confidence interval = 30.923031 to 35.085201</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Direct standardization: the StatsDirect help example (Curtin and Klein 1995, stroke
+# deaths in males of a hypothetical US state, standardized to the 1940 US Standard
+# Million; the test workbook's Rates worksheet columns Age Bands, Index Events, Index
+# Group Sizes and Reference Sizes) in R
+age &lt;- c("Under 1 year", "1-4 years", "5-14 years", "15-24 years", "25-34 years",
+         "35-44 years", "45-54 years", "55-64 years", "65-74 years", "75-84 years",
+         "85 years and over")
+deaths &lt;- c(1, 0, 1, 2, 8, 21, 46, 103, 254, 371, 212)
+# person-time in person-years (the table above gives thousands)
+person_time &lt;- c(38000, 150000, 322000, 344000, 443000, 379000, 256000, 189000,
+                 136000, 57000, 12000)
+reference &lt;- c(15343, 64718, 170355, 181677, 162066, 139237, 117811, 80294, 48426,
+               17303, 2770)
+per &lt;- 100000   # the multiplier chosen for the rates
+conf &lt;- 0.95
+
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+
+# Base R has no direct standardization function, so the rate is computed as the
+# formulae above give it: the stratum rates weighted by the reference population
+rate &lt;- deaths / person_time
+weight &lt;- reference / sum(reference)
+cat("Rates are expressed per", format(per, big.mark = ",", scientific = FALSE),
+    "units of person time:\n")
+cat("Index events  Index PT  Index rate  Reference size  Weight\n")
+for (i in seq_along(age)) {
+  cat(deaths[i], person_time[i], six(rate[i] * per), reference[i], six(weight[i]),
+      "\n")
+}
+
+# The exact confidence interval for each stratum's Poisson count over its person-time
+# is what poisson.test() gives (its conf.int)
+# (poisson.test() takes whole-number counts; qgamma(0.025, y) and qgamma(0.975, y + 1)
+# over the person-time give the same limits for fractional counts)
+cat("Index rate  Exact 95% confidence interval\n")
+for (i in seq_along(age)) {
+  ci &lt;- poisson.test(deaths[i], person_time[i], conf.level = conf)$conf.int * per
+  cat(six(rate[i] * per), six(ci[1]), "to", six(ci[2]), age[i], "\n")
+}
+
+# The directly standardized rate and, applied to the study's person-time, the number of
+# events it would have had at the standardized rate
+total &lt;- sum(deaths)
+dsr &lt;- sum(weight * rate)
+cat("Total events =", total, "\n")
+cat("Adjusted events =", six(dsr * sum(person_time)), "\n")
+cat("Crude rate =", six(total / sum(person_time) * per), "\n")
+cat("Adjusted rate R =", six(dsr * per), "\n")
+
+# The variance of the rate as a weighted sum of binomial proportions (any rates) and
+# as a weighted sum of Poisson rates (Chiang 1961, small rates), each with a normal
+# interval; a stratum whose rate is 0 or 1 adds nothing to the binomial variance
+z &lt;- qnorm(1 - (1 - conf) / 2)
+v_binomial &lt;- sum(weight^2 * rate * (1 - rate) / person_time)
+v_poisson &lt;- sum(weight^2 * rate / person_time)
+cat("Any rates (binomial model)\n")
+cat("Approximate standard error of R =", six(sqrt(v_binomial) * per), "\n")
+cat("Approximate 95% confidence interval =", six((dsr - z * sqrt(v_binomial)) * per),
+    "to", six((dsr + z * sqrt(v_binomial)) * per), "\n")
+cat("Small rates (Poisson model)\n")
+cat("Approximate standard error of R =", six(sqrt(v_poisson) * per), "\n")
+cat("Approximate 95% confidence interval =", six((dsr - z * sqrt(v_poisson)) * per),
+    "to", six((dsr + z * sqrt(v_poisson)) * per), "\n")
+
+# Dobson et al. (1991): the exact limits for the total count of events, shifted and
+# scaled to the standardized rate
+total_ci &lt;- poisson.test(total, conf.level = conf)$conf.int
+dobson &lt;- dsr + (total_ci - total) * sqrt(v_poisson / total)
+cat("Improved approximate (Dobson) 95% confidence interval =",
+    six(dobson[1] * per), "to", six(dobson[2] * per), "\n")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
                                         </p>

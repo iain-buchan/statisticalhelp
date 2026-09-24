@@ -134,7 +134,7 @@
                                             <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
                                             <li>5% is the usual choice for ALPHA.</li>
                                             <li>SD is usually estimated from previous studies.</li>
-                                            <li>If possible, choose a range of mean differences that you want have the statistical power to detect.</li>
+                                            <li>If possible, choose a range of mean differences that you want to have the statistical power to detect.</li>
                                         </ul>
                                         <p>&#160;</p>
                                         <p><u>Technical validation</u>
@@ -144,6 +144,84 @@
                                             <img src="../generatedimages/equations/equation214.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>- where d = delta/sd, α = alpha, β = 1 - power and t<sub>v,p</sub> is a Student t quantile with v degrees of freedom and probability p. n is rounded up to the closest integer, then adjusted if necessary to the smallest n for which the power calculated from the non-central t distribution reaches POWER.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Suppose you plan a study of peak expiratory flow rate (PEFR) before and after a walk on a cold day, like the one in the <a href="../parametric_methods/paired_t.htm">paired t test</a> example but looking for a smaller effect. You want to detect a mean fall of 20 L/min with 80% power at a two sided alpha of 5%, and from that earlier study you expect the standard deviation of the paired differences to be about 35 L/min. The figures are invented for this illustration.</p>
+                                        <p>&#160;</p>
+                                        <p>To run this in StatsDirect select Paired t from the Sample Size section of the Analysis menu. Enter 20 as the difference of population mean from zero, 35 as the standard deviation of the paired differences, 80% as the power and 5% as alpha. Then run it again with 90% as the power.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for a paired or single sample Student t test</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Alpha = 0.05</p>
+                                        <p>Power = 0.8</p>
+                                        <p>Difference of mean from zero = 20</p>
+                                        <p>Standard deviation = 35</p>
+                                        <p>Estimated minimum sample size = 27 pairs</p>
+                                        <p>Degrees of freedom = 26</p>
+                                        <p>&#160;</p>
+                                        <p>and with 90% power:</p>
+                                        <p>&#160;</p>
+                                        <p>Alpha = 0.05</p>
+                                        <p>Power = 0.9</p>
+                                        <p>Difference of mean from zero = 20</p>
+                                        <p>Standard deviation = 35</p>
+                                        <p>Estimated minimum sample size = 35 pairs</p>
+                                        <p>Degrees of freedom = 34</p>
+                                        <p>&#160;</p>
+                                        <p>Twenty-seven pairs of measurements would give an 80% chance of detecting a true mean fall of 20 L/min, and 35 pairs a 90% chance. The size is the smallest number of pairs for which the power of the paired t test, calculated from the non-central t distribution, reaches the power asked for.</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Sample size for a paired t test: the StatsDirect help example (an invented plan for
+# a study of peak expiratory flow rate before and after a cold walk, like the paired t
+# test example: a fall of 20 L/min to detect, sd of paired differences 35 L/min) in R
+delta &lt;- 20                               # difference in population means to detect
+sdiff &lt;- 35                               # sd of the paired response differences
+target &lt;- 0.8                             # power, the probability of detecting delta
+alpha &lt;- 0.05                             # two sided type I error probability
+
+# power.t.test solves for the number of pairs at which the power of the two sided
+# paired t test, from the non-central t distribution, equals the target. strict = TRUE
+# counts rejections in both tails as the report does; the default counts only the tail
+# on the side of delta, which seldom changes the whole number of pairs.
+r &lt;- power.t.test(delta = delta, sd = sdiff, sig.level = alpha, power = target,
+                  type = "paired", strict = TRUE)
+print(r)
+
+# A whole number of pairs: the smallest whose power reaches the target (checked below)
+n &lt;- ceiling(r$n)
+cat("Alpha =", alpha, "\n")
+cat("Power =", target, "\n")
+cat("Difference of mean from zero =", delta, "\n")
+cat("Standard deviation =", sdiff, "\n")
+cat("Estimated minimum sample size =", n, "pairs\n")
+cat("Degrees of freedom =", n - 1, "\n")
+
+# The report also checks that n is the smallest number of pairs whose power reaches the
+# target: the two sided power with n pairs, from the non-central t distribution with
+# n - 1 degrees of freedom and non-centrality delta / (sd / sqrt(n)), and with n - 1
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pw &lt;- function(n) {
+  tcrit &lt;- qt(1 - alpha / 2, n - 1)
+  ncp &lt;- delta / (sdiff / sqrt(n))
+  pt(tcrit, n - 1, ncp, lower.tail = FALSE) + pt(-tcrit, n - 1, ncp)
+}
+cat("Power with", n, "pairs =", six(pw(n)), "and with", n - 1, "pairs =",
+    six(pw(n - 1)), "\n")
+
+# The same plan with 90% power
+r90 &lt;- power.t.test(delta = delta, sd = sdiff, sig.level = alpha, power = 0.9,
+                    type = "paired", strict = TRUE)
+n90 &lt;- ceiling(r90$n)
+cat("Power = 0.9\n")
+cat("Estimated minimum sample size =", n90, "pairs\n")
+cat("Degrees of freedom =", n90 - 1, "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

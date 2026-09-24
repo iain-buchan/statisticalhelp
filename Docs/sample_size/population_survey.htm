@@ -135,6 +135,56 @@
                                             <img src="../generatedimages/equations/equation220.svg" alt="" class="mcReset" />
                                         </p>
                                         <p>- where p is p%/100, d is d%/100, and z is a quantile from the standard normal distribution for a two tailed probability of 1-cc. n is rounded up to the closest integer.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>Suppose you plan a survey of smoking among the adults of a town, about 20,000 people. From surveys elsewhere you expect about 25% of them to smoke, and you want the percentage in your sample to be within 3% of the percentage in the town, either way, with 95% confidence. The figures are invented for this illustration.</p>
+                                        <p>&#160;</p>
+                                        <p>To run this in StatsDirect select Population Survey from the Sample Size section of the Analysis menu. Enter 20000 as the population size, 25 as the rate, 3 as the acceptable deviation and 95% as the confidence level.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Sample size for a population survey</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Population estimate = 20,000</p>
+                                        <p>Population rate = 25%</p>
+                                        <p>Maximum deviation = ±3%</p>
+                                        <p>Confidence level = 95</p>
+                                        <p>&#160;</p>
+                                        <p>Estimated minimum sample size = 770</p>
+                                        <p>&#160;</p>
+                                        <p>A simple random sample of 770 adults would be enough. Without the finite population correction, as for a population of unlimited size, 801 would be needed: the correction matters little unless the sample is a substantial fraction of the population.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Sample size for a population survey: the StatsDirect help example (an invented
+# survey of smoking among the 20,000 adults of a town, expected 25% give or take 3%,
+# with 95% confidence) in R
+N &lt;- 20000                                # size of the population to be sampled
+p &lt;- 25 / 100                             # expected proportion with the characteristic
+d &lt;- 3 / 100                              # acceptable absolute deviation, plus or minus
+conf &lt;- 0.95                              # confidence level
+
+# Base R has no function for this survey sample size, so the topic's formula is used:
+# the size for an unlimited population from the normal approximation to the binomial,
+# then the finite population correction, then rounding up to a whole number of subjects.
+z &lt;- qnorm(1 - (1 - conf) / 2)            # two sided: 1.959964 for 95% confidence
+sn &lt;- z^2 * p * (1 - p) / d^2             # for an unlimited population
+n &lt;- sn / (1 + sn / N)                    # with the finite population correction
+# StatsDirect adds one to the whole part of n instead, so a rate of exactly 0% or 100%
+# (n = 0) gives 1 there and 0 here; they differ only when n is a whole number
+cat("Population estimate =", format(N, big.mark = ","), "\n")
+cat("Population rate =", paste0(100 * p, "%"), "\n")
+cat("Maximum deviation = +/-", paste0(100 * d, "%"), "\n")
+cat("Confidence level =", 100 * conf, "\n")
+cat("Estimated minimum sample size =", ceiling(n), "\n")
+
+# The same survey of a population of unlimited size, for comparison
+cat("Sample size for an unlimited population =", ceiling(sn), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
                                     </div>
                                     <MadCap:pageFooter>
                                         <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>

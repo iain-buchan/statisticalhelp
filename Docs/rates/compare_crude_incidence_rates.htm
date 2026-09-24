@@ -227,12 +227,12 @@
                                         <p>Exposed incidence rate = 0.000552</p>
                                         <p>Non-exposed incidence rate = 0.001166</p>
                                         <p>&#160;</p>
-                                        <p>Incidence rate difference = -0.000613</p>
+                                        <p>Rate difference = -0.000613</p>
                                         <p>Approximate 95% confidence interval = -0.000965 to -0.000261</p>
                                         <p>&#160;</p>
-                                        <p>Chi-square = 11.678635 P = .0006</p>
+                                        <p>Chi-square = 11.678635 P = 0.0006</p>
                                         <p>&#160;</p>
-                                        <p>Incidence rate ratio = 0.473934</p>
+                                        <p>Rate ratio = 0.473934</p>
                                         <p>Exact 95% confidence interval = 0.295128 to 0.746416</p>
                                         <p>&#160;</p>
                                         <p>Conditional maximum likelihood estimate of rate ratio = 0.473934</p>
@@ -241,7 +241,96 @@
                                         <p>Exact mid-P 95% confidence interval = 0.302362 to 0.730939</p>
                                         <p>Exact mid-P one sided P = 0.0003, two sided P = 0.0006</p>
                                         <p>&#160;</p>
-                                        <p>Here we may conclude with 95% confidence that the true population value for the difference between the two incidence rates lies somewhere between -0.001 and -0.0003. We may also conclude with 95% confidence that the incidence rate for those who used postmenopausal hormones in the circumstances of the study was between 0.30 and 0.75 of that for those who did not take post- menopausal hormones.</p>
+                                        <p>Here we may conclude with 95% confidence that the true population value for the difference between the two incidence rates lies somewhere between -0.001 and -0.0003. We may also conclude with 95% confidence that the incidence rate for those who used postmenopausal hormones in the circumstances of the study was between 0.30 and 0.75 of that for those who did not take postmenopausal hormones.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Compare two crude rates: the StatsDirect help example (Stampfer et al. 1985, cases of
+# coronary heart disease and person-years of follow up among users and non-users of
+# postmenopausal hormones) in R
+a &lt;- 30          # cases among the exposed (hormone users)
+b &lt;- 60          # cases among the non-exposed
+pt1 &lt;- 54308.7   # person-years of follow up of the exposed
+pt2 &lt;- 51477.5   # person-years of follow up of the non-exposed
+
+# R's standard comparison of two rates. It conditions on the total number of cases:
+# if the two rates were equal, the exposed cases a would be binomial with probability
+# pt1 / (pt1 + pt2), so the comparison is the exact binomial test of a in a + b. Its
+# rate ratio is the report's rate ratio and its conditional maximum likelihood
+# estimate. Its interval is the Clopper-Pearson binomial interval turned into a rate
+# ratio, which is the report's exact (Fisher) interval. Its P value is the report's
+# two sided exact Fisher P (the binomial test of a in a + b, two sided).
+print(poisson.test(c(a, b), c(pt1, pt2)))
+
+# The rates, their difference and its test-based interval (Sahai and Khurshid 1996):
+# a chi-square statistic compares a with its expected value given the total number
+# of cases, and the limits are the difference plus or minus z times the difference
+# divided by the square root of chi-square
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+m &lt;- a + b
+pt &lt;- pt1 + pt2
+ir1 &lt;- a / pt1
+ir2 &lt;- b / pt2
+ird &lt;- ir1 - ir2
+cat("Exposed incidence rate =", six(ir1), "\n")
+cat("Non-exposed incidence rate =", six(ir2), "\n")
+chisq &lt;- (a - m * pt1 / pt)^2 / (m * pt1 * pt2 / pt^2)
+z &lt;- qnorm(0.975)
+cat("Rate difference =", six(ird), "\n")
+if (chisq &gt; 0) {                # the limits are undefined when the rates are equal
+  cat("approximate 95% confidence interval =", six(ird - z * sqrt(ird^2 / chisq)),
+      "to", six(ird + z * sqrt(ird^2 / chisq)), "\n")
+}
+cat("chi-square =", six(chisq), " ", pv(pchisq(chisq, 1, lower.tail = FALSE)), "\n")
+
+# The rate ratio and its exact interval from quantiles of the F distribution, as the
+# formula above gives it. The lower limit is 0 when a is 0 and the upper limit is
+# infinite when b is 0. The limits agree with those of poisson.test to 6 places.
+irr &lt;- ir1 / ir2
+lower &lt;- if (a == 0) 0 else pt2 / pt1 * (a / (b + 1)) / qf(0.975, 2 * (b + 1), 2 * a)
+upper &lt;- if (b == 0) Inf else pt2 / pt1 * ((a + 1) / b) * qf(0.975, 2 * (a + 1), 2 * b)
+cat("Rate ratio =", six(irr), "\n")
+cat("exact 95% confidence interval =", six(lower), "to", six(upper), "\n")
+
+# The conditional analysis. Given the total m, a is binomial with probability
+# p = pt1 * ratio / (pt1 * ratio + pt2), and a rate ratio is recovered from a
+# probability p as p * pt2 / ((1 - p) * pt1). The one sided Fisher P is the smaller
+# tail of that distribution at a ratio of 1; the two sided P adds up the probabilities
+# of the values of a that are no more probable than the one observed.
+ratio &lt;- function(p) p * pt2 / ((1 - p) * pt1)
+cat("Conditional maximum likelihood estimate of rate ratio =", six(irr), "\n")
+cat("Exact Fisher 95% confidence interval =", six(lower), "to", six(upper), "\n")
+prob &lt;- dbinom(0:m, m, pt1 / pt)
+up &lt;- sum(prob[(a + 1):(m + 1)])
+down &lt;- sum(prob[1:(a + 1)])
+two &lt;- sum(prob[prob &lt;= prob[a + 1] * (1 + 1e-7)])
+cat("Exact Fisher one sided ", pv(min(up, down)), ", two sided ", pv(two), "\n",
+    sep = "")
+
+# The mid-P versions count half of the probability of a itself: each limit is the
+# probability at which the tail beyond a plus half the probability of a is 2.5%,
+# found by root finding, and the two sided mid-P is twice the one sided value
+mid_tail &lt;- function(p, top) {
+  half &lt;- 0.5 * dbinom(a, m, p)
+  if (top) pbinom(a - 1, m, p) + half else pbinom(a, m, p, lower.tail = FALSE) + half
+}
+lower_mid &lt;- if (a == 0) 0 else
+  ratio(uniroot(function(p) mid_tail(p, FALSE) - 0.025, c(1e-12, 1 - 1e-12),
+                tol = 1e-12)$root)
+upper_mid &lt;- if (b == 0) Inf else
+  ratio(uniroot(function(p) mid_tail(p, TRUE) - 0.025, c(1e-12, 1 - 1e-12),
+                tol = 1e-12)$root)
+cat("Exact mid-P 95% confidence interval =", six(lower_mid), "to", six(upper_mid),
+    "\n")
+mid &lt;- min(up, down) - 0.5 * prob[a + 1]
+cat("Exact mid-P one sided ", pv(mid), ", two sided ", pv(min(2 * mid, 1)), "\n",
+    sep = "")</pre>
+                                            </div>
+                                        </div>
                                         <p>&#160;</p>
                                         <p><a href="../basics/p_values.htm">P values</a>
                                         </p>
