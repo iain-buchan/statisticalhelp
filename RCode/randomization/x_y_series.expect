@@ -1,0 +1,8 @@
+# Randomizing a series of integers, the help illustration: 1 to 49 with seed 10. The program uses its own generator, so the numbers are checked between the help and the program (HP) and the R series separately (R). One fragment per line.
+Random allocation of numbers in a series
+Randomized with seed: 10
+HP: 1 43 2 17 3 14 4 31 5 34 6 40 7 41 8 42 9 16 10 2 11 37 12 7 13 19 14 11 15 30 16 48 17 13 18 25 19 46 20 4 21 18 22 28 23 12 24 32 25 49 26 22 27 36 28 45 29 44 30 5 31 3 32 39 33 6 34 10 35 27 36 26 37 8 38 47 39 9 40 24 41 21 42 35 43 33 44 20 45 29 46 23 47 1 48 15 49 38
+R: 1 43 2 9 3 10 4 12 5 8 6 39
+R: 48 49 49 30
+R: The first six: 43 9 10 12 8 39
+R: Cards 6 to 10 shuffled: 8 6 7 10 9

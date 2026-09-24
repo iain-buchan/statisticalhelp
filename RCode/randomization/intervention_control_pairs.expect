@@ -1,0 +1,11 @@
+# Randomization of intervention-control pairs: the help example (50 pairs, seed 10, balanced allocation). StatsDirect's generator and R's give different sequences for the same seed, so the pair orders are checked in the help and the program report; R's output is checked for its headings and its balanced counts.
+Randomized intervention-control pairs
+Randomized with seed: 10, balanced allocation
+HP: 1 Intervention - Control 2 Control - Intervention 3 Intervention - Control 4 Intervention - Control 5 Control - Intervention 6 Control - Intervention 7 Intervention - Control 8 Control - Intervention 9 Intervention - Control 10 Control - Intervention
+HP: 11 Intervention - Control 12 Control - Intervention 13 Control - Intervention 14 Intervention - Control 15 Intervention - Control 16 Intervention - Control 17 Control - Intervention 18 Control - Intervention 19 Intervention - Control 20 Control - Intervention
+HP: 21 Intervention - Control 22 Control - Intervention 23 Control - Intervention 24 Intervention - Control 25 Control - Intervention 26 Control - Intervention 27 Control - Intervention 28 Intervention - Control 29 Intervention - Control 30 Intervention - Control
+HP: 31 Intervention - Control 32 Intervention - Control 33 Intervention - Control 34 Control - Intervention 35 Control - Intervention 36 Intervention - Control 37 Intervention - Control 38 Control - Intervention 39 Control - Intervention 40 Control - Intervention
+HP: 41 Control - Intervention 42 Intervention - Control 43 Control - Intervention 44 Control - Intervention 45 Intervention - Control 46 Intervention - Control 47 Control - Intervention 48 Control - Intervention 49 Intervention - Control 50 Intervention - Control
+R: Pairs allocated Intervention - Control = 25
+R: Pairs allocated Control - Intervention = 25
+R: Equally likely balanced arrangements = 126410606437752

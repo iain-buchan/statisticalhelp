@@ -1,0 +1,14 @@
+# Random numbers by distribution, the help illustration: ten standard normal deviates from seed 1234 (Data_Generating_Random Numbers_Normal). The operation fills a worksheet column and prints no report; the "program" text is that column as the builtin fills it (full precision, so the values are checked P: at full precision and H: at the six places the help shows). StatsDirect's and R's generators give different series for the same seed, so R's ten values are checked R: on their own. One fragment per line.
+Normal (seed 1234, mean = 0, sd = 1)
+H: -0.872311 0.311024 -0.156733 0.790419 0.772112 -0.604991 -0.593378 0.848327 1.729491 1.154892
+P: -0.8723107021809289 0.31102389289802573 -0.1567327465364736 0.7904194746188635 0.7721115132689844
+P: -0.6049906480548849 -0.593377549302275 0.8483274310198193 1.7294907945054714 1.1548918177344025
+H: mean 0.337885 and standard deviation 0.864366
+R: -1.207066 0.277429 1.084441 -2.345698 0.429125 0.506056 -0.574740
+R: -0.546632 -0.564452 -0.890038
+R: Mean of the ten = -0.383157 sd = 0.995788
+R: Uniform 0 to 1 (mean 0.5, variance 1/12):
+R: Gamma (A = 2, B = 3; mean 6, variance 18):
+R: Lognormal (log mean 0, log sd 1; mean 1.6487 variance 4.6708):
+R: Poisson (mean 4, variance 4):
+R: Binomial (10 trials, p = 0.3; mean 3, variance 2.1):

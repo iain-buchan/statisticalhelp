@@ -185,5 +185,63 @@
                 <td style="text-align: right;">1</td>
             </tr>
         </table>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the procedure of the example above, using R's own random number generator, which differs from StatsDirect's, so the same seed gives a different allocation. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Preference group allocation: the StatsDirect help example (ten students ranking
+# five courses; the test workbook's Other worksheet columns Group capacity and 1st,
+# 2nd and 3rd choice) in R
+capacity &lt;- c(2, 1, 2, 3, 5)                       # places in groups 1 to 5
+choice &lt;- cbind(c(3, 3, 5, 3, 5, 5, 2, 4, 3, 1),   # each student's 1st choice
+                c(5, 4, 1, 1, 3, 4, 3, 1, 5, 3),   # 2nd choice
+                c(1, 2, 3, 4, 1, 3, 5, 5, 1, 5))   # 3rd choice
+groups &lt;- length(capacity)
+subjects &lt;- nrow(choice)
+stopifnot(sum(capacity) &gt;= subjects, choice &gt;= 1, choice &lt;= groups)
+
+# R has no function for this, so the procedure is written out. Round by round (1st
+# choices, then 2nd, then 3rd) each group with places left takes the unallocated
+# subjects who chose it in that round; when more want it than there are places, a
+# random sample of them gets in, so each has the same chance. Subjects still without
+# a group after the last round are placed at random in the places left over.
+# set.seed() makes an allocation repeatable. R's random number generator is not
+# StatsDirect's (both are Mersenne twisters, but seeded and used differently), so the
+# same seed gives a different allocation in R from the one in the help.
+set.seed(10)
+group &lt;- rep(NA_integer_, subjects)
+for (round in seq_len(ncol(choice))) {
+  for (g in seq_len(groups)) {
+    space &lt;- capacity[g] - sum(group == g, na.rm = TRUE)
+    wanting &lt;- which(is.na(group) &amp; choice[, round] == g)
+    if (space &gt; 0 &amp;&amp; length(wanting) &gt; 0) {
+      taken &lt;- if (length(wanting) &gt; space) sample(wanting, space) else wanting
+      group[taken] &lt;- g
+    }
+  }
+}
+left &lt;- which(is.na(group))
+if (length(left) &gt; 0) {
+  spare &lt;- rep(seq_len(groups), capacity - tabulate(group, groups))  # one entry a place
+  group[left] &lt;- spare[sample.int(length(spare), length(left))]    # even if one is left
+}
+
+# The report: the allocation, and (not in the report) which choice each student got
+cat("Random allocation to groups by preference\n")
+cat("Groups =", groups, "\n")
+cat("Total group capacity =", sum(capacity), "\n")
+cat("Subjects =", subjects, "\n")
+cat("Randomized with seed: 10\n")
+got &lt;- apply(choice == group, 1, function(hit) if (any(hit)) which(hit)[1] else NA)
+print(data.frame(Subject = seq_len(subjects), Group = group, Choice = got),
+      row.names = FALSE)
+cat("Places used:", paste(tabulate(group, groups), "of", capacity, collapse = ", "),
+    "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+
     </body>
 </html>

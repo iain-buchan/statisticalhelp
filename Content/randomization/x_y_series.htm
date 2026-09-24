@@ -227,4 +227,38 @@
         </p>
         <p>Robust (pseudo-)random number generation is used, see <a href="random_number_generator.htm">random number generation</a>.</p>
     </body>
-</html>
+</html>        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the illustration above, with the different series that R's own generator gives for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Randomizing a series of integers: the StatsDirect help illustration (the numbers
+# 1 to 49, as in a lottery, put in a random order with seed 10) in R
+x &lt;- 1
+y &lt;- 49
+seed &lt;- 10
+
+# sample(x:y) returns the integers x to y in a random order, every order being
+# equally likely. StatsDirect and R each have their own Mersenne Twister generator
+# and their own way of turning its output into a random order, so the same seed
+# gives a different series in R: the two columns of the output are the same, the
+# numbers are not. Keep the seed with the series, as either program can then repeat it.
+# (For a series of one number, x = y, sample(x:y) would instead shuffle 1 to x.)
+set.seed(seed)
+series &lt;- sample(x:y)
+cat("Random allocation of numbers in a series\n")
+cat("Randomized with seed:", seed, "\n")
+print(data.frame(position = seq_along(series), number = series), row.names = FALSE)
+
+# Six lottery numbers: the first six of the series, or equivalently sample(x:y, 6),
+# which draws six of the numbers without replacement
+cat("The first six:", head(series, 6), "\n")
+
+# The five cards labelled 6 to 10
+set.seed(seed)
+cat("Cards 6 to 10 shuffled:", sample(6:10), "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+

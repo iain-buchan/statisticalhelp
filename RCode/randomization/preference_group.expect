@@ -1,0 +1,9 @@
+# Preference group allocation: the help example (ten students, five courses) with StatsDirect's seed 10; R's generator gives another allocation
+Random allocation to groups by preference
+Groups = 5
+Total group capacity = 13
+Subjects = 10
+Randomized with seed: 10
+Subject Group
+HP: Subject Group 1 5 2 3 3 5 4 3 5 5 6 5 7 2 8 4 9 5 10 1
+R: Places used: 1 of 2, 1 of 1, 2 of 2, 2 of 3, 4 of 5

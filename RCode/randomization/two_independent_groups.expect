@@ -1,0 +1,8 @@
+# Random allocation to two independent groups, the help illustration: 30 subjects, 15 to each group, seed 10. StatsDirect's and R's generators give different sequences for the same seed, so the allocation itself is checked help against program (HP) and the R allocation on its own (R); the headings and counts are checked in all three.
+Unpaired random allocation to intervention or control group
+Randomized with seed: 10
+RH: 15 to each group
+HP: Intervention 2 Control 1 Intervention 3 Control 4 Intervention 6 Control 5 Intervention 7 Control 9 Intervention 8 Control 11 Intervention 10 Control 12 Intervention 15 Control 13 Intervention 16 Control 14 Intervention 19 Control 17 Intervention 22 Control 18 Intervention 23 Control 20 Intervention 25 Control 21 Intervention 27 Control 24 Intervention 29 Control 26 Intervention 30 Control 28
+R: Subjects: 30 (15 to each group)
+R: Intervention 7 Control 1
+R: Intervention 28 Control 30
