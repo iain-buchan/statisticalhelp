@@ -20,7 +20,7 @@
         </p>
         <p>- where qi hat is the probability that an individual will die in the ith interval, n<sub>i</sub> is the length of the interval, M<sub>i</sub> is the death rate in the interval (i.e. the number of individuals dying in the interval [D<sub>i</sub>] divided by the mid-year population [P<sub>i</sub>], which is the number of years lived in the interval by those alive at the start of the interval, i.e. it is the person-time denominator for the rate), and ai is the fraction of the last age interval of life.</p>
         <p>&#160;</p>
-        <p>To explain a<sub>i</sub>: When a person dies at a certain age they have lived only a fraction of the interval in which their age at death sits, the average of all of these fractions of the interval for all people dying in the interval is call the fraction of the last age interval of life, a<sub>i</sub>. Infant deaths tend to occur early in the first year of life (which is the usual first age interval for abridged life tables). The ai value for this interval is around 0.1 in developed countries and higher where infant mortality rates are higher. The values for young childhood intervals are around 0.4 and for adult intervals are around 0.5. The proper values for ai can be calculated from the full death records. If the full records are not available then the WHO guidelines are to use the following ai values for the first interval given the following infant mortality rates:</p>
+        <p>To explain a<sub>i</sub>: When a person dies at a certain age they have lived only a fraction of the interval in which their age at death sits, the average of all of these fractions of the interval for all people dying in the interval is called the fraction of the last age interval of life, a<sub>i</sub>. Infant deaths tend to occur early in the first year of life (which is the usual first age interval for abridged life tables). The ai value for this interval is around 0.1 in developed countries and higher where infant mortality rates are higher. The values for young childhood intervals are around 0.4 and for adult intervals are around 0.5. The proper values for ai can be calculated from the full death records. If the full records are not available then the WHO guidelines are to use the following ai values for the first interval given the following infant mortality rates:</p>
         <p>&#160;</p>
         <table cellspacing="0" style="caption-side: top;">
             <col />
@@ -146,12 +146,13 @@
         <p>&#160;</p>
         <p>Standard errors and confidence intervals for q and e are calculated using the formulae given by Chiang (1984):</p>
         <p>
-            <MadCap:equation>$\displaystyle s_{\hat e_\alpha}^2=\sum_{i=\alpha}^{w-1}\hat p_{\alpha i}^2[(1-a_i)n_i+\hat e_{i+1}]s_{\hat p_i}^2 \\
+            <MadCap:equation>$\displaystyle s_{\hat e_\alpha}^2=\sum_{i=\alpha}^{w-1}\hat p_{\alpha i}^2[(1-a_i)n_i+\hat e_{i+1}]^2s_{\hat p_i}^2 \\
 \displaystyle s_{\hat p_i}^2=\frac{\hat q_i^2(1-\hat q_i)}{D_i} \\
-\displaystyle \hat p_{\alpha i}=\frac{l_I}{l_\alpha} \\
+\displaystyle \hat p_{\alpha i}=\frac{l_i}{l_\alpha} \\
 \displaystyle s_{\hat q_i}^2=\frac{1}{D_i}\hat q_i^2(1-\hat q_i)$</MadCap:equation>
         </p>
         <p>- where s squared e hat alpha is the variance of the expectation of life at the age of the start of the interval alpha, and s squared q hat i is the variance of the probability of death for the ith interval.</p>
+        <p>The variance of e does not include the sampling variation of the death rate in the open interval, so the Monte Carlo interval can be wider than the Chiang interval when few deaths fall in that interval.</p>
         <p>&#160;</p>
         <p>If you want to test whether or not the probability of death in one age interval is statistically significantly different from another interval, or compare the probability of death in a given age interval from two different populations (e.g. male vs. female), then you can use the following formulae:</p>
         <p>
@@ -813,7 +814,6 @@
         </table>
         <p>&#160;</p>
         <p>Median expectation of life (age at which half of original cohort survives) = 75.876035</p>
-    </body>
         <p>95% CI by Monte Carlo (20000) simulation = 75.799707 to 75.951499</p>
         <p>&#160;</p>
         <p>Expectation of life at birth = 71.952313</p>
@@ -914,4 +914,5 @@ cat("95% CI by Monte Carlo (20000) simulation =", mc(sim["e0", ]), "\n")</pre>
         </MadCap:dropDown>
         <p>&#160;</p>
 
+    </body>
 </html>

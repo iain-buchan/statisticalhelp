@@ -19,20 +19,20 @@
         <p>&#160;</p>
         <p>Repeat times may represent separate factors or the observation of the same factor repeated on k occasions. For example, time to develop symptoms could be analysed for k different symptoms in a group of patients treated with drug x and compared with a group of patients not treated with drug x.</p>
         <p>&#160;</p>
-        <p>Missing data can be code either by entering a missing data symbol * as the time, or by setting censored equal to 0 and time less than the minimum uncensored time in your data set.</p>
+        <p>Missing data can be coded either by entering a missing data symbol * as the time, or by setting censored equal to 0 and time less than the minimum uncensored time in your data set.</p>
         <p>&#160;</p>
         <p>For further details please refer to <a href="../references/reference_list.htm#ref-makuch-1991">Makuch and Escobar (1991)</a> and <a href="../references/reference_list.htm#ref-wei-1984">Wei and Lachin (1984)</a>.</p>
         <p>&#160;</p>
         <p><u>Technical Validation</u>
         </p>
-        <p>Wei and Lachin's multivariate tests are calculated for the case to two multivariate distributions, and the intermediate univariate statistics are given. The algorithm used for the method is that given by Makuch and Escobar (1991).</p>
+        <p>Wei and Lachin's multivariate tests are calculated for the case of two multivariate distributions, and the intermediate univariate statistics are given. The algorithm used for the method is that given by Makuch and Escobar (1991).</p>
         <p>&#160;</p>
         <p>The general univariate statistic for comparing the time to event (of component type k out of m multivariate components) of the two groups is calculated as:</p>
         <p>
             <MadCap:equation>$\displaystyle T_k=\frac{\displaystyle \sum_{j=1}^{n_1}w_j\Delta_{1kj}e_{2k}-\sum_{j=1}^{n_2}w_j\Delta_{2kj}e_{1k}}{\sqrt{n}} \\
 \displaystyle e_{ik}=\frac{r_{ik}}{r_{1k}+r_{2k}}$</MadCap:equation>
         </p>
-        <p>- where n<sub>1</sub> is the number of event times per component in group 1; n<sup style="vertical-align: sub;">2</sup> is the number of event times per component in group 2; n is the total number of event times per component; r<sub>ik</sub> is the number at risk in group i at the jth event time in the kth component; Δ is equal to 0 if an observation is censored or 1 otherwise; e<sub>ik</sub> is the expected proportion of events in group i for the kth component; and w<sub>j</sub> is equal to 1 for the log-rank method or (r<sub>1k</sub>+r<sub>2k</sub>)/n for the Gehan-Breslow generalised Wilcoxon method.</p>
+        <p>- where n<sub>1</sub> is the number of subjects in group 1; n<sup style="vertical-align: sub;">2</sup> is the number of subjects in group 2; n is the total number of subjects; r<sub>ik</sub> is the number at risk in group i at the jth event time in the kth component; Δ is equal to 0 if an observation is censored or 1 otherwise; e<sub>ik</sub> is the expected proportion of events in group i for the kth component; and w<sub>j</sub> is equal to 1 for the log-rank method or (r<sub>1k</sub>+r<sub>2k</sub>)/n for the Gehan-Breslow generalised Wilcoxon method.</p>
         <p>&#160;</p>
         <p>The univariate statistic for the kth component of the multivariate survival data is calculated as:</p>
         <p>
@@ -50,16 +50,16 @@
         <p>
             <MadCap:equation>$\displaystyle \text{WL}_1=\frac{\displaystyle \sum_{k=1}^m T_k}{\displaystyle \sqrt{\sum_{k=1}^m \sum_{l=1}^m \hat{\sigma}_{kl}}}$</MadCap:equation>
         </p>
-        <p>Note that the P value given with the stochastic ordering (linear combination) statistic is two sided, some authors prefer one sided inference (<a href="../references/reference_list.htm#ref-davis-1994">Davis, 1994</a>). If you make a one sided inference then you are considering only ascending or only descending ordering, and you are assuming that observing an order in the opposite direction to that expected would be unimportant to your conclusions.</p>
+        <p>Both one sided and two sided P values are given with the stochastic ordering (linear combination) statistic; some authors prefer one sided inference (<a href="../references/reference_list.htm#ref-davis-1994">Davis, 1994</a>). If you make a one sided inference then you are considering only ascending or only descending ordering, and you are assuming that observing an order in the opposite direction to that expected would be unimportant to your conclusions.</p>
         <p>&#160;</p>
         <p>The univariate and stochastic ordering statistics are asymptotically normally distributed; the omnibus statistic is asymptotically chi-square distributed on m degrees of freedom.</p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
         <p>From <a href="../references/reference_list.htm#ref-makuch-1991">Makuch and Escobar (1991)</a>.</p>
-        <p>Test workbook (Survival worksheet: Treatment Gp, Time m1, Censor m1, Time m2, Censor m2, Time m3, Censor m3, Time m4, Censor m4).</p>
+        <p>Test workbook (Survival worksheet: Treatment Gp, time m1, censor m1, time m2, censor m2, time m3, censor m3, time m4, censor m4).</p>
         <p>&#160;</p>
-        <p>The following data represent the times in days it took in vitro cultures of lymphocytes to reach a level of p24 antigen expression. The cultures where taken from patients infected with HIV-1 who had advanced AIDS or AIDS related complex. The idea was that patients whose cultures took a short time to express p24 antigen had a greater load of HIV-1. The two groups represented patients on two different treatments. The culture was run for 30 days and specimens which remained negative or which became contaminated were called censored (=0). The tests were run over four 30 day periods.</p>
+        <p>The following data represent the times in days it took in vitro cultures of lymphocytes to reach a level of p24 antigen expression. The cultures were taken from patients infected with HIV-1 who had advanced AIDS or AIDS related complex. The idea was that patients whose cultures took a short time to express p24 antigen had a greater load of HIV-1. The two groups represented patients on two different treatments. The culture was run for 30 days and specimens which remained negative or which became contaminated were called censored (=0). The tests were run over four 30 day periods.</p>
         <p>&#160;</p>
         <table cellspacing="0" style="caption-side: top;">
             <col />
@@ -601,45 +601,41 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>To analyse these data in StatsDirect you must first prepare them in 9 workbook columns as shown above. Alternatively, open the test workbook using the file open function of the file menu. Then select Wei-Lachin from the Survival Analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Treatment GP" when asked for the group identifier. Next, enter the number of repeat times as four. Select "time m1" and "censor m1" for time and <a href="censorship.htm" target="_popup">censorship</a> for repeat time one. Repeat this selection process for the other three repeat times.</p>
+        <p>To analyse these data in StatsDirect you must first prepare them in 9 workbook columns as shown above. Alternatively, open the test workbook using the file open function of the file menu. Then select Wei-Lachin from the Survival Analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Treatment Gp" when asked for the group identifier. Next, enter the number of repeat times as four. Select "time m1" and "censor m1" for time and <a href="censorship.htm" target="_popup">censorship</a> for repeat time one. Repeat this selection process for the other three repeat times.</p>
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
-        <p><u>Wei-Lachin Analysis</u>
+        <p><u>Wei-Lachin analysis</u>
         </p>
         <p>&#160;</p>
         <p><u>Univariate Generalised Wilcoxon (Gehan)</u>
         </p>
         <p>&#160;</p>
-        <p>total cases = 47 by group = 23 24</p>
+        <p>total cases = 47 (by group = 23 and 24)</p>
         <p>&#160;</p>
-        <p>Observed failures by group = 20 23</p>
-        <p>repeat time = 1</p>
+        <p>Repeat time 1</p>
+        <p>observed failures by group = 20 and 23</p>
         <p>Wei-Lachin t = -0.527597</p>
         <p>Wei-Lachin variance = 0.077575</p>
-        <p>z = -1.89427</p>
-        <p>chi-square = 3.588261, P = .0582</p>
+        <p>chi-square = 3.588261  P = 0.0582</p>
         <p>&#160;</p>
-        <p>Observed failures by group = 14 21</p>
-        <p>repeat time = 2</p>
+        <p>Repeat time 2</p>
+        <p>observed failures by group = 14 and 21</p>
         <p>Wei-Lachin t = 0.077588</p>
         <p>Wei-Lachin variance = 0.056161</p>
-        <p>z = 0.327397</p>
-        <p>chi-square = 0.107189, P = .7434</p>
+        <p>chi-square = 0.107189  P = 0.7434</p>
         <p>&#160;</p>
-        <p>Observed failures by group = 18 19</p>
-        <p>repeat time = 3</p>
+        <p>Repeat time 3</p>
+        <p>observed failures by group = 18 and 19</p>
         <p>Wei-Lachin t = -0.11483</p>
         <p>Wei-Lachin variance = 0.060918</p>
-        <p>z = -0.465244</p>
-        <p>chi-square = 0.216452, P = .6418</p>
+        <p>chi-square = 0.216452  P = 0.6418</p>
         <p>&#160;</p>
-        <p>Observed failures by group = 20 16</p>
-        <p>repeat time = 4</p>
+        <p>Repeat time 4</p>
+        <p>observed failures by group = 20 and 16</p>
         <p>Wei-Lachin t = 0.335179</p>
         <p>Wei-Lachin variance = 0.056281</p>
-        <p>z = 1.412849</p>
-        <p>chi-square = 1.996143, P = .1577</p>
+        <p>chi-square = 1.996143  P = 0.1577</p>
         <p>&#160;</p>
         <p><u>Multivariate Generalised Wilcoxon (Gehan)</u>
         </p>
@@ -709,42 +705,38 @@
         </table>
         <p>&#160;</p>
         <p>repeat times = 4</p>
-        <p>chi squared omnibus statistic = 9.242916 P = .0553</p>
+        <p>chi-square omnibus statistic = 9.242916  P = 0.0553</p>
         <p>&#160;</p>
-        <p>stochastic ordering z = -0.30981 one sided P = 0.3784, two sided P = 0.7567</p>
+        <p>stochastic ordering z = -0.30981  one sided P = 0.3784,  two sided P = 0.7567</p>
         <p>&#160;</p>
         <p><u>Univariate Log-Rank</u>
         </p>
         <p>&#160;</p>
-        <p>total cases = 47 by group = 23 24</p>
+        <p>total cases = 47 (by group = 23 and 24)</p>
         <p>&#160;</p>
-        <p>Observed failures by group = 20 23</p>
-        <p>repeat time = 1</p>
+        <p>Repeat time 1</p>
+        <p>observed failures by group = 20 and 23</p>
         <p>Wei-Lachin t = -0.716191</p>
         <p>Wei-Lachin variance = 0.153385</p>
-        <p>z = -1.828676</p>
-        <p>chi-square = 3.344058, P = .0674</p>
+        <p>chi-square = 3.344058  P = 0.0674</p>
         <p>&#160;</p>
-        <p>Observed failures by group = 14 21</p>
-        <p>repeat time = 2</p>
+        <p>Repeat time 2</p>
+        <p>observed failures by group = 14 and 21</p>
         <p>Wei-Lachin t = -0.277786</p>
         <p>Wei-Lachin variance = 0.144359</p>
-        <p>z = -0.731119</p>
-        <p>chi-square = 0.534536, P = .4647</p>
+        <p>chi-square = 0.534536  P = 0.4647</p>
         <p>&#160;</p>
-        <p>Observed failures by group = 18 19</p>
-        <p>repeat time = 3</p>
+        <p>Repeat time 3</p>
+        <p>observed failures by group = 18 and 19</p>
         <p>Wei-Lachin t = -0.372015</p>
         <p>Wei-Lachin variance = 0.150764</p>
-        <p>z = -0.9581</p>
-        <p>chi-square = 0.917956, P = .338</p>
+        <p>chi-square = 0.917956  P = 0.338</p>
         <p>&#160;</p>
-        <p>Observed failures by group = 20 16</p>
-        <p>repeat time = 4</p>
+        <p>Repeat time 4</p>
+        <p>observed failures by group = 20 and 16</p>
         <p>Wei-Lachin t = 0.619506</p>
         <p>Wei-Lachin variance = 0.143437</p>
-        <p>z = 1.635743</p>
-        <p>chi-square = 2.675657, P = .1019</p>
+        <p>chi-square = 2.675657  P = 0.1019</p>
         <p>&#160;</p>
         <p><u>Multivariate Log-Rank</u>
         </p>
@@ -812,6 +804,14 @@
                 <td>8.555558</td>
             </tr>
         </table>
+        <p>&#160;</p>
+        <p>repeat times = 4</p>
+        <p>chi-square omnibus statistic = 9.52966  P = 0.0491</p>
+        <p>&#160;</p>
+        <p>stochastic ordering z = -0.688754  one sided P = 0.2455,  two sided P = 0.491</p>
+        <p>&#160;</p>
+        <p>Here the multivariate log-rank test has revealed a statistically significant difference between the treatment groups which was not revealed by any of the individual univariate tests. For more detailed discussion of each result parameter see <a href="../references/reference_list.htm#ref-wei-1984">Wei and Lachin (1984)</a>.</p>
+        <p>&#160;</p>
         <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
@@ -921,14 +921,6 @@ for (gehan in c(TRUE, FALSE)) {
 }</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
-        <p>&#160;</p>
-        <p>&#160;</p>
-        <p>repeat times = 4</p>
-        <p>chi squared omnibus statistic = 9.52966, P = .0491</p>
-        <p>&#160;</p>
-        <p>stochastic ordering z = -0.688754, one sided P = 0.2455, two sided P = 0.491</p>
-        <p>&#160;</p>
-        <p>Here the multivariate log-rank test has revealed a statistically significant difference between the treatment groups which was not revealed by any of the individual univariate tests. For more detailed discussion of each result parameter see <a href="../references/reference_list.htm#ref-wei-1984">Wei and Lachin (1984)</a>.</p>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

@@ -11,7 +11,7 @@
         <p>&#160;</p>
         <p>This function fits Cox's proportional hazards model for survival-time (time-to-event) outcomes on one or more predictors.</p>
         <p>&#160;</p>
-        <p>Cox regression (or proportional hazards regression) is method for investigating the effect of several variables upon the time a specified event takes to happen. In the context of an outcome such as death this is known as Cox regression for survival analysis. The method does not assume any particular "survival model" but it is not truly nonparametric because it does assume that <b>the effects of the predictor variables upon survival are constant over time and are additive in one scale</b>. You should not use Cox regression without the guidance of a Statistician.</p>
+        <p>Cox regression (or proportional hazards regression) is a method for investigating the effect of several variables upon the time a specified event takes to happen. In the context of an outcome such as death this is known as Cox regression for survival analysis. The method does not assume any particular "survival model" but it is not truly nonparametric because it does assume that <b>the effects of the predictor variables upon survival are constant over time and are additive in one scale</b>. You should not use Cox regression without the guidance of a Statistician.</p>
         <p>&#160;</p>
         <p>Provided that the assumptions of Cox regression are met, this function will provide better estimates of survival probabilities and cumulative hazard than those provided by the <a href="kaplan_meier.htm">Kaplan-Meier</a> function.</p>
         <p>&#160;</p>
@@ -37,7 +37,7 @@
         <p>&#160;</p>
         <p><u>Survival and cumulative hazard rates</u>
         </p>
-        <p>The survival/survivorship function and the cumulative hazard function (as discussed under <a href="kaplan_meier.htm">Kaplan-Meier</a>) are calculated relative to the baseline (lowest value of covariates) at each time point. Cox regression provides a better estimate of these functions than the Kaplan-Meier method when the assumptions of the Cox model are met and the fit of the model is strong.</p>
+        <p>The survival/survivorship function and the cumulative hazard function (as discussed under <a href="kaplan_meier.htm">Kaplan-Meier</a>) are calculated relative to a baseline at which every covariate is zero (or at its mean, for a continuous covariate that is centred) at each time point. Cox regression provides a better estimate of these functions than the Kaplan-Meier method when the assumptions of the Cox model are met and the fit of the model is strong.</p>
         <p>&#160;</p>
         <p>You are given the option to 'centre continuous covariates' – this makes survival and hazard functions relative to the mean of continuous variables rather than relative to the minimum, which is usually the most meaningful comparison.</p>
         <p>&#160;</p>
@@ -56,7 +56,7 @@
         </p>
         <p>StatsDirect optimises the log likelihood associated with a Cox regression model until the change in log likelihood with iterations is less than the accuracy that you specify in the dialog box that is displayed just before the calculation takes place (<a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>; <a href="../references/reference_list.htm#ref-harris-1991">Harris, 1991</a>; <a href="../references/reference_list.htm#ref-cox-1984">Cox and Oakes, 1984</a>; <a href="../references/reference_list.htm#ref-le-1997">Le, 1997</a>; <a href="../references/reference_list.htm#ref-hosmer-1999">Hosmer and Lemeshow, 1999</a>).</p>
         <p>&#160;</p>
-        <p>The calculation options dialog box sets a value (default is 10000) for "SPLITTING RATIO"; this is the ratio in proportionality constant at a time t above which StatsDirect will split your data into more strata and calculate an extended likelihood solution, see <a href="../references/reference_list.htm#ref-bryson-1981">Bryson and Johnson, (1981)</a>.</p>
+        <p>The calculation options dialog box sets a value (default is 1000) for "SPLITTING RATIO"; this is the ratio in proportionality constant at a time t above which StatsDirect will split your data into more strata and calculate an extended likelihood solution, see <a href="../references/reference_list.htm#ref-bryson-1981">Bryson and Johnson, (1981)</a>.</p>
         <p>&#160;</p>
         <p>Ties are handled by Breslow's approximation (<a href="../references/reference_list.htm#ref-breslow-1974">Breslow, 1974</a>).</p>
         <p>&#160;</p>

@@ -33,11 +33,11 @@
         </p>
         <p>- where e<sub>1</sub> and e<sub>2</sub> are the extents of exposure to risk of death (sometimes called expected deaths) in the two groups compared, each summed over the distinct observed times (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
         <p>&#160;</p>
-        <p>An exact conditional maximum likelihood estimate of the hazard ratio is optionally given. The exact estimate and its confidence interval (Fisher or mid-P) should be routinely used in preference to the above approximation. The exponents of <a href="cox_regression.htm">Cox regression</a> parameters are also exact estimators of the hazard ratio, but please note that they are not exact if Breslow's method has been used to correct for ties in the regression. Please consult with a statistician if you are considering using Cox regression.</p>
+        <p>An exact conditional maximum likelihood estimate of the hazard ratio is also given when there are two groups. The exact estimate and its confidence interval (Fisher or mid-P) should be routinely used in preference to the above approximation. The exponents of <a href="cox_regression.htm">Cox regression</a> parameters are also exact estimators of the hazard ratio, but please note that they are not exact if Breslow's method has been used to correct for ties in the regression. Please consult with a statistician if you are considering using Cox regression.</p>
         <p>&#160;</p>
         <p><u>Trend test</u>
         </p>
-        <p>If you have more than two groups then StatsDirect will calculate a variant of the log-rank test for trend. If you choose not to enter group scores then they are allocated as 1,2,3 ... n in group order (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>).</p>
+        <p>If you have more than two groups then StatsDirect will calculate a variant of the log-rank test for trend. If you choose not to enter group scores then they are allocated as 1,2,3 ... n in group order, the order in which the groups first appear in the data and are numbered in the report (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-lawless-1982">Lawless, 1982</a>; <a href="../references/reference_list.htm#ref-kalbfleisch-1980">Kalbfleisch and Prentice, 1980</a>).</p>
         <p>&#160;</p>
         <p><u>Technical validation</u>
         </p>
@@ -51,7 +51,7 @@
 \displaystyle \chi_{k-1}^2=\textbf{U}'\textbf{V}_w^{-1}\textbf{U} \\
 \displaystyle \chi_{1\text{ trend}}^2 =\frac{(\textbf{c}'\textbf{U})^2}{\textbf c'\widehat{\textbf{V}}_w \textbf c}$</MadCap:equation>
         </p>
-        <p>- where the weight w<sub>j</sub> for the log-rank test is equal to 1, and w<sub>j</sub> for the generalised Wilcoxon test is n<sub>j</sub> (Gehan-Breslow method); for the Tarone-Ware method w<sub>j</sub> is the square root of n<sub>j</sub>; and for the Peto-Prentice method w<sub>j</sub> is the Kaplan-Meier survivor function multiplied by (n<sub>j</sub> divided by n<sub>j</sub> +1). e<sub>ij</sub> is the expectation of death in group i at the jth distinct observed time where d<sub>j</sub> events/deaths occurred. n<sub>ij</sub> is the number at risk in group i just before the jth distinct observed time, and n<sub>j</sub> is the total number at risk at that time. The test statistic for equality of survival across the k groups (populations sampled) is approximately chi-square distributed on k-1 degrees of freedom. The test statistic for monotone trend is approximately chi-square distributed on 1 degree of freedom. <b>c</b> is a vector of scores that are either defined by the user or allocated as 1 to k.</p>
+        <p>- where the weight w<sub>j</sub> for the log-rank test is equal to 1, and w<sub>j</sub> for the generalised Wilcoxon test is n<sub>j</sub> (Gehan-Breslow method; StatsDirect divides this weight by the number of observations in the stratum plus one, which leaves the chi-square unchanged); for the Tarone-Ware method w<sub>j</sub> is the square root of n<sub>j</sub>; and for the Peto-Prentice method w<sub>j</sub> is a survivor function estimate, the product over the earlier distinct times of (n<sub>j</sub> - d<sub>j</sub> + 1) divided by (n<sub>j</sub> + 1), multiplied by (n<sub>j</sub> divided by n<sub>j</sub> + 1). e<sub>ij</sub> is the expectation of death in group i at the jth distinct observed time where d<sub>j</sub> events/deaths occurred. n<sub>ij</sub> is the number at risk in group i just before the jth distinct observed time, and n<sub>j</sub> is the total number at risk at that time. The test statistic for equality of survival across the k groups (populations sampled) is approximately chi-square distributed on k-1 degrees of freedom. The test statistic for monotone trend is approximately chi-square distributed on 1 degree of freedom. <b>c</b> is a vector of scores that are either defined by the user or allocated as 1 to k.</p>
         <p>&#160;</p>
         <p>Variance is estimated by the method that Peto (1977) refers to as "exact".</p>
         <p>&#160;</p>
@@ -64,7 +64,7 @@
         <p><u>Example</u>
         </p>
         <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 479)</a>.</p>
-        <p>Test workbook (Survival worksheet: Stage Group, Time, Censor).</p>
+        <p>Test workbook (Survival worksheet: Stage group, Time, Censor).</p>
         <p>&#160;</p>
         <p>The following data represent the survival in days since entry to the trial of patients with diffuse histiocytic lymphoma. Two different groups of patients, those with stage III and those with stage IV disease, are compared.</p>
         <p>Stage 3: 6, 19, 32, 42, 42, 43*, 94, 126*, 169*, 207, 211*, 227*, 253, 255*, 270*, 310*, 316*, 335*, 346*</p>
@@ -493,7 +493,7 @@
         <p><u>Logrank and Wilcoxon tests</u>
         </p>
         <p>&#160;</p>
-        <p><u>Log Rank (Peto)</u>:</p>
+        <p><u>Log-rank (Peto)</u>:</p>
         <p>&#160;</p>
         <p><u>For group 1 (Stage group = 1)</u>
         </p>
@@ -526,9 +526,9 @@
         <p>&#160;</p>
         <p>Chi-square for equivalence of death rates = 6.70971 P = 0.0096</p>
         <p>&#160;</p>
-        <p><u>Hazard Ratio, (approximate 95% confidence interval)</u>
+        <p><u>Hazard Ratio (approximate 95% confidence interval)</u>
         </p>
-        <p>Group 1 vs. Group 2 = 0.388878, (0.218343 to 0.692607)</p>
+        <p>Group 1 vs. Group 2 = 0.388878 (0.218343 to 0.692607)</p>
         <p>&#160;</p>
         <p>Conditional maximum likelihood estimates:</p>
         <p>Hazard Ratio = 0.381485</p>
