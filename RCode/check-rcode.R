@@ -9,10 +9,11 @@
 # A fragment that the help or the report words differently can be limited to some checks by
 # a prefix: any of the letters R (script output), H (help) and P (program report), as in "RH:" or "HP:".
 #
-# usage: Rscript --vanilla RCode/check-rcode.R [folder of program reports as .txt]
+# usage: Rscript --vanilla RCode/check-rcode.R [folder of program reports as .txt] [pattern of the scripts to check]
 
 args <- commandArgs(trailingOnly = TRUE)
-reports <- if (length(args) >= 1) args[1] else NA
+reports <- if (length(args) >= 1 && nzchar(args[1])) args[1] else NA
+only <- if (length(args) >= 2) args[2] else NA   # an optional pattern: check only the scripts whose path matches it
 root <- normalizePath(file.path(dirname(sub("^--file=", "", grep("^--file=",
           commandArgs(), value = TRUE)[1])), ".."))
 squash <- function(s) tolower(gsub("[[:space:]]+", " ", paste(s, collapse = " ")))
@@ -27,6 +28,7 @@ topic_text <- function(path) {
 
 scripts <- list.files(file.path(root, "RCode"), pattern = "\\.R$", recursive = TRUE)
 scripts <- setdiff(scripts, "check-rcode.R")
+if (!is.na(only)) scripts <- grep(only, scripts, value = TRUE)
 failures <- 0
 for (rel in scripts) {
   stem <- sub("\\.R$", "", rel)
