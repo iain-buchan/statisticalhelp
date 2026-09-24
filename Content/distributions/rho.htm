@@ -11,7 +11,7 @@
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Spearman's rho</b>.</p>
         <p>&#160;</p>
-        <p>Given a value for the Hotelling-Pabst test statistic (T) or Spearman's rho (ρ) this function calculates the probability of obtaining a value greater than or equal to T.</p>
+        <p>Given a value for the Hotelling-Pabst test statistic (T) or Spearman's rho (ρ) this function calculates the upper tail probability: that of obtaining a rank correlation at least as large as the one given, which is a value of T less than or equal to the T given.</p>
         <p>&#160;</p>
         <p>For two rankings (x1,x2...xn and y1,y2...yn) of n objects without ties:</p>
         <p>
@@ -25,11 +25,30 @@
         <p>&#160;</p>
         <p><u>Technical Validation</u>
         </p>
-        <p>Probabilities are calculated by summation across all permutations when n = 10 and by and Edgeworth series approximation when n &gt; 10 (<a href="../references/reference_list.htm#ref-best-1975-a">Best and Roberts, 1975</a>). The exact calculation employs a corrected version of the Best and Roberts (1975) algorithm. The Edgeworth series results for n &gt; 10 are accurate to at least four decimal places.</p>
+        <p>Probabilities are calculated by summation across all permutations when n is 10 or fewer and by an Edgeworth series approximation when n &gt; 10 (<a href="../references/reference_list.htm#ref-best-1975-a">Best and Roberts, 1975</a>). The exact calculation employs a corrected version of the Best and Roberts (1975) algorithm. The Edgeworth series results for n &gt; 10 are within 0.0004 of the exact probabilities at n = 11 and within 0.00005 by n = 15; the approximation improves as n grows.</p>
         <p>&#160;</p>
-        <p>The inverse is calculated by finding the largest value of T that gives a calculated probability (using the method above) closest to but not less than the P value entered.</p>
-    </body>
-</html>        <MadCap:dropDown class="rcode">
+        <p>The inverse is calculated by finding the largest value of T that gives a calculated probability (using the method above) closest to but not greater than the P value entered.</p>
+        <p>&#160;</p>
+        <p><u>Illustration</u>
+        </p>
+        <p>Consider the ten pairs of rankings in the <a href="../nonparametric_methods/spearman.htm">Spearman rank correlation</a> example, a tutor's rankings of ten students for suitability to their career and for knowledge of psychology. The sum of the squared differences between the paired ranks is T = 52, so ρ = 1 - 6 × 52/990 = 0.684848. To calculate the probability of a rank correlation at least this large when the two rankings are independent, select Spearman's rho from the Distributions section of the Analysis menu, enter 10 as the sample size and 52 as Hotelling-Pabst T (or enter 0.684848 as Spearman's rho, from which StatsDirect calculates T) and click Calculate. StatsDirect shows the upper tail probability, that of a T no larger than 52, and reports it as:</p>
+        <p>&#160;</p>
+        <p>P(Hotelling T 52, n 10) = 0.017325837742504 upper tail</p>
+        <p>&#160;</p>
+        <p>Of the 10! = 3,628,800 equally likely orderings of one ranking against the other, 62,872 give a T of 52 or less. This is the upper side P of the exact test in the Spearman rank correlation report (P = 0.0173); the distribution of ρ is symmetrical about zero, so the two sided P is twice it (P = 0.0347).</p>
+        <p>&#160;</p>
+        <p>For the inverse, enter 10 as the sample size and 0.025 as the upper tail P and click Invert. StatsDirect finds the largest T whose upper tail probability does not exceed 0.025, shows it with its rho (T = 58, ρ = 0.648484848484848) and reports the probability that it cuts off:</p>
+        <p>&#160;</p>
+        <p>Hotelling T (upper tail P 0.025, n 10) = 0.02448936287478</p>
+        <p>&#160;</p>
+        <p>So with ten pairs a rho of 0.648485 or more (a T of 58 or less) is significant at the one sided 2.5% level, as the example's 0.684848 is. The next possible value, T = 60 (ρ = 0.636364), has an upper tail probability of 0.027215332892416 and is not: with so few pairs the attainable significance levels are coarse.</p>
+        <p>&#160;</p>
+        <p>With more than ten pairs the probability comes from the Edgeworth series. Enter 20 as the sample size and 0.4 as Spearman's rho: StatsDirect calculates T = 798 and reports:</p>
+        <p>&#160;</p>
+        <p>P(Hotelling T 798, n 20) = 0.040820092284141 upper tail</p>
+        <p>&#160;</p>
+        <p>The probabilities in this illustration were calculated in R with the code below; StatsDirect displays them to 15 decimal places.</p>
+        <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
@@ -150,3 +169,7 @@ p20 &lt;- cor.test(x, y, method = "spearman", alternative = "greater")$p.value
 cat("P(Hotelling T ", score20, ", n 20) = ", fifteen(p20), " upper tail\n", sep = "")</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
+        <p>&#160;</p>
+
+    </body>
+</html>
