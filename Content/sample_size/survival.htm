@@ -12,7 +12,7 @@
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Sample Size_Survival Times</b>.</p>
         <p>&#160;</p>
-        <p>This function gives you the minimum number of subjects that you require to detect a true ratio of median survival times (hr) with power POWER and <a href="../basics/p_values.htm">two sided type I error probability</a> ALPHA (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>; <a href="../references/reference_list.htm#ref-schoenfeld-1982">Schoenfeld and Richter, 1982</a>).</p>
+        <p>This function gives you the minimum number of subjects that you require to detect a true hazard ratio (hr) for experimental subjects relative to controls with power POWER and <a href="../basics/p_values.htm">two sided type I error probability</a> ALPHA (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>; <a href="../references/reference_list.htm#ref-schoenfeld-1982">Schoenfeld and Richter, 1982</a>).</p>
         <p>&#160;</p>
         <p>The method used here is suitable for calculating sample sizes for studies that will be analysed by the log-rank test.</p>
         <p>&#160;</p>
@@ -36,7 +36,7 @@
             <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
             <li>5% is the usual choice for ALPHA.</li>
             <li>C is usually estimated from previous studies.</li>
-            <li>If possible, choose a range of hazard ratios that you want have the statistical power to detect.</li>
+            <li>If possible, choose a range of hazard ratios that you want to have the statistical power to detect.</li>
         </ul>
         <p>&#160;</p>
         <p><u>Technical validation</u>
@@ -48,8 +48,8 @@
 \displaystyle p_a=\frac{1-\exp(-\ln(2)A/\bar t)}{\ln(2)A/\bar t}\\
 \displaystyle \bar t=(C+E)/2$</MadCap:equation>
         </p>
-        <p>- where α = alpha, β = 1 - power, m is the number of controls per experimental subject and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer. (1+1/m)/p is equivalent to 2/p in the first equation if the experimental and control group sizes are equal (m = 1).</p>
-    </body>
+        <p>- where α = alpha, β = 1 - power, m is the number of controls per experimental subject and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the next whole number. (1+1/m)/p is equivalent to 2/p in the first equation if the experimental and control group sizes are equal (m = 1).</p>
+        <p>&#160;</p>
         <p><u>Example</u>
         </p>
         <p>Suppose you plan a trial of a new treatment against the usual one, with death as the endpoint. From earlier studies the median survival on the usual treatment is about 12 months, and you want to be able to detect an improvement to a median of 18 months on the new treatment (a hazard ratio of 0.67), with 80% power at the 5% two sided level. You expect to recruit for 24 months and to follow the subjects for another 12 months after the last one is recruited, allocating one control per experimental subject. The figures are invented for this illustration.</p>
@@ -123,4 +123,7 @@ size_survival(ct, et, at, fut, m, power, alpha)
 size_survival(ct, et, at = 36, fut = 0, m, power, alpha)</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
+        <p>&#160;</p>
+
+    </body>
 </html>

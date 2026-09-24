@@ -18,7 +18,7 @@
         <ul>
             <li>POWER: probability of detecting a true effect.</li>
             <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
-            <li>R0: correlation coefficient under the null hypothesis (often 0).</li>
+            <li>R0: correlation coefficient under the null hypothesis (often 0; StatsDirect takes R0 and R1 between 0 and 1, so if both are negative enter their absolute values).</li>
             <li>R1: correlation coefficient under the alternative hypothesis.</li>
         </ul>
         <p>&#160;</p>
@@ -33,7 +33,7 @@
         <p>&#160;</p>
         <p><u>Technical validation</u>
         </p>
-        <p>The sample size estimation uses Fisher's classic z-transformation to normalize the distribution of Pearson's correlation coefficient:</p>
+        <p>The sample size estimation uses Fisher's classic z-transformation to normalise the distribution of Pearson's correlation coefficient:</p>
         <p>
             <MadCap:equation>$\displaystyle z'=\frac{1}{2} \ln \left( \frac{1+r}{1-r}\right)$</MadCap:equation>
         </p>
@@ -54,8 +54,8 @@
         </p>
         <p>-where norm is the area under the standard normal distribution curve.</p>
         <p>&#160;</p>
-        <p>The precise value of n is rounded up to the closest integer in the results given by StatsDirect.</p>
-    </body>
+        <p>The initial estimate is rounded up to a whole number and then moved to the smallest number of pairs at which the power equation gives at least the required power; this is the sample size given by StatsDirect.</p>
+        <p>&#160;</p>
         <p><u>Example</u>
         </p>
         <p>Suppose that you are planning a study of the association between two measurements, and that a correlation of 0.4 or more would matter in practice. This is an invented example: you want an 80% chance of detecting a true correlation of 0.4 at the two sided 5% level of significance, against the null hypothesis of no correlation (R0 = 0).</p>
@@ -121,4 +121,6 @@ cat("Power with", n - 1, "pairs =", paste0(pct(size_power(n - 1)), ","), "with",
     "pairs =", pct(size_power(n)), "\n")</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
+        <p>&#160;</p>
+    </body>
 </html>
