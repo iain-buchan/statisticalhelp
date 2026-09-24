@@ -1,0 +1,21 @@
+# Number needed to treat, the help's Haynes and Sackett (1993) ACE inhibitor trial (123 of 607 controls and 94 of 607 treated died) with 95% intervals; the NNTs adjusted for an expected risk of 30% are in the script and the program report only. One fragment per line.
+HP:Number needed to treat (empirical results using observed counts only)
+Estimates with 95% confidence intervals:
+Risk of event in controls = 123/607 = 0.202636 (0.171346 to 0.23685)
+Risk of event in treated = 94/607 = 0.15486 (0.126993 to 0.186133)
+Relative risk of event = 0.764228 (0.598898 to 0.974221)
+Risk of no event in controls = 484/607 = 0.797364 (0.76315 to 0.828654)
+Risk of no event in treated = 513/607 = 0.84514 (0.813867 to 0.873007)
+Relative risk of no event = 1.059917 (1.005736 to 1.118137)
+Odds ratio of event in treated cf. controls = 0.721026 (0.529913 to 0.979347)
+Relative risk reduction (controls-treated) = 0.235772 (0.025779 to 0.401102)
+Risk difference (controls-treated) = 0.047776 (0.004675 to 0.090991)
+NNT [risk difference] = 20.931034_benefit (10.990105_benefit to 213.910426_benefit)
+NNT [risk difference] (rounded up) = 21_benefit (11_benefit to 214_benefit)
+RP:Expected risk of event without treatment = 30%
+RP:NNT [relative risk of event] = 14.137931_benefit (8.310441_benefit to 129.305731_benefit)
+RP:NNT [relative risk of event] (rounded up) = 15_benefit (9_benefit to 130_benefit)
+RP:NNT [relative risk of no event] = 23.842365_benefit (12.092478_benefit to 249.060835_benefit)
+RP:NNT [relative risk of no event] (rounded up) = 24_benefit (13_benefit to 250_benefit)
+RP:NNT [odds ratio] = 15.640759_benefit (8.70126_benefit to 229.137004_benefit)
+RP:NNT [odds ratio] (rounded up) = 16_benefit (9_benefit to 230_benefit)

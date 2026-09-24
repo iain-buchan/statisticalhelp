@@ -1,0 +1,17 @@
+# Risk (retrospective), Sahai and Khurshid (1996) smoking and oral cancer (255, 49, 93, 46) with 95% intervals. One fragment per line.
+HP: Risk analysis (retrospective)
+Observed odds ratio = 2.574062
+Approximate power (for 5% significance) = 96.84%
+Approximate (Woolf, logit) 95% confidence interval = 1.613302 to 4.106976
+Conditional maximum likelihood estimates:
+Conditional estimate of odds ratio = 2.56799
+Exact Fisher 95% confidence interval = 1.566572 to 4.213082
+Exact Fisher one sided P < 0.0001, two sided P < 0.0001
+Exact mid-P 95% confidence interval = 1.606435 to 4.107938
+Exact mid-P one sided P < 0.0001, two sided P < 0.0001
+Population exposure % = 66.906475 (exposure among the controls)
+Population attributable risk % = 51.294336
+Approximate 95% confidence interval = 34.307694 to 68.280978
+RP: Population exposure % = 50 (as entered)
+RP: Population attributable risk % = 44.04126
+RP: Approximate 95% confidence interval = 23.46848 to 60.837884

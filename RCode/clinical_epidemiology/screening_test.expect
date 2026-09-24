@@ -1,0 +1,6 @@
+# Screening test errors (Bayes' theorem), the StatsDirect help example: a hypothetical test of sensitivity 0.951 and specificity 0.989 with a prevalence of 1 in 100. One fragment per line.
+For an overall case rate of 100 per ten thousand population tested:
+Test SENSITIVITY = 95.1%
+Probability of a FALSE POSITIVE result = 0.533824
+Test SPECIFICITY = 98.9%
+Probability of a FALSE NEGATIVE result = 0.0005

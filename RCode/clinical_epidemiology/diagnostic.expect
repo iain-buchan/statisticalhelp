@@ -1,0 +1,22 @@
+# Diagnostic test 2 by 2 table, the help's hypothetical serum marker (431, 30, 29, 116) with 95% intervals. One fragment per line.
+461
+145
+460
+146
+606
+Prevalence (pre-test likelihood of disease)
+0.759076 (0.722988 to 0.792617), 75.91% (72.3% to 79.26%)
+Predictive value of +ve test (post-test likelihood of disease)
+0.934924 (0.908401 to 0.955666), 93.49% (90.84% to 95.57%), {change = 17%}
+(post-test likelihood of no disease)
+0.8 (0.725563 to 0.861777), 80% (72.56% to 86.18%), {change = 56%}
+(post-test disease likelihood despite -ve test)
+0.2 (0.138223 to 0.274437), 20% (13.82% to 27.44%), {change = -56%}
+Sensitivity (true positive rate)
+0.936957 (0.910711 to 0.957376), 93.7% (91.07% to 95.74%)
+Specificity (true negative rate)
+0.794521 (0.719844 to 0.856862), 79.45% (71.98% to 85.69%)
+LR (positive test) = 4.559855 (3.364957 to 6.340323)
+LR (negative test) = 0.079348 (0.055211 to 0.113307)
+Observed odds ratio = 57.466667
+Conditional maximum likelihood estimate = 56.64839 (32.064885 to 103.54465)
