@@ -1,0 +1,53 @@
+# Log-rank and Wilcoxon tests, Armitage and Berry (1994) lymphoma by stage, and the stratified example of Peto et al. (1977). One fragment per line.
+Observed deaths = 8
+Extent of exposure to risk of death = 16.687031
+Relative rate = 0.479414
+Observed deaths = 46
+Extent of exposure to risk of death = 37.312969
+Relative rate = 1.232815
+-8.687031
+11.24706
+-11.24706
+Chi-square for equivalence of death rates = 6.70971 P = 0.0096
+Group 1 vs. Group 2 = 0.388878 (0.218343 to 0.692607)
+Hazard Ratio = 0.381485
+Exact Fisher 95% confidence interval = 0.154582 to 0.822411
+Exact Fisher one sided P = 0.0051, two sided P = 0.0104
+Exact mid-P 95% confidence interval = 0.167398 to 0.783785
+Exact mid-P one sided P = 0.0034, two sided P = 0.0068
+-5.19836
+4.962627
+-4.962627
+Chi-square for equivalence of death rates = 5.44529 P = 0.0196
+# the stratified example
+Observed deaths = 4
+Extent of exposure to risk of death = 5.421429
+Relative rate = 0.737813
+Observed deaths = 3
+Extent of exposure to risk of death = 1.578571
+Relative rate = 1.900452
+-1.421429
+0.922398
+-0.922398
+Chi-square for equivalence of death rates = 2.190442 P = 0.1389
+-0.75
+0.46875
+Chi-square for equivalence of death rates = 1.2 P = 0.2733
+Observed deaths = 2
+Extent of exposure to risk of death = 4.98342
+Relative rate = 0.401331
+Extent of exposure to risk of death = 5.01658
+Relative rate = 1.594712
+-2.98342
+2.433343
+Chi-square for equivalence of death rates = 3.657846 P = 0.0558
+10.404848
+0.576654
+6.595152
+1.667892
+overall chi-square = 5.781939 P = 0.0162
+Group 1 vs. Group 2 = 0.345738 (0.13034 to 0.9171)
+-1.885167
+1.287751
+Chi-square for equivalence of death rates = 2.759739 P = 0.0967
+overall chi-square = 3.953375 P = 0.0468

@@ -1,0 +1,47 @@
+# Wei-Lachin test, Makuch and Escobar (1991) p24 antigen expression times of 47 HIV patients over four periods. One fragment per line.
+Univariate Generalised Wilcoxon (Gehan)
+total cases = 47 (by group = 23 and 24)
+Repeat time 1
+observed failures by group = 20 and 23
+Wei-Lachin t = -0.527597
+Wei-Lachin variance = 0.077575
+chi-square = 3.588261 P = 0.0582
+Repeat time 2
+observed failures by group = 14 and 21
+Wei-Lachin t = 0.077588
+Wei-Lachin variance = 0.056161
+chi-square = 0.107189 P = 0.7434
+Repeat time 3
+observed failures by group = 18 and 19
+Wei-Lachin t = -0.11483
+Wei-Lachin variance = 0.060918
+chi-square = 0.216452 P = 0.6418
+Repeat time 4
+observed failures by group = 20 and 16
+Wei-Lachin t = 0.335179
+Wei-Lachin variance = 0.056281
+chi-square = 1.996143 P = 0.1577
+Multivariate Generalised Wilcoxon (Gehan)
+Covariance matrix: 0.077575 0.026009 0.056161 0.035568 0.020484 0.060918 0.023525 0.016862 0.026842 0.056281
+Inverse of covariance matrix: 19.204259 -5.078483 22.22316 -8.40436 -3.176864 25.857118 -2.497583 -3.020025 -7.867237 23.468861
+repeat times = 4
+chi-square omnibus statistic = 9.242916 P = 0.0553
+stochastic ordering z = -0.30981 one sided P = 0.3784, two sided P = 0.7567
+Univariate Log-Rank
+Wei-Lachin t = -0.716191
+Wei-Lachin variance = 0.153385
+chi-square = 3.344058 P = 0.0674
+Wei-Lachin t = -0.277786
+Wei-Lachin variance = 0.144359
+chi-square = 0.534536 P = 0.4647
+Wei-Lachin t = -0.372015
+Wei-Lachin variance = 0.150764
+chi-square = 0.917956 P = 0.338
+Wei-Lachin t = 0.619506
+Wei-Lachin variance = 0.143437
+chi-square = 2.675657 P = 0.1019
+Multivariate Log-Rank
+Covariance matrix: 0.153385 0.049439 0.144359 0.052895 0.050305 0.150764 0.039073 0.047118 0.052531 0.143437
+Inverse of covariance matrix: 7.973385 -1.779359 8.69056 -1.892007 -1.661697 8.575636 -0.894576 -1.761494 -2.079402 8.555558
+chi-square omnibus statistic = 9.52966 P = 0.0491
+stochastic ordering z = -0.688754 one sided P = 0.2455, two sided P = 0.491
