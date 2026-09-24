@@ -1,0 +1,5 @@
+# Poisson rate confidence interval, the help example: 14 events in 400 person-years. One fragment per line.
+Events observed = 14
+Time spent at risk of event = 400
+Poisson (e.g. incidence) rate estimate = 0.035
+Exact 95% confidence interval = 0.019135 to 0.058724

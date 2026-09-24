@@ -1,0 +1,22 @@
+# Standardize and compare two rates, Newman (2001) schizophrenia cohort against the Alberta population in eight age strata. One fragment per line.
+5.302693 0.638882 19.343485 0.210839
+8.227018 6.094736 10.916013 0.27493
+5.596703 3.761033 8.069297 0.184007
+2.802107 1.716758 4.338327 0.119839
+2.010649 1.317034 2.946823 0.097483
+1.1099 0.666146 1.740021 0.063552
+1.808577 1.167342 2.678348 0.03578
+1.393114 0.63598 2.650516 0.01357
+2.028063 1.746703 2.342474 1 All (crude)
+Crude rate exposed = 15.430094
+Exact 95% CI = 13.313979 to 17.786968
+Crude rate not exposed = 7.608293
+Exact 95% CI = 7.434549 to 7.785072
+Standardized rate exposed = 17.616898
+Approximate 95% CI = 14.217636 to 21.016159
+Standardized rate not exposed = 7.608293
+Approximate 95% CI = 7.433557 to 7.783028
+Standardized rate ratio = 2.315486
+Approximate 95% CI = 1.906565 to 2.812113
+HP: Analysis model for rates: Poisson (small rates)
+HP: Rates are expressed per 1,000 units of person time

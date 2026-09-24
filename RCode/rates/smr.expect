@@ -1,0 +1,12 @@
+# Indirect standardization and SMR, the help example: Bland (2000) liver cirrhosis deaths among male doctors. One fragment per line.
+0.000006 1080 0.006328 15-24
+0.000013 12860 0.167823 25-34
+0.000047 11510 0.540245 35-44
+0.000162 10330 1.668326 45-54
+0.000271 7790 2.113879 55-64
+Total = 4.4966
+Standardized Mortality Ratio (SMR) = 3.113463
+SMR (*100 as integer) = 311
+Exact 95% confidence interval = 1.702159 to 5.223862 (170 to 522)
+Probability of observing 14 or more deaths by chance P = 0.0002
+Probability of observing 14 or fewer deaths by chance P > 0.9999

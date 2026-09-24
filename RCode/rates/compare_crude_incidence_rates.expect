@@ -1,0 +1,13 @@
+# Compare two crude rates, the help example: Stampfer et al. (1985) CHD cases and person-years by postmenopausal hormone use. One fragment per line.
+Exposed incidence rate = 0.000552
+Non-exposed incidence rate = 0.001166
+Rate difference = -0.000613
+approximate 95% confidence interval = -0.000965 to -0.000261
+chi-square = 11.678635 P = 0.0006
+Rate ratio = 0.473934
+exact 95% confidence interval = 0.295128 to 0.746416
+Conditional maximum likelihood estimate of rate ratio = 0.473934
+Exact Fisher 95% confidence interval = 0.295128 to 0.746416
+Exact Fisher one sided P = 0.0004, two sided P = 0.0007
+Exact mid-P 95% confidence interval = 0.302362 to 0.730939
+Exact mid-P one sided P = 0.0003, two sided P = 0.0006
