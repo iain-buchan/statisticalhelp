@@ -1,0 +1,28 @@
+# Relative risk meta-analysis, Fleiss and Gross (1991) seven aspirin trials. One fragment per line.
+1 0.742046 0.522928 1.051866 MRC-1
+2 0.699291 0.483538 1.010302 CDP
+3 0.827038 0.648842 1.053557 MRC-2
+4 0.820853 0.528416 1.273886 GASP
+5 0.819326 0.594653 1.133252 PARIS
+6 1.118333 0.941378 1.3287 AMIS
+7 0.914173 0.859614 0.97217 ISIS-2
+1 -0.298344 0.031787 2.891172 7.835723 MRC-1
+2 -0.357688 0.035337 2.758272 7.176709 CDP
+3 -0.189905 0.015292 5.418302 13.589974 MRC-2
+4 -0.197411 0.050391 1.672876 5.286301 GASP
+5 -0.199274 0.027064 3.011273 8.920134 PARIS
+6 0.111839 0.007729 9.540439 20.405362 AMIS
+7 -0.089736 0.000985 74.707666 36.785796 ISIS-2
+Fixed effects (Mantel-Haenszel, Rothman-Boice)
+Pooled relative risk = 0.913608 (95% CI = 0.8657 to 0.964168)
+(test relative risk differs from 1) = 10.809386 (df = 1) P = 0.001
+Cochran Q = 9.928487 (df = 6) P = 0.1277
+Moment-based estimate of between studies variance = 0.007437
+(inconsistency) = 39.6% (95% CI = 0% to 73.3%)
+Random effects (DerSimonian-Laird)
+Pooled relative risk = 0.892922 (95% CI = 0.800632 to 0.995851)
+(test relative risk differs from 1) = 4.139819 (df = 1) P = 0.0419
+RH: Begg-Mazumdar: Kendall's tau = -0.428571 P = 0.2389 (low power)
+P: Begg-Mazumdar: Kendall's -0.428571 P = 0.2389
+Egger: bias = -0.730996 (90% CI = -2.227324 to 0.765332) P = 0.3701
+Harbord-Egger: bias = -0.734002 (90% CI = -2.233589 to 0.765585) P = 0.3693

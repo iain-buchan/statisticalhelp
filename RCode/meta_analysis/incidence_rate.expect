@@ -1,0 +1,30 @@
+# Incidence rate meta-analysis, Rothman and Monson (1973) trigeminal neuralgia deaths in two age strata. One fragment per line.
+Incidence rate difference (IRD) meta-analysis
+0.003356 -0.002623 0.009335
+0.026187 0.00734 0.045034
+0.003356 0.000009 91.904848 59.481911
+0.026187 0.000092 8.095152 40.518089
+Pooled IRD = 0.005204 (95% CI = -0.000602 to 0.01101)
+Z (test IRD differs from 0) = 1.756825 P = 0.0789
+Cochran Q = 4.419452 (df = 1) P = 0.0355
+Moment-based estimate of between studies variance = 0.000202
+(inconsistency) = 77.4%
+Pooled IRD = 0.012607 (95% CI = -0.009361 to 0.034574)
+Z (test IRD differs from 0) = 1.124754 P = 0.2607
+# The incidence rate ratio option on the same data, which the help does not show
+RP: Incidence rate ratio (IRR) meta-analysis
+RP: 1.570844 0.648937 3.952809
+RP: 1.485862 1.100305 1.99584
+RP: 0.451613 0.212464 11.108247 11.108247
+RP: 0.395995 0.023077 88.891753 88.891753
+RP: Pooled IRR = 1.49507 (95% CI = 1.140774 to 1.959401)
+RP: Z (test IRR differs from 1) = 2.914396 P = 0.0036
+RP: Fixed effects (conditional maximum likelihood)
+RP: Pooled rate ratio = 1.495096
+RP: Exact Fisher 95% confidence interval = 1.128054 to 1.974067
+RP: Exact Fisher one sided P = 0.0025, two sided P = 0.0044
+RP: Exact mid-P 95% confidence interval = 1.138392 to 1.957004
+RP: Exact mid-P one sided P = 0.002, two sided P = 0.0041
+RP: Cochran Q = 0.01604 (df = 1) P = 0.8992
+RP: Moment-based estimate of between studies variance = 0
+RP: (inconsistency) = 0%

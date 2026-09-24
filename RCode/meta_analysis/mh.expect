@@ -1,0 +1,42 @@
+# Odds ratio meta-analysis (Mantel-Haenszel and exact), Armitage and Berry (1994) ten lung cancer and smoking studies. One fragment per line.
+RP: 1 5.37963 1.409677 30.083873
+RP: 2 5.682819 1.74247 29.261941
+RP: 3 4.322751 1.639419 12.65063
+RP: 4 5.640886 3.682557 8.815936
+RP: 5 9.077381 4.126151 23.599352
+RP: 6 5.09434 1.463436 27.155812
+RP: 7 3.867978 2.256644 6.95097
+RP: 8 3.183413 1.828153 5.757666
+RP: 9 4.253771 3.018787 6.136299
+RP: 10 5.621622 2.093208 18.888126
+RP: 1 1.68262 0.609628 1.941381 2.200596
+RP: 2 1.737447 0.517899 2.900187 2.547112
+RP: 3 1.463892 0.271729 3.714125 4.396356
+RP: 4 1.730041 0.049594 16.923697 21.224699
+RP: 5 2.205786 0.197913 5.167479 5.895602
+RP: 6 1.62813 0.555199 2.508168 2.390577
+RP: 7 1.352732 0.082367 13.607447 13.172493
+RP: 8 1.157954 0.085653 13.098493 12.695278
+RP: 9 1.447806 0.032748 36.512284 31.583652
+RP: 10 1.72662 0.314937 3.626738 3.893635
+Fixed effects (Mantel-Haenszel, Robins-Breslow-Greenland)
+Pooled odds ratio = 4.681639 (95% CI = 3.865935 to 5.669455)
+(test odds ratio differs from 1) = 292.379352 P < 0.0001
+Fixed effects (conditional maximum likelihood)
+Pooled odds ratio = 4.713244
+Exact Fisher 95% CI = 3.888241 to 5.747141
+Exact Fisher one sided P < 0.0001, two sided P < 0.0001
+Exact mid-P 95% CI = 3.904839 to 5.719768
+Exact mid-P one sided P < 0.0001, two sided P < 0.0001
+Non-combinability of studies
+Breslow-Day = 6.766765 (df = 9) P = 0.6614
+Cochran Q = 6.641235 (df = 9) P = 0.6744
+Moment-based estimate of between studies variance = 0
+(inconsistency) = 0% (95% CI = 0% to 51.7%)
+Random effects (DerSimonian-Laird)
+Pooled odds ratio = 4.625084 (95% CI = 3.821652 to 5.597423)
+(test odds ratio differs from 1) = 247.466729 (df = 1) P < 0.0001
+Bias indicators
+Begg-Mazumdar: Kendall's tau = 0.111111 P = 0.7275 (low power)
+Egger: bias = 0.580646 (90% CI = -0.6025 to 1.763792) P = 0.3881
+Harbord-Egger: bias = 0.792634 (90% CI = -0.56532 to 2.150587) P = 0.3094
