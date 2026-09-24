@@ -1,0 +1,17 @@
+# Spearman's rho distribution, the help illustration: T = 52 for 10 pairs (the rankings of the Spearman rank correlation example), the inverse at an upper tail P of 0.025, and rho = 0.4 for 20 pairs (the Edgeworth series). The dialog cannot be rendered headlessly, so there is no program report: the fragments are checked in the R output and the help.
+RH: T = 52
+RH: 0.684848
+RH: P(Hotelling T 52, n 10) = 0.017325837742504 upper tail
+RH: 62,872
+RH: 3,628,800
+RH: P = 0.0173
+RH: P = 0.0347
+RH: T = 58
+RH: 0.648484848484848
+RH: 0.648485
+RH: Hotelling T (upper tail P 0.025, n 10) = 0.02448936287478
+RH: T = 60
+RH: 0.636364
+RH: 0.027215332892416
+RH: T = 798
+RH: P(Hotelling T 798, n 20) = 0.040820092284141 upper tail

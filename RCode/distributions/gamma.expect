@@ -1,0 +1,14 @@
+# Gamma distribution: the help illustration (A = 2, B = 3, 100 random values). The program writes a column, not a report; the "program" text is the column the builtin fills for seed 1234 (checked P: by its title), whose mean and sd the help quotes (H:). The generator's values differ from R's, so the other fragments are checked in R and the help only.
+RH: Mean = 6
+RH: Variance = 18
+RH: Standard deviation = 4.242641
+RH: Density at t = 4: 0.117154
+RH: P(t <= 4) = 0.38494
+RH: Median = 5.035041
+RH: 95th centile = 14.231594
+RH: Sample mean = 6.599323
+RH: Sample sd = 4.681867
+RH: A = 1: P(t <= 4) = 0.736403
+RH: A = 0.5, B = 1: P(t <= 1.5) = 0.916735
+H: mean 6.021564 and standard deviation 4.184212
+P: Gamma (seed 1234, A = 2, B = 3)

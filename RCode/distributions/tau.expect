@@ -1,0 +1,14 @@
+# Kendall's tau distribution, the help illustration: S = 23 for 10 pairs (the rankings of the Kendall rank correlation example) and the inverse at an upper tail P of 0.05. The program report holds the dialog's two lines, produced by calling its routines directly (the dialog cannot be rendered headlessly); the counts, tau values and 4-place P values are checked in the R output and the help only.
+RH: 34 concordant and 11 discordant pairs, so S = 23
+RH: 0.511111
+P(Kendall's T 23, n 10) = 0.023311287477954 upper tail
+RH: P = 0.0233
+RH: P = 0.0466
+RH: 84,592
+RH: 3,628,800
+RH: S = 19
+RH: 0.422222
+Kendall's T (upper tail P 0.05, n 10) = 0.054156746031746
+RH: S = 21
+RH: 0.466667
+RH: 0.036275077160494

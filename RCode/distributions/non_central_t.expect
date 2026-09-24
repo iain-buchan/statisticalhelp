@@ -1,0 +1,17 @@
+# Non-central t distribution, the help's illustration: the tails of t = 2.5 (df 10, delta 1), the 0.9 quantile, and the power of a one sample t test (n = 20, d = 0.5). StatsDirect shows up to 15 decimal places (H:); R's pt and qt agree to 12 places (R:). No program report: the dialog asks for its inputs interactively.
+H: P(non-central t < 2.5, df 10, delta 1) = 0.103454395602356 upper, 0.896545604397644 lower
+R: P(non-central t < 2.5, df 10, delta 1) = 0.103454395602 upper, 0.896545604398 lower
+H: non-central t(P 0.1, df 10, delta 1) = 2.52607989706019
+RH: non-central t(P 0.1, df 10, delta 1) = 2.52607989706
+H: P(non-central t < 2.093024, df 19, delta 2.236068) = 0.564482925241891 upper, 0.435517074758109 lower
+R: P(non-central t < 2.093024, df 19, delta 2.236068) = 0.564482925242 upper, 0.435517074758 lower
+H: P(non-central t < -2.093024, df 19, delta 2.236068) = 0.999978478237757 upper, 0.000021521762243 lower
+R: P(non-central t < -2.093024, df 19, delta 2.236068) = 0.999978478238 upper, 0.000021521762 lower
+RH: 0.5644829
+RH: 0.0000215
+RH: 0.5645044
+RH: power = 0.5645044
+RH: 2.236068
+RH: 2.093024
+H: 0.8965
+H: 2.526080

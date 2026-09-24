@@ -1,0 +1,6 @@
+# Studentized range (Q) distribution: the help illustration (the Tukey P of q = 3.74767 and the 5% critical value for 4 samples with 36 df, from the multiple comparisons example, and Q = root 2 times t for 2 samples). The report lines were produced by calling the dialog's own routines through the program's DLL (see the program-reports file): the headless probe cannot drive the dialog.
+P(Q 3.74767, df 36, samples 4) = 0.0551754 upper, 0.9448246 lower
+Q(upper P 0.05, df 36, samples 4) = 3.8087984
+Q(upper P 0.05, df 36, samples 2) = 2.868158
+RH: 2.028094
+H: 0.0552

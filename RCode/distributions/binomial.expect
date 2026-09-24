@@ -1,0 +1,8 @@
+# Binomial distribution, the help illustration: a fair coin tossed 10 times (5 heads) and a treatment with a 1 in 4 success rate given to 20 patients (8 successes). The dialog cannot be rendered headlessly, so there is no program report: the fragments are checked in the R output and the help.
+RH: 0.24609375
+RH: 0.623046875
+RH: np = 5
+RH: 1.581139
+RH: P(binomial p 0.25, 20 trials) = 0.060886689216204 [8 successes], 0.101811856922723 [>=8 successes], 0.959074832293481 [<=8 successes]
+RH: 0.1018
+RH: P(binomial p 0.5, 10 trials) = 0.24609375 [5 successes], 0.623046875 [>=5 successes], 0.623046875 [<=5 successes]

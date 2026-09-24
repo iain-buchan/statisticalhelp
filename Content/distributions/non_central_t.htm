@@ -25,4 +25,54 @@
         </p>
         <p>StatsDirect evaluates the cumulative probability that a t random variable is less than or equal to a given value of T with n degrees of freedom and non-centrality parameter d (<a href="../references/reference_list.htm#ref-lenth-1989">Lenth, 1989</a>; <a href="../references/reference_list.htm#ref-owen-1965">Owen, 1965</a>; <a href="../references/reference_list.htm#ref-young-1974">Young and Minder, 1974</a>; <a href="../references/reference_list.htm#ref-thomas-1979">Thomas, 1979</a>; <a href="../references/reference_list.htm#ref-chou-1985">Chou, 1985</a>; <a href="../references/reference_list.htm#ref-boys-1989">Boys 1989</a>; <a href="../references/reference_list.htm#ref-goedhart-1992">Goedhart and Jansen, 1992</a>). The inverse of T is found by conventional root finding methods to six decimal places of accuracy.</p>
     </body>
-</html>
+</html>        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the illustration above to 12 decimal places (R's non-central t functions are accurate to about that many places here; StatsDirect shows up to 15 decimal places). It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Non-central t distribution: the illustration in the StatsDirect help (a tail
+# probability, its inverse, and the power of a t test, as the Distributions dialog
+# computes them) in R
+# StatsDirect shows these to up to 15 decimal places. R's pt evaluates the non-central t
+# distribution by the series of Lenth (1989) and qt inverts it (see the help for pt);
+# here they agree with StatsDirect's values to 12 decimal places, so 12 are printed.
+twelve &lt;- function(x) formatC(x, digits = 12, format = "f", drop0trailing = TRUE)
+seven &lt;- function(x) formatC(x, digits = 7, format = "f", drop0trailing = TRUE)
+
+# Tail probabilities of t = 2.5 on 10 degrees of freedom with non-centrality 1:
+# pt(q, df, ncp) is the lower tail (P for t &lt;= t); lower.tail = FALSE gives the upper
+cat("P(non-central t &lt; 2.5, df 10, delta 1) =",
+    twelve(pt(2.5, 10, ncp = 1, lower.tail = FALSE)), "upper,",
+    twelve(pt(2.5, 10, ncp = 1)), "lower\n")
+
+# The inverse: the value of t below which the distribution has probability 0.9 (Invert
+# with 0.9 as P for t &lt;= t; the report labels the line with the upper tail, 0.1)
+cat("non-central t(P 0.1, df 10, delta 1) =", twelve(qt(0.9, 10, ncp = 1)), "\n")
+
+# Power of a paired or single sample t test on n = 20 observations at the two sided 5%
+# level when the true mean difference is d = 0.5 standard deviations: under that
+# alternative t has 19 degrees of freedom and non-centrality d * sqrt(n). The critical
+# value and the non-centrality are rounded to the 6 places typed into the dialog.
+n &lt;- 20
+d &lt;- 0.5
+delta &lt;- round(d * sqrt(n), 6)              # 2.236068
+crit &lt;- round(qt(0.975, n - 1), 6)          # 2.093024
+upper &lt;- pt(crit, n - 1, ncp = delta, lower.tail = FALSE)
+cat(paste0("P(non-central t &lt; ", crit, ", df ", n - 1, ", delta ", delta, ") ="),
+    twelve(upper), "upper,", twelve(pt(crit, n - 1, ncp = delta)), "lower\n")
+lower &lt;- pt(-crit, n - 1, ncp = delta)
+cat(paste0("P(non-central t &lt; ", -crit, ", df ", n - 1, ", delta ", delta, ") ="),
+    twelve(pt(-crit, n - 1, ncp = delta, lower.tail = FALSE)), "upper,",
+    twelve(lower), "lower\n")
+# The test rejects when |t| exceeds the critical value, so its power is the upper tail
+# beyond crit plus the lower tail below -crit
+cat("Power =", seven(upper + lower), "=", seven(upper), "+", seven(lower), "\n")
+
+# power.t.test does the same with the unrounded critical value; strict = TRUE counts
+# rejections in the other tail too, as StatsDirect's sample size calculations for t
+# tests do (without it only the tail on the side of the difference is counted)
+print(power.t.test(n = n, delta = d, sd = 1, sig.level = 0.05, type = "one.sample",
+                   strict = TRUE))</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>

@@ -1,0 +1,6 @@
+# F (variance ratio) distribution: the help illustration (the F test example's upper tail P, the 5% critical value on 6 and 8 df, and F = t squared on 1 and 20 df). The program report holds the dialog's three lines, produced by calling its routines directly; the t value is checked against the help and R only.
+P(F 6.944952, dfn 6, dfd 8) = 0.007667699178732 upper
+F(upper P 0.05, dfn 6, dfd 8) = 3.58058031976146
+F(upper P 0.05, dfn 1, dfd 20) = 4.35124350332929
+RH: 2.08596344726586
+RH:0.0077

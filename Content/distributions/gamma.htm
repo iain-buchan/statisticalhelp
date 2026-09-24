@@ -29,4 +29,47 @@
         <p>&#160;</p>
         <p>See <a href="../randomization/generate_random_numbers.htm">random number fill</a>.</p>
     </body>
-</html>
+</html>        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the illustration above, apart from the column that StatsDirect writes for seed 1234, whose values R's generator does not repeat. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Gamma distribution: the StatsDirect help illustration (100 random values with a
+# shaping parameter A = 2 and a scaling parameter B = 3, from Data_Generating_Random
+# Numbers_Gamma) in R
+A &lt;- 2                                    # shaping parameter: R's shape argument
+B &lt;- 3                                    # scaling parameter: R's scale argument, the
+                                          # reciprocal of its rate argument
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+
+# The distribution: its mean is AB and its variance A times B squared; dgamma, pgamma
+# and qgamma give the density, the cumulative probability and the quantiles
+cat("Mean =", six(A * B), "  Variance =", six(A * B^2),
+    "  Standard deviation =", six(sqrt(A) * B), "\n")
+cat("Density at t = 4:", six(dgamma(4, shape = A, scale = B)), "\n")
+cat("P(t &lt;= 4) =", six(pgamma(4, shape = A, scale = B)), "\n")
+cat("Median =", six(qgamma(0.5, shape = A, scale = B)), "\n")
+cat("95th centile =", six(qgamma(0.95, shape = A, scale = B)), "\n")
+
+# 100 random values: R and StatsDirect both use the Mersenne Twister generator but each
+# seeds it in its own way, so the values differ from the column StatsDirect fills for
+# any seed, while each seed repeats its own series in both programs. The set.seed call
+# makes this run repeatable.
+set.seed(2024)
+x &lt;- rgamma(100, shape = A, scale = B)
+print(summary(x))
+cat("Sample mean =", six(mean(x)), "  Sample sd =", six(sd(x)), "\n")
+
+# Two special cases the topic mentions: A = 1 is the exponential distribution with
+# mean B, and with B = 1, A = 0.5 is half a squared standard normal deviate (half
+# a chi-square deviate with 1 degree of freedom), so the cumulative probabilities
+# agree
+cat("A = 1: P(t &lt;= 4) =", six(pgamma(4, shape = 1, scale = B)),
+    " exponential:", six(pexp(4, rate = 1 / B)), "\n")
+cat("A = 0.5, B = 1: P(t &lt;= 1.5) =", six(pgamma(1.5, shape = 0.5)),
+    " chi-square:", six(pchisq(2 * 1.5, df = 1)), "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+

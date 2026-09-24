@@ -1,0 +1,4 @@
+# Student's t distribution calculator, the illustration in the help: tail areas for t = 2 with 10 df and t = -2.5 with 15 df, and the t with upper tail 0.025 for 10 df. The dialog's figures cannot be rendered by the probe, so all are checked against R and the help only. One fragment per line.
+RH: P(t 2, df 10) = 0.03669401738537 upper, 0.96330598261463 lower, 0.07338803477074 two sided
+RH: P(t -2.5, df 15) = 0.987747098376743 upper, 0.012252901623257 lower, 0.024505803246514 two sided
+RH: t(upper P 0.025, df 10) = 2.22813885198627
