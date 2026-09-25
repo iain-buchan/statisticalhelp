@@ -43,16 +43,16 @@ for (rel in scripts) {
   texts <- list(R = squash(out), H = topic_text(topic_file))
   report_file <- if (is.na(reports)) NA else file.path(reports, paste0(gsub("/", "_", stem), ".txt"))
   if (!is.na(report_file) && file.exists(report_file))
-    texts$P <- squash(readLines(report_file, warn = FALSE))
+    texts$P <- squash(readLines(report_file, warn = FALSE, encoding = "UTF-8"))
   # the code in the topic must be the tested script
   topic_raw <- paste(readLines(topic_file, warn = FALSE, encoding = "UTF-8"), collapse = "\n")
   shown <- regmatches(topic_raw, regexpr("(?s)<pre class=\"rcode\"[^>]*>.*?</pre>", topic_raw, perl = TRUE))
   shown <- gsub("<[^>]+>", "", shown)
   shown <- gsub("&lt;", "<", shown); shown <- gsub("&gt;", ">", shown); shown <- gsub("&amp;", "&", shown)
   same <- length(shown) == 1 &&
-    identical(squash(shown), squash(readLines(file.path(root, "RCode", rel), warn = FALSE)))
+    identical(squash(shown), squash(readLines(file.path(root, "RCode", rel), warn = FALSE, encoding = "UTF-8")))
   bad <- if (same) character() else "the code shown in the topic differs from the script"
-  for (line in readLines(expect_file, warn = FALSE)) {
+  for (line in readLines(expect_file, warn = FALSE, encoding = "UTF-8")) {
     line <- trimws(line)
     if (line == "" || startsWith(line, "#")) next
     where <- c("R", "H", "P")
