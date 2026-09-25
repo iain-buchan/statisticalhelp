@@ -216,19 +216,19 @@
                                             </tr>
                                             <tr>
                                                 <td>Between Groups</td>
-                                                <td>27,234.2</td>
+                                                <td>27234.2</td>
                                                 <td>3</td>
-                                                <td>9,078.066667</td>
+                                                <td>9078.066667</td>
                                             </tr>
                                             <tr>
                                                 <td>Within Groups</td>
-                                                <td>63,953.6</td>
+                                                <td>63953.6</td>
                                                 <td>16</td>
-                                                <td>3,997.1</td>
+                                                <td>3997.1</td>
                                             </tr>
                                             <tr>
                                                 <td>Corrected Total</td>
-                                                <td>91,187.8</td>
+                                                <td>91187.8</td>
                                                 <td>19</td>
                                                 <td>&#160;</td>
                                             </tr>
@@ -305,7 +305,7 @@ print(summary(fit))
 # The report's lines to 6 places
 a &lt;- anova(fit)
 six &lt;- function(x) {
-  formatC(x, digits = 6, format = "f", big.mark = ",", drop0trailing = TRUE)
+  formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
 }
 pv &lt;- function(p) {
   if (p &lt; 0.0001) "P &lt; 0.0001" else
