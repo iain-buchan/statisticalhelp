@@ -1,6 +1,6 @@
 # Poisson regression, Armitage, Berry and Matthews (2001) cancers in veterans and non-veterans by age group. One fragment per line.
 RH: 2067.700372
-P: 2,067.700372
+P: 2067.700372
 df = 11
 b0 = -9.324832
 -45.596773
@@ -59,14 +59,14 @@ RP: 1.233953 to 3.130991
 29.217124
 42.309634
 RH: 2072.917496
-P: 2,072.917496
+P: 2072.917496
 Pseudo (deviance based) R-square = 0.997483
 Pseudo (McFadden, likelihood ratio index) R-square = 0.939986
 5.086063
 P = 0.8854
 0.508606
 RH: 4065.424363
-P: 4,065.424363
+P: 4065.424363
 P = 0.4405
 10.257687
 P = 0.4182

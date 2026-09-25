@@ -14,7 +14,7 @@ sn <- z^2 * p * (1 - p) / d^2             # for an unlimited population
 n <- sn / (1 + sn / N)                    # with the finite population correction
 # StatsDirect adds one to the whole part of n instead, so a rate of exactly 0% or 100%
 # (n = 0) gives 1 there and 0 here; they differ only when n is a whole number
-cat("Population estimate =", format(N, big.mark = ","), "\n")
+cat("Population estimate =", format(N, scientific = FALSE), "\n")
 cat("Population rate =", paste0(100 * p, "%"), "\n")
 cat("Maximum deviation = +/-", paste0(100 * d, "%"), "\n")
 cat("Confidence level =", 100 * conf, "\n")

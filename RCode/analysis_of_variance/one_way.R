@@ -15,7 +15,7 @@ print(summary(fit))
 # The report's lines to 6 places
 a <- anova(fit)
 six <- function(x) {
-  formatC(x, digits = 6, format = "f", big.mark = ",", drop0trailing = TRUE)
+  formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
 }
 pv <- function(p) {
   if (p < 0.0001) "P < 0.0001" else

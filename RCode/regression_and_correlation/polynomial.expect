@@ -1,6 +1,6 @@
 # Polynomial regression, McClave and Dietrich (1991) electricity consumption and home size. One fragment per line.
 RH: b0= -1216.143887
-P: b0= -1,216.143887
+P: b0= -1216.143887
 t = -5.008698
 P = 0.0016
 b1= 2.39893
@@ -11,13 +11,13 @@ RP: r = -0.944649
 t = -7.617907
 P = 0.0001
 RH: KW Hrs/Mnth = -1216.143887 +2.39893 Home Size -0.00045 Home Size^2
-P: KW Hrs/Mnth = -1,216.143887 +2.39893 Home Size -0.00045 Home Size^2
+P: KW Hrs/Mnth = -1216.143887 +2.39893 Home Size -0.00045 Home Size^2
 RH: Regression 831069.546371 2 415534.773185
-P: Regression 831,069.546371 2 415,534.773185
+P: Regression 831069.546371 2 415534.773185
 RH: Residual 15332.553629 7 2190.364804
-P: Residual 15,332.553629 7 2,190.364804
+P: Residual 15332.553629 7 2190.364804
 RH: Total (corrected) 846402.1 9
-P: Total (corrected) 846,402.1 9
+P: Total (corrected) 846402.1 9
 Root MSE = 46.801333
 F = 189.710304
 (R) = 0.990901
@@ -25,6 +25,6 @@ F = 189.710304
 97.670932%
 Durbin-Watson test statistic = 2.078928
 RH: AUC (polynomial function) = 2855413.374801
-P: AUC (polynomial function) = 2,855,413.374801
+P: AUC (polynomial function) = 2855413.374801
 RH: AUC (by trapezoidal rule) = 2838195
-P: AUC (by trapezoidal rule) = 2,838,195
+P: AUC (by trapezoidal rule) = 2838195

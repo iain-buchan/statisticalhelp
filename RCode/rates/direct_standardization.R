@@ -20,7 +20,7 @@ six <- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
 # formulae above give it: the stratum rates weighted by the reference population
 rate <- deaths / person_time
 weight <- reference / sum(reference)
-cat("Rates are expressed per", format(per, big.mark = ",", scientific = FALSE),
+cat("Rates are expressed per", format(per, scientific = FALSE),
     "units of person time:\n")
 cat("Index events  Index PT  Index rate  Reference size  Weight\n")
 for (i in seq_along(age)) {

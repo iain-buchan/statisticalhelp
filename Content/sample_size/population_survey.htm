@@ -43,7 +43,7 @@
         <p><u>Sample size for a population survey</u>
         </p>
         <p>&#160;</p>
-        <p>Population estimate = 20,000</p>
+        <p>Population estimate = 20000</p>
         <p>Population rate = 25%</p>
         <p>Maximum deviation = ±3%</p>
         <p>Confidence level = 95</p>
@@ -74,7 +74,7 @@ sn &lt;- z^2 * p * (1 - p) / d^2             # for an unlimited population
 n &lt;- sn / (1 + sn / N)                    # with the finite population correction
 # StatsDirect adds one to the whole part of n instead, so a rate of exactly 0% or 100%
 # (n = 0) gives 1 there and 0 here; they differ only when n is a whole number
-cat("Population estimate =", format(N, big.mark = ","), "\n")
+cat("Population estimate =", format(N, scientific = FALSE), "\n")
 cat("Population rate =", paste0(100 * p, "%"), "\n")
 cat("Maximum deviation = +/-", paste0(100 * d, "%"), "\n")
 cat("Confidence level =", 100 * conf, "\n")
