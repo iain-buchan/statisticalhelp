@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="934.5519" MadCap:lastWidth="3249" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
     <head><title>F (Variance Ratio) Distribution - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -20,7 +20,7 @@
         <p>&#160;</p>
         <p>F can be used to <a href="../parametric_methods/f_variance_ratio.htm">compare two estimates of variance</a> but it is mainly used to compare groups of means and to examine the combined effect of several factors (ways of grouping data) in <a href="../analysis_of_variance/anova.htm">analysis of variance</a>. For a simple one way analysis of variance (one factor between subjects) there is one grouping of observations into k groups, here n = k-1 and d = N-k where N is the total number of subjects observed. The denominator degrees of freedom, d, is sometimes referred to as the error degrees of freedom. When degrees of freedom are small, larger F values are required to reach significance:</p>
         <p>
-            <img src="../resources/Images/fcurves.png" width="225" height="213" border="0" />
+            <img src="../resources/Images/fcurves.png" width="434px" height="406px" style="max-width: 100%;" alt="F-distribution density curves for 4 and 12, and 10 and 100 degrees of freedom, showing the upper 5% tails above F = 3.26 and F = 1.93, respectively." />
         </p>
         <p>&#160;</p>
         <p>When there is one numerator degree of freedom and d denominator degrees of freedom then F is equal to the square of Student's t with d degrees of freedom. Both F and t are related mathematically by the beta function.</p>
@@ -62,11 +62,11 @@
         <p>which is the square of 2.08596344726586, the two sided 5% point of Student's t with 20 degrees of freedom.</p>
         <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+                <MadCap:dropDownHotspot class="rcode">
+                    <img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
             <MadCap:dropDownBody>
-                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
-                <pre class="rcode" xml:space="preserve"># F (variance ratio) distribution: the StatsDirect help illustration (the upper tail
+                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># F (variance ratio) distribution: the StatsDirect help illustration (the upper tail
 # P of the F test example, a 5% critical value, and the link with Student's t) in R
 
 # The dialog shows tail areas to 15 decimal places and F to 15 significant figures
@@ -104,6 +104,5 @@ cat("Student's t (two sided 5% point, df 20) =", x15(t20), "  squared =",
             </MadCap:dropDownBody>
         </MadCap:dropDown>
         <p>&#160;</p>
-
     </body>
 </html>
