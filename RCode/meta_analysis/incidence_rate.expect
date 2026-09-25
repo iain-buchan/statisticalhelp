@@ -9,6 +9,7 @@ Z (test IRD differs from 0) = 1.756825 P = 0.0789
 Cochran Q = 4.419452 (df = 1) P = 0.0355
 Moment-based estimate of between studies variance = 0.000202
 (inconsistency) = 77.4%
+HP: (inconsistency) = 77.4% (95% CI = 0% to 94.3%)
 Pooled IRD = 0.012607 (95% CI = -0.009361 to 0.034574)
 Z (test IRD differs from 0) = 1.124754 P = 0.2607
 # The incidence rate ratio option on the same data, which the help does not show
