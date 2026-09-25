@@ -18,24 +18,24 @@
         <p>StatsDirect lets you specify the maximum scale factor. You might want to specify a maximum scale factor if you are producing several population pyramids that you want to compare on the same scale, in this case the same scale value should be used for all plots.</p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/pyramid.svg" width="566" height="540" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/pyramid.png" width="566" height="540" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/pyramid.svg" width="566" height="580" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/pyramid.png" width="566" height="580" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p><u>Example</u>
         </p>
-        <p>Test workbook (Graphics worksheet: UK Mid-98 Age Bands, UK Mid-98 Males, UK Mid-98 Females).</p>
+        <p>Test workbook (Graphics worksheet: UK Mid-2024 Age Bands, UK Mid-2024 Males, UK Mid-2024 Females).</p>
         <p>&#160;</p>
-        <p>The chart above shows the resident population of the United Kingdom at mid-1998, in thousands, by sex and five-year age band (Office for National Statistics mid-year estimates). The column marked "UK Mid-98 Age Bands" holds the labels of the 17 age bands in the workbook (the 5-9 and 10-14 bands are not in it), and the columns marked "UK Mid-98 Males" and "UK Mid-98 Females" hold the counts of males and females in each band. The column marked "UK Mid-98 Persons" holds the totals of the two, for a pyramid of totals.</p>
+        <p>The chart above shows the resident population of the United Kingdom at mid-2024, in thousands, by sex and five-year age band (Office for National Statistics mid-year estimates, from the Nomis service). The column marked "UK Mid-2024 Age Bands" holds the labels of the 19 age bands, from 0-4 to 90 and over, and the columns marked "UK Mid-2024 Males" and "UK Mid-2024 Females" hold the counts of males and females in each band. The column marked "UK Mid-2024 Persons" holds the totals of the two, for a pyramid of totals.</p>
         <p>&#160;</p>
-        <p>To draw it in StatsDirect open the test workbook using the file open function of the file menu. Then select Population Pyramid from the Graphics menu. Select the column marked "UK Mid-98 Males" when prompted for the numbers in age groups, the column marked "UK Mid-98 Females" when prompted for the numbers in female age groups, and the column marked "UK Mid-98 Age Bands" when prompted for the group labels. StatsDirect then shows the chart options, where you can type a title and change the scale maximum. The chart above is titled "UK Resident Population Estimate at Mid-1998"; otherwise the chart is titled "Population pyramid".</p>
+        <p>To draw it in StatsDirect open the test workbook using the file open function of the file menu. Then select Population Pyramid from the Graphics menu. Select the column marked "UK Mid-2024 Males" when prompted for the numbers in age groups, the column marked "UK Mid-2024 Females" when prompted for the numbers in female age groups, and the column marked "UK Mid-2024 Age Bands" when prompted for the group labels. StatsDirect then shows the chart options, where you can type a title and change the scale maximum. The chart above is titled "UK Resident Population Estimate at Mid-2024"; otherwise the chart is titled "Population pyramid".</p>
         <p>&#160;</p>
         <p>For this example:</p>
         <p>&#160;</p>
-        <p>The chart draws a bar for each age band, in worksheet order from the top, with the males' count to the left of the centre line and the females' count to the right. Both halves run from 0 at the centre to the scale maximum at the edge, and there is no axis: the scale maximum is written under the chart. Scale maximum = 2500, the default, which is the largest count (2469 thousand males aged 30-34) rounded up to a neat value, or the largest count itself when that is greater; give pyramids that are to be compared the same scale maximum. A pyramid drawn from a single column of totals, with the female column skipped, is split evenly about the centre line.</p>
+        <p>The chart draws a bar for each age band, in worksheet order from the top, with the males' count to the left of the centre line and the females' count to the right. Both halves run from 0 at the centre to the scale maximum at the edge, and there is no axis: the scale maximum is written under the chart. Scale maximum = 2500, the default, which is the largest count (2484.3 thousand females aged 35-39) rounded up to a neat value, or the largest count itself when that is greater; give pyramids that are to be compared the same scale maximum. A pyramid drawn from a single column of totals, with the female column skipped, is split evenly about the centre line.</p>
         <p>&#160;</p>
-        <p>Males = 25175.6 thousand, Females = 26351.8 thousand.</p>
+        <p>Males = 33908.5 thousand, Females = 35347.8 thousand.</p>
         <p>&#160;</p>
-        <p>The pyramid is widest at 30-34, the largest band, which holds the generation born in the 1960s; the bands from 55-59 onwards, born before 1945, are markedly narrower. The two halves are nearly symmetrical in the younger bands, where males slightly outnumber females, but females outnumber males from the 45-49 band upwards and the gap widens with age: at 90 and over there are 3.82 women for each man.</p>
+        <p>The pyramid is widest at 30-34 and 35-39, the two largest bands, which hold the generation born around 1990; the 55-59 band, born in the 1960s, is the next widest, and the bands from 65-69 onwards narrow with age. Males outnumber females in every band up to 20-24, but females outnumber males from the 25-29 band upwards, and from 55-59 the ratio of women to men rises with age: at 90 and over there are 1.97 women for each man.</p>
         <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
@@ -43,15 +43,16 @@
             <MadCap:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Population pyramid: the StatsDirect help illustration (the resident population of
-# the UK at mid-1998, in thousands, by sex and five-year age band; the test workbook's
-# Graphics worksheet columns UK Mid-98 Age Bands, UK Mid-98 Males and UK Mid-98
+# the UK at mid-2024, in thousands, by sex and five-year age band; the test workbook's
+# Graphics worksheet columns UK Mid-2024 Age Bands, UK Mid-2024 Males and UK Mid-2024
 # Females) in R
-band &lt;- c("0-4", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54",
-          "55-59", "60-64", "65-69", "70-74", "75-79", "80-84", "85-89", "90 and over")
-males &lt;- c(1882.1, 1884.2, 1803.2, 2251.8, 2469, 2315.2, 1979.2, 1916.3, 1954.8, 1516.2,
-           1379.7, 1237.6, 1052.7, 809.8, 427.2, 217.9, 78.7)
-females &lt;- c(1788.6, 1785.4, 1717.2, 2138.3, 2372.5, 2247, 1963.9, 1917.7, 1968.2,
-             1547.1, 1438.3, 1379.4, 1294.8, 1180, 787.9, 524.5, 301)
+band &lt;- c("0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44",
+          "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", "80-84", "85-89",
+          "90 and over")
+males &lt;- c(1821.6, 2008.3, 2125.9, 2073.4, 2111.5, 2250.8, 2337.6, 2319, 2213.9, 2021.6,
+           2180.5, 2271.3, 2107.4, 1743, 1479.7, 1354.3, 817.6, 460.4, 210.7)
+females &lt;- c(1732.5, 1910, 2026, 1968.4, 2048.2, 2295.1, 2471.6, 2484.3, 2344.2, 2096.5,
+             2261.7, 2368.3, 2203.8, 1846.3, 1628.3, 1554.6, 1026.4, 666.4, 415.2)
 
 # StatsDirect draws a bar for each age band, in worksheet order from the top, with the
 # males' count to the left of a centre line and the females' count to the right. Both
@@ -80,13 +81,13 @@ mtext(c("male", "female"), side = 1, at = c(-scale_max, scale_max) / 2, line = 0
 mtext(paste("Scale maximum =", scale_max), side = 1, line = 2.5, adj = 0)
 par(op)
 
-# A pyramid from a single column of totals (the workbook's UK Mid-98 Persons) is split
-# evenly about the centre line: rect(-total / 2, top - 1, total / 2, top).
+# A pyramid from a single column of totals (the workbook's UK Mid-2024 Persons) is
+# split evenly about the centre line: rect(-total / 2, top - 1, total / 2, top).
 
 # The values plotted
-cat("UK Mid-98 Age Bands   UK Mid-98 Males   UK Mid-98 Females\n")
+cat("UK Mid-2024 Age Bands   UK Mid-2024 Males   UK Mid-2024 Females\n")
 for (i in seq_len(n)) {
-  cat(sprintf("%-21s %15.1f %19.1f\n", band[i], males[i], females[i]))
+  cat(sprintf("%-23s %17.1f %21.1f\n", band[i], males[i], females[i]))
 }
 
 # What the chart shows, in thousands
@@ -94,8 +95,8 @@ six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
 cat("Males =", six(sum(males)), "  Females =", six(sum(females)), "\n")
 cat("Largest band:", band[which.max(males + females)], "\n")
 cat("Females outnumber males from the", band[females &gt; males][1], "band upwards\n")
-ratio &lt;- formatC(females[n] / males[n], digits = 2, format = "f")
-cat("At 90 and over there are", ratio, "women for each man\n")</pre>
+cat("At 90 and over:", formatC(females[n] / males[n], digits = 2, format = "f"),
+    "women for each man\n")</pre>
             </MadCap:dropDownBody>
         </MadCap:dropDown>
         <p>&#160;</p>

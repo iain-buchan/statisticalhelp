@@ -1,139 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg width="566" viewBox="0 0 1132 1080" xmlns="http://www.w3.org/2000/svg" height="540">
+<svg width="566" viewBox="0 0 1132 1160" xmlns="http://www.w3.org/2000/svg" height="580">
   <text x="615.5" y="20">
-    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">UK Resident Population Estimate at Mid-1998</tspan>
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">UK Resident Population Estimate at Mid-2024</tspan>
   </text>
-  <g transform="translate(164,107.05882352941171)">
+  <g transform="translate(164,106.31578947368416)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0-4</tspan>
     </text>
   </g>
-  <g transform="translate(164,161.17647058823525)">
+  <g transform="translate(164,158.9473684210525)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">5-9</tspan>
+    </text>
+  </g>
+  <g transform="translate(164,211.57894736842104)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">10-14</tspan>
+    </text>
+  </g>
+  <g transform="translate(164,264.2105263157895)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">15-19</tspan>
     </text>
   </g>
-  <g transform="translate(164,215.29411764705878)">
+  <g transform="translate(164,316.8421052631579)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">20-24</tspan>
     </text>
   </g>
-  <g transform="translate(164,269.4117647058823)">
+  <g transform="translate(164,369.47368421052636)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">25-29</tspan>
     </text>
   </g>
-  <g transform="translate(164,323.52941176470586)">
+  <g transform="translate(164,422.1052631578947)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">30-34</tspan>
     </text>
   </g>
-  <g transform="translate(164,377.6470588235294)">
+  <g transform="translate(164,474.7368421052631)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">35-39</tspan>
     </text>
   </g>
-  <g transform="translate(164,431.7647058823529)">
+  <g transform="translate(164,527.3684210526316)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">40-44</tspan>
     </text>
   </g>
-  <g transform="translate(164,485.88235294117646)">
+  <g transform="translate(164,580)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">45-49</tspan>
     </text>
   </g>
-  <g transform="translate(164,540)">
+  <g transform="translate(164,632.6315789473683)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">50-54</tspan>
     </text>
   </g>
-  <g transform="translate(164,594.1176470588234)">
+  <g transform="translate(164,685.2631578947369)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">55-59</tspan>
     </text>
   </g>
-  <g transform="translate(164,648.2352941176471)">
+  <g transform="translate(164,737.8947368421053)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">60-64</tspan>
     </text>
   </g>
-  <g transform="translate(164,702.3529411764706)">
+  <g transform="translate(164,790.5263157894738)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">65-69</tspan>
     </text>
   </g>
-  <g transform="translate(164,756.4705882352941)">
+  <g transform="translate(164,843.1578947368421)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">70-74</tspan>
     </text>
   </g>
-  <g transform="translate(164,810.5882352941176)">
+  <g transform="translate(164,895.7894736842106)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">75-79</tspan>
     </text>
   </g>
-  <g transform="translate(164,864.7058823529412)">
+  <g transform="translate(164,948.421052631579)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">80-84</tspan>
     </text>
   </g>
-  <g transform="translate(164,918.8235294117646)">
+  <g transform="translate(164,1001.0526315789474)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">85-89</tspan>
     </text>
   </g>
-  <g transform="translate(164,972.9411764705883)">
+  <g transform="translate(164,1053.6842105263158)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">90 and over</tspan>
     </text>
   </g>
-  <rect x="286.88534000000004" y="80" width="328.61465999999996" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="80" width="312.28955999999994" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="286.51868" y="134.11764705882354" width="328.98132" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="134.11764705882354" width="311.73083999999994" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="300.66128" y="188.23529411764707" width="314.83872" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="188.23529411764707" width="299.82312" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="222.33571999999998" y="242.3529411764706" width="393.16428" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="242.3529411764706" width="373.34718" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="184.4126" y="296.47058823529414" width="431.0874" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="296.47058823529414" width="414.23849999999993" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="211.26608000000004" y="350.5882352941177" width="404.23391999999996" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="350.5882352941177" width="392.3262" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="269.93168" y="404.7058823529412" width="345.56832" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="404.7058823529412" width="342.8969400000001" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="280.91402" y="458.82352941176475" width="334.58598" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="458.82352941176475" width="334.83042" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="274.19192000000004" y="512.9411764705883" width="341.30807999999996" height="54.11764705882342" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="512.9411764705883" width="343.64771999999994" height="54.11764705882342" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="350.77148" y="567.0588235294117" width="264.72852" height="54.11764705882359" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="567.0588235294117" width="270.12366" height="54.11764705882359" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="374.60438" y="621.1764705882354" width="240.89562" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="621.1764705882354" width="251.12717999999995" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="399.41504" y="675.2941176470588" width="216.08496000000002" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="675.2941176470588" width="240.84324000000004" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="431.69858" y="729.4117647058824" width="183.80142" height="54.11764705882348" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="729.4117647058824" width="226.07207999999991" height="54.11764705882348" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="474.10892" y="783.5294117647059" width="141.39108" height="54.117647058823565" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="783.5294117647059" width="206.02800000000002" height="54.117647058823565" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="540.91088" y="837.6470588235294" width="74.58911999999998" height="54.11764705882351" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="837.6470588235294" width="137.56734000000006" height="54.11764705882351" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="577.45466" y="891.7647058823529" width="38.04534000000001" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="891.7647058823529" width="91.57770000000005" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <rect x="601.75898" y="945.8823529411765" width="13.741020000000049" height="54.117647058823536" style="stroke:#000000;fill:#0000FF;" />
-  <rect x="615.5" y="945.8823529411765" width="52.55459999999994" height="54.117647058823536" style="stroke:#000000;fill:#FF00FF;" />
-  <line x1="615.5" y1="1000" x2="615.5" y2="80" style="stroke:#000000;" />
-  <g transform="translate(397.25,1012)">
+  <rect x="297.44864" y="80" width="318.05136" height="52.631578947368325" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="80" width="302.4945" height="52.631578947368325" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="264.85082" y="132.63157894736833" width="350.64918" height="52.63157894736855" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="132.63157894736833" width="333.486" height="52.63157894736855" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="244.31786" y="185.26315789473688" width="371.18214" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="185.26315789473688" width="353.7396" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="253.48435999999998" y="237.89473684210532" width="362.01564" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="237.89473684210532" width="343.68264" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="246.83209999999997" y="290.52631578947376" width="368.66790000000003" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="290.52631578947376" width="357.61572" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="222.51031999999992" y="343.1578947368422" width="392.9896800000001" height="52.631578947368325" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="343.1578947368422" width="400.7244599999999" height="52.631578947368325" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="207.35504000000003" y="395.7894736842105" width="408.14495999999997" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="395.7894736842105" width="431.54135999999994" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="210.6026" y="448.42105263157896" width="404.8974" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="448.42105263157896" width="433.7587800000001" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="228.95306" y="501.0526315789474" width="386.54694" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="501.0526315789474" width="409.2973199999999" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="262.52864000000005" y="553.6842105263158" width="352.97135999999995" height="52.631578947368325" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="553.6842105263158" width="366.0489" height="52.631578947368325" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="234.7847" y="606.3157894736842" width="380.7153" height="52.631578947368496" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="606.3157894736842" width="394.89282000000003" height="52.631578947368496" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="218.93101999999993" y="658.9473684210527" width="396.56898000000007" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="658.9473684210527" width="413.5051800000001" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="247.54796" y="711.578947368421" width="367.95204" height="52.63157894736838" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="711.578947368421" width="384.78348000000005" height="52.63157894736838" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="311.1722" y="764.2105263157895" width="304.3278" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="764.2105263157895" width="322.36397999999997" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="357.14437999999996" y="816.8421052631579" width="258.35562000000004" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="816.8421052631579" width="284.30117999999993" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="379.03922" y="869.4736842105264" width="236.46078" height="52.63157894736838" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="869.4736842105264" width="271.43316000000004" height="52.63157894736838" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="472.74703999999997" y="922.1052631578948" width="142.75296000000003" height="52.63157894736844" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="922.1052631578948" width="179.2094400000001" height="52.63157894736844" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="535.11416" y="974.7368421052631" width="80.38584000000003" height="52.63157894736841" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="974.7368421052631" width="116.35343999999998" height="52.63157894736841" style="stroke:#000000;fill:#FF00FF;" />
+  <rect x="578.71178" y="1027.3684210526317" width="36.788220000000024" height="52.63157894736841" style="stroke:#000000;fill:#0000FF;" />
+  <rect x="615.5" y="1027.3684210526317" width="72.49392" height="52.63157894736841" style="stroke:#000000;fill:#FF00FF;" />
+  <line x1="615.5" y1="1080" x2="615.5" y2="80" style="stroke:#000000;" />
+  <g transform="translate(397.25,1092)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">male</tspan>
     </text>
   </g>
-  <g transform="translate(833.75,1012)">
+  <g transform="translate(833.75,1092)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">female</tspan>
     </text>
   </g>
-  <g transform="translate(40,1040)">
+  <g transform="translate(40,1120)">
     <text x="0" y="0" transform="rotate(0)">
       <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">Scale maximum = 2500</tspan>
     </text>

@@ -1,13 +1,14 @@
 # Population pyramid: the StatsDirect help illustration (the resident population of
-# the UK at mid-1998, in thousands, by sex and five-year age band; the test workbook's
-# Graphics worksheet columns UK Mid-98 Age Bands, UK Mid-98 Males and UK Mid-98
+# the UK at mid-2024, in thousands, by sex and five-year age band; the test workbook's
+# Graphics worksheet columns UK Mid-2024 Age Bands, UK Mid-2024 Males and UK Mid-2024
 # Females) in R
-band <- c("0-4", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54",
-          "55-59", "60-64", "65-69", "70-74", "75-79", "80-84", "85-89", "90 and over")
-males <- c(1882.1, 1884.2, 1803.2, 2251.8, 2469, 2315.2, 1979.2, 1916.3, 1954.8, 1516.2,
-           1379.7, 1237.6, 1052.7, 809.8, 427.2, 217.9, 78.7)
-females <- c(1788.6, 1785.4, 1717.2, 2138.3, 2372.5, 2247, 1963.9, 1917.7, 1968.2,
-             1547.1, 1438.3, 1379.4, 1294.8, 1180, 787.9, 524.5, 301)
+band <- c("0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44",
+          "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", "80-84", "85-89",
+          "90 and over")
+males <- c(1821.6, 2008.3, 2125.9, 2073.4, 2111.5, 2250.8, 2337.6, 2319, 2213.9, 2021.6,
+           2180.5, 2271.3, 2107.4, 1743, 1479.7, 1354.3, 817.6, 460.4, 210.7)
+females <- c(1732.5, 1910, 2026, 1968.4, 2048.2, 2295.1, 2471.6, 2484.3, 2344.2, 2096.5,
+             2261.7, 2368.3, 2203.8, 1846.3, 1628.3, 1554.6, 1026.4, 666.4, 415.2)
 
 # StatsDirect draws a bar for each age band, in worksheet order from the top, with the
 # males' count to the left of a centre line and the females' count to the right. Both
@@ -36,13 +37,13 @@ mtext(c("male", "female"), side = 1, at = c(-scale_max, scale_max) / 2, line = 0
 mtext(paste("Scale maximum =", scale_max), side = 1, line = 2.5, adj = 0)
 par(op)
 
-# A pyramid from a single column of totals (the workbook's UK Mid-98 Persons) is split
-# evenly about the centre line: rect(-total / 2, top - 1, total / 2, top).
+# A pyramid from a single column of totals (the workbook's UK Mid-2024 Persons) is
+# split evenly about the centre line: rect(-total / 2, top - 1, total / 2, top).
 
 # The values plotted
-cat("UK Mid-98 Age Bands   UK Mid-98 Males   UK Mid-98 Females\n")
+cat("UK Mid-2024 Age Bands   UK Mid-2024 Males   UK Mid-2024 Females\n")
 for (i in seq_len(n)) {
-  cat(sprintf("%-21s %15.1f %19.1f\n", band[i], males[i], females[i]))
+  cat(sprintf("%-23s %17.1f %21.1f\n", band[i], males[i], females[i]))
 }
 
 # What the chart shows, in thousands
@@ -50,5 +51,5 @@ six <- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
 cat("Males =", six(sum(males)), "  Females =", six(sum(females)), "\n")
 cat("Largest band:", band[which.max(males + females)], "\n")
 cat("Females outnumber males from the", band[females > males][1], "band upwards\n")
-ratio <- formatC(females[n] / males[n], digits = 2, format = "f")
-cat("At 90 and over there are", ratio, "women for each man\n")
+cat("At 90 and over:", formatC(females[n] / males[n], digits = 2, format = "f"),
+    "women for each man\n")
