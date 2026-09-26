@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CatapultToc Version="1" DescendantCount="256">
+<CatapultToc Version="1" DescendantCount="255">
     <TocEntry Title="Contents" Link="/contents.htm" ComputedResetPageLayout="true" ComputedFirstTopic="true" DescendantCount="0" />
     <TocEntry Title="Basic statistical principles" Link="/basics/basics.htm" BreakType="chapter" StartSection="false" PageNumberReset="continue" SectionNumberReset="continue" VolumeNumberReset="same" ChapterNumberReset="continue" ComputeToc="false" ReplaceMergeNode="false" ComputedResetPageLayout="true" ComputedFirstTopic="false" DescendantCount="16">
         <TocEntry Title="Statistics" Link="/basics/statistics.htm" ComputedFirstTopic="false" DescendantCount="0" />
@@ -19,10 +19,9 @@
         <TocEntry Title="Calculator" Link="/basics/calculator.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Analysis" Link="/basics/analysis.htm" ComputedFirstTopic="false" DescendantCount="0" />
     </TocEntry>
-    <TocEntry Title="Preparing your data" Link="/data_preparation/data_preparation.htm" BreakType="chapter" StartSection="false" PageNumberReset="continue" ReplaceMergeNode="false" ComputedResetPageLayout="true" ComputedFirstTopic="false" DescendantCount="44">
-        <TocEntry Title="Generating data" Link="/data_preparation/generating.htm" ComputedFirstTopic="false" DescendantCount="5">
+    <TocEntry Title="Preparing your data" Link="/data_preparation/data_preparation.htm" BreakType="chapter" StartSection="false" PageNumberReset="continue" ReplaceMergeNode="false" ComputedResetPageLayout="true" ComputedFirstTopic="false" DescendantCount="43">
+        <TocEntry Title="Generating data" Link="/data_preparation/generating.htm" ComputedFirstTopic="false" DescendantCount="4">
             <TocEntry Title="Workbook" Link="/basics/worksheet.htm" ComputedFirstTopic="false" DescendantCount="0" />
-            <TocEntry Title="Excel links" Link="/basics/excel.htm" ComputedFirstTopic="false" DescendantCount="0" />
             <TocEntry Title="Missing data" Link="/basics/missing_data.htm" ComputedFirstTopic="false" DescendantCount="0" />
             <TocEntry Title="Fill series" Link="/data_preparation/fill_series.htm" ComputedFirstTopic="false" DescendantCount="0" />
             <TocEntry Title="Fill random numbers" Link="/randomization/generate_random_numbers.htm" ComputedFirstTopic="false" DescendantCount="0" />

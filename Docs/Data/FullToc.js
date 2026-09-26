@@ -1,6 +1,6 @@
 var xmlFullTocData = "";
 xmlFullTocData += '<?xml version=\"1.0\" encoding=\"utf-8\"?>';
-xmlFullTocData += '<CatapultToc Version=\"1\" DescendantCount=\"256\">';
+xmlFullTocData += '<CatapultToc Version=\"1\" DescendantCount=\"255\">';
 xmlFullTocData += '    <TocEntry Title=\"Contents\" Link=\"/contents.htm\" ComputedResetPageLayout=\"true\" ComputedFirstTopic=\"true\" DescendantCount=\"0\" />';
 xmlFullTocData += '    <TocEntry Title=\"Basic statistical principles\" Link=\"/basics/basics.htm\" BreakType=\"chapter\" StartSection=\"false\" PageNumberReset=\"continue\" SectionNumberReset=\"continue\" VolumeNumberReset=\"same\" ChapterNumberReset=\"continue\" ComputeToc=\"false\" ReplaceMergeNode=\"false\" ComputedResetPageLayout=\"true\" ComputedFirstTopic=\"false\" DescendantCount=\"16\">';
 xmlFullTocData += '        <TocEntry Title=\"Statistics\" Link=\"/basics/statistics.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
@@ -20,10 +20,9 @@ xmlFullTocData += '        <TocEntry Title=\"Reliability\" Link=\"/basics/reliab
 xmlFullTocData += '        <TocEntry Title=\"Calculator\" Link=\"/basics/calculator.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '        <TocEntry Title=\"Analysis\" Link=\"/basics/analysis.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '    </TocEntry>';
-xmlFullTocData += '    <TocEntry Title=\"Preparing your data\" Link=\"/data_preparation/data_preparation.htm\" BreakType=\"chapter\" StartSection=\"false\" PageNumberReset=\"continue\" ReplaceMergeNode=\"false\" ComputedResetPageLayout=\"true\" ComputedFirstTopic=\"false\" DescendantCount=\"44\">';
-xmlFullTocData += '        <TocEntry Title=\"Generating data\" Link=\"/data_preparation/generating.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"5\">';
+xmlFullTocData += '    <TocEntry Title=\"Preparing your data\" Link=\"/data_preparation/data_preparation.htm\" BreakType=\"chapter\" StartSection=\"false\" PageNumberReset=\"continue\" ReplaceMergeNode=\"false\" ComputedResetPageLayout=\"true\" ComputedFirstTopic=\"false\" DescendantCount=\"43\">';
+xmlFullTocData += '        <TocEntry Title=\"Generating data\" Link=\"/data_preparation/generating.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"4\">';
 xmlFullTocData += '            <TocEntry Title=\"Workbook\" Link=\"/basics/worksheet.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
-xmlFullTocData += '            <TocEntry Title=\"Excel links\" Link=\"/basics/excel.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '            <TocEntry Title=\"Missing data\" Link=\"/basics/missing_data.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '            <TocEntry Title=\"Fill series\" Link=\"/data_preparation/fill_series.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '            <TocEntry Title=\"Fill random numbers\" Link=\"/randomization/generate_random_numbers.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';

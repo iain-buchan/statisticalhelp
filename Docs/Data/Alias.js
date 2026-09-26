@@ -28,7 +28,6 @@ xmlAliasData += '    <Map Name=\"CONFOUNDING\" Link=\"basics/confounding.htm\" R
 xmlAliasData += '    <Map Name=\"DEGREES_OF_FREEDOM\" Link=\"basics/degrees_freedom.htm\" ResolvedId=\"1024\" />';
 xmlAliasData += '    <Map Name=\"EPIDEMIOLOGY\" Link=\"basics/epidemiology.htm\" ResolvedId=\"1025\" />';
 xmlAliasData += '    <Map Name=\"EXAMPLE\" Link=\"basics/example.htm\" ResolvedId=\"1026\" />';
-xmlAliasData += '    <Map Name=\"EXCEL\" Link=\"basics/excel.htm\" ResolvedId=\"1027\" />';
 xmlAliasData += '    <Map Name=\"INTENTION_TO_TREAT\" Link=\"basics/intention_to_treat.htm\" ResolvedId=\"1028\" />';
 xmlAliasData += '    <Map Name=\"LICENCE\" Link=\"basics/licence.htm\" ResolvedId=\"1029\" />';
 xmlAliasData += '    <Map Name=\"MEASUREMENT_SCALES\" Link=\"basics/measurement_scales.htm\" ResolvedId=\"1030\" />';
