@@ -406,9 +406,9 @@ wt_random &lt;- 100 * w_re / sum(w_re)
 or_re &lt;- exp(sum(w_re * yi) / sum(w_re))
 x2_re &lt;- sum(w_re * yi)^2 / sum(w_re)
 
-# The report's second table: the standardised effect is the log odds ratio, its
-# variance is recovered from the exact limits, and the weights are percentages
-vi &lt;- ((log(uci) - log(lci)) / 2 / z)^2
+# The report's second table: the standardised effect is the log odds ratio, with
+# its logit (Woolf) variance, and the weights are percentages
+vi &lt;- v_woolf
 cat("Stratum, standardized effect, variance, % weights (fixed, random)\n")
 for (i in 1:k) {
   cat(i, six(yi[i]), six(vi[i]), six(wt_fixed[i]), six(wt_random[i]), "\n")

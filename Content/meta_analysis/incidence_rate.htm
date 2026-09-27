@@ -778,7 +778,7 @@ cat("Incidence rate ratio (IRR) meta-analysis\n")
 print(data.frame(stratum = 1:k, IRR = six(irr), lower = six(exact[1, ]),
                  upper = six(exact[2, ]), strata), row.names = FALSE)
 print(data.frame(stratum = 1:k, effect = six(log(irr)),
-                 variance = six(((log(exact[2, ]) - log(exact[1, ])) / (2 * z))^2),
+                 variance = six(1 / a + 1 / b),
                  fixed = six(res_r$fixed_pct), random = six(res_r$random_pct), strata),
       row.names = FALSE)
 summarise(res_r, "IRR", 1, exp)

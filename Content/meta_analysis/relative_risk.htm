@@ -251,7 +251,7 @@
             <tr>
                 <td>1</td>
                 <td>-0.298344</td>
-                <td>0.031787</td>
+                <td>0.032105</td>
                 <td>2.891172</td>
                 <td>7.835723</td>
                 <td>MRC-1</td>
@@ -259,7 +259,7 @@
             <tr>
                 <td>2</td>
                 <td>-0.357688</td>
-                <td>0.035337</td>
+                <td>0.035736</td>
                 <td>2.758272</td>
                 <td>7.176709</td>
                 <td>CDP</td>
@@ -267,7 +267,7 @@
             <tr>
                 <td>3</td>
                 <td>-0.189905</td>
-                <td>0.015292</td>
+                <td>0.015362</td>
                 <td>5.418302</td>
                 <td>13.589974</td>
                 <td>MRC-2</td>
@@ -275,7 +275,7 @@
             <tr>
                 <td>4</td>
                 <td>-0.197411</td>
-                <td>0.050391</td>
+                <td>0.051175</td>
                 <td>1.672876</td>
                 <td>5.286301</td>
                 <td>GASP</td>
@@ -283,7 +283,7 @@
             <tr>
                 <td>5</td>
                 <td>-0.199274</td>
-                <td>0.027064</td>
+                <td>0.027298</td>
                 <td>3.011273</td>
                 <td>8.920134</td>
                 <td>PARIS</td>
@@ -291,7 +291,7 @@
             <tr>
                 <td>6</td>
                 <td>0.111839</td>
-                <td>0.007729</td>
+                <td>0.007747</td>
                 <td>9.540439</td>
                 <td>20.405362</td>
                 <td>AMIS</td>
@@ -299,7 +299,7 @@
             <tr>
                 <td>7</td>
                 <td>-0.089736</td>
-                <td>0.000985</td>
+                <td>0.000986</td>
                 <td>74.707666</td>
                 <td>36.785796</td>
                 <td>ISIS-2</td>
@@ -410,12 +410,11 @@ rr_dl &lt;- exp(sum(w_dl * lrr) / sum(w_dl))
 dl_ci &lt;- exp(sum(w_dl * lrr) / sum(w_dl) + c(-1, 1) * z / sqrt(sum(w_dl)))
 x2_dl &lt;- sum(w_dl * lrr)^2 / sum(w_dl)
 
-# The report's second table: the log relative risk, its variance recovered from
-# the Koopman limits, and each study's share of the fixed and random weights
+# The report's second table: the log relative risk with its variance, and each
+# study's share of the fixed and random weights
 cat("Stratum  Standardized effect  Variance  % Weights (fixed, random)\n")
-v_ci &lt;- ((log(ci[, 2]) - log(ci[, 1])) / (2 * z))^2
 for (i in 1:k) {
-  cat(i, six(lrr[i]), six(v_ci[i]), six(100 * w_mh[i] / sum(w_mh)),
+  cat(i, six(lrr[i]), six(v_i[i]), six(100 * w_mh[i] / sum(w_mh)),
       six(100 * w_dl[i] / sum(w_dl)), study[i], "\n")
 }
 

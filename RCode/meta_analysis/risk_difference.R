@@ -48,8 +48,6 @@ mn_limits <- function(a, n1, b, n2) {
     uniroot(function(x) score(x) + z, c(est, 1 - 1e-9), tol = 1e-12)$root)
 }
 ci <- t(mapply(mn_limits, a, n1, b, n2))
-se <- (ci[, 2] - ci[, 1]) / (2 * z)   # the standard error each interval implies
-v <- se^2
 
 # Mantel-Haenszel weights (fixed effects) and the pooled difference of Greenland and
 # Robins (1985), with their variance formula
@@ -69,10 +67,10 @@ w_dl <- 1 / (v_iv + tau2)
 rd_dl <- sum(w_dl * rd) / sum(w_dl)
 se_dl <- 1 / sqrt(sum(w_dl))
 
-# The study table: risk differences, their intervals, the variances the intervals
-# imply and the percentage weights
+# The study table: risk differences, their intervals, their binomial variances and
+# the percentage weights
 tab <- data.frame(Study = study, `Risk difference` = six(rd), Lower = six(ci[, 1]),
-                  Upper = six(ci[, 2]), Variance = six(v),
+                  Upper = six(ci[, 2]), Variance = six(v_iv),
                   `% fixed` = six(100 * w_mh / sum(w_mh)),
                   `% random` = six(100 * w_dl / sum(w_dl)), check.names = FALSE)
 print(tab, row.names = FALSE)

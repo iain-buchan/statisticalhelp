@@ -72,12 +72,11 @@ rr_dl <- exp(sum(w_dl * lrr) / sum(w_dl))
 dl_ci <- exp(sum(w_dl * lrr) / sum(w_dl) + c(-1, 1) * z / sqrt(sum(w_dl)))
 x2_dl <- sum(w_dl * lrr)^2 / sum(w_dl)
 
-# The report's second table: the log relative risk, its variance recovered from
-# the Koopman limits, and each study's share of the fixed and random weights
+# The report's second table: the log relative risk with its variance, and each
+# study's share of the fixed and random weights
 cat("Stratum  Standardized effect  Variance  % Weights (fixed, random)\n")
-v_ci <- ((log(ci[, 2]) - log(ci[, 1])) / (2 * z))^2
 for (i in 1:k) {
-  cat(i, six(lrr[i]), six(v_ci[i]), six(100 * w_mh[i] / sum(w_mh)),
+  cat(i, six(lrr[i]), six(v_i[i]), six(100 * w_mh[i] / sum(w_mh)),
       six(100 * w_dl[i] / sum(w_dl)), study[i], "\n")
 }
 
