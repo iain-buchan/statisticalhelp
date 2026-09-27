@@ -74,7 +74,7 @@
         <p>StatsDirect uses the methods of <a href="../references/reference_list.htm#ref-maxwell-1970">Maxwell (1970)</a> to test for differences between the ratings of the two raters (or k nominal responses with paired observations).</p>
         <p>&#160;</p>
         <p>
-            <MadCap:keyword term="McNemar" />Maxwell's chi-square statistic tests for overall disagreement between the two raters. The general McNemar statistic tests for asymmetry in the distribution of subjects about which the raters disagree, i.e. disagreement more over some categories of response than others.</p>
+            <MadCap:keyword term="McNemar" />Maxwell's chi-square statistic tests for overall disagreement between the two raters. The general McNemar statistic tests for asymmetry in the distribution of subjects about which the raters disagree, i.e. disagreement more over some categories of response than others. A pair of categories in which neither rater put a subject that the other put in the other category adds nothing to this statistic, and is not counted in its degrees of freedom.</p>
         <p>&#160;</p>
         <p>Data preparation</p>
         <p>You may present your data for the two-rater methods as a fourfold table in the interactive screen data entry menu option. Otherwise, you may present your data as responses/ratings in columns and rows in a worksheet, where the columns represent raters and the rows represent subjects rated. If you have more than two raters then you must present your data in the worksheet column (rater) row (subject) format. Missing data can be used where raters did not rate all subjects.</p>
@@ -249,7 +249,7 @@
         <p>&#160;</p>
         <p style="text-decoration: underline;">Disagreement over any category and asymmetry of disagreement (2 raters)</p>
         <p>Marginal homogeneity (Maxwell) chi-square = 73.013451, df = 4, P &lt; 0.0001</p>
-        <p>Symmetry (generalised McNemar) chi-square = 79.076091, df = 10, P &lt; 0.0001</p>
+        <p>Symmetry (generalised McNemar) chi-square = 79.076091, df = 9, P &lt; 0.0001</p>
         <p>&#160;</p>
         <p>Note that for calculation of standard errors for the kappa statistics, StatsDirect uses a more accurate method than that which is quoted in most textbooks (e.g. <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>).</p>
         <p>&#160;</p>
@@ -370,12 +370,13 @@ cat("Marginal homogeneity (Maxwell) chi-square =", six(x2), " df =", g - 1, " ",
 
 # The generalised McNemar (Bowker) test of symmetry, as mcnemar.test(counts) computes
 # it, except that the pair of cells that are both empty (weak MAST, very high RAST and
-# the reverse) is left out rather than making the statistic undefined
+# the reverse) is left out rather than making the statistic undefined: it adds nothing
+# to the statistic, and is not counted in the degrees of freedom
 above &lt;- counts[upper.tri(counts)]
 below &lt;- t(counts)[upper.tri(counts)]
 filled &lt;- above + below &gt; 0
 x2m &lt;- sum((above - below)[filled]^2 / (above + below)[filled])
-dfm &lt;- g * (g - 1) / 2
+dfm &lt;- sum(filled)
 cat("Symmetry (generalised McNemar) chi-square =", six(x2m), " df =", dfm, " ",
     pv(pchisq(x2m, dfm, lower.tail = FALSE)), "\n")</pre>
             </MadCap:dropDownBody>
