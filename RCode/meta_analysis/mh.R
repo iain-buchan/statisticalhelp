@@ -102,8 +102,9 @@ exact_limits <- function(dist, s, level = 0.95, half = FALSE) {
 }
 
 # Each study's odds ratio with its exact (conditional maximum likelihood) limits,
-# as fisher.test would give them, but to a tight tolerance; the report applies a
-# continuity correction first when a table has an empty cell, which none has here
+# as fisher.test would give them, but to a tight tolerance. The report gives the odds
+# ratio of a table with an empty cell after a continuity correction, and the exact
+# limits of the table as it is; no table has an empty cell here
 or <- a * d / (b * c)
 lci <- numeric(k)
 uci <- numeric(k)

@@ -68,22 +68,19 @@ forest <- function(est, lower, upper, pooled, p_lower, p_upper, pct, main, xlab,
   polygon(c(p_lower, pooled, p_upper, pooled), c(1, 1.2, 1, 0.8), col = "grey")
 }
 
-# Each stratum's incidence rate difference, with the test-based ("approximate")
-# interval: the difference divided by the square root of its Mantel-Haenszel chi-square
-# is the standard error the limits use. The fixed effects weights invert the Poisson
-# variance of the difference, a/pt1^2 + b/pt2^2
+# Each stratum's incidence rate difference, with its approximate interval: the
+# difference plus and minus z standard errors, from the Poisson variance of the
+# difference, a/pt1^2 + b/pt2^2, which the fixed effects weights invert
 ird <- a / pt1 - b / pt2
-m <- a + b
-n <- pt1 + pt2
-chisq <- (a - m * pt1 / n)^2 / (m * pt1 * pt2 / n^2)
-se_ird <- abs(ird) / sqrt(chisq)
-res <- pool(ird, a / pt1^2 + b / pt2^2)
+v_ird <- a / pt1^2 + b / pt2^2
+se_ird <- sqrt(v_ird)
+res <- pool(ird, v_ird)
 cat("Incidence rate difference (IRD) meta-analysis\n")
 print(data.frame(stratum = 1:k, IRD = six(ird), lower = six(ird - z * se_ird),
                  upper = six(ird + z * se_ird), strata), row.names = FALSE)
-# The report's next table: the standardised effect is the difference itself, and the
-# variance shown beside the weights is the one implied by the interval, se squared
-print(data.frame(stratum = 1:k, effect = six(ird), variance = six(se_ird^2),
+# The report's next table: the standardised effect is the difference itself, with its
+# variance beside the weights
+print(data.frame(stratum = 1:k, effect = six(ird), variance = six(v_ird),
                  fixed = six(res$fixed_pct), random = six(res$random_pct), strata),
       row.names = FALSE)
 summarise(res, "IRD", 0)

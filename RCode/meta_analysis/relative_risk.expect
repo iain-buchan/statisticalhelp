@@ -18,11 +18,10 @@ Pooled relative risk = 0.913608 (95% CI = 0.8657 to 0.964168)
 (test relative risk differs from 1) = 10.809386 (df = 1) P = 0.001
 Cochran Q = 9.928487 (df = 6) P = 0.1277
 Moment-based estimate of between studies variance = 0.007437
-(inconsistency) = 39.6% (95% CI = 0% to 73.3%)
+(inconsistency) = 39.6% (95% CI = 0% to 76.6%)
 Random effects (DerSimonian-Laird)
 Pooled relative risk = 0.892922 (95% CI = 0.800632 to 0.995851)
 (test relative risk differs from 1) = 4.139819 (df = 1) P = 0.0419
-RH: Begg-Mazumdar: Kendall's tau = -0.428571 P = 0.2389 (low power)
-P: Begg-Mazumdar: Kendall's -0.428571 P = 0.2389
+Begg-Mazumdar: Kendall's tau = -0.428571 P = 0.2389 (low power)
 Egger: bias = -0.730996 (90% CI = -2.227324 to 0.765332) P = 0.3701
 Harbord-Egger: bias = -0.734002 (90% CI = -2.233589 to 0.765585) P = 0.3693

@@ -88,21 +88,26 @@ cat("Pooled relative risk = ", six(rr_mh), " (95% CI = ",
 cat("Chi2 (test relative risk differs from 1) =", six(x2), " (df = 1) ",
     pv(pchisq(x2, 1, lower.tail = FALSE)), "\n")
 
-# I-squared, with the interval that the heterogeneity topic attributes to Hedges and
-# Pigott (2001), from the non-central chi-square distribution of Q: Q - df estimates the
-# non-centrality, and the quantiles of that distribution give the limits for H-squared
-# and so for I-squared
+# I-squared = (Q - df) / Q, with the interval that the heterogeneity topic attributes
+# to Hedges and Pigott (2001): Q is treated as non-central chi-square and its
+# distribution function at the observed Q is inverted for the non-centrality parameter
+# lambda, the lower limit where that probability is 0.975 (0 when even the central
+# distribution gives less) and the upper where it is 0.025; each limit is converted to
+# I-squared as lambda / (df + lambda)
 cat("Non-combinability of studies\n")
 cat("Cochran Q = ", six(q), "  (df = ", k - 1, ")  ",
     pv(pchisq(q, k - 1, lower.tail = FALSE)), "\n", sep = "")
 cat("Moment-based estimate of between studies variance =", six(tau2), "\n")
 i2 <- max(0, 100 * (q - (k - 1)) / q)
-nc <- max(0, q - (k - 1))
-h2_lower <- max(1, qchisq(0.025, k - 1, ncp = nc) / (k - 1))
-h2_upper <- qchisq(0.975, k - 1, ncp = nc) / (k - 1)
+lambda <- function(p) {
+  if (pchisq(q, k - 1) < p) 0 else
+    uniroot(function(l) pchisq(q, k - 1, ncp = l) - p, c(0, 10 * q + 100),
+            tol = 1e-10)$root
+}
+lim <- c(lambda(0.975), lambda(0.025))
 cat("I2 (inconsistency) = ", one(i2), "% (95% CI = ",
-    one(100 * (h2_lower - 1) / h2_lower), "% to ",
-    one(100 * (h2_upper - 1) / h2_upper), "%)\n", sep = "")
+    one(100 * lim[1] / (k - 1 + lim[1])), "% to ",
+    one(100 * lim[2] / (k - 1 + lim[2])), "%)\n", sep = "")
 
 cat("Random effects (DerSimonian-Laird)\n")
 cat("Pooled relative risk = ", six(rr_dl), " (95% CI = ", six(dl_ci[1]), " to ",

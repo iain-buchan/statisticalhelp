@@ -116,7 +116,7 @@ cat("Egger: bias = ", six(coef(egger)[1]), " (90% CI = ", six(egger_ci[1, 1]), "
 # Harbord's modification regresses the score O - E divided by sqrt(V) on sqrt(V). For
 # the Peto odds ratio that is the same regression as Egger's, since the log odds ratio
 # over its standard error is (O - E) / sqrt(V) and the precision is sqrt(V), so the two
-# tests agree unless a table with an empty cell needs a continuity correction
+# tests agree
 harbord <- lm(I(oe / sqrt(V)) ~ sqrt(V))
 harbord_ci <- confint(harbord, level = 0.9)
 cat("Harbord-Egger: bias = ", six(coef(harbord)[1]), " (90% CI = ",

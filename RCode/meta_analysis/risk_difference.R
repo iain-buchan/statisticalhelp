@@ -26,8 +26,9 @@ rd <- a / n1 - b / n2
 # the values of the difference at which the score statistic reaches -1.96 and +1.96,
 # with the two proportions estimated under the constraint that they differ by that
 # value (the closed form of the constrained estimates, Newcombe 1998 method 10) and
-# the variance multiplied by N / (N - 1). These tables have no empty cells; with one,
-# StatsDirect would also add a continuity correction to the variances further down.
+# the variance multiplied by N / (N - 1). These tables have no empty cells; the counts
+# of a table with one would have a continuity correction first for the weights and the
+# variances further down (but not for its risk difference or for these limits).
 mn_limits <- function(a, n1, b, n2) {
   N <- n1 + n2
   score <- function(delta) {
@@ -112,7 +113,8 @@ x2_dl <- (rd_dl / se_dl)^2
 cat("Chi-square (test risk difference differs from 0) =", six(x2_dl), " (df = 1) ",
     pv(pchisq(x2_dl, 1, lower.tail = FALSE)), "\n")
 
-# Bias indicators, both from the standard errors the intervals above imply. Begg and
+# Bias indicators, both from the binomial variances that the inverse variance weights
+# are made from, whatever the method of the intervals of the studies. Begg and
 # Mazumdar's test is Kendall's rank correlation between the standardised effects
 # (deviations from the inverse variance pooled estimate) and the variances, with the
 # exact P that cor.test gives for so few studies when no values tie (fewer than about
@@ -120,13 +122,13 @@ cat("Chi-square (test risk difference differs from 0) =", six(x2_dl), " (df = 1)
 # (estimate / se) on precision (1 / se) and asks whether the intercept is zero, with
 # a 90% interval.
 cat("Bias indicators\n")
-w <- 1 / v
-rd_iv <- sum(w * rd) / sum(w)
-t_std <- (rd - rd_iv) / sqrt(v - 1 / sum(w))
-begg <- cor.test(t_std, v, method = "kendall")
+se_iv <- sqrt(v_iv)
+rd_iv <- sum(w_iv * rd) / sum(w_iv)
+t_std <- (rd - rd_iv) / sqrt(v_iv - 1 / sum(w_iv))
+begg <- cor.test(t_std, v_iv, method = "kendall")
 cat("Begg-Mazumdar: Kendall's tau =", six(begg$estimate), " ", pv(begg$p.value),
     "(low power)\n")
-egger <- lm(I(rd / se) ~ I(1 / se))
+egger <- lm(I(rd / se_iv) ~ I(1 / se_iv))
 bias <- coef(egger)[1]
 cat("Egger: bias = ", six(bias), " (90% CI = ", six(confint(egger, level = 0.9)[1, 1]),
     " to ", six(confint(egger, level = 0.9)[1, 2]), ")  ",
@@ -135,8 +137,8 @@ cat("Egger: bias = ", six(bias), " (90% CI = ", six(confint(egger, level = 0.9)[
 # The charts that follow in the report: a bias assessment (funnel) plot of each risk
 # difference against its standard error, with the fixed effects pooled estimate and
 # the limits within which 95% of study estimates would fall at each standard error
-top <- max(se) * 1.05
-plot(rd, se, ylim = c(top, 0), xlim = range(rd, rd_mh + c(-1, 1) * z * top),
+top <- max(se_iv) * 1.05
+plot(rd, se_iv, ylim = c(top, 0), xlim = range(rd, rd_mh + c(-1, 1) * z * top),
      xlab = "Risk difference", ylab = "Standard error", main = "Bias assessment plot")
 abline(v = rd_mh)
 lines(rd_mh + c(-1, 0, 1) * z * top, c(top, 0, top))

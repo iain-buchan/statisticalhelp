@@ -63,7 +63,7 @@
         <p>Incidence rate difference = IRD = [a/pte] - [b/ptn]</p>
         <p>Incidence rate ratio = IRR = [a/pte] / [b/ptn]</p>
         <p>&#160;</p>
-        <p>StatsDirect gives you the option of IRD or IRR based meta-analysis. For each stratum (e.g. trial) you are given either IRD (with approximate confidence interval) or IRR (with exact confidence interval). Pooled estimates for IRD or IRR are given for both fixed and random effects models.</p>
+        <p>StatsDirect gives you the option of IRD or IRR based meta-analysis. For each stratum (e.g. trial) you are given either IRD (with approximate confidence interval) or IRR (with exact confidence interval). The approximate confidence interval for IRD is IRD plus and minus the standard normal deviate times its standard error, which is the square root of a/pte<sup>2</sup> + b/ptn<sup>2</sup>. Pooled estimates for IRD or IRR are given for both fixed and random effects models.</p>
         <p>&#160;</p>
         <p>An exact conditional likelihood method is optionally used to evaluate the pooled rate ratio (<a href="../references/reference_list.htm#ref-martin-2000">Martin and Austin, 2000</a>). The exact method may take an appreciable time to compute with large numbers. The exact results should be used in preference to the approximation, especially if some categories involve few observations (less than 15 or so).</p>
         <p>&#160;</p>
@@ -598,15 +598,15 @@
             <tr>
                 <td style="text-align: right;">1</td>
                 <td style="text-align: right;">0.003356</td>
-                <td style="text-align: right;">-0.002623</td>
-                <td style="text-align: right;">0.009335</td>
+                <td style="text-align: right;">-0.0027</td>
+                <td style="text-align: right;">0.009412</td>
                 <td style="text-align: right;">Age &lt; 65</td>
             </tr>
             <tr>
                 <td style="text-align: right;">2</td>
                 <td style="text-align: right;">0.026187</td>
-                <td style="text-align: right;">0.00734</td>
-                <td style="text-align: right;">0.045034</td>
+                <td style="text-align: right;">0.005781</td>
+                <td style="text-align: right;">0.046593</td>
                 <td style="text-align: right;">Age &gt;= 65</td>
             </tr>
         </table>
@@ -628,7 +628,7 @@
             <tr>
                 <td style="text-align: right;">1</td>
                 <td style="text-align: right;">0.003356</td>
-                <td style="text-align: right;">0.000009</td>
+                <td style="text-align: right;">0.00001</td>
                 <td style="text-align: right;">91.904848</td>
                 <td style="text-align: right;">59.481911</td>
                 <td style="text-align: right;">Age &lt; 65</td>
@@ -636,7 +636,7 @@
             <tr>
                 <td style="text-align: right;">2</td>
                 <td style="text-align: right;">0.026187</td>
-                <td style="text-align: right;">0.000092</td>
+                <td style="text-align: right;">0.000108</td>
                 <td style="text-align: right;">8.095152</td>
                 <td style="text-align: right;">40.518089</td>
                 <td style="text-align: right;">Age &gt;= 65</td>
@@ -737,22 +737,19 @@ forest &lt;- function(est, lower, upper, pooled, p_lower, p_upper, pct, main, xl
   polygon(c(p_lower, pooled, p_upper, pooled), c(1, 1.2, 1, 0.8), col = "grey")
 }
 
-# Each stratum's incidence rate difference, with the test-based ("approximate")
-# interval: the difference divided by the square root of its Mantel-Haenszel chi-square
-# is the standard error the limits use. The fixed effects weights invert the Poisson
-# variance of the difference, a/pt1^2 + b/pt2^2
+# Each stratum's incidence rate difference, with its approximate interval: the
+# difference plus and minus z standard errors, from the Poisson variance of the
+# difference, a/pt1^2 + b/pt2^2, which the fixed effects weights invert
 ird &lt;- a / pt1 - b / pt2
-m &lt;- a + b
-n &lt;- pt1 + pt2
-chisq &lt;- (a - m * pt1 / n)^2 / (m * pt1 * pt2 / n^2)
-se_ird &lt;- abs(ird) / sqrt(chisq)
-res &lt;- pool(ird, a / pt1^2 + b / pt2^2)
+v_ird &lt;- a / pt1^2 + b / pt2^2
+se_ird &lt;- sqrt(v_ird)
+res &lt;- pool(ird, v_ird)
 cat("Incidence rate difference (IRD) meta-analysis\n")
 print(data.frame(stratum = 1:k, IRD = six(ird), lower = six(ird - z * se_ird),
                  upper = six(ird + z * se_ird), strata), row.names = FALSE)
-# The report's next table: the standardised effect is the difference itself, and the
-# variance shown beside the weights is the one implied by the interval, se squared
-print(data.frame(stratum = 1:k, effect = six(ird), variance = six(se_ird^2),
+# The report's next table: the standardised effect is the difference itself, with its
+# variance beside the weights
+print(data.frame(stratum = 1:k, effect = six(ird), variance = six(v_ird),
                  fixed = six(res$fixed_pct), random = six(res$random_pct), strata),
       row.names = FALSE)
 summarise(res, "IRD", 0)
