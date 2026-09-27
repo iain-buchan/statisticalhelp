@@ -167,7 +167,7 @@
         </p>
         <p>You can specify a weighting variable for utility to be applied to each interval. This is used, for example in the calculation of health adjusted life expectancy (HALE) by assuming that there is more health utility (sometimes defined by absence of disability) in some periods of life than in others. <a href="../references/reference_list.htm#ref-wolfson-1996">Wolfson (1996)</a> describes the principles of health adjusted life expectancy.</p>
         <p>&#160;</p>
-        <p>StatsDirect simply multiplies Ti (the total number of years lived by those individuals from the artificial cohort attaining the age that starts the interval) by the given ith utility weight, then divides as usual by li (the number out of the artificial cohort alive at the start of the interval) in order to compute adjusted life expectancy.</p>
+        <p>StatsDirect uses the method of <a href="../references/reference_list.htm#ref-sullivan-1971">Sullivan (1971)</a>. Li (the number of years lived in the ith interval by the artificial cohort) is multiplied by the ith utility weight, and the products for the interval and for all later intervals are added together to give an adjusted Ti (the total number of years lived, weighted for utility, by those individuals from the artificial cohort attaining the age that starts the interval). The adjusted Ti is then divided as usual by li (the number out of the artificial cohort alive at the start of the interval) in order to compute adjusted life expectancy. If every weight is 1 then the adjusted life expectancy is equal to the life expectancy.</p>
         <p>&#160;</p>
         <p><u>Data preparation</u>
         </p>

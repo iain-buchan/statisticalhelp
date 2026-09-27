@@ -16,12 +16,9 @@ g <- factor(group, levels = unique(group))
 # R's standard estimate: survfit gives the product limit estimate of S with Greenwood's
 # variance. conf.type = "plain" makes its limits S +/- z SE(S), the scale on which the
 # Brookmeyer-Crowley interval for the median is set (R's default is the log scale).
-# print(fit) gives the median (the first time at which S falls to 0.5 or below; R
-# takes the midpoint when S equals 0.5 exactly) and, with rmean = "individual", the
-# mean survival time restricted to each group's own longest time, as in the report.
-# R's limits for the median are where the confidence band of S crosses 0.5, so its
-# upper limit is the first time at which the upper limit of S is 0.5 or below, where
-# StatsDirect's is the last time whose S is within z standard errors of 0.5.
+# print(fit) gives the median, the Brookmeyer-Crowley limits for it and, with
+# rmean = "individual", the mean survival time restricted to each group's own longest
+# time, as in the report.
 fit <- survfit(Surv(time, event) ~ g, conf.type = "plain")
 print(fit, rmean = "individual")
 print(summary(fit, censored = TRUE))
@@ -48,23 +45,30 @@ for (k in levels(s$strata)) {
                    "SE(H)" = ifelse(S > 0, six(seH), "*"), check.names = FALSE),
         row.names = FALSE)
 
-  # The median: the first time at which S is 0.5 or below (this example has no run of
-  # S exactly 0.5, so R's midpoint rule gives the same value)
+  # The median: the first time at which S is 0.5 or below. Where S is exactly 0.5 from
+  # that time to the next death time, the median is the midpoint of the two times (this
+  # example has no run of S exactly 0.5)
   m <- which(S <= 0.5)[1]
+  med <- means[k, "median"]
   # (a group whose S never falls to 0.5 has no median; the two intervals below need one)
-  cat("Median survival time =", t[m], "\n")
+  cat("Median survival time =", med, "\n")
 
   # Andersen's interval: the median +/- z SE(S at the median) / f, where f estimates the
   # density of the survival times at the median by the slope of S between the last time
-  # with S >= 0.5 + 0.05 and the first time with S <= 0.5 - 0.05 (0.05 = 1 - 0.95)
+  # with S >= 0.5 + 0.05 and the first time with S <= 0.5 - 0.05 (the margin of 0.05
+  # is the same at every confidence level)
   hi <- max(which(S >= 0.55))
   lo <- min(which(S <= 0.45))
   f <- (S[hi] - S[lo]) / (t[lo] - t[hi])
-  cat("Andersen 95% CI for median survival time =", six(t[m] - z * seS[m] / f), "to",
-      six(t[m] + z * seS[m] / f), "\n")
+  cat("Andersen 95% CI for median survival time =", six(med - z * seS[m] / f), "to",
+      six(med + z * seS[m] / f), "\n")
 
-  # Brookmeyer-Crowley: the times whose S is within z standard errors of 0.5
-  bc <- range(t[S > 0 & abs(S - 0.5) / seS <= z])
+  # Brookmeyer-Crowley: the first times at which the lower and the upper confidence
+  # limits of S are 0.5 or below. The times from the lower limit up to the upper are
+  # those whose S is within z standard errors of 0.5, so the interval runs up to the
+  # death time that follows the last of them. NA is a limit that the data do not
+  # reach, which the report prints as infinity
+  bc <- means[k, c("0.95LCL", "0.95UCL")]
   cat("Brookmeyer-Crowley 95% CI for median survival time =", bc[1], "to", bc[2], "\n")
 
   # The mean survival time (the area under S up to the longest time), with the

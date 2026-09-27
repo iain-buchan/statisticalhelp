@@ -18,7 +18,7 @@ Group Surv = 2
 344 1 0 1 0.048128 0.046941 3.033884 0.975335
 Median survival time = 233
 Andersen 95% CI for median survival time = 231.898503 to 234.101497
-Brookmeyer-Crowley 95% CI for median survival time = 232 to 240
+Brookmeyer-Crowley 95% CI for median survival time = 232 to 261
 Mean survival time (95% CI) [limit: 344 on 323] = 241.283422 (219.591463 to 262.975382)
 Group Surv = 1
 143 19 1 0 0.947368 0.051228 0.054067 0.054074
@@ -40,5 +40,5 @@ Group Surv = 1
 303 1 1 0 0 * infinity *
 Median survival time = 216
 Andersen 95% CI for median survival time = 199.619628 to 232.380372
-Brookmeyer-Crowley 95% CI for median survival time = 192 to 230
+Brookmeyer-Crowley 95% CI for median survival time = 192 to 235
 Mean survival time (95% CI) = 218.684211 (200.363485 to 237.004936)

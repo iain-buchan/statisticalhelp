@@ -28,8 +28,8 @@ pv <- function(p) {
 # distinct time the numbers at risk and the deaths in each group give the expected
 # deaths, the weighted score U and its variance matrix V. The log-rank weight is 1.
 # The Peto-Prentice weight is a survivor function estimate: the product over the
-# earlier distinct times of (n - d + 1) / (n + 1), multiplied by n / (n + 1) at the
-# current time. The chi-square drops the last group's row and column, as V is singular.
+# distinct times up to and including the current time of (n - d + 1) / (n + 1).
+# The chi-square drops the last group's row and column, as V is singular.
 rank_test <- function(time, dead, group, wilcoxon = FALSE) {
   k <- max(group)
   O <- tabulate(group[dead == 1], k)
@@ -43,13 +43,13 @@ rank_test <- function(time, dead, group, wilcoxon = FALSE) {
     ni <- tabulate(group[atrisk], k)
     d <- sum(dead[time == t])
     di <- tabulate(group[time == t & dead == 1], k)
-    w <- if (wilcoxon) surv * n / (n + 1) else 1
+    surv <- surv * (n - d + 1) / (n + 1)
+    w <- if (wilcoxon) surv else 1
     E <- E + d * ni / n
     U <- U + w * (di - d * ni / n)
     if (n > 1) {
       V <- V + w^2 * (diag(ni * n, k) - outer(ni, ni)) * d * (n - d) / (n^2 * (n - 1))
     }
-    surv <- surv * (n - d + 1) / (n + 1)
   }
   chi <- as.numeric(t(U[-k]) %*% solve(V[-k, -k]) %*% U[-k])
   p <- pchisq(chi, k - 1, lower.tail = FALSE)
@@ -157,7 +157,7 @@ cat("Exact mid-P one sided ", pv(min(upper_mid, 1 - upper_mid)), ", two sided ",
 
 # Generalised Wilcoxon test. R's nearest is the Peto and Peto modification, with the
 # Kaplan-Meier estimate as the weight (rho = 1): chi-square 5.45, against the report's
-# 5.445 with the Peto-Prentice weight described above
+# 5.488 with the Peto-Prentice weight described above
 print(survdiff(Surv(time, dead) ~ stage, rho = 1))
 cat("Generalised Wilcoxon (Peto-Prentice):\n")
 show_test(rank_test(time, dead, stage, wilcoxon = TRUE), groups = FALSE)
