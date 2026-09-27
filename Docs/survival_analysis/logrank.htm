@@ -152,7 +152,7 @@
                                         <p>
                                             <img src="../generatedimages/equations/equation238.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where the weight w<sub>j</sub> for the log-rank test is equal to 1, and w<sub>j</sub> for the generalised Wilcoxon test is n<sub>j</sub> (Gehan-Breslow method; StatsDirect divides this weight by the number of observations in the stratum plus one, which leaves the chi-square unchanged); for the Tarone-Ware method w<sub>j</sub> is the square root of n<sub>j</sub>; and for the Peto-Prentice method w<sub>j</sub> is a survivor function estimate, the product over the earlier distinct times of (n<sub>j</sub> - d<sub>j</sub> + 1) divided by (n<sub>j</sub> + 1), multiplied by (n<sub>j</sub> divided by n<sub>j</sub> + 1). e<sub>ij</sub> is the expectation of death in group i at the jth distinct observed time where d<sub>j</sub> events/deaths occurred. n<sub>ij</sub> is the number at risk in group i just before the jth distinct observed time, and n<sub>j</sub> is the total number at risk at that time. The test statistic for equality of survival across the k groups (populations sampled) is approximately chi-square distributed on k-1 degrees of freedom. The test statistic for monotone trend is approximately chi-square distributed on 1 degree of freedom. <b>c</b> is a vector of scores that are either defined by the user or allocated as 1 to k.</p>
+                                        <p>- where the weight w<sub>j</sub> for the log-rank test is equal to 1, and w<sub>j</sub> for the generalised Wilcoxon test is n<sub>j</sub> (Gehan-Breslow method; StatsDirect divides this weight by the number of observations in the stratum plus one, which leaves the chi-square unchanged); for the Tarone-Ware method w<sub>j</sub> is the square root of n<sub>j</sub>; and for the Peto-Prentice method w<sub>j</sub> is a survivor function estimate, the product over the distinct times up to and including the jth of (n<sub>j</sub> - d<sub>j</sub> + 1) divided by (n<sub>j</sub> + 1), which is the weight that SAS uses for the test of Peto and Peto. e<sub>ij</sub> is the expectation of death in group i at the jth distinct observed time where d<sub>j</sub> events/deaths occurred. n<sub>ij</sub> is the number at risk in group i just before the jth distinct observed time, and n<sub>j</sub> is the total number at risk at that time. The test statistic for equality of survival across the k groups (populations sampled) is approximately chi-square distributed on k-1 degrees of freedom. The test statistic for monotone trend is approximately chi-square distributed on 1 degree of freedom. <b>c</b> is a vector of scores that are either defined by the user or allocated as 1 to k.</p>
                                         <p>&#160;</p>
                                         <p>Variance is estimated by the method that Peto (1977) refers to as "exact".</p>
                                         <p>&#160;</p>
@@ -641,23 +641,23 @@
                                         <p><u>Generalised Wilcoxon (Peto-Prentice)</u>:</p>
                                         <p>&#160;</p>
                                         <p>test statistics:</p>
-                                        <p>-5.19836, 5.19836</p>
+                                        <p>-5.185761, 5.185761</p>
                                         <p>&#160;</p>
                                         <p>variance-covariance matrix:</p>
                                         <table cellspacing="0" style="caption-side: top;">
                                             <col />
                                             <col />
                                             <tr>
-                                                <td>4.962627</td>
-                                                <td>-4.962627</td>
+                                                <td>4.900418</td>
+                                                <td>-4.900418</td>
                                             </tr>
                                             <tr>
-                                                <td>-4.962627</td>
-                                                <td>4.962627</td>
+                                                <td>-4.900418</td>
+                                                <td>4.900418</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>Chi-square for equivalence of death rates = 5.44529 P = 0.0196</p>
+                                        <p>Chi-square for equivalence of death rates = 5.487718 P = 0.0192</p>
                                         <p>&#160;</p>
                                         <p>Both log-rank and Wilcoxon tests demonstrated a statistically significant difference in survival experience between stage 3 and stage 4 patients in this study.</p>
                                         <p>&#160;</p>
@@ -964,23 +964,23 @@
                                         <p><u>Generalised Wilcoxon (Peto-Prentice) * [STRATUM 2 of 2: Strat=2]</u>:</p>
                                         <p>&#160;</p>
                                         <p>test statistics:</p>
-                                        <p>-1.885167, 1.885167</p>
+                                        <p>-1.841824, 1.841824</p>
                                         <p>&#160;</p>
                                         <p>variance-covariance matrix:</p>
                                         <table cellspacing="0" style="caption-side: top;">
                                             <col />
                                             <col />
                                             <tr>
-                                                <td>1.287751</td>
-                                                <td>-1.287751</td>
+                                                <td>1.246236</td>
+                                                <td>-1.246236</td>
                                             </tr>
                                             <tr>
-                                                <td>-1.287751</td>
-                                                <td>1.287751</td>
+                                                <td>-1.246236</td>
+                                                <td>1.246236</td>
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>Chi-square for equivalence of death rates = 2.759739 P = 0.0967</p>
+                                        <p>Chi-square for equivalence of death rates = 2.722049 P = 0.099</p>
                                         <p>&#160;</p>
                                         <p><u>Generalised Wilcoxon (Peto-Prentice) for COMBINED STRATA</u>:</p>
                                         <p>&#160;</p>
@@ -1009,7 +1009,7 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>overall chi-square = 3.953375 P = 0.0468</p>
+                                        <p>overall chi-square = 3.916972 P = 0.0478</p>
                                         <p>&#160;</p>
                                         <p>Allowing for renal impairment, the death rate differed between the two groups (stratified log-rank test P = 0.0162): the hazard in group 1 was about a third of that in group 2, with a wide confidence interval from so few deaths. Neither stratum alone gave a statistically significant difference.</p>
                                         <p>&#160;</p>
@@ -1045,8 +1045,8 @@ pv &lt;- function(p) {
 # distinct time the numbers at risk and the deaths in each group give the expected
 # deaths, the weighted score U and its variance matrix V. The log-rank weight is 1.
 # The Peto-Prentice weight is a survivor function estimate: the product over the
-# earlier distinct times of (n - d + 1) / (n + 1), multiplied by n / (n + 1) at the
-# current time. The chi-square drops the last group's row and column, as V is singular.
+# distinct times up to and including the current time of (n - d + 1) / (n + 1).
+# The chi-square drops the last group's row and column, as V is singular.
 rank_test &lt;- function(time, dead, group, wilcoxon = FALSE) {
   k &lt;- max(group)
   O &lt;- tabulate(group[dead == 1], k)
@@ -1060,13 +1060,13 @@ rank_test &lt;- function(time, dead, group, wilcoxon = FALSE) {
     ni &lt;- tabulate(group[atrisk], k)
     d &lt;- sum(dead[time == t])
     di &lt;- tabulate(group[time == t &amp; dead == 1], k)
-    w &lt;- if (wilcoxon) surv * n / (n + 1) else 1
+    surv &lt;- surv * (n - d + 1) / (n + 1)
+    w &lt;- if (wilcoxon) surv else 1
     E &lt;- E + d * ni / n
     U &lt;- U + w * (di - d * ni / n)
     if (n &gt; 1) {
       V &lt;- V + w^2 * (diag(ni * n, k) - outer(ni, ni)) * d * (n - d) / (n^2 * (n - 1))
     }
-    surv &lt;- surv * (n - d + 1) / (n + 1)
   }
   chi &lt;- as.numeric(t(U[-k]) %*% solve(V[-k, -k]) %*% U[-k])
   p &lt;- pchisq(chi, k - 1, lower.tail = FALSE)
@@ -1174,7 +1174,7 @@ cat("Exact mid-P one sided ", pv(min(upper_mid, 1 - upper_mid)), ", two sided ",
 
 # Generalised Wilcoxon test. R's nearest is the Peto and Peto modification, with the
 # Kaplan-Meier estimate as the weight (rho = 1): chi-square 5.45, against the report's
-# 5.445 with the Peto-Prentice weight described above
+# 5.488 with the Peto-Prentice weight described above
 print(survdiff(Surv(time, dead) ~ stage, rho = 1))
 cat("Generalised Wilcoxon (Peto-Prentice):\n")
 show_test(rank_test(time, dead, stage, wilcoxon = TRUE), groups = FALSE)

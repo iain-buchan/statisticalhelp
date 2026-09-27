@@ -163,6 +163,8 @@
                                         <p>&#160;</p>
                                         <p>A confidence interval for the pooled relative risk is calculated using the Greenland-Robins variance formula(<a href="../references/reference_list.htm#ref-greenland-1985">Greenland and Robins, 1985</a>). A chi-square test statistic is given with associated probability of the pooled relative risk being equal to one. Note that some packages give a z statistic; this is equal to the square root of the chi-square statistic with one degree of freedom, i.e. it gives the same P.</p>
                                         <p>&#160;</p>
+                                        <p>If any cell count in a table is zero then a continuity correction is applied to each cell in that table - if you have selected the 'delay continuity correction' <a href="options.htm">option</a> then the pooled relative risk, its confidence interval and the fixed effects weights are calculated from the counts as they are, provided that there is an event in each group among the studies. The type of continuity correction used is set in the <a href="options.htm">options</a>. A table is left out of the pooling, and marked as excluded, if it has no cases in either group or no subjects in one of the groups.</p>
+                                        <p>&#160;</p>
                                         <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
                                         <p>&#160;</p>
                                         <p>Note that the results from StatsDirect may differ slightly from other software or from those quoted in papers; this is due to differences in the variance formulae. StatsDirect employs the most robust practical approaches to variance according to accepted statistical literature.</p>
@@ -418,7 +420,7 @@
                                         </p>
                                         <p>Cochran Q = 9.928487 (df = 6) P = 0.1277</p>
                                         <p>Moment-based estimate of between studies variance = 0.007437</p>
-                                        <p>I² (inconsistency) =  39.6% (95% CI = 0% to 73.3%)</p>
+                                        <p>I² (inconsistency) =  39.6% (95% CI = 0% to 76.6%)</p>
                                         <p>&#160;</p>
                                         <p><u>Random effects (DerSimonian-Laird)</u>
                                         </p>
@@ -525,21 +527,26 @@ cat("Pooled relative risk = ", six(rr_mh), " (95% CI = ",
 cat("Chi2 (test relative risk differs from 1) =", six(x2), " (df = 1) ",
     pv(pchisq(x2, 1, lower.tail = FALSE)), "\n")
 
-# I-squared, with the interval that the heterogeneity topic attributes to Hedges and
-# Pigott (2001), from the non-central chi-square distribution of Q: Q - df estimates the
-# non-centrality, and the quantiles of that distribution give the limits for H-squared
-# and so for I-squared
+# I-squared = (Q - df) / Q, with the interval that the heterogeneity topic attributes
+# to Hedges and Pigott (2001): Q is treated as non-central chi-square and its
+# distribution function at the observed Q is inverted for the non-centrality parameter
+# lambda, the lower limit where that probability is 0.975 (0 when even the central
+# distribution gives less) and the upper where it is 0.025; each limit is converted to
+# I-squared as lambda / (df + lambda)
 cat("Non-combinability of studies\n")
 cat("Cochran Q = ", six(q), "  (df = ", k - 1, ")  ",
     pv(pchisq(q, k - 1, lower.tail = FALSE)), "\n", sep = "")
 cat("Moment-based estimate of between studies variance =", six(tau2), "\n")
 i2 &lt;- max(0, 100 * (q - (k - 1)) / q)
-nc &lt;- max(0, q - (k - 1))
-h2_lower &lt;- max(1, qchisq(0.025, k - 1, ncp = nc) / (k - 1))
-h2_upper &lt;- qchisq(0.975, k - 1, ncp = nc) / (k - 1)
+lambda &lt;- function(p) {
+  if (pchisq(q, k - 1) &lt; p) 0 else
+    uniroot(function(l) pchisq(q, k - 1, ncp = l) - p, c(0, 10 * q + 100),
+            tol = 1e-10)$root
+}
+lim &lt;- c(lambda(0.975), lambda(0.025))
 cat("I2 (inconsistency) = ", one(i2), "% (95% CI = ",
-    one(100 * (h2_lower - 1) / h2_lower), "% to ",
-    one(100 * (h2_upper - 1) / h2_upper), "%)\n", sep = "")
+    one(100 * lim[1] / (k - 1 + lim[1])), "% to ",
+    one(100 * lim[2] / (k - 1 + lim[2])), "%)\n", sep = "")
 
 cat("Random effects (DerSimonian-Laird)\n")
 cat("Pooled relative risk = ", six(rr_dl), " (95% CI = ", six(dl_ci[1]), " to ",
