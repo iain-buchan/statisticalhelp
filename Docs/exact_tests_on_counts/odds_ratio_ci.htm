@@ -129,11 +129,11 @@
                                         <p>..where BR is the baseline (control) response rate; BR can be estimated by b/(b+d) if not known from larger studies.</p>
                                         <p>This function uses an exact method to construct confidence limits for the odds ratio of a fourfold table (<a href="../references/reference_list.htm#ref-martin-1991">Martin and Austin, 1991</a>). The Fisher limits complement Fisher's exact test of independence in a fourfold table, for which one and two sided probabilities are provided here. <a href="../proportions/mid_p.htm">Mid-P</a> values are also given.</p>
                                         <p>&#160;</p>
-                                        <p>Please note that this method will take a long time with large numbers.</p>
+                                        <p>Please note that this method will take a long time with large numbers. It considers every value that the first frequency of the table could have with the row and column totals that were observed, and is not used if there are more than a million of them; the results then say that the table is too large.</p>
                                         <p>&#160;</p>
                                         <p>DATA INPUT:</p>
                                         <p>&#160;</p>
-                                        <p>Observed frequencies should be entered as a standard fourfold table:</p>
+                                        <p>Observed frequencies should be entered as a standard fourfold table. The frequencies should be whole numbers; one that is not is rounded to the nearest whole number, and the results show the table that was analysed. A table with an empty row or an empty column says nothing about the odds ratio: its confidence limits are given as 0 and infinity, and its P values as 1.</p>
                                         <p>&#160;</p>
                                         <table cellspacing="0" style="caption-side: top;">
                                             <col />
