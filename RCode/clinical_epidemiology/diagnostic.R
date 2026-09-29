@@ -29,22 +29,18 @@ prevalence <- (tp + fn) / n
 cat("Prevalence (pre-test likelihood of disease)\n")
 cat(rate(tp + fn, n), "\n")
 
-# The change, in braces, is from the pre-test to the post-test likelihood, in whole
-# percentages (halves round to even, as the program does; the pre-test rate is
-# evaluated as the program evaluates it, so that both round alike)
+# The change, in braces, is from the pre-test to the post-test likelihood: the
+# difference of the two percentages
 ppv <- tp / (tp + fp)
 cat("Predictive value of +ve test (post-test likelihood of disease)\n")
-cat(rate(tp, tp + fp), ", {change = ", round(100 * ppv) - round(100 * prevalence),
-    "%}\n", sep = "")
+cat(rate(tp, tp + fp), ", {change = ", pc(ppv - prevalence), "}\n", sep = "")
 npv <- tn / (tn + fn)
 cat("Predictive values of -ve test\n")
 cat("(post-test likelihood of no disease)\n")
-cat(rate(tn, tn + fn), ", {change = ", round(100 * npv) - round((fp + tn) / n * 100),
-    "%}\n", sep = "")
+cat(rate(tn, tn + fn), ", {change = ", pc(npv - (fp + tn) / n), "}\n", sep = "")
 # 1 - npv, whose exact interval is that of the false negatives among the test negatives
 cat("(post-test disease likelihood despite -ve test)\n")
-cat(rate(fn, tn + fn), ", {change = ",
-    round(100 * (1 - npv)) - round(100 * prevalence), "%}\n", sep = "")
+cat(rate(fn, tn + fn), ", {change = ", pc((1 - npv) - prevalence), "}\n", sep = "")
 sens <- tp / (tp + fn)
 cat("Sensitivity (true positive rate)\n")
 cat(rate(tp, tp + fn), "\n")

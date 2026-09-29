@@ -147,14 +147,14 @@
         <p>&#160;</p>
         <p><u>Predictive value of +ve test (post-test likelihood of disease)</u>
         </p>
-        <p>0.934924 (0.908401 to 0.955666), 93.49% (90.84% to 95.57%), {change = 17%}</p>
+        <p>0.934924 (0.908401 to 0.955666), 93.49% (90.84% to 95.57%), {change = 17.58%}</p>
         <p>&#160;</p>
         <p><u>Predictive values of -ve test</u>
         </p>
         <p>(post-test likelihood of no disease)</p>
-        <p>0.8 (0.725563 to 0.861777), 80% (72.56% to 86.18%), {change = 56%}</p>
+        <p>0.8 (0.725563 to 0.861777), 80% (72.56% to 86.18%), {change = 55.91%}</p>
         <p>(post-test disease likelihood despite -ve test)</p>
-        <p>0.2 (0.138223 to 0.274437), 20% (13.82% to 27.44%), {change = -56%}</p>
+        <p>0.2 (0.138223 to 0.274437), 20% (13.82% to 27.44%), {change = -55.91%}</p>
         <p>&#160;</p>
         <p><u>Sensitivity (true positive rate)</u>
         </p>
@@ -213,22 +213,18 @@ prevalence &lt;- (tp + fn) / n
 cat("Prevalence (pre-test likelihood of disease)\n")
 cat(rate(tp + fn, n), "\n")
 
-# The change, in braces, is from the pre-test to the post-test likelihood, in whole
-# percentages (halves round to even, as the program does; the pre-test rate is
-# evaluated as the program evaluates it, so that both round alike)
+# The change, in braces, is from the pre-test to the post-test likelihood: the
+# difference of the two percentages
 ppv &lt;- tp / (tp + fp)
 cat("Predictive value of +ve test (post-test likelihood of disease)\n")
-cat(rate(tp, tp + fp), ", {change = ", round(100 * ppv) - round(100 * prevalence),
-    "%}\n", sep = "")
+cat(rate(tp, tp + fp), ", {change = ", pc(ppv - prevalence), "}\n", sep = "")
 npv &lt;- tn / (tn + fn)
 cat("Predictive values of -ve test\n")
 cat("(post-test likelihood of no disease)\n")
-cat(rate(tn, tn + fn), ", {change = ", round(100 * npv) - round((fp + tn) / n * 100),
-    "%}\n", sep = "")
+cat(rate(tn, tn + fn), ", {change = ", pc(npv - (fp + tn) / n), "}\n", sep = "")
 # 1 - npv, whose exact interval is that of the false negatives among the test negatives
 cat("(post-test disease likelihood despite -ve test)\n")
-cat(rate(fn, tn + fn), ", {change = ",
-    round(100 * (1 - npv)) - round(100 * prevalence), "%}\n", sep = "")
+cat(rate(fn, tn + fn), ", {change = ", pc((1 - npv) - prevalence), "}\n", sep = "")
 sens &lt;- tp / (tp + fn)
 cat("Sensitivity (true positive rate)\n")
 cat(rate(tp, tp + fn), "\n")
