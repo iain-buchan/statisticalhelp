@@ -129,6 +129,7 @@
                                         <p>Some of the methods used here are unreliable with small numbers; generally, there should be at least 25 events observed overall and at least one event in each stratum. If the number of events is small, consider aggregating strata.</p>
                                         <p>&#160;</p>
                                         <p>Note that an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
+                                        <p>With the binomial method, the number of events in a stratum must not exceed its person-time, and the person-time must not have been scaled (for example person-years, not thousands of person-years). The Poisson method has no such restriction.</p>
                                         <p>&#160;</p>
                                         <p>See also:</p>
                                         <p><a href="direct_standardization.htm">Direct standardization</a>
@@ -156,11 +157,11 @@
                                         </p>
                                         <p>- where Y is the observed number of events, Y<sub>l</sub> and Y<sub>u</sub> are lower and upper confidence limits for Y respectively, χ²<sub>ν, α</sub> is the chi-square quantile for upper tail probability α on ν degrees of freedom.</p>
                                         <p>&#160;</p>
-                                        <p>The two crude rates are compared as a ratio using Poisson distribution and test-based methods (<a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>):</p>
+                                        <p>The two crude rates, and the two rates of each stratum, are compared as a ratio with an exact confidence interval, using the Poisson distribution (<a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>):</p>
                                         <p>
                                             <img src="../generatedimages/equations/equation176.svg" alt="" class="mcReset" />
                                         </p>
-                                        <p>- where IRR hat is the point estimate of the incidence rate ratio, a and b are the events observed in the exposed and non-exposed populations, PT<sub>1</sub> and PT<sub>2</sub> are their person-time and F is a quantile of the F distribution (denominator degrees of freedom are quoted last).</p>
+                                        <p>- where IRR hat is the point estimate of the incidence rate ratio, a and b are the events observed in the exposed and non-exposed populations, PT<sub>1</sub> and PT<sub>2</sub> are their person-time and F is a quantile of the F distribution (denominator degrees of freedom are quoted last). If there are no events in the non-exposed population then the rate ratio is infinite and only its lower confidence limit is given; if there are no events in either population then the rate ratio is not given. With the binomial model, the confidence interval for a rate ratio is the score interval for the ratio of two proportions (<a href="../references/reference_list.htm#ref-koopman-1984">Koopman, 1984</a>).</p>
                                         <p>&#160;</p>
                                         <p>Approximate confidence intervals for the DSR are calculated firstly by Chiang's normal approximation to Poisson rate sums (<a href="../references/reference_list.htm#ref-chiang-1961">Chiang, 1961</a>; <a href="../references/reference_list.htm#ref-keyfitz-1966">Keyfitz, 1966</a>; <a href="../references/reference_list.htm#ref-breslow-1987">Breslow and Day, 1987</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>); the improved approximation adjusted for the total number of observed events (<a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al., 1991</a>) is given by the <a href="direct_standardization.htm">direct standardization</a> function.</p>
                                         <p>
