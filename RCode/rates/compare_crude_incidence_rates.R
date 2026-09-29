@@ -15,10 +15,11 @@ pt2 <- 51477.5   # person-years of follow up of the non-exposed
 # two sided exact Fisher P (the binomial test of a in a + b, two sided).
 print(poisson.test(c(a, b), c(pt1, pt2)))
 
-# The rates, their difference and its test-based interval (Sahai and Khurshid 1996):
-# a chi-square statistic compares a with its expected value given the total number
-# of cases, and the limits are the difference plus or minus z times the difference
-# divided by the square root of chi-square
+# The rates and their difference. Each rate has the variance of a Poisson count
+# divided by the square of its person-time, so the standard error of the difference
+# is the square root of a / pt1^2 + b / pt2^2, and the limits are the difference
+# plus or minus z times that standard error. The chi-square statistic compares a
+# with its expected value given the total number of cases
 six <- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
 pv <- function(p) {
   if (p < 0.0001) "P < 0.0001" else
@@ -31,13 +32,12 @@ ir2 <- b / pt2
 ird <- ir1 - ir2
 cat("Exposed incidence rate =", six(ir1), "\n")
 cat("Non-exposed incidence rate =", six(ir2), "\n")
-chisq <- (a - m * pt1 / pt)^2 / (m * pt1 * pt2 / pt^2)
+se <- sqrt(a / pt1^2 + b / pt2^2)
 z <- qnorm(0.975)
 cat("Rate difference =", six(ird), "\n")
-if (chisq > 0) {                # the limits are undefined when the rates are equal
-  cat("approximate 95% confidence interval =", six(ird - z * sqrt(ird^2 / chisq)),
-      "to", six(ird + z * sqrt(ird^2 / chisq)), "\n")
-}
+cat("approximate 95% confidence interval =", six(ird - z * se), "to",
+    six(ird + z * se), "\n")
+chisq <- (a - m * pt1 / pt)^2 / (m * pt1 * pt2 / pt^2)
 cat("chi-square =", six(chisq), " ", pv(pchisq(chisq, 1, lower.tail = FALSE)), "\n")
 
 # The rate ratio and its exact interval from quantiles of the F distribution, as the
