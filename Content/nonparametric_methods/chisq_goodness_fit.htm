@@ -62,7 +62,7 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <p>To analyse these data using StatsDirect you must first enter the observed frequencies into the workbook. You can enter the grouped frequencies, as above, or the individual observations (187 rows coded 1 to 4 in this case). If you enter individual observations, StatsDirect collects them into groups/bins/classes of frequencies which you can inspect before proceeding with the analysis. The next step is to enter the expected frequencies, this is done directly on screen after you have <a href="../workbook/selecting_data.htm">selected</a> the observed frequencies and chosen Chi-square Goodness of Fit from the Nonparametric section of the analysis menu. For this example you can enter the expected proportions, the expected frequencies will be calculated and displayed automatically. You can also alter the number of degrees of freedom but this is intended for expert statistical use, thus you would normally except the default value of number of categories minus one. The results for our example are:</p>
+        <p>To analyse these data using StatsDirect you must first enter the observed frequencies into a workbook column, as above, and enter the expected distribution in another column of the same length: proportions, percentages or expected counts, which are scaled to the observed total (for this example the percentages 44, 45, 8 and 3). A third column may hold the names of the categories. Then choose Chi-square Goodness of Fit from the Nonparametric section of the analysis menu and <a href="../workbook/selecting_data.htm">select</a> the observed column, the expected column, and the names or skip them. The expected frequencies are calculated and displayed; the degrees of freedom are the number of categories minus one. The results for our example are:</p>
         <p>&#160;</p>
         <p>N = 187</p>
         <p>&#160;</p>
@@ -101,6 +101,8 @@
         <p>P = 0.0007</p>
         <p>&#160;</p>
         <p>Here we may report a statistically highly significant difference between the distribution of blood groups from patients undergoing this surgical procedure and that which would be expected from a random sample of the general population.</p>
+        <p>&#160;</p>
+        <p>You can then ask for a simulated exact P value (Simulate Exact P): the observed total is drawn again and again from the expected distribution, and the P value is the proportion of the draws whose chi-square is at least that of your table; it is given with an exact (Clopper-Pearson) confidence interval for that proportion. Frequencies that are not whole numbers are used as you entered them by the test; they are rounded to the nearest whole number for the simulation, and the results say when this has been done.</p>
         <p>&#160;</p>
         <MadCap:dropDown class="rcode">
             <MadCap:dropDownHead class="rcode">
