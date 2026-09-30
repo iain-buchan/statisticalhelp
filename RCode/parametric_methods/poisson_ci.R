@@ -13,9 +13,9 @@ print(r)
 # The report's lines, to 6 decimal places
 six <- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
 cat("Size =", n, "  Mean =", six(mean(counts)), "\n")
-cat("Approximate two sided 95% CI =", six(r$conf.int[1]), "to", six(r$conf.int[2]),
-    "\n")
+cat("Exact two sided 95% CI =", six(r$conf.int[1]), "to", six(r$conf.int[2]), "\n")
 # StatsDirect also gives the one sided 95% lower and upper limits, which are the
-# ends of a two sided 90% interval, under the heading "one sided 90% CI"
+# ends of a two sided 90% interval
 ci <- poisson.test(sum(counts), n, conf.level = 0.9)$conf.int
-cat("Approximate one sided 90% CI =", six(ci[1]), "to", six(ci[2]), "\n")
+cat("Exact one sided 95% confidence limits: lower ", six(ci[1]), ", upper ", six(ci[2]),
+    "\n", sep = "")
