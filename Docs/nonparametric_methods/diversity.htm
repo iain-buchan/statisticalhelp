@@ -160,7 +160,7 @@
                                         </p>
                                         <p>- where z star is the studentized statistic from a bootstrap sample, using the large sample variance calculated from that sample, and z star with a subscript is a quantile of its bootstrap distribution. The equal-tailed bootstrap-t limits are centred on g by putting half of the distance between them on each side.</p>
                                         <p>&#160;</p>
-                                        <p>The resampling scheme used for the bootstrap intervals above draws N individuals at random with replacement from the N observed, each draw falling in class i with probability ni/N (a multinomial resample of the observed counts); a class may therefore be absent from a bootstrap sample, so the number of classes is not held constant.</p>
+                                        <p>The resampling scheme used for the bootstrap intervals above draws N individuals at random with replacement from the N observed, each draw falling in class i with probability ni/N (a multinomial resample of the observed counts); a class may therefore be absent from a bootstrap sample, so the number of classes is not held constant. You are asked for a seed for the random numbers of the re-samples; the box is filled with a seed from the clock, which you can change, and the report gives the seed that was used, so that the same re-samples can be drawn again.</p>
                                         <p>&#160;</p>
                                         <p><a href="../references/reference_list.htm#ref-vives-2001">Vives et al. (2001)</a> showed that percentile methods (including BCa) do not perform well for Shannon's index, they advise using a symmetrized bootstrap-t confidence interval, which takes a quantile of the absolute studentized values. The centred bootstrap-t interval of StatsDirect is close to that interval but is not the same.</p>
                                         <p>&#160;</p>
@@ -224,7 +224,7 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>To test these data for diversity using StatsDirect you must first prepare them in a workbook column. Alternatively, open the test workbook using the file open function of the file menu. Then select the Diversity item from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Community (RAPD)" when prompted for data.</p>
+                                        <p>To test these data for diversity using StatsDirect you must first prepare them in a workbook column. Alternatively, open the test workbook using the file open function of the file menu. Then select the Diversity item from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Community (RAPD)" when prompted for data, then enter 2000 bootstrap replications and the seed 1 to match the figures below (the default is 10,000 replications, and the seed box is filled from the clock).</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
@@ -233,6 +233,7 @@
                                         <p>&#160;</p>
                                         <p>Total number of counts = 117</p>
                                         <p>Number of classes observed (richness) = 26</p>
+                                        <p>Re-samples = 2000, seed = 1</p>
                                         <p>&#160;</p>
                                         <p>Estimated total number of classes = 54</p>
                                         <p>Standard error (large sample) = 23.167466</p>
@@ -242,23 +243,23 @@
                                         <p>Standard error (large sample) = 0.016826</p>
                                         <p>Standard error (small sample) = 0.017173</p>
                                         <p>Normal (large sample) 95% CI = 0.866373 to 0.932331</p>
-                                        <p>Re-samples = 2000, bias = 0.007559, standard error (bootstrap) = 0.017044</p>
-                                        <p>Normal (bootstrap) 95% CI = 0.865925 to 0.932778</p>
-                                        <p>Centred bootstrap-t 95% CI = 0.867531 to 0.931173</p>
+                                        <p>Re-samples = 2000, bias = 0.008099, standard error (bootstrap) = 0.017107</p>
+                                        <p>Normal (bootstrap) 95% CI = 0.865802 to 0.932901</p>
+                                        <p>Centred bootstrap-t 95% CI = 0.866084 to 0.932619</p>
                                         <p>&#160;</p>
                                         <p><b>Shannon H' (base e)</b> = 2.656515</p>
                                         <p>Standard error (large sample) = 0.095839</p>
                                         <p>Standard error (small sample) = 0.10049</p>
                                         <p>Normal (large sample) 95% CI = 2.468673 to 2.844356</p>
-                                        <p>Re-samples = 2000, bias = 0.115523, standard error (bootstrap) = 0.097829</p>
-                                        <p>Normal (bootstrap) 95% CI = 2.464657 to 2.848373</p>
-                                        <p>Centred bootstrap-t 95% CI = 2.453262 to 2.859768</p>
+                                        <p>Re-samples = 2000, bias = 0.118681, standard error (bootstrap) = 0.098032</p>
+                                        <p>Normal (bootstrap) 95% CI = 2.464259 to 2.848771</p>
+                                        <p>Centred bootstrap-t 95% CI = 2.449698 to 2.863331</p>
                                         <p>&#160;</p>
-                                        <p>The bootstrap results depend on the random numbers drawn, so they differ a little from one run to the next.</p>
+                                        <p>The bootstrap results depend on the random numbers drawn: with the seed above they are the same each time the analysis is run, and with another seed they differ a little.</p>
                                         <p>&#160;</p>
                                         <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
                                             <div class="MCDropDownBody dropDownBody">
-                                                <p class="rcodenote">This R code reproduces the example above; its bootstrap figures differ a little from run to run, as those of StatsDirect do. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Diversity of classes: the StatsDirect help example (strains of Staphylococcus
+                                                <p class="rcodenote">This R code reproduces the example above; its bootstrap figures differ a little from run to run, and from StatsDirect's. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Diversity of classes: the StatsDirect help example (strains of Staphylococcus
 # aureus in hospital samples, Grundmann et al. 2001) in R
 counts &lt;- c(30, 13, 9, 8, 7, 7, 7, 6, 6, 5, 2, 2, 2, rep(1, 13))
 N &lt;- sum(counts)

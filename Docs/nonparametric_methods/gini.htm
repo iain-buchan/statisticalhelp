@@ -140,7 +140,7 @@
                                         <p>&#160;</p>
                                         <p>The small sample variance properties of G are not known, and large sample approximations to the variance of G are poor (<a href="../references/reference_list.htm#ref-mills-1997">Mills and Zandvakili, 1997</a>; <a href="../references/reference_list.htm#ref-glasser-1962">Glasser, 1962</a>; <a href="../references/reference_list.htm#ref-dixon-1987">Dixon et al., 1987</a>), therefore confidence intervals are calculated via bootstrap re-sampling methods (<a href="../references/reference_list.htm#ref-efron-1997">Efron and Tibshirani, 1997</a>).</p>
                                         <p>&#160;</p>
-                                        <p>StatsDirect calculates two types of bootstrap confidence intervals, these are percentile and bias-corrected (<a href="../references/reference_list.htm#ref-mills-1997">Mills and Zandvakili, 1997</a>; <a href="../references/reference_list.htm#ref-dixon-1987">Dixon et al., 1987</a>; <a href="../references/reference_list.htm#ref-efron-1997">Efron and Tibshirani, 1997</a>). The bias-corrected intervals are most appropriate for most applications.</p>
+                                        <p>StatsDirect calculates two types of bootstrap confidence intervals, these are percentile and bias-corrected (<a href="../references/reference_list.htm#ref-mills-1997">Mills and Zandvakili, 1997</a>; <a href="../references/reference_list.htm#ref-dixon-1987">Dixon et al., 1987</a>; <a href="../references/reference_list.htm#ref-efron-1997">Efron and Tibshirani, 1997</a>). The bias-corrected intervals are most appropriate for most applications. You are asked for a seed for the random numbers of the re-samples; the box is filled with a seed from the clock, which you can change, and the report gives the seed that was used, so that the same re-samples can be drawn again.</p>
                                         <p>&#160;</p>
                                         <p>In order for G to be an unbiased estimate of the true population value, it should be multiplied by n/(n-1) (<a href="../references/reference_list.htm#ref-dixon-1987">Dixon, 1987</a>; <a href="../references/reference_list.htm#ref-mills-1997">Mills and Zandvakili, 1997</a>). This corrected form of G does not appear most literature, but there are few situations when it is not the most appropriate form to use.</p>
                                         <p>&#160;</p>
@@ -205,7 +205,7 @@
                                             </tr>
                                         </table>
                                         <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu, then select Gini Coefficient of Inequality from the Nonparametric section of the Analysis menu. Select the column marked "Infant Mortality Rate (IMR)" when prompted for data, skip the frequency weights, and enter 2000 bootstrap replications to match the figures below (the default is 100,000).</p>
+                                        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu, then select Gini Coefficient of Inequality from the Nonparametric section of the Analysis menu. Select the column marked "Infant Mortality Rate (IMR)" when prompted for data, skip the frequency weights, and enter 2000 bootstrap replications and the seed 2001 to match the figures below (the default is 100,000 replications, and the seed box is filled from the clock).</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
@@ -217,23 +217,23 @@
                                         <p>Positive non-zero observations = 5</p>
                                         <p>Variance coefficient = 0.404884</p>
                                         <p>&#160;</p>
-                                        <p>Re-samples = 2000</p>
-                                        <p>Bias = 0.039481</p>
-                                        <p>Standard error (bootstrap) = 0.046904</p>
+                                        <p>Re-samples = 2000, seed = 2001</p>
+                                        <p>Bias = 0.040067</p>
+                                        <p>Standard error (bootstrap) = 0.046859</p>
                                         <p>&#160;</p>
                                         <p>Gini coefficient = 0.19893</p>
-                                        <p>Percentile 95% CI = 0.058182 to 0.22619</p>
-                                        <p>BCa 95% CI = 0.111628 to 0.23871</p>
+                                        <p>Percentile 95% CI = 0.070485 to 0.223529</p>
+                                        <p>BCa 95% CI = 0.120245 to 0.241304</p>
                                         <p>&#160;</p>
                                         <p>Unbiased estimator of population Gini coefficient = 0.248663</p>
-                                        <p>Percentile 95% CI = 0.072727 to 0.282738</p>
-                                        <p>BCa 95% CI = 0.139535 to 0.298387</p>
+                                        <p>Percentile 95% CI = 0.088106 to 0.279412</p>
+                                        <p>BCa 95% CI = 0.150307 to 0.30163</p>
                                         <p>&#160;</p>
                                         <p>
                                             <img src="../resources/images/lorenz.svg" width="566" height="400" border="0" data-mc-conditions="Primary.WEBHELP" />
                                         </p>
                                         <p>&#160;</p>
-                                        <p>The bias, standard error and confidence limits come from random re-samples, so they differ a little each time the analysis is run. Brown's G<sub>b</sub> = 0.1904 for these data, from the live births and infant deaths. This example uses too few groups for reliable inference from G.</p>
+                                        <p>The bias, standard error and confidence limits come from random re-samples: with the seed above they are the same each time the analysis is run, and with another seed they differ a little. Brown's G<sub>b</sub> = 0.1904 for these data, from the live births and infant deaths. This example uses too few groups for reliable inference from G.</p>
                                         <p>&#160;</p>
                                         <p><u>Technical notes</u>
                                         </p>
