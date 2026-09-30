@@ -123,6 +123,8 @@
                                         <p>&#160;</p>
                                         <p>If no observation was made at time zero you are asked whether to treat the observation at time zero as zero; if you answer yes, a zero observation at time zero is added for every subject, so that each subject's baseline is zero and the area under the curve starts from the origin.</p>
                                         <p>&#160;</p>
+                                        <p>A row without an observation is left out. If the same observation is entered twice for a subject at a time it is taken once; two observations that differ, for the same subject at the same time, are refused.</p>
+                                        <p>&#160;</p>
                                         <p>The area under the curve (AUC) is calculated using the linear trapezoidal rule for each subject. The mean AUC of a group is summarised with the standard deviation of the subjects' AUCs and its standard error SD/√n; the t interval uses n − 1 degrees of freedom (Bland 2000). The weighted variance of <a href="../references/reference_list.htm#ref-wolfsegger-2007">Wolfsegger 2007</a> equation 4 is for serial-sampling designs in which each subject contributes a single time point and is not used for complete profiles.</p>
                                         <p>&#160;</p>
                                         <p>
@@ -135,6 +137,8 @@
                                         <p>A bootstrap-t confidence interval may also be calculated: whole subjects (each with their observations at every time point) are resampled with replacement within the group; for each bootstrap sample the mean AUC and its standard error SE* = SD*/sqrt(n) are calculated from the resampled subjects' AUCs and the standardised statistic t* = (AUC - AUC*)/SE* is collected; the alpha/2 and 1-alpha/2 centiles of these t* values are then used to form the interval from AUC + t*(alpha/2) SE to AUC + t*(1-alpha/2) SE.</p>
                                         <p>&#160;</p>
                                         <p>When there are two groups the AUCs are compared using a two sample t test on the subjects' AUCs with unequal variances (Welch, Satterthwaite degrees of freedom). A bootstrap t test is also performed resampling whole subjects within each group.</p>
+                                        <p>&#160;</p>
+                                        <p>The areas under the curve of all the subjects, and their logarithms (base 10), are plotted against normal scores, and the square of the correlation is given with each plot. A plot that cannot be drawn is left out, and the report says why: the plot of the logarithms if an area is zero or below (a subject with one observation has an area of zero), and both plots if there are fewer than two areas or the areas are all the same.</p>
                                         <p>&#160;</p>
                                         <p><u>Example</u>
                                         </p>

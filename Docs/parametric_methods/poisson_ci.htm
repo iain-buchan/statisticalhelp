@@ -134,7 +134,7 @@
                                         <p>&#160;</p>
                                         <p>2, 1, 1, 0, 2, 1, 0, 2, 3, 1, 0, 1, 2, 2, 1, 0, 0, 1, 1, 2, 2, 1, 1</p>
                                         <p>&#160;</p>
-                                        <p>In order to analyse these data in StatsDirect you should enter them into a workbook and then select Poisson Confidence Interval from the Parametric section of the Analysis menu. You have the opportunity to specify a one or two sided interval.</p>
+                                        <p>In order to analyse these data in StatsDirect you should enter them into a workbook and then select Poisson Confidence Interval from the Parametric section of the Analysis menu. You are asked for a confidence level; the report gives the two sided interval and the one sided limits at that level.</p>
                                         <p>&#160;</p>
                                         <p>For this example:</p>
                                         <p>&#160;</p>
@@ -144,8 +144,10 @@
                                         <p>Sample name: Reception</p>
                                         <p>Size = 23</p>
                                         <p>Mean = 1.173913</p>
-                                        <p>Approximate two sided 95% CI = 0.773616 to 1.707982</p>
-                                        <p>Approximate one sided 90% CI = 0.828613 to 1.618877</p>
+                                        <p>Exact two sided 95% CI = 0.773616 to 1.707982</p>
+                                        <p>Exact one sided 95% confidence limits: lower 0.828613, upper 1.618877</p>
+                                        <p>&#160;</p>
+                                        <p>The interval is exact: its limits are the means with which a total count as large as the one observed or larger, and as small or smaller, has half of what the confidence level leaves. The two one sided limits are given together. With 95% confidence the mean is above 0.828613, and with 95% confidence it is below 1.618877; the two are the ends of the two sided 90% interval.</p>
                                         <p>&#160;</p>
                                         <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
                                             <div class="MCDropDownBody dropDownBody">
@@ -164,12 +166,12 @@ print(r)
 # The report's lines, to 6 decimal places
 six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
 cat("Size =", n, "  Mean =", six(mean(counts)), "\n")
-cat("Approximate two sided 95% CI =", six(r$conf.int[1]), "to", six(r$conf.int[2]),
-    "\n")
+cat("Exact two sided 95% CI =", six(r$conf.int[1]), "to", six(r$conf.int[2]), "\n")
 # StatsDirect also gives the one sided 95% lower and upper limits, which are the
-# ends of a two sided 90% interval, under the heading "one sided 90% CI"
+# ends of a two sided 90% interval
 ci &lt;- poisson.test(sum(counts), n, conf.level = 0.9)$conf.int
-cat("Approximate one sided 90% CI =", six(ci[1]), "to", six(ci[2]), "\n")</pre>
+cat("Exact one sided 95% confidence limits: lower ", six(ci[1]), ", upper ", six(ci[2]),
+    "\n", sep = "")</pre>
                                             </div>
                                         </div>
                                         <p>&#160;</p>
