@@ -111,7 +111,7 @@
                             </nav>
                             <div class="body-container">
                                 <div data-mc-content-body="True">
-                                    <div role="main" id="mc-main-content"><a name="kanchor106"></a>
+                                    <div role="main" id="mc-main-content"><a name="kanchor5"></a>
                                         <h1>Principal Components Analysis and Cronbach's Alpha Reliability Coefficient</h1>
                                         <p>&#160;</p>
                                         <p>Menu locations:</p>
@@ -330,11 +330,22 @@
                                         <p>You can see from the results above that questions 3 and 4 seemed to have scales going in opposite directions to the other two questions, so they were reversed before the final analysis. Dropping question 2 improves the internal consistency of the overall set of questions, but this does not bring the standardised alpha coefficient to the conventionally acceptable level of 0.8 and above. It may be necessary to rethink this questionnaire.</p>
                                         <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
                                             <div class="MCDropDownBody dropDownBody">
-                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and reads the data from questionnaire.csv, the test workbook's columns saved with their headings as a csv file (see the first comment in the code); it was checked with R 4.6.1.</p><pre class="rcode" xml:space="preserve"># Principal components and scale reliability: the StatsDirect help example (four
-# questionnaire items answered by 60 people) in R. Save the test workbook's
-# Agreement worksheet columns Question 1 to 4, with their headings, as
-# questionnaire.csv in R's working directory first
-q &lt;- read.csv("questionnaire.csv")
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Principal components and scale reliability: the StatsDirect help example (four
+# questionnaire items answered by 60 people) in R. The data are the test workbook's
+# Agreement worksheet columns Question 1 to 4.
+q &lt;- data.frame(
+  q1 = c(2, 5, 4, 4, 3, 3, 3, 4, 4, 4, 4, 5, 4, 4, 4, 3, 4, 5, 5, 4, 4, 4, 3, 5,
+    5, 3, 4, 3, 4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 4, 3, 4, 5, 4, 4, 4, 3, 5, 4, 3,
+    5, 5, 4, 2, 3, 4, 4, 4, 3, 4, 4),
+  q2 = c(3, 5, 5, 3, 3, 3, 4, 4, 5, 4, 4, 5, 4, 3, 4, 3, 5, 5, 5, 4, 4, 4, 4, 3,
+    5, 3, 4, 3, 4, 4, 4, 5, 4, 5, 4, 3, 3, 4, 4, 4, 5, 5, 4, 4, 4, 4, 5, 5, 4,
+    3, 3, 5, 5, 4, 3, 4, 4, 4, 4, 4),
+  q3 = c(5, 4, 5, 4, 5, 4, 4, 5, 5, 3, 5, 4, 4, 5, 5, 4, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 5, 5),
+  q4 = c(5, 4, 5, 4, 5, 5, 4, 5, 5, 3, 5, 4, 4, 5, 5, 5, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 4, 5, 4, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 4, 5))
 names(q) &lt;- paste("Question", 1:4)
 
 # Items that load on the first component with the opposite sign to the first item

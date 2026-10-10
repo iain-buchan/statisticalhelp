@@ -113,7 +113,7 @@
                             <div class="body-container">
                                 <div data-mc-content-body="True">
                                     <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor110"></a>Generalised Cochran-Mantel-Haenszel tests</h1>
+                                        <h1><a name="kanchor29"></a>Generalised Cochran-Mantel-Haenszel tests</h1>
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Crosstabs</b>.</p>
                                         <p>&#160;</p>
@@ -189,12 +189,26 @@
                                         <p>From the results above you can see that the strongest effect detected is ordinal association (i.e. association between greater job satisfaction with greater income), after controlling for gender.</p>
                                         <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
                                             <div class="MCDropDownBody dropDownBody">
-                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. It reads the data from job_satisfaction.csv, the test workbook's columns saved with their headings as a csv file (see the first comment in the code). Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Generalised Cochran-Mantel-Haenszel tests: the StatsDirect help example (Agresti
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Generalised Cochran-Mantel-Haenszel tests: the StatsDirect help example (Agresti
 # 2002, job satisfaction by income in 104 people, controlling for gender) in R
 # The data are the Income, Job Satisfaction and Gender columns of the Tables
-# worksheet of the StatsDirect test workbook. Save those columns, with their
-# headings, as job_satisfaction.csv in R's working directory first.
-d &lt;- read.csv("job_satisfaction.csv")
+# worksheet of the StatsDirect test workbook.
+d &lt;- data.frame(
+  Income = c(1, 2, 2, 1, 1, 1, 1, 2, 2, 2, 3, 4, 4, 1, 2, 2, 2, 4, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+    3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3,
+    4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 1, 2, 3, 3,
+    3, 4, 4, 4, 4, 4, 4),
+  Job.Satisfaction = c(1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4, 4, 4),
+  Gender = c(1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2))
 tab &lt;- table(Income = d$Income, Satisfaction = d$Job.Satisfaction, Gender = d$Gender)
 print(tab)                        # one income by satisfaction table per gender
 u &lt;- c(3, 10, 20, 35)             # scores for the income categories (the rows)

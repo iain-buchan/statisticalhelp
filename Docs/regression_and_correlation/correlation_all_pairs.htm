@@ -112,7 +112,7 @@
                             <div class="body-container">
                                 <div data-mc-content-body="True">
                                     <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor10"></a>Correlation of All Pairs</h1>
+                                        <h1><a name="kanchor107"></a>Correlation of All Pairs</h1>
                                         <p>&#160;</p>
                                         <p>Menu location: <b>Analysis_Regression and Correlation_Principal Components_Correlation.</b></p>
                                         <p>&#160;</p>
@@ -172,11 +172,22 @@
                                         <p>&#160;</p>
                                         <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
                                             <div class="MCDropDownBody dropDownBody">
-                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and reads the data from questionnaire.csv, the test workbook's columns saved with their headings as a csv file (see the first comment in the code); it was checked with R 4.6.1.</p><pre class="rcode" xml:space="preserve"># Correlation of all pairs: an illustration with the four questionnaire items of
-# the principal components topic in R. Save the test workbook's Agreement worksheet
-# columns Question 1 to 4, with their headings, as questionnaire.csv in R's
-# working directory first
-q &lt;- read.csv("questionnaire.csv")
+                                                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Correlation of all pairs: an illustration with the four questionnaire items of
+# the principal components topic in R. The data are the test workbook's Agreement
+# worksheet columns Question 1 to 4.
+q &lt;- data.frame(
+  q1 = c(2, 5, 4, 4, 3, 3, 3, 4, 4, 4, 4, 5, 4, 4, 4, 3, 4, 5, 5, 4, 4, 4, 3, 5,
+    5, 3, 4, 3, 4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 4, 3, 4, 5, 4, 4, 4, 3, 5, 4, 3,
+    5, 5, 4, 2, 3, 4, 4, 4, 3, 4, 4),
+  q2 = c(3, 5, 5, 3, 3, 3, 4, 4, 5, 4, 4, 5, 4, 3, 4, 3, 5, 5, 5, 4, 4, 4, 4, 3,
+    5, 3, 4, 3, 4, 4, 4, 5, 4, 5, 4, 3, 3, 4, 4, 4, 5, 5, 4, 4, 4, 4, 5, 5, 4,
+    3, 3, 5, 5, 4, 3, 4, 4, 4, 4, 4),
+  q3 = c(5, 4, 5, 4, 5, 4, 4, 5, 5, 3, 5, 4, 4, 5, 5, 4, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 5, 5),
+  q4 = c(5, 4, 5, 4, 5, 5, 4, 5, 5, 3, 5, 4, 4, 5, 5, 5, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 4, 5, 4, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 4, 5))
 names(q) &lt;- paste("Question", 1:4)
 
 # The principal components function had reversed questions 3 and 4 so that all
