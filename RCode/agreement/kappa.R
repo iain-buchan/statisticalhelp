@@ -103,11 +103,12 @@ cat("Marginal homogeneity (Maxwell) chi-square =", six(x2), " df =", g - 1, " ",
 
 # The generalised McNemar (Bowker) test of symmetry, as mcnemar.test(counts) computes
 # it, except that the pair of cells that are both empty (weak MAST, very high RAST and
-# the reverse) is left out rather than making the statistic undefined
+# the reverse) is left out rather than making the statistic undefined: it adds nothing
+# to the statistic, and is not counted in the degrees of freedom
 above <- counts[upper.tri(counts)]
 below <- t(counts)[upper.tri(counts)]
 filled <- above + below > 0
 x2m <- sum((above - below)[filled]^2 / (above + below)[filled])
-dfm <- g * (g - 1) / 2
+dfm <- sum(filled)
 cat("Symmetry (generalised McNemar) chi-square =", six(x2m), " df =", dfm, " ",
     pv(pchisq(x2m, dfm, lower.tail = FALSE)), "\n")
