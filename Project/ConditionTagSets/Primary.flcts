@@ -3,9 +3,9 @@
     <ConditionTag
         Name="WEBHELP"
         BackgroundColor="#40ffff"
-        Comment="Content for the browser outputs only (HTML5 and WebHelp targets): the SVG chart pictures." />
+        Comment="Content for the public help outputs (GitHub and Website targets): the SVG chart pictures." />
     <ConditionTag
         Name="SWHELP"
         BackgroundColor="#ffff00"
-        Comment="Content for the compiled HTML Help (STATSDIRECT.chm, SWHelp target) only: the PNG chart pictures, because the CHM viewer does not render SVG." />
+        Comment="Content for the DesktopHelp target: software-help variants, including PNG chart pictures retained from the previous CHM output." />
 </CatapultConditionTagSet>

@@ -2,7 +2,9 @@
 sharpen-chm-equations.ps1
 =========================
 Redraws the equation pictures of a Flare HTML Help (CHM) build with more picture dots, then
-compiles the CHM again. Run by the post-build event of the SWHelp target:
+compiles the CHM again. Retained for legacy CHM builds; the current DesktopHelp
+target produces HTML5 and does not run this script. A CHM target can invoke it
+from its post-build event:
 
     ver >NUL 2>NUL
     powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDirectory)BuildTools\sharpen-chm-equations.ps1" -OutputDirectory "$(OutputDirectory)." -TargetName "$(TargetName)"
