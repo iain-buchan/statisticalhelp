@@ -228,12 +228,23 @@
                 <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
             </MadCap:dropDownHead>
             <MadCap:dropDownBody>
-                <p class="rcodenote">This R code reproduces the example above. It needs no packages and reads the data from questionnaire.csv, the test workbook's columns saved with their headings as a csv file (see the first comment in the code); it was checked with R 4.6.1.</p>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Principal components and scale reliability: the StatsDirect help example (four
-# questionnaire items answered by 60 people) in R. Save the test workbook's
-# Agreement worksheet columns Question 1 to 4, with their headings, as
-# questionnaire.csv in R's working directory first
-q &lt;- read.csv("questionnaire.csv")
+# questionnaire items answered by 60 people) in R. The data are the test workbook's
+# Agreement worksheet columns Question 1 to 4.
+q &lt;- data.frame(
+  q1 = c(2, 5, 4, 4, 3, 3, 3, 4, 4, 4, 4, 5, 4, 4, 4, 3, 4, 5, 5, 4, 4, 4, 3, 5,
+    5, 3, 4, 3, 4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 4, 3, 4, 5, 4, 4, 4, 3, 5, 4, 3,
+    5, 5, 4, 2, 3, 4, 4, 4, 3, 4, 4),
+  q2 = c(3, 5, 5, 3, 3, 3, 4, 4, 5, 4, 4, 5, 4, 3, 4, 3, 5, 5, 5, 4, 4, 4, 4, 3,
+    5, 3, 4, 3, 4, 4, 4, 5, 4, 5, 4, 3, 3, 4, 4, 4, 5, 5, 4, 4, 4, 4, 5, 5, 4,
+    3, 3, 5, 5, 4, 3, 4, 4, 4, 4, 4),
+  q3 = c(5, 4, 5, 4, 5, 4, 4, 5, 5, 3, 5, 4, 4, 5, 5, 4, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 5, 5),
+  q4 = c(5, 4, 5, 4, 5, 5, 4, 5, 5, 3, 5, 4, 4, 5, 5, 5, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 4, 5, 4, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 4, 5))
 names(q) &lt;- paste("Question", 1:4)
 
 # Items that load on the first component with the opposite sign to the first item

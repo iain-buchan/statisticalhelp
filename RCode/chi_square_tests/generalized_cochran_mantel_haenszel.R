@@ -1,9 +1,23 @@
 # Generalised Cochran-Mantel-Haenszel tests: the StatsDirect help example (Agresti
 # 2002, job satisfaction by income in 104 people, controlling for gender) in R
 # The data are the Income, Job Satisfaction and Gender columns of the Tables
-# worksheet of the StatsDirect test workbook. Save those columns, with their
-# headings, as job_satisfaction.csv in R's working directory first.
-d <- read.csv("job_satisfaction.csv")
+# worksheet of the StatsDirect test workbook.
+d <- data.frame(
+  Income = c(1, 2, 2, 1, 1, 1, 1, 2, 2, 2, 3, 4, 4, 1, 2, 2, 2, 4, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+    3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3,
+    4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 1, 2, 3, 3,
+    3, 4, 4, 4, 4, 4, 4),
+  Job.Satisfaction = c(1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+    4, 4, 4, 4, 4, 4, 4, 4, 4, 4),
+  Gender = c(1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2,
+    2, 2, 2, 2, 2, 2, 2))
 tab <- table(Income = d$Income, Satisfaction = d$Job.Satisfaction, Gender = d$Gender)
 print(tab)                        # one income by satisfaction table per gender
 u <- c(3, 10, 20, 35)             # scores for the income categories (the rows)

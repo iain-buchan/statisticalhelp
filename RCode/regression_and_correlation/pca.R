@@ -1,8 +1,19 @@
 # Principal components and scale reliability: the StatsDirect help example (four
-# questionnaire items answered by 60 people) in R. Save the test workbook's
-# Agreement worksheet columns Question 1 to 4, with their headings, as
-# questionnaire.csv in R's working directory first
-q <- read.csv("questionnaire.csv")
+# questionnaire items answered by 60 people) in R. The data are the test workbook's
+# Agreement worksheet columns Question 1 to 4.
+q <- data.frame(
+  q1 = c(2, 5, 4, 4, 3, 3, 3, 4, 4, 4, 4, 5, 4, 4, 4, 3, 4, 5, 5, 4, 4, 4, 3, 5,
+    5, 3, 4, 3, 4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 4, 3, 4, 5, 4, 4, 4, 3, 5, 4, 3,
+    5, 5, 4, 2, 3, 4, 4, 4, 3, 4, 4),
+  q2 = c(3, 5, 5, 3, 3, 3, 4, 4, 5, 4, 4, 5, 4, 3, 4, 3, 5, 5, 5, 4, 4, 4, 4, 3,
+    5, 3, 4, 3, 4, 4, 4, 5, 4, 5, 4, 3, 3, 4, 4, 4, 5, 5, 4, 4, 4, 4, 5, 5, 4,
+    3, 3, 5, 5, 4, 3, 4, 4, 4, 4, 4),
+  q3 = c(5, 4, 5, 4, 5, 4, 4, 5, 5, 3, 5, 4, 4, 5, 5, 4, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 5, 5),
+  q4 = c(5, 4, 5, 4, 5, 5, 4, 5, 5, 3, 5, 4, 4, 5, 5, 5, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 4, 5, 4, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 4, 5))
 names(q) <- paste("Question", 1:4)
 
 # Items that load on the first component with the opposite sign to the first item
