@@ -1,23 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<CatapultTarget
-  Version="2"
-  Comment="StatsDirect software help"
-  Type="HtmlHelp"
-  PreCompileScaledImages="false"
-  Destinations=""
-  GlossaryTermConversion="marked"
-  ConditionTagExpression="include[Primary.SWHELP] exclude[Primary.WEBHELP] "
-  DefaultUrl="/Content/contents.htm"
-  OutputFile="STATSDIRECT.chm"
-  Skin="/Project/Skins/HTML Help.flskn"
-  MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
-  BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
-  MasterStylesheet="/Content/resources/stylesheets/statsdirect2.css"
-  MasterPage="/Content/resources/masterpages/chm.flmsp">
-  <Destinations>
-    <Destination
-      Link="/Project/Destinations/NewDestination.fldes" />
-  </Destinations>
-  <PostBuild>ver &gt;NUL 2&gt;NUL
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDirectory)BuildTools\sharpen-chm-equations.ps1" -OutputDirectory "$(OutputDirectory)." -TargetName "$(TargetName)"</PostBuild>
+<?xml version="1.0" encoding="utf-8"?>
+<CatapultTarget Version="2" Comment="Offline HTML5 help for the StatsDirect desktop application" Type="WebHelp2" PreCompileScaledImages="false" ConditionTagExpression="include[Primary.SWHELP] exclude[Primary.WEBHELP]" DefaultUrl="/Content/contents.htm" OutputFile="index.html" Skin="/Project/Skins/SD Web Skin.flskn" MasterToc="/Project/TOCs/STATSDIRECT.fltoc" BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs" MasterStylesheet="/Content/resources/stylesheets/desktop.css" MasterPage="/Content/resources/masterpages/desktop.flmsp" MoveOutputContentToRoot="true" MakeFileLowerCase="true" ReplaceSpacesWithUnderscores="true" ResolveCssVariables="true" EnableSitemap="false" ShowMadCapBacklink="false">
+  <Destinations><Destination Link="/Project/Destinations/NewDestination.fldes" /></Destinations>
 </CatapultTarget>
