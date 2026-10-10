@@ -34,12 +34,12 @@ for (rel in scripts) {
   stem <- sub("\\.R$", "", rel)
   expect_file <- file.path(root, "RCode", paste0(stem, ".expect"))
   topic_file <- file.path(root, "Content", paste0(stem, ".htm"))
-  # scripts run from RCode/data, where the few examples that read a data file find it
-  old <- setwd(file.path(root, "RCode", "data"))
+  # scripts run from a scratch folder: every script carries its own data, and R leaves its Rplots.pdf there
+  old <- setwd(tempdir())
   out <- suppressWarnings(system2(file.path(R.home("bin"), "Rscript"),
            c("--vanilla", shQuote(file.path(root, "RCode", rel))), stdout = TRUE, stderr = TRUE))
   setwd(old)
-  unlink(file.path(root, "RCode", "data", "Rplots.pdf"))
+  unlink(file.path(tempdir(), "Rplots.pdf"))
   texts <- list(R = squash(out), H = topic_text(topic_file))
   report_file <- if (is.na(reports)) NA else file.path(reports, paste0(gsub("/", "_", stem), ".txt"))
   if (!is.na(report_file) && file.exists(report_file))
