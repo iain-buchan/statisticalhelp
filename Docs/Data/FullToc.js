@@ -1,8 +1,8 @@
 var xmlFullTocData = "";
 xmlFullTocData += '<?xml version=\"1.0\" encoding=\"utf-8\"?>';
-xmlFullTocData += '<CatapultToc Version=\"1\" DescendantCount=\"255\">';
+xmlFullTocData += '<CatapultToc Version=\"1\" DescendantCount=\"256\">';
 xmlFullTocData += '    <TocEntry Title=\"Contents\" Link=\"/contents.htm\" ComputedResetPageLayout=\"true\" ComputedFirstTopic=\"true\" DescendantCount=\"0\" />';
-xmlFullTocData += '    <TocEntry Title=\"Basic statistical principles\" Link=\"/basics/basics.htm\" BreakType=\"chapter\" StartSection=\"false\" PageNumberReset=\"continue\" SectionNumberReset=\"continue\" VolumeNumberReset=\"same\" ChapterNumberReset=\"continue\" ComputeToc=\"false\" ReplaceMergeNode=\"false\" ComputedResetPageLayout=\"true\" ComputedFirstTopic=\"false\" DescendantCount=\"16\">';
+xmlFullTocData += '    <TocEntry Title=\"Basic statistical principles\" Link=\"/basics/basics.htm\" BreakType=\"chapter\" StartSection=\"false\" PageNumberReset=\"continue\" SectionNumberReset=\"continue\" VolumeNumberReset=\"same\" ChapterNumberReset=\"continue\" ComputeToc=\"false\" ReplaceMergeNode=\"false\" ComputedResetPageLayout=\"true\" ComputedFirstTopic=\"false\" DescendantCount=\"17\">';
 xmlFullTocData += '        <TocEntry Title=\"Statistics\" Link=\"/basics/statistics.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '        <TocEntry Title=\"Measurement scales and data types\" Link=\"/basics/measurement_scales.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '        <TocEntry Title=\"Selecting statistical methods\" Link=\"/methods/method_selection.htm\" BreakType=\"chapter\" StartSection=\"false\" PageNumberReset=\"continue\" ComputedResetPageLayout=\"true\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
@@ -18,6 +18,7 @@ xmlFullTocData += '        <TocEntry Title=\"Attributable risk\" Link=\"/basics/
 xmlFullTocData += '        <TocEntry Title=\"Validity\" Link=\"/basics/validity.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '        <TocEntry Title=\"Reliability\" Link=\"/basics/reliability.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '        <TocEntry Title=\"Calculator\" Link=\"/basics/calculator.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
+xmlFullTocData += '        <TocEntry Title=\"R script window\" Link=\"/basics/r_script_window.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '        <TocEntry Title=\"Analysis\" Link=\"/basics/analysis.htm\" ComputedFirstTopic=\"false\" DescendantCount=\"0\" />';
 xmlFullTocData += '    </TocEntry>';
 xmlFullTocData += '    <TocEntry Title=\"Preparing your data\" Link=\"/data_preparation/data_preparation.htm\" BreakType=\"chapter\" StartSection=\"false\" PageNumberReset=\"continue\" ReplaceMergeNode=\"false\" ComputedResetPageLayout=\"true\" ComputedFirstTopic=\"false\" DescendantCount=\"43\">';

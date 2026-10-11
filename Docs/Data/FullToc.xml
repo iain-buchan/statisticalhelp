@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CatapultToc Version="1" DescendantCount="255">
+<CatapultToc Version="1" DescendantCount="256">
     <TocEntry Title="Contents" Link="/contents.htm" ComputedResetPageLayout="true" ComputedFirstTopic="true" DescendantCount="0" />
-    <TocEntry Title="Basic statistical principles" Link="/basics/basics.htm" BreakType="chapter" StartSection="false" PageNumberReset="continue" SectionNumberReset="continue" VolumeNumberReset="same" ChapterNumberReset="continue" ComputeToc="false" ReplaceMergeNode="false" ComputedResetPageLayout="true" ComputedFirstTopic="false" DescendantCount="16">
+    <TocEntry Title="Basic statistical principles" Link="/basics/basics.htm" BreakType="chapter" StartSection="false" PageNumberReset="continue" SectionNumberReset="continue" VolumeNumberReset="same" ChapterNumberReset="continue" ComputeToc="false" ReplaceMergeNode="false" ComputedResetPageLayout="true" ComputedFirstTopic="false" DescendantCount="17">
         <TocEntry Title="Statistics" Link="/basics/statistics.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Measurement scales and data types" Link="/basics/measurement_scales.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Selecting statistical methods" Link="/methods/method_selection.htm" BreakType="chapter" StartSection="false" PageNumberReset="continue" ComputedResetPageLayout="true" ComputedFirstTopic="false" DescendantCount="0" />
@@ -17,6 +17,7 @@
         <TocEntry Title="Validity" Link="/basics/validity.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Reliability" Link="/basics/reliability.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Calculator" Link="/basics/calculator.htm" ComputedFirstTopic="false" DescendantCount="0" />
+        <TocEntry Title="R script window" Link="/basics/r_script_window.htm" ComputedFirstTopic="false" DescendantCount="0" />
         <TocEntry Title="Analysis" Link="/basics/analysis.htm" ComputedFirstTopic="false" DescendantCount="0" />
     </TocEntry>
     <TocEntry Title="Preparing your data" Link="/data_preparation/data_preparation.htm" BreakType="chapter" StartSection="false" PageNumberReset="continue" ReplaceMergeNode="false" ComputedResetPageLayout="true" ComputedFirstTopic="false" DescendantCount="43">

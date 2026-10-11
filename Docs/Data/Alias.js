@@ -22,6 +22,7 @@ xmlAliasData += '    <Map Name=\"ATTRIBUTABLE_RISK\" Link=\"basics/attributable_
 xmlAliasData += '    <Map Name=\"BASICS\" Link=\"basics/basics.htm\" ResolvedId=\"1018\" />';
 xmlAliasData += '    <Map Name=\"BIAS\" Link=\"basics/bias.htm\" ResolvedId=\"1019\" />';
 xmlAliasData += '    <Map Name=\"CALC\" Link=\"basics/calculator.htm\" ResolvedId=\"1020\" />';
+xmlAliasData += '    <Map Name=\"R_SCRIPT_WINDOW\" Link=\"basics/r_script_window.htm\" ResolvedId=\"1401\" />';
 xmlAliasData += '    <Map Name=\"CAUSALITY\" Link=\"basics/causality.htm\" ResolvedId=\"1021\" />';
 xmlAliasData += '    <Map Name=\"CI\" Link=\"basics/confidence_interval.htm\" ResolvedId=\"1022\" />';
 xmlAliasData += '    <Map Name=\"CONFOUNDING\" Link=\"basics/confounding.htm\" ResolvedId=\"1023\" />';
