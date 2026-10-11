@@ -64,6 +64,9 @@
       Title="Calculator"
       Link="/Content/basics/calculator.htm" />
     <TocEntry
+      Title="R script window"
+      Link="/Content/basics/r_script_window.htm" />
+    <TocEntry
       Title="Analysis"
       Link="/Content/basics/analysis.htm" />
   </TocEntry>
