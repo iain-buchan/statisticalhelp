@@ -654,6 +654,7 @@
                                                 <p class="rcodenote">This R code reproduces the example above. It uses the survival package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Cox (proportional hazards) regression: the StatsDirect help example (Armitage and
 # Berry 1994, survival in days of lymphoma patients by stage of disease; the test
 # workbook's Survival worksheet columns Stage group, Time and Censor) in R
+if (!requireNamespace("survival", quietly = TRUE)) install.packages("survival", repos = "https://cloud.r-project.org")
 library(survival)
 stage &lt;- c(rep(1, 19), rep(2, 61))
 time &lt;- c(6, 19, 32, 42, 42, 43, 94, 126, 169, 207, 211, 227, 253, 255, 270, 310,

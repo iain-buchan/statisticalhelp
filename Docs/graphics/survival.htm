@@ -147,6 +147,7 @@
                                                 <p class="rcodenote">This R code reproduces the illustration above. It uses the survival package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Survival plot: the StatsDirect help illustration (Kaplan-Meier estimates of survival
 # in two groups of rats given different pre-treatments, the Kaplan-Meier example; the
 # test workbook's Survival worksheet columns Group Surv, Time Surv and Censor Surv) in R
+if (!requireNamespace("survival", quietly = TRUE)) install.packages("survival", repos = "https://cloud.r-project.org")
 library(survival)
 group &lt;- c(2, 1, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2,
            2, 2, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 2, 1, 2, 2)
