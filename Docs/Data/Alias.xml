@@ -400,4 +400,8 @@
     <Map Name="EXPAND" Link="data_preparation/expand.htm" ResolvedId="1398" />
     <Map Name="TIME_SERIES_SUMMARY" Link="basic_descriptive_statistics/time_series.htm" ResolvedId="1399" />
     <Map Name="GROWTH" Link="data_preparation/growth_charts.htm" ResolvedId="1400" />
+    <Map Name="SCRIPT_AI" Link="basics/script_ai.htm" ResolvedId="1402" />
+    <Map Name="LEARNING" Link="basics/learning.htm" ResolvedId="1403" />
+    <Map Name="EXAMPLE_WORKBOOK" Link="basics/example.htm" ResolvedId="1404" />
+    <Map Name="REPORT_WINDOW" Link="basics/report_window.htm" ResolvedId="1405" />
 </CatapultAliasFile>

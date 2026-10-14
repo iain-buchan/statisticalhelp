@@ -401,5 +401,9 @@ xmlAliasData += '    <Map Name=\"CONTRACT\" Link=\"data_preparation/contract.htm
 xmlAliasData += '    <Map Name=\"EXPAND\" Link=\"data_preparation/expand.htm\" ResolvedId=\"1398\" />';
 xmlAliasData += '    <Map Name=\"TIME_SERIES_SUMMARY\" Link=\"basic_descriptive_statistics/time_series.htm\" ResolvedId=\"1399\" />';
 xmlAliasData += '    <Map Name=\"GROWTH\" Link=\"data_preparation/growth_charts.htm\" ResolvedId=\"1400\" />';
+xmlAliasData += '    <Map Name=\"SCRIPT_AI\" Link=\"basics/script_ai.htm\" ResolvedId=\"1402\" />';
+xmlAliasData += '    <Map Name=\"LEARNING\" Link=\"basics/learning.htm\" ResolvedId=\"1403\" />';
+xmlAliasData += '    <Map Name=\"EXAMPLE_WORKBOOK\" Link=\"basics/example.htm\" ResolvedId=\"1404\" />';
+xmlAliasData += '    <Map Name=\"REPORT_WINDOW\" Link=\"basics/report_window.htm\" ResolvedId=\"1405\" />';
 xmlAliasData += '</CatapultAliasFile>';
 MadCap.Utilities.Xhr._FilePathToXmlStringMap.Add('Alias', xmlAliasData);
