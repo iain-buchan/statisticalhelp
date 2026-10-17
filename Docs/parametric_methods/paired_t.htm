@@ -265,7 +265,8 @@ plot((before + after) / 2, d, xlab = "Mean ((PEFR Before + PEFR After) / 2)",
      ylab = "Difference (PEFR Before - PEFR After)", ylim = range(d, loa))
 abline(h = mean(d))
 abline(h = loa, col = "red")
-legend("topright", "mean difference +/- 95% limits of agreement", bty = "n")</pre>
+mtext("Mean difference and 95% limits of agreement",
+      side = 3, line = 0.5, cex = 0.8)</pre>
                                             </div>
                                         </div>
                                         <p>&#160;</p>
