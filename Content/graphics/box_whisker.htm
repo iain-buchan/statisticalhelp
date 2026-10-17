@@ -11,15 +11,19 @@
         <p>&#160;</p>
         <p>Box and Whisker <a href="text_vector.htm" target="_popup">plots</a>, described by <a href="../references/reference_list.htm#ref-tukey-1977">Tukey (1977)</a>, give a pictorial representation of nonparametric descriptive statistics.</p>
         <p>&#160;</p>
-        <p>In nonparametric terms, the central "box" represents the distance between the first and third quartiles with the median between them marked with a diamond, with the minimum as the origin of the leading "whisker" and with the maximum as the limit of the trailing "whisker".</p>
+        <p>In nonparametric terms, the central "box" represents the distance between the first and third quartiles (or the Tukey hinges when selected) with the median between them marked with a diamond, with the minimum as the origin of the leading "whisker" and with the maximum as the limit of the trailing "whisker".</p>
         <p>&#160;</p>
-        <p>The quartiles are calculated by the conventional definition used in the descriptive statistics (centile type 2): with the data sorted into ascending order, the lower quartile is the (n+1)/4th value and the upper quartile the 3(n+1)/4th value, interpolating between neighbouring values when this is not a whole number. Note that some software plots the upper and lower hinges (the medians of the upper and lower halves of the data) rather than the quartiles; hinges can differ slightly from quartiles.</p>
+        <p>The default <b>Median, quartiles and range</b> uses the conventional definition in descriptive statistics (StatsDirect centile type 2): with the data sorted into ascending order, the lower quartile is the (n+1)/4th value and the upper quartile the 3(n+1)/4th value, interpolating between neighbouring values. In R these are <code>quantile(x, c(0.25, 0.5, 0.75), type = 6)</code>. This default is unchanged.</p>
+        <p>&#160;</p>
+        <p>Choose <b>Tukey hinges (median of each half)</b> for the definition used by R's standard <code>boxplot()</code> and <code>fivenum()</code>. Split the ordered values into lower and upper halves, including the overall median in both halves when the sample size is odd; the medians of those halves are the hinges. Hinges can differ from the interpolated quartiles, especially in small samples. For example, values 1 to 5 give interpolated quartiles 1.5 and 4.5, but Tukey hinges 2 and 4. This choice is StatsDirect's seventh box-plot method; it is not R's <code>quantile(type = 7)</code>.</p>
+        <p>&#160;</p>
+        <p>The inner and outer fences use 1.5 and 3 times the distance between the selected quartiles or hinges. With only the outer fence selected, whiskers extend to the last observations within 3 times that distance; with neither fence selected, they extend to the minimum and maximum. The optional mean marker is available with either nonparametric definition.</p>
         <p>&#160;</p>
         <p>This convention can also be extended to parametric representation of data using the arithmetic mean bounded by one standard deviation or by its confidence interval. StatsDirect enables you to choose one of these two parametric schemes or the nonparametric scheme for each plot. See <a href="../basic_descriptive_statistics/univariate_summary.htm">descriptive statistics</a>  for the formulae used.</p>
         <p>&#160;</p>
         <p>This is a useful way to present data to an audience; it is often easier to convey the central location and spread of values pictorially than by quoting a list of descriptive statistics.</p>
         <p>&#160;</p>
-        <p>If you tick the fence options (both are ticked by default) then each whisker stops at the last data point inside the fence and any data points beyond it are plotted as circles: hollow for points beyond the inner fence and filled for points beyond the outer fence. This form of box and whisker plot is often used to represent outliers. For the nonparametric plot, the inner fences are the lower and upper quartiles minus and plus 1.5 times the interquartile range, and the outer fences 3 times the interquartile range. For the parametric plots, the inner fences are the mean minus and plus 1.96 standard deviations, and the outer fences 2.58 standard deviations.</p>
+        <p>If you tick the fence options (both are ticked by default) then each whisker stops at the last data point inside the fence and any data points beyond it are plotted as circles: hollow for points beyond the inner fence and filled for points beyond the outer fence. This form of box and whisker plot is often used to represent outliers. For the nonparametric plots, the inner fences are the lower and upper quartiles or hinges minus and plus 1.5 times their difference, and the outer fences 3 times that difference. For the parametric plots, the inner fences are the mean minus and plus 1.96 standard deviations, and the outer fences 2.58 standard deviations.</p>
         <p>&#160;</p>
         <p>
             <img src="../resources/Images/boxwhisker.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/boxwhisker.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
@@ -59,14 +63,15 @@ mets &lt;- list("CMT 64"  = c(0, 0, 1, 1, 2, 2, 4, 9),
              "CMT 175" = c(0, 3, 5, 6, 10, 19, 56, 100, 132),
              "CMT 181" = c(2, 4, 6, 6, 6, 7, 18, 39, 60))
 
-# R's standard plot: boxplot() draws the box between Tukey's hinges (the medians
-# of the lower and upper halves of the data), the whiskers to the last values
-# within 1.5 times the box length of the box, and the values beyond as circles.
+# R's standard plot matches StatsDirect's optional Tukey-hinge definition.
+# boxplot() uses fivenum() hinges, not quantile()'s default type 7. Its whiskers
+# reach the last values within 1.5 box lengths; points beyond are circles.
+# StatsDirect also distinguishes points beyond its outer (3 box lengths) fence.
 op &lt;- par(mar = c(5, 6, 4, 2))              # room for the column names on the left
 boxplot(mets, horizontal = TRUE, las = 1, main = "boxplot() of the same columns")
 par(op)
 
-# StatsDirect's box runs from the lower to the upper quartile, the (n+1)/4th and
+# StatsDirect's DEFAULT box runs from the lower to the upper quartile, the (n+1)/4th and
 # 3(n+1)/4th ordered values with interpolation between neighbours, which is type
 # 6 of quantile(); the hinges differ from these quartiles for most sample sizes.
 # Its fences are the quartiles minus and plus 1.5 (inner) and 3 (outer) times the
