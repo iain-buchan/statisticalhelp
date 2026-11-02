@@ -17,13 +17,19 @@
     <Property Id="ARPCOMMENTS" Value="HTML help authoring, equations, Contents, search and GitHub publishing. User workspaces are retained when the application is removed." />
     <Property Id="ARPURLINFOABOUT" Value="https://github.com/iain-buchan/statisticalhelp" />
     <Property Id="ARPPRODUCTICON" Value="HelpEditorIcon" />
-    <Icon Id="HelpEditorIcon" SourceFile="$(var.PayloadDirectory)\HelpSource\Content\resources\Images\sd3.ico" />
+    <Icon Id="HelpEditorIcon" SourceFile="$(var.PayloadDirectory)\Assets\HelpEditor.ico" />
     <WixVariable Id="WixUILicenseRtf" Value="Licence.rtf" />
     <ui:WixUI Id="WixUI_Minimal" />
     <StandardDirectory Id="LocalAppDataFolder">
       <Directory Id="UserProgramsFolder" Name="Programs">
         <Directory Id="INSTALLFOLDER" Name="StatsDirectHelpEditor" />
       </Directory>
+    </StandardDirectory>
+    <StandardDirectory Id="DesktopFolder">
+      <Component Id="HelpEditorDesktopShortcut" Guid="B7AE40F8-8565-42B8-B664-833314DB2101">
+        <Shortcut Id="HelpEditorDesktop" Name="StatsDirect Help Editor" Target="[INSTALLFOLDER]StatsDirectHelpEditor.exe" WorkingDirectory="INSTALLFOLDER" Icon="HelpEditorIcon" />
+        <RegistryValue Root="HKCU" Key="Software\StatsDirect\HelpEditor\Installer" Name="DesktopShortcut" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
     </StandardDirectory>
     <StandardDirectory Id="ProgramMenuFolder">
       <Directory Id="HelpEditorMenuFolder" Name="StatsDirect Help Editor">
@@ -38,6 +44,7 @@
     <Feature Id="Complete" Title="StatsDirect Help Editor" Level="1">
       <ComponentGroupRef Id="HelpEditorPayload" />
       <ComponentRef Id="HelpEditorShortcut" />
+      <ComponentRef Id="HelpEditorDesktopShortcut" />
     </Feature>
   </Package>
 </Wix>

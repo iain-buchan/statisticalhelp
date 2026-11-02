@@ -16,6 +16,7 @@ public sealed partial class MainForm : Form
     private readonly HelpEditorWorkspace workspace;
     private readonly string initialProject;
     private readonly string? initialTopic;
+    private readonly Icon applicationIcon;
     private readonly Action<Uri> externalLinkLauncher;
     private readonly Action<Uri> browserPreviewLauncher;
     private readonly WebView2 editor = new() { Dock = DockStyle.Fill };
@@ -66,6 +67,14 @@ public sealed partial class MainForm : Form
         this.initialTopic = initialTopic;
         this.externalLinkLauncher = externalLinkLauncher ?? (uri => Process.Start(new ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true }));
         this.browserPreviewLauncher = browserPreviewLauncher ?? (uri => Process.Start(new ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true }));
+        // Keep every ICO frame for Windows' title-bar/taskbar DPI choices. Each
+        // editor window owns its clone independently of the resource stream.
+        using var iconStream = typeof(MainForm).Assembly.GetManifestResourceStream("StatsDirect.HelpEditor.AppIcon")
+            ?? throw new InvalidOperationException("The Help Editor application icon is missing.");
+        using var resourceIcon = new Icon(iconStream);
+        applicationIcon = (Icon)resourceIcon.Clone();
+        Icon = applicationIcon;
+        Disposed += (_, _) => applicationIcon.Dispose();
         Text = "StatsDirect Help Editor — prototype";
         AutoScaleMode = AutoScaleMode.Dpi;
         AutoScaleDimensions = new SizeF(96, 96);

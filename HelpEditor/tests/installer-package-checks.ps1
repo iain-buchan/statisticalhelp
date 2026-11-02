@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory)][string]$PayloadDirectory,
     [string]$Bundle,
     [string]$WixToolPath,
-    [string]$ExpectedVersion = '0.1.0',
+    [string]$ExpectedVersion = '0.1.1',
     [string]$ExpectedCommit,
     [string]$Root = (Split-Path -Parent $PSScriptRoot),
     [string]$OutputDirectory,
@@ -28,6 +28,27 @@ function Check([string]$Name, [bool]$Passed, [object]$Detail = $null) {
 }
 function Hash([string]$Path) { (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant() }
 function Call($Object, [string]$Name, [string]$Kind, [object[]]$Arguments = $null) { $Object.GetType().InvokeMember($Name, $Kind, $null, $Object, $Arguments) }
+function NativeIconMatches([string]$Executable, [string]$IconFile) {
+    # Inspect the executable's actual Windows icon, rather than its project XML.
+    # Render both icons at the same native size so PNG/DIB encoding is irrelevant.
+    Add-Type -AssemblyName System.Drawing
+    $actual = $null; $expected = $null; $actualBitmap = $null; $expectedBitmap = $null
+    try {
+        $actual = [Drawing.Icon]::ExtractAssociatedIcon($Executable)
+        if (-not $actual) { return $false }
+        $expected = [Drawing.Icon]::new($IconFile, $actual.Size)
+        $actualBitmap = $actual.ToBitmap(); $expectedBitmap = $expected.ToBitmap()
+        if ($actualBitmap.Size -ne $expectedBitmap.Size) { return $false }
+        for ($y = 0; $y -lt $actualBitmap.Height; $y++) {
+            for ($x = 0; $x -lt $actualBitmap.Width; $x++) {
+                if ($actualBitmap.GetPixel($x, $y).ToArgb() -ne $expectedBitmap.GetPixel($x, $y).ToArgb()) { return $false }
+            }
+        }
+        return $true
+    } finally {
+        foreach ($image in @($actualBitmap, $expectedBitmap, $actual, $expected)) { if ($image) { $image.Dispose() } }
+    }
+}
 $engine = $null
 $database = $null
 try {
@@ -74,8 +95,31 @@ try {
     Check 'Direct MSI detects both per-user and machine WebView2 in the 32-bit registry' ($runtimeLocators.Count -eq 2 -and @($runtimeLocators | Where-Object { ([int]$_.Type -band 16) -ne 0 -or $_.Name -ne 'pv' }).Count -eq 0 -and @($runtimeLocators.Root | Sort-Object) -join ',' -eq '1,2')
     $launch = @(Rows 'LaunchCondition' @('Condition', 'Description'))
     Check 'The direct MSI reports a missing WebView2 runtime and permits maintenance' (@($launch | Where-Object { $_.Condition -like 'Installed OR*WEBVIEW2USERVERSION*WEBVIEW2MACHINEVERSION*' -and $_.Description -like '*StatsDirectHelpEditorSetup.exe*' }).Count -eq 1)
-    $shortcuts = @(Rows 'Shortcut' @('Shortcut', 'Directory_', 'Target', 'Component_'))
-    Check 'Start-menu shortcut points to the editor and no desktop shortcut is added' ($shortcuts.Count -eq 1 -and $shortcuts[0].Directory_ -eq 'HelpEditorMenuFolder' -and $shortcuts[0].Target -eq '[INSTALLFOLDER]StatsDirectHelpEditor.exe')
+    $shortcuts = @(Rows 'Shortcut' @('Shortcut', 'Directory_', 'Target', 'Component_', 'Icon_', 'WkDir'))
+    Check 'Start-menu and desktop shortcuts use the Help Editor target and variant icon' ($shortcuts.Count -eq 2 -and (@($shortcuts.Directory_ | Sort-Object) -join '|') -eq 'DesktopFolder|HelpEditorMenuFolder' -and @($shortcuts | Where-Object { $_.Target -ne '[INSTALLFOLDER]StatsDirectHelpEditor.exe' -or $_.WkDir -ne 'INSTALLFOLDER' -or $_.Icon_ -ne 'HelpEditorIcon' }).Count -eq 0)
+    $iconPath = Join-Path $PayloadDirectory 'Assets\HelpEditor.ico'
+    $iconView = Call $database 'OpenView' 'InvokeMethod' @('SELECT `Data` FROM `Icon` WHERE `Name` = ''HelpEditorIcon''')
+    $iconRecord = $null
+    try {
+        Call $iconView 'Execute' 'InvokeMethod' | Out-Null
+        $iconRecord = Call $iconView 'Fetch' 'InvokeMethod'
+        $iconMatches = $false
+        if ($iconRecord -and (Test-Path -LiteralPath $iconPath -PathType Leaf)) {
+            $iconLength = [int](Call $iconRecord 'DataSize' 'GetProperty' @(1))
+            # msiReadStreamBytes (1) returns one byte per BSTR character.
+            $binary = [string](Call $iconRecord 'ReadStream' 'InvokeMethod' @(1, $iconLength, 1))
+            $expectedBytes = [IO.File]::ReadAllBytes($iconPath)
+            $iconMatches = $binary.Length -eq $expectedBytes.Length
+            for ($index = 0; $iconMatches -and $index -lt $binary.Length; $index++) { $iconMatches = [int][char]$binary[$index] -eq $expectedBytes[$index] }
+        }
+        Check 'The compiled MSI ARP and shortcut icon contains the exact packaged variant artwork' ($properties.ARPPRODUCTICON -eq 'HelpEditorIcon' -and $iconMatches)
+    } finally {
+        if ($iconRecord) { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($iconRecord) }
+        Call $iconView 'Close' 'InvokeMethod' | Out-Null
+        [void][Runtime.InteropServices.Marshal]::ReleaseComObject($iconView)
+    }
+    Check 'The editor executable has the native Help Editor variant icon' (NativeIconMatches (Join-Path $PayloadDirectory 'StatsDirectHelpEditor.exe') $iconPath)
+    Check 'The setup executable has the native Help Editor variant icon' (NativeIconMatches $Bundle $iconPath)
     $customActions = @(Rows 'CustomAction' @('Action', 'Type', 'Source', 'Target'))
     Check 'The MSI has no application launch, workspace deletion or elevation custom actions' (@($customActions | Where-Object { $_.Source -ne 'WixUIWixca_X64' -and $_.Action -notlike 'WixUI*' }).Count -eq 0) @($customActions.Action)
     $removal = @(Rows 'RemoveFile' @('FileKey', 'Component_', 'FileName', 'DirProperty', 'InstallMode'))

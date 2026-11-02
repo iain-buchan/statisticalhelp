@@ -7,14 +7,17 @@
     <Nullable>enable</Nullable>
     <AssemblyName>StatsDirectHelpEditor</AssemblyName>
     <RootNamespace>StatsDirect.HelpEditor.App</RootNamespace>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <ApplicationDefaultFont>Arial, 11pt</ApplicationDefaultFont>
+    <ApplicationIcon>Assets\HelpEditor.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
     <ProjectReference Include="../StatsDirectHelpEditor.Core/StatsDirectHelpEditor.Core.csproj" />
     <Content Include="Web/**/*" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="AppHelp/provenance.json;AppHelp/LICENSE.StatsDirect.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets/HelpEditor.ico" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Assets/HelpEditor.ico" LogicalName="StatsDirect.HelpEditor.AppIcon" />
   </ItemGroup>
   <!-- The SDK supplies both UI wrappers; this host uses WinForms only. -->
   <Target Name="RemoveUnusedWpfWrapper" BeforeTargets="ResolveAssemblyReferences">

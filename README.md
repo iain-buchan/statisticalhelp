@@ -6,7 +6,7 @@ The independent **StatsDirect Help Editor** provides formatted HTML editing,
 MathLive equations, Contents editing, search rebuilding, browser and docked app
 previews, GitHub synchronisation and optional ChatGPT text review without Flare.
 
-- [Download the signed 0.1.0 evaluation installer](https://github.com/iain-buchan/statisticalhelp/releases/tag/help-editor-v0.1.0)
+- [Download the signed 0.1.1 evaluation installer](https://github.com/iain-buchan/statisticalhelp/releases/tag/help-editor-v0.1.1)
 - [Editor source, build instructions and licences](HelpEditor/README.md)
 - [WiX installer source and signing instructions](HelpEditor/installer/README.md)
 

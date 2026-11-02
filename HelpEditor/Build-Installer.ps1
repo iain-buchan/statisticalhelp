@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.1.0',
+    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.1.1',
     [string]$SourceProject = (Join-Path $PSScriptRoot 'HelpSource'),
     [string]$OutputDirectory = (Join-Path $PSScriptRoot 'Release'),
     [switch]$Sign,
@@ -145,7 +145,7 @@ try {
     $signedProperty = if ($Sign) { 'true' } else { 'false' }
     Invoke-Checked dotnet @('build', (Join-Path $root 'installer\HelpEditor.wixproj'), '-c', 'Release', '-p:AcceptEula=wix7', ('-p:BuildVersion=' + $Version), ('-p:PayloadDirectory=' + $payload), ('-p:PayloadAuthoring=' + $authoring), ('-p:SignOutput=' + $signedProperty), ('-p:OutputPath=' + $products + '\'), ('-p:BaseIntermediateOutputPath=' + (Join-Path $work 'msi-obj') + '\'), '--nologo', '--verbosity', 'minimal')
     $msi = Join-Path $products 'StatsDirectHelpEditor-x64.msi'
-    Invoke-Checked dotnet @('build', (Join-Path $root 'installer\HelpEditor.Bundle.wixproj'), '-c', 'Release', '-p:AcceptEula=wix7', ('-p:BuildVersion=' + $Version), ('-p:MsiPath=' + $msi), ('-p:WebView2Bootstrapper=' + $prerequisite), ('-p:SignOutput=' + $signedProperty), ('-p:OutputPath=' + $products + '\'), ('-p:BaseIntermediateOutputPath=' + (Join-Path $work 'bundle-obj') + '\'), '--nologo', '--verbosity', 'minimal')
+    Invoke-Checked dotnet @('build', (Join-Path $root 'installer\HelpEditor.Bundle.wixproj'), '-c', 'Release', '-p:AcceptEula=wix7', ('-p:BuildVersion=' + $Version), ('-p:MsiPath=' + $msi), ('-p:WebView2Bootstrapper=' + $prerequisite), ('-p:PayloadDirectory=' + $payload), ('-p:SignOutput=' + $signedProperty), ('-p:OutputPath=' + $products + '\'), ('-p:BaseIntermediateOutputPath=' + (Join-Path $work 'bundle-obj') + '\'), '--nologo', '--verbosity', 'minimal')
     $artifacts = @()
     foreach ($name in @('StatsDirectHelpEditor-x64.msi', 'StatsDirectHelpEditorSetup.exe')) {
         $file = Join-Path $products $name

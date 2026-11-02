@@ -3,7 +3,8 @@
   xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
   <Bundle Name="StatsDirect Help Editor" Version="$(var.BuildVersion)" Manufacturer="StatsDirect Limited"
     UpgradeCode="DB8E7178-01E3-4687-9100-00D0F8ED7DB4" DisableModify="yes"
-    Copyright="Copyright ©2026 Iain Buchan" AboutUrl="https://github.com/iain-buchan/statisticalhelp">
+    Copyright="Copyright ©2026 Iain Buchan" AboutUrl="https://github.com/iain-buchan/statisticalhelp"
+    IconSourceFile="$(var.PayloadDirectory)\Assets\HelpEditor.ico">
     <BootstrapperApplication>
       <bal:WixStandardBootstrapperApplication Theme="rtfLicense" LicenseFile="Licence.rtf" SuppressOptionsUI="yes" />
     </BootstrapperApplication>

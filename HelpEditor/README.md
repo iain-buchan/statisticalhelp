@@ -8,6 +8,8 @@ Double-click `Start-StatsDirectHelpEditor.cmd`, or open `App/StatsDirectHelpEdit
 
 The application is a prototype for evaluation. Its default window opens maximized to suit this PC's display scaling.
 
+Version 0.1.1 adds the turquoise StatsDirect delta with a book-and-pencil badge to the executable, window/taskbar, installed-app entry and setup. The installer creates both Start-menu and desktop shortcuts. The icon includes ten sizes from 16 to 256 pixels for different display scaling settings.
+
 ## Windows installer and public source
 
 The Help Editor is a separate application from StatsDirect. Its source is maintained in the public [statisticalhelp repository](https://github.com/iain-buchan/statisticalhelp/tree/master/HelpEditor). Signed evaluation downloads are published under [Help Editor releases](https://github.com/iain-buchan/statisticalhelp/releases).

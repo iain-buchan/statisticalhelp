@@ -3,7 +3,7 @@
 Build from a short checkout path with the .NET 10 SDK and Windows:
 
 ```powershell
-.\Build-Installer.ps1 -Version 0.1.0
+.\Build-Installer.ps1 -Version 0.1.1
 ```
 
 This creates the MSI and setup EXE under `Release`. The app and headless builder
@@ -12,7 +12,7 @@ the build passes `AcceptEula=wix7` for this invocation. Unsigned builds need no
 signing certificate. `App` and existing StatsDirect installers are not changed.
 
 The per-user install goes into `%LOCALAPPDATA%\Programs\StatsDirectHelpEditor`,
-with a Start-menu shortcut. It requires no administrator access. The setup EXE
+with Start-menu and desktop shortcuts using the Help Editor's delta/book/pencil icon. It requires no administrator access. The setup EXE
 includes Microsoft's signed Evergreen WebView2 bootstrapper. Existing per-user
 or machine-wide WebView2 is reused; otherwise an internet connection is needed
 for that bootstrapper to download the shared runtime. It remains installed when
@@ -28,7 +28,7 @@ and notices are retained.
 For a signed release, first commit the reviewed source, then run:
 
 ```powershell
-.\Build-Installer.ps1 -Version 0.1.0 -Sign `
+.\Build-Installer.ps1 -Version 0.1.1 -Sign `
   -SignToolPath 'C:\path\to\Windows SDK\signtool.exe' `
   -CertificateThumbprint 'YOUR_CODE_SIGNING_CERTIFICATE_SHA1_THUMBPRINT'
 ```

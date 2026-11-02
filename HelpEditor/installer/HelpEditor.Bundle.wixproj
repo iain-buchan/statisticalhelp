@@ -3,7 +3,7 @@
     <Platform>x64</Platform>
     <OutputType>Bundle</OutputType>
     <OutputName>StatsDirectHelpEditorSetup</OutputName>
-    <DefineConstants>$(DefineConstants);BuildVersion=$(BuildVersion);MsiPath=$(MsiPath);WebView2Bootstrapper=$(WebView2Bootstrapper)</DefineConstants>
+    <DefineConstants>$(DefineConstants);BuildVersion=$(BuildVersion);MsiPath=$(MsiPath);WebView2Bootstrapper=$(WebView2Bootstrapper);PayloadDirectory=$(PayloadDirectory)</DefineConstants>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
