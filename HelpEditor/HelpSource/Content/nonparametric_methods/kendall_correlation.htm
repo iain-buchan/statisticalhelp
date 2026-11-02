@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1892.656" MadCap:lastWidth="2512" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Kendall's Rank Correlation - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Nonparametric (Kendall) correlation;Kendall's rank correlation;Correlation: Nonparametric: Kendall" />
+            Kendall's Rank Correlation</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Nonparametric_Kendall Rank Correlation</b>.</p>
+        <p>&#160;</p>
+        <p>Kendall's rank correlation provides a distribution free test of independence and a measure of the strength of dependence between two variables.</p>
+        <p>&#160;</p>
+        <p>Spearman's rank correlation is satisfactory for testing a null hypothesis of independence between two variables but it is difficult to interpret when the null hypothesis is rejected. Kendall's rank correlation improves upon this by reflecting the strength of the dependence between the variables being compared.</p>
+        <p>&#160;</p>
+        <p>Consider two samples, x and y, each of size n. The total number of possible pairings of x with y observations is n(n-1)/2. Now consider ordering the pairs by the x values and then by the y values. If x3 &gt; y3 when ordered on both x and y then the third pair is concordant, otherwise the third pair is discordant. S is the difference between the number of concordant (ordered in the same way, nc) and discordant (ordered differently, nd) pairs.</p>
+        <p>&#160;</p>
+        <p>Tau (τ) is related to S by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \tau \frac{n_c-n_d}{n(n-1)/2}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>If there are tied (same value) observations then τ<sub>b</sub> is used:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \tau_b=\frac{S}{\sqrt{\displaystyle \left[n(n-1)/2-\sum_{i=1}^t t_i(t_i-1)/2 \right]\left[n(n-1)/2-\sum_{i=1}^u u_i(u_i-1)/2 \right]}}$</MadCap:equation>
+        </p>
+        <p>- where t<sub>i</sub> is the number of observations tied at a particular rank of x and u<sub>i</sub> is the number tied at a rank of y.</p>
+        <p>&#160;</p>
+        <p>In the presence of ties the statistic τ<sub>b</sub> is given as a variant of τ adjusted for ties (Kendall, 1970). When there are no ties τ<sub>b</sub> = τ. An approximate confidence interval is given for τ<sub>b</sub> or τ. Please note that the confidence interval does not correspond exactly to the P values of the tests because slightly different assumptions are made (<a href="../references/reference_list.htm#ref-samara-1988">Samara and Randles, 1988</a>).</p>
+        <p>&#160;</p>
+        <p>The gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):</p>
+        <p>
+            <MadCap:equation>$\displaystyle \gamma=\frac{\displaystyle n_c-n_d}{n_c+n_d}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Tests for Kendall's test statistic being zero are calculated in exact form when there are no tied data, and in approximate form through a normalised statistic with and without a continuity correction (Kendall's score reduced by 1).</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>An asymptotically distribution-free confidence interval is constructed for τ<sub>b</sub> or τ using the variant of the method of <a href="../references/reference_list.htm#ref-samara-1988">Samara and Randles (1988)</a> described by <a href="../references/reference_list.htm#ref-hollander-1999">Hollander and Wolfe (1999)</a>.</p>
+        <p>&#160;</p>
+        <p>In the presence of ties, the normalised statistic is calculated using the extended variance formula given by <a href="../references/reference_list.htm#ref-hollander-1999">Hollander and Wolfe (1999)</a>. In the absence of ties, the probability of null S (and thus τ) is evaluated exactly from the frequency distribution of S (built by recurrence) when n ≤ 1000 and by an Edgeworth series expansion when n &gt; 1000 (<a href="../references/reference_list.htm#ref-best-1974">Best and Gipps, 1974</a>). In the presence of ties you are guided to make inferences from the normal approximation (<a href="../references/reference_list.htm#ref-kendall-1990">Kendall and Gibbons, 1990</a>; <a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-hollander-1999">Hollander and Wolfe, 1999</a>).  Note that StatsDirect uses more accurate methods for calculating the P values associated with τ than does most other statistical software, therefore, there may be differences in results.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 466)</a>.</p>
+        <p>Test workbook (Nonparametric worksheet: Career, Psychology).</p>
+        <p>&#160;</p>
+        <p>The following data represent a tutor's ranking of ten clinical psychology students as to their suitability for their career and their knowledge of psychology:</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">Career</td>
+                <td style="text-align: right;text-decoration: underline;">Psychology</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">6</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select Kendall Rank Correlation from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Career" and "Psychology" when prompted for data.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Kendall's rank correlation</u></p>
+        <p>&#160;</p>
+        <p>Career vs. Psychology</p>
+        <p>Observations per sample = 10</p>
+        <p>Concordant pairs = 34</p>
+        <p>Discordant pairs = 11</p>
+        <p>Tied pairs = 0</p>
+        <p>Kendall's score = 23   (standard error = 11.18034)</p>
+        <p>Gamma = 0.511111</p>
+        <p>&#160;</p>
+        <p>Kendall's tau = 0.511111</p>
+        <p>Approximate 95% CI = 0.135203 to 0.887019</p>
+        <p>&#160;</p>
+        <p><u>Approximate tests</u></p>
+        <p>Sample size too small for reliable inference from z, use exact test</p>
+        <p>z = 2.057183</p>
+        <p>Upper side P = 0.0198 (H<sub>1</sub>: concordance)</p>
+        <p>Lower side P = 0.9802 (H<sub>1</sub>: discordance)</p>
+        <p>Two sided P = 0.0397 (H<sub>1</sub>: dependence)</p>
+        <p>&#160;</p>
+        <p>z (continuity corrected) = 1.96774</p>
+        <p>Upper side P = 0.0245 (H<sub>1</sub>: concordance)</p>
+        <p>Lower side P = 0.9755 (H<sub>1</sub>: discordance)</p>
+        <p>Two sided P = 0.0491 (H<sub>1</sub>: dependence)</p>
+        <p>&#160;</p>
+        <p><u>Exact test</u></p>
+        <p>Upper side P = 0.0233 (H<sub>1</sub>: concordance)</p>
+        <p>Lower side P = 0.9857 (H<sub>1</sub>: discordance)</p>
+        <p>Two sided P = 0.0466 (H<sub>1</sub>: dependence)</p>
+        <p>&#160;</p>
+        <p>From these results we reject the null hypothesis of mutual independence between the career suitability and psychology knowledge rankings for the students. With a two sided test we are considering the possibility of concordance or discordance (akin to positive or negative correlation). A one sided test would have been restricted to either discordance or concordance, this would be an unusual assumption. In our example we can conclude that there is a statistically significant lack of independence between career suitability and psychology knowledge rankings of the students by the tutor. The tutor tended to rank students with apparently greater knowledge as more suitable to their career than those with apparently less knowledge and vice versa.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Kendall's rank correlation: the StatsDirect help example (Armitage and Berry
+# 1994, p. 466) in R
+career     &lt;- c(4, 10, 3, 1, 9, 2, 6, 7, 8, 5)
+psychology &lt;- c(5, 8, 6, 2, 10, 3, 9, 4, 7, 1)
+n &lt;- length(career)
+
+# R's standard test. Its T is the number of concordant pairs (34). Without ties
+# and with fewer than 50 pairs its P is exact, as is StatsDirect's.
+# Use alternative = "greater" for the upper side P and "less" for the lower.
+print(cor.test(career, psychology, method = "kendall"))
+
+# The rest of this code is for data without ties. With ties R's P is no longer
+# exact, tau b replaces tau, and the variance of the score needs an adjustment.
+stopifnot(!anyDuplicated(career), !anyDuplicated(psychology))
+upper &lt;- cor.test(career, psychology, method = "kendall",
+                  alternative = "greater")$p.value
+lower &lt;- cor.test(career, psychology, method = "kendall",
+                  alternative = "less")$p.value
+cat("Exact test:  Upper side P =", round(upper, 4), "  Lower side P =",
+    round(lower, 4), "  Two sided P =", round(min(1, 2 * min(upper, lower)), 4),
+    "\n")
+
+# Concordant and discordant pairs, Kendall's score and tau
+q &lt;- sign(outer(career, career, "-")) * sign(outer(psychology, psychology, "-"))
+concordant &lt;- sum(q[upper.tri(q)] &gt; 0)
+discordant &lt;- sum(q[upper.tri(q)] &lt; 0)
+score &lt;- concordant - discordant
+se &lt;- sqrt(n * (n - 1) * (2 * n + 5) / 18)     # standard error of the score
+tau &lt;- score / (n * (n - 1) / 2)
+tied &lt;- n * (n - 1) / 2 - concordant - discordant
+cat("Concordant pairs =", concordant, "  Discordant pairs =", discordant,
+    "  Tied pairs =", tied, "\n")
+cat(sprintf("Kendall's score = %d   (standard error = %.5f)\n", score, se))
+cat(sprintf("Gamma = %.6f\n", score / (concordant + discordant)))
+
+# Approximate 95% confidence interval for tau: the method of Samara and Randles
+# (1988) as given by Hollander and Wolfe (1999)
+ci &lt;- rowSums(q)                                # each observation's own score
+v &lt;- 2 / (n * (n - 1)) *
+  (2 * (n - 2) / (n * (n - 1)^2) * sum((ci - mean(ci))^2) + 1 - tau^2)
+limits &lt;- tau + c(-1, 1) * qnorm(0.975) * sqrt(v)
+cat(sprintf("Kendall's tau = %.6f   Approximate 95%% CI = %.6f to %.6f\n",
+            tau, limits[1], limits[2]))
+
+# Approximate tests from the normal distribution, without and with a continuity
+# correction (StatsDirect advises the exact test for a sample as small as this)
+for (cc in c(0, 1)) {
+  z &lt;- (score - cc * sign(score)) / se
+  cat(sprintf("z = %.6f   Upper side P = %.4f   Lower side P = %.4f   %s%.4f\n",
+              z, 1 - pnorm(z), pnorm(z), "Two sided P = ", 2 * pnorm(-abs(z))))
+}</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../references/reference_list.htm">reference list</a>
+        </p>
+    </body>
+</html>

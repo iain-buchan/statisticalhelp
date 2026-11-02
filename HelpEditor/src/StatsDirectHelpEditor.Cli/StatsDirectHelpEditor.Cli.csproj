@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net10.0</TargetFramework><OutputType>Exe</OutputType><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AssemblyName>StatsDirectHelpBuilder</AssemblyName><RootNamespace>StatsDirect.HelpEditor.Cli</RootNamespace></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../StatsDirectHelpEditor.Core/StatsDirectHelpEditor.Core.csproj" /></ItemGroup>
+</Project>

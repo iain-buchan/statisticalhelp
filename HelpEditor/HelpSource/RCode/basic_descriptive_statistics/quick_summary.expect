@@ -1,0 +1,22 @@
+# Quick univariate summary, systolic blood pressure of 20 doctors. One fragment per line; the quick summary is a dialog, not a report, so there is no program report to check.
+RH: Valid data 20
+RH: Sum 2601
+RH: Mean 130.05
+RH: Variance 99.207895
+RH: Standard deviation 9.960316
+RH: Variation coefficient 0.076588
+RH: Standard error of mean 2.227194
+RH: 95% Upper CL of mean 134.711571
+RH: 95% Lower CL of mean 125.388429
+RH: Geometric mean 129.684825
+RH: Skewness -0.047857
+RH: Kurtosis 2.411345
+RH: Maximum 149
+RH: 95th percentile 146.5
+RH: Upper quartile 137.5
+RH: Median 130
+RH: Lower quartile 124
+RH: Interquartile range 13.5
+RH: 5th percentile 113
+RH: Minimum 111
+RH: Range 38

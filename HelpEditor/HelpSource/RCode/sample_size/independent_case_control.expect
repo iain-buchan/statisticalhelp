@@ -1,0 +1,10 @@
+# Sample size for an independent case-control study, an invented example: 20% of controls exposed, odds ratio 2, one control per case, 80% power, 5% two sided alpha. One fragment per line.
+Probability of exposure in controls = 0.2
+Probability of exposure in cases = 0.333333
+Controls per case subject = 1
+Alpha = 0.05
+Power = 0.8
+For uncorrected chi-square test:
+N = 172 case subjects and 172 controls
+For corrected chi-square and Fisher's exact tests:
+N = 187 case subjects and 187 controls

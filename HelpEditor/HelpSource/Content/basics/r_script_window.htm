@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>R script window</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <meta name="description" content="Use an interactive R console and script editor in one window, with a shared R workspace, prompts, charts and interruption controls." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="R script window;R console;R workspace;Continue in R;Open in R;R script;Stop R;Restart R;AI assistance" />R script window</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Continue in R</b> on the right-click menu of a result in a report, the <b>R</b> button on the toolbar of a report, <b>File &gt; New R session</b> for an empty R script, or <b>File &gt; Open</b> of a StatsDirect notebook (.ipynb), whose R code opens here.</p>
+        <p>&#160;</p>
+        <p>The R script window holds an R script and runs it with the R installed on your computer. <b>Continue in R</b> on a result writes the script of that result: the data as the analysis used them, read from the workbook, the settings, and the analysis as the R section of its help topic shows it. For a chart follow-on of a regression, such as the residual plots, the script draws the plots after the regression. The <b>R</b> button on the toolbar of a report does the same for the result the cursor is in, or for the latest result when the cursor is in none. The script is short and plain, so that you can read it, change it and run it again, or take it to R or RStudio. Every analysis whose help topic has an R section has such a script; for the others, <b>Open data and settings in R</b> gives the data and settings for you to add the analysis.</p>
+        <p>&#160;</p>
+        <p>A script opened with <b>Continue in R</b> runs once as soon as it opens. <b>File &gt; New R session</b> opens an empty window without starting R or running code. R starts when you first run code. A saved R script or the R code of an imported notebook (.ipynb) is not run until you choose <b>Run</b>.</p>
+        <p>&#160;</p>
+        <h2>Console and Script</h2>
+        <p><b>Console</b> lets you enter R commands and see their results and charts. Type after the prompt and press <b>Enter</b> to run a command; <b>Shift+Enter</b> adds a line. R shows <b>+</b> when it needs the rest of an expression. When R asks a question, the question appears in the transcript and you enter your answer in the same input box. Up and Down recall previous commands when the input is a single line.</p>
+        <p>The <b>Script</b> tab holds code you can edit and save. Select part of it and choose <b>Run selection</b>, or leave nothing selected and choose <b>Run script</b>. The Console shows what R prints. Commands and prompts are blue, ordinary output is dark text, warnings and errors are red, and status notices are grey.</p>
+        <p>Console and Script use the <b>same R workspace</b>. Variables, loaded packages and completed calculations remain available when you run more code or switch tabs. For example, a variable created in Script can be used in a later Console command. Each R window has its own workspace.</p>
+        <p>&#160;</p>
+        <h2>Stop and Restart</h2>
+        <p><b>Stop</b> interrupts the current calculation, incomplete expression or question. It does not submit a blank answer. Variables assigned before the interruption remain available; completed changes to data or files are not undone. Wait for the ready prompt before entering another command.</p>
+        <p><b>Restart</b> asks for confirmation, then starts a fresh R session. It clears the R workspace, including its variables and loaded packages, while keeping the Script text. Use it when you want a clean start or R does not respond to Stop.</p>
+        <p>Under <b>More</b>, <b>Clear output</b> clears the displayed output; it does not clear R variables. <b>Output folder</b> opens the R folder of your StatsDirect documents.</p>
+        <p>&#160;</p>
+        <h2>Charts and editing</h2>
+        <p>Use <b>Open chart</b> to open a chart separately or <b>Copy chart</b> to copy it. Each button refers to the chart beside it, including an earlier version if later commands changed the plot. Ordinary Windows R charts use SVG, so they remain sharp when resized.</p>
+        <p>The separate chart viewer has <b>&#8722;</b>, a zoom percentage, <b>+</b> and <b>Fit</b> controls. Use them to enlarge a chart and scroll around it; click the percentage or <b>Fit</b> to show the complete chart again. On Windows, <b>Ctrl++</b>, <b>Ctrl+&#8722;</b> and <b>Ctrl+0</b> provide the same commands; on Mac use the Command key. Right-click a chart for <b>Copy Chart</b>, <b>Save Chart as SVG</b> and <b>Save Chart as PNG</b>. Copying and saving always use the complete retained chart, regardless of the zoom or the visible area.</p>
+        <p>To put a copied chart in a report, place the cursor where you want it and choose <b>Paste</b> or press Ctrl+V. SVG remains vector SVG in a StatsDirect report, with a PNG alternative for applications that need a picture. The report keeps its own copy, so the R output file is not needed to reopen it. Press Enter with the picture selected, or with the cursor immediately after it, to continue writing below it. <b>Undo</b> and <b>Redo</b> include the paste and the new paragraph.</p>
+        <p><b>Save</b> and <b>Save As</b> on the File menu keep the Script as an R file, which R and RStudio can open. Saving the script does not save the live R workspace. Closing the window ends its R session. Cut, Copy, Paste and Find work on the script as in any editor; right-click for its editing commands.</p>
+        <p><b>Open in R</b>, under <b>More</b>, saves the script as an R file and opens it in RStudio when that is installed, otherwise in R's own window. <b>AI</b> opens the <a href="script_ai.htm">Script AI</a> pane for questions about the script, its output and the methods. Suggested code is for you to review and run.</p>
+        <p>&#160;</p>
+        <p>The first lines of a script say which workbook and sheet its data came from and when they were read, and note any column that has changed in the workbook since the analysis ran, or could not be read, so that you can put its values in by hand. This Windows console uses 64-bit R 4.2 or later (tested with R 4.6.2 and R 4.2.3), the newest installed. If R is missing, StatsDirect offers to install it on first use. Use <b>More &gt; Set up R</b> to install a current R when only an older R is installed.</p>
+        <p>&#160;</p>
+        <p>Help on this window opens this topic while the window is empty; once a script of a result is in it, Help opens that result's topic, whose R section the script follows.</p>
+    </body>
+</html>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="1044.552" MadCap:lastWidth="3249" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Z (Normal Distribution) Tests - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Z (normal distribution) tests" />Z (Normal Distribution) Tests</h1>
+        <p>&#160;</p>
+        <p>Menu locations:<br /><b>Analysis_Parametric_Single Sample z<br />Analysis_Parametric_Unpaired z</b></p>
+        <p>&#160;</p>
+        <p>For large (50 or more observations) normally distributed samples,  <a href="../distributions/normal.htm">normal distribution</a>  tests are equivalent to Student t tests.</p>
+        <p>&#160;</p>
+        <p><u>Normal data</u>
+        </p>
+        <p>You may either compare the means of two independent random samples or compare the mean of one sample with a known population mean. Note that for large degrees of freedom, <a href="../distributions/t.htm">Student's t</a>  distribution is approximately normal (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
+        <p>&#160;</p>
+        <p>See the examples for <a href="parametric_methods.htm">t tests</a>  and consider these in the context of larger samples.</p>
+        <p>&#160;</p>
+        <p>You will gain a little more sensitivity by using a normal distribution test instead of its equivalent Student t test but you must have good reason to believe that your data have been drawn from a normal distribution. Student t tests are less sensitive than normal distribution tests to small deviations from normality; use t tests if you have any doubt. If your data are clearly non-normal then you should consider using a nonparametric alternative such as the <a href="../nonparametric_methods/wilcoxon_signed_ranks.htm">Wilcoxon signed ranks</a>  test or the <a href="../nonparametric_methods/mann_whitney.htm">Mann-Whitney</a> U test.</p>
+        <p>&#160;</p>
+        <p>The single sample test statistic is calculated as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle z=\frac{\bar x-\mu}{\sqrt{s^2/n}}$</MadCap:equation>
+        </p>
+        <p>- where x bar is the sample mean, s² is the sample variance, n is the sample size, µ is the specified population mean and z is a quantile from the standard normal distribution.</p>
+        <p>&#160;</p>
+        <p>The unpaired test statistic is calculated as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle z=\frac{\bar x_1 -\bar x_2}{\sqrt{\displaystyle \frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$</MadCap:equation>
+        </p>
+        <p>- where x-bar 1 and x-bar 2 are the sample means, s<sub>1</sub>² and s<sub>2</sub>² are the sample variances, n<sub>1</sub> and n<sub>2</sub> are the sample sizes and z is a quantile from the standard normal distribution.</p>
+        <p>&#160;</p>
+        <p><u>Log-normal data</u>
+        </p>
+        <p>For samples from a log-normal distribution (logs from a normal distribution) you may wish to construct an interval analogous to the confidence interval for the mean of a sample from a normal distribution. StatsDirect gives you the geometric mean (arithmetic mean of logs) and a reference range as:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \exp(g \pm 2s) \\
+
+\displaystyle g=\frac{1}{n}\sum_{i=1}^n \ln(x_i) \\
+
+\displaystyle s=\sqrt{\frac{\displaystyle \sum_{i=1}^n \ln(x_i)^2- \frac{1}{n}\left[ \sum_{i=1}^n \ln(x_i)\right]^2 }{n-1}}$</MadCap:equation>
+        </p>
+        <p>- where g is geometric mean, ln is natural logarithm, n is sample size and z is a quantile from the standard normal distribution (alpha/2 quantile for a 100*(1-alpha)% confidence interval). The geometric mean and its reference range are given only if every value of the sample is above zero.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Parametric worksheet: Michelson).</p>
+        <p>&#160;</p>
+        <p>Consider Michelson's 100 measurements in 1879 of the speed of light in air, in millions of metres per second (<a href="../references/reference_list.htm#ref-dorsey-1944">Dorsey, 1944</a>), which are also used in the univariate summary example. The accepted value of the speed of light in a vacuum is 299.792458 million metres per second.</p>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu. Then select Single Sample z from the Parametric section of the Analysis menu. Select the column marked "Michelson" when prompted for data, enter 299.792458 as the population mean and leave the population standard deviation blank.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Normal distribution (z) test - single sample</u>
+        </p>
+        <p>&#160;</p>
+        <p>Sample name: Michelson</p>
+        <p>Sample mean = 299.8524</p>
+        <p>Population mean = 299.792458</p>
+        <p>Sample size n = 100</p>
+        <p>Sample sd = 0.079011</p>
+        <p>Population sd = not known</p>
+        <p>&#160;</p>
+        <p>95% confidence interval for mean difference = 0.044456 to 0.075428</p>
+        <p>&#160;</p>
+        <p>Standard normal deviate (z) = 7.586582</p>
+        <p>One sided P &lt; 0.0001</p>
+        <p>Two sided P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <p>For lognormal data:</p>
+        <p>Geometric mean = 299.85239  (95% reference range = 299.697571 to 300.007288)</p>
+        <p>&#160;</p>
+        <p>The measurements were on average 0.06 million metres per second above the accepted value in a vacuum, and further above the speed in air, which is about 0.03% lower. The confidence interval shows that the variation between measurements does not explain this: the series carried a systematic error, as is well known for these data.</p>
+        <p>&#160;</p>
+        <p>To compare two independent samples, for example the first and the last 50 of these measurements to look for a drift over the series, copy them into two columns (or add a column of group identifiers, 1 for the first 50 and 2 for the rest, and select it as the group identifier). Then select Unpaired z from the Parametric section of the Analysis menu.</p>
+        <p>&#160;</p>
+        <p><u>Normal distribution (z) test - two independent samples</u>
+        </p>
+        <p>&#160;</p>
+        <p>Sample name: First 50</p>
+        <p>Mean = 299.8728</p>
+        <p>Variance = 0.008951</p>
+        <p>Size = 50</p>
+        <p>&#160;</p>
+        <p>Sample name: Last 50</p>
+        <p>Mean = 299.832</p>
+        <p>Variance = 0.002812</p>
+        <p>Size = 50</p>
+        <p>&#160;</p>
+        <p>Combined standard error = 0.015338</p>
+        <p>&#160;</p>
+        <p>95% confidence interval for difference between means = 0.010737 to 0.070863</p>
+        <p>&#160;</p>
+        <p>Standard normal deviate (z) = 2.659979</p>
+        <p>&#160;</p>
+        <p>One sided P = 0.0039</p>
+        <p>Two sided P = 0.0078</p>
+        <p>&#160;</p>
+        <p>The later measurements were lower on average, and a difference this large is unlikely to arise by chance. With 50 measurements in each sample the unpaired t test gives almost the same answer (t = 2.66 on 77 degrees of freedom with unequal variances, two sided P = 0.0095).</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Normal distribution (z) tests: the StatsDirect help example (Michelson's 100
+# measurements of the speed of light in air, millions of metres per second) in R
+speed &lt;- c(299.85, 299.74, 299.90, 300.07, 299.93, 299.85, 299.95, 299.98, 299.98,
+           299.88, 300.00, 299.98, 299.93, 299.65, 299.76, 299.81, 300.00, 300.00,
+           299.96, 299.96, 299.96, 299.94, 299.96, 299.94, 299.88, 299.80, 299.85,
+           299.88, 299.90, 299.84, 299.83, 299.79, 299.81, 299.88, 299.88, 299.83,
+           299.80, 299.79, 299.76, 299.80, 299.88, 299.88, 299.88, 299.86, 299.72,
+           299.72, 299.62, 299.86, 299.97, 299.95, 299.88, 299.91, 299.85, 299.87,
+           299.84, 299.84, 299.85, 299.84, 299.84, 299.84, 299.89, 299.81, 299.81,
+           299.82, 299.80, 299.77, 299.76, 299.74, 299.75, 299.76, 299.91, 299.92,
+           299.89, 299.86, 299.88, 299.72, 299.84, 299.85, 299.85, 299.78, 299.89,
+           299.84, 299.78, 299.81, 299.76, 299.81, 299.79, 299.81, 299.82, 299.85,
+           299.87, 299.87, 299.81, 299.74, 299.81, 299.94, 299.95, 299.80, 299.81,
+           299.87)
+n &lt;- length(speed)
+mu &lt;- 299.792458                          # the accepted value, in a vacuum
+
+# R has no z test among its standard functions (with a sample this large t.test
+# gives almost the same answers), so the report's lines are calculated here.
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else paste("P =", formatC(p, digits = 4, format = "f"))
+}
+z &lt;- qnorm(0.975)
+cat("Sample mean =", six(mean(speed)), "  Sample size n =", n,
+    "  Sample sd =", six(sd(speed)), "\n")
+
+# Single sample test, with the population sd not known: the sample sd is used
+se &lt;- sd(speed) / sqrt(n)
+cat("95% confidence interval for mean difference =", six(mean(speed) - mu - z * se),
+    "to", six(mean(speed) - mu + z * se), "\n")
+dev &lt;- (mean(speed) - mu) / se
+cat("Standard normal deviate (z) =", six(dev), "\n")
+cat("One sided", pv(pnorm(-abs(dev))), "  Two sided", pv(2 * pnorm(-abs(dev))), "\n")
+
+# For lognormal data: the geometric mean, with the reference range exp(mean of
+# the logs plus or minus z times their sd)
+lg &lt;- log(speed)
+cat("Geometric mean =", six(exp(mean(lg))), " (95% reference range =",
+    six(exp(mean(lg) - z * sd(lg))), "to", paste0(six(exp(mean(lg) + z * sd(lg))), ")"),
+    "\n")
+
+# Two independent samples: the first and last 50 measurements
+first &lt;- speed[1:50]
+last &lt;- speed[51:100]
+cat("First 50:  Mean =", six(mean(first)), "  Variance =", six(var(first)),
+    "  Size =", length(first), "\n")
+cat("Last 50:  Mean =", six(mean(last)), "  Variance =", six(var(last)),
+    "  Size =", length(last), "\n")
+se2 &lt;- sqrt(var(first) / length(first) + var(last) / length(last))
+cat("Combined standard error =", six(se2), "\n")
+d &lt;- mean(first) - mean(last)
+cat("95% confidence interval for difference between means =", six(d - z * se2), "to",
+    six(d + z * se2), "\n")
+dev2 &lt;- d / se2
+cat("Standard normal deviate (z) =", six(dev2), "\n")
+cat("One sided", pv(pnorm(-abs(dev2))), "  Two sided", pv(2 * pnorm(-abs(dev2))), "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

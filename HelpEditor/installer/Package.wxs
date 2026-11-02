@@ -1,0 +1,43 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <Package Name="StatsDirect Help Editor" Manufacturer="StatsDirect Limited"
+    Version="$(var.BuildVersion)" UpgradeCode="272143C2-41D6-4DBD-A4C0-3AB22F09CD24"
+    Scope="perUser" InstallerVersion="500" Compressed="yes">
+    <MajorUpgrade DowngradeErrorMessage="A newer version of StatsDirect Help Editor is already installed." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+    <Property Id="WEBVIEW2USERVERSION">
+      <RegistrySearch Id="MsiWebView2UserSearch" Root="HKCU" Bitness="always32"
+        Key="SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}" Name="pv" Type="raw" />
+    </Property>
+    <Property Id="WEBVIEW2MACHINEVERSION">
+      <RegistrySearch Id="MsiWebView2MachineSearch" Root="HKLM" Bitness="always32"
+        Key="SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}" Name="pv" Type="raw" />
+    </Property>
+    <Launch Condition="Installed OR (WEBVIEW2USERVERSION AND WEBVIEW2USERVERSION &lt;&gt; &quot;0.0.0.0&quot;) OR (WEBVIEW2MACHINEVERSION AND WEBVIEW2MACHINEVERSION &lt;&gt; &quot;0.0.0.0&quot;)"
+      Message="Microsoft Edge WebView2 Runtime is required. Run StatsDirectHelpEditorSetup.exe to install it, then install the editor." />
+    <Property Id="ARPCOMMENTS" Value="HTML help authoring, equations, Contents, search and GitHub publishing. User workspaces are retained when the application is removed." />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/iain-buchan/statisticalhelp" />
+    <Property Id="ARPPRODUCTICON" Value="HelpEditorIcon" />
+    <Icon Id="HelpEditorIcon" SourceFile="$(var.PayloadDirectory)\HelpSource\Content\resources\Images\sd3.ico" />
+    <WixVariable Id="WixUILicenseRtf" Value="Licence.rtf" />
+    <ui:WixUI Id="WixUI_Minimal" />
+    <StandardDirectory Id="LocalAppDataFolder">
+      <Directory Id="UserProgramsFolder" Name="Programs">
+        <Directory Id="INSTALLFOLDER" Name="StatsDirectHelpEditor" />
+      </Directory>
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="HelpEditorMenuFolder" Name="StatsDirect Help Editor">
+        <Component Id="HelpEditorShortcut" Guid="BBF6826B-D68B-46E9-8461-015F064A1367">
+          <Shortcut Id="HelpEditorStartMenu" Name="StatsDirect Help Editor" Target="[INSTALLFOLDER]StatsDirectHelpEditor.exe" WorkingDirectory="INSTALLFOLDER" Icon="HelpEditorIcon" />
+          <RemoveFolder Id="RemoveHelpEditorMenu" On="uninstall" />
+          <RemoveFolder Id="RemoveEmptyUserPrograms" Directory="UserProgramsFolder" On="uninstall" />
+          <RegistryValue Root="HKCU" Key="Software\StatsDirect\HelpEditor\Installer" Name="StartMenu" Type="integer" Value="1" KeyPath="yes" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+    <Feature Id="Complete" Title="StatsDirect Help Editor" Level="1">
+      <ComponentGroupRef Id="HelpEditorPayload" />
+      <ComponentRef Id="HelpEditorShortcut" />
+    </Feature>
+  </Package>
+</Wix>

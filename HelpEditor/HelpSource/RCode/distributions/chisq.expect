@@ -1,0 +1,5 @@
+# Chi-square distribution: the help's example (the upper tail P of 3.84 on 1 df and of 15.2 on 6 df, and the 1% critical value on 3 df) as the Distributions dialog reports them. One fragment per line.
+P(chi-sq 3.84, df 1) = 0.050043521248705 upper tail
+P(chi-sq 15.2, df 6) = 0.018756919725354 upper tail
+chi-sq(upper P 0.01, df 3) = 11.3448667301444
+R:Two sided normal P beyond sqrt(3.84) = 0.050043521248705

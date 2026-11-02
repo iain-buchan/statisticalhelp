@@ -1,0 +1,8 @@
+# Two sample Smirnov test, Conover (1999) Xi v Yi. One fragment per line.
+D = 0.4
+P = 0.2653
+P = 0.1328
+D = 0.333333
+P = 0.2462
+HP: One sided test (suspecting Xi shifted left of Yi):
+HP: One sided test (suspecting Xi shifted right of Yi):

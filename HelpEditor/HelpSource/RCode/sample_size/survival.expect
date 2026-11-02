@@ -1,0 +1,14 @@
+# Sample size for survival analysis, an invented example: median survival 12 against 18 months, 24 months of accrual, 12 of follow-up, one control per experimental subject, 80% power, 5% alpha; then 36 months of accrual with no follow-up. One fragment per line.
+HP:Sample size for survival analysis
+median survival time for controls = 12
+median survival time for experimental subjects = 18
+hazard ratio (experimental vs. control) = 0.666667
+accrual time for recruitment = 24
+additional follow-up time after recruitment = 12
+alpha = 0.05
+power = 0.8
+Estimated minimum sample size = 147 experimental subjects and 147 controls
+RP:accrual time for recruitment = 36
+RP:additional follow-up time after recruitment = 0
+RP:Estimated minimum sample size = 187 experimental subjects and 187 controls
+H:187 in each group

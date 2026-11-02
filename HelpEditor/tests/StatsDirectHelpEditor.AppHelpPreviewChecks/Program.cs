@@ -1,0 +1,108 @@
+using System.Text.Json;
+using System.Security.Cryptography;
+using Microsoft.Web.WebView2.Core;
+using StatsDirect.HelpEditor.App.AppHelp;
+using StatsDirect.HelpEditor.Core;
+
+internal static class Program
+{
+    private static readonly List<object> results = [];
+    private static int passed, failed;
+    private static HelpService service = null!;
+    private static string root = "", fixture = "";
+    private static void Check(bool value, string name)
+    {
+        if (value) passed++; else failed++;
+        results.Add(new { name, passed = value });
+        Console.WriteLine($"{(value ? "PASS" : "FAIL")} {name}");
+    }
+    private static async Task<JsonElement> Js(string script) => JsonDocument.Parse(await service.View.Browser.CoreWebView2.ExecuteScriptAsync(script)).RootElement.Clone();
+    private static async Task Until(string condition)
+    {
+        var deadline = DateTime.UtcNow.AddSeconds(15);
+        while (DateTime.UtcNow < deadline)
+        {
+            if ((await Js(condition)).ValueKind == JsonValueKind.True) return;
+            await Task.Delay(50);
+        }
+        throw new TimeoutException(condition);
+    }
+    private static IEnumerable<Control> Descendants(Control control) => new[] { control }.Concat(control.Controls.Cast<Control>().SelectMany(Descendants));
+    [STAThread]
+    private static int Main(string[] args)
+    {
+        root = Path.GetFullPath(args[0]);
+        fixture = Path.Combine(root, "evidence", "AppHelpPreviewFixture-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(fixture);
+        ApplicationConfiguration.Initialize();
+        using var owner = new Form { Text = "Isolated app-help host fixture", StartPosition = FormStartPosition.Manual, Location = new Point(-16000, -16000), Size = new Size(2400, 1400), ShowInTaskbar = false };
+        owner.Shown += async (_, _) =>
+        {
+            try { await Run(owner); }
+            catch (Exception ex) { failed++; results.Add(new { name = "Unexpected app-help host error", passed = false, error = ex.ToString() }); Console.Error.WriteLine(ex); }
+            finally { service?.Dispose(); owner.Close(); }
+        };
+        Application.Run(owner);
+        File.WriteAllText(Path.Combine(root, "evidence", "app-help-preview-checks.json"), JsonSerializer.Serialize(new { passed, failed, checkedAtUtc = DateTimeOffset.UtcNow, fixture, results }, new JsonSerializerOptions { WriteIndented = true }));
+        Console.WriteLine($"{passed} app-help preview checks passed; {failed} failed");
+        return failed == 0 ? 0 : 1;
+    }
+    private static async Task Run(Form owner)
+    {
+        string source = Path.Combine(fixture, "source");
+        void Write(string relative, string text) { string path = Path.Combine(source, relative); Directory.CreateDirectory(Path.GetDirectoryName(path)!); File.WriteAllText(path, text); }
+        Write(HelpProject.MarkerFile, "{\"prototypeWorkingCopy\":true}");
+        Write("StatsDirect.flprj", "<CatapultProject />");
+        Write("Project/TOCs/STATSDIRECT.fltoc", "<CatapultToc><TocEntry Title=\"Contents\" Link=\"/Content/contents.htm\"/><TocEntry Title=\"One\" Link=\"/Content/one.htm\"/><TocEntry Title=\"Two\" Link=\"/Content/two.htm\"/></CatapultToc>");
+        Write("Content/contents.htm", "<html><head><title>Fixture contents</title></head><body><h1>Fixture contents</h1><a href=\"one.htm\">One</a></body></html>");
+        Write("Content/one.htm", "<html xmlns:MadCap=\"http://www.madcapsoftware.com/Schemas/MadCap.xsd\"><head><title>One</title></head><body><h1>One</h1><p id=\"Ref-Case\">Searchsentinel</p><p MadCap:conditions=\"Primary.SWHELP\">Desktoponlysentinel</p><p MadCap:conditions=\"Primary.WEBHELP\">Publiconlysentinel</p><MadCap:dropDown class=\"rcode\"><MadCap:dropDownHead><MadCap:dropDownHotspot>R code</MadCap:dropDownHotspot></MadCap:dropDownHead><MadCap:dropDownBody><pre>x &lt;- 1\nmean(x)</pre></MadCap:dropDownBody></MadCap:dropDown><p><MadCap:equation>\\(x^2\\)</MadCap:equation></p><a href=\"two.htm#Target\">Two</a>" + string.Concat(Enumerable.Repeat("<p>Long content retains the reading position.</p>", 130)) + "</body></html>");
+        Write("Content/two.htm", "<html><head><title>Two</title></head><body><h1>Two</h1><p id=\"Target\">Second topic</p></body></html>");
+        var project = HelpProject.Open(source);
+        string output = Path.Combine(fixture, "Desktop");
+        var built = HelpBuilder.Build(project, output, Path.Combine(root, "src", "StatsDirectHelpEditor.App", "Web"), HelpBuildTarget.Desktop);
+        Check(built.TopicCount == 3 && built.Warnings.Count == 0, "App host consumes a real independent Desktop help build");
+        var workspace = new SplitContainer { Dock = DockStyle.Fill, SplitterDistance = 240 };
+        var ribbon = new Panel { Dock = DockStyle.Top, Height = 60 };
+        owner.Controls.Add(workspace); owner.Controls.Add(ribbon); owner.PerformLayout();
+        int fullWidth = workspace.Width;
+        string profile = Path.Combine(fixture, "browser-profile");
+        service = new HelpService(profile); int closed = 0; service.Closed += () => closed++;
+        service.Show(owner, "one.htm#Ref-Case", output);
+        await service.View.Ready.WaitAsync(TimeSpan.FromSeconds(45));
+        await Until("location.pathname==='/one.htm' && location.hash==='#Ref-Case' && document.readyState==='complete'");
+        Check(!owner.IsMdiContainer && service.IsDocked && service.DockHost.Panel.Dock == DockStyle.Right && workspace.Width < fullWidth, "Exact app help host docks beside a non-MDI fill workspace");
+        Check(workspace.Right <= service.DockHost.Divider.Left && service.DockHost.Divider.Right <= service.DockHost.Panel.Left && service.DockHost.Panel.Top >= ribbon.Bottom && ribbon.Width == owner.ClientSize.Width, "Help pane and splitter reserve space without covering the editor or full-width ribbon");
+        Check(service.View.Font.Name == "Arial" && service.View.Font.SizeInPoints == 10, "App help chrome uses the app's Arial 10 font");
+        var buttons = Descendants(service.View).OfType<ToolStrip>().SelectMany(strip => strip.Items.Cast<ToolStripItem>()).Select(item => item.Text).ToArray();
+        Check(new[] { "Help", "Pop out", "Close", "Back", "Forward", "Contents", "Print", "Search:", "Search" }.All(text => buttons.Contains(text)), "App heading, navigation, search, print and pop-out controls match StatsDirect");
+        Check((await Js("document.body.innerText.includes('Desktoponlysentinel') && !document.body.innerText.includes('Publiconlysentinel') && !!document.querySelector('#help-topic-body')")).GetBoolean(), "App view renders the complete Desktop site shell and Desktop source conditions");
+        await Until("!!document.querySelector('mjx-container svg')");
+        Check(true, "Offline mathematics renders inside the exact app browser host");
+        var browser = service.View.Browser.CoreWebView2;
+        await Js("window.appPreviewToken='persistent';document.querySelector('details').open=true;document.getElementById('topic').scrollTop=300;");
+        int originalWidth = service.DockHost.Panel.Width;
+        await service.ToggleModeAsync();
+        Check(!service.IsDocked && service.Window?.Owner == owner && workspace.Width == fullWidth, "Pop out restores editor width and opens an owned floating app help window");
+        Check(ReferenceEquals(browser, service.View.Browser.CoreWebView2) && (await Js("window.appPreviewToken==='persistent' && document.querySelector('details').open")).GetBoolean(), "Pop out preserves browser identity and expanded R code");
+        await service.ToggleModeAsync();
+        await Until("document.getElementById('topic').scrollTop >= 299");
+        Check(service.IsDocked && ReferenceEquals(browser, service.View.Browser.CoreWebView2), "Dock preserves the page, browser and original reading position");
+        service.Show(owner, "two.htm#Target", output); await Until("location.pathname==='/two.htm' && location.hash==='#Target'");
+        Check(browser.CanGoBack, "Independent app-preview topic navigation preserves browser history and anchors");
+        browser.GoBack(); await Until("location.pathname==='/one.htm'");
+        service.View.Search("Searchsentinel");
+        await Until("location.hash.includes('searchQuery') && document.getElementById('results').textContent.includes('One')");
+        Check(true, "The actual app Search command works with the independent rebuilt index");
+        service.Hide();
+        Check(!service.IsVisible && workspace.Width == fullWidth && closed == 1, "Closing the pane releases editor space and emits one authoring Closed event");
+        service.Hide(); Check(closed == 1, "Repeated Hide does not emit duplicate close events");
+        service.Show(owner, "one.htm", output); await Until("location.pathname==='/one.htm'");
+        Check(service.IsDocked && service.DockHost.Panel.Width == originalWidth && ReferenceEquals(browser, service.View.Browser.CoreWebView2), "Reopening retains the pane width and browser session");
+        await service.ToggleModeAsync(); service.Window!.Close();
+        Check(!service.IsVisible && closed == 2, "The floating window's X emits the same authoring Closed event");
+        string installedProfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "StatsDirect", "HtmlHelp");
+        Check(!browser.Environment.UserDataFolder.Equals(installedProfile, StringComparison.OrdinalIgnoreCase) && browser.Environment.UserDataFolder.Equals(profile, StringComparison.OrdinalIgnoreCase), "Editor preview test profile is isolated from installed StatsDirect and the live editor");
+        var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "src", "StatsDirectHelpEditor.App", "AppHelp", "provenance.json"))).RootElement;
+        Check(manifest.GetProperty("files").EnumerateArray().All(file => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(root,"src","StatsDirectHelpEditor.App","AppHelp",file.GetProperty("snapshot").GetString()!)))).Equals(file.GetProperty("snapshotSha256").GetString(),StringComparison.OrdinalIgnoreCase)), "All six native host snapshots match their recorded source provenance hashes");
+    }
+}

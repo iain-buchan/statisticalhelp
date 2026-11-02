@@ -1,0 +1,19 @@
+**/bin/
+**/obj/
+App/
+Build/
+evidence/
+**/.editor-profile/
+**/.app-help-preview-profile/
+**/.preview-profile/
+**/.help-editor-recovery/
+WorkingCopies/
+HelpSource/Project/Users/
+HelpSource/Project/Destinations/
+ReleaseWork/
+Release/
+# Test source lives directly in tests or its project directories. Everything
+# nested below those project directories is generated fixture/profile output.
+tests/*/*/
+**/__pycache__/
+**/*.user

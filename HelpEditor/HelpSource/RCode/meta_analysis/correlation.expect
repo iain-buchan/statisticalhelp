@@ -1,0 +1,39 @@
+# Correlation meta-analysis, eight studies of drug misuse and delinquency (the test workbook's meta worksheet). One fragment per line.
+131 0.51 0.370922 0.626703
+129 0.48 0.334935 0.602837
+RH: 155 0.30 0.149418 0.436981
+P: 155 0.3 0.149418 0.436981
+121 0.21 0.03273 0.37446
+RH: 111 0.60 0.465688 0.707292
+P: 111 0.6 0.465688 0.707292
+119 0.46 0.305281 0.591057
+112 0.22 0.03591 0.389649
+145 0.25 0.090686 0.396837
+HP: 0.56273 0.007813 12.812813 12.609861 12.805474
+R: 0.56273 0.007812 12.812813 12.609861 12.805474
+0.522984 0.007937 12.612613 12.559901 12.609971
+0.30952 0.006579 15.215215 13.129365 15.151515
+0.213171 0.008475 11.811812 12.347632 11.827957
+0.693147 0.009259 10.810811 12.050626 10.85044
+0.497311 0.008621 11.611612 12.291224 11.632454
+0.223656 0.009174 10.910911 12.082088 10.948192
+0.255413 0.007042 14.214214 12.929303 14.173998
+Pooled correlation = 0.383132 (95% CI = 0.329008 to 0.434748)
+Z (test correlation differs from 0) = 12.760536
+Cochran Q = 27.382264 (df = 7) P = 0.0003
+Moment-based estimate of between studies variance = 0.023363
+(inconsistency) = 74.4% (95% CI = 46.2% to 86.5%)
+Pooled correlation = 0.387032 (95% CI = 0.277911 to 0.486292)
+Z (test correlation differs from 0) = 6.512137
+Begg-Mazumdar: Kendall's tau = 0.071429
+P = 0.9049 (low power)
+Egger: bias = 10.348335 (90% CI = -13.777152 to 34.473823) P = 0.4365
+Weighted mean correlation (95% CI): 0.374262 (0.278809 to 0.469714)
+Z (test correlation differs from 0) = 7.684871 P < 0.0001
+Observed variance across studies: 0.018974
+Variance due to sampling error: 0.005828
+Variance in the population correlations: 0.013146
+95% Credibility interval for weighted mean correlation: 0.14954 to 0.598984
+Residual standard deviation (should be smaller than 1/4 WMC: 0.093565): 0.114656
+Percent of observed variance accounted for by sampling error (should be at least 75%): 30.717078
+Chi-square test of heterogeneity: 26.044144 P = 0.0005

@@ -1,0 +1,20 @@
+# Cox (proportional hazards) regression, Armitage and Berry (1994) lymphoma survival by stage. One fragment per line.
+80 subjects with 54 events
+Deviance (likelihood ratio) chi-square = 7.634383
+df = 1
+P = 0.0057
+b1 = 0.96102
+z = 2.492043
+P = 0.0127
+2.614362
+1.227756 to 5.566976
+0.96102
+0.385636
+Log likelihood with no covariates = -207.554801
+Log likelihood with all model covariates = -203.737609
+# the first rows of the baseline survival and hazard option (not shown in the help)
+RP: 4 0.997843 0.002143
+RP: 6 0.993467 0.006493
+RP: 10 0.991246 0.008714
+RP: 11 0.984405 0.015478
+RP: 13 0.982061 0.017843

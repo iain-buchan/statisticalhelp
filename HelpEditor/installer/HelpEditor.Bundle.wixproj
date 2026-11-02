@@ -1,0 +1,20 @@
+<Project Sdk="WixToolset.Sdk/7.0.1">
+  <PropertyGroup>
+    <Platform>x64</Platform>
+    <OutputType>Bundle</OutputType>
+    <OutputName>StatsDirectHelpEditorSetup</OutputName>
+    <DefineConstants>$(DefineConstants);BuildVersion=$(BuildVersion);MsiPath=$(MsiPath);WebView2Bootstrapper=$(WebView2Bootstrapper)</DefineConstants>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Bundle.wxs" />
+    <PackageReference Include="WixToolset.Bal.wixext" Version="7.0.1" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="7.0.1" />
+  </ItemGroup>
+  <Target Name="SignBundleEngine" Condition="'$(SignOutput)' == 'true'">
+    <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)Sign-Artifact.ps1&quot; -Path &quot;%(SignBundleEngine.FullPath)&quot;" />
+  </Target>
+  <Target Name="SignBundle" Condition="'$(SignOutput)' == 'true'">
+    <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)Sign-Artifact.ps1&quot; -Path &quot;%(SignBundle.FullPath)&quot;" />
+  </Target>
+</Project>

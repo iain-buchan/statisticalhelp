@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="595" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Frequency (Counts) and Cumulative Frequency Analysis - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="This function gives the actual and relative values for frequency and cumulative frequency of observations in the samples you select." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Frequencies;Counts (frequency)" />
+            Frequencies</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Frequencies</b>.</p>
+        <p>&#160;</p>
+        <p>This function gives the actual and relative values for frequency and cumulative frequency of observations in the samples you select. You can choose to have the results sorted by value or by frequency, in ascending or descending order; the cumulative frequencies run down the table in the order that you choose.</p>
+        <p>&#160;</p>
+        <p>Values that are numbers are put in order of size; values that are not numbers come after them, in the order of their characters (capital letters before small letters). If you sort by frequency then values that have the same frequency are put in the order of their values.</p>
+        <p>&#160;</p>
+        <p>An empty cell is counted as a missing value, down to the last row of your selection that contains data. Missing values are counted in the total, which is followed by the number of them, and are shown in the first row of the table; the relative and cumulative percentages are of the values that are not missing.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>&#160;</p>
+        <p>The following represent responses to an element of a questionnaire that used a Likert scale:</p>
+        <p>3</p>
+        <p>3</p>
+        <p>4</p>
+        <p>1</p>
+        <p>1</p>
+        <p>2</p>
+        <p>5</p>
+        <p>3</p>
+        <p>&#160;</p>
+        <p>In order to analyse these data in StatsDirect, first enter them into a workbook column. Then <a href="../workbook/selecting_data.htm">select</a> this column and choose the frequencies option of the analysis menu.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Frequency analysis for Response</p>
+        <p>&#160;</p>
+        <p>Total = 8</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Value</td>
+                <td style="text-decoration: underline;">Frequency</td>
+                <td style="text-decoration: underline;">Relative %</td>
+                <td style="text-decoration: underline;">Cumulative</td>
+                <td style="text-decoration: underline;">Cumulative Relative %</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>25</td>
+                <td>2</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1</td>
+                <td>12.5</td>
+                <td>3</td>
+                <td>37.5</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>3</td>
+                <td>37.5</td>
+                <td>6</td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>1</td>
+                <td>12.5</td>
+                <td>7</td>
+                <td>87.5</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>1</td>
+                <td>12.5</td>
+                <td>8</td>
+                <td>100</td>
+            </tr>
+        </table>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Frequencies: the StatsDirect help example (eight responses on a Likert scale)
+# in R
+response &lt;- c(3, 3, 4, 1, 1, 2, 5, 3)
+n &lt;- length(response)
+
+# R's standard table of counts
+counts &lt;- table(response)
+print(counts)
+
+# The report's table: each value with its frequency, relative frequency as a
+# percentage, cumulative frequency and cumulative percentage
+cat("Total =", n, "\n")
+cat("Value  Frequency  Relative %  Cumulative  Cumulative Relative %\n")
+cumulative &lt;- cumsum(counts)
+for (i in seq_along(counts)) {
+  cat(names(counts)[i], counts[i], 100 * counts[i] / n, cumulative[i],
+      100 * cumulative[i] / n, "\n")
+}</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+
+    </body>
+</html>

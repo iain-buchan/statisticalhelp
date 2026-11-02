@@ -1,0 +1,38 @@
+# Kruskal-Wallis test, Conover (1999) corn yields by four methods. One fragment per line.
+Mean rank: 21.83
+T = 25.464373
+T = 25.628836
+Critical q (range) = 3.63316
+2.97066
+P = 0.1529
+3.385636
+P = 0.0782
+4.91709
+P = 0.0029
+4.709793
+P = 0.0048
+4.744037
+P = 0.0044
+4.59903
+P = 0.0063
+2.042272
+6.533333
+4.617018
+P = 0.0071
+7.738095
+5.064024
+P = 0.004
+17.020833
+4.882747
+14.271429
+4.952009
+10.4875
+4.766474
+24.758929
+5.20065
+P < 0.0001
+HP: Mean rank: 21.83, 15.3, 29.57, 4.81
+HP: Total observations = 34
+HP: Dwass-Steel-Critchlow-Fligner, 2-sided
+HP: Conover-Iman, 2-sided
+HP: Critical t (30 df, 2-sided) = 2.042272

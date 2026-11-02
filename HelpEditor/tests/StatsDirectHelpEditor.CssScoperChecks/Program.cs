@@ -1,0 +1,50 @@
+using System.Text.Json;
+using StatsDirect.HelpEditor.Core;
+
+string root = Path.GetFullPath(args.Length > 0 ? args[0] : "../../../../../");
+var checks = new List<object>(); var failures = new List<string>();
+void Check(bool value, string name, object? detail = null) { checks.Add(new { name, passed = value, detail }); if (!value) failures.Add(name); }
+void Equal(string css, string expected, string name) { string actual = HelpCssScoper.Scope(css); Check(actual == expected, name, new { actual, expected }); }
+void Reject(string css, string name) { try { HelpCssScoper.Scope(css); Check(false, name); } catch (InvalidDataException) { Check(true, name); } }
+Equal("body,p{color:red}", "#help-topic-body,#help-topic-body p{color:red}", "Scopes body itself and ordinary descendants");
+Equal("html body > p,body.x a{color:blue}", "html #help-topic-body > p,#help-topic-body.x a{color:blue}", "Replaces body components without doubling the root");
+Equal("html[data-help-skin='flare'].x a{color:red}", "html[data-help-skin='flare'].x #help-topic-body a{color:red}", "Preserves the outer HTML appearance condition");
+Equal("html:root{color:red}", "html:root #help-topic-body{color:red}", "Preserves HTML compound selector conditions");
+Equal(".somebody,bodyguard,[title='body']{color:red}", "#help-topic-body .somebody,#help-topic-body bodyguard,#help-topic-body [title='body']{color:red}", "Does not replace substrings or attribute strings");
+Equal("a:is(.a,.b),[title='a,b']{color:red}", "#help-topic-body a:is(.a,.b),#help-topic-body [title='a,b']{color:red}", "Keeps commas inside functions and quoted attributes");
+Equal(".comma\\,name,p{color:red}", "#help-topic-body .comma\\,name,#help-topic-body p{color:red}", "Keeps escaped selector commas");
+Equal("/*body{}*/ body/*note*/.x {content:'{;}'}", "/*body{}*/ #help-topic-body/*note*/.x{content:'{;}'}", "Handles comments and declaration strings without treating them as rules");
+Equal("@media (max-width:600px){body{margin:0}@supports(display:grid){p,a{display:grid}}}", "@media (max-width:600px){#help-topic-body{margin:0}@supports(display:grid){#help-topic-body p,#help-topic-body a{display:grid}}}", "Scopes recursively inside nested media and support rules");
+Equal("@layer base;@layer base{@container article (width>30em){h1{font-size:2em}}}", "@layer base;@layer base{@container article (width>30em){#help-topic-body h1{font-size:2em}}}", "Handles layer declarations and nested container rules");
+Equal("@font-face{font-family:Example;src:url(font.woff2)}@keyframes fade{from{opacity:0}50%,to{opacity:1}}@-webkit-keyframes x{to{opacity:0}}p{animation:fade 1s}", "@font-face{font-family:Example;src:url(font.woff2)}@keyframes fade{from{opacity:0}50%,to{opacity:1}}@-webkit-keyframes x{to{opacity:0}}#help-topic-body p{animation:fade 1s}", "Preserves font definitions and keyframe selectors");
+Equal("@namespace MadCap url('urn:unused');p{color:red}", "#help-topic-body p{color:red}", "Omits unused authoring namespace declarations");
+Equal("@property --value{syntax:'<number>';inherits:false;initial-value:1}p{--json:{x:y};color:var(--color)}", "@property --value{syntax:'<number>';inherits:false;initial-value:1}#help-topic-body p{--json:{x:y};color:var(--color)}", "Preserves property definitions and balanced custom values");
+Equal("#help-topic-body p{color:red}", "#help-topic-body p{color:red}", "Does not duplicate an existing root prefix");
+Equal(":is(body,p){color:red}", "#help-topic-body :is(body,p){color:red}", "A body name inside a selector function cannot remove outer scoping");
+Check(HelpCssScoper.Scope("body,p{color:red}", ".article") == ".article,.article p{color:red}", "Supports a caller-supplied root selector");
+var urls = new List<string>();
+string relocated = HelpCssScoper.Scope("/*url(ignore)*/p{content:'url(keep)';background:url('../a b(c).svg');mask:URL(icon\\).svg);src:url(\\66 ont.woff2)}", rewriteUrl: value => { urls.Add(value); return "/assets/" + value; });
+Check(urls.SequenceEqual(["../a b(c).svg", "icon).svg", "font.woff2"]) && relocated.Contains("url(\"/assets/../a b(c).svg\")") && relocated.Contains("content:'url(keep)'") && relocated.Contains("/*url(ignore)*/"), "Rewrites real URL functions with decoded CSS escapes, preserving comments and content", new { urls, relocated });
+string escaped = HelpCssScoper.Scope("p{background:url(a)}", rewriteUrl: _ => "a\"b\\c\n.svg");
+Check(escaped.Contains("url(\"a\\\"b\\\\c\\a .svg\")"), "Quotes and escapes rewritten URLs safely", escaped);
+Reject("p{color:red", "Rejects an unclosed declaration block");
+Reject("@media all{p{color:red}", "Rejects an unclosed grouping block");
+Reject("p[title='x'{color:red}", "Rejects mismatched selector brackets");
+Reject("p{content:'unterminated}", "Rejects an unclosed quoted string");
+Reject("/*unfinished", "Rejects an unclosed comment");
+Reject("p{transform:translate(1px]}", "Rejects mismatched declaration groups");
+Reject("p,,a{color:red}", "Rejects an empty selector");
+Reject("p;color:red;", "Rejects an ordinary selector without a block");
+Reject("@unknown{p{color:red}}", "Rejects unknown block at-rules clearly");
+Reject("@import url('global.css');p{color:red}", "Rejects unresolved imports rather than leaking unscoped CSS into the viewer");
+Reject("p{content:'line\nbreak'}", "Rejects an unescaped newline in a string");
+Reject("p{color:red}}", "Rejects an unexpected closing block");
+string stylesheet = File.ReadAllText(Path.Combine(root, "HelpSource/Content/resources/Stylesheets/statsdirect.css"));
+string scoped = HelpCssScoper.Scope(stylesheet);
+Check(scoped.Contains("#help-topic-body h1{") && scoped.Contains("#help-topic-body pre.rcode{") && scoped.Contains("#help-topic-body{") && !scoped.Contains("#help-topic-body body{"), "Scopes the real untouched topic stylesheet and its R styles");
+Check(HelpCssScoper.Scope(EquationArtworkCatalog.Css).Contains("#help-topic-body .help-equation.help-equation-artwork{"), "Scopes the existing equation artwork rules");
+File.WriteAllText(Path.Combine(root, "evidence/scoped-topic-stylesheet.css"), scoped);
+var report = new { passed = failures.Count == 0, checkedAtUtc = DateTimeOffset.UtcNow, total = checks.Count, failures, checks };
+File.WriteAllText(Path.Combine(root, "evidence/css-scoper-checks.json"), JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true }));
+Console.WriteLine(JsonSerializer.Serialize(new { report.passed, report.total, failures }));
+return failures.Count == 0 ? 0 : 1;

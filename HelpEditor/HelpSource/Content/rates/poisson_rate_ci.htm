@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="941.5519" MadCap:lastWidth="2868" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Poisson Confidence Interval (Incidence Rate) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Incidence rate confidence interval;Poisson rate confidence interval;Rates: Single" />Poisson Rate Confidence Interval</h1>
+        <p>&#160;</p>
+        <p>Menu locations:</p>
+        <p><strong>Analysis_Rates_Poisson Rate CI;</strong>
+        </p>
+        <p><strong>Analysis_Exact_Poisson Rate CI.</strong>
+        </p>
+        <p>&#160;</p>
+        <p>Uncommon events in populations, such as the occurrence of specific diseases, are usefully modelled using a <a href="../distributions/poisson.htm">Poisson distribution</a>. A common application of Poisson confidence intervals is to <a href="incidence_and_prevalence.htm">incidence rates</a> of diseases (<a href="../references/reference_list.htm#ref-gail-2000">Gail and Benichou, 2000</a>; <a href="../references/reference_list.htm#ref-rothman-1998">Rothman and Greenland, 1998</a>; <a href="../references/reference_list.htm#ref-selvin-1996">Selvin, 1996</a>).</p>
+        <p>&#160;</p>
+        <p>The incidence rate is estimated as the number of events observed divided by the time at risk of event during the observation period.</p>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>Exact Poisson confidence limits for the estimated rate are found as the Poisson means, for distributions with the observed number of events and probabilities relevant to the chosen confidence level, divided by time at risk. The relationship between the Poisson and chi-square distributions is employed here (<a href="../references/reference_list.htm#ref-ulm-1990">Ulm, 1990</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle Y_l=\frac{\chi_{2Y,\space\alpha/2}^2}{2} \\
+
+\displaystyle Y_u=\frac{\chi_{2(Y+1),\space1-\alpha/2}^2}{2}$</MadCap:equation>
+        </p>
+        <p>- where Y is the observed number of events, Y<sub>l</sub> and Y<sub>u</sub> are lower and upper confidence limits for Y respectively, χ<sup>2</sup><sub>ν,a</sub> is the chi-square quantile for lower tail probability a on ν degrees of freedom.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>Say that 14 events are observed in 200 people studied for 1 year and 100 people studied for 2 years.</p>
+        <p>&#160;</p>
+        <p>The person time at risk is 200 + 100 x 2 = 400 person years</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Events observed = 14</p>
+        <p>Time spent at risk of event = 400</p>
+        <p>&#160;</p>
+        <p>Poisson (e.g. incidence) rate estimate = 0.035</p>
+        <p>Exact 95% confidence interval = 0.019135 to 0.058724</p>
+        <p>&#160;</p>
+        <p>Here we can say with 95% confidence that the true population incidence rate for this event lies between 0.02 and 0.06 events per person year.</p>
+        <p>&#160;</p>
+        <p>See also <a href="compare_crude_incidence_rates.htm">incidence rate comparisons</a></p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Poisson rate confidence interval: the StatsDirect help example (14 events in 400
+# person-years of observation, an incidence rate) in R
+events &lt;- 14
+time_at_risk &lt;- 400                       # 200 people for 1 year and 100 for 2 years
+
+# poisson.test gives the exact limits for the rate (a whole number of events), the
+# same as the chi-square quantile formulae above: its estimate is events / time
+print(poisson.test(events, time_at_risk, conf.level = 0.95))
+
+# The report's lines to 6 places. The limits are also the Poisson means whose
+# cumulative probabilities reach the tails: qgamma(alpha / 2, events) and
+# qgamma(1 - alpha / 2, events + 1), divided by the time at risk. With no events the
+# lower limit is 0.
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+alpha &lt;- 0.05
+rate &lt;- events / time_at_risk
+lower &lt;- if (events == 0) 0 else qgamma(alpha / 2, events) / time_at_risk
+upper &lt;- qgamma(1 - alpha / 2, events + 1) / time_at_risk
+cat("Events observed =", events, "\n")
+cat("Time spent at risk of event =", time_at_risk, "\n")
+cat("Poisson (e.g. incidence) rate estimate =", six(rate), "\n")
+cat("Exact 95% confidence interval =", six(lower), "to", six(upper), "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

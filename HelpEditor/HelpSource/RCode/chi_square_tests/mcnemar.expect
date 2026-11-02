@@ -1,0 +1,11 @@
+# McNemar and exact (Liddell) test for matched pairs, Armitage and Berry (1994) two culture media. One fragment per line.
+= 7.142857 (1 DF)
+P = 0.0075
+= 5.785714 (1 DF)
+P = 0.0162
+Point estimate of relative risk (R') = 6
+Exact 95% confidence interval = 1.335744 to 55.197091
+F = 4
+Two sided P = 0.0129
+# the warning the report adds when the exact P is below 0.05: not a figure, so not printed by the script
+HP: R' is significantly different from unity

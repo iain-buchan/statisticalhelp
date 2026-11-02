@@ -1,0 +1,9 @@
+# Sample size for Pearson's correlation, an invented example: r1 = 0.4 against r0 = 0, 80% power, two sided alpha 5%. One fragment per line.
+Alpha = 0.05
+Power = 0.8
+Correlation coefficient under null hypothesis = 0
+Correlation coefficient under alternative hypothesis = 0.4
+Estimated minimum sample size = 47
+RH:46.73
+RH:80.2%
+RH:79.3%

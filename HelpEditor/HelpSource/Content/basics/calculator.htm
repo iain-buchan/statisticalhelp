@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2212" MadCap:lastWidth="3154" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Calculator in StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="A calculator that takes algebraic expressions and evaluates statistical functions." />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Calculator;Expression evaluator" />Calculator</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis &gt; Calculator</b>, in its own section immediately before <b>Options</b>.</p>
+        <p>&#160;</p>
+        <p>
+        The StatsDirect calculator evaluates expressions in the form of simple arithmetic or more complex algebra.</p>
+        <p>&#160;</p>
+        <p>Calculator opens when selected from the Analysis menu. It docks below the worksheet or report and can be resized by dragging its divider. Use <strong>Pop out</strong> to move it into a separate window and <strong>Dock</strong> to return it. <strong>Close</strong> hides it without leaving a tab; reopening it retains your expression, result and saved calculations for the current session. Help can remain open alongside Calculator.</p>
+        <p>Long expressions wrap in the input box, which scrolls vertically when needed. Press <strong>Enter</strong> or select <strong>Calculate</strong> to evaluate an expression. Use <strong>Shift+Enter</strong> to add a line break. Line breaks outside quoted text are treated as whitespace.</p>
+        <p>All calculations are performed in IEEE-754 double precision (64-bit).</p>
+        <p>&#160;</p>
+        <p><strong>Save</strong> evaluates the expression and adds it with its result to the saved list. Select an item and use <strong>Recall</strong> to restore it, or <strong>Insert</strong> to insert its expression at the caret in a new calculation. <strong>Remove</strong> removes the selected saved item. <strong>Copy result</strong> copies the current result; <strong>Copy saved</strong> copies all saved calculations to the clipboard.</p>
+        <p>&#160;</p>
+        <p>While a parameter dialog is open, a visible calculator temporarily floats so you can still use it. It returns to your chosen presentation when the dialog closes.</p>
+        <p>&#160;</p>
+        <p>
+            <img src="../resources/Images/sigma.gif" width="30" height="30" border="0" />
+        </p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td><u>Constants</u>
+                </td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>PI</td>
+                <td>3.14159265358979323846 (&#960;)</td>
+            </tr>
+            <tr>
+                <td>EE</td>
+                <td>2.71828182845904523536 (e)</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>
+                    Arithmetic Functions</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>ABS</td>
+                <td>absolute value</td>
+            </tr>
+            <tr>
+                <td>CLOG</td>
+                <td>common (base 10) logarithm</td>
+            </tr>
+            <tr>
+                <td>CEXP</td>
+                <td>anti log (base 10)</td>
+            </tr>
+            <tr>
+                <td>EXP</td>
+                <td>anti log (base e)</td>
+            </tr>
+            <tr>
+                <td>LOG</td>
+                <td>natural (base e, Napieran) logarithm</td>
+            </tr>
+            <tr>
+                <td>LOGIT</td>
+                <td>logit: log(p/(1-p)), p=proportion</td>
+            </tr>
+            <tr>
+                <td>ALOGIT</td>
+                <td>antilogit: exp(l)/(1+exp(l)), l=logit</td>
+            </tr>
+            <tr>
+                <td>SQR or SQRT</td>
+                <td>square root</td>
+            </tr>
+            <tr>
+                <td>!</td>
+                <td>factorial (maximum 170.624)</td>
+            </tr>
+            <tr>
+                <td>LOG!</td>
+                <td>log factorial</td>
+            </tr>
+            <tr>
+                <td>IZ</td>
+                <td>normal deviate for a p value</td>
+            </tr>
+            <tr>
+                <td>UZ</td>
+                <td>upper tail p for a normal deviate</td>
+            </tr>
+            <tr>
+                <td>LZ</td>
+                <td>lower tail p for a normal deviate</td>
+            </tr>
+            <tr>
+                <td>TRUNC or FIX</td>
+                <td>integer part of a real number</td>
+            </tr>
+            <tr>
+                <td>CINT</td>
+                <td>real number rounded to nearest integer</td>
+            </tr>
+            <tr>
+                <td>INT</td>
+                <td>real number rounded down to the nearest integer (e.g. -2.5 gives -3)</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Please note that the largest factorial allowed is 170.624, but you can work with Log factorials via the LOG! function, e.g. LOG!(272).</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td><u>Arithmetic Operators</u>
+                </td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>^</td>
+                <td>exponentiation (to the power of)</td>
+            </tr>
+            <tr>
+                <td>+</td>
+                <td>addition</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>subtraction; in front of a value it is negation, e.g. -5, -PI, -(3+2), -LOG(2)</td>
+            </tr>
+            <tr>
+                <td>*</td>
+                <td>multiplication</td>
+            </tr>
+            <tr>
+                <td>/</td>
+                <td>division</td>
+            </tr>
+            <tr>
+                <td>\</td>
+                <td>integer division</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Calculations give an order of priority to arithmetic operators, this must be considered when entering expressions. For example, the result of the expression "6 - 3/2" is 4.5 and not 1.5 because division takes priority over subtraction.</p>
+        <p>&#160;</p>
+        <p>Priority of arithmetic operators in descending order</p>
+        <ol>
+            <li>Factorial (!) and Exponentiation (^ or **): factorial first, so 2^3! is 2^6 = 64; a chain of powers is worked from left to right, so 2^3^2 is (2^3)^2 = 64</li>
+            <li>Negation (-X): -2^2 is -(2^2) = -4 and -3! is -(3!) = -6; write (-2)^2 for 4. Exception = x^-y: a minus sign straight after ^ belongs to the exponent, i.e. 4^-2 is 4^(-2) = 0.0625. Formulas typed into worksheet cells follow the Excel convention instead, where =-2^2 is 4. Versions before 5 understood a minus sign only as part of a number, so they gave -2^2 = 4 and could not evaluate -PI or -(3+2)</li>
+            <li>Multiplication, Division and Integer Division (*, /, \)</li>
+            <li>Addition and Subtraction (+, -)</li>
+        </ol>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td><u>Trigonometric Functions</u>
+                </td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>ARCCOS</td>
+                <td>arc cosine</td>
+            </tr>
+            <tr>
+                <td>ARCCOSH</td>
+                <td>arc hyperbolic cosine</td>
+            </tr>
+            <tr>
+                <td>ARCCOT</td>
+                <td>arc cotangent</td>
+            </tr>
+            <tr>
+                <td>ARCCOTH</td>
+                <td>arc hyperbolic cotangent</td>
+            </tr>
+            <tr>
+                <td>ARCCSC</td>
+                <td>arc cosecant</td>
+            </tr>
+            <tr>
+                <td>ARCCSCH</td>
+                <td>arc hyperbolic cosecant</td>
+            </tr>
+            <tr>
+                <td>ARCTANH</td>
+                <td>arc hyperbolic tangent</td>
+            </tr>
+            <tr>
+                <td>ARCSEC</td>
+                <td>arc secant</td>
+            </tr>
+            <tr>
+                <td>ARCSECH</td>
+                <td>arc hyperbolic secant</td>
+            </tr>
+            <tr>
+                <td>ARCSIN</td>
+                <td>arc sine</td>
+            </tr>
+            <tr>
+                <td>ARCSINH</td>
+                <td>arc hyperbolic sine</td>
+            </tr>
+            <tr>
+                <td>ARCTAN or ATAN</td>
+                <td>arc tangent</td>
+            </tr>
+            <tr>
+                <td>COS</td>
+                <td>cosine</td>
+            </tr>
+            <tr>
+                <td>COT</td>
+                <td>cotangent</td>
+            </tr>
+            <tr>
+                <td>COTH</td>
+                <td>hyperbolic cotangent</td>
+            </tr>
+            <tr>
+                <td>CSC</td>
+                <td>cosecant</td>
+            </tr>
+            <tr>
+                <td>CSCH</td>
+                <td>hyperbolic cosecant</td>
+            </tr>
+            <tr>
+                <td>SIN</td>
+                <td>sine</td>
+            </tr>
+            <tr>
+                <td>SINH</td>
+                <td>hyperbolic sine</td>
+            </tr>
+            <tr>
+                <td>SECH</td>
+                <td>hyperbolic secant</td>
+            </tr>
+            <tr>
+                <td>SEC</td>
+                <td>secant</td>
+            </tr>
+            <tr>
+                <td>TAN</td>
+                <td>tangent</td>
+            </tr>
+            <tr>
+                <td>TANH</td>
+                <td>hyperbolic tangent</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To convert degrees to radians, multiply degrees by pi/180. To convert radians to degrees, multiply radians by 180/pi.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td><u>Logical Functions</u>
+                </td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>AND</td>
+                <td>logical AND</td>
+            </tr>
+            <tr>
+                <td>NOT</td>
+                <td>logical NOT</td>
+            </tr>
+            <tr>
+                <td>OR</td>
+                <td>logical OR</td>
+            </tr>
+            <tr>
+                <td>&lt;</td>
+                <td>less than</td>
+            </tr>
+            <tr>
+                <td>=</td>
+                <td>equal to</td>
+            </tr>
+            <tr>
+                <td>&gt;</td>
+                <td>greater than</td>
+            </tr>
+        </table>
+    </body>
+</html>

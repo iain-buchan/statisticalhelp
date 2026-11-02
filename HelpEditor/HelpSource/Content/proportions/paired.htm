@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1490" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Compare a Pair of Proportions - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Paired proportions;Proportions: Paired" />Paired Proportions</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Proportions_Paired</b>.</p>
+        <p>&#160;</p>
+        <p>This function examines the difference between a pair of <a href="binomial_proportions.htm" target="_popup">binomial proportions</a>.</p>
+        <p>&#160;</p>
+        <p>Two proportions are paired (as opposed to independent) if they share a common feature that affects the outcome. For example, when comparing two laboratory methods (culture media) to detect bacteria in samples of blood, if blood from the same sample is put into both methods, this is the "pairing". Pairs of results from multiple samples can then be compared as a pair of proportions:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">Group/Category A:</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-align: center;text-decoration: underline;">outcome present</td>
+                <td style="text-align: center;text-decoration: underline;">outcome absent</td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: right;">Group/Category B:</td>
+                <td style="text-align: right;">outcome present:</td>
+                <td style="text-align: center;">a</td>
+                <td style="text-align: center;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome absent:</td>
+                <td style="text-align: center;">c</td>
+                <td style="text-align: center;">d</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>total n = a+b+c+d</p>
+        <p>responding in both categories = r = a</p>
+        <p>responding in first category only = s = b</p>
+        <p>responding in second category only = t = c</p>
+        <p>&#160;</p>
+        <p>proportion 1 = (r + s) / n</p>
+        <p>proportion 2 = (r + t) / n</p>
+        <p>&#160;</p>
+        <p>proportion difference (delta) = (s - t) / n</p>
+        <p>&#160;</p>
+        <p>Another way of looking at these data is to examine how the grouping into category A depends upon the grouping into category B (see <a href="../chi_square_tests/mcnemar.htm">exact test for matched pairs of counts</a>).</p>
+        <p>&#160;</p>
+        <p>StatsDirect gives you exact and exact mid-P hypothesis tests for the equality of the two proportions (i.e. delta = 0) and gives you a confidence interval for the difference between them.</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>two mutually exclusive outcomes</li>
+            <li>random sample from one population</li>
+        </ul>
+        <p>&#160;</p>
+        <p>Consider using <a href="mid_p.htm" target="_popup">mid-P</a> values and intervals when you have several similar studies to consider within an overall investigation (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Exact methods are used throughout (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-liddell-1983">Liddell, 1983</a>). The two sided exact P value equates with the exact test for a <a href="../chi_square_tests/mcnemar.htm">paired fourfold table</a> (<a href="../references/reference_list.htm#ref-liddell-1983">Liddell, 1983</a>). The exact test is calculated for any number of pairs.</p>
+        <p>&#160;</p>
+        <p>The confidence interval is constructed using Newcombe's refinement of Wilson's score based method, this is close to a <a href="mid_p.htm">mid-P</a> interval (<a href="../references/reference_list.htm#ref-newcombe-1998-a">Newcombe, 1998a</a>).</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 138)</a>.</p>
+        <p>&#160;</p>
+        <p>The data below represent a comparison of two media for culturing Mycobacterium tuberculosis. Fifty suspect sputum specimens were plated up on both media and the following results were obtained:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">Medium B:</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">Growth</td>
+                <td style="text-decoration: underline;text-align: right;">No Growth</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Medium A:</td>
+                <td style="text-align: right;">Growth:</td>
+                <td style="text-align: right;">20</td>
+                <td style="text-align: right;">12</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">No Growth:</td>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">16</td>
+                <td style="text-align: right;">N = 50</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must select paired proportions from the proportions section of the analysis menu. Select a 95% confidence interval by pressing enter when you are presented with the confidence interval menu. Enter TOTAL (n) as 50, BOTH (r) as 20, FIRST (s) as 12 and SECOND (t) as 2.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Total = 50, both = 20, first only = 12, second only = 2</p>
+        <p>Proportion 1 = 0.64</p>
+        <p>Proportion 2 = 0.44</p>
+        <p>Proportion difference = 0.2</p>
+        <p>&#160;</p>
+        <p>Exact two sided P = 0.0129</p>
+        <p>Exact one sided P = 0.0065</p>
+        <p>&#160;</p>
+        <p>Exact two sided mid P = 0.0074</p>
+        <p>Exact one sided mid P = 0.0037</p>
+        <p>&#160;</p>
+        <p>Score based (Newcombe) 95% confidence interval for the proportion difference:</p>
+        <p>0.056156 to 0.329207</p>
+        <p>&#160;</p>
+        <p>Here we can conclude that the proportion difference is statistically significantly different from zero. With 95% confidence we can say that the true population value for the proportion difference lies somewhere between 0.06 and 0.33. This leaves us with little doubt that medium A is more effective than medium B for the culture of tubercle bacilli.</p>
+        <p>&#160;</p>
+        <p>Compare these results with the exact test for <a href="../chi_square_tests/mcnemar.htm">matched pairs</a>.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Paired proportions: the StatsDirect help example (Armitage and Berry 1994, p. 138,
+# growth of tubercle bacilli from 50 sputum specimens on two culture media) in R
+n &lt;- 50   # total pairs
+r &lt;- 20   # growth on both media
+s &lt;- 12   # growth on medium A only
+t &lt;- 2    # growth on medium B only
+p1 &lt;- (r + s) / n
+p2 &lt;- (r + t) / n
+cat("Total = ", n, ",  both = ", r, ",  first only = ", s, ",  second only = ", t,
+    "\n", sep = "")
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+cat("Proportion 1 =", six(p1), "\n")
+cat("Proportion 2 =", six(p2), "\n")
+cat("Proportion difference =", six((s - t) / n), "\n")
+
+# The exact test is a binomial test on the discordant pairs: under the null
+# hypothesis each of the s + t pairs that differ is equally likely to favour
+# either medium, so s ~ Binomial(s + t, 1/2). With probability 1/2 the binomial is
+# symmetric, so the outcomes at least as far from 7 as s = 12 are 0 to 2 and 12 to 14,
+# and binom.test's two sided P (0.0129) is twice the one sided P. mcnemar.test() on the
+# 2 by 2 table gives the continuity corrected chi-square approximation instead.
+print(binom.test(s, s + t, p = 0.5))
+
+# One sided and mid P values. The one sided P is the lower tail of the smaller of
+# s and t; mid P counts the observed value with half weight. Two sided P is twice
+# the one sided value, capped at 1.
+m &lt;- min(s, t)
+p_one &lt;- pbinom(m, s + t, 0.5)
+p_mid &lt;- p_one - dbinom(m, s + t, 0.5) / 2
+cat("Exact two sided", pv(min(1, 2 * p_one)), "\n")
+cat("Exact one sided", pv(p_one), "\n")
+cat("Exact two sided mid", pv(min(1, 2 * p_mid)), "\n")
+cat("Exact one sided mid", pv(p_mid), "\n")
+
+# Confidence interval for the difference: Newcombe's (1998) method 10. The Wilson
+# score interval of each proportion is found first, then the two are combined using
+# an estimate of the correlation (phi) between the paired outcomes, with Newcombe's
+# continuity correction of the numerator of phi when it is positive.
+z &lt;- qnorm(0.975)
+a &lt;- r
+b &lt;- s
+c &lt;- t
+d &lt;- n - r - s - t
+wilson &lt;- function(x) {
+  den &lt;- n + z^2
+  half &lt;- 0.5 * z * sqrt(z^2 + 4 * x * (n - x) / n)
+  c((x + 0.5 * z^2 - half) / den, (x + 0.5 * z^2 + half) / den)
+}
+w1 &lt;- wilson(a + b)   # limits for proportion 1
+w2 &lt;- wilson(a + c)   # limits for proportion 2
+if ((a + b) * (c + d) * (a + c) * (b + d) == 0) {
+  phi &lt;- 0
+} else {
+  num &lt;- a * d - b * c
+  if (num &gt; 0) num &lt;- max(num - n / 2, 0)
+  phi &lt;- num / sqrt((a + b) * (c + d) * (a + c) * (b + d))
+}
+dl1 &lt;- p1 - w1[1]
+du1 &lt;- w1[2] - p1
+dl2 &lt;- p2 - w2[1]
+du2 &lt;- w2[2] - p2
+lower &lt;- (p1 - p2) - sqrt(dl1^2 - 2 * phi * dl1 * du2 + du2^2)
+upper &lt;- (p1 - p2) + sqrt(du1^2 - 2 * phi * du1 * dl2 + dl2^2)
+cat("Score based (Newcombe) 95% confidence interval for the proportion difference:\n")
+cat(six(lower), "to", six(upper), "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

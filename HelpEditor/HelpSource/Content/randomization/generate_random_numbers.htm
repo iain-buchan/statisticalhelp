@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="3283" MadCap:lastWidth="2868" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Random Number Generation (by Distribution) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Random numbers" />
+            Random Numbers</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Generating_Random Numbers</b>.</p>
+        <p>&#160;</p>
+        <p>This function enables you to create one or more series of random numbers from given distributions.</p>
+        <p>&#160;</p>
+        <p>A <a href="random_number_generator.htm">robust generator</a> of uniform (pseudo)random numbers is used as the basis for generating deviates from the probability distributions described below. You are given the opportunity to enter your own seed number to be used by the random number generator but you should use the default seed (based upon your computer's clock) in most cases. Please note that each seed generates its own series and that series is the same if you use the seed again. You have very little chance of using the same seed twice if you select the seed that StatsDirect suggests.</p>
+        <p>&#160;</p>
+        <p>These functions are intended for simulation work; they employ widely cited and debated algorithms (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle, 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Uniform (continuous uniform, rectangular)</u>
+        </p>
+        <p>The continuous uniform distribution has a constant density function of the interval (a, b) and thus a rectangular shape from a to b:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{1}{b-a} \\
+\displaystyle \text{var}(x)=\frac{(b-a)^2}{12}$</MadCap:equation>
+        </p>
+        <p>- where a and b lie between minus and plus infinity.</p>
+        <p>&#160;</p>
+        <p>The interval most commonly used is 0 to 1</p>
+        <p>&#160;</p>
+        <p>For an interval a to b, StatsDirect asks for the number type: interval (any value between a and b) or count (whole numbers from a to b inclusive, each equally likely).</p>
+        <p>&#160;</p>
+        <p><u>Normal (Gaussian)</u>
+        </p>
+        <p>The commonly used standard <a href="../distributions/normal.htm">normal distribution</a> (mean of 0 and standard deviation of 1) is one of a family of normal distributions defined by the density function:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(x-\mu)^2}{2\sigma^2}\right)}$</MadCap:equation>
+        </p>
+        <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
+        <p>&#160;</p>
+        <p>Algorithm: inversion of the cumulative distribution function (<a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>)</p>
+        <p>&#160;</p>
+        <p><u>Lognormal</u>
+        </p>
+        <p>The density of a lognormal distribution is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{1}{x\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(\ln(x)-\mu)^2}{2\sigma^2}\right)}$</MadCap:equation>
+        </p>
+        <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
+        <p>&#160;</p>
+        <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ<sup>2</sup>).</p>
+        <p>&#160;</p>
+        <p>Algorithm: transformed inversion of the cumulative distribution function (<a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>)</p>
+        <p>&#160;</p>
+        <p><u>Exponential</u>
+        </p>
+        <p>The (negative) exponential distribution is a special case (shaping parameter of 1) of the gamma distribution. Its density is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\lambda\exp (-\lambda x)$</MadCap:equation>
+        </p>
+        <p>- where the parameter λ must be greater than zero.</p>
+        <p>&#160;</p>
+        <p>Algorithm: transformation (<a href="../references/reference_list.htm#ref-ahrens-1972">Ahrens and Dieter, 1972</a>).</p>
+        <p>&#160;</p>
+        <p><u>Gamma</u>
+        </p>
+        <p>The density function of the gamma distribution is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{\lambda}{\Gamma(r)}(\lambda x)^{r-1} \exp (-\lambda x)$</MadCap:equation>
+        </p>
+        <p>- where the parameters λ and r (shaping parameter) must be greater than zero. StatsDirect asks for A (shaping parameter, r) and B (scaling parameter, 1/λ).</p>
+        <p>&#160;</p>
+        <p>Γ(*) is the gamma function:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}\exp(-t) \space dt, \space x&gt;0 \\$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Please note that gamma deviates with a shaping parameter of 0.5 are half the square of normal deviates and gamma deviates with a shaping parameter of 1 are exponential deviates.</p>
+        <p>&#160;</p>
+        <p>Algorithm: acceptance-rejection methods GD and GS (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>).</p>
+        <p>&#160;</p>
+        <p><u>Binomial</u>
+        </p>
+        <p>The density function of the <a href="../distributions/binomial.htm">binomial distribution</a> is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\left(\begin{array}{c}n\\ x\end{array}\right)p^x(1-p)^{n-x} \\$</MadCap:equation>
+        </p>
+        <p>- where p lies between 0 and 1 and n is the number of trials.</p>
+        <p>&#160;</p>
+        <p>Algorithm: acceptance-rejection method BTPEC (<a href="../references/reference_list.htm#ref-kachitvichyanukul-1988">Kachitvichyanukul and Schmeiser, 1988</a>).</p>
+        <p>&#160;</p>
+        <p><u>Poisson</u>
+        </p>
+        <p>The density function of the <a href="../distributions/poisson.htm">Poisson distribution</a> is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\frac{\exp (-\lambda)\lambda^x}{x!}$</MadCap:equation>
+        </p>
+        <p>- where parameter λ is greater than zero.</p>
+        <p>&#160;</p>
+        <p>Algorithm: acceptance-rejection (<a href="../references/reference_list.htm#ref-ahrens-1982-a">Ahrens and Dieter, 1982a</a>).</p>
+        <p>&#160;</p>
+        <p><u>Chi-square</u>
+        </p>
+        <p>The density function of the <a href="../distributions/chisq.htm">chi-square distribution</a> is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\frac{x^{n/2-1} \exp(-x/2)}{2^{n/2}(n/2-1)!} \space \text{if} \space x&gt;0; P(x)=0 \space \text{otherwise}$</MadCap:equation>
+        </p>
+        <p>The deviates are calculated as gamma deviates with parameters n/2 and 2, where n is degrees of freedom.</p>
+        <p>&#160;</p>
+        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>,<a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>F (variance ratio)</u>
+        </p>
+        <p>The density function of the <a href="../distributions/f.htm">F distribution</a> is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\frac{\left( \frac{\displaystyle  n+d-2}{\displaystyle 2}\right)! \space x^{n/2-1}}{(n/2-1)!(d/2-1)!\left( 1+\frac{\displaystyle n}{\displaystyle d}x\right)^{(n+d)/2}} \left( \frac{n}{d}\right)^{n/2} \space \text{if}\space x&gt;0; P(x)=0 \space \text{otherwise}$</MadCap:equation>
+        </p>
+        <p>The deviates are calculated as (x/n)/(z/d) where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
+        <p>&#160;</p>
+        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Student's t</u>
+        </p>
+        <p>The density function of <a href="../distributions/t.htm">Student's t distribution</a>  is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle P(x)=\frac{\left( \frac{\displaystyle n-1}{\displaystyle 2}\right)!}{(n/2-1)!\sqrt{\pi n}(1+x^2/n)^{(n+1)/2}}$</MadCap:equation>
+        </p>
+        <p>The deviates are calculated as a standard normal deviate multiplied by the square root of the degrees of freedom (n) divided by a gamma deviate with parameters n/2 and 2 (a chi-square deviate with n degrees of freedom).</p>
+        <p>&#160;</p>
+        <p>Algorithm: Transformed standard normal and gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Beta</u>
+        </p>
+        <p>The density function of the beta distribution is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \space x^{a-1}(1-x)^{b-1} \space \text{if} \space 0&lt;x&lt;1; f(x)=0 \space \text{otherwise}$</MadCap:equation>
+        </p>
+        <p>- where a and b are the two shape parameters.</p>
+        <p>&#160;</p>
+        <p>Algorithm: Acceptance-rejection methods BB and BC (<a href="../references/reference_list.htm#ref-cheng-1978">Cheng 1978</a>).</p>
+        <p>&#160;</p>
+        <p><u>Logistic</u>
+        </p>
+        <p>The density function of the standard logistic distribution is given by:</p>
+        <p>
+            <MadCap:equation>$\displaystyle f(x)=\Lambda(x)[1-\Lambda(x)] \\
+\displaystyle \Lambda(x)=\frac{1}{1+\exp(-x)}$</MadCap:equation>
+        </p>
+        <p>The deviates are calculated as location + scale * ln(u/(1-u)), where u is a uniform deviate.</p>
+        <p>&#160;</p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Cauchy</u>
+        </p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Weibull</u>
+        </p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p>&#160;</p>
+        <p><u>Geometric</u>
+        </p>
+        <p>Algorithm: Transformed Poisson and exponential deviates (<a href="../references/reference_list.htm#ref-devroye-1986">Devroye, 1986</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>; <a href="../references/reference_list.htm#ref-ahrens-1972">Ahrens and Dieter, 1972</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-a">1982a</a>).</p>
+        <p>&#160;</p>
+        <p><u>Negative binomial</u>
+        </p>
+        <p>Algorithm: Transformed Poisson and gamma deviates (<a href="../references/reference_list.htm#ref-devroye-1986">Devroye, 1986</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>; <a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-a">1982a</a>).</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>To fill a column with ten random numbers from the standard normal distribution, select Normal from the Random Numbers section of the Generating section of the Data menu. Enter 1 as the number of columns to fill and 10 as the number of rows, keep the population mean of 0 and the population standard deviation of 1, and enter 1234 as the seed in place of the one suggested.</p>
+        <p>&#160;</p>
+        <p>StatsDirect puts these ten numbers (shown here to six decimal places) into a new column of the worksheet, under the heading:</p>
+        <p>&#160;</p>
+        <p>Normal (seed 1234, mean = 0, sd = 1)</p>
+        <p>-0.872311</p>
+        <p>0.311024</p>
+        <p>-0.156733</p>
+        <p>0.790419</p>
+        <p>0.772112</p>
+        <p>-0.604991</p>
+        <p>-0.593378</p>
+        <p>0.848327</p>
+        <p>1.729491</p>
+        <p>1.154892</p>
+        <p>&#160;</p>
+        <p>The ten values have mean 0.337885 and standard deviation 0.864366: a sample this small from a normal distribution with mean 0 and standard deviation 1 need not look like one. Running the function again with seed 1234 gives the same ten numbers, and any other seed gives a different series. The seed used is always in the column heading, so a series can be repeated even when you accept the seed that StatsDirect suggests.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the illustration above in its structure: R's random number generator gives a different series for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Random numbers by distribution: the StatsDirect help illustration (ten standard
+# normal deviates from seed 1234, then samples from the other distributions that the
+# Data_Generating_Random Numbers menu offers) in R
+# StatsDirect and R both use the Mersenne Twister generator, but each seeds it in
+# its own way, so the same seed gives a different series in each program. Within one
+# program a seed always repeats its own series: set.seed() then the r* function.
+set.seed(1234)
+x &lt;- rnorm(10, mean = 0, sd = 1)
+cat("Normal (seed 1234, mean = 0, sd = 1), from R's generator:\n")
+print(round(x, 6))
+cat("Mean of the ten =", round(mean(x), 6), " sd =", round(sd(x), 6), "\n")
+print(summary(x))
+
+# The menu's other distributions and R's function for each, with StatsDirect's
+# parameter names in the comment; n is the number of rows to fill. R's runif and
+# StatsDirect's uniform generator both leave out the end points 0 and 1.
+n &lt;- 1000
+set.seed(1234)
+u01 &lt;- runif(n)                            # Uniform 0 to 1
+uab &lt;- runif(n, min = 2, max = 5)          # Uniform A to B, interval type
+cnt &lt;- sample(1:6, n, replace = TRUE)      # Uniform A to B, count type: whole numbers
+ln &lt;- rlnorm(n, meanlog = 0, sdlog = 1)    # Lognormal: log mean, log sd
+bi &lt;- rbinom(n, size = 10, prob = 0.3)     # Binomial: number of trials, probability
+po &lt;- rpois(n, lambda = 4)                 # Poisson: mean
+ga &lt;- rgamma(n, shape = 2, scale = 3)      # Gamma: A (shape), B (scale, 1/lambda)
+ex &lt;- rexp(n, rate = 2)                    # Exponential: rate
+ch &lt;- rchisq(n, df = 3)                    # Chi-square: degrees of freedom
+fv &lt;- rf(n, df1 = 4, df2 = 10)             # F: numerator, denominator df
+st &lt;- rt(n, df = 5)                        # Student's t: degrees of freedom
+lo &lt;- rlogis(n, location = 0, scale = 1)   # Logistic: mu, sigma
+ge &lt;- rgeom(n, prob = 0.3)                 # Geometric: P (failures before a success)
+nb &lt;- rnbinom(n, size = 2, prob = 0.5)     # Negative binomial: N, P (failures before
+                                           #   the Nth success)
+ca &lt;- rcauchy(n, location = 0, scale = 1)  # Cauchy: L (location), S (scale)
+we &lt;- rweibull(n, shape = 1.5, scale = 2)  # Weibull: A (shape), sigma (scale)
+be &lt;- rbeta(n, shape1 = 2, shape2 = 5)     # Beta: A, B
+
+# A sample's summary should sit close to the distribution's mean and variance: for
+# the gamma distribution A * B and A * B^2, for the lognormal exp(mu + sigma^2 / 2)
+# and exp(2 * mu + 2 * sigma^2) - exp(2 * mu + sigma^2), for the Poisson its mean
+cat("Uniform 0 to 1 (mean 0.5, variance 1/12):\n")
+print(summary(u01))
+cat("Sample variance =", round(var(u01), 4), "\n")
+cat("Gamma (A = 2, B = 3; mean 6, variance 18):\n")
+print(summary(ga))
+cat("Sample variance =", round(var(ga), 4), "\n")
+cat("Lognormal (log mean 0, log sd 1; mean", round(exp(0.5), 4), "variance",
+    paste0(round(exp(2) - exp(1), 4), "):"), "\n")
+print(summary(ln))
+cat("Sample variance =", round(var(ln), 4), "\n")
+cat("Poisson (mean 4, variance 4):\n")
+print(summary(po))
+cat("Sample variance =", round(var(po), 4), "\n")
+cat("Binomial (10 trials, p = 0.3; mean 3, variance 2.1):\n")
+print(summary(bi))
+cat("Sample variance =", round(var(bi), 4), "\n")
+
+# The gamma sample against its density
+hist(ga, freq = FALSE, breaks = 30, main = "Gamma (A = 2, B = 3)", xlab = "x")
+curve(dgamma(x, shape = 2, scale = 3), add = TRUE, col = "red")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+
+    </body>
+</html>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CatapultTargetFile
+  Version="2"
+  Type="WebHelp2"
+  DefaultUrl="/Content/contents.htm"
+  MasterPage="/Content/resources/MasterPages/MasterFooter.flmsp"
+  PreCompileScaledImages="false"
+  EnableSitemap="true"
+  GenerateWebSafeImages="false"
+  SitemapWebUrl="https://www.statsdirect.com/help/"
+  ReplaceSpacesWithUnderscores="true"
+  MakeFileLowerCase="true"
+  UseCustomTopicFileExtension="false"
+  InsertMOTW="false"
+  WebSafeFileExtension="png"
+  Comment=""
+  TargetLanguage="en-gb"
+  MasterToc="/Project/TOCs/STATSDIRECT.fltoc"
+  BrowseSequence="/Project/Advanced/STATSDIRECT.flbrs"
+  MasterStylesheet="/Content/resources/stylesheets/statsdirect.css"
+  MoveOutputContentToRoot="true"
+  ConditionTagExpression="include[Primary.WEBHELP] exclude[Primary.SWHELP]"
+  ResolveCssVariables="true">
+  <MicroContentSearch>
+    <FeaturedSnippets
+      type="AllFiles"
+      numberOfResults="1">
+      <microContentSubset />
+    </FeaturedSnippets>
+    <KnowledgePanel
+      type="Empty"
+      numberOfResults="1">
+      <microContentSubset />
+    </KnowledgePanel>
+  </MicroContentSearch>
+</CatapultTargetFile>

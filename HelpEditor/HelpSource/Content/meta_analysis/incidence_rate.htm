@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2228.104" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Incidence Rate Meta-analysis - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Incidence rate meta-analysis;Meta-analysis: Incidence rate" />
+            Incidence Rate Meta-analysis</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Meta-Analysis_Incidence Rate</b>.</p>
+        <p>&#160;</p>
+        <p>Cohort studies are often used to reveal incidence rates of a condition under different environmental conditions or exposures. This function helps you to compare incidence rates from several studies by meta-analysis (<a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>; <a href="../references/reference_list.htm#ref-ioannidis-1995">Ioannidis et al., 1995</a>; <a href="../references/reference_list.htm#ref-rothman-1973">Rothman and Monson 1973</a>). Meta-analysis may be used to investigate the combination or interaction of a group of independent studies, for example, a series of incidence rates from similar studies conducted at different centres.</p>
+        <p>&#160;</p>
+        <p>You can also use incidence rate difference to provide a better estimate of the effects of treatment in groups of trials that have different lengths of follow up.</p>
+        <p>&#160;</p>
+        <p>Person time for a group is the sum total of times that each of the subjects in that group have been studied for:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">Exposed</td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">Not exposed</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Group</td>
+                <td style="text-decoration: underline;text-align: center;">Cases</td>
+                <td style="text-decoration: underline;text-align: center;">Person-time</td>
+                <td style="text-decoration: underline;text-align: center;">Cases</td>
+                <td style="text-decoration: underline;text-align: center;">Person-time</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">stratum 1:</td>
+                <td style="text-align: center;">a1</td>
+                <td style="text-align: center;">pte1</td>
+                <td style="text-align: center;">b1</td>
+                <td style="text-align: center;">ptn1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">.</td>
+                <td style="text-align: center;">.</td>
+                <td style="text-align: center;">.</td>
+                <td style="text-align: center;">.</td>
+                <td style="text-align: center;">.</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">stratum k:</td>
+                <td style="text-align: center;">ak</td>
+                <td style="text-align: center;">ptek</td>
+                <td style="text-align: center;">bk</td>
+                <td style="text-align: center;">ptnk</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>For each stratum:</p>
+        <p>Incidence rate difference = IRD = [a/pte] - [b/ptn]</p>
+        <p>Incidence rate ratio = IRR = [a/pte] / [b/ptn]</p>
+        <p>&#160;</p>
+        <p>StatsDirect gives you the option of IRD or IRR based meta-analysis. For each stratum (e.g. trial) you are given either IRD (with approximate confidence interval) or IRR (with exact confidence interval). The approximate confidence interval for IRD is IRD plus and minus the standard normal deviate times its standard error, which is the square root of a/pte<sup>2</sup> + b/ptn<sup>2</sup>. Pooled estimates for IRD or IRR are given for both fixed and random effects models.</p>
+        <p>&#160;</p>
+        <p>A stratum without an event in one of its two groups is given a continuity correction: 0.5 (or the number that is set in the <a href="options.htm">options</a>) is added to the events of both groups, for the rate ratio and its variance and for the variance of the rate difference; the rate difference itself, and the exact confidence interval of the rate ratio, are calculated from the events as they are. A stratum without an event in either group is left out of the pooling and marked as excluded.</p>
+        <p>&#160;</p>
+        <p>An exact conditional likelihood method is optionally used to evaluate the pooled rate ratio (<a href="../references/reference_list.htm#ref-martin-2000">Martin and Austin, 2000</a>). The exact method may take an appreciable time to compute with large numbers. The exact results should be used in preference to the approximation, especially if some categories involve few observations (less than 15 or so).</p>
+        <p>&#160;</p>
+        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
+        <p>&#160;</p>
+        <p>DATA INPUT:</p>
+        <p>You may enter the number of cases occurring in an exposed and a non-exposed group where subjects are possibly followed up for different times. Person time for a group is the sum total of times that each of the subjects in that group have been studied for.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Pooled incidence rate difference for fixed effects is estimated as follows:</p>
+        <p>
+            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle \widehat{IRD}=\frac{\sum_{i=1}^{k}\left[W_i\left(\frac{a_i}{{pt}_{ei}}-\frac{b_i}{{pt}_{ni}}\right)\right]}{\sum_{i=1}^{k}w_i}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle W_i=\frac{{pt}_{ei}^2{pt}_{ni}^2}{a_i{pt}_{ni}^2+b_i{pt}_{ei}^2}$</MadCap:equation>
+        </p>
+        <p>- where the weight,  W<sub>i</sub>, is the inverse of the estimated variance.</p>
+        <p>&#160;</p>
+        <p>Pooled incidence rate ratio for fixed effects is estimated as follows:</p>
+        <p>
+            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle \widehat{IRR}=\exp\left\{\frac{\sum_{i=1}^{k}\left[W_i\log\left(\frac{a_i}{{pt}_{ei}}/\frac{b_i}{{pt}_{ni}}\right)\right]}{\sum_{i=1}^{k}W_i}\right\}$</MadCap:equation>
+        </p>
+        <p>
+            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle W_i=\frac{a_i b_i}{a_i+b_i}$</MadCap:equation>
+        </p>
+        <p>- where the weight,  W<sub>i</sub>, is the inverse of the estimated variance for the log transformed statistic.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>The example looks at mortality by sex and age for patients with trigeminal neuralgia (<a href="../references/reference_list.htm#ref-rothman-1973">Rothman and Monson, 1973</a>). The person-time data are person-years.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">Exposed</td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">Not exposed</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Group:</td>
+                <td style="text-align: right;text-decoration: underline;">Cases</td>
+                <td style="text-align: right;text-decoration: underline;">Person-time</td>
+                <td style="text-align: right;text-decoration: underline;">Cases</td>
+                <td style="text-align: right;text-decoration: underline;">Person-time</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Age &lt; 65:</td>
+                <td style="text-align: right;">14</td>
+                <td style="text-align: right;">1516</td>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">1701</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Age &gt;= 65:</td>
+                <td style="text-align: right;">76</td>
+                <td style="text-align: right;">949</td>
+                <td style="text-align: right;">121</td>
+                <td style="text-align: right;">2245</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect first prepare them in four workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select incidence rate difference from the meta-analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Exposed cases", "Exposed person-time", "Control cases" and "Control person-time" when prompted for data, and the column marked "Age split" for the stratum labels. Note that "exposed" and "experimental" groups are the same.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Incidence rate difference (IRD) meta-analysis</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
+                <td colspan="4" style="text-decoration: underline;text-align: right;">Table (a, person-time exposed, b, person-time not exposed)</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">14</td>
+                <td style="text-align: right;">1516</td>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">1701</td>
+                <td style="text-align: right;">Age &lt; 65</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">76</td>
+                <td style="text-align: right;">949</td>
+                <td style="text-align: right;">121</td>
+                <td style="text-align: right;">2245</td>
+                <td style="text-align: right;">Age &gt;= 65</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
+                <td style="text-decoration: underline;text-align: right;">IRD</td>
+                <td colspan="2" style="text-decoration: underline;text-align: right;">95% CI (approximate)</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">0.003356</td>
+                <td style="text-align: right;">-0.0027</td>
+                <td style="text-align: right;">0.009412</td>
+                <td style="text-align: right;">Age &lt; 65</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">0.026187</td>
+                <td style="text-align: right;">0.005781</td>
+                <td style="text-align: right;">0.046593</td>
+                <td style="text-align: right;">Age &gt;= 65</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Stratum</td>
+                <td style="text-decoration: underline;text-align: right;">Standardized effect</td>
+                <td style="text-decoration: underline;text-align: right;">Variance</td>
+                <td colspan="2" style="text-decoration: underline;text-align: right;">% Weights (fixed, random)</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">0.003356</td>
+                <td style="text-align: right;">0.00001</td>
+                <td style="text-align: right;">91.904848</td>
+                <td style="text-align: right;">59.481911</td>
+                <td style="text-align: right;">Age &lt; 65</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">0.026187</td>
+                <td style="text-align: right;">0.000108</td>
+                <td style="text-align: right;">8.095152</td>
+                <td style="text-align: right;">40.518089</td>
+                <td style="text-align: right;">Age &gt;= 65</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Fixed effects (inverse variance)</u>
+        </p>
+        <p>Pooled IRD = 0.005204 (95% CI = -0.000602 to 0.01101)</p>
+        <p>Z (test IRD differs from 0) = 1.756825 P = 0.0789</p>
+        <p>&#160;</p>
+        <p><u>Non-combinability of studies</u>
+        </p>
+        <p>Cochran Q = 4.419452 (df = 1) P = 0.0355</p>
+        <p>Moment-based estimate of between studies variance = 0.000202</p>
+        <p>I² (inconsistency) = 77.4% (95% CI = 0% to 94.3%)</p>
+        <p>&#160;</p>
+        <p><u>Random effects (DerSimonian-Laird)</u>
+        </p>
+        <p>Pooled IRD = 0.012607 (95% CI = -0.009361 to 0.034574)</p>
+        <p>Z (test IRD differs from 0) = 1.124754 P = 0.2607</p>
+        <p>&#160;</p>
+        <p>Here we infer with 95% confidence, assuming a fixed effects model, that the true size of the difference between incidence rates was somewhere between -0.0006 and 0.011 deaths per person-year for the exposed group compared with the non-exposed group; i.e. not statistically significant.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above, then runs the incidence rate ratio option on the same data. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Incidence rate meta-analysis: the StatsDirect help example (Rothman and Monson 1973,
+# deaths among patients with trigeminal neuralgia in two age strata, exposed and not
+# exposed; the test workbook's meta worksheet columns Exposed cases, Exposed
+# person-time, Control cases, Control person-time and Age split) in R
+a &lt;- c(14, 76)        # cases in the exposed groups
+pt1 &lt;- c(1516, 949)   # person-years in the exposed groups
+b &lt;- c(10, 121)       # cases in the non-exposed groups
+pt2 &lt;- c(1701, 2245)  # person-years in the non-exposed groups
+strata &lt;- c("Age &lt; 65", "Age &gt;= 65")
+k &lt;- length(a)
+z &lt;- qnorm(0.975)     # for 95% confidence intervals
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+
+# Base R has no meta-analysis function, so the pooling follows the formulae above: a
+# fixed effects estimate weighted by inverse variance, Cochran's Q for heterogeneity,
+# the DerSimonian-Laird moment estimate of the between-studies variance (tau squared,
+# zero when Q is below its degrees of freedom) and the random effects estimate, whose
+# weights add tau squared to each stratum's variance (two or more strata)
+pool &lt;- function(y, v) {
+  w &lt;- 1 / v
+  fixed &lt;- sum(w * y) / sum(w)
+  q &lt;- sum(w * (y - fixed)^2)
+  tau2 &lt;- max(0, (q - (k - 1)) / (sum(w) - sum(w^2) / sum(w)))
+  wr &lt;- 1 / (v + tau2)
+  list(fixed = fixed, se = sqrt(1 / sum(w)), q = q, tau2 = tau2,
+       random = sum(wr * y) / sum(wr), se_r = sqrt(1 / sum(wr)),
+       fixed_pct = 100 * w / sum(w), random_pct = 100 * wr / sum(wr))
+}
+# The pooled part of the report; f back-transforms a log ratio to a ratio
+summarise &lt;- function(p, name, null, f = identity) {
+  ci &lt;- function(est, se) {
+    paste0("(95% CI = ", six(f(est - z * se)), " to ", six(f(est + z * se)), ")")
+  }
+  cat("Fixed effects (inverse variance)\n")
+  cat("Pooled", name, "=", six(f(p$fixed)), ci(p$fixed, p$se), "\n")
+  cat("Z (test ", name, " differs from ", null, ") = ", six(p$fixed / p$se), "  ",
+      pv(2 * pnorm(-abs(p$fixed / p$se))), "\n", sep = "")
+  cat("Non-combinability of studies\n")
+  cat("Cochran Q = ", six(p$q), "  (df = ", k - 1, ")  ",
+      pv(pchisq(p$q, k - 1, lower.tail = FALSE)), "\n", sep = "")
+  cat("Moment-based estimate of between studies variance =", six(p$tau2), "\n")
+  # I2 is the share of Q beyond its degrees of freedom; StatsDirect adds a confidence
+  # interval for it when there are at least three strata
+  i2 &lt;- max(0, 100 * (p$q - (k - 1)) / p$q)
+  cat("I2 (inconsistency) = ",
+      formatC(i2, digits = 1, format = "f", drop0trailing = TRUE), "%\n", sep = "")
+  cat("Random effects (DerSimonian-Laird)\n")
+  cat("Pooled", name, "=", six(f(p$random)), ci(p$random, p$se_r), "\n")
+  cat("Z (test ", name, " differs from ", null, ") = ", six(p$random / p$se_r), "  ",
+      pv(2 * pnorm(-abs(p$random / p$se_r))), "\n", sep = "")
+}
+# The forest plots that follow in the report: each stratum's estimate and interval, a
+# box that grows with its weight, and the pooled estimate as a diamond at the foot
+forest &lt;- function(est, lower, upper, pooled, p_lower, p_upper, pct, main, xlab,
+                   null, log = "") {
+  par(mar = c(5, 7, 4, 2))
+  y &lt;- (k + 1):2
+  plot(NA, xlim = range(lower, upper, p_lower, p_upper), ylim = c(0.5, k + 1.5),
+       log = log, yaxt = "n", ylab = "", xlab = xlab, main = main)
+  axis(2, at = c(y, 1), labels = c(strata, "combined"), las = 1, tick = FALSE)
+  abline(v = null, lty = 3)
+  segments(lower, y, upper, y)
+  points(est, y, pch = 15, cex = 0.5 + 2 * sqrt(pct / 100))
+  polygon(c(p_lower, pooled, p_upper, pooled), c(1, 1.2, 1, 0.8), col = "grey")
+}
+
+# Each stratum's incidence rate difference, with its approximate interval: the
+# difference plus and minus z standard errors, from the Poisson variance of the
+# difference, a/pt1^2 + b/pt2^2, which the fixed effects weights invert
+ird &lt;- a / pt1 - b / pt2
+v_ird &lt;- a / pt1^2 + b / pt2^2
+se_ird &lt;- sqrt(v_ird)
+res &lt;- pool(ird, v_ird)
+cat("Incidence rate difference (IRD) meta-analysis\n")
+print(data.frame(stratum = 1:k, IRD = six(ird), lower = six(ird - z * se_ird),
+                 upper = six(ird + z * se_ird), strata), row.names = FALSE)
+# The report's next table: the standardised effect is the difference itself, with its
+# variance beside the weights
+print(data.frame(stratum = 1:k, effect = six(ird), variance = six(v_ird),
+                 fixed = six(res$fixed_pct), random = six(res$random_pct), strata),
+      row.names = FALSE)
+summarise(res, "IRD", 0)
+forest(ird, ird - z * se_ird, ird + z * se_ird, res$fixed, res$fixed - z * res$se,
+       res$fixed + z * res$se, res$fixed_pct,
+       "Incidence rate difference meta-analysis plot [fixed effects]",
+       "incidence rate difference (95% confidence interval)", 0)
+forest(ird, ird - z * se_ird, ird + z * se_ird, res$random, res$random - z * res$se_r,
+       res$random + z * res$se_r, res$random_pct,
+       "Incidence rate difference meta-analysis plot [random effects]",
+       "incidence rate difference (95% confidence interval)", 0)
+
+# The same data as incidence rate ratios, StatsDirect's other option for this menu
+# item. poisson.test compares two rates and gives their ratio with the exact interval
+# of the report, from the binomial distribution of the exposed cases among all cases.
+# The standardised effect is the log ratio and the fixed effects weights invert its
+# variance, 1/a + 1/b
+irr &lt;- (a / pt1) / (b / pt2)
+exact &lt;- sapply(1:k, function(i) {
+  poisson.test(c(a[i], b[i]), c(pt1[i], pt2[i]))$conf.int
+})
+res_r &lt;- pool(log(irr), 1 / a + 1 / b)
+cat("Incidence rate ratio (IRR) meta-analysis\n")
+print(data.frame(stratum = 1:k, IRR = six(irr), lower = six(exact[1, ]),
+                 upper = six(exact[2, ]), strata), row.names = FALSE)
+print(data.frame(stratum = 1:k, effect = six(log(irr)),
+                 variance = six(1 / a + 1 / b),
+                 fixed = six(res_r$fixed_pct), random = six(res_r$random_pct), strata),
+      row.names = FALSE)
+summarise(res_r, "IRR", 1, exp)
+
+# The report's exact conditional block (Martin and Austin 2000): given a stratum's
+# total cases, its exposed cases are binomial with probability pt1 psi / (pt1 psi + pt2)
+# for a common rate ratio psi, so the total of exposed cases over the strata has
+# the convolution of these binomials as its conditional distribution. Under psi = 1
+# each is dbinom(x, a + b, pt1 / (pt1 + pt2)); another psi multiplies the probability of
+# x exposed cases by psi^x. The conditional maximum likelihood estimate is the psi
+# whose expected total equals the observed total, and each exact limit the psi at
+# which one tail probability of the observed total is 2.5% (the mid-P versions count
+# half of the observed total's probability). The P values are the tails at psi = 1,
+# the two sided Fisher P summing the outcomes no more probable than the observed one
+null_p &lt;- 1
+for (i in 1:k) {
+  coef &lt;- dbinom(0:(a[i] + b[i]), a[i] + b[i], pt1[i] / (pt1[i] + pt2[i]))
+  product &lt;- numeric(length(null_p) + length(coef) - 1)
+  for (j in seq_along(coef)) {
+    at &lt;- j:(j + length(null_p) - 1)
+    product[at] &lt;- product[at] + coef[j] * null_p
+  }
+  null_p &lt;- product
+}
+x &lt;- seq_along(null_p) - 1
+s &lt;- sum(a)
+cond &lt;- function(psi) {
+  lp &lt;- log(null_p) + x * log(psi)
+  p &lt;- exp(lp - max(lp))
+  p / sum(p)
+}
+tail_p &lt;- function(psi, upper, half = 1) {
+  p &lt;- cond(psi)
+  sum(p[if (upper) x &gt; s else x &lt; s]) + half * p[x == s]
+}
+root &lt;- function(f) uniroot(f, c(0.01, 100), tol = 1e-10)$root  # brackets this example
+cmle &lt;- root(function(psi) sum(x * cond(psi)) - s)
+fisher &lt;- c(root(function(psi) tail_p(psi, TRUE) - 0.025),
+            root(function(psi) tail_p(psi, FALSE) - 0.025))
+mid &lt;- c(root(function(psi) tail_p(psi, TRUE, 0.5) - 0.025),
+         root(function(psi) tail_p(psi, FALSE, 0.5) - 0.025))
+p_null &lt;- cond(1)
+one_f &lt;- min(tail_p(1, TRUE), tail_p(1, FALSE))
+two_f &lt;- sum(p_null[p_null &lt;= p_null[x == s]])
+one_m &lt;- min(tail_p(1, TRUE, 0.5), tail_p(1, FALSE, 0.5))
+cat("Fixed effects (conditional maximum likelihood)\n")
+cat("Pooled rate ratio =", six(cmle), "\n")
+cat("Exact Fisher 95% confidence interval =", six(fisher[1]), "to", six(fisher[2]),
+    "\n")
+cat("Exact Fisher one sided ", pv(one_f), ", two sided ", pv(two_f), "\n", sep = "")
+cat("Exact mid-P 95% confidence interval =", six(mid[1]), "to", six(mid[2]), "\n")
+cat("Exact mid-P one sided ", pv(one_m), ", two sided ", pv(min(1, 2 * one_m)), "\n",
+    sep = "")
+forest(irr, exact[1, ], exact[2, ], exp(res_r$fixed), exp(res_r$fixed - z * res_r$se),
+       exp(res_r$fixed + z * res_r$se), res_r$fixed_pct,
+       "Incidence rate ratio meta-analysis plot [fixed effects]",
+       "incidence rate ratio (95% confidence interval)", 1, log = "x")
+forest(irr, exact[1, ], exact[2, ], exp(res_r$random),
+       exp(res_r$random - z * res_r$se_r), exp(res_r$random + z * res_r$se_r),
+       res_r$random_pct, "Incidence rate ratio meta-analysis plot [random effects]",
+       "incidence rate ratio (95% confidence interval)", 1, log = "x")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

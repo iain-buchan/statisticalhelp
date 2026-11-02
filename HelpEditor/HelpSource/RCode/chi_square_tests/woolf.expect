@@ -1,0 +1,18 @@
+# Woolf chi-square analysis of 2 by 2 series, Armitage and Berry (1994) smoking and lung cancer in ten studies. One fragment per line.
+Number of tables = 10
+Mean log odds ratio = 1.531495 giving odds ratio = 4.625084
+Variance of mean log odds ratio = 0.009478 standard error = 0.097355
+Approximate 95% CI for mean log odds ratio = 1.340683 to 1.722306
+Giving odds ratio of 3.821652 to 5.597423
+= 0 is 247.466729 Chi = 15.731075 P < 0.0001
+for heterogeneity = 6.62565 DF = 9 P = 0.676
+Mean log odds ratio = 1.506344 giving odds ratio = 4.510211
+Variance of mean log odds ratio = 0.00893 standard error = 0.0945
+Approximate 95% CI for mean log odds ratio = 1.321127 to 1.691561
+Giving odds ratio of 3.747641 to 5.427948
+= 0 is 254.086475 Chi = 15.94009 P < 0.0001
+for heterogeneity = 6.532642 DF = 9 P = 0.6857
+# the Mantel-Haenszel comparison in the text: the script prints R's test, the help rounds its interval to one place
+R: 3.865935 5.669455
+R: 4.681639
+H: 3.9 to 5.7

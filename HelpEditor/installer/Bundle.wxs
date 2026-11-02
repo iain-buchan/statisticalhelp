@@ -1,0 +1,28 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+  xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
+  xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+  <Bundle Name="StatsDirect Help Editor" Version="$(var.BuildVersion)" Manufacturer="StatsDirect Limited"
+    UpgradeCode="DB8E7178-01E3-4687-9100-00D0F8ED7DB4" DisableModify="yes"
+    Copyright="Copyright ©2026 Iain Buchan" AboutUrl="https://github.com/iain-buchan/statisticalhelp">
+    <BootstrapperApplication>
+      <bal:WixStandardBootstrapperApplication Theme="rtfLicense" LicenseFile="Licence.rtf" SuppressOptionsUI="yes" />
+    </BootstrapperApplication>
+    <Chain>
+      <!-- The runtime is shared and remains installed when the editor is removed.
+           This per-user chain has no UAC/elevation handover. -->
+      <ExePackage Id="WebView2Runtime" DisplayName="Microsoft Edge WebView2 Runtime"
+        PerMachine="no" Permanent="yes" Cache="remove" Vital="yes"
+        DetectCondition="WEBVIEW2USERVERSION &gt; v0.0.0.0 OR WEBVIEW2MACHINEVERSION &gt; v0.0.0.0"
+        InstallArguments="/silent /install">
+        <ExePackagePayload SourceFile="$(var.WebView2Bootstrapper)" Name="MicrosoftEdgeWebview2Setup.exe" Compressed="yes" />
+      </ExePackage>
+      <MsiPackage Id="HelpEditorMsi" SourceFile="$(var.MsiPath)" Compressed="yes" Visible="no" />
+    </Chain>
+  </Bundle>
+  <Fragment>
+    <util:RegistrySearch Id="WebView2UserSearch" Variable="WEBVIEW2USERVERSION" Root="HKCU" Bitness="always32"
+      Key="SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}" Value="pv" Result="value" />
+    <util:RegistrySearch Id="WebView2MachineSearch" Variable="WEBVIEW2MACHINEVERSION" Root="HKLM" Bitness="always32"
+      Key="SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}" Value="pv" Result="value" />
+  </Fragment>
+</Wix>

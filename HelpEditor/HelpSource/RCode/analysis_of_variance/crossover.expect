@@ -1,0 +1,22 @@
+# Crossover trial, Armitage and Berry (1994) dry nights. One fragment per line.
+Group 1 8.117647 5.294118 2.823529
+Group 2 7.666667 8.916667 -1.25
+combined diff = 2.172414
+SE = 0.61602
+t = 3.526533
+DF = 28
+P = 0.0015
+diff 1 - diff 2 = 4.073529
+SE = 1.2372
+effect magnitude = 2.036765
+95% CI = 0.767502 to 3.306027
+t = 3.292539
+DF = 27
+P = 0.0028
+diff 1 + diff 2 = 1.573529
+t = 1.271847
+P = 0.2143
+sum 1 - sum 2 = -3.171569
+SE = 2.440281
+t = -1.299673
+P = 0.2047

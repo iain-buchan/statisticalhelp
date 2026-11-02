@@ -1,0 +1,9 @@
+# Normal distribution calculator: tail areas of z = 3 and z = 0.67, the deviates for upper tails of 0.025 and 0.25, and the technical validation figures. The illustration lines are checked against distributions_normal.txt, the dialog lines from its own routines (the probe cannot drive the dialog); the validation figures are RH: as the dialog does not print them in that wording.
+P(z 3) = 0.00134989803163 upper, 0.99865010196837 lower, 0.00269979606326 two sided
+P(z 0.67) = 0.25142889509531 upper, 0.74857110490469 lower, 0.50285779019062 two sided
+z(upper P 0.025) = 1.95996398454005
+z(upper P 0.25) = 0.674489750196082
+RH: z0.001 = -3.09023230616781
+RH: Lower tail P(z= -3.09023230616781) = 0.001
+RH: z0.25 = -0.674489750196082
+RH: Lower tail P(z= -0.674489750196082) = 0.25

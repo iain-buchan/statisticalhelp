@@ -1,0 +1,20 @@
+# Kendall's rank correlation, Armitage and Berry (1994) career v psychology. One fragment per line.
+Concordant pairs = 34
+Discordant pairs = 11
+Tied pairs = 0
+Kendall's score = 23 (standard error = 11.18034)
+Gamma = 0.511111
+Kendall's tau = 0.511111
+Approximate 95% CI = 0.135203 to 0.887019
+z = 2.057183
+Upper side P = 0.0198
+Lower side P = 0.9802
+Two sided P = 0.0397
+Upper side P = 0.0245
+Lower side P = 0.9755
+Two sided P = 0.0491
+Upper side P = 0.0233
+Lower side P = 0.9857
+Two sided P = 0.0466
+HP: z (continuity corrected) = 1.96774
+HP: Sample size too small for reliable inference from z, use exact test

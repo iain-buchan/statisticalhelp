@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1859" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Odds Ratio and Attributable Risk (Retrospective) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Risk (retrospective);Odds ratio: Retrospective risk;Population attributable risk: Retrospective" />
+            Risk (Retrospective)</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Clinical Epidemiology_Risk (Retrospective)</b>.</p>
+        <p>&#160;</p>
+        <p>This function calculates odds ratios and population attributable risk with confidence intervals.</p>
+        <p>&#160;</p>
+        <p>You can examine the likelihood of an outcome such as disease in relation to an exposure such as a suspected risk or protection factor. The study design considered here is <a href="../basics/prospective.htm">retrospective</a> and usually a case-control study. If you need information on prospective studies see <a href="risk_prospective.htm">risk (prospective)</a>.</p>
+        <p>&#160;</p>
+        <p>The type of data used by this function is counts or frequencies (number of individuals with a study characteristic). You should organize these data into a fourfold table divided by outcome (e.g. disease status) in one dimension and the presence or absence of a characteristic factor (e.g. risk factor) in the other:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">EXPOSURE</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-align: center;text-decoration: underline;">EXPOSED</td>
+                <td style="text-align: center;text-decoration: underline;">UNEXPOSED</td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: right;">OUTCOME:</td>
+                <td style="text-align: right;">YES:</td>
+                <td style="text-align: center;">a</td>
+                <td style="text-align: center;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">NO:</td>
+                <td style="text-align: center;">c</td>
+                <td style="text-align: center;">d</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Odds ratio (OR) = (a*d)/(b*c)</p>
+        <p>&#160;</p>
+        <p>Estimate of population exposure (Px) = c/(c+d), unless you enter a value</p>
+        <p>Estimate of population attributable risk% = 100*(Px*(OR-1))/(1+(Px*(OR-1)))</p>
+        <p>&#160;</p>
+        <p>In retrospective studies you select subjects by outcome and look back to see if they have a characteristic factor such as a risk factor or a protection factor for a disease. The odds ratio ((a/c)/(b/d)) looks at the likelihood of an outcome in relation to a characteristic factor. In epidemiological terms, the odds ratio is used as a point estimate of the relative risk in retrospective studies. Odds ratio is the key statistic for most case-control studies.</p>
+        <p>&#160;</p>
+        <p>In prospective studies, <a href="../basics/attributable_risk.htm">Attributable risk</a>  or risk difference is used to quantify risk in the exposed group that is attributable to the exposure. In retrospective studies, attributable risk can not be calculated directly but population attributable risk can be estimated. Population attributable risk estimates the proportion of disease in the study population that is attributable to the exposure. In order to calculate population attributable risk, the prevalence of exposure in the study population must be known or estimated, StatsDirect prompts you to enter this value or to default to an estimate made from your study data. The default is the proportion of the controls that were exposed, c/(c+d), which represents the population when the outcome is rare and does not depend upon the number of controls you sampled per case (versions before 5 pooled the cases and controls for this estimate). The confidence interval is that of Walter for the default estimate; if you enter the population exposure then the interval is calculated from the confidence limits of the odds ratio. Population attributable risk is presented as a percentage with a confidence interval when the odds ratio is greater than one (<a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>).</p>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>A confidence interval (CI) for the odds ratio is calculated using an exact conditional likelihood method (<a href="../references/reference_list.htm#ref-martin-1991">Martin and Austin, 1991</a>). The exact calculations can take an appreciable amount of time with large numbers.</p>
+        <p>&#160;</p>
+        <p>Approximate power is calculated as the power achieved with the given sample size to detect the observed effect with a two-sided probability of <a href="../basics/p_values.htm">type I error</a>  of (100-CI%)% based on analysis with Fisher's exact test or a continuity corrected chi-square test of independence in a fourfold contingency table (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>).</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid (1996, p. 209)</a>.</p>
+        <p>&#160;</p>
+        <p>The following data represent a retrospective investigation of smoking in relation to oral cancer.</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td colspan="2" style="text-decoration: underline;text-align: right;">Smoking status (cigarettes per day)</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">≥ 16</td>
+                <td style="text-decoration: underline;text-align: right;">&lt; 16</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Cases:</td>
+                <td style="text-align: right;">255</td>
+                <td style="text-align: right;">49</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Controls:</td>
+                <td style="text-align: right;">93</td>
+                <td style="text-align: right;">46</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect select Risk (Retrospective) from the Clinical Epidemiology section of the Analysis menu. Choose the default 95% confidence interval. Then enter the above frequencies into the 2 by 2 table on the screen.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Risk analysis (retrospective)</u>
+        </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td colspan="2" style="text-decoration: underline;text-align: right;">Characteristic factor</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">Present</td>
+                <td style="text-decoration: underline;text-align: right;">Absent</td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: right;">Outcome:</td>
+                <td style="text-align: right;">Positive:</td>
+                <td style="text-align: right;">255</td>
+                <td style="text-align: right;">49</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Negative:</td>
+                <td style="text-align: right;">93</td>
+                <td style="text-align: right;">46</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Observed odds ratio = 2.574062</p>
+        <p>Approximate power (for 5% significance) = 96.84%</p>
+        <p>&#160;</p>
+        <p>Approximate (Woolf, logit) 95% confidence interval = 1.613302 &#160;to &#160;4.106976</p>
+        <p>&#160;</p>
+        <p>Conditional maximum likelihood estimates:</p>
+        <p>Conditional estimate of odds ratio = 2.56799</p>
+        <p>Exact Fisher 95% confidence interval = 1.566572 &#160;to &#160;4.213082</p>
+        <p>Exact Fisher one sided P &lt; 0.0001, two sided P &lt; 0.0001</p>
+        <p>Exact mid-P 95% confidence interval = 1.606435 &#160;to &#160;4.107938</p>
+        <p>Exact mid-P one sided P &lt; 0.0001, two sided P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <p>Population exposure % = 66.906475 (exposure among the controls)</p>
+        <p>Population attributable risk % = 51.294336</p>
+        <p>Approximate 95% confidence interval = 34.307694  to  68.280978</p>
+        <p>&#160;</p>
+        <p>From these data we have evidence that the odds of developing oral cancer is around two and a half times higher for heavy smokers compared with lighter (less than 16 per day) or non-smokers of cigarettes. With 95% confidence we infer that the true population value for this statistic lies between one and a half and four times. Using an estimate of 67% heavy smoking (the proportion among the controls), for the population studied in this 1957 investigation, we can infer with 95% confidence that the proportion of oral cancer cases in that population that were due to heavy smoking lay between 34 and 68 percent.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Risk (retrospective): the StatsDirect help example (Sahai and Khurshid 1996, heavy
+# smoking of 16 or more cigarettes a day among 304 oral cancer cases and 139 controls)
+# in R
+counts &lt;- matrix(c(255, 49,
+                   93, 46), 2, byrow = TRUE,
+                 dimnames = list(Outcome = c("Positive", "Negative"),
+                                 Factor = c("Present", "Absent")))
+print(counts)
+a &lt;- counts[1, 1]   # cases with the factor
+b &lt;- counts[1, 2]   # cases without it
+c &lt;- counts[2, 1]   # controls with the factor
+d &lt;- counts[2, 2]   # controls without it
+
+# R's standard test conditions on both margins of the table. Its odds ratio is the
+# conditional maximum likelihood estimate and its interval is the exact Fisher
+# interval: each limit leaves 2.5% in one tail of the conditional distribution. Its
+# P value is the two sided Fisher P. All three are found to about four significant
+# figures, so the last digits differ from the report, which is exact to 6 places.
+print(fisher.test(counts))
+
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+odds &lt;- a * d / (b * c)
+cat("Observed odds ratio =", six(odds), "\n")
+
+# Approximate power: the power with which Fisher's exact test on samples of this size
+# (348 with the factor, 95 without) would detect the observed difference between the
+# proportions of cases, a / (a + c) and b / (b + d), at the two sided 5% level. It is
+# the power at which the continuity corrected sample size formula of Casagrande, Pike
+# and Smith (1978), in the form given by Fleiss, returns the size of the exposed group.
+alpha &lt;- 0.05
+p1 &lt;- a / (a + c)
+p0 &lt;- b / (b + d)
+m &lt;- (b + d) / (a + c)                    # unexposed per exposed subject
+z &lt;- qnorm(1 - alpha / 2)
+pbar &lt;- (p1 + m * p0) / (m + 1)
+size_for_power &lt;- function(power) {
+  zb &lt;- qnorm(power)
+  n &lt;- (z * sqrt((1 + 1 / m) * pbar * (1 - pbar)) +
+          zb * sqrt(p0 * (1 - p0) / m + p1 * (1 - p1)))^2 / (p0 - p1)^2
+  n * (1 + sqrt(1 + 2 * (m + 1) / (n * m * abs(p0 - p1))))^2 / 4
+}
+power &lt;- uniroot(function(pw) size_for_power(pw) - (a + c), c(alpha, 1 - 1e-12),
+                 tol = 1e-10)$root         # the size falls as the power asked for falls
+cat("Approximate power (for 5% significance) = ",
+    formatC(100 * power, digits = 2, format = "f", drop0trailing = TRUE), "%\n",
+    sep = "")
+
+# Woolf's (logit) interval from the standard error of the log odds ratio
+se &lt;- sqrt(1 / a + 1 / b + 1 / c + 1 / d)
+cat("Approximate (Woolf, logit) 95% confidence interval =",
+    six(exp(log(odds) - z * se)), "to", six(exp(log(odds) + z * se)), "\n")
+
+# The conditional estimate and exact limits to full precision. Given the margins, the
+# top left cell a can take the values lo to hi, with probabilities proportional to the
+# central hypergeometric probabilities times (odds ratio)^a
+m1 &lt;- a + b                    # cases
+n1 &lt;- a + c                    # factor present
+n0 &lt;- b + d                    # factor absent
+lo &lt;- max(0, m1 - n0)
+hi &lt;- min(m1, n1)
+x &lt;- lo:hi
+prob &lt;- function(psi) {        # the distribution of a when the odds ratio is psi
+  lw &lt;- dhyper(x, n1, n0, m1, log = TRUE) + (x - lo) * log(psi)
+  w &lt;- exp(lw - max(lw))
+  w / sum(w)
+}
+cat("Conditional maximum likelihood estimates:\n")
+# The estimate makes the expected value of a equal to the observed a
+cmle &lt;- exp(uniroot(function(l) sum(x * prob(exp(l))) - a, c(-30, 30),
+                    tol = 1e-12)$root)
+cat("Conditional estimate of odds ratio =", six(cmle), "\n")
+
+# Exact Fisher limits: the lower limit is the odds ratio under which a or more is
+# a 2.5% upper tail, the upper limit the one under which a or fewer is a 2.5% lower
+# tail. The mid-P limits count half of the probability of a itself in each tail.
+limit &lt;- function(upper, half) {
+  tail &lt;- function(l) {
+    p &lt;- prob(exp(l))
+    if (upper) sum(p[x &lt; a]) + half * p[x == a] else sum(p[x &gt; a]) + half * p[x == a]
+  }
+  exp(uniroot(function(l) tail(l) - alpha / 2, c(-30, 30), tol = 1e-12)$root)
+}
+cat("Exact Fisher 95% confidence interval =", six(limit(FALSE, 1)), "to",
+    six(limit(TRUE, 1)), "\n")
+
+# P values at an odds ratio of 1. The one sided Fisher P is the smaller tail; the two
+# sided Fisher P adds up the tables no more probable than the observed one, as
+# fisher.test does, allowing a tiny tolerance for probabilities that are equal in
+# theory but differ by rounding.
+p_null &lt;- prob(1)
+up &lt;- sum(p_null[x &gt;= a])
+down &lt;- sum(p_null[x &lt;= a])
+cat("Exact Fisher one sided ", pv(min(up, down)), ", two sided ",
+    pv(sum(p_null[p_null &lt;= p_null[x == a] * (1 + 1e-7)])), "\n", sep = "")
+
+# The mid-P versions count half of the probability of the observed table, and the
+# two sided mid-P is twice the one sided value
+cat("Exact mid-P 95% confidence interval =", six(limit(FALSE, 0.5)), "to",
+    six(limit(TRUE, 0.5)), "\n")
+mid &lt;- min(up, down) - 0.5 * p_null[x == a]
+cat("Exact mid-P one sided ", pv(mid), ", two sided ", pv(min(2 * mid, 1)), "\n",
+    sep = "")
+
+# Population attributable risk, reported when the odds ratio exceeds 1. With no
+# population figure entered, the exposure is estimated from the controls, c / (c + d),
+# and the attributable fraction Px (OR - 1) / (1 + Px (OR - 1)) is then the same as
+# 1 - (b / (a + b)) / (d / (c + d)), whose large sample variance is Walter's (1978).
+# All three are printed as percentages.
+px &lt;- c / (c + d)
+par &lt;- px * (odds - 1) / (1 + px * (odds - 1))
+var_par &lt;- (b * (c + d) / (d * (a + b)))^2 * (a / (b * (a + b)) + c / (d * (c + d)))
+cat("Population exposure % =", six(100 * px), "(exposure among the controls)\n")
+cat("Population attributable risk % =", six(100 * par), "\n")
+cat("Approximate 95% confidence interval =", six(100 * (par - z * sqrt(var_par))),
+    "to", six(100 * (par + z * sqrt(var_par))), "\n")
+
+# If the population exposure is entered instead (say 50%), it carries no sampling
+# error, so the limits are the Woolf limits of the odds ratio put through the same
+# formula
+px &lt;- 0.5
+attributable &lt;- function(or) 100 * px * (or - 1) / (1 + px * (or - 1))
+cat("Population exposure % =", six(100 * px), "(as entered)\n")
+cat("Population attributable risk % =", six(attributable(odds)), "\n")
+cat("Approximate 95% confidence interval =", six(attributable(exp(log(odds) - z * se))),
+    "to", six(attributable(exp(log(odds) + z * se))), "\n")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

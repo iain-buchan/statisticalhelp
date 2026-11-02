@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="2" MadCap:lastHeight="524" MadCap:lastWidth="1013">
+    <head><title>Histogram (Text-based Frequency Distribution Plot) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Histogram (text)" />
+            Histogram (Text-based)</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Graphics_Histogram (text-based)</b>.</p>
+        <p>&#160;</p>
+        <p>The text-based frequency distribution histogram is plotted horizontally across the screen with the count for each value-range (bin) displayed at the left hand side.</p>
+        <p>&#160;</p>
+        <p>The variable that you select is divided into m ranges (bins, bars). The variable is then sorted and the first k values less than or equal to the upper limit of the first bin are counted as the frequency of the first bin. This counting is then repeated for each bin, and bars are plotted to represent the counts. The numbers displayed on the x axis are the middle values (mid-points) for the value range of each bin.</p>
+        <p>&#160;</p>
+        <p>StatsDirect will attempt to select a "neat" number of bins and "neat" mid-point values for your data. You may over-ride this selection and set your own bin specifications when prompted.</p>
+        <p>&#160;</p>
+        <p>See also the <a href="histogram.htm">graphical histogram</a>.</p>
+        <p>&#160;</p>
+        <p><u>Example</u></p>
+        <p>From <a href="../references/reference_list.htm#ref-aziz-1996">Aziz et al. (1996)</a>.</p>
+        <p>Test workbook (Graphics worksheet: SDI not conceived).</p>
+        <p>&#160;</p>
+        <p>The data are sperm deformity index (SDI) values from the semen samples of 116 men in an infertility study whose partners did not conceive. The same values, with those of the men whose partners did conceive, are used in the <a href="../nonparametric_methods/roc.htm">ROC curve</a> example.</p>
+        <p>&#160;</p>
+        <p>To draw this histogram in StatsDirect open the test workbook using the file open function of the file menu. Then select Histogram (text-based) from the Graphics menu and select the column marked "SDI not conceived" when prompted for data. Keep the bins that StatsDirect suggests.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Distribution of SDI not conceived</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;Counts &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Mid-points</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;2 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| 190 ===</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;0 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| 180</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;1 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| 170 ==</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;14 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| 160 ========================</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;29 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| 150 ==================================================</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;33 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| 140 =========================================================</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;20 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| 130 ==================================</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;12 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| 120 =====================</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;5 &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;| 110 =========</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/+--------+-------+--------+-------+--------+-------+--------+</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;0 &#160;&#160;&#160;&#160;&#160;&#160;&#160;5 &#160;&#160;&#160;&#160;&#160;&#160;10 &#160;&#160;&#160;&#160;&#160;&#160;15 &#160;&#160;&#160;&#160;&#160;20 &#160;&#160;&#160;&#160;&#160;&#160;25 &#160;&#160;&#160;&#160;&#160;30 &#160;&#160;&#160;&#160;&#160;&#160;35</p>
+        <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Mid-points for SDI not conceived</p>
+        <p>&#160;</p>
+        <p>StatsDirect chose nine bins of width 10 with mid-points 110 to 190, so the first bin holds the values above 105 up to 115 and the last those above 185 up to 195; a value equal to the upper limit of a bin is counted in that bin. The bars are drawn to the scale of the count ruler beneath them, so the end of a bar reads its count off the ruler. The distribution is roughly symmetrical about the 140 bin, with 33 of the 116 values between 135 and 145, and has a longer tail to the right: 17 values are 125 or below and only three are above 165.</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Histogram (text-based): the StatsDirect help example (Aziz et al. 1996, the
+# sperm deformity index of 116 men whose partners did not conceive; the test
+# workbook's Graphics worksheet column "SDI not conceived") in R
+sdi &lt;- c(165, 140, 154, 139, 134, 154, 120, 133, 150, 146, 140, 114, 128, 131,
+  116, 128, 122, 129, 145, 117, 140, 149, 116, 147, 125, 149, 129, 157, 144,
+  123, 107, 129, 152, 164, 134, 120, 148, 151, 149, 138, 159, 169, 137, 151,
+  141, 145, 135, 135, 153, 125, 159, 148, 142, 130, 111, 140, 136, 142, 139,
+  137, 187, 154, 151, 149, 148, 157, 159, 143, 124, 141, 114, 136, 110, 129,
+  145, 132, 125, 149, 146, 138, 151, 147, 154, 147, 158, 156, 156, 128, 151,
+  138, 193, 131, 127, 129, 120, 159, 147, 159, 156, 143, 149, 160, 126, 136,
+  150, 136, 151, 140, 145, 140, 134, 140, 138, 144, 140, 140)
+cat("n =", length(sdi), "  range", min(sdi), "to", max(sdi), "\n")
+
+# StatsDirect chose nine bins of width 10 with "neat" mid-points 110 to 190, so
+# the bin edges are 105, 115, ..., 195. A value equal to a bin's upper limit is
+# counted in that bin, which is hist()'s default (right = TRUE), and a value on the
+# lowest edge would go into the first bin (include.lowest = TRUE, also the default).
+edges &lt;- seq(105, 195, by = 10)
+h &lt;- hist(sdi, breaks = edges, plot = FALSE)
+print(data.frame(mid_point = h$mids, count = h$counts))
+
+# The text histogram as StatsDirect prints it: the highest bin first, its count at
+# the left, then the mid-point and a bar of "=" signs. The bars are on the scale of
+# the count ruler drawn beneath them, which ends at a neat value above the largest
+# count (35 here, which pretty() also gives; for other data the two may differ),
+# and the full width of 60 characters stands for that value
+ruler &lt;- pretty(c(0, max(h$counts)))
+bar &lt;- strrep("=", round(h$counts / max(ruler) * 60))
+# a bin with a count too small for one sign is marked with a colon
+bar[h$counts &gt; 0 &amp; bar == ""] &lt;- ":"
+cat("Distribution of SDI not conceived\n")
+cat("Counts     Mid-points\n")
+for (i in rev(seq_along(h$mids)))
+  cat(formatC(h$counts[i], width = -6), "|", formatC(h$mids[i], width = 4), bar[i],
+      "\n")
+cat("Count ruler:", ruler, "\n")
+cat("Mid-points for SDI not conceived\n")
+
+# The same bins drawn as an ordinary histogram, labelled at the bin mid-points
+plot(h, main = "Distribution of SDI not conceived", ylab = "Counts",
+     xlab = "Mid-points for SDI not conceived", xaxt = "n")
+axis(1, at = h$mids)</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+
+    </body>
+</html>

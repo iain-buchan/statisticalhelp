@@ -1,0 +1,9 @@
+# Poisson distribution, an illustration: 14 events with mean 8, the means at which 14 or more / 14 or fewer events has probability 0.025 (Lower CL / Upper CL with 95), and no events with mean 3. The program report holds the dialog's one-line reports produced from its own routines (its first line says how). One fragment per line.
+0.016923711395853
+0.034180701793819
+0.982743009602034
+HP: P(Poisson n 14, µ 8) = 0.016923711395853 for n events, 0.034180701793819 for n or more events, 0.982743009602034 for n or fewer events
+7.6539302763006
+23.4896211218356
+0.049787068367864
+P: P(Poisson n 0, µ 3) = 0.049787068367864 for n events, 1 for n or more events, 0.049787068367864 for n or fewer events

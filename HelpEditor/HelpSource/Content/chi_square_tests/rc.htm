@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="4118.104" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>R by C Chi-square and Exact Contingency Table Analyses - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Phi coefficient;Pearson contingency coefficient;G-square test;Cramér V coefficient;R by c chi-square test;Chi-square tests : R by c;Goodman-Kruskal gamma;Fisher's exact test: R by c" />
+            R by C Contingency Table Analysis</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Chi-square_R by C</b>.</p>
+        <p>&#160;</p>
+        <p>The r by c chi-square test in StatsDirect uses a number of methods to investigate two way contingency tables that consist of any number of independent categories forming r rows and c columns.</p>
+        <p>&#160;</p>
+        <p>Tests of independence of the categories in a table are the chi-square test, the G-square (likelihood-ratio chi-square) test and the generalised Fisher exact (Fisher-Freeman-Halton) test. All three tests indicate the degree of independence between the variables that make up the table.</p>
+        <p>&#160;</p>
+        <p>The generalised Fisher exact test is difficult to compute (<a href="../references/reference_list.htm#ref-mehta-1983">Mehta and Patel, 1983</a>, <a href="../references/reference_list.htm#ref-mehta-1986-a">1986a</a>); it may take a long time and it may not be computed for the table that you enter. When the test has taken a second, StatsDirect shows a progress bar, which tells you which stage of its search the test is in and how much of that stage is done; the later stages take longer. If you press Cancel then the test is stopped, and the results are given without the exact P value. If the Fisher exact method cannot be computed practically then a hybrid method based upon Cochran rules is used (<a href="../references/reference_list.htm#ref-mehta-1986-b">Mehta and Patel, 1986b</a>); this may also fail with large tables and/or numbers. The Fisher-Freeman-Halton result is quoted with just one P value as it is implicitly two-sided.</p>
+        <p>&#160;</p>
+        <p>Relating the Fisher-Freeman-Halton statistic to the Pearson Chi-square statistic:</p>
+        <ul>
+            <li>The null hypothesis is independence between row and column categories.</li>
+            <li>Let <b>t</b> denote a table from the set of all tables with the same row and column margins.</li>
+            <li>Let D(<b>t</b>) be the measure of discrepancy.</li>
+            <li>The exact two sided P value = P [D(<b>t</b>) &gt;= D(<b>t</b><sub>observed</sub>)] = sum of hypergeometric probabilities of those tables where D(<b>t</b>) is larger than or equal to the observed table.</li>
+            <li>In large samples the distribution of D(<b>t</b>) conditional on fixed row and column margins converges to the chi-square distribution with (r-1)(c-1) degrees of freedom.</li>
+        </ul>
+        <p>&#160;</p>
+        <p>The G-square statistic is less reliable than the chi-square statistic when you have small numbers. In general, you should use the chi-square statistic if the Fisher exact test is not computable. If you consult a statistician then it would be useful to provide the G-square statistic also.</p>
+        <p>&#160;</p>
+        <p>These tests of independence are suitable for nominal data. If your data are ordinal then you should use the more powerful tests for trend (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-agresti-2002">Agresti, 2002</a>, <a href="../references/reference_list.htm#ref-agresti-1996">1996</a>).</p>
+        <p>&#160;</p>
+        <p>Assumptions of the tests of independence:</p>
+        <ul>
+            <li>the sample is random</li>
+            <li>each observation may be classified into one cell (in the table) only</li>
+        </ul>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>
+            <MadCap:equation>$\displaystyle \chi^2=\sum_{i=1}^r \sum_{j=1}^c \frac{\displaystyle (O_{ij}-E_{ij})^2}{E_{ij}} \\
+
+\displaystyle G^2=2\sum_{i=1}^r \sum_{j=1}^c O_{ij} \log \left(\frac{\displaystyle O_{ij}}{E_{ij}} \right) \\$</MadCap:equation>
+        </p>
+        <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n).</p>
+        <p>&#160;</p>
+        <p>
+            <MadCap:equation>$\displaystyle P_f=\frac{\displaystyle \prod_{i=1}^r f_{i.}!\prod_{j=1}^cf_{.j}!}{\displaystyle f_{..}!\prod_{i=1}^r \prod_{j=1}^cf_{ij}!} \\
+
+\displaystyle P=\sum_{P \le P_0}P_f \\$</MadCap:equation>
+        </p>
+        <p>- where P is the two sided Fisher probability, P<sub>f</sub> is the conditional probability for the observed table given fixed row and column totals (f<sub>i.</sub> and f<sub>.j</sub> respectively), f<sub>..</sub> is the total count and ! represents factorial.</p>
+        <p>&#160;</p>
+        <p>Analysis of trend in r by c tables indicates how much of the general independence between scores is accounted for by linear trend. StatsDirect uses equally spaced scores (1, 2, 3 and so on) for this purpose unless you specify otherwise: if you select 'Specify trend scores' then you are asked for a score for each row and a score for each column, and the scores that are used are shown with the table. If you wish to experiment with other scoring systems then expert statistical guidance is advisable. <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994)</a> quote an example where extent of grief of mothers suffering a perinatal death, graded I to IV, is compared with the degree of support received by these women. In this example the overall statistic is non-significant but a significant trend is demonstrated.</p>
+        <p>&#160;</p>
+        <p>
+            <MadCap:equation>$\displaystyle r=\frac{\displaystyle \sum_{i=1}^r \sum_{j=1}^cu_i v_jO_{ij}-\left( \sum_{i=1}^r u_i O_{i+}\right) \left( \sum_{j=1}^c v_j O_{j+}\right)/n}{\displaystyle \sqrt{\left[ \sum_{i=1}^r u_i^2 O_{i+} -\frac{\displaystyle \left( \sum_{i=1}^r u_i O_{i+}\right)^2}{n}\right] \left[ \sum_{j=1}^c v_j^2 O_{j+}-\frac{\displaystyle \left( \sum_{j=1}^c v_j O_{j+}\right)^2}{n}\right]}} \\$</MadCap:equation>
+        </p>
+        <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n). Row scores are u, column scores are v, row totals are O<sub>i+</sub> and column totals are O<sub>j+</sub>.</p>
+        <p>&#160;</p>
+        <p>The sample correlation coefficient r reflects the direction and closeness of linear trend in your table. r may vary between -1 and 1 just like Pearson's product moment correlation coefficient. Total independence of the categories in your table would mean that r = 0. The test for linear trend is related to r by M²=(n-1)r² and this is numerically identical to Armitage's chi-square for linear trend (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>). If you interchange the rows and columns in your table then the value of M² will be the same.</p>
+        <p>&#160;</p>
+        <p>The ANOVA output applies techniques similar to analysis of variance to an r by c table. Here the equality of mean column and row scores is tested. StatsDirect uses equally spaced scores for this purpose unless you specify otherwise. See Armitage for more information (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>). </p>
+        <p>&#160;</p>
+        <p>Pearson's and Cramér's (V) coefficients of contingency and the phi (&#966;, correlation) coefficient reflect the strength of the association in a contingency table (<a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>; <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle \phi=\sqrt{\chi^2/n} \\
+
+\displaystyle \text{Pearson } V=\sqrt{\frac{\displaystyle \chi^2}{\chi^2+n}} \\
+
+\displaystyle \text{Cram}\acute{\text{e}}\text{r } V=\sqrt{\frac{\displaystyle \chi^2/n}{\min(r-1,c-1)}} \\$</MadCap:equation>
+        </p>
+        <p>For 2 by 2 tables, Cramér's V is calculated alternatively as a signed value:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \text{Cram}\acute{\text{e}}\text{r } V=\frac{\displaystyle ad-bc}{\displaystyle \sqrt{(a+b)(c+d)(a+c)(b+d)}} \\$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>Observed values and totals are given for the table, with expected values and cell chi-square contributions if you ask for them. A row or column without any counts takes no part in the analysis: r and c above are the numbers of rows and columns that have counts.</p>
+        <p>&#160;</p>
+        <p>If your data categories are both ordered then you will gain more power in tests of independence by using the ordinal methods due to Goodman and Kruskal (gamma) and <a href="../nonparametric_methods/kendall_correlation.htm">Kendall (tau-b)</a>. Large sample, asymptotically normal variance estimates are used; the simple form is used for independence testing (<a href="../references/reference_list.htm#ref-agresti-1984">Agresti, 1984</a>; <a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-goodman-1963">Goodman and Kruskal, 1963</a>, <a href="../references/reference_list.htm#ref-goodman-1972">1972</a>). Tau-b tends to be less sensitive than gamma to the choice of response categories.</p>
+        <p>
+            <MadCap:equation>$\displaystyle \gamma=\frac{\displaystyle P-Q}{P+Q} \\
+
+\displaystyle \tau_b=\frac{\displaystyle P-Q}{\sqrt{w_rw_c}} \\
+
+\displaystyle w_r=n^2-\sum_{i=1}^r O_{i+}^2 \\
+
+\displaystyle w_c=n^2-\sum_{j=1}^c O_{j+}^2 \\
+
+\displaystyle P=\sum_{i=1}^r \sum_{j=1}^c O_{ij} A_{ij} \\
+
+\displaystyle Q=\sum_{i=1}^r \sum_{j=1}^c O_{ij} D_{ij} \\
+
+\displaystyle A_{ij}= \sum_{h \lt i} \sum_{k \lt j}O_{hk}+\sum_{h \gt i} \sum_{k \gt j}O_{hk} \\
+
+\displaystyle D_{ij}= \sum_{h \lt i} \sum_{k \gt j}O_{hk}+\sum_{h \gt i} \sum_{k \lt j}O_{hk} \\$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 408)</a>.</p>
+        <p>&#160;</p>
+        <p>The following data (as above) describe the state of grief of 66 mothers who had suffered a neonatal death. The table relates this to the amount of support given to these women:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="3" style="text-align: center;text-decoration: underline;">Support</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;text-align: right;">Good</td>
+                <td style="text-decoration: underline;text-align: right;">Adequate</td>
+                <td style="text-decoration: underline;text-align: right;">Poor</td>
+            </tr>
+            <tr>
+                <td rowspan="4" valign="middle" style="text-align: right;">Grief State:</td>
+                <td style="text-align: right;">I</td>
+                <td style="text-align: right;">17</td>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">II</td>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">III</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">IV</td>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must select r by c from the chi-square section of the analysis menu. Choose the default 95% confidence interval. Check the boxes marked "Try Fisher-Freeman-Halton exact test", "Show expected counts" and "Show cell chi-square", and clear "Show percentages". Then enter the above data as directed by the screen.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>Observed</td>
+                <td>17</td>
+                <td>9</td>
+                <td>8</td>
+                <td style="font-weight: bold;">34</td>
+            </tr>
+            <tr>
+                <td>Expected</td>
+                <td>13.909091</td>
+                <td>10.818182</td>
+                <td>9.272727</td>
+                <td style="font-weight: bold;">&#160;</td>
+            </tr>
+            <tr>
+                <td>DChi²</td>
+                <td>0.686869</td>
+                <td>0.305577</td>
+                <td>0.174688</td>
+                <td style="font-weight: bold;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Observed</td>
+                <td>6</td>
+                <td>5</td>
+                <td>1</td>
+                <td style="font-weight: bold;">12</td>
+            </tr>
+            <tr>
+                <td>Expected</td>
+                <td>4.909091</td>
+                <td>3.818182</td>
+                <td>3.272727</td>
+                <td style="font-weight: bold;">&#160;</td>
+            </tr>
+            <tr>
+                <td>DChi²</td>
+                <td>0.242424</td>
+                <td>0.365801</td>
+                <td>1.578283</td>
+                <td style="font-weight: bold;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Observed</td>
+                <td>3</td>
+                <td>5</td>
+                <td>4</td>
+                <td style="font-weight: bold;">12</td>
+            </tr>
+            <tr>
+                <td>Expected</td>
+                <td>4.909091</td>
+                <td>3.818182</td>
+                <td>3.272727</td>
+                <td style="font-weight: bold;">&#160;</td>
+            </tr>
+            <tr>
+                <td>DChi²</td>
+                <td>0.742424</td>
+                <td>0.365801</td>
+                <td>0.161616</td>
+                <td style="font-weight: bold;">&#160;</td>
+            </tr>
+            <tr>
+                <td>Observed</td>
+                <td>1</td>
+                <td>2</td>
+                <td>5</td>
+                <td style="font-weight: bold;">8</td>
+            </tr>
+            <tr>
+                <td>Expected</td>
+                <td>3.272727</td>
+                <td>2.545455</td>
+                <td>2.181818</td>
+                <td style="font-weight: bold;">&#160;</td>
+            </tr>
+            <tr>
+                <td>DChi²</td>
+                <td>1.578283</td>
+                <td>0.116883</td>
+                <td>3.640152</td>
+                <td style="font-weight: bold;">&#160;</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;">Totals:</td>
+                <td style="font-weight: bold;">27</td>
+                <td style="font-weight: bold;">21</td>
+                <td style="font-weight: bold;">18</td>
+                <td style="font-weight: bold;">66</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>TOTAL number of cells = 12</p>
+        <p>Warning: 9 out of 12 cells have EXPECTATION &lt; 5</p>
+        <p>&#160;</p>
+        <p><u>NOMINAL INDEPENDENCE</u>
+        </p>
+        <p>Chi-square = 9.9588, DF = 6, P = 0.1264</p>
+        <p>G-square = 10.186039, DF = 6, P = 0.117</p>
+        <p>Fisher-Freeman-Halton exact P = 0.1426 </p>
+        <p>&#160;</p>
+        <p><u>ANOVA</u>
+        </p>
+        <p>Chi-square for equality of mean column scores = 5.696401</p>
+        <p>DF = 2, P = 0.0579</p>
+        <p>&#160;</p>
+        <p><u>LINEAR TREND</u>
+        </p>
+        <p>Sample correlation (r) = 0.295083</p>
+        <p>Chi-square for linear trend (M²) = 5.6598</p>
+        <p>DF = 1, P = 0.0174</p>
+        <p>&#160;</p>
+        <p><u>NOMINAL ASSOCIATION</u>
+        </p>
+        <p>Phi = 0.388447</p>
+        <p>Pearson's contingency = 0.362088</p>
+        <p>Cramér's V = 0.274673</p>
+        <p>&#160;</p>
+        <p><u>ORDINAL</u>
+        </p>
+        <p>Goodman-Kruskal gamma = 0.349223</p>
+        <p>Approximate test of gamma = 0:&#160;SE = 0.15333, P = 0.0228, 95% CI = 0.048701 to 0.649744</p>
+        <p>Approximate test of independence:&#160;SE = 0.163609, P = 0.0328, 95% CI = 0.028554 to 0.669891</p>
+        <p>&#160;</p>
+        <p>Kendall tau-b = 0.236078</p>
+        <p>Approximate test of tau-b = 0:&#160;SE = 0.108929, P = 0.0302, 95% CI = 0.02258 to 0.449575</p>
+        <p>Approximate test of independence:&#160;SE = 0.110601, P = 0.0328, 95% CI = 0.019303 to 0.452852</p>
+        <p>&#160;</p>
+        <p>Here we see that although the overall test was not significant we did show a statistically significant trend in mean scores. This suggests that supporting these mothers did help lessen their burden of grief.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># R by c contingency table: the StatsDirect help example (Armitage and Berry 1994,
+# grief of 66 mothers after a neonatal death by the support they received) in R
+counts &lt;- matrix(c(17, 9, 8,
+                   6, 5, 1,
+                   3, 5, 4,
+                   1, 2, 5), 4, 3, byrow = TRUE,
+                 dimnames = list(Grief = c("I", "II", "III", "IV"),
+                                 Support = c("Good", "Adequate", "Poor")))
+print(addmargins(counts))
+n &lt;- sum(counts)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+
+# Nominal independence: Pearson's chi-square without Yates' correction (R warns
+# that the expected counts are small, as the report does), the expected counts
+# and each cell's share of the chi-square, the likelihood ratio G-square and the
+# Fisher-Freeman-Halton exact test, which fisher.test gives for a table larger
+# than 2 by 2
+chi &lt;- suppressWarnings(chisq.test(counts, correct = FALSE))
+cat("Expected\n")
+print(six(chi$expected), quote = FALSE)
+cat("DChi2\n")
+print(six(chi$residuals^2), quote = FALSE)
+cat("Warning:", sum(chi$expected &lt; 5), "out of", length(counts),
+    "cells have EXPECTATION &lt; 5\n")
+cat("Chi-square =", six(chi$statistic), " DF =", chi$parameter, " ", pv(chi$p.value),
+    "\n")
+g2 &lt;- 2 * sum(counts * log(counts / chi$expected), na.rm = TRUE)  # 0 log 0 counts as 0
+cat("G-square =", six(g2), " DF =", chi$parameter, " ",
+    pv(pchisq(g2, chi$parameter, lower.tail = FALSE)), "\n")
+cat("Fisher-Freeman-Halton exact", pv(fisher.test(counts)$p.value), "\n")
+
+# The trend and ANOVA statistics score the rows 1 to 4 and the columns 1 to 3
+# (equally spaced scores, as the report uses unless others are given). One pair
+# of scores per mother makes them ordinary vectors of 66 values (whole-number
+# counts, as a contingency table has).
+grief &lt;- rep(as.vector(row(counts)), as.vector(counts))
+support &lt;- rep(as.vector(col(counts)), as.vector(counts))
+
+# ANOVA: does the mean grief score differ between the support columns? The
+# chi-square is (n - 1) times the between-column sum of squares over the total
+# sum of squares of the row scores, with columns less 1 as its degrees of freedom
+# (the report counts only columns and rows with any counts)
+ss &lt;- anova(lm(grief ~ factor(support)))[["Sum Sq"]]
+chi_eq &lt;- (n - 1) * ss[1] / sum(ss)
+df_eq &lt;- ncol(counts) - 1
+cat("Chi-square for equality of mean column scores =", six(chi_eq), " DF =", df_eq, " ",
+    pv(pchisq(chi_eq, df_eq, lower.tail = FALSE)), "\n")
+
+# Linear trend: the correlation between the row and column scores, and the
+# Mantel-Haenszel chi-square (n - 1) r^2 with one degree of freedom
+r &lt;- cor(grief, support)
+m2 &lt;- (n - 1) * r^2
+cat("Sample correlation (r) =", six(r), "\n")
+cat("Chi-square for linear trend (M2) =", six(m2), " DF = 1 ",
+    pv(pchisq(m2, 1, lower.tail = FALSE)), "\n")
+
+# Nominal association: phi, Pearson's contingency coefficient and Cramer's V
+x2 &lt;- as.numeric(chi$statistic)
+cat("Phi =", six(sqrt(x2 / n)), "\n")
+cat("Pearson's contingency =", six(sqrt(x2 / (x2 + n))), "\n")
+cat("Cramer's V =", six(sqrt(x2 / (n * (min(dim(counts)) - 1)))), "\n")
+
+# Ordinal association: Goodman and Kruskal's gamma and Kendall's tau-b from the
+# concordant and discordant pairs, each with two standard errors (Agresti 2002,
+# Brown and Benedetti 1977): one for a test that the measure is 0, one under
+# independence
+R &lt;- nrow(counts)
+C &lt;- ncol(counts)
+conc &lt;- disc &lt;- counts * 0
+for (i in 1:R) for (j in 1:C) {
+  conc[i, j] &lt;- sum(counts[(1:R) &gt; i, (1:C) &gt; j]) + sum(counts[(1:R) &lt; i, (1:C) &lt; j])
+  disc[i, j] &lt;- sum(counts[(1:R) &gt; i, (1:C) &lt; j]) + sum(counts[(1:R) &lt; i, (1:C) &gt; j])
+}
+cc &lt;- sum(counts * conc)                  # concordant pairs, counted twice
+dc &lt;- sum(counts * disc)                  # discordant pairs, counted twice
+gamma &lt;- (cc - dc) / (cc + dc)
+se_gamma &lt;- 4 / (cc + dc)^2 * sqrt(sum(counts * (dc * conc - cc * disc)^2))
+v_ind &lt;- sum(counts * (conc - disc)^2) - (cc - dc)^2 / n
+se_gamma_ind &lt;- 2 / (cc + dc) * sqrt(v_ind)
+rows &lt;- rowSums(counts)
+cols &lt;- colSums(counts)
+dr &lt;- n^2 - sum(rows^2)
+dcl &lt;- n^2 - sum(cols^2)
+taub &lt;- (cc - dc) / sqrt(dr * dcl)
+vij &lt;- outer(rows, cols, function(a, b) a * dcl + b * dr)
+vt &lt;- sum(counts * (2 * sqrt(dr * dcl) * (conc - disc) + taub * vij)^2) -
+      n^3 * taub^2 * (dr + dcl)^2
+se_taub &lt;- sqrt(vt) / (dr * dcl)
+se_taub_ind &lt;- 2 * sqrt(v_ind / (dr * dcl))
+z &lt;- qnorm(0.975)
+show &lt;- function(label, est, se) {
+  cat(label, " SE =", six(se), " ", pv(2 * pnorm(-abs(est / se))),
+      " 95% CI =", six(est - z * se), "to", six(est + z * se), "\n")
+}
+cat("Goodman-Kruskal gamma =", six(gamma), "\n")
+show("Approximate test of gamma = 0:", gamma, se_gamma)
+show("Approximate test of independence:", gamma, se_gamma_ind)
+cat("Kendall tau-b =", six(taub), "\n")
+show("Approximate test of tau-b = 0:", taub, se_taub)
+show("Approximate test of independence:", taub, se_taub_ind)</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

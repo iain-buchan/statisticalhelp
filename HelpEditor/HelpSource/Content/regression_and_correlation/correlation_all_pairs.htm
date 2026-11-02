@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="2" MadCap:lastHeight="115" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Correlation of All Pairs (Correlation Matrix) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Correlation: All pairs;Correlation: Matrix" />Correlation of All Pairs</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Regression and Correlation_Principal Components_Correlation.</b></p>
+        <p>&#160;</p>
+        <p>Please select the correlation matrix from the <a href="pca.htm">principal components</a> function in order to produce a matrix of correlations (<a href="simple_linear.htm">Pearson's product moment</a>) of all pairs.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>An illustration with the four questionnaire items of the <a href="pca.htm">principal components</a> example (test workbook, Agreement worksheet: Question 1 to Question 4). Run the principal components (correlation) function on the four columns and select the correlation matrix from its results; the matrix is of the items as that function reversed them (questions 3 and 4).</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Correlation matrix:</u>
+        </p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;">Question 1</td>
+                <td style="text-decoration: underline;">Question 2</td>
+                <td style="text-decoration: underline;">Question 3</td>
+                <td style="text-decoration: underline;">Question 4</td>
+            </tr>
+            <tr>
+                <td>Question 1</td>
+                <td>1</td>
+                <td>0.337395</td>
+                <td>0.083735</td>
+                <td>0.16767</td>
+            </tr>
+            <tr>
+                <td>Question 2</td>
+                <td>0.337395</td>
+                <td>1</td>
+                <td>-0.00133</td>
+                <td>0.037286</td>
+            </tr>
+            <tr>
+                <td>Question 3</td>
+                <td>0.083735</td>
+                <td>-0.00133</td>
+                <td>1</td>
+                <td>0.881114</td>
+            </tr>
+            <tr>
+                <td>Question 4</td>
+                <td>0.16767</td>
+                <td>0.037286</td>
+                <td>0.881114</td>
+                <td>1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Correlation of all pairs: an illustration with the four questionnaire items of
+# the principal components topic in R. The data are the test workbook's Agreement
+# worksheet columns Question 1 to 4.
+q &lt;- data.frame(
+  q1 = c(2, 5, 4, 4, 3, 3, 3, 4, 4, 4, 4, 5, 4, 4, 4, 3, 4, 5, 5, 4, 4, 4, 3, 5,
+    5, 3, 4, 3, 4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 4, 3, 4, 5, 4, 4, 4, 3, 5, 4, 3,
+    5, 5, 4, 2, 3, 4, 4, 4, 3, 4, 4),
+  q2 = c(3, 5, 5, 3, 3, 3, 4, 4, 5, 4, 4, 5, 4, 3, 4, 3, 5, 5, 5, 4, 4, 4, 4, 3,
+    5, 3, 4, 3, 4, 4, 4, 5, 4, 5, 4, 3, 3, 4, 4, 4, 5, 5, 4, 4, 4, 4, 5, 5, 4,
+    3, 3, 5, 5, 4, 3, 4, 4, 4, 4, 4),
+  q3 = c(5, 4, 5, 4, 5, 4, 4, 5, 5, 3, 5, 4, 4, 5, 5, 4, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 5, 5),
+  q4 = c(5, 4, 5, 4, 5, 5, 4, 5, 5, 3, 5, 4, 4, 5, 5, 5, 4, 5, 4, 4, 4, 4, 5, 5,
+    3, 4, 4, 5, 3, 5, 5, 5, 5, 5, 5, 4, 4, 5, 4, 4, 5, 5, 5, 4, 5, 4, 5, 4, 4,
+    4, 4, 4, 5, 5, 5, 4, 5, 4, 4, 5))
+names(q) &lt;- paste("Question", 1:4)
+
+# The principal components function had reversed questions 3 and 4 so that all
+# the items point the same way, and its correlation matrix is of the items as
+# reversed
+for (item in c("Question 3", "Question 4")) {
+  q[[item]] &lt;- max(q[[item]]) + min(q[[item]]) - q[[item]]
+}
+
+# R's correlation matrix (Pearson's product moment) of every pair of columns, to
+# 6 places as the report prints it
+print(round(cor(q), 6))</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+
+    </body>
+</html>

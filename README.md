@@ -1,5 +1,22 @@
 This is the help system for www.statsdirect.com statistical software, and a knowledge-support resource for those learning or applying biostatistical methods.
 
+## StatsDirect Help Editor for Windows
+
+The independent **StatsDirect Help Editor** provides formatted HTML editing,
+MathLive equations, Contents editing, search rebuilding, browser and docked app
+previews, GitHub synchronisation and optional ChatGPT text review without Flare.
+
+- [Download the signed 0.1.0 evaluation installer](https://github.com/iain-buchan/statisticalhelp/releases/tag/help-editor-v0.1.0)
+- [Editor source, build instructions and licences](HelpEditor/README.md)
+- [WiX installer source and signing instructions](HelpEditor/installer/README.md)
+
+The installer is a separate application and includes an independent help working
+copy. Edits can be committed and pushed with your own GitHub credentials after
+cloning the help repository in the editor. The existing published help and the
+StatsDirect application installers are unchanged by this addition.
+
+## Existing Flare project
+
 The HTML5 source is integrated with navigation and indexing across pages using Madcap Flare software: www.madcapsoftware.com/products/flare/.
 
 The StatisticalHelp project is supported by The University of Liverpool: www.liverpool.ac.uk/statisticalhelp.

@@ -1,0 +1,8 @@
+# Fully nested ANOVA, Snedecor and Cochran (1989) turnip green calcium. One fragment per line.
+Between Groups 7.560346 3 2.520115
+Between Subgroups within Groups 2.6302 8 0.328775
+Residual 0.07985 12 0.006654
+Total 10.270396 23
+F (VR between groups) = 378.727406 P < 0.0001
+F (using group/subgroup msqr) = 7.665167 P = 0.0097
+F (VR between subgroups within groups) = 49.408892 P < 0.0001

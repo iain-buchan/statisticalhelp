@@ -1,0 +1,16 @@
+# ROC curve: Aziz et al. (1996) sperm deformity index, conceived v not conceived. No program report: the statistics are computed in the chart renderer with its cut-off calculator, which the probe cannot run, so the script is checked against the help text. One fragment per line.
+RH: Area under ROC curve by extended trapezoidal rule = 0.875411
+RH: Wilcoxon estimate of area under ROC curve = 0.875411
+RH: DeLong standard error = 0.034862: 95% CI = 0.807082 to 0.943739
+RH: Optimum cut-off point selected = 161
+R: a = 30
+R: b = 5
+R: c = 12
+R: d = 111
+H: a b 30 5
+H: c d 12 111
+RH: sensitivity (95% CI) = 0.714286 (0.554161 to 0.842809)
+RH: specificity (95% CI) = 0.956897 (0.902275 to 0.985858)
+R: Cut-off with weight 2 = 152
+H: A cut-off of 152 was gained with sensitivity weighted twice as important as specificity
+H: was calculated at 161

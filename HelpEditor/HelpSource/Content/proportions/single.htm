@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Binomial Proportion Confidence Interval and Test - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Single proportion;Binomial proportion;Proportions: Single" />Single Proportion</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Proportions_Single</b>.</p>
+        <p>&#160;</p>
+        <p>This function compares an observed single <a href="binomial_proportions.htm" target="_popup">binomial proportion</a> with an expected proportion.</p>
+        <p>&#160;</p>
+        <p>expected proportion (binomial parameter) = pi</p>
+        <p>successes = r</p>
+        <p>observations/trials = n</p>
+        <p>observed proportion p = r / n</p>
+        <p>&#160;</p>
+        <p>The expected proportion (pi) is the probability of success on each trial, for example pi = 0.5 for coming up heads on the toss of a coin. The <a href="../exact_tests_on_counts/sign.htm">sign test</a> is basically a single proportion test based on pi = 0.5. Some authors refer to this method as a "binomial test".</p>
+        <p>&#160;</p>
+        <p>StatsDirect provides an exact confidence interval and an approximate mid-P confidence interval for the single proportion. You are also given exact P and exact mid-P hypothesis tests for the proportion in comparison with an expected proportion, i.e. null hypothesis that p = pi (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-gardner-1989">Gardner and Altman, 1989</a>).</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>two mutually exclusive outcomes</li>
+            <li>random sample</li>
+        </ul>
+        <p>&#160;</p>
+        <p>Consider using <a href="mid_p.htm">mid-P</a> values and intervals when you have several similar studies to consider within an overall investigation (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-barnard-1989">Barnard, 1989</a>).</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>The Clopper-Pearson method is used for the exact confidence interval and the Newcombe-Wilson method is used for the mid-P confidence interval (<a href="../references/reference_list.htm#ref-newcombe-1998-c">Newcombe, 1998c</a>). Mid-P probabilities are found by subtracting half the exact probability for the observed count from the cumulative total; this subtraction is done on each side for the two sided result.</p>
+        <p>&#160;</p>
+        <p>The P values are exact cumulative binomial probabilities, whatever the size of the sample. The two sided P value is the sum of the probabilities of the counts that are no more probable than the observed count; with an expected proportion of 0.5 this is twice the one sided P value, or 1 if that is more.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 119)</a>.</p>
+        <p>&#160;</p>
+        <p>In a trial of two analgesics, X and Y, 100 patients tried each drug for a week. The trial order was randomized. 65 out of 100 preferred drug Y.</p>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must select single proportion from the proportions section of the analysis menu. To select a 95% confidence interval just press enter when you are presented with the confidence interval menu. Enter n as 100 and r as 65. Enter the binomial test proportion as 0.5, this is because you would expect 50% of an infinite number of patients to prefer drug Y if there was no difference between X and Y.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Total = 100, response = 65</p>
+        <p>Proportion = 0.65</p>
+        <p>&#160;</p>
+        <p>Exact (Clopper-Pearson) 95% confidence interval = 0.548151 to 0.742706</p>
+        <p>&#160;</p>
+        <p>Using null hypothesis that the population proportion equals 0.5</p>
+        <p>Binomial one sided P = 0.0018</p>
+        <p>Binomial two sided P = 0.0035</p>
+        <p>&#160;</p>
+        <p>Approximate (Wilson) 95% mid-P confidence interval = 0.552544 to 0.736358</p>
+        <p>&#160;</p>
+        <p>Binomial one sided mid-P = 0.0013</p>
+        <p>Binomial two sided mid-P = 0.0027</p>
+        <p>&#160;</p>
+        <p>Here we can conclude that the proportion was statistically significantly different from 0.5. With 95% confidence we can state that the true population value for the proportion lies somewhere between 0.55 and 0.74.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Single proportion: the StatsDirect help example (Armitage and Berry 1994, p. 119,
+# 65 of 100 patients preferred analgesic Y) in R
+n &lt;- 100
+r &lt;- 65
+pi0 &lt;- 0.5                                # the expected proportion under the null
+
+# R's standard test gives the exact (Clopper-Pearson) confidence interval and an
+# exact two sided P. StatsDirect's two sided P is the total probability of the
+# counts no more likely than the observed count; the two agree here and in the
+# other cases tried (for example 7 of 12 against 0.3: 0.0524 from both).
+print(binom.test(r, n, p = pi0))
+
+# The report's lines, to 6 decimal places, P values to 4
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+ci &lt;- binom.test(r, n, p = pi0)$conf.int
+cat("Total = ", n, ",  response = ", r, "\n", sep = "")
+cat("Proportion =", six(r / n), "\n")
+cat("Exact (Clopper-Pearson) 95% confidence interval =", six(ci[1]), "to", six(ci[2]),
+    "\n")
+
+# One sided P: the smaller of the two tail probabilities, each including the
+# observed count (alternative = "less" and "greater" in binom.test give them)
+lower &lt;- pbinom(r, n, pi0)                # P(count &lt;= r)
+upper &lt;- pbinom(r - 1, n, pi0, lower.tail = FALSE)   # P(count &gt;= r)
+cat("Binomial one sided", pv(min(lower, upper)), "\n")
+cat("Binomial two sided", pv(binom.test(r, n, p = pi0)$p.value), "\n")
+
+# The Wilson score interval, which prop.test gives when its continuity
+# correction is turned off
+wilson &lt;- prop.test(r, n, correct = FALSE)$conf.int
+cat("Approximate (Wilson) 95% mid-P confidence interval =", six(wilson[1]), "to",
+    six(wilson[2]), "\n")
+
+# Mid-P: half the probability of the observed count is taken off the smaller
+# tail, and the two sided mid-P is twice the one sided
+mid &lt;- min(lower, upper) - dbinom(r, n, pi0) / 2
+cat("Binomial one sided mid-", pv(mid), "\n", sep = "")
+cat("Binomial two sided mid-", pv(2 * mid), "\n", sep = "")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

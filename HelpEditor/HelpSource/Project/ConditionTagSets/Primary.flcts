@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CatapultConditionTagSet>
+    <ConditionTag
+        Name="WEBHELP"
+        BackgroundColor="#40ffff"
+        Comment="Content for the public help outputs (GitHub and Website targets): the SVG chart pictures." />
+    <ConditionTag
+        Name="SWHELP"
+        BackgroundColor="#ffff00"
+        Comment="Content for the DesktopHelp target: software-help variants, including PNG chart pictures retained from the previous CHM output." />
+</CatapultConditionTagSet>

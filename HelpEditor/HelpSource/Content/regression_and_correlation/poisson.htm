@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="4387" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Poisson Regression (Incidence Rate Ratio) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Overdispertion;Regression (relative risk);Poisson regression;Regression: Poisson;Log-linear regression" />Poisson Regression</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Regression and Correlation_Poisson</b></p>
+        <p>&#160;</p>
+        <p>This function fits a Poisson regression model for multivariate analysis of numbers of uncommon events in <a href="../basics/prospective.htm">cohort studies</a>.</p>
+        <p>&#160;</p>
+        <p>The multiplicative Poisson regression model is fitted as a log-linear regression (i.e. a log link and a Poisson error distribution), with an offset equal to the natural logarithm of person-time if person-time is specified (<a href="../references/reference_list.htm#ref-mccullagh-1989">McCullagh and Nelder, 1989</a>; <a href="../references/reference_list.htm#ref-frome-1983">Frome, 1983</a>; <a href="../references/reference_list.htm#ref-agresti-2002">Agresti, 2002</a>). With the multiplicative Poisson model, the exponents of coefficients are equal to the incidence rate ratio (relative risk). These baseline relative risks give values relative to named covariates for the whole population. You can define relative risks for a sub-population by multiplying that sub-population's baseline relative risk with the relative risks due to other covariate groupings, for example the relative risk of dying from lung cancer if you are a smoker who has lived in a high radon area. StatsDirect offers sub-population relative risks for <a href="../basics/measurement_scales.htm">dichotomous</a> covariates.</p>
+        <p>&#160;</p>
+        <p>The outcome/response variable is assumed to come from a <a href="../distributions/poisson.htm">Poisson distribution</a>. Note that a Poisson distribution is the distribution of the number of events in a fixed time interval, provided that the events occur at random, independently in time and at a constant rate. Poisson distributions are used for modelling events per unit space as well as time, for example number of particles per square centimetre.</p>
+        <p>&#160;</p>
+        <p>Poisson regression can also be used for log-linear modelling of contingency table data, and for multinomial modelling. For contingency table counts you would create r + c indicator/dummy variables as the covariates, representing the r rows and c columns of the contingency table:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>r1c1</td>
+                <td>r1c2</td>
+                <td>r1c3</td>
+            </tr>
+            <tr>
+                <td>r2c1</td>
+                <td>r2c2</td>
+                <td>r2c3</td>
+            </tr>
+            <tr>
+                <td>r3c1</td>
+                <td>r3c2</td>
+                <td>r3c3</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Response</td>
+                <td style="text-decoration: underline;">x_r1</td>
+                <td style="text-decoration: underline;">x_r2</td>
+                <td style="text-decoration: underline;">x_r3</td>
+                <td style="text-decoration: underline;">x_c1</td>
+                <td style="text-decoration: underline;">x_c2</td>
+                <td style="text-decoration: underline;">x_c3</td>
+            </tr>
+            <tr>
+                <td>r1c1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>r1c2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>r1c3</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>r2c1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>r2c2</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>r2c3</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>r3c1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>r3c2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>r3c3</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p><u>Adequacy of the model</u>
+        </p>
+        <p>In order to assess the adequacy of the Poisson regression model you should first look at the basic descriptive statistics for the event count data. If the count mean and variance are very different (equivalent in a Poisson distribution) then the model is likely to be over-dispersed.</p>
+        <p>&#160;</p>
+        <p>The model analysis option gives a scale parameter (sp) as a measure of over-dispersion; this is equal to the Pearson chi-square statistic divided by the number of observations minus the number of parameters (covariates and intercept). The variances of the coefficients can be adjusted by multiplying by sp. The goodness of fit test statistics and residuals can be adjusted by dividing by sp. Using a quasi-likelihood approach sp could be integrated with the regression, but this would assume a known fixed value for sp, which is seldom the case. A better approach to over-dispersed Poisson models is to use a parametric alternative model, the negative binomial.</p>
+        <p>&#160;</p>
+        <p>The deviance (likelihood ratio) test statistic, G², is the most useful summary of the adequacy of the fitted model. It represents the change in deviance between the fitted model and the model with a constant term and no covariates; therefore G² is not calculated if no constant is specified. If this test is significant then the covariates contribute significantly to the model.</p>
+        <p>&#160;</p>
+        <p>The deviance goodness of fit test reflects the fit of the data to a Poisson distribution in the regression. If this test is significant then a red asterisk is shown by the P value, and you should consider other covariates and/or other error distributions such as negative binomial.</p>
+        <p>&#160;</p>
+        <p>StatsDirect does not exclude/drop covariates from its Poisson regression if they are highly correlated with one another. Models that are not of full (rank = number of parameters) rank are fully estimated in most circumstances, but you should usually consider combining or excluding variables, or possibly excluding the constant term. You should seek expert statistical if you find yourself in this situation.</p>
+        <p>&#160;</p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The deviance function is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle D=2\sum_{i=1}^ny_i\ln\left( \frac{y_i}{\hat \mu_i}\right)-(y_i-\hat{\mu}_i)$</MadCap:equation>
+        </p>
+        <p>- where y is the number of events, n is the number of observations and μ is the fitted Poisson mean.</p>
+        <p>&#160;</p>
+        <p>The log-likelihood function is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle L=\sum_{i=1}^ny_i\ln( \hat{\mu_i})-\hat{\mu}_i-\ln(y_i!)$</MadCap:equation>
+        </p>
+        <p>The maximum likelihood regression proceeds by iteratively re-weighted least squares, using singular value decomposition to solve the linear system at each iteration, until the change in deviance is within the specified accuracy.</p>
+        <p>&#160;</p>
+        <p>The Pearson chi-square residual is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle r_p=\frac{(y_i-\hat{\mu}_i)^2}{\hat{\mu}_i}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>The Pearson goodness of fit test statistic is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle \chi^2=\sum_{i=1}^n \frac{(y_i-\hat{\mu}_i)^2}{\hat{\mu}_i}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>The deviance residual is (<a href="../references/reference_list.htm#ref-cook-1982">Cook and Weisberg, 1982</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle r_d=\text{sgn}(y_i-\hat{\mu}_i)\sqrt{D(y_i,\hat{\mu}_i)}$</MadCap:equation>
+        </p>
+        <p>-where D(observation, fit) is the deviance and sgn(x) is the sign of x.</p>
+        <p>&#160;</p>
+        <p>The Freeman-Tukey, variance stabilized, residual is (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman and Tukey, 1950</a>):</p>
+        <p>
+            <MadCap:equation>$\displaystyle r_{ft}=\sqrt{y_i}+\sqrt{y_i+1}-\sqrt{4\hat{\mu}_i+1}$</MadCap:equation>
+        </p>
+        <p>&#160;</p>
+        <p>The standardized residual is:</p>
+        <p>
+            <MadCap:equation>$\displaystyle r_s=\frac{y_i-\hat{\mu}_i}{\sqrt{\hat{\mu}_i(1-h_i)}}$</MadCap:equation>
+        </p>
+        <p>- where h is the leverage (diagonal of the Hat matrix).</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p><a href="../references/reference_list.htm#ref-armitage-2001">From Armitage et al. (2001)</a>:</p>
+        <p>Test workbook (Regression worksheet: Cancers, Subject-years, Veterans, Age group).</p>
+        <p>&#160;</p>
+        <p>To analyse these data using StatsDirect you must first open the test workbook using the file open function of the file menu. Next generate a set of dummy variables to represent the levels of the "Age group" variable using the <a href="../data_preparation/dummy_variables.htm">Dummy Variables</a> function of the Data menu. Then select Poisson from the Regression and Correlation section of the Analysis menu. Click on the option "Counts of events and exposure (person-time), and select the response data type as "Individual". <a href="../workbook/selecting_data.htm">Select</a> the column marked "Cancers" when asked for the response. Then select "Subject-years" when asked for person-time. Then select "Veterans", "Age group (25-29)" , "Age group (30-34)" etc. in one action when you are asked for predictors.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p><u>Poisson regression</u>
+        </p>
+        <p>&#160;</p>
+        <p>Deviance (likelihood ratio) chi-square = 2067.700372 df = 11 P &lt; 0.0001</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>Intercept</td>
+                <td>b0 = -9.324832</td>
+                <td>z = -45.596773</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Veterans</td>
+                <td>b1 = -0.003528</td>
+                <td>z = -0.063587</td>
+                <td>P = 0.9493</td>
+            </tr>
+            <tr>
+                <td>Age group (25-29)</td>
+                <td>b2 = 0.679314</td>
+                <td>z = 2.921869</td>
+                <td>P = 0.0035</td>
+            </tr>
+            <tr>
+                <td>Age group (30-34)</td>
+                <td>b3 = 1.371085</td>
+                <td>z = 6.297824</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (35-39)</td>
+                <td>b4 = 1.939619</td>
+                <td>z = 9.14648</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (40-44)</td>
+                <td>b5 = 2.034323</td>
+                <td>z = 9.413835</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (45-49)</td>
+                <td>b6 = 2.726551</td>
+                <td>z = 12.269534</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (50-54)</td>
+                <td>b7 = 3.202873</td>
+                <td>z = 14.515926</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (55-59)</td>
+                <td>b8 = 3.716187</td>
+                <td>z = 17.064363</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (60-64)</td>
+                <td>b9 = 4.092676</td>
+                <td>z = 18.801188</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (65-69)</td>
+                <td>b10 = 4.23621</td>
+                <td>z = 18.892791</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (70+)</td>
+                <td>b11 = 4.363717</td>
+                <td>z = 19.19183</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>log Cancers [offset log(Subject-years)] = -9.324832 -0.003528 Veterans +0.679314 Age group (25-29) +1.371085 Age group (30-34) +1.939619 Age group (35-39) +2.034323 Age group (40-44) +2.726551 Age group (45-49) +3.202873 Age group (50-54) +3.716187 Age group (55-59) +4.092676 Age group (60-64) +4.23621 Age group (65-69) +4.363717 Age group (70+)</p>
+        <p>&#160;</p>
+        <p><u>Poisson regression - incidence rate ratios</u>
+        </p>
+        <p>&#160;</p>
+        <p>Inference population: whole study (baseline risk)</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Parameter</td>
+                <td style="text-decoration: underline;">Estimate</td>
+                <td style="text-decoration: underline;">IRR</td>
+                <td style="text-decoration: underline;">95% CI</td>
+            </tr>
+            <tr>
+                <td>Veterans</td>
+                <td>-0.003528</td>
+                <td>0.996479</td>
+                <td>0.89381 to 1.11094</td>
+            </tr>
+            <tr>
+                <td>Age group (25-29)</td>
+                <td>0.679314</td>
+                <td>1.972524</td>
+                <td>1.250616 to 3.111147</td>
+            </tr>
+            <tr>
+                <td>Age group (30-34)</td>
+                <td>1.371085</td>
+                <td>3.939622</td>
+                <td>2.571233 to 6.036256</td>
+            </tr>
+            <tr>
+                <td>Age group (35-39)</td>
+                <td>1.939619</td>
+                <td>6.956098</td>
+                <td>4.590483 to 10.540786</td>
+            </tr>
+            <tr>
+                <td>Age group (40-44)</td>
+                <td>2.034323</td>
+                <td>7.647073</td>
+                <td>5.006696 to 11.679905</td>
+            </tr>
+            <tr>
+                <td>Age group (45-49)</td>
+                <td>2.726551</td>
+                <td>15.280093</td>
+                <td>9.884869 to 23.620062</td>
+            </tr>
+            <tr>
+                <td>Age group (50-54)</td>
+                <td>3.202873</td>
+                <td>24.60311</td>
+                <td>15.96527 to 37.914362</td>
+            </tr>
+            <tr>
+                <td>Age group (55-59)</td>
+                <td>3.716187</td>
+                <td>41.107367</td>
+                <td>26.825601 to 62.992647</td>
+            </tr>
+            <tr>
+                <td>Age group (60-64)</td>
+                <td>4.092676</td>
+                <td>59.899957</td>
+                <td>39.096281 to 91.773558</td>
+            </tr>
+            <tr>
+                <td>Age group (65-69)</td>
+                <td>4.23621</td>
+                <td>69.145275</td>
+                <td>44.555675 to 107.305502</td>
+            </tr>
+            <tr>
+                <td>Age group (70+)</td>
+                <td>4.363717</td>
+                <td>78.54856</td>
+                <td>50.303407 to 122.653248</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p style="text-decoration: underline;">Poisson regression - model analysis</p>
+        <p>&#160;</p>
+        <p>Accuracy = 1.00E-07</p>
+        <p>Log likelihood with all covariates = -66.006668</p>
+        <p>&#160;</p>
+        <p>Deviance with all covariates = 5.217124, df = 10, rank = 12</p>
+        <p>Akaike information criterion = 29.217124</p>
+        <p>Schwarz information criterion = 42.309634</p>
+        <p>&#160;</p>
+        <p>Deviance with no covariates = 2072.917496</p>
+        <p>Deviance (likelihood ratio, G²) = 2067.700372, df = 11, P &lt; 0.0001</p>
+        <p>Pseudo (deviance based) R-square = 0.997483</p>
+        <p>Pseudo (McFadden, likelihood ratio index) R-square = 0.939986</p>
+        <p>&#160;</p>
+        <p>Pearson goodness of fit = 5.086063, df = 10, P = 0.8854</p>
+        <p>Deviance goodness of fit = 5.217124, df = 10, P = 0.8762</p>
+        <p>&#160;</p>
+        <p>Over-dispersion scale parameter = 0.508606</p>
+        <p>Scaled G² = 4065.424363, df = 11, P &lt; 0.0001</p>
+        <p>Scaled Pearson goodness of fit = 10, df = 10, P = 0.4405</p>
+        <p>Scaled Deviance goodness of fit = 10.257687, df = 10, P = 0.4182</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Parameter</td>
+                <td style="text-decoration: underline;">Coefficient</td>
+                <td style="text-decoration: underline;">Standard Error</td>
+            </tr>
+            <tr>
+                <td>Constant</td>
+                <td>-9.324832</td>
+                <td>0.204506</td>
+            </tr>
+            <tr>
+                <td>Veterans</td>
+                <td>-0.003528</td>
+                <td>0.055478</td>
+            </tr>
+            <tr>
+                <td>Age group (25-29)</td>
+                <td>0.679314</td>
+                <td>0.232493</td>
+            </tr>
+            <tr>
+                <td>Age group (30-34)</td>
+                <td>1.371085</td>
+                <td>0.217708</td>
+            </tr>
+            <tr>
+                <td>Age group (35-39)</td>
+                <td>1.939619</td>
+                <td>0.212062</td>
+            </tr>
+            <tr>
+                <td>Age group (40-44)</td>
+                <td>2.034323</td>
+                <td>0.216099</td>
+            </tr>
+            <tr>
+                <td>Age group (45-49)</td>
+                <td>2.726551</td>
+                <td>0.222221</td>
+            </tr>
+            <tr>
+                <td>Age group (50-54)</td>
+                <td>3.202873</td>
+                <td>0.220645</td>
+            </tr>
+            <tr>
+                <td>Age group (55-59)</td>
+                <td>3.716187</td>
+                <td>0.217775</td>
+            </tr>
+            <tr>
+                <td>Age group (60-64)</td>
+                <td>4.092676</td>
+                <td>0.217682</td>
+            </tr>
+            <tr>
+                <td>Age group (65-69)</td>
+                <td>4.23621</td>
+                <td>0.224224</td>
+            </tr>
+            <tr>
+                <td>Age group (70+)</td>
+                <td>4.363717</td>
+                <td>0.227374</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Parameter</td>
+                <td style="text-decoration: underline;">Scaled Standard Error</td>
+                <td style="text-decoration: underline;">Scaled Wald z</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>Constant</td>
+                <td>0.145847</td>
+                <td>-63.935674</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Veterans</td>
+                <td>0.039565</td>
+                <td>-0.089162</td>
+                <td>P = 0.929</td>
+            </tr>
+            <tr>
+                <td>Age group (25-29)</td>
+                <td>0.165806</td>
+                <td>4.097037</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (30-34)</td>
+                <td>0.155262</td>
+                <td>8.830792</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (35-39)</td>
+                <td>0.151235</td>
+                <td>12.825169</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (40-44)</td>
+                <td>0.154115</td>
+                <td>13.200054</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (45-49)</td>
+                <td>0.158481</td>
+                <td>17.204308</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (50-54)</td>
+                <td>0.157357</td>
+                <td>20.354193</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (55-59)</td>
+                <td>0.15531</td>
+                <td>23.927605</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (60-64)</td>
+                <td>0.155243</td>
+                <td>26.362975</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (65-69)</td>
+                <td>0.159909</td>
+                <td>26.491421</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Age group (70+)</td>
+                <td>0.162155</td>
+                <td>26.910733</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>With 95% confidence you can infer that the risk of cancer in these veterans compared with non-veterans lies between 0.89 and 1.11, i.e. a statistically non-significant effect.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Poisson regression: the StatsDirect help example (Armitage, Berry and Matthews
+# 2001, cancers in veterans and non-veterans by age group, with the subject-years
+# of exposure) in R
+cancers &lt;- c(6, 21, 54, 118, 97, 58, 56, 54, 34, 9, 2,
+             18, 60, 122, 191, 108, 74, 88, 120, 141, 108, 99)
+years &lt;- c(60840, 157175, 176134, 186514, 135475, 42620, 25001, 13710, 6163, 1575, 273,
+           208487, 303832, 325421, 312242, 165597, 54396, 40716, 33801, 26618, 17404,
+           14146)
+veterans &lt;- rep(c(1, 0), each = 11)
+ages &lt;- c("24 &lt;=", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59",
+          "60-64", "65-69", "70+")
+agegroup &lt;- factor(rep(ages, 2), levels = ages)
+
+# R's standard model: a Poisson regression of the counts with the log of the
+# exposure as an offset; the age group factor gives the same dummy variables as
+# the report, with the youngest group as the baseline
+fit &lt;- glm(cancers ~ veterans + agegroup + offset(log(years)), family = poisson)
+print(summary(fit))
+
+# The report's lines to 6 places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+dev &lt;- fit$deviance
+lr &lt;- fit$null.deviance - dev
+cat("Deviance goodness of fit chi-square =", six(dev), " df =", fit$df.residual, " ",
+    pv(pchisq(dev, fit$df.residual, lower.tail = FALSE)), "\n")
+df_lr &lt;- fit$df.null - fit$df.residual
+cat("Deviance (likelihood ratio) chi-square =", six(lr), " df =", df_lr, " ",
+    pv(pchisq(lr, df_lr, lower.tail = FALSE)), "\n")
+s &lt;- summary(fit)$coefficients
+lab &lt;- c("Intercept", "Veterans", paste0("Age group (", ages[-1], ")"))
+for (i in 1:12) {
+  cat(lab[i], " b", i - 1, " = ", six(s[i, 1]), "  z = ", six(s[i, 3]), "  ",
+      pv(s[i, 4]), "\n", sep = "")
+}
+
+signed &lt;- paste0(ifelse(s[3:12, 1] &gt;= 0, "+", ""), six(s[3:12, 1]), " ", lab[3:12])
+cat("log Cancers [offset log(Subject-years)] =", six(s[1, 1]), six(s[2, 1]), "Veterans",
+    paste(signed, collapse = " "), "\n")
+
+# Incidence rate ratios: exp of the coefficients, with Wald limits (the intercept's
+# row is the baseline rate per subject-year)
+ci &lt;- confint.default(fit)
+for (i in 1:12) {
+  cat(lab[i], six(s[i, 1]), six(exp(s[i, 1])), six(exp(ci[i, 1])), "to",
+      six(exp(ci[i, 2])), "\n")
+}
+
+# The report also gives the ratios in each veteran status: among the veterans
+# each age group's rate relative to the youngest non-veterans is exp of the age
+# coefficient plus the veteran coefficient, with the standard error of that sum
+# from the covariance matrix; among the non-veterans they are the ratios above
+vc &lt;- vcov(fit)
+for (i in 3:12) {
+  est &lt;- s[i, 1] + s[2, 1]
+  se_sum &lt;- sqrt(vc[i, i] + vc[2, 2] + 2 * vc[i, 2])
+  half &lt;- qnorm(0.975) * se_sum
+  cat("Veterans = 1:", lab[i], six(s[i, 1]), six(exp(est)), six(exp(est - half)), "to",
+      six(exp(est + half)), "\n")
+}
+
+# The model analysis: the log likelihood (as R's logLik gives it), the information
+# criteria on the deviance scale, the two pseudo R-squares (1 minus the ratio of
+# the deviances; 1 minus the ratio of the log likelihoods, McFadden's, with the
+# offset alone as the null model), Pearson's chi-square and the over-dispersion
+# scale, which is Pearson's chi-square over its degrees of freedom
+ll &lt;- as.numeric(logLik(fit))
+ll0 &lt;- as.numeric(logLik(glm(cancers ~ offset(log(years)), family = poisson)))
+k &lt;- length(coef(fit))
+n &lt;- length(cancers)
+cat("Log likelihood with all covariates =", six(ll), "\n")
+cat("Deviance with all covariates =", six(dev), " df =", fit$df.residual,
+    " rank =", k, "\n")
+cat("Akaike information criterion =", six(dev + 2 * k), "\n")
+cat("Schwarz information criterion =", six(dev + k * log(n)), "\n")
+cat("Deviance with no covariates =", six(fit$null.deviance), "\n")
+cat("Pseudo (deviance based) R-square =", six(1 - dev / fit$null.deviance), "\n")
+cat("Pseudo (McFadden, likelihood ratio index) R-square =", six(1 - ll / ll0), "\n")
+pearson &lt;- sum(residuals(fit, type = "pearson")^2)
+cat("Pearson goodness of fit =", six(pearson), " df =", fit$df.residual, " ",
+    pv(pchisq(pearson, fit$df.residual, lower.tail = FALSE)), "\n")
+scale &lt;- pearson / fit$df.residual
+cat("Over-dispersion scale parameter =", six(scale), "\n")
+cat("Scaled G2 =", six(lr / scale), " df =", df_lr, " ",
+    pv(pchisq(lr / scale, df_lr, lower.tail = FALSE)), "\n")
+cat("Scaled Pearson goodness of fit =", six(pearson / scale), " df =", fit$df.residual,
+    " ", pv(pchisq(pearson / scale, fit$df.residual, lower.tail = FALSE)), "\n")
+cat("Scaled Deviance goodness of fit =", six(dev / scale), " df =", fit$df.residual,
+    " ", pv(pchisq(dev / scale, fit$df.residual, lower.tail = FALSE)), "\n")
+cat("Coefficients, standard errors, then the scaled standard errors and Wald z:\n")
+for (i in 1:12) {
+  cat(lab[i], six(s[i, 1]), six(s[i, 2]), six(s[i, 2] * sqrt(scale)),
+      six(s[i, 1] / (s[i, 2] * sqrt(scale))),
+      pv(2 * pnorm(-abs(s[i, 1] / (s[i, 2] * sqrt(scale))))), "\n")
+}</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+{
+  "capturedAtUtc": "2026-11-02T11:47:55.567137+00:00",
+  "repository": "https://github.com/iain-buchan/statsdirect",
+  "sourceCommit": "95e23818d986e5085a1a2b511ce7ebefd711f1cf",
+  "license": "MIT",
+  "licenseFile": "LICENSE.StatsDirect.txt",
+  "dockHostAdaptation": "None: ToolDockHost already finds a DockStyle.Fill workspace when there is no MdiClient.",
+  "files": [
+    {
+      "source": "StatsDirectUI/UI/HtmlHelp/HelpView.cs",
+      "snapshot": "HelpView.cs",
+      "sourceSha256": "ea16b8d2b87c0bd3e0306c3bf6c9ffba068b3eccdb9a8a99d18f5d85f0d82b06",
+      "snapshotSha256": "bf27ebbb488594dfb2996f16f66b5df87b8245aea48f29fe133fc6e39eefc3b7",
+      "changes": [
+        "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility.",
+        "Default browser profile isolated from installed StatsDirect; visible help layout unchanged."
+      ]
+    },
+    {
+      "source": "StatsDirectUI/UI/HtmlHelp/HelpCatalog.cs",
+      "snapshot": "HelpCatalog.cs",
+      "sourceSha256": "ddbab4c66f2b2d3b0becedbea1a0f74e02864ea7b01f3ed94fb4e4e3f5e45fc0",
+      "snapshotSha256": "2b33891df8ee5c6357441dff982e6fd1413e489eb3fda579570d8d61dc677678",
+      "changes": [
+        "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility."
+      ]
+    },
+    {
+      "source": "StatsDirectUI/UI/HtmlHelp/HelpService.cs",
+      "snapshot": "HelpService.cs",
+      "sourceSha256": "11b673ea1a95dd380e21d91b82a3e6a1d6ad6d8f5071c97781b5e85dcd9f0d94",
+      "snapshotSha256": "2c4993769f3cc06694b6b41c56235f2a7282bb978e32b4b7fab4ece58f7cae94",
+      "changes": [
+        "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility.",
+        "Forwards session Hidden as Closed so the authoring tab can reflect a user closing the preview.",
+        "Optional browser-profile path allows isolated tests; the normal editor default remains separate from installed StatsDirect.",
+        "ShowExisting reveals the existing authoring preview session without re-requesting its topic; unchanged Browser/App view switches retain reading state and history."
+      ]
+    },
+    {
+      "source": "StatsDirectUI/UI/ToolWindows/ToolPaneSession.cs",
+      "snapshot": "ToolPaneSession.cs",
+      "sourceSha256": "be1d951337d5b85e7279dc295fb305d133d590199925f7a7aff7a214bb216de8",
+      "snapshotSha256": "86b6f99055c9efd2a82c86528cf78aad9f245e416c95e4fae97d4392dff6fb84",
+      "changes": [
+        "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility.",
+        "Emits Hidden once when a visible session is hidden; lifecycle/docking behavior unchanged."
+      ]
+    },
+    {
+      "source": "StatsDirectUI/UI/ToolWindows/ToolDockHost.cs",
+      "snapshot": "ToolDockHost.cs",
+      "sourceSha256": "cb6316787c77fb9184695d89dea69b56e1d3aafe959afafc59736a23099a5b50",
+      "snapshotSha256": "05fd30774247bd810ad826dfa50cf0833188179d318fff52098467ba1eee9d44",
+      "changes": [
+        "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility."
+      ]
+    },
+    {
+      "source": "StatsDirectUI/UI/ToolWindows/ToolWindow.cs",
+      "snapshot": "ToolWindow.cs",
+      "sourceSha256": "4414b057975cce381e7ef23b5d00f99051cc9dbca48a5707aa1ba39824b4da88",
+      "snapshotSha256": "d656118ea1a6b94710a83982defe44c9101db6e618ba9e4ff0044d17c889a1c9",
+      "changes": [
+        "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility."
+      ]
+    }
+  ],
+  "sourceRepositoryModifiedBySnapshotting": false
+}

@@ -1,0 +1,10 @@
+* text=auto eol=lf
+# Preserve verified artwork, vendor assets and the supplied authored help bytes.
+HelpSource/** -text
+src/StatsDirectHelpEditor.App/Web/** -text
+src/StatsDirectHelpEditor.App/AppHelp/** -text
+*.png -text
+*.ico -text
+*.woff -text
+*.woff2 -text
+*.svg -text

@@ -1,0 +1,13 @@
+# Block randomization, the help illustration: 20 subjects, 2 treatments, blocks of random size, seed 10. StatsDirect's and R's generators give different sequences for the same seed, so the allocations are checked separately (HP: the program's, R: the script's). One fragment per line.
+Random allocation in blocks
+Randomized with seed: 10
+Subjects: 20
+Block size: random between 4 and 8
+Treatments: 2
+Subject Treatment
+HP: 1 A 2 A 3 B 4 B 5 B 6 B 7 A 8 A 9 A 10 A 11 B 12 A 13 B 14 B 15 B 16 A 17 B 18 A 19 B 20 A
+R: 1 A 2 B 3 B 4 A 5 B 6 A 7 B 8 A 9 B 10 B 11 A 12 A 13 A 14 B 15 A 16 B 17 A 18 B 19 B 20 A
+R: Block sizes drawn: 8 8 4
+R: A B 10 10
+R: Block size: 4
+R: 1 A 2 A 3 B 4 B 5 B 6 A 7 B 8 A 9 A 10 B 11 A 12 B 13 A 14 B 15 B 16 A 17 B 18 B 19 A 20 A

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head>
+        <!-- For the compiled help (CHM) only, whose viewer scales text with the display but not pictures: see the comment in the script. -->
+        <script type="text/javascript" src="../scripts/chm-pictures.js">
+        </script>
+    </head>
+    <body>
+        <MadCap:bodyProxy />
+    </body>
+</html>

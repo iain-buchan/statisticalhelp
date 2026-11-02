@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="566" viewBox="0 0 1132 800" xmlns="http://www.w3.org/2000/svg" height="400">
+  <line x1="115" y1="689" x2="1052" y2="689" style="stroke:#868686;" />
+  <line x1="115" y1="80" x2="115" y2="689" style="stroke:#868686;" />
+  <g transform="translate(115,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0</tspan>
+    </text>
+  </g>
+  <line x1="115" y1="696" x2="115" y2="689" style="stroke:#868686;" />
+  <g transform="translate(245.13888888888889,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">50</tspan>
+    </text>
+  </g>
+  <line x1="245.13888888888889" y1="696" x2="245.13888888888889" y2="689" style="stroke:#868686;" />
+  <g transform="translate(375.27777777777777,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">100</tspan>
+    </text>
+  </g>
+  <line x1="375.27777777777777" y1="696" x2="375.27777777777777" y2="689" style="stroke:#868686;" />
+  <g transform="translate(505.4166666666667,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">150</tspan>
+    </text>
+  </g>
+  <line x1="505.4166666666667" y1="696" x2="505.4166666666667" y2="689" style="stroke:#868686;" />
+  <g transform="translate(635.5555555555555,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">200</tspan>
+    </text>
+  </g>
+  <line x1="635.5555555555555" y1="696" x2="635.5555555555555" y2="689" style="stroke:#868686;" />
+  <g transform="translate(765.6944444444445,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">250</tspan>
+    </text>
+  </g>
+  <line x1="765.6944444444445" y1="696" x2="765.6944444444445" y2="689" style="stroke:#868686;" />
+  <g transform="translate(895.8333333333334,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">300</tspan>
+    </text>
+  </g>
+  <line x1="895.8333333333334" y1="696" x2="895.8333333333334" y2="689" style="stroke:#868686;" />
+  <g transform="translate(1025.9722222222222,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">350</tspan>
+    </text>
+  </g>
+  <line x1="1025.9722222222222" y1="696" x2="1025.9722222222222" y2="689" style="stroke:#868686;" />
+  <g transform="translate(100,689)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0</tspan>
+    </text>
+  </g>
+  <line x1="108" y1="689" x2="115" y2="689" style="stroke:#868686;" />
+  <g transform="translate(100,536.75)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">5</tspan>
+    </text>
+  </g>
+  <line x1="108" y1="536.75" x2="115" y2="536.75" style="stroke:#868686;" />
+  <g transform="translate(100,384.5)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">10</tspan>
+    </text>
+  </g>
+  <line x1="108" y1="384.5" x2="115" y2="384.5" style="stroke:#868686;" />
+  <g transform="translate(100,232.25)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">15</tspan>
+    </text>
+  </g>
+  <line x1="108" y1="232.25" x2="115" y2="232.25" style="stroke:#868686;" />
+  <g transform="translate(100,80)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">20</tspan>
+    </text>
+  </g>
+  <line x1="108" y1="80" x2="115" y2="80" style="stroke:#868686;" />
+  <text x="583.5" y="723">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Time</tspan>
+  </text>
+  <g transform="translate(77,384.5)">
+    <text x="0" y="0" transform="rotate(-90)">
+      <tspan dy="0" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Zidovudine</tspan>
+    </text>
+  </g>
+  <text x="583.5" y="20">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">Normal</tspan>
+  </text>
+  <line x1="154.0416717529297" y1="575.7259979248047" x2="115" y2="686.5640029907227" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="193.0833282470703" y1="201.19097900390625" x2="154.0416717529297" y2="575.7259979248047" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="232.125" y1="440.2235107421875" x2="193.0833282470703" y2="201.19097900390625" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="271.1666564941406" y1="530.3554992675781" x2="232.125" y2="440.2235107421875" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="349.25" y1="541.6220092773438" x2="271.1666564941406" y2="530.3554992675781" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="427.3333435058594" y1="624.4459991455078" x2="349.25" y2="541.6220092773438" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="505.4166564941406" y1="643.3249969482422" x2="427.3333435058594" y2="624.4459991455078" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="583.5" y1="653.0690002441406" x2="505.4166564941406" y2="643.3249969482422" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="739.6666870117188" y1="667.0760040283203" x2="583.5" y2="653.0690002441406" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="895.8333129882812" y1="676.5155029296875" x2="739.6666870117188" y2="667.0760040283203" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="1052" y1="680.1695022583008" x2="895.8333129882812" y2="676.5155029296875" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <rect x="109" y="680.5640029907227" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="148.0416717529297" y="569.7259979248047" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="187.0833282470703" y="195.19097900390625" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="226.125" y="434.2235107421875" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="265.1666564941406" y="524.3554992675781" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="343.25" y="535.6220092773438" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="421.3333435058594" y="618.4459991455078" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="499.4166564941406" y="637.3249969482422" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="577.5" y="647.0690002441406" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="733.6666870117188" y="661.0760040283203" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="889.8333129882812" y="670.5155029296875" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="1046" y="674.1695022583008" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <line x1="154.0416717529297" y1="484.3760070800781" x2="115" y2="686.5640029907227" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="193.0833282470703" y1="522.1340026855469" x2="154.0416717529297" y2="484.3760070800781" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="232.125" y1="541.6220092773438" x2="193.0833282470703" y2="522.1340026855469" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="271.1666564941406" y1="618.9649963378906" x2="232.125" y2="541.6220092773438" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="349.25" y1="629.6224975585938" x2="271.1666564941406" y2="618.9649963378906" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="427.3333435058594" y1="644.5429992675781" x2="349.25" y2="629.6224975585938" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="505.4166564941406" y1="643.6295013427734" x2="427.3333435058594" y2="644.5429992675781" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="583.5" y1="648.1970062255859" x2="505.4166564941406" y2="643.6295013427734" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="739.6666870117188" y1="665.5534973144531" x2="583.5" y2="648.1970062255859" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="895.8333129882812" y1="673.7750015258789" x2="739.6666870117188" y2="665.5534973144531" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="1052" y1="680.4739990234375" x2="895.8333129882812" y2="673.7750015258789" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <rect x="109" y="680.5640029907227" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="148.0416717529297" y="478.3760070800781" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="187.0833282470703" y="516.1340026855469" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="226.125" y="535.6220092773438" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="265.1666564941406" y="612.9649963378906" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="343.25" y="623.6224975585938" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="421.3333435058594" y="638.5429992675781" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="499.4166564941406" y="637.6295013427734" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="577.5" y="642.1970062255859" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="733.6666870117188" y="659.5534973144531" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="889.8333129882812" y="667.7750015258789" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="1046" y="674.4739990234375" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <line x1="154.0416717529297" y1="385.1090087890625" x2="115" y2="686.5640029907227" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="193.0833282470703" y1="467.3240051269531" x2="154.0416717529297" y2="385.1090087890625" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="232.125" y1="583.6430053710938" x2="193.0833282470703" y2="467.3240051269531" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="271.1666564941406" y1="615.3110046386719" x2="232.125" y2="583.6430053710938" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="349.25" y1="637.5395050048828" x2="271.1666564941406" y2="615.3110046386719" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="427.3333435058594" y1="667.6849975585938" x2="349.25" y2="637.5395050048828" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="505.4166564941406" y1="665.8580017089844" x2="427.3333435058594" y2="667.6849975585938" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="583.5" y1="674.6884994506836" x2="505.4166564941406" y2="665.8580017089844" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="739.6666870117188" y1="683.5189971923828" x2="583.5" y2="674.6884994506836" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="895.8333129882812" y1="686.5640029907227" x2="739.6666870117188" y2="683.5189971923828" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="1052" y1="686.5640029907227" x2="895.8333129882812" y2="686.5640029907227" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <rect x="109" y="680.5640029907227" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="148.0416717529297" y="379.1090087890625" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="187.0833282470703" y="461.3240051269531" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="226.125" y="577.6430053710938" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="265.1666564941406" y="609.3110046386719" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="343.25" y="631.5395050048828" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="421.3333435058594" y="661.6849975585938" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="499.4166564941406" y="659.8580017089844" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="577.5" y="668.6884994506836" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="733.6666870117188" y="677.5189971923828" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="889.8333129882812" y="680.5640029907227" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="1046" y="680.5640029907227" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <line x1="154.0416717529297" y1="654.89599609375" x2="115" y2="686.5640029907227" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="193.0833282470703" y1="467.6285095214844" x2="154.0416717529297" y2="654.89599609375" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="232.125" y1="574.2035064697266" x2="193.0833282470703" y2="467.6285095214844" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="271.1666564941406" y1="598.5634918212891" x2="232.125" y2="574.2035064697266" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="349.25" y1="634.7989959716797" x2="271.1666564941406" y2="598.5634918212891" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="427.3333435058594" y1="650.3285064697266" x2="349.25" y2="634.7989959716797" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="505.4166564941406" y1="658.8544921875" x2="427.3333435058594" y2="650.3285064697266" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="583.5" y1="663.7265014648438" x2="505.4166564941406" y2="658.8544921875" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="739.6666870117188" y1="671.6434936523438" x2="583.5" y2="663.7265014648438" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="895.8333129882812" y1="677.4290008544922" x2="739.6666870117188" y2="671.6434936523438" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="1052" y1="681.3874969482422" x2="895.8333129882812" y2="677.4290008544922" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <rect x="109" y="680.5640029907227" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="148.0416717529297" y="648.89599609375" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="187.0833282470703" y="461.6285095214844" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="226.125" y="568.2035064697266" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="265.1666564941406" y="592.5634918212891" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="343.25" y="628.7989959716797" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="421.3333435058594" y="644.3285064697266" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="499.4166564941406" y="652.8544921875" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="577.5" y="657.7265014648438" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="733.6666870117188" y="665.6434936523438" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="889.8333129882812" y="671.4290008544922" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="1046" y="675.3874969482422" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <line x1="154.0416717529297" y1="281.88348388671875" x2="115" y2="686.5640029907227" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="193.0833282470703" y1="152.77545166015625" x2="154.0416717529297" y2="281.88348388671875" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="232.125" y1="570.2449951171875" x2="193.0833282470703" y2="152.77545166015625" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="271.1666564941406" y1="520.6114807128906" x2="232.125" y2="570.2449951171875" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="349.25" y1="470.6734924316406" x2="271.1666564941406" y2="520.6114807128906" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="427.3333435058594" y1="531.8779907226562" x2="349.25" y2="470.6734924316406" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="505.4166564941406" y1="572.0720062255859" x2="427.3333435058594" y2="531.8779907226562" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="583.5" y1="612.5704956054688" x2="505.4166564941406" y2="572.0720062255859" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="739.6666870117188" y1="649.1105041503906" x2="583.5" y2="612.5704956054688" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="895.8333129882812" y1="667.6849975585938" x2="739.6666870117188" y2="649.1105041503906" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <line x1="1052" y1="677.7334976196289" x2="895.8333129882812" y2="667.6849975585938" style="stroke:#9E413E;stroke-dasharray:3,1;" />
+  <rect x="109" y="680.5640029907227" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="148.0416717529297" y="275.88348388671875" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="187.0833282470703" y="146.77545166015625" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="226.125" y="564.2449951171875" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="265.1666564941406" y="514.6114807128906" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="343.25" y="464.6734924316406" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="421.3333435058594" y="525.8779907226562" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="499.4166564941406" y="566.0720062255859" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="577.5" y="606.5704956054688" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="733.6666870117188" y="643.1105041503906" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="889.8333129882812" y="661.6849975585938" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <rect x="1046" y="671.7334976196289" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+</svg>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="761" viewBox="0 0 1510 800" xmlns="http://www.w3.org/2000/svg" height="400">
+  <line x1="498" y1="689" x2="1107" y2="689" style="stroke:#868686;" />
+  <line x1="498" y1="80" x2="498" y2="689" style="stroke:#868686;" />
+  <line x1="1107" y1="80" x2="498" y2="80" style="stroke:#868686;" />
+  <line x1="1107" y1="80" x2="1107" y2="689" style="stroke:#868686;" />
+  <g transform="translate(498,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.0</tspan>
+    </text>
+  </g>
+  <line x1="498" y1="696" x2="498" y2="689" style="stroke:#868686;" />
+  <g transform="translate(619.8000018149614,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.2</tspan>
+    </text>
+  </g>
+  <line x1="619.8000018149614" y1="696" x2="619.8000018149614" y2="689" style="stroke:#868686;" />
+  <g transform="translate(741.6000036299229,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.4</tspan>
+    </text>
+  </g>
+  <line x1="741.6000036299229" y1="696" x2="741.6000036299229" y2="689" style="stroke:#868686;" />
+  <g transform="translate(863.4000145196915,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.6</tspan>
+    </text>
+  </g>
+  <line x1="863.4000145196915" y1="696" x2="863.4000145196915" y2="689" style="stroke:#868686;" />
+  <g transform="translate(985.2000072598457,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.8</tspan>
+    </text>
+  </g>
+  <line x1="985.2000072598457" y1="696" x2="985.2000072598457" y2="689" style="stroke:#868686;" />
+  <g transform="translate(1107,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">1.0</tspan>
+    </text>
+  </g>
+  <line x1="1107" y1="696" x2="1107" y2="689" style="stroke:#868686;" />
+  <g transform="translate(483,689)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.0</tspan>
+    </text>
+  </g>
+  <line x1="491" y1="689" x2="498" y2="689" style="stroke:#868686;" />
+  <g transform="translate(483,567.1999981850386)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.2</tspan>
+    </text>
+  </g>
+  <line x1="491" y1="567.1999981850386" x2="498" y2="567.1999981850386" style="stroke:#868686;" />
+  <g transform="translate(483,445.39999637007713)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.4</tspan>
+    </text>
+  </g>
+  <line x1="491" y1="445.39999637007713" x2="498" y2="445.39999637007713" style="stroke:#868686;" />
+  <g transform="translate(483,323.59998548030853)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.6</tspan>
+    </text>
+  </g>
+  <line x1="491" y1="323.59998548030853" x2="498" y2="323.59998548030853" style="stroke:#868686;" />
+  <g transform="translate(483,201.79999274015427)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.8</tspan>
+    </text>
+  </g>
+  <line x1="491" y1="201.79999274015427" x2="498" y2="201.79999274015427" style="stroke:#868686;" />
+  <g transform="translate(483,80)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">1.0</tspan>
+    </text>
+  </g>
+  <line x1="491" y1="80" x2="498" y2="80" style="stroke:#868686;" />
+  <text x="802.5" y="723">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">1-Specificity</tspan>
+  </text>
+  <g transform="translate(455,384.5)">
+    <text x="0" y="0" transform="rotate(-90)">
+      <tspan dy="0" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Sensitivity</tspan>
+    </text>
+  </g>
+  <text x="802.5" y="20">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">ROC plot for Sperm Deformity Index and Conception</tspan>
+  </text>
+  <line x1="498" y1="689" x2="1107" y2="80" style="stroke:#000000;" />
+  <ellipse cx="1107" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1101.75" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1096.5" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1091.25" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1091.25" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1080.75" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1080.75" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1070.25" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1065" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1065" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1065" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1049.25" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1049.25" cy="80" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1044" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1038.75" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1033.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1033.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1033.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1017.75" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1012.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1007.25" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1007.25" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="1007.25" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="991.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="991.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="991.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="991.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="991.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="965.25" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="960" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="960" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="949.5" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="944.25" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="939" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="939" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="939" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="923.25" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="923.25" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="912.75" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="912.75" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="912.75" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="912.75" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="912.75" cy="94.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="891.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="891.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="881.25" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="881.25" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="881.25" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="881.25" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="860.25" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="860.25" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="849.75" cy="109" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="802.5" cy="123.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="802.5" cy="123.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="802.5" cy="123.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="792" cy="138" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="792" cy="138" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="792" cy="138" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="781.5" cy="152.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="781.5" cy="152.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="771" cy="152.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="771" cy="152.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="760.5" cy="152.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="760.5" cy="152.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="760.5" cy="152.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="760.5" cy="152.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="760.5" cy="152.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="739.5" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="739.5" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="729" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="729" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="729" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="729" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="708" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="708" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="708" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="692.25" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="692.25" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="692.25" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="692.25" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="692.25" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="692.25" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="692.25" cy="167" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="660.75" cy="181.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="660.75" cy="181.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="660.75" cy="181.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="650.25" cy="196" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="650.25" cy="196" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="650.25" cy="196" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="650.25" cy="196" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="650.25" cy="196" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="650.25" cy="196" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="618.75" cy="196" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="618.75" cy="196" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="613.5" cy="210.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="608.25" cy="210.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="608.25" cy="210.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="608.25" cy="210.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="608.25" cy="210.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="608.25" cy="210.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="587.25" cy="225" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="587.25" cy="225" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="587.25" cy="225" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="587.25" cy="225" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="571.5" cy="239.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="571.5" cy="239.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="561" cy="239.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="555.75" cy="239.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="555.75" cy="239.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="555.75" cy="239.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="555.75" cy="239.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="555.75" cy="239.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="555.75" cy="239.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="529.5" cy="254" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="524.25" cy="254" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="524.25" cy="268.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="524.25" cy="268.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="524.25" cy="297.49999999999994" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="524.25" cy="297.49999999999994" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="524.25" cy="326.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="524.25" cy="326.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="524.25" cy="326.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="519" cy="355.49999999999994" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="519" cy="355.49999999999994" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="519" cy="355.49999999999994" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="513.75" cy="384.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="513.75" cy="384.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="513.75" cy="413.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="513.75" cy="428" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="513.75" cy="428" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="442.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="457" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="457" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="486" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="486" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="515" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="529.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="544" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="558.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="573" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="508.5" cy="587.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="503.25" cy="587.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="503.25" cy="602" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="498" cy="602" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="498" cy="616.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="498" cy="631" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="498" cy="645.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="498" cy="660" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="498" cy="674.5" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="1107" y1="80" x2="1101.75" y2="80" style="stroke:#40699C;" />
+  <line x1="1101.75" y1="80" x2="1096.5" y2="80" style="stroke:#40699C;" />
+  <line x1="1096.5" y1="80" x2="1091.25" y2="80" style="stroke:#40699C;" />
+  <line x1="1091.25" y1="80" x2="1080.75" y2="80" style="stroke:#40699C;" />
+  <line x1="1080.75" y1="80" x2="1070.25" y2="80" style="stroke:#40699C;" />
+  <line x1="1070.25" y1="80" x2="1065" y2="80" style="stroke:#40699C;" />
+  <line x1="1065" y1="80" x2="1049.25" y2="80" style="stroke:#40699C;" />
+  <line x1="1049.25" y1="80" x2="1044" y2="94.5" style="stroke:#40699C;" />
+  <line x1="1044" y1="94.5" x2="1038.75" y2="94.5" style="stroke:#40699C;" />
+  <line x1="1038.75" y1="94.5" x2="1033.5" y2="94.5" style="stroke:#40699C;" />
+  <line x1="1033.5" y1="94.5" x2="1017.75" y2="94.5" style="stroke:#40699C;" />
+  <line x1="1017.75" y1="94.5" x2="1012.5" y2="94.5" style="stroke:#40699C;" />
+  <line x1="1012.5" y1="94.5" x2="1007.25" y2="94.5" style="stroke:#40699C;" />
+  <line x1="1007.25" y1="94.5" x2="991.5" y2="94.5" style="stroke:#40699C;" />
+  <line x1="991.5" y1="94.5" x2="965.25" y2="94.5" style="stroke:#40699C;" />
+  <line x1="965.25" y1="94.5" x2="960" y2="94.5" style="stroke:#40699C;" />
+  <line x1="960" y1="94.5" x2="949.5" y2="94.5" style="stroke:#40699C;" />
+  <line x1="949.5" y1="94.5" x2="944.25" y2="94.5" style="stroke:#40699C;" />
+  <line x1="944.25" y1="94.5" x2="939" y2="94.5" style="stroke:#40699C;" />
+  <line x1="939" y1="94.5" x2="923.25" y2="94.5" style="stroke:#40699C;" />
+  <line x1="923.25" y1="94.5" x2="912.75" y2="94.5" style="stroke:#40699C;" />
+  <line x1="912.75" y1="94.5" x2="891.75" y2="109" style="stroke:#40699C;" />
+  <line x1="891.75" y1="109" x2="881.25" y2="109" style="stroke:#40699C;" />
+  <line x1="881.25" y1="109" x2="860.25" y2="109" style="stroke:#40699C;" />
+  <line x1="860.25" y1="109" x2="849.75" y2="109" style="stroke:#40699C;" />
+  <line x1="849.75" y1="109" x2="802.5" y2="123.5" style="stroke:#40699C;" />
+  <line x1="802.5" y1="123.5" x2="792" y2="138" style="stroke:#40699C;" />
+  <line x1="792" y1="138" x2="781.5" y2="152.5" style="stroke:#40699C;" />
+  <line x1="781.5" y1="152.5" x2="771" y2="152.5" style="stroke:#40699C;" />
+  <line x1="771" y1="152.5" x2="760.5" y2="152.5" style="stroke:#40699C;" />
+  <line x1="760.5" y1="152.5" x2="739.5" y2="167" style="stroke:#40699C;" />
+  <line x1="739.5" y1="167" x2="729" y2="167" style="stroke:#40699C;" />
+  <line x1="729" y1="167" x2="708" y2="167" style="stroke:#40699C;" />
+  <line x1="708" y1="167" x2="692.25" y2="167" style="stroke:#40699C;" />
+  <line x1="692.25" y1="167" x2="660.75" y2="181.5" style="stroke:#40699C;" />
+  <line x1="660.75" y1="181.5" x2="650.25" y2="196" style="stroke:#40699C;" />
+  <line x1="650.25" y1="196" x2="618.75" y2="196" style="stroke:#40699C;" />
+  <line x1="618.75" y1="196" x2="613.5" y2="210.5" style="stroke:#40699C;" />
+  <line x1="613.5" y1="210.5" x2="608.25" y2="210.5" style="stroke:#40699C;" />
+  <line x1="608.25" y1="210.5" x2="587.25" y2="225" style="stroke:#40699C;" />
+  <line x1="587.25" y1="225" x2="571.5" y2="239.5" style="stroke:#40699C;" />
+  <line x1="571.5" y1="239.5" x2="561" y2="239.5" style="stroke:#40699C;" />
+  <line x1="561" y1="239.5" x2="555.75" y2="239.5" style="stroke:#40699C;" />
+  <line x1="555.75" y1="239.5" x2="529.5" y2="254" style="stroke:#40699C;" />
+  <line x1="529.5" y1="254" x2="524.25" y2="254" style="stroke:#40699C;" />
+  <line x1="524.25" y1="254" x2="524.25" y2="268.5" style="stroke:#40699C;" />
+  <line x1="524.25" y1="268.5" x2="524.25" y2="297.49999999999994" style="stroke:#40699C;" />
+  <line x1="524.25" y1="297.49999999999994" x2="524.25" y2="326.5" style="stroke:#40699C;" />
+  <line x1="524.25" y1="326.5" x2="519" y2="355.49999999999994" style="stroke:#40699C;" />
+  <line x1="519" y1="355.49999999999994" x2="513.75" y2="384.5" style="stroke:#40699C;" />
+  <line x1="513.75" y1="384.5" x2="513.75" y2="413.5" style="stroke:#40699C;" />
+  <line x1="513.75" y1="413.5" x2="513.75" y2="428" style="stroke:#40699C;" />
+  <line x1="513.75" y1="428" x2="508.5" y2="442.5" style="stroke:#40699C;" />
+  <line x1="508.5" y1="442.5" x2="508.5" y2="457" style="stroke:#40699C;" />
+  <line x1="508.5" y1="457" x2="508.5" y2="486" style="stroke:#40699C;" />
+  <line x1="508.5" y1="486" x2="508.5" y2="515" style="stroke:#40699C;" />
+  <line x1="508.5" y1="515" x2="508.5" y2="529.5" style="stroke:#40699C;" />
+  <line x1="508.5" y1="529.5" x2="508.5" y2="544" style="stroke:#40699C;" />
+  <line x1="508.5" y1="544" x2="508.5" y2="558.5" style="stroke:#40699C;" />
+  <line x1="508.5" y1="558.5" x2="508.5" y2="573" style="stroke:#40699C;" />
+  <line x1="508.5" y1="573" x2="508.5" y2="587.5" style="stroke:#40699C;" />
+  <line x1="508.5" y1="587.5" x2="503.25" y2="587.5" style="stroke:#40699C;" />
+  <line x1="503.25" y1="587.5" x2="503.25" y2="602" style="stroke:#40699C;" />
+  <line x1="503.25" y1="602" x2="498" y2="602" style="stroke:#40699C;" />
+  <line x1="498" y1="602" x2="498" y2="616.5" style="stroke:#40699C;" />
+  <line x1="498" y1="616.5" x2="498" y2="631" style="stroke:#40699C;" />
+  <line x1="498" y1="631" x2="498" y2="645.5" style="stroke:#40699C;" />
+  <line x1="498" y1="645.5" x2="498" y2="660" style="stroke:#40699C;" />
+  <line x1="498" y1="660" x2="498" y2="674.5" style="stroke:#40699C;" />
+  <ellipse cx="524.2500004693866" cy="253.9999896287918" rx="12" ry="12" style="stroke:#40699C;fill:none;" />
+  <ellipse cx="27" cy="92" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <text x="42" y="92">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">SDI conceived (+ve), SDI not conceived (-ve)</tspan>
+  </text>
+</svg>

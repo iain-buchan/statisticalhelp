@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2026" MadCap:lastWidth="2733" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Crosstabs (Cross Tabulation, Two or Three Way) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+        <meta name="description" content="This a two or three way cross tabulation function. If you have two columns of numbers that correspond to different classifications of the same individuals then you can use this function to give a two way frequency table for the cross classification. This can be stratified by a third classification variable.&#xD;&#xA;" />
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Crosstabs;Cross tabulation;Contingency tables (crosstabs);Tabulation (crosstabs)" />
+            Crosstabs</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Crosstabs</b>.</p>
+        <p>&#160;</p>
+        <p>
+            This a two or three way cross tabulation function. If you have two columns of numbers that correspond to different classifications of the same individuals then you can use this function to give a two way frequency table for the cross classification. This can be stratified by a third classification variable.</p>
+        <p>&#160;</p>
+        <p>For two way crosstabs, StatsDirect offers a range of analyses appropriate to the dimensions of the contingency table. For more information see <a href="../chi_square_tests/chisq_tests.htm">chi-square tests</a> and <a href="../exact_tests_on_counts/exact_tests.htm">exact tests</a>.</p>
+        <p>&#160;</p>
+        <p>For three way crosstabs, StatsDirect offers either <a href="../meta_analysis/mh.htm">odds ratio</a> (for case-control studies) or <a href="../meta_analysis/relative_risk.htm">relative risk</a> (for cohort studies) meta-analyses for 2 by 2 by k tables, and <a href="../chi_square_tests/generalized_cochran_mantel_haenszel.htm">generalised Cochran-Mantel-Haenszel tests</a> for r by c by k tables. For 2 by 2 by k tables the second category of the first classifier (rows) is taken as the exposed group, and the second category of the second classifier (columns) as the outcome of interest; with categories coded 0 and 1, for example, 1 is exposed and 1 is the outcome.</p>
+        <p>&#160;</p>
+        <p>The categories of each classifier are put in the order of their labels: labels that are numbers in order of size, and after them the other labels in the order of their characters. A record with a missing value in one of the classifiers of a table is left out of the table.</p>
+        <p>&#160;</p>
+        <p>If the first and second classifiers have different numbers of categories then you are asked whether to force the table to be symmetrical. If you agree, each classifier is given the categories of the other that it lacks, as empty rows or columns; this is what you want where the same classification has been made twice, as in a study of agreement. Rows and columns without counts take no part in the tests, their degrees of freedom or the measures of association.</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>&#160;</p>
+        <p>A database of test scores contains two fields of interest, sex (M=1, F=0) and grade of skin reaction to an antigen (none = 0, weak + = 1, strong + = 2). Here is a list of those fields for 10 patients:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Sex</td>
+                <td style="text-decoration: underline;text-align: right;">Reaction</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">0</td>
+                <td style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>In order to get a cross tabulation of these from StatsDirect you should enter these data in two workbook columns. Then choose crosstabs from the analysis menu.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td colspan="3" style="text-align: center;"><u>Reaction</u>
+                </td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td style="text-align: center;">0</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">2</td>
+            </tr>
+            <tr>
+                <td>Sex:</td>
+                <td>0</td>
+                <td style="text-align: center;">2</td>
+                <td style="text-align: center;">2</td>
+                <td style="text-align: center;">1</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">3</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>We could then proceed to an r by c (2 by 3) <a href="../chi_square_tests/rc.htm">contingency table analysis</a> to look for association between sex and reaction to this antigen:</p>
+        <p>&#160;</p>
+        <p>Contingency table analysis</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>Observed</td>
+                <td>2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>% of row</td>
+                <td>40%</td>
+                <td>40%</td>
+                <td>20%</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>% of col</td>
+                <td>66.67%</td>
+                <td>66.67%</td>
+                <td>25%</td>
+                <td>50%</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>Observed</td>
+                <td>1</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>% of row</td>
+                <td>20%</td>
+                <td>20%</td>
+                <td>60%</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>% of col</td>
+                <td>33.33%</td>
+                <td>33.33%</td>
+                <td>75%</td>
+                <td>50%</td>
+            </tr>
+            <tr>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+                <td>&#160;</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>3</td>
+                <td>3</td>
+                <td>4</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>% of n</td>
+                <td>30%</td>
+                <td>30%</td>
+                <td>40%</td>
+                <td>&#160;</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>TOTAL number of cells = 6</p>
+        <p>&#160;</p>
+        <p>WARNING: 6 out of 6 cells have EXPECTATION &lt; 5</p>
+        <p>&#160;</p>
+        <p>NOMINAL INDEPENDENCE</p>
+        <p>Chi-square = 1.666667, DF = 2, P = 0.4346</p>
+        <p>G-square = 1.726092, DF = 2, P = 0.4219</p>
+        <p>Fisher-Freeman-Halton exact P = 0.5714</p>
+        <p>&#160;</p>
+        <p>ANOVA</p>
+        <p>Chi-square for equality of mean column scores = 1.5</p>
+        <p>DF = 2, P = 0.4724</p>
+        <p>&#160;</p>
+        <p>LINEAR TREND</p>
+        <p>Sample correlation (r) = 0.361158</p>
+        <p>Chi-square for linear trend (M²) = 1.173913</p>
+        <p>DF = 1, P = 0.2786</p>
+        <p>&#160;</p>
+        <p>NOMINAL ASSOCIATION</p>
+        <p>Phi = 0.408248</p>
+        <p>Pearson's contingency = 0.377964</p>
+        <p>Cramér's V = 0.408248</p>
+        <p>&#160;</p>
+        <p>ORDINAL</p>
+        <p>Goodman-Kruskal gamma = 0.555556</p>
+        <p>Approximate test of gamma = 0: SE = 0.384107, P = 0.1481, 95% CI = -0.197281 to 1.308392</p>
+        <p>Approximate test of independence: SE = 0.437445, P = 0.2041, 95% CI = -0.301821 to 1.412932</p>
+        <p>&#160;</p>
+        <p>Kendall tau-b = 0.348155</p>
+        <p>Approximate test of tau-b = 0: SE = 0.275596, P = 0.2065, 95% CI = -0.192002 to 0.888313</p>
+        <p>Approximate test of independence: SE = 0.274138, P = 0.2041, 95% CI = -0.189145 to 0.885455</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Crosstabs: the StatsDirect help example (sex and grade of skin reaction to an
+# antigen in 10 patients) in R, with the contingency table analysis that follows
+sex &lt;- c(0, 1, 1, 0, 1, 0, 0, 0, 1, 1)           # M = 1, F = 0
+reaction &lt;- c(0, 1, 2, 2, 2, 1, 0, 1, 2, 0)      # none = 0, weak = 1, strong = 2
+
+# R's standard cross tabulation, with the percentages of each row and column
+tab &lt;- table(Sex = sex, Reaction = reaction)
+print(tab)
+print(round(100 * prop.table(tab, 1), 2))       # % of row
+print(round(100 * prop.table(tab, 2), 2))       # % of col
+n &lt;- sum(tab)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+
+# Nominal independence: Pearson's chi-square without Yates' correction (R warns
+# about the small expected counts, as the report does), the likelihood ratio
+# G-square, and the Fisher-Freeman-Halton exact test, which fisher.test gives
+# for a table larger than 2 by 2
+chi &lt;- suppressWarnings(chisq.test(tab, correct = FALSE))
+cat("Chi-square =", six(chi$statistic), " DF =", chi$parameter, " ", pv(chi$p.value),
+    "\n")
+g2 &lt;- 2 * sum(tab * log(tab / chi$expected), na.rm = TRUE)   # 0 log 0 counts as 0
+cat("G-square =", six(g2), " DF =", chi$parameter, " ",
+    pv(pchisq(g2, chi$parameter, lower.tail = FALSE)), "\n")
+cat("Fisher-Freeman-Halton exact", pv(fisher.test(tab)$p.value), "\n")
+cat("Expected counts below 5:", sum(chi$expected &lt; 5), "of", length(tab), "\n")
+
+# ANOVA: a chi-square comparing the mean row score (the sex code) between the
+# columns, (n - 1) times the between-column sum of squares over the total sum of
+# squares, with the number of columns less 1 as its degrees of freedom
+between &lt;- sum(tapply(sex, reaction, function(v) length(v) * (mean(v) - mean(sex))^2))
+chi_eq &lt;- (n - 1) * between / sum((sex - mean(sex))^2)
+df_eq &lt;- ncol(tab) - 1
+cat("Chi-square for equality of mean column scores =", six(chi_eq), " DF =", df_eq, " ",
+    pv(pchisq(chi_eq, df_eq, lower.tail = FALSE)), "\n")
+
+# Linear trend: the correlation between the row and column scores, and
+# Mantel-Haenszel's chi-square (n - 1) r^2 with one degree of freedom
+r &lt;- cor(sex, reaction)
+m2 &lt;- (n - 1) * r^2
+cat("Sample correlation (r) =", six(r), "\n")
+cat("Chi-square for linear trend (M2) =", six(m2), " DF = 1 ",
+    pv(pchisq(m2, 1, lower.tail = FALSE)), "\n")
+
+# Nominal association: phi, Pearson's contingency coefficient and Cramer's V
+x2 &lt;- as.numeric(chi$statistic)
+cat("Phi =", six(sqrt(x2 / n)), "\n")
+cat("Pearson's contingency =", six(sqrt(x2 / (x2 + n))), "\n")
+cat("Cramer's V =", six(sqrt(x2 / (n * (min(dim(tab)) - 1)))), "\n")
+
+# Ordinal association: Goodman and Kruskal's gamma and Kendall's tau-b from the
+# concordant and discordant pairs, each with two standard errors (Agresti 2002,
+# Brown and Benedetti 1977): one for a test that the measure is 0, one under
+# independence
+o &lt;- unclass(tab)
+R &lt;- nrow(o)
+C &lt;- ncol(o)
+conc &lt;- disc &lt;- o * 0
+for (i in 1:R) for (j in 1:C) {
+  conc[i, j] &lt;- sum(o[(1:R) &gt; i, (1:C) &gt; j]) + sum(o[(1:R) &lt; i, (1:C) &lt; j])
+  disc[i, j] &lt;- sum(o[(1:R) &gt; i, (1:C) &lt; j]) + sum(o[(1:R) &lt; i, (1:C) &gt; j])
+}
+cc &lt;- sum(o * conc)                       # concordant pairs, counted twice
+dc &lt;- sum(o * disc)                       # discordant pairs, counted twice
+gamma &lt;- (cc - dc) / (cc + dc)
+se_gamma &lt;- 4 / (cc + dc)^2 * sqrt(sum(o * (dc * conc - cc * disc)^2))
+v_ind &lt;- sum(o * (conc - disc)^2) - (cc - dc)^2 / n
+se_gamma_ind &lt;- 2 / (cc + dc) * sqrt(v_ind)
+rows &lt;- rowSums(o)
+cols &lt;- colSums(o)
+dr &lt;- n^2 - sum(rows^2)
+dcl &lt;- n^2 - sum(cols^2)
+taub &lt;- (cc - dc) / sqrt(dr * dcl)
+vij &lt;- outer(rows, cols, function(a, b) a * dcl + b * dr)
+vt &lt;- sum(o * (2 * sqrt(dr * dcl) * (conc - disc) + taub * vij)^2) -
+      n^3 * taub^2 * (dr + dcl)^2
+se_taub &lt;- sqrt(vt) / (dr * dcl)
+se_taub_ind &lt;- 2 * sqrt(v_ind / (dr * dcl))
+z &lt;- qnorm(0.975)
+show &lt;- function(label, est, se) {
+  cat(label, " SE =", six(se), " ", pv(2 * pnorm(-abs(est / se))),
+      " 95% CI =", six(est - z * se), "to", six(est + z * se), "\n")
+}
+cat("Goodman-Kruskal gamma =", six(gamma), "\n")
+show("Approximate test of gamma = 0:", gamma, se_gamma)
+show("Approximate test of independence:", gamma, se_gamma_ind)
+cat("Kendall tau-b =", six(taub), "\n")
+show("Approximate test of tau-b = 0:", taub, se_taub)
+show("Approximate test of independence:", taub, se_taub_ind)</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+
+    </body>
+</html>

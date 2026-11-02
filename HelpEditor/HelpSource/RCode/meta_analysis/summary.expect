@@ -1,0 +1,63 @@
+# Summary data meta-analysis, the odds ratios with 95% limits of the seven aspirin trials (Fleiss 1993). One fragment per line.
+0.719714
+0.207152
+0.47831
+1.077371
+0.68076
+0.213469
+0.446423
+1.030758
+0.80287
+0.148339
+0.599864
+1.072965
+0.800739
+0.270977
+0.46972
+1.358784
+0.798143
+0.19656
+0.545041
+1.177753
+1.132736
+0.100512
+0.930385
+1.37967
+0.894969
+0.039192
+0.828783
+0.966411
+-0.328901
+2.647516
+7.569774
+-0.384545
+2.493139
+7.198172
+-0.219562
+5.163037
+12.748104
+-0.22222
+1.547221
+4.75221
+-0.225467
+2.940518
+8.255604
+0.124636
+11.245456
+20.878635
+-0.110966
+73.963113
+38.597502
+Fixed effects (inverse variance)
+Pooled odds ratio = 0.897845 (95% CI = 0.840448 to 0.959163)
+Z (test Odds Ratio differs from 1) = -3.196974 P = 0.0014
+Non-combinability of studies
+Cochran Q = 9.278463 (df = 6) P = 0.1585
+Moment-based estimate of between studies variance = 0.008558
+(inconsistency) = 35.3% (95% CI = 0% to 75.6%)
+Random effects (DerSimonian-Laird)
+Pooled odds ratio = 0.881131 (95% CI = 0.779666 to 0.995799)
+Z (test Odds Ratio) = -2.027405 P = 0.0426
+Bias indicators
+Begg-Mazumdar: Kendall's tau = -0.428571 P = 0.2389 (low power)
+Egger: bias = -0.671627 (90% CI = -2.183157 to 0.839904) P = 0.4116

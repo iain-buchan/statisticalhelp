@@ -1,0 +1,24 @@
+# Generalised Cochran-Mantel-Haenszel tests, Agresti (2002) job satisfaction by income in 104 people, controlling for gender. One fragment per line.
+HP: Row variable (first classifier): Income
+HP: Column variable (second classifier): Job Satisfaction
+HP: Stratum variable (third classifier, controlling for): Gender
+Income scores: 3, 10, 20, 35
+Job Satisfaction scores: 1, 3, 4, 5
+Ordinal association
+6.156301
+P = 0.0131
+Nominal rows vs. ordinal columns association
+9.034222
+P = 0.0288
+Nominal association
+10.200089
+P = 0.3345
+Sample size = 104
+# the degrees of freedom as the script prints them, and R's own Cochran-Mantel-Haenszel test of nominal association
+R: DF = 1
+R: DF = 3
+R: DF = 9
+R: M^2 = 10.2, df = 9, p-value = 0.3345
+HP: 6.156301 1 P = 0.0131
+HP: 9.034222 3 P = 0.0288
+HP: 10.200089 9 P = 0.3345

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="563" MadCap:lastWidth="1479" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Converting Text to Numbers in StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Convert text to numbers;Coding text" />
+            Text to Numbers</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Cleaning and Encoding_Text to Numbers</b>.</p>
+        <p>&#160;</p>
+        <p>This function codes text as numbers to enable analysis. An example of where you might want to do this is a workbook that has been created from a database where certain categories are entered as text:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Category</td>
+                <td style="text-decoration: underline;">Data</td>
+            </tr>
+            <tr>
+                <td>TA</td>
+                <td>2.3</td>
+            </tr>
+            <tr>
+                <td>TA</td>
+                <td>3.4</td>
+            </tr>
+            <tr>
+                <td>TB</td>
+                <td>5.6</td>
+            </tr>
+            <tr>
+                <td>TB</td>
+                <td>4.5</td>
+            </tr>
+            <tr>
+                <td>TB</td>
+                <td>4.9</td>
+            </tr>
+            <tr>
+                <td>TA</td>
+                <td>3.9</td>
+            </tr>
+            <tr>
+                <td>TB</td>
+                <td>3.9</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>If you enter these data into two columns in a StatsDirect workbook, you can convert the Category column to numbers using the Text to Numbers function from the Data menu. If you select the whole of this column by clicking on the header, the first row will have the word "Category" in it. To avoid counting "Category" as one of your categories when it is really the column title, click on "No" when you are asked if the top row is to be included in the conversion. The results will be as follows:</p>
+        <p>&#160;</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Category</td>
+                <td style="text-decoration: underline;">Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2.3</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>3.4</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>5.6</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>4.5</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>4.9</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>3.9</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>3.9</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>StatsDirect can code text automatically as in the example above. You may also specify your own numeric code for each different text string by entering any valid number alongside the matching text in a substitution table. The substitution table only appears if you click "Yes" when StatsDirect prompts you to specify numbers.</p>
+    </body>
+</html>

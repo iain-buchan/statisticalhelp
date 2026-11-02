@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="4" MadCap:lastHeight="443" MadCap:lastWidth="2828" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Censored Observations and Survival Analysis - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <MadCap:keyword term="Survival analysis: Censorship;Censorship (survival analysis)" />
+        <h1>Censorship</h1>
+        <p>&#160;</p>
+        <p>Censorship in survival-time (time-to-event, failure-time) studies refers to incomplete data.</p>
+        <p>&#160;</p>
+        <p>Examples of incomplete data are:</p>
+        <ul>
+            <li>individual still alive (no event) at end of study</li>
+            <li>individual lost to follow up or left study before the end</li>
+            <li>event not recorded properly</li>
+        </ul>
+        <p>...in these situations the lack of completeness of data exists at the end of the study, a situation more strictly known as right censorship. Censorship in StatsDirect is used to mean right censorship.</p>
+        <p>&#160;</p>
+        <p>Coding for censorship in StatsDirect is:</p>
+        <ul>
+            <li>0 for censored data (no event observed)</li>
+            <li>≥1 for uncensored data (e.g. 1 for an individual event/death at a time point, 2 for 2 events etc. - note that 2 events can be expressed either in a single row with 2 in the censorship column or in two rows with 1 in the censorship column)</li>
+        </ul>
+        <p>&#160;</p>
+        <p>If there are problems with your data at the start of a study (e.g. start time not recorded properly) then the data are left censored. Left censored data are best avoided or dealt with by specialist Statisticians.</p>
+    </body>
+</html>

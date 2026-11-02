@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>StatsDirect Help Editor</title>
+  <link rel="stylesheet" href="./mathlive/mathlive-fonts.css">
+  <link rel="stylesheet" href="./mathlive/mathlive-static.css">
+  <link rel="stylesheet" href="./editor.css">
+</head>
+<body>
+  <header class="page-header">
+    <div><strong id="page-title">Choose a topic</strong><span id="page-path"></span></div>
+    <span id="change-state" aria-live="polite">No page open</span>
+  </header>
+  <nav class="tabs" aria-label="Page views">
+    <button type="button" role="tab" aria-selected="true" data-tab="visual" id="visual-tab">Edit page</button>
+    <button type="button" role="tab" aria-selected="false" data-tab="source" id="source-tab">HTML source</button>
+    <button type="button" role="tab" aria-selected="false" data-tab="preview" id="preview-tab">Preview</button>
+    <button type="button" role="tab" aria-selected="false" data-output-view="browser" id="browser-tab">Browser view</button>
+    <button type="button" role="tab" aria-selected="false" data-output-view="app" id="app-tab" title="Show StatsDirect help in the dockable pane while keeping the page editable alongside it">App view</button>
+  </nav>
+  <div id="error" class="message error" role="alert" hidden></div>
+  <div id="editor-toolbar" class="editor-toolbar" role="toolbar" aria-label="Page formatting">
+    <div class="ribbon-group" role="group" aria-label="History"><div class="ribbon-controls">
+      <button type="button" data-command="undo" title="Undo (Ctrl+Z)" id="undo">↶ Undo</button>
+      <button type="button" data-command="redo" title="Redo (Ctrl+Y)" id="redo">↷ Redo</button>
+    </div><span class="ribbon-label">History</span></div>
+    <div class="ribbon-group" role="group" aria-label="Text"><div class="ribbon-controls">
+      <select id="font-family" aria-label="Font family"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Times New Roman">Times New Roman</option><option value="Consolas">Consolas</option></select>
+      <select id="font-size" aria-label="Font size"><option value="8">8 pt</option><option value="9">9 pt</option><option value="10" selected>10 pt</option><option value="11">11 pt</option><option value="12">12 pt</option><option value="14">14 pt</option><option value="16">16 pt</option><option value="18">18 pt</option><option value="24">24 pt</option><option value="32">32 pt</option></select>
+      <button type="button" data-command="bold" aria-label="Bold" aria-pressed="false" title="Bold (Ctrl+B)"><b>B</b></button>
+      <button type="button" data-command="italic" aria-label="Italic" aria-pressed="false" title="Italic (Ctrl+I)"><i>I</i></button>
+      <button type="button" data-command="underline" aria-label="Underline" aria-pressed="false" title="Underline (Ctrl+U)"><u>U</u></button>
+      <label class="colour-control" title="Text colour"><span>Text</span><input type="color" id="text-colour" value="#000000" aria-label="Text colour"></label>
+      <label class="colour-control" title="Highlight colour"><span>Highlight</span><input type="color" id="highlight-colour" value="#ffff00" aria-label="Highlight colour"></label>
+      <button type="button" data-command="removeFormat" aria-label="Clear text formatting" title="Clear text formatting">Clear</button>
+    </div><span class="ribbon-label">Text</span></div>
+    <div class="ribbon-group" role="group" aria-label="Paragraph"><div class="ribbon-controls">
+      <select id="block-style" aria-label="Paragraph style"><option value="p">Paragraph</option><option value="h1">Heading 1</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option><option value="pre">Code</option></select>
+      <button type="button" data-command="justifyLeft" aria-label="Align left" aria-pressed="false" title="Align left">≡ Left</button>
+      <button type="button" data-command="justifyCenter" aria-label="Align centre" aria-pressed="false" title="Align centre">≡ Centre</button>
+      <button type="button" data-command="justifyRight" aria-label="Align right" aria-pressed="false" title="Align right">≡ Right</button>
+      <button type="button" data-command="insertUnorderedList" aria-label="Bullet list" aria-pressed="false" title="Bullet list">• List</button>
+      <button type="button" data-command="insertOrderedList" aria-label="Numbered list" aria-pressed="false" title="Numbered list">1. List</button>
+    </div><span class="ribbon-label">Paragraph</span></div>
+    <div class="ribbon-group" role="group" aria-label="Insert"><div class="ribbon-controls">
+      <button type="button" id="insert-link" title="Insert or edit link (Ctrl+K)">Link</button>
+      <button type="button" id="insert-image">Image</button>
+      <button type="button" id="insert-equation">＋ Equation</button>
+      <button type="button" id="edit-equation" disabled>Edit equation</button>
+    </div><span class="ribbon-label">Insert</span></div>
+  </div>
+  <main>
+    <section id="visual-panel" role="tabpanel" aria-labelledby="visual-tab">
+      <div id="visual-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Help page text" spellcheck="true"><p class="empty-hint">Choose a topic from the contents or pages list.</p></div>
+    </section>
+    <section id="source-panel" role="tabpanel" aria-labelledby="source-tab" hidden>
+      <div class="source-note">Edit the complete XHTML page. R-code sections and other specialised content can be edited here.</div>
+      <textarea id="source-editor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Complete XHTML source"></textarea>
+    </section>
+    <section id="preview-panel" role="tabpanel" aria-labelledby="preview-tab" hidden>
+      <div id="preview-loading" role="status" hidden>Preparing browser view…</div>
+      <iframe id="preview-frame" title="Help page preview" sandbox="allow-scripts"></iframe>
+    </section>
+  </main>
+  <footer><span id="editor-hint">Equations can be edited by double-clicking them.</span><button type="button" id="save-page">Save page <kbd>Ctrl+S</kbd></button></footer>
+  <dialog id="equation-dialog" aria-labelledby="equation-heading">
+    <form method="dialog" id="equation-form">
+      <h2 id="equation-heading">Edit equation</h2>
+      <p class="dialog-note">Type mathematical notation or use the symbol keyboard.</p>
+      <math-field id="equation-field" math-virtual-keyboard-policy="manual" aria-label="Equation"></math-field>
+      <label class="checkbox"><input type="checkbox" id="equation-display" checked> Display-size equation</label>
+      <details id="latex-options"><summary>LaTeX source</summary><textarea id="equation-latex" spellcheck="false" aria-label="Equation LaTeX source"></textarea></details>
+      <div id="equation-error" class="message error" role="alert" hidden></div>
+      <div class="dialog-actions"><button type="button" id="equation-cancel">Cancel</button><button type="button" class="primary" id="equation-apply">Apply equation</button></div>
+      <div id="equation-keyboard" aria-label="Equation symbol keyboard"></div>
+    </form>
+  </dialog>
+  <dialog id="link-dialog" aria-labelledby="link-heading">
+    <form id="link-form">
+      <h2 id="link-heading">Insert link</h2>
+      <label class="form-field">Text to display<input type="text" id="link-text" autocomplete="off"></label>
+      <fieldset class="link-modes"><legend>Link to</legend><label><input type="radio" name="link-mode" value="internal" checked> Help page</label><label><input type="radio" name="link-mode" value="external"> Website or email</label></fieldset>
+      <div id="internal-link-fields">
+        <label class="form-field">Find a help page<input type="search" id="link-search" placeholder="Search titles or page paths" autocomplete="off"></label>
+        <select id="link-page" size="7" aria-label="Help page"></select>
+        <div id="link-result-count" class="dialog-note" aria-live="polite"></div>
+        <label class="form-field">Section or anchor (optional)<input type="text" id="link-fragment" placeholder="For example: example" autocomplete="off"></label>
+      </div>
+      <div id="external-link-fields" hidden><label class="form-field">Website or email address<input type="text" id="link-url" placeholder="https://example.org or mailto:name@example.org" autocomplete="off"></label></div>
+      <div id="link-error" class="message error" role="alert" hidden></div>
+      <div class="dialog-actions link-actions"><button type="button" id="link-open">Open in new window</button><button type="button" id="link-remove">Remove link</button><span class="dialog-spacer"></span><button type="button" id="link-cancel">Cancel</button><button type="submit" class="primary" id="link-apply">Insert link</button></div>
+    </form>
+  </dialog>
+  <div id="link-context-menu" class="context-menu" role="menu" aria-label="Link actions" hidden>
+    <button type="button" role="menuitem" id="context-edit-link">Edit link…</button>
+    <button type="button" role="menuitem" id="context-open-link">Open in new window</button>
+    <button type="button" role="menuitem" id="context-remove-link">Remove link</button>
+  </div>
+  <script type="module" src="./editor.js"></script>
+</body>
+</html>

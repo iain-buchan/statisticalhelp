@@ -1,0 +1,51 @@
+name: Help Editor checks
+
+on:
+  push:
+    paths: ['HelpEditor/**', '.github/workflows/help-editor.yml']
+  pull_request:
+    paths: ['HelpEditor/**', '.github/workflows/help-editor.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: HelpEditor
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build editor, console builder and test programs
+        run: dotnet build StatsDirectHelpEditor.slnx -c Release --nologo
+      - name: Core, installed workspace and Git checks
+        run: |
+          foreach ($name in @('Checks','InstalledWorkspaceChecks','GitChecks','HeadlessChecks')) {
+            dotnet run --no-build -c Release --project "tests/StatsDirectHelpEditor.$name" -- $PWD.Path
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - name: Native installed startup and source artwork
+        run: |
+          foreach ($name in @('InstalledWorkspaceWindowsChecks','SourceImageWindowsChecks')) {
+            dotnet run --no-build -c Release --project "tests/StatsDirectHelpEditor.$name" -- $PWD.Path
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - name: Rebuild all help without Flare or the GUI
+        run: ./Build-Help.ps1 -CompileBuilder -Target All
+      - name: Verify source remains clean
+        run: |
+          git diff --exit-code -- .
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Preserve verification reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: help-editor-checks
+          path: HelpEditor/evidence/*.json

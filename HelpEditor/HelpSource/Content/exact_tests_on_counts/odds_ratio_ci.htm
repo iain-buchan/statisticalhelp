@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1064" MadCap:lastWidth="3399" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Odds Ratio Confidence Interval (Exact) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Gart limits; Odds ratio: Confidence interval;Odds ratio" />Confidence Interval for 2 by 2 Odds</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Exact_Odds Ratio CI</b>.</p>
+        <p>&#160;</p>
+        <p>Odds = probability / (1 - probability) therefore odds can take on any value between 0 and infinity whereas probability may vary only between 0 and 1. Odds and log odds are therefore better suited than probability to some types of calculation.</p>
+        <p>&#160;</p>
+        <p>Odds ratio (OR) is related to risk ratio (RR, relative risk):</p>
+        <p>RR = (a / (a+c)) / (b / (b+d))</p>
+        <p>&#160;</p>
+        <p>When a is small in comparison to c and b is small in comparison to d (i.e. relatively small numbers of outcome positive observations or low prevalence) then c can be substituted for a+c and d can be substituted for d+b in the above. With a little rearrangement this gives the odds ratio (cross ratio, approximate relative risk):</p>
+        <p>OR = (a*d)/(b*c).</p>
+        <p>&#160;</p>
+        <p>OR can therefore be related to RR by:</p>
+        <p>RR = 1/(BR+(1-BR)/OR)</p>
+        <p>..where BR is the baseline (control) response rate; BR can be estimated by b/(b+d) if not known from larger studies.</p>
+        <p>This function uses an exact method to construct confidence limits for the odds ratio of a fourfold table (<a href="../references/reference_list.htm#ref-martin-1991">Martin and Austin, 1991</a>). The Fisher limits complement Fisher's exact test of independence in a fourfold table, for which one and two sided probabilities are provided here. <a href="../proportions/mid_p.htm">Mid-P</a> values are also given.</p>
+        <p>&#160;</p>
+        <p>Please note that this method will take a long time with large numbers. It considers every value that the first frequency of the table could have with the row and column totals that were observed, and is not used if there are more than a million of them; the results then say that the table is too large.</p>
+        <p>&#160;</p>
+        <p>DATA INPUT:</p>
+        <p>&#160;</p>
+        <p>Observed frequencies should be entered as a standard fourfold table. The frequencies should be whole numbers; one that is not is rounded to the nearest whole number, and the results show the table that was analysed. A table with an empty row or an empty column says nothing about the odds ratio: its confidence limits are given as 0 and infinity, and its P values as 1.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;text-decoration: underline;">feature present</td>
+                <td style="text-align: right;text-decoration: underline;">feature absent</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome positive:</td>
+                <td style="text-align: right;">a</td>
+                <td style="text-align: right;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome negative:</td>
+                <td style="text-align: right;">c</td>
+                <td style="text-align: right;">d</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>sample estimate of the odds ratio = (a*d)/(b*c)</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-thomas-1971">Thomas (1971)</a>.</p>
+        <p>&#160;</p>
+        <p>The following data look at the criminal convictions of twins in an attempt to investigate some of the hereditability of criminality.</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">&#160;</td>
+                <td style="text-align: right;text-decoration: underline;">Monozygotic</td>
+                <td style="text-align: right;text-decoration: underline;">Dizygotic</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Convicted:</td>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Not convicted:</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">15</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect select Odds Ratio Confidence Interval from the Exact Tests section of the analysis menu. Choose the default 95% two sided confidence interval.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>&#160;</p>
+        <p>Confidence limits with 2.5% lower tail area and 2.5% upper tail area two sided:</p>
+        <p>&#160;</p>
+        <p>Observed odds ratio = 25</p>
+        <p>&#160;</p>
+        <p>Conditional maximum likelihood estimate of odds ratio = 21.305318</p>
+        <p>&#160;</p>
+        <p>Exact Fisher 95% confidence interval = 2.753383 to 301.462338</p>
+        <p>Exact Fisher one sided P = 0.0005, two sided P = 0.0005</p>
+        <p>&#160;</p>
+        <p>Exact mid-P 95% confidence interval = 3.379906 to 207.270568</p>
+        <p>Exact mid-P one sided P = 0.0002, two sided P = 0.0005</p>
+        <p>&#160;</p>
+        <p>Here we can say with 95% confidence that one of a pair of identical twins who has a criminal conviction is between 2.75 and 301.5 times more likely than non-identical twins to have a convicted twin.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Exact confidence interval for a 2 by 2 odds ratio: the StatsDirect help example
+# (Thomas 1971, criminal convictions of monozygotic and dizygotic twins) in R
+twins &lt;- matrix(c(10, 2,
+                  3, 15), 2, byrow = TRUE,
+                dimnames = list(c("convicted", "not convicted"),
+                                c("monozygotic", "dizygotic")))
+print(twins)
+
+# R's standard test conditions on both margins of the table. Its odds ratio is the
+# conditional maximum likelihood estimate and its interval is the exact Fisher
+# interval: each limit leaves 2.5% in one tail of the conditional distribution. Its
+# P value is the two sided Fisher P and matches the report exactly. The estimate and
+# the limits come from root finding to a modest tolerance, so their last digits differ
+# from the report (the upper limit in its third significant figure); the report is
+# exact to 6 places.
+print(fisher.test(twins))
+
+# The same quantities to full precision. Given the margins, the top left cell a can
+# take the values lo to hi, with probabilities proportional to the central
+# hypergeometric probabilities times (odds ratio)^a
+a &lt;- twins[1, 1]
+m1 &lt;- sum(twins[1, ])          # outcome present
+n1 &lt;- sum(twins[, 1])          # feature present
+n0 &lt;- sum(twins[, 2])          # feature absent
+lo &lt;- max(0, m1 - n0)
+hi &lt;- min(m1, n1)
+x &lt;- lo:hi
+prob &lt;- function(psi) {        # the distribution of a when the odds ratio is psi
+  lw &lt;- dhyper(x, n1, n0, m1, log = TRUE) + (x - lo) * log(psi)
+  w &lt;- exp(lw - max(lw))
+  w / sum(w)
+}
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+odds &lt;- twins[1, 1] * twins[2, 2] / (twins[1, 2] * twins[2, 1])
+cat("Observed odds ratio =", six(odds), "\n")
+
+# The conditional maximum likelihood estimate makes the expected value of a equal to
+# the observed a. The root finding needs lo &lt; a &lt; hi: the estimate is 0 when a is at
+# lo and infinite when a is at hi.
+cmle &lt;- if (a == lo) 0 else if (a == hi) Inf else
+  exp(uniroot(function(l) sum(x * prob(exp(l))) - a, c(-30, 30), tol = 1e-12)$root)
+cat("Conditional maximum likelihood estimate of odds ratio =", six(cmle), "\n")
+
+# Exact Fisher limits: the lower limit is the odds ratio under which a or more is
+# a 2.5% upper tail, the upper limit the one under which a or fewer is a 2.5% lower
+# tail. The mid-P limits count half of the probability of a itself in each tail.
+# The lower limit is 0 when a is at lo, the upper limit infinite when a is at hi.
+alpha &lt;- 0.05
+limit &lt;- function(upper, half) {
+  if (!upper &amp;&amp; a == lo) return(0)
+  if (upper &amp;&amp; a == hi) return(Inf)
+  tail &lt;- function(l) {
+    p &lt;- prob(exp(l))
+    if (upper) sum(p[x &lt; a]) + half * p[x == a] else sum(p[x &gt; a]) + half * p[x == a]
+  }
+  exp(uniroot(function(l) tail(l) - alpha / 2, c(-30, 30), tol = 1e-12)$root)
+}
+cat("Exact Fisher 95% confidence interval =", six(limit(FALSE, 1)), "to",
+    six(limit(TRUE, 1)), "\n")
+
+# P values at an odds ratio of 1. The one sided Fisher P is the smaller tail; the two
+# sided Fisher P adds up the tables no more probable than the observed one, as
+# fisher.test does (with an allowance for rounding in equal probabilities).
+p1 &lt;- prob(1)
+up &lt;- sum(p1[x &gt;= a])
+down &lt;- sum(p1[x &lt;= a])
+cat("Exact Fisher one sided ", pv(min(up, down)), ", two sided ",
+    pv(sum(p1[p1 &lt;= p1[x == a] * (1 + 1e-7)])), "\n", sep = "")
+
+# The mid-P versions count half of the probability of the observed table, and the
+# two sided mid-P is twice the one sided value
+cat("Exact mid-P 95% confidence interval =", six(limit(FALSE, 0.5)), "to",
+    six(limit(TRUE, 0.5)), "\n")
+mid &lt;- min(up, down) - 0.5 * p1[x == a]
+cat("Exact mid-P one sided ", pv(mid), ", two sided ", pv(min(2 * mid, 1)), "\n",
+    sep = "")</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>

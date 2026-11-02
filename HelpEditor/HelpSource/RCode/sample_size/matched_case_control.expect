@@ -1,0 +1,12 @@
+# Sample size for a matched case-control study, an invented example: correlation 0.2, 30% of controls exposed, odds ratio 2, 3 controls per case, power 80%, alpha 5%; then the paired design. One fragment per line.
+case-control correlation = 0.2
+probability of exposure in controls = 0.3
+odds ratio = 2
+controls per case subject = 3
+alpha = 0.05
+power = 0.8
+Estimated minimum sample size (cases required) = 108
+Reduction in sample size, relative to paired design,
+when using 3 controls per case = 0.6
+controls per case subject = 1
+Estimated minimum sample size (cases required) = 180

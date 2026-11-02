@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="495" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Rotate Data Block (Transpose) - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Rotate data block" />
+            Rotate Data Block</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Data_Organizing_Rotate</b>.</p>
+        <p>&#160;</p>
+        <p>This function rotates a selected block of data from a StatsDirect workbook in the following way:</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;">1..</td>
+                <td style="text-decoration: underline;">2..</td>
+                <td style="text-decoration: underline;">3..</td>
+            </tr>
+            <tr>
+                <td>1:</td>
+                <td>1.1</td>
+                <td>0.7</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2:</td>
+                <td>1.5</td>
+                <td>0.6</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>3:</td>
+                <td>1.6</td>
+                <td>0.6</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>4:</td>
+                <td>1.8</td>
+                <td>0.5</td>
+                <td>4</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>...this would become:</p>
+        <p>&#160;</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td>&#160;</td>
+                <td style="text-decoration: underline;">1..</td>
+                <td style="text-decoration: underline;">2..</td>
+                <td style="text-decoration: underline;">3..</td>
+                <td style="text-decoration: underline;">4..</td>
+            </tr>
+            <tr>
+                <td>1:</td>
+                <td>1.1</td>
+                <td>1.5</td>
+                <td>1.6</td>
+                <td>1.8</td>
+            </tr>
+            <tr>
+                <td>2:</td>
+                <td>0.7</td>
+                <td>0.6</td>
+                <td>0.6</td>
+                <td>0.5</td>
+            </tr>
+            <tr>
+                <td>3:</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>... in other words rows become columns and columns become rows.</p>
+        <p>&#160;</p>
+        <p>The resulting rotation is best saved to a new workbook.</p>
+        <p>&#160;</p>
+        <p>You are given the option to keep existing formulae or to translate them into results before rotation. Please note that if you keep formulae and save your rotated data to another worksheet, the references in the formulae are likely to be incorrect.</p>
+    </body>
+</html>

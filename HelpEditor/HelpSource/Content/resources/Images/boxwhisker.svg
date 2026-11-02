@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="566" viewBox="0 0 1132 800" xmlns="http://www.w3.org/2000/svg" height="400">
+  <line x1="163" y1="689" x2="1052" y2="689" style="stroke:#868686;" />
+  <line x1="163" y1="80" x2="163" y2="689" style="stroke:#868686;" />
+  <g transform="translate(163,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0</tspan>
+    </text>
+  </g>
+  <line x1="163" y1="696" x2="163" y2="689" style="stroke:#868686;" />
+  <g transform="translate(290,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">20</tspan>
+    </text>
+  </g>
+  <line x1="290" y1="696" x2="290" y2="689" style="stroke:#868686;" />
+  <g transform="translate(417,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">40</tspan>
+    </text>
+  </g>
+  <line x1="417" y1="696" x2="417" y2="689" style="stroke:#868686;" />
+  <g transform="translate(544,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">60</tspan>
+    </text>
+  </g>
+  <line x1="544" y1="696" x2="544" y2="689" style="stroke:#868686;" />
+  <g transform="translate(671,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">80</tspan>
+    </text>
+  </g>
+  <line x1="671" y1="696" x2="671" y2="689" style="stroke:#868686;" />
+  <g transform="translate(798,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">100</tspan>
+    </text>
+  </g>
+  <line x1="798" y1="696" x2="798" y2="689" style="stroke:#868686;" />
+  <g transform="translate(925,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">120</tspan>
+    </text>
+  </g>
+  <line x1="925" y1="696" x2="925" y2="689" style="stroke:#868686;" />
+  <g transform="translate(1052,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">140</tspan>
+    </text>
+  </g>
+  <line x1="1052" y1="696" x2="1052" y2="689" style="stroke:#868686;" />
+  <g transform="translate(153,140.89999999999998)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">CMT 64</tspan>
+    </text>
+  </g>
+  <line x1="156" y1="80" x2="163" y2="80" style="stroke:#868686;" />
+  <g transform="translate(153,262.70000000000005)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">CMT 167</tspan>
+    </text>
+  </g>
+  <line x1="156" y1="201.79999999999995" x2="163" y2="201.79999999999995" style="stroke:#868686;" />
+  <g transform="translate(153,384.5)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">CMT 170</tspan>
+    </text>
+  </g>
+  <line x1="156" y1="323.6" x2="163" y2="323.6" style="stroke:#868686;" />
+  <g transform="translate(153,506.29999999999995)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">CMT 175</tspan>
+    </text>
+  </g>
+  <line x1="156" y1="445.4" x2="163" y2="445.4" style="stroke:#868686;" />
+  <g transform="translate(153,628.1)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">CMT 181</tspan>
+    </text>
+  </g>
+  <line x1="156" y1="567.2" x2="163" y2="567.2" style="stroke:#868686;" />
+  <text x="607.5" y="723">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">min &lt; LQ &lt; median &gt; UQ &gt; max</tspan>
+  </text>
+  <text x="607.5" y="20">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">Number of metastases in different cell lines</tspan>
+  </text>
+  <rect x="164.5875" y="100.27971115112302" width="20.6375" height="81.24059947729111" style="stroke:#000000;fill:none;" />
+  <polygon points="162.525,140.89999999999998 172.525,150.89999999999998 182.525,140.89999999999998 172.525,130.89999999999998" style="stroke:#000000;fill:#000000;" />
+  <line x1="172.525" y1="100.27971115112302" x2="172.525" y2="181.52028884887693" style="stroke:#000000;" />
+  <line x1="163" y1="140.89999999999998" x2="164.5875" y2="140.89999999999998" style="stroke:#000000;" />
+  <line x1="163" y1="127.37345542907713" x2="163" y2="154.42654457092283" style="stroke:#000000;" />
+  <line x1="172.0000002503395" y1="127.37345542907713" x2="163" y2="127.37345542907713" style="stroke:#000000;" />
+  <line x1="163" y1="154.42654457092283" x2="172.0000002503395" y2="154.42654457092283" style="stroke:#000000;" />
+  <line x1="220.14999999999998" y1="140.89999999999998" x2="185.225" y2="140.89999999999998" style="stroke:#000000;" />
+  <line x1="220.14999999999998" y1="127.37345542907713" x2="220.14999999999998" y2="154.42654457092283" style="stroke:#000000;" />
+  <line x1="211.15000126361846" y1="127.37345542907713" x2="220.14999999999998" y2="127.37345542907713" style="stroke:#000000;" />
+  <line x1="220.14999999999998" y1="154.42654457092283" x2="211.15000126361846" y2="154.42654457092283" style="stroke:#000000;" />
+  <rect x="186.8125" y="222.0797111511231" width="125.4125" height="81.24059947729111" style="stroke:#000000;fill:none;" />
+  <polygon points="213.325,262.70000000000005 223.325,272.70000000000005 233.325,262.70000000000005 223.325,252.70000000000005" style="stroke:#000000;fill:#000000;" />
+  <line x1="223.325" y1="222.0797111511231" x2="223.325" y2="303.320288848877" style="stroke:#000000;" />
+  <line x1="163" y1="262.70000000000005" x2="186.8125" y2="262.70000000000005" style="stroke:#000000;" />
+  <line x1="163" y1="249.1734263896942" x2="163" y2="276.22657361030576" style="stroke:#000000;" />
+  <line x1="172.0000002503395" y1="249.1734263896942" x2="163" y2="249.1734263896942" style="stroke:#000000;" />
+  <line x1="163" y1="276.22657361030576" x2="172.0000002503395" y2="276.22657361030576" style="stroke:#000000;" />
+  <line x1="778.9499999999999" y1="262.70000000000005" x2="312.225" y2="262.70000000000005" style="stroke:#000000;" />
+  <line x1="778.9499999999999" y1="249.1734263896942" x2="778.9499999999999" y2="276.22657361030576" style="stroke:#000000;" />
+  <line x1="769.9500164031982" y1="249.1734263896942" x2="778.9499999999999" y2="249.1734263896942" style="stroke:#000000;" />
+  <line x1="778.9499999999999" y1="276.22657361030576" x2="769.9500164031982" y2="276.22657361030576" style="stroke:#000000;" />
+  <rect x="191.575" y="343.87971115112305" width="44.45" height="81.24059947729111" style="stroke:#000000;fill:none;" />
+  <polygon points="216.5,384.5 226.5,394.5 236.5,384.5 226.5,374.5" style="stroke:#000000;fill:#000000;" />
+  <line x1="226.5" y1="343.87971115112305" x2="226.5" y2="425.12028884887695" style="stroke:#000000;" />
+  <line x1="175.7" y1="384.5" x2="191.575" y2="384.5" style="stroke:#000000;" />
+  <line x1="175.7" y1="370.97342638969417" x2="175.7" y2="398.0265736103058" style="stroke:#000000;" />
+  <line x1="184.7000002503395" y1="370.97342638969417" x2="175.7" y2="370.97342638969417" style="stroke:#000000;" />
+  <line x1="175.7" y1="398.0265736103058" x2="184.7000002503395" y2="398.0265736103058" style="stroke:#000000;" />
+  <line x1="296.35" y1="384.5" x2="236.025" y2="384.5" style="stroke:#000000;" />
+  <line x1="296.35" y1="370.97342638969417" x2="296.35" y2="398.0265736103058" style="stroke:#000000;" />
+  <line x1="287.35000429153445" y1="370.97342638969417" x2="296.35" y2="370.97342638969417" style="stroke:#000000;" />
+  <line x1="296.35" y1="398.0265736103058" x2="287.35000429153445" y2="398.0265736103058" style="stroke:#000000;" />
+  <rect x="188.4" y="465.67969663143157" width="469.90000000000003" height="81.24059947729111" style="stroke:#000000;fill:none;" />
+  <polygon points="216.5,506.3 226.5,516.3 236.5,506.3 226.5,496.3" style="stroke:#000000;fill:#000000;" />
+  <line x1="226.5" y1="465.67969663143157" x2="226.5" y2="546.9203033685684" style="stroke:#000000;" />
+  <line x1="163" y1="506.3" x2="188.4" y2="506.3" style="stroke:#000000;" />
+  <line x1="163" y1="492.77344090938567" x2="163" y2="519.8265590906143" style="stroke:#000000;" />
+  <line x1="172.0000002503395" y1="492.77344090938567" x2="163" y2="492.77344090938567" style="stroke:#000000;" />
+  <line x1="163" y1="519.8265590906143" x2="172.0000002503395" y2="519.8265590906143" style="stroke:#000000;" />
+  <line x1="1001.1999999999999" y1="506.3" x2="658.3" y2="506.3" style="stroke:#000000;" />
+  <line x1="1001.1999999999999" y1="492.77344090938567" x2="1001.1999999999999" y2="519.8265590906143" style="stroke:#000000;" />
+  <line x1="992.199967956543" y1="492.77344090938567" x2="1001.1999999999999" y2="492.77344090938567" style="stroke:#000000;" />
+  <line x1="1001.1999999999999" y1="519.8265590906143" x2="992.199967956543" y2="519.8265590906143" style="stroke:#000000;" />
+  <rect x="194.75" y="587.4796966314316" width="149.225" height="81.24059947729111" style="stroke:#000000;fill:none;" />
+  <polygon points="191.1,628.1 201.1,638.1 211.1,628.1 201.1,618.1" style="stroke:#000000;fill:#000000;" />
+  <line x1="201.1" y1="587.4796966314316" x2="201.1" y2="668.7202997386455" style="stroke:#000000;" />
+  <line x1="175.7" y1="628.1" x2="194.75" y2="628.1" style="stroke:#000000;" />
+  <line x1="175.7" y1="614.5734409093857" x2="175.7" y2="641.6265590906144" style="stroke:#000000;" />
+  <line x1="184.7000002503395" y1="614.5734409093857" x2="175.7" y2="614.5734409093857" style="stroke:#000000;" />
+  <line x1="175.7" y1="641.6265590906144" x2="184.7000002503395" y2="641.6265590906144" style="stroke:#000000;" />
+  <line x1="544" y1="628.1" x2="343.975" y2="628.1" style="stroke:#000000;" />
+  <line x1="544" y1="614.5734409093857" x2="544" y2="641.6265590906144" style="stroke:#000000;" />
+  <line x1="534.9999921798706" y1="614.5734409093857" x2="544" y2="614.5734409093857" style="stroke:#000000;" />
+  <line x1="544" y1="641.6265590906144" x2="534.9999921798706" y2="641.6265590906144" style="stroke:#000000;" />
+</svg>

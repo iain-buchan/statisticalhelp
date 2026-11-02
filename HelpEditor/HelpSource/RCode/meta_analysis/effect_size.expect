@@ -1,0 +1,36 @@
+# Effect size meta-analysis, Freemantle (personal communication) seven trials of an educational intervention. One fragment per line.
+0.982018 0.826124 0.189712 1.453464
+0.973875 0.171233 -0.536003 0.87554
+0.991545 0.564449 0.09524 1.030587
+0.994034 0.350002 -0.000005 0.698642
+0.973875 1.20168 0.358317 2.027136
+0.992553 0.880352 0.46397 1.292737
+0.982841 0.792426 0.187185 1.38934
+27 17 0.811269 0.18121 1.441328
+16 15 0.166759 -0.538869 0.872388
+25 66 0.559677 0.092265 1.027089
+62 66 0.347914 -0.001341 0.697169
+9 22 1.170286 0.341855 1.998716
+63 40 0.873796 0.459972 1.28762
+23 23 0.778829 0.179356 1.378302
+% weights (fixed, random)
+9.19968 10.62611
+7.334723 8.764878
+16.716159 17.01627
+29.939856 25.212518
+5.321368 6.605485
+21.325794 20.235667
+10.162419 11.53907
+Fixed effects (Hedges-Olkin)
+Pooled effect size d+ = 0.612354 (95% CI = 0.421251 to 0.803457)
+Z (test d+ differs from 0) = 6.280333 P < 0.0001
+Non-combinability of studies
+Cochran Q = 7.737692 (df = 6) P = 0.258
+Moment-based estimate of between studies variance = 0.020397
+(inconsistency) = 22.5% (95% CI = 0% to 72.5%)
+Random effects (DerSimonian-Laird)
+Pooled d+ = 0.627768 (95% CI = 0.403026 to 0.85251)
+Z (test d+ differs from 0) = 5.474734 P < 0.0001
+Bias indicators
+Begg-Mazumdar: Kendall's tau = 0.238095 P = 0.5619 (low power)
+Egger: bias = 1.439076 (90% CI = -1.712135 to 4.590287) P = 0.3997

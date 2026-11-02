@@ -1,0 +1,24 @@
+# Friedman test, Conover (1999) grass preferences; Cochran Q, Conover (1999) sportsmen. One fragment per line.
+Mean rank: 3.17
+356.5
+T1 (chi-square) = 8.097345
+T2 (F) = 3.192198
+P = 0.0362
+Critical t (33 df) = 2.034515
+11.481678
+14.5
+P = 0.0149
+13.5
+P = 0.0226
+P = 0.4834
+P = 0.8604
+10.5
+P = 0.0717
+9.5
+P = 0.1017
+Q = 2.8
+P = 0.2466
+HP: Treatment average sum of squares of ranks = 356.5
+HP: Number of blocks = 12
+HP: Friedman: all pairwise comparisons (2-sided Conover)
+HP: Cochran Q test

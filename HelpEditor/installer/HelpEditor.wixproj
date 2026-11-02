@@ -1,0 +1,20 @@
+<Project Sdk="WixToolset.Sdk/7.0.1">
+  <PropertyGroup>
+    <Platform>x64</Platform>
+    <OutputType>Package</OutputType>
+    <OutputName>StatsDirectHelpEditor-x64</OutputName>
+    <DefineConstants>$(DefineConstants);BuildVersion=$(BuildVersion);PayloadDirectory=$(PayloadDirectory)</DefineConstants>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <!-- ICE91 assumes a package might support ALLUSERS. This package is
+         deliberately per-user only, with all payload below LocalAppData. -->
+    <SuppressIces>ICE91</SuppressIces>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Package.wxs" />
+    <Compile Include="$(PayloadAuthoring)" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="7.0.1" />
+  </ItemGroup>
+  <Target Name="SignMsi" Condition="'$(SignOutput)' == 'true'">
+    <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)Sign-Artifact.ps1&quot; -Path &quot;%(SignMsi.FullPath)&quot;" />
+  </Target>
+</Project>

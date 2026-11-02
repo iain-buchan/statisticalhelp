@@ -1,0 +1,33 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/StatsDirectHelpEditor.App/StatsDirectHelpEditor.App.csproj" />
+    <Project Path="src/StatsDirectHelpEditor.Cli/StatsDirectHelpEditor.Cli.csproj" />
+    <Project Path="src/StatsDirectHelpEditor.Core/StatsDirectHelpEditor.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/StatsDirectHelpEditor.AppHelpPreviewChecks/StatsDirectHelpEditor.AppHelpPreviewChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.BrowserPreviewWindowsChecks/StatsDirectHelpEditor.BrowserPreviewWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.Checks/StatsDirectHelpEditor.Checks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.ContentsWindowsChecks/StatsDirectHelpEditor.ContentsWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.CssScoperChecks/StatsDirectHelpEditor.CssScoperChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.DeepPreviewChecks/StatsDirectHelpEditor.DeepPreviewChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.DeepSourceChecks/StatsDirectHelpEditor.DeepSourceChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.DeepWorkflowWindowsChecks/StatsDirectHelpEditor.DeepWorkflowWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.EquationArtworkChecks/StatsDirectHelpEditor.EquationArtworkChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.GitChecks/StatsDirectHelpEditor.GitChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.HeadlessChecks/StatsDirectHelpEditor.HeadlessChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.InstalledWorkspaceChecks/StatsDirectHelpEditor.InstalledWorkspaceChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.InstalledWorkspaceWindowsChecks/StatsDirectHelpEditor.InstalledWorkspaceWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.LinkWindowsChecks/StatsDirectHelpEditor.LinkWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.PolishChecks/StatsDirectHelpEditor.PolishChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.PolishTransportChecks/StatsDirectHelpEditor.PolishTransportChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.PolishWindowsChecks/StatsDirectHelpEditor.PolishWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.PreviewCacheWindowsChecks/StatsDirectHelpEditor.PreviewCacheWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.SearchReplaceChecks/StatsDirectHelpEditor.SearchReplaceChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.SearchReplaceWindowsChecks/StatsDirectHelpEditor.SearchReplaceWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.SourceImageWindowsChecks/StatsDirectHelpEditor.SourceImageWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.WindowsChecks/StatsDirectHelpEditor.WindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.WebsitePublishChecks/StatsDirectHelpEditor.WebsitePublishChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.WorkspaceWindowsChecks/StatsDirectHelpEditor.WorkspaceWindowsChecks.csproj" />
+  </Folder>
+</Solution>

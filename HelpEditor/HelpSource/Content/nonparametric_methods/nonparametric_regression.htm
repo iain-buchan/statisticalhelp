@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1237" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+    <head><title>Nonparametric Linear Regression - StatsDirect</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <h1>
+            <MadCap:keyword term="Nonparametric linear regression" />
+            Nonparametric Linear Regression</h1>
+        <p>&#160;</p>
+        <p>Menu location: <b>Analysis_Nonparametric_Nonparametric Linear Regression</b>.</p>
+        <p>&#160;</p>
+        <p>This is a distribution free method for investigating a linear relationship between two variables Y (dependent, outcome) and X (predictor, independent).</p>
+        <p>&#160;</p>
+        <p>The slope b of the regression (Y=bX+a) is calculated as the median of the gradients from all possible pairwise contrasts of your data. A confidence interval based upon <a href="kendall_correlation.htm">Kendall's</a> t is constructed for the slope.</p>
+        <p>&#160;</p>
+        <p>Nonparametric linear regression is much less sensitive to extreme observations (outliers) than is <a href="../regression_and_correlation/simple_linear.htm">simple linear regression</a> based upon the least squares method. If your data contain extreme observations which may be erroneous but you do not have sufficient reason to exclude them from the analysis then nonparametric linear regression may be appropriate.</p>
+        <p>&#160;</p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>The sample is random (X can be non-random provided that Ys are independent with identical conditional distributions).</li>
+            <li>The regression of Y on X is linear (this implies an interval measurement scale for both X and Y).</li>
+        </ul>
+        <p>&#160;</p>
+        <p>This function also provides you with an approximate two sided Kendall's rank correlation test for independence between the variables.</p>
+        <p>&#160;</p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Note that the two sided confidence interval for the slope is the inversion of the two sided Kendall's test. The approximate two sided P value for Kendall's t or tb is given but the <a href="../distributions/tau.htm">exact quantile from Kendall's distribution</a> is used to construct the confidence interval, therefore, there may be slight disagreement between the P value and confidence interval. If there are many ties then this situation is compounded (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>).</p>
+        <p>&#160;</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999, p. 338)</a>.</p>
+        <p>Test workbook (Nonparametric worksheet: GPA, GMAT).</p>
+        <p>&#160;</p>
+        <p>The following data represent test scores for 12 graduates respectively:</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">GPA</td>
+                <td style="text-decoration: underline;text-align: right;">GMAT</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4.0</td>
+                <td style="text-align: right;">710</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4.0</td>
+                <td style="text-align: right;">610</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.9</td>
+                <td style="text-align: right;">640</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.8</td>
+                <td style="text-align: right;">580</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.7</td>
+                <td style="text-align: right;">545</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.6</td>
+                <td style="text-align: right;">560</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.5</td>
+                <td style="text-align: right;">610</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.5</td>
+                <td style="text-align: right;">530</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.5</td>
+                <td style="text-align: right;">560</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.3</td>
+                <td style="text-align: right;">540</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.2</td>
+                <td style="text-align: right;">570</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3.2</td>
+                <td style="text-align: right;">560</td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select Nonparametric Linear Regression from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "GPA" and "GMAT" when prompted for Y and X variables respectively.</p>
+        <p>&#160;</p>
+        <p>For this example:</p>
+        <p>GPA vs. GMAT</p>
+        <p>Observations per sample = 12</p>
+        <p>&#160;</p>
+        <p>Median slope (95% CI) = 0.003485 (0 to 0.008)</p>
+        <p>Y-intercept = 1.581061</p>
+        <p>&#160;</p>
+        <p>Kendall's rank correlation coefficient tau b = 0.439039</p>
+        <p>Two sided (on continuity corrected z) P = 0.0678 (H<sub>1</sub>: any correlation)</p>
+        <p>&#160;</p>
+        <p>If you plot GPA against GMAT scores using the scatter plot function in the graphics menu, you will see that there is a reasonably straight line relationship between GPA and GMAT. Here we can infer with 95% confidence that the true population value of the slope of a linear regression line for these two variables lies between 0 and 0.008. The regression equation is estimated at Y = 1.5811 + 0.0035X.</p>
+        <p>&#160;</p>
+        <p>From the two sided Kendall's rank correlation test, we can not reject the null hypothesis of mutual independence between the pairs of results for the twelve graduates. Note that the zero lower confidence interval is a marginal result and we may have rejected the null hypothesis had we used a different method for testing independence.</p>
+        <p>&#160;</p>
+        <MadCap:dropDown class="rcode">
+            <MadCap:dropDownHead class="rcode">
+                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
+            </MadCap:dropDownHead>
+            <MadCap:dropDownBody>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Nonparametric linear regression: the StatsDirect help example (Conover 1999,
+# p. 338) in R
+gpa  &lt;- c(4.0, 4.0, 3.9, 3.8, 3.7, 3.6, 3.5, 3.5, 3.5, 3.3, 3.2, 3.2)   # outcome
+gmat &lt;- c(710, 610, 640, 580, 545, 560, 610, 530, 560, 540, 570, 560)   # predictor
+n &lt;- length(gpa)
+
+# R has no standard function for this method (Theil's regression). The slope is
+# the median of the slopes between all pairs of points that differ in x, and the
+# intercept makes the line pass through the two medians.
+s &lt;- outer(gpa, gpa, "-") / outer(gmat, gmat, "-")
+s &lt;- sort(s[upper.tri(s) &amp; outer(gmat, gmat, "!=")])
+N &lt;- length(s)                            # 62 slopes: 4 of the 66 pairs tie in x
+slope &lt;- median(s)
+cat("Observations per sample =", n, "\n")
+cat(sprintf("Median slope = %.6f   Y-intercept = %.6f\n", slope,
+            median(gpa) - slope * median(gmat)))
+
+# 95% confidence interval for the slope (Conover 1999): with w the 0.975 quantile
+# of Kendall's statistic (concordant minus discordant pairs) for n pairs, the
+# limits are the rth smallest and rth largest slope, r = (N - w) / 2 rounded down.
+# The null distribution of the statistic comes from the number of inversions of
+# a random ordering: multiply the polynomials 1 + q + ... + q^i for i below n.
+ways &lt;- 1
+for (i in 1:(n - 1)) ways &lt;- convolve(ways, rep(1, i + 1), type = "open")
+S &lt;- n * (n - 1) / 2 - 2 * (seq_along(ways) - 1)      # the statistic, largest first
+upper &lt;- cumsum(round(ways)) / factorial(n)           # P(statistic &gt;= S)
+w &lt;- max(S[upper &gt; 0.025])                # 28: P(statistic &gt; 28) is 0.0224
+r &lt;- floor((N - w) / 2)
+cat(sprintf("95%% CI for the slope = %g to %g\n", s[r], s[N + 1 - r]))
+
+# Kendall's rank correlation between outcome and predictor. With ties R gives
+# tau b and a normal approximation; continuity = TRUE matches StatsDirect's P.
+print(cor.test(gmat, gpa, method = "kendall", exact = FALSE, continuity = TRUE))</pre>
+            </MadCap:dropDownBody>
+        </MadCap:dropDown>
+        <p>&#160;</p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    </body>
+</html>
