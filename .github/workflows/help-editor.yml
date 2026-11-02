@@ -43,6 +43,12 @@ jobs:
         run: |
           git diff --exit-code -- .
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build and audit the actual WiX installers
+        run: |
+          $output = Join-Path $env:RUNNER_TEMP 'HelpEditorInstaller'
+          ./Build-Installer.ps1 -OutputDirectory $output
+          $payload = Join-Path (Get-ChildItem (Join-Path $output '.work') -Directory | Select-Object -First 1).FullName 'payload'
+          ./tests/installer-package-checks.ps1 -Msi (Join-Path $output 'StatsDirectHelpEditor-x64.msi') -Bundle (Join-Path $output 'StatsDirectHelpEditorSetup.exe') -PayloadDirectory $payload -ExpectedCommit $env:GITHUB_SHA -Root $PWD.Path
       - name: Preserve verification reports
         if: always()
         uses: actions/upload-artifact@v4

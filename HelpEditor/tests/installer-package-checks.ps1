@@ -2,6 +2,8 @@
 param(
     [Parameter(Mandatory)][string]$Msi,
     [Parameter(Mandatory)][string]$PayloadDirectory,
+    [string]$Bundle,
+    [string]$WixToolPath,
     [string]$ExpectedVersion = '0.1.0',
     [string]$ExpectedCommit,
     [string]$Root = (Split-Path -Parent $PSScriptRoot),
@@ -10,6 +12,8 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $Msi = [IO.Path]::GetFullPath($Msi)
+if (-not $Bundle) { $Bundle = Join-Path (Split-Path -Parent $Msi) 'StatsDirectHelpEditorSetup.exe' }
+$Bundle = [IO.Path]::GetFullPath($Bundle)
 $PayloadDirectory = [IO.Path]::GetFullPath($PayloadDirectory)
 $Root = [IO.Path]::GetFullPath($Root)
 if (-not $OutputDirectory) { $OutputDirectory = Join-Path $Root 'evidence' }
@@ -100,6 +104,47 @@ try {
     $runtime = $bundleSource.SelectSingleNode('//*[local-name()="ExePackage"]')
     $searches = @($bundleSource.SelectNodes('//*[local-name()="RegistrySearch"]'))
     Check 'Bundle prerequisite is per-user, permanent and skipped when either registry location has WebView2' ($runtime.PerMachine -eq 'no' -and $runtime.Permanent -eq 'yes' -and $runtime.InstallArguments -eq '/silent /install' -and $runtime.DetectCondition -like '*WEBVIEW2USERVERSION*OR*WEBVIEW2MACHINEVERSION*' -and $searches.Count -eq 2 -and @($searches | Where-Object Bitness -ne 'always32').Count -eq 0)
+    if (-not $WixToolPath) {
+        $packageFolders = @()
+        if ($env:NUGET_PACKAGES) { $packageFolders += $env:NUGET_PACKAGES }
+        $assetsPath = Join-Path $Root 'src\StatsDirectHelpEditor.App\obj\project.assets.json'
+        if (Test-Path -LiteralPath $assetsPath) { $assets = Get-Content -LiteralPath $assetsPath -Raw | ConvertFrom-Json; $packageFolders += @($assets.packageFolders.PSObject.Properties.Name) }
+        $packageFolders += Join-Path ([Environment]::GetFolderPath('UserProfile')) '.nuget\packages'
+        foreach ($folder in $packageFolders) { $candidate = Join-Path $folder 'wixtoolset.sdk\7.0.1\tools\net8.0\wix.dll'; if (Test-Path -LiteralPath $candidate -PathType Leaf) { $WixToolPath = $candidate; break } }
+    }
+    if (-not $WixToolPath -or -not (Test-Path -LiteralPath $WixToolPath -PathType Leaf)) { throw 'The pinned WiX 7.0.1 tool must be restored, or supplied with -WixToolPath, to audit the actual bundle.' }
+    $bundleRoot = Join-Path $testRoot 'compiled-bundle'
+    $bundleBa = Join-Path $bundleRoot 'ba'
+    $bundleContents = Join-Path $bundleRoot 'contents'
+    $bundleArguments = @('burn', 'extract', '-acceptEula', 'wix7', $Bundle, '-o', $bundleContents, '-oba', $bundleBa)
+    if ([IO.Path]::GetExtension($WixToolPath) -eq '.dll') { & dotnet $WixToolPath @bundleArguments *> (Join-Path $testRoot 'bundle-extract.log') }
+    else { & $WixToolPath @bundleArguments *> (Join-Path $testRoot 'bundle-extract.log') }
+    $bundleExtractCode = $LASTEXITCODE
+    Check 'The actual setup EXE extracts successfully for compiled-engine inspection' ($bundleExtractCode -eq 0)
+    if ($bundleExtractCode -ne 0) { throw 'The actual bundle could not be inspected; see bundle-extract.log.' }
+    $manifest = [xml](Get-Content -LiteralPath (Join-Path $bundleBa 'manifest.xml') -Raw)
+    $compiledSearches = @($manifest.SelectNodes('//*[local-name()="RegistrySearch"]'))
+    $runtimeSearches = @($compiledSearches | Where-Object { $_.Id -in @('WebView2UserSearch', 'WebView2MachineSearch') })
+    # Unreferenced Fragment definitions can disappear at link time. Inspecting
+    # source XML alone previously missed an EXE with neither runtime search.
+    Check 'Compiled Burn engine includes both WebView2 registry searches' ($runtimeSearches.Count -eq 2 -and @($runtimeSearches.Id | Sort-Object -Unique).Count -eq 2) @($runtimeSearches | ForEach-Object { $_.OuterXml })
+    $searchesCorrect = $runtimeSearches.Count -eq 2
+    foreach ($spec in @(@{id='WebView2UserSearch';root='HKCU';variable='WEBVIEW2USERVERSION'}, @{id='WebView2MachineSearch';root='HKLM';variable='WEBVIEW2MACHINEVERSION'})) {
+        $compiled = @($runtimeSearches | Where-Object Id -eq $spec.id)
+        if ($compiled.Count -ne 1 -or $compiled[0].Root -ne $spec.root -or $compiled[0].Variable -ne $spec.variable -or $compiled[0].Key -ne 'SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}' -or $compiled[0].Value -ne 'pv' -or $compiled[0].Type -ne 'value' -or $compiled[0].Win64 -eq 'yes') { $searchesCorrect = $false }
+    }
+    Check 'Compiled searches assign the required variables from HKCU/HKLM 32-bit pv values' $searchesCorrect
+    $compiledRuntime = $manifest.SelectSingleNode('//*[local-name()="ExePackage" and @Id="WebView2Runtime"]')
+    $compiledMsi = $manifest.SelectSingleNode('//*[local-name()="MsiPackage" and @Id="HelpEditorMsi"]')
+    $registration = $manifest.SelectSingleNode('//*[local-name()="Registration"]')
+    Check 'Compiled chain remains per-user and retains the shared WebView2 runtime' ($registration.Scope -eq 'perUser' -and $compiledRuntime.Scope -eq 'perUser' -and $compiledMsi.Scope -eq 'perUser' -and $compiledRuntime.Permanent -eq 'yes' -and $compiledRuntime.InstallArguments -eq '/silent /install' -and $compiledRuntime.DetectCondition -eq 'WEBVIEW2USERVERSION > v0.0.0.0 OR WEBVIEW2MACHINEVERSION > v0.0.0.0')
+    $msiPayload = $manifest.SelectSingleNode('//*[local-name()="Payload" and @Id="HelpEditorMsi"]')
+    $embeddedMsi = Join-Path (Join-Path $bundleContents $msiPayload.Container) $msiPayload.FilePath
+    Check 'The setup EXE embeds the exact MSI being audited' ((Test-Path -LiteralPath $embeddedMsi -PathType Leaf) -and (Hash $embeddedMsi) -eq (Hash $Msi))
+    $runtimePayload = $manifest.SelectSingleNode('//*[local-name()="Payload" and @Id="WebView2Runtime"]')
+    $embeddedRuntime = Join-Path (Join-Path $bundleContents $runtimePayload.Container) $runtimePayload.FilePath
+    $embeddedRuntimeSignature = if (Test-Path -LiteralPath $embeddedRuntime -PathType Leaf) { Get-AuthenticodeSignature -LiteralPath $embeddedRuntime } else { $null }
+    Check 'The setup EXE embeds a trusted Microsoft WebView2 bootstrapper' ($embeddedRuntimeSignature.Status -eq 'Valid' -and $embeddedRuntimeSignature.SignerCertificate.Subject -match '(^|,\s*)O=Microsoft Corporation(,|$)')
     $beforeHash = Hash $Msi
     $extractLog = Join-Path $testRoot 'administrative-extract.log'
     $process = Start-Process -FilePath (Join-Path $env:WINDIR 'System32\msiexec.exe') -ArgumentList @('/a', ('"' + $Msi + '"'), '/qn', ('TARGETDIR="' + $extract + '"'), '/l*v', ('"' + $extractLog + '"')) -WindowStyle Hidden -PassThru -Wait
@@ -113,7 +158,7 @@ try {
         Check 'Every administratively extracted file matches the staged payload SHA256' ($differences.Count -eq 0) $differences
     }
     if ($RequireSigned) {
-        foreach ($file in @($Msi, (Join-Path $PayloadDirectory 'StatsDirectHelpEditor.exe'), (Join-Path $PayloadDirectory 'Builder\StatsDirectHelpBuilder.exe'))) { $signature = Get-AuthenticodeSignature -LiteralPath $file; Check ('Valid timestamped signature: ' + (Split-Path -Leaf $file)) ($signature.Status -eq 'Valid' -and [bool]$signature.TimeStamperCertificate) }
+        foreach ($file in @($Msi, $Bundle, (Join-Path $PayloadDirectory 'StatsDirectHelpEditor.exe'), (Join-Path $PayloadDirectory 'Builder\StatsDirectHelpBuilder.exe'))) { $signature = Get-AuthenticodeSignature -LiteralPath $file; Check ('Valid timestamped signature: ' + (Split-Path -Leaf $file)) ($signature.Status -eq 'Valid' -and [bool]$signature.TimeStamperCertificate) }
     }
 } catch { Check 'Installer package audit completed without unexpected failures' $false $_.Exception.ToString() }
 finally {
@@ -125,5 +170,6 @@ $failed = @($checks | Where-Object { -not $_.passed }).Count
 $report = [ordered]@{checkedAtUtc=[DateTimeOffset]::UtcNow.ToString('o');passed=$passed;failed=$failed;administrativeExtractionOnly=$true;checks=@($checks)}
 $reportPath = Join-Path $testRoot 'installer-package-checks.json'
 [IO.File]::WriteAllText($reportPath, ($report | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllText((Join-Path $OutputDirectory 'installer-package-checks.json'), ($report | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
 Write-Host ($passed.ToString() + ' installer package checks passed; ' + $failed + ' failed. Report: ' + $reportPath)
 if ($failed) { throw 'Installer package checks failed. See the JSON report.' }

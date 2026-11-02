@@ -7,6 +7,9 @@
     <BootstrapperApplication>
       <bal:WixStandardBootstrapperApplication Theme="rtfLicense" LicenseFile="Licence.rtf" SuppressOptionsUI="yes" />
     </BootstrapperApplication>
+    <!-- Link the search fragment and its runtime extension into the engine. -->
+    <util:RegistrySearchRef Id="WebView2UserSearch" />
+    <util:RegistrySearchRef Id="WebView2MachineSearch" />
     <Chain>
       <!-- The runtime is shared and remains installed when the editor is removed.
            This per-user chain has no UAC/elevation handover. -->
