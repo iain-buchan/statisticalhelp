@@ -19,6 +19,8 @@
     <Project Path="tests/StatsDirectHelpEditor.InstalledWorkspaceChecks/StatsDirectHelpEditor.InstalledWorkspaceChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.InstalledWorkspaceWindowsChecks/StatsDirectHelpEditor.InstalledWorkspaceWindowsChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.LinkWindowsChecks/StatsDirectHelpEditor.LinkWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.NamespaceChecks/StatsDirectHelpEditor.NamespaceChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.NamespaceWindowsChecks/StatsDirectHelpEditor.NamespaceWindowsChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.PolishChecks/StatsDirectHelpEditor.PolishChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.PolishTransportChecks/StatsDirectHelpEditor.PolishTransportChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.PolishWindowsChecks/StatsDirectHelpEditor.PolishWindowsChecks.csproj" />

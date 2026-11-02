@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2278" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2278" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Effect Size Meta-analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Effect size meta-analysis;Meta-analysis: Effect size" />Effect Size Meta-analysis</h1>
+            <sdh:keyword term="Effect size meta-analysis;Meta-analysis: Effect size" />Effect Size Meta-analysis</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Meta-Analysis_Effect Size</b>.</p>
         <p>&#160;</p>
@@ -15,10 +15,10 @@
         <p>&#160;</p>
         <p>There are a number of statistical methods for estimating effect size, StatsDirect uses g (modified Glass statistic with pooled sample standard deviation) and the unbiased estimator d (<a href="../references/reference_list.htm#ref-hedges-1985">Hedges and Olkin, 1985</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle d=g[J(N-2)] \\
+            <sdh:equation>$\displaystyle d=g[J(N-2)] \\
 \displaystyle g=\frac{\mu_e-\mu_c}{\sigma_{\text{pooled}}} \\
 \displaystyle \sigma_{\text{pooled}}=\sqrt{\frac{\sigma_e^2(n_e-1)+\sigma_c^2(n_c-1)}{N-2}} \\
-\displaystyle J(m)=\frac{\Gamma[m/2]}{\Gamma[(m-1)/2]\sqrt{m/2}}$</MadCap:equation>
+\displaystyle J(m)=\frac{\Gamma[m/2]}{\Gamma[(m-1)/2]\sqrt{m/2}}$</sdh:equation>
         </p>
         <p>- where n<sub>e</sub> is the number in the experimental group, n<sub>c</sub> is the number in the control group, μ<sub>e</sub> is the sample mean of the experimental group, μ<sub>c</sub> is the sample mean of the control group, σ<sub>e</sub> is the sample standard deviation for the experimental group, σ<sub>c</sub> is the sample standard deviation for the control group, N = n<sub>e</sub> + n<sub>c</sub>, J(m) is the correction factor given m and Γ is the gamma function.</p>
         <p>&#160;</p>
@@ -27,7 +27,7 @@
         <p>The pooled mean effect size estimate (d+) is calculated using direct weights defined as the inverse of the variance of d for each study/stratum. An approximate confidence interval for d+ is given with a z statistic and probability of this pooled effect size being equal to zero (<a href="../references/reference_list.htm#ref-hedges-1985">Hedges and Olkin, 1985</a>).</p>
         <p>&#160;</p>
         <p>
-            <MadCap:keyword term="Weighted mean difference (meta-analysis)" />StatsDirect also gives the option to base effect size calculations on weighted mean difference (a non-standardized estimate unlike g and d) as described in the Cochrane Collaboration Handbook (<a href="../references/reference_list.htm#ref-mulrow-1996">Mulrow and Oxman, 1996</a>). The confidence interval for the mean difference of each study is calculated from the variances of its two groups taken separately, as the weights are.</p>
+            <sdh:keyword term="Weighted mean difference (meta-analysis)" />StatsDirect also gives the option to base effect size calculations on weighted mean difference (a non-standardized estimate unlike g and d) as described in the Cochrane Collaboration Handbook (<a href="../references/reference_list.htm#ref-mulrow-1996">Mulrow and Oxman, 1996</a>). The confidence interval for the mean difference of each study is calculated from the variances of its two groups taken separately, as the weights are.</p>
         <p>&#160;</p>
         <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
         <p>&#160;</p>
@@ -365,11 +365,11 @@
         <p>&#160;</p>
         <p>Here we can say with 95% confidence, assuming a random effects model, that the true size of the effect was at least 0.4 greater for the group who received the educational intervention compared with those who did not. Assuming a fixed effects model a slightly stronger inference could be made about an effect size of 0.42 (the lower confidence limit) but the high inter-study variation makes the fixed effects model less appropriate.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Effect size meta-analysis: the StatsDirect help example (Freemantle, personal
 # communication, test outcomes of seven comparisons from six trials of an educational
@@ -534,8 +534,8 @@ forest(dplus, dplus - z * se_dplus, dplus + z * se_dplus,
 forest(dsd, dsd - z * se_dsd, dsd + z * se_dsd,
        "Effect size meta-analysis plot [random effects]")
 par(op)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

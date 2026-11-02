@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="766" MadCap:lastWidth="961">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" sdh:lastBlockDepth="6" sdh:lastHeight="766" sdh:lastWidth="961">
     <head><title>Multiple Comparisons/Contrasts/Testing in ANOVA - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,15 +8,15 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="ANOVA: Multiple comparisons;Sifting data (warnings);Mutliple contrasts;Multiple comparisons with ANOVA;Dredging data (warnings);Fishing for contrasts (warning);Type I error (avoidance in multiple testing)" />
+            <sdh:keyword term="ANOVA: Multiple comparisons;Sifting data (warnings);Mutliple contrasts;Multiple comparisons with ANOVA;Dredging data (warnings);Fishing for contrasts (warning);Type I error (avoidance in multiple testing)" />
             Multiple Comparisons in Analysis of Variance</h1>
         <p>&#160;</p>
         <p>StatsDirect provides functions for multiple comparison (simultaneous inference), specifically all pairwise comparisons and all comparisons with a control. For k groups there are k(k-1)/2 possible pairwise comparisons.</p>
         <p>&#160;</p>
         <p>
-            <MadCap:keyword term="Newman-Keuls" />
-            <MadCap:keyword term="Scheffé" />
-            <MadCap:keyword term="Tukey-Kramer" />Tukey (Tukey-Kramer if unequal group sizes), Scheffé, Bonferroni and Newman-Keuls methods are provided for all pairwise comparisons (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-wallenstein-1980">Wallenstein, 1980</a>; <a href="../references/reference_list.htm#ref-miller-1981-b">Miller, 1981</a>; <a href="../references/reference_list.htm#ref-hsu-1996">Hsu, 1996</a>; <a href="../references/reference_list.htm#ref-kleinbaum-1998">Kleinbaum et al., 1998</a><MadCap:keyword term="Dunnett" />). Dunnett's method is used for multiple comparisons with a control group (<a href="../references/reference_list.htm#ref-hsu-1996">Hsu, 1996</a>).</p>
+            <sdh:keyword term="Newman-Keuls" />
+            <sdh:keyword term="Scheffé" />
+            <sdh:keyword term="Tukey-Kramer" />Tukey (Tukey-Kramer if unequal group sizes), Scheffé, Bonferroni and Newman-Keuls methods are provided for all pairwise comparisons (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-wallenstein-1980">Wallenstein, 1980</a>; <a href="../references/reference_list.htm#ref-miller-1981-b">Miller, 1981</a>; <a href="../references/reference_list.htm#ref-hsu-1996">Hsu, 1996</a>; <a href="../references/reference_list.htm#ref-kleinbaum-1998">Kleinbaum et al., 1998</a><sdh:keyword term="Dunnett" />). Dunnett's method is used for multiple comparisons with a control group (<a href="../references/reference_list.htm#ref-hsu-1996">Hsu, 1996</a>).</p>
         <p>&#160;</p>
         <p>For k groups, ANOVA can be used to look for a difference across k group means as a whole. If there is a statistically significant difference across k means then a multiple comparison method can be used to look for specific differences between pairs of groups. The reason that two sample methods should not be used to make multiple pairwise comparisons is that they are not designed for repeat testing in a "data dredging" manner.</p>
         <p>&#160;</p>
@@ -472,11 +472,11 @@
         <p>&#160;</p>
         <p>Every method finds the response to Substance 1 higher than to Substances 3 and 4. Whether it also differs from Substance 2 depends on the method: Newman-Keuls says so (P = 0.0119), Tukey (P = 0.0552) and Scheff&#233; (P = 0.0896) do not, and the word "stop" marks where each of those two sequences of contrasts ends; in the Newman-Keuls table the two pairs inside the non-significant range from Substance 4 to Substance 2 are marked as not tested. With Substance 1 as the control, Dunnett&#39;s method finds all three of the other substances to give a lower response.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Multiple comparisons after one way analysis of variance: an illustration with
 # the Substance 1 to 4 columns of the StatsDirect test workbook (ANOVA worksheet)
@@ -588,8 +588,8 @@ for (j in c(4, 3, 2)) {
   cat(names(means)[j], six(dj), six(dj - d * sed), "to", six(dj + d * sed),
       pv(1 - pmax_abs_t(abs(dj) / sed)), "\n")
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="anova.htm">analysis of variance</a>
         </p>

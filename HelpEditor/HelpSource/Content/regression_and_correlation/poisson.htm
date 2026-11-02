@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="4387" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="4387" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Poisson Regression (Incidence Rate Ratio) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Overdispertion;Regression (relative risk);Poisson regression;Regression: Poisson;Log-linear regression" />Poisson Regression</h1>
+            <sdh:keyword term="Overdispertion;Regression (relative risk);Poisson regression;Regression: Poisson;Log-linear regression" />Poisson Regression</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Regression and Correlation_Poisson</b></p>
         <p>&#160;</p>
@@ -156,40 +156,40 @@
         </p>
         <p>The deviance function is:</p>
         <p>
-            <MadCap:equation>$\displaystyle D=2\sum_{i=1}^ny_i\ln\left( \frac{y_i}{\hat \mu_i}\right)-(y_i-\hat{\mu}_i)$</MadCap:equation>
+            <sdh:equation>$\displaystyle D=2\sum_{i=1}^ny_i\ln\left( \frac{y_i}{\hat \mu_i}\right)-(y_i-\hat{\mu}_i)$</sdh:equation>
         </p>
         <p>- where y is the number of events, n is the number of observations and μ is the fitted Poisson mean.</p>
         <p>&#160;</p>
         <p>The log-likelihood function is:</p>
         <p>
-            <MadCap:equation>$\displaystyle L=\sum_{i=1}^ny_i\ln( \hat{\mu_i})-\hat{\mu}_i-\ln(y_i!)$</MadCap:equation>
+            <sdh:equation>$\displaystyle L=\sum_{i=1}^ny_i\ln( \hat{\mu_i})-\hat{\mu}_i-\ln(y_i!)$</sdh:equation>
         </p>
         <p>The maximum likelihood regression proceeds by iteratively re-weighted least squares, using singular value decomposition to solve the linear system at each iteration, until the change in deviance is within the specified accuracy.</p>
         <p>&#160;</p>
         <p>The Pearson chi-square residual is:</p>
         <p>
-            <MadCap:equation>$\displaystyle r_p=\frac{(y_i-\hat{\mu}_i)^2}{\hat{\mu}_i}$</MadCap:equation>
+            <sdh:equation>$\displaystyle r_p=\frac{(y_i-\hat{\mu}_i)^2}{\hat{\mu}_i}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>The Pearson goodness of fit test statistic is:</p>
         <p>
-            <MadCap:equation>$\displaystyle \chi^2=\sum_{i=1}^n \frac{(y_i-\hat{\mu}_i)^2}{\hat{\mu}_i}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \chi^2=\sum_{i=1}^n \frac{(y_i-\hat{\mu}_i)^2}{\hat{\mu}_i}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>The deviance residual is (<a href="../references/reference_list.htm#ref-cook-1982">Cook and Weisberg, 1982</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle r_d=\text{sgn}(y_i-\hat{\mu}_i)\sqrt{D(y_i,\hat{\mu}_i)}$</MadCap:equation>
+            <sdh:equation>$\displaystyle r_d=\text{sgn}(y_i-\hat{\mu}_i)\sqrt{D(y_i,\hat{\mu}_i)}$</sdh:equation>
         </p>
         <p>-where D(observation, fit) is the deviance and sgn(x) is the sign of x.</p>
         <p>&#160;</p>
         <p>The Freeman-Tukey, variance stabilized, residual is (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman and Tukey, 1950</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle r_{ft}=\sqrt{y_i}+\sqrt{y_i+1}-\sqrt{4\hat{\mu}_i+1}$</MadCap:equation>
+            <sdh:equation>$\displaystyle r_{ft}=\sqrt{y_i}+\sqrt{y_i+1}-\sqrt{4\hat{\mu}_i+1}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>The standardized residual is:</p>
         <p>
-            <MadCap:equation>$\displaystyle r_s=\frac{y_i-\hat{\mu}_i}{\sqrt{\hat{\mu}_i(1-h_i)}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle r_s=\frac{y_i-\hat{\mu}_i}{\sqrt{\hat{\mu}_i(1-h_i)}}$</sdh:equation>
         </p>
         <p>- where h is the leverage (diagonal of the Hat matrix).</p>
         <p>&#160;</p>
@@ -551,11 +551,11 @@
         <p>&#160;</p>
         <p>With 95% confidence you can infer that the risk of cancer in these veterans compared with non-veterans lies between 0.89 and 1.11, i.e. a statistically non-significant effect.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Poisson regression: the StatsDirect help example (Armitage, Berry and Matthews
 # 2001, cancers in veterans and non-veterans by age group, with the subject-years
@@ -655,8 +655,8 @@ for (i in 1:12) {
       six(s[i, 1] / (s[i, 2] * sqrt(scale))),
       pv(2 * pnorm(-abs(s[i, 1] / (s[i, 2] * sqrt(scale))))), "\n")
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

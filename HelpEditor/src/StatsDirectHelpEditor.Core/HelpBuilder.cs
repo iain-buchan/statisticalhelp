@@ -13,7 +13,6 @@ public record BuildResult(string OutputDirectory, int TopicCount, int SearchDocu
 /// <summary>A small, independent HTML builder for the subset of Flare used by StatsDirect.</summary>
 public static class HelpBuilder
 {
-    private static readonly XNamespace MadCap = "http://www.madcapsoftware.com/Schemas/MadCap.xsd";
     private const string OutputMarker = ".statsdirect-help-output.json";
     private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
     private const string TopicCss = "body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}img,svg{max-width:100%;height:auto}details.rcode{margin:1em 0}details.rcode>div{margin-left:18px}summary{cursor:pointer}details.rcode>summary{font-weight:bold;color:#2c5f8a}details.rcode>summary{list-style:none}details.rcode>summary::-webkit-details-marker{display:none}details.rcode>summary:before{content:\"\";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}.help-topic-nav{font-size:9pt;margin-bottom:1em}.help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}mjx-container{max-width:100%}.help-equation mjx-assistive-mml{width:1px!important;height:1px!important}";
@@ -124,7 +123,7 @@ public static class HelpBuilder
             var document = HelpProject.Parse(drafts.TryGetValue(topic.Path, out string? draft) ? draft : project.ReadTopic(topic.Path));
             var body = document.Descendants().First(e => e.Name.LocalName == "body");
             ApplyConditions(body, target);
-            var keywordText = string.Join(" ", body.Descendants(MadCap + "keyword").Select(e => (string?)e.Attribute("term") ?? ""));
+            var keywordText = string.Join(" ", body.Descendants().Where(e => HelpSourceNamespaces.IsElement(e, "keyword")).Select(e => (string?)e.Attribute("term") ?? ""));
             var text = NormalizeText(string.Join(" ", body.DescendantNodes().OfType<XText>().Where(t => !t.Ancestors().Any(e => e.Name.LocalName is "script" or "style")).Select(t => t.Value)));
             var outputPath = topic.Path.ToLowerInvariant();
             var transformed = new XElement(body);
@@ -132,7 +131,7 @@ public static class HelpBuilder
             string footerHtml = "";
             if (sharedFooter != null)
             {
-                var footer = XElement.Parse("<footer xmlns:MadCap=\"http://www.madcapsoftware.com/Schemas/MadCap.xsd\" class=\"help-shared-footer\">" + sharedFooter.Html + "</footer>", LoadOptions.PreserveWhitespace);
+                var footer = XElement.Parse("<footer class=\"help-shared-footer\">" + sharedFooter.Html + "</footer>", LoadOptions.PreserveWhitespace);
                 ApplyConditions(footer, target);
                 Transform(footer, sharedFooter.SourcePath, project, warnings, equationArtwork, outputPath);
                 footerHtml = footer.ToString(SaveOptions.DisableFormatting);
@@ -248,7 +247,7 @@ public static class HelpBuilder
     private static void ApplyConditions(XElement root, HelpBuildTarget target)
     {
         foreach (var e in root.Descendants().ToList())
-            if (!Included((string?)e.Attribute(MadCap + "conditions"), target)) e.Remove();
+            if (HelpSourceNamespaces.Attributes(e, "conditions").Any(attribute => !Included(attribute.Value, target))) e.Remove();
     }
 
     private static void Transform(XElement body, string path, HelpProject project, List<string> warnings, EquationArtworkCatalog artwork, string? linkOutputPath = null)
@@ -259,7 +258,7 @@ public static class HelpBuilder
             // Source content is documentation, not executable page code. The
             // builder supplies its own offline equation/navigation scripts.
             if (e.Name.LocalName.Equals("script", StringComparison.OrdinalIgnoreCase)) { e.Remove(); continue; }
-            if (e.Name.Namespace == MadCap)
+            if (HelpSourceNamespaces.IsAuthoringNamespace(e.Name.NamespaceName))
             {
                 switch (e.Name.LocalName)
                 {
@@ -277,12 +276,17 @@ public static class HelpBuilder
                     case "dropDownHotspot": e.ReplaceWith(e.Nodes().Select(CloneNode)); continue;
                     case "dropDownBody": e.Name = "div"; break;
                     default:
-                        warnings.Add("Unsupported Flare element " + e.Name.LocalName + " in " + path + "; content retained.");
+                        warnings.Add("Unsupported help authoring element " + e.Name.LocalName + " in " + path + "; content retained.");
                         e.Name = "span"; break;
                 }
             }
-            foreach (var a in e.Attributes().Where(a => a.IsNamespaceDeclaration || a.Name.Namespace == MadCap || a.Name.LocalName.StartsWith("on", StringComparison.OrdinalIgnoreCase)).ToList()) a.Remove();
         }
+        // Include the fragment root (in particular the shared footer) and any
+        // cloned equation children. Reader HTML has no authoring vocabulary.
+        foreach (var attribute in body.DescendantsAndSelf().Attributes().Where(attribute =>
+            attribute.IsNamespaceDeclaration && HelpSourceNamespaces.IsAuthoringNamespace(attribute.Value) ||
+            HelpSourceNamespaces.IsAuthoringNamespace(attribute.Name.NamespaceName) ||
+            attribute.Name.LocalName.StartsWith("on", StringComparison.OrdinalIgnoreCase)).ToList()) attribute.Remove();
         // Flare's hotspot owns the chevron immediately before its label. The
         // equivalent summary must not expose source-formatting indentation as
         // an extra visible space between that chevron and the R logo.
@@ -400,7 +404,8 @@ public static class HelpBuilder
         var result = new List<ViewerNode>();
         foreach (var n in nodes)
         {
-            if (!Included(n.OriginalAttributes.GetValueOrDefault(MadCap + "conditions"), target)) continue;
+            if (n.OriginalAttributes.Any(attribute => attribute.Key.LocalName == "conditions" &&
+                HelpSourceNamespaces.IsAuthoringNamespace(attribute.Key.NamespaceName) && !Included(attribute.Value, target))) continue;
             string? link = n.Link;
             if (link is not null)
             {

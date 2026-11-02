@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="3" MadCap:lastHeight="1058.552" MadCap:lastWidth="3229" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="3" sdh:lastHeight="1058.552" sdh:lastWidth="3229" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Student t Distribution - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,13 +7,13 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Student's t distribution;t distribution;Distributions: Student t" />Student's t Distribution</h1>
+            <sdh:keyword term="Student's t distribution;t distribution;Distributions: Student t" />Student's t Distribution</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Student's t</b>.</p>
         <p>&#160;</p>
         <p>Student's t is the distribution with n degrees of freedom of :</p>
         <p>
-            <MadCap:equation>$\displaystyle \frac{z}{\sqrt{\chi^2/n}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \frac{z}{\sqrt{\chi^2/n}}$</sdh:equation>
         </p>
         <p>- where z is the <a href="normal.htm">standard normal</a> variable and χ² is a <a href="chisq.htm">chi-square</a> random variable with n degrees of freedom.</p>
         <p>&#160;</p>
@@ -33,17 +33,17 @@
         </p>
         <p>The distribution function of a t distribution with n degrees of freedom is:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(t)=\frac{\Gamma[(n+1)/2]}{\sqrt{n\pi} \space \Gamma[n/2]}\int_{-\infty}^t \left(1+\frac{x^2}{n}\right)^{-(n+1)/2} \space dx$</MadCap:equation>
+            <sdh:equation>$\displaystyle f(t)=\frac{\Gamma[(n+1)/2]}{\sqrt{n\pi} \space \Gamma[n/2]}\int_{-\infty}^t \left(1+\frac{x^2}{n}\right)^{-(n+1)/2} \space dx$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Γ(*) is the gamma function:</p>
         <p>
-            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>A t variable with n degrees of freedom can be transformed to an F variable with 1 and n degrees of freedom as t²=F. An F variable with ν<sub>1</sub> and ν<sub>2</sub> degrees of freedom can be transformed to a beta variable with parameters p=ν<sub>1</sub>/2 and q= ν<sub>2</sub>/2 as beta = ν<sub>1</sub>F/(ν<sub>2</sub>+ν<sub>1</sub>F). The beta distribution with parameters p and q is:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{beta}(x)=\frac{\Gamma(p+q)}{\Gamma(p)\Gamma(q)}\int_0^x t^{p-1}(1-t)^{q-1} \space dt$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{beta}(x)=\frac{\Gamma(p+q)}{\Gamma(p)\Gamma(q)}\int_0^x t^{p-1}(1-t)^{q-1} \space dt$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p><u>Example</u>
@@ -66,11 +66,11 @@
         <p>This is the critical value of t for a two sided test at the 5% level with 10 degrees of freedom, and the multiplier of the standard error in a 95% confidence interval based on 10 degrees of freedom.</p>
         <p>&#160;</p>
         <p>The figures above were calculated in R with the functions shown below; StatsDirect calculates the same values and shows them to the same 15 decimal places (15 significant figures for t).</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Student's t distribution: the StatsDirect help illustration (tail areas for t = 2
 # with 10 degrees of freedom and for t = -2.5 with 15, then the t with an upper tail
@@ -96,8 +96,8 @@ tails(-2.5, 15)      # a negative t: the distribution is symmetric, so the tails
 # area lies, so the t with 0.025 above it (0.05 in the two tails together) is
 cat("t(upper P 0.025, df 10) =", t15(qt(0.025, 10, lower.tail = FALSE)), "\n")
 # which is the same as qt(0.975, 10)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

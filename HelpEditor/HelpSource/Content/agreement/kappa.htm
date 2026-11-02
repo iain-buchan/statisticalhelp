@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="4" MadCap:lastHeight="4150.104" MadCap:lastWidth="2828">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" sdh:lastBlockDepth="4" sdh:lastHeight="4150.104" sdh:lastWidth="2828">
     <head><title>Agreement Analysis (Categorical Data, Kappa, Maxwell, Scott Pi, Gwet AC1) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,14 +8,14 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Inter-rater agreement: Kappa;Stuart-Maxwell;Scott-Cohen pi;Reliability: Categorical;Agreement analysis: Categorical;Kappa;Maxwell;Gwet AC1" />Agreement of Categorical Measurements</h1>
+            <sdh:keyword term="Inter-rater agreement: Kappa;Stuart-Maxwell;Scott-Cohen pi;Reliability: Categorical;Agreement analysis: Categorical;Kappa;Maxwell;Gwet AC1" />Agreement of Categorical Measurements</h1>
         <p>&#160;</p>
         <p>Menu locations:<br /><b>Analysis_Agreement_Categorical (Kappa)</b><br /><b>Analysis_Chi-square_Kappa and Maxwell</b><br /><b>Analysis_Clinical Epidemiology_Kappa and Maxwell</b></p>
         <p>.</p>
         <p><u>Agreement Analysis</u>
         </p>
         <p>
-            <MadCap:keyword term="Cohen's kappa" />For the case of two raters, this function gives Cohen's kappa (weighted and unweighted), Scott's pi and Gwett's AC1 as measures of inter-rater agreement for two raters' categorical assessments (<a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-fleiss-1969">Fleiss, 1969</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-scott-1955">Scott 1955</a>). For three or more raters, this function gives extensions of the Cohen kappa method, due to <a href="../references/reference_list.htm#ref-fleiss-1979-b">Fleiss and Cuzick (1979)</a> in the case of two possible responses per rater, and <a href="../references/reference_list.htm#ref-fleiss-1979-c">Fleiss, Nee and Landis (1979)</a> in the general case of three or more responses per rater.</p>
+            <sdh:keyword term="Cohen's kappa" />For the case of two raters, this function gives Cohen's kappa (weighted and unweighted), Scott's pi and Gwett's AC1 as measures of inter-rater agreement for two raters' categorical assessments (<a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-fleiss-1969">Fleiss, 1969</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-scott-1955">Scott 1955</a>). For three or more raters, this function gives extensions of the Cohen kappa method, due to <a href="../references/reference_list.htm#ref-fleiss-1979-b">Fleiss and Cuzick (1979)</a> in the case of two possible responses per rater, and <a href="../references/reference_list.htm#ref-fleiss-1979-c">Fleiss, Nee and Landis (1979)</a> in the general case of three or more responses per rater.</p>
         <p>&#160;</p>
         <p>If you have only two categories then Scott's pi statistic (with confidence interval constructed by the <a href="../references/reference_list.htm#ref-donner-1992">Donner-Eliasziw (1992)</a> method) for inter-rater agreement (<a href="../references/reference_list.htm#ref-zwick-1988">Zwick, 1988</a>) is more reliable than kappa.</p>
         <p>&#160;</p>
@@ -74,7 +74,7 @@
         <p>StatsDirect uses the methods of <a href="../references/reference_list.htm#ref-maxwell-1970">Maxwell (1970)</a> to test for differences between the ratings of the two raters (or k nominal responses with paired observations).</p>
         <p>&#160;</p>
         <p>
-            <MadCap:keyword term="McNemar" />Maxwell's chi-square statistic tests for overall disagreement between the two raters. The general McNemar statistic tests for asymmetry in the distribution of subjects about which the raters disagree, i.e. disagreement more over some categories of response than others. A pair of categories in which neither rater put a subject that the other put in the other category adds nothing to this statistic, and is not counted in its degrees of freedom. Maxwell's statistic usually has one degree of freedom fewer than there are categories. If the raters disagree only within groups of categories, never taking a category of one group for a category of another, the statistic is worked out within each of the groups of categories that disagreements join and added up, and its degrees of freedom are the number of categories less the number of groups. If the raters agree on every subject, kappa is 1 with a standard error of 0, and neither test is given.</p>
+            <sdh:keyword term="McNemar" />Maxwell's chi-square statistic tests for overall disagreement between the two raters. The general McNemar statistic tests for asymmetry in the distribution of subjects about which the raters disagree, i.e. disagreement more over some categories of response than others. A pair of categories in which neither rater put a subject that the other put in the other category adds nothing to this statistic, and is not counted in its degrees of freedom. Maxwell's statistic usually has one degree of freedom fewer than there are categories. If the raters disagree only within groups of categories, never taking a category of one group for a category of another, the statistic is worked out within each of the groups of categories that disagreements join and added up, and its degrees of freedom are the number of categories less the number of groups. If the raters agree on every subject, kappa is 1 with a standard error of 0, and neither test is given.</p>
         <p>&#160;</p>
         <p>Data preparation</p>
         <p>You may present your data for the two-rater methods as a fourfold table in the interactive screen data entry menu option. Otherwise, you may present your data as responses/ratings in columns and rows in a worksheet, where the columns represent raters and the rows represent subjects rated. If you have more than two raters then you must present your data in the worksheet column (rater) row (subject) format. Missing data can be used where raters did not rate all subjects.</p>
@@ -84,61 +84,61 @@
         <p>All formulae for kappa statistics and their tests are as per <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss (1981)</a>:</p>
         <p>For two raters (m=2) and two categories (k=2):</p>
         <p>
-            <MadCap:equation>$\displaystyle p_o=\sum_{i=1}^k \sum_{j=1}^k w_{ij} \space p_{ij}$</MadCap:equation>
+            <sdh:equation>$\displaystyle p_o=\sum_{i=1}^k \sum_{j=1}^k w_{ij} \space p_{ij}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle p_e=\sum_{i=1}^k \sum_{j=1}^k w_{ij} \space p_{i.} \space p_{.j}$</MadCap:equation>
+            <sdh:equation>$\displaystyle p_e=\sum_{i=1}^k \sum_{j=1}^k w_{ij} \space p_{i.} \space p_{.j}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \hat{\kappa} = (p_o-p_e)/(1-p_e)$</MadCap:equation>
+            <sdh:equation>$\displaystyle \hat{\kappa} = (p_o-p_e)/(1-p_e)$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle s_o=\frac{1}{(1-p_e) \space \sqrt{n}} \sqrt{[\sum_{i=1}^k\sum_{j=1}^k p_{i.} \space p_{.j} \space (\bar{w}_{ij}-(\bar{w}_{i.}+\bar{w}_{.i}))]-p_e^2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle s_o=\frac{1}{(1-p_e) \space \sqrt{n}} \sqrt{[\sum_{i=1}^k\sum_{j=1}^k p_{i.} \space p_{.j} \space (\bar{w}_{ij}-(\bar{w}_{i.}+\bar{w}_{.i}))]-p_e^2}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle p_{i.}=\sum_{j=1}^k p_{ij}$</MadCap:equation>
+            <sdh:equation>$\displaystyle p_{i.}=\sum_{j=1}^k p_{ij}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle p_{.j}=\sum_{i=1}^k p_{ij}$</MadCap:equation>
+            <sdh:equation>$\displaystyle p_{.j}=\sum_{i=1}^k p_{ij}$</sdh:equation>
         </p>
         <p>- where n is the number of subjects rated, w is the weight for agreement or disagreement, p<sub>o</sub> is the observed proportion of agreement, p<sub>e</sub> is the expected proportion of agreement, p<sub>ij</sub> is the fraction of ratings i by the first rater and j by the second rater, and so is the standard error for testing that the kappa statistic equals zero.</p>
         <p>&#160;</p>
         <p>For three or more raters (m&gt;2) and two categories (k =2):</p>
         <p>
-            <MadCap:equation>$\displaystyle B=\frac{1}{n}\sum_{i=1}^k{\frac{(x_i-m_i \bar{p})^2}{m_i}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle B=\frac{1}{n}\sum_{i=1}^k{\frac{(x_i-m_i \bar{p})^2}{m_i}}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle W=\frac{1}{n(\bar{m}-1)} \sum_{i=1}^k{\frac{x_i(m_i-x_i)}{m_i}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle W=\frac{1}{n(\bar{m}-1)} \sum_{i=1}^k{\frac{x_i(m_i-x_i)}{m_i}}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \hat{\kappa}=\frac{B-W}{B+(\bar{m}-1)W}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \hat{\kappa}=\frac{B-W}{B+(\bar{m}-1)W}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle s_o=\frac{1}{(\bar{m}-1)\sqrt{n \bar{m}_h}} \sqrt{2(\bar{m}_h-1)+\frac{(\bar{m}-\bar{m}_h)(1-4\bar{p}\bar{q})}{\bar{m}\bar{p}\bar{q}}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle s_o=\frac{1}{(\bar{m}-1)\sqrt{n \bar{m}_h}} \sqrt{2(\bar{m}_h-1)+\frac{(\bar{m}-\bar{m}_h)(1-4\bar{p}\bar{q})}{\bar{m}\bar{p}\bar{q}}}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \bar{p}=\sum_{i=1}^k \frac{x_i}{n\bar{m}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \bar{p}=\sum_{i=1}^k \frac{x_i}{n\bar{m}}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \bar{m}=\sum_{i=1}^k{\frac{m_i}{n}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \bar{m}=\sum_{i=1}^k{\frac{m_i}{n}}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \bar{m}_h=\frac{k}{\sum_{i=1}^k{1/m_i}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \bar{m}_h=\frac{k}{\sum_{i=1}^k{1/m_i}}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\bar{q}=1-\bar{p}$</MadCap:equation>
+            <sdh:equation>$\bar{q}=1-\bar{p}$</sdh:equation>
         </p>
         <p>- where x<sub>i</sub> is the number of positive ratings out of m<sub>i</sub> raters for subject i of n subjects, and so is the standard error for testing that the kappa statistic equals zero.</p>
         <p>&#160;</p>
         <p>For three or more raters and categories (m&gt;2, k&gt;2):</p>
         <p>
-            <MadCap:equation>$\displaystyle \bar{\kappa}=\frac{\displaystyle \sum_{j=1}^k\bar{p}_j \bar{q}_j \hat{\kappa}_j}{\displaystyle \sum_{j=1}^k{\bar{p}_j \bar{q}_j}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \bar{\kappa}=\frac{\displaystyle \sum_{j=1}^k\bar{p}_j \bar{q}_j \hat{\kappa}_j}{\displaystyle \sum_{j=1}^k{\bar{p}_j \bar{q}_j}}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle s_{oj}=\sqrt{\frac{2}{nm(m-1)}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle s_{oj}=\sqrt{\frac{2}{nm(m-1)}}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \bar{s}_o=\frac{\sqrt{2}}{\displaystyle \sum_{i=1}^k{\bar{p}_j \bar{q}_j\sqrt{nm(m-1)}}} \sqrt{[\sum_{j=1}^k{\bar{p}_j\bar{q}_j}]^2-\sum_{j=1}^k{\bar{p}_j\bar{q}_j(\bar{q}_j-\bar{p}_j)}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \bar{s}_o=\frac{\sqrt{2}}{\displaystyle \sum_{i=1}^k{\bar{p}_j \bar{q}_j\sqrt{nm(m-1)}}} \sqrt{[\sum_{j=1}^k{\bar{p}_j\bar{q}_j}]^2-\sum_{j=1}^k{\bar{p}_j\bar{q}_j(\bar{q}_j-\bar{p}_j)}}$</sdh:equation>
         </p>
         <p>- where s<sub>oj</sub> is the standard error for testing kappa equal for each rating category separately, and so bar is the standard error for testing kappa equal to zero for the overall kappa across the k categories. Kappa hat is calculated as for the m&gt;2, k=2 method shown above.</p>
         <p>&#160;</p>
@@ -259,11 +259,11 @@
         <p>&#160;</p>
         <p>The statistically highly significant Maxwell test statistic above indicates that the raters disagree significantly in at least one category. The generalised McNemar statistic indicates the disagreement is not spread evenly.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Agreement of categorical measurements: the StatsDirect help example (Altman 1991,
 # the RAST and MAST tests of 363 sera graded in five categories) in R
@@ -379,8 +379,8 @@ x2m &lt;- sum((above - below)[filled]^2 / (above + below)[filled])
 dfm &lt;- sum(filled)
 cat("Symmetry (generalised McNemar) chi-square =", six(x2m), " df =", dfm, " ",
     pv(pchisq(x2m, dfm, lower.tail = FALSE)), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1945" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1945" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Conditional (Matched) Logistic Regression - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Conditional logistic regression;Regression: Conditional logistic;Matched logistic regression" />Conditional Logistic Regression</h1>
+            <sdh:keyword term="Conditional logistic regression;Regression: Conditional logistic;Matched logistic regression" />Conditional Logistic Regression</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Regression and Correlation_Conditional Logistic</b>.</p>
         <p>&#160;</p>
@@ -23,9 +23,9 @@
         <p>&#160;</p>
         <p>The following information about the difference between two logits demonstrates one of the important uses of logistic regression models:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{logit}_a-\text{logit}_b=\log \left( \frac{\hat{\pi}_a}{1-\hat{\pi}_a}\right)-\log \left( \frac{\hat{\pi}_b}{1-\hat{\pi}_b}\right) \\
+            <sdh:equation>$\displaystyle \text{logit}_a-\text{logit}_b=\log \left( \frac{\hat{\pi}_a}{1-\hat{\pi}_a}\right)-\log \left( \frac{\hat{\pi}_b}{1-\hat{\pi}_b}\right) \\
 \displaystyle \text{logit}_a-\text{logit}_b=\log \left( \frac{\hat{\pi}_a}{1-\hat{\pi}_a} \bigg/\frac{\hat{\pi}_b}{1-\hat{\pi}_b} \right) \\
-\displaystyle \text{logit}_a-\text{logit}_b= \log(\text{odds ratio})$</MadCap:equation>
+\displaystyle \text{logit}_a-\text{logit}_b= \log(\text{odds ratio})$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Logistic models provide important information about the relationship between response/outcome and exposure. It makes no difference to logistic models, whether outcomes have been sampled prospectively or retrospectively, this is not the case with other binomial models.</p>
@@ -164,11 +164,11 @@
         <p>&#160;</p>
         <p>Note that the selection of predictors for regression models such as this can be complex and is best done with the help of a Statistician. <a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow (1989)</a> give a good discussion of the example above, but with non-standard dummy variables (StatsDirect uses a standard dummy/design variable coding scheme adopted by most other statistical software). The optimal selection of predictors depends not only upon their numerical performance in the model, with or without appropriate transformations or study of interactions, but also upon their biophysical importance in the study.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It uses the survival package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Conditional logistic regression: the StatsDirect help example (Hosmer and Lemeshow
 # 1989, low birth weight in 56 matched pairs) in R. The data are the test workbook's
@@ -265,8 +265,8 @@ for (i in 1:6) {
   cat(lab[i], six(ci[i, "exp(coef)"]), six(ci[i, "lower .95"]), "to",
       six(ci[i, "upper .95"]), "\n")
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

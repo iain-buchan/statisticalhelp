@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="3" MadCap:lastHeight="691.6558" MadCap:lastWidth="3229" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="3" sdh:lastHeight="691.6558" sdh:lastWidth="3229" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Kendall's tau Distribution - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Kendall's tau distribution;Tau distribution;Distributions: Tau" />Kendall's Tau Distribution</h1>
+            <sdh:keyword term="Kendall's tau distribution;Tau distribution;Distributions: Tau" />Kendall's Tau Distribution</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Kendall's tau</b>.</p>
         <p>&#160;</p>
@@ -17,12 +17,12 @@
         <p>&#160;</p>
         <p>Tau (τ) is related to S by:</p>
         <p>
-            <MadCap:equation>$\displaystyle \tau =\frac{n_c-n_d}{n(n-1)/2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \tau =\frac{n_c-n_d}{n(n-1)/2}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>If there are tied (same value) observations then τ<sub>b</sub> is used:</p>
         <p>
-            <MadCap:equation>$\displaystyle \tau_b=\frac{\displaystyle s}{\displaystyle\sqrt{\left[ n(n-1)/2-\sum_{i=1}^t t_i(t_i-1)/2\right] \left[ n(n-1)/2-\sum_{i=1}^u u_i(u_i-1)/2\right]}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \tau_b=\frac{\displaystyle s}{\displaystyle\sqrt{\left[ n(n-1)/2-\sum_{i=1}^t t_i(t_i-1)/2\right] \left[ n(n-1)/2-\sum_{i=1}^u u_i(u_i-1)/2\right]}}$</sdh:equation>
         </p>
         <p>- where t<sub>i</sub> is the number of observations tied at a particular rank of x and u is the number tied at a rank of y. When there are no ties τ<sub>b</sub> =  τ.</p>
         <p>&#160;</p>
@@ -49,11 +49,11 @@
         <p>So with ten pairs an S of 19 does not quite reach the one sided 5% level. The next possible value, S = 21 (τ = 0.466667), is the smallest that does, with an upper tail probability of 0.036275077160494: with so few pairs the attainable significance levels are coarse.</p>
         <p>&#160;</p>
         <p>StatsDirect displays the probabilities in this illustration to 15 decimal places; the R code below reproduces them.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Kendall's tau distribution: the StatsDirect help illustration (S = 23 for the 10 pairs
 # of rankings of the Kendall rank correlation example, Armitage and Berry 1994, p. 466,
@@ -149,8 +149,8 @@ cat("Kendall's T (upper tail P 0.05, n ", n, ") = ", fifteen(upper(k, n)), "\n",
 # significant at the one sided 5% level
 cat("S = ", k + 2, " (tau = ", six((k + 2) / (n * (n - 1) / 2)), "): P(Kendall's T ",
     k + 2, ", n ", n, ") = ", fifteen(upper(k + 2, n)), " upper tail\n", sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

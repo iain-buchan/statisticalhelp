@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="2" MadCap:lastHeight="723" MadCap:lastWidth="1013">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" sdh:lastBlockDepth="2" sdh:lastHeight="723" sdh:lastWidth="1013">
     <head><title>XY Scatter Plot (Text-based) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Scatter plot (text)" />Scatter Plot (Text-based)</h1>
+            <sdh:keyword term="Scatter plot (text)" />Scatter Plot (Text-based)</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Graphics_Scatter (Text)</b>.</p>
         <p>&#160;</p>
@@ -55,11 +55,11 @@
         <p style="font-family: 'Courier New', monospace;margin-top: 0pt;font-size: 10pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Birth&#160;Weight</p>
         <p>&#160;</p>
         <p>The plot shows the percentage gain falling as birth weight rises: the four largest gains (111 to 120%) belong to babies of 80 to 87 oz, and most of the babies over 120 oz gained between 27 and 76%. The 2 marks two points in one cell of the grid (128 oz, with gains of 48% and 50%). The lowest point (27% at 125 oz) falls on the x axis line, where the scale starts, and is drawn over it so that no point is lost.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Scatter plot (text-based): the StatsDirect help illustration (Armitage and Berry
 # 1994, birth weight in oz and percentage weight gain between 70 and 100 days of 32
@@ -129,8 +129,8 @@ text_scatter(weight, gain, xtics, ytics, formatC(xtics, format = "f", digits = 0
 cat("Scatter plot of % Increase against Birth Weight:", length(weight), "points\n")
 cat("Birth weight from", min(weight), "to", max(weight), "oz; gain from", min(gain),
     "to", max(gain), "%\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

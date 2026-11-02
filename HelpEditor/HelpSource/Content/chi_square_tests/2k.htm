@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1702.552" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1702.552" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head>
         <meta name="copyright" value="© StatsDirect Limited 1990-2009" content="" /><title>2 by K Chi-square Test and Trend (Contingency Tables) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
@@ -8,13 +8,13 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="2 by k chi-square test;Chi-square tests: 2 by k;Chi-square tests: Linear trend" />2 by K Chi-square Test</h1>
+            <sdh:keyword term="2 by k chi-square test;Chi-square tests: 2 by k;Chi-square tests: Linear trend" />2 by K Chi-square Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Chi-square_2 by k</b>.</p>
         <p>&#160;</p>
         <p>Several proportions can be compared using a 2 by k chi-square test. For example, a random sample of people can be subdivided into k age groups and counts made of those individuals with and those without a particular attribute. For this sample, a 2 by k chi-square test could be used to test whether or not age has a statistically significant effect on the attribute studied. This is a test of the independence of the row and column variables, it is equivalent to the chi-square independence tests for 2 by 2 and r by c chi-square tables.</p>
         <p>
-            <MadCap:equation>$\displaystyle \chi^2=\sum_{i=1}^r \sum_{j=1}^c \frac{\displaystyle (O_{ij}-E_{ij})^2}{E_{ij}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \chi^2=\sum_{i=1}^r \sum_{j=1}^c \frac{\displaystyle (O_{ij}-E_{ij})^2}{E_{ij}}$</sdh:equation>
         </p>
         <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n).</p>
         <p>&#160;</p>
@@ -29,8 +29,8 @@
         <p>If there is a meaningful order to your k groups (e.g. sequential age bands) then the chi-square test for trend provides a more powerful test than the unordered independence test above. StatsDirect automatically performs a test for linear trend across the k groups. You can enter your own scores for the trend test. For example, if a variable was categorised as mild, moderate or severe pain then scores 1, 2 and 3 are likely to be reasonable, so leave StatsDirect to assign scores. If, instead, the categories were mild, moderate and worst ever pain then you might enter a linear score system as 1, 2 and 5 respectively (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>).</p>
         <p>&#160;</p>
         <p>
-            <MadCap:equation>$\displaystyle \mu=\sum_{i=1}^k\frac{n_iv_i}{N} \\
-\displaystyle \chi^2_\text{trend}=\frac{\displaystyle \left[\sum_{i=1}^kr_iv_i-R\mu \right]^2}{\displaystyle p(1-p)\left[\sum_{i=1}^kn_iv_i^2-N\mu^2\right]}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \mu=\sum_{i=1}^k\frac{n_iv_i}{N} \\
+\displaystyle \chi^2_\text{trend}=\frac{\displaystyle \left[\sum_{i=1}^kr_iv_i-R\mu \right]^2}{\displaystyle p(1-p)\left[\sum_{i=1}^kn_iv_i^2-N\mu^2\right]}$</sdh:equation>
         </p>
         <p>- where each of k groups of observations are denoted as r<sub>i</sub> successes out of n<sub>i</sub> total with score v<sub>i</sub> assigned. R is the sum of all r<sub>i</sub>, N is the sum of all n<sub>i</sub> and p = R/N.</p>
         <p>&#160;</p>
@@ -150,11 +150,11 @@
         <p>&#160;</p>
         <p>Here the total chi-square test shows a statistically significant association between the classifications, i.e. between tonsil size and Strep. pyogenes carrier status. We have also shown a significant linear trend which enables us to refine our conclusions to a suggestion that the proportion of Strep. pyogenes carriers increases with tonsil size.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># 2 by k chi-square test with a test for linear trend: the StatsDirect help example
 # (Armitage and Berry 1994, palatine tonsil size and carrier status for Strep.
@@ -208,8 +208,8 @@ cat("Chi-square for linear trend =", six(x2_lin), " |Chi| =", six(sqrt(x2_lin)),
 x2_non &lt;- x2 - x2_lin
 cat("Remaining chi-square (non-linearity) =", six(x2_non), paste0("(", k - 2, " DF) "),
     pv(pchisq(x2_non, k - 2, lower.tail = FALSE)), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="788.5519" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="788.5519" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Partial Correlation - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Correlation: Partial;Partial correlation" />Partial Correlation</h1>
+            <sdh:keyword term="Correlation: Partial;Partial correlation" />Partial Correlation</h1>
         <p>&#160;</p>
         <p>Partial correlation is a method used to describe the relationship between two variables whilst taking away the effects of another variable, or several other variables, on this relationship.</p>
         <p>&#160;</p>
@@ -50,7 +50,7 @@
         <p>&#160;</p>
         <p>The partial correlation of A and B adjusted for C is:</p>
         <p>
-            <MadCap:equation>$\displaystyle r_{ABC}=\frac{r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r_{AC}^2)(1-r_{BC}^2)}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle r_{ABC}=\frac{r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r_{AC}^2)(1-r_{BC}^2)}}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>The same can be done using Spearman's rank correlation co-efficient.</p>
@@ -61,7 +61,7 @@
         <p>&#160;</p>
         <p>The general form of partial correlation from a multiple regression is as follows:</p>
         <p>
-            <MadCap:equation>$\displaystyle r_k=\frac{t_k}{\sqrt{t_k^2+\text{residual DF}}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle r_k=\frac{t_k}{\sqrt{t_k^2+\text{residual DF}}}$</sdh:equation>
         </p>
         <p>- where t<sub>k</sub> is the Student t statistic for the kth term in the linear model.</p>
         <p>&#160;</p>
@@ -74,11 +74,11 @@
         <p>&#160;</p>
         <p>The first formula above gives the same values from the three pairwise correlations of YY, X1 and X2, and the second gives them from the t statistics with the 50 residual degrees of freedom.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Partial correlation: the multiple linear regression topic's example (Armitage and
 # Berry 1994, recovery time YY after a hypotensive drug against the log dose X1 and
@@ -121,8 +121,8 @@ for (term in c("x1", "x2")) {
   cat(toupper(term), ": t =", six(t[term]), "on", df, "DF, two sided",
       pv(2 * pt(-abs(t[term]), df)), "\n")
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2028" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2028" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Two Way Analysis of Variance (ANOVA) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="ANOVA: Two way;Two way ANOVA" />Two Way Analysis of Variance</h1>
+            <sdh:keyword term="ANOVA: Two way;Two way ANOVA" />Two Way Analysis of Variance</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Analysis of Variance_Two Way</b>.</p>
         <p>&#160;</p>
@@ -85,7 +85,7 @@
         <p>
             Unlike one way ANOVA, the F tests for two way ANOVA are the same if either or both block and treatment factors are considered <a href="anova.htm">fixed or random</a>:</p>
         <p>
-            <MadCap:equation>$\displaystyle F_\text{between treatments}=\frac{MST}{MSE}
+            <sdh:equation>$\displaystyle F_\text{between treatments}=\frac{MST}{MSE}
 \\
 \displaystyle F_{\text{between blocks}}=\frac{MSB}{MSE}
 \\
@@ -93,7 +93,7 @@
 \\
 \displaystyle MSB=\frac{\displaystyle k\sum_{j=1}^b(\bar{Y}_{.j}-\bar{Y}_{..})^2}{b-1}
 \\
-\displaystyle MSE=\frac{\displaystyle \sum_{i=1}^k \sum_{j=1}^b (Y_{ij}-\bar{Y}_{i.}-\bar{Y}_{.j}+\bar{Y}_{..})^2} {(k-1)(b-1)}$</MadCap:equation>
+\displaystyle MSE=\frac{\displaystyle \sum_{i=1}^k \sum_{j=1}^b (Y_{ij}-\bar{Y}_{i.}-\bar{Y}_{.j}+\bar{Y}_{..})^2} {(k-1)(b-1)}$</sdh:equation>
         </p>
         <p>- where F is the variance ratio for tests of equality of treatment and block means, MST is the mean square due to treatments/groups (between groups), MSB is the mean square due to blocks (between blocks), MSE is the mean square due to error (within groups, residual mean square), Y<sub>ij</sub> is an observation, Y bar i. is a treatment group mean, Y bar .j is a block mean and Y bar .. is the grand mean of all observations.</p>
         <p>&#160;</p>
@@ -222,11 +222,11 @@
         <p>&#160;</p>
         <p>Here we can see that there was a statistically highly significant difference between mean clotting times across the groups. The difference between subjects is of no particular interest here.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Two way randomized block analysis of variance: the StatsDirect help example
 # (Armitage and Berry 1994, clotting times of plasma from eight subjects treated
@@ -261,8 +261,8 @@ cat("Residual (error)", six(a$"Sum Sq"[3]), a$Df[3], six(a$"Mean Sq"[3]), "\n")
 cat("Corrected total", six(sum(a$"Sum Sq")), sum(a$Df), "\n")
 cat("F (VR between blocks) =", six(a$"F value"[1]), " ", pv(a$"Pr(&gt;F)"[1]), "\n")
 cat("F (VR between treatments) =", six(a$"F value"[2]), " ", pv(a$"Pr(&gt;F)"[2]), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

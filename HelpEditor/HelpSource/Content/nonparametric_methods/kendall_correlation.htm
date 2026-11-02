@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1892.656" MadCap:lastWidth="2512" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1892.656" sdh:lastWidth="2512" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Kendall's Rank Correlation - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Nonparametric (Kendall) correlation;Kendall's rank correlation;Correlation: Nonparametric: Kendall" />
+            <sdh:keyword term="Nonparametric (Kendall) correlation;Kendall's rank correlation;Correlation: Nonparametric: Kendall" />
             Kendall's Rank Correlation</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Nonparametric_Kendall Rank Correlation</b>.</p>
@@ -20,12 +20,12 @@
         <p>&#160;</p>
         <p>Tau (τ) is related to S by:</p>
         <p>
-            <MadCap:equation>$\displaystyle \tau \frac{n_c-n_d}{n(n-1)/2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \tau \frac{n_c-n_d}{n(n-1)/2}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>If there are tied (same value) observations then τ<sub>b</sub> is used:</p>
         <p>
-            <MadCap:equation>$\displaystyle \tau_b=\frac{S}{\sqrt{\displaystyle \left[n(n-1)/2-\sum_{i=1}^t t_i(t_i-1)/2 \right]\left[n(n-1)/2-\sum_{i=1}^u u_i(u_i-1)/2 \right]}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \tau_b=\frac{S}{\sqrt{\displaystyle \left[n(n-1)/2-\sum_{i=1}^t t_i(t_i-1)/2 \right]\left[n(n-1)/2-\sum_{i=1}^u u_i(u_i-1)/2 \right]}}$</sdh:equation>
         </p>
         <p>- where t<sub>i</sub> is the number of observations tied at a particular rank of x and u<sub>i</sub> is the number tied at a rank of y.</p>
         <p>&#160;</p>
@@ -33,7 +33,7 @@
         <p>&#160;</p>
         <p>The gamma coefficient is given as a measure of association that is highly resistant to tied data (Goodman and Kruskal, 1963):</p>
         <p>
-            <MadCap:equation>$\displaystyle \gamma=\frac{\displaystyle n_c-n_d}{n_c+n_d}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \gamma=\frac{\displaystyle n_c-n_d}{n_c+n_d}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Tests for Kendall's test statistic being zero are calculated in exact form when there are no tied data, and in approximate form through a normalised statistic with and without a continuity correction (Kendall's score reduced by 1).</p>
@@ -137,11 +137,11 @@
         <p>&#160;</p>
         <p>From these results we reject the null hypothesis of mutual independence between the career suitability and psychology knowledge rankings for the students. With a two sided test we are considering the possibility of concordance or discordance (akin to positive or negative correlation). A one sided test would have been restricted to either discordance or concordance, this would be an unusual assumption. In our example we can conclude that there is a statistically significant lack of independence between career suitability and psychology knowledge rankings of the students by the tutor. The tutor tended to rank students with apparently greater knowledge as more suitable to their career than those with apparently less knowledge and vice versa.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Kendall's rank correlation: the StatsDirect help example (Armitage and Berry
 # 1994, p. 466) in R
@@ -194,8 +194,8 @@ for (cc in c(0, 1)) {
   cat(sprintf("z = %.6f   Upper side P = %.4f   Lower side P = %.4f   %s%.4f\n",
               z, 1 - pnorm(z), pnorm(z), "Two sided P = ", 2 * pnorm(-abs(z))))
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

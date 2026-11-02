@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="1239" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="1239" sdh:lastWidth="3209" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Sample Size for Matched (Paired) Case-control Studies - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Sample size: Matched case-control studies" />
+            <sdh:keyword term="Sample size: Matched case-control studies" />
             Sample Size for Matched Case-control Studies</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Sample Size_Matched Case-Control</b>.</p>
@@ -39,7 +39,7 @@
         </p>
         <p>The estimated sample size n is calculated as (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>):</p>
         <p>
-            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">$\displaystyle \begin{array}{l}
+            <sdh:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">$\displaystyle \begin{array}{l}
 \displaystyle n = \frac{[(\sigma_1/\sigma_\psi)Z_{\alpha/2}+Z_\beta]^2}{\delta^2} \\
 \displaystyle \delta = \frac{\left[\sum_{k=1}^{m}\frac{{kt}_k\psi}{k\psi+m-k+1}\right]-\sum_{k=1}^{m}\frac{k t_k}{m+1}}{\sigma(\psi)} \\
 \displaystyle \sigma^2(\psi) = \sum_{k=1}^{m}\frac{k t_k\psi(m-k+1)}{(k\psi+m-k+1)^2} \\
@@ -52,7 +52,7 @@
 \displaystyle p_{0-} = \frac{p_{01}}{q_1} \\
 \displaystyle q_{0+} = 1-p_{0+} \\
 \displaystyle q_{0-} = 1-p_{0-}
-\end{array}$</MadCap:equation>
+\end{array}$</sdh:equation>
         </p>
         <p>- where α = alpha, β = 1 - power, ψ = odds ratio, ϕ is the correlation coefficient for exposure between matched cases and controls, and Zp is the standard normal deviate for probability p. n is rounded up to the closest integer.</p>
         <p>&#160;</p>
@@ -94,11 +94,11 @@
         <p>Estimated minimum sample size (cases required) = 180</p>
         <p>&#160;</p>
         <p>With three controls per case, 108 cases (and 324 controls) would give 80% power to detect an odds ratio of 2. With one control per case 180 cases would be needed, so the extra controls reduce the number of cases to 60% of that of the paired design. The saving diminishes as further controls are added to each case.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Sample size for a matched case-control study: the StatsDirect help example (an
 # invented study with three controls matched to each case, exposure in 30% of the
@@ -160,8 +160,8 @@ cat("when using", m, "controls per case =", six(n_m / n_1), "\n")
 # The paired design itself, for comparison
 cat("controls per case subject = 1\n")
 cat("Estimated minimum sample size (cases required) =", n_1, "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

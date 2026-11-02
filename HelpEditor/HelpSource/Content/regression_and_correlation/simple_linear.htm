@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="2756" MadCap:lastWidth="2828" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="2756" sdh:lastWidth="2828" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Simple Linear Regression and Pearson Correlation - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Simple linear regression;Regression: Simple linear;Line fitting;Correlation: Simple" />Simple Linear Regression and Correlation</h1>
+            <sdh:keyword term="Simple linear regression;Regression: Simple linear;Line fitting;Correlation: Simple" />Simple Linear Regression and Correlation</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Regression and Correlation_Simple Linear and Correlation</b>.</p>
         <p>&#160;</p>
@@ -15,8 +15,8 @@
         <p>&#160;</p>
         <p>Regression parameters for a straight line model (Y = a + bx) are calculated by the least squares method (minimisation of the sum of squares of deviations from a straight line). This differentiates to the following formulae for the slope (b) and the Y intercept (a) of the line:</p>
         <p>
-            <MadCap:equation>$\displaystyle b=\frac{\displaystyle \sum_{i=1}^n (x_i-\bar x)(Y_i-\bar Y)}{\displaystyle \sum_{i-1}^n (x_i-\bar x)^2}\ \\
-\displaystyle a=\bar Y- b\bar x$</MadCap:equation>
+            <sdh:equation>$\displaystyle b=\frac{\displaystyle \sum_{i=1}^n (x_i-\bar x)(Y_i-\bar Y)}{\displaystyle \sum_{i-1}^n (x_i-\bar x)^2}\ \\
+\displaystyle a=\bar Y- b\bar x$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Regression assumptions:</p>
@@ -36,7 +36,7 @@
         <p>&#160;</p>
         <p>Pearson's product moment correlation coefficient (r) is given as a measure of linear association between the two variables:</p>
         <p>
-            <MadCap:equation>$\displaystyle r=\frac{\displaystyle\sum_{i=1}^n (x_i-\bar x)(Y_i-\bar Y)}{\displaystyle \sqrt{\sum_{i=1}^n(x_i-\bar x)^2 \sum_{i=1}^n(Y_i-\bar Y)^2}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle r=\frac{\displaystyle\sum_{i=1}^n (x_i-\bar x)(Y_i-\bar Y)}{\displaystyle \sqrt{\sum_{i=1}^n(x_i-\bar x)^2 \sum_{i=1}^n(Y_i-\bar Y)^2}}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>r² is the proportion of the total variance (s²) of Y that can be explained by the linear regression of Y on x. 1-r² is the proportion that is not explained by the regression. Thus 1-r² = s²xY / s²Y.</p>
@@ -218,11 +218,11 @@
         <p>&#160;</p>
         <p>From this analysis we have gained the equation for a straight line forced through our data i.e. % increase in weight = 167.87 - 0.864 * birth weight. The r square value tells us that about 45% of the total variation about the Y mean is explained by the regression line. The analysis of variance test for the regression, summarised by the ratio F, shows that the regression itself was statistically highly significant. This is equivalent to a t test with the null hypothesis that the slope is equal to zero. The confidence interval for the slope shows that with 95% confidence the population value for the slope lies somewhere between -0.5 and -1.2. The correlation coefficient r was statistically highly significantly different from zero. Its negative value indicates that there is an inverse relationship between X and Y i.e. lower birth weight babies show greater % increases in weight at 70 to 100 days after birth. With 95% confidence the population value for r lies somewhere between -0.4 and -0.8.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Simple linear regression and correlation: the StatsDirect help example (Armitage
 # and Berry 1994, birth weight and percentage weight gain of 32 babies) in R
@@ -267,8 +267,8 @@ z &lt;- abs(atanh(ct$estimate)) * sqrt(n - 3)
 power &lt;- pnorm(z - qnorm(0.975)) + pnorm(-z - qnorm(0.975))
 cat("Power (for 5% significance) =",
     paste0(formatC(100 * power, digits = 2, format = "f"), "%"), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="regression_and_correlation.htm">regression and correlation</a>
         </p>

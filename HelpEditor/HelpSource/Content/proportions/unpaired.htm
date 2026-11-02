@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="1305" MadCap:lastWidth="987" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="1305" sdh:lastWidth="987" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Compare Two Independent Binomial Proportions - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Unpaired proportions;Proportions: Two independent" />
+            <sdh:keyword term="Unpaired proportions;Proportions: Two independent" />
             Two Independent Proportions</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Proportions_Two Independent</b>.</p>
@@ -86,11 +86,11 @@
         <p>&#160;</p>
         <p>Here we can conclude that the difference between these two proportions is statistically significantly different from zero. With 95% confidence we can state that the true population fatality rate with treatment B is between 0.03 and 0.17 greater than with treatment A.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Two independent proportions: the StatsDirect help example (Armitage and Berry 1994,
 # deaths under two treatments: 41 of 257 patients given A and 64 of 244 given B) in R
@@ -172,8 +172,8 @@ cat("Standard error of proportion difference =", six(se), "\n")
 cat("Standard normal deviate (z) =", six(deviate), "\n")
 cat("Approximate two sided", pv(2 * pnorm(-abs(deviate))), "\n")
 cat("Approximate one sided", pv(pnorm(-abs(deviate))), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

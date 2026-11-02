@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="6" MadCap:lastHeight="2492.552" MadCap:lastWidth="3169" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="6" sdh:lastHeight="2492.552" sdh:lastWidth="3169" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Follow-up Life Table (Actuarial) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Survival analysis: Follow-up life table;Cohort life table;Berkson and Gage table;Follow-up life table;Life table: Follow-up" />
+            <sdh:keyword term="Survival analysis: Follow-up life table;Cohort life table;Berkson and Gage table;Follow-up life table;Life table: Follow-up" />
             Follow-up Life Table</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Survival_Follow-Up Life Table</b>.</p>
@@ -73,10 +73,10 @@
         </ul>
         <p>&#160;</p>
         <p>
-            <MadCap:equation>$\displaystyle n_x'=n_x-\frac{w_x}{2} \\
+            <sdh:equation>$\displaystyle n_x'=n_x-\frac{w_x}{2} \\
 \displaystyle q_x=\frac{d_x}{n_x'} \\
 \displaystyle p_x=1-q_x \\
-\displaystyle l_x=\prod_{i=0}^{x-1}p_i$</MadCap:equation>
+\displaystyle l_x=\prod_{i=0}^{x-1}p_i$</sdh:equation>
         </p>
         <p>- where l<sub>x</sub> is the product of all p<sub>x</sub> before x.</p>
         <p>&#160;</p>
@@ -363,11 +363,11 @@
         <p>&#160;</p>
         <p>We conclude with 95% confidence that the true population survival rate 5 years after the surgical operation studied is between 24.5% and 33.8% for people diagnosed as having this cancer.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Follow-up (actuarial) life table: the StatsDirect help example (Armitage and Berry
 # 1994, the survival of 374 patients after surgery for a malignancy; the test workbook's
@@ -415,8 +415,8 @@ print(data.frame(Interval = interval, "P(survival)" = star(c(p, NA)),
                  "Survivors (lx%)" = six(100 * c(1, lx)),
                  "SD of lx%" = star(c(NA, 100 * sqrt(var_lx))),
                  "95% CI for lx%" = ci, check.names = FALSE), row.names = FALSE)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>

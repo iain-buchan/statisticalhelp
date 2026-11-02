@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="926.5519" MadCap:lastWidth="2828" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="926.5519" sdh:lastWidth="2828" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Sample Size for Independent Case-control Studies - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Sample size: Independent case-control studies" />
+            <sdh:keyword term="Sample size: Independent case-control studies" />
             Sample Size for Independent Case-control Studies</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Sample Size_Independent Case-Control</b>.</p>
@@ -39,10 +39,10 @@
         </p>
         <p>The estimated sample size n is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle n=\frac{\left[ z_{\alpha/2}\sqrt{(1+1/m)\bar p'(1-\bar p')}+z_{\beta}\sqrt{p_1(1-p_1)+p_0(1-p_0)/m}\right]^2}{(p_1-p_0)^2} \\
+            <sdh:equation>$\displaystyle n=\frac{\left[ z_{\alpha/2}\sqrt{(1+1/m)\bar p'(1-\bar p')}+z_{\beta}\sqrt{p_1(1-p_1)+p_0(1-p_0)/m}\right]^2}{(p_1-p_0)^2} \\
 \displaystyle \bar p'=\frac{p_1+mp_0}{1+m}\\
 \displaystyle p_1=\frac{p_0 \psi}{1+p_0(\psi-1)}\\
-\displaystyle n_c=\frac{n}{4} \left[ 1+\sqrt{1+\frac{2(m+1)}{nm|p_0-p_1|}}\right]^2$</MadCap:equation>
+\displaystyle n_c=\frac{n}{4} \left[ 1+\sqrt{1+\frac{2(m+1)}{nm|p_0-p_1|}}\right]^2$</sdh:equation>
         </p>
         <p>- where α = alpha, β = 1 - power, ψ = odds ratio, n<sub>c</sub> is the continuity corrected sample size, m is the number of control subjects per case, and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer.</p>
         <p>&#160;</p>
@@ -70,11 +70,11 @@
         <p>N = 187 case subjects and 187 controls</p>
         <p>&#160;</p>
         <p>An odds ratio of 2 with 20% of controls exposed means that a third of the cases are expected to be exposed. 172 cases and 172 controls would be enough for the uncorrected chi-square test, or 187 of each if the analysis will use the continuity-corrected chi-square test or Fisher's exact test. With two controls per case the same study needs 126 cases and 252 controls (137 and 274 with the correction): more controls per case reduce the number of cases needed, with diminishing returns beyond about four per case.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Sample size for an independent case-control study: the StatsDirect help example
 # (invented figures: 20% of the controls are exposed and an odds ratio of 2 is to be
@@ -113,8 +113,8 @@ cat("N =", ceiling(n), "case subjects and", floor(m * ceiling(n)), "controls\n")
 nc &lt;- n / 4 * (1 + sqrt(1 + 2 * (m + 1) / (n * m * abs(p0 - p1))))^2
 cat("For corrected chi-square and Fisher's exact tests:\n")
 cat("N =", ceiling(nc), "case subjects and", floor(m * ceiling(nc)), "controls\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

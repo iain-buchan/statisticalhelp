@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="524" MadCap:lastWidth="2572" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="524" sdh:lastWidth="2572" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Gamma Distribution - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Gamma distribution;Distributions: Gamma" />Gamma Distribution</h1>
+            <sdh:keyword term="Gamma distribution;Distributions: Gamma" />Gamma Distribution</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Data_Generating_Random Numbers_Gamma</b>.</p>
         <p>&#160;</p>
@@ -15,12 +15,12 @@
         <p>&#160;</p>
         <p>The gamma density function is:</p>
         <p>
-            <MadCap:equation>$\displaystyle g(t) = \frac{1}{B^A \space \Gamma(A)}t^{A-1} e^{-t/B}, \space t\ge 0 \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle g(t) = \frac{1}{B^A \space \Gamma(A)}t^{A-1} e^{-t/B}, \space t\ge 0 \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>The gamma function Γ(*) is:</p>
         <p>
-            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} u^{x-1}e^{-u} \space du, \space x&gt;0 \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} u^{x-1}e^{-u} \space du, \space x&gt;0 \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>If A is an integer then Γ(A)=(A-1)! where x! is factorial x.</p>
@@ -60,11 +60,11 @@
         <p>These figures were calculated in R, whose dgamma, pgamma, qgamma and rgamma functions define shape and scale as StatsDirect defines A and B. StatsDirect itself only generates the random numbers, so the probabilities and quantiles do not appear in a StatsDirect report.</p>
         <p>&#160;</p>
         <p>See <a href="../randomization/generate_random_numbers.htm">random number fill</a>.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above, apart from the column that StatsDirect writes for seed 1234, whose values R's generator does not repeat. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Gamma distribution: the StatsDirect help illustration (100 random values with a
 # shaping parameter A = 2 and a scaling parameter B = 3, from Data_Generating_Random
@@ -100,8 +100,8 @@ cat("A = 1: P(t &lt;= 4) =", six(pgamma(4, shape = 1, scale = B)),
     " exponential:", six(pexp(4, rate = 1 / B)), "\n")
 cat("A = 0.5, B = 1: P(t &lt;= 1.5) =", six(pgamma(1.5, shape = 0.5)),
     " chi-square:", six(pchisq(2 * 1.5, df = 1)), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

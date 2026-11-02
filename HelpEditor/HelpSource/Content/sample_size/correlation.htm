@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="1092" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="1092" sdh:lastWidth="3209" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Sample Size for Pearson's Correlation - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Sample size: Correlation" />Sample Size for Pearson's Correlation</h1>
+            <sdh:keyword term="Sample size: Correlation" />Sample Size for Pearson's Correlation</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Sample Size_Correlation</b>.</p>
         <p>&#160;</p>
@@ -35,22 +35,22 @@
         </p>
         <p>The sample size estimation uses Fisher's classic z-transformation to normalise the distribution of Pearson's correlation coefficient:</p>
         <p>
-            <MadCap:equation>$\displaystyle z'=\frac{1}{2} \ln \left( \frac{1+r}{1-r}\right)$</MadCap:equation>
+            <sdh:equation>$\displaystyle z'=\frac{1}{2} \ln \left( \frac{1+r}{1-r}\right)$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>This gives rise to the usual test for an observed correlation coefficient (r1) to be tested for its difference from a pre-defined reference value (r0, often 0), and from this the power and sample size (n) can be determined:</p>
         <p>
-            <MadCap:equation>$\displaystyle z_2=\sqrt{(n-3)} \left[ z_{r1}'-z_{r0}'\right]$</MadCap:equation>
+            <sdh:equation>$\displaystyle z_2=\sqrt{(n-3)} \left[ z_{r1}'-z_{r0}'\right]$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>StatsDirect makes an initial estimate of n as:</p>
         <p>
-            <MadCap:equation>$\displaystyle n=\left[\frac{z_{1-\alpha/2}+z_{1-\beta}}{|z_{r0}'-z_{r1}'|} \right]^2+3$</MadCap:equation>
+            <sdh:equation>$\displaystyle n=\left[\frac{z_{1-\alpha/2}+z_{1-\beta}}{|z_{r0}'-z_{r1}'|} \right]^2+3$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>StatsDirect then finds the value of n that satisfies the following power (1-β) equation:</p>
         <p>
-            <MadCap:equation>$\displaystyle 1-\beta= \text{norm}\left[|z_{r1}'-z_{r0}'| \sqrt{n-3}-z_{1-\alpha/2}\right]+\text{norm}\left[-|z_{r1}'-z_{r0}'| \sqrt{n-3}-z_{1-\alpha/2}\right]$</MadCap:equation>
+            <sdh:equation>$\displaystyle 1-\beta= \text{norm}\left[|z_{r1}'-z_{r0}'| \sqrt{n-3}-z_{1-\alpha/2}\right]+\text{norm}\left[-|z_{r1}'-z_{r0}'| \sqrt{n-3}-z_{1-\alpha/2}\right]$</sdh:equation>
         </p>
         <p>-where norm is the area under the standard normal distribution curve.</p>
         <p>&#160;</p>
@@ -75,11 +75,11 @@
         <p>&#160;</p>
         <p>The initial estimate from the formula above is 46.73 pairs, which is rounded up to 47. With 47 pairs the power equation gives 80.2%, and with 46 pairs 79.3%, so 47 is the smallest number of pairs that meets the target: the study should include at least 47 pairs of measurements.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Sample size for Pearson's correlation: the StatsDirect help example (an invented
 # study that should detect a correlation of 0.4 or more, r1 = 0.4 against the null
@@ -119,8 +119,8 @@ pct &lt;- function(x) paste0(formatC(100 * x, digits = 1, format = "f"), "%")
 cat("Initial estimate of n =", formatC(n0, digits = 2, format = "f"), "\n")
 cat("Power with", n - 1, "pairs =", paste0(pct(size_power(n - 1)), ","), "with", n,
     "pairs =", pct(size_power(n)), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
     </body>
 </html>

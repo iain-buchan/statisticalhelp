@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1435" MadCap:lastWidth="3153" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1435" sdh:lastWidth="3153" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>McNemar Matched 2 by 2 Chi-square and Exact Test - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Matched pairs chi-square test;Liddell's test;McNemar's test;Chi-square tests: McNemar" />
+            <sdh:keyword term="Matched pairs chi-square test;Liddell's test;McNemar's test;Chi-square tests: McNemar" />
             McNemar Chi-square and Exact test for Matched Pairs</h1>
         <p>&#160;</p>
         <p>Menu locations:</p>
@@ -20,9 +20,9 @@
         <p>&#160;</p>
         <p>Confidence limits for R' are calculated as follows:</p>
         <p>
-            <MadCap:equation>$\displaystyle R'_L=\frac{b}{(c+1)\space F_{\alpha/2,\space 2(c+1),\space 2b}} \\ 
+            <sdh:equation>$\displaystyle R'_L=\frac{b}{(c+1)\space F_{\alpha/2,\space 2(c+1),\space 2b}} \\ 
 \space \\
-\displaystyle R'_U=\frac{(b+1)\space F_{\alpha/2,\space 2(b+1),\space 2c}}{c}$</MadCap:equation>
+\displaystyle R'_U=\frac{(b+1)\space F_{\alpha/2,\space 2(b+1),\space 2c}}{c}$</sdh:equation>
         </p>
         <p>- where F(α/2, n, d) is a quantile from the F distribution with n and d degrees of freedom.</p>
         <p>&#160;</p>
@@ -171,11 +171,11 @@
         <p>&#160;</p>
         <p>Here we can conclude that the tubercle bacilli in the experiment grew significantly better on medium A than on medium B. With 95% confidence we can state that the chances of a positive culture are between 1.34 and 55.20 times greater on medium A than on medium B.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># McNemar and exact (Liddell) test for matched pairs: the StatsDirect help example
 # (Armitage and Berry 1994, p. 127, fifty sputum specimens cultured on two media) in R
@@ -229,8 +229,8 @@ fstat &lt;- r / (s + 1)
 cat("F =", six(fstat), "\n")
 cat("Two sided", pv(min(1, 2 * pf(fstat, 2 * (s + 1), 2 * r, lower.tail = FALSE))),
     "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

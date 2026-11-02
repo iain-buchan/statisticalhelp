@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="6009.552" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="topic">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="6009.552" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" class="topic">
     <head><title>Log-Rank and Wilcoxon Tests (Compare Survival Curves) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Survival analysis: Logrank test;Wilcoxon (survival) test;Stratified logrank test;Peto's test;Logrank test;Hazard ratios: Logrank test" />Log-rank and Wilcoxon</h1>
+            <sdh:keyword term="Survival analysis: Logrank test;Wilcoxon (survival) test;Stratified logrank test;Peto's test;Logrank test;Hazard ratios: Logrank test" />Log-rank and Wilcoxon</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Survival_Log-rank and Wilcoxon</b>.</p>
         <p>&#160;</p>
@@ -29,7 +29,7 @@
         </p>
         <p>An approximate confidence interval for the log hazard-ratio is calculated using the following estimate of standard error (SE):</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{SE}=\sqrt{\frac{1}{e_1}+\frac{1}{e_2}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{SE}=\sqrt{\frac{1}{e_1}+\frac{1}{e_2}}$</sdh:equation>
         </p>
         <p>- where e<sub>1</sub> and e<sub>2</sub> are the extents of exposure to risk of death (sometimes called expected deaths) in the two groups compared, each summed over the distinct observed times (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
         <p>&#160;</p>
@@ -43,13 +43,13 @@
         </p>
         <p>The general test statistic is calculated around a hypergeometric distribution of the number of events at distinct event times:</p>
         <p>
-            <MadCap:equation>$\displaystyle e_{ij}=\frac{n_{ij}d_j}{n_j} \\
+            <sdh:equation>$\displaystyle e_{ij}=\frac{n_{ij}d_j}{n_j} \\
 \displaystyle \text {diagonal } (\widehat{\textbf{V}}_j)_{ii}=\frac{n_{ij}(n_j-n_{ij})d_j(n_j-d_j)}{n_j^2(n_j-1)}, \space i=1,2,...k-1 \\
 \displaystyle \text {off diagonal } (\widehat{\textbf{V}}_j)_{il}=-\frac{n_{ij}n_{lj}d_j(n_j-d_j)}{n_j^2(n_j-1)}, \space i,l=1,2,...k-1, \space i \ne l \\
 \displaystyle U_i =\sum_{j}w_j(d_{ij}-e_{ij}) \\
 \displaystyle \widehat{\textbf{V}}_w=\textbf{w}\hat{\textbf{V}}\textbf{w} \\
 \displaystyle \chi_{k-1}^2=\textbf{U}'\textbf{V}_w^{-1}\textbf{U} \\
-\displaystyle \chi_{1\text{ trend}}^2 =\frac{(\textbf{c}'\textbf{U})^2}{\textbf c'\widehat{\textbf{V}}_w \textbf c}$</MadCap:equation>
+\displaystyle \chi_{1\text{ trend}}^2 =\frac{(\textbf{c}'\textbf{U})^2}{\textbf c'\widehat{\textbf{V}}_w \textbf c}$</sdh:equation>
         </p>
         <p>- where the weight w<sub>j</sub> for the log-rank test is equal to 1, and w<sub>j</sub> for the generalised Wilcoxon test is n<sub>j</sub> (Gehan-Breslow method; StatsDirect divides this weight by the number of observations in the stratum plus one, which leaves the chi-square unchanged); for the Tarone-Ware method w<sub>j</sub> is the square root of n<sub>j</sub>; and for the Peto-Prentice method w<sub>j</sub> is a survivor function estimate, the product over the distinct times up to and including the jth of (n<sub>j</sub> - d<sub>j</sub> + 1) divided by (n<sub>j</sub> + 1), which is the weight that SAS uses for the test of Peto and Peto. e<sub>ij</sub> is the expectation of death in group i at the jth distinct observed time where d<sub>j</sub> events/deaths occurred. n<sub>ij</sub> is the number at risk in group i just before the jth distinct observed time, and n<sub>j</sub> is the total number at risk at that time. The test statistic for equality of survival across the k groups (populations sampled) is approximately chi-square distributed on k-1 degrees of freedom. The test statistic for monotone trend is approximately chi-square distributed on 1 degree of freedom. <b>c</b> is a vector of scores that are either defined by the user or allocated as 1 to k.</p>
         <p>&#160;</p>
@@ -57,7 +57,7 @@
         <p>&#160;</p>
         <p>The stratified test statistic is expressed as (Kalbfleisch and Prentice, 1980):</p>
         <p>
-            <MadCap:equation>$\displaystyle \chi_{k-1}^2=\left(\sum \textbf{U}\right)'\left(\sum \widehat{\textbf{V}}_w\right)^{-1}\left(\sum \textbf{U}\right)$</MadCap:equation>
+            <sdh:equation>$\displaystyle \chi_{k-1}^2=\left(\sum \textbf{U}\right)'\left(\sum \widehat{\textbf{V}}_w\right)^{-1}\left(\sum \textbf{U}\right)$</sdh:equation>
         </p>
         <p>- where the statistics defined above are calculated within strata then summed across strata prior to the generalised inverse and transpose matrix operations.</p>
         <p>&#160;</p>
@@ -912,11 +912,11 @@
         <p>&#160;</p>
         <p>Allowing for renal impairment, the death rate differed between the two groups (stratified log-rank test P = 0.0162): the hazard in group 1 was about a third of that in group 2, with a wide confidence interval from so few deaths. Neither stratum alone gave a statistically significant difference.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the two examples above. It uses the survival package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Log-rank and Wilcoxon tests: the StatsDirect help example (Armitage and Berry 1994,
 # survival in days of lymphoma patients with stage III or stage IV disease; the test
@@ -1115,8 +1115,8 @@ cat("Hazard Ratio (approximate 95% confidence interval)\n")
 hazard_ratio(total$O, total$E, 1, 2)
 cat("Generalised Wilcoxon (Peto-Prentice), stratified:\n")
 total &lt;- combined(wilcoxon = TRUE)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

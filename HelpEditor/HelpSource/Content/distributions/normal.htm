@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="3" MadCap:lastHeight="1666" MadCap:lastWidth="2552" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="3" sdh:lastHeight="1666" sdh:lastWidth="2552" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Normal Distribution and Standard Normal (Gaussian) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Gaussian distribution;Normal distribution;Standard normal distribution;Central limit theorem;Distributions: Normal" />Normal Distribution(s)</h1>
+            <sdh:keyword term="Gaussian distribution;Normal distribution;Standard normal distribution;Central limit theorem;Distributions: Normal" />Normal Distribution(s)</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Normal</b>.</p>
         <p>&#160;</p>
@@ -21,7 +21,7 @@
         <p>&#160;</p>
         <p>The standard normal distribution (z distribution) is a normal distribution with a mean of 0 and a standard deviation of 1. Any point (x) from a normal distribution can be converted to the standard normal distribution (z) with the formula z = (x-mean) / standard deviation. z for any particular x value shows how many standard deviations x is away from the mean for all x values. For example, if 1.4m is the height of a school pupil where the mean for pupils of his age/sex/ethnicity is 1.2m with a standard deviation of 0.4 then z = (1.4-1.2) / 0.4 = 0.5, i.e. the pupil is half a standard deviation from the mean (value at centre of curve).</p>
         <p>
-            <img src="../resources/Images/normalhistogram.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/normalhistogram.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/normalhistogram.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/normalhistogram.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>The diagram above shows the bell shaped curve of a normal (Gaussian) distribution superimposed on a <a href="../graphics/histogram.htm">histogram</a> of a sample from a normal distribution. Many populations display normal or near normal distributions. There are also many mathematical relationships between normal and other distributions. Most statistical methods make "normal approximations" when samples are sufficiently large.</p>
         <p>&#160;</p>
@@ -46,13 +46,13 @@
         </p>
         <p>Distribution function, Φ(z), of a standard normal variable z:</p>
         <p>
-            <MadCap:equation>$\displaystyle \Phi(z)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^z e^{-t^2/2} \space dt$</MadCap:equation>
+            <sdh:equation>$\displaystyle \Phi(z)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^z e^{-t^2/2} \space dt$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>StatsDirect calculates Φ(z) from the complement of the error function (erfc):</p>
         <p>
-            <MadCap:equation>$\displaystyle \Phi(z)=\frac{1}{2}\text{erfc} \left( \frac{-z}{\sqrt{2}} \right) \\
-\displaystyle \text{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_x^\infty e^{-t^2} \space dt$</MadCap:equation>
+            <sdh:equation>$\displaystyle \Phi(z)=\frac{1}{2}\text{erfc} \left( \frac{-z}{\sqrt{2}} \right) \\
+\displaystyle \text{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_x^\infty e^{-t^2} \space dt$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p><u>Example</u>
@@ -79,11 +79,11 @@
         <p>This is the upper quartile of the standard normal distribution: a quarter of any normal distribution lies more than 0.674 standard deviations above its mean, and half lies within 0.674 standard deviations of the mean.</p>
         <p>&#160;</p>
         <p>The figures above were calculated in R with the functions shown below; StatsDirect calculates the same values and shows them to the same 15 decimal places (15 significant figures for z).</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Normal distribution: the StatsDirect help illustration (tail areas of the standard
 # normal deviates 3 and 0.67, and the deviates that cut off upper tails of 0.025 and
@@ -123,8 +123,8 @@ cat("Lower tail P(z= ", s15(z1), ") = ", s15(pnorm(z1)), "\n", sep = "")
 z2 &lt;- qnorm(0.25)
 cat("z0.25 = ", s15(z2), "\n", sep = "")
 cat("Lower tail P(z= ", s15(z2), ") = ", s15(pnorm(z2)), "\n", sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

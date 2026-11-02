@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1561" MadCap:lastWidth="2773" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1561" sdh:lastWidth="2773" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Cuzick's Test for Trend - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Cuzick's test for trend;Trend test (nonparametric)" />Cuzick's Test for Trend</h1>
+            <sdh:keyword term="Cuzick's test for trend;Trend test (nonparametric)" />Cuzick's Test for Trend</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Nonparametric_Cuzick Trend Test</b>.</p>
         <p>&#160;</p>
@@ -27,7 +27,7 @@
         <p>&#160;</p>
         <p>The test statistic is calculated as follows:</p>
         <p>
-            <MadCap:equation>$\displaystyle T=\sum_{i=1}^kl_iR_i \\
+            <sdh:equation>$\displaystyle T=\sum_{i=1}^kl_iR_i \\
 
 \displaystyle L=\sum_{i=1}^kl_in_i \\
 
@@ -35,7 +35,7 @@
 
 \displaystyle \text{var}(T)=\frac{N+1}{12}\left( N \sum_{i=1}^kl_i^2n_i-L^2\right) \\
 
-\displaystyle z=\frac{T-E(T)}{\sqrt{\text{var}(T)}}$</MadCap:equation>
+\displaystyle z=\frac{T-E(T)}{\sqrt{\text{var}(T)}}$</sdh:equation>
         </p>
         <p>- where R<sub>i</sub> is the sum of the pooled ranks for the ith group, l<sub>i</sub> is the sum of scores for the ith group, n<sub>i</sub> is the sample size for the ith group and N is the total number of observations. For the null hypothesis of no trend across the groups T will have mean E(T), variance var(T) and the null hypothesis is tested using the normalised test statistic z.</p>
         <p>&#160;</p>
@@ -163,11 +163,11 @@
         <p>&#160;</p>
         <p>With these data we are interested in a trend in one direction only, therefore, we can use a one sided test for trend. We have shown a statistically significant trend for increasing number of metastases across these malignant cell lines in this order.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Cuzick's trend test: the StatsDirect help example (Cuzick 1985) in R
 mets &lt;- list("CMT 64"  = c(0, 0, 1, 1, 2, 2, 4, 9),
@@ -201,8 +201,8 @@ for (v in c(varT, varTties)) {
               if (v == varT) "" else sprintf("Corrected for ties: VarT = %.6f   ", v),
               zstat, pnorm(-abs(zstat)), 2 * pnorm(-abs(zstat))))
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

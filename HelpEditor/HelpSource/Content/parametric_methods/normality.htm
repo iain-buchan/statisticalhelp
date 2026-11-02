@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1592" MadCap:lastWidth="1479" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="topic">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1592" sdh:lastWidth="1479" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" class="topic">
     <head><title>Normality Tests (Shapiro-Wilk, Shapiro-Francia, Royston) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
         </script>
     </head>
     <body>
-        <MadCap:keyword term="Skewness: Normality tests;K2 test;Shapiro-Francia W' test;Shapiro-Wilk W test;Normality tests" />
+        <sdh:keyword term="Skewness: Normality tests;K2 test;Shapiro-Francia W' test;Shapiro-Wilk W test;Normality tests" />
         <h1>Normality Tests</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Parametric_Normality</b>.</p>
@@ -154,15 +154,15 @@
             </tr>
         </table>
         <p>
-            <img src="../resources/Images/normal_plot.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/normal_plot.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/normal_plot.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/normal_plot.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>Here the test statistics are clearly significant at P = 0.05 which rejects the null hypothesis that these data are from a normal distribution. The departures from the straight line in the normal plot demonstrate this pattern in more detail. In fact, these data were from a 2 by 5 factor grouping experiment.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Normality tests: the StatsDirect help example (30 penicillin yields) in R
 yield &lt;- c(0.0987, 0.0000, 0.0533, -0.0026, 0.0293, -0.0036, 0.0246, -0.0042, 0.0200,
@@ -261,8 +261,8 @@ lim &lt;- range(expected, yield)
 plot(expected, yield, xlim = lim, ylim = lim, xlab = "Normal (Penicillin)",
      ylab = "Observed (Penicillin)")
 abline(0, 1)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

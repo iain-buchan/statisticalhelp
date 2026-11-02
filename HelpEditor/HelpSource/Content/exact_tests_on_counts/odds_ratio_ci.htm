@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1064" MadCap:lastWidth="3399" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1064" sdh:lastWidth="3399" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Odds Ratio Confidence Interval (Exact) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Gart limits; Odds ratio: Confidence interval;Odds ratio" />Confidence Interval for 2 by 2 Odds</h1>
+            <sdh:keyword term="Gart limits; Odds ratio: Confidence interval;Odds ratio" />Confidence Interval for 2 by 2 Odds</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Exact_Odds Ratio CI</b>.</p>
         <p>&#160;</p>
@@ -98,11 +98,11 @@
         <p>&#160;</p>
         <p>Here we can say with 95% confidence that one of a pair of identical twins who has a criminal conviction is between 2.75 and 301.5 times more likely than non-identical twins to have a convicted twin.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Exact confidence interval for a 2 by 2 odds ratio: the StatsDirect help example
 # (Thomas 1971, criminal convictions of monozygotic and dizygotic twins) in R
@@ -184,8 +184,8 @@ cat("Exact mid-P 95% confidence interval =", six(limit(FALSE, 0.5)), "to",
 mid &lt;- min(up, down) - 0.5 * p1[x == a]
 cat("Exact mid-P one sided ", pv(mid), ", two sided ", pv(min(2 * mid, 1)), "\n",
     sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

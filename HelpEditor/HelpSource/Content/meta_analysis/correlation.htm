@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1527" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1527" sdh:lastWidth="974" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Pearson Correlation Meta-analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
     </head>
     <body>
         <h1>Correlation Meta-analysis</h1>
         <p>&#160;</p>
-        <p>Menu location: <MadCap:keyword term="Correlation Meta-analysis;Meta-analysis: Correlation" /><b>Analysis_Meta-Analysis_Correlation</b>.</p>
+        <p>Menu location: <sdh:keyword term="Correlation Meta-analysis;Meta-analysis: Correlation" /><b>Analysis_Meta-Analysis_Correlation</b>.</p>
         <p>&#160;</p>
         <p>This function enables you to calculate an overall correlation coefficient (r) from a set of correlations.</p>
         <p>&#160;</p>
@@ -256,11 +256,11 @@
         </ol>
         <p>&#160;</p>
         <p>Here we cannot make a confident statement about the pooled correlation coefficient because the set of studies is clearly not homogeneous and the number of studies is too small for standard correlation meta-analysis methods to be reliable.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Correlation meta-analysis: the StatsDirect help example (eight studies of the
 # relationship between drug misuse and delinquency; the test workbook's meta worksheet
@@ -422,8 +422,8 @@ forest &lt;- function(pooled, title) {
 forest(fixed, "Correlation (Hedges-Olkin fixed effects) meta-analysis plot")
 forest(random, "Correlation (Hedges-Olkin random effects) meta-analysis plot")
 forest(sh, "Correlation (Schmidt-Hunter) meta-analysis plot")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2109.552" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2109.552" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>One Way Analysis of Variance (ANOVA) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="ANOVA: One way;One way ANOVA" />One Way Analysis of Variance</h1>
+            <sdh:keyword term="ANOVA: One way;One way ANOVA" />One Way Analysis of Variance</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Analysis of Variance_One Way</b>.</p>
         <p>&#160;</p>
@@ -22,9 +22,9 @@
         <p>&#160;</p>
         <p>Numerically, one way ANOVA is a generalisation of the two sample t test. The F statistic compares the variability between the groups to the variability within the groups:</p>
         <p>
-            <MadCap:equation>$\displaystyle F=\frac{MST}{MSE} \\
+            <sdh:equation>$\displaystyle F=\frac{MST}{MSE} \\
 \displaystyle MST=\frac{\displaystyle \sum_{i=1}^k(T_i^2/n_i)-G^2/n}{k-1} \\
-\displaystyle MSE=\frac{\displaystyle \sum_{i=1}^k \sum_{j=1}^{n_i} Y_{ij}^2-\sum_{i=1}^k (T_i^2/n_i)}{n-k}$</MadCap:equation>
+\displaystyle MSE=\frac{\displaystyle \sum_{i=1}^k \sum_{j=1}^{n_i} Y_{ij}^2-\sum_{i=1}^k (T_i^2/n_i)}{n-k}$</sdh:equation>
         </p>
         <p>- where F is the variance ratio for the overall test, MST is the mean square due to treatments/groups (between groups), MSE is the mean square due to error (within groups, residual mean square), Y<sub>ij</sub> is an observation, T<sub>i</sub> is a group total, G is the grand total of all observations, n<sub>i</sub> is the number in group i and n is the total number of observations.</p>
         <p>&#160;</p>
@@ -183,11 +183,11 @@
         </table>
         <p>&#160;</p>
         <p>F (variance ratio) = 1.180462374402 P = 0.3494</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example and the technical validation above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># One way analysis of variance: the StatsDirect help example (Armitage and Berry
 # 1994, worms recovered from four groups of rats) in R
@@ -232,8 +232,8 @@ cat("Between Groups", twelve(b$"Sum Sq"[1]), b$Df[1], twelve(b$"Mean Sq"[1]), "\
 cat("Within Groups", twelve(b$"Sum Sq"[2]), b$Df[2], twelve(b$"Mean Sq"[2]), "\n")
 cat("Corrected Total", twelve(sum(b$"Sum Sq")), sum(b$Df), "\n")
 cat("F (variance ratio) =", twelve(b$"F value"[1]), " ", pv(b$"Pr(&gt;F)"[1]), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

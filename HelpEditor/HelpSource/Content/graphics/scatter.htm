@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="532" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="532" sdh:lastWidth="1013" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>XY Scatter and Line Plots - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,13 +7,13 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Scatter plot;XY plot" />Scatter (and Line) Plot</h1>
+            <sdh:keyword term="Scatter plot;XY plot" />Scatter (and Line) Plot</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Graphics_Scatter</b>.</p>
         <p>&#160;</p>
         <p>This function plots a single Y axis (ordinate) variable or series against an X axis (abscissa) variable or series. The scale selection for the axes is automatic. Each series is plotted using different marker style and you can opt to display joining lines between the markers.</p>
         <p>
-            <img src="../resources/Images/linechart.svg" width="634" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/linechart.png" width="634" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/linechart.svg" width="634" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/linechart.png" width="634" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p>There is a <a href="scatter_text.htm">scatter plot (text-based)</a>  for single Y vs. X character based plots.</p>
@@ -29,11 +29,11 @@
         <p>For this example the plot has 25 points, two of which coincide (8 years, 95 cm H2O): age from 7 to 23 years; PImax from 40 to 150 cm H2O. Each point is an open circle, the chart is titled "Scatter plot" and the axes take the titles of the columns.</p>
         <p>&#160;</p>
         <p>The plot shows PImax rising with age, but with much scatter about that trend: patients of the same age differ by up to 75 cm H2O (at 23 years), and the two lowest pressures (40 and 45 cm H2O) belong to patients of 19 and 11 years, not to the youngest. A relationship this loose is worth seeing before it is summarised as a correlation coefficient or a regression line.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Scatter plot: the StatsDirect help illustration (PImax, the maximal static
 # inspiratory pressure, against age in 25 patients with cystic fibrosis, Altman 1991;
@@ -65,8 +65,8 @@ cat("Age from", min(age), "to", max(age), "years; PImax from", min(pimax), "to",
 #      ylab = "PImax (cm H2O)", main = "Line plot")
 # A further series goes on the same axes with points(), given a different marker
 # (pch) and a legend, as StatsDirect does when more than one series is plotted.</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

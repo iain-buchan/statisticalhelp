@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
 const {chromium}=require('./browser-runtime.cjs');
 const root=path.resolve(__dirname,'..'),source=path.join(root,'HelpSource/Content'),web=path.join(root,'src/StatsDirectHelpEditor.App/Web'),evidence=path.join(root,'evidence');
 const topics=[],checks=[],results=[],errors=[],external=new Set();
-function walk(folder){for(const item of fs.readdirSync(folder,{withFileTypes:true})){const file=path.join(folder,item.name);if(item.isDirectory())walk(file);else if(/\.htm$/i.test(file)){const text=fs.readFileSync(file,'utf8'),count=(text.match(/<MadCap:equation\b/g)||[]).length;if(count)topics.push({url:path.relative(source,file).replaceAll('\\','/').toLowerCase(),file,count});}}}
+function walk(folder){for(const item of fs.readdirSync(folder,{withFileTypes:true})){const file=path.join(folder,item.name);if(item.isDirectory())walk(file);else if(/\.htm$/i.test(file)){const text=fs.readFileSync(file,'utf8'),count=(text.match(/<(?:MadCap|sdh):equation\b/g)||[]).length;if(count)topics.push({url:path.relative(source,file).replaceAll('\\','/').toLowerCase(),file,count});}}}
 walk(source);
 const digest=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'),before=new Map(topics.map(t=>[t.file,digest(t.file)]));
 const mime={'.html':'text/html','.htm':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.gif':'image/gif','.jpg':'image/jpeg','.woff':'font/woff','.woff2':'font/woff2'};
@@ -57,7 +57,7 @@ const syntheticSource='<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas
  for(const target of ['desktop','public'])for(const width of [900,390])for(const rel of [...previewSamples,'synthetic-equations.htm']){
   await editor.setViewportSize({width,height:1100});const text=rel==='synthetic-equations.htm'?syntheticSource:fs.readFileSync(path.join(source,rel),'utf8'),payload={path:rel,title:rel,source:text,baseUrl:origin+'/project/'+rel};
   await editor.evaluate(p=>{HelpEditor.load(p);HelpEditor.setWorkspaceMode(true);HelpEditor.setWorkspaceView(p.target);},{...payload,target});const frame=await(await editor.$('#preview-frame')).contentFrame();await frame.waitForFunction(()=>window.helpPreviewReady===true);await frame.waitForFunction(()=>Array.from(document.images).every(i=>i.complete));
-  const equations=await frame.evaluate(inspectEquations),expected=rel==='synthetic-equations.htm'?4:(text.match(/<MadCap:equation\b/g)||[]).length;
+  const equations=await frame.evaluate(inspectEquations),expected=rel==='synthetic-equations.htm'?4:(text.match(/<(?:MadCap|sdh):equation\b/g)||[]).length;
   record(target+' draft preview '+rel+' fits equations at '+width+'px without source edits',equations.length===expected&&equations.every(valid)&&await editor.evaluate(p=>HelpEditor.getSource()===p.source,payload),{equations:equations.filter(e=>!valid(e)),count:equations.length,expected});
  }
  record('Source files are unchanged',Array.from(before).every(([file,value])=>digest(file)===value));

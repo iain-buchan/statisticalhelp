@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="115" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="115" sdh:lastWidth="1013" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Correlation of All Pairs (Correlation Matrix) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Correlation: All pairs;Correlation: Matrix" />Correlation of All Pairs</h1>
+            <sdh:keyword term="Correlation: All pairs;Correlation: Matrix" />Correlation of All Pairs</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Regression and Correlation_Principal Components_Correlation.</b></p>
         <p>&#160;</p>
@@ -65,11 +65,11 @@
             </tr>
         </table>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Correlation of all pairs: an illustration with the four questionnaire items of
 # the principal components topic in R. The data are the test workbook's Agreement
@@ -99,8 +99,8 @@ for (item in c("Question 3", "Question 4")) {
 # R's correlation matrix (Pearson's product moment) of every pair of columns, to
 # 6 places as the report prints it
 print(round(cor(q), 6))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

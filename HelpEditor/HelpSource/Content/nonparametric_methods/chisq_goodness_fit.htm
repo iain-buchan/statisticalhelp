@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1358.552" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1358.552" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Chi-square Goodness of Fit Test - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Chi-square tests: Goodness of fit;Goodness of fit (chi-square)" />
+            <sdh:keyword term="Chi-square tests: Goodness of fit;Goodness of fit (chi-square)" />
             Chi-square Goodness of Fit Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Nonparametric_Chi-Square Goodness of Fit.</b></p>
@@ -18,7 +18,7 @@
         <p>&#160;</p>
         <p>Pearson's chi-square goodness of fit test statistic is:</p>
         <p>
-            <MadCap:equation>$\displaystyle T=\sum_{j=1}^c\frac{(O_j-E_j)^2}{E_j}$</MadCap:equation>
+            <sdh:equation>$\displaystyle T=\sum_{j=1}^c\frac{(O_j-E_j)^2}{E_j}$</sdh:equation>
         </p>
         <p>- where O<sub>j</sub> are observed counts, E<sub>j</sub> are corresponding expected count and c is the number of classes for which counts/frequencies are being analysed.</p>
         <p>&#160;</p>
@@ -104,11 +104,11 @@
         <p>&#160;</p>
         <p>You can then ask for a simulated exact P value (Simulate Exact P): the observed total is drawn again and again from the expected distribution, and the P value is the proportion of the draws whose chi-square is at least that of your table; it is given with an exact (Clopper-Pearson) confidence interval for that proportion. Frequencies that are not whole numbers are used as you entered them by the test; they are rounded to the nearest whole number for the simulation, and the results say when this has been done.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Chi-square goodness of fit: the StatsDirect help example (blood groups of 187
 # consecutive patients against the distribution expected in the population) in R
@@ -128,8 +128,8 @@ cat(sprintf("Chi-square = %.6f  df = %d\nP = %.4f\n", test$statistic,
 
 # Like StatsDirect, R warns when the expected frequencies are small: the
 # chi-square approximation is then unreliable.</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

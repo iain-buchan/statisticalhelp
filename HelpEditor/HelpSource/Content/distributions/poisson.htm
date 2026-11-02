@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="3" MadCap:lastHeight="861" MadCap:lastWidth="2552" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="3" sdh:lastHeight="861" sdh:lastWidth="2552" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Poisson Distribution - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Poisson distribution;Distributions: Poisson" />Poisson Distribution</h1>
+            <sdh:keyword term="Poisson distribution;Distributions: Poisson" />Poisson Distribution</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Poisson</b>.</p>
         <p>&#160;</p>
@@ -19,12 +19,12 @@
         <p>&#160;</p>
         <p>Both the mean and variance of a Poisson distribution are equal to µ. The probability of r events happening in unit time with an event rate of µ is:</p>
         <p>
-            <MadCap:equation>$\displaystyle P(r)=\frac{e^{-\mu}\mu^r}{r!}$</MadCap:equation>
+            <sdh:equation>$\displaystyle P(r)=\frac{e^{-\mu}\mu^r}{r!}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>The summation of this Poisson frequency function from zero to r will always be equal to one as:</p>
         <p>
-            <MadCap:equation>$\displaystyle e^\mu=\sum_{r=0}^\infty (\mu^r/r!)$</MadCap:equation>
+            <sdh:equation>$\displaystyle e^\mu=\sum_{r=0}^\infty (\mu^r/r!)$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Analysis of mortality statistics often employs Poisson distributions on the assumption that deaths from most diseases occur independently and at random in populations (see <a href="../rates/poisson_rate_ci.htm">Poisson rate confidence interval</a>). Other common uses of Poisson are in Physics to model radioactive particle emission and in insurance companies to model accident rates.</p>
@@ -35,7 +35,7 @@
         <p>&#160;</p>
         <p>Γ(*) is the gamma function:</p>
         <p>
-            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</sdh:equation>
         </p>
         <p>Γ(1)=1</p>
         <p>Γ(x+1)=xΓ(x)</p>
@@ -60,11 +60,11 @@
         <p>With a mean of 3 the probability of no events is 0.049787068367864, which is e<sup>-3</sup>, as the formula above gives for r = 0.</p>
         <p>&#160;</p>
         <p>StatsDirect shows a probability to 15 decimal places and a mean to 15 significant figures; the R code below calculates the same figures.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Poisson distribution: the StatsDirect help illustration (probabilities for a count of
 # events with a given mean, and the mean that gives a chosen tail probability) in R
@@ -110,8 +110,8 @@ cat("  which is exp(-3) =", p15(exp(-3)), "\n")
 # probability of that many or fewer is at least the probability given
 cat("Smallest count with probability at least 0.95 of that many or fewer, mean 8 =",
     qpois(0.95, mu), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

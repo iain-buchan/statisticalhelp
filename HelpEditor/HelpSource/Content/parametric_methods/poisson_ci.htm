@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="876.5519" MadCap:lastWidth="3249" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="topic">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="876.5519" sdh:lastWidth="3249" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" class="topic">
     <head><title>Poisson Confidence Interval (Incidence Rate) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Poisson confidence interval" />Poisson Confidence Interval</h1>
+            <sdh:keyword term="Poisson confidence interval" />Poisson Confidence Interval</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Parametric_Poisson Confidence Interval</b>.</p>
         <p>&#160;</p>
@@ -17,8 +17,8 @@
         <p>&#160;</p>
         <p>The Poisson mean is estimated here as the arithmetic mean of the sample and the confidence interval is estimated using the relationship between the chi-square and Poisson distributions (<a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>; <a href="../references/reference_list.htm#ref-johnson-1969">Johnson and Kotz, 1969</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{Y}_\text{l}=\frac{\chi^2_{2n,\space \alpha/2}}{2} \\
-\displaystyle \text{Y}_\text{u}=\frac{\chi^2_{2(n+1),\space 1-\alpha/2}}{2} \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{Y}_\text{l}=\frac{\chi^2_{2n,\space \alpha/2}}{2} \\
+\displaystyle \text{Y}_\text{u}=\frac{\chi^2_{2(n+1),\space 1-\alpha/2}}{2} \\$</sdh:equation>
         </p>
         <p>- where χ<sup>2</sup><sub>α,ν</sub> is the chi-square deviate with lower tail area α on ν degrees of freedom and n is the total count (the sum of the observations); Y<sub>l</sub> and Y<sub>u</sub> are the confidence limits for the total count, and the limits for the Poisson mean are Y<sub>l</sub>/N and Y<sub>u</sub>/N where N is the sample size (the sample mean is the point estimate).</p>
         <p>&#160;</p>
@@ -45,11 +45,11 @@
         <p>&#160;</p>
         <p>The interval is exact: its limits are the means with which a total count as large as the one observed or larger, and as small or smaller, has half of what the confidence level leaves. The two one sided limits are given together. With 95% confidence the mean is above 0.828613, and with 95% confidence it is below 1.618877; the two are the ends of the two sided 90% interval.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Poisson confidence interval: the StatsDirect help example (patients arriving at
 # a reception desk in 23 five minute intervals) in R
@@ -72,8 +72,8 @@ cat("Exact two sided 95% CI =", six(r$conf.int[1]), "to", six(r$conf.int[2]), "\
 ci &lt;- poisson.test(sum(counts), n, conf.level = 0.9)$conf.int
 cat("Exact one sided 95% confidence limits: lower ", six(ci[1]), ", upper ", six(ci[2]),
     "\n", sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>

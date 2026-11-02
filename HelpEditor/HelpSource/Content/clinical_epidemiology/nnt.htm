@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1697" MadCap:lastWidth="1225" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1697" sdh:lastWidth="1225" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Number Needed to Treat (NNT) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Number needed to treat; Absolute risk (NNT)" />Number Needed to Treat</h1>
+            <sdh:keyword term="Number needed to treat; Absolute risk (NNT)" />Number Needed to Treat</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Clinical Epidemiology_Number Needed to Treat</b>.</p>
         <p>&#160;</p>
@@ -113,11 +113,11 @@
         <p>&#160;</p>
         <p>Here we infer, with 95% confidence, that you need to treat as many as 214 or as few as 11 patients in severe congestive heart failure with this ACEi in order to prevent one death that would not have been prevented with the standard non-ACEi therapy in six months of treatment.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above, then adds the numbers needed to treat adjusted for an expected risk of 30%, which the report shows when an expected risk is entered at the optional prompt. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Number needed to treat: the StatsDirect help example (Haynes and Sackett 1993, a trial
 # of an ACE inhibitor in severe congestive heart failure: 123 of 607 controls and 94 of
@@ -245,8 +245,8 @@ nnt("risk difference", 1 / rd)
 nnt("relative risk of event", 1 / (er * rrr))
 nnt("relative risk of no event", 1 / ((1 - er) * (rrne - 1)))
 nnt("odds ratio", (1 - er * (1 - oor)) / ((1 - er) * er * (1 - oor)))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>

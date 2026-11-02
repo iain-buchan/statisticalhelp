@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>StatsDirectHelpEditor</AssemblyName>
     <RootNamespace>StatsDirect.HelpEditor.App</RootNamespace>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <ApplicationDefaultFont>Arial, 11pt</ApplicationDefaultFont>
     <ApplicationIcon>Assets\HelpEditor.ico</ApplicationIcon>
   </PropertyGroup>
@@ -17,6 +17,7 @@
     <Content Include="Web/**/*" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="AppHelp/provenance.json;AppHelp/LICENSE.StatsDirect.txt" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets/HelpEditor.ico" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../Schema/StatsDirectHelp.xsd" Link="Schema/StatsDirectHelp.xsd" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <EmbeddedResource Include="Assets/HelpEditor.ico" LogicalName="StatsDirect.HelpEditor.AppIcon" />
   </ItemGroup>
   <!-- The SDK supplies both UI wrappers; this host uses WinForms only. -->

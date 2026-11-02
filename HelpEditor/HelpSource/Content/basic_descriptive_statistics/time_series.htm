@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="6" MadCap:lastHeight="6081" MadCap:lastWidth="3169">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" sdh:lastBlockDepth="6" sdh:lastHeight="6081" sdh:lastWidth="3169">
     <head><title>Time Series Summary Statistics in StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Time series summary;Area under curve: Time series;Time-concentration curve;Pharmacokinetics" />Time Series Summary: Area Under Curve</h1>
+            <sdh:keyword term="Time series summary;Area under curve: Time series;Time-concentration curve;Pharmacokinetics" />Time Series Summary: Area Under Curve</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Descriptive_Time Series Summary</b>.</p>
         <p>&#160;</p>
@@ -23,13 +23,13 @@
         <p>The area under the curve (AUC) is calculated using the linear trapezoidal rule for each subject. The mean AUC of a group is summarised with the standard deviation of the subjects' AUCs and its standard error SD/&#8730;n; the t interval uses n &#8722; 1 degrees of freedom (Bland 2000). The weighted variance of <a href="../references/reference_list.htm#ref-wolfsegger-2007">Wolfsegger 2007</a> equation 4 is for serial-sampling designs in which each subject contributes a single time point and is not used for complete profiles.</p>
         <p>&#160;</p>
         <p>
-            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">$\displaystyle \begin{array}{l}
+            <sdh:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">$\displaystyle \begin{array}{l}
 \displaystyle w_1 = \frac{1}{2}\Biggl(t_2-t_1\Biggr) \\
 \displaystyle w_j = \frac{1}{2}\Biggl(t_{j+1}-t_{j-1}\Biggr)\,\Biggl(2\le j\le J-1\Biggr) \\
 \displaystyle w_J = \frac{1}{2}\Biggl(t_J-t_{J-1}\Biggr) \\
 \displaystyle \widehat{AUC_k} = \sum_{j=1}^{J}w_j\bar{X}_{jk} \\
 \displaystyle \operatorname{var}\Biggl[\widehat{AUC_k}\Biggr] = \sum_{j=1}^{J}w_j^2\delta_{jk}^2 n_{jk}^{-1}
-\end{array}$</MadCap:equation>
+\end{array}$</sdh:equation>
         </p>
         <p>...where t 1-J are times of observations in a series from 1 to J, AUC is the area under the curve for the kth subject from baseline to the last measured time point, w are the weights applied to the observations (X), n is the number of observations at each time point,and sigma squared is the variance of the observations at each time point.</p>
         <p>&#160;</p>
@@ -459,7 +459,7 @@
         <p>Median (IQR) slope to maximum: 0.13 (0.18)</p>
         <p>Mean (SD) slope to maximum: 0.22 (0.26)</p>
         <p>
-            <img src="../resources/Images/time_series_summary_malabsorbtion.svg" width="566" height="400" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_malabsorbtion.png" width="566" height="400" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/time_series_summary_malabsorbtion.svg" width="566" height="400" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_malabsorbtion.png" width="566" height="400" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p><u>Group: Normal</u>
@@ -674,20 +674,20 @@
         <p>Median (IQR) slope to maximum: 0.53 (0.14)</p>
         <p>Mean (SD) slope to maximum: 0.49 (0.16)</p>
         <p>
-            <img src="../resources/Images/time_series_summary_normal.svg" width="566" height="400" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_normal.png" width="566" height="400" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/time_series_summary_normal.svg" width="566" height="400" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_normal.png" width="566" height="400" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p><u>AUC Distribution</u>
         </p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/time_series_summary_normal_plot.svg" width="566" height="400" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_normal_plot.png" width="566" height="400" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/time_series_summary_normal_plot.svg" width="566" height="400" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_normal_plot.png" width="566" height="400" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>R-square for AUC vs. normal scores: 0.80
 </p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/time_series_summary_normal_plot_log.svg" width="566" height="400" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_normal_plot_log.png" width="566" height="400" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/time_series_summary_normal_plot_log.svg" width="566" height="400" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_normal_plot_log.png" width="566" height="400" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>R-square for log(AUC) vs. normal scores: 0.94
 </p>
@@ -703,14 +703,14 @@
         <p>Two sided bootstrap P = 0.1809</p>
         <p>95% bootstrap-t interval: -1240.73 to 35.45</p>
         <p>
-            <img src="../resources/Images/time_series_summary_compare.svg" width="566" height="430" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_compare.png" width="566" height="430" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/time_series_summary_compare.svg" width="566" height="430" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/time_series_summary_compare.png" width="566" height="430" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Time series summary: the StatsDirect help example (Bland 2000, blood levels of
 # zidovudine after an oral dose in patients with and without malabsorption) in R
@@ -883,8 +883,8 @@ cat("AUC difference (95% CI):", two(diff(rev(r$estimate))),
 qqnorm(c(auc_Malabsorbtion, auc_Normal), main = "Normal Plot for AUC",
        ylab = "Area Under Curve")
 qqline(c(auc_Malabsorbtion, auc_Normal))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

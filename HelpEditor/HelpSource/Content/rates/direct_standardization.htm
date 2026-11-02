@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="3187" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="3187" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Directly Standardized Rates - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Direct standardization;Directly standardized rates;Rates: Direct standardization" />Direct Standardization</h1>
+            <sdh:keyword term="Direct standardization;Directly standardized rates;Rates: Direct standardization" />Direct Standardization</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Rates_Direct Standardization</b>.</p>
         <p>&#160;</p>
@@ -41,7 +41,7 @@
         <p>Approximate confidence intervals for the DSR are calculated firstly by Chiang's normal approximation to Poisson rate sums (<a href="../references/reference_list.htm#ref-chiang-1961">Chiang, 1961</a>; <a href="../references/reference_list.htm#ref-keyfitz-1966">Keyfitz, 1966</a>; <a href="../references/reference_list.htm#ref-breslow-1987">Breslow and Day, 1987</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>) and secondly by an improved approximation adjusted for the total number of observed events (<a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al., 1991</a>).</p>
         <p>&#160;</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{DSR}=\frac{\displaystyle \sum_{i=1}^k N_ir_i}{\displaystyle \sum_{i=1}^k N_i} \\
+            <sdh:equation>$\displaystyle \text{DSR}=\frac{\displaystyle \sum_{i=1}^k N_ir_i}{\displaystyle \sum_{i=1}^k N_i} \\
 
 \displaystyle r_i=y_i/n_i \\
 
@@ -53,7 +53,7 @@
 
 \displaystyle \text{ICI}_l=\text{DSR} + (Y_l-Y) \sqrt{v/Y} \\
 
-\displaystyle \text{ICI}_u=\text{DSR} + (Y_u-Y) \sqrt{v/Y} \\$</MadCap:equation>
+\displaystyle \text{ICI}_u=\text{DSR} + (Y_u-Y) \sqrt{v/Y} \\$</sdh:equation>
         </p>
         <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub>  is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum, y<sub>i</sub> is the number of events observed in the ith stratum of the study population, n<sub>i</sub> is the person-time for the ith stratum of the study population, z<sub>α/2</sub> is the 100(1 - α/2) centile of the standard normal distribution, Y is the total number of events observed, Y<sub>l</sub> and Y<sub>u</sub> are the exact lower and upper confidence limits for the Poisson count Y and ICI <sub>l to u</sub> is the improved confidence interval due to <a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al</a>. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formula above.</p>
         <p>&#160;</p>
@@ -324,11 +324,11 @@
         <p>Approximate 95% confidence interval = 30.891605 to 35.020125</p>
         <p>Improved approximate (Dobson) 95% confidence interval = 30.923031 to 35.085201</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Direct standardization: the StatsDirect help example (Curtin and Klein 1995, stroke
 # deaths in males of a hypothetical US state, standardized to the 1940 US Standard
@@ -400,8 +400,8 @@ total_ci &lt;- poisson.test(total, conf.level = conf)$conf.int
 dobson &lt;- dsr + (total_ci - total) * sqrt(v_poisson / total)
 cat("Improved approximate (Dobson) 95% confidence interval =",
     six(dobson[1] * per), "to", six(dobson[2] * per), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>

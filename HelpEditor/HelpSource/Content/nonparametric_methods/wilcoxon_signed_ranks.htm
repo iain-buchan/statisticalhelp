@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="1139" MadCap:lastWidth="2115" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="1139" sdh:lastWidth="2115" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Wilcoxon Signed Ranks Test - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
         </script>
     </head>
     <body>
-        <MadCap:keyword term="Wilcoxon signed ranks test;Median difference" />
+        <sdh:keyword term="Wilcoxon signed ranks test;Median difference" />
         <h1>Wilcoxon's Signed Ranks Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Nonparametric_Wilcoxon Signed Ranks</b>.</p>
@@ -121,11 +121,11 @@
         <p>&#160;</p>
         <p>Assuming that the paired differences come from a symmetrical distribution then these results show that one group did not tend to yield different results to the other group which was paired with it, i.e. there was no statistically significant difference between the aggressivity scores of the first born as compared with the second twin. The extent of this lack of difference is shown well by the confidence interval which clearly encompasses zero. Note that the quoted 95.8% confidence interval is as close as you can get to 95% because of the mathematics involved in nonparametric methods like this.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Wilcoxon signed ranks test: the StatsDirect help example (Conover 1999) in R
 first  &lt;- c(86, 71, 77, 68, 91, 72, 77, 91, 70, 71, 88, 87)
@@ -182,8 +182,8 @@ cat(sprintf("%.1f%% confidence interval for difference between population median
             100 * (1 - 2 * psignrank(K - 1, n))))
 cat(sprintf("K = %g   Median difference = %g (%g to %g)\n",
             K, median(a), a[K], rev(a)[K]))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

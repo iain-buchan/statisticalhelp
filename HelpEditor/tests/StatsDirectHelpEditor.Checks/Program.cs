@@ -82,7 +82,7 @@ try
     revised = revised.Replace("</body>", "<pre id=\"cdata-code\"><![CDATA[if (x < 3 && y > 1) {\n  print(\"a & b\")\n}]]></pre><p id=\"Ref-Case\">Case-sensitive anchor.</p><p><a href=\"#Ref-Case\">Local anchor</a></p></body>");
     revised = revised.Replace("</body>", "<p><a id=\"external-example\" href=\"https://help-editor-external.invalid/article?x=1&amp;y=2\" rel=\"nofollow\">External reference example</a></p></body>");
     project.SaveTopic("basics/example.htm", revised);
-    Check(project.ReadTopic("basics/example.htm") == revised, "Saves exact source including unmodified special blocks");
+    Check(project.ReadTopic("basics/example.htm") == revised.Replace(HelpSourceNamespaces.LegacyUri, HelpSourceNamespaces.CurrentUri), "Saves exact source apart from the authoring namespace declaration, including unmodified special blocks");
     var toc = project.LoadContents();
     Check(toc.Count == 1 && toc[0].Children.Count == 1, "Loads nested contents");
     Check(toc[0].Children[0].Link == "basics/example.htm#ref-one", "Preserves contents anchors");

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="1403" MadCap:lastWidth="3249" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="1403" sdh:lastWidth="3249" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Reference Range (Normal Range) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Normal range;Reference range;Reference interval" />Reference Range</h1>
+            <sdh:keyword term="Normal range;Reference range;Reference interval" />Reference Range</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Parametric_Reference Range</b>.</p>
         <p>&#160;</p>
@@ -16,11 +16,11 @@
         <p>&#160;</p>
         <p>The reference range and confidence interval for data from a normal distribution is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{RR}=\bar x\pm sz_{\displaystyle(1-c)/2} \\
+            <sdh:equation>$\displaystyle \text{RR}=\bar x\pm sz_{\displaystyle(1-c)/2} \\
 
 \displaystyle \text{SE}=\sqrt{\frac{s^2}{n}+\frac{s^2z_{\displaystyle(1-c)/2}^2}{2n}} \\
 
-\displaystyle \text{CI}=\text{RR}\pm z_{\alpha/2}\text{SE}$</MadCap:equation>
+\displaystyle \text{CI}=\text{RR}\pm z_{\alpha/2}\text{SE}$</sdh:equation>
         </p>
         <p>- where x bar is the sample mean, s is the sample standard deviation, n is the sample size, RR is the reference range, SE is the standard error of the reference range limits, CI is the confidence interval for the reference range limits, z is a quantile from the standard normal distribution and c is % range coverage/100 (e.g. 0.95 for a 95% reference range).</p>
         <p>&#160;</p>
@@ -70,11 +70,11 @@
         <p>Exact confidence level = 94.120331%</p>
         <p>&#160;</p>
         <p>These data are not from a normal distribution but are from an approximately log-normal distribution. This explains why the results for log-normal data are closer to the 2.5% and 97.5% percentiles.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Reference range: the StatsDirect help example (Altman 1991, serum IgM in 298
 # children) in R
@@ -147,8 +147,8 @@ for (p in c(0.025, 0.975)) {
   cat(sprintf("Exact confidence level = %s%%\n",
               six(100 * (pbinom(hi, n, p) - pbinom(lo, n, p)))))
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

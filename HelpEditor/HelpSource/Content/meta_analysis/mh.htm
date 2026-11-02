@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2826.552" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2826.552" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Odds Ratio Meta-analysis (Mantel-Haenszel and Exact) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Chi-square tests: Mantel-Haenszel;Mantel-Haenszel odds ratio;Odds ratio: Meta-analysis;Meta-analysis: Odds ratio" />
+            <sdh:keyword term="Chi-square tests: Mantel-Haenszel;Mantel-Haenszel odds ratio;Odds ratio: Meta-analysis;Meta-analysis: Odds ratio" />
             Mantel-Haenszel Test and Odds Ratio Meta-analysis</h1>
         <p>&#160;</p>
         <p>Menu locations:</p>
@@ -57,7 +57,7 @@
         <p>&#160;</p>
         <p>The Mantel-Haenszel method is used to estimate the pooled odds ratio for all strata, assuming a fixed effects model:</p>
         <p>
-            <MadCap:equation>$\displaystyle \widehat{OR}_{MH}=\frac{\displaystyle \sum_{i=1}^k \left( \frac{a_id_i}{n_i}\right)}{\displaystyle \sum_{i=1}^k \left( \frac{b_ic_i}{n_i}\right)}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \widehat{OR}_{MH}=\frac{\displaystyle \sum_{i=1}^k \left( \frac{a_id_i}{n_i}\right)}{\displaystyle \sum_{i=1}^k \left( \frac{b_ic_i}{n_i}\right)}$</sdh:equation>
         </p>
         <p>- where n<sub>i</sub> =  a<sub>i</sub>+b<sub>i</sub>+c<sub>i</sub>+d<sub>i</sub>.</p>
         <p>&#160;</p>
@@ -240,11 +240,11 @@
         <p>&#160;</p>
         <p>Here we can say with 95% confidence that the true population odds in favour of being a smoker were between 3.9 and 5.7 times greater in patients who had lung cancer compared with controls.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Odds ratio meta-analysis (Mantel-Haenszel and exact): the StatsDirect help example
 # (Armitage and Berry 1994, smoking among lung cancer patients and controls in ten
@@ -556,8 +556,8 @@ forest(or_mh, mh_ci[1], mh_ci[2], wt_fixed,
 forest(or_re, re_ci[1], re_ci[2], wt_random,
        "Odds ratio meta-analysis plot [random effects]", "combined [random]")
 par(mar = c(5, 4, 4, 2) + 0.1)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1547" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1547" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Likelihood Ratios and Diagnostic Tests (Bayes' Theorem) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Likelihood ratios: 2 by k" />
+            <sdh:keyword term="Likelihood ratios: 2 by k" />
             Likelihood Ratios</h1>
         <p>&#160;</p>
         <p>Menu location:  <b>Analysis_Clinical Epidemiology_Likelihood Ratios (2 by k)</b>.</p>
@@ -156,11 +156,11 @@
         <p>&#160;</p>
         <p>Here we can say with 95% confidence that CK results of ≥ 280 are at least ten (9.9) times more likely to come from patients who have had an MI than they are to come from those who have not had an MI.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Likelihood ratios for the levels of a test: the StatsDirect help example (Sackett et
 # al. 1991, p. 111, initial creatine kinase levels of 230 patients who had an acute
@@ -217,8 +217,8 @@ prior &lt;- 0.5
 posterior_odds &lt;- prior / (1 - prior) * lr[1]
 cat("Posterior probability of MI given CK of 280 or more =",
     six(posterior_odds / (posterior_odds + 1)), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>

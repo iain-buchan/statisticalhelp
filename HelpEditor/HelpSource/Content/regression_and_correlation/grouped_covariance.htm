@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="4508" MadCap:lastWidth="2772" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="4508" sdh:lastWidth="2772" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Grouped Linear Regression with Covariance Analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Covariance (regression);Regression: Grouped: Covariance" />Grouped Linear Regression with Covariance Analysis</h1>
+            <sdh:keyword term="Covariance (regression);Regression: Grouped: Covariance" />Grouped Linear Regression with Covariance Analysis</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Regression and Correlation_Grouped Linear_Covariance</b>.</p>
         <p>&#160;</p>
@@ -28,19 +28,19 @@
         </p>
         <p>Slopes of several regression lines are compared by analysis of variance as follows (Armitage, 1994):</p>
         <p>
-            <MadCap:equation>$\displaystyle SS_{\text{common}} =\frac{\displaystyle \left(\sum_{j=1}^k SxY_j \right)^2} {\displaystyle {\sum_{j=1}^k Sxx_j}}\\
+            <sdh:equation>$\displaystyle SS_{\text{common}} =\frac{\displaystyle \left(\sum_{j=1}^k SxY_j \right)^2} {\displaystyle {\sum_{j=1}^k Sxx_j}}\\
 \displaystyle SS_{\text{between}} = \sum_{j=1}^k \frac{(SxY_j)^2}{Sxx_j}-\frac{\displaystyle \left(\sum_{j=1}^k SxY_j\right)^2} {\displaystyle {\sum_{j=1}^k Sxx_j}}\\
-\displaystyle SS_{\text{total}} = \sum_{j=1}^k SYY_j$</MadCap:equation>
+\displaystyle SS_{\text{total}} = \sum_{j=1}^k SYY_j$</sdh:equation>
         </p>
         <p>- where SS<sub>common</sub> is the sum of squares due to the common slope of k regression lines, SS<sub>between</sub> is the sum of squares due to differences between the slopes, SS<sub>total</sub> is the total sum of squares and the residual sum of squares is the difference between SS<sub>total</sub> and SS<sub>common</sub>. Sxx<sub>j</sub> is the sum of squares about the mean x observation in the jth group, SxY<sub>j</sub> is the sum of products of the deviations of xY pairs from their means in the jth group and SYY<sub>j</sub> is the sum of squares about the mean Y observation in the jth group.</p>
         <p>&#160;</p>
         <p>Vertical separation of slopes of several regression lines is tested by analysis of covariance as follows (Armitage, 1994):</p>
         <p>
-            <MadCap:equation>$\displaystyle SxY_\text{between}=\left[ \sum_{j=1}^k \frac{\displaystyle \left( \sum_{i=1}^{n_j}x_{ji} \right)\left( \sum_{i=1}^{n_j} Y_{ji}\right)}{n_j} \right]-\frac{\displaystyle \left( \sum_{i=1}^{N}x_i \right)\left( \sum_{i=1}^{N} Y_i\right)}{N} \\
+            <sdh:equation>$\displaystyle SxY_\text{between}=\left[ \sum_{j=1}^k \frac{\displaystyle \left( \sum_{i=1}^{n_j}x_{ji} \right)\left( \sum_{i=1}^{n_j} Y_{ji}\right)}{n_j} \right]-\frac{\displaystyle \left( \sum_{i=1}^{N}x_i \right)\left( \sum_{i=1}^{N} Y_i\right)}{N} \\
 \displaystyle SxY_\text{within}=\left( \sum_{i=1}^{N}x_i Y_i \right) -\left[ \sum_{j=1}^k \frac{\displaystyle \left( \sum_{i=1}^{n_j}x_{ji} \right)\left( \sum_{i=1}^{n_j} Y_{ji}\right)}{n_j} \right] \\
 \displaystyle SxY_\text{total}=\left( \sum_{i=1}^{N}x_i Y_i \right) - \frac{\displaystyle \left( \sum_{i=1}^{N}x_i \right)\left( \sum_{i=1}^{N} Y_i\right)}{N}\\
 \displaystyle SS_\text{within}=SYY_\text{within}-\frac{(SxY_\text{within})^2}{Sxx_\text{within}}\\
-\displaystyle SS_\text{total}=SYY_\text{total}-\frac{(SxY_\text{total})^2}{Sxx_\text{total}}$</MadCap:equation>
+\displaystyle SS_\text{total}=SYY_\text{total}-\frac{(SxY_\text{total})^2}{Sxx_\text{total}}$</sdh:equation>
         </p>
         <p>- where SS are corrected sums of squares within the groups, total and between the groups (subtract within from total). The constituent sums of products or squares are partitioned between groups, within groups and total as above.</p>
         <p>&#160;</p>
@@ -515,11 +515,11 @@
         <p>&#160;</p>
         <p>The analysis of covariance shows a highly significant vertical separation of the lines: at a given log dose, preparation I gave lower bone density scores than the standard and than preparation F, while the standard and preparation F did not differ significantly. (Earlier versions of StatsDirect counted the degrees of freedom of this analysis from the dose levels rather than the rats when the scores were entered as replicates, and found no separation.)</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Grouped linear regression with covariance analysis: the StatsDirect help example
 # (Armitage and Berry 1994, bone density of rats given three preparations of
@@ -662,8 +662,8 @@ plot(d$x, d$y, pch = as.numeric(d$group), col = as.numeric(d$group),
      main = "Grouped linear regression")
 for (g in 1:3) abline(lm(y ~ x, data = d[d$group == names(groups)[g], ]), col = g)
 legend("bottomright", legend = names(groups), pch = 1:3, col = 1:3, bty = "n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

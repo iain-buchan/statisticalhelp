@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="3636" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="3636" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Polynomial Regression - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Polynomial regression;Regression: Polynomial;Area under curve: Polynomial regression;Curve fitting: Polynomial regression" />
+            <sdh:keyword term="Polynomial regression;Regression: Polynomial;Area under curve: Polynomial regression;Curve fitting: Polynomial regression" />
             Polynomial Regression</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Regression and Correlation_Polynomial</b>.</p>
@@ -16,7 +16,7 @@
         <p>&#160;</p>
         <p>If a polynomial model is appropriate for your study then you may use this function to fit a k order/degree polynomial to your data:</p>
         <p>
-            <MadCap:equation>$\displaystyle \hat Y=b_0+b_1x_1 + b_2x_2^2+...+b_kx_k^k$</MadCap:equation>
+            <sdh:equation>$\displaystyle \hat Y=b_0+b_1x_1 + b_2x_2^2+...+b_kx_k^k$</sdh:equation>
         </p>
         <p>- where Y caret is the predicted outcome value for the polynomial model with regression coefficients b<sub>1</sub> to k for each degree and Y intercept b<sub>0</sub>. The model is simply a <a href="multiple_linear.htm">general linear regression</a> model with k predictors raised to the power of i where i=1 to k. A second order (k=2) polynomial forms a quadratic expression (parabolic curve), a third order (k=3) polynomial forms a cubic expression and a fourth order (k=4) polynomial forms a quartic expression. See <a href="../references/reference_list.htm#ref-kleinbaum-1998">Kleinbaum et al. (1998)</a> and <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994)</a> for more information.</p>
         <p>&#160;</p>
@@ -215,24 +215,24 @@
         <p><u>Plots</u>
         </p>
         <p>
-            <img src="../resources/Images/polynomialcurve.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/polynomialcurve.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/polynomialcurve.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/polynomialcurve.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/polynolialci.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/polynolialci.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/polynolialci.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/polynolialci.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/polynomialpi.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/polynomialpi.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/polynomialpi.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/polynomialpi.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p>N.B.&#160;Look at a plot of this data curve. The right hand end shows a very sharp decline. If you were to extrapolate beyond the data, you have observed then you might conclude that very large houses have very low electricity consumption. This is obviously wrong. Polynomials are frequently illogical for some parts of a fitted curve. You must blend common sense, art and mathematics when fitting these models! Remember the general principles listed above.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Polynomial regression: the StatsDirect help example (McClave and Dietrich 1991,
 # electricity consumption and home size, degree 2) in R
@@ -282,8 +282,8 @@ curve_area &lt;- integrate(function(x) b[1] + b[2] * x + b[3] * x^2, min(size), 
 cat("AUC (polynomial function) =", six(curve_area$value), "\n")
 trapezia &lt;- sum(diff(size) * (head(kwh, -1) + tail(kwh, -1)) / 2)
 cat("AUC (by trapezoidal rule) =", six(trapezia), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

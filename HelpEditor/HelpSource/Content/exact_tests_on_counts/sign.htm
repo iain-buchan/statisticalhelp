@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="748" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="748" sdh:lastWidth="1013" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Sign Test (Binomial Test) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Sign test;Binomial test" />
+            <sdh:keyword term="Sign test;Binomial test" />
             Sign Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Exact_Sign</b>.</p>
@@ -46,11 +46,11 @@
         <p>&#160;</p>
         <p>If we were confident that this group could only realistically be expected to have a lower caloric intake and we would not be interested in higher caloric intakes then we could make inference from the one sided P value. We do not, however, have evidence for such an assumption so we can not reject the null hypothesis that the proportion is not significantly different from 0.5. We can say with 95% confidence that the true population value of the proportion lies somewhere between 0.48 and 0.98. The most sensible response to these results would be to go back and collect more data.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Sign test: the StatsDirect help example (Altman 1991, p. 186: 9 of 11 women with a
 # food energy intake below the daily average) in R
@@ -87,8 +87,8 @@ ci &lt;- binom.test(r, n, conf.level = 0.95)$conf.int
 cat("Lower Limit =", six(ci[1]), "\n")
 cat("Proportion =", six(r / n), "\n")
 cat("Upper Limit =", six(ci[2]), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="4118.104" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="4118.104" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>R by C Chi-square and Exact Contingency Table Analyses - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Phi coefficient;Pearson contingency coefficient;G-square test;Cramér V coefficient;R by c chi-square test;Chi-square tests : R by c;Goodman-Kruskal gamma;Fisher's exact test: R by c" />
+            <sdh:keyword term="Phi coefficient;Pearson contingency coefficient;G-square test;Cramér V coefficient;R by c chi-square test;Chi-square tests : R by c;Goodman-Kruskal gamma;Fisher's exact test: R by c" />
             R by C Contingency Table Analysis</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Chi-square_R by C</b>.</p>
@@ -39,23 +39,23 @@
         <p>&#160;</p>
         <p>&#160;</p>
         <p>
-            <MadCap:equation>$\displaystyle \chi^2=\sum_{i=1}^r \sum_{j=1}^c \frac{\displaystyle (O_{ij}-E_{ij})^2}{E_{ij}} \\
+            <sdh:equation>$\displaystyle \chi^2=\sum_{i=1}^r \sum_{j=1}^c \frac{\displaystyle (O_{ij}-E_{ij})^2}{E_{ij}} \\
 
-\displaystyle G^2=2\sum_{i=1}^r \sum_{j=1}^c O_{ij} \log \left(\frac{\displaystyle O_{ij}}{E_{ij}} \right) \\$</MadCap:equation>
+\displaystyle G^2=2\sum_{i=1}^r \sum_{j=1}^c O_{ij} \log \left(\frac{\displaystyle O_{ij}}{E_{ij}} \right) \\$</sdh:equation>
         </p>
         <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n).</p>
         <p>&#160;</p>
         <p>
-            <MadCap:equation>$\displaystyle P_f=\frac{\displaystyle \prod_{i=1}^r f_{i.}!\prod_{j=1}^cf_{.j}!}{\displaystyle f_{..}!\prod_{i=1}^r \prod_{j=1}^cf_{ij}!} \\
+            <sdh:equation>$\displaystyle P_f=\frac{\displaystyle \prod_{i=1}^r f_{i.}!\prod_{j=1}^cf_{.j}!}{\displaystyle f_{..}!\prod_{i=1}^r \prod_{j=1}^cf_{ij}!} \\
 
-\displaystyle P=\sum_{P \le P_0}P_f \\$</MadCap:equation>
+\displaystyle P=\sum_{P \le P_0}P_f \\$</sdh:equation>
         </p>
         <p>- where P is the two sided Fisher probability, P<sub>f</sub> is the conditional probability for the observed table given fixed row and column totals (f<sub>i.</sub> and f<sub>.j</sub> respectively), f<sub>..</sub> is the total count and ! represents factorial.</p>
         <p>&#160;</p>
         <p>Analysis of trend in r by c tables indicates how much of the general independence between scores is accounted for by linear trend. StatsDirect uses equally spaced scores (1, 2, 3 and so on) for this purpose unless you specify otherwise: if you select 'Specify trend scores' then you are asked for a score for each row and a score for each column, and the scores that are used are shown with the table. If you wish to experiment with other scoring systems then expert statistical guidance is advisable. <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994)</a> quote an example where extent of grief of mothers suffering a perinatal death, graded I to IV, is compared with the degree of support received by these women. In this example the overall statistic is non-significant but a significant trend is demonstrated.</p>
         <p>&#160;</p>
         <p>
-            <MadCap:equation>$\displaystyle r=\frac{\displaystyle \sum_{i=1}^r \sum_{j=1}^cu_i v_jO_{ij}-\left( \sum_{i=1}^r u_i O_{i+}\right) \left( \sum_{j=1}^c v_j O_{j+}\right)/n}{\displaystyle \sqrt{\left[ \sum_{i=1}^r u_i^2 O_{i+} -\frac{\displaystyle \left( \sum_{i=1}^r u_i O_{i+}\right)^2}{n}\right] \left[ \sum_{j=1}^c v_j^2 O_{j+}-\frac{\displaystyle \left( \sum_{j=1}^c v_j O_{j+}\right)^2}{n}\right]}} \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle r=\frac{\displaystyle \sum_{i=1}^r \sum_{j=1}^cu_i v_jO_{ij}-\left( \sum_{i=1}^r u_i O_{i+}\right) \left( \sum_{j=1}^c v_j O_{j+}\right)/n}{\displaystyle \sqrt{\left[ \sum_{i=1}^r u_i^2 O_{i+} -\frac{\displaystyle \left( \sum_{i=1}^r u_i O_{i+}\right)^2}{n}\right] \left[ \sum_{j=1}^c v_j^2 O_{j+}-\frac{\displaystyle \left( \sum_{j=1}^c v_j O_{j+}\right)^2}{n}\right]}} \\$</sdh:equation>
         </p>
         <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n). Row scores are u, column scores are v, row totals are O<sub>i+</sub> and column totals are O<sub>j+</sub>.</p>
         <p>&#160;</p>
@@ -65,22 +65,22 @@
         <p>&#160;</p>
         <p>Pearson's and Cramér's (V) coefficients of contingency and the phi (&#966;, correlation) coefficient reflect the strength of the association in a contingency table (<a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>; <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle \phi=\sqrt{\chi^2/n} \\
+            <sdh:equation>$\displaystyle \phi=\sqrt{\chi^2/n} \\
 
 \displaystyle \text{Pearson } V=\sqrt{\frac{\displaystyle \chi^2}{\chi^2+n}} \\
 
-\displaystyle \text{Cram}\acute{\text{e}}\text{r } V=\sqrt{\frac{\displaystyle \chi^2/n}{\min(r-1,c-1)}} \\$</MadCap:equation>
+\displaystyle \text{Cram}\acute{\text{e}}\text{r } V=\sqrt{\frac{\displaystyle \chi^2/n}{\min(r-1,c-1)}} \\$</sdh:equation>
         </p>
         <p>For 2 by 2 tables, Cramér's V is calculated alternatively as a signed value:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{Cram}\acute{\text{e}}\text{r } V=\frac{\displaystyle ad-bc}{\displaystyle \sqrt{(a+b)(c+d)(a+c)(b+d)}} \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{Cram}\acute{\text{e}}\text{r } V=\frac{\displaystyle ad-bc}{\displaystyle \sqrt{(a+b)(c+d)(a+c)(b+d)}} \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Observed values and totals are given for the table, with expected values and cell chi-square contributions if you ask for them. A row or column without any counts takes no part in the analysis: r and c above are the numbers of rows and columns that have counts.</p>
         <p>&#160;</p>
         <p>If your data categories are both ordered then you will gain more power in tests of independence by using the ordinal methods due to Goodman and Kruskal (gamma) and <a href="../nonparametric_methods/kendall_correlation.htm">Kendall (tau-b)</a>. Large sample, asymptotically normal variance estimates are used; the simple form is used for independence testing (<a href="../references/reference_list.htm#ref-agresti-1984">Agresti, 1984</a>; <a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-goodman-1963">Goodman and Kruskal, 1963</a>, <a href="../references/reference_list.htm#ref-goodman-1972">1972</a>). Tau-b tends to be less sensitive than gamma to the choice of response categories.</p>
         <p>
-            <MadCap:equation>$\displaystyle \gamma=\frac{\displaystyle P-Q}{P+Q} \\
+            <sdh:equation>$\displaystyle \gamma=\frac{\displaystyle P-Q}{P+Q} \\
 
 \displaystyle \tau_b=\frac{\displaystyle P-Q}{\sqrt{w_rw_c}} \\
 
@@ -94,7 +94,7 @@
 
 \displaystyle A_{ij}= \sum_{h \lt i} \sum_{k \lt j}O_{hk}+\sum_{h \gt i} \sum_{k \gt j}O_{hk} \\
 
-\displaystyle D_{ij}= \sum_{h \lt i} \sum_{k \gt j}O_{hk}+\sum_{h \gt i} \sum_{k \lt j}O_{hk} \\$</MadCap:equation>
+\displaystyle D_{ij}= \sum_{h \lt i} \sum_{k \gt j}O_{hk}+\sum_{h \gt i} \sum_{k \lt j}O_{hk} \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p><u>Example</u>
@@ -288,11 +288,11 @@
         <p>&#160;</p>
         <p>Here we see that although the overall test was not significant we did show a statistically significant trend in mean scores. This suggests that supporting these mothers did help lessen their burden of grief.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># R by c contingency table: the StatsDirect help example (Armitage and Berry 1994,
 # grief of 66 mothers after a neonatal death by the support they received) in R
@@ -398,8 +398,8 @@ show("Approximate test of independence:", gamma, se_gamma_ind)
 cat("Kendall tau-b =", six(taub), "\n")
 show("Approximate test of tau-b = 0:", taub, se_taub)
 show("Approximate test of independence:", taub, se_taub_ind)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="834" MadCap:lastWidth="3399" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="834" sdh:lastWidth="3399" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Generalised Cochran-Mantel-Haenszel Tests - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Chi-square tests: Generalised Cochran-Mantel-Haenszel;Generalised Cochran-Mantel-Haenszel;Cochran-Mantel-Haenszel (generalised)" />Generalised Cochran-Mantel-Haenszel tests</h1>
+            <sdh:keyword term="Chi-square tests: Generalised Cochran-Mantel-Haenszel;Generalised Cochran-Mantel-Haenszel;Cochran-Mantel-Haenszel (generalised)" />Generalised Cochran-Mantel-Haenszel tests</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Crosstabs</b>.</p>
         <p>&#160;</p>
@@ -82,11 +82,11 @@
         <p>Sample size = 104</p>
         <p>&#160;</p>
         <p>From the results above you can see that the strongest effect detected is ordinal association (i.e. association between greater job satisfaction with greater income), after controlling for gender.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Generalised Cochran-Mantel-Haenszel tests: the StatsDirect help example (Agresti
 # 2002, job satisfaction by income in 104 people, controlling for gender) in R
@@ -164,8 +164,8 @@ show("Ordinal association", cmh(A_ordinal), 1)
 show("Nominal rows vs. ordinal columns association", cmh(A_rows), r - 1)
 show("Nominal association", cmh(A_nominal), (r - 1) * (cc - 1))
 cat("Sample size =", sum(tab), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

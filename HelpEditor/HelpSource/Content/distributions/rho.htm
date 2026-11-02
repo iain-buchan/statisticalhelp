@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="507" MadCap:lastWidth="2572" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="507" sdh:lastWidth="2572" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Spearman's rho Distribution - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Spearman's rho distribution;Functions;Hotelling-Pabst T distribution;Distributions: Rho" />Spearman's Rho and Hotelling-Pabst T distribution</h1>
+            <sdh:keyword term="Spearman's rho distribution;Functions;Hotelling-Pabst T distribution;Distributions: Rho" />Spearman's Rho and Hotelling-Pabst T distribution</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Spearman's rho</b>.</p>
         <p>&#160;</p>
@@ -15,12 +15,12 @@
         <p>&#160;</p>
         <p>For two rankings (x1,x2...xn and y1,y2...yn) of n objects without ties:</p>
         <p>
-            <MadCap:equation>$\displaystyle T=\sum_{i=1}^n(x_i-y_i)^2$</MadCap:equation>
+            <sdh:equation>$\displaystyle T=\sum_{i=1}^n(x_i-y_i)^2$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>T is related to the <a href="../nonparametric_methods/spearman.htm">Spearman rank correlation coefficient</a> (ρ) by:</p>
         <p>
-            <MadCap:equation>$\displaystyle \rho=1-\frac{6T}{n^3-n}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \rho=1-\frac{6T}{n^3-n}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p><u>Technical Validation</u>
@@ -48,11 +48,11 @@
         <p>P(Hotelling T 798, n 20) = 0.040820092284141 upper tail</p>
         <p>&#160;</p>
         <p>The probabilities in this illustration were calculated in R with the code below; StatsDirect displays them to 15 decimal places.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Spearman's rho distribution: the StatsDirect help illustration (T = 52 for the 10
 # pairs of rankings of the Spearman rank correlation example, Armitage and Berry 1994,
@@ -167,8 +167,8 @@ cat("T =", score20, " Spearman's rho =", fifteen(1 - 6 * score20 / (20^3 - 20)),
 print(cor.test(x, y, method = "spearman", alternative = "greater"))
 p20 &lt;- cor.test(x, y, method = "spearman", alternative = "greater")$p.value
 cat("P(Hotelling T ", score20, ", n 20) = ", fifteen(p20), " upper tail\n", sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

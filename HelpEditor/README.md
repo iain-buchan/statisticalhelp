@@ -1,6 +1,6 @@
 # StatsDirect Help Editor prototype
 
-A separate C#/.NET Windows authoring application. This directory contains its source and an independent help working copy. It edits the **HelpSource working copy**, independently of the original Flare project. No Flare licence, Node installation, web server or internet connection is required to use the built editor or rebuild help.
+A separate C#/.NET Windows authoring application. It edits the **HelpSource working copy**, independently of the original Flare project. No Flare licence, Node installation, web server or internet connection is required to use the built editor or rebuild help.
 
 ## Start
 
@@ -9,6 +9,8 @@ Double-click `Start-StatsDirectHelpEditor.cmd`, or open `App/StatsDirectHelpEdit
 The application is a prototype for evaluation. Its default window opens maximized to suit this PC's display scaling.
 
 Version 0.1.1 adds the turquoise StatsDirect delta with a book-and-pencil badge to the executable, window/taskbar, installed-app entry and setup. The installer creates both Start-menu and desktop shortcuts. The icon includes ten sizes from 16 to 256 pixels for different display scaling settings.
+
+The next development version, 0.1.2, uses the independent [StatsDirect help schema](Schema/StatsDirectHelp.xsd) for authoring extensions, with the `sdh` prefix. Existing Flare source can still be imported and edited. Equations, conditional text, R dropdowns and the generated help retain their appearance; the builder resolves everything locally and never downloads a schema to build help. See [the schema documentation](Schema/README.md). The signed 0.1.1 downloads remain unchanged.
 
 ## Windows installer and public source
 

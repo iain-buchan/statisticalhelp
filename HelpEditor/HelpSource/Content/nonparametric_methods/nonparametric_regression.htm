@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1237" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1237" sdh:lastWidth="974" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Nonparametric Linear Regression - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Nonparametric linear regression" />
+            <sdh:keyword term="Nonparametric linear regression" />
             Nonparametric Linear Regression</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Nonparametric_Nonparametric Linear Regression</b>.</p>
@@ -109,11 +109,11 @@
         <p>&#160;</p>
         <p>From the two sided Kendall's rank correlation test, we can not reject the null hypothesis of mutual independence between the pairs of results for the twelve graduates. Note that the zero lower confidence interval is a marginal result and we may have rejected the null hypothesis had we used a different method for testing independence.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Nonparametric linear regression: the StatsDirect help example (Conover 1999,
 # p. 338) in R
@@ -148,8 +148,8 @@ cat(sprintf("95%% CI for the slope = %g to %g\n", s[r], s[N + 1 - r]))
 # Kendall's rank correlation between outcome and predictor. With ties R gives
 # tau b and a normal approximation; continuity = TRUE matches StatsDirect's P.
 print(cor.test(gmat, gpa, method = "kendall", exact = FALSE, continuity = TRUE))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

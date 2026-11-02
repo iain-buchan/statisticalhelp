@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="2" MadCap:lastHeight="782" MadCap:lastWidth="1013">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" sdh:lastBlockDepth="2" sdh:lastHeight="782" sdh:lastWidth="1013">
     <head><title>Bar Chart or Column Chart - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Bar chart;Column chart" />Bar Plot</h1>
+            <sdh:keyword term="Bar chart;Column chart" />Bar Plot</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Graphics_Bar or Column (Value)</b> for values already in the worksheet, and <b>Graphics_Bar or Column (Frequency)</b> for the counts of the categories of raw data.</p>
         <p>&#160;</p>
@@ -16,7 +16,7 @@
         <p>You can choose to show groupings side by side or as a stack of bars on top of one another. The stack can also be made "100%" where you want to show the relative percentage make up of subgroups in a group, which is equivalent to a pie chart. In the example below the ABO blood group distribution is shown for three ethnic groups using this function:-</p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/bar_chart.svg" width="566" height="463" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/bar_chart.png" width="566" height="463" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/bar_chart.svg" width="566" height="463" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/bar_chart.png" width="566" height="463" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p><u>Example</u>
@@ -38,11 +38,11 @@
         <p>Blood group O is by far the commonest in the two indigenous groups, in which groups B and AB are rare or absent, whereas the White British group is split almost evenly between blood groups A and O.</p>
         <p>&#160;</p>
         <p>Bar or Column (Frequency) draws the same kind of plot from raw categorical data: it counts the observations in each category of the column you select (with more than one column, it plots the proportion of each column's observations in each category). For example, select the column marked "Sex" in the Other worksheet of the test workbook: the two bars show its counts, F 4, M 8.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Bar plot: the StatsDirect help illustration (the ABO blood group distribution of
 # three ethnic groups; the test workbook's Graphics worksheet columns Blood Group,
@@ -97,8 +97,8 @@ counts &lt;- table(sex)
 barplot(counts, col = shade[1], ylab = "Sex", main = "Bar chart")
 cat("Sex counts: ", paste(names(counts), counts, collapse = ", "), "\n", sep = "")
 par(op)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

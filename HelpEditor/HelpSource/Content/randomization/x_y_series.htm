@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1247" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1247" sdh:lastWidth="974" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Generating a Random Series of Integers - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Randomization: Series of numbers" />Randomize a Series</h1>
+            <sdh:keyword term="Randomization: Series of numbers" />Randomize a Series</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Randomization_Series X to Y</b></p>
         <p>&#160;</p>
@@ -228,11 +228,11 @@
         <p><u>Technical validation</u>
         </p>
         <p>Robust (pseudo-)random number generation is used, see <a href="random_number_generator.htm">random number generation</a>.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above, with the different series that R's own generator gives for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Randomizing a series of integers: the StatsDirect help illustration (the numbers
 # 1 to 49, as in a lottery, put in a random order with seed 10) in R
@@ -259,8 +259,8 @@ cat("The first six:", head(series, 6), "\n")
 # The five cards labelled 6 to 10
 set.seed(seed)
 cat("Cards 6 to 10 shuffled:", sample(6:10), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

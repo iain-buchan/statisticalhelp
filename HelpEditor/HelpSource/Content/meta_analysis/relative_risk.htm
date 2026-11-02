@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2405.552" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2405.552" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Relative Risk Meta-analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Meta-analysis: Relative risk;Relative risk: Meta-analysis;Risk ratio: Meta-analysis" />
+            <sdh:keyword term="Meta-analysis: Relative risk;Relative risk: Meta-analysis;Risk ratio: Meta-analysis" />
              Relative Risk (Risk Ratio) Meta-analysis</h1>
         <p>&#160;</p>
         <p>Menu location:  <b>Analysis_Meta-Analysis_Relative Risk</b>.</p>
@@ -52,7 +52,7 @@
         <p>&#160;</p>
         <p>The Mantel-Haenszel type method of Rothman and Boice (<a href="../references/reference_list.htm#ref-rothman-1998">Rothman, 1998</a>) is used to estimate the pooled risk ratio for all strata under the assumption of a fixed effects model:</p>
         <p>
-            <MadCap:equation>$\displaystyle \widehat{RR}_{MH}=\frac{\displaystyle \sum_{i=1}^k \left( \frac{b_i+d_i}{n_i}\right)a_i}{\displaystyle \sum_{i=1}^k \left( \frac{a_i+c_i}{n_i}\right)b_i}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \widehat{RR}_{MH}=\frac{\displaystyle \sum_{i=1}^k \left( \frac{b_i+d_i}{n_i}\right)a_i}{\displaystyle \sum_{i=1}^k \left( \frac{a_i+c_i}{n_i}\right)b_i}$</sdh:equation>
         </p>
         <p>- where n<sub>i</sub> =  a<sub>i</sub>+b<sub>i</sub>+c<sub>i</sub>+d<sub>i</sub>.</p>
         <p>&#160;</p>
@@ -330,11 +330,11 @@
         <p>&#160;</p>
         <p>Here we can say with 95% confidence, assuming a random effects model, that for those given aspirin the true population risk of dying in the specified interval after a heart attack is at most 0.996 of the risk for those not given aspirin. Assuming a fixed effects model a stronger inference could be made about a relative risk of .96 (the upper confidence limit) but the high inter-study variation makes the fixed effects model less appropriate.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Relative risk meta-analysis: the StatsDirect help example (Fleiss and Gross 1991,
 # deaths after myocardial infarction in seven placebo-controlled trials of aspirin;
@@ -519,8 +519,8 @@ forest(w_mh, rr_mh, exp(log(rr_mh) - z * sqrt(v_mh)), exp(log(rr_mh) + z * sqrt(
        "Relative risk meta-analysis plot (fixed effects)", "combined [fixed]")
 forest(w_dl, rr_dl, dl_ci[1], dl_ci[2],
        "Relative risk meta-analysis plot (random effects)", "combined [random]")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

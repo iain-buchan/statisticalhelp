@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Homogeneity or Equality of Variance - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="ANOVA: Homogeneity;Bartlett's test;Homogeneity of variance;Equality of variance;Levene's test;Squared ranks test" />
+            <sdh:keyword term="ANOVA: Homogeneity;Bartlett's test;Homogeneity of variance;Equality of variance;Levene's test;Squared ranks test" />
             Equality (Homogeneity) of Variance</h1>
         <p>&#160;</p>
         <p>Menu locations:</p>
@@ -139,11 +139,11 @@
         <p>&#160;</p>
         <p>Here there is no evidence that the variances differ, and the Welch adjustment does not change the conclusion of the one way analysis (P = 0.177 against P = 0.1195).</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the two examples above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Squared ranks test for equality of variance: the StatsDirect help example
 # (Conover 1999, weights of cereal boxes filled by two machines) in R
@@ -195,8 +195,8 @@ cat("Bartlett's chi-square =", six(b$statistic), " df =", b$parameter, "",
 w &lt;- oneway.test(worms ~ group)                         # var.equal = FALSE is Welch
 cat("Welch adjusted ANOVA F =", six(w$statistic), "",
     dfs(w$parameter[1], six(w$parameter[2])), "", pv(w$p.value), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

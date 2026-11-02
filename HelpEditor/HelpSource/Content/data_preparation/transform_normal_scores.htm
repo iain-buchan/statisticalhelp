@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1102" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1102" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Normal Scores Transform - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Normal scores;Transformations: Normal scores" />
+            <sdh:keyword term="Normal scores;Transformations: Normal scores" />
             Normal Scores</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Data_Transforming and Deriving_Normal Scores</b>.</p>
@@ -17,17 +17,17 @@
         <p>Three different methods for calculating normal scores are provided:</p>
         <p>1.&#160;<b>van der Waerden's</b> method (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle s=\Phi^{-1}\left(\frac{r}{n+1}\right)$</MadCap:equation>
+            <sdh:equation>$\displaystyle s=\Phi^{-1}\left(\frac{r}{n+1}\right)$</sdh:equation>
             <br />- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ<sup>-1</sup>(p) is the pth quantile from the standard normal distribution.</p>
         <p>&#160;</p>
-        <p>2.&#160;<b>Blom's</b> method (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>):<br /><MadCap:equation>$\displaystyle s=\Phi^{-1}\left(\frac{r-3/8}{n+1/4}\right)$</MadCap:equation></p>
+        <p>2.&#160;<b>Blom's</b> method (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>):<br /><sdh:equation>$\displaystyle s=\Phi^{-1}\left(\frac{r-3/8}{n+1/4}\right)$</sdh:equation></p>
         <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ<sup>-1</sup>(p) is the pth quantile from the standard normal distribution.</p>
         <p>&#160;</p>
         <p>3.&#160;<b>Expected normal order scores</b> (<a href="../references/reference_list.htm#ref-david-1981">David, 1981</a>; <a href="../references/reference_list.htm#ref-royston-1982-a">Royston, 1982</a>; <a href="../references/reference_list.htm#ref-harter-1961">Harter, 1961</a>)<br /></p>
         <p>
-            <MadCap:equation>$\displaystyle s=\frac{n!}{(r-1)!(n-r)!}\int_{-\infty}^\infty x[\Phi(x)]^{r-1}[1-\Phi(x)]^{n-r}\phi(x) \space dx \\
+            <sdh:equation>$\displaystyle s=\frac{n!}{(r-1)!(n-r)!}\int_{-\infty}^\infty x[\Phi(x)]^{r-1}[1-\Phi(x)]^{n-r}\phi(x) \space dx \\
 
-\displaystyle \phi(x)=\frac{\exp(-0.5x^2)}{\sqrt{2\pi}}$</MadCap:equation>
+\displaystyle \phi(x)=\frac{\exp(-0.5x^2)}{\sqrt{2\pi}}$</sdh:equation>
         </p>
         <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size, φ(x) is the standard normal density and Φ(x) is the standard normal distribution function. The solution is found by numerical integration. Calculation of expected normal order scores is not practical for very large samples, n of 2500 is the maximum permitted in StatsDirect.</p>
         <p><u>Example</u>

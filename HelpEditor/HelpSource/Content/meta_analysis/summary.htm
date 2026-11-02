@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="339" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="339" sdh:lastWidth="1013" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Summary Meta-analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Inverse variance meta-analysis;Meta-analysis: Summary;Summary meta-analysis" />Summary Data Meta-analysis</h1>
+            <sdh:keyword term="Inverse variance meta-analysis;Meta-analysis: Summary;Summary meta-analysis" />Summary Data Meta-analysis</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Meta-Analysis_Summary</b>.</p>
         <p>&#160;</p>
@@ -194,11 +194,11 @@
         <p>Egger: bias = -0.671627 (90% CI = -2.183157 to 0.839904) P = 0.4116</p>
         <p>&#160;</p>
         <p>The standard error of each log odds ratio is recovered from the study's confidence limits, and the studies are then combined by inverse variance weighting on the log scale. Here the fixed effects pooled odds ratio, 0.90 with 95% confidence limits of 0.84 and 0.96, is close to the Peto odds ratio calculated from the counts of the same trials. The inconsistency between the studies is moderate (I² = 35%), and the random effects model, which allows for it, gives a wider interval whose upper limit approaches 1.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Summary data meta-analysis: the StatsDirect help example (the odds ratio of each of
 # seven trials of aspirin after heart attack, Fleiss 1993, with its 95% confidence
@@ -343,8 +343,8 @@ forest &lt;- function(weights, est, se_est, title) {
 }
 forest(w, pooled, se_pooled, "Summary meta-analysis plot [fixed effects]")
 forest(w_dl, pooled_dl, se_dl, "Summary meta-analysis plot [random effects]")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

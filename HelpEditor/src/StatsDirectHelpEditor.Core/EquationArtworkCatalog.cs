@@ -87,17 +87,18 @@ public sealed class EquationArtworkCatalog
 
     // The same length-prefixed UTF-16 representation is implemented in
     // equation-artwork.js. Namespace prefixes, declarations and XML comments
-    // do not affect rendering. Actual text, attributes and child order do.
+    // do not affect rendering. Equivalent StatsDirect/Flare authoring names
+    // retain the original addresses. Actual text, attributes and child order do.
     public static string CanonicalSource(XElement equation)
     {
         var builder = new StringBuilder();
         void Part(string value) { value = value.Replace("\r\n", "\n").Replace('\r', '\n'); builder.Append(value.Length).Append(':').Append(value); }
         void Element(XElement element)
         {
-            builder.Append('E'); Part(element.Name.NamespaceName); Part(element.Name.LocalName);
-            var attributes = element.Attributes().Where(a => !a.IsNamespaceDeclaration).OrderBy(a => a.Name.NamespaceName, StringComparer.Ordinal).ThenBy(a => a.Name.LocalName, StringComparer.Ordinal).ToArray();
+            builder.Append('E'); Part(HelpSourceNamespaces.ArtworkNamespace(element.Name.NamespaceName)); Part(element.Name.LocalName);
+            var attributes = element.Attributes().Where(a => !a.IsNamespaceDeclaration).OrderBy(a => HelpSourceNamespaces.ArtworkNamespace(a.Name.NamespaceName), StringComparer.Ordinal).ThenBy(a => a.Name.LocalName, StringComparer.Ordinal).ToArray();
             builder.Append(attributes.Length).Append(':');
-            foreach (var attribute in attributes) { Part(attribute.Name.NamespaceName); Part(attribute.Name.LocalName); Part(attribute.Value); }
+            foreach (var attribute in attributes) { Part(HelpSourceNamespaces.ArtworkNamespace(attribute.Name.NamespaceName)); Part(attribute.Name.LocalName); Part(attribute.Value); }
             var text = new StringBuilder();
             void Flush() { if (text.Length == 0) return; builder.Append('T'); Part(text.ToString()); text.Clear(); }
             foreach (var node in element.Nodes())

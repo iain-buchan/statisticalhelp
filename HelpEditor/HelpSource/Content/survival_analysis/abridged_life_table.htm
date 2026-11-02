@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="5168" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="5168" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Abridged Life Table (Actuarial) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
         </script>
     </head>
     <body>
-        <MadCap:keyword term="Survival analysis: Abridged life table;Chiang-Greenwood life table;Actuarial table;Abridged life table;Life table: Abridged" />
+        <sdh:keyword term="Survival analysis: Abridged life table;Chiang-Greenwood life table;Actuarial table;Abridged life table;Life table: Abridged" />
         <h1>Abridged Life Table</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Survival_Abridged Life Table</b></p>
@@ -15,8 +15,8 @@
         <p>&#160;</p>
         <p>The table is constructed by the following definitions of <a href="../references/reference_list.htm#ref-greenwood-1922">Greenwood (1922)</a> and <a href="../references/reference_list.htm#ref-chiang-1984">Chiang (1984)</a>:</p>
         <p>
-            <MadCap:equation>$\displaystyle \hat q_i=\frac{n_iM_i}{1+(1-a_i)n_iM_i} \\
-\displaystyle M_i=\frac{D_i}{P_i}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \hat q_i=\frac{n_iM_i}{1+(1-a_i)n_iM_i} \\
+\displaystyle M_i=\frac{D_i}{P_i}$</sdh:equation>
         </p>
         <p>- where qi hat is the probability that an individual will die in the ith interval, n<sub>i</sub> is the length of the interval, M<sub>i</sub> is the death rate in the interval (i.e. the number of individuals dying in the interval [D<sub>i</sub>] divided by the mid-year population [P<sub>i</sub>], which is the number of years lived in the interval by those alive at the start of the interval, i.e. it is the person-time denominator for the rate), and ai is the fraction of the last age interval of life.</p>
         <p>&#160;</p>
@@ -49,10 +49,10 @@
         <p>&#160;</p>
         <p>The rest of the calculations proceed using the following formulae on a theoretical standard starting population of 100,000 (the radix value) living at the start. In other words, we are constructing an artificial cohort of 100,000 and overlaying current mortality experience on them in order to work out life expectancies.</p>
         <p>
-            <MadCap:equation>$\displaystyle \left(\begin{array}{c}d_i = l_i\hat q_i\\ l_i+1=l_i-d_i \\ L_i=n_i(l_i-d_i)+a_in_id_i\end{array}\right), \space i=0,1,...w-1 \\
+            <sdh:equation>$\displaystyle \left(\begin{array}{c}d_i = l_i\hat q_i\\ l_i+1=l_i-d_i \\ L_i=n_i(l_i-d_i)+a_in_id_i\end{array}\right), \space i=0,1,...w-1 \\
 \displaystyle L_w=\frac{l_w}{M_w} \\
 \displaystyle T_i=\sum_{w}^i L_i \\
-\displaystyle e_i=\frac{T_i}{l_i}$</MadCap:equation>
+\displaystyle e_i=\frac{T_i}{l_i}$</sdh:equation>
         </p>
         <p>- where w is the number of intervals, d<sub>i</sub> is the number out of the artificial cohort dying in the ith interval, l<sub>i</sub> is the number out of the artificial cohort alive at the start of the interval, L<sub>i</sub> is the number of years lived in the interval by the artificial cohort, T<sub>i</sub> is the total number of years lived by those individuals from the artificial cohort attaining the age that starts the interval, and e<sub>i</sub> is the observed expectation of life at the age that starts the interval.</p>
         <p>&#160;</p>
@@ -146,18 +146,18 @@
         <p>&#160;</p>
         <p>Standard errors and confidence intervals for q and e are calculated using the formulae given by Chiang (1984):</p>
         <p>
-            <MadCap:equation>$\displaystyle s_{\hat e_\alpha}^2=\sum_{i=\alpha}^{w-1}\hat p_{\alpha i}^2[(1-a_i)n_i+\hat e_{i+1}]^2s_{\hat p_i}^2 \\
+            <sdh:equation>$\displaystyle s_{\hat e_\alpha}^2=\sum_{i=\alpha}^{w-1}\hat p_{\alpha i}^2[(1-a_i)n_i+\hat e_{i+1}]^2s_{\hat p_i}^2 \\
 \displaystyle s_{\hat p_i}^2=\frac{\hat q_i^2(1-\hat q_i)}{D_i} \\
 \displaystyle \hat p_{\alpha i}=\frac{l_i}{l_\alpha} \\
-\displaystyle s_{\hat q_i}^2=\frac{1}{D_i}\hat q_i^2(1-\hat q_i)$</MadCap:equation>
+\displaystyle s_{\hat q_i}^2=\frac{1}{D_i}\hat q_i^2(1-\hat q_i)$</sdh:equation>
         </p>
         <p>- where s squared e hat alpha is the variance of the expectation of life at the age of the start of the interval alpha, and s squared q hat i is the variance of the probability of death for the ith interval.</p>
         <p>The variance of e does not include the sampling variation of the death rate in the open interval, so the Monte Carlo interval can be wider than the Chiang interval when few deaths fall in that interval.</p>
         <p>&#160;</p>
         <p>If you want to test whether or not the probability of death in one age interval is statistically significantly different from another interval, or compare the probability of death in a given age interval from two different populations (e.g. male vs. female), then you can use the following formulae:</p>
         <p>
-            <MadCap:equation>$\displaystyle z=\frac{q_i-q_j}{\text{SE}(q_i-q_j)} \\
-\displaystyle \text{SE}(q_i-q_j)=\sqrt{\frac{\hat q_i^2(1-q_i)}{D_i}+\frac{\hat q_j^2(1-q_j)}{D_j}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle z=\frac{q_i-q_j}{\text{SE}(q_i-q_j)} \\
+\displaystyle \text{SE}(q_i-q_j)=\sqrt{\frac{\hat q_i^2(1-q_i)}{D_i}+\frac{\hat q_j^2(1-q_j)}{D_j}}$</sdh:equation>
         </p>
         <p>- where z is a standard normal test statistic and SE is the standard error of the difference between the two (ith vs. jth) probabilities of death that you are comparing.</p>
         <p>&#160;</p>
@@ -821,11 +821,11 @@
         <p>95% CI by Monte Carlo (20000) simulation = 71.877782 to 72.027161</p>
         <p>&#160;</p>
         <p>The Monte Carlo limits depend on the random numbers drawn, so they differ a little from one run to the next.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above; its Monte Carlo limits differ a little from run to run, as those of StatsDirect do. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Abridged life table: the StatsDirect help example (Chiang 1984, p. 141, the total
 # population of California in 1970; the test workbook's Survival worksheet columns
@@ -910,8 +910,8 @@ cat("95% CI by Monte Carlo (20000) simulation =", mc(sim["median", ]), "\n")
 cat("Expectation of life at birth =", six(e[1]), "\n")
 cat("95% CI by Chiang variance estimate =", ci(e[1], sqrt(ve[1])), "\n")
 cat("95% CI by Monte Carlo (20000) simulation =", mc(sim["e0", ]), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

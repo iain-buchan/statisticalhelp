@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="3" MadCap:lastHeight="1245" MadCap:lastWidth="3229" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="3" sdh:lastHeight="1245" sdh:lastWidth="3229" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Binomial Distribution - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Binomial distribution;Distributions: Binomial" />Binomial Distribution</h1>
+            <sdh:keyword term="Binomial distribution;Distributions: Binomial" />Binomial Distribution</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Binomial</b>.</p>
         <p>&#160;</p>
@@ -16,17 +16,17 @@
         <p>
             If a coin is tossed n times then a binomial distribution can be used to determine the probability, P(r) of exactly r successes:</p>
         <p>
-            <MadCap:equation>$\displaystyle P(r)=\left(\begin{array}{c}n\\ r\end{array}\right)p^r(1-p)^{n-r} \\
+            <sdh:equation>$\displaystyle P(r)=\left(\begin{array}{c}n\\ r\end{array}\right)p^r(1-p)^{n-r} \\
 
-\displaystyle P(r)=\frac{n!}{r!(n-r)!}p^r(1-p)^{n-r}$</MadCap:equation>
+\displaystyle P(r)=\frac{n!}{r!(n-r)!}p^r(1-p)^{n-r}$</sdh:equation>
         </p>
         <p>Here p is the probability of success on each trial, in many situations this will be 0.5, for example the chance of a coin coming up heads is 50:50/equal/p=0.5. The assumptions of above calculation are that the n events have mutually exclusive outcomes, are independent and are randomly selected from a binomial population. Note that ! is a factorial and 0! is 1 as anything to the power of 0 is 1.</p>
         <p>&#160;</p>
         <p>In many situations the probability of interest is not that associated with exactly r successes but instead it is the probability of r or more (≥r) or at most r (≤r) successes. Here the cumulative probability is calculated:</p>
         <p>
-            <MadCap:equation>$\displaystyle P(\ge r)=\sum_{i=r}^n P(r_i) \\
+            <sdh:equation>$\displaystyle P(\ge r)=\sum_{i=r}^n P(r_i) \\
 
-\displaystyle P(\le r)=\sum_{i=0}^r P(r_i) \\$</MadCap:equation>
+\displaystyle P(\le r)=\sum_{i=0}^r P(r_i) \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>The mean of a binomial distribution is np and its standard deviation is sqr(np(1-p)); as a proportion (r/n) the mean is p and the standard deviation is sqr(p(1-p)/n). The shape of a binomial distribution is symmetrical when p=0.5 or when n is large.</p>
@@ -38,7 +38,7 @@
         </p>
         <p>When n is large and p is close to 0.5, the binomial distribution can be approximated from the standard normal distribution; this is a special case of the <a href="normal.htm">central limit theorem</a>:</p>
         <p>
-            <MadCap:equation>$\displaystyle P(\ge r)= P(z)=P \left[ \frac{r/n-p}{\sqrt{p(1-p)/n}} \right] \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle P(\ge r)= P(z)=P \left[ \frac{r/n-p}{\sqrt{p(1-p)/n}} \right] \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Please note that confidence intervals for binomial proportions with p = 0.5 are given with the <a href="../exact_tests_on_counts/sign.htm">sign test</a>.</p>
@@ -49,7 +49,7 @@
         <p>&#160;</p>
         <p>Γ(*) is the gamma function:</p>
         <p>
-            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</sdh:equation>
         </p>
         <p>Γ(1)=1</p>
         <p>Γ(x+1)=xΓ(x)</p>
@@ -73,11 +73,11 @@
         <p>&#160;</p>
         <p>The two report lines are what StatsDirect prints, to 15 decimal places. The R code below recomputes the probabilities.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Binomial distribution: the StatsDirect help illustration (a fair coin tossed 10 times,
 # and a treatment that succeeds in one patient in four given to 20 patients) in R
@@ -125,8 +125,8 @@ print(binom.test(8, 20, p = 0.25, alternative = "greater"))
 # qbinom is the inverse, the smallest r whose cumulative probability P(&lt;= r) reaches the
 # probability given; the StatsDirect dialog does not offer it for the binomial
 qbinom(0.95, 20, 0.25)                      # 8: P(&lt;=7) is 0.898188 and P(&lt;=8) 0.959075</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
     </body>
 </html>

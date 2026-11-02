@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="763" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="763" sdh:lastWidth="3209" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Precision and Floating Point Arithmetic in StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Precision (arithmetic computation)" />Precision</h1>
+            <sdh:keyword term="Precision (arithmetic computation)" />Precision</h1>
         <p>&#160;</p>
         <p>StatsDirect calculates all of its functions in IEEE-754 double precision (8 byte, 64 bit) for floating point arithmetic and 4 byte (32 bit) integers for integer arithmetic.</p>
         <p>&#160;</p>
@@ -32,7 +32,7 @@
         <p>&#160;</p>
         <p>Each number is stored in binary format (a series of 0 or 1 digits/bits). Double precision numbers have 64 of these bits with which to represent a real number. The first bit represents the sign of the number (s), the next 11 bits represent the exponent (e) and the other 52 bits (the mantissa, M) store the detail: A real number is:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{real number}=s \times M \times B^{e-E}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{real number}=s \times M \times B^{e-E}$</sdh:equation>
         </p>
         <p>- where B (the radix) is 2 for all computers that StatsDirect runs on, and E is the bias of the exponent (a fixed constant).</p>
         <p>&#160;</p>

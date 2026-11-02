@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2798.552" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="topic">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2798.552" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" class="topic">
     <head><title>Mann-Whitney U Test (Wilcoxon Rank Sum) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,14 +7,14 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Wilcoxon rank sum test;Mann-Whitney U test;Wilcoxon two sample test" />Mann-Whitney U Test</h1>
+            <sdh:keyword term="Wilcoxon rank sum test;Mann-Whitney U test;Wilcoxon two sample test" />Mann-Whitney U Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Nonparametric_Mann-Whitney</b>.</p>
         <p>&#160;</p>
         <p>This is a method for the comparison of two independent random samples (x and y):</p>
         <p>The Mann Whitney U statistic is defined as:</p>
         <p>
-            <MadCap:equation>$\displaystyle U=n_1 n_2+\frac{n_2(n_2+1)}{2}-\sum_{i=n_1+1}^{n_1+n_2}R_i$</MadCap:equation>
+            <sdh:equation>$\displaystyle U=n_1 n_2+\frac{n_2(n_2+1)}{2}-\sum_{i=n_1+1}^{n_1+n_2}R_i$</sdh:equation>
         </p>
         <p>- where samples of size n<sub>1</sub> and n<sub>2</sub> are pooled and R<sub>i</sub> are the ranks.</p>
         <p>&#160;</p>
@@ -231,11 +231,11 @@
         <p>K = 134   Median difference = 0.8 (CI: -2.3 to 4.4)</p>
         <p>&#160;</p>
         <p>Here we have assumed that these groups are independent and that they represent at least hypothetical random samples of the sub-populations they represent. In this analysis, we are clearly unable to reject the null hypothesis that one group does NOT tend to yield different fitness scores to the other. This lack of statistical evidence of a difference is reflected in the confidence interval for the difference between population means, in that the interval spans zero. Note that the quoted 95.14% confidence interval is as close as you can get to 95% because of the very nature of the mathematics involved in nonparametric methods like this.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Mann-Whitney U test: the StatsDirect help example (Conover 1999, p. 218) in R
 farm &lt;- c(14.8, 7.3, 5.6, 6.3, 9.0, 4.2, 10.6, 12.5, 12.9, 16.1, 11.4, 2.7)
@@ -298,8 +298,8 @@ cat(sprintf("%.2f%% confidence interval for the difference: K = %d\n",
             100 * (1 - 2 * pwilcox(K - 1, n1, n2)), K))
 cat(sprintf("median difference = %g   CI = %g to %g\n",
             median(d), d[K], rev(d)[K]))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

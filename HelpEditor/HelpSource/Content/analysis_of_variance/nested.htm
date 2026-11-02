@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="2345" MadCap:lastWidth="3189">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" sdh:lastBlockDepth="5" sdh:lastHeight="2345" sdh:lastWidth="3189">
     <head><title>Nested (Hierarchical) Analysis of Variance (ANOVA) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="ANOVA: Nested;Fully nested random ANOVA;Nested ANOVA" />Fully Nested Random Analysis of Variance</h1>
+            <sdh:keyword term="ANOVA: Nested;Fully nested random ANOVA;Nested ANOVA" />Fully Nested Random Analysis of Variance</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Analysis of Variance_Fully Nested</b>.</p>
         <p>&#160;</p>
@@ -116,10 +116,10 @@
         </p>
         <p>ANOVA for a three factor fully random nested (split-plot) model is calculated as follows (Snedecor and Cochran, 1989):</p>
         <p>
-            <MadCap:equation>$\displaystyle CF=\frac{\displaystyle (\sum_{i=1}^g \sum_{j=1}^{s_i} \sum_{k=1}^{n_{ij}}X_{ijk})^2}{N} \\
+            <sdh:equation>$\displaystyle CF=\frac{\displaystyle (\sum_{i=1}^g \sum_{j=1}^{s_i} \sum_{k=1}^{n_{ij}}X_{ijk})^2}{N} \\
 \displaystyle SS_{\text{total}}=\sum_{i=1}^g \sum_{j=1}^{s_i} \sum_{k=1}^{n_{ij}} X_{ijk}^2-CF \\
 \displaystyle SS_{\text{groups}}=\sum_{i=1}^{g} \frac{\displaystyle (\sum_{j=1}^{s_i}\sum_{k=1}^{n_{ij}} X_{ijk})^2}{\displaystyle \sum_{j=1}^{s_i}n_{ij}}-CF \\
-\displaystyle SS_{\text{subgroups (group i)}}=\sum_{j=1}^{s_i} \frac{\displaystyle (\sum_{k=1}^{n_{ij}}X_{ijk})^2}{n_{ij}}-\frac{\displaystyle (\sum_{j=1}^{s_i}\sum_{k=1}^{n_{ij}} X_{ijk})^2}{\displaystyle \sum_{j=1}^{s_i}n_{ij}}$</MadCap:equation>
+\displaystyle SS_{\text{subgroups (group i)}}=\sum_{j=1}^{s_i} \frac{\displaystyle (\sum_{k=1}^{n_{ij}}X_{ijk})^2}{n_{ij}}-\frac{\displaystyle (\sum_{j=1}^{s_i}\sum_{k=1}^{n_{ij}} X_{ijk})^2}{\displaystyle \sum_{j=1}^{s_i}n_{ij}}$</sdh:equation>
         </p>
         <p>- where X<sub>ijk</sub> is the kth observation from the jth subgroup of the ith group, g is the number of groups, SS<sub>total</sub> is the total sum of squares, SS<sub>groups</sub> is the sum of squares due to the group factor, SS<sub>subgroups (group i)</sub> is the sum of squares due to the subgroup factor of group i, si is the number of subgroups in the ith group, n<sub>ij</sub> is the number of observations in the jth subgroup of the ith group and N is the total number of observations.</p>
         <p>&#160;</p>
@@ -286,11 +286,11 @@
         <p>&#160;</p>
         <p>The analysis shows that the plants contribute most to the overall variability and the leaves also have a statistically significant contribution. The samples from each leaf, as reflected by the residual sum of squares, contribute relatively little to the overall variability. Sampling further plants or leaves is, therefore, more important than taking multiple samples per leaf.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Fully nested (hierarchical) analysis of variance: the StatsDirect help example
 # (Snedecor and Cochran 1989, calcium in the leaves of turnip greens: four
@@ -330,8 +330,8 @@ p3 &lt;- pf(f3, df[2], df[3], lower.tail = FALSE)
 cat("F (VR between groups) =", six(f1), " ", pv(p1), "\n")
 cat("F (using group/subgroup msqr) =", six(f2), " ", pv(p2), "\n")
 cat("F (VR between subgroups within groups) =", six(f3), " ", pv(p3), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

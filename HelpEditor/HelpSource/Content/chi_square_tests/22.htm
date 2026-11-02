@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2604" MadCap:lastWidth="2773" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2604" sdh:lastWidth="2773" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>2 by 2 Chi-square Test (Four-fold Contingency Table) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Chi-square tests: 2 by 2;2 by 2 chi-square test;Odds ratio: 2 by 2 table;Relative risk (2 by 2 table);Fourfold table" />
+            <sdh:keyword term="Chi-square tests: 2 by 2;2 by 2 chi-square test;Odds ratio: 2 by 2 table;Relative risk (2 by 2 table);Fourfold table" />
             2 by 2 Chi-square Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Chi-square_2 by 2</b>.</p>
@@ -25,21 +25,21 @@
         </ul>
         <p>&#160;</p>
         <p>
-            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">$\displaystyle \chi^2=\sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}$</MadCap:equation>
+            <sdh:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">$\displaystyle \chi^2=\sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}$</sdh:equation>
         </p>
         <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n).</p>
         <p>&#160;</p>
         <p>Yates' continuity correction improves the approximation of the discrete sample chi-square statistic to a continuous chi-square distribution (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>):</p>
         <p>
-            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">$\displaystyle \text{Yates' corrected } \chi^2= \sum_{i=1}^r \sum_{j=1}^c \frac{\displaystyle (|O_{ij}-E_{ij}|-0.5)^2}{E_{ij}}$</MadCap:equation>
+            <sdh:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML">$\displaystyle \text{Yates' corrected } \chi^2= \sum_{i=1}^r \sum_{j=1}^c \frac{\displaystyle (|O_{ij}-E_{ij}|-0.5)^2}{E_{ij}}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>The <a href="rc.htm">r by c chi-square</a> function can be used to examine two by two tables in greater detail.</p>
         <p>&#160;</p>
         <p>Pearson's and Cramér's (V) coefficients of contingency reflect the strength of the association in a contingency table (<a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>; <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{Pearson V}=\sqrt{\frac{\chi^2}{\chi^2+n}} \\
-\displaystyle \text{Cram}\acute{\text{e}}\text{r V}=\frac{\displaystyle ad-bc}{\displaystyle \sqrt{(a+b)(c+d)(a+c)(b+d)}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{Pearson V}=\sqrt{\frac{\chi^2}{\chi^2+n}} \\
+\displaystyle \text{Cram}\acute{\text{e}}\text{r V}=\frac{\displaystyle ad-bc}{\displaystyle \sqrt{(a+b)(c+d)(a+c)(b+d)}}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>You will see another coefficient, phi (ϕ, correlation), given by the r by c chi-square function. This is equal to an unsigned version of V with 2 by 2 tables.</p>
@@ -181,11 +181,11 @@
         <p>&#160;</p>
         <p>Here we can see a statistically significant relationship between treatment and mortality. The strength of that relationship is reflected by the coefficient of contingency. The odds ratio tells us that the odds in favour of dying after treatment A are about half of the odds of dying after treatment B. With 95% confidence we put the true population value for this ratio of odds somewhere between 0.33 and 0.85. If you need to phrase the arguments with odds ratios the other way around then just quote the reciprocals, i.e. here we would say that the odds of dying after treatment B are 1.9 times greater than after treatment A.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># 2 by 2 chi-square test: the StatsDirect help example (Armitage and Berry 1994, deaths
 # among 257 patients given treatment A and 244 given treatment B) in R
@@ -264,8 +264,8 @@ cat("mid-P exact 95% confidence interval =", six(limit(upper, 0.5)), "to",
 mid &lt;- min(lower(1, 0.5), upper(1, 0.5))
 cat("Exact mid-P one sided ", pv(mid), ", two sided ", pv(min(1, 2 * mid)), "\n",
     sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

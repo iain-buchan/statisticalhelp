@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Reflection;
 using System.Xml.Linq;
 using StatsDirect.HelpEditor.App;
+using StatsDirect.HelpEditor.Core;
 
 internal static class Program
 {
@@ -72,11 +73,11 @@ internal static class Program
                 await form.EditorWebView.ExecuteScriptAsync("document.getElementById('equation-field').value='\\\\frac{a+b}{n}';document.getElementById('equation-apply').click();");
                 await form.SaveCurrentTopicAsync();
                 var saved = XDocument.Parse(form.CurrentProject.ReadTopic(path));
-                XNamespace mc = "http://www.madcapsoftware.com/Schemas/MadCap.xsd";
-                Check(saved.Descendants(mc + "equation").Single().Value.Contains("frac{a+b}{n}"), "Native MathLive editing saves back into a Flare equation");
+                Check(saved.Descendants(HelpSourceNamespaces.Current + "equation").Single().Value.Contains("frac{a+b}{n}"), "Native MathLive editing saves back into a StatsDirect equation");
                 var sourceDocument = XDocument.Parse(changed);
                 Check(saved.Descendants("pre").Select(p => p.Value).SequenceEqual(sourceDocument.Descendants("pre").Select(p => p.Value)), "Native formatted save preserves every R/code block, whitespace and Unicode");
-                Check(saved.Descendants(mc + "keyword").Select(k => (string?)k.Attribute("term")).SequenceEqual(sourceDocument.Descendants(mc + "keyword").Select(k => (string?)k.Attribute("term"))), "Native formatted save preserves all keyword metadata");
+                static IEnumerable<string?> Keywords(XDocument document) => document.Descendants().Where(element => element.Name.LocalName == "keyword" && HelpSourceNamespaces.IsAuthoringNamespace(element.Name.NamespaceName)).Select(element => (string?)element.Attribute("term"));
+                Check(Keywords(saved).SequenceEqual(Keywords(sourceDocument)), "Native formatted save preserves all keyword metadata");
                 await form.OpenTopicAsync(path);
                 await form.SwitchWorkspaceAsync("public");
                 Check(form.LastOutputPreviewResult != null && File.ReadAllText(Path.Combine(form.LastOutputPreviewResult.OutputDirectory, path.ToLowerInvariant())).Contains("frac{a+b}{n}"), "Generated Browser view receives the updated equation");

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="5396.552" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="5396.552" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Wei-Lachin (Multivariate Logrank) Test - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Survival analysis: Wei-Lachin test;Wei-Lachin test" />Wei-Lachin Test</h1>
+            <sdh:keyword term="Survival analysis: Wei-Lachin test;Wei-Lachin test" />Wei-Lachin Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Survival_Wei-Lachin</b>.</p>
         <p>&#160;</p>
@@ -29,26 +29,26 @@
         <p>&#160;</p>
         <p>The general univariate statistic for comparing the time to event (of component type k out of m multivariate components) of the two groups is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle T_k=\frac{\displaystyle \sum_{j=1}^{n_1}w_j\Delta_{1kj}e_{2k}-\sum_{j=1}^{n_2}w_j\Delta_{2kj}e_{1k}}{\sqrt{n}} \\
-\displaystyle e_{ik}=\frac{r_{ik}}{r_{1k}+r_{2k}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle T_k=\frac{\displaystyle \sum_{j=1}^{n_1}w_j\Delta_{1kj}e_{2k}-\sum_{j=1}^{n_2}w_j\Delta_{2kj}e_{1k}}{\sqrt{n}} \\
+\displaystyle e_{ik}=\frac{r_{ik}}{r_{1k}+r_{2k}}$</sdh:equation>
         </p>
         <p>- where n<sub>1</sub> is the number of subjects in group 1; n<sup style="vertical-align: sub;">2</sup> is the number of subjects in group 2; n is the total number of subjects; r<sub>ik</sub> is the number at risk in group i at the jth event time in the kth component; Δ is equal to 0 if an observation is censored or 1 otherwise; e<sub>ik</sub> is the expected proportion of events in group i for the kth component; and w<sub>j</sub> is equal to 1 for the log-rank method or (r<sub>1k</sub>+r<sub>2k</sub>)/n for the Gehan-Breslow generalised Wilcoxon method.</p>
         <p>&#160;</p>
         <p>The univariate statistic for the kth component of the multivariate survival data is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{WL}_k=\frac{T_k}{\sqrt{\hat{\sigma}_{kk} }}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{WL}_k=\frac{T_k}{\sqrt{\hat{\sigma}_{kk} }}$</sdh:equation>
         </p>
         <p>- where σ hat<sub>kk</sub> is the kth diagonal element of the estimated variance-covariance matrix that is calculated as described by Makuch and Escobar (1991).</p>
         <p>&#160;</p>
         <p>An omnibus test that the two multivariate distributions are equal is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{WL}_0=\textbf{T}'\bf \Sigma^{-1} \textbf{T}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{WL}_0=\textbf{T}'\bf \Sigma^{-1} \textbf{T}$</sdh:equation>
         </p>
         <p>- where <b>T'</b> is the transpose of the vector of univariate test statistics and <b>Σ</b><sup style="font-weight: bold;">-1</sup> is the generalised inverse of the estimated variance-covariance matrix.</p>
         <p>&#160;</p>
         <p>A stochastic ordering test statistic is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{WL}_1=\frac{\displaystyle \sum_{k=1}^m T_k}{\displaystyle \sqrt{\sum_{k=1}^m \sum_{l=1}^m \hat{\sigma}_{kl}}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{WL}_1=\frac{\displaystyle \sum_{k=1}^m T_k}{\displaystyle \sqrt{\sum_{k=1}^m \sum_{l=1}^m \hat{\sigma}_{kl}}}$</sdh:equation>
         </p>
         <p>Both one sided and two sided P values are given with the stochastic ordering (linear combination) statistic; some authors prefer one sided inference (<a href="../references/reference_list.htm#ref-davis-1994">Davis, 1994</a>). If you make a one sided inference then you are considering only ascending or only descending ordering, and you are assuming that observing an order in the opposite direction to that expected would be unimportant to your conclusions.</p>
         <p>&#160;</p>
@@ -812,11 +812,11 @@
         <p>&#160;</p>
         <p>Here the multivariate log-rank test has revealed a statistically significant difference between the treatment groups which was not revealed by any of the individual univariate tests. For more detailed discussion of each result parameter see <a href="../references/reference_list.htm#ref-wei-1984">Wei and Lachin (1984)</a>.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It uses the survival package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Wei-Lachin test: the StatsDirect help example (Makuch and Escobar 1991, days for
 # lymphocyte cultures from 47 HIV patients in two treatment groups to express p24
@@ -942,8 +942,8 @@ for (gehan in c(TRUE, FALSE)) {
   cat("stochastic ordering z = ", six(z), "  one sided ", pv(p1), ",  two sided ",
       pv(2 * p1), "\n", sep = "")
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

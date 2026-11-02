@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1281.552" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1281.552" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Screening Test Errors (Bayes' Theorem) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Screening test errors;Bayes rule (screening tests);False result probabilities" />
+            <sdh:keyword term="Screening test errors;Bayes rule (screening tests);False result probabilities" />
             Screening Test Errors</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Clinical Epidemiology_Screening Test Errors</b>.</p>
@@ -54,9 +54,9 @@
         </p>
         <p>Results are calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle P_{F+}=\frac{P(A|\bar{B})(1-P(B))}{P(A|\bar{B})+P(B)[P(A|B)-P(A|\bar{B})]} \\
+            <sdh:equation>$\displaystyle P_{F+}=\frac{P(A|\bar{B})(1-P(B))}{P(A|\bar{B})+P(B)[P(A|B)-P(A|\bar{B})]} \\
 \space \\
-\displaystyle P_{F-}=\frac{[1-P(A|B)]P(B)}{1-P(A|\bar{B})-P(B)[P(A|B)-P(A|\bar{B})]} \\$</MadCap:equation>
+\displaystyle P_{F-}=\frac{[1-P(A|B)]P(B)}{1-P(A|\bar{B})-P(B)[P(A|B)-P(A|\bar{B})]} \\$</sdh:equation>
         </p>
         <p>- where P<sub>F+</sub> is the false positive rate P(B bar|A) (= 1 - positive predictive value), P<sub>F-</sub> is the false negative rate P(B|A bar) (= 1 - negative predictive value), P(A|B) is the probability of A given B, A is a positive test result, A bar is a negative test result, B is disease present and B bar is disease absent.</p>
         <p>&#160;</p>
@@ -105,11 +105,11 @@
         <p>Probability of a FALSE NEGATIVE result = 0.0005</p>
         <p>&#160;</p>
         <p>Here we see that more than half of the patients who give a positive test will not have the disease (about 1% of all patients tested will give a false positive result). This is clearly not acceptable for a full screening method but could be used as pre-screening before further tests if there was no better initial test available.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Screening test errors (Bayes' theorem): the StatsDirect help example (a hypothetical
 # screening test tried on 4000 patients, 2000 with the disease and 2000 without) in R
@@ -156,8 +156,8 @@ cat("False positives among the positive results =",
     six(expected["Positive", "Absent"] / sum(expected["Positive", ])), "\n")
 cat("False negatives among the negative results =",
     six(expected["Negative", "Present"] / sum(expected["Negative", ])), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

@@ -61,8 +61,7 @@ public sealed partial class HelpProject
         string sourcePath = master[8..];
         string fullPath = SafePaths.Resolve(ContentPath, sourcePath);
         if (!File.Exists(fullPath)) throw new FileNotFoundException("The target's shared footer master page is missing.", fullPath);
-        XNamespace mc = "http://www.madcapsoftware.com/Schemas/MadCap.xsd";
-        var footer = Parse(File.ReadAllText(fullPath)).Descendants(mc + "pageFooter").FirstOrDefault();
+        var footer = Parse(File.ReadAllText(fullPath)).Descendants().FirstOrDefault(element => HelpSourceNamespaces.IsElement(element, "pageFooter"));
         return footer == null ? null : new SharedFooterInfo(sourcePath, string.Concat(footer.Nodes().Select(n => n.ToString(SaveOptions.DisableFormatting))));
     }
 
@@ -88,7 +87,7 @@ public sealed partial class HelpProject
             throw new InvalidDataException("A topic must contain an HTML root and body.");
         var path = TopicPath(relativePath);
         if (!File.Exists(path)) throw new FileNotFoundException("Open an existing topic, or use New page.", path);
-        SafePaths.AtomicWrite(path, source);
+        SafePaths.AtomicWrite(path, HelpSourceNamespaces.NormalizeSource(source));
     }
 
     public string CreateTopic(string title, string folder = "basics")
@@ -104,7 +103,7 @@ public sealed partial class HelpProject
         for (var i = 2; File.Exists(path); i++) path = Path.Combine(directory, stem + "_" + i + ".htm");
         var css = Path.GetRelativePath(directory, Path.Combine(ContentPath, "resources/stylesheets/statsdirect.css")).Replace('\\', '/');
         var doc = new XDocument(new XDeclaration("1.0", "utf-8", null),
-            new XElement("html", new XAttribute(XNamespace.Xmlns + "MadCap", "http://www.madcapsoftware.com/Schemas/MadCap.xsd"),
+            new XElement("html", new XAttribute(XNamespace.Xmlns + HelpSourceNamespaces.PreferredPrefix, HelpSourceNamespaces.CurrentUri),
                 new XElement("head", new XElement("title", title.Trim()), new XElement("link", new XAttribute("rel", "stylesheet"), new XAttribute("href", css))),
                 new XElement("body", new XElement("h1", title.Trim()), new XElement("p", "Write the new help page here."))));
         SafePaths.AtomicWrite(path, doc.Declaration + Environment.NewLine + doc.ToString());
@@ -148,7 +147,7 @@ public sealed partial class HelpProject
     }
 
     public void SaveContents(IReadOnlyList<TocNode> nodes)
-        => SafePaths.AtomicWrite(TocPath, CreateContentsSource(nodes));
+        => SafePaths.AtomicWrite(TocPath, HelpSourceNamespaces.NormalizeSource(CreateContentsSource(nodes)));
 
     private string CreateContentsSource(IReadOnlyList<TocNode> nodes)
     {

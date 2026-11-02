@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="505" MadCap:lastWidth="1194" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="505" sdh:lastWidth="1194" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Box and Whisker Plot (Text-based) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Box and whisker plot (text)" />Box and Whisker Plot (Text-based)</h1>
+            <sdh:keyword term="Box and whisker plot (text)" />Box and Whisker Plot (Text-based)</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Graphics_Box and Whisker (Text)</b>.</p>
         <p>&#160;</p>
@@ -44,11 +44,11 @@
         <p style="font-family: 'Courier New', monospace;margin-top: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;min&#160;&lt;&#160;LQ&#160;&lt;&#160;median&#160;&gt;&#160;UQ&#160;&gt;&#160;max,&#160;fences&#160;(1.5&#160;&amp;&#160;3.0&#160;IQR)</p>
         <p>&#160;</p>
         <p>Each row is one column of data: the box runs from the lower quartile ([) to the upper quartile (]) with the median marked by an asterisk, and the whiskers run from the minimum (&gt;) to the maximum (&lt;). For Town Boys (n = 36) the minimum is 1, the lower quartile 5.15, the median 7.75, the upper quartile 12.4 and the maximum 18.6; for Farm Boys (n = 12) they are 2.7, 5.775, 9.8, 12.8 and 16.1. A value more than 1.5 interquartile ranges beyond a quartile, that is outside the inner fences (-5.725 to 23.275 for Town Boys and -4.7625 to 23.3375 for Farm Boys), would be plotted as a point (o) beyond a whisker that ends in a bar (|) at the fence, and a value more than three interquartile ranges beyond a quartile, outside the outer fences (-16.6 to 34.15 for Town Boys and -15.3 to 33.875 for Farm Boys), as a dot (.); there is none here, so the whiskers run to the extremes. The two groups of scores spread over similar ranges, with the farm boys' median the higher.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Box and whisker plot (text-based): the illustration in the StatsDirect help (the
 # fitness scores of two groups of boys, Conover 1999, p. 218; the test workbook's
@@ -98,8 +98,8 @@ points(z$stats[3, ], 2:1, pch = 8)
 for (i in 1:2) {
   points(b[[i]]$out, rep(3 - i, length(b[[i]]$out)), pch = b[[i]]$pch)
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p>See also the graphical <a href="box_whisker.htm">box and whisker plot</a>.</p>
     </body>

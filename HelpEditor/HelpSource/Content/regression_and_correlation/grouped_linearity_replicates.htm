@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2084" MadCap:lastWidth="2772" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2084" sdh:lastWidth="2772" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Linearity of Regression - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Grouped linear regression (linearity);Regression: Grouped: Linearity" />Linearity with Replicates of the Outcome (Y)</h1>
+            <sdh:keyword term="Grouped linear regression (linearity);Regression: Grouped: Linearity" />Linearity with Replicates of the Outcome (Y)</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Regression and Correlation_Grouped Linear_Linearity</b>.</p>
         <p>&#160;</p>
@@ -32,9 +32,9 @@
         </p>
         <p>Linearity is tested by analysis of variance for the linear regression of k outcome observations for each level of the predictor variable (Armitage, 1994):</p>
         <p>
-            <MadCap:equation>$\displaystyle SS_{\text{regression}} = \frac{\displaystyle \left[{\sum_{i=1}^N x_i Y_i -\bigg(\sum_{i=1}^N}{x_i\bigg)\bigg(\sum_{i-_1}^N}{Y_i}\bigg)\bigg/N\right]^2}{\displaystyle {\sum_{i=1}^N}{x_i^2- \bigg( \sum_{i=1}^N}{x_i}\bigg) ^2\bigg/N} \\
+            <sdh:equation>$\displaystyle SS_{\text{regression}} = \frac{\displaystyle \left[{\sum_{i=1}^N x_i Y_i -\bigg(\sum_{i=1}^N}{x_i\bigg)\bigg(\sum_{i-_1}^N}{Y_i}\bigg)\bigg/N\right]^2}{\displaystyle {\sum_{i=1}^N}{x_i^2- \bigg( \sum_{i=1}^N}{x_i}\bigg) ^2\bigg/N} \\
 \displaystyle SS_{\text{repeats}} = {\sum_{i=1}^N Y_i^2 -\sum_{j-_1}^k}(T^2_j/n_j)\\
-\displaystyle SS_{\text{total}} = {\sum_{i=1}^N Y_i^2 -\bigg(\sum_{i-_1}^N}Y_i\bigg)^2 \bigg/N$</MadCap:equation>
+\displaystyle SS_{\text{total}} = {\sum_{i=1}^N Y_i^2 -\bigg(\sum_{i-_1}^N}Y_i\bigg)^2 \bigg/N$</sdh:equation>
         </p>
         <p>- where SS<sub>regression</sub> is the sum of squares due to the regression of Y on x, SS<sub>repeats</sub> is the part of the usual residual sum of squares that is due to variation within repeats of the outcome observations, SS<sub>total</sub> is the total sum of squares and the remainder represents the sum of squares due to deviation of the means of repeated outcome observations from the regression. Y is the outcome variable, x is the predictor variable, N is the total number of Y observations and n<sub>j</sub> is the number of Y repeats for the jth x observation.</p>
         <p>&#160;</p>
@@ -192,11 +192,11 @@
         <p>&#160;</p>
         <p>Thus the regression itself (meaning the slope) was statistically highly significant. If the deviations from x means had been significant then we should have rejected our assumption of linearity, as it stands they were not.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Linearity with replicates of Y: the StatsDirect help example (Armitage and Berry
 # 1994, bone density of rats at three log doses of vitamin D; the test workbook's
@@ -234,8 +234,8 @@ cat("Deviation of x means", six(ssdev), 1, six(ssdev), six(ssdev / mswithin),
     pv(pf(ssdev / mswithin, 1, dfwithin, lower.tail = FALSE)), "\n")
 cat("Within x residual", six(sswithin), dfwithin, six(mswithin), "\n")
 cat("Total", six(ssreg + ssdev + sswithin), length(y) - 1, "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

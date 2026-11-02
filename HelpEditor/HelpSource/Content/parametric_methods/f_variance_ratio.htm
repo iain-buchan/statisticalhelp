@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="257" MadCap:lastWidth="1291" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="257" sdh:lastWidth="1291" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>F (Variance Ratio) Test - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="F (variance ratio) test;Variance ratio test" />F (Variance Ratio) Test</h1>
+            <sdh:keyword term="F (variance ratio) test;Variance ratio test" />F (Variance Ratio) Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Parametric_F (Variance Ratio)</b>.</p>
         <p>&#160;</p>
@@ -102,11 +102,11 @@
         <p>&#160;</p>
         <p>The variance of the scores is nearly seven times larger in the patients with marked symptoms, and the two sided test is significant at the 5% level. The equal variances assumed by the ordinary unpaired t test would be doubtful for these data, so the unequal variances form of that test, or a nonparametric method, would be safer.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># F (variance ratio) test: the StatsDirect help example (scores of patients with
 # slight or no symptoms and with marked symptoms) in R
@@ -129,8 +129,8 @@ cat("Slight/no symptoms   DF =", length(slight) - 1, "  Variance =", six(var(sli
 cat("F =", six(f$statistic), "\n")
 p &lt;- pf(f$statistic, f$parameter[1], f$parameter[2], lower.tail = FALSE)
 cat(sprintf("Upper side P = %.4f   Two sided P = %.4f\n", p, 2 * min(p, 1 - p)))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

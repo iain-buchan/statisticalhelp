@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="3421" MadCap:lastWidth="2793" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="3421" sdh:lastWidth="2793" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Proportion Meta-analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Meta-analysis: Proportion;Proportion meta-analysis" />Proportion Meta-analysis</h1>
+            <sdh:keyword term="Meta-analysis: Proportion;Proportion meta-analysis" />Proportion Meta-analysis</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Meta-Analysis_Proportion</b>.</p>
         <p>&#160;</p>
@@ -69,37 +69,37 @@
         <p>StatsDirect first transforms proportions via the Freeman-Tukey double arcsine method (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman and Tukey, 1950</a>, <a href="../references/reference_list.htm#ref-miller-1978">Miller 1978</a>) then performs an inverse-variance weighted fixed and random effects meta-analysis by conventional methods (<a href="../references/reference_list.htm#ref-dersimonian-1986">DerSimonian and Laird, 1986</a>). The appropriate weight is n+0.5 but some other software uses n+1.  In our own simulation testing of the variance options within the formula 1/(n+c), varying c from 0.5 to 1, we found that the n+1 method (<a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>) is conservative, avoiding underestimation of the true variance of the transformed proportion, but the original n+0.5 method (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman et al, 1950</a>) method is closer to the true variance in absolute terms. Note that there is no fixed transformation of a binomial proportion that provides optimal variance stabilization, which depends on your data - iterative variance stabilization methods may emerge with further research. The pooled proportion can be calculated as the back-transform of the weighted mean of the transformed proportions (<a href="../references/reference_list.htm#ref-miller-1978">Miller 1978</a>):</p>
         <p>&#160;</p>
         <p>
-            <MadCap:equation>$\displaystyle \hat{p}=\left\{1-\text{sgn}⁡(\cos{(\hat{x})})\times\sqrt{1-{\left[\sin{(\hat x)}+\frac{(\sin{(\hat x)}-1/\sin{(\hat x)})}n\right]}^2}\ \right\} \times 0.5$</MadCap:equation>
+            <sdh:equation>$\displaystyle \hat{p}=\left\{1-\text{sgn}⁡(\cos{(\hat{x})})\times\sqrt{1-{\left[\sin{(\hat x)}+\frac{(\sin{(\hat x)}-1/\sin{(\hat x)})}n\right]}^2}\ \right\} \times 0.5$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \hat x=\frac{\sum ⁢xw⁢}{\sum ⁢w}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \hat x=\frac{\sum ⁢xw⁢}{\sum ⁢w}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle x=\sin^{-1}\left(\sqrt{r/(n+1)}\right)+\sin^{-1} \left( \sqrt{(r+1)/(n+1)}\right)$</MadCap:equation>
+            <sdh:equation>$\displaystyle x=\sin^{-1}\left(\sqrt{r/(n+1)}\right)+\sin^{-1} \left( \sqrt{(r+1)/(n+1)}\right)$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle w=n+0.5$</MadCap:equation>
+            <sdh:equation>$\displaystyle w=n+0.5$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle q=\sum w(x-\hat x)^2$</MadCap:equation>
+            <sdh:equation>$\displaystyle q=\sum w(x-\hat x)^2$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \tau^2=\frac{q-(k-1)}{\sum w-\sum w^2/\sum w}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \tau^2=\frac{q-(k-1)}{\sum w-\sum w^2/\sum w}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle w_r=\frac{1}{\tau^2+1/w}$</MadCap:equation>
+            <sdh:equation>$\displaystyle w_r=\frac{1}{\tau^2+1/w}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \hat x_r=\frac{\sum xw_r}{\sum w_r}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \hat x_r=\frac{\sum xw_r}{\sum w_r}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \hat{p_r}=\left\{1-\text{sgn}⁡(\cos{(\hat{x}_r)})\times\sqrt{1-{\left[\sin{(\hat x_r)}+\frac{(\sin{(\hat x_r)}-1/\sin{(\hat x_r)})}n\right]}^2}\ \right\} \times 0.5$</MadCap:equation>
+            <sdh:equation>$\displaystyle \hat{p_r}=\left\{1-\text{sgn}⁡(\cos{(\hat{x}_r)})\times\sqrt{1-{\left[\sin{(\hat x_r)}+\frac{(\sin{(\hat x_r)}-1/\sin{(\hat x_r)})}n\right]}^2}\ \right\} \times 0.5$</sdh:equation>
         </p>
         <p>- where p hat is the fixed effects pooled proportion, x is the Freeman-Tukey transformed proportion, w is the inverse variance weight for the transformed proportion, q is the Cochran q statistic, tau squared is the moment-based estimate of the between-studies variance, w r is the DerSimonian-Laird weight, p hat r is the random effects estimate of the pooled proportion, and n in the back-transforms to p hat and p hat r is the harmonic mean of the study sample sizes.</p>
         <p>&#160;</p>
         <p>An alternative, simpler, back transform (Stuart-Ord), which is the default choice of inverse transform in StatsDirect, is:</p>
         <p>
-            <MadCap:equation>$\displaystyle \hat p=\sin (\hat x/2)^2$</MadCap:equation>
+            <sdh:equation>$\displaystyle \hat p=\sin (\hat x/2)^2$</sdh:equation>
         </p>
         <p>This form is strictly less accurate than the Miller method above but it is less susceptible to the bias effects of non-linear transformations, giving more credible estimates of pooled proportions where the true population value is close to 0 or 1.</p>
         <p>&#160;</p>
@@ -616,11 +616,11 @@
         <p>Harbord: bias = 6.349191 (90% CI = 2.914719 to 9.783663)  P = 0.0046</p>
         <p>&#160;</p>
         <p>The differences between trials are very large (99% inconsistency), therefore a random effects model should be followed. The weights table shows both the fixed and random effects weights – the random effects weights used to calculate the pooled proportion are similar across the studies, unlike the fixed effects weights. We conclude that the adherence for this class of drug is approximately 79%, and with 95% confidence at least 69%. Of the bias indicators, only Harbord's test points to small-study effects: the smaller trials reported higher adherence than the pooled proportion predicts.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Proportion meta-analysis: the StatsDirect help example (adherence with medication in
 # 22 fictitious trials; the test workbook's Meta-analysis worksheet columns Trial,
@@ -788,8 +788,8 @@ cat("Harbord: bias = ", six(coef(harbord)[1]), " (90% CI = ",
     six(confint(harbord, level = 0.9)[1, 1]), " to ",
     six(confint(harbord, level = 0.9)[1, 2]), ")  ",
     pv(summary(harbord)$coefficients[1, 4]), "\n", sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

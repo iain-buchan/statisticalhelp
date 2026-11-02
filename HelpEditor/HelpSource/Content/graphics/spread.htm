@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="512" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="512" sdh:lastWidth="1013" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Spread Plot (Distribution Dot Plot) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,14 +7,14 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Spread plot;Distributions: Visualisation: Spread" />
+            <sdh:keyword term="Spread plot;Distributions: Visualisation: Spread" />
             Spread Plot</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Graphics_Spread</b>.</p>
         <p>&#160;</p>
         <p>This is a useful way to show the spread of data across groups. It is one step back from the <a href="box_whisker.htm">Box and Whisker plot</a> in that it gives an entirely pictorial representation of the spread of your data. The scale axis is divided into an arbitrary number of divisions which are the width of a plot point; if more than one data point occupies a division it is plotted alongside the first, thus a concentration of data at a particular value is represented by a broad band.</p>
         <p>
-            <img src="../resources/Images/spreadplot.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/spreadplot.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/spreadplot.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/spreadplot.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p><u>Example</u>
@@ -34,11 +34,11 @@
         <p>SDI not conceived: broadest band 15 values at 138</p>
         <p>&#160;</p>
         <p>A band is a column of values that lie within the width of one plot point of the first (lowest) value in the column; on the scale from 100 to 240 of this plot a plot point is about two units of SDI wide. The men whose partners did not conceive form a dense band between about 125 and 160, whereas the values of the men whose partners conceived are spread more widely and lie mostly higher. The spread plot shows the two distributions without summarising them; the ROC curve example measures how well the index separates the two groups.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Spread plot: the StatsDirect help illustration (Aziz et al. 1996, sperm deformity
 # index of men whose partners conceived and of men whose partners did not; the test
@@ -124,8 +124,8 @@ par(op)
 # The men whose partners did not conceive form a dense band between about 125 and
 # 160; the values of the men whose partners conceived are spread more widely and
 # lie mostly higher. The plot shows the two distributions without summarising them.</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

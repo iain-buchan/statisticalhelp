@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="1880" MadCap:lastWidth="974">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" sdh:lastBlockDepth="5" sdh:lastHeight="1880" sdh:lastWidth="974">
     <head>
         <meta name="search-keywords" content="agreement analysis" /><title>Agreement Analysis (Berry-Mielke Universal R) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Reliability: Universal R;Agreement analysis: Universal R;Inter-rater agreement: Universal R;Berry-Mielke R;Universal agreement coefficient R" />Universal Agreement R</h1>
+            <sdh:keyword term="Reliability: Universal R;Agreement analysis: Universal R;Inter-rater agreement: Universal R;Berry-Mielke R;Universal agreement coefficient R" />Universal Agreement R</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Agreement_Universal R</b>.</p>
         <p>&#160;</p>
@@ -443,11 +443,11 @@
         </table>
         <p>&#160;</p>
         <p>The results indicate a statistically significant difference between the two groups of observers' ratings of the same set of objects.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example and the comparison example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Universal agreement R: the StatsDirect help example (Mielke and Berry 2007, five
 # objects measured by three observers in three dimensions; the test workbook's
@@ -557,8 +557,8 @@ upper &lt;- p_type3((r2 - r1) / sqrt(vard), -skewd)
 cat("Significance:", pv(p_type3((mu1 * (1 - r1) - mu1) / sqrt(var1), skew1)),
     pv(p_type3((mu2 * (1 - r2) - mu2) / sqrt(var2), skew2)),
     pv(min(1, 2 * min(lower, upper))), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2568.104" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2568.104" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Unpaired (Two Sample) t Test - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Unpaired t test; t test: Unpaired / two sample;Student t test: Unpaired / two sample; Two sample t test" />Unpaired (Two Sample) t Test</h1>
+            <sdh:keyword term="Unpaired t test; t test: Unpaired / two sample;Student t test: Unpaired / two sample; Two sample t test" />Unpaired (Two Sample) t Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Parametric_Unpaired t</b>.</p>
         <p>&#160;</p>
@@ -17,8 +17,8 @@
         <p>&#160;</p>
         <p>Assuming equal variances, the test statistic is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle t=\frac{\bar x_1-\bar x_2}{\sqrt{s^2 \left( \frac{1}{n_1}+ \frac{1}{n_2}\right)}} \\
-\displaystyle s^2=\frac{\displaystyle \sum_{i=1}^{n_1} (x_i-\bar x_1)^2+\sum_{j=1}^{n_2} (x_j-\bar x_2)^2}{n_1+n_2-2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle t=\frac{\bar x_1-\bar x_2}{\sqrt{s^2 \left( \frac{1}{n_1}+ \frac{1}{n_2}\right)}} \\
+\displaystyle s^2=\frac{\displaystyle \sum_{i=1}^{n_1} (x_i-\bar x_1)^2+\sum_{j=1}^{n_2} (x_j-\bar x_2)^2}{n_1+n_2-2}$</sdh:equation>
         </p>
         <p>- where x bar 1 and x bar 2 are the sample means, s² is the pooled sample variance, n<sub>1</sub> and n<sub>2</sub> are the sample sizes and t is a Student t quantile with n<sub>1</sub> + n<sub>2</sub> - 2 degrees of freedom.</p>
         <p>&#160;</p>
@@ -28,10 +28,10 @@
         <p>&#160;</p>
         <p>Assuming unequal variances, the test statistic is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle d=\frac{\bar x_1 - \bar x_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}} \\
+            <sdh:equation>$\displaystyle d=\frac{\bar x_1 - \bar x_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}} \\
 \displaystyle df=\frac{\left[ \frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}\right]^2}{\frac{(s_1^2/n_1)^2}{n_1-1}+\frac{(s_2^2/n_2)^2}{n_2-1}} \\
 \displaystyle s_1^2=\frac{\displaystyle \sum_{i=1}^{n_1} (x_i-\bar x_1)^2}{n_1-1} \\
-\displaystyle s_2^2=\frac{\displaystyle \sum_{j=1}^{n_2} (x_j-\bar x_2)^2}{n_2-1}$</MadCap:equation>
+\displaystyle s_2^2=\frac{\displaystyle \sum_{j=1}^{n_2} (x_j-\bar x_2)^2}{n_2-1}$</sdh:equation>
         </p>
         <p>- where x bar 1 and x bar 2 are the sample means, s² is the sample variance, n<sub>1</sub> and n<sub>2</sub> are the sample sizes, d is the Behrens-Welch test statistic evaluated as a Student t quantile with df degrees of freedom using Satterthwaite's approximation.</p>
         <p>&#160;</p>
@@ -143,11 +143,11 @@
         <p>&#160;</p>
         <p>N.B. We did not consider a one sided P value here because we could not be absolutely certain that the rats would all benefit from a high protein diet in comparison with those on a low protein diet.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Unpaired t test: the StatsDirect help example (Armitage and Berry 1994, weight
 # gain of 19 rats on high or low protein diets) in R
@@ -189,8 +189,8 @@ report(equal, "Assuming equal variances", "t")
 report(unequal, "Assuming unequal variances", "t(d)")
 cat("Two sided F test is", if (f$p.value &lt; 0.05) "significant" else "not significant",
     "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

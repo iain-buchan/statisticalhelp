@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="3" MadCap:lastHeight="850" MadCap:lastWidth="2848" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="3" sdh:lastHeight="850" sdh:lastWidth="2848" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Chi-square Distribution - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,14 +7,14 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Chi-square distribution;Distributions: Chi-square" />
+            <sdh:keyword term="Chi-square distribution;Distributions: Chi-square" />
             Chi-square Distribution</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Chi-Square</b>.</p>
         <p>&#160;</p>
         <p>A variable from a chi-square distribution with n degrees of freedom is the sum of the squares of n independent <a href="normal.htm">standard normal variables</a> (z).</p>
         <p>
-            <MadCap:equation>$\displaystyle \chi^2=z_1^2+z_2^2+...+z_n^2$</MadCap:equation>
+            <sdh:equation>$\displaystyle \chi^2=z_1^2+z_2^2+...+z_n^2$</sdh:equation>
         </p>
         <p>[chi (Greek χ) is pronounced ki as in kind]</p>
         <p>&#160;</p>
@@ -22,7 +22,7 @@
         <p>&#160;</p>
         <p>The so called "linear constraint" property of chi-square explains its application in many statistical methods: Suppose we consider one sub-set of all possible outcomes of n random variables (z). The sub-set is defined by a linear constraint:</p>
         <p>
-            <MadCap:equation>$\displaystyle a_1 z_1+a_2z_2+...+a_n z_n=k$</MadCap:equation>
+            <sdh:equation>$\displaystyle a_1 z_1+a_2z_2+...+a_n z_n=k$</sdh:equation>
         </p>
         <p>- where a and k are constants. Here the sum of the squares of z follows a chi-square distribution with n-1 degrees of freedom. If there are m linear constraints then the total degrees of freedom is n-m. The number of linear constraints associated with the design of contingency tables explains the number of degrees of freedom used in contingency table tests (<a href="../references/reference_list.htm#ref-bland-2000">Bland, 2000</a>).</p>
         <p>&#160;</p>
@@ -38,12 +38,12 @@
         </p>
         <p>The distribution function F(x) of a chi-square random variable x with n degrees of freedom is:</p>
         <p>
-            <MadCap:equation>$\displaystyle F(x)=\frac{1}{\displaystyle 2^{n/2} \Gamma(n/2)} \int_0^x t^{n/2-1}e^{-t/2} \space dt \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle F(x)=\frac{1}{\displaystyle 2^{n/2} \Gamma(n/2)} \int_0^x t^{n/2-1}e^{-t/2} \space dt \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Γ(*) is the gamma function:</p>
         <p>
-            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0 \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p><u>Example</u>
@@ -57,11 +57,11 @@
         <p>chi-sq(upper P 0.01, df 3) = 11.3448667301444</p>
         <p>&#160;</p>
         <p>A chi-square of 3.84 on one degree of freedom, as from a 2 by 2 table, falls just short of the 5% level, whose critical value is 3.841459; 15.2 on six degrees of freedom, as from a 3 by 4 table, is significant at the 2% level; and a chi-square on three degrees of freedom must exceed 11.3449 to be significant at the 1% level. StatsDirect shows the P to 15 decimal places and the chi-square to 15 significant figures, and writes each result to the report as a probability distribution calculation.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Chi-square distribution: the example in the StatsDirect help (the upper tail
 # probabilities of two chi-square statistics and the 1% critical value on 3 degrees of
@@ -85,8 +85,8 @@ cat("Two sided normal P beyond sqrt(3.84) =", fifteen(2 * pnorm(-sqrt(3.84))), "
 # (13 decimal places for a value above 10), so it is printed the same way here
 x15 &lt;- function(x) formatC(x, digits = 15, format = "g", drop0trailing = TRUE)
 cat("chi-sq(upper P 0.01, df 3) =", x15(qchisq(0.01, 3, lower.tail = FALSE)), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1422" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1422" sdh:lastWidth="974" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Fisher Exact Test (Expanded) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Fisher's exact test: 2 by 2 expanded;Mid-P (Fisher exact test)" />Fisher's Exact Test (Expanded)</h1>
+            <sdh:keyword term="Fisher's exact test: 2 by 2 expanded;Mid-P (Fisher exact test)" />Fisher's Exact Test (Expanded)</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Exact_Expanded Fisher</b>.</p>
         <p>&#160;</p>
@@ -175,11 +175,11 @@
         <p>&#160;</p>
         <p>Here we cannot reject the null hypothesis that there is no association between these two classifications, i.e. between feeding mode and malocclusion.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Fisher's exact test (expanded): the StatsDirect help example (Armitage and Berry 1994,
 # p. 138, malocclusion of the teeth by the type of feeding received by infants) in R
@@ -251,8 +251,8 @@ cat("Two sided (by summation)", pv(p2), "\n")
 mid_p &lt;- p1 - p_obs / 2
 cat("One sided mid-", pv(mid_p), "\n", sep = "")
 cat("Two sided mid-", pv(min(1, 2 * mid_p)), "\n", sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

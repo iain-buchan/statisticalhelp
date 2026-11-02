@@ -172,7 +172,7 @@ internal static class Program
                 Check(form.IsAppPreviewVisible && desktopPreview.Contains("DESKTOP_ONLY") && !desktopPreview.Contains("PUBLIC_ONLY"), "Native Desktop selection refreshes the app preview without reopening the page");
                 Check(await JsString("window.HelpEditor.getSource()") == dirty && form.IsDirty, "Switching targets in Preview retains dirty source and the unsaved indicator");
                 await form.SaveCurrentTopicAsync();
-                Check(form.CurrentProject.ReadTopic("basics/alpha.htm") == dirty && !form.IsDirty, "Saving after target switches persists only the user's source edits");
+                Check(form.CurrentProject.ReadTopic("basics/alpha.htm") == dirty.Replace(HelpSourceNamespaces.LegacyUri, HelpSourceNamespaces.CurrentUri) && !form.IsDirty, "Saving after target switches persists the user's source edits with the canonical authoring namespace");
                 await form.SwitchWorkspaceAsync("public");
                 await form.OpenTopicAsync("basics/beta.htm");
                 Check(await JsBool("window.HelpEditor.getState().buildTarget === 'Public'"), "Opening another page forwards the currently selected target");
@@ -291,7 +291,7 @@ internal static class Program
         string title = "Recoverable λ " + Guid.NewGuid().ToString("N")[..8];
         string path = form.CurrentProject.CreateTopic(title, "basics");
         string source = form.CurrentProject.ReadTopic(path).Replace("Write the new help page here.", "Recovery exact bytes λ &amp; β.")
-            .Replace("</body>", "<MadCap:equation>$\\frac{x+1}{n}$</MadCap:equation><pre xml:space=\"preserve\">x &lt;- c(1, 2)\n  mean(x)</pre></body>");
+            .Replace("</body>", "<sdh:equation>$\\frac{x+1}{n}$</sdh:equation><pre xml:space=\"preserve\">x &lt;- c(1, 2)\n  mean(x)</pre></body>");
         form.CurrentProject.SaveTopic(path, source);
         var tree = form.CurrentProject.LoadContents();
         tree[1].Children.Add(new TocNode { Title = title, Link = path });

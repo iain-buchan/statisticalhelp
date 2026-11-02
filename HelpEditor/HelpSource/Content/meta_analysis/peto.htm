@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2606.552" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2606.552" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Peto Odds Ratio Meta-analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Peto odds ratio meta-analysis;Meta-analysis: Peto odds" />Peto Odds Ratio Meta-analysis</h1>
+            <sdh:keyword term="Peto odds ratio meta-analysis;Meta-analysis: Peto odds" />Peto Odds Ratio Meta-analysis</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Meta-Analysis_Peto Odds Ratio</b>.</p>
         <p>&#160;</p>
@@ -52,20 +52,20 @@
         <p>&#160;</p>
         <p>&#160;</p>
         <p>
-            <MadCap:equation>$\displaystyle \hat{\psi}=\exp \left( \frac{O-E}{V}\right) \\
+            <sdh:equation>$\displaystyle \hat{\psi}=\exp \left( \frac{O-E}{V}\right) \\
 \displaystyle O=a \\
 \displaystyle E=(a+b)(a+c)/n \\
 \displaystyle V=\frac{(a+b)(c+d)(a+c)(b+d)}{n^2(n-1)} \\
 \displaystyle z_p=\frac{O-E}{\sqrt{V}} \\
-\displaystyle \text{CI}=\exp \left( \frac{(O-E)\pm z_{\alpha/2}\sqrt{V}}{V}\right)$</MadCap:equation>
+\displaystyle \text{CI}=\exp \left( \frac{(O-E)\pm z_{\alpha/2}\sqrt{V}}{V}\right)$</sdh:equation>
         </p>
         <p>- where psi hat is the Peto odds ratio, n = a+b+c+d, z<sub>p</sub> is the asymptotically normal test statistic, CI is the 100(1-a)% confidence interval and z<sub>α/2</sub> is a quantile from the standard normal distribution. V is both weighting factor and variance for the difference between observed and expected a, O-E.</p>
         <p>&#160;</p>
         <p>For each table, the Peto odds ratio is displayed with an approximate confidence interval. The pooled Peto odds ratio for all strata is calculated under the assumption of a fixed effects model as follows:</p>
         <p>
-            <MadCap:equation>$\displaystyle \hat{\psi}_{\text{pool}}=\exp \left( \frac{\displaystyle \sum_{i=1}^k (O_i-E_i)}{\displaystyle \sum_{i=1}^kV_i}\right)\\
+            <sdh:equation>$\displaystyle \hat{\psi}_{\text{pool}}=\exp \left( \frac{\displaystyle \sum_{i=1}^k (O_i-E_i)}{\displaystyle \sum_{i=1}^kV_i}\right)\\
 
-\displaystyle \text{CI}_{\text{pool}}=\exp \left( \frac{\displaystyle \sum_{i=1}^k (O_i-E_i)\pm z_{\alpha/2}\sqrt{\sum_{i=1}^kV_i}}{\displaystyle \sum_{i=1}^kV_i}\right)$</MadCap:equation>
+\displaystyle \text{CI}_{\text{pool}}=\exp \left( \frac{\displaystyle \sum_{i=1}^k (O_i-E_i)\pm z_{\alpha/2}\sqrt{\sum_{i=1}^kV_i}}{\displaystyle \sum_{i=1}^kV_i}\right)$</sdh:equation>
         </p>
         <p>- where the intermediate statistics are defined as above for individual strata.</p>
         <p>&#160;</p>
@@ -388,11 +388,11 @@
         <p>&#160;</p>
         <p>Here we can say with 95% confidence that the true population odds of death for those who received aspirin after a heart attack from this set of studies is between 0.84 and 0.96 of the same odds for those not receiving aspirin.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Peto odds ratio meta-analysis: the StatsDirect help example (Fleiss 1993, deaths after
 # heart attack in seven trials of aspirin; the test workbook's Meta-analysis worksheet
@@ -565,8 +565,8 @@ par(mar = c(5, 4, 4, 2) + 0.1)
 plot(V, oe, xlim = c(0, max(V)), ylim = range(0, oe), xlab = "Peto weights",
      ylab = "Observed-Expected", main = "Peto O-E vs. V plot")
 abline(0, log(pooled))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

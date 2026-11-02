@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="3" MadCap:lastHeight="739" MadCap:lastWidth="2813" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="3" sdh:lastHeight="739" sdh:lastWidth="2813" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Linearized Regression Estimates - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Linearized regression estimates;Curve fitting: Linearized estimates;Regression: Linearized curves" />
+            <sdh:keyword term="Linearized regression estimates;Curve fitting: Linearized estimates;Regression: Linearized curves" />
             Linearized Estimates</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Regression and Correlation_Linearized Estimates</b>.</p>
@@ -18,15 +18,15 @@
         <p>&#160;</p>
         <p><u>Exponential</u>
         </p>
-        <p>Data are linearized by logarithmic transformation of the outcome (Y) variable. Simple linear regression of ln(Y) vs. x gives ln(a) as the intercept and b as the slope for the function:<br /><MadCap:equation>$\displaystyle y=a\,e^{bx}$</MadCap:equation></p>
+        <p>Data are linearized by logarithmic transformation of the outcome (Y) variable. Simple linear regression of ln(Y) vs. x gives ln(a) as the intercept and b as the slope for the function:<br /><sdh:equation>$\displaystyle y=a\,e^{bx}$</sdh:equation></p>
         <p>&#160;</p>
         <p><u>Geometric</u>
         </p>
-        <p>Data are linearized by logarithmic transformation of both variables. Simple linear regression of ln(Y) vs. ln(x) gives ln(a) as the intercept and b as the slope for the function:<br /><MadCap:equation>$\displaystyle y=a\,x^{b}$</MadCap:equation></p>
+        <p>Data are linearized by logarithmic transformation of both variables. Simple linear regression of ln(Y) vs. ln(x) gives ln(a) as the intercept and b as the slope for the function:<br /><sdh:equation>$\displaystyle y=a\,x^{b}$</sdh:equation></p>
         <p>&#160;</p>
         <p><u>Hyperbolic</u>
         </p>
-        <p>Data are linearized by reciprocal transformation of both variables. Simple linear regression of 1/Y vs. 1/x gives a as the slope and b as the intercept for the function:<br /><MadCap:equation>$\displaystyle y=\frac{x}{a+bx}$</MadCap:equation></p>
+        <p>Data are linearized by reciprocal transformation of both variables. Simple linear regression of 1/Y vs. 1/x gives a as the slope and b as the intercept for the function:<br /><sdh:equation>$\displaystyle y=\frac{x}{a+bx}$</sdh:equation></p>
         <p>&#160;</p>
         <p>The standard error of the estimate is given for each of these regressions but please note that the errors of your outcome/response variable might not be from a normal distribution.</p>
         <p>&#160;</p>
@@ -79,11 +79,11 @@
         <p>&#160;</p>
         <p>The hyperbolic model fits these data best of the three on its own scale, but the standard errors are on different scales and none of the models should be used beyond the observed home sizes: these estimates suggest which non-linear model might be worth fitting properly.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Linearized regression estimates: an illustration with the electricity
 # consumption and home size data of the polynomial regression topic (McClave and
@@ -116,8 +116,8 @@ report("(Geometric / Power)  Y = a * x^b", fit, exp(coef(fit)[1]), coef(fit)[2])
 # intercept
 fit &lt;- lm(I(1 / kwh) ~ I(1 / size))
 report("(Hyperbolic)  Y = x / (a + b * x)", fit, coef(fit)[2], coef(fit)[1])</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

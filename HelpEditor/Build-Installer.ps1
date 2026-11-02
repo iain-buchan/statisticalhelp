@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.1.1',
+    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.1.2',
     [string]$SourceProject = (Join-Path $PSScriptRoot 'HelpSource'),
     [string]$OutputDirectory = (Join-Path $PSScriptRoot 'Release'),
     [switch]$Sign,

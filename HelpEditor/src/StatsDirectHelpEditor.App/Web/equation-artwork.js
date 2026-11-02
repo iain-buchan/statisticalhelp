@@ -7,13 +7,16 @@ export const equationArtworkCss=`
 `;
 export function canonicalEquationSource(equation) {
   let result='';
+  // The captured catalog is immutable. Namespace migration changes authoring
+  // identity, not the equation artwork's original source identity.
+  const namespace=uri=>uri==='https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd'?'http://www.madcapsoftware.com/Schemas/MadCap.xsd':uri||'';
   const part=value=>{value=String(value).replace(/\r\n?/g,'\n');result+=value.length+':'+value;};
   const element=node=>{
-    result+='E';part(node.namespaceURI||'');part(node.localName);
+    result+='E';part(namespace(node.namespaceURI));part(node.localName);
     const attributes=Array.from(node.attributes).filter(a=>a.namespaceURI!=='http://www.w3.org/2000/xmlns/'&&a.name!=='xmlns').sort((a,b)=>{
-      const an=a.namespaceURI||'',bn=b.namespaceURI||'';return an<bn?-1:an>bn?1:a.localName<b.localName?-1:a.localName>b.localName?1:0;
+      const an=namespace(a.namespaceURI),bn=namespace(b.namespaceURI);return an<bn?-1:an>bn?1:a.localName<b.localName?-1:a.localName>b.localName?1:0;
     });
-    result+=attributes.length+':';for(const a of attributes){part(a.namespaceURI||'');part(a.localName);part(a.value);}
+    result+=attributes.length+':';for(const a of attributes){part(namespace(a.namespaceURI));part(a.localName);part(a.value);}
     let text='';const flush=()=>{if(text){result+='T';part(text);text='';}};
     for(const child of node.childNodes)if(child.nodeType===3||child.nodeType===4)text+=child.nodeValue;else if(child.nodeType===1){flush();element(child);}
     flush();result+='Z';

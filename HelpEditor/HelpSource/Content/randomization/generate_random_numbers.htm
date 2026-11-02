@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="3283" MadCap:lastWidth="2868" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="3283" sdh:lastWidth="2868" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Random Number Generation (by Distribution) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Random numbers" />
+            <sdh:keyword term="Random numbers" />
             Random Numbers</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Data_Generating_Random Numbers</b>.</p>
@@ -22,8 +22,8 @@
         </p>
         <p>The continuous uniform distribution has a constant density function of the interval (a, b) and thus a rectangular shape from a to b:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\frac{1}{b-a} \\
-\displaystyle \text{var}(x)=\frac{(b-a)^2}{12}$</MadCap:equation>
+            <sdh:equation>$\displaystyle f(x)=\frac{1}{b-a} \\
+\displaystyle \text{var}(x)=\frac{(b-a)^2}{12}$</sdh:equation>
         </p>
         <p>- where a and b lie between minus and plus infinity.</p>
         <p>&#160;</p>
@@ -35,7 +35,7 @@
         </p>
         <p>The commonly used standard <a href="../distributions/normal.htm">normal distribution</a> (mean of 0 and standard deviation of 1) is one of a family of normal distributions defined by the density function:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(x-\mu)^2}{2\sigma^2}\right)}$</MadCap:equation>
+            <sdh:equation>$\displaystyle f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(x-\mu)^2}{2\sigma^2}\right)}$</sdh:equation>
         </p>
         <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
         <p>&#160;</p>
@@ -45,7 +45,7 @@
         </p>
         <p>The density of a lognormal distribution is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\frac{1}{x\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(\ln(x)-\mu)^2}{2\sigma^2}\right)}$</MadCap:equation>
+            <sdh:equation>$\displaystyle f(x)=\frac{1}{x\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(\ln(x)-\mu)^2}{2\sigma^2}\right)}$</sdh:equation>
         </p>
         <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
         <p>&#160;</p>
@@ -57,7 +57,7 @@
         </p>
         <p>The (negative) exponential distribution is a special case (shaping parameter of 1) of the gamma distribution. Its density is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\lambda\exp (-\lambda x)$</MadCap:equation>
+            <sdh:equation>$\displaystyle f(x)=\lambda\exp (-\lambda x)$</sdh:equation>
         </p>
         <p>- where the parameter λ must be greater than zero.</p>
         <p>&#160;</p>
@@ -67,13 +67,13 @@
         </p>
         <p>The density function of the gamma distribution is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\frac{\lambda}{\Gamma(r)}(\lambda x)^{r-1} \exp (-\lambda x)$</MadCap:equation>
+            <sdh:equation>$\displaystyle f(x)=\frac{\lambda}{\Gamma(r)}(\lambda x)^{r-1} \exp (-\lambda x)$</sdh:equation>
         </p>
         <p>- where the parameters λ and r (shaping parameter) must be greater than zero. StatsDirect asks for A (shaping parameter, r) and B (scaling parameter, 1/λ).</p>
         <p>&#160;</p>
         <p>Γ(*) is the gamma function:</p>
         <p>
-            <MadCap:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}\exp(-t) \space dt, \space x&gt;0 \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}\exp(-t) \space dt, \space x&gt;0 \\$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Please note that gamma deviates with a shaping parameter of 0.5 are half the square of normal deviates and gamma deviates with a shaping parameter of 1 are exponential deviates.</p>
@@ -84,7 +84,7 @@
         </p>
         <p>The density function of the <a href="../distributions/binomial.htm">binomial distribution</a> is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle P(x)=\left(\begin{array}{c}n\\ x\end{array}\right)p^x(1-p)^{n-x} \\$</MadCap:equation>
+            <sdh:equation>$\displaystyle P(x)=\left(\begin{array}{c}n\\ x\end{array}\right)p^x(1-p)^{n-x} \\$</sdh:equation>
         </p>
         <p>- where p lies between 0 and 1 and n is the number of trials.</p>
         <p>&#160;</p>
@@ -94,7 +94,7 @@
         </p>
         <p>The density function of the <a href="../distributions/poisson.htm">Poisson distribution</a> is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle P(x)=\frac{\exp (-\lambda)\lambda^x}{x!}$</MadCap:equation>
+            <sdh:equation>$\displaystyle P(x)=\frac{\exp (-\lambda)\lambda^x}{x!}$</sdh:equation>
         </p>
         <p>- where parameter λ is greater than zero.</p>
         <p>&#160;</p>
@@ -104,7 +104,7 @@
         </p>
         <p>The density function of the <a href="../distributions/chisq.htm">chi-square distribution</a> is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle P(x)=\frac{x^{n/2-1} \exp(-x/2)}{2^{n/2}(n/2-1)!} \space \text{if} \space x&gt;0; P(x)=0 \space \text{otherwise}$</MadCap:equation>
+            <sdh:equation>$\displaystyle P(x)=\frac{x^{n/2-1} \exp(-x/2)}{2^{n/2}(n/2-1)!} \space \text{if} \space x&gt;0; P(x)=0 \space \text{otherwise}$</sdh:equation>
         </p>
         <p>The deviates are calculated as gamma deviates with parameters n/2 and 2, where n is degrees of freedom.</p>
         <p>&#160;</p>
@@ -114,7 +114,7 @@
         </p>
         <p>The density function of the <a href="../distributions/f.htm">F distribution</a> is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle P(x)=\frac{\left( \frac{\displaystyle  n+d-2}{\displaystyle 2}\right)! \space x^{n/2-1}}{(n/2-1)!(d/2-1)!\left( 1+\frac{\displaystyle n}{\displaystyle d}x\right)^{(n+d)/2}} \left( \frac{n}{d}\right)^{n/2} \space \text{if}\space x&gt;0; P(x)=0 \space \text{otherwise}$</MadCap:equation>
+            <sdh:equation>$\displaystyle P(x)=\frac{\left( \frac{\displaystyle  n+d-2}{\displaystyle 2}\right)! \space x^{n/2-1}}{(n/2-1)!(d/2-1)!\left( 1+\frac{\displaystyle n}{\displaystyle d}x\right)^{(n+d)/2}} \left( \frac{n}{d}\right)^{n/2} \space \text{if}\space x&gt;0; P(x)=0 \space \text{otherwise}$</sdh:equation>
         </p>
         <p>The deviates are calculated as (x/n)/(z/d) where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
         <p>&#160;</p>
@@ -124,7 +124,7 @@
         </p>
         <p>The density function of <a href="../distributions/t.htm">Student's t distribution</a>  is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle P(x)=\frac{\left( \frac{\displaystyle n-1}{\displaystyle 2}\right)!}{(n/2-1)!\sqrt{\pi n}(1+x^2/n)^{(n+1)/2}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle P(x)=\frac{\left( \frac{\displaystyle n-1}{\displaystyle 2}\right)!}{(n/2-1)!\sqrt{\pi n}(1+x^2/n)^{(n+1)/2}}$</sdh:equation>
         </p>
         <p>The deviates are calculated as a standard normal deviate multiplied by the square root of the degrees of freedom (n) divided by a gamma deviate with parameters n/2 and 2 (a chi-square deviate with n degrees of freedom).</p>
         <p>&#160;</p>
@@ -134,7 +134,7 @@
         </p>
         <p>The density function of the beta distribution is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \space x^{a-1}(1-x)^{b-1} \space \text{if} \space 0&lt;x&lt;1; f(x)=0 \space \text{otherwise}$</MadCap:equation>
+            <sdh:equation>$\displaystyle f(x)=\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \space x^{a-1}(1-x)^{b-1} \space \text{if} \space 0&lt;x&lt;1; f(x)=0 \space \text{otherwise}$</sdh:equation>
         </p>
         <p>- where a and b are the two shape parameters.</p>
         <p>&#160;</p>
@@ -144,8 +144,8 @@
         </p>
         <p>The density function of the standard logistic distribution is given by:</p>
         <p>
-            <MadCap:equation>$\displaystyle f(x)=\Lambda(x)[1-\Lambda(x)] \\
-\displaystyle \Lambda(x)=\frac{1}{1+\exp(-x)}$</MadCap:equation>
+            <sdh:equation>$\displaystyle f(x)=\Lambda(x)[1-\Lambda(x)] \\
+\displaystyle \Lambda(x)=\frac{1}{1+\exp(-x)}$</sdh:equation>
         </p>
         <p>The deviates are calculated as location + scale * ln(u/(1-u)), where u is a uniform deviate.</p>
         <p>&#160;</p>
@@ -187,11 +187,11 @@
         <p>&#160;</p>
         <p>The ten values have mean 0.337885 and standard deviation 0.864366: a sample this small from a normal distribution with mean 0 and standard deviation 1 need not look like one. Running the function again with seed 1234 gives the same ten numbers, and any other seed gives a different series. The seed used is always in the column heading, so a series can be repeated even when you accept the seed that StatsDirect suggests.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above in its structure: R's random number generator gives a different series for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Random numbers by distribution: the StatsDirect help illustration (ten standard
 # normal deviates from seed 1234, then samples from the other distributions that the
@@ -253,8 +253,8 @@ cat("Sample variance =", round(var(bi), 4), "\n")
 # The gamma sample against its density
 hist(ga, freq = FALSE, breaks = 30, main = "Gamma (A = 2, B = 3)", xlab = "x")
 curve(dgamma(x, shape = 2, scale = 3), add = TRUE, col = "red")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

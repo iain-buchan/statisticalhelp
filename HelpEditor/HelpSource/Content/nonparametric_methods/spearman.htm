@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Spearman's Rank Correlation - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Nonparametric (Spearman) correlation;Spearman's rank correlation; Correlation: Nonparametric: Spearman" />
+            <sdh:keyword term="Nonparametric (Spearman) correlation;Spearman's rank correlation; Correlation: Nonparametric: Spearman" />
             Spearman's Rank Correlation</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Nonparametric_Spearman Rank Correlation</b>.</p>
@@ -16,7 +16,7 @@
         <p>&#160;</p>
         <p>Spearman's rank correlation coefficient (r or rho) is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle \rho=\frac{\displaystyle \sum_{i=1}^n R(x_i)R(y_i)-n \left( \frac{n+1}{2}\right)^2}{\displaystyle \sqrt{\sum_{i=1}^n R(x_i)^2-n\left( \frac{n+1}{2}\right)^2 }\sqrt{\sum_{i=1}^n R(y_i)^2-n\left( \frac{n+1}{2}\right)^2 }}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \rho=\frac{\displaystyle \sum_{i=1}^n R(x_i)R(y_i)-n \left( \frac{n+1}{2}\right)^2}{\displaystyle \sqrt{\sum_{i=1}^n R(x_i)^2-n\left( \frac{n+1}{2}\right)^2 }\sqrt{\sum_{i=1}^n R(y_i)^2-n\left( \frac{n+1}{2}\right)^2 }}$</sdh:equation>
         </p>
         <p>- where R(x) and R(y) are the ranks of a pair of variables (x and y) each containing n observations.</p>
         <p>&#160;</p>
@@ -100,11 +100,11 @@
         <p>&#160;</p>
         <p>From these results we reject the null hypothesis of mutual independence between the tutor's ranking of students suitability for their career and their knowledge of psychology. With a two sided test we are considering the possibility of a positive or a negative correlation, i.e. we can't be sure of this direction at the outset. A one sided test would have been restricted to correlation in one direction only i.e. large values of one group associated with big values of the other (positive correlation) or large values of one group associated with small values of the other (negative correlation). In our example we can conclude that there is a statistically significant lack of independence between career suitability and psychology knowledge rankings of the students by the tutor. The tutor tended to rank students with apparently greater knowledge as more suitable to their career than those with apparently less knowledge and vice versa.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Spearman's rank correlation: the StatsDirect help example (Armitage and Berry
 # 1994, p. 466) in R
@@ -151,8 +151,8 @@ upper &lt;- sum(p[1:(score + 1)])            # a small score is a large rho
 lower &lt;- sum(p[(score + 1):(maxsum + 1)]) # each side includes the observed score
 cat("Upper side P =", round(upper, 4), "  Lower side P =", round(lower, 4),
     "  Two sided P =", round(min(1, 2 * min(upper, lower)), 4), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

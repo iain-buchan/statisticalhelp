@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="1254" MadCap:lastWidth="935" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="1254" sdh:lastWidth="935" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Quantile (Median etc.) Confidence Interval - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Quantile confidence interval;Percentile confidence interval;Median confidence interval" />Quantile Confidence Interval</h1>
+            <sdh:keyword term="Quantile confidence interval;Percentile confidence interval;Median confidence interval" />Quantile Confidence Interval</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Nonparametric_Quantile Confidence Interval</b>.</p>
         <p>&#160;</p>
@@ -104,11 +104,11 @@
         <p>&#160;</p>
         <p>We may conclude with 91% confidence that the population value of the upper quartile lies between 63.3 and 73.3 hours.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Quantile confidence interval: the StatsDirect help example (Conover 1999,
 # p. 145) in R
@@ -148,8 +148,8 @@ show(which.min(abs(cum - tail)) - 1, which.min(abs(cum - (1 - tail))) - 1,
 # then uses the smallest or largest observation and marks the limit.
 stopifnot(any(cum &lt;= tail), any(cum &gt;= 1 - tail))
 show(max(which(cum &lt;= tail)) - 1, min(which(cum &gt;= 1 - tail)) - 1, "conservative")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>

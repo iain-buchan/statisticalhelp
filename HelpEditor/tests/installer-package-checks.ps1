@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory)][string]$PayloadDirectory,
     [string]$Bundle,
     [string]$WixToolPath,
-    [string]$ExpectedVersion = '0.1.1',
+    [string]$ExpectedVersion = '0.1.2',
     [string]$ExpectedCommit,
     [string]$Root = (Split-Path -Parent $PSScriptRoot),
     [string]$OutputDirectory,

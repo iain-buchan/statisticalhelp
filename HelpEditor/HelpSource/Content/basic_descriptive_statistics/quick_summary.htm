@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="288" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="288" sdh:lastWidth="1013" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Descriptive Statistics on Variables in StatsDirect Spreadsheet Columns</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Quick summary statistics;Summarising data (quick/F9 key)" />
+            <sdh:keyword term="Quick summary statistics;Summarising data (quick/F9 key)" />
             Quick Univariate Summary</h1>
         <p>&#160;</p>
         <p>Menu locations:<br /><b>Analysis_Descriptive_Quick Summary<br />Edit_Describe Column Data </b>(or press F9 in the worksheet)<b></b></p>
@@ -126,11 +126,11 @@
         <p>&#160;</p>
         <p>The quick summary always uses centile type 1 for the quartiles and percentiles, and shows six decimal places whatever the setting in Analysis_Options.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Quick univariate summary: the StatsDirect help example (resting systolic blood
 # pressure of 20 first year resident doctors, from the single sample t test) in R
@@ -172,8 +172,8 @@ cat("Interquartile range", six(q[4] - q[2]), "\n")
 cat("5th percentile", six(q[1]), "\n")
 cat("Minimum", six(min(bp)), "\n")
 cat("Range", six(max(bp) - min(bp)), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

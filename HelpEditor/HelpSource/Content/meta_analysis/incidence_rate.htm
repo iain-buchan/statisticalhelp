@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2228.104" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2228.104" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Incidence Rate Meta-analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Incidence rate meta-analysis;Meta-analysis: Incidence rate" />
+            <sdh:keyword term="Incidence rate meta-analysis;Meta-analysis: Incidence rate" />
             Incidence Rate Meta-analysis</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Meta-Analysis_Incidence Rate</b>.</p>
@@ -78,19 +78,19 @@
         </p>
         <p>Pooled incidence rate difference for fixed effects is estimated as follows:</p>
         <p>
-            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle \widehat{IRD}=\frac{\sum_{i=1}^{k}\left[W_i\left(\frac{a_i}{{pt}_{ei}}-\frac{b_i}{{pt}_{ni}}\right)\right]}{\sum_{i=1}^{k}w_i}$</MadCap:equation>
+            <sdh:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle \widehat{IRD}=\frac{\sum_{i=1}^{k}\left[W_i\left(\frac{a_i}{{pt}_{ei}}-\frac{b_i}{{pt}_{ni}}\right)\right]}{\sum_{i=1}^{k}w_i}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle W_i=\frac{{pt}_{ei}^2{pt}_{ni}^2}{a_i{pt}_{ni}^2+b_i{pt}_{ei}^2}$</MadCap:equation>
+            <sdh:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle W_i=\frac{{pt}_{ei}^2{pt}_{ni}^2}{a_i{pt}_{ni}^2+b_i{pt}_{ei}^2}$</sdh:equation>
         </p>
         <p>- where the weight,  W<sub>i</sub>, is the inverse of the estimated variance.</p>
         <p>&#160;</p>
         <p>Pooled incidence rate ratio for fixed effects is estimated as follows:</p>
         <p>
-            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle \widehat{IRR}=\exp\left\{\frac{\sum_{i=1}^{k}\left[W_i\log\left(\frac{a_i}{{pt}_{ei}}/\frac{b_i}{{pt}_{ni}}\right)\right]}{\sum_{i=1}^{k}W_i}\right\}$</MadCap:equation>
+            <sdh:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle \widehat{IRR}=\exp\left\{\frac{\sum_{i=1}^{k}\left[W_i\log\left(\frac{a_i}{{pt}_{ei}}/\frac{b_i}{{pt}_{ni}}\right)\right]}{\sum_{i=1}^{k}W_i}\right\}$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle W_i=\frac{a_i b_i}{a_i+b_i}$</MadCap:equation>
+            <sdh:equation xmlns:dsi="http://www.w3.org/1998/Math/MathML" style="font-size: 12pt;">$\displaystyle W_i=\frac{a_i b_i}{a_i+b_i}$</sdh:equation>
         </p>
         <p>- where the weight,  W<sub>i</sub>, is the inverse of the estimated variance for the log transformed statistic.</p>
         <p>&#160;</p>
@@ -246,11 +246,11 @@
         <p>&#160;</p>
         <p>Here we infer with 95% confidence, assuming a fixed effects model, that the true size of the difference between incidence rates was somewhere between -0.0006 and 0.011 deaths per person-year for the exposed group compared with the non-exposed group; i.e. not statistically significant.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above, then runs the incidence rate ratio option on the same data. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Incidence rate meta-analysis: the StatsDirect help example (Rothman and Monson 1973,
 # deaths among patients with trigeminal neuralgia in two age strata, exposed and not
@@ -423,8 +423,8 @@ forest(irr, exact[1, ], exact[2, ], exp(res_r$random),
        exp(res_r$random - z * res_r$se_r), exp(res_r$random + z * res_r$se_r),
        res_r$random_pct, "Incidence rate ratio meta-analysis plot [random effects]",
        "incidence rate ratio (95% confidence interval)", 1, log = "x")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

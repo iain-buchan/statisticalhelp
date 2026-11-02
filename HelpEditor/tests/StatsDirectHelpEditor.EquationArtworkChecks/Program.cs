@@ -16,7 +16,7 @@ XNamespace mc = "http://www.madcapsoftware.com/Schemas/MadCap.xsd";
 foreach (var file in Directory.EnumerateFiles(Path.Combine(root, "HelpSource/Content"), "*.htm", SearchOption.AllDirectories))
 {
     var document = XDocument.Load(file, LoadOptions.PreserveWhitespace);
-    foreach (var source in document.Descendants(mc + "equation"))
+    foreach (var source in document.Descendants().Where(element => element.Name.LocalName == "equation" && HelpSourceNamespaces.IsAuthoringNamespace(element.Name.NamespaceName)))
     {
         equations++;
         var rendered = catalog.TryCreateEquation(source, "nested/topic.htm");
@@ -24,6 +24,9 @@ foreach (var file in Directory.EnumerateFiles(Path.Combine(root, "HelpSource/Con
         if (rendered is null) continue;
         Check(rendered.Element("img")?.Attribute("src")?.Value.StartsWith("../" + EquationArtworkCatalog.OutputFolder, StringComparison.Ordinal) == true, "Nested topic resolves its verified artwork");
         Check(rendered.Descendants("span").Any(x => ((string?)x.Attribute("class"))?.Contains("help-equation-live", StringComparison.Ordinal) == true), "Accessible source remains available to the independent MathML renderer");
+        var migrated = XElement.Parse(source.ToString(SaveOptions.DisableFormatting).Replace(HelpSourceNamespaces.LegacyUri, HelpSourceNamespaces.CurrentUri));
+        Check(EquationArtworkCatalog.SourceKey(migrated) == EquationArtworkCatalog.SourceKey(source) && catalog.TryCreateEquation(migrated, "nested/topic.htm") is not null,
+            "Changing only the authoring namespace preserves verified artwork identity");
         var changed = new XElement(source); changed.Value += "+changed";
         Check(catalog.TryCreateEquation(changed, "nested/topic.htm") is null, "Edited source cannot reuse stale SVG");
         var restyled = new XElement(source); restyled.SetAttributeValue("style", "font-size:24pt");

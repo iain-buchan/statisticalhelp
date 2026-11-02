@@ -77,13 +77,13 @@ internal static class Program
         await SetSource(menuSaveDraft);
         FileCommand("Save page").PerformClick();
         await WaitUntil(() => !Field<bool>("busy") && !form.IsDirty);
-        Check(form.CurrentProject.ReadTopic("basics/alpha.htm") == menuSaveDraft,
-            "File > Save page still saves the actual edited buffer without a toolbar button");
+        Check(form.CurrentProject.ReadTopic("basics/alpha.htm") == menuSaveDraft.Replace(HelpSourceNamespaces.LegacyUri, HelpSourceNamespaces.CurrentUri),
+            "File > Save page saves the edited buffer with the canonical authoring namespace");
         await SetSource(beforeMenuSave);
         FileCommand("Save page").PerformClick();
         await WaitUntil(() => !Field<bool>("busy") && !form.IsDirty);
-        Check(form.CurrentProject.ReadTopic("basics/alpha.htm") == beforeMenuSave,
-            "A second File > Save restores the exact fixture source before workspace regression checks");
+        Check(form.CurrentProject.ReadTopic("basics/alpha.htm") == beforeMenuSave.Replace(HelpSourceNamespaces.LegacyUri, HelpSourceNamespaces.CurrentUri),
+            "A second File > Save restores the fixture source with the canonical authoring namespace");
         var captionMetrics = Field<Label>("workspaceCaption");
         Check(captionMetrics.Height >= captionMetrics.PreferredHeight && captionMetrics.Height >= captionMetrics.Font.Height * 2 + captionMetrics.Padding.Vertical && form.EditorWebView.Parent!.Top >= captionMetrics.Bottom,
             "Both caption lines fit the actual DPI-scaled font above the editor", new { captionMetrics.DeviceDpi, captionMetrics.Height, captionMetrics.PreferredHeight, FontHeight = captionMetrics.Font.Height, captionMetrics.Bounds });

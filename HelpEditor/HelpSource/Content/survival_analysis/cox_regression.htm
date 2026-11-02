@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="3666" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="3666" sdh:lastWidth="974" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Cox Regression (Proportional Hazards, Hazard Ratio) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Survival analysis: Cox regression;Cox regression;Proportional hazards;Survival estimates (Cox regression);Hazard ratios: Cox regression;Survival curves (Cox regression)" />Cox (Proportional Hazards) Regression</h1>
+            <sdh:keyword term="Survival analysis: Cox regression;Cox regression;Proportional hazards;Survival estimates (Cox regression);Hazard ratios: Cox regression;Survival curves (Cox regression)" />Cox (Proportional Hazards) Regression</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Survival_Cox Regression</b>.</p>
         <p>&#160;</p>
@@ -542,11 +542,11 @@
         <p>Deviance (likelihood ratio) chi-square = 7.634383 df = 1 P = 0.0057</p>
         <p>&#160;</p>
         <p>The significance test for the coefficient b1 tests the null hypothesis that it equals zero and thus that its exponent equals one. The confidence interval for exp(b1) is therefore the confidence interval for the relative death rate or hazard ratio; we may therefore infer with 95% confidence that the death rate from stage 4 cancers is approximately 3 times, and at least 1.2 times, the risk from stage 3 cancers.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It uses the survival package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Cox (proportional hazards) regression: the StatsDirect help example (Armitage and
 # Berry 1994, survival in days of lymphoma patients by stage of disease; the test
@@ -613,8 +613,8 @@ at_event &lt;- base$n.event &gt; 0
 cat("First baseline rows: time, survival probability, cumulative hazard\n")
 print(data.frame(time = base$time[at_event], survival = six(base$surv[at_event]),
                  hazard = six(base$cumhaz[at_event]))[1:5, ], row.names = FALSE)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

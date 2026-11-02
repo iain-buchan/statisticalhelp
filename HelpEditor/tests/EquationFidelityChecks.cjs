@@ -6,7 +6,7 @@ const root = path.resolve(__dirname, '..'), source = path.join(root, 'HelpSource
 const baseline = process.env.STATSDIRECT_FLARE_DESKTOP || 'C:/Develop/SD3Help/StatsDirect/Output/ieb21/DesktopHelp';
 const output = path.join(root, 'Build/Desktop');
 const topics = [];
-function walk(dir) { for (const e of fs.readdirSync(dir, { withFileTypes: true })) { const file = path.join(dir, e.name); if (e.isDirectory()) walk(file); else if (/\.htm$/i.test(e.name) && /<MadCap:equation\b/i.test(fs.readFileSync(file, 'utf8'))) topics.push(path.relative(source, file).replaceAll('\\', '/').toLowerCase()); } }
+function walk(dir) { for (const e of fs.readdirSync(dir, { withFileTypes: true })) { const file = path.join(dir, e.name); if (e.isDirectory()) walk(file); else if (/\.htm$/i.test(e.name) && /<(?:MadCap|sdh):equation\b/i.test(fs.readFileSync(file, 'utf8'))) topics.push(path.relative(source, file).replaceAll('\\', '/').toLowerCase()); } }
 walk(source);
 const mime = { '.htm': 'text/html', '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.gif': 'image/gif', '.jpg': 'image/jpeg', '.json': 'application/json', '.xml': 'application/xml', '.woff': 'font/woff', '.woff2': 'font/woff2' };
 const server = http.createServer((req, res) => {

@@ -672,8 +672,11 @@ public sealed partial class MainForm : Form
             throw new InvalidOperationException("This page was changed on disk by another editor. Your unsaved changes are still open. Copy them from HTML source, then use File > Reload page from disk to review and merge with the newer file before saving.");
         sourceProject.SaveTopic(path, source);
         MarkSavedSourceChanged();
-        loadedDiskSource = source;
-        await editor.ExecuteScriptAsync("window.HelpEditor.markSaved()");
+        // Saving an imported Flare page can canonicalize its authoring
+        // namespace. Both conflict detection and the renderer must use the
+        // actual stored source as their next baseline.
+        loadedDiskSource = sourceProject.ReadTopic(path);
+        await editor.ExecuteScriptAsync("window.HelpEditor.markSaved(" + JsonSerializer.Serialize(loadedDiskSource) + ")");
         SetDirty(false);
         allTopics = project.ListTopics();
         await UpdateTopicCatalogAsync();

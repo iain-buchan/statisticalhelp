@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2026 Iain Buchan. SPDX-License-Identifier: MIT -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd"
+           targetNamespace="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd"
+           elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+      StatsDirect Help authoring extensions, independently defined from their use
+      in the StatsDirect help source. This is an MIT-licensed extension vocabulary,
+      not a copy of, or complete replacement for, any third-party help schema.
+      It does not require Flare. Ordinary HTML/XHTML, MathML and SVG retain their
+      own namespaces. No-namespace legacy project/configuration formats are separate.
+      See README.md for scope, legacy import and validation instructions.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:simpleType name="BooleanWithLegacyCase">
+    <xs:annotation><xs:documentation>Use true/false in new source; imported True/False values remain valid.</xs:documentation></xs:annotation>
+    <xs:union memberTypes="xs:boolean">
+      <xs:simpleType><xs:restriction base="xs:string"><xs:enumeration value="True"/><xs:enumeration value="False"/></xs:restriction></xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="NonNegativeDecimal">
+    <xs:restriction base="xs:decimal"><xs:minInclusive value="0"/></xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NonEmptyString">
+    <xs:restriction base="xs:string"><xs:minLength value="1"/></xs:restriction>
+  </xs:simpleType>
+
+  <xs:attribute name="conditions" type="xs:string">
+    <xs:annotation><xs:documentation>Authoring condition tags, interpreted by the selected output target. Existing Primary.SWHELP and Primary.WEBHELP labels remain usable.</xs:documentation></xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="searchable" type="sdh:BooleanWithLegacyCase">
+    <xs:annotation><xs:documentation>Whether this authored content participates in search.</xs:documentation></xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="ignoredWords" type="xs:string">
+    <xs:annotation><xs:documentation>Imported authoring/spelling metadata; not reader-facing content.</xs:documentation></xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="lastBlockDepth" type="xs:nonNegativeInteger"/>
+  <xs:attribute name="lastHeight" type="sdh:NonNegativeDecimal"/>
+  <xs:attribute name="lastWidth" type="sdh:NonNegativeDecimal"/>
+  <xs:attribute name="lastBlocdatackDepth" type="xs:nonNegativeInteger">
+    <xs:annotation><xs:documentation>Legacy misspelling found in the imported source. Retained for lossless import only; use lastBlockDepth for newly authored metadata.</xs:documentation></xs:annotation>
+  </xs:attribute>
+
+  <xs:attributeGroup name="AuthoringAttributes">
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="class" type="xs:string"/>
+    <xs:attribute name="style" type="xs:string"/>
+    <xs:attribute name="title" type="xs:string"/>
+    <xs:attribute name="lang" type="xs:string"/>
+    <xs:attribute name="dir" type="xs:string"/>
+    <xs:attribute ref="sdh:conditions"/>
+    <xs:attribute ref="sdh:searchable"/>
+    <xs:attribute ref="sdh:ignoredWords"/>
+    <xs:attribute ref="sdh:lastBlockDepth"/>
+    <xs:attribute ref="sdh:lastHeight"/>
+    <xs:attribute ref="sdh:lastWidth"/>
+    <xs:attribute ref="sdh:lastBlocdatackDepth"/>
+  </xs:attributeGroup>
+  <xs:group name="MixedContent">
+    <xs:choice>
+      <xs:element ref="sdh:equation"/>
+      <xs:element ref="sdh:keyword"/>
+      <xs:element ref="sdh:dropDown"/>
+      <!-- Legacy HTML is unnamespaced; new HTML may use the XHTML namespace.
+           These languages are intentionally not redefined by this schema. -->
+      <xs:any namespace="##local http://www.w3.org/1999/xhtml http://www.w3.org/1998/Math/MathML http://www.w3.org/2000/svg" processContents="lax"/>
+    </xs:choice>
+  </xs:group>
+  <xs:complexType name="MixedContentType" mixed="true">
+    <xs:group ref="sdh:MixedContent" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="sdh:AuthoringAttributes"/>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+
+  <xs:element name="equation" type="sdh:MixedContentType">
+    <xs:annotation><xs:documentation>Authored equation content: MathML, editable TeX text, or mixed supported markup. This schema checks XML structure, not mathematical correctness or TeX syntax.</xs:documentation></xs:annotation>
+  </xs:element>
+  <xs:element name="keyword">
+    <xs:annotation><xs:documentation>Search/index keywords; semicolon-separated terms are retained as supplied.</xs:documentation></xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="term" type="sdh:NonEmptyString" use="required"/>
+      <xs:attributeGroup ref="sdh:AuthoringAttributes"/>
+      <xs:anyAttribute namespace="##other" processContents="lax"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dropDown">
+    <xs:annotation><xs:documentation>A collapsible section with one heading followed by one body, including equivalent R-code sections.</xs:documentation></xs:annotation>
+    <xs:complexType>
+      <xs:sequence><xs:element ref="sdh:dropDownHead"/><xs:element ref="sdh:dropDownBody"/></xs:sequence>
+      <xs:attributeGroup ref="sdh:AuthoringAttributes"/>
+      <xs:anyAttribute namespace="##other" processContents="lax"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dropDownHead">
+    <xs:complexType mixed="true">
+      <xs:sequence><xs:element ref="sdh:dropDownHotspot"/></xs:sequence>
+      <xs:attributeGroup ref="sdh:AuthoringAttributes"/>
+      <xs:anyAttribute namespace="##other" processContents="lax"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dropDownHotspot" type="sdh:MixedContentType"/>
+  <xs:element name="dropDownBody" type="sdh:MixedContentType"/>
+  <xs:element name="pageFooter" type="sdh:MixedContentType">
+    <xs:annotation><xs:documentation>Authored footer content copied into the selected output.</xs:documentation></xs:annotation>
+  </xs:element>
+  <xs:element name="bodyProxy">
+    <xs:annotation><xs:documentation>Empty master-page placeholder at which the topic body is inserted.</xs:documentation></xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="sdh:AuthoringAttributes"/>
+      <xs:anyAttribute namespace="##other" processContents="lax"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

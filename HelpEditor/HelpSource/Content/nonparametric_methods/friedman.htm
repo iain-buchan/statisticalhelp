@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2771.76" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2771.76" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Friedman and Cohran Q Tests - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Friedman test;Quade test;Kendall W test;Cochran Q test;Nonparametric two way ANOVA;Two way ANOVA (nonparametric)" />
+            <sdh:keyword term="Friedman test;Quade test;Kendall W test;Cochran Q test;Nonparametric two way ANOVA;Two way ANOVA (nonparametric)" />
             Friedman and Cochran Q Tests</h1>
         <p>&#160;</p>
         <p>Menu locations:<br /><b>Analysis_Analysis of Variance_Friedman<br />Analysis_Nonparametric_Friedman<br />Analysis_Nonparametric_Cochran Q</b></p>
@@ -18,17 +18,17 @@
         <p>&#160;</p>
         <p>The Iman-Davenport T<sub>2</sub>variant of the Friedman test statistic is:</p>
         <p>
-            <MadCap:equation>$\displaystyle T_2 = \frac{(b-1)T_1}{b(k-1)-T_1}$</MadCap:equation>
+            <sdh:equation>$\displaystyle T_2 = \frac{(b-1)T_1}{b(k-1)-T_1}$</sdh:equation>
         </p>
         <p>- where there are k treatments and b blocks and T<sub>1</sub> is:</p>
         <p>
-            <MadCap:equation>$\displaystyle T_1 = \frac{\displaystyle (k-1) \left[ \sum_{j=1}^k R_j^2-bC_1 \right]}{A_1-C_1}$</MadCap:equation>
+            <sdh:equation>$\displaystyle T_1 = \frac{\displaystyle (k-1) \left[ \sum_{j=1}^k R_j^2-bC_1 \right]}{A_1-C_1}$</sdh:equation>
         </p>
         <p>- where R<sub>j</sub> is the sum of the ranks (from pooled observations) for all blocks in a one treatment and A<sub>1</sub> and C<sub>1</sub>  are:</p>
         <p>
-            <MadCap:equation>$\displaystyle A_1 = \sum_{i=1}^b \sum_{j=1}^k [R(X{_i}_j)]^2 \\
+            <sdh:equation>$\displaystyle A_1 = \sum_{i=1}^b \sum_{j=1}^k [R(X{_i}_j)]^2 \\
 
-\displaystyle C_1 = \frac{bk(k+1)^2}{4}$</MadCap:equation>
+\displaystyle C_1 = \frac{bk(k+1)^2}{4}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p>Assumptions:</p>
@@ -41,7 +41,7 @@
         <p>&#160;</p>
         <p>When the test is significant StatsDirect allows you to make multiple comparisons between the individual samples. These comparisons are performed automatically for all possible contrasts and you are informed of the statistical significance of each contrast. A contrast is considered significant if the following inequality is satisfied:</p>
         <p>
-            <MadCap:equation>$\displaystyle |R_j-R_i|&gt;t_{1-\alpha/2}\sqrt{\frac{\displaystyle 2b \left(A_1-\sum_{j=1}^k R_j^2 \right)}{(b-1)(k-1)}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle |R_j-R_i|&gt;t_{1-\alpha/2}\sqrt{\frac{\displaystyle 2b \left(A_1-\sum_{j=1}^k R_j^2 \right)}{(b-1)(k-1)}}$</sdh:equation>
         </p>
         <p>- where t is a quantile from the Student t distribution on (b-1)(k-1) degrees of freedom. This method is a nonparametric equivalent to Fisher's least significant difference method (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>).</p>
         <p>&#160;</p>
@@ -283,11 +283,11 @@
         <p>&#160;</p>
         <p>From the overall test statistic we can conclude that there is a statistically significant tendency for at least one group to yield higher values than at least one of the other groups. Considering the raw data and the contrast results we see that grasses 2 and 3 are significantly preferred above grass 1 but that there is little to choose between 2 and 3.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above, with the pairwise comparisons and the Cochran Q variant. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Friedman test: the StatsDirect help example (Conover 1999, p. 372) in R
 grass &lt;- matrix(c(4,   3,   2,   1,
@@ -345,8 +345,8 @@ Q &lt;- kq * (kq - 1) * sum((colSums(games) - sum(games) / kq)^2) /
   sum(rowSums(games) * (kq - rowSums(games)))
 cat(sprintf("Cochran Q = %g   df = %d   P = %.4f\n", Q, kq - 1,
             pchisq(Q, kq - 1, lower.tail = FALSE)))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

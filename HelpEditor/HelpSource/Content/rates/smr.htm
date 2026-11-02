@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2062" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2062" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Indirect Standardization of Rates (e.g. Mortality: SMR) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Standardized mortality ratios;Standardized incidence ratios;Indirect standardization;SMR;Rates: Indirect standardization" />
+            <sdh:keyword term="Standardized mortality ratios;Standardized incidence ratios;Indirect standardization;SMR;Rates: Indirect standardization" />
             Indirect Standardization and SMR</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Rates_Indirect Standardization and SMR</b>.</p>
@@ -40,10 +40,10 @@
         </p>
         <p>The confidence intervals are calculated by the exact Poisson method of Owen, this gives better coverage than the frequently quoted Vandenbroucke approximation or other asymptotic methods (<a href="../references/reference_list.htm#ref-ulm-1990">Ulm, 1990</a>; <a href="../references/reference_list.htm#ref-greenland-1991">Greenland, 1991</a>).</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{SMR}=\frac{d}{e} \\
+            <sdh:equation>$\displaystyle \text{SMR}=\frac{d}{e} \\
 \displaystyle e=\sum_{i=1}^kn_iR_i \\
 \displaystyle \text{SMR}_\text{l}=\frac{\chi_{\alpha/2,\space 2d}^2}{2e} \\
-\displaystyle \text{SMR}_\text{u}=\frac{\chi_{1-\alpha/2,\space 2(d+1)}^2}{2e}$</MadCap:equation>
+\displaystyle \text{SMR}_\text{u}=\frac{\chi_{1-\alpha/2,\space 2(d+1)}^2}{2e}$</sdh:equation>
         </p>
         <p>- where SMR<sub>l</sub> and SMR<sub>u</sub> are lower and upper confidence limits respectively for the SMR, χ<sup>2</sup><sub>α, ν</sub> is the (100*α)th chi-square centile with ν degrees of freedom, d is the number of observed deaths, e is the number of expected deaths, n<sub>i</sub> is the person-time for the ith study group stratum and R<sub>i</sub> is the reference population rate for the ith stratum.</p>
         <p>&#160;</p>
@@ -155,11 +155,11 @@
         <p>Probability of observing 14 or fewer deaths by chance P &gt; 0.9999</p>
         <p>&#160;</p>
         <p>Here we can see that the total expected deaths from liver cirrhosis in male doctors is 4.5 per year. The observed number, 14, was statistically highly significantly greater than expected. With 95% confidence we can state that male doctors in this country exhibit between 1.7 and 5.2 times the number of deaths from liver cirrhosis than expected from the general male population of a similar age distribution.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Indirect standardization and SMR: the StatsDirect help example (Bland 2000, deaths
 # from liver cirrhosis among male doctors against the age-specific rates for all men;
@@ -209,8 +209,8 @@ p_fewer &lt;- ppois(observed, e)
 cat("Probability of observing", observed, "or more deaths by chance", pv(p_more), "\n")
 cat("Probability of observing", observed, "or fewer deaths by chance", pv(p_fewer),
     "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="3" MadCap:lastHeight="426" MadCap:lastWidth="2848" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="3" sdh:lastHeight="426" sdh:lastWidth="2848" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Non-central t Distribution - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Non-central t distribution;Distributions: Non-central t" />Non-central t Distribution</h1>
+            <sdh:keyword term="Non-central t distribution;Distributions: Non-central t" />Non-central t Distribution</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Distributions_Non-Central t</b>.</p>
         <p>&#160;</p>
@@ -15,7 +15,7 @@
         <p>&#160;</p>
         <p>Non-central t may be expressed in terms of a normal and a chi-square distribution:</p>
         <p>
-            <MadCap:equation>$\displaystyle T=\frac{z}{\sqrt{\chi^2/\nu}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle T=\frac{z}{\sqrt{\chi^2/\nu}}$</sdh:equation>
         </p>
         <p>- where z is a normal variable with mean &#948; and variance 1 and χ² is a chi-square random variable with &#957; degrees of freedom (<a href="../references/reference_list.htm#ref-owen-1965">Owen, 1965</a>).</p>
         <p>&#160;</p>
@@ -42,11 +42,11 @@
         <p>P(non-central t &lt; -2.093024, df 19, delta 2.236068) = 0.999978478237757 upper, 0.000021521762243 lower</p>
         <p>&#160;</p>
         <p>The power of the test is the probability of exceeding 2.093024, 0.5644829, plus the probability of falling below -2.093024, 0.0000215: in all 0.5645044 (R's power.t.test gives power = 0.5645044 from the unrounded critical value). Twenty observations give only a 56% chance of detecting a difference of half a standard deviation at the 5% level. These are the values StatsDirect gives: direct numerical integration of the distribution confirms them to the precision shown, and R's pt and qt (see the R code below) agree with them to 12 decimal places.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above to 12 decimal places (R's non-central t functions are accurate to about that many places here; StatsDirect shows up to 15 decimal places). It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Non-central t distribution: the illustration in the StatsDirect help (a tail
 # probability, its inverse, and the power of a t test, as the Distributions dialog
@@ -91,8 +91,8 @@ cat("Power =", seven(upper + lower), "=", seven(upper), "+", seven(lower), "\n")
 # tests do (without it only the tail on the side of the difference is counted)
 print(power.t.test(n = n, delta = d, sd = 1, sig.level = 0.05, type = "one.sample",
                    strict = TRUE))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

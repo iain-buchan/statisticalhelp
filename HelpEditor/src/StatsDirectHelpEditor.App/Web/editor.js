@@ -3,8 +3,11 @@ import { loadEquationArtwork, equationArtworkCss } from './equation-artwork.js';
 
 const equationArtwork = await loadEquationArtwork();
 
-const MC = 'http://www.madcapsoftware.com/Schemas/MadCap.xsd';
+const SDH = 'https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd';
+const LEGACY_MC = 'http://www.madcapsoftware.com/Schemas/MadCap.xsd';
 const XMLNS = 'http://www.w3.org/2000/xmlns/';
+const isHelpNamespace = uri => uri === SDH || uri === LEGACY_MC;
+const helpAttribute = (node,name) => node.hasAttributeNS(SDH,name) ? node.getAttributeNS(SDH,name) : node.getAttributeNS(LEGACY_MC,name);
 const $ = id => document.getElementById(id);
 const visual = $('visual-editor'), source = $('source-editor');
 const state = { path: '', title: '', baseUrl: '', baseSource: '', savedSource: '', xml: null,
@@ -60,6 +63,26 @@ function parseXml(text) {
 }
 function findBody(doc) { return Array.from(doc.documentElement.children).find(x=>x.localName.toLowerCase()==='body'); }
 function findTitle(doc) { return Array.from(doc.getElementsByTagName('*')).find(x=>x.localName.toLowerCase()==='title'); }
+function canonicalizeHelpNamespaces(doc) {
+  let used=false;
+  for(let node of Array.from(doc.getElementsByTagName('*'))){
+    if(isHelpNamespace(node.namespaceURI)){
+      const replacement=doc.createElementNS(SDH,'sdh:'+node.localName);
+      for(const attr of Array.from(node.attributes))replacement.setAttributeNS(attr.namespaceURI,attr.name,attr.value);
+      replacement.append(...Array.from(node.childNodes));node.replaceWith(replacement);node=replacement;used=true;
+    }
+    const helpAttributes=Array.from(node.attributes).filter(attr=>isHelpNamespace(attr.namespaceURI));
+    const attributeNames=new Set();
+    for(const attr of helpAttributes){
+      if(attributeNames.has(attr.localName))throw new Error('The source contains conflicting legacy and StatsDirect authoring attributes. Resolve the duplicate attributes in HTML source before saving.');
+      attributeNames.add(attr.localName);
+    }
+    for(const attr of Array.from(node.attributes))if(attr.namespaceURI===XMLNS&&isHelpNamespace(attr.value))node.removeAttributeNode(attr);
+    for(const attr of helpAttributes){node.removeAttributeNS(attr.namespaceURI,attr.localName);node.setAttributeNS(SDH,'sdh:'+attr.localName,attr.value);used=true;}
+  }
+  if(used)doc.documentElement.setAttributeNS(XMLNS,'xmlns:sdh',SDH);
+  return doc;
+}
 function absolute(value) { try { return new URL(value, state.baseUrl).href; } catch { return value; } }
 function withoutEditorImageKey(value) {
   // Keep authored query spelling intact. Only our document-specific cache key
@@ -94,7 +117,7 @@ function stampProtected(element,id,node){element.dataset.protectedId=id;element.
 function recoverProtected(element){
   const payload=element.dataset.editorProtectedXml;
   if(!payload||payload.length>20_000_000||/<!DOCTYPE/i.test(payload))return null;
-  const doc=new DOMParser().parseFromString('<root xmlns:MadCap="'+MC+'">'+payload+'</root>','application/xml');
+  const doc=new DOMParser().parseFromString('<root xmlns:sdh="'+SDH+'" xmlns:MadCap="'+LEGACY_MC+'">'+payload+'</root>','application/xml');
   if(doc.querySelector('parsererror')||doc.documentElement.childNodes.length!==1)return null;
   const node=doc.documentElement.firstChild;if(![Node.ELEMENT_NODE,Node.COMMENT_NODE].includes(node.nodeType))return null;
   const oldBase=element.dataset.editorSourceBase;
@@ -143,11 +166,11 @@ function prepareLatexForMathLive(latex) {
 }
 function makeId(prefix) { return prefix+editorInstance+'-'+(++sequence); }
 function includedInPreview(node) {
-  const conditions=(node.getAttributeNS(MC,'conditions')||'').split(/[;,]/).map(x=>x.trim());
+  const conditions=(helpAttribute(node,'conditions')||'').split(/[;,]/).map(x=>x.trim());
   return !conditions.includes(state.buildTarget==='Public'?'Primary.SWHELP':'Primary.WEBHELP');
 }
 function annotateVariant(element,node) {
-  const conditions=node.getAttributeNS(MC,'conditions');if(!conditions)return;
+  const conditions=helpAttribute(node,'conditions');if(!conditions)return;
   element.dataset.editorCondition=conditions;
   const label=conditions==='Primary.SWHELP'?'Desktop help only':conditions==='Primary.WEBHELP'?'Public help only':'Content variant: '+conditions;
   element.title=(node.getAttribute('title')?node.getAttribute('title')+' — ':'')+label;
@@ -279,12 +302,12 @@ function equationWidget(node, id) {
 }
 function protectedWidget(node) {
   const id = makeId('protected'); state.protected.set(id,node.cloneNode(true));
-  if (node.namespaceURI === MC && node.localName.toLowerCase() === 'equation') return equationWidget(node,id);
+  if (isHelpNamespace(node.namespaceURI) && node.localName.toLowerCase() === 'equation') return equationWidget(node,id);
   const element = document.createElement('span'); stampProtected(element,id,node); element.contentEditable = 'false';
-  if (node.namespaceURI === MC && node.localName.toLowerCase() === 'keyword') { element.className='metadata-widget'; return element; }
+  if (isHelpNamespace(node.namespaceURI) && node.localName.toLowerCase() === 'keyword') { element.className='metadata-widget'; return element; }
   element.className = 'protected-block';
   const header = document.createElement('header'), label = document.createElement('strong'), button = document.createElement('button');
-  const isDropDown = node.namespaceURI === MC && node.localName.toLowerCase() === 'dropdown';
+  const isDropDown = isHelpNamespace(node.namespaceURI) && node.localName.toLowerCase() === 'dropdown';
   const hotspot = Array.from(node.getElementsByTagName('*')).find(x=>x.localName.toLowerCase()==='dropdownhotspot');
   label.textContent = isDropDown ? hotspot?.textContent.trim() || 'Expandable section' : node.localName.toLowerCase()==='script' ? 'Page script' : node.localName;
   button.type='button'; button.textContent='Edit HTML'; button.dataset.sourceWidget=id;
@@ -299,7 +322,7 @@ function editableNode(node) {
   if (node.nodeType === Node.COMMENT_NODE) { const id=makeId('comment');state.protected.set(id,node.cloneNode(true));const s=document.createElement('span');s.className='metadata-widget';s.contentEditable='false';stampProtected(s,id,node);return s; }
   if (node.nodeType !== Node.ELEMENT_NODE) return document.createTextNode('');
   const tag=node.localName.toLowerCase();
-  if (node.namespaceURI === MC || !ordinaryTags.has(tag) || node.namespaceURI && node.namespaceURI!=='http://www.w3.org/1999/xhtml') return protectedWidget(node);
+  if (isHelpNamespace(node.namespaceURI) || !ordinaryTags.has(tag) || node.namespaceURI && node.namespaceURI!=='http://www.w3.org/1999/xhtml') return protectedWidget(node);
   const element=document.createElement(tag),id=makeId('element');state.elements.set(id,node.cloneNode(false));element.dataset.sourceNode=id;
   for (const attr of node.attributes) {
     if (/^on/i.test(attr.name) || attr.name.startsWith('xmlns') || attr.name.toLowerCase()==='contenteditable') continue;
@@ -373,7 +396,7 @@ function serializeVisual() {
   normalizeProtectedCopies();
   const doc=state.xml.cloneNode(true),body=findBody(doc);body.replaceChildren();
   for(const node of visual.childNodes){const imported=importVisual(node,doc);if(imported)body.append(imported);}
-  if(Array.from(body.getElementsByTagName('*')).some(x=>x.namespaceURI===MC) && doc.documentElement.lookupNamespaceURI('MadCap')!==MC)doc.documentElement.setAttributeNS(XMLNS,'xmlns:MadCap',MC);
+  canonicalizeHelpNamespaces(doc);
   const declaration=state.baseSource.match(/^\uFEFF?(<\?xml[^>]*\?>)[\r\n]*/)?.[1];
   let result=new XMLSerializer().serializeToString(doc);
   if(declaration && !result.startsWith('<?xml'))result=declaration+'\n'+result;
@@ -466,7 +489,7 @@ function previewNode(node) {
   if(node.nodeType!==Node.ELEMENT_NODE)return document.createTextNode('');
   if(!includedInPreview(node))return document.createTextNode('');
   const tag=node.localName.toLowerCase();
-  if(node.namespaceURI===MC){
+  if(isHelpNamespace(node.namespaceURI)){
     if(tag==='keyword')return document.createTextNode('');
     if(tag==='equation'){
       const original=equationArtwork.create(node,document,prepareLatexForPreview);
@@ -549,8 +572,23 @@ function load(payload){
     else if(state.xml&&previousPageView==='source')setOutputView('source');
   }else if(previousWorkspace!=='edit'&&state.xml)setWorkspaceView(previousWorkspace);
 }
-function markSaved(){
-  const text=getSource();state.savedSource=text;state.baseSource=text;state.xml=parseXml(text);source.value=text;state.visualDirty=false;state.sourceDirty=false;setDirty(false);captureHistory();
+function markSaved(authoritativeSource){
+  const current=getSource(),text=authoritativeSource===undefined?current:authoritativeSource;
+  if(typeof text!=='string')throw new Error('The saved page source is invalid.');
+  const xml=parseXml(text);
+  if(text!==current){
+    // The host can normalize an imported namespace before writing the page.
+    // Adopt those exact disk bytes without adding a normalization-only Undo.
+    captureHistory();state.history[state.historyIndex]=text;
+  }
+  if(source.value!==text){
+    const old=source.value,selection={start:source.selectionStart,end:source.selectionEnd,direction:source.selectionDirection,top:source.scrollTop,left:source.scrollLeft};
+    let prefix=0,suffix=0;while(prefix<old.length&&prefix<text.length&&old[prefix]===text[prefix])prefix++;
+    while(suffix<old.length-prefix&&suffix<text.length-prefix&&old[old.length-1-suffix]===text[text.length-1-suffix])suffix++;
+    const position=offset=>offset<=prefix?offset:offset>=old.length-suffix?offset+text.length-old.length:Math.min(offset,text.length-suffix);
+    source.value=text;source.setSelectionRange(position(selection.start),position(selection.end),selection.direction);source.scrollTop=selection.top;source.scrollLeft=selection.left;
+  }
+  state.savedSource=text;state.baseSource=text;state.xml=xml;state.visualDirty=false;state.sourceDirty=false;setDirty(false);captureHistory();
   const title=findTitle(state.xml)?.textContent.trim();if(title){state.title=title;$('page-title').textContent=title;}
 }
 function rememberSelection(){const s=getSelection();if(s.rangeCount&&visual.contains(s.anchorNode)&&visual.contains(s.focusNode)){state.range=s.getRangeAt(0).cloneRange();updateToolbar();}}
@@ -572,7 +610,7 @@ function openEquation(id=null){
 function applyEquation(){
   const field=$('equation-field'),latex=field.getValue('latex-without-placeholders').trim(),errors=field.errors||[];
   if(!latex||errors.length){$('equation-error').textContent=!latex?'Enter an equation before applying it.':'Please correct the LaTeX before applying it: '+errors.map(e=>e.code||e.message||String(e)).join(', ');$('equation-error').hidden=false;return;}
-  const node=state.equationTarget?state.protected.get(state.equationTarget).cloneNode(true):state.xml.createElementNS(MC,'MadCap:equation');
+  const node=state.equationTarget?state.protected.get(state.equationTarget).cloneNode(true):state.xml.createElementNS(SDH,'sdh:equation');
   node.replaceChildren(state.xml.createTextNode('$'+($('equation-display').checked?'\\displaystyle ':'')+latex+'$'));
   if(state.equationTarget){const id=state.equationTarget;state.protected.set(id,node);const old=visual.querySelector('[data-protected-id="'+id+'"]');if(!old){$('equation-error').textContent='The selected equation is no longer in the page. Cancel and select it again.';$('equation-error').hidden=false;return;}old.replaceWith(equationWidget(node,id));selectEquation(visual.querySelector('[data-protected-id="'+id+'"]'));}
   else{

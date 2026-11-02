@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="550" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="550" sdh:lastWidth="1013" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>L'Abbé Plot (Meta-analysis Heterogeneity) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,14 +7,14 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="L Abbe plot" />L'Abbé Plot</h1>
+            <sdh:keyword term="L Abbe plot" />L'Abbé Plot</h1>
         <p>&#160;</p>
         <p>Menu locations: <b>Analysis_Meta-Analysis_Odds Ratio, Analysis_Meta-Analysis_Relative Risk</b>.</p>
         <p>&#160;</p>
         <p>This plots the event rate in the experimental (intervention) group against the event rate in the control group, as an aid to exploring the heterogeneity of effect estimates within a meta-analysis (<a href="../references/reference_list.htm#ref-song-1999">Song, 1999</a>; <a href="../references/reference_list.htm#ref-labbe-1987">L'Abbé et al. 1987</a>).</p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/labbe.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/labbe.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/labbe.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/labbe.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p>StatsDirect draws the plot with the odds ratio, Peto odds ratio and relative risk meta-analysis reports, before the forest plots. Each study is a circle at its event rate in the control group (across) and its event rate in the experimental group (up), both as percentages of the group, with the radius of the circle in proportion to the number of subjects in the study. The solid diagonal is the line of equal rates: a study below it had the lower event rate in its experimental group. The dashed line shows where the studies would lie if all shared the pooled fixed effects estimate (Mantel-Haenszel, or Peto): for a relative risk it is the straight line from the origin with that slope; for an odds ratio it is the curve of that odds ratio, which meets the diagonal at both ends. Studies far from the dashed line, or scattered on both sides of the diagonal, are a sign of heterogeneity, which the meta-analysis report also tests.</p>
@@ -91,11 +91,11 @@
         <p>&#160;</p>
         <p>The report does not print these rates: they are the coordinates of the seven circles, and the pooled relative risk of the fixed effects analysis is the slope of the dashed line. All seven trials lie close to the diagonal and a little below it, as a relative risk of 0.91 implies, with AMIS the only trial above it and none standing apart from the rest, so the plot gives no sign of gross heterogeneity, in keeping with the I² of 39.6% in the meta-analysis report.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># L'Abbe plot: the StatsDirect help illustration (Fleiss and Gross 1991, deaths after
 # myocardial infarction in seven placebo-controlled trials of aspirin; the test
@@ -159,8 +159,8 @@ cat("I2 (inconsistency) = ", formatC(i2, digits = 1, format = "f"), "%\n", sep =
 # The studies lie close to the line of equality and a little below it, as a
 # relative risk of 0.91 implies, and none stands out from the rest: the plot
 # suggests no gross heterogeneity, in keeping with an I2 of 39.6%</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p>See also: <a href="meta_analyses.htm">meta-analysis</a> and <a href="../graphics/forest.htm">Forest plot</a>.</p>
     </body>

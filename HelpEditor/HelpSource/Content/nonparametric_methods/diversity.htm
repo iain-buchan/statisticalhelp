@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="3104.104" MadCap:lastWidth="2773" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="3104.104" sdh:lastWidth="2773" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Diversity of Classes (Shannon, Simpson, Species) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Species diversity;Simpson index;Shannon-Weiner index;Shannon index;Diversity;Heterozygosity" />Diversity of Classes</h1>
+            <sdh:keyword term="Species diversity;Simpson index;Shannon-Weiner index;Shannon index;Diversity;Heterozygosity" />Diversity of Classes</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Nonparametric_Diversity of Classes</b></p>
         <p>&#160;</p>
@@ -21,43 +21,43 @@
         <p>&#160;</p>
         <p>Simpson's index Ds (equal to one minus Simpson's original measure of dominance, l, later proposed by Hurlbert as PIE, the probability of inter-specific encounter) is the most meaningful measure of evenness. D<sub>s</sub> is the probability that two randomly sampled individuals are from two different classes. This is equivalent to the genetic calculation of heterozygosity, H, being the probability that two alleles are not identical by descent. It follows that 1-D<sub>s</sub>, or dominance l, is the probability that two randomly sampled individuals are from the same class.</p>
         <p>
-            <MadCap:equation>$\displaystyle l=\frac{\displaystyle \sum_{i=1}^s n_i(n_i-1)}{N(N-1)} \\
-D_s=1-l$</MadCap:equation>
+            <sdh:equation>$\displaystyle l=\frac{\displaystyle \sum_{i=1}^s n_i(n_i-1)}{N(N-1)} \\
+D_s=1-l$</sdh:equation>
         </p>
         <p>- where s is the number of classes observed, n<sub>i</sub> is the number observed from the ith class and N is the total number of individuals observed in the sample. Note that Hurlbert (1971) gives a different form of this equation and that the one above is better because it reduces rounding error by reducing the amount of intermediate division.</p>
         <p>&#160;</p>
         <p>The variance for D<sub>s</sub> can be estimated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{var } D_s=\frac{\displaystyle \sum_{i=1}^s \left(\frac{n_i}{N}\right)^3- \left[ \sum_{i=1}^s \left(\frac{n_i}{N}\right)^2\right]^2}{N/4}\\
+            <sdh:equation>$\displaystyle \text{var } D_s=\frac{\displaystyle \sum_{i=1}^s \left(\frac{n_i}{N}\right)^3- \left[ \sum_{i=1}^s \left(\frac{n_i}{N}\right)^2\right]^2}{N/4}\\
 
-\displaystyle \text{var } D_s=\frac{\displaystyle 4N(N-1)(N-2)\sum_{i=1}^s \left(\frac{n_i}{N}\right)^3+2N(N-1)\sum_{i=1}^s \left(\frac{n_i}{N}\right)^2- 2N(N-1)(2N-3)\left[ \sum_{i=1}^s \left(\frac{n_i}{N}\right)^2\right]^2}{[N(N-1)]^2}\\$</MadCap:equation>
+\displaystyle \text{var } D_s=\frac{\displaystyle 4N(N-1)(N-2)\sum_{i=1}^s \left(\frac{n_i}{N}\right)^3+2N(N-1)\sum_{i=1}^s \left(\frac{n_i}{N}\right)^2- 2N(N-1)(2N-3)\left[ \sum_{i=1}^s \left(\frac{n_i}{N}\right)^2\right]^2}{[N(N-1)]^2}\\$</sdh:equation>
         </p>
         <p>- the second formula above gives better variance estimates for small samples than does the first (<a href="../references/reference_list.htm#ref-simpson-1949">Simpson, 1949</a>; <a href="../references/reference_list.htm#ref-brower-1998">Brower, 1998</a>).</p>
         <p>&#160;</p>
         <p>Shannon's index of diversity H' is derived from information theory, originally in the context of information in telephone systems (<a href="../references/reference_list.htm#ref-shannon-1948">Shannon, 1948</a>). It combines both evenness and richness in a single measure. H' has no intuitive interpretation in terms of probability and is sensitive to sample size. H' was once thought to be a measure of entropy, but this is no longer supported (<a href="../references/reference_list.htm#ref-hurlbert-1971">Hurlbert, 1971</a>, <a href="../references/reference_list.htm#ref-goodman-1975">Goodman 1975</a>). H' can lead to confounded comparisons where the investigator can not infer whether or not differences in H' are due to differences in richness, diversity or just sampling differences. StatsDirect calculates H' solely for consistency because it has been used widely in the past.</p>
         <p>
-            <MadCap:equation>$\displaystyle H'=-\sum_{i=1}^s\frac{n_i}{N}\ln \left(\frac{n_i}{N}\right)$</MadCap:equation>
+            <sdh:equation>$\displaystyle H'=-\sum_{i=1}^s\frac{n_i}{N}\ln \left(\frac{n_i}{N}\right)$</sdh:equation>
         </p>
         <p>- where s is the number of classes observed,  n<sub>i</sub> is the number observed from the ith class and N is the total number of individuals observed in the sample. Note that some authors use different bases for the logarithms, giving differently scaled results, but it makes no difference which is used provided you are consistent. If you want to convert the natural log results of StatsDirect to log (base 10) results then simply multiply H' by 0.4343.</p>
         <p>&#160;</p>
         <p>The variance for H' can be estimated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{var } H'=\frac{\displaystyle \sum_{i=1}^sn_i\ln (n_i)^2-\left[ \sum_{i=1}^s n_i \ln (n_i)\right]^2/N}{N^2} \\
-\displaystyle \text{var } H'=\frac{\displaystyle \sum_{i=1}^sn_i\ln (n_i)^2-\left[ \sum_{i=1}^s n_i \ln (n_i)\right]^2/N}{N^2} + \frac{s-1}{2N^2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{var } H'=\frac{\displaystyle \sum_{i=1}^sn_i\ln (n_i)^2-\left[ \sum_{i=1}^s n_i \ln (n_i)\right]^2/N}{N^2} \\
+\displaystyle \text{var } H'=\frac{\displaystyle \sum_{i=1}^sn_i\ln (n_i)^2-\left[ \sum_{i=1}^s n_i \ln (n_i)\right]^2/N}{N^2} + \frac{s-1}{2N^2}$</sdh:equation>
         </p>
         <p>- the second formula above gives better variance estimates for small samples than does the first (<a href="../references/reference_list.htm#ref-shannon-1948">Shannon, 1948</a>; <a href="../references/reference_list.htm#ref-nayak-1985">Nayak, 1985</a>; <a href="../references/reference_list.htm#ref-pardo-1997">Pardo et al. 1997</a>). Note that there is an error in the second formula in <a href="../references/reference_list.htm#ref-brower-1998">Brower et al. (1998)</a>.</p>
         <p>&#160;</p>
         <p>The large sample variance estimates above are used to calculate confidence intervals for Ds and H'. These asymptotic estimates of variance do not perform well with small samples, which can be compensated for using the small sample adjustments shown above. A better approach is to use bootstrap confidence intervals in order to get as much information as possible out of your sample. StatsDirect calculates two types of bootstrap confidence intervals for diversity indices, these are the bootstrap refinement of the normal asymptotic interval (<a href="../references/reference_list.htm#ref-mills-1997">Mills and Zandvakili, 1997</a>; <a href="../references/reference_list.htm#ref-dixon-1987">Dixon et al., 1987</a>; <a href="../references/reference_list.htm#ref-efron-1997">Efron and Tibshirani, 1997</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle g \space \pm t_{1-\alpha/2,k-1} \times \text{SE}_b \\
-\displaystyle \text{SE}_b=\sqrt{\frac{1}{k-1}\sum_{i=1}^k(g^*_i-\bar g)^2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle g \space \pm t_{1-\alpha/2,k-1} \times \text{SE}_b \\
+\displaystyle \text{SE}_b=\sqrt{\frac{1}{k-1}\sum_{i=1}^k(g^*_i-\bar g)^2}$</sdh:equation>
         </p>
         <p>- where g is either the Simpson or Shannon statistic calculated from the observed sample, k is the number bootstrap resamples, g star is the statistic of interest calculated from a bootstrap sample, SE<sub>b</sub> is the bootstrap estimate of standard error and t is a quantile of the Student t distribution.</p>
         <p>&#160;</p>
         <p>…and a centred bootstrap-t interval (after <a href="../references/reference_list.htm#ref-vives-2001">Vives et al., 2001</a>; <a href="../references/reference_list.htm#ref-hall-1988">Hall 1988</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle g \space \pm \frac{z^*_{1-\alpha /2}-z^*_{\alpha /2}}{2}\sqrt{\text{var}(g)} \\
-\displaystyle z^*=\frac{(g^*-g)}{\sqrt{\text{var}(g^*)}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle g \space \pm \frac{z^*_{1-\alpha /2}-z^*_{\alpha /2}}{2}\sqrt{\text{var}(g)} \\
+\displaystyle z^*=\frac{(g^*-g)}{\sqrt{\text{var}(g^*)}}$</sdh:equation>
         </p>
         <p>- where z star is the studentized statistic from a bootstrap sample, using the large sample variance calculated from that sample, and z star with a subscript is a quantile of its bootstrap distribution. The equal-tailed bootstrap-t limits are centred on g by putting half of the distance between them on each side.</p>
         <p>&#160;</p>
@@ -67,9 +67,9 @@ D_s=1-l$</MadCap:equation>
         <p>&#160;</p>
         <p>StatsDirect also extrapolates the richness (number of classes) in your sample in order to give an estimate of the number of classes in the population. There are different approaches to this extrapolation, a well-founded method that does not assume a model of class abundance is that of <a href="../references/reference_list.htm#ref-chao-1984">Chao (1984)</a> as discussed by <a href="../references/reference_list.htm#ref-colwell-1994">Colwell and Coddington (1994)</a>.</p>
         <p>
-            <MadCap:equation>$\displaystyle S=s+\frac{a^2}{2b} \\
+            <sdh:equation>$\displaystyle S=s+\frac{a^2}{2b} \\
 
-\displaystyle \text{var}(S)=b\left[\frac{(a/b)^4}{4}+(a/b)^3+\frac{(a/b)^2}{2}\right]$</MadCap:equation>
+\displaystyle \text{var}(S)=b\left[\frac{(a/b)^4}{4}+(a/b)^3+\frac{(a/b)^2}{2}\right]$</sdh:equation>
         </p>
         <p>- where S is the estimate of the total number of classes in the population, s is the number of classes observed in the sample, a is the number of classes with exactly one individual (singletons), b is the number of classes with exactly two individuals (doubletons), and where 1 is substituted for a or b if either has no singletons or doubletons. The confidence interval for S is the log-normal interval of <a href="../references/reference_list.htm#ref-chao-1987">Chao (1987)</a>: s + (S - s)/C to s + (S - s)*C, where C = exp(z*sqrt(ln(1 + var(S)/(S - s)<sup>2</sup>))) and z is a quantile of the standard normal distribution. It treats the number of classes not seen, S - s, as log-normal, so the lower limit cannot fall below the number of classes observed.</p>
         <p>&#160;</p>
@@ -160,11 +160,11 @@ D_s=1-l$</MadCap:equation>
         <p>&#160;</p>
         <p>The bootstrap results depend on the random numbers drawn: with the seed above they are the same each time the analysis is run, and with another seed they differ a little.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above; its bootstrap figures differ a little from run to run, and from StatsDirect's. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Diversity of classes: the StatsDirect help example (strains of Staphylococcus
 # aureus in hospital samples, Grundmann et al. 2001) in R
@@ -222,8 +222,8 @@ cat(sprintf("Bootstrap, Simpson: bias = %.6f  standard error = %.6f\n",
             Ds - mean(boot[1, ]), sd(boot[1, ])))
 cat(sprintf("Bootstrap, Shannon: bias = %.6f  standard error = %.6f\n",
             H - mean(boot[2, ]), sd(boot[2, ])))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>

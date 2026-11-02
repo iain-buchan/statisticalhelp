@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="2805.104" MadCap:lastWidth="2773">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" sdh:lastBlockDepth="5" sdh:lastHeight="2805.104" sdh:lastWidth="2773">
     <head><title>Agreement Analysis (Continuous Data, Intra-class Correlation) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Reliability: Continuous;Inter-rater agreement: Intra-class correlation;Agreement analysis: Continuous;Homogeneity analysis;Intra-class correlation" />
+            <sdh:keyword term="Reliability: Continuous;Inter-rater agreement: Intra-class correlation;Agreement analysis: Continuous;Homogeneity analysis;Intra-class correlation" />
             Agreement of Continuous Measurements</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Agreement_Continuous (Intra-class)</b>.</p>
@@ -17,11 +17,11 @@
         <p>&#160;</p>
         <p>Intra-class correlation coefficient is calculated as:</p>
         <p>
-            <MadCap:equation>$ \displaystyle r_I=\frac{MS_B-MS_W}{MS_B+(m-1) MS_W}$</MadCap:equation>
+            <sdh:equation>$ \displaystyle r_I=\frac{MS_B-MS_W}{MS_B+(m-1) MS_W}$</sdh:equation>
         </p>
         <p>- where m is the number of observations per subject, MS<sub>B</sub> is the between-subjects mean square and MS<sub>W</sub> is the within-subjects (residual) mean square from one way ANOVA. This is the one way random effects coefficient ICC(1) of <a href="../references/reference_list.htm#ref-shrout-1979">Shrout and Fleiss (1979)</a> and <a href="../references/reference_list.htm#ref-mcgraw-1996">McGraw and Wong (1996)</a>. Its confidence interval is calculated from the exact distribution of F = MS<sub>B</sub>/MS<sub>W</sub> with n &#8722; 1 and n(m &#8722; 1) degrees of freedom, where n is the number of subjects:</p>
         <p>
-            <MadCap:equation>$ \displaystyle \frac{F/F_U-1}{F/F_U+m-1} \le r_I \le \frac{F/F_L-1}{F/F_L+m-1}$</MadCap:equation>
+            <sdh:equation>$ \displaystyle \frac{F/F_U-1}{F/F_U+m-1} \le r_I \le \frac{F/F_L-1}{F/F_L+m-1}$</sdh:equation>
         </p>
         <p>- where F<sub>U</sub> and F<sub>L</sub> are the upper and lower &#945;/2 quantiles of the F distribution with n &#8722; 1 and n(m &#8722; 1) degrees of freedom, for a 100(1 &#8722; &#945;)% confidence interval.</p>
         <p>&#160;</p>
@@ -29,7 +29,7 @@
         <p>&#160;</p>
         <p>The repeatability coefficient is calculated as:</p>
         <p>
-            <MadCap:equation>$ \displaystyle C_r=\sqrt{2} \space z \space \zeta_w$</MadCap:equation>
+            <sdh:equation>$ \displaystyle C_r=\sqrt{2} \space z \space \zeta_w$</sdh:equation>
         </p>
         <p>- where z is a quantile from the standard normal distribution (usually taken as the 5% two tailed quantile of 1.96) and ζ<sub>w</sub> is the estimated within-subjects standard deviation (calculated as above).</p>
         <p>&#160;</p>
@@ -200,21 +200,21 @@
         <p>Note that Bland and Altman (1996a) quote an intra-class correlation of 0.88 for these data, from Fisher's symmetrical-table form of the coefficient; the one way random effects (ANOVA) estimator above gives 0.89.</p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/repeatability.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/repeatability.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/repeatability.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/repeatability.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/ebx_545344684.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/ebx_545344684.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/ebx_545344684.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/ebx_545344684.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/qq.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/qq.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/qq.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/qq.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Agreement of continuous measurements: the StatsDirect help example (Bland and Altman
 # 1996a, four peak flow readings on each of 20 children; the test workbook's Agreement
@@ -289,8 +289,8 @@ abline(h = mean(largest), lty = 2)
 plot(qchisq(seq(0.01, 0.99, length.out = n), m - 1),
      sort(rowSums(abs(flow - child_mean))), xlab = paste0("chi-square (", m - 1, ")"),
      ylab = "Sum(|x-mean(x)|)", main = "Q-Q Plot")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

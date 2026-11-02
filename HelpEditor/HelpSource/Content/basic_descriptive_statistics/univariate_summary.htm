@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="3684.104" MadCap:lastWidth="2773" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="3684.104" sdh:lastWidth="2773" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Descriptive Statistics on Variables in StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Summary statistics;Mean (summary);Average (summary);Centile (summary);Standard error (summary);Variance coefficient (summary);Variance (summary);Range (summary);Standard deviation (summary);Skewness: Summary statistics;Quartile (summary);Univariate summary;Median (summary);Minimum (summary);Missing data (summary);Mean (summary);Coefficient of variation (summary);Kurtosis (summary);Maximum (summary)" />
+            <sdh:keyword term="Summary statistics;Mean (summary);Average (summary);Centile (summary);Standard error (summary);Variance coefficient (summary);Variance (summary);Range (summary);Standard deviation (summary);Skewness: Summary statistics;Quartile (summary);Univariate summary;Median (summary);Minimum (summary);Missing data (summary);Mean (summary);Coefficient of variation (summary);Kurtosis (summary);Maximum (summary)" />
             Univariate Summary</h1>
         <p>&#160;</p>
         <p>Menu locations:</p>
@@ -50,20 +50,20 @@
         <p><u>Sum, mean, variance, standard deviation, standard error and variance coefficient</u>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \bar{x}=\frac{\displaystyle \sum_{i=1}^n x_i}{n} \\
+            <sdh:equation>$\displaystyle \bar{x}=\frac{\displaystyle \sum_{i=1}^n x_i}{n} \\
 \displaystyle s^2=\frac{\displaystyle \sum_{i=1}^n \left(x-\bar{x}\right)^2}{n-1} \\
 \displaystyle \text{SEM}=\frac{s}{\sqrt{n}} \\
 \displaystyle \text{lower CL}=\bar{x}-\text{SEM} \space t_{\alpha, n-1} \\
 \displaystyle \text{upper CL}=\bar{x}+\text{SEM} \space t_{\alpha, n-1} \\
-\displaystyle \text{VC}=\frac{s}{\bar{x}}$</MadCap:equation>
+\displaystyle \text{VC}=\frac{s}{\bar{x}}$</sdh:equation>
         </p>
         <p>- where Σ is the summation for all observations (x<sub>i</sub>) in a sample, x bar is the sample (arithmetic) mean, n is the sample size, s² is the sample variance, s is the sample standard deviation, SEM is the standard error of the sample mean, upper and lower CL are the confidence limits of the confidence interval for the mean, t<sub>α, n-1</sub> is the (100*a)% two tailed quantile from the Student t distribution with n-1 degrees of freedom, and VC is the variance coefficient.</p>
         <p>&#160;</p>
         <p><u>Skewness and kurtosis</u>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle \text{skewness}= \frac{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^3/n}{\displaystyle \left[\sum_{i=1}^n(x_i-\bar{x})^2/n\right]^{1.5}} \\
-\displaystyle \text{kurtosis}= \frac{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^4/n}{\displaystyle \left[\sum_{i=1}^n(x_i-\bar{x})^2/n\right]^2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{skewness}= \frac{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^3/n}{\displaystyle \left[\sum_{i=1}^n(x_i-\bar{x})^2/n\right]^{1.5}} \\
+\displaystyle \text{kurtosis}= \frac{\displaystyle\sum_{i=1}^n(x_i-\bar{x})^4/n}{\displaystyle \left[\sum_{i=1}^n(x_i-\bar{x})^2/n\right]^2}$</sdh:equation>
         </p>
         <p>- where Σ is the summation for all observations (x<sub>i</sub>) in a sample, x bar is the sample mean and n is the sample size. Note that there are other definitions of these coefficients used by some other statistical software. StatsDirect uses the standard definitions for which critical values are published in standard statistical tables (<a href="../references/reference_list.htm#ref-pearson-1970">Pearson and Hartley, 1970</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>).</p>
         <p>&#160;</p>
@@ -71,7 +71,7 @@
         </p>
         <p>The geometric mean is a useful measure of central tendency for samples that are log-normally distributed (i.e. the logarithms of the observations are from an approximately normal distribution). The geometric mean is not calculated for samples that contain values of zero or below.</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{GM}=\exp \left[ \frac{\displaystyle \sum_{i=1}^n\ln (x_i)}{n} \right]$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{GM}=\exp \left[ \frac{\displaystyle \sum_{i=1}^n\ln (x_i)}{n} \right]$</sdh:equation>
         </p>
         <p>- where Σ is the summation for all observations (x<sub>i</sub>) in a sample, ln is the natural (base e) logarithm, exp is the exponent (anti-logarithm for base e), GM is the sample geometric mean and n is the sample size.</p>
         <p>&#160;</p>
@@ -79,16 +79,16 @@
         </p>
         <p>If weights are selected then the weights that you supply are first normalised so that they sum to the total number of observations n:</p>
         <p>
-            <MadCap:equation>$\displaystyle V=\sum_{i=1}^nv_i \\
-\displaystyle w_i=v_i(n/V)$</MadCap:equation>
+            <sdh:equation>$\displaystyle V=\sum_{i=1}^nv_i \\
+\displaystyle w_i=v_i(n/V)$</sdh:equation>
         </p>
         <p>- where v<sub>i</sub> is a user supplied weight and w<sub>i</sub> is the normalised weight.</p>
         <p>&#160;</p>
         <p>The following formulae replace the mean, variance and moments calculations defined above when weights are used:</p>
         <p>
-            <MadCap:equation>$\displaystyle \bar{x}=\frac{\displaystyle \sum_{i=1}^n w_i x_i}{n} \\
+            <sdh:equation>$\displaystyle \bar{x}=\frac{\displaystyle \sum_{i=1}^n w_i x_i}{n} \\
 \displaystyle s^2=\frac{\displaystyle \sum_{i=1}^n w_i(x_i-\bar{x})^2}{n-1} \\
-\displaystyle m_r=\frac{\displaystyle \sum_{i=1}^n w_i(x_i-\bar{x})^r}{n}$</MadCap:equation><br />- where m<sub>r</sub> is the rth moment about the mean; skewness is m<sub>3</sub>/m<sub>2</sub><sup>1.5</sup> and kurtosis is m<sub>4</sub>/m<sub>2</sub><sup>2</sup>.
+\displaystyle m_r=\frac{\displaystyle \sum_{i=1}^n w_i(x_i-\bar{x})^r}{n}$</sdh:equation><br />- where m<sub>r</sub> is the rth moment about the mean; skewness is m<sub>3</sub>/m<sub>2</sub><sup>1.5</sup> and kurtosis is m<sub>4</sub>/m<sub>2</sub><sup>2</sup>.
         </p>
         <p>&#160;</p>
         <p><u>Median, quartiles and range</u>
@@ -102,20 +102,20 @@
         <p><b>Centile type 2:</b>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle Q_p=(1-h)u_i+h \space u_{i+1} \\
+            <sdh:equation>$\displaystyle Q_p=(1-h)u_i+h \space u_{i+1} \\
 \displaystyle h=m-i \\
-\displaystyle i=\text{fix}(m) \\ \displaystyle m=\max(\min(p(n+1),n),1)$</MadCap:equation>
+\displaystyle i=\text{fix}(m) \\ \displaystyle m=\max(\min(p(n+1),n),1)$</sdh:equation>
         </p>
         <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), fix is the integer part of a real number, h is the fractional part of order statistic i, u is an observation from a sample after it has been ordered from smallest to largest value and n is the sample size. When i = n the quantile is u<sub>n</sub> (h is then zero, and there is no u<sub>n+1</sub> to evaluate), so Q(0) = u<sub>1</sub> and Q(1) = u<sub>n</sub>.</p>
         <p>&#160;</p>
         <p><b>Centile type 1:</b>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle Q_p=\frac{u_{i-1}+u_i}{2} \space \text{if} \space W_{i-1}=P \\
+            <sdh:equation>$\displaystyle Q_p=\frac{u_{i-1}+u_i}{2} \space \text{if} \space W_{i-1}=P \\
 \displaystyle Q_p=u_i \space \text{otherwise} \\
 \displaystyle W_i=\sum_{j=1}^iw_j \\
 \displaystyle P=pn \\
-i=\text{first index where } W_i&gt;P$</MadCap:equation>
+i=\text{first index where } W_i&gt;P$</sdh:equation>
         </p>
         <p>- where p is a proportion, Q is the pth quantile (e.g. median is Q(0.5)), u is an observation from a sample after it has been ordered from smallest to largest value, n is the sample size, w is a weight normalised so that it sums to n and W<sub>i</sub> is the sum of the weights of the first i ordered observations. At the two ends, Q(0) is the smallest observation u<sub>1</sub> and Q(1) is the largest, u<sub>n</sub>. A single observation is its own median, quartiles and centiles.</p>
         <p>&#160;</p>
@@ -332,11 +332,11 @@ i=\text{first index where } W_i&gt;P$</MadCap:equation>
                 <td>1</td>
             </tr>
         </table>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the two examples above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Univariate summary: the StatsDirect help example (Michelson's 100 measurements
 # of the speed of light in air, millions of metres per second) in R
@@ -423,8 +423,8 @@ centile &lt;- function(p) {
 }
 cat("Upper quartile", centile(0.75), "  Median", centile(0.5), "  Lower quartile",
     centile(0.25), "  Centile 95", centile(0.95), "  Centile 5", centile(0.05), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

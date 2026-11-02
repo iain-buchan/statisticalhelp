@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="683" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="683" sdh:lastWidth="974" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Random Allocation to Two Independent Groups - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
         </script>
     </head>
     <body>
-        <MadCap:keyword term="Randomization: Two independent groups" />
+        <sdh:keyword term="Randomization: Two independent groups" />
         <h1>Random Allocation to Two Independent Groups</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Randomization_Two Independent Groups</b></p>
@@ -126,11 +126,11 @@
         <p><u>Technical validation</u>
         </p>
         <p>Robust (pseudo-)random number generation is used, see <a href="random_number_generator.htm">random number generation</a>.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above with R's own random number generator, which gives a different allocation for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Random allocation to two independent groups: the StatsDirect help illustration (30
 # subjects, 15 to each of an intervention and a control group, seed 10) in R
@@ -161,8 +161,8 @@ cat(sprintf("Intervention %2d   Control %2d", intervention, control), sep = "\n"
 # Checks that the two groups partition the subjects
 stopifnot(length(intervention) == half, length(control) == half)
 stopifnot(identical(sort(c(intervention, control)), 1:n))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

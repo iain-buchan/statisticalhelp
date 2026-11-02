@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2405.552" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2405.552" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Risk Difference Meta-analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Meta-analysis: Risk difference;Risk difference: Meta-analysis" />
+            <sdh:keyword term="Meta-analysis: Risk difference;Risk difference: Meta-analysis" />
             Risk Difference Meta-analysis</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Meta-Analysis_Risk Difference</b>.</p>
@@ -52,7 +52,7 @@
         <p>&#160;</p>
         <p>The Mantel-Haenszel type method of Greenland and Robins (<a href="../references/reference_list.htm#ref-greenland-1985">Greenland and Robins, 1985</a>; <a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>) is used to estimate the pooled risk difference for all strata, assuming a fixed effects model:</p>
         <p>
-            <MadCap:equation>$\displaystyle \widehat{RD}_{MH}=\frac{\displaystyle \sum_{i=1}^k \left[a_i \left( \frac{b_i+d_i}{n_i}\right)\right]-b_i\left( \frac{a_i+c_i}{n_i}\right)}{\displaystyle \sum_{i=1}^k \left( \frac{(a_i+c_i)(b_i+d_i)}{n_i}\right)}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \widehat{RD}_{MH}=\frac{\displaystyle \sum_{i=1}^k \left[a_i \left( \frac{b_i+d_i}{n_i}\right)\right]-b_i\left( \frac{a_i+c_i}{n_i}\right)}{\displaystyle \sum_{i=1}^k \left( \frac{(a_i+c_i)(b_i+d_i)}{n_i}\right)}$</sdh:equation>
         </p>
         <p>- where n<sub>i</sub> =  a<sub>i</sub>+b<sub>i</sub>+c<sub>i</sub>+d<sub>i</sub>.</p>
         <p>&#160;</p>
@@ -260,11 +260,11 @@
         <p>&#160;</p>
         <p>Here we can say with 95% confidence, assuming a random effects model, that for those given aspirin the true population risk of dying in the specified interval after a heart attack is at least 0.002 less than the risk for those not given aspirin. Assuming a fixed effects model a stronger inference could be made about a risk difference of 0.006 (the lower absolute confidence limit) but the high inter-study variation makes the fixed effects model less appropriate.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Risk difference meta-analysis: the StatsDirect help example (Fleiss and Gross 1991,
 # deaths after myocardial infarction in seven placebo-controlled trials of aspirin; the
@@ -432,8 +432,8 @@ forest(w_mh, rd_mh, rd_mh - z * se_mh, rd_mh + z * se_mh,
        "Risk difference meta-analysis plot [fixed effects]", "combined [fixed]")
 forest(w_dl, rd_dl, rd_dl - z * se_dl, rd_dl + z * se_dl,
        "Risk difference meta-analysis plot [random effects]", "combined [random]")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

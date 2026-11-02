@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="5572.208" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="5572.208" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Multiple (General) Linear Regression</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Regression: Multiple Linear;Linear regression (general/multiple);General linear regression;Multiple linear regression;ANOVA (regression);Adjusted means (linear regression); Residuals (linear regression)" />
+            <sdh:keyword term="Regression: Multiple Linear;Linear regression (general/multiple);General linear regression;Multiple linear regression;ANOVA (regression);Adjusted means (linear regression); Residuals (linear regression)" />
             Multiple (General) Linear Regression</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Regression and Correlation_Multiple Linear</b>.</p>
@@ -39,13 +39,13 @@
         <p>&#160;</p>
         <p>Standard error for the predicted Y, leverage hi (the ith diagonal element of the hat (XXi) matrix), Studentized residuals, jackknife residuals, Cook's distance and DFIT are also given with the residuals. For further information on analysis of residuals please see <a href="../references/reference_list.htm#ref-belsley-1980">Belsley et al. (1980)</a>, <a href="../references/reference_list.htm#ref-kleinbaum-1998">Kleinbaum et al. (1998)</a> or <a href="../references/reference_list.htm#ref-draper-1998">Draper and Smith (1998)</a>.</p>
         <p>
-            <MadCap:equation>$\displaystyle e_i= Y_i- \hat Y_i \\
+            <sdh:equation>$\displaystyle e_i= Y_i- \hat Y_i \\
 \displaystyle s^2= \frac{\displaystyle \sum_{i=1}^n e_i^2}{n-p}\\
 \displaystyle r_i= \frac{e_i}{s\sqrt{1-h_i}}\\
 \displaystyle s^2_{_-i}= \frac{(n-p)s^2-e^2_i /(1-h_i)}{{n-p-1}}\\
 \displaystyle r_{-i}= \frac{e_i}{\sqrt{s^2_{_-i} (1-h_i)}}\\
 \displaystyle d_i=\left[\frac{e_i}{s\sqrt{1-h_i}} \right]^2 \left[ \frac{h_i}{1-h_i} \right] \frac{1}{p} \\
-\displaystyle \text{DFIT}_i=r_{-i}\sqrt{\frac{h_i}{1-h_i}}$</MadCap:equation>
+\displaystyle \text{DFIT}_i=r_{-i}\sqrt{\frac{h_i}{1-h_i}}$</sdh:equation>
         </p>
         <p>- where p is the number of parameters in the model, n is the number of observations, e<sub>i</sub> is a residual, r<sub>i</sub> is a Studentized residual, r-i is a jackknife residual, s² is the residual mean square, s²-i is an estimate of s² after deletion of the ith residual, h<sub>i</sub> is the leverage (ith diagonal element of the hat or XXi matrix), d<sub>i</sub> is Cook's distance and DFIT<sub>i</sub>is DFFITS.</p>
         <p>&#160;</p>
@@ -67,7 +67,7 @@
         <p>&#160;</p>
         <p>StatsDirect gives variance inflation factor (and the reciprocal, tolerance) as a measure of collinearity.</p>
         <p>
-            <MadCap:equation>$\displaystyle \text{VIF}_i=\frac{1}{1-R_i^2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle \text{VIF}_i=\frac{1}{1-R_i^2}$</sdh:equation>
         </p>
         <p>VIF<sub>i</sub> is the variance inflation factor for the ith predictor. R<sub>i</sub>² is the multiple correlation coefficient when the ith predictor is taken as the outcome predicted by the remaining x variables.</p>
         <p>&#160;</p>
@@ -87,7 +87,7 @@
         </p>
         <p>The <a href="partial_correlation.htm">partial correlation</a> coefficient for a predictor X<sub>k</sub> describes the relationship of Y and X<sub>k</sub> when all other X are held fixed, i.e. the correlation of Y and X<sub>k</sub> after taking away the effects of all other predictors in the model. The r statistic displayed with the main regression results is the partial correlation. It is calculated from the t statistic for the predictor as:</p>
         <p>
-            <MadCap:equation>$\displaystyle r_k=\frac{t_k}{\sqrt{t_k^2+\text{residual DF}}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle r_k=\frac{t_k}{\sqrt{t_k^2+\text{residual DF}}}$</sdh:equation>
         </p>
         <p>&#160;</p>
         <p><u>Multiple correlation</u>
@@ -96,7 +96,7 @@
         <p>&#160;</p>
         <p>An adjusted value of R² is given as Ra² (n observations, p parameters including the intercept):</p>
         <p>
-            <MadCap:equation>$\displaystyle R_a^2=1-(1-R^2)\frac{n-1}{n-p}$</MadCap:equation>
+            <sdh:equation>$\displaystyle R_a^2=1-(1-R^2)\frac{n-1}{n-p}$</sdh:equation>
         </p>
         <p>The adjustment allows comparison of Ra² between different regression models by compensating for the fact that R² is bound to increase with the number of predictors in the model.</p>
         <p>&#160;</p>
@@ -576,11 +576,11 @@
         </table>
         <p>&#160;</p>
         <p>y = -3482258.63459582 +15.061872271373 x1 -0.035819179293 x2 -2.020229803817 x3 -1.033226867174 x4 -0.051104105654 x5 +1829.15146461355 x6</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example and the technical validation above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Multiple linear regression: the StatsDirect help example (Armitage and Berry 1994,
 # recovery time after a hypotensive drug, 53 patients) in R, then the NIST Longley
@@ -667,8 +667,8 @@ for (i in 1:7) {
 }
 terms &lt;- paste0(ifelse(s[2:7, 1] &gt;= 0, "+", ""), sapply(s[2:7, 1], twelve), " x", 1:6)
 cat("y =", twelve(s[1, 1]), paste(terms, collapse = " "), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

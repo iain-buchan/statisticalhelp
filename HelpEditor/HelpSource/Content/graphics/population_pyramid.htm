@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="618" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="618" sdh:lastWidth="1013" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Population Pyramid (Demographic Structure) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Population pyramid" />Population Pyramid</h1>
+            <sdh:keyword term="Population pyramid" />Population Pyramid</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Graphics_Population Pyramid</b>.</p>
         <p>&#160;</p>
@@ -18,7 +18,7 @@
         <p>StatsDirect lets you specify the maximum scale factor. You might want to specify a maximum scale factor if you are producing several population pyramids that you want to compare on the same scale, in this case the same scale value should be used for all plots.</p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/pyramid.svg" width="566" height="580" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/pyramid.png" width="566" height="580" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/pyramid.svg" width="566" height="580" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/pyramid.png" width="566" height="580" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p><u>Example</u>
@@ -36,11 +36,11 @@
         <p>Males = 33908.5 thousand, Females = 35347.8 thousand.</p>
         <p>&#160;</p>
         <p>The pyramid is widest at 30-34 and 35-39, the two largest bands, which hold the generation born around 1990; the 55-59 band, born in the 1960s, is the next widest, and the bands from 65-69 onwards narrow with age. Males outnumber females in every band up to 20-24, but females outnumber males from the 25-29 band upwards, and from 55-59 the ratio of women to men rises with age: at 90 and over there are 1.97 women for each man.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Population pyramid: the StatsDirect help illustration (the resident population of
 # the UK at mid-2024, in thousands, by sex and five-year age band; the test workbook's
@@ -97,8 +97,8 @@ cat("Largest band:", band[which.max(males + females)], "\n")
 cat("Females outnumber males from the", band[females &gt; males][1], "band upwards\n")
 cat("At 90 and over:", formatC(females[n] / males[n], digits = 2, format = "f"),
     "women for each man\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

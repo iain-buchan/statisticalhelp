@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="888" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="888" sdh:lastWidth="974" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Block Randomization - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Block randomization;Randomization: Block" />Block Randomization</h1>
+            <sdh:keyword term="Block randomization;Randomization: Block" />Block Randomization</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Randomization_Blocks</b></p>
         <p>&#160;</p>
@@ -123,11 +123,11 @@
         <p><u>Technical validation</u>
         </p>
         <p>Robust (pseudo-)random number generation is used, see <a href="random_number_generator.htm">random number generation</a>.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above in its structure: R's random number generator gives a different allocation for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Block randomization: the StatsDirect help illustration (20 subjects allocated to
 # 2 treatments in blocks of random size, seed 10) in R
@@ -171,8 +171,8 @@ set.seed(seed)
 fixed &lt;- unlist(lapply(seq_len(n / b), function(i) sample(rep(treatments, b / t))))
 cat("\nBlock size:", b, "\n")
 print(data.frame(Subject = 1:n, Treatment = fixed), row.names = FALSE)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

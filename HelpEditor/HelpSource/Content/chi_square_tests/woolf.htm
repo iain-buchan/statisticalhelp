@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1433" MadCap:lastWidth="974" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1433" sdh:lastWidth="974" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Woolf Chi-square Analysis (Stratified 2 by 2 Tables) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Woolf chi-square (stratified tables);Chi-square tests: Woolf" />
+            <sdh:keyword term="Woolf chi-square (stratified tables);Chi-square tests: Woolf" />
             Woolf Statistics for 2 by 2 Tables and Series</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Chi-square_Woolf</b>.</p>
@@ -198,11 +198,11 @@
         <p>&#160;</p>
         <p>The equivalent analysis using the Mantel-Haenszel method gave a confidence interval for the pooled odds ratio of 3.9 to 5.7; the difference is partly accounted for by the Haldane correction. You should use the more robust Mantel-Haenszel for most analyses of this kind. Woolf's method is included for further investigation of inter-table relationships under expert statistical guidance.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Woolf chi-square analysis of 2 by 2 series: the StatsDirect help example (Armitage
 # and Berry 1994, p. 516, smoking among lung cancer patients and controls in ten
@@ -261,8 +261,8 @@ woolf(log((a + 0.5) * (d + 0.5) / ((b + 0.5) * (c + 0.5))),
 # test, without its continuity correction
 tables &lt;- array(rbind(a, c, b, d), c(2, 2, k))   # each table filled column by column
 print(mantelhaen.test(tables, correct = FALSE))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

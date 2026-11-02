@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="511" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="511" sdh:lastWidth="3209" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Sample Size for Population Surveys - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Sample size: Population surveys" />
+            <sdh:keyword term="Sample size: Population surveys" />
             Sample Size for Population Survey</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Sample Size_Population Survey</b>.</p>
@@ -27,8 +27,8 @@
         </p>
         <p>The estimated sample size n is calculated, using simple Gaussian theory, as:</p>
         <p>
-            <MadCap:equation>$\displaystyle n=\frac{sn}{1+sn/N} \\
-\displaystyle sn=\frac{z^2 p(1-p)}{d^2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle n=\frac{sn}{1+sn/N} \\
+\displaystyle sn=\frac{z^2 p(1-p)}{d^2}$</sdh:equation>
         </p>
         <p>- where p is p%/100, d is d%/100, and z is a quantile from the standard normal distribution for a two tailed probability of 1-cc. n is rounded up to the closest integer.</p>
         <p>&#160;</p>
@@ -52,11 +52,11 @@
         <p>&#160;</p>
         <p>A simple random sample of 770 adults would be enough. Without the finite population correction, as for a population of unlimited size, 801 would be needed: the correction matters little unless the sample is a substantial fraction of the population.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Sample size for a population survey: the StatsDirect help example (an invented
 # survey of smoking among the 20,000 adults of a town, expected 25% give or take 3%,
@@ -82,8 +82,8 @@ cat("Estimated minimum sample size =", ceiling(n), "\n")
 
 # The same survey of a population of unlimited size, for comparison
 cat("Sample size for an unlimited population =", ceiling(sn), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

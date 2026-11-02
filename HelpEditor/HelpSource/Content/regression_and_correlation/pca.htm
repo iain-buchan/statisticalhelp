@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2410" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2410" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Principal Components Analysis (PCA) and Alpha Reliability - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
         </script>
     </head>
     <body>
-        <MadCap:keyword term="Regression: Principal components analysis;Scale reliability coefficient alpha;Alpha (Cronbach/deletions);Factor analysis;Principal components analysis;Reliability: PCA;Questionnaire design: PCA" />
+        <sdh:keyword term="Regression: Principal components analysis;Scale reliability coefficient alpha;Alpha (Cronbach/deletions);Factor analysis;Principal components analysis;Reliability: PCA;Questionnaire design: PCA" />
         <h1>Principal Components Analysis and Cronbach's Alpha Reliability Coefficient</h1>
         <p>&#160;</p>
         <p>Menu locations:</p>
@@ -102,7 +102,7 @@
         <p>&#160;</p>
         <p>A lower confidence limit for Cronbach's alpha is calculated using the sampling theory of <a href="../references/reference_list.htm#ref-kristof-1963">Kristof (1963)</a> and <a href="../references/reference_list.htm#ref-feldt-1965">Feldt (1965)</a>:</p>
         <p>
-            <MadCap:equation>$\displaystyle \alpha \ge1-|(1-\alpha)F_{p, \space n-1, \space (n-1)(k-1)}|$</MadCap:equation>
+            <sdh:equation>$\displaystyle \alpha \ge1-|(1-\alpha)F_{p, \space n-1, \space (n-1)(k-1)}|$</sdh:equation>
         </p>
         <p>- where F is the F distribution quantile for a 100(1-p)% confidence limit, k is the number of variables and n is the number of observations per variable.</p>
         <p>&#160;</p>
@@ -223,11 +223,11 @@
         </table>
         <p>&#160;</p>
         <p>You can see from the results above that questions 3 and 4 seemed to have scales going in opposite directions to the other two questions, so they were reversed before the final analysis. Dropping question 2 improves the internal consistency of the overall set of questions, but this does not bring the standardised alpha coefficient to the conventionally acceptable level of 0.8 and above. It may be necessary to rethink this questionnaire.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Principal components and scale reliability: the StatsDirect help example (four
 # questionnaire items answered by 60 people) in R. The data are the test workbook's
@@ -290,8 +290,8 @@ for (kind in c("raw", "standardized")) {
     cat("  Question", j, "dropped:", six(aj), " change", six(aj - a), "\n")
   }
 }</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

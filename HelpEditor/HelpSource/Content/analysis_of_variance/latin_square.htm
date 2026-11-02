@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:lastBlockDepth="5" MadCap:lastHeight="3299" MadCap:lastWidth="3189">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd" sdh:lastBlockDepth="5" sdh:lastHeight="3299" sdh:lastWidth="3189">
     <head><title>Latin Square Tests and Analysis of Variance (ANOVA) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="ANOVA: Latin square;Three way ANOVA (avoidance);Latin square ANOVA" />Latin Square Analysis of Variance</h1>
+            <sdh:keyword term="ANOVA: Latin square;Three way ANOVA (avoidance);Latin square ANOVA" />Latin Square Analysis of Variance</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Analysis of Variance_Latin</b>.</p>
         <p>&#160;</p>
@@ -101,16 +101,16 @@
         <p>
             The Latin square ANOVA for three factors without interaction is calculated as follows (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-cochran-1957">Cochran and Cox, 1957</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle SS_{\text{total}}=\sum_{i=1}^a \sum_{j=1}^a \sum_{k=1}^a X_{ijk}^2/a-G^2/a^2$</MadCap:equation>
+            <sdh:equation>$\displaystyle SS_{\text{total}}=\sum_{i=1}^a \sum_{j=1}^a \sum_{k=1}^a X_{ijk}^2/a-G^2/a^2$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle SS_{\text{rows}}=\sum_{i=1}^aR_i^2/a-G^2/a^2$</MadCap:equation>
+            <sdh:equation>$\displaystyle SS_{\text{rows}}=\sum_{i=1}^aR_i^2/a-G^2/a^2$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle SS_{\text{columns}}=\sum_{j=1}^aC_j^2/a-G^2/a^2$</MadCap:equation>
+            <sdh:equation>$\displaystyle SS_{\text{columns}}=\sum_{j=1}^aC_j^2/a-G^2/a^2$</sdh:equation>
         </p>
         <p>
-            <MadCap:equation>$\displaystyle SS_{\text{treatments}}=\sum_{k=1}^aT_k^2/a-G^2/a^2$</MadCap:equation>
+            <sdh:equation>$\displaystyle SS_{\text{treatments}}=\sum_{k=1}^aT_k^2/a-G^2/a^2$</sdh:equation>
         </p>
         <p>- where X<sub>ijk</sub> is the observation from the ith row of the jth column with the kth treatment, G is the grand total of all observations, R<sub>i</sub> is the total for the ith row, C<sub>j</sub> is the total for the jth column, T<sub>k</sub> is the total for the kth treatment, SS<sub>total</sub> is the total sum of squares, SS<sub>rows</sub> is the sum of squares due to the rows, SS<sub>columns</sub> is the sum of squares due to the columns, SS<sub>treatments</sub> is the sum of squares due to the treatments and a is the number of rows, columns or treatments.</p>
         <p>&#160;</p>
@@ -608,11 +608,11 @@
         <p>&#160;</p>
         <p>Here we see that the order of administration does not have a statistically significant effect on blistering but that inter-rabbit variation was significant.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Latin square analysis of variance: the StatsDirect help example (Armitage and
 # Berry 1994, blistering of rabbits' skin at six sites in six rabbits, with the
@@ -644,8 +644,8 @@ cat("Total", six(sum(a$"Sum Sq")), sum(a$Df), "\n")
 cat("F (rows) =", six(a$"F value"[1]), " ", pv(a$"Pr(&gt;F)"[1]), "\n")
 cat("F (columns) =", six(a$"F value"[2]), " ", pv(a$"Pr(&gt;F)"[2]), "\n")
 cat("F (treatments) =", six(a$"F value"[3]), " ", pv(a$"Pr(&gt;F)"[3]), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

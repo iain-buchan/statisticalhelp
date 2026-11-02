@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="1440" MadCap:lastWidth="3189" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="1440" sdh:lastWidth="3189" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Single Sample t Test - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Single sample t test;Student t test: Single sample;t test: Single sample" />Single Sample t Test</h1>
+            <sdh:keyword term="Single sample t test;Student t test: Single sample;t test: Single sample" />Single Sample t Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Parametric_Single Sample t</b>.</p>
         <p>&#160;</p>
@@ -17,7 +17,7 @@
         <p>&#160;</p>
         <p>The test statistic is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle t=\frac{\bar x-\mu}{\sqrt{s^2/n}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle t=\frac{\bar x-\mu}{\sqrt{s^2/n}}$</sdh:equation>
         </p>
         <p>- where x bar is the sample mean, s² is the sample variance, n is the sample size, µ is the specified population mean and t is a Student t quantile with n-1 degrees of freedom.</p>
         <p>&#160;</p>
@@ -98,11 +98,11 @@
         <p>&#160;</p>
         <p>A null hypothesis of no difference between sample and population means has clearly been rejected. Using the 95% CI we expect the mean systolic BP for this population of doctors to be at least 5 mm Hg greater than the age and sex matched general public, lying somewhere between 125 and 135 mm Hg.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Single sample t test: the StatsDirect help example (resting systolic blood
 # pressure of 20 first year resident doctors) in R
@@ -132,8 +132,8 @@ cat(sprintf("One sided P = %.4f   Two sided P = %.4f\n", r$p.value / 2, r$p.valu
 pw &lt;- power.t.test(n = n, delta = mean(bp) - mu, sd = sd(bp), sig.level = 0.05,
                    type = "one.sample", strict = TRUE)
 cat(sprintf("Power (for 5%% significance) = %.2f%%\n", 100 * pw$power))</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

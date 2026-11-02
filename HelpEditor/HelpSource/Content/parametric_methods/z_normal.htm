@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="1044.552" MadCap:lastWidth="3249" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="1044.552" sdh:lastWidth="3249" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Z (Normal Distribution) Tests - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Z (normal distribution) tests" />Z (Normal Distribution) Tests</h1>
+            <sdh:keyword term="Z (normal distribution) tests" />Z (Normal Distribution) Tests</h1>
         <p>&#160;</p>
         <p>Menu locations:<br /><b>Analysis_Parametric_Single Sample z<br />Analysis_Parametric_Unpaired z</b></p>
         <p>&#160;</p>
@@ -23,13 +23,13 @@
         <p>&#160;</p>
         <p>The single sample test statistic is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle z=\frac{\bar x-\mu}{\sqrt{s^2/n}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle z=\frac{\bar x-\mu}{\sqrt{s^2/n}}$</sdh:equation>
         </p>
         <p>- where x bar is the sample mean, s² is the sample variance, n is the sample size, µ is the specified population mean and z is a quantile from the standard normal distribution.</p>
         <p>&#160;</p>
         <p>The unpaired test statistic is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle z=\frac{\bar x_1 -\bar x_2}{\sqrt{\displaystyle \frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$</MadCap:equation>
+            <sdh:equation>$\displaystyle z=\frac{\bar x_1 -\bar x_2}{\sqrt{\displaystyle \frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$</sdh:equation>
         </p>
         <p>- where x-bar 1 and x-bar 2 are the sample means, s<sub>1</sub>² and s<sub>2</sub>² are the sample variances, n<sub>1</sub> and n<sub>2</sub> are the sample sizes and z is a quantile from the standard normal distribution.</p>
         <p>&#160;</p>
@@ -37,11 +37,11 @@
         </p>
         <p>For samples from a log-normal distribution (logs from a normal distribution) you may wish to construct an interval analogous to the confidence interval for the mean of a sample from a normal distribution. StatsDirect gives you the geometric mean (arithmetic mean of logs) and a reference range as:</p>
         <p>
-            <MadCap:equation>$\displaystyle \exp(g \pm 2s) \\
+            <sdh:equation>$\displaystyle \exp(g \pm 2s) \\
 
 \displaystyle g=\frac{1}{n}\sum_{i=1}^n \ln(x_i) \\
 
-\displaystyle s=\sqrt{\frac{\displaystyle \sum_{i=1}^n \ln(x_i)^2- \frac{1}{n}\left[ \sum_{i=1}^n \ln(x_i)\right]^2 }{n-1}}$</MadCap:equation>
+\displaystyle s=\sqrt{\frac{\displaystyle \sum_{i=1}^n \ln(x_i)^2- \frac{1}{n}\left[ \sum_{i=1}^n \ln(x_i)\right]^2 }{n-1}}$</sdh:equation>
         </p>
         <p>- where g is geometric mean, ln is natural logarithm, n is sample size and z is a quantile from the standard normal distribution (alpha/2 quantile for a 100*(1-alpha)% confidence interval). The geometric mean and its reference range are given only if every value of the sample is above zero.</p>
         <p>&#160;</p>
@@ -102,11 +102,11 @@
         <p>&#160;</p>
         <p>The later measurements were lower on average, and a difference this large is unlikely to arise by chance. With 50 measurements in each sample the unpaired t test gives almost the same answer (t = 2.66 on 77 degrees of freedom with unequal variances, two sided P = 0.0095).</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Normal distribution (z) tests: the StatsDirect help example (Michelson's 100
 # measurements of the speed of light in air, millions of metres per second) in R
@@ -165,8 +165,8 @@ cat("95% confidence interval for difference between means =", six(d - z * se2), 
 dev2 &lt;- d / se2
 cat("Standard normal deviate (z) =", six(dev2), "\n")
 cat("One sided", pv(pnorm(-abs(dev2))), "  Two sided", pv(2 * pnorm(-abs(dev2))), "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

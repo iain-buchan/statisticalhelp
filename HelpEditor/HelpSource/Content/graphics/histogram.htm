@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="2" MadCap:lastHeight="1073" MadCap:lastWidth="1013" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="2" sdh:lastHeight="1073" sdh:lastWidth="1013" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Histogram (Frequency Distribution Plot) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Histogram;Distributions: Visualisation: Histogram" />
+            <sdh:keyword term="Histogram;Distributions: Visualisation: Histogram" />
             Histogram</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Graphics_Histogram</b>.</p>
@@ -23,11 +23,11 @@
         <p>The <a href="histogram_text.htm">text-based</a> version of this plot prints the number of data in each bin.</p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/histogram.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/histogram.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/histogram.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/histogram.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p>&#160;</p>
         <p>
-            <img src="../resources/Images/histogram2.svg" width="566" height="400" border="0" MadCap:conditions="Primary.WEBHELP" /><img src="../resources/Images/histogram2.png" width="566" height="400" border="0" MadCap:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
+            <img src="../resources/Images/histogram2.svg" width="566" height="400" border="0" sdh:conditions="Primary.WEBHELP" /><img src="../resources/Images/histogram2.png" width="566" height="400" border="0" sdh:conditions="Primary.SWHELP" style="-ms-interpolation-mode: bicubic;" />
         </p>
         <p><u>Example</u>
         </p>
@@ -51,11 +51,11 @@
         <p>&#160;</p>
         <p>The IgM concentrations are skewed to the right, with a tail that reaches 4.5 g/l, so most of the bins above 2 g/l are empty or nearly so. Their logarithms are close to symmetrical, and the normal curve overlaid on the second histogram (the normal distribution with the mean and standard deviation of the logarithms, scaled to the counts) fits them well, which is why the reference range example works with the logarithms.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Histogram: the StatsDirect help illustration (serum IgM in g/l of 298 children aged
 # 6 months to 6 years, Altman 1991; the test workbook's Other worksheet columns IgM
@@ -147,8 +147,8 @@ sd_histogram &lt;- function(x, name, normal_curve = FALSE) {
 # The IgM concentrations, then their logarithms to base 10 with the normal curve
 sd_histogram(igm, "IgM")
 sd_histogram(log10(igm), "Log(base 10): IgM", normal_curve = TRUE)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

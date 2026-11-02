@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Compare Two Crude Rates (Incidence Rate Ratio) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Incidence rate comparisons;Rates: Compare two crude" />
+            <sdh:keyword term="Incidence rate comparisons;Rates: Compare two crude" />
             Compare Two Crude Rates</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Rates_Compare Two Crude Rates</b>.</p>
@@ -53,7 +53,7 @@
         </p>
         <p>The confidence interval for the rate difference is constructed from the standard error of the difference, where each rate has the variance of a Poisson count divided by the square of its person-time. The chi-square statistic tests the equality of the two rates, given the total number of events. The confidence interval for the rate ratio is exact, using the Poisson distribution (<a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>):</p>
         <p>
-            <MadCap:equation>$\displaystyle \widehat{\text{IRD}}=\frac{a}{PT_1}-\frac{b}{PT_2} \\
+            <sdh:equation>$\displaystyle \widehat{\text{IRD}}=\frac{a}{PT_1}-\frac{b}{PT_2} \\
 
 \displaystyle \chi^2=\left( a-\frac{mPT_1}{PT}\right)^2\bigg /\left( \frac{mPT_1 PT_2}{PT^2}\right) \\
 
@@ -61,7 +61,7 @@
 
 \displaystyle \widehat{\text{IRR}}=\frac{a}{PT_1}/\frac{b}{PT_2} \\
 
-\displaystyle \widehat{\text{IRR}}  \space \text{CI} = \left( \frac{PT_2}{PT_1}\right) \left( \frac{a}{b+1}\right) \frac{1}{F_{\alpha/2, \space 2(b+1), \space 2a}} \text{ to } \left( \frac{PT_2}{PT_1}\right) \left( \frac{a+1}{b}\right) {F_{\alpha/2, \space 2(a+1), \space 2b}}$</MadCap:equation>
+\displaystyle \widehat{\text{IRR}}  \space \text{CI} = \left( \frac{PT_2}{PT_1}\right) \left( \frac{a}{b+1}\right) \frac{1}{F_{\alpha/2, \space 2(b+1), \space 2a}} \text{ to } \left( \frac{PT_2}{PT_1}\right) \left( \frac{a+1}{b}\right) {F_{\alpha/2, \space 2(a+1), \space 2b}}$</sdh:equation>
         </p>
         <p>- where IRD hat and IRR hat are point estimates of incidence rate difference and ratio respectively, m is the total number of events observed, PT is the total person-time observed, Z is a quantile of the standard normal distribution and F is a quantile of the F distribution (denominator degrees of freedom are quoted last).</p>
         <p>&#160;</p>
@@ -146,11 +146,11 @@
         <p>&#160;</p>
         <p>Here we may conclude with 95% confidence that the true population value for the difference between the two incidence rates lies somewhere between -0.001 and -0.0003. We may also conclude with 95% confidence that the incidence rate for those who used postmenopausal hormones in the circumstances of the study was between 0.30 and 0.75 of that for those who did not take postmenopausal hormones.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Compare two crude rates: the StatsDirect help example (Stampfer et al. 1985, cases of
 # coronary heart disease and person-years of follow up among users and non-users of
@@ -236,8 +236,8 @@ cat("Exact mid-P 95% confidence interval =", six(lower_mid), "to", six(upper_mid
 mid &lt;- min(up, down) - 0.5 * prob[a + 1]
 cat("Exact mid-P one sided ", pv(mid), ", two sided ", pv(min(2 * mid, 1)), "\n",
     sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/p_values.htm">P values</a>
         </p>

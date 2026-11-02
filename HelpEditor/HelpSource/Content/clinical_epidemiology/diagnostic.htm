@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="5" MadCap:lastHeight="2240" MadCap:lastWidth="2808" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="5" sdh:lastHeight="2240" sdh:lastWidth="2808" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Diagnostic Tests (Sensitivity, Specificity etc.) - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Diagnostic test errors;Likelihood ratios: 2 by 2;True positive;False positive;Predictive values;Diagnostic odds ratio;Odds ratio: Diagnostic" />
+            <sdh:keyword term="Diagnostic test errors;Likelihood ratios: 2 by 2;True positive;False positive;Predictive values;Diagnostic odds ratio;Odds ratio: Diagnostic" />
             Diagnostic Test 2 by 2 Table</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Clinical Epidemiology_Diagnostic Test (2 by 2)</b>.</p>
@@ -176,11 +176,11 @@
         <p>&#160;</p>
         <p>Here we can say with 95% confidence that marker results of ≥ 100 are at least three (3.365) times more likely to come from patients with disease than those without disease. Also with 95% confidence we can say that marker results of &lt;100 are at most only about one tenth (0.113) as likely to come from patients with disease as from those without disease.</p>
         <p>&#160;</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Diagnostic test 2 by 2 table: the StatsDirect help example (a hypothetical serum
 # marker of disease, positive at 100 units or more: 431 diseased and 30 disease-free
@@ -286,8 +286,8 @@ cmle_lower &lt;- solve_or(function(lo) sum(dens(lo)[x &gt;= tp]) - 0.025)
 cmle_upper &lt;- solve_or(function(lo) sum(dens(lo)[x &lt;= tp]) - 0.025)
 cat("Conditional maximum likelihood estimate = ", six(cmle), " (", six(cmle_lower),
     " to ", six(cmle_upper), ")\n", sep = "")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
         <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
         </p>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="923.5519" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="923.5519" sdh:lastWidth="3209" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Sample Size for Survival Analysis - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Sample size: Survival analysis" />
+            <sdh:keyword term="Sample size: Survival analysis" />
             Sample Size for Survival Analysis</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Sample Size_Survival Times</b>.</p>
@@ -43,10 +43,10 @@
         </p>
         <p>The estimated number of experimental subjects n (with mn controls) is calculated as:</p>
         <p>
-            <MadCap:equation>$\displaystyle n=\left( z_{\alpha/2}+z_{\beta}\right)^2\left( \frac{(1+1/m)/p}{\ln(r)^2}\right) \\
+            <sdh:equation>$\displaystyle n=\left( z_{\alpha/2}+z_{\beta}\right)^2\left( \frac{(1+1/m)/p}{\ln(r)^2}\right) \\
 \displaystyle p=1-p_a \exp(-\ln(2)F/\bar t) \\
 \displaystyle p_a=\frac{1-\exp(-\ln(2)A/\bar t)}{\ln(2)A/\bar t}\\
-\displaystyle \bar t=(C+E)/2$</MadCap:equation>
+\displaystyle \bar t=(C+E)/2$</sdh:equation>
         </p>
         <p>- where α = alpha, β = 1 - power, m is the number of controls per experimental subject and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the next whole number. (1+1/m)/p is equivalent to 2/p in the first equation if the experimental and control group sizes are equal (m = 1).</p>
         <p>&#160;</p>
@@ -72,11 +72,11 @@
         <p>Estimated minimum sample size = 147 experimental subjects and 147 controls</p>
         <p>&#160;</p>
         <p>The trial would need 147 subjects in each group, 294 in all. The number depends on how many deaths the study will observe, not only on how many subjects it recruits: if instead the trial recruited for 36 months and closed as soon as recruitment ended, so that the last subjects recruited were hardly followed at all, 187 in each group would be needed for the same power.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Sample size for survival analysis: the StatsDirect help example (an invented trial
 # of a new treatment against the usual one: median survival 12 months on the usual
@@ -121,8 +121,8 @@ size_survival(ct, et, at, fut, m, power, alpha)
 # The same trial recruiting for three years and closing as soon as recruitment ends:
 # fewer of the deaths are seen by then, so more subjects are needed for the same power
 size_survival(ct, et, at = 36, fut = 0, m, power, alpha)</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

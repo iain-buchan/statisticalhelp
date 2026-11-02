@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<html MadCap:lastBlockDepth="4" MadCap:lastHeight="631.5519" MadCap:lastWidth="3209" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">
+<html sdh:lastBlockDepth="4" sdh:lastHeight="631.5519" sdh:lastWidth="3209" xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
     <head><title>Sample Size for Paired t Test - StatsDirect</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
         <script type="text/javascript">
@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1>
-            <MadCap:keyword term="Sample size: Paired t test" />
+            <sdh:keyword term="Sample size: Paired t test" />
             Sample Size for Paired t Test</h1>
         <p>&#160;</p>
         <p>Menu location: <b>Analysis_Sample Size_Paired t</b>.</p>
@@ -36,7 +36,7 @@
         </p>
         <p>The estimated sample size n is calculated as the solution of:</p>
         <p>
-            <MadCap:equation>$\displaystyle n=\frac{(t_{n-1, \space \alpha/2}+t_{n-1, \space \beta})^2}{d^2}$</MadCap:equation>
+            <sdh:equation>$\displaystyle n=\frac{(t_{n-1, \space \alpha/2}+t_{n-1, \space \beta})^2}{d^2}$</sdh:equation>
         </p>
         <p>- where d = delta/sd, α = alpha, β = 1 - power and t<sub>v,p</sub> is a Student t quantile with v degrees of freedom and probability p. n is rounded up to the closest integer, then adjusted if necessary to the smallest n for which the power calculated from the non-central t distribution reaches POWER.</p>
         <p>&#160;</p>
@@ -68,11 +68,11 @@
         <p>Degrees of freedom = 34</p>
         <p>&#160;</p>
         <p>Twenty-seven pairs of measurements would give an 80% chance of detecting a true mean fall of 20 L/min, and 35 pairs a 90% chance. The size is the smallest number of pairs for which the power of the paired t test, calculated from the non-central t distribution, reaches the power asked for.</p>
-        <MadCap:dropDown class="rcode">
-            <MadCap:dropDownHead class="rcode">
-                <MadCap:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</MadCap:dropDownHotspot>
-            </MadCap:dropDownHead>
-            <MadCap:dropDownBody>
+        <sdh:dropDown class="rcode">
+            <sdh:dropDownHead class="rcode">
+                <sdh:dropDownHotspot class="rcode"><img class="rlogo" src="../resources/Images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</sdh:dropDownHotspot>
+            </sdh:dropDownHead>
+            <sdh:dropDownBody>
                 <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
                 <pre class="rcode" xml:space="preserve"># Sample size for a paired t test: the StatsDirect help example (an invented plan for
 # a study of peak expiratory flow rate before and after a cold walk, like the paired t
@@ -118,8 +118,8 @@ n90 &lt;- ceiling(r90$n)
 cat("Power = 0.9\n")
 cat("Estimated minimum sample size =", n90, "pairs\n")
 cat("Degrees of freedom =", n90 - 1, "\n")</pre>
-            </MadCap:dropDownBody>
-        </MadCap:dropDown>
+            </sdh:dropDownBody>
+        </sdh:dropDown>
         <p>&#160;</p>
 
     </body>

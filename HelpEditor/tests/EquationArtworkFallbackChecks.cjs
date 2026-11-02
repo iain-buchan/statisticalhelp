@@ -37,7 +37,7 @@ function inspect(){
  const editor=await context.newPage();editor.on('pageerror',e=>errors.push(e.message));await editor.goto(origin+'/');await editor.waitForFunction(()=>!!window.HelpEditor);
  const originalTopic=fs.readFileSync(path.join(realSource,'Content',sample.topic),'utf8');
  const initialSource=await editor.evaluate(({originalTopic,index})=>{
-  const parsed=new DOMParser().parseFromString(originalTopic,'application/xml'),equation=parsed.getElementsByTagNameNS('http://www.madcapsoftware.com/Schemas/MadCap.xsd','equation')[index-1],xml=new XMLSerializer().serializeToString(equation);
+  const parsed=new DOMParser().parseFromString(originalTopic,'application/xml'),equation=parsed.getElementsByTagNameNS('*','equation')[index-1],xml=new XMLSerializer().serializeToString(equation);
   return '<?xml version="1.0" encoding="utf-8"?>\n<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd"><head><title>Equation fallback fixture</title><link rel="stylesheet" href="resources/stylesheets/statsdirect.css" /></head><body><h1>Equation fallback fixture</h1><p id="current">'+xml+'</p><p id="edited">'+xml+'</p><p id="new"></p></body></html>';
  },{originalTopic,index:sample.index});
  const payload={path:'fixture.htm',title:'Equation fallback fixture',source:initialSource,baseUrl:origin+'/project/fixture.htm'};
@@ -49,7 +49,7 @@ function inspect(){
   HelpEditor.openEquation();document.getElementById('equation-field').value='\\frac{7}{3}+\\alpha';document.getElementById('equation-apply').click();
   if(document.getElementById('equation-dialog').open)throw new Error('Inserting the new equation was rejected.');
   const source=HelpEditor.getSource(),doc=new DOMParser().parseFromString(source,'application/xml');HelpEditor.markSaved();
-  return {source,valid:!doc.querySelector('parsererror'),equations:doc.getElementsByTagNameNS('http://www.madcapsoftware.com/Schemas/MadCap.xsd','equation').length,unchangedWidget:document.querySelector('#current .equation-widget').dataset.protectedId===currentBefore,edited:doc.querySelector('#edited').textContent.includes('12345'),new:doc.querySelector('#new').textContent.includes('\\frac')&&doc.querySelector('#new').textContent.includes('\\alpha')};
+  return {source,valid:!doc.querySelector('parsererror'),equations:doc.getElementsByTagNameNS('*','equation').length,unchangedWidget:document.querySelector('#current .equation-widget').dataset.protectedId===currentBefore,edited:doc.querySelector('#edited').textContent.includes('12345'),new:doc.querySelector('#new').textContent.includes('\\frac')&&doc.querySelector('#new').textContent.includes('\\alpha')};
  },payload);
  record('MathLive edits an existing equation and inserts a new one while keeping the original',editedSource.valid&&editedSource.equations===3&&editedSource.unchangedWidget&&editedSource.edited&&editedSource.new,editedSource);
  fs.mkdirSync(path.join(content,'resources/stylesheets'),{recursive:true});fs.mkdirSync(path.join(project,'Project/TOCs'),{recursive:true});
