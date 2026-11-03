@@ -16,20 +16,21 @@ internal static class Program
     private static int Main(string[] args)
     {
         string root = Path.GetFullPath(args[0]);
-        fixture = Path.Combine(root, "tests", "StatsDirectHelpEditor.LinkWindowsChecks", "HelpSource");
+        string testRoot = Path.Combine(Path.GetTempPath(), "sdhe-link-" + Guid.NewGuid().ToString("N")[..8]);
+        fixture = Path.Combine(testRoot, "HelpSource");
         evidence = Path.Combine(root, "evidence");
         Directory.CreateDirectory(evidence);
         CreateFixture();
         ApplicationConfiguration.Initialize();
         Application.ThreadException += (_, e) => Check(false, "Unhandled UI exception: " + e.Exception);
-        parent = new MainForm(fixture, uri => external.Add(uri)) { SuppressDialogs = true, WindowState = FormWindowState.Normal, StartPosition = FormStartPosition.Manual, ShowInTaskbar = false, Location = new Point(-16000, 0), Size = new Size(1600, 1000) };
+        parent = new MainForm(fixture, uri => external.Add(uri), workspaceOverride: new HelpEditorWorkspace(testRoot, fixture, null)) { SuppressDialogs = true, WindowState = FormWindowState.Normal, StartPosition = FormStartPosition.Manual, ShowInTaskbar = false, Location = new Point(-16000, 0), Size = new Size(1600, 1000) };
         parent.Shown += async (_, _) =>
         {
             try { await RunChecks(); }
             catch (Exception ex) { Check(false, "Unexpected native link failure: " + ex); }
             finally
             {
-                File.WriteAllText(Path.Combine(evidence, "link-windows-checks.json"), JsonSerializer.Serialize(new { passed, failed, results }, new JsonSerializerOptions { WriteIndented = true }));
+                File.WriteAllText(Path.Combine(evidence, "link-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed, failed, results }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine($"{passed} native link checks passed; {failed} failed");
                 foreach (MainForm window in Windows().ToArray()) ForceClose(window);
             }
@@ -90,6 +91,8 @@ internal static class Program
         prior = Windows().ToHashSet();
         await CustomOpen("internal-link");
         var beta = await WaitForNewWindow(prior, "references/beta.htm");
+        Check(beta.ArtifactRoot == parent.ArtifactRoot && beta.EditorWebView.CoreWebView2.Environment.UserDataFolder == parent.EditorWebView.CoreWebView2.Environment.UserDataFolder,
+            "A new link window retains the originating workspace and its isolated renderer profile");
         Check(parent.CurrentTopicPath == "basics/alpha.htm" && await Source(parent) == dirtySnapshot && parent.IsDirty, "Custom right-click Open preserves the parent's unsaved page");
         Check(beta.Owner == null, "Custom context-menu windows have no disposing Owner relationship");
         int count = Windows().Count();

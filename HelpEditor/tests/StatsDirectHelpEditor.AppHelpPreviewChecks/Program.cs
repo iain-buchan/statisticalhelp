@@ -32,7 +32,7 @@ internal static class Program
     private static int Main(string[] args)
     {
         root = Path.GetFullPath(args[0]);
-        fixture = Path.Combine(root, "evidence", "AppHelpPreviewFixture-" + Guid.NewGuid().ToString("N"));
+        fixture = Path.Combine(Path.GetTempPath(), "sdhe-apphelp-" + Guid.NewGuid().ToString("N")[..8]);
         Directory.CreateDirectory(fixture);
         ApplicationConfiguration.Initialize();
         using var owner = new Form { Text = "Isolated app-help host fixture", StartPosition = FormStartPosition.Manual, Location = new Point(-16000, -16000), Size = new Size(2400, 1400), ShowInTaskbar = false };

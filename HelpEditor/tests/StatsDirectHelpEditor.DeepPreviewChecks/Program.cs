@@ -17,14 +17,13 @@ internal static class Program
     [STAThread]
     private static int Main(string[] args)
     {
-        root = Path.GetFullPath(args[0]); testRoot = Path.Combine(root, "tests", "StatsDirectHelpEditor.DeepPreviewChecks");
-        fixture = Path.Combine(testRoot, "fixtures", Guid.NewGuid().ToString("N"), "HelpSource");
-        Directory.CreateDirectory(Path.Combine(testRoot, "HelpSource"));
+        root = Path.GetFullPath(args[0]); testRoot = Path.Combine(Path.GetTempPath(), "sdhe-preview-" + Guid.NewGuid().ToString("N")[..8]);
+        fixture = Path.Combine(testRoot, "HelpSource");
         report = args.Contains("--baseline") ? "deep-preview-before.json" : "deep-preview-checks.json";
         CreateFixture();
         ApplicationConfiguration.Initialize();
         Application.ThreadException += (_, e) => { uiErrors++; Check(false, "Unhandled native preview exception", e.Exception.ToString()); };
-        form = new MainForm(fixture, uri => external.Add(uri.AbsoluteUri), initialTopic: "basics/alpha.htm")
+        form = new MainForm(fixture, uri => external.Add(uri.AbsoluteUri), initialTopic: "basics/alpha.htm", workspaceOverride: new HelpEditorWorkspace(testRoot, fixture, null))
         { SuppressDialogs = true, WindowState = FormWindowState.Normal, ShowInTaskbar = false, StartPosition = FormStartPosition.Manual, Location = new(-16000, 0), Size = new(1600, 1000) };
         form.Shown += async (_, _) =>
         {
@@ -33,7 +32,7 @@ internal static class Program
             finally
             {
                 Directory.CreateDirectory(Path.Combine(root, "evidence"));
-                File.WriteAllText(Path.Combine(root, "evidence", report), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, uiErrors, checks }, new JsonSerializerOptions { WriteIndented = true }));
+                File.WriteAllText(Path.Combine(root, "evidence", report), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, uiErrors, checks }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine($"{passed} deep preview checks passed; {failed} failed");
                 FieldInfo("closingApproved").SetValue(form, true); form.Close();
             }
@@ -83,19 +82,19 @@ internal static class Program
 
         await form.SwitchWorkspaceAsync("public"); await UntilBrowser("Boolean(document.getElementById('BetaTarget'))");
         string cssPath = Path.Combine(form.LastOutputPreviewResult!.OutputDirectory, "help-viewer.css");
-        File.Delete(cssPath); int beforeMissingCss = form.OutputPreviewBuildCount;
+        File.Move(cssPath, Path.Combine(testRoot, "missing-viewer-style.probe")); int beforeMissingCss = form.OutputPreviewBuildCount;
         await form.SwitchWorkspaceAsync("public");
         Check(File.Exists(cssPath) && form.OutputPreviewBuildCount == beforeMissingCss + 1, "A missing generated navigation stylesheet is repaired before reusing the site");
         string scriptPath = Path.Combine(form.LastOutputPreviewResult.OutputDirectory, "help-viewer.js");
-        File.Delete(scriptPath); int beforeMissingScript = form.OutputPreviewBuildCount;
+        File.Move(scriptPath, Path.Combine(testRoot, "missing-viewer-script.probe")); int beforeMissingScript = form.OutputPreviewBuildCount;
         await form.SwitchWorkspaceAsync("public");
         Check(File.Exists(scriptPath) && form.OutputPreviewBuildCount == beforeMissingScript + 1, "A missing generated navigation script is repaired before reusing the site");
         string topicCssPath = Path.Combine(form.LastOutputPreviewResult.OutputDirectory, "resources", "help-editor-runtime", "topic.css");
-        File.Delete(topicCssPath); int beforeMissingTopicCss = form.OutputPreviewBuildCount;
+        File.Move(topicCssPath, Path.Combine(testRoot, "missing-topic-style.probe")); int beforeMissingTopicCss = form.OutputPreviewBuildCount;
         await form.SwitchWorkspaceAsync("public");
         Check(File.Exists(topicCssPath) && form.OutputPreviewBuildCount == beforeMissingTopicCss + 1, "A missing Flare-scoped topic stylesheet is repaired without accepting a broken cache");
         string mathPath = Path.Combine(form.LastOutputPreviewResult.OutputDirectory, "resources", "help-editor-runtime", "mathjax", "tex-mml-svg.js");
-        File.Delete(mathPath); int beforeMissingMath = form.OutputPreviewBuildCount;
+        File.Move(mathPath, Path.Combine(testRoot, "missing-math-runtime.probe")); int beforeMissingMath = form.OutputPreviewBuildCount;
         await form.SwitchWorkspaceAsync("public");
         Check(File.Exists(mathPath) && form.OutputPreviewBuildCount == beforeMissingMath + 1, "Missing equation-rendering runtime is repaired before using cached pages");
 

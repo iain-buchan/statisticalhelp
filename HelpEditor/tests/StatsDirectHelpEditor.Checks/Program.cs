@@ -251,7 +251,7 @@ try
     Check(real.ListTopics().Count == 404, "Full copied project loads all 404 real help pages");
     var realBefore = SourceDigests(real.RootPath);
     var full = HelpBuilder.Build(real, Path.Combine(root, "Build", "Desktop"), runtime, HelpBuildTarget.Desktop);
-    Check(full.TopicCount == 404 && full.SearchDocumentCount == 404, "Full desktop build indexes all 404 pages");
+    Check(full.TopicCount == 404 && full.SearchDocumentCount == 403, "Full desktop build retains 404 topics and indexes 403 searchable pages");
     string fullViewer = File.ReadAllText(Path.Combine(full.OutputDirectory, "index.html"));
     string fullNestedTopic = File.ReadAllText(Path.Combine(full.OutputDirectory, "rates", "incidence_and_prevalence.htm"));
     Check(fullViewer.Contains("class=\"help-logo\"") && fullViewer.Contains("src=\"resources/images/sd3helplogo.png\"") && fullViewer.Contains("alt=\"StatsDirect StatisticalHelp\"") && fullViewer.Contains("href=\"resources/images/sd3.ico\"") && fullNestedTopic.Contains("href=\"../resources/images/sd3.ico\""), "Real help includes the Flare header logo and browser icon with correct nested-topic paths");

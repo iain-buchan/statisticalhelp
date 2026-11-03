@@ -110,6 +110,7 @@ try
     Check(EquationArtworkCatalog.CanonicalSource(oldEquation) == EquationArtworkCatalog.CanonicalSource(ownEquation) && EquationArtworkCatalog.SourceKey(oldEquation) == EquationArtworkCatalog.SourceKey(ownEquation), "Namespace migration keeps canonical equation artwork identity, including authoring attributes and MathML children");
     ownEquation.Name = XName.Get("equation", "urn:unrelated");
     Check(EquationArtworkCatalog.SourceKey(oldEquation) != EquationArtworkCatalog.SourceKey(ownEquation), "Unrelated namespaces cannot claim the identity of verified equation artwork");
+    foreach (var result in SearchIndexChecks.Run(fixture)) Check(result.Passed, result.Name);
 }
 catch (Exception exception)
 {

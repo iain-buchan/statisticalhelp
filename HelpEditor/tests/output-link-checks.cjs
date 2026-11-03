@@ -2,6 +2,7 @@
 const fs=require('node:fs'),path=require('node:path');
 const {chromium}=require('./browser-runtime.cjs');
 const root=path.resolve(__dirname,'..');
+const buildRoot=process.env.STATSDIRECT_HELP_BUILD_ROOT||path.join(root,'Build');
 function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);}
 (async()=>{
  const browser=await chromium.launch({channel:'msedge',headless:true});
@@ -11,7 +12,7 @@ function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.
   const targets=process.argv.length>2?process.argv.slice(2):['Desktop','Public'];
   if(targets.some(t=>!['Desktop','Public'].includes(t)))throw new Error('Targets must be Desktop and/or Public');
   for(const target of targets){
-   const build=path.join(root,'Build',target),files=walk(build).map(f=>path.relative(build,f).replaceAll('\\','/'));
+   const build=path.join(buildRoot,target),files=walk(build).map(f=>path.relative(build,f).replaceAll('\\','/'));
    const exact=new Set(files),folded=new Map(files.map(f=>[f.toLowerCase(),f]));
    const pages=files.filter(f=>/\.html?$/i.test(f)),docs=[];
    for(let offset=0;offset<pages.length;offset+=30){
@@ -63,7 +64,7 @@ function walk(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.
    checks.push({target,pages:pages.length,files:files.length,references,anchors,contextMappings:aliases.length,missing,caseMismatches,missingAnchors,privateOrigins,passed:!missing.length&&!caseMismatches.length&&!missingAnchors.length&&!privateOrigins.length});
   }
  }finally{await browser.close();}
- const report={checkedAtUtc:new Date().toISOString(),passed:checks.every(c=>c.passed),checks};
+ const report={checkedAtUtc:new Date().toISOString(),buildRoot,passed:checks.every(c=>c.passed),checks};
  fs.writeFileSync(path.join(root,'evidence','output-link-checks.json'),JSON.stringify(report,null,2));
  console.log(JSON.stringify(report,null,2));if(!report.passed)process.exitCode=1;
 })().catch(e=>{console.error(e);process.exitCode=1;});

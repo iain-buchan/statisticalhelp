@@ -114,12 +114,19 @@ public sealed partial class HelpProject
     {
         var target = TopicPath(relativePath);
         var references = new List<string>();
-        foreach (var topic in ListTopics())
+        // Shared master pages and imported snippets can link to topics too.
+        // Ignoring them would let page deletion break every shared footer.
+        var authoredFiles = Directory.EnumerateFiles(ContentPath, "*", SearchOption.AllDirectories)
+            .Where(path => Path.GetExtension(path).ToLowerInvariant() is ".htm" or ".html" or ".flmsp" or ".flsnp")
+            .Order(StringComparer.OrdinalIgnoreCase);
+        foreach (var sourcePath in authoredFiles)
         {
-            if (SafePaths.Same(TopicPath(topic.Path), target)) continue;
-            var doc = Parse(ReadTopic(topic.Path));
-            if (doc.Descendants().Attributes().Where(a => a.Name.LocalName is "href" or "src").Any(a => RefersTo(topic.Path, a.Value, target)))
-                references.Add(topic.Path);
+            SafePaths.CheckNoLinks(sourcePath);
+            if (SafePaths.Same(sourcePath, target)) continue;
+            string relative = Path.GetRelativePath(ContentPath, sourcePath).Replace('\\', '/');
+            var doc = Parse(File.ReadAllText(sourcePath));
+            if (doc.Descendants().Attributes().Where(a => a.Name.LocalName is "href" or "src").Any(a => RefersTo(relative, a.Value, target)))
+                references.Add(relative);
         }
         foreach (var node in Flatten(LoadContents()))
             if (node.Link is not null && RefersTo("", "/Content/" + node.Link, target)) references.Add("Contents: " + node.Title);

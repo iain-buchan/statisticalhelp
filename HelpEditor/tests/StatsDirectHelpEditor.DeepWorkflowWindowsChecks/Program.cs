@@ -15,11 +15,11 @@ internal static class Program
     [STAThread]
     private static int Main(string[] args)
     {
-        root = Path.GetFullPath(args[0]); testRoot = Path.Combine(root, "tests", "StatsDirectHelpEditor.DeepWorkflowWindowsChecks");
+        root = Path.GetFullPath(args[0]); testRoot = Path.Combine(Path.GetTempPath(), "sdhe-workflow-" + Guid.NewGuid().ToString("N")[..8]);
         fixture = Path.Combine(testRoot, "HelpSource"); CreateFixture();
         ApplicationConfiguration.Initialize();
         Application.ThreadException += (_, e) => Check(false, "Unhandled workflow UI exception", e.Exception.ToString());
-        form = new MainForm(fixture, _ => throw new InvalidOperationException("Unexpected external URL"), initialTopic: Topic)
+        form = new MainForm(fixture, _ => throw new InvalidOperationException("Unexpected external URL"), initialTopic: Topic, workspaceOverride: new HelpEditorWorkspace(testRoot, fixture, null))
         { SuppressDialogs = true, WindowState = FormWindowState.Normal, ShowInTaskbar = false, StartPosition = FormStartPosition.Manual, Location = new(-16000, 0), Size = new(1400, 900) };
         form.Shown += async (_, _) =>
         {
@@ -28,7 +28,7 @@ internal static class Program
             finally
             {
                 Directory.CreateDirectory(Path.Combine(root, "evidence"));
-                File.WriteAllText(Path.Combine(root, "evidence", "deep-workflow-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, passed = failed == 0, count = passed + failed, passedCount = passed, failedCount = failed, checks }, new JsonSerializerOptions { WriteIndented = true }));
+                File.WriteAllText(Path.Combine(root, "evidence", "deep-workflow-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, count = passed + failed, passedCount = passed, failedCount = failed, checks }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine($"{passed} workflow checks passed; {failed} failed");
                 typeof(MainForm).GetField("closingApproved", BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(form, true); form.Close();
             }
@@ -123,7 +123,7 @@ internal static class Program
     {
         string expected = Path.GetFullPath(Path.Combine(testRoot, "HelpSource"));
         if (!fixture.Equals(expected, StringComparison.OrdinalIgnoreCase) || !fixture.StartsWith(testRoot + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("Unsafe fixture path.");
-        if (Directory.Exists(fixture)) Directory.Delete(fixture, true);
+        if (Directory.Exists(fixture)) throw new InvalidOperationException("The isolated fixture must be new; existing evidence is retained.");
         Directory.CreateDirectory(Path.Combine(fixture, "Content", "basics")); Directory.CreateDirectory(Path.Combine(fixture, "Project", "TOCs"));
         File.WriteAllText(Path.Combine(fixture, HelpProject.MarkerFile), "{}");
         File.WriteAllText(Path.Combine(fixture, "Content", "contents.htm"), "<html><head><title>Contents</title></head><body><h1>Contents</h1></body></html>");

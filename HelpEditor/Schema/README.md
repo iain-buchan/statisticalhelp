@@ -38,6 +38,12 @@ spelling for new metadata. `searchable` accepts XML booleans and imported
 be nonnegative decimal numbers. Condition labels remain plain text so that new
 target conditions do not require editing the schema.
 
+On a topic's `html` root, `sdh:searchable="false"` or `sdh:searchable="0"`
+excludes that topic from reader search. Imported legacy `False` is also honoured.
+The page is still generated and retains its Contents entry and context-help
+links. Omitted, `true` and `1` values keep the page searchable. This control
+applies to whole topics; this schema does not promise subtree search exclusion.
+
 Equation, footer and dropdown content may mix text with ordinary unnamespaced
 HTML, namespaced XHTML, MathML or SVG. Those languages are not redefined here.
 Their content uses lax validation, and the XSD does not establish mathematical

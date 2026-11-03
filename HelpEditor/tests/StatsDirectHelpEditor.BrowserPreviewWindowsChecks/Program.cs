@@ -21,21 +21,21 @@ internal static class Program
     private static int Main(string[] args)
     {
         string root = Path.GetFullPath(args[0]);
-        testRoot = Path.Combine(root, "tests", "StatsDirectHelpEditor.BrowserPreviewWindowsChecks");
+        testRoot = Path.Combine(Path.GetTempPath(), "sdhe-browser-" + Guid.NewGuid().ToString("N")[..8]);
         fixture = Path.Combine(testRoot, "HelpSource");
         evidence = Path.Combine(root, "evidence");
         Directory.CreateDirectory(evidence);
         CreateFixture();
         ApplicationConfiguration.Initialize();
         Application.ThreadException += (_, e) => { uiExceptions++; Check(false, "Unhandled native UI exception: " + e.Exception); };
-        form = new MainForm(fixture, browserPreviewLauncher: uri => launched.Add(uri)) { SuppressDialogs = true, WindowState = FormWindowState.Normal, StartPosition = FormStartPosition.Manual, Location = new Point(-16000, 0), ShowInTaskbar = false, Size = new Size(1600, 1000) };
+        form = new MainForm(fixture, browserPreviewLauncher: uri => launched.Add(uri), workspaceOverride: new HelpEditorWorkspace(testRoot, fixture, null)) { SuppressDialogs = true, WindowState = FormWindowState.Normal, StartPosition = FormStartPosition.Manual, Location = new Point(-16000, 0), ShowInTaskbar = false, Size = new Size(1600, 1000) };
         form.Shown += async (_, _) =>
         {
             try { await RunChecks(); }
             catch (Exception ex) { Check(false, "Unexpected browser-preview check failure: " + ex); }
             finally
             {
-                File.WriteAllText(Path.Combine(evidence, "browser-preview-windows-checks.json"), JsonSerializer.Serialize(new { passed, failed, results }, new JsonSerializerOptions { WriteIndented = true }));
+                File.WriteAllText(Path.Combine(evidence, "browser-preview-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed, failed, results }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine($"{passed} native browser-preview checks passed; {failed} failed");
                 probeWindow?.Dispose();
                 typeof(MainForm).GetField("closingApproved", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(form, true);

@@ -121,6 +121,8 @@ public sealed class HelpPolishSnapshot
             XmlConvert.VerifyXmlChars(proposal.After); XmlConvert.VerifyXmlChars(proposal.Reason);
             if (!Numbers.Matches(proposal.Before).Select(m => m.Value).SequenceEqual(Numbers.Matches(proposal.After).Select(m => m.Value)))
                 throw new InvalidDataException("A suggestion changes numeric values. Text polishing must preserve the page's numbers.");
+            if (!NumericalComparisons(proposal.Before).SequenceEqual(NumericalComparisons(proposal.After)))
+                throw new InvalidDataException("A suggestion changes a comparison around a numeric value. Text polishing must preserve numerical comparisons.");
             if (!Addresses.Matches(proposal.Before).Select(m => m.Value).SequenceEqual(Addresses.Matches(proposal.After).Select(m => m.Value)))
                 throw new InvalidDataException("A suggestion changes a visible URL. Edit references and links explicitly instead.");
             string id = Guid.NewGuid().ToString("N");
@@ -133,6 +135,31 @@ public sealed class HelpPolishSnapshot
         var review = new HelpPolishReview(this, changes, replacements);
         _ = review.Apply(changes.Select(c => c.Id)); // Validate the complete proposed draft before showing any changes.
         return review;
+    }
+
+    private static IEnumerable<(string Before, string After)> NumericalComparisons(string text)
+    {
+        // Number preservation alone would allow P < 0.05 to become P > 0.05.
+        // Protect only symbols adjacent to each number, leaving ordinary prose
+        // and equivalent Unicode/ASCII comparison spelling free to improve.
+        foreach (Match number in Numbers.Matches(text))
+            yield return (AdjacentComparison(text, number.Index - 1, -1),
+                AdjacentComparison(text, number.Index + number.Length, 1));
+
+        static string AdjacentComparison(string value, int at, int direction)
+        {
+            while (at >= 0 && at < value.Length && char.IsWhiteSpace(value[at])) at += direction;
+            if (at < 0 || at >= value.Length) return "";
+            int pairStart = direction < 0 ? at - 1 : at;
+            if (pairStart >= 0 && pairStart + 1 < value.Length)
+            {
+                string pair = value.Substring(pairStart, 2);
+                if (pair is "<=" or ">=" or "!=") return pair;
+                if (pair == "<>") return "!=";
+                if (pair == "==") return "=";
+            }
+            return value[at] switch { '≤' => "<=", '≥' => ">=", '≠' => "!=", '<' => "<", '>' => ">", '=' => "=", _ => "" };
+        }
     }
 
     internal static string NormalizePath(string path)

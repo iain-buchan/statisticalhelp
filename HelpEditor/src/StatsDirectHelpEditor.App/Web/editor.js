@@ -63,6 +63,19 @@ function parseXml(text) {
 }
 function findBody(doc) { return Array.from(doc.documentElement.children).find(x=>x.localName.toLowerCase()==='body'); }
 function findTitle(doc) { return Array.from(doc.getElementsByTagName('*')).find(x=>x.localName.toLowerCase()==='title'); }
+function sourcePositionMapper(before,after){
+  let prefix=0,suffix=0;while(prefix<before.length&&prefix<after.length&&before[prefix]===after[prefix])prefix++;
+  while(suffix<before.length-prefix&&suffix<after.length-prefix&&before[before.length-1-suffix]===after[after.length-1-suffix])suffix++;
+  const unique=(text,offset)=>{if(!text)return null;const found=after.indexOf(text);return found>=0&&after.indexOf(text,found+1)<0?found+offset:null;};
+  return offset=>{
+    if(offset<=prefix)return offset;
+    if(offset>=before.length-suffix)return offset+after.length-before.length;
+    // Multiple accepted changes can surround the caret. Prefer an unchanged,
+    // unique text context before falling back to the nearest retained offset.
+    const left=before.slice(Math.max(0,offset-48),offset),right=before.slice(offset,offset+48);
+    return unique(left+right,left.length)??unique(right,0)??unique(left,left.length)??Math.min(offset,after.length-suffix);
+  };
+}
 function canonicalizeHelpNamespaces(doc) {
   let used=false;
   for(let node of Array.from(doc.getElementsByTagName('*'))){
@@ -414,12 +427,13 @@ function getSource() {
 function currentSnapshot() { return state.tab==='source' ? state.sourceDirty?source.value:state.baseSource : state.visualDirty ? serializeVisual() : state.baseSource; }
 function captureHistory() {
   clearTimeout(state.historyTimer);state.historyTimer=null;
-  if(!state.path||state.restoring)return;
-  let text;try{text=currentSnapshot();}catch{return;}
-  if(state.history[state.historyIndex]===text)return;
+  if(!state.path||state.restoring)return false;
+  let text;try{text=currentSnapshot();}catch{$('undo').disabled=state.historyIndex<0;$('redo').disabled=true;return false;}
+  if(state.history[state.historyIndex]===text)return true;
   state.history.splice(state.historyIndex+1);state.history.push(text);state.historyIndex=state.history.length-1;
   while(state.history.length>80 || state.history.length>2 && state.history.reduce((n,s)=>n+s.length,0)>5_000_000){state.history.shift();state.historyIndex--;}
   updateUndoButtons();
+  return true;
 }
 function scheduleHistory() { clearTimeout(state.historyTimer);state.historyTimer=setTimeout(captureHistory,220); }
 function updateUndoButtons(){ $('undo').disabled=state.historyIndex<=0;$('redo').disabled=state.historyIndex>=state.history.length-1; }
@@ -432,7 +446,14 @@ function restoreSnapshot(text) {
     setDirty(text!==state.savedSource);
   } finally{state.restoring=false;updateUndoButtons();updateToolbar();}
 }
-function undo(){captureHistory();if(state.historyIndex>0){state.historyIndex--;restoreSnapshot(state.history[state.historyIndex]);}}
+function undo(){
+  if(!captureHistory()){
+    // A damaged specialised paste has no serializable snapshot. Undo removes
+    // that paste by restoring the latest good draft, rather than skipping it.
+    if(state.historyIndex>=0)restoreSnapshot(state.history[state.historyIndex]);return;
+  }
+  if(state.historyIndex>0){state.historyIndex--;restoreSnapshot(state.history[state.historyIndex]);}
+}
 function redo(){captureHistory();if(state.historyIndex<state.history.length-1){state.historyIndex++;restoreSnapshot(state.history[state.historyIndex]);}}
 // Accepted AI suggestions are one ordinary draft edit. Keep the disk baseline
 // and the existing history so Undo restores every edit made before the review.
@@ -443,17 +464,18 @@ function applyReviewedSource(path,expectedSource,newSource){
   if(getSource()!==expectedSource)throw new Error('The page changed after this review. Review the current text again.');
   parseXml(newSource); // Refuse invalid output before touching the draft/history.
   if(newSource===expectedSource)return true;
-  const selection={start:source.selectionStart,end:source.selectionEnd,direction:source.selectionDirection,top:source.scrollTop,left:source.scrollLeft};
-  const visualPosition={top:visual.scrollTop,left:visual.scrollLeft};
+  const selection={text:source.value,start:source.selectionStart,end:source.selectionEnd,direction:source.selectionDirection,top:source.scrollTop,left:source.scrollLeft};
+  const visualPanel=$('visual-panel'),visualPosition={top:visualPanel.scrollTop,left:visualPanel.scrollLeft},visualSelection=reviewSelectionBookmark();
   captureHistory();
   restoreSnapshot(newSource);
   captureHistory();
   if(state.tab==='source'){
-    const end=source.value.length;
-    source.setSelectionRange(Math.min(selection.start,end),Math.min(selection.end,end),selection.direction);
+    const position=sourcePositionMapper(selection.text,source.value);
+    source.setSelectionRange(position(selection.start),position(selection.end),selection.direction);
     source.scrollTop=selection.top;source.scrollLeft=selection.left;
   }
-  visual.scrollTop=visualPosition.top;visual.scrollLeft=visualPosition.left;
+  if(state.tab==='visual')restoreReviewSelection(visualSelection);
+  visualPanel.scrollTop=visualPosition.top;visualPanel.scrollLeft=visualPosition.left;
   const title=findTitle(state.xml)?.textContent.trim();if(title){state.title=title;$('page-title').textContent=title;}
   return true;
 }
@@ -583,15 +605,39 @@ function markSaved(authoritativeSource){
   }
   if(source.value!==text){
     const old=source.value,selection={start:source.selectionStart,end:source.selectionEnd,direction:source.selectionDirection,top:source.scrollTop,left:source.scrollLeft};
-    let prefix=0,suffix=0;while(prefix<old.length&&prefix<text.length&&old[prefix]===text[prefix])prefix++;
-    while(suffix<old.length-prefix&&suffix<text.length-prefix&&old[old.length-1-suffix]===text[text.length-1-suffix])suffix++;
-    const position=offset=>offset<=prefix?offset:offset>=old.length-suffix?offset+text.length-old.length:Math.min(offset,text.length-suffix);
+    const position=sourcePositionMapper(old,text);
     source.value=text;source.setSelectionRange(position(selection.start),position(selection.end),selection.direction);source.scrollTop=selection.top;source.scrollLeft=selection.left;
   }
   state.savedSource=text;state.baseSource=text;state.xml=xml;state.visualDirty=false;state.sourceDirty=false;setDirty(false);captureHistory();
   const title=findTitle(state.xml)?.textContent.trim();if(title){state.title=title;$('page-title').textContent=title;}
 }
 function rememberSelection(){const s=getSelection();if(s.rangeCount&&visual.contains(s.anchorNode)&&visual.contains(s.focusNode)){state.range=s.getRangeAt(0).cloneRange();updateToolbar();}}
+function reviewSelectionBookmark(){
+  const selection=getSelection();
+  if(!selection.rangeCount||!visual.contains(selection.anchorNode)||!visual.contains(selection.focusNode))return null;
+  const point=(node,offset)=>{
+    const parent=node.nodeType===Node.ELEMENT_NODE?node:node.parentElement,block=parent.closest('p,h1,h2,h3,h4,h5,h6,li,td,th,pre,div')||visual;
+    const path=[];for(let part=block;part!==visual;part=part.parentNode)path.unshift(Array.prototype.indexOf.call(part.parentNode.childNodes,part));
+    const range=document.createRange();range.selectNodeContents(block);range.setEnd(node,offset);
+    return{id:block===visual?null:block.id,path,tag:block.localName,text:block.textContent,offset:range.toString().length};
+  };
+  return{anchor:point(selection.anchorNode,selection.anchorOffset),focus:point(selection.focusNode,selection.focusOffset)};
+}
+function restoreReviewSelection(bookmark){
+  if(!bookmark)return;
+  const point=saved=>{
+    let block=saved.id?Array.from(visual.querySelectorAll('[id]')).find(element=>element.id===saved.id):null;
+    if(!block){block=visual;for(const index of saved.path){block=block?.childNodes[index];if(!block)break;}}
+    if(!block||block.localName!==saved.tag||block.textContent!==saved.text&&!saved.id){
+      const matches=Array.from(visual.getElementsByTagName(saved.tag)).filter(element=>element.textContent===saved.text);if(matches.length===1)block=matches[0];
+    }
+    if(!block||!visual.contains(block))block=visual;
+    const walker=document.createTreeWalker(block,NodeFilter.SHOW_TEXT);let remaining=sourcePositionMapper(saved.text,block.textContent)(saved.offset),last=null;
+    for(let node;(node=walker.nextNode());){last=node;if(remaining<=node.nodeValue.length)return{node,offset:remaining};remaining-=node.nodeValue.length;}
+    return last?{node:last,offset:last.nodeValue.length}:{node:block,offset:0};
+  };
+  const anchor=point(bookmark.anchor),focus=point(bookmark.focus);visual.focus();getSelection().setBaseAndExtent(anchor.node,anchor.offset,focus.node,focus.offset);rememberSelection();
+}
 function restoreSelection(range=state.range){visual.focus();const selection=getSelection();selection.removeAllRanges();if(range?.startContainer.isConnected&&visual.contains(range.startContainer))selection.addRange(range);else{const r=document.createRange();r.selectNodeContents(visual);r.collapse(false);selection.addRange(r);}}
 function visualChanged(){applyPendingFontSize();normalizeProtectedCopies();state.visualDirty=true;setDirty(true);showError();scheduleHistory();}
 function selectEquation(element){normalizeProtectedCopies();for(const other of visual.querySelectorAll('.equation-widget.selected'))other.classList.remove('selected');state.selectedEquation=element?.dataset.protectedId||null;if(element)element.classList.add('selected');$('edit-equation').disabled=!state.selectedEquation;}
@@ -671,6 +717,12 @@ function focusWidgetSource(id){
   if(selected){source.focus();source.setSelectionRange(selected.start,selected.end);const line=source.value.slice(0,selected.start).split('\n').length;source.scrollTop=Math.max(0,(line-3)*parseFloat(getComputedStyle(source).lineHeight));}
 }
 function format(command,value){if(!state.path||modalState().dialogOpen)return;captureHistory();restoreSelection();if(command==='removeFormat')state.pendingFontSize=null;document.execCommand('styleWithCSS',false,true);document.execCommand(command,false,value);rememberSelection();visualChanged();captureHistory();updateToolbar();}
+function insertImage(src){
+  if(!state.path||modalState().dialogOpen)return;captureHistory();restoreSelection();
+  const selection=getSelection(),range=selection.getRangeAt(0),image=document.createElement('img');image.src=imageSource(src);image.dataset.originalSrc=src;
+  range.deleteContents();range.insertNode(image);range.setStartAfter(image);range.collapse(true);selection.removeAllRanges();selection.addRange(range);
+  rememberSelection();visualChanged();captureHistory();updateToolbar();
+}
 function updateToolbar(){
   if(!state.path||state.tab!=='visual')return;
   for(const button of document.querySelectorAll('[data-command][aria-pressed]'))try{button.setAttribute('aria-pressed',String(document.queryCommandState(button.dataset.command)));}catch{}
@@ -762,7 +814,7 @@ document.addEventListener('pointerdown',e=>{if(!e.target.closest('#link-context-
 window.addEventListener('resize',hideLinkContext);$('visual-panel').addEventListener('scroll',hideLinkContext);
 $('link-context-menu').addEventListener('keydown',e=>{const items=Array.from($('link-context-menu').querySelectorAll('button'));if(e.key==='Escape'){e.preventDefault();hideLinkContext();visual.focus();}else if(['ArrowDown','ArrowUp'].includes(e.key)){e.preventDefault();const i=items.indexOf(document.activeElement);items[(i+(e.key==='ArrowDown'?1:-1)+items.length)%items.length].focus();}});
 $('insert-image').addEventListener('mousedown',e=>e.preventDefault());
-$('insert-image').addEventListener('click',()=>{const src=prompt('Image path relative to this page:','../resources/Images/');if(src===null)return;if(!validUrl(src,true)){showError('Enter a relative image path or an https image URL.');return;}format('insertImage',src);});
+$('insert-image').addEventListener('click',()=>{const src=prompt('Image path relative to this page:','../resources/Images/');if(src===null)return;if(!src.trim()||!validUrl(src,true)){showError('Enter a relative image path or an https image URL.');return;}insertImage(src);});
 $('insert-equation').addEventListener('mousedown',e=>e.preventDefault());$('insert-equation').addEventListener('click',()=>openEquation());
 $('edit-equation').addEventListener('click',()=>openEquation(state.selectedEquation));
 $('equation-cancel').addEventListener('click',closeEquationDialog);$('equation-apply').addEventListener('click',applyEquation);

@@ -88,6 +88,32 @@ Case("Statistical content protection", () =>
     Reject(() => Change(urls, urls.Blocks.Single().Text, "Read https://elsewhere.invalid/article for guidance."), "Visible reference URLs cannot be changed by prose polishing");
 });
 
+Case("Numerical comparison protection", () =>
+{
+    string before = "Use P < 0.05 to describe evidence.";
+    foreach (string encoded in new[] { "&lt;", "&#60;", "&#x3c;" })
+    {
+        var snapshot = HelpPolishSnapshot.Create("a.htm", Page("<p>" + before.Replace("<", encoded) + "</p>"));
+        foreach (string changed in new[] { ">", "<=", "!=" })
+            Reject(() => Change(snapshot, before, before.Replace("<", changed)), "Polishing rejects changed P-value comparison " + encoded + " to " + changed);
+        Check(Change(snapshot, before, "Report P < 0.05 to describe evidence.").Changes.Count == 1, "Prose-only editing retains the decoded comparison from " + encoded);
+    }
+    foreach (var (original, equivalent) in new[] { ("≤", "<="), ("≥", ">="), ("≠", "!=") })
+    {
+        string text = "Use P " + original + " 0.05 to describe evidence.";
+        var snapshot = HelpPolishSnapshot.Create("a.htm", Page("<p>" + System.Security.SecurityElement.Escape(text) + "</p>"));
+        Check(Change(snapshot, text, "Report P " + equivalent + " 0.05 to describe evidence.").Changes.Count == 1, "Equivalent Unicode/ASCII numerical comparison remains reviewable: " + original);
+    }
+    var left = HelpPolishSnapshot.Create("a.htm", Page("<p>Use 0.05 &lt; P to describe evidence.</p>"));
+    Reject(() => Change(left, "Use 0.05 < P to describe evidence.", "Use 0.05 > P to describe evidence."), "A numeric value on the left of a comparison is protected too");
+    string longText = "Use thresholds " + string.Join("; ", Enumerable.Repeat("P < 0.05", 5_000)) + ".";
+    var longSnapshot = HelpPolishSnapshot.Create("a.htm", Page("<p>" + System.Security.SecurityElement.Escape(longText) + "</p>"));
+    long allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+    var longReview = Change(longSnapshot, longText, "Report thresholds " + longText[15..]);
+    long allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+    Check(longReview.Changes.Count == 1 && allocated < 100_000_000, "Long numerical prose remains reviewable without repeatedly copying the whole paragraph", new { numbers = 5_000, allocatedBytes = allocated });
+});
+
 Case("Invalid model output and identity", () =>
 {
     var snapshot = HelpPolishSnapshot.Create("a.htm", Page("<p>Original wording.</p>")); var block = snapshot.Blocks.Single();

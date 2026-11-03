@@ -158,7 +158,11 @@ public static class HelpBuilder
                     mathHead + "</head><body class=\"help-math-ignore\"><nav class=\"help-topic-nav\"><a href=\"" + home + "\" target=\"_top\">Contents and search</a></nav>" + topicBody + "</body></html>";
             }
             Write(outputPath, html);
-            searchDocuments.Add(new SearchDocument(searchDocuments.Count, outputPath, topic.Title, keywordText, text));
+            // A topic excluded from search still belongs in the built site,
+            // Contents and application context-help map.
+            bool searchable = !HelpSourceNamespaces.Attributes(document.Root!, "searchable").Any(attribute =>
+                attribute.Value.Trim() == "0" || attribute.Value.Trim().Equals("false", StringComparison.OrdinalIgnoreCase));
+            if (searchable) searchDocuments.Add(new SearchDocument(searchDocuments.Count, outputPath, topic.Title, keywordText, text));
         }
 
         var toc = project.LoadContents();

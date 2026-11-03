@@ -716,7 +716,7 @@ public sealed partial class MainForm : Form
             await OpenTopicAsync(reference);
             return this;
         }
-        var opened = new MainForm(CurrentProject.RootPath, externalLinkLauncher, reference, browserPreviewLauncher)
+        var opened = new MainForm(CurrentProject.RootPath, externalLinkLauncher, reference, browserPreviewLauncher, workspaceOverride: workspace)
         {
             SuppressDialogs = SuppressDialogs,
             StartPosition = FormStartPosition.Manual,

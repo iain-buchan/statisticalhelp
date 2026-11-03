@@ -199,7 +199,7 @@ internal static class Program
 
     private static async Task RunMainFormIntegration()
     {
-        string testRoot = Path.Combine(root, "tests", "StatsDirectHelpEditor.SearchReplaceWindowsChecks");
+        string testRoot = Path.Combine(Path.GetTempPath(), "sdhe-search-" + Guid.NewGuid().ToString("N")[..8]);
         string sourceRoot = Path.Combine(testRoot, "HelpSource");
         foreach (string file in Directory.GetFiles(fixture, "*", SearchOption.AllDirectories))
         {
@@ -208,7 +208,7 @@ internal static class Program
             File.Copy(file, destination, overwrite: true);
         }
         var sourceBytes = Directory.GetFiles(sourceRoot, "*", SearchOption.AllDirectories).ToDictionary(path => path, File.ReadAllBytes);
-        using var main = new MainForm(sourceRoot, _ => throw new InvalidOperationException("Unexpected external launch in integration fixture"))
+        using var main = new MainForm(sourceRoot, _ => throw new InvalidOperationException("Unexpected external launch in integration fixture"), workspaceOverride: new HelpEditorWorkspace(testRoot, sourceRoot, null))
         { SuppressDialogs = true, WindowState = FormWindowState.Normal, StartPosition = FormStartPosition.Manual, Location = new Point(-16000, 0), ShowInTaskbar = false, Size = new Size(1600, 1000) };
         main.Show();
         try

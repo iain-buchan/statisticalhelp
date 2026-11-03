@@ -37,6 +37,10 @@ RefusesSync(() => PolishChatGptClient.ParseReview(snapshot, "```json\n{}\n```"),
 RefusesSync(() => PolishChatGptClient.ParseReview(snapshot, Response("stale", "Clearer")), "stale before text rejected without source writes");
 RefusesSync(() => PolishChatGptClient.ParseReview(snapshot, Response(block.Text, block.Text)), "unchanged block rejected");
 RefusesSync(() => PolishChatGptClient.ParseReview(snapshot, "{\"changes\":[],\"shell\":\"run\"}"), "extra output properties rejected");
+var numericSnapshot = HelpPolishSnapshot.Create("example.htm", "<html><body><p>Report P &lt; 0.05 as specified.</p></body></html>");
+var numericBlock = numericSnapshot.Blocks.Single();
+string reversedComparison = JsonSerializer.Serialize(new { changes = new[] { new { blockId = numericBlock.Id, before = numericBlock.Text, after = numericBlock.Text.Replace("<", ">"), reason = "Clearer wording" } } });
+RefusesSync(() => PolishChatGptClient.ParseReview(numericSnapshot, reversedComparison), "structured AI output cannot reverse a numerical comparison before tracked review");
 Check(PolishChatGptClient.IsLoginUrl("https://auth.openai.com/authorize?code=x"), "official HTTPS auth URL accepted");
 foreach (string invalid in new[] { "http://auth.openai.com/", "https://auth.openai.com.evil.test/", "https://user@auth.openai.com/", "https://auth.openai.com:123/", "file:///C:/auth" })
     Check(!PolishChatGptClient.IsLoginUrl(invalid), "untrusted login URL rejected: " + invalid);

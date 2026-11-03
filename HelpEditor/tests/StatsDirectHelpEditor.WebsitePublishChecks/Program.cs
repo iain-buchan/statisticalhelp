@@ -255,7 +255,7 @@ if (args.Contains("--full-source"))
         var sourceBefore = new[] { "Content", "Project", "RCode" }.Where(folder => Directory.Exists(Path.Combine(copy, folder))).ToDictionary(folder => folder, folder => Digests(Path.Combine(copy, folder)));
         var prepared = await service.PrepareWebsiteAsync(assets);
         string docs = Path.Combine(copy, "Docs");
-        Check(prepared.TopicCount == 404 && prepared.SearchDocumentCount == 404, "Complete copied help publishes all 404 topics and search documents");
+        Check(prepared.TopicCount == 404 && prepared.SearchDocumentCount == 403, "Complete copied help publishes 404 topics and 403 searchable pages");
         Check(prepared.Warnings.Count == 0, "Complete copied help publication builds without warnings");
         Check(sourceBefore.All(pair => SameDigests(pair.Value, Path.Combine(copy, pair.Key))), "Preparing the complete website preserves every copied source file byte");
         using var receipt = JsonDocument.Parse(File.ReadAllText(Path.Combine(docs, ".statsdirect-help-website.json")));

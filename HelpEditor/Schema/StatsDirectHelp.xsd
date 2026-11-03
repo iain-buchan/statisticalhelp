@@ -32,7 +32,7 @@
     <xs:annotation><xs:documentation>Authoring condition tags, interpreted by the selected output target. Existing Primary.SWHELP and Primary.WEBHELP labels remain usable.</xs:documentation></xs:annotation>
   </xs:attribute>
   <xs:attribute name="searchable" type="sdh:BooleanWithLegacyCase">
-    <xs:annotation><xs:documentation>Whether this authored content participates in search.</xs:documentation></xs:annotation>
+    <xs:annotation><xs:documentation>On a topic's html root, false/False/0 excludes the topic from reader search while preserving its output, Contents entry and context help. Omitted or true/True/1 keeps it searchable. Other imported placements are retained as metadata; subtree search exclusion is not defined.</xs:documentation></xs:annotation>
   </xs:attribute>
   <xs:attribute name="ignoredWords" type="xs:string">
     <xs:annotation><xs:documentation>Imported authoring/spelling metadata; not reader-facing content.</xs:documentation></xs:annotation>

@@ -17,12 +17,12 @@ internal static class Program
     {
         root = System.IO.Path.GetFullPath(args[0]);
         evidence = System.IO.Path.Combine(root, "evidence");
-        string testRoot = System.IO.Path.Combine(root, "tests", "StatsDirectHelpEditor.PolishWindowsChecks");
+        string testRoot = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "sdhe-polish-" + Guid.NewGuid().ToString("N")[..8]);
         fixture = System.IO.Path.Combine(testRoot, "HelpSource");
         CreateFixture();
         ApplicationConfiguration.Initialize();
         Application.ThreadException += (_, e) => { unhandled++; Check(false, "Unhandled UI exception", e.Exception.ToString()); };
-        using var main = new MainForm(fixture, _ => throw new InvalidOperationException("Unexpected external launch"))
+        using var main = new MainForm(fixture, _ => throw new InvalidOperationException("Unexpected external launch"), workspaceOverride: new HelpEditorWorkspace(testRoot, fixture, null))
         { SuppressDialogs = true, WindowState = FormWindowState.Normal, StartPosition = FormStartPosition.Manual, Location = new Point(-16000, 0), ShowInTaskbar = false, Size = new Size(1600, 1000) };
         form = main;
         form.Shown += async (_, _) =>
@@ -34,6 +34,7 @@ internal static class Program
                 await CheckDraftApplication();
                 await CheckNativeReview();
                 await CheckRequestLifecycle();
+                await CheckProtectedComparisonProposal();
             }
             catch (Exception e) { Check(false, "Unexpected polish integration failure", e.ToString()); }
             finally
@@ -41,7 +42,7 @@ internal static class Program
                 Check(unhandled == 0, "No unhandled UI errors");
                 Check(form.CurrentProject.ReadTopic(PathName) == Saved, "No check saves or rewrites the help fixture");
                 Directory.CreateDirectory(evidence);
-                File.WriteAllText(System.IO.Path.Combine(evidence, "polish-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, passed, failed, results }, new JsonSerializerOptions { WriteIndented = true }));
+                File.WriteAllText(System.IO.Path.Combine(evidence, "polish-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed, failed, results }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine($"{passed} native polish checks passed; {failed} failed");
                 typeof(MainForm).GetField("closingApproved", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(form, true);
                 form.Close();
@@ -233,6 +234,34 @@ internal static class Program
         pending.SetResult(lateReview);
         await Until(() => dialog.IsDisposed);
         Check(await Source() == before, "Stop and close suppresses late suggestions and preserves the current draft");
+    }
+
+    private static async Task CheckProtectedComparisonProposal()
+    {
+        string before = await Source();
+        string draft = before.Replace("</body>", "<p>Evidence: P &lt; 0.05.</p></body>");
+        await SetSource(draft);
+        int history = await Int("HelpEditor.getState().historyIndex");
+        var snapshot = HelpPolishSnapshot.Create(PathName, draft);
+        var block = snapshot.Blocks.Single(item => item.Text == "Evidence: P < 0.05.");
+        var context = HelpPolishContext.Create(form.CurrentProject, snapshot);
+        using var client = new FakeClient
+        {
+            ReviewRequest = (_, _, _, _) => Task.FromResult(snapshot.Review([
+                new(block.Id, block.Text, "Evidence: P > 0.05.", "Owned invalid statistical proposal.")]))
+        };
+        using var dialog = new PolishReviewDialog(snapshot, context, client, _ => throw new InvalidOperationException("Unexpected browser")) { SuppressDialogs = true };
+        dialog.Show(form); dialog.Location = new Point(-16000, 0);
+        await Until(() => Button(dialog, "Suggest changes").Enabled);
+        Button(dialog, "Suggest changes").PerformClick();
+        await Until(() => !Button(dialog, "Stop").Enabled);
+        Check(dialog.LastError?.Contains("comparison", StringComparison.OrdinalIgnoreCase) == true && dialog.Review == null && !Button(dialog, "Apply accepted changes").Enabled,
+            "A mocked AI proposal reversing a P-value comparison is rejected inline without exposing Apply");
+        Check(await Source() == draft && form.CurrentProject.ReadTopic(PathName) == Saved && Field<string?>("loadedDiskSource") == Saved && await Int("HelpEditor.getState().historyIndex") == history,
+            "Rejecting a changed numerical comparison preserves the exact draft, saved page, conflict baseline and Undo history");
+        Button(dialog, "Close").PerformClick();
+        await Js("HelpEditor.undo()");
+        Check(await Source() == before, "The invalid comparison proposal leaves one ordinary Undo for the author's own draft edit");
     }
 
     private static string CallApply(string path, string before, string after) => "HelpEditor.applyReviewedSource(" + JsonSerializer.Serialize(path) + "," + JsonSerializer.Serialize(before) + "," + JsonSerializer.Serialize(after) + ")";

@@ -16,11 +16,11 @@ internal static class Program
     [STAThread]
     private static int Main(string[] args)
     {
-        root = Path.GetFullPath(args[0]); testRoot = Path.Combine(root, "tests", "StatsDirectHelpEditor.PreviewCacheWindowsChecks");
+        root = Path.GetFullPath(args[0]); testRoot = Path.Combine(Path.GetTempPath(), "sdhe-cache-" + Guid.NewGuid().ToString("N")[..8]);
         fixture = Path.Combine(testRoot, "HelpSource"); CreateFixture();
         ApplicationConfiguration.Initialize();
         Application.ThreadException += (_, e) => Check(false, "Unhandled native exception", e.Exception.ToString());
-        form = new MainForm(fixture, _ => throw new InvalidOperationException("Unexpected external URL"), initialTopic: "basics/alpha.htm")
+        form = new MainForm(fixture, _ => throw new InvalidOperationException("Unexpected external URL"), initialTopic: "basics/alpha.htm", workspaceOverride: new HelpEditorWorkspace(testRoot, fixture, null))
         { SuppressDialogs = true, WindowState = FormWindowState.Normal, ShowInTaskbar = false, StartPosition = FormStartPosition.Manual, Location = new(-16000, 0), Size = new(1500, 900) };
         form.Shown += async (_, _) =>
         {
@@ -29,7 +29,7 @@ internal static class Program
             finally
             {
                 Directory.CreateDirectory(Path.Combine(root, "evidence"));
-                File.WriteAllText(Path.Combine(root, "evidence", "preview-cache-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, checks }, new JsonSerializerOptions { WriteIndented = true }));
+                File.WriteAllText(Path.Combine(root, "evidence", "preview-cache-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, checks }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine($"{passed} preview cache checks passed; {failed} failed");
                 typeof(MainForm).GetField("closingApproved", BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(form, true); form.Close();
             }
@@ -90,9 +90,9 @@ internal static class Program
         string newPage = Path.Combine(fixture, "Content", "unlisted.htm"); File.WriteAllText(newPage, Page("Unlisted", "<p>NEW_PAGE_CONTEXT</p>"));
         int beforeAdd = form.OutputPreviewBuildCount; await form.SwitchWorkspaceAsync("public");
         Check(form.OutputPreviewBuildCount == beforeAdd + 1 && form.LastOutputPreviewResult!.TopicCount == 4 && Output("unlisted.htm").Contains("NEW_PAGE_CONTEXT"), "Adding an unlisted page updates the whole generated site and search");
-        File.Delete(newPage); await form.SwitchWorkspaceAsync("public");
+        File.Move(newPage, Path.Combine(testRoot, "unlisted-removed-page.probe")); await form.SwitchWorkspaceAsync("public");
         Check(form.LastOutputPreviewResult!.TopicCount == 3 && !File.Exists(Path.Combine(form.LastOutputPreviewResult.OutputDirectory, "unlisted.htm")), "Deleting a page invalidates the preview and removes obsolete generated output");
-        int beforeMissing = form.OutputPreviewBuildCount; File.Delete(Path.Combine(form.LastOutputPreviewResult.OutputDirectory, "search-index.js")); await form.SwitchWorkspaceAsync("public");
+        int beforeMissing = form.OutputPreviewBuildCount; File.Move(Path.Combine(form.LastOutputPreviewResult.OutputDirectory, "search-index.js"), Path.Combine(testRoot, "search-index-missing.probe")); await form.SwitchWorkspaceAsync("public");
         Check(form.OutputPreviewBuildCount == beforeMissing + 1 && File.Exists(Path.Combine(form.LastOutputPreviewResult!.OutputDirectory, "search-index.js")), "A missing generated search index triggers a rebuild instead of a broken cached site");
         string betaPath = Path.Combine(fixture, "Content", "basics", "beta.htm"); string betaBeforeFailure = File.ReadAllText(betaPath);
         File.WriteAllText(betaPath, "<html><body>broken external page"); bool buildFailed = false;
@@ -142,7 +142,7 @@ internal static class Program
     {
         string expected = Path.GetFullPath(Path.Combine(testRoot, "HelpSource"));
         if (!fixture.Equals(expected, StringComparison.OrdinalIgnoreCase) || !fixture.StartsWith(testRoot + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("Unsafe fixture path.");
-        if (Directory.Exists(fixture)) Directory.Delete(fixture, true);
+        if (Directory.Exists(fixture)) throw new InvalidOperationException("The isolated fixture must be new; existing evidence is retained.");
         Directory.CreateDirectory(Path.Combine(fixture, "Content", "basics")); Directory.CreateDirectory(Path.Combine(fixture, "Content", "resources", "stylesheets")); Directory.CreateDirectory(Path.Combine(fixture, "Project", "TOCs"));
         File.WriteAllText(Path.Combine(fixture, HelpProject.MarkerFile), "{\"purpose\":\"isolated preview-cache checks\"}");
         File.WriteAllText(Path.Combine(fixture, "Content", "contents.htm"), Page("Contents", "<h1>Fixture contents</h1>"));

@@ -19,7 +19,7 @@ internal static class Program
     [STAThread] static int Main(string[] args)
     {
         root=Path.GetFullPath(args[0]);
-        string testRoot=Path.Combine(root,"tests","StatsDirectHelpEditor.SourceImageWindowsChecks");fixture=Path.Combine(testRoot,"HelpSource");
+        string testRoot=Path.Combine(Path.GetTempPath(),"sdhe-images-"+Guid.NewGuid().ToString("N")[..8]);fixture=Path.Combine(testRoot,"HelpSource");
         Directory.CreateDirectory(Path.Combine(fixture,"Content","distributions"));Directory.CreateDirectory(Path.Combine(fixture,"Content","resources","Images"));Directory.CreateDirectory(Path.Combine(fixture,"Project","TOCs"));
         File.WriteAllText(Path.Combine(fixture,HelpProject.MarkerFile),"{}");
         File.WriteAllText(Path.Combine(fixture,"Content","contents.htm"),"<html><head><title>Contents</title></head><body><h1>Contents</h1></body></html>");
@@ -27,13 +27,13 @@ internal static class Program
         foreach(string name in new[]{"normalcurves.png","normalhistogram.png","normalhistogram.svg"})File.Copy(Path.Combine(root,"HelpSource","Content","resources","Images",name),Path.Combine(fixture,"Content","resources","Images",name),true);
         File.WriteAllText(Path.Combine(fixture,"Project","TOCs","STATSDIRECT.fltoc"),"<CatapultToc><TocEntry Title='Contents' Link='/Content/contents.htm'/><TocEntry Title='Normal' Link='/Content/distributions/normal.htm'/></CatapultToc>");
         ApplicationConfiguration.Initialize();
-        form=new MainForm(fixture){SuppressDialogs=true,WindowState=FormWindowState.Normal,ShowInTaskbar=false,StartPosition=FormStartPosition.Manual,Location=new(-16000,0),Size=new(1600,1000)};
+        form=new MainForm(fixture,workspaceOverride:new HelpEditorWorkspace(testRoot,fixture,null)){SuppressDialogs=true,WindowState=FormWindowState.Normal,ShowInTaskbar=false,StartPosition=FormStartPosition.Manual,Location=new(-16000,0),Size=new(1600,1000)};
         Application.ThreadException+=(_,e)=>Check(false,"Unhandled image-check UI exception",e.Exception.ToString());
         form.Shown+=async(_,_)=>
         {
             try{await Run();}catch(Exception ex){Check(false,"Source-image checks completed",ex.ToString());}
             finally{
-                Directory.CreateDirectory(Path.Combine(root,"evidence"));File.WriteAllText(Path.Combine(root,"evidence","source-image-windows-checks.json"),JsonSerializer.Serialize(new{checkedAtUtc=DateTimeOffset.UtcNow,passed,failed,checks,responses,networkFailures,observations},new JsonSerializerOptions{WriteIndented=true}));
+                Directory.CreateDirectory(Path.Combine(root,"evidence"));File.WriteAllText(Path.Combine(root,"evidence","source-image-windows-checks.json"),JsonSerializer.Serialize(new{checkedAtUtc=DateTimeOffset.UtcNow,fixture,passed,failed,checks,responses,networkFailures,observations},new JsonSerializerOptions{WriteIndented=true}));
                 Console.WriteLine($"{passed} image checks passed; {failed} failed");
                 typeof(MainForm).GetField("closingApproved",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(form,true);form.Close();
             }

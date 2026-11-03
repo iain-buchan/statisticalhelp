@@ -171,6 +171,21 @@ internal static class RecoveryChecks
             Reject(() => links.DeleteTopic("basics/parent.htm"), "Application context IDs continue to prevent deletion");
             Check(links.ListDeletedTopics().Count == 0, "Blocked references do not create deleted-page records");
 
+            foreach (string extension in new[] { ".flmsp", ".flsnp" })
+            {
+                var shared = Fixture("SharedContent" + extension[1..]);
+                string relative = "resources/masterpages/shared" + extension;
+                string sharedPath = Path.Combine(shared.RootPath, "Content", relative);
+                Directory.CreateDirectory(Path.GetDirectoryName(sharedPath)!);
+                File.WriteAllText(sharedPath, "<html xmlns:sdh='" + HelpSourceNamespaces.CurrentUri + "'><body><sdh:pageFooter><p><a href='../../basics/parent.htm#anchor'>Parent guidance</a></p></sdh:pageFooter></body></html>");
+                byte[] sharedPage = File.ReadAllBytes(Page(shared, "parent")), sharedToc = File.ReadAllBytes(Toc(shared));
+                Check(shared.FindReferences("basics/parent.htm").Contains(relative), "Reference inspection includes shared authored content: " + extension);
+                Reject(() => shared.DeleteTopic("basics/parent.htm"), "A shared footer/snippet link prevents deletion: " + extension);
+                Check(File.Exists(Page(shared, "parent")) && File.ReadAllBytes(Page(shared, "parent")).AsSpan().SequenceEqual(sharedPage)
+                    && File.ReadAllBytes(Toc(shared)).AsSpan().SequenceEqual(sharedToc) && shared.ListDeletedTopics().Count == 0,
+                    "Blocked shared-content reference preserves page, navigation and recovery state: " + extension);
+            }
+
             var lifecycle = Fixture("BuildLifecycle");
             string output = Path.Combine(runRoot, "Build", "Lifecycle"), runtime = Path.Combine(root, "src", "StatsDirectHelpEditor.App", "Web");
             lifecycle.DeleteTopic("basics/parent.htm");
