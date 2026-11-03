@@ -110,7 +110,7 @@ Copy-VendorNotice ('microsoft.web.webview2\' + $webViewVersion + '\LICENSE.txt')
 Copy-VendorNotice ('microsoft.web.webview2\' + $webViewVersion + '\NOTICE.txt') 'WebView2-SDK\NOTICE.txt'
 Write-Json ([ordered]@{schemaVersion=1; version=$Version}) (Join-Path $payload '.statsdirect-help-editor-install.json')
 $inventory = @()
-foreach ($folder in @('src', 'installer')) {
+foreach ($folder in @('src', 'installer', 'Schema')) {
     foreach ($file in Get-ChildItem -LiteralPath (Join-Path $root $folder) -File -Recurse) {
         $relative = $file.FullName.Substring($root.TrimEnd('\').Length + 1).Replace('\', '/')
         if ($relative -match '(^|/)(bin|obj)(/|$)') { continue }

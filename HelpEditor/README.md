@@ -10,7 +10,7 @@ The application is a prototype for evaluation. Its default window opens maximize
 
 Version 0.1.1 adds the turquoise StatsDirect delta with a book-and-pencil badge to the executable, window/taskbar, installed-app entry and setup. The installer creates both Start-menu and desktop shortcuts. The icon includes ten sizes from 16 to 256 pixels for different display scaling settings.
 
-The next development version, 0.1.2, uses the independent [StatsDirect help schema](Schema/StatsDirectHelp.xsd) for authoring extensions, with the `sdh` prefix. Existing Flare source can still be imported and edited. Equations, conditional text, R dropdowns and the generated help retain their appearance; the builder resolves everything locally and never downloads a schema to build help. See [the schema documentation](Schema/README.md). The signed 0.1.1 downloads remain unchanged.
+Version 0.1.2 uses the independent [StatsDirect help schema](Schema/StatsDirectHelp.xsd) for authoring extensions, with the `sdh` prefix. Existing Flare source can still be imported and edited. Equations, conditional text, R dropdowns and the generated help retain their appearance; the builder resolves everything locally and never downloads a schema to build help. See [the schema documentation](Schema/README.md).
 
 ## Windows installer and public source
 
