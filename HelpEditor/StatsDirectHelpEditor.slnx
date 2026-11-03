@@ -30,6 +30,8 @@
     <Project Path="tests/StatsDirectHelpEditor.SourceImageWindowsChecks/StatsDirectHelpEditor.SourceImageWindowsChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.WindowsChecks/StatsDirectHelpEditor.WindowsChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.WebsitePublishChecks/StatsDirectHelpEditor.WebsitePublishChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.WebsiteZipChecks/StatsDirectHelpEditor.WebsiteZipChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.WebsiteExportWindowsChecks/StatsDirectHelpEditor.WebsiteExportWindowsChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.WorkspaceWindowsChecks/StatsDirectHelpEditor.WorkspaceWindowsChecks.csproj" />
   </Folder>
 </Solution>

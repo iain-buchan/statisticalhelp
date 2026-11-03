@@ -2,7 +2,7 @@ using System.Text.Json;
 using StatsDirect.HelpEditor.Core;
 
 bool help = args.Length == 0 || args.Length == 1 && (args[0] is "--help" or "-h")
-    || args.Length == 2 && (args[0] is "build" or "list" or "prepare-workspace") && (args[1] is "--help" or "-h");
+    || args.Length == 2 && (args[0] is "build" or "list" or "prepare-workspace" or "export-website") && (args[1] is "--help" or "-h");
 if (help)
 {
     Console.WriteLine("""
@@ -13,6 +13,9 @@ if (help)
             [--assets <App/Web>] [--target DesktopHelp|Website|GitHub]
         List:
           StatsDirectHelpBuilder list --project <working-copy>
+        Export a freshly rebuilt Website as a flat ZIP:
+          StatsDirectHelpBuilder export-website --project <working-copy> --zip <website.zip>
+            [--assets <App/Web>]
         Installed first-run working copy:
           StatsDirectHelpBuilder prepare-workspace
 
@@ -22,7 +25,8 @@ if (help)
         Framework-dependent builds need the .NET 10 runtime; the installer includes it.
         Building help does not require the .NET SDK.
         Builds use saved source in a marked working copy. They do not open a GUI,
-        invoke Flare, publish, zip output, or change source files.
+        invoke Flare, publish, or change source files.
+        export-website uses saved source and atomically replaces its ZIP only after success.
         prepare-workspace creates an installed user's first copy only; existing work is preserved.
         Successful results are JSON on stdout; errors go to stderr with exit code 1.
         """);
@@ -39,8 +43,8 @@ try
         Console.WriteLine(JsonSerializer.Serialize(new { WorkspaceRoot = workspace.RootPath, ProjectPath = workspace.DefaultProjectPath }));
         return 0;
     }
-    if (command is not ("build" or "list")) throw new ArgumentException("Unknown command. Use --help.");
-    var allowed = command == "build" ? new[] { "--project", "--output", "--assets", "--target" } : ["--project"];
+    if (command is not ("build" or "list" or "export-website")) throw new ArgumentException("Unknown command. Use --help.");
+    var allowed = command switch { "build" => new[] { "--project", "--output", "--assets", "--target" }, "export-website" => ["--project", "--zip", "--assets"], _ => ["--project"] };
     var options = new Dictionary<string, string>(StringComparer.Ordinal);
     for (int index = 1; index < args.Length; index += 2)
     {
@@ -56,6 +60,13 @@ try
     if (command == "list")
     {
         Console.WriteLine(JsonSerializer.Serialize(project.ListTopics(), new JsonSerializerOptions { WriteIndented = true }));
+        return 0;
+    }
+    if (command == "export-website")
+    {
+        string exportAssets = options.TryGetValue("--assets", out var chosenExportAssets) ? chosenExportAssets : DefaultAssets();
+        var exported = WebsiteZipExporter.Export(project, Get("--zip"), exportAssets);
+        Console.WriteLine(JsonSerializer.Serialize(exported, new JsonSerializerOptions { WriteIndented = true }));
         return 0;
     }
     string requested = Get("--target", "DesktopHelp");

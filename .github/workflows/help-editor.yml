@@ -27,13 +27,13 @@ jobs:
         run: dotnet build StatsDirectHelpEditor.slnx -c Release --nologo
       - name: Core, installed workspace and Git checks
         run: |
-          foreach ($name in @('Checks','InstalledWorkspaceChecks','GitChecks','HeadlessChecks','NamespaceChecks')) {
+          foreach ($name in @('Checks','InstalledWorkspaceChecks','GitChecks','HeadlessChecks','NamespaceChecks','WebsiteZipChecks')) {
             dotnet run --no-build -c Release --project "tests/StatsDirectHelpEditor.$name" -- $PWD.Path
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
       - name: Native installed startup and source artwork
         run: |
-          foreach ($name in @('InstalledWorkspaceWindowsChecks','SourceImageWindowsChecks','NamespaceWindowsChecks')) {
+          foreach ($name in @('InstalledWorkspaceWindowsChecks','SourceImageWindowsChecks','NamespaceWindowsChecks','WebsiteExportWindowsChecks')) {
             dotnet run --no-build -c Release --project "tests/StatsDirectHelpEditor.$name" -- $PWD.Path
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }

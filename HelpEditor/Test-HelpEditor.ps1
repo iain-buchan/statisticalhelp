@@ -11,10 +11,11 @@ function Run-Check([string]$Name,[scriptblock]$Action){
 Push-Location $root
 try{
     Run-Check 'Build solution' {dotnet build StatsDirectHelpEditor.slnx --configuration Release --nologo --verbosity minimal}
-    foreach($name in @('Checks','WindowsChecks','ContentsWindowsChecks','LinkWindowsChecks','BrowserPreviewWindowsChecks','WorkspaceWindowsChecks','AppHelpPreviewChecks','SearchReplaceChecks','SearchReplaceWindowsChecks','SourceImageWindowsChecks','InstalledWorkspaceChecks','InstalledWorkspaceWindowsChecks','PolishChecks','PolishTransportChecks','PolishWindowsChecks','PreviewCacheWindowsChecks','DeepPreviewChecks','DeepSourceChecks','DeepWorkflowWindowsChecks','GitChecks','WebsitePublishChecks','HeadlessChecks','EquationArtworkChecks','CssScoperChecks')){
+    foreach($name in @('Checks','WindowsChecks','ContentsWindowsChecks','LinkWindowsChecks','BrowserPreviewWindowsChecks','WebsiteExportWindowsChecks','WorkspaceWindowsChecks','AppHelpPreviewChecks','SearchReplaceChecks','SearchReplaceWindowsChecks','SourceImageWindowsChecks','InstalledWorkspaceChecks','InstalledWorkspaceWindowsChecks','PolishChecks','PolishTransportChecks','PolishWindowsChecks','PreviewCacheWindowsChecks','DeepPreviewChecks','DeepSourceChecks','DeepWorkflowWindowsChecks','GitChecks','WebsitePublishChecks','HeadlessChecks','EquationArtworkChecks','CssScoperChecks')){
         $project='tests/StatsDirectHelpEditor.'+$name
         Run-Check $name {dotnet run --no-build --project $project --configuration Release -- $root}
     }
+    Run-Check 'Website ZIP Core and CLI export' {dotnet run --no-build --project tests/StatsDirectHelpEditor.WebsiteZipChecks --configuration Release -- $root}
     Run-Check 'Deleted-page recovery' {dotnet run --no-build --project tests/StatsDirectHelpEditor.Checks --configuration Release -- $root --recovery-only}
     & (Join-Path $root 'Build-Help.ps1') -CompileBuilder
     Run-Check 'Headless wrapper without SDK or Flare' { & (Join-Path $root 'tests/headless-wrapper-checks.ps1') -Root $root }

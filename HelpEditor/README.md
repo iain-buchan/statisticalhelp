@@ -1,6 +1,6 @@
 # StatsDirect Help Editor prototype
 
-A separate C#/.NET Windows authoring application. It edits the **HelpSource working copy**, independently of the original Flare project. No Flare licence, Node installation, web server or internet connection is required to use the built editor or rebuild help.
+A separate C#/.NET Windows authoring application in **`C:\Develop\StatsDirectHelp`**. It edits the **HelpSource working copy**, independently of the original Flare project. No Flare licence, Node installation, web server or internet connection is required to use the built editor or rebuild help.
 
 ## Start
 
@@ -45,6 +45,8 @@ There is one row of page-view tabs: **Formatted**, **HTML source**, **Browser vi
 Browser and App previews reuse the generated site when you navigate between saved topics. Revisiting an unchanged view also keeps its live browser document, including scroll position, expanded R code and search state. Changes to source, Contents, artwork, styles, design or the current draft regenerate the affected preview; ordinary Contents clicks do not rebuild all pages. Missing critical preview assets trigger repair. Contents section links retain their anchors; navigation within the current page preserves the draft and Undo history.
 
 ## Build and search
+
+**File > Export website ZIP…** builds a fresh Website version and asks where to save the archive. It includes the current page's unsaved draft, as Browser view does, without saving that draft to source. The ZIP contains the website files directly at its root, ready to unpack into `www.statsdirect.com/help`; it excludes editable source, sign-in information, recovery data and editor settings. The last successful save location is remembered on this PC. Cancelling or a failed export leaves the previous ZIP intact.
 
 Choose **App view** or **Browser view** to select the Desktop or Public target. Use **File > Build help and search (Ctrl+B)** or **File > Preview site in browser (F5)**. Saved outputs go only to `Build/Desktop` or `Build/Public` beside this README. F5 rebuilds the selected target and opens the complete local site, with Contents and full-text search, in your default browser. It asks about unsaved page edits before building. Returning to Formatted or HTML source keeps the last selected build target. **File > Preview site in editor** offers the separate whole-site viewer. The in-editor previews use independent `Build/EditorPreview` folders so a draft preview cannot replace a saved output.
 
@@ -119,6 +121,16 @@ Use `-ProjectPath <marked-working-copy>` and `-OutputRoot <separate-folder>` for
 ```
 
 The console automatically finds its sibling `App/Web` assets, or accepts `--assets`. It also supports `list --project <copy>` and `--help`. Only after changing the builder's C# implementation, run `Build-Help.ps1 -CompileBuilder -Target All`; that development step needs the SDK. When publishing a new GUI package, also publish `src/StatsDirectHelpEditor.Cli/StatsDirectHelpEditor.Cli.csproj` into `App/Builder` so both use the current Core library. Keep `App/Web` and the complete Builder folder together.
+
+Create a fresh Website ZIP from saved source without the GUI:
+
+```powershell
+& 'C:\Develop\StatsDirectHelp\App\Builder\StatsDirectHelpBuilder.exe' export-website `
+    --project 'C:\Develop\StatsDirectHelp\HelpSource' `
+    --zip 'C:\temp\StatsDirectHelp-Website.zip'
+```
+
+This command does not upload anything or change the GUI's remembered save location.
 
 ## Checks and provenance
 

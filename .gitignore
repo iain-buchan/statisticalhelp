@@ -11,3 +11,7 @@
 /Project/Users
 /.svn
 **/Thumbs.db
+
+# Help Editor authoring preferences are local to each computer.
+/HelpEditor/Settings/authoring-preferences.json
+/HelpEditor/Settings/.authoring-preferences-*.tmp

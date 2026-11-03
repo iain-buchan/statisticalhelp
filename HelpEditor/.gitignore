@@ -8,6 +8,8 @@ evidence/
 **/.preview-profile/
 **/.help-editor-recovery/
 WorkingCopies/
+/Settings/authoring-preferences.json
+/Settings/.authoring-preferences-*.tmp
 HelpSource/Project/Users/
 HelpSource/Project/Destinations/
 ReleaseWork/

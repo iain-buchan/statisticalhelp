@@ -59,7 +59,7 @@ public sealed partial class MainForm : Form
     public string? LastError { get; private set; }
     public BuildResult? LastBuildResult { get; private set; }
 
-    public MainForm(string? projectPath = null, Action<Uri>? externalLinkLauncher = null, string? initialTopic = null, Action<Uri>? browserPreviewLauncher = null, HelpEditorWorkspace? workspaceOverride = null)
+    public MainForm(string? projectPath = null, Action<Uri>? externalLinkLauncher = null, string? initialTopic = null, Action<Uri>? browserPreviewLauncher = null, HelpEditorWorkspace? workspaceOverride = null, Func<SaveFileDialog, DialogResult>? websiteZipPicker = null)
     {
         workspace = workspaceOverride ?? HelpEditorWorkspace.Resolve(AppContext.BaseDirectory);
         artifactRoot = workspace.RootPath;
@@ -67,6 +67,7 @@ public sealed partial class MainForm : Form
         this.initialTopic = initialTopic;
         this.externalLinkLauncher = externalLinkLauncher ?? (uri => Process.Start(new ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true }));
         this.browserPreviewLauncher = browserPreviewLauncher ?? (uri => Process.Start(new ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true }));
+        this.websiteZipPicker = websiteZipPicker;
         // Keep every ICO frame for Windows' title-bar/taskbar DPI choices. Each
         // editor window owns its clone independently of the resource stream.
         using var iconStream = typeof(MainForm).Assembly.GetManifestResourceStream("StatsDirect.HelpEditor.AppIcon")
@@ -212,6 +213,7 @@ public sealed partial class MainForm : Form
         AddMenu(file, "Deleted pages…", ShowDeletedPagesAsync);
         file.DropDownItems.Add(new ToolStripSeparator());
         AddMenu(file, "&Build help and search", BuildHelpAsync, Keys.Control | Keys.B);
+        AddMenu(file, "Export website &ZIP…", ShowWebsiteZipExportAsync);
         AddMenu(file, "&Preview site in browser", PreviewSiteInBrowserAsync, Keys.F5);
         AddMenu(file, "Preview site in editor", BuildAndPreviewAsync);
         file.DropDownItems.Add(new ToolStripSeparator());
@@ -716,7 +718,7 @@ public sealed partial class MainForm : Form
             await OpenTopicAsync(reference);
             return this;
         }
-        var opened = new MainForm(CurrentProject.RootPath, externalLinkLauncher, reference, browserPreviewLauncher, workspaceOverride: workspace)
+        var opened = new MainForm(CurrentProject.RootPath, externalLinkLauncher, reference, browserPreviewLauncher, workspaceOverride: workspace, websiteZipPicker: websiteZipPicker)
         {
             SuppressDialogs = SuppressDialogs,
             StartPosition = FormStartPosition.Manual,
