@@ -1,0 +1,21 @@
+{
+  "sourceRepository": "https://github.com/iain-buchan/statsdirect",
+  "upstreamRepository": "https://github.com/iain-buchan/statsdirect-mac",
+  "upstreamCommit": "1f4d920be36081a6e9121d83933b6356ed6ece2d",
+  "license": "MIT",
+  "lessons": 12,
+  "questions": 35,
+  "bankVersion": "learn-draft-2026-10-01",
+  "files": [
+    {
+      "path": "Learning/upstream/Learn/lessons.json",
+      "sha256": "7df8bd1b539c7ae27735383af873e06735464b700c7c9307284ab69bc39ad74f"
+    },
+    {
+      "path": "Learning/upstream/Learn/bank.mjs",
+      "sha256": "f4c872afa4837459db1bc8e3370e0903b0d2c5469a5bd543dd57877a64fff8b9"
+    }
+  ],
+  "workingCopy": "starter-course.json",
+  "upstreamFilesChanged": false
+}

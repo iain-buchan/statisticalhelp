@@ -252,7 +252,9 @@ public sealed partial class MainForm : Form
         help.DropDownItems.Add("About this prototype", null, (_, _) => MessageBox.Show(this,
             "Edits are saved only to the marked working copy.\n\nContents changes save automatically. Removing a contents entry keeps the page file. Deleted pages can be recovered through File > Deleted pages. Deletion is blocked if other pages or application context IDs still refer to the page.\n\nBuild help regenerates the offline pages, navigation and search index under this prototype’s Build folder. It does not publish help or rebuild StatsDirect installers.",
             "StatsDirect Help Editor", MessageBoxButtons.OK, MessageBoxIcon.Information));
-        menu.Items.AddRange([file, editMenu, tocMenu, github, help]);
+        var tutor = new ToolStripMenuItem("&Tutor");
+        AddMenu(tutor, "&Edit tutor courses and questions…", OpenTutorAuthoringAsync);
+        menu.Items.AddRange([file, editMenu, tocMenu, tutor, github, help]);
         foreach (ToolStripMenuItem item in menu.Items)
         {
             item.Font = menu.Font;

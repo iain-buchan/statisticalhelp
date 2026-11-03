@@ -55,4 +55,19 @@ internal static class AuthoringPreferences
         try { return JsonNode.Parse(File.ReadAllText(path)) as JsonObject ?? throw new JsonException("Expected an object."); }
         catch (JsonException exception) { throw new InvalidDataException("The authoring preferences could not be read. Correct " + path + " before exporting.", exception); }
     }
+
+    internal static string ReadStatsDirectSourceRoot(string workspaceRoot)
+    {
+        try { return Read(workspaceRoot)["statsDirectSourceRoot"]?.GetValue<string>() is { Length: > 0 } value && Path.IsPathFullyQualified(value) ? value : ""; }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException) { return ""; }
+    }
+
+    internal static void SaveStatsDirectSourceRoot(string workspaceRoot, string sourceRoot)
+    {
+        var preferences = Read(workspaceRoot); preferences["statsDirectSourceRoot"] = Path.GetFullPath(sourceRoot);
+        string path = Path.Combine(workspaceRoot, RelativePath); Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        string temporary = Path.Combine(Path.GetDirectoryName(path)!, ".authoring-preferences-" + Guid.NewGuid().ToString("N") + ".tmp");
+        File.WriteAllText(temporary, preferences.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine, new UTF8Encoding(false));
+        File.Move(temporary, path, true);
+    }
 }

@@ -13,7 +13,13 @@ internal static class Program
             if (args[i].Equals("--project", StringComparison.OrdinalIgnoreCase)) project = args[++i];
             else if (args[i].Equals("--topic", StringComparison.OrdinalIgnoreCase)) topic = args[++i];
         }
-        using var context = new EditorApplicationContext(new MainForm(project, initialTopic: topic));
+        var main = new MainForm(project, initialTopic: topic);
+        if (args.Contains("--tutor", StringComparer.OrdinalIgnoreCase)) main.Shown += async (_, _) =>
+        {
+            try { await main.Initialization; await main.OpenTutorAuthoringAsync(); }
+            catch (Exception error) { MessageBox.Show(main, error.Message, "Tutor authoring", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+        };
+        using var context = new EditorApplicationContext(main);
         Application.Run(context);
     }
 }

@@ -14,6 +14,32 @@ Version 0.1.2 uses the independent [StatsDirect help schema](Schema/StatsDirectH
 
 ## Windows installer and public source
 
+### Tutor authoring development build (0.1.3)
+
+**Primary workflow: maintain the built-in StatsDirect tutor.** Edit the authoring source under `TutorSource`, save drafts, record the checks you performed, then choose **File > Publish built-in tutor for StatsDirect builds…**. On this PC it writes `C:\Users\ieb21\source\repos\statsdirect\Learning\AuthoredTutor`. It preserves the original lesson/question IDs and five learner pathways, updates embedded practice questions consistently, and produces versioned, hashed source files. New or changed material needs an author review bound to that exact content; editing the JSON afterwards invalidates that approval. Any known stale numerical check must also be renewed with recorded evidence.
+
+The Windows project automatically validates and incorporates published files on its next normal build. The hook rebuilds the Learning bundle and its separate native lesson JSON together; unchanged inputs reuse verified outputs. A publication in progress, invalid hashes or missing build dependencies stop that build. Saving an unpublished draft leaves the last published material in use. The pinned upstream source stays intact. Publishing here updates source inputs only: it does not sign, build installers or push to GitHub. Provider-course export remains available as a secondary option.
+
+The development app adds **Tutor > Edit tutor courses and questions…**. This opens an independent authoring window, so you can keep editing help pages alongside a course. The supplied working copy is `TutorSource/starter-course.json`: the original 12 lessons and 35 multiple-choice questions. **File > Start a new course from the basics…** uses an immutable packaged template, so revising your working course does not change the starting material for another course. A separate **health and biomedical examples** course contains four original draft lessons and questions, with numerical checks recorded in `TutorExamples/verify-health-biomed-exercises.R`.
+
+Use **Course and audience** to set the title, course ID/version, training provider, review email, learner level and assessment/evidence expectations. Edit teaching text, objectives, practical tasks, worked examples, misconceptions, prompts, numeric data and R examples. Multiple-choice editing includes the answer key, hint, explanation and feedback for every choice. You can paste numeric Excel cells with column headings into a lesson. Duplicate, reorder and delete items; **Edit > Recover deleted material…** restores deletions even after saving and reopening. Native text Undo works within a field; **Undo last item change** restores earlier applied edits.
+
+**Learner preview** checks the teaching content and lets you try MCQ answers without creating learner records. It is a plain-text content preview; StatsDirect itself supplies the final Markdown and mathematical rendering. **JSON source** edits additional record metadata. Course source saves preserve unknown fields and refuse to overwrite a newer edit on disk. The new immutable seed assets live in `src/StatsDirectHelpEditor.App/TutorSeed`; editable files, recovery and author notes are separate.
+
+**ChatGPT > Research, draft or review material…** reuses the editor's ChatGPT sign-in. It can search live Internet sources, retrieve the current course (including readings and course objectives) and all saved help topics, then propose an original lesson or MCQ, revise one, or perform a statistical review. The audience, instructions and follow-up discussion are editable. Review the proposed record, sources, observed browsing activity, statistical notes and suggested R checks before accepting. Acceptance updates an unsaved draft, retaining host-recorded source evidence and the suggested R check. Proposed code is never run automatically. Source browsing, an AI review and an actual numerical check are recorded as different things. Use **Review > Record author review…** to record your own checked sources, calculations and reasoning. Editing content invalidates old review/check status while retaining prior evidence locally.
+
+**Save course source** preserves the editable source, author notes and deletion recovery. **Export course for StatsDirect…** creates a separate schema-2 provider pack, imported through StatsDirect **Help > Learning Options > Import course materials**. Courses add personalised material alongside the built-in tutor. The learner's existing versioned questions, practical work, reflections and evidence records are retained by StatsDirect; this authoring tool does not alter those records. Changed exports get distinct course versions, including different unsaved revisions. An authoring audience tag does not by itself filter the course's learner question set. Course providers determine assessment/CPD recognition; this prototype awards no credits or examination endorsement.
+
+Headless authoring checks and export are also available, with no GUI or Flare:
+
+```powershell
+App/Builder/StatsDirectHelpBuilder.exe validate-course --course TutorSource/starter-course.json
+App/Builder/StatsDirectHelpBuilder.exe export-course --course TutorSource/starter-course.json --output Build/my-course.json
+App/Builder/StatsDirectHelpBuilder.exe publish-tutor --course TutorSource/starter-course.json --statsdirect-source C:\Users\ieb21\source\repos\statsdirect
+```
+
+The released 0.1.2 installers and published tutor are unchanged by this development build.
+
 The Help Editor is a separate application from StatsDirect. Its source is maintained in the public [statisticalhelp repository](https://github.com/iain-buchan/statisticalhelp/tree/master/HelpEditor). Signed evaluation downloads are published under [Help Editor releases](https://github.com/iain-buchan/statisticalhelp/releases).
 
 The x64 setup installs for the current user, includes the .NET runtime, and installs Microsoft's Evergreen WebView2 runtime if needed. Program files go under `%LOCALAPPDATA%\Programs\StatsDirectHelpEditor`. Editable help, generated output and browser profiles go under `%LOCALAPPDATA%\StatsDirect\HelpEditor`. The initial help working copy is created once; upgrades and uninstalling the application leave that user's work intact. The included help is an independent working copy. GitHub connection and publication are explicit commands.

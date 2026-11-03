@@ -4,7 +4,7 @@ namespace StatsDirect.HelpEditor.App;
 public sealed class EditorApplicationContext : ApplicationContext
 {
     [ThreadStatic] private static EditorApplicationContext? current;
-    private readonly HashSet<MainForm> windows = [];
+    private readonly HashSet<Form> windows = [];
 
     public EditorApplicationContext(MainForm initialWindow)
     {
@@ -14,12 +14,15 @@ public sealed class EditorApplicationContext : ApplicationContext
     }
 
     public static void ShowEditor(MainForm window)
+        => ShowDocument(window);
+
+    public static void ShowDocument(Form window)
     {
         if (current != null) current.Add(window);
         else window.Show();
     }
 
-    private void Add(MainForm window)
+    private void Add(Form window)
     {
         windows.Add(window);
         window.FormClosed += (_, _) =>

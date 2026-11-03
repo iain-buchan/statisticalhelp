@@ -148,6 +148,26 @@ internal static class Program
         Check(await Source(nativeBeta) == childDirty, "The independent child's unsaved source survives the first window closing");
         await nativeBeta.SaveCurrentTopicAsync();
         Check(nativeBeta.CurrentProject.ReadTopic("references/beta.htm") == childDirty, "The surviving child can still save normally");
+        await nativeBeta.OpenTutorAuthoringAsync();
+        var tutor = Application.OpenForms.OfType<TutorEditorForm>().Single();
+        tutor.SuppressDialogs = true;
+        string template = Path.Combine(AppContext.BaseDirectory, "TutorSeed", "starter-course.json");
+        byte[] immutableBefore = File.ReadAllBytes(template);
+        Check(tutor.Document.FilePath == Path.Combine(nativeBeta.ArtifactRoot, "TutorSource", "starter-course.json") &&
+            tutor.Document.GetItems("lessons").Count == 12, "Tutor menu creates an independent editable seed in the originating workspace");
+        await nativeBeta.OpenTutorAuthoringAsync();
+        Check(Application.OpenForms.OfType<TutorEditorForm>().Count() == 1, "Opening Tutor again reuses its existing authoring window");
+        string lessonId = tutor.Document.GetItems("lessons")[0]["id"]!.GetValue<string>();
+        tutor.SelectItem("lessons", lessonId); tutor.SetField("title", "Independent tutor draft after Help closes");
+        ForceClose(nativeBeta);
+        await Task.Delay(80);
+        Check(!tutor.IsDisposed && tutor.HasUnsavedChanges && !Windows().Any(), "Closing the last Help window keeps the dirty Tutor window and its message loop alive");
+        var helpFactory = (Func<Task<HelpPolishContext?>>)typeof(TutorEditorForm).GetField("helpContext", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(tutor)!;
+        Check(await helpFactory() != null, "Tutor can still read saved help context after its originating Help window closes");
+        tutor.SaveCourse();
+        Check(TutorCourseDocument.Open(tutor.Document.FilePath!).GetItems("lessons")[0]["title"]!.GetValue<string>() == "Independent tutor draft after Help closes" &&
+            File.ReadAllBytes(template).SequenceEqual(immutableBefore), "Surviving Tutor saves its own source without modifying the packaged template");
+        tutor.Close();
     }
 
     private static async Task CustomOpen(string id)

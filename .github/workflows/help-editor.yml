@@ -23,20 +23,27 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
       - name: Build editor, console builder and test programs
         run: dotnet build StatsDirectHelpEditor.slnx -c Release --nologo
       - name: Core, installed workspace and Git checks
         run: |
-          foreach ($name in @('Checks','InstalledWorkspaceChecks','GitChecks','HeadlessChecks','NamespaceChecks','WebsiteZipChecks')) {
+          foreach ($name in @('Checks','InstalledWorkspaceChecks','GitChecks','HeadlessChecks','NamespaceChecks','WebsiteZipChecks','TutorAuthoringChecks','TutorBuiltinChecks','TutorResearchChecks')) {
             dotnet run --no-build -c Release --project "tests/StatsDirectHelpEditor.$name" -- $PWD.Path
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
       - name: Native installed startup and source artwork
         run: |
-          foreach ($name in @('InstalledWorkspaceWindowsChecks','SourceImageWindowsChecks','NamespaceWindowsChecks','WebsiteExportWindowsChecks')) {
+          foreach ($name in @('InstalledWorkspaceWindowsChecks','SourceImageWindowsChecks','NamespaceWindowsChecks','WebsiteExportWindowsChecks','TutorAuthoringWindowsChecks')) {
             dotnet run --no-build -c Release --project "tests/StatsDirectHelpEditor.$name" -- $PWD.Path
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
+          dotnet run --no-build -c Release --project tests/StatsDirectHelpEditor.TutorAuthoringWindowsChecks -- $PWD.Path --preview-only
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --no-build -c Release --project tests/StatsDirectHelpEditor.TutorResearchChecks -- $PWD.Path --dialog
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Rebuild all help without Flare or the GUI
         run: ./Build-Help.ps1 -CompileBuilder -Target All
       - name: Validate the StatsDirect authoring schema
@@ -48,9 +55,10 @@ jobs:
       - name: Build and audit the actual WiX installers
         run: |
           $output = Join-Path $env:RUNNER_TEMP 'HelpEditorInstaller'
-          ./Build-Installer.ps1 -OutputDirectory $output
+          $version = ([xml](Get-Content src/StatsDirectHelpEditor.App/StatsDirectHelpEditor.App.csproj -Raw)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+          ./Build-Installer.ps1 -Version $version -OutputDirectory $output
           $payload = Join-Path (Get-ChildItem (Join-Path $output '.work') -Directory | Select-Object -First 1).FullName 'payload'
-          ./tests/installer-package-checks.ps1 -Msi (Join-Path $output 'StatsDirectHelpEditor-x64.msi') -Bundle (Join-Path $output 'StatsDirectHelpEditorSetup.exe') -PayloadDirectory $payload -ExpectedCommit $env:GITHUB_SHA -Root $PWD.Path
+          ./tests/installer-package-checks.ps1 -Msi (Join-Path $output 'StatsDirectHelpEditor-x64.msi') -Bundle (Join-Path $output 'StatsDirectHelpEditorSetup.exe') -PayloadDirectory $payload -ExpectedVersion $version -ExpectedCommit $env:GITHUB_SHA -Root $PWD.Path
       - name: Preserve verification reports
         if: always()
         uses: actions/upload-artifact@v4

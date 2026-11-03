@@ -1,4 +1,4 @@
-param([switch]$CompareFlare)
+param([switch]$CompareFlare,[string]$StatsDirectSourceRoot)
 $ErrorActionPreference='Stop'
 $root=$PSScriptRoot
 $node=Get-Command node -ErrorAction SilentlyContinue
@@ -16,6 +16,14 @@ try{
         Run-Check $name {dotnet run --no-build --project $project --configuration Release -- $root}
     }
     Run-Check 'Website ZIP Core and CLI export' {dotnet run --no-build --project tests/StatsDirectHelpEditor.WebsiteZipChecks --configuration Release -- $root}
+    Run-Check 'Tutor course authoring and exact runtime import' {dotnet run --no-build --project tests/StatsDirectHelpEditor.TutorAuthoringChecks --configuration Release -- $root}
+    Run-Check 'Built-in tutor publishing and review gates' {dotnet run --no-build --project tests/StatsDirectHelpEditor.TutorBuiltinChecks --configuration Release -- $root}
+    Run-Check 'Tutor native editing and preview fixtures' {dotnet run --no-build --project tests/StatsDirectHelpEditor.TutorAuthoringWindowsChecks --configuration Release -- $root}
+    Run-Check 'Tutor embedded WebView2 learner preview' {dotnet run --no-build --project tests/StatsDirectHelpEditor.TutorAuthoringWindowsChecks --configuration Release -- $root --preview-only}
+    Run-Check 'Tutor research protocol and context' {dotnet run --no-build --project tests/StatsDirectHelpEditor.TutorResearchChecks --configuration Release -- $root}
+    Run-Check 'Tutor research dialog' {dotnet run --no-build --project tests/StatsDirectHelpEditor.TutorResearchChecks --configuration Release -- $root --dialog}
+    Run-Check 'Tutor learner-content preview' {& $node.Source tests/TutorPreviewChecks.cjs}
+    if($StatsDirectSourceRoot){Run-Check 'Tutor normal Windows MSBuild hook' {& (Join-Path $root 'tests/TutorBuildHookChecks.ps1') -StatsDirectSourceRoot $StatsDirectSourceRoot}}
     Run-Check 'Deleted-page recovery' {dotnet run --no-build --project tests/StatsDirectHelpEditor.Checks --configuration Release -- $root --recovery-only}
     & (Join-Path $root 'Build-Help.ps1') -CompileBuilder
     Run-Check 'Headless wrapper without SDK or Flare' { & (Join-Path $root 'tests/headless-wrapper-checks.ps1') -Root $root }

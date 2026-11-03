@@ -2,7 +2,7 @@ using System.Text.Json;
 using StatsDirect.HelpEditor.Core;
 
 bool help = args.Length == 0 || args.Length == 1 && (args[0] is "--help" or "-h")
-    || args.Length == 2 && (args[0] is "build" or "list" or "prepare-workspace" or "export-website") && (args[1] is "--help" or "-h");
+    || args.Length == 2 && (args[0] is "build" or "list" or "prepare-workspace" or "export-website" or "validate-course" or "export-course" or "publish-tutor") && (args[1] is "--help" or "-h");
 if (help)
 {
     Console.WriteLine("""
@@ -18,6 +18,12 @@ if (help)
             [--assets <App/Web>]
         Installed first-run working copy:
           StatsDirectHelpBuilder prepare-workspace
+        Check an editable tutor course or export a learner-importable pack:
+          StatsDirectHelpBuilder validate-course --course <source.json>
+          StatsDirectHelpBuilder export-course --course <source.json> --output <course-pack.json>
+        Publish reviewed built-in tutor inputs for the next StatsDirect build:
+          StatsDirectHelpBuilder publish-tutor --course <source.json> --statsdirect-source <repository>
+            [--baseline <immutable-starter.json>]
 
         DesktopHelp is the default target. Desktop/Public are accepted aliases.
         Website and GitHub use the same Public HTML, footer and source conditions.
@@ -43,8 +49,8 @@ try
         Console.WriteLine(JsonSerializer.Serialize(new { WorkspaceRoot = workspace.RootPath, ProjectPath = workspace.DefaultProjectPath }));
         return 0;
     }
-    if (command is not ("build" or "list" or "export-website")) throw new ArgumentException("Unknown command. Use --help.");
-    var allowed = command switch { "build" => new[] { "--project", "--output", "--assets", "--target" }, "export-website" => ["--project", "--zip", "--assets"], _ => ["--project"] };
+    if (command is not ("build" or "list" or "export-website" or "validate-course" or "export-course" or "publish-tutor")) throw new ArgumentException("Unknown command. Use --help.");
+    var allowed = command switch { "build" => new[] { "--project", "--output", "--assets", "--target" }, "export-website" => ["--project", "--zip", "--assets"], "validate-course" => ["--course"], "export-course" => ["--course", "--output"], "publish-tutor" => ["--course", "--statsdirect-source", "--baseline"], _ => ["--project"] };
     var options = new Dictionary<string, string>(StringComparer.Ordinal);
     for (int index = 1; index < args.Length; index += 2)
     {
@@ -56,6 +62,31 @@ try
         options.Add(name, args[index + 1]);
     }
     string Get(string name, string? fallback = null) => options.GetValueOrDefault(name) ?? fallback ?? throw new ArgumentException("Missing " + name);
+    if (command == "publish-tutor")
+    {
+        var course = TutorCourseDocument.Open(Get("--course"));
+        string repo = Path.GetFullPath(Get("--statsdirect-source"));
+        if (!File.Exists(Path.Combine(repo, "Learning", "build.mjs")) || !File.Exists(Path.Combine(repo, "StatsDirectUI", "StatsDirectUI.csproj"))) throw new InvalidDataException("Choose the StatsDirect source repository.");
+        string sourceAssets = Path.Combine(repo, "StatsDirectUI", "Assets");
+        string baselinePath = Get("--baseline", Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "TutorSeed", "starter-course.json")));
+        var original = TutorCourseDocument.Open(baselinePath);
+        if (course.Content["authoring"] is not System.Text.Json.Nodes.JsonObject authoring) course.Content["authoring"] = authoring = new();
+        authoring["builtinBaseline"] = TutorBuiltinPublisher.CreateBaseline(original.Content,
+            Directory.EnumerateFiles(Path.Combine(sourceAssets, "Operations"), "*.xml", SearchOption.AllDirectories).Select(Path.GetFileNameWithoutExtension).OfType<string>(),
+            Directory.EnumerateFiles(Path.Combine(sourceAssets, "Help"), "*.htm", SearchOption.AllDirectories).Select(path => Path.GetRelativePath(Path.Combine(sourceAssets, "Help"), path).Replace('\\', '/')));
+        var published = TutorBuiltinPublisher.Publish(course, Path.Combine(repo, "Learning", "AuthoredTutor"));
+        Console.WriteLine(JsonSerializer.Serialize(published, new JsonSerializerOptions { WriteIndented = true }));
+        return 0;
+    }
+    if (command is "validate-course" or "export-course")
+    {
+        var course = TutorCourseDocument.Open(Get("--course"));
+        var issues = course.Validate(); bool valid = !issues.Any(issue => issue.Severity == "Error");
+        string? output = null;
+        if (command == "export-course") { output = Path.GetFullPath(Get("--output")); course.Export(output); }
+        Console.WriteLine(JsonSerializer.Serialize(new { Command = command, ValidForExport = valid, Source = course.FilePath, Output = output, Lessons = course.GetItems("lessons").Count, Questions = course.GetItems("questions").Count, Issues = issues }, new JsonSerializerOptions { WriteIndented = true }));
+        return valid ? 0 : 1;
+    }
     var project = HelpProject.Open(Get("--project"));
     if (command == "list")
     {

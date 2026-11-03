@@ -3,6 +3,8 @@
 HelpSource/** -text
 src/StatsDirectHelpEditor.App/Web/** -text
 src/StatsDirectHelpEditor.App/AppHelp/** -text
+TutorSource/Baseline/** -text
+tests/StatsDirectHelpEditor.TutorAuthoringChecks/Runtime*.cs -text
 *.png -text
 *.ico -text
 *.woff -text

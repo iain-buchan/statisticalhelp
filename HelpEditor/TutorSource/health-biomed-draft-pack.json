@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 2,
+  "id": "health-biomed-original-drafts",
+  "version": "0.1-draft",
+  "title": "Health and biomedicine: original draft teaching exercises",
+  "provider": {
+    "name": "StatsDirect education authoring examples (draft)",
+    "reviewEmail": "support@statisticalhelp.org",
+    "assessmentType": "self",
+    "assessmentRequirements": "Complete the four practice questions and practical tasks. Keep your interpretation, relevant report or R output, and a reflection for discussion with your course tutor. The fictional data and draft wording require instructor review before teaching use.",
+    "cpdStatement": "This draft pack awards no CPD, CME or professional credit. Any recognition and assessment conditions must be specified by the relevant provider or professional scheme."
+  },
+  "review": {
+    "status": "draft",
+    "reviewedBy": "",
+    "reviewedAt": "",
+    "note": "Original synthetic examples created on 2026-11-03. Numerical checks recorded using base R; clinical and educational wording still require tutor approval. Not copied from, affiliated with or endorsed by an examination body."
+  },
+  "verification": {
+    "status": "numerical-check-recorded",
+    "checkedAt": "2026-11-03",
+    "software": "R 4.6.2 (2026-10-29 ucrt)",
+    "script": "verify-health-biomed-exercises.R",
+    "scope": "Arithmetic and paired t-test outputs for the four fictional examples; not clinical validation or accreditation."
+  },
+  "documents": [
+    {
+      "id": "author-and-learner-note",
+      "title": "How to use these draft examples",
+      "text": "All scenarios and datasets in this pack are fictional. Choose the learning objective before the method. State the outcome, units, denominator, reference group and study design. Use the numerical output alongside assumptions, uncertainty and context. A calculation alone cannot establish a causal or clinical conclusion. Record your reasoning and a limitation, then explain how the learning might improve your own work. These examples are original drafts for tutor review, not authentic examination questions or an accredited course."
+    }
+  ],
+  "resourceURLs": [
+    "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/statistical-guidance-reporting-results-studies-evaluating-diagnostic-tests-guidance-industry-and-fda",
+    "https://www.rcgp.org.uk/getmedia/dba5948c-3b9d-4936-918e-ca8cea1122b4/Data-Interpretation-topics-AKT.pdf",
+    "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html",
+    "https://www.cdc.gov/field-epi-manual/php/chapters/analyze-interpret-data.html"
+  ],
+  "lessons": [
+    {
+      "id": "positive-test-denominator",
+      "title": "What does a positive screening result mean?",
+      "topic": "Diagnostic tests",
+      "objective": "Calculate positive predictive value using the correct conditional denominator and distinguish it from sensitivity.",
+      "audience": "Undergraduate health/biomedicine; introductory postgraduate critical appraisal",
+      "level": "foundation",
+      "summary": "In a fictional teaching population of 1,000 people, a reference standard identifies 50 with a condition. A test gives 40 true positives, 10 false negatives, 95 false positives and 855 true negatives. These are invented data, not performance claims for a real test. In the worksheet, the first row is test-positive and the second is test-negative.",
+      "steps": "Count all positive results before calculating the proportion that truly have the condition. Compare this with sensitivity, which uses people with the condition as its denominator. Discuss why the same test characteristics need not give the same predictive value in populations with different prevalence.",
+      "challenge": "Calculate the positive predictive value and sensitivity. Explain their different denominators in plain language. If the target population changed, what additional information would you need before using this predictive value there?",
+      "columns": [
+        {
+          "title": "Condition present",
+          "values": [
+            40,
+            10
+          ]
+        },
+        {
+          "title": "Condition absent",
+          "values": [
+            95,
+            855
+          ]
+        }
+      ],
+      "r": "tp <- 40; fn <- 10; fp <- 95; tn <- 855\nc(PPV = tp / (tp + fp), sensitivity = tp / (tp + fn),\n  specificity = tn / (tn + fp))\n",
+      "help": "clinical_epidemiology/diagnostic.htm",
+      "readingURLs": [
+        "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/statistical-guidance-reporting-results-studies-evaluating-diagnostic-tests-guidance-industry-and-fda"
+      ],
+      "sources": [
+        {
+          "title": "FDA: Statistical Guidance on Reporting Results from Studies Evaluating Diagnostic Tests",
+          "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/statistical-guidance-reporting-results-studies-evaluating-diagnostic-tests-guidance-industry-and-fda",
+          "checkedAt": "2026-11-03",
+          "scope": "Definitions of diagnostic accuracy and PPV; Appendix defines PPV as TP/(TP+FP). The fictional counts are original."
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "note": "Numerical answer checked in R; tutor review required."
+      }
+    },
+    {
+      "id": "absolute-treatment-benefit",
+      "title": "Communicate absolute benefit and follow-up",
+      "topic": "Risk and treatment effect",
+      "objective": "Distinguish absolute risk reduction, relative risk and the number needed to treat over a stated period.",
+      "audience": "Undergraduate health/biomedicine; UK postgraduate and US medical evidence interpretation",
+      "level": "foundation",
+      "summary": "A fictional randomised trial follows all participants for 12 months. The same adverse outcome occurs in 40 of 400 people allocated to an intervention and 60 of 400 allocated to control. Rows in the worksheet are intervention then control. The numbers illustrate an effect estimate, not a treatment recommendation.",
+      "steps": "Calculate both risks, then subtract intervention risk from control risk. Use the reciprocal of this absolute reduction for the NNT point estimate. Retain the 12-month period and consider uncertainty, adverse effects and applicability before a clinical decision.",
+      "challenge": "Report absolute and relative effects in a short explanation for a patient or service manager. Identify what is missing before the intervention can be recommended. Explain why the NNT is not a guarantee for each group of 20 people.",
+      "columns": [
+        {
+          "title": "Adverse outcomes",
+          "values": [
+            40,
+            60
+          ]
+        },
+        {
+          "title": "Participants",
+          "values": [
+            400,
+            400
+          ]
+        }
+      ],
+      "r": "risk_intervention <- 40 / 400\nrisk_control <- 60 / 400\narr <- risk_control - risk_intervention\nc(absolute_risk_reduction = arr, relative_risk = risk_intervention / risk_control,\n  NNT_over_12_months = 1 / arr)\n",
+      "help": "clinical_epidemiology/nnt.htm",
+      "readingURLs": [
+        "https://www.rcgp.org.uk/getmedia/dba5948c-3b9d-4936-918e-ca8cea1122b4/Data-Interpretation-topics-AKT.pdf"
+      ],
+      "sources": [
+        {
+          "title": "RCGP: Data Interpretation topics for the AKT",
+          "url": "https://www.rcgp.org.uk/getmedia/dba5948c-3b9d-4936-918e-ca8cea1122b4/Data-Interpretation-topics-AKT.pdf",
+          "checkedAt": "2026-11-03",
+          "scope": "Curriculum orientation: absolute risk, NNT, relative risk and interpretation. This source does not supply or approve the original scenario or numerical key."
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "note": "Arithmetic checked in R; no interval is supplied and the point estimate is not a clinical recommendation."
+      }
+    },
+    {
+      "id": "paired-patient-readings",
+      "title": "Recognise the paired unit of analysis",
+      "topic": "Paired measurements and study design",
+      "objective": "Select an analysis of within-person differences and distinguish observed change from a causal effect.",
+      "audience": "Undergraduate biomedical statistics; masters and healthcare analysts moving from Excel to R",
+      "level": "intermediate",
+      "summary": "Eight fictional patients each have one systolic blood-pressure reading before and after a service change. Each worksheet row is the same patient. Before-minus-after differences are in mmHg. Assume different patients are independent and the population distribution of differences is approximately normal for the MCQ. Real data would require checking these assumptions and how readings were collected.",
+      "steps": "Inspect paired rows and compute each patient's difference. Use a paired t test under the stated assumptions; compare it with a one-sample t test of differences. Report the mean difference and confidence interval. A before-and-after comparison without a suitable control does not establish that the service change caused it.",
+      "challenge": "Produce a StatsDirect or R report with the estimated change and 95% confidence interval. Explain pairing, discuss the limited evidence about distributional assumptions from eight pairs, and give one alternative explanation for the observed change. Reflect on a similar analysis you have previously done in Excel.",
+      "operation": "TPaired",
+      "columns": [
+        {
+          "title": "Before (mmHg)",
+          "values": [
+            142,
+            136,
+            158,
+            149,
+            128,
+            155,
+            147,
+            139
+          ]
+        },
+        {
+          "title": "After (mmHg)",
+          "values": [
+            139,
+            135,
+            154,
+            147,
+            123,
+            153,
+            146,
+            135
+          ]
+        }
+      ],
+      "r": "before <- c(142, 136, 158, 149, 128, 155, 147, 139)\nafter <- c(139, 135, 154, 147, 123, 153, 146, 135)\nd <- before - after\nt.test(before, after, paired = TRUE)\n# Equivalent analysis of the within-patient differences:\nt.test(d)\nqqnorm(d, main = \"Fictional within-patient differences\")\nqqline(d)\n",
+      "help": "parametric_methods/paired_t.htm",
+      "readingURLs": [
+        "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html"
+      ],
+      "sources": [
+        {
+          "title": "R stats documentation: Student's t-Test",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html",
+          "checkedAt": "2026-11-03",
+          "scope": "Paired and one-sample t-test interfaces. Original fictional data; numerical output checked in installed R 4.6.2."
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "note": "Method and numerical comparison checked under stated assumptions; tutor review of teaching context remains required."
+      }
+    },
+    {
+      "id": "service-case-mix",
+      "title": "A service comparison that changes after stratifying",
+      "topic": "Case-mix and confounding",
+      "objective": "Recognise how different case-mix can reverse a crude service comparison and avoid a causal ranking from observational rates.",
+      "audience": "Masters; NHS commissioning and US payer analysts",
+      "level": "intermediate",
+      "summary": "Two fictional services report favourable outcomes over the same period. Severity is measured before service delivery. In the lower-severity stratum, A has 90 outcomes among 100 people and B has 19 among 20. In the higher-severity stratum, A has 40 among 100 and B has 90 among 180. There is complete follow-up and identical outcome definitions for this exercise. Worksheet rows are A lower, A higher, B lower, B higher. These data are invented and do not rank real services.",
+      "steps": "Calculate crude and severity-specific proportions. Then calculate a descriptive comparison using a common population that is 50% lower-severity and 50% higher-severity. Explain why choosing a common mix answers a different descriptive question, and why adjustment for one factor does not establish a causal service effect.",
+      "challenge": "Prepare a short briefing explaining the crude and stratified findings to a workforce or commissioning group. Identify additional information needed before judging provider quality. State why the equal-mix comparison is illustrative rather than a definitive risk-adjustment model. Record one implication for your usual reporting practice.",
+      "columns": [
+        {
+          "title": "Favourable outcomes",
+          "values": [
+            90,
+            40,
+            19,
+            90
+          ]
+        },
+        {
+          "title": "People",
+          "values": [
+            100,
+            100,
+            20,
+            180
+          ]
+        }
+      ],
+      "r": "rates <- rbind(A = c(lower = 90/100, higher = 40/100),\n               B = c(lower = 19/20, higher = 90/180))\ncrude <- c(A = 130/200, B = 109/200)\nrates\ncrude\n# A descriptive comparison at an explicitly chosen common 50:50 severity mix:\nrowMeans(rates)\n",
+      "help": "clinical_epidemiology/risk_prospective.htm",
+      "readingURLs": [
+        "https://www.cdc.gov/field-epi-manual/php/chapters/analyze-interpret-data.html"
+      ],
+      "sources": [
+        {
+          "title": "CDC Field Epidemiology Manual: Analyzing and Interpreting Data",
+          "url": "https://www.cdc.gov/field-epi-manual/php/chapters/analyze-interpret-data.html",
+          "checkedAt": "2026-11-03",
+          "scope": "Background on stratification, confounding and cautious interpretation. Original fictional rates and common-mix calculations are independently specified here."
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "note": "Numerical reversal and explicit common-mix arithmetic checked in R; causal and service interpretation still need tutor review."
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "HB-PPV-01",
+      "version": 1,
+      "topic": "Diagnostic tests",
+      "objective": "Choose the conditional denominator for positive predictive value.",
+      "stem": "In a fictional screening exercise there are 40 true positives, 95 false positives, 10 false negatives and 855 true negatives. Among people with a positive result, approximately what percentage have the condition according to the reference standard?",
+      "options": [
+        {
+          "id": "A",
+          "text": "4.0%",
+          "feedback": "40/1,000 is the proportion of the whole teaching population who are true positives; the question conditions on a positive result."
+        },
+        {
+          "id": "B",
+          "text": "29.6%",
+          "feedback": "There are 135 positive results, of which 40 are true positives: 40/135 = 29.63%."
+        },
+        {
+          "id": "C",
+          "text": "80.0%",
+          "feedback": "40/(40+10) is sensitivity: the proportion positive among people with the condition."
+        },
+        {
+          "id": "D",
+          "text": "90.0%",
+          "feedback": "855/(855+95) is specificity: the proportion negative among people without the condition."
+        },
+        {
+          "id": "E",
+          "text": "98.8%",
+          "feedback": "855/(855+10) is negative predictive value, conditioning on a negative result instead."
+        }
+      ],
+      "correct": "B",
+      "hint": "First count everyone with a positive test result.",
+      "lesson": "Positive predictive value and sensitivity use different denominators.",
+      "explanation": "PPV = 40/(40+95) = 29.63%. Sensitivity is 40/(40+10) = 80%. Predictive value is a property of the test result in its tested population, not an individual guarantee or evidence that the same number transfers to another setting.",
+      "help": "clinical_epidemiology/diagnostic.htm",
+      "sources": [
+        {
+          "title": "FDA diagnostic-test reporting guidance",
+          "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/statistical-guidance-reporting-results-studies-evaluating-diagnostic-tests-guidance-industry-and-fda",
+          "checkedAt": "2026-11-03",
+          "scope": "PPV definition; original numerical scenario."
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "note": "R arithmetic checked; instructor approval pending."
+      }
+    },
+    {
+      "id": "HB-NNT-01",
+      "version": 1,
+      "topic": "Absolute treatment benefit",
+      "objective": "Calculate an NNT point estimate from risks with the same follow-up period.",
+      "stem": "In a fictional randomised trial with complete 12-month follow-up, an adverse outcome occurs in 40/400 intervention participants and 60/400 control participants. What is the number needed to treat point estimate to prevent one additional such outcome over 12 months?",
+      "options": [
+        {
+          "id": "A",
+          "text": "3",
+          "feedback": "About one third is the relative reduction, not the absolute reduction used for NNT."
+        },
+        {
+          "id": "B",
+          "text": "5",
+          "feedback": "Five percentage points is the absolute reduction; it is not the reciprocal of the reduction expressed as a proportion."
+        },
+        {
+          "id": "C",
+          "text": "10",
+          "feedback": "Ten per cent is the intervention risk. NNT uses the between-group absolute risk reduction."
+        },
+        {
+          "id": "D",
+          "text": "20",
+          "feedback": "The risks are 0.10 and 0.15. NNT = 1/(0.15-0.10) = 20 over the stated 12 months."
+        },
+        {
+          "id": "E",
+          "text": "400",
+          "feedback": "This is the group size, not the NNT point estimate."
+        }
+      ],
+      "correct": "D",
+      "hint": "Calculate the absolute risk reduction as a proportion before taking its reciprocal.",
+      "lesson": "Retain the outcome definition and follow-up period when reporting an NNT.",
+      "explanation": "The absolute reduction is 0.05, so the NNT point estimate is 20 over 12 months. This is an average estimated benefit, with uncertainty; it does not guarantee one prevented event in every 20 treated people. Harms and applicability also matter for decisions.",
+      "help": "clinical_epidemiology/nnt.htm",
+      "sources": [
+        {
+          "title": "RCGP AKT data interpretation topics",
+          "url": "https://www.rcgp.org.uk/getmedia/dba5948c-3b9d-4936-918e-ca8cea1122b4/Data-Interpretation-topics-AKT.pdf",
+          "checkedAt": "2026-11-03",
+          "scope": "Audience/curriculum orientation only, not approval of this original question or its numerical key."
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "note": "R arithmetic checked; instructor approval pending."
+      }
+    },
+    {
+      "id": "HB-PAIRED-01",
+      "version": 1,
+      "topic": "Paired measurements",
+      "objective": "Match the analysis to paired observations and explicit assumptions.",
+      "stem": "The same eight fictional patients each have a blood-pressure reading before and after a service change. Different patients are independent, and the population distribution of within-patient differences is assumed approximately normal. Which analysis directly uses the pairing to estimate and test the mean before-minus-after change?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A one-sample t analysis of each patient's before-minus-after difference",
+          "feedback": "This is equivalent to a paired t analysis and retains the matching."
+        },
+        {
+          "id": "B",
+          "text": "An independent two-sample t analysis of the two sets of readings",
+          "feedback": "The readings belong to matched pairs; treating them as independent discards that structure."
+        },
+        {
+          "id": "C",
+          "text": "A test of correlation between before and after readings",
+          "feedback": "Correlation measures association, not the mean within-patient change."
+        },
+        {
+          "id": "D",
+          "text": "A chi-square test after labelling every reading high or low",
+          "feedback": "This changes the outcome and does not directly estimate the requested mean change."
+        },
+        {
+          "id": "E",
+          "text": "A one-sample t analysis of the before readings against zero",
+          "feedback": "This does not analyse the before-minus-after change."
+        }
+      ],
+      "correct": "A",
+      "hint": "What quantity is measured once per patient after you use the matching?",
+      "lesson": "The unit for the paired analysis is the patient's difference, not sixteen independent readings.",
+      "explanation": "Under the assumptions stated, a one-sample t analysis of the eight differences is the paired t analysis. For the lesson data, the mean before-minus-after difference is 2.75 mmHg and the 95% confidence interval is approximately 1.506 to 3.994 mmHg. This analysis alone cannot attribute the change to the service intervention.",
+      "help": "parametric_methods/paired_t.htm",
+      "sources": [
+        {
+          "title": "R stats: Student's t-Test",
+          "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html",
+          "checkedAt": "2026-11-03",
+          "scope": "Paired/one-sample test interface; original data and outputs checked in R 4.6.2."
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "note": "R paired/one-sample results and analytic statistic agree; instructor review pending."
+      }
+    },
+    {
+      "id": "HB-CASEMIX-01",
+      "version": 1,
+      "topic": "Service comparison and case-mix",
+      "objective": "Interpret a crude comparison in the presence of different severity mixes.",
+      "stem": "For a favourable outcome, fictional service A reports 90/100 in a lower-severity stratum and 40/100 in a higher-severity stratum. Service B reports 19/20 and 90/180 respectively. Severity is measured before service delivery; follow-up and outcome definitions are the same. Which conclusion best accounts for all four rates?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A has better outcomes in both severity strata",
+          "feedback": "A's stratum-specific rates are 90% and 40%, compared with B's 95% and 50%."
+        },
+        {
+          "id": "B",
+          "text": "The crude rates prove A provides better care",
+          "feedback": "The crude rates favour A but combine different severity mixes and cannot establish a causal quality ranking."
+        },
+        {
+          "id": "C",
+          "text": "B has higher rates in each stratum, while A has a higher crude rate because the services have different severity mixes",
+          "feedback": "A's crude rate is 65%, B's is 54.5%, yet B's rate is higher within both strata. B has a much larger proportion of higher-severity people."
+        },
+        {
+          "id": "D",
+          "text": "Different severity mixes do not matter because both services have 200 people",
+          "feedback": "Equal overall totals do not make the severity distributions comparable."
+        },
+        {
+          "id": "E",
+          "text": "A 50:50 severity standard proves which service would cause better outcomes",
+          "feedback": "A common mix can aid descriptive comparison, but adjustment for one factor does not remove every bias or establish causation."
+        }
+      ],
+      "correct": "C",
+      "hint": "Calculate the two stratum rates before combining the numerators and denominators.",
+      "lesson": "Comparable denominators require attention to who is included, not only to equal sample sizes.",
+      "explanation": "The crude rates are 130/200 = 65% for A and 109/200 = 54.5% for B. Within-stratum rates are A: 90%, 40%; B: 95%, 50%. At an explicitly chosen common 50:50 mix, descriptive rates are 65% and 72.5%. This illustrates case-mix distortion of a crude comparison; it does not prove a causal service effect.",
+      "help": "clinical_epidemiology/risk_prospective.htm",
+      "sources": [
+        {
+          "title": "CDC Field Epidemiology Manual: Analyzing and Interpreting Data",
+          "url": "https://www.cdc.gov/field-epi-manual/php/chapters/analyze-interpret-data.html",
+          "checkedAt": "2026-11-03",
+          "scope": "Stratification/confounding background; original fictional data and arithmetic."
+        }
+      ],
+      "review": {
+        "status": "draft",
+        "note": "R crude/stratified/common-mix arithmetic checked; tutor review of service interpretation pending."
+      }
+    }
+  ]
+}

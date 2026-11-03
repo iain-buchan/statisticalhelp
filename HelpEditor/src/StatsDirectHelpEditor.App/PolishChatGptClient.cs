@@ -22,7 +22,7 @@ public interface IPolishChatGptClient : IDisposable
 }
 
 /// <summary>Owns a credential-isolated ChatGPT connection. The model sees frozen help snapshots only.</summary>
-public sealed class PolishChatGptClient : IPolishChatGptClient
+public sealed partial class PolishChatGptClient : IPolishChatGptClient
 {
     public bool IsSignedIn { get; private set; }
     public string Status { get; private set; } = "Not connected to ChatGPT";
@@ -48,7 +48,9 @@ public sealed class PolishChatGptClient : IPolishChatGptClient
         internal required string Thread;
         internal string? Turn;
         internal required CancellationToken Token;
-        internal required HelpPolishContext Context;
+        internal HelpPolishContext? Context;
+        internal Func<string, JsonObject, string>? ContextTool = null;
+        internal Action<string, JsonNode?>? ObserveNotification = null;
         internal readonly TaskCompletionSource<string> Completion = new(TaskCreationOptions.RunContinuationsAsynchronously);
         internal readonly Dictionary<string, string> Texts = [];
         internal readonly HashSet<string> Calls = [];
@@ -359,6 +361,7 @@ public sealed class PolishChatGptClient : IPolishChatGptClient
         string eventTurn = S(parameters, "turnId");
         if (eventTurn.Length > 0 && current.Turn != null && eventTurn != current.Turn) return;
         if (eventTurn.Length > 0) current.Turn ??= eventTurn;
+        current.ObserveNotification?.Invoke(method, parameters);
         if (method == "item/agentMessage/delta")
         {
             string id = S(parameters, "itemId"), text = current.Texts.GetValueOrDefault(id, "") + S(parameters, "delta");
@@ -396,7 +399,8 @@ public sealed class PolishChatGptClient : IPolishChatGptClient
                 throw new InvalidOperationException();
             lock (current.Calls) { if (current.Calls.Count >= 1024 || !current.Calls.Add(call)) throw new InvalidOperationException(); }
             current.Turn ??= turn;
-            string output = ExecuteContextTool(current.Context, tool, arguments);
+            string output = current.ContextTool != null ? current.ContextTool(tool, arguments)
+                : ExecuteContextTool(current.Context ?? throw new InvalidOperationException(), tool, arguments);
             current.Token.ThrowIfCancellationRequested();
             result = ToolResult(true, output);
         }

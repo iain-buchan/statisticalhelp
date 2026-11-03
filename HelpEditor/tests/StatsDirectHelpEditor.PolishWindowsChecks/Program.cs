@@ -241,7 +241,15 @@ internal static class Program
         string before = await Source();
         string draft = before.Replace("</body>", "<p>Evidence: P &lt; 0.05.</p></body>");
         await SetSource(draft);
+        // Source typing commits its Undo snapshot after a debounce. Exercise
+        // the ordinary Undo/Redo commands before comparing history, so the
+        // fixture's own pending typing cannot be mistaken for a review edit.
+        await Js("HelpEditor.undo()");
+        Check(await Source() == before, "The comparison fixture's new typing is one ordinary Undo step");
+        await Js("HelpEditor.redo()");
+        Check(await Source() == draft && await Bool("HelpEditor.getState().dirty"), "Redo restores the comparison fixture's exact unsaved draft before review");
         int history = await Int("HelpEditor.getState().historyIndex");
+        string initialEditorState = await String("JSON.stringify(HelpEditor.getState())");
         var snapshot = HelpPolishSnapshot.Create(PathName, draft);
         var block = snapshot.Blocks.Single(item => item.Text == "Evidence: P < 0.05.");
         var context = HelpPolishContext.Create(form.CurrentProject, snapshot);
@@ -257,8 +265,19 @@ internal static class Program
         await Until(() => !Button(dialog, "Stop").Enabled);
         Check(dialog.LastError?.Contains("comparison", StringComparison.OrdinalIgnoreCase) == true && dialog.Review == null && !Button(dialog, "Apply accepted changes").Enabled,
             "A mocked AI proposal reversing a P-value comparison is rejected inline without exposing Apply");
-        Check(await Source() == draft && form.CurrentProject.ReadTopic(PathName) == Saved && Field<string?>("loadedDiskSource") == Saved && await Int("HelpEditor.getState().historyIndex") == history,
-            "Rejecting a changed numerical comparison preserves the exact draft, saved page, conflict baseline and Undo history");
+        string actualDraft = await Source(), actualSaved = form.CurrentProject.ReadTopic(PathName);
+        string? actualBaseline = Field<string?>("loadedDiskSource");
+        int actualHistory = await Int("HelpEditor.getState().historyIndex");
+        string finalEditorState = await String("JSON.stringify(HelpEditor.getState())");
+        Check(actualDraft == draft, "Rejecting a changed numerical comparison preserves the exact current draft",
+            new { expected = draft, actual = actualDraft });
+        Check(actualSaved == Saved, "Rejecting a changed numerical comparison preserves the exact saved page",
+            new { expected = Saved, actual = actualSaved });
+        Check(actualBaseline == Saved, "Rejecting a changed numerical comparison preserves the exact disk-conflict baseline",
+            new { expected = Saved, actual = actualBaseline });
+        Check(actualHistory == history && finalEditorState == initialEditorState,
+            "Rejecting a changed numerical comparison preserves settled Undo history and complete editor state",
+            new { historyBefore = history, historyAfter = actualHistory, initialEditorState, finalEditorState });
         Button(dialog, "Close").PerformClick();
         await Js("HelpEditor.undo()");
         Check(await Source() == before, "The invalid comparison proposal leaves one ordinary Undo for the author's own draft edit");
