@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "format": "statsdirect-published-content-v1",
   "publisher": "StatsDirectHelpEditor",
-  "publicationId": "09b770d4-6921-411b-b2cb-3b1e2940115b",
-  "publishedAtUtc": "2026-11-04T20:50:27.1753418+00:00",
+  "publicationId": "618eca28-c29d-476c-89e5-292fa844ec03",
+  "publishedAtUtc": "2026-11-04T21:10:46.8707112+00:00",
   "producer": {
-    "version": "1.0.0\u002B760ab886834201d62630ebc1507a350f4cef103f",
-    "sourceCommit": "760ab886834201d62630ebc1507a350f4cef103f"
+    "version": "1.0.0\u002B09f032011d4058b4beb75700976c1a84a9c3c528",
+    "sourceCommit": "09f032011d4058b4beb75700976c1a84a9c3c528"
   },
-  "helpSourceSha256": "fc67c3b82e55aa77c8820e367b8a369604a793eaed73740223af8537e2c15978",
+  "helpSourceSha256": "91d99b8da98f3b08d32f2f0c5f87368ca904cd21f3018343922cb04367bbcad6",
   "tutorSourceSha256": "618185dfe8d9ddcaa2ad7b25652d0ff54237b3050c8120d08f8bded33085f77e",
   "artifacts": {
     "website": {
@@ -28,7 +28,7 @@
         {
           "path": ".statsdirect-help-website.json",
           "bytes": 120067,
-          "sha256": "db84beb2299b3735c8e77218e091391a9724f0b1be579550f4447453090300e6"
+          "sha256": "50bc5446bd83f22332b30af26ed7f43ebe73ab32b1188c67f354011a53e9201d"
         },
         {
           "path": "Data/Alias.xml",
@@ -298,7 +298,7 @@
         {
           "path": "build-info.json",
           "bytes": 227,
-          "sha256": "5b3d5c8b4c2158fdfc69f9c36b455e944a2b6fc4c8048216eff5078ed0c193e6"
+          "sha256": "f08fd75a539b4a489e153067171f10550a606b0ff6fbb87b8190d24253cb1eaa"
         },
         {
           "path": "chi_square_tests/22.htm",
@@ -1694,16 +1694,6 @@
           "path": "report/undo.htm",
           "bytes": 6134,
           "sha256": "088ce65920c8135a6371e837cd656ef58fbc5d6579f2edee85198eebfaa1fd26"
-        },
-        {
-          "path": "resources/Scripts/chm-pictures.js",
-          "bytes": 3333,
-          "sha256": "5de4e404305b61db4e091797ed9ef3614fc425cc858e4783afbe3c26d2727d3d"
-        },
-        {
-          "path": "resources/Scripts/chm-pictures.js.props",
-          "bytes": 86,
-          "sha256": "06275d84fd284a2c48312be127ecf5edadf9bdd4b44c6a7e41795a3cfa1cb15e"
         },
         {
           "path": "resources/help-editor-runtime/equation-artwork/016139cadf29a735e31b698f1be96e8b4dc47d08c7ca2a646130f5227a993858.svg",
@@ -3493,7 +3483,7 @@
         {
           "path": "resources/help-editor-runtime/publication.json",
           "bytes": 136,
-          "sha256": "2f84597a193ca1fcf34de0f026ade21e35424e14e8a56712c4028d9a9d631fdf"
+          "sha256": "f802d1096ea4846b2903df10f183f8ba19c7ef1fa896d3fa4cf50a9d1aa54b46"
         },
         {
           "path": "resources/help-editor-runtime/topic.css",
@@ -3996,6 +3986,16 @@
           "sha256": "6d0f4fc26f3f9af9d9b077868b609e09cd24dfe01427a8d07a873dd8720d26eb"
         },
         {
+          "path": "resources/scripts/chm-pictures.js",
+          "bytes": 3333,
+          "sha256": "5de4e404305b61db4e091797ed9ef3614fc425cc858e4783afbe3c26d2727d3d"
+        },
+        {
+          "path": "resources/scripts/chm-pictures.js.props",
+          "bytes": 86,
+          "sha256": "06275d84fd284a2c48312be127ecf5edadf9bdd4b44c6a7e41795a3cfa1cb15e"
+        },
+        {
           "path": "resources/stylesheets/desktop.css",
           "bytes": 656,
           "sha256": "b004554a1ef9adb6eb0dd87303d3f951c00668b254690f53c52dade37237ba18"
@@ -4410,8 +4410,8 @@
       "files": [
         {
           "path": ".statsdirect-desktop-help.json",
-          "bytes": 227815,
-          "sha256": "6b91ba34a3d1c8a04023d127a8c37a8f34cdda090110cd3c28046c0cea8a5528"
+          "bytes": 227814,
+          "sha256": "785d911f4a8c338990fa95dab63d3818595aeb1c7abe8d715f8af023885465a7"
         },
         {
           "path": ".statsdirect-help-output.json",
@@ -4686,7 +4686,7 @@
         {
           "path": "build-info.json",
           "bytes": 228,
-          "sha256": "b792a9e1d7b6c7637179390c98c9558ed47b46e1563a2795cc4355d5d4074249"
+          "sha256": "145218d256d4d4cbb9eccadffcc2aac4d87cf14f14a00455c2cbd228e5f7f530"
         },
         {
           "path": "chi_square_tests/22.htm",
@@ -7871,7 +7871,7 @@
         {
           "path": "resources/help-editor-runtime/publication.json",
           "bytes": 137,
-          "sha256": "cf61fc2e00cbb97842409c761464a940172dce5a2af856f6108d51a3c0471b5b"
+          "sha256": "ce02a4fc772e75cd9ff20b338a70729b22292a6b392465213222b7a443e11f98"
         },
         {
           "path": "resources/help-editor-runtime/topic.css",
@@ -8815,7 +8815,7 @@
         {
           "path": "manifest.json",
           "bytes": 11869,
-          "sha256": "589dce78391a812dccc4a6f2b1a2f1f5baed82b5091abe609b3d9452e8b3a768"
+          "sha256": "e9b1aedaacf661e1413284153d41db6c2428cfaf6cfe569e82e1df728e639b12"
         },
         {
           "path": "questions.json",

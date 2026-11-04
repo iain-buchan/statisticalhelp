@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "format": "statsdirect-desktop-help-v1",
-  "publishedAtUtc": "2026-11-04T20:50:07.5509134+00:00",
+  "publishedAtUtc": "2026-11-04T21:10:24.153992+00:00",
   "sourceSha256": "0956b1d07fd09eb703655fddbdd5baf9a8a7cdc2441db03a1c065ac3b1077311",
   "entryPage": "index.html",
   "topicCount": 404,
@@ -2307,7 +2307,7 @@
     {
       "path": "build-info.json",
       "bytes": 228,
-      "sha256": "b792a9e1d7b6c7637179390c98c9558ed47b46e1563a2795cc4355d5d4074249"
+      "sha256": "145218d256d4d4cbb9eccadffcc2aac4d87cf14f14a00455c2cbd228e5f7f530"
     },
     {
       "path": "chi_square_tests/22.htm",
@@ -5492,7 +5492,7 @@
     {
       "path": "resources/help-editor-runtime/publication.json",
       "bytes": 137,
-      "sha256": "cf61fc2e00cbb97842409c761464a940172dce5a2af856f6108d51a3c0471b5b"
+      "sha256": "ce02a4fc772e75cd9ff20b338a70729b22292a6b392465213222b7a443e11f98"
     },
     {
       "path": "resources/help-editor-runtime/topic.css",
@@ -6410,5 +6410,5 @@
       "sha256": "b64d6bb5aa7e1a3082ed0b154e935a5744c0aa9483f1dc008847fc35e28be12e"
     }
   ],
-  "publicationSnapshotSha256": "fc67c3b82e55aa77c8820e367b8a369604a793eaed73740223af8537e2c15978"
+  "publicationSnapshotSha256": "91d99b8da98f3b08d32f2f0c5f87368ca904cd21f3018343922cb04367bbcad6"
 }
