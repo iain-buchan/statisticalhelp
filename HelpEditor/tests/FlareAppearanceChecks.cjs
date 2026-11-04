@@ -2,9 +2,9 @@
 // No CSS resets or fixed content widths are injected. Pixel differences are
 // reported explicitly, including intentional source corrections, rather than
 // hidden by a broad screenshot tolerance.
-const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os');
+const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os'),crypto=require('node:crypto');
 const {chromium}=require('./browser-runtime.cjs');
-const {resolveFlareTarget}=require('./flare-baseline.cjs');
+const {resolveFlareTarget,readManifest}=require('./flare-baseline.cjs');
 let PNG;try{({PNG}=require('pngjs'));}catch{({PNG}=require(path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/pngjs')));}
 const root=path.resolve(__dirname,'..'),evidence=path.join(root,'evidence/FlareAppearance');
 const mounts={flare:resolveFlareTarget('Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
@@ -23,6 +23,30 @@ function pixels(beforeFile,afterFile,name,region){
  for(let y=0;y<diff.height;y++)for(let x=0;x<diff.width;x++){const ai=((y+Math.floor(area.y))*a.width+x+Math.floor(area.x))*4,di=(y*diff.width+x)*4;let d=0;for(let c=0;c<3;c++){const delta=Math.abs(a.data[ai+c]-b.data[ai+c]);d=Math.max(d,delta);sum+=delta;}if(d>0)changed++;if(d>8)material++;max=Math.max(max,d);diff.data[di]=d?255:b.data[ai];diff.data[di+1]=d?0:b.data[ai+1];diff.data[di+2]=d?0:b.data[ai+2];diff.data[di+3]=255;}
  const total=diff.width*diff.height;if(changed&&name)fs.writeFileSync(path.join(evidence,name+'-diff.png'),PNG.sync.write(diff));
  return{sameSize:true,region:area,totalPixels:total,changedPixels:changed,changedPercent:100*changed/total,changedOverEight:material,changedOverEightPercent:100*material/total,meanAbsoluteChannelDifference:sum/(total*3),maxChannelDifference:max,exact:changed===0};
+}
+function historicalLiveProof(){
+ const directory=path.join(__dirname,'FlareLiveBaseline'),receiptPath=path.join(directory,'receipt.json');
+ const folder=fs.lstatSync(directory);if(!folder.isDirectory()||folder.isSymbolicLink())throw new Error('Historical live proof must be a regular fixture directory');
+ const receiptInfo=fs.lstatSync(receiptPath);if(!receiptInfo.isFile()||receiptInfo.isSymbolicLink())throw new Error('Historical live proof receipt must be a regular file');
+ const receipt=JSON.parse(fs.readFileSync(receiptPath,'utf8'));
+ if(receipt.schemaVersion!==1||receipt.checkedAtUtc!=='2026-11-02T09:27:04.434Z'||receipt.liveUrl!=='https://statsdirect.com/help/'||receipt.topicUrl!=='https://statsdirect.com/help/contents.htm'||receipt.localTarget!=='Website'||typeof receipt.method!=='string'||!receipt.method.trim()||!/^[a-f0-9]{64}$/.test(receipt.originalReceiptSha256||''))throw new Error('Historical live proof has invalid capture provenance');
+ if(receipt.frozenFlareArchiveSha256!==readManifest().archive.sha256)throw new Error('Historical live proof is not bound to this frozen Flare archive');
+ if(!Array.isArray(receipt.viewports)||receipt.viewports.length!==viewports.length)throw new Error('Historical live proof must contain all three expected viewports');
+ const files=new Set(['receipt.json']);
+ const proof=viewports.map((viewport,index)=>{
+  const row=receipt.viewports[index];if(!row||row.viewport?.width!==viewport.width||row.viewport?.height!==viewport.height||row.viewport?.deviceScaleFactor!==1)throw new Error('Historical live proof viewport differs from the required capture');
+  const images=['live','local'].map(kind=>{
+   const pin=row[kind],name=kind+'-'+viewport.width+'.png';
+   if(!pin||pin.file!==name||!Number.isSafeInteger(pin.bytes)||pin.bytes<=0||pin.bytes>2_000_000||!/^[a-f0-9]{64}$/.test(pin.sha256||''))throw new Error('Historical live proof has an invalid PNG pin: '+name);
+   const file=path.join(directory,name),info=fs.lstatSync(file);if(!info.isFile()||info.isSymbolicLink()||info.size!==pin.bytes)throw new Error('Historical live proof PNG size/type differs: '+name);
+   const bytes=fs.readFileSync(file);if(crypto.createHash('sha256').update(bytes).digest('hex')!==pin.sha256)throw new Error('Historical live proof PNG checksum differs: '+name);
+   const png=PNG.sync.read(bytes);if(png.width!==viewport.width||png.height!==viewport.height)throw new Error('Historical live proof PNG dimensions differ: '+name);
+   files.add(name);return file;
+  });
+  return{width:viewport.width,pixels:pixels(...images)};
+ });
+ if(fs.readdirSync(directory).length!==files.size||fs.readdirSync(directory).some(name=>!files.has(name)))throw new Error('Historical live proof contains unexpected fixture files');
+ return{receipt,proof};
 }
 async function ready(page,isEditor){
  if(isEditor){await page.waitForFunction(()=>!!window.StatsDirectHelp,{timeout:15000});await page.locator('#topic').waitFor();const frame=page.frames().find(f=>f.parentFrame()===page.mainFrame()),surface=frame||page.mainFrame();await surface.waitForFunction(()=>!!document.body&&document.readyState==='complete');await surface.waitForFunction(()=>[...document.images].every(i=>i.complete));if(await surface.evaluate(()=>!!window.MathJax?.startup?.promise))await surface.evaluate(()=>MathJax.startup.promise);}
@@ -51,16 +75,16 @@ function compare(topic,width,before,after){
  const figures=before.figures.map((e,i)=>({index:i,src:e.src,differences:metricDifferences(e,after.figures[i],[...geometry,'naturalWidth','naturalHeight'])})).filter(e=>e.differences.length);check(topic,width,'Figures retain natural and rendered dimensions and positions',before.figures.length===after.figures.length&&!figures.length,{beforeCount:before.figures.length,afterCount:after.figures.length,figures});
 }
 (async()=>{let browser;try{
- fs.mkdirSync(evidence,{recursive:true});await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;
+ fs.mkdirSync(evidence,{recursive:true});const historical=historicalLiveProof();await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;
  browser=await chromium.launch({channel:'msedge',headless:true});const context=await browser.newContext();
  await context.route('**/*',route=>{const url=route.request().url();if(url.startsWith(origin+'/')||/^(data|blob):/.test(url))return route.continue();return route.abort();});
  for(const viewport of viewports){await context.setDefaultTimeout(15000);const pages=[await context.newPage(),await context.newPage()];for(const page of pages){await page.setViewportSize(viewport);page.on('pageerror',e=>errors.push({width:viewport.width,url:page.url(),message:e.message}));page.on('response',r=>{if(r.status()>=400)networkFailures.push({url:r.url(),status:r.status()});});}
   for(const topic of topics){const metrics=[],files=[];for(let i=0;i<2;i++){const kind=i?'editor':'flare',page=pages[i],name=kind+'-'+viewport.width+'-'+topic.replace(/[/.]/g,'-');await page.goto(origin+'/'+kind+'/'+topic,{waitUntil:'load'});await ready(page,!!i);await page.mouse.move(viewport.width-1,viewport.height-1);metrics.push(await inspect(page,!!i));const file=path.join(evidence,name+'.png');await page.screenshot({path:file});files.push(file);}compare(topic,viewport.width,...metrics);const full=pixels(...files,'viewport-'+viewport.width+'-'+topic.replace(/[/.]/g,'-')),header=pixels(...files,null,{x:0,y:0,width:viewport.width,height:Math.round(metrics[0].header.height)});captures.push({topic,viewport,metrics,files,fullPixels:full,headerPixels:header});}
   await Promise.all(pages.map(p=>p.close()));
  }
- const baselineLive=JSON.parse(fs.readFileSync(path.join(root,'evidence/FlareLiveBaseline/baseline.json'),'utf8'));const liveProof=viewports.map(v=>({width:v.width,pixels:pixels(path.join(root,'evidence/FlareLiveBaseline/live-'+v.width+'.png'),path.join(root,'evidence/FlareLiveBaseline/local-'+v.width+'.png'))}));
- check('baseline',0,'Local Flare baseline matches the live published contents pixel for pixel at every tested viewport',liveProof.every(x=>x.pixels.exact),liveProof);
- const report={checkedAtUtc:new Date().toISOString(),passed:checks.every(c=>c.passed)&&!errors.length&&!networkFailures.length,method:'Matched natural viewport and deterministic Edge engine; no injected layout normalization; exact geometry and computed text metrics checked with only 0.2px rounding allowance. Visible flow blocks are compared beyond the first paragraph, including after oversized equations; only the explicitly corrected reference list is excluded from this body-flow comparison. Pixel differences explicitly retained. 251 original equation SVG assets equal live bytes; 7 source-corrected equations use the newer local Flare baseline.',mounts,liveProof,baselineCheckedAtUtc:baselineLive.checkedAtUtc,checks,captures,errors,networkFailures};
+ const liveProof=historical.proof;
+ check('baseline',0,'Archived local Flare baseline matches its original live captures pixel for pixel at every tested viewport',liveProof.every(x=>x.pixels.exact),liveProof);
+ const report={checkedAtUtc:new Date().toISOString(),passed:checks.every(c=>c.passed)&&!errors.length&&!networkFailures.length,method:'Matched natural viewport and deterministic Edge engine; no injected layout normalization; exact geometry and computed text metrics checked with only 0.2px rounding allowance. Visible flow blocks are compared beyond the first paragraph, including after oversized equations; only the explicitly corrected reference list is excluded from this body-flow comparison. Pixel differences explicitly retained. 251 original equation SVG assets equal live bytes; 7 source-corrected equations use the newer local Flare baseline.',mounts,liveProof,baselineCheckedAtUtc:historical.receipt.checkedAtUtc,baselineLiveUrl:historical.receipt.liveUrl,baselineProofArchiveSha256:historical.receipt.frozenFlareArchiveSha256,checks,captures,errors,networkFailures};
  fs.writeFileSync(path.join(evidence,'appearance-checks.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({passed:report.passed,checks:checks.length,failed:checks.filter(c=>!c.passed).length,exactFullScreens:captures.filter(c=>c.fullPixels.exact).length,exactHeaders:captures.filter(c=>c.headerPixels.exact).length,captures:captures.length,errors,networkFailures},null,2));if(!report.passed)process.exitCode=1;
  }finally{if(browser)await browser.close();server.close();}
-})().catch(e=>{console.error(e);server.close();process.exitCode=1;});
+})().catch(e=>{fs.mkdirSync(evidence,{recursive:true});fs.writeFileSync(path.join(evidence,'appearance-checks.json'),JSON.stringify({checkedAtUtc:new Date().toISOString(),passed:false,error:e.stack||String(e),checks,captures,errors,networkFailures},null,2));console.error(e);server.close();process.exitCode=1;});

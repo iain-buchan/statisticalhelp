@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "checkedAtUtc": "2026-11-02T09:27:04.434Z",
+  "liveUrl": "https://statsdirect.com/help/",
+  "topicUrl": "https://statsdirect.com/help/contents.htm",
+  "method": "Original Playwright Microsoft Edge captures at natural viewports/DPR1, after page load and 1200 ms settling; no injected layout normalization. Original live/local PNG bytes are retained unchanged. This is historical proof, not a fresh website availability check.",
+  "originalReceiptSha256": "06be1cd1946da2ae5fb1f9bd84ce006f71eee283046039a417c5fcbe34fdf7f9",
+  "frozenFlareArchiveSha256": "1c1bdbede80a6062393d8a49986461484b68ba803bec0ed169e3489f29cf6b13",
+  "localTarget": "Website",
+  "viewports": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 900,
+        "deviceScaleFactor": 1
+      },
+      "live": {
+        "file": "live-1280.png",
+        "bytes": 61195,
+        "sha256": "7249e3ae0b8da531e21e4e8cd15822cbdcb07ecbe93f67eb4e39f8f58e048f8d"
+      },
+      "local": {
+        "file": "local-1280.png",
+        "bytes": 61195,
+        "sha256": "7249e3ae0b8da531e21e4e8cd15822cbdcb07ecbe93f67eb4e39f8f58e048f8d"
+      }
+    },
+    {
+      "viewport": {
+        "width": 900,
+        "height": 900,
+        "deviceScaleFactor": 1
+      },
+      "live": {
+        "file": "live-900.png",
+        "bytes": 37476,
+        "sha256": "96085cbe283af0d3a4c5d4aec6f3e7fb5ca381d67fc6f13fe39113bd448d2e0b"
+      },
+      "local": {
+        "file": "local-900.png",
+        "bytes": 37476,
+        "sha256": "96085cbe283af0d3a4c5d4aec6f3e7fb5ca381d67fc6f13fe39113bd448d2e0b"
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "deviceScaleFactor": 1
+      },
+      "live": {
+        "file": "live-390.png",
+        "bytes": 33555,
+        "sha256": "3dd62c3d92fc3fbd8f764a2b0655f2e870b175fa1596874e56da37023941afd6"
+      },
+      "local": {
+        "file": "local-390.png",
+        "bytes": 33555,
+        "sha256": "3dd62c3d92fc3fbd8f764a2b0655f2e870b175fa1596874e56da37023941afd6"
+      }
+    }
+  ]
+}

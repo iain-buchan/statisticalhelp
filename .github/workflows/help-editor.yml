@@ -153,4 +153,5 @@ jobs:
           path: |
             ${{ env.HELP_REGRESSION_ROOT }}/regression-workspace.json
             ${{ env.HELP_REGRESSION_ROOT }}/evidence/BrowserRegression-All/**
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/FlareAppearance/**
             ${{ env.HELP_REGRESSION_ROOT }}/evidence/*.json
