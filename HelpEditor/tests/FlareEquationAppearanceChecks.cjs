@@ -3,9 +3,10 @@
 // older pictures, as recorded separately in FlareLiveBaseline.
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os'),crypto=require('node:crypto');
 const {chromium}=require('./browser-runtime.cjs');
+const {resolveFlareTarget}=require('./flare-baseline.cjs');
 let PNG;try{({PNG}=require('pngjs'));}catch{({PNG}=require(path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/pngjs')));}
 const root=path.resolve(__dirname,'..'),source=path.join(root,'HelpSource/Content'),evidence=path.join(root,'evidence/FlareEquationAppearance');
-const mounts={flare:path.resolve(process.env.STATSDIRECT_FLARE_WEBSITE||'C:/Develop/SD3Help/StatsDirect/Output/ieb21/Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
+const mounts={flare:resolveFlareTarget('Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
 const topics=[];function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const file=path.join(dir,e.name);if(e.isDirectory())walk(file);else if(/\.htm$/i.test(file)&&/<(?:MadCap|sdh):equation\b/i.test(fs.readFileSync(file,'utf8')))topics.push(path.relative(source,file).replaceAll('\\','/').toLowerCase());}}walk(source);topics.sort();
 const mime={'.htm':'text/html','.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.gif':'image/gif','.jpg':'image/jpeg','.json':'application/json','.xml':'application/xml','.woff':'font/woff','.woff2':'font/woff2'};
 const server=http.createServer((req,res)=>{const parts=decodeURIComponent(new URL(req.url,'http://localhost').pathname).split('/').filter(Boolean),mount=mounts[parts.shift()],file=mount&&path.resolve(mount,...parts);if(!file||!file.startsWith(mount+path.sep)){res.writeHead(403).end();return;}try{res.setHeader('Content-Type',mime[path.extname(file).toLowerCase()]||'application/octet-stream');res.end(fs.readFileSync(file));}catch{res.writeHead(404).end();}});

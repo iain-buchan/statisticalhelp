@@ -19,8 +19,10 @@ $Root = [IO.Path]::GetFullPath($Root)
 if (-not $OutputDirectory) { $OutputDirectory = Join-Path $Root 'evidence' }
 $OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory)
 $testRoot = Join-Path $OutputDirectory ('InstallerPackageCheck-' + [Guid]::NewGuid().ToString('N'))
-$extract = Join-Path $testRoot 'extracted'
-New-Item -ItemType Directory -Path $extract -Force | Out-Null
+New-Item -ItemType Directory -Path $testRoot -Force | Out-Null
+$extract = $null
+$extractedRoot = $null
+$extractionPathValidation = $null
 $checks = [Collections.Generic.List[object]]::new()
 function Check([string]$Name, [bool]$Passed, [object]$Detail = $null) {
     $checks.Add([pscustomobject]@{name=$Name;passed=$Passed;detail=$Detail})
@@ -132,6 +134,16 @@ try {
         if ($parent) { return (Join-Path $parent $leaf) }
         return $leaf
     }
+    function AdministrativeDirectory([string]$Id) {
+        if (-not $directories.ContainsKey($Id)) { throw ('Unknown administrative-image directory: ' + $Id) }
+        $entry = $directories[$Id]
+        if (-not $entry.Directory_Parent) { return '' }
+        $parent = AdministrativeDirectory $entry.Directory_Parent
+        $leaf = $entry.DefaultDir.Split(':')[0].Split('|')[-1]
+        if ($leaf -eq '.') { return $parent }
+        if ($parent) { return (Join-Path $parent $leaf) }
+        return $leaf
+    }
     $files = @(Rows 'File' @('File', 'Component_', 'FileName', 'FileSize'))
     $packaged = @{}
     foreach ($file in $files) { $folder = RelativeDirectory $components[$file.Component_].Directory_; $leaf = $file.FileName.Split('|')[-1]; $relative = if ($folder) { Join-Path $folder $leaf } else { $leaf }; $packaged[$relative] = $file }
@@ -189,6 +201,42 @@ try {
     $embeddedRuntime = Join-Path (Join-Path $bundleContents $runtimePayload.Container) $runtimePayload.FilePath
     $embeddedRuntimeSignature = if (Test-Path -LiteralPath $embeddedRuntime -PathType Leaf) { Get-AuthenticodeSignature -LiteralPath $embeddedRuntime } else { $null }
     Check 'The setup EXE embeds a trusted Microsoft WebView2 bootstrapper' ($embeddedRuntimeSignature.Status -eq 'Valid' -and $embeddedRuntimeSignature.SignerCertificate.Subject -match '(^|,\s*)O=Microsoft Corporation(,|$)')
+    # Windows Installer's native administrative-image writer still has a path
+    # length limit. Keep its payload separate from arbitrarily deep evidence
+    # folders; the complete logs and the actual extraction location stay here.
+    $administrativePaths = @($files | ForEach-Object {
+        $folder = AdministrativeDirectory $components[$_.Component_].Directory_
+        $leaf = $_.FileName.Split('|')[-1]
+        if ($folder) { Join-Path $folder $leaf } else { $leaf }
+    })
+    $temporaryParents = @([IO.Path]::GetTempPath(), (Join-Path ([IO.Path]::GetPathRoot([Environment]::SystemDirectory)) 'Temp')) | Select-Object -Unique
+    $pathProblems = [Collections.Generic.List[string]]::new()
+    foreach ($temporaryParent in $temporaryParents) {
+        try {
+            $temporaryParent = [IO.Path]::GetFullPath($temporaryParent).TrimEnd([IO.Path]::DirectorySeparatorChar)
+            if (-not (Test-Path -LiteralPath $temporaryParent -PathType Container)) { throw 'Temporary parent does not exist.' }
+            $ancestor = [IO.DirectoryInfo]::new($temporaryParent)
+            while ($ancestor) {
+                if (($ancestor.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw 'Temporary parent is linked.' }
+                $ancestor = $ancestor.Parent
+            }
+            $candidate = Join-Path $temporaryParent ('sdhe-audit-' + [Guid]::NewGuid().ToString('N').Substring(0, 12))
+            if (Test-Path -LiteralPath $candidate) { throw 'Temporary extraction name is already occupied.' }
+            $longestPath = 0
+            foreach ($relative in $administrativePaths) {
+                $fullPath = [IO.Path]::GetFullPath((Join-Path $candidate $relative))
+                if (-not $fullPath.StartsWith($candidate + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw 'An administrative path escapes extraction.' }
+                $longestPath = [Math]::Max($longestPath, $fullPath.Length)
+            }
+            if ($longestPath -ge 250) { throw ('Native administrative paths are too long: ' + $longestPath) }
+            New-Item -ItemType Directory -Path $candidate -ErrorAction Stop | Out-Null
+            $extract = $candidate
+            $extractionPathValidation = [pscustomobject]@{temporaryParent=$temporaryParent;longestExpectedFilePath=$longestPath;newUnlinkedDirectory=$true}
+            break
+        } catch { $pathProblems.Add($temporaryParent + ': ' + $_.Exception.Message) }
+    }
+    if (-not $extract) { throw ('No safe short native-temporary extraction directory is available. ' + ($pathProblems -join ' ')) }
+    Check 'Administrative extraction uses a new short, unlinked native-temporary directory' $true $extractionPathValidation
     $beforeHash = Hash $Msi
     $extractLog = Join-Path $testRoot 'administrative-extract.log'
     $process = Start-Process -FilePath (Join-Path $env:WINDIR 'System32\msiexec.exe') -ArgumentList @('/a', ('"' + $Msi + '"'), '/qn', ('TARGETDIR="' + $extract + '"'), '/l*v', ('"' + $extractLog + '"')) -WindowStyle Hidden -PassThru -Wait
@@ -199,7 +247,9 @@ try {
         $extractedRoot = Split-Path -Parent $executables[0].FullName
         $differences = @()
         foreach ($file in $payloadFiles) { $relative = $file.FullName.Substring($PayloadDirectory.Length + 1); $copy = Join-Path $extractedRoot $relative; if (-not (Test-Path -LiteralPath $copy -PathType Leaf) -or (Hash $copy) -ne (Hash $file.FullName)) { $differences += $relative } }
-        Check 'Every administratively extracted file matches the staged payload SHA256' ($differences.Count -eq 0) $differences
+        $extractedFiles = @(Get-ChildItem -LiteralPath $extractedRoot -File -Recurse)
+        $unexpectedFiles = @($extractedFiles | Where-Object { -not $packaged.ContainsKey($_.FullName.Substring($extractedRoot.Length + 1)) } | ForEach-Object { $_.FullName.Substring($extractedRoot.Length + 1) })
+        Check 'Every administratively extracted file matches the exact staged payload SHA256 inventory' ($differences.Count -eq 0 -and $unexpectedFiles.Count -eq 0 -and $extractedFiles.Count -eq $payloadFiles.Count) ([pscustomobject]@{compared=$payloadFiles.Count;extracted=$extractedFiles.Count;differences=$differences;unexpectedFiles=$unexpectedFiles})
     }
     if ($RequireSigned) {
         foreach ($file in @($Msi, $Bundle, (Join-Path $PayloadDirectory 'StatsDirectHelpEditor.exe'), (Join-Path $PayloadDirectory 'Builder\StatsDirectHelpBuilder.exe'))) { $signature = Get-AuthenticodeSignature -LiteralPath $file; Check ('Valid timestamped signature: ' + (Split-Path -Leaf $file)) ($signature.Status -eq 'Valid' -and [bool]$signature.TimeStamperCertificate) }
@@ -211,7 +261,7 @@ finally {
 }
 $passed = @($checks | Where-Object passed).Count
 $failed = @($checks | Where-Object { -not $_.passed }).Count
-$report = [ordered]@{checkedAtUtc=[DateTimeOffset]::UtcNow.ToString('o');passed=$passed;failed=$failed;administrativeExtractionOnly=$true;checks=@($checks)}
+$report = [ordered]@{checkedAtUtc=[DateTimeOffset]::UtcNow.ToString('o');passed=$passed;failed=$failed;administrativeExtractionOnly=$true;administrativeExtractionDirectory=$extract;extractedPayloadDirectory=$extractedRoot;extractionPathValidation=$extractionPathValidation;checks=@($checks)}
 $reportPath = Join-Path $testRoot 'installer-package-checks.json'
 [IO.File]::WriteAllText($reportPath, ($report | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllText((Join-Path $OutputDirectory 'installer-package-checks.json'), ($report | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))

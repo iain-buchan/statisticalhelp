@@ -17,15 +17,20 @@ public sealed partial class GitSyncService
         (clean.Equals(WebsitePath, StringComparison.Ordinal) || clean.StartsWith(WebsitePath + "/", StringComparison.Ordinal));
 
     /// <summary>Rebuild Public help before committing. Only the independent checkout's Docs is replaced.</summary>
-    public async Task<WebsitePublication> PrepareWebsiteAsync(string runtimeAssetsDirectory, CancellationToken ct = default)
+    public Task<WebsitePublication> PrepareWebsiteAsync(string runtimeAssetsDirectory, CancellationToken ct = default) =>
+        PrepareWebsiteCoreAsync(staging => Task.Run(() => HelpBuilder.Build(project, staging, runtimeAssetsDirectory, HelpBuildTarget.Public), ct), ct);
+
+    private async Task<WebsitePublication> PrepareWebsiteCoreAsync(Func<string, Task<BuildResult>> prepare, CancellationToken ct, bool uniqueStaging = false)
     {
         var status = await RequireRepositoryAsync(ct);
         await RejectOutsideStagedChangesAsync(ct, includeWebsite: true);
-        var gitDirectory = await RunAsync(project.RootPath, ["rev-parse", "--absolute-git-dir"], ct);
+        var gitDirectory = await RunAsync(RepositoryRoot, ["rev-parse", "--absolute-git-dir"], ct);
         string pendingPath = SafePaths.Resolve(gitDirectory.Output.Trim(), "statsdirect-help-website-pending.json");
-        string docs = SafePaths.Resolve(project.RootPath, WebsitePath);
+        string docs = SafePaths.Resolve(RepositoryRoot, WebsitePath);
+        bool pinWebsiteBytes = ScopedSourcePrivacy || HasPublicationAttributes(docs);
+        if (pinWebsiteBytes) RequirePublicationAttributes(docs);
         var before = WebsiteFiles(docs);
-        bool previousPrepared = TryReadWebsiteReceipt(docs, out var previous) && SameFiles(before, previous!.Files);
+        bool previousPrepared = TryReadWebsiteReceipt(docs, out var previous) && previous!.Schema == 1 && SameFiles(before, previous.Files);
         PendingWebsiteCopy? pending = null;
         try { if (File.Exists(pendingPath)) pending = JsonSerializer.Deserialize<PendingWebsiteCopy>(File.ReadAllText(pendingPath)); }
         catch (JsonException) { }
@@ -37,7 +42,7 @@ public sealed partial class GitSyncService
         if (edited.Length > 0 && !previousPrepared && !resumable)
             throw new InvalidOperationException("Docs has changes outside a complete editor-generated website. Save those changes separately or restore them before rebuilding; nothing was overwritten.");
 
-        var tracked = await RunAsync(project.RootPath, ["ls-files", "-z", "--", WebsitePath], ct);
+        var tracked = await RunAsync(RepositoryRoot, ["ls-files", "-z", "--", WebsitePath], ct);
         var owned = tracked.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries).Select(path => path[(WebsitePath.Length + 1)..]).ToHashSet(StringComparer.Ordinal);
         if (previousPrepared) owned.UnionWith(previous!.Files.Keys);
         if (resumable) { owned.UnionWith(pending!.Before!.Keys); owned.UnionWith(pending!.After!.Keys); }
@@ -46,9 +51,9 @@ public sealed partial class GitSyncService
             throw new InvalidOperationException("Docs contains untracked files that would be replaced. Move them elsewhere before rebuilding: " + string.Join(", ", unowned.Take(5)));
 
         // Git-private staging permits a failed source build to leave Docs intact.
-        string staging = SafePaths.Resolve(gitDirectory.Output.Trim(), "statsdirect-help-website-build");
+        string staging = SafePaths.Resolve(gitDirectory.Output.Trim(), "statsdirect-help-website-build" + (uniqueStaging ? "-" + Guid.NewGuid().ToString("N") : ""));
         string sourceHash = SourceHash();
-        var built = await Task.Run(() => HelpBuilder.Build(project, staging, runtimeAssetsDirectory, HelpBuildTarget.Public), ct);
+        var built = await prepare(staging);
         ct.ThrowIfCancellationRequested();
         if (sourceHash != SourceHash()) throw new InvalidOperationException("Help source changed during the website build. Rebuild before committing; Docs was not changed.");
         if (!SameFiles(before, WebsiteFiles(docs))) throw new InvalidOperationException("Docs changed during the website build. Rebuild after reviewing those changes; nothing was overwritten.");
@@ -64,6 +69,7 @@ public sealed partial class GitSyncService
         // This is ownership evidence for retry, never a publishable completion receipt.
         var intended = new Dictionary<string, string>(generated, StringComparer.Ordinal);
         if (!before.ContainsKey(".nojekyll")) intended[".nojekyll"] = Convert.ToHexString(SHA256.HashData([]));
+        if (pinWebsiteBytes) intended[".gitattributes"] = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes("* -text\n")));
         SafePaths.AtomicWrite(pendingPath, JsonSerializer.Serialize(new PendingWebsiteCopy(before, intended)));
         foreach (string path in generated.Keys)
         {
@@ -74,9 +80,10 @@ public sealed partial class GitSyncService
             try { File.Copy(SafePaths.Resolve(staging, path), temporary); File.Move(temporary, destination, overwrite: true); }
             finally { if (File.Exists(temporary)) File.Delete(temporary); }
         }
-        foreach (string path in before.Keys.Except(generated.Keys).Where(path => !WebsiteMetadata.Contains(path, StringComparer.Ordinal)))
+        foreach (string path in before.Keys.Except(generated.Keys).Where(path => !WebsiteMetadata.Contains(path, StringComparer.Ordinal) && !(pinWebsiteBytes && path == ".gitattributes")))
             File.Delete(SafePaths.Resolve(docs, path));
         if (!File.Exists(Path.Combine(docs, ".nojekyll"))) SafePaths.AtomicWrite(Path.Combine(docs, ".nojekyll"), "");
+        if (pinWebsiteBytes) SafePaths.AtomicWrite(Path.Combine(docs, ".gitattributes"), "* -text\n");
         ct.ThrowIfCancellationRequested();
         if (sourceHash != SourceHash()) throw new InvalidOperationException("Source changed while the website was copied. Rebuild before committing or pushing.");
         var receipt = new WebsiteReceipt(1, sourceHash, built.TopicCount, WebsiteFiles(docs));
@@ -94,38 +101,58 @@ public sealed partial class GitSyncService
     }
 
     /// <summary>A working-branch push is ready for review; merging to master triggers the existing Pages deployment.</summary>
-    public async Task<string> PushWebsiteAsync(CancellationToken ct = default)
+    public Task<string> PushWebsiteAsync(CancellationToken ct = default) => PushVerifiedWebsiteAsync(false, ct);
+
+    public Task<string> PushPreparedWebsiteAsync(bool allowDefaultBranchPublication, CancellationToken ct = default)
+    {
+        if (!publicationLayout) throw new InvalidOperationException("Reviewed publication requires an explicit Git publication layout.");
+        return PushVerifiedWebsiteAsync(allowDefaultBranchPublication, ct);
+    }
+
+    public Task<string> PushPreparedWebsiteAsync(string expectedCommit, bool allowDefaultBranchPublication, CancellationToken ct = default)
+    {
+        if (!publicationLayout) throw new InvalidOperationException("Reviewed publication requires an explicit Git publication layout.");
+        if (!System.Text.RegularExpressions.Regex.IsMatch(expectedCommit ?? "", "\\A(?:[0-9a-fA-F]{40}|[0-9a-fA-F]{64})\\z"))
+            throw new ArgumentException("Supply the exact reviewed commit SHA.", nameof(expectedCommit));
+        return PushVerifiedWebsiteAsync(allowDefaultBranchPublication, ct, expectedCommit!.ToLowerInvariant());
+    }
+
+    private async Task<string> PushVerifiedWebsiteAsync(bool allowDefaultBranchPublication, CancellationToken ct, string? expectedCommit = null)
     {
         var status = await RequireRepositoryAsync(ct);
-        string verifiedCommit = (await RunAsync(project.RootPath, ["rev-parse", "HEAD"], ct)).Output.Trim();
+        string verifiedCommit = (await RunAsync(RepositoryRoot, ["rev-parse", "HEAD"], ct)).Output.Trim();
+        if (publicationLayout && (verifiedCommit != (reviewedPublicationCommit ?? publicationBaseCommit) || expectedCommit != null && verifiedCommit != expectedCommit))
+            throw new InvalidOperationException("HEAD changed from the reviewed publication commit. Start with a fresh review before pushing; no unrelated commit was published.");
         VerifyWebsite();
         if (status.Changes.Any(change => change.IsSource || IsWebsitePath(change.Path) || change.OriginalPath is { } old && IsWebsitePath(old)))
             throw new InvalidOperationException("Saved source or website files have uncommitted changes. Rebuild and commit the source and website together before pushing.");
-        var committed = await RunAsync(project.RootPath, ["show", verifiedCommit + ":" + WebsitePath + "/" + WebsiteReceiptName], ct, allowFailure: true);
-        TryReadWebsiteReceipt(SafePaths.Resolve(project.RootPath, WebsitePath), out var current);
+        var committed = await RunAsync(RepositoryRoot, ["show", verifiedCommit + ":" + WebsitePath + "/" + WebsiteReceiptName], ct, allowFailure: true);
+        TryReadWebsiteReceipt(SafePaths.Resolve(RepositoryRoot, WebsitePath), out var current);
         WebsiteReceipt? saved = null;
         try { if (committed.ExitCode == 0) saved = JsonSerializer.Deserialize<WebsiteReceipt>(committed.Output); }
         catch (JsonException) { }
         // Git can normalize CRLF/LF in JSON. Compare its data, not serialized newlines.
         if (saved?.Schema != current!.Schema || saved.SourceHash != current.SourceHash || saved.TopicCount != current.TopicCount || saved.Files is null || !SameFiles(saved.Files, current.Files))
             throw new InvalidOperationException("The current commit has no matching generated website. Rebuild and commit before pushing.");
-        return await PushCoreAsync(verifiedCommit, status.Branch, ct);
+        if (ScopedSourcePrivacy || HasPublicationAttributes(SafePaths.Resolve(RepositoryRoot, WebsitePath))) await VerifyRawPublicationFilesAsync(ct, commit: verifiedCommit);
+        return await PushCoreAsync(verifiedCommit, status.Branch, ct, allowDefaultBranchPublication);
     }
 
     private async Task VerifyWebsiteForCommitAsync(CancellationToken ct, IReadOnlyDictionary<string, string>? environment = null)
     {
         VerifyWebsite();
         // An ignored source file must not influence a site while being omitted from its commit.
-        var indexed = await RunAsync(project.RootPath, ["ls-files", "-z", "--", .. SourcePaths, WebsitePath], ct, environment: environment);
-        var expected = SourceFiles().Concat(WebsiteFiles(SafePaths.Resolve(project.RootPath, WebsitePath)).Keys.Select(path => WebsitePath + "/" + path))
+        var indexed = await RunAsync(RepositoryRoot, ["ls-files", "-z", "--", .. CommitPathSpecs(ScopedSourcePaths.Append(WebsitePath).ToArray())], ct, environment: environment);
+        var expected = SourceFiles().Concat(WebsiteFiles(SafePaths.Resolve(RepositoryRoot, WebsitePath)).Keys.Select(path => WebsitePath + "/" + path))
             .Append(WebsitePath + "/" + WebsiteReceiptName).ToHashSet(StringComparer.Ordinal);
         var actual = indexed.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries).ToHashSet(StringComparer.Ordinal);
         if (!expected.SetEquals(actual)) throw new InvalidOperationException("Some source or website files are ignored or not staged. Check .gitignore before committing; the website and source must be saved together.");
+        if (ScopedSourcePrivacy || HasPublicationAttributes(SafePaths.Resolve(RepositoryRoot, WebsitePath))) await VerifyRawPublicationFilesAsync(ct, environment);
     }
 
     private void VerifyWebsite()
     {
-        string docs = SafePaths.Resolve(project.RootPath, WebsitePath);
+        string docs = SafePaths.Resolve(RepositoryRoot, WebsitePath);
         if (!TryReadWebsiteReceipt(docs, out var receipt) || receipt!.Schema != 1 || receipt.TopicCount == 0 || receipt.SourceHash != SourceHash() || !SameFiles(receipt.Files, WebsiteFiles(docs)))
             throw new InvalidOperationException("The generated GitHub website is missing, changed or out of date. Rebuild the website before committing or pushing.");
     }
@@ -144,17 +171,17 @@ public sealed partial class GitSyncService
         using var digest = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
         foreach (string path in SourceFiles())
         {
-            digest.AppendData(Encoding.UTF8.GetBytes(path + "\0" + FileHash(SafePaths.Resolve(project.RootPath, path)) + "\n"));
+            digest.AppendData(Encoding.UTF8.GetBytes(path + "\0" + FileHash(SafePaths.Resolve(RepositoryRoot, path)) + "\n"));
         }
         return Convert.ToHexString(digest.GetHashAndReset());
     }
 
-    private IEnumerable<string> SourceFiles() => SourcePaths.SelectMany(path =>
+    private IEnumerable<string> SourceFiles() => ScopedSourcePaths.SelectMany(path =>
     {
-        string full = SafePaths.Resolve(project.RootPath, path);
-        return Directory.Exists(full) ? CheckedFiles(full).Select(file => Path.GetRelativePath(project.RootPath, file).Replace('\\', '/'))
+        string full = SafePaths.Resolve(RepositoryRoot, path);
+        return Directory.Exists(full) ? CheckedFiles(full).Select(file => Path.GetRelativePath(RepositoryRoot, file).Replace('\\', '/'))
             : File.Exists(full) ? new[] { path } : [];
-    }).Order(StringComparer.Ordinal);
+    }).Where(IsScopedSourcePath).Order(StringComparer.Ordinal);
 
     private static Dictionary<string, string> WebsiteFiles(string directory) => !Directory.Exists(directory) ? new(StringComparer.Ordinal)
         : CheckedFiles(directory).Where(file => Path.GetRelativePath(directory, file).Replace('\\', '/') != WebsiteReceiptName)

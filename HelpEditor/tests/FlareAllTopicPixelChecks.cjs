@@ -2,9 +2,10 @@
 // Intentional source edits are classified, never silently excluded from pixels.
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os'),crypto=require('node:crypto');
 const {chromium}=require('./browser-runtime.cjs');
+const {resolveFlareTarget}=require('./flare-baseline.cjs');
 let PNG;try{({PNG}=require('pngjs'));}catch{({PNG}=require(path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/pngjs')));}
 const root=path.resolve(__dirname,'..'),source=path.join(root,'HelpSource/Content'),evidence=path.join(root,'evidence',process.env.STATSDIRECT_PIXEL_EVIDENCE_NAME||'FlareAllTopicPixels');
-const mounts={flare:path.resolve(process.env.STATSDIRECT_FLARE_WEBSITE||'C:/Develop/SD3Help/StatsDirect/Output/ieb21/Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
+const mounts={flare:resolveFlareTarget('Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
 const topics=[];function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const f=path.join(dir,e.name);if(e.isDirectory())walk(f);else if(/\.htm$/i.test(f))topics.push(path.relative(source,f).replaceAll('\\','/').toLowerCase());}}walk(source);topics.sort();
 const filter=process.env.STATSDIRECT_PIXEL_TOPIC_FILTER;if(filter)topics.splice(0,topics.length,...topics.filter(t=>new RegExp(filter,'i').test(t)));
 const mime={'.htm':'text/html','.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.gif':'image/gif','.jpg':'image/jpeg','.json':'application/json','.xml':'application/xml','.woff':'font/woff','.woff2':'font/woff2','.ico':'image/x-icon'};

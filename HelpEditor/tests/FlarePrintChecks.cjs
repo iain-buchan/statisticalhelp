@@ -4,8 +4,9 @@
 // STATSDIRECT_PYTHON and STATSDIRECT_POPPLER_PATH can select local installations.
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os'),{spawnSync}=require('node:child_process');
 const {chromium}=require('./browser-runtime.cjs');
+const {resolveFlareTarget}=require('./flare-baseline.cjs');
 const root=path.resolve(__dirname,'..'),evidence=path.join(root,'evidence/FlarePrintChecks');
-const mounts={flare:path.resolve(process.env.STATSDIRECT_FLARE_WEBSITE||'C:/Develop/SD3Help/StatsDirect/Output/ieb21/Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
+const mounts={flare:resolveFlareTarget('Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
 const runtime=path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies');
 const python=process.env.STATSDIRECT_PYTHON||path.join(runtime,'python/python.exe'),poppler=process.env.STATSDIRECT_POPPLER_PATH||path.join(runtime,'native/poppler/Library/bin');
 const topics=['references/reference_list.htm','analysis_of_variance/one_way.htm'];

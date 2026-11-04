@@ -2,8 +2,9 @@
 // accessibility content and must never stand in for the visible image here.
 const fs = require('node:fs'), path = require('node:path'), http = require('node:http');
 const { chromium } = require('./browser-runtime.cjs');
+const { resolveFlareTarget } = require('./flare-baseline.cjs');
 const root = path.resolve(__dirname, '..'), source = path.join(root, 'HelpSource/Content'), evidence = path.join(root, 'evidence');
-const baseline = process.env.STATSDIRECT_FLARE_DESKTOP || 'C:/Develop/SD3Help/StatsDirect/Output/ieb21/DesktopHelp';
+const baseline = resolveFlareTarget('DesktopHelp');
 const output = path.join(root, 'Build/Desktop');
 const topics = [];
 function walk(dir) { for (const e of fs.readdirSync(dir, { withFileTypes: true })) { const file = path.join(dir, e.name); if (e.isDirectory()) walk(file); else if (/\.htm$/i.test(e.name) && /<(?:MadCap|sdh):equation\b/i.test(fs.readFileSync(file, 'utf8'))) topics.push(path.relative(source, file).replaceAll('\\', '/').toLowerCase()); } }

@@ -205,7 +205,16 @@ try
     Check(editedIndex.Contains("editedfreshcontext") && !editedIndex.Contains("ultramarinecontext"), "Repeated rebuilding replaces edited search terms without stale entries");
     project.SaveTopic("basics/example.htm", revised);
     Reject(() => HelpBuilder.Build(project, Path.Combine(working, "Content"), runtime), "Refuses to build over source Content");
-    Reject(() => HelpBuilder.Build(project, @"C:\temp", runtime), "Refuses the installer destination");
+    string protectedInstaller = Path.Combine(buildRoot, "ProtectedInstaller");
+    string protectionFixture = Path.Combine(buildRoot, "protection-fixture.json");
+    File.WriteAllText(protectionFixture, JsonSerializer.Serialize(new { schemaVersion = 1, protectedPaths = new[] { protectedInstaller } }));
+    string? previousProtection = Environment.GetEnvironmentVariable(WorkspaceProtectionSettings.ConfigurationEnvironmentVariable);
+    try
+    {
+        Environment.SetEnvironmentVariable(WorkspaceProtectionSettings.ConfigurationEnvironmentVariable, protectionFixture);
+        Reject(() => HelpBuilder.Build(project, protectedInstaller, runtime), "Refuses the configured installer destination");
+    }
+    finally { Environment.SetEnvironmentVariable(WorkspaceProtectionSettings.ConfigurationEnvironmentVariable, previousProtection); }
     string foreignOutput = Path.Combine(buildRoot, "Unowned"); Directory.CreateDirectory(foreignOutput); File.WriteAllText(Path.Combine(foreignOutput, "keep.txt"), "Keep me");
     Reject(() => HelpBuilder.Build(project, foreignOutput, runtime), "Refuses an existing unowned output folder");
     string retryOutput = Path.Combine(buildRoot, "RetryAfterFailure");

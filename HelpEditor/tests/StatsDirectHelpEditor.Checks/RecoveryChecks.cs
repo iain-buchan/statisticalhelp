@@ -33,7 +33,9 @@ internal static class RecoveryChecks
             var restored = HelpProject.Open(project.RootPath).RestoreDeletedTopic(deleted.Id);
             Check(restored.OriginalContentsRestored && restored.Notice == null && File.ReadAllBytes(page).AsSpan().SequenceEqual(originalPage) && File.ReadAllBytes(toc).AsSpan().SequenceEqual(originalToc), "Unchanged navigation restores the exact page and complete original UTF-16 Contents hierarchy");
             Check(project.ListDeletedTopics().Count == 0 && Directory.Exists(archive), "Restored records leave the deleted list while retaining their archive");
-            project.SaveContents(project.LoadContents());
+            var editedContents = project.LoadContents();
+            editedContents[0].Title += " — explicit edit";
+            project.SaveContents(editedContents);
             Check(XDocument.Load(toc).Declaration?.Encoding == "utf-8" && HelpProject.Open(project.RootPath).LoadContents().Count == 2,
                 "An ordinary Contents edit after UTF-16 recovery writes a valid matching UTF-8 declaration");
             project.DeleteTopic("basics/parent.htm");

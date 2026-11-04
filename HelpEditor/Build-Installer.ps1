@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.1.3',
+    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version,
     [string]$SourceProject = (Join-Path $PSScriptRoot 'HelpSource'),
     [string]$OutputDirectory = (Join-Path $PSScriptRoot 'Release'),
     [switch]$Sign,
@@ -9,6 +9,9 @@ param(
     [string]$TimestampUrl = 'http://timestamp.globalsign.com/tsa/r6advanced1'
 )
 $ErrorActionPreference = 'Stop'
+if (-not $Version) {
+    $Version = ([xml](Get-Content -LiteralPath (Join-Path $PSScriptRoot 'src/StatsDirectHelpEditor.App/StatsDirectHelpEditor.App.csproj') -Raw)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+}
 if ([Environment]::OSVersion.Platform -ne 'Win32NT') { throw 'WiX installer builds require Windows.' }
 $parsedVersion = [version]$Version
 if ($parsedVersion.Major -gt 255 -or $parsedVersion.Minor -gt 255 -or $parsedVersion.Build -gt 65535) { throw 'Version exceeds Windows Installer version limits.' }

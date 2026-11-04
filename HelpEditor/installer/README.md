@@ -3,7 +3,7 @@
 Build from a short checkout path with the .NET 10 SDK and Windows:
 
 ```powershell
-.\Build-Installer.ps1 -Version 0.1.2
+.\Build-Installer.ps1 -Version 1.0.0
 ```
 
 This creates the MSI and setup EXE under `Release`. The app and headless builder
@@ -28,7 +28,7 @@ and notices are retained.
 For a signed release, first commit the reviewed source, then run:
 
 ```powershell
-.\Build-Installer.ps1 -Version 0.1.2 -Sign `
+.\Build-Installer.ps1 -Version 1.0.0 -Sign `
   -SignToolPath 'C:\path\to\Windows SDK\signtool.exe' `
   -CertificateThumbprint 'YOUR_CODE_SIGNING_CERTIFICATE_SHA1_THUMBPRINT'
 ```

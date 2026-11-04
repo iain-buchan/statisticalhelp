@@ -2,7 +2,8 @@
 // out-of-flow placeholder must not add a blank line on a narrow screen.
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {chromium}=require('./browser-runtime.cjs');
-const root=path.resolve(__dirname,'..'),evidence=path.join(root,'evidence'),mounts={flare:'C:/Develop/SD3Help/StatsDirect/Output/ieb21/Website',editor:path.join(root,'Build/Public')};
+const {resolveFlareTarget}=require('./flare-baseline.cjs');
+const root=path.resolve(__dirname,'..'),evidence=path.join(root,'evidence'),mounts={flare:resolveFlareTarget('Website'),editor:path.join(root,'Build/Public')};
 const checks=[],errors=[],results=[];
 function record(name,passed,detail){checks.push({name,passed:!!passed,detail});console.log((passed?'PASS ':'FAIL ')+name);}
 const mime={'.htm':'text/html','.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.gif':'image/gif','.jpg':'image/jpeg','.json':'application/json','.xml':'application/xml','.ico':'image/x-icon','.woff':'font/woff','.woff2':'font/woff2'};

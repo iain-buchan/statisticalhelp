@@ -1,8 +1,7 @@
 using System.Text.Json;
 using StatsDirect.HelpEditor.Core;
 
-bool help = args.Length == 0 || args.Length == 1 && (args[0] is "--help" or "-h")
-    || args.Length == 2 && (args[0] is "build" or "list" or "prepare-workspace" or "export-website" or "validate-course" or "export-course" or "publish-tutor") && (args[1] is "--help" or "-h");
+bool help = args.Length == 0 || args.Any(argument => argument is "--help" or "-h");
 if (help)
 {
     Console.WriteLine("""
@@ -24,6 +23,24 @@ if (help)
         Publish reviewed built-in tutor inputs for the next StatsDirect build:
           StatsDirectHelpBuilder publish-tutor --course <source.json> --statsdirect-source <repository>
             [--baseline <immutable-starter.json>]
+        Compare saved help sources without changing either tree:
+          StatsDirectHelpBuilder compare-source --left <project-or-Content> --right <project-or-Content>
+        Publish one saved-source snapshot to website ZIP, GitHub and desktop help:
+          StatsDirectHelpBuilder publish-help --project <working-copy> --zip <website.zip>
+            --github-url <https://github.com/owner/repo> --github-branch <branch>
+            --author-name <name> --author-email <email> --statsdirect-source <repository>
+            [--expected-destination-sha256 <inspection hash>]
+            [--adopt-flare-output --adoption-reason <review notes>] [--allow-default-branch]
+            [--prepare-only] [--journal-directory <private folder>] [--assets <App/Web>]
+          This explicitly pushes the source/Docs commit unless --prepare-only is set.
+          GitHub Pages deployment continues afterwards; the live server is not certified here.
+        Inspect and explicitly deliver desktop help into a StatsDirect source copy:
+          StatsDirectHelpBuilder inspect-desktop-help --statsdirect-source <repository>
+          StatsDirectHelpBuilder publish-desktop-help --project <working-copy> --statsdirect-source <repository>
+            [--expected-destination-sha256 <inspection hash>]
+            [--adopt-flare-output --adoption-reason <review notes>] [--allow-warnings] [--assets <App/Web>]
+          StatsDirectHelpBuilder verify-desktop-help --statsdirect-source <repository>
+          StatsDirectHelpBuilder recover-desktop-help --statsdirect-source <repository>
 
         DesktopHelp is the default target. Desktop/Public are accepted aliases.
         Website and GitHub use the same Public HTML, footer and source conditions.
@@ -40,6 +57,7 @@ if (help)
 }
 try
 {
+    if (HelpDeliveryCommands.TryRun(args, DefaultAssets) is int deliveryExitCode) return deliveryExitCode;
     string command = args[0].ToLowerInvariant();
     if (command == "prepare-workspace")
     {

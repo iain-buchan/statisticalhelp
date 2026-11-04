@@ -2,8 +2,9 @@
 // No pixel-equivalence claim: MathJax SVG and Flare's generated equation SVG differ.
 const fs = require('node:fs'), path = require('node:path'), http = require('node:http');
 const { chromium } = require('./browser-runtime.cjs');
+const { resolveFlareRoot } = require('./flare-baseline.cjs');
 const root = path.resolve(__dirname, '..'), evidence = path.join(root, 'evidence');
-const flare = process.env.STATSDIRECT_FLARE_OUTPUT || 'C:/Develop/SD3Help/StatsDirect/Output/ieb21';
+const flare = resolveFlareRoot();
 const mounts = { DesktopHelp: path.join(flare, 'DesktopHelp'), Website: path.join(flare, 'Website'), GitHub: path.join(flare, 'GitHub'), Desktop: path.join(root, 'Build/Desktop'), Public: path.join(root, 'Build/Public') };
 const mime = { '.htm': 'text/html', '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.gif': 'image/gif', '.jpg': 'image/jpeg', '.json': 'application/json', '.xml': 'application/xml', '.woff': 'font/woff', '.woff2': 'font/woff2' };
 const server = http.createServer((req, res) => {

@@ -1,6 +1,13 @@
 param([switch]$CompareFlare,[string]$StatsDirectSourceRoot)
 $ErrorActionPreference='Stop'
 $root=$PSScriptRoot
+$previousPlaywright=$env:STATSDIRECT_PLAYWRIGHT_PATH
+$previousNodePath=$env:NODE_PATH
+$browserDependencies=Join-Path $root 'tests\browser\node_modules'
+if(Test-Path -LiteralPath (Join-Path $browserDependencies 'playwright')) {
+    $env:STATSDIRECT_PLAYWRIGHT_PATH=Join-Path $browserDependencies 'playwright'
+    $env:NODE_PATH=$browserDependencies
+}
 $node=Get-Command node -ErrorAction SilentlyContinue
 if(-not $node){throw 'Node.js is required for developer browser checks (not for using the editor).'}
 function Run-Check([string]$Name,[scriptblock]$Action){
@@ -11,6 +18,9 @@ function Run-Check([string]$Name,[scriptblock]$Action){
 Push-Location $root
 try{
     Run-Check 'Build solution' {dotnet build StatsDirectHelpEditor.slnx --configuration Release --nologo --verbosity minimal}
+    foreach($name in @('ContentsNavigationChecks','DesktopDeliveryChecks','PortabilityChecks','DeliveryWindowsChecks','HelpPublicationChecks','HelpPublicationWindowsChecks','NestedGitChecks')) {
+        Run-Check $name {dotnet run --no-build --project ('tests/StatsDirectHelpEditor.'+$name) --configuration Release -- $root}
+    }
     foreach($name in @('Checks','WindowsChecks','ContentsWindowsChecks','LinkWindowsChecks','BrowserPreviewWindowsChecks','WebsiteExportWindowsChecks','WorkspaceWindowsChecks','AppHelpPreviewChecks','SearchReplaceChecks','SearchReplaceWindowsChecks','SourceImageWindowsChecks','InstalledWorkspaceChecks','InstalledWorkspaceWindowsChecks','PolishChecks','PolishTransportChecks','PolishWindowsChecks','PreviewCacheWindowsChecks','DeepPreviewChecks','DeepSourceChecks','DeepWorkflowWindowsChecks','GitChecks','WebsitePublishChecks','HeadlessChecks','EquationArtworkChecks','CssScoperChecks')){
         $project='tests/StatsDirectHelpEditor.'+$name
         Run-Check $name {dotnet run --no-build --project $project --configuration Release -- $root}
@@ -56,4 +66,4 @@ try{
         Run-Check 'Print complete topics with navigation open or closed' {& $node.Source tests/FlarePrintChecks.cjs}
     }
     Write-Host 'All requested checks passed. Detailed reports are in evidence.'
-}finally{Pop-Location}
+}finally{Pop-Location;$env:STATSDIRECT_PLAYWRIGHT_PATH=$previousPlaywright;$env:NODE_PATH=$previousNodePath}

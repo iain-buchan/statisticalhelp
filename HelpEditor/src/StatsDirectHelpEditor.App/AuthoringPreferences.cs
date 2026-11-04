@@ -5,7 +5,7 @@ using System.Text.Json.Nodes;
 namespace StatsDirect.HelpEditor.App;
 
 /// <summary>Per-workspace authoring choices, separate from help source and build inputs.</summary>
-internal static class AuthoringPreferences
+internal static partial class AuthoringPreferences
 {
     internal const string RelativePath = "Settings/authoring-preferences.json";
     private const string WebsiteZipKey = "websiteZipPath";

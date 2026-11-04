@@ -1,0 +1,10 @@
+{
+  "name": "statsdirect-help-browser-checks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Developer-only browser regression dependencies; not part of the installed Help Editor.",
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "pngjs": "7.0.0"
+  }
+}

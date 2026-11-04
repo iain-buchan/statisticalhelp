@@ -1,4 +1,4 @@
-# StatsDirect Help Editor prototype
+# StatsDirect Help Editor
 
 A separate C#/.NET Windows authoring application in **`C:\Develop\StatsDirectHelp`**. It edits the **HelpSource working copy**, independently of the original Flare project. No Flare licence, Node installation, web server or internet connection is required to use the built editor or rebuild help.
 
@@ -6,7 +6,7 @@ A separate C#/.NET Windows authoring application in **`C:\Develop\StatsDirectHel
 
 Double-click `Start-StatsDirectHelpEditor.cmd`, or open `App/StatsDirectHelpEditor.exe`. Both open `HelpSource` automatically. The .NET 10 Windows Desktop runtime and Microsoft Edge WebView2 runtime are required; both are already present on this PC.
 
-The application is a prototype for evaluation. Its default window opens maximized to suit this PC's display scaling.
+Version **1.0.0** is validated for the initial single-author workflow described in [the release gate](docs/ReleaseReadiness.md). The default window opens maximized to suit this PC's display scaling. Building or installing this editor does not rebuild the main StatsDirect application or its installers.
 
 Version 0.1.1 adds the turquoise StatsDirect delta with a book-and-pencil badge to the executable, window/taskbar, installed-app entry and setup. The installer creates both Start-menu and desktop shortcuts. The icon includes ten sizes from 16 to 256 pixels for different display scaling settings.
 
@@ -14,7 +14,7 @@ Version 0.1.2 uses the independent [StatsDirect help schema](Schema/StatsDirectH
 
 ## Windows installer and public source
 
-### Tutor authoring development build (0.1.3)
+### Tutor authoring (introduced in 0.1.3)
 
 **Primary workflow: maintain the built-in StatsDirect tutor.** Edit the authoring source under `TutorSource`, save drafts, record the checks you performed, then choose **File > Publish built-in tutor for StatsDirect builds…**. On this PC it writes `C:\Users\ieb21\source\repos\statsdirect\Learning\AuthoredTutor`. It preserves the original lesson/question IDs and five learner pathways, updates embedded practice questions consistently, and produces versioned, hashed source files. New or changed material needs an author review bound to that exact content; editing the JSON afterwards invalidates that approval. Any known stale numerical check must also be renewed with recorded evidence.
 
@@ -76,6 +76,14 @@ Browser and App previews reuse the generated site when you navigate between save
 
 ## Build and search
 
+**File > Publish help…** is the normal release-preparation command. Configure the website ZIP, GitHub repository/branch and author, and the StatsDirect source repository once. It takes one frozen snapshot of saved pages and runtime assets, builds Public and Desktop once, saves the website ZIP, commits matching source and root `Docs` in a private Git checkout, delivers desktop help into `StatsDirectUI/Assets/Help`, then pushes the verified Git commit. Settings are remembered after success. Publishing to the default branch requires the explicit checkbox; a working branch still needs review/merge before it updates Pages. GitHub Pages deploys asynchronously after the push.
+
+The website ZIP is ready for your separate transfer to `www.statsdirect.com/help`. StatsDirect's normal build consumes the verified copy in its own source assets, without depending on this editor's temporary folders. The command does not build StatsDirect or its installers. Open drafts must be saved first. Failures show the individual targets completed and retain a private journal/snapshot; a remote push and file changes on different drives are not one atomic transaction. No automatic merge or rollback hides a partial result. See [publishing and recovery](docs/DesktopPublishing.md).
+
+**File > Publish desktop help for StatsDirect builds…** builds saved source, checks the complete result and delivers it into the selected repository's `StatsDirectUI/Assets/Help`. It shows the destination, existing file count and snapshot hash before replacement. Recognised Flare output requires explicit adoption; unknown or changed output is refused. Unsaved page and equation/link drafts must be saved or resolved first. Publication does not rebuild StatsDirect or its installers. See [desktop publishing and recovery](docs/DesktopPublishing.md), including the optional consumer build guard.
+
+**File > Compare saved help sources…** reports text, links, equations, code, other markup and Contents differences against another source tree. The comparison treats imported authoring namespaces as equivalent and changes neither tree. Unsaved drafts are excluded.
+
 **File > Export website ZIP…** builds a fresh Website version and asks where to save the archive. It includes the current page's unsaved draft, as Browser view does, without saving that draft to source. The ZIP contains the website files directly at its root, ready to unpack into `www.statsdirect.com/help`; it excludes editable source, sign-in information, recovery data and editor settings. The last successful save location is remembered on this PC. Cancelling or a failed export leaves the previous ZIP intact.
 
 Choose **App view** or **Browser view** to select the Desktop or Public target. Use **File > Build help and search (Ctrl+B)** or **File > Preview site in browser (F5)**. Saved outputs go only to `Build/Desktop` or `Build/Public` beside this README. F5 rebuilds the selected target and opens the complete local site, with Contents and full-text search, in your default browser. It asks about unsaved page edits before building. Returning to Formatted or HTML source keeps the last selected build target. **File > Preview site in editor** offers the separate whole-site viewer. The in-editor previews use independent `Build/EditorPreview` folders so a draft preview cannot replace a saved output.
@@ -84,7 +92,7 @@ The independent C# builder converts supported topic-level MadCap features into o
 
 **Flare original** is the default output appearance, reproducing the published Flare header, navigation, responsive layout and topic styling. **Readable Contents** keeps the prototype's larger, clearer navigation as an optional design. The editor's **Design** selector also offers **Clean blue** and **Warm paper** colour schemes, separately for app and website help. A choice previews immediately and is saved in the working project's optional `Project/HelpEditorDesign.json`; rebuild to apply it to the whole site. Generated help has a fixed design, with no reader-facing appearance selector or saved browser preference. Designs do not rewrite topic source, mathematics or artwork. Navigation and search are independently implemented, with no Flare runtime dependency. The original design keeps each topic and its navigation in one document at its canonical `.htm` URL; direct links, new tabs, anchors and browser history work offline. The optional designs retain the prototype's framed topic pane. Exact visual comparisons against the live site and local Flare outputs are recorded in `evidence/FlareAppearance` and `evidence/FlareAllTopicPixels`. Search is rebuilt from current source, so result ranking and snippets can differ from Flare.
 
-Search uses a compact inverted index built in C#, with title and keyword weighting. No additional search library or service is needed. The new output is for prototype evaluation; it has not replaced any published help or been added to the StatsDirect installers.
+Search uses a compact inverted index built in C#, with title and keyword weighting. No additional search library or service is needed. The 1.0.0 candidate output has been tested in an isolated build of the actual StatsDirect application; it has not replaced published help or released installers.
 
 The default design has been checked at desktop, tablet and phone widths, including content flow after large equations. Original artwork is byte-identical. Small browser raster and scroll-rounding differences are recorded separately; exact pixel identity is reported only for the screenshots that achieve it. Updated reference links and the restored Incidence and Prevalence entry remain intentional source improvements. Long topics print in full, including when the mobile Contents pane is open.
 

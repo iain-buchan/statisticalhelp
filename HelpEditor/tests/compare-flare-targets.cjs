@@ -1,8 +1,9 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {chromium}=require('./browser-runtime.cjs');
-const root=path.resolve(__dirname,'..'),oldRoot='C:/Develop/SD3Help/StatsDirect/Output/ieb21';
+const {resolveFlareRoot,referenceCorrections}=require('./flare-baseline.cjs');
+const root=path.resolve(__dirname,'..'),oldRoot=resolveFlareRoot();
 const definitions=[['DesktopHelp','Desktop'],['Website','Public'],['GitHub','Public']];
-const referenceLinkCorrections=JSON.parse(fs.readFileSync(path.join(root,'evidence/reference-link-corrections.json'),'utf8'));
+const referenceLinkCorrections=referenceCorrections();
 if(!Array.isArray(referenceLinkCorrections))throw new Error('Reference link corrections must be an array');
 const correctionKeys=new Set(),newCorrectionKeys=new Set(),replacementKeys=new Set();
 for(const [index,correction]of referenceLinkCorrections.entries()){

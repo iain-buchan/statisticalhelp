@@ -15,6 +15,7 @@ HelpSource/Project/Users/
 HelpSource/Project/Destinations/
 ReleaseWork/
 Release/
+Publishing/
 # Test source lives directly in tests or its project directories. Everything
 # nested below those project directories is generated fixture/profile output.
 tests/*/*/

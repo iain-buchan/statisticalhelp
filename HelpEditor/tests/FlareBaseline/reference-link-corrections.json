@@ -1,0 +1,1019 @@
+[
+  {
+    "referenceId": "ref-mccullagh-1989",
+    "oldUrl": "https://doi.org/10.1007/978-1-4899-3242-6",
+    "newUrl": "https://doi.org/10.1201/9780203753736",
+    "reason": "Old Springer landing page returns 404. Current publisher DOI identifies the same second edition; retain the original 1989 print citation.",
+    "evidence": [
+      "https://api.crossref.org/works/10.1201/9780203753736",
+      "https://www.routledge.com/Generalized-Linear-Models/McCullagh-Nelder/p/book/9780412317606"
+    ]
+  },
+  {
+    "referenceId": "ref-collett-1994",
+    "oldUrl": "https://doi.org/10.1007/978-1-4899-3115-3",
+    "newUrl": "https://doi.org/10.1201/9781003282525",
+    "reason": "Use verified fourth-edition publisher DOI following user authorization; old original Springer DOI has a dead landing.",
+    "evidence": [
+      "https://search.worldcat.org/title/Modelling-survival-data-in-medical-research/oclc/29703711",
+      "https://www.routledge.com/Modelling-Survival-Data-in-Medical-Research/Collett/p/book/9781032252858",
+      "https://api.crossref.org/works/10.1201/9781003282525"
+    ],
+    "newLinkText": "Later edition (4th ed., 2023): https://doi.org/10.1201/9781003282525",
+    "editionVerification": "Routledge identifies David Collett, 4th Edition, copyright 2023, print ISBN 9781032252858. Parent Crossref confirms exact title/author, edition 4, 2023-05-10 and T&F resource."
+  },
+  {
+    "referenceId": "ref-johnson-1970",
+    "oldUrl": "https://ci.nii.ac.jp/ncid/BA03499119?l=en",
+    "newUrl": "https://books.google.com/books/about/Distributions_in_Statistics_Continuous_u.html?id=4GRvugEACAAJ",
+    "reason": "English Google Books record for the cited 1970 Wiley two-volume set, with bibliographic metadata, citation export and library/seller routes.",
+    "evidence": [
+      "https://books.google.com/books/about/Distributions_in_Statistics_Continuous_u.html?id=4GRvugEACAAJ",
+      "https://ci.nii.ac.jp/ncid/BA03499119?l=en"
+    ],
+    "editionVerification": "Exact original Wiley 1970 set verified from live HTML. Caution: web open of older short-slug URL returned inconsistent cached metadata (Houghton Mifflin vol2); live canonical endpoint and current search result show the correct Wiley two-volume set. No newer edition substituted."
+  },
+  {
+    "referenceId": "ref-johnson-1998",
+    "oldUrl": "https://kansalliskirjasto.finna.fi/Record/vaari.1535890",
+    "newUrl": "https://books.google.com/books/about/Applied_Multivariate_Statistical_Analysi.html?id=9265AAAAIAAJ",
+    "reason": "Exact English Google Books record offers description, contents, snippets and citation export for the fourth edition.",
+    "evidence": [
+      "https://books.google.com/books/about/Applied_Multivariate_Statistical_Analysi.html?id=9265AAAAIAAJ"
+    ],
+    "editionVerification": "Fourth edition, Prentice Hall 1998 exactly matches cited author/title/edition/publisher/year. No newer edition substituted."
+  },
+  {
+    "referenceId": "ref-johnson-2007",
+    "oldUrl": "https://ci.nii.ac.jp/ncid/BA84423634?l=en",
+    "newUrl": "https://search.worldcat.org/title/Applied-multivariate-statistical-analysis/oclc/70867129",
+    "reason": "English global WorldCat record matches the original sixth edition and provides routes to library holdings. Current Pearson product page represents a 2024 Classic Version and was rejected.",
+    "evidence": [
+      "https://search.worldcat.org/title/Applied-multivariate-statistical-analysis/oclc/70867129",
+      "https://ndlsearch.ndl.go.jp/books/R100000136-I1971712334745993532"
+    ],
+    "editionVerification": "Exact sixth edition 2007 original US bibliographic identity verified. Direct shell fetch was 403, while primary WorldCat web open and indexed metadata succeeded. No later Classic Version or international reissue substituted."
+  },
+  {
+    "referenceId": "ref-kalbfleisch-1980",
+    "oldUrl": "https://agris.fao.org/search/en/providers/122535/records/65ddee3e63b8185d9ca5c36f",
+    "newUrl": "https://doi.org/10.1002/9781118032985",
+    "reason": "Use the verified later second-edition whole-book DOI with an explicit edition label.",
+    "evidence": [
+      "https://books.google.com/books/about/The_Statistical_Analysis_of_Failure_Time.html?id=zdpQAAAAMAAJ",
+      "https://agris.fao.org/search/en/providers/122535/records/65ddee3e63b8185d9ca5c36f",
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118032985",
+      "https://www.wiley.com/en-us/the-statistical-analysis-of-failure-time-data-2nd-edition-p-9780471363576"
+    ],
+    "editionVerification": "Wiley identifies Kalbfleisch and Prentice, print ISBN 9780471363576, first published 26 August 2002 and DOI 10.1002/9781118032985; Wiley product title confirms second edition. Original Google Books record is 1980, ISBN 0471055190.",
+    "newLinkText": "Later edition (2nd ed., 2002): https://doi.org/10.1002/9781118032985"
+  },
+  {
+    "referenceId": "ref-kim-1973",
+    "oldUrl": "https://kansalliskirjasto.finna.fi/Record/vaari.1670127",
+    "newUrl": "https://search.worldcat.org/title/Selected-tables-in-mathematical-statistics.-Volume-I/oclc/803803",
+    "reason": "English WorldCat record for the cited AMS 1973 Volume I; offers an international library discovery destination for the exact collected volume containing the tables. No current publisher landing page or chapter DOI was found for this old volume.",
+    "evidence": [
+      "https://search.worldcat.org/title/Selected-tables-in-mathematical-statistics.-Volume-I/oclc/803803",
+      "https://www.ams.org/journals/notices/197408/197408FullIssue.pdf"
+    ],
+    "editionVerification": "Exact AMS 1973 Volume I confirmed by WorldCat; publisher's contemporary advertisement confirms the Kim/Jennrich contribution and AMS corrected reprint identity. This is the 1973 collected volume, not a different paper or later edition."
+  },
+  {
+    "referenceId": "ref-krebs-1989",
+    "oldUrl": "https://www.finna.fi/Record/helka.992906483506253",
+    "newUrl": "https://search.worldcat.org/title/Ecological-methodology/oclc/18135789",
+    "reason": "WorldCat record for the exact 1989 Harper & Row book, with ISBN and international holdings discovery. Avoids the Google Books record's misleading second-edition label on its 1989 record.",
+    "evidence": [
+      "https://search.worldcat.org/es/title/Ecological-methodology/oclc/18135789",
+      "https://www.zoology.ubc.ca/~krebs/publist.html",
+      "https://openlibrary.org/books/OL2043033M/Ecological_methodology"
+    ],
+    "editionVerification": "1989 first edition verified by date, publisher and ISBN, with author's list distinguishing 1999 second edition. Default English WorldCat URL uses exact OCLC record verified through its indexed localized interface. Direct automated HTTP requests to WorldCat encountered a bot challenge; indexed WorldCat record content was readable."
+  },
+  {
+    "referenceId": "ref-streiner-1995",
+    "oldUrl": "https://www.finna.fi/Record/vaari.1210780",
+    "newUrl": "https://doi.org/10.1093/oso/9780198528470.001.0001",
+    "reason": "Prefer verified Oxford later third-edition book DOI as authorized.",
+    "evidence": [
+      "https://books.google.com/books/about/Health_Measurement_Scales.html?id=8TYQAQAAMAAJ",
+      "https://academic.oup.com/book/24920/chapter-abstract/188747993",
+      "https://academic.oup.com/book/54319"
+    ],
+    "editionVerification": "Oxford description explicitly identifies third edition, dated 6 November 2003, ISBN 9780198528470; Crossref confirms book/both authors.",
+    "newLinkText": "Later edition (3rd ed., 2003): https://doi.org/10.1093/oso/9780198528470.001.0001"
+  },
+  {
+    "referenceId": "ref-bland-1996-d",
+    "oldUrl": "https://elib.must.ac.ug/cgi-bin/koha/opac-detail.pl?biblionumber=839",
+    "newUrl": "https://books.google.com/books/about/An_Introduction_to_Medical_Statistics.html?id=UFhrAAAAMAAJ",
+    "reason": "English Google Books reader destination for Bland's exact second edition, same ISBN as the 1996 reprint. The citation can retain its precise 1996 reprint wording while the destination identifies the edition by its original 1995 publication date.",
+    "evidence": [
+      "https://books.google.com/books/about/An_Introduction_to_Medical_Statistics.html?id=UFhrAAAAMAAJ",
+      "https://www.finna.fi/Record/oy.994851823906252",
+      "https://www-users.york.ac.uk/~mb55/pubs/pbstat.htm"
+    ],
+    "editionVerification": "Same second edition and ISBN verified; Oulu catalogue explicitly verifies its 1996 reprint. Google Books metadata uses the edition's 1995 date rather than the cited impression's 1996 date. No substitution of the 2000 third edition is proposed."
+  },
+  {
+    "referenceId": "ref-menard-1995",
+    "oldUrl": "https://ci.nii.ac.jp/ncid/BA25687994?l=en",
+    "newUrl": "https://doi.org/10.4135/9781412983433",
+    "reason": "Verified SAGE book DOI for later second edition replaces Google Books under user instruction.",
+    "evidence": [
+      "https://books.google.com/books?id=zBgXAQAAMAAJ",
+      "https://academic.oup.com/jrsssd/article-abstract/45/4/534/7123222",
+      "https://www.sagepub.com/shop/buy-a-book/applied-logistic-regression-analysis-2-11277",
+      "https://api.crossref.org/works?query.bibliographic=Applied%20logistic%20regression%20analysis%20Menard&rows=5",
+      "https://api.crossref.org/works/10.4135%2F9781412983433",
+      "https://agris.fao.org/search/en/providers/122535/records/65ddca557c7033e84be80c9f"
+    ],
+    "editionVerification": "Crossref identifies 2002 book/ISBN 9780761922087. US National Agricultural Library via AGRIS explicitly identifies second edition.",
+    "newLinkText": "Later edition (2nd ed., 2002): https://doi.org/10.4135/9781412983433"
+  },
+  {
+    "referenceId": "ref-selvin-1996",
+    "oldUrl": "https://ci.nii.ac.jp/ncid/BA27219997?l=en",
+    "newUrl": "https://doi.org/10.1093/acprof:oso/9780195172805.001.0001",
+    "reason": "Prefer verified later third-edition book DOI as authorized.",
+    "evidence": [
+      "https://books.google.com/books?id=KTgQAQAAMAAJ",
+      "https://search.worldcat.org/title/32273404",
+      "https://ci.nii.ac.jp/ncid/BA27219997",
+      "https://academic.oup.com/book/27487/chapter-abstract/197409443",
+      "https://academic.oup.com/book/27487"
+    ],
+    "editionVerification": "Oxford explicitly identifies third edition, 10 June 2004; Crossref confirms title/author/ISBN 9780195172805.",
+    "newLinkText": "Later edition (3rd ed., 2004): https://doi.org/10.1093/acprof:oso/9780195172805.001.0001"
+  },
+  {
+    "referenceId": "ref-last-1995",
+    "oldUrl": "https://libraryopac.searo.who.int/cgi-bin/koha/opac-detail.pl?biblionumber=3541",
+    "newUrl": "https://doi.org/10.1093/acref/9780199976720.001.0001",
+    "reason": "Use the verified sixth-edition reference-book DOI, explicitly labelled, under the user's later-edition permission.",
+    "evidence": [
+      "https://books.google.com/books?id=dFlrAAAAMAAJ",
+      "https://search.worldcat.org/title/A-dictionary-of-epidemiology/oclc/31076952",
+      "https://libraryopac.searo.who.int/cgi-bin/koha/opac-MARCdetail.pl?biblionumber=3541",
+      "https://books.google.com/books/about/A_Dictionary_of_Epidemiology.html?id=RPaQY8cG4N4C",
+      "https://academic.oup.com/ije/pages/cfc-dictionary-of-epidemiology",
+      "https://www.wce2024.org/wp-content/uploads/2024/10/Miquel-SYM13-The-dictionary-of-epidemiology-review-and-discussion.pdf",
+      "https://api.crossref.org/works/10.1093/acref/9780199976720.001.0001"
+    ],
+    "editionVerification": "Oxford/IEA publisher call for contributions links this exact DOI as the 2014 sixth edition, explains John Last edited the first four editions and Miquel Porta the fifth and sixth. Editor Miquel Porta's presentation reproduces Oxford Reference bibliographic data: print 2014, online 2016, ISBN 9780199976720. Crossref confirms Oxford University Press, edited-book, 2014, same ISBN; its deposited title carries an obsolete DRAFT suffix.",
+    "newLinkText": "Later edition (6th ed., 2014; edited by Miquel Porta): https://doi.org/10.1093/acref/9780199976720.001.0001"
+  },
+  {
+    "referenceId": "ref-mcdowell-1996",
+    "oldUrl": "https://ci.nii.ac.jp/ncid/BA27739658?l=en",
+    "newUrl": "https://doi.org/10.1093/acprof:oso/9780195165678.001.0001",
+    "reason": "Verified book DOI for later third edition preferred under user instruction permitting later editions.",
+    "evidence": [
+      "https://books.google.com/books?id=nyRhQgAACAAJ",
+      "https://search.worldcat.org/title/Measuring-health-%3A-a-guide-to-rating-scales-and-questionnaires/oclc/32628155",
+      "https://academic.oup.com/book/27457"
+    ],
+    "editionVerification": "Oxford and Crossref identify 2006 third edition by Ian McDowell, print ISBN 9780195165678. Current Google record is 1996 second edition.",
+    "newLinkText": "Later edition (3rd ed., 2006): https://doi.org/10.1093/acprof:oso/9780195165678.001.0001"
+  },
+  {
+    "referenceId": "ref-abramowitz-1972",
+    "oldUrl": "https://personal.math.ubc.ca/~cbm/aands/",
+    "newUrl": "https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun",
+    "reason": "Use authoritative original-publisher NIST handbook record. Its work-level record avoids presenting the UBC tenth-printing scan as the cited ninth printing. Printing discrepancy retained for bibliographic review.",
+    "evidence": [
+      "https://personal.math.ubc.ca/~cbm/aands/",
+      "https://personal.math.ubc.ca/~cbm/aands/intro.htm",
+      "https://nvlpubs.nist.gov/nistpubs/sp958-lide/html/135-139.html",
+      "https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun"
+    ],
+    "newLinkText": "https://www.nist.gov/mathematics-statistics/handbook-mathematical-functions-abramowitz-and-stegun",
+    "editionVerification": "UBC explicitly says Tenth Printing, December 1972; its title page lists Ninth Printing, November 1970. NIST confirms ninth November 1970."
+  },
+  {
+    "referenceId": "ref-agresti-1996",
+    "oldUrl": "https://books.google.com/books?vid=ISBN0471113387",
+    "newUrl": "https://doi.org/10.1002/0470114754",
+    "reason": "Use verified later-edition book DOI following user authorization.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/0470114754",
+      "https://books.google.com/books?vid=ISBN0471113387"
+    ],
+    "newLinkText": "Later edition (2nd ed., 2007): https://doi.org/10.1002/0470114754",
+    "editionVerification": "Wiley identifies Second Edition, Alan Agresti, print ISBN 9780471226185, copyright 2007; online first publication 2006."
+  },
+  {
+    "referenceId": "ref-agresti-1984",
+    "oldUrl": "https://books.google.com/books?id=7y_vAAAAMAAJ",
+    "newUrl": "https://doi.org/10.1002/9780470594001",
+    "reason": "Use verified later-edition book DOI following user authorization.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/9780470594001",
+      "https://books.google.com/books?id=7y_vAAAAMAAJ"
+    ],
+    "newLinkText": "Later edition (2nd ed., 2010): https://doi.org/10.1002/9780470594001",
+    "editionVerification": "Wiley identifies Second Edition, Alan Agresti, 2010, print ISBN 9780470082898; original Google Books record confirms 1984 first edition."
+  },
+  {
+    "referenceId": "ref-altman-1991",
+    "oldUrl": "https://www.amazon.com/dp/0412276305",
+    "newUrl": "https://doi.org/10.1201/9780429258589",
+    "reason": "Replace Amazon with verified work-level publisher DOI.",
+    "evidence": [
+      "https://api.crossref.org/works/10.1201/9780429258589",
+      "https://www.taylorfrancis.com/books/9781000228816",
+      "https://www.ncbi.nlm.nih.gov/nlmcatalog/9216122"
+    ],
+    "newLinkText": "https://doi.org/10.1201/9780429258589",
+    "editionVerification": "Parent Crossref check confirms exact title, Altman, first digital date 1990-11-22, ISBN 9780429258589, T&F resource books/9781000228816; NLM confirms original first edition print ISBN 9780412276309 and 1991."
+  },
+  {
+    "referenceId": "ref-armitage-1994",
+    "oldUrl": "https://www.ncbi.nlm.nih.gov/nlmcatalog/9309522",
+    "newUrl": "https://doi.org/10.1002/9780470773666",
+    "reason": "Replace catalogue with verified later-edition book DOI following user authorization.",
+    "evidence": [
+      "https://doi.org/10.1002/9780470773666",
+      "https://www.ncbi.nlm.nih.gov/nlmcatalog/9309522"
+    ],
+    "newLinkText": "Later edition (4th ed., 2002): https://doi.org/10.1002/9780470773666",
+    "editionVerification": "Wiley names Armitage/Berry/Matthews, Fourth Edition, copyright 2002, print ISBN 9780632052578; current NLM confirms cited third edition 1994."
+  },
+  {
+    "referenceId": "ref-bailey-1977",
+    "oldUrl": "https://www.amazon.com/dp/0471995002",
+    "newUrl": "https://search.worldcat.org/title/2798924",
+    "reason": "Replace Amazon with English WorldCat original-book record. No book DOI or current publisher page verified.",
+    "evidence": [
+      "https://openlibrary.org/isbn/0471995002.json",
+      "https://search.worldcat.org/title/2798924",
+      "https://academic.oup.com/jrsssa/article/172/3/689/7085059"
+    ],
+    "newLinkText": "https://search.worldcat.org/title/2798924",
+    "editionVerification": "LOC/Harvard-derived Open Library edition matches Bailey, Wiley 1977, ISBN 0471995002 and OCLC 2798924; author obituary corroborates title and year."
+  },
+  {
+    "referenceId": "ref-bland-2000",
+    "oldUrl": "https://www.amazon.com/dp/0192632698",
+    "newUrl": "https://search.worldcat.org/title/44464311",
+    "reason": "Replace Amazon with English WorldCat record for exact third edition; no verified book DOI found.",
+    "evidence": [
+      "https://search.worldcat.org/title/44464311",
+      "https://openlibrary.org/isbn/0192632698.json",
+      "https://www-users.york.ac.uk/~mb55/pubs/jmbpb.htm"
+    ],
+    "newLinkText": "https://search.worldcat.org/title/44464311",
+    "editionVerification": "WorldCat displays Martin Bland, third edition, English 2000, Oxford University Press; edition metadata confirms ISBN 0192632698."
+  },
+  {
+    "referenceId": "ref-brower-1998",
+    "oldUrl": "https://www.amazon.com/dp/0697243583",
+    "newUrl": "https://books.google.com/books?id=YpsoAQAAMAAJ",
+    "reason": "Replace Amazon with exact fourth-edition English Google Books record; no book DOI or surviving publisher page verified.",
+    "evidence": [
+      "https://books.google.com/books/about/Field_and_Laboratory_Methods_for_General.html?id=YpsoAQAAMAAJ",
+      "https://openlibrary.org/books/OL669419M/Field_and_laboratory_methods_for_general_ecology"
+    ],
+    "newLinkText": "https://books.google.com/books?id=YpsoAQAAMAAJ",
+    "editionVerification": "Google Books names all three authors, fourth edition, McGraw-Hill 1998, ISBN 0697243583."
+  },
+  {
+    "referenceId": "ref-chatterjee-2000",
+    "oldUrl": "https://search.worldcat.org/title/807066144",
+    "newUrl": "https://doi.org/10.1002/0470055464",
+    "reason": "Replace catalogue with verified later-edition book DOI following user authorization.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/0470055464",
+      "https://search.worldcat.org/title/807066144"
+    ],
+    "newLinkText": "Later edition (4th ed., 2006): https://doi.org/10.1002/0470055464",
+    "editionVerification": "Wiley identifies Fourth Edition, Chatterjee/Hadi, 2006, print ISBN 9780471746966. Current WorldCat confirms cited third edition 2000 including Price."
+  },
+  {
+    "referenceId": "ref-chiang-1984",
+    "oldUrl": "https://www.amazon.com/dp/0898745705",
+    "newUrl": "https://search.worldcat.org/title/8866735",
+    "reason": "Replace Amazon with exact 1984 English WorldCat record; no work DOI or current publisher page verified.",
+    "evidence": [
+      "https://search.worldcat.org/title/The-life-table-and-its-applications/oclc/8866735",
+      "https://www.foyles.co.uk/book/the-life-table-and-its-applications/chin-long-chiang/9780898745702"
+    ],
+    "newLinkText": "https://search.worldcat.org/title/8866735",
+    "editionVerification": "WorldCat names Chin Long Chiang, original edition, Robert E. Krieger, Malabar 1984; ISBN 0898745705 corroborated."
+  },
+  {
+    "referenceId": "ref-cochran-1957",
+    "oldUrl": "https://www.amazon.com/dp/0471162043",
+    "newUrl": "https://www.wiley.com/en-us/Experimental%2BDesigns%2C%2B2nd%2BEdition-p-9780471545675",
+    "reason": "Replace Amazon with official publisher record of same second edition. No book DOI verified; review DOI excluded.",
+    "evidence": [
+      "https://www.wiley.com/en-us/Experimental%2BDesigns%2C%2B2nd%2BEdition-p-9780471545675",
+      "https://acsess.onlinelibrary.wiley.com/doi/10.2134/agronj1958.00021962005000020023x"
+    ],
+    "newLinkText": "https://www.wiley.com/en-us/Experimental%2BDesigns%2C%2B2nd%2BEdition-p-9780471545675",
+    "editionVerification": "Wiley labels second edition by Cochran/Cox; current paperback 1992 ISBN 9780471545675 is same edition lineage as cited 1957 second edition. Historical citation retained."
+  },
+  {
+    "referenceId": "ref-colton-1974",
+    "oldUrl": "https://www.amazon.com/dp/0316152498",
+    "newUrl": "https://books.google.com/books?id=W1drAAAAMAAJ",
+    "reason": "Replace Amazon with original 1974 English Google Books record. No original book DOI or surviving publisher record verified.",
+    "evidence": [
+      "https://books.google.com/books/about/Statistics_in_Medicine.html?hl=en&id=W1drAAAAMAAJ&output=html_text",
+      "https://agris.fao.org/search/en/providers/122535/records/65de10cd0f3e94b9e5ca2ece"
+    ],
+    "newLinkText": "https://books.google.com/books?id=W1drAAAAMAAJ",
+    "editionVerification": "Google Books matches Theodore Colton, Little Brown 1974, ISBN 0316152498; FAO AGRIS/NAL independently confirms first edition 1974."
+  },
+  {
+    "referenceId": "ref-conover-1999",
+    "oldUrl": "https://www.amazon.com/dp/0471168513",
+    "newUrl": "https://www.wiley.com/en-us/practical-nonparametric-statistics-3rd-edition-p-9780471160687",
+    "reason": "Replace Amazon with official publisher record for exact third edition. No book DOI verified.",
+    "evidence": [
+      "https://uat.store.wiley.com/en-us/practical-nonparametric-statistics-3rd-edition-p-9780471160687",
+      "https://www.wiley.com/en-us/practical-nonparametric-statistics-3rd-edition-p-9780471160687"
+    ],
+    "newLinkText": "https://www.wiley.com/en-us/practical-nonparametric-statistics-3rd-edition-p-9780471160687",
+    "editionVerification": "Wiley explicitly says W.J. Conover, 3rd Edition, January 1999, ISBN 9780471160687. Binding ISBN variation is not treated as proof the Amazon record is another edition."
+  },
+  {
+    "referenceId": "ref-cook-1982",
+    "oldUrl": "https://www.amazon.com/dp/041224280X",
+    "newUrl": "https://hdl.handle.net/11299/37076",
+    "reason": "Replace Amazon with author institutional repository containing complete original book. No original book DOI verified; review DOIs excluded.",
+    "evidence": [
+      "https://hdl.handle.net/11299/37076",
+      "https://conservancy.umn.edu/bitstream/11299/37076/1/Cook_Weisberg_Residuals_and_Influence.pdf"
+    ],
+    "newLinkText": "https://hdl.handle.net/11299/37076",
+    "editionVerification": "UMN persistent record names Cook/Weisberg, 1982, Chapman and Hall. Scan copyright/title pages confirm ISBN 041224280X."
+  },
+  {
+    "referenceId": "ref-cox-1989",
+    "oldUrl": "https://www.amazon.com/dp/0412306204",
+    "newUrl": "https://doi.org/10.1201/9781315137391",
+    "reason": "Replace Amazon with verified publisher DOI for exact second edition.",
+    "evidence": [
+      "https://api.crossref.org/works/10.1201/9781315137391",
+      "https://www.routledge.com/Analysis-of-Binary-Data-In-econometrics-finance-and-other-fields/Cox-Snell/p/book/9780412306204",
+      "https://www.nuff.ox.ac.uk/Users/Cox/Publications.html"
+    ],
+    "newLinkText": "https://doi.org/10.1201/9781315137391",
+    "editionVerification": "Parent Crossref confirms Analysis of Binary Data Second Edition, issued 2018 digital reissue. Routledge identifies D.R. Cox and E.J. Snell, 2nd Edition, copyright 1989, ISBN 9780412306204. Author Oxford publications page corroborates."
+  },
+  {
+    "referenceId": "ref-dagpunar-1988",
+    "oldUrl": "https://www.amazon.com/dp/0198522029",
+    "newUrl": "https://search.worldcat.org/title/17546779",
+    "reason": "Replace Amazon with English WorldCat original 1988 book record. No book DOI or current publisher record verified.",
+    "evidence": [
+      "https://openlibrary.org/isbn/0198522029.json",
+      "https://search.worldcat.org/title/17546779",
+      "https://www.southampton.ac.uk/people/5xh6gh/doctor-john-dagpunar?page=1"
+    ],
+    "newLinkText": "https://search.worldcat.org/title/17546779",
+    "editionVerification": "LOC-derived Open Library edition identifies Dagpunar, Clarendon/OUP 1988, ISBN 0198522029, OCLC 17546779. Author institutional profile confirms title/year/ISBN."
+  },
+  {
+    "referenceId": "ref-david-1981",
+    "oldUrl": "https://openlibrary.org/books/OL4102397M/Order_statistics",
+    "newUrl": "https://doi.org/10.1002/0471722162",
+    "reason": "Replace Open Library with verified later-edition book DOI following user authorization.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/0471722162",
+      "https://www.ms.u-tokyo.ac.jp/library/file/WileyOL.html",
+      "https://books.google.com/books/about/Order_Statistics.html?id=sospAQAAMAAJ"
+    ],
+    "newLinkText": "Later edition (3rd ed., 2003): https://doi.org/10.1002/0471722162",
+    "editionVerification": "Wiley names David/Nagaraja, 2003, print ISBN 9780471389262 and describes continuation of David second edition. Wiley product/library records identify Third Edition."
+  },
+  {
+    "referenceId": "ref-dixon-1993",
+    "oldUrl": "https://books.google.com/books?id=yWvwAAAAMAAJ",
+    "newUrl": "https://doi.org/10.1093/oso/9780195131871.003.0014",
+    "reason": "Replace parent-book Google Books record with DOI for exact chapter in verified later edition, following user authorization.",
+    "evidence": [
+      "https://academic.oup.com/book/51108/chapter-abstract/422425726",
+      "https://academic.oup.com/book/51108",
+      "https://pdixon.stat.iastate.edu/DIXONCV.pdf"
+    ],
+    "newLinkText": "Later edition (2nd ed., 2001): https://doi.org/10.1093/oso/9780195131871.003.0014",
+    "editionVerification": "OUP identifies Chapter 14, exact title, Philip M. Dixon, 26 April 2001, pages 267-288. Parent book is explicitly Second Edition edited by Scheiner/Gurevitch, print ISBN 9780195131871."
+  },
+  {
+    "referenceId": "ref-everitt-1991",
+    "oldUrl": "https://books.google.com/books?vid=ISBN0340545291",
+    "newUrl": "https://doi.org/10.1002/9781118887486",
+    "reason": "Replace Google Books with verified later-edition book DOI following user authorization.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118887486",
+      "https://books.google.com/books?vid=ISBN0340545291"
+    ],
+    "newLinkText": "Later edition (2nd ed., 2001): https://doi.org/10.1002/9781118887486",
+    "editionVerification": "Wiley explicitly calls this 2nd edition, Everitt/Dunn, first published 2 March 2001, copyright 2001, print ISBN 9780470711170."
+  },
+  {
+    "referenceId": "ref-feinstein-2002",
+    "oldUrl": "https://www.amazon.com/dp/1584882166",
+    "newUrl": "https://doi.org/10.1201/9781420035681",
+    "reason": "Replace Amazon with verified publisher DOI for exact first edition.",
+    "evidence": [
+      "https://api.crossref.org/works/10.1201/9781420035681",
+      "https://www.taylorfrancis.com/books/9781420035681",
+      "https://www.routledge.com/Principles-of-Medical-Statistics/Feinstein/p/book/9780429115974",
+      "https://books.google.com/books/about/Principles_of_Medical_Statistics.html?id=pQ-jRsoBi5YC"
+    ],
+    "newLinkText": "https://doi.org/10.1201/9781420035681",
+    "editionVerification": "Crossref gives Feinstein, exact title, ISBN 9780429115974 and T&F resource books/9781420035681; Routledge product 9780429115974 explicitly labels 1st Edition, Alvan R. Feinstein, copyright 2002. Crossref issued date 2001-09-14 does not change historical copyright year."
+  },
+  {
+    "referenceId": "ref-finney-1971",
+    "oldUrl": "https://www.amazon.com/dp/0521135907",
+    "newUrl": "https://search.worldcat.org/title/802882862",
+    "reason": "Replace Amazon first-edition reprint link with exact third-edition English record. No original book DOI verified.",
+    "evidence": [
+      "https://search.worldcat.org/title/Probit-analysis/oclc/802882862",
+      "https://www.ncbi.nlm.nih.gov/nlmcatalog/1277125",
+      "https://assets.cambridge.org/97805211/35900/frontmatter/9780521135900_frontmatter.pdf"
+    ],
+    "newLinkText": "https://search.worldcat.org/title/802882862",
+    "editionVerification": "WorldCat explicitly states Finney, 3rd edition, Cambridge University Press 1971. NLM confirms ISBN 052108041X. Current Amazon ISBN 0521135907 maps to CUP frontmatter for Probit Analysis: A Statistical Treatment of the Sigmoid Response Curve, the original first-edition reprint."
+  },
+  {
+    "referenceId": "ref-finney-1978",
+    "oldUrl": "https://www.amazon.com/dp/0852642520",
+    "newUrl": "https://books.google.com/books?id=1EtpQgAACAAJ",
+    "reason": "Replace Amazon with exact 1978 third-edition English Google Books record. No book DOI or current publisher record verified; review DOIs excluded.",
+    "evidence": [
+      "https://books.google.com/books/about/Statistical_Method_in_Biological_Assay.html?id=1EtpQgAACAAJ",
+      "https://wellcomecollection.org/works/zdckddmu"
+    ],
+    "newLinkText": "https://books.google.com/books?id=1EtpQgAACAAJ",
+    "editionVerification": "Google Books and Wellcome agree D.J. Finney, 3rd edition, Charles Griffin 1978, 508 pages, ISBN 0852642520."
+  },
+  {
+    "referenceId": "ref-fleiss-1981",
+    "oldUrl": "https://www.amazon.com/dp/0471064289",
+    "newUrl": "https://doi.org/10.1002/0471445428",
+    "reason": "Replace Amazon with verified later-edition book DOI following user authorization.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/0471445428",
+      "https://books.google.com/books?id=8Z8QAQAAIAAJ"
+    ],
+    "newLinkText": "Later edition (3rd ed., 2003): https://doi.org/10.1002/0471445428",
+    "editionVerification": "Wiley identifies Fleiss/Levin/Paik, third edition, 2003, print ISBN 9780471526292. Original 1981 second edition confirmed by Google Books ISBN 0471064289."
+  },
+  {
+    "referenceId": "ref-gail-2000",
+    "oldUrl": "https://www.amazon.com/dp/0471866415",
+    "newUrl": "https://www.wiley.com/en-us/encyclopedia-of-epidemiologic-methods-p-9780471866411",
+    "reason": "Replace Amazon with exact 2000 official English publisher record. No whole-book DOI verified; Encyclopedia of Biostatistics DOIs excluded.",
+    "evidence": [
+      "https://www.wiley.com/en-us/encyclopedia-of-epidemiologic-methods-p-9780471866411"
+    ],
+    "newLinkText": "https://www.wiley.com/en-us/encyclopedia-of-epidemiologic-methods-p-9780471866411",
+    "editionVerification": "Wiley explicitly names Gail/Benichou editors, November 2000, ISBN 9780471866411."
+  },
+  {
+    "referenceId": "ref-gentle-2003",
+    "oldUrl": "https://www.amazon.com/dp/1441918086",
+    "newUrl": "https://doi.org/10.1007/b97336",
+    "reason": "Replace Amazon with the DOI for the cited second edition.",
+    "evidence": [
+      "https://link.springer.com/book/10.1007/b97336",
+      "https://mason.gmu.edu/~jgentle/books/rngbk.htm"
+    ],
+    "newLinkText": "https://doi.org/10.1007/b97336",
+    "editionVerification": "Springer identifies edition 2, copyright 2003, hardcover ISBN 9780387001784; its later electronic and paperback dates are formats of that edition. Amazon ISBN 1441918086 is the same Springer-listed second-edition paperback."
+  },
+  {
+    "referenceId": "ref-golub-1983",
+    "oldUrl": "https://books.google.com/books?id=g4gQAQAAIAAJ",
+    "newUrl": "https://doi.org/10.56021/9781421407944",
+    "reason": "Use the publisher-verified whole-book DOI for a later edition, as authorized by the user, and explicitly label its edition.",
+    "evidence": [
+      "https://www.press.jhu.edu/books/title/10678/matrix-computations",
+      "https://books.google.com/books?id=g4gQAQAAIAAJ"
+    ],
+    "newLinkText": "Later edition (4th ed., 2013): https://doi.org/10.56021/9781421407944",
+    "editionVerification": "Hopkins Press identifies both cited authors, title, fourth edition, 15 February 2013, ISBN 9781421407944 and this DOI. The current Google Books record is an older 1983 record; this DOI is not represented as the 1983 edition."
+  },
+  {
+    "referenceId": "ref-harris-1991",
+    "oldUrl": "https://www.amazon.com/dp/0824784006",
+    "newUrl": "https://doi.org/10.1201/9781003573784",
+    "reason": "Replace Amazon with the whole-book DOI for a verified digital reissue of the cited first edition.",
+    "evidence": [
+      "https://api.crossref.org/works/10.1201/9781003573784",
+      "https://www.routledge.com/product/isbn/9781040294031",
+      "https://orbi.uliege.be/handle/2268/334715",
+      "https://academic.oup.com/jrsssc/article/41/3/602/6990226"
+    ],
+    "newLinkText": "Digital reissue (2024): https://doi.org/10.1201/9781003573784",
+    "editionVerification": "Crossref identifies Harris and Albert, same title, monograph, edition 1, electronic publication 29 October 2024. Publisher preview reproduces original CIP with ISBN 0824784006 and 1991 classification; author institutional repository also links this DOI to the original work. Publisher copyright year is 1990, while original cataloguing/review and citation use 1991."
+  },
+  {
+    "referenceId": "ref-hedges-1985",
+    "oldUrl": "https://www.amazon.com/dp/0123363802",
+    "newUrl": "https://doi.org/10.1016/C2009-0-03396-0",
+    "reason": "Replace Amazon with the publisher whole-book DOI, not a book-review DOI.",
+    "evidence": [
+      "https://www.sciencedirect.com/book/monograph/9780080570655/statistical-methods-for-meta-analysis",
+      "https://agris.fao.org/search/en/providers/122535/records/65ddebc67c7033e84be8e295"
+    ],
+    "newLinkText": "https://doi.org/10.1016/C2009-0-03396-0",
+    "editionVerification": "ScienceDirect identifies Larry V. Hedges and Ingram Olkin, Statistical Methods for Meta-Analysis, Book 1985, Academic Press, and the whole-book DOI. Ebook ISBN differs from the original print ISBN 0123363802 but publisher copyright/publication year remains 1985."
+  },
+  {
+    "referenceId": "ref-hocking-1985",
+    "oldUrl": "https://www.amazon.com/dp/053403618X",
+    "newUrl": "https://books.google.com/books?id=JxPvAAAAMAAJ",
+    "reason": "Replace Amazon with an English Google Books record of the exact cited book.",
+    "evidence": [
+      "https://books.google.com/books?vid=ISBN053403618X",
+      "https://books.google.com/books?id=JxPvAAAAMAAJ",
+      "https://support.sas.com/documentation/cdl/en/statug/66859/HTML/default/statug_introanova_sect016.htm"
+    ],
+    "newLinkText": "https://books.google.com/books?id=JxPvAAAAMAAJ",
+    "editionVerification": "Direct Google Books ISBN lookup returned HTTP 200 and volume JxPvAAAAMAAJ: Ronald R. Hocking, Brooks/Cole Publishing Company 1985, ISBN 053403618X, 385 pages. Methods and Applications of Linear Models has a different title and later publication lineage, so the exact book record is preferable to assuming it is the same work."
+  },
+  {
+    "referenceId": "ref-hollander-1973",
+    "oldUrl": "https://search.worldcat.org/title/520735",
+    "newUrl": "https://doi.org/10.1002/9781119196037",
+    "reason": "Use a verified later-edition whole-book DOI with an explicit edition label, as authorized by the user.",
+    "evidence": [
+      "https://api.crossref.org/works?rows=5&query.bibliographic=Nonparametric%20statistical%20methods%20Hollander%20Wolfe%201999",
+      "https://www.wiley.com/en-be/nonparametric-statistical-methods-3rd-edition-p-9781119196037",
+      "https://search.worldcat.org/title/520735",
+      "https://search.worldcat.org/title/Nonparametric-statistical-methods/oclc/301603607"
+    ],
+    "newLinkText": "Later edition (3rd ed.): https://doi.org/10.1002/9781119196037",
+    "editionVerification": "Crossref identifies a monograph by Hollander, Wolfe and added coauthor Eric Chicken, electronic publication July 2015, ISBN 9781119196037. Wiley explicitly identifies this ISBN as the third edition O-book and print ISBN 9780470387375. The 1973 first and 1999 second editions are not misrepresented as this edition."
+  },
+  {
+    "referenceId": "ref-hollander-1999",
+    "oldUrl": "https://www.amazon.com/dp/0471190454",
+    "newUrl": "https://doi.org/10.1002/9781119196037",
+    "reason": "Use a verified later-edition whole-book DOI with an explicit edition label, as authorized by the user.",
+    "evidence": [
+      "https://api.crossref.org/works?rows=5&query.bibliographic=Nonparametric%20statistical%20methods%20Hollander%20Wolfe%201999",
+      "https://www.wiley.com/en-be/nonparametric-statistical-methods-3rd-edition-p-9781119196037",
+      "https://search.worldcat.org/title/520735",
+      "https://search.worldcat.org/title/Nonparametric-statistical-methods/oclc/301603607"
+    ],
+    "newLinkText": "Later edition (3rd ed.): https://doi.org/10.1002/9781119196037",
+    "editionVerification": "Crossref identifies a monograph by Hollander, Wolfe and added coauthor Eric Chicken, electronic publication July 2015, ISBN 9781119196037. Wiley explicitly identifies this ISBN as the third edition O-book and print ISBN 9780470387375. The 1973 first and 1999 second editions are not misrepresented as this edition."
+  },
+  {
+    "referenceId": "ref-hosmer-1989",
+    "oldUrl": "https://books.google.com/books?vid=ISBN0471615536",
+    "newUrl": "https://doi.org/10.1002/0471722146",
+    "reason": "Use the later second-edition whole-book DOI with its edition explicitly labelled.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/0471722146",
+      "https://books.google.com/books/about/Applied_Logistic_Regression.html?id=-p5qAAAAMAAJ"
+    ],
+    "newLinkText": "Later edition (2nd ed., 2000): https://doi.org/10.1002/0471722146",
+    "editionVerification": "Wiley identifies Hosmer and Lemeshow, first published September 2000, print ISBN 9780471356325, DOI 10.1002/0471722146; its description is a revised edition and current publisher title page identifies second edition. The 1989 Google record has ISBN 0471615536 and remains evidence for the original citation."
+  },
+  {
+    "referenceId": "ref-hosmer-1999",
+    "oldUrl": "https://www.amazon.com/dp/0471154105",
+    "newUrl": "https://doi.org/10.1002/9780470258019",
+    "reason": "Use the verified later second-edition whole-book DOI and label it explicitly.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/resolve/openurl?genre=book&isbn=9780470258019",
+      "https://api.crossref.org/works?rows=5&query.bibliographic=Applied%20survival%20analysis%20Hosmer%20Lemeshow%201999"
+    ],
+    "newLinkText": "Later edition (2nd ed., 2008): https://doi.org/10.1002/9780470258019",
+    "editionVerification": "Wiley identifies the second edition, Hosmer, Lemeshow and added coauthor Susanne May, 26 February 2008, print ISBN 9780471754992. This is not the 1999 first edition with ISBN 0471154105."
+  },
+  {
+    "referenceId": "ref-howard-1972",
+    "oldUrl": "https://doi.org/10.1111/j.2517-6161.1972.tb00899.x",
+    "newUrl": "https://doi.org/10.1111/j.2517-6161.1972.tb00900.x",
+    "reason": "Improve from main Cox-paper DOI to the separate publisher DOI for Discussion on Professor Cox's Paper, pages202-220.",
+    "evidence": [
+      "https://api.crossref.org/works/10.1111%2Fj.2517-6161.1972.tb00899.x",
+      "https://academic.oup.com/jrsssb/article/34/2/202/7027323",
+      "https://api.crossref.org/works/10.1111/j.2517-6161.1972.tb00900.x"
+    ],
+    "newLinkText": "https://doi.org/10.1111/j.2517-6161.1972.tb00900.x",
+    "editionVerification": "Improve from main Cox-paper DOI to the separate publisher DOI for Discussion on Professor Cox's Paper, pages202-220.",
+    "textReplacements": [
+      {
+        "oldText": "Link to the paper and its discussion:",
+        "newText": "Link to the discussion:"
+      }
+    ]
+  },
+  {
+    "referenceId": "ref-hsu-1996",
+    "oldUrl": "https://www.amazon.com/dp/0412982811",
+    "newUrl": "https://doi.org/10.1201/b15074",
+    "reason": "Replace Amazon with the whole-book DOI for the cited work.",
+    "evidence": [
+      "https://api.crossref.org/works/10.1201/b15074",
+      "https://www.routledge.com/Multiple-Comparisons-Theory-and-Methods/Hsu/p/book/9780412982811",
+      "https://www.asc.ohio-state.edu/hsu.1/book.html"
+    ],
+    "newLinkText": "https://doi.org/10.1201/b15074",
+    "editionVerification": "Crossref identifies monograph Multiple Comparisons by Jason Hsu, Chapman and Hall/CRC, 1 February 1996, ISBN 9780429170874. Author institutional page and Routledge verify full subtitle, first edition, 1996 and original ISBN 0412982811."
+  },
+  {
+    "referenceId": "ref-hunter-1990",
+    "oldUrl": "https://www.loc.gov/item/89010766/",
+    "newUrl": "https://doi.org/10.4135/9781483398105",
+    "reason": "Use the verified third-edition whole-book DOI with a clear later-edition label.",
+    "evidence": [
+      "https://methods.sagepub.com/book/mono/embed/methods-of-meta-analysis-3e/chpt/part-i-introduction-metaanalysis",
+      "https://agris.fao.org/search/en/providers/122535/records/65ddc76d7c7033e84be7ed15",
+      "https://www.loc.gov/item/89010766/"
+    ],
+    "newLinkText": "Later edition (3rd ed., 2015): https://doi.org/10.4135/9781483398105",
+    "editionVerification": "Sage describes the third edition and names Frank L. Schmidt and John E. Hunter. FAO AGRIS/National Agricultural Library record verifies 2015, edition 3, ISBN 9781483398105 and whole-book DOI. Crossref singleton was rate-limited; no DOI inference from a book review is used."
+  },
+  {
+    "referenceId": "ref-johnson-1969",
+    "oldUrl": "https://www.amazon.com/dp/B000OK3PNK",
+    "newUrl": "https://doi.org/10.1002/0471715816",
+    "reason": "Replace the Amazon ASIN with the whole-book DOI for the verified later third edition, explicitly labelled.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/0471715816",
+      "https://books.google.com/books?vid=ISBN0471443603",
+      "https://help.imsl.com/fortran/6.0/sfun/worddocuments/appendixcreferences.htm",
+      "https://lib.ysu.am/open_books/417797.pdf"
+    ],
+    "newLinkText": "Later edition (3rd ed., 2005; Univariate Discrete Distributions): https://doi.org/10.1002/0471715816",
+    "editionVerification": "Wiley identifies Univariate Discrete Distributions, third edition, Norman L. Johnson, Adrienne W. Kemp and Samuel Kotz, 27 January 2005, print ISBN 9780471272465, DOI 10.1002/0471715816. This is the later edition lineage of Discrete Distributions, not a review. Original 1969 title/authors are independently verified by Google Books and IMSL references. Preface to a later volume of the same Wiley series explicitly identifies Univariate Discrete Distributions as the first volume in the second-edition collection replacing the 1969-1972 Distributions in Statistics series; univariate-only scope and changed title are disclosed in the link label."
+  },
+  {
+    "referenceId": "ref-kendall-1990",
+    "oldUrl": "https://www.amazon.com/dp/0195208374",
+    "newUrl": "https://books.google.com/books?id=YFMBwQEACAAJ",
+    "reason": "Replace Amazon with an English Google Books record of the exact fifth edition. DOI candidates were reviews or different-author chapters.",
+    "evidence": [
+      "https://books.google.com/books/about/Rank_Correlation_Methods.html?id=YFMBwQEACAAJ",
+      "https://api.crossref.org/works?rows=5&query.bibliographic=Rank%20correlation%20methods%20Kendall%20Gibbons"
+    ],
+    "newLinkText": "https://books.google.com/books?id=YFMBwQEACAAJ",
+    "editionVerification": "Google Books identifies Maurice George Kendall and Jean Dickinson Gibbons, fifth edition, E. Arnold 1990, ISBN 0195208374, 260 pages."
+  },
+  {
+    "referenceId": "ref-kleinbaum-1998",
+    "oldUrl": "https://www.amazon.com/dp/0534209106",
+    "newUrl": "https://search.worldcat.org/title/Applied-regression-analysis-and-other-multivariable-methods/oclc/37004410",
+    "reason": "Replace Amazon with the English WorldCat record of the exact third edition.",
+    "evidence": [
+      "https://search.worldcat.org/title/Applied-regression-analysis-and-other-multivariable-methods/oclc/37004410",
+      "https://www.gbv.de/dms/ilmenau/toc/230009247.PDF",
+      "https://openlibrary.org/works/OL21079331W/Applied_Regression_Analysis_and_Multivariable_Methods?edition=key%3A%2Fbooks%2FOL671660M"
+    ],
+    "newLinkText": "https://search.worldcat.org/title/Applied-regression-analysis-and-other-multivariable-methods/oclc/37004410",
+    "editionVerification": "WorldCat verifies third edition, Duxbury Press, Pacific Grove 1998. Institutional scan of the title page verifies Kleinbaum, Kupper, Muller and Nizam. Original ISBN is 0534209106. No whole-book DOI was verified; current publisher catalogue primarily returns newer editions."
+  },
+  {
+    "referenceId": "ref-knuth-1997",
+    "oldUrl": "https://www.amazon.com/dp/0201896842",
+    "newUrl": "https://www.informit.com/store/art-of-computer-programming-volume-2-seminumerical-9780201896848",
+    "reason": "Replace Amazon with the exact-edition publisher product and reference page.",
+    "evidence": [
+      "https://www.informit.com/store/art-of-computer-programming-volume-2-seminumerical-9780201896848",
+      "https://www-cs-faculty.stanford.edu/~knuth/taocp.html"
+    ],
+    "newLinkText": "https://www.informit.com/store/art-of-computer-programming-volume-2-seminumerical-9780201896848",
+    "editionVerification": "InformIT identifies Donald E. Knuth, volume 2 Seminumerical Algorithms, third edition, publication 4 November 1997, print ISBN 0201896842. Knuth institutional bibliography independently lists 1997 third edition and same ISBN; publisher copyright display 1998 is recorded without altering citation year."
+  },
+  {
+    "referenceId": "ref-knuth-1998",
+    "oldUrl": "https://www.amazon.com/dp/0201896850",
+    "newUrl": "https://www.informit.com/store/art-of-computer-programming-volume-3-sorting-and-searching-9780201896855",
+    "reason": "Replace Amazon with the exact-edition publisher product and reference page.",
+    "evidence": [
+      "https://www.informit.com/store/art-of-computer-programming-volume-3-sorting-and-searching-9780201896855",
+      "https://www-cs-faculty.stanford.edu/~knuth/taocp.html"
+    ],
+    "newLinkText": "https://www.informit.com/store/art-of-computer-programming-volume-3-sorting-and-searching-9780201896855",
+    "editionVerification": "InformIT identifies Donald E. Knuth, volume 3 Sorting and Searching, second edition, publication 24 April 1998, copyright 1998, print ISBN 0201896850. Knuth institutional bibliography confirms the same edition and year."
+  },
+  {
+    "referenceId": "ref-krzanowski-1988",
+    "oldUrl": "https://books.google.com/books?vid=ISBN0198522118",
+    "newUrl": "https://doi.org/10.1093/oso/9780198507086.001.0001",
+    "reason": "Use the publisher-verified later updated-edition whole-book DOI with an explicit date label.",
+    "evidence": [
+      "https://academic.oup.com/book/53362",
+      "https://books.google.com/books?vid=ISBN0198522118"
+    ],
+    "newLinkText": "Later updated edition (2000): https://doi.org/10.1093/oso/9780198507086.001.0001",
+    "editionVerification": "Oxford Academic verifies W. J. Krzanowski, identical title, 28 September 2000, print ISBN 9780198507086 and this DOI. Its abstract explicitly describes an updated edition with an appendix tracing developments since the first edition. Original 1988 Google record has ISBN 0198522118."
+  },
+  {
+    "referenceId": "ref-last-2001",
+    "oldUrl": "https://www.amazon.com/dp/0195141695",
+    "newUrl": "https://doi.org/10.1093/acref/9780199976720.001.0001",
+    "reason": "Use the verified sixth-edition reference-book DOI, explicitly labelled, under the user's later-edition permission.",
+    "evidence": [
+      "https://academic.oup.com/ije/pages/cfc-dictionary-of-epidemiology",
+      "https://www.wce2024.org/wp-content/uploads/2024/10/Miquel-SYM13-The-dictionary-of-epidemiology-review-and-discussion.pdf",
+      "https://api.crossref.org/works/10.1093/acref/9780199976720.001.0001"
+    ],
+    "newLinkText": "Later edition (6th ed., 2014; edited by Miquel Porta): https://doi.org/10.1093/acref/9780199976720.001.0001",
+    "editionVerification": "Oxford/IEA publisher call for contributions links this exact DOI as the 2014 sixth edition, explains John Last edited the first four editions and Miquel Porta the fifth and sixth. Editor Miquel Porta's presentation reproduces Oxford Reference bibliographic data: print 2014, online 2016, ISBN 9780199976720. Crossref confirms Oxford University Press, edited-book, 2014, same ISBN; its deposited title carries an obsolete DRAFT suffix."
+  },
+  {
+    "referenceId": "ref-lawless-1982",
+    "oldUrl": "https://books.google.com/books?vid=ISBN0471085448",
+    "newUrl": "https://doi.org/10.1002/9781118033005",
+    "reason": "Use the verified later second-edition whole-book DOI, with its edition and year clearly labelled.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/9781118033005",
+      "https://www.wiley.com/en-gb/statistical-models-and-methods-for-lifetime-data-2nd-edition-p-9780471372158",
+      "https://books.google.com/books?vid=ISBN0471085448"
+    ],
+    "newLinkText": "Later edition (2nd ed., 2003): https://doi.org/10.1002/9781118033005",
+    "editionVerification": "Wiley identifies Jerald F. Lawless, second edition, copyright 2003, first publication 13 November 2002, print ISBN 9780471372158 and DOI 10.1002/9781118033005. Original 1982 Google Books record has ISBN 0471085448."
+  },
+  {
+    "referenceId": "ref-le-1997",
+    "oldUrl": "https://books.google.com/books?id=eYV2QgAACAAJ",
+    "newUrl": "https://www.wiley.com/en-us/applied-survival-analysis-p-9780471170853",
+    "reason": "Replace the catalogue link with Wiley's exact-work publisher page. Whole-book DOI searches returned book reviews, not a verified book DOI.",
+    "evidence": [
+      "https://www.wiley.com/en-us/applied-survival-analysis-p-9780471170853",
+      "https://books.google.com/books?id=eYV2QgAACAAJ",
+      "https://api.crossref.org/works?rows=5&query.bibliographic=Applied%20survival%20analysis%20Chap%20Le"
+    ],
+    "newLinkText": "https://www.wiley.com/en-us/applied-survival-analysis-p-9780471170853",
+    "editionVerification": "Wiley verifies Chap T. Le, Applied Survival Analysis, October 1997, ISBN 9780471170853. Direct Google Books fetch of the current link corroborates the same title, author, year and ISBN. Do not use the Borgan 1999 review DOI or JSTOR review DOIs."
+  },
+  {
+    "referenceId": "ref-marsaglia-1997",
+    "oldUrl": "https://web.archive.org/web/20110101164502/http://www.stat.fsu.edu/pub/diehard",
+    "newUrl": "https://tams-www.informatik.uni-hamburg.de/publications/2001/SA_Witt_Hartmann/cdrom/Internetseiten/stat.fsu.edu/diehard.html",
+    "reason": "Working University of Hamburg institutional mirror preserves the original English DIEHARD homepage and local software/documentation archives. It is a more useful destination than the unretrievable Wayback URL.",
+    "evidence": [
+      "https://tams-www.informatik.uni-hamburg.de/publications/2001/SA_Witt_Hartmann/cdrom/Internetseiten/stat.fsu.edu/diehard.html",
+      "https://tams-www.informatik.uni-hamburg.de/publications/2001/SA_Witt_Hartmann/cdrom/Internetseiten/stat.fsu.edu/diehard.zip",
+      "https://webhome.phy.duke.edu/~rgb/General/dieharder.php",
+      "https://search.worldcat.org/title/741251712"
+    ],
+    "newLinkText": "https://tams-www.informatik.uni-hamburg.de/publications/2001/SA_Witt_Hartmann/cdrom/Internetseiten/stat.fsu.edu/diehard.html",
+    "editionVerification": "Mirrored original page explicitly identifies George Marsaglia, DIEHARD, FSU and original research support. Its linked local diehard.zip returns HTTP 200 and contains DIEHARD.DOC whose text starts Version: DOS, Jan 7, 1997 and the exact title DIEHARD: a battery of tests of randomness.",
+    "textReplacements": [
+      {
+        "oldText": "Archived website:",
+        "newText": "University-hosted mirror:"
+      }
+    ]
+  },
+  {
+    "referenceId": "ref-miller-1981-a",
+    "oldUrl": "https://www.amazon.com/dp/0471255483",
+    "newUrl": "https://books.google.com/books?id=cttQAAAAMAAJ&hl=en",
+    "reason": "Replace Amazon ISBN for 1998 second edition with exact English 1981 original record. No actual book DOI found.",
+    "evidence": [
+      "https://books.google.com/books/about/Survival_Analysis.html?id=cttQAAAAMAAJ",
+      "https://www.ncbi.nlm.nih.gov/nlmcatalog/101027645",
+      "https://www.wiley.com/en-gb/survival-analysis-2nd-edition-p-9780471255482"
+    ],
+    "newLinkText": "https://books.google.com/books?id=cttQAAAAMAAJ&hl=en",
+    "editionVerification": "Google Books/NLM confirm Wiley 1981, 238 pages, ISBN 047109434X. Wiley labels current Amazon ISBN 0471255483 second edition March 1998."
+  },
+  {
+    "referenceId": "ref-mood-1974",
+    "oldUrl": "https://www.amazon.com/dp/0070854653",
+    "newUrl": "https://books.google.com/books?id=dAjnRwAACAAJ&hl=en",
+    "reason": "Replace Amazon with exact English third-edition Google Books record. Located DOI hits were reviews.",
+    "evidence": [
+      "https://books.google.com/books/about/Introduction_to_the_Theory_of_Statistics.html?hl=en&id=dAjnRwAACAAJ&output=html_text"
+    ],
+    "newLinkText": "https://books.google.com/books?id=dAjnRwAACAAJ&hl=en",
+    "editionVerification": "Google explicitly lists edition 3, McGraw-Hill 1974, three cited authors and ISBN 0070854653."
+  },
+  {
+    "referenceId": "ref-mortimer-1999",
+    "oldUrl": "https://www.amazon.com/dp/1850700842",
+    "newUrl": "https://books.google.com/books?id=piOSFSzJW30C&hl=en",
+    "reason": "Replace Amazon with English Google Books record of exact host book; no DOI for cited chapter verified.",
+    "evidence": [
+      "https://books.google.com/books/about/Towards_Reproductive_Certainty_Fertility.html?id=piOSFSzJW30C",
+      "https://wellcomecollection.org/works/usu84b62",
+      "https://www.cambridge.org/core/books/abs/quality-and-risk-management-in-the-ivf-laboratory/bibliography/3363C6697D924FACD77BB4ABBF52EAA9"
+    ],
+    "newLinkText": "https://books.google.com/books?id=piOSFSzJW30C&hl=en",
+    "editionVerification": "Google verifies Jansen/Mortimer editors, 1999, ISBN 1850700842, 534 pages and chapter in contents at page 421. Wellcome verifies same Parthenon volume."
+  },
+  {
+    "referenceId": "ref-mulrow-1996",
+    "oldUrl": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook",
+    "newUrl": "https://www.jameslindlibrary.org/mulrow-cd-oxman-ad-editors-1996/",
+    "reason": "Replace current-handbook homepage with dedicated reputable historical archive of exact 1996 handbook including full PDF.",
+    "evidence": [
+      "https://www.jameslindlibrary.org/mulrow-cd-oxman-ad-editors-1996/",
+      "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/archive/v5.0.0"
+    ],
+    "newLinkText": "https://www.jameslindlibrary.org/mulrow-cd-oxman-ad-editors-1996/",
+    "editionVerification": "James Lind Library confirms Mulrow/Oxman, updated 21 October 1996, version 3. Cochrane history corroborates 1996 stand-alone handbook.",
+    "textReplacements": [
+      {
+        "oldText": "Current handbook and information about earlier versions:",
+        "newText": "Archived 1996 handbook:"
+      }
+    ]
+  },
+  {
+    "referenceId": "ref-pearson-1970",
+    "oldUrl": "https://www.amazon.com/dp/B001F7WZIW",
+    "newUrl": "https://books.google.com/books?id=0PoYAQAAIAAJ&hl=en",
+    "reason": "Replace volume 1 Amazon URL with exact English 1970 third-edition Google record. Retain institution-hosted volume 2 scan.",
+    "evidence": [
+      "https://books.google.com/books?cad=3&id=0PoYAQAAIAAJ&source=gbs_book_other_versions_r",
+      "https://www.mat.univie.ac.at/~schmitt/OeSGdM/2008_oesgm09.pdf"
+    ],
+    "newLinkText": "https://books.google.com/books?id=0PoYAQAAIAAJ&hl=en",
+    "editionVerification": "Google identifies volume 1 edition 3, Cambridge for Biometrika Trustees, 1970. Vienna scan title page identifies volume II, Pearson/Hartley, Cambridge 1972; 31 MB response is archive scan."
+  },
+  {
+    "referenceId": "ref-petrie-1990",
+    "oldUrl": "https://www.amazon.com/dp/0632018135",
+    "newUrl": "https://books.google.com/books?id=RuYPHAAACAAJ&hl=en",
+    "reason": "Replace Amazon with English Google Books record matching its ISBN. Record identifies second edition originally published 1987.",
+    "evidence": [
+      "https://books.google.com/books?vid=ISBN0632018135&hl=en",
+      "https://www.ncbi.nlm.nih.gov/nlmcatalog/8810526"
+    ],
+    "newLinkText": "Second-edition record (1987): https://books.google.com/books?id=RuYPHAAACAAJ&hl=en",
+    "editionVerification": "Google and NLM agree on Petrie, second edition, Blackwell Scientific, 270 pages, ISBN 0632018135. No distinct 1990 edition or book DOI verified."
+  },
+  {
+    "referenceId": "ref-rothman-1998",
+    "oldUrl": "https://www.amazon.com/dp/0316757802",
+    "newUrl": "https://books.google.com/books?id=cL3zwIFHB7cC&hl=en",
+    "reason": "Replace Amazon with exact English second-edition Google record. Reject book-review DOIs, including later-edition reviews.",
+    "evidence": [
+      "https://books.google.com/books/about/Modern_Epidemiology.html?id=cL3zwIFHB7cC",
+      "https://iucat.iu.edu/iupuc/3636151"
+    ],
+    "newLinkText": "https://books.google.com/books?id=cL3zwIFHB7cC&hl=en",
+    "editionVerification": "Google confirms Rothman/Greenland, Lippincott-Raven 1998, 737 pages, ISBN 0316757802 and second-edition description."
+  },
+  {
+    "referenceId": "ref-rowntree-1991",
+    "oldUrl": "https://www.amazon.com/dp/0140136320",
+    "newUrl": "https://openlibrary.org/books/OL7348445M/Statistics_Without_Tears_(Penguin_Science)",
+    "reason": "Replace Amazon with reputable English Open Library exact 1991 edition. Google ISBN results describe revised 2000 reprint.",
+    "evidence": [
+      "https://openlibrary.org/works/OL4805919W/editions.json?limit=20",
+      "https://ci.nii.ac.jp/ncid/BA27219079",
+      "https://www.worldofbooks.com/en-gb/products/statistics-without-tears-book-derek-rowntree-9780140136326"
+    ],
+    "newLinkText": "https://openlibrary.org/books/OL7348445M/Statistics_Without_Tears_(Penguin_Science)",
+    "editionVerification": "Open Library editions API identifies OL7348445M as 28 February 1991, Penguin, ISBN 0140136320; CiNii independently confirms Penguin 1991 with primer subtitle."
+  },
+  {
+    "referenceId": "ref-sackett-1991",
+    "oldUrl": "https://www.amazon.com/dp/0316765996",
+    "newUrl": "https://books.google.com/books?id=3PrEQgAACAAJ&hl=en",
+    "reason": "Replace Amazon with exact English second-edition Google record. DOI search hits were reviews.",
+    "evidence": [
+      "https://books.google.com/books/about/Clinical_Epidemiology.html?id=3PrEQgAACAAJ"
+    ],
+    "newLinkText": "https://books.google.com/books?id=3PrEQgAACAAJ&hl=en",
+    "editionVerification": "Google identifies Little, Brown 1991, edition 2, 441 pages, ISBN 0316765996."
+  },
+  {
+    "referenceId": "ref-sahai-1996",
+    "oldUrl": "https://www.amazon.com/dp/0849394449",
+    "newUrl": "https://search.worldcat.org/title/32590129",
+    "reason": "Replace Amazon with English WorldCat record of cited 1996 book. No actual book DOI verified; similar-title DOIs were reviews.",
+    "evidence": [
+      "https://search.worldcat.org/title/Statistics-in-epidemiology-%3A-methods-techniques-and-applications/oclc/32590129",
+      "https://books.google.com/books/about/Statistics_in_Epidemiology.html?id=oDlBZgyx54kC",
+      "https://www.unizwa.edu.om/profile_details.php?comingfrom=413&lang=en&staffid=676"
+    ],
+    "newLinkText": "https://search.worldcat.org/title/32590129",
+    "editionVerification": "WorldCat confirms Sahai/Khurshid, exact title, CRC Boca Raton copyright 1996. Google verifies ISBN 0849394449 with release date 21 December 1995."
+  },
+  {
+    "referenceId": "ref-schlesselman-1982",
+    "oldUrl": "https://www.amazon.com/dp/019502933X",
+    "newUrl": "https://books.google.com/books?id=ar6EAAAAIAAJ&hl=en",
+    "reason": "Replace Amazon with exact English Google print-edition record. Candidate DOIs were reviews/unrelated case-control chapters.",
+    "evidence": [
+      "https://books.google.com/books?vid=ISBN019502933X&hl=en",
+      "https://hero.epa.gov/reference/57148/"
+    ],
+    "newLinkText": "https://books.google.com/books?id=ar6EAAAAIAAJ&hl=en",
+    "editionVerification": "Google ISBN lookup confirms Schlesselman/Stolley, Oxford 1982, 354 pages and ISBN 019502933X; EPA corroborates title/year/ISBN."
+  },
+  {
+    "referenceId": "ref-sen-1973",
+    "oldUrl": "https://www.amazon.com/dp/0198281935",
+    "newUrl": "https://doi.org/10.1093/0198281935.001.0001",
+    "reason": "Prefer verified Oxford book DOI explicitly labelled later expanded edition under user instruction.",
+    "evidence": [
+      "https://academic.oup.com/book/4134",
+      "https://academic.oup.com/book/4134/chapter/145893722",
+      "https://academic.oup.com/book/4134/chapter/145893869"
+    ],
+    "newLinkText": "Later expanded edition (1997): https://doi.org/10.1093/0198281935.001.0001",
+    "editionVerification": "Landing/Crossref retain 1973 date; actual copyright page says expanded edition published 1997 with Sen/Foster annexe."
+  },
+  {
+    "referenceId": "ref-senn-1993",
+    "oldUrl": "https://www.senns.uk/cticr2.html",
+    "newUrl": "https://doi.org/10.1002/0470854596",
+    "reason": "Prefer verified Wiley later second-edition book DOI as authorized.",
+    "evidence": [
+      "https://onlinelibrary.wiley.com/doi/book/10.1002/0470854596",
+      "https://www.senns.uk/cticr2.html"
+    ],
+    "newLinkText": "Later edition (2nd ed., 2002): https://doi.org/10.1002/0470854596",
+    "editionVerification": "Wiley explicitly calls it second edition, first published 15 July 2002, ISBN 9780471496533; author page confirms 1993 first and 2002 second editions."
+  },
+  {
+    "referenceId": "ref-snedecor-1989",
+    "oldUrl": "https://www.amazon.com/dp/0813815614",
+    "newUrl": "https://www.wiley-vch.de/en?isbn=9780813815619&option=com_eshop&title=Statistical+Methods&view=product",
+    "reason": "Replace Amazon with current publisher’s English record of exact eighth edition. No book DOI verified.",
+    "evidence": [
+      "https://www.wiley-vch.de/en?isbn=9780813815619&option=com_eshop&title=Statistical+Methods&view=product",
+      "https://hero.epa.gov/reference/7289263/"
+    ],
+    "newLinkText": "https://www.wiley-vch.de/en?isbn=9780813815619&option=com_eshop&title=Statistical+Methods&view=product",
+    "editionVerification": "Wiley-VCH explicitly lists eighth edition January 1989 and ISBN 9780813815619. EPA confirms Iowa State University Press edition."
+  },
+  {
+    "referenceId": "ref-stuart-1994",
+    "oldUrl": "https://www.amazon.com/dp/0340614307",
+    "newUrl": "https://www.wiley-vch.de/en/areas-interest/mathematics-statistics/statistics-16st/probability-mathematical-statistics-16st1/kendall-39-s-advanced-theory-of-statistics-volume-1-distribution-theory-978-0-470-66530-5",
+    "reason": "Replace Amazon with publisher English record explicitly identifying cited sixth edition/1994. Crossref matches were reviews.",
+    "evidence": [
+      "https://www.wiley-vch.de/en/areas-interest/mathematics-statistics/statistics-16st/probability-mathematical-statistics-16st1/kendall-39-s-advanced-theory-of-statistics-volume-1-distribution-theory-978-0-470-66530-5",
+      "https://books.google.com/books/about/Kendall_s_Advanced_Theory_of_Statistics.html?id=-RjvAAAAMAAJ"
+    ],
+    "newLinkText": "https://www.wiley-vch.de/en/areas-interest/mathematics-statistics/statistics-16st/probability-mathematical-statistics-16st1/kendall-39-s-advanced-theory-of-statistics-volume-1-distribution-theory-978-0-470-66530-5",
+    "editionVerification": "Wiley-VCH lists Stuart/Ord, volume 1 Distribution Theory, sixth edition June 1994. Google confirms original Edward Arnold edition 6, ISBN 0340614307."
+  },
+  {
+    "referenceId": "ref-sullivan-1971",
+    "oldUrl": "https://pubmed.ncbi.nlm.nih.gov/5554262/",
+    "newUrl": "https://doi.org/10.2307/4594169",
+    "reason": "Exact registered article DOI exists and is preferred over PubMed.",
+    "evidence": [
+      "https://api.crossref.org/works/10.2307%2F4594169",
+      "https://pubmed.ncbi.nlm.nih.gov/5554262/",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC1937122/"
+    ],
+    "newLinkText": "https://doi.org/10.2307/4594169",
+    "editionVerification": "Crossref verifies Sullivan/title, HSMHA Health Reports 86(4), 1971, page 347; PubMed/PMC confirm complete pages 347-354 and PMID 5554262."
+  },
+  {
+    "referenceId": "ref-tukey-1977",
+    "oldUrl": "https://www.amazon.com/dp/0201076160",
+    "newUrl": "https://www.pearson.com/en-us/subject-catalog/p/exploratory-data-analysis-classic-version/P200000006400",
+    "reason": "Original publisher describes Tukey's Modern Classics reissue and provides contents; no book DOI verified. Higher-priority publisher destination than Google Books.",
+    "evidence": [
+      "https://books.google.com/books/about/Exploratory_Data_Analysis.html?id=UT9dAAAAIAAJ",
+      "https://search.worldcat.org/title/1034668314",
+      "https://www.pearson.com/en-us/subject-catalog/p/exploratory-data-analysis-classic-version/P200000006400"
+    ],
+    "newLinkText": "Publisher's classic reissue (2019): https://www.pearson.com/en-us/subject-catalog/p/exploratory-data-analysis-classic-version/P200000006400",
+    "editionVerification": "Google lists Tukey, Addison-Wesley 1977, 688 pages, ISBN 0201076160. WorldCat independently records 1977 work."
+  },
+  {
+    "referenceId": "ref-vives-2001",
+    "oldUrl": "https://web.archive.org/web/20091027230934/http://pws.math.spbu.ru/procs:fourth",
+    "newUrl": "https://www.idescat.cat/serveis/biblioteca/docs/bib/publicacions/r00262002v263.pdf#page=70",
+    "reason": "The coauthor Jordi Ocaña’s English research-group report gives a directly verified bibliographic record with the same authors, year, proceedings and pages. This is a useful working primary fallback, but its title differs from the current citation and requires bibliographic review.",
+    "evidence": [
+      "https://www.idescat.cat/serveis/biblioteca/docs/bib/publicacions/r00262002v263.pdf#page=70",
+      "https://www.idescat.cat/serveis/biblioteca/docs/bib/publicacions/r00262002v263.pdf",
+      "https://web.archive.org/web/20091027230934/http://pws.math.spbu.ru/procs:fourth"
+    ],
+    "newLinkText": "https://www.idescat.cat/serveis/biblioteca/docs/bib/publicacions/r00262002v263.pdf#page=70",
+    "editionVerification": "Ocaña, The Simulation and Computational Statistics Research Group, Questiio 26(3), 2002, printed pp391-393; final reference at printed p393 (PDF page70) identifies Vives S, Salicru M, Ocana J (2001), Asymptotic confidence regions in (h,phi)-entropies, Proceedings of the IV Workshop on Simulation, Melas/Ermakov eds., pp492-499.",
+    "textReplacements": [
+      {
+        "oldText": "Archived proceedings website:",
+        "newText": "Coauthor bibliography (different title reported):"
+      }
+    ]
+  },
+  {
+    "referenceId": "ref-wolfson-1996",
+    "oldUrl": "https://pubmed.ncbi.nlm.nih.gov/8844180/",
+    "newUrl": "https://www150.statcan.gc.ca/n1/en/catalogue/82-003-X19960012825",
+    "reason": "Replace PubMed with original publisher English archive record/full PDF. No exact article DOI verified.",
+    "evidence": [
+      "https://www150.statcan.gc.ca/n1/en/catalogue/82-003-X19960012825",
+      "https://pubmed.ncbi.nlm.nih.gov/8844180/"
+    ],
+    "newLinkText": "https://www150.statcan.gc.ca/n1/en/catalogue/82-003-X19960012825",
+    "editionVerification": "Statistics Canada identifies Michael Wolfson, Health Reports issue 1996001, exact title and PDF dated 31 July 1996; PubMed confirms 8(1):41-46."
+  }
+]

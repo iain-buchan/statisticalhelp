@@ -59,7 +59,11 @@ public sealed partial class MainForm : Form
     public string? LastError { get; private set; }
     public BuildResult? LastBuildResult { get; private set; }
 
-    public MainForm(string? projectPath = null, Action<Uri>? externalLinkLauncher = null, string? initialTopic = null, Action<Uri>? browserPreviewLauncher = null, HelpEditorWorkspace? workspaceOverride = null, Func<SaveFileDialog, DialogResult>? websiteZipPicker = null)
+    public MainForm(string? projectPath = null, Action<Uri>? externalLinkLauncher = null,
+        string? initialTopic = null, Action<Uri>? browserPreviewLauncher = null,
+        HelpEditorWorkspace? workspaceOverride = null, Func<SaveFileDialog, DialogResult>? websiteZipPicker = null,
+        HelpPublicationRunner? helpPublicationRunner = null,
+        Func<HelpPublicationOptions, HelpPublicationOptions?>? helpPublicationOptionsPicker = null)
     {
         workspace = workspaceOverride ?? HelpEditorWorkspace.Resolve(AppContext.BaseDirectory);
         artifactRoot = workspace.RootPath;
@@ -68,6 +72,8 @@ public sealed partial class MainForm : Form
         this.externalLinkLauncher = externalLinkLauncher ?? (uri => Process.Start(new ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true }));
         this.browserPreviewLauncher = browserPreviewLauncher ?? (uri => Process.Start(new ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true }));
         this.websiteZipPicker = websiteZipPicker;
+        this.helpPublicationRunner = helpPublicationRunner;
+        this.helpPublicationOptionsPicker = helpPublicationOptionsPicker;
         // Keep every ICO frame for Windows' title-bar/taskbar DPI choices. Each
         // editor window owns its clone independently of the resource stream.
         using var iconStream = typeof(MainForm).Assembly.GetManifestResourceStream("StatsDirect.HelpEditor.AppIcon")
@@ -76,7 +82,7 @@ public sealed partial class MainForm : Form
         applicationIcon = (Icon)resourceIcon.Clone();
         Icon = applicationIcon;
         Disposed += (_, _) => applicationIcon.Dispose();
-        Text = "StatsDirect Help Editor — prototype";
+        Text = "StatsDirect Help Editor";
         AutoScaleMode = AutoScaleMode.Dpi;
         AutoScaleDimensions = new SizeF(96, 96);
         Font = new Font("Arial", 11);
@@ -214,6 +220,9 @@ public sealed partial class MainForm : Form
         file.DropDownItems.Add(new ToolStripSeparator());
         AddMenu(file, "&Build help and search", BuildHelpAsync, Keys.Control | Keys.B);
         AddMenu(file, "Export website &ZIP…", ShowWebsiteZipExportAsync);
+        AddMenu(file, "Publish help…", ShowHelpPublicationAsync);
+        AddMenu(file, "Publish desktop help for StatsDirect builds…", ShowDesktopHelpPublishAsync);
+        AddMenu(file, "Compare saved help sources…", ShowSourceComparisonAsync);
         AddMenu(file, "&Preview site in browser", PreviewSiteInBrowserAsync, Keys.F5);
         AddMenu(file, "Preview site in editor", BuildAndPreviewAsync);
         file.DropDownItems.Add(new ToolStripSeparator());
@@ -249,8 +258,8 @@ public sealed partial class MainForm : Form
         AddMenu(github, "&Rebuild website and commit…", CommitGitAsync);
         AddMenu(github, "&Push branch", PushGitAsync);
         var help = new ToolStripMenuItem("&Help");
-        help.DropDownItems.Add("About this prototype", null, (_, _) => MessageBox.Show(this,
-            "Edits are saved only to the marked working copy.\n\nContents changes save automatically. Removing a contents entry keeps the page file. Deleted pages can be recovered through File > Deleted pages. Deletion is blocked if other pages or application context IDs still refer to the page.\n\nBuild help regenerates the offline pages, navigation and search index under this prototype’s Build folder. It does not publish help or rebuild StatsDirect installers.",
+        help.DropDownItems.Add("About StatsDirect Help Editor", null, (_, _) => MessageBox.Show(this,
+            $"StatsDirect Help Editor {Application.ProductVersion}\n\nEdits are saved only to the marked working copy.\n\nContents changes save automatically. Removing a contents entry keeps the page file. Deleted pages can be recovered through File > Deleted pages. Deletion is blocked if other pages or application context IDs still refer to the page.\n\nBuild help regenerates the offline pages, navigation and search index under the workspace’s Build folder. It does not publish help or rebuild StatsDirect installers.",
             "StatsDirect Help Editor", MessageBoxButtons.OK, MessageBoxIcon.Information));
         var tutor = new ToolStripMenuItem("&Tutor");
         AddMenu(tutor, "&Edit tutor courses and questions…", OpenTutorAuthoringAsync);
@@ -337,7 +346,7 @@ public sealed partial class MainForm : Form
     private async Task InitializeBrowserAsync()
     {
         string assets = Path.Combine(AppContext.BaseDirectory, "Web");
-        if (!File.Exists(Path.Combine(assets, "index.html"))) throw new FileNotFoundException("The editor’s Web assets are missing. Build the prototype project first.");
+        if (!File.Exists(Path.Combine(assets, "index.html"))) throw new FileNotFoundException("The editor’s Web assets are missing. Repair or reinstall StatsDirect Help Editor.");
         var environment = await CoreWebView2Environment.CreateAsync(null, Path.Combine(artifactRoot, ".editor-profile"));
         await editor.EnsureCoreWebView2Async(environment);
         var core = editor.CoreWebView2;
@@ -643,7 +652,7 @@ public sealed partial class MainForm : Form
             // notifications before restoring Browser/App for the new page.
             await RefreshEditorStateAsync();
             SelectCurrentPage();
-            Text = $"{title} — StatsDirect Help Editor (prototype)";
+            Text = $"{title} — StatsDirect Help Editor";
             status.Text = path;
             UpdateWorkspaceCaption();
             await RefreshVisibleOutputPreviewsAsync();
@@ -687,7 +696,7 @@ public sealed partial class MainForm : Form
         RefreshPageList();
         SelectCurrentPage();
         string title = allTopics.FirstOrDefault(topic => topic.Path.Equals(path, StringComparison.OrdinalIgnoreCase))?.Title ?? Path.GetFileNameWithoutExtension(path);
-        Text = $"{title} — StatsDirect Help Editor (prototype)";
+        Text = $"{title} — StatsDirect Help Editor";
         status.Text = "Saved " + path + " · current-page previews use your latest edits";
         await RefreshVisibleOutputPreviewsAsync();
     }
@@ -720,7 +729,9 @@ public sealed partial class MainForm : Form
             await OpenTopicAsync(reference);
             return this;
         }
-        var opened = new MainForm(CurrentProject.RootPath, externalLinkLauncher, reference, browserPreviewLauncher, workspaceOverride: workspace, websiteZipPicker: websiteZipPicker)
+        var opened = new MainForm(CurrentProject.RootPath, externalLinkLauncher, reference, browserPreviewLauncher,
+            workspaceOverride: workspace, websiteZipPicker: websiteZipPicker,
+            helpPublicationRunner: helpPublicationRunner, helpPublicationOptionsPicker: helpPublicationOptionsPicker)
         {
             SuppressDialogs = SuppressDialogs,
             StartPosition = FormStartPosition.Manual,

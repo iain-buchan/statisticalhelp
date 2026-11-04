@@ -4,9 +4,10 @@
 // hidden by a broad screenshot tolerance.
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),os=require('node:os');
 const {chromium}=require('./browser-runtime.cjs');
+const {resolveFlareTarget}=require('./flare-baseline.cjs');
 let PNG;try{({PNG}=require('pngjs'));}catch{({PNG}=require(path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/pngjs')));}
 const root=path.resolve(__dirname,'..'),evidence=path.join(root,'evidence/FlareAppearance');
-const mounts={flare:path.resolve(process.env.STATSDIRECT_FLARE_WEBSITE||'C:/Develop/SD3Help/StatsDirect/Output/ieb21/Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
+const mounts={flare:resolveFlareTarget('Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
 const mime={'.htm':'text/html','.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.gif':'image/gif','.jpg':'image/jpeg','.json':'application/json','.xml':'application/xml','.woff':'font/woff','.woff2':'font/woff2','.ttf':'font/ttf','.ico':'image/x-icon'};
 const server=http.createServer((req,res)=>{const parts=decodeURIComponent(new URL(req.url,'http://localhost').pathname).split('/').filter(Boolean),mount=mounts[parts.shift()],file=mount&&path.resolve(mount,...parts);if(!file||!file.startsWith(mount+path.sep)){res.writeHead(403).end();return;}try{res.setHeader('Content-Type',mime[path.extname(file).toLowerCase()]||'application/octet-stream');res.end(fs.readFileSync(file));}catch{res.writeHead(404).end();}});
 const topics=['contents.htm','basics/basics.htm','graphics/box_whisker.htm','parametric_methods/paired_t.htm','analysis_of_variance/one_way.htm','basic_descriptive_statistics/time_series.htm','rates/incidence_and_prevalence.htm','references/reference_list.htm'];

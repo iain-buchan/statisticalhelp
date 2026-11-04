@@ -3,8 +3,9 @@
 // old tokenizer or its highlighting of every individual letter "t".
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {chromium}=require('./browser-runtime.cjs');
+const {resolveFlareTarget}=require('./flare-baseline.cjs');
 const root=path.resolve(__dirname,'..'),evidence=path.join(root,'evidence/FlareNavigationStates');
-const mounts={flare:path.resolve(process.env.STATSDIRECT_FLARE_WEBSITE||'C:/Develop/SD3Help/StatsDirect/Output/ieb21/Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
+const mounts={flare:resolveFlareTarget('Website'),editor:path.resolve(process.env.STATSDIRECT_HELP_OUTPUT||path.join(root,'Build/Public'))};
 const mime={'.htm':'text/html','.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.gif':'image/gif','.jpg':'image/jpeg','.json':'application/json','.xml':'application/xml','.woff':'font/woff','.woff2':'font/woff2','.ico':'image/x-icon'};
 const server=http.createServer((req,res)=>{const parts=decodeURIComponent(new URL(req.url,'http://localhost').pathname).split('/').filter(Boolean),mount=mounts[parts.shift()],file=mount&&path.resolve(mount,...parts);if(!file||!file.startsWith(mount+path.sep)){res.writeHead(403).end();return;}try{res.setHeader('Content-Type',mime[path.extname(file).toLowerCase()]||'application/octet-stream');res.end(fs.readFileSync(file));}catch{res.writeHead(404).end();}});
 const checks=[],states=[],errors=[];function check(width,name,passed,detail){checks.push({width,name,passed:!!passed,detail});}

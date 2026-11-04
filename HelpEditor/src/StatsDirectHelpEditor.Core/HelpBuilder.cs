@@ -200,11 +200,10 @@ public static class HelpBuilder
     private static void ValidateOutput(HelpProject project, string output)
     {
         SafePaths.CheckNoLinks(output);
+        WorkspaceProtectionSettings.Load().RequireUnprotected(output, "Build help");
         if (SafePaths.Same(output, project.RootPath) || SafePaths.IsWithin(project.RootPath, output) ||
             SafePaths.IsWithin(output, project.ContentPath) || SafePaths.IsWithin(output, Path.Combine(project.RootPath, "Project")) ||
-            SafePaths.IsWithin(output, Path.Combine(project.RootPath, "RCode")) || SafePaths.IsWithin(output, Path.Combine(project.RootPath, ".help-editor-recovery")) ||
-            SafePaths.IsWithin(output, @"C:\Develop\SD3Help\StatsDirect") ||
-            SafePaths.IsWithin(output, @"C:\Users\ieb21\source\repos\statsdirect") || SafePaths.IsWithin(output, @"C:\temp"))
+            SafePaths.IsWithin(output, Path.Combine(project.RootPath, "RCode")) || SafePaths.IsWithin(output, Path.Combine(project.RootPath, ".help-editor-recovery")))
             throw new InvalidOperationException("Choose a separate prototype build folder, outside source files and released artifacts.");
     }
 

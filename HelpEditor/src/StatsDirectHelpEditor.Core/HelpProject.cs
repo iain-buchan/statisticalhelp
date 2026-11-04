@@ -1,4 +1,6 @@
 using System.Globalization;
+using System.Security.Cryptography;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -16,23 +18,26 @@ public sealed class TocNode
     public string? Link { get; set; }
     public List<TocNode> Children { get; set; } = [];
     internal Dictionary<XName, string> OriginalAttributes { get; set; } = [];
+    internal TocSourceSnapshot? SourceSnapshot { get; set; }
 }
+
+internal sealed record TocSourceSnapshot(string ProjectRoot, string SourceStamp, string NodeId, XElement Element);
 
 /// <summary>Edits only explicitly marked working copies, never the original Flare project.</summary>
 public sealed partial class HelpProject
 {
+    private sealed record ContentsDocumentSnapshot(string ProjectRoot, string SourceStamp);
+    private static readonly ConditionalWeakTable<IReadOnlyList<TocNode>, ContentsDocumentSnapshot> ContentsSources = new();
     public const string MarkerFile = ".statsdirect-help-editor.json";
     public string RootPath { get; }
     internal string ContentPath { get; }
     internal string TocPath => SafePaths.Resolve(RootPath, "Project/TOCs/STATSDIRECT.fltoc");
-    private readonly Dictionary<string, Dictionary<XName, string>> tocAttributes = [];
 
     private HelpProject(string root)
     {
         RootPath = Path.GetFullPath(root).TrimEnd(Path.DirectorySeparatorChar);
         SafePaths.CheckNoLinks(RootPath);
-        if (SafePaths.IsWithin(RootPath, @"C:\Develop\SD3Help\StatsDirect"))
-            throw new InvalidOperationException("The editor opens a working copy, not the original Flare project.");
+        WorkspaceProtectionSettings.Load().RequireUnprotected(RootPath, "Open help source");
         if (!File.Exists(SafePaths.Resolve(RootPath, MarkerFile)))
             throw new InvalidOperationException("This folder is not a marked StatsDirectHelpEditor working copy.");
         ContentPath = SafePaths.Resolve(RootPath, "Content");
@@ -78,6 +83,28 @@ public sealed partial class HelpProject
         }).OrderBy(t => t.Path, StringComparer.OrdinalIgnoreCase).ToList();
 
     public string ReadTopic(string relativePath) => File.ReadAllText(TopicPath(relativePath));
+
+    /// <summary>Resolve an existing topic's stored filename case without parsing the other help pages.</summary>
+    public string ResolveTopicPath(string relativePath)
+    {
+        _ = TopicPath(relativePath); // Apply the same containment, extension and link checks as reads.
+        string current = ContentPath;
+        var parts = relativePath.Replace('\\', '/').Split('/');
+        for (int index = 0; index < parts.Length; index++)
+        {
+            SafePaths.CheckNoLinks(current);
+            if (!Directory.Exists(current)) throw new DirectoryNotFoundException("The help topic's folder no longer exists.");
+            var matches = Directory.EnumerateFileSystemEntries(current)
+                .Where(path => Path.GetFileName(path).Equals(parts[index], StringComparison.OrdinalIgnoreCase)).ToArray();
+            string? match = matches.FirstOrDefault(path => Path.GetFileName(path).Equals(parts[index], StringComparison.Ordinal));
+            if (match == null && matches.Length > 1) throw new IOException("The help link has ambiguous filename casing: " + relativePath);
+            match ??= matches.SingleOrDefault();
+            if (match == null) throw new FileNotFoundException("The help topic no longer exists: " + relativePath);
+            current = SafePaths.Resolve(current, Path.GetFileName(match));
+        }
+        if (!File.Exists(current)) throw new FileNotFoundException("The help topic no longer exists: " + relativePath);
+        return Path.GetRelativePath(ContentPath, current).Replace('\\', '/');
+    }
 
     public void SaveTopic(string relativePath, string source)
     {
@@ -141,48 +168,128 @@ public sealed partial class HelpProject
 
     public List<TocNode> LoadContents()
     {
-        var doc = XDocument.Load(TocPath, LoadOptions.PreserveWhitespace);
+        string source = File.ReadAllText(TocPath);
+        var doc = Parse(source);
+        string stamp = ContentsStamp(source);
         TocNode Read(XElement e)
         {
             var node = new TocNode { Title = (string?)e.Attribute("Title") ?? "Untitled section", Link = NormalizeTocLink((string?)e.Attribute("Link")) };
             node.OriginalAttributes = e.Attributes().ToDictionary(a => a.Name, a => a.Value);
-            tocAttributes[node.Id] = node.OriginalAttributes;
+            node.SourceSnapshot = new(RootPath, stamp, node.Id, ContentsTemplate(e));
             node.Children = e.Elements("TocEntry").Select(Read).ToList();
             return node;
         }
-        return doc.Root!.Elements("TocEntry").Select(Read).ToList();
+        var nodes = (doc.Root ?? throw new InvalidDataException("Contents have no root element.")).Elements("TocEntry").Select(Read).ToList();
+        ContentsSources.Add(nodes, new(RootPath, stamp));
+        return nodes;
     }
 
     public void SaveContents(IReadOnlyList<TocNode> nodes)
-        => SafePaths.AtomicWrite(TocPath, HelpSourceNamespaces.NormalizeSource(CreateContentsSource(nodes)));
+    {
+        string before = File.ReadAllText(TocPath);
+        string source = HelpSourceNamespaces.NormalizeSource(CreateContentsSource(nodes, before));
+        if (File.ReadAllText(TocPath) != before) throw new InvalidOperationException("Contents changed while saving. Reload them before applying these edits.");
+        if (source != before) SafePaths.AtomicWrite(TocPath, source);
+        BindContentsSnapshots(nodes, Parse(source).Root!, ContentsStamp(source));
+    }
 
     private string CreateContentsSource(IReadOnlyList<TocNode> nodes)
+        => CreateContentsSource(nodes, File.ReadAllText(TocPath));
+
+    private string CreateContentsSource(IReadOnlyList<TocNode> nodes, string source)
     {
-        var doc = XDocument.Load(TocPath, LoadOptions.PreserveWhitespace);
+        var original = Parse(source);
+        var doc = new XDocument(original);
+        string stamp = ContentsStamp(source);
+        if (ContentsSources.TryGetValue(nodes, out var treeSource) &&
+            (!SafePaths.Same(treeSource.ProjectRoot, RootPath) || treeSource.SourceStamp != stamp))
+            throw new InvalidOperationException("Contents changed after this tree was loaded, or it belongs to a different working copy. Reload them before applying these edits.");
         var seen = new HashSet<string>();
         XElement Write(TocNode n, int depth)
         {
-            if (depth > 40 || !seen.Add(n.Id)) throw new InvalidDataException("The contents tree contains a repeated or excessively nested node.");
+            if (depth > 40 || string.IsNullOrWhiteSpace(n.Id) || !seen.Add(n.Id)) throw new InvalidDataException("The contents tree contains a repeated or excessively nested node.");
             if (string.IsNullOrWhiteSpace(n.Title)) throw new InvalidDataException("Every contents entry needs a title.");
-            var attrs = tocAttributes.GetValueOrDefault(n.Id) ?? n.OriginalAttributes;
-            var element = new XElement("TocEntry", attrs.Where(a => a.Key.LocalName is not ("Title" or "Link")).Select(a => new XAttribute(a.Key, a.Value)), new XAttribute("Title", n.Title.Trim()));
+            var snapshot = n.SourceSnapshot;
+            if (snapshot != null && (!SafePaths.Same(snapshot.ProjectRoot, RootPath) || snapshot.NodeId != n.Id))
+                throw new InvalidDataException("A contents entry belongs to a different working copy or its stable ID was changed. Add a new entry instead.");
+            if (snapshot != null && snapshot.SourceStamp != stamp)
+                throw new InvalidOperationException("Contents changed after this tree was loaded. Reload them before applying these edits.");
+            var element = snapshot == null
+                ? new XElement("TocEntry", n.OriginalAttributes.Select(a => new XAttribute(a.Key, a.Value)))
+                : new XElement(snapshot.Element);
+            if (snapshot == null || n.Title != ((string?)snapshot.Element.Attribute("Title") ?? "Untitled section")) element.SetAttributeValue("Title", n.Title.Trim());
             if (!string.IsNullOrWhiteSpace(n.Link))
             {
                 var link = NormalizeTocLink(n.Link)!;
                 var part = link.Split('#', '?')[0];
                 TopicPath(part); // reject traversal and references outside Content
                 if (!File.Exists(TopicPath(part))) throw new FileNotFoundException("Contents entry points to a missing topic: " + link);
-                element.Add(new XAttribute("Link", "/Content/" + link));
+                if (snapshot == null || link != NormalizeTocLink((string?)snapshot.Element.Attribute("Link")))
+                    element.SetAttributeValue("Link", "/Content/" + link);
             }
-            element.Add(n.Children.Select(c => Write(c, depth + 1)));
+            else if (snapshot == null || NormalizeTocLink((string?)snapshot.Element.Attribute("Link")) != null) element.Attribute("Link")?.Remove();
+            ReplaceContentsChildren(element, n.Children.Select(c => Write(c, depth + 1)).ToArray());
             return element;
         }
-        var root = new XElement(doc.Root!.Name, doc.Root.Attributes().Select(a => new XAttribute(a)), nodes.Select(n => Write(n, 0)));
-        doc.Root.ReplaceWith(root);
+        ReplaceContentsChildren(doc.Root ?? throw new InvalidDataException("Contents have no root element."), nodes.Select(n => Write(n, 0)).ToArray());
+        if (XNode.DeepEquals(original, doc)) return source;
         // AtomicWrite emits UTF-8. A restored UTF-16 original must not leave a
         // stale UTF-16 declaration on its next ordinary Contents edit.
         if (doc.Declaration != null) doc.Declaration.Encoding = "utf-8";
-        return doc.Declaration + Environment.NewLine + doc.ToString();
+        using var bytes = new MemoryStream();
+        using (var writer = XmlWriter.Create(bytes, new XmlWriterSettings
+        {
+            Encoding = new UTF8Encoding(false), Indent = false, OmitXmlDeclaration = doc.Declaration == null,
+            NewLineChars = source.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n", NewLineHandling = NewLineHandling.Replace
+        })) doc.Save(writer);
+        return Encoding.UTF8.GetString(bytes.ToArray());
+    }
+
+    private static string ContentsStamp(string source) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(source)));
+
+    private void BindContentsSnapshots(IReadOnlyList<TocNode> nodes, XElement parent, string stamp)
+    {
+        ContentsSources.Remove(nodes);
+        ContentsSources.Add(nodes, new(RootPath, stamp));
+        var elements = parent.Elements("TocEntry").ToArray();
+        if (nodes.Count != elements.Length) throw new InvalidDataException("The saved Contents tree no longer matches the edited entries. Reload it.");
+        for (int index = 0; index < nodes.Count; index++)
+        {
+            var node = nodes[index]; var element = elements[index];
+            node.SourceSnapshot = new(RootPath, stamp, node.Id, ContentsTemplate(element));
+            node.OriginalAttributes = element.Attributes().ToDictionary(a => a.Name, a => a.Value);
+            BindContentsSnapshots(node.Children, element, stamp);
+        }
+    }
+
+    private static void ReplaceContentsChildren(XElement parent, IReadOnlyList<XElement> children)
+    {
+        var slots = parent.Elements("TocEntry").ToArray();
+        int shared = Math.Min(slots.Length, children.Count);
+        for (int index = 0; index < shared; index++) slots[index].ReplaceWith(children[index]);
+        for (int index = shared; index < slots.Length; index++) slots[index].Remove();
+        XNode? previous = shared == 0 ? null : children[shared - 1];
+        for (int index = shared; index < children.Count; index++)
+        {
+            var element = children[index];
+            if (previous != null) previous.AddAfterSelf(element);
+            else if (parent.LastNode is XText trailing && string.IsNullOrWhiteSpace(trailing.Value)) trailing.AddBeforeSelf(element);
+            else parent.Add(element);
+            previous = element;
+        }
+    }
+
+    private static XElement ContentsTemplate(XElement element)
+        // Each child has its own snapshot. Keep its slot here, without copying
+        // every descendant into all its ancestors. LINQ to XML clones the
+        // remaining parented nodes, preserving comments and extension markup.
+    {
+        var template = new XElement(element.Name, element.Attributes().Select(a => new XAttribute(a)),
+            element.Nodes().Select(node => node is XElement child && child.Name == "TocEntry" ? new XElement(child.Name) : node));
+        // LINQ to XML distinguishes <TocEntry /> from <TocEntry></TocEntry>.
+        // Retain that distinction so an untouched imported tree is a true no-op.
+        if (!element.IsEmpty && template.IsEmpty) template.Add("");
+        return template;
     }
 
     internal string TopicPath(string relativePath)
@@ -224,46 +331,5 @@ public sealed partial class HelpProject
     internal static IEnumerable<TocNode> Flatten(IEnumerable<TocNode> nodes)
     {
         foreach (var n in nodes) { yield return n; foreach (var child in Flatten(n.Children)) yield return child; }
-    }
-}
-
-internal static class SafePaths
-{
-    internal static bool Same(string a, string b) => Path.GetFullPath(a).TrimEnd(Path.DirectorySeparatorChar).Equals(Path.GetFullPath(b).TrimEnd(Path.DirectorySeparatorChar), StringComparison.OrdinalIgnoreCase);
-    internal static bool IsWithin(string path, string parent)
-    {
-        path = Path.GetFullPath(path).TrimEnd(Path.DirectorySeparatorChar);
-        parent = Path.GetFullPath(parent).TrimEnd(Path.DirectorySeparatorChar);
-        return path.Equals(parent, StringComparison.OrdinalIgnoreCase) || path.StartsWith(parent + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase);
-    }
-
-    internal static string Resolve(string root, string relative, bool allowDot = false)
-    {
-        if (string.IsNullOrWhiteSpace(relative) || Path.IsPathRooted(relative) || relative.Contains(':') || relative.IndexOfAny(['\0', '#', '?']) >= 0)
-            throw new ArgumentException("Use a path within the working copy.");
-        var clean = relative.Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar);
-        if (!allowDot && clean.Split(Path.DirectorySeparatorChar).Any(p => p is ".." or ".")) throw new ArgumentException("Parent-directory paths are not allowed here.");
-        var path = Path.GetFullPath(Path.Combine(root, clean));
-        if (!IsWithin(path, root)) throw new ArgumentException("The path is outside the working copy.");
-        CheckNoLinks(path);
-        return path;
-    }
-
-    internal static void CheckNoLinks(string path)
-    {
-        for (var current = Path.GetFullPath(path); !string.IsNullOrEmpty(current); current = Path.GetDirectoryName(current)!)
-        {
-            if ((Directory.Exists(current) || File.Exists(current)) && (File.GetAttributes(current) & FileAttributes.ReparsePoint) != 0)
-                throw new IOException("Linked files or folders are not supported in this prototype: " + current);
-        }
-    }
-
-    internal static void AtomicWrite(string path, string text)
-    {
-        CheckNoLinks(path);
-        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-        var temp = path + ".helpeditor-" + Guid.NewGuid().ToString("N") + ".tmp";
-        try { File.WriteAllText(temp, text, new UTF8Encoding(false)); File.Move(temp, path, true); }
-        finally { if (File.Exists(temp)) File.Delete(temp); }
     }
 }

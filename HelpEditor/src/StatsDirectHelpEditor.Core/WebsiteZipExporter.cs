@@ -18,6 +18,7 @@ public static class WebsiteZipExporter
         string destination = Path.GetFullPath(zipPath), assets = Path.GetFullPath(runtimeAssetsDirectory);
         if (SafePaths.IsWithin(destination, project.RootPath) || SafePaths.IsWithin(destination, assets))
             throw new InvalidOperationException("Save the website ZIP outside its help source and application assets.");
+        var protection = WorkspaceProtectionSettings.Load();
         CheckDestinationLinks(destination);
         if (Directory.Exists(destination)) throw new IOException("The ZIP filename is occupied by a folder.");
         cancellationToken.ThrowIfCancellationRequested();
@@ -25,11 +26,10 @@ public static class WebsiteZipExporter
         var drafts = topicOverrides?.ToDictionary(pair => pair.Key, pair => pair.Value, StringComparer.OrdinalIgnoreCase);
         string inputs = InputStamp(project, assets, cancellationToken);
         string parent = Path.GetDirectoryName(destination)!;
-        Directory.CreateDirectory(parent);
-        string tempParent = Path.GetFullPath(Path.GetTempPath());
-        if (SafePaths.IsWithin(tempParent, @"C:\temp")) tempParent = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp");
-        if (SafePaths.IsWithin(tempParent, project.RootPath) || SafePaths.IsWithin(tempParent, assets)) throw new InvalidOperationException("Temporary export storage must be outside the help source and runtime assets.");
+        string tempParent = protection.FindSafeTemporaryParent(project.RootPath, assets);
         SafePaths.CheckNoLinks(tempParent);
+        Directory.CreateDirectory(parent);
+        CheckDestinationLinks(destination);
         string stage = Path.Combine(tempParent, "sdhe-website-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(stage);
         string temporary = Path.Combine(parent, ".sdhe-website-" + Guid.NewGuid().ToString("N") + ".tmp");
@@ -129,13 +129,7 @@ public static class WebsiteZipExporter
     }
     private static void CheckDestinationLinks(string path)
     {
-        // Cloud-synced Documents folders can be reparse points without being
-        // name-surrogate links. Reject actual symlinks/junctions, not cloud storage.
-        for (string? current = Path.GetFullPath(path); current != null; current = Path.GetDirectoryName(current))
-        {
-            FileSystemInfo info = Directory.Exists(current) ? new DirectoryInfo(current) : new FileInfo(current);
-            if (info.LinkTarget != null) throw new IOException("Save the ZIP without linked files or folders: " + current);
-        }
+        SafePaths.CheckNoLinks(path);
     }
     private static void DeleteOwnedStage(string stage, string expectedParent)
     {

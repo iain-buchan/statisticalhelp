@@ -5,6 +5,13 @@
     <Project Path="src/StatsDirectHelpEditor.Core/StatsDirectHelpEditor.Core.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/StatsDirectHelpEditor.ContentsNavigationChecks/StatsDirectHelpEditor.ContentsNavigationChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.DesktopDeliveryChecks/StatsDirectHelpEditor.DesktopDeliveryChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.DeliveryWindowsChecks/StatsDirectHelpEditor.DeliveryWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.HelpPublicationChecks/StatsDirectHelpEditor.HelpPublicationChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.NestedGitChecks/StatsDirectHelpEditor.NestedGitChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.HelpPublicationWindowsChecks/StatsDirectHelpEditor.HelpPublicationWindowsChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.PortabilityChecks/StatsDirectHelpEditor.PortabilityChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.AppHelpPreviewChecks/StatsDirectHelpEditor.AppHelpPreviewChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.BrowserPreviewWindowsChecks/StatsDirectHelpEditor.BrowserPreviewWindowsChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.Checks/StatsDirectHelpEditor.Checks.csproj" />

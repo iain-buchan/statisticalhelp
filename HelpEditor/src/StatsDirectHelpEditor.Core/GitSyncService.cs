@@ -9,7 +9,8 @@ namespace StatsDirect.HelpEditor.Core;
 public record GitFileChange(string Status, string Path)
 {
     public string? OriginalPath { get; init; }
-    public bool IsSource => GitSyncService.IsSourcePath(Path) || OriginalPath is not null && GitSyncService.IsSourcePath(OriginalPath);
+    internal bool? SourceClassification { get; init; }
+    public bool IsSource => SourceClassification ?? (GitSyncService.IsSourcePath(Path) || OriginalPath is not null && GitSyncService.IsSourcePath(OriginalPath));
 }
 
 public record GitAuthorIdentity(string Name, string Email);
@@ -31,47 +32,49 @@ public record GitStatus(bool IsRepository, string Branch, string? Remote, int Ah
     public int OtherChangeCount => Changes.Count - SourceChangeCount;
 }
 
-/// <summary>Explicit Git commands on a marked authoring copy. Never publishes the default branch.</summary>
-public sealed partial class GitSyncService(HelpProject project)
+/// <summary>Explicit Git commands; default-branch publication requires the dedicated reviewed workflow.</summary>
+public sealed partial class GitSyncService
 {
     private static readonly string[] SourcePaths = ["Content", "Project", "RCode", "StatsDirect.flprj"];
     private const string RecoveryDirectory = ".help-editor-recovery";
     private const string FetchStateKey = "statsdirectHelpEditor.lastSuccessfulFetch";
-    private readonly HelpProject project = project ?? throw new ArgumentNullException(nameof(project));
+
 
     public static async Task<HelpProject> CloneAsync(string url, string dest, CancellationToken ct = default)
     {
         var source = ValidateCloneSource(url);
         var destination = Path.GetFullPath(dest).TrimEnd(Path.DirectorySeparatorChar);
         SafePaths.CheckNoLinks(destination);
-        if (SafePaths.IsWithin(destination, @"C:\Develop\SD3Help\StatsDirect") || SafePaths.IsWithin(destination, @"C:\Users\ieb21\source\repos\statsdirect") || SafePaths.IsWithin(destination, @"C:\temp") || SafePaths.Same(destination, Path.GetPathRoot(destination)!))
+        WorkspaceProtectionSettings.Load().RequireUnprotected(destination, "Clone help");
+        if (SafePaths.Same(destination, Path.GetPathRoot(destination)!))
             throw new InvalidOperationException("Choose a new folder for an independent help working copy.");
         if (File.Exists(destination) || Directory.Exists(destination) && Directory.EnumerateFileSystemEntries(destination).Any())
             throw new InvalidOperationException("Clone needs a new or empty destination folder.");
         var parent = Path.GetDirectoryName(destination) ?? throw new ArgumentException("Choose a destination folder.", nameof(dest));
         Directory.CreateDirectory(parent);
         await RunAsync(parent, ["clone", "--no-hardlinks", "--", source, destination], ct, timeoutSeconds: 180);
-        if (!Directory.Exists(Path.Combine(destination, "Content")) || !File.Exists(Path.Combine(destination, "Project", "TOCs", "STATSDIRECT.fltoc")))
-            throw new InvalidDataException("The cloned repository is not a StatsDirect Flare help project. Choose iain-buchan/statisticalhelp.");
+        string prefix = CloneSourcePrefix(destination);
+        string sourceRoot = prefix.Length == 0 ? destination : SafePaths.Resolve(destination, prefix);
         var sha = await RunAsync(destination, ["rev-parse", "HEAD"], ct);
-        SafePaths.AtomicWrite(Path.Combine(destination, HelpProject.MarkerFile), JsonSerializer.Serialize(new { prototypeWorkingCopy = true, originalPath = Redact(source), copiedAtUtc = DateTimeOffset.UtcNow, sourceCommit = sha.Output.Trim(), clonedBy = "StatsDirectHelpEditor" }, new JsonSerializerOptions { WriteIndented = true }));
+        string marker = Path.Combine(sourceRoot, HelpProject.MarkerFile);
+        if (!File.Exists(marker)) SafePaths.AtomicWrite(marker, JsonSerializer.Serialize(new { prototypeWorkingCopy = true, originalPath = Redact(source), copiedAtUtc = DateTimeOffset.UtcNow, sourceCommit = sha.Output.Trim(), clonedBy = "StatsDirectHelpEditor" }, new JsonSerializerOptions { WriteIndented = true }));
         // The marker and deleted-page recovery copies stay local to this authoring copy.
         var exclude = Path.Combine(destination, ".git", "info", "exclude");
         Directory.CreateDirectory(Path.GetDirectoryName(exclude)!);
         var current = File.Exists(exclude) ? File.ReadAllText(exclude) : "";
-        foreach (string localPath in new[] { "/" + HelpProject.MarkerFile, "/" + RecoveryDirectory + "/" })
+        foreach (string localPath in new[] { "/" + (prefix.Length == 0 ? "" : prefix + "/") + HelpProject.MarkerFile, "/" + (prefix.Length == 0 ? "" : prefix + "/") + RecoveryDirectory + "/" })
             if (!current.Split('\n').Any(line => line.Trim() == localPath))
                 File.AppendAllText(exclude, Environment.NewLine + localPath + Environment.NewLine, new UTF8Encoding(false));
-        return HelpProject.Open(destination);
+        return HelpProject.Open(sourceRoot);
     }
 
     public async Task<GitStatus> StatusAsync(CancellationToken ct = default)
     {
-        var top = await RunAsync(project.RootPath, ["rev-parse", "--show-toplevel"], ct, allowFailure: true);
-        if (top.ExitCode != 0 || !SafePaths.Same(top.Output.Trim(), project.RootPath)) return new GitStatus(false, "", null, 0, 0, []);
-        var branchResult = await RunAsync(project.RootPath, ["symbolic-ref", "--quiet", "--short", "HEAD"], ct, allowFailure: true);
+        var top = await RunAsync(RepositoryRoot, ["rev-parse", "--show-toplevel"], ct, allowFailure: true);
+        if (top.ExitCode != 0 || !SafePaths.Same(top.Output.Trim(), RepositoryRoot)) return new GitStatus(false, "", null, 0, 0, []);
+        var branchResult = await RunAsync(RepositoryRoot, ["symbolic-ref", "--quiet", "--short", "HEAD"], ct, allowFailure: true);
         var branch = branchResult.ExitCode == 0 ? branchResult.Output.Trim() : "(detached HEAD)";
-        var remoteResult = await RunAsync(project.RootPath, ["remote", "get-url", "origin"], ct, allowFailure: true);
+        var remoteResult = await RunAsync(RepositoryRoot, ["remote", "get-url", "origin"], ct, allowFailure: true);
         var rawRemote = remoteResult.ExitCode == 0 ? remoteResult.Output.Trim() : null;
         var remote = rawRemote is not null ? Redact(rawRemote) : null;
         var tracking = await ConfiguredTrackingBranchAsync(branch, ct);
@@ -80,11 +83,11 @@ public sealed partial class GitSyncService(HelpProject project)
         var hasComparison = false;
         if (comparison is not null)
         {
-            var counts = await RunAsync(project.RootPath, ["rev-list", "--left-right", "--count", "HEAD..." + comparison], ct, allowFailure: true);
+            var counts = await RunAsync(RepositoryRoot, ["rev-list", "--left-right", "--count", "HEAD..." + comparison], ct, allowFailure: true);
             var fields = counts.Output.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
             if (counts.ExitCode == 0 && fields.Length == 2 && int.TryParse(fields[0], out ahead) && int.TryParse(fields[1], out behind)) hasComparison = true;
         }
-        var status = await RunAsync(project.RootPath, ["status", "--porcelain=v1", "-z", "--untracked-files=all"], ct);
+        var status = await RunAsync(RepositoryRoot, ["status", "--porcelain=v1", "-z", "--untracked-files=all"], ct);
         var parts = status.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries);
         var changes = new List<GitFileChange>();
         for (int i = 0; i < parts.Length; i++)
@@ -98,7 +101,7 @@ public sealed partial class GitSyncService(HelpProject project)
             // Hide only untracked recovery data: staged/tracked copies and
             // renames must remain visible and subject to the commit guard.
             if (code == "??" && IsRecoveryPath(path)) continue;
-            changes.Add(new GitFileChange(code, path) { OriginalPath = originalPath });
+            changes.Add(new GitFileChange(code, path) { OriginalPath = originalPath, SourceClassification = IsScopedSourcePath(path) || originalPath is not null && IsScopedSourcePath(originalPath) });
         }
         return new GitStatus(true, branch, remote, ahead, behind, changes)
         {
@@ -112,8 +115,8 @@ public sealed partial class GitSyncService(HelpProject project)
     public async Task<GitAuthorIdentity> ReadAuthorIdentityAsync(CancellationToken ct = default)
     {
         await RequireRepositoryAsync(ct);
-        var name = await RunAsync(project.RootPath, ["config", "--get", "user.name"], ct, allowFailure: true);
-        var email = await RunAsync(project.RootPath, ["config", "--get", "user.email"], ct, allowFailure: true);
+        var name = await RunAsync(RepositoryRoot, ["config", "--get", "user.name"], ct, allowFailure: true);
+        var email = await RunAsync(RepositoryRoot, ["config", "--get", "user.email"], ct, allowFailure: true);
         return new(name.ExitCode == 0 ? name.Output.Trim() : "", email.ExitCode == 0 ? email.Output.Trim() : "");
     }
 
@@ -121,11 +124,11 @@ public sealed partial class GitSyncService(HelpProject project)
     {
         await RequireRepositoryAsync(ct);
         var origin = await RequireOriginAsync(ct);
-        var result = await RunAsync(project.RootPath, ["fetch", "--prune", "origin"], ct, timeoutSeconds: 120);
+        var result = await RunAsync(RepositoryRoot, ["fetch", "--prune", "origin"], ct, timeoutSeconds: 120, environment: TransportEnvironment);
         // A successful explicit fetch updates local metadata only. Status never
         // fetches, and a failed/cancelled attempt must not replace this receipt.
         var state = JsonSerializer.Serialize(new FetchState(OriginIdentity(origin), DateTimeOffset.UtcNow));
-        await RunAsync(project.RootPath, ["config", "--local", "--replace-all", FetchStateKey, state], ct);
+        await RunAsync(RepositoryRoot, ["config", "--local", "--replace-all", FetchStateKey, state], ct);
         return Message(result, "Fetched origin. The working files were not changed.");
     }
 
@@ -137,7 +140,7 @@ public sealed partial class GitSyncService(HelpProject project)
         await FetchAsync(ct);
         var tracking = await TrackingBranchAsync(status.Branch, ct);
         if (tracking is null) throw new InvalidOperationException("This working branch has not been pushed yet. Commit and push it first; there is no matching remote branch to pull.");
-        var merged = await RunAsync(project.RootPath, ["merge", "--ff-only", tracking], ct);
+        var merged = await RunAsync(RepositoryRoot, ["merge", "--ff-only", tracking], ct);
         return Message(merged, "The working branch is up to date.");
     }
 
@@ -147,7 +150,7 @@ public sealed partial class GitSyncService(HelpProject project)
         await ValidateBranchAsync(branch, ct);
         if (branch.Equals("main", StringComparison.OrdinalIgnoreCase) || branch.Equals("master", StringComparison.OrdinalIgnoreCase))
             throw new InvalidOperationException("Use a working branch, for example help-editor/20261101.");
-        return Message(await RunAsync(project.RootPath, ["switch", "-c", branch], ct), "Created working branch " + branch + ".");
+        return Message(await RunAsync(RepositoryRoot, ["switch", "-c", branch], ct), "Created working branch " + branch + ".");
     }
 
     public Task<string> CommitAsync(string message, string authorName, string authorEmail, CancellationToken ct = default) =>
@@ -161,17 +164,17 @@ public sealed partial class GitSyncService(HelpProject project)
         if (string.IsNullOrWhiteSpace(authorName) || authorName.IndexOfAny(['\r', '\n', '<', '>']) >= 0 || !Regex.IsMatch(authorEmail, @"^[^\s<>@]+@[^\s<>@]+$"))
             throw new ArgumentException("Enter a valid author name and email address.");
         await RejectOutsideStagedChangesAsync(ct, includeWebsite);
-        var scope = includeWebsite ? SourcePaths.Append(WebsitePath).ToArray() : SourcePaths;
-        var tracked = await RunAsync(project.RootPath, ["ls-tree", "-r", "--name-only", "-z", "HEAD", "--", .. scope], ct);
+        var scope = includeWebsite ? ScopedSourcePaths.Append(WebsitePath).ToArray() : ScopedSourcePaths;
+        var tracked = await RunAsync(RepositoryRoot, ["ls-tree", "-r", "--name-only", "-z", "HEAD", "--", .. scope], ct);
         var trackedPaths = tracked.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries);
-        var paths = scope.Where(p => Directory.Exists(Path.Combine(project.RootPath, p)) || File.Exists(Path.Combine(project.RootPath, p)) || trackedPaths.Any(t => t == p || t.StartsWith(p + "/", StringComparison.Ordinal))).ToArray();
+        var paths = scope.Where(p => Directory.Exists(Path.Combine(RepositoryRoot, p)) || File.Exists(Path.Combine(RepositoryRoot, p)) || trackedPaths.Any(t => t == p || t.StartsWith(p + "/", StringComparison.Ordinal))).ToArray();
         if (paths.Length == 0) throw new InvalidOperationException("This working copy has no help-source paths to commit.");
-        return await CommitReviewedTreeAsync(paths, message.Trim(), authorName.Trim(), authorEmail.Trim(), includeWebsite, ct);
+        return await CommitReviewedTreeAsync(CommitPathSpecs(paths), message.Trim(), authorName.Trim(), authorEmail.Trim(), includeWebsite, ct);
     }
 
     public Task<string> PushAsync(CancellationToken ct = default) => PushCoreAsync(null, null, ct);
 
-    private async Task<string> PushCoreAsync(string? verifiedCommit, string? verifiedBranch, CancellationToken ct)
+    private async Task<string> PushCoreAsync(string? verifiedCommit, string? verifiedBranch, CancellationToken ct, bool allowDefaultBranchPublication = false)
     {
         var status = await RequireRepositoryAsync(ct);
         if (verifiedBranch != null && status.Branch != verifiedBranch)
@@ -179,31 +182,47 @@ public sealed partial class GitSyncService(HelpProject project)
         if (status.Branch == "(detached HEAD)") throw new InvalidOperationException("Create or switch to a working branch before pushing.");
         await ValidateBranchAsync(status.Branch, ct);
         await RequireOriginAsync(ct);
-        if (status.Branch.Equals("main", StringComparison.OrdinalIgnoreCase) || status.Branch.Equals("master", StringComparison.OrdinalIgnoreCase))
+        if (!allowDefaultBranchPublication && (status.Branch.Equals("main", StringComparison.OrdinalIgnoreCase) || status.Branch.Equals("master", StringComparison.OrdinalIgnoreCase)))
             throw new InvalidOperationException("This prototype does not push main or master. Create a help-editor working branch and review it before merging on GitHub.");
-        var remoteHead = await RunAsync(project.RootPath, ["ls-remote", "--symref", "origin", "HEAD"], ct, timeoutSeconds: 120);
+        var remoteHead = await RunAsync(RepositoryRoot, ["ls-remote", "--symref", "origin", "HEAD"], ct, timeoutSeconds: 120, environment: TransportEnvironment);
         var match = Regex.Match(remoteHead.Output, @"(?m)^ref:\s+refs/heads/([^\r\n\t]+)\s+HEAD\s*$");
-        if (match.Success && status.Branch.Equals(match.Groups[1].Value, StringComparison.OrdinalIgnoreCase))
-            throw new InvalidOperationException("The selected branch is the repository’s default branch. Push a separate working branch instead.");
-        var pushed = await RunAsync(project.RootPath, ["push", "--set-upstream", "origin", (verifiedCommit ?? "HEAD") + ":refs/heads/" + status.Branch], ct, timeoutSeconds: 120);
+        if (!allowDefaultBranchPublication && match.Success && status.Branch.Equals(match.Groups[1].Value, StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException("The selected branch is the repositoryâ€™s default branch. Push a separate working branch instead.");
+        if (allowDefaultBranchPublication)
+        {
+            if (!publicationLayout || verifiedCommit == null || verifiedBranch == null) throw new InvalidOperationException("Default-branch publication requires a reviewed committed website.");
+            var currentRemote = await RunAsync(RepositoryRoot, ["ls-remote", "origin", "refs/heads/" + status.Branch], ct, timeoutSeconds: 120, environment: TransportEnvironment);
+            string remoteCommit = currentRemote.Output.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? "";
+            var clonedRemote = await RunAsync(RepositoryRoot, ["rev-parse", "refs/remotes/origin/" + status.Branch], ct, allowFailure: true);
+            if (remoteCommit.Length == 0 || remoteCommit != verifiedCommit && (clonedRemote.ExitCode != 0 || remoteCommit != clonedRemote.Output.Trim()))
+                throw new InvalidOperationException("The publication branch changed on the remote after review. Start with a fresh clone before publishing.");
+        }
+        var pushed = await RunAsync(RepositoryRoot, ["push", "--set-upstream", "origin", (verifiedCommit ?? "HEAD") + ":refs/heads/" + status.Branch], ct, timeoutSeconds: 120, environment: TransportEnvironment);
         // A SHA refspec has no local branch name from which Git can infer tracking.
         if (verifiedCommit != null)
-            await RunAsync(project.RootPath, ["branch", "--set-upstream-to=origin/" + status.Branch, status.Branch], ct);
-        return Message(pushed, "Pushed the working branch to origin. Nothing was merged or published.");
+            await RunAsync(RepositoryRoot, ["branch", "--set-upstream-to=origin/" + status.Branch, status.Branch], ct);
+        return Message(pushed, allowDefaultBranchPublication ? "Published the reviewed help commit to origin/" + status.Branch + "." : "Pushed the working branch to origin. Nothing was merged or published.");
     }
 
     private async Task<GitStatus> RequireRepositoryAsync(CancellationToken ct)
     {
         var status = await StatusAsync(ct);
         if (!status.IsRepository) throw new InvalidOperationException("This is a copied folder, not an independent Git checkout. Clone the GitHub help repository into a new working copy to synchronise it.");
+        if (expectedPublicationBranch != null && status.Branch != expectedPublicationBranch)
+            throw new InvalidOperationException("The selected publication branch changed after cloning. Start with a fresh reviewed clone before publishing.");
         return status;
     }
 
     private async Task<string> RequireOriginAsync(CancellationToken ct)
     {
-        var result = await RunAsync(project.RootPath, ["remote", "get-url", "origin"], ct, allowFailure: true);
+        var result = await RunAsync(RepositoryRoot, ["remote", "get-url", "origin"], ct, allowFailure: true);
         if (result.ExitCode != 0 || string.IsNullOrWhiteSpace(result.Output)) throw new InvalidOperationException("This repository has no origin remote.");
-        return result.Output.Trim();
+        string origin = result.Output.Trim();
+        if (expectedPublicationOrigin != null && !origin.Equals(expectedPublicationOrigin, StringComparison.Ordinal))
+            throw new InvalidOperationException("The selected publication origin changed after cloning. Review the repository URL and start again.");
+        if (localTestRemote != null && (!Uri.TryCreate(origin, UriKind.Absolute, out var localUri) || !localUri.IsFile || !SafePaths.Same(localUri.LocalPath, localTestRemote)))
+            throw new InvalidOperationException("The isolated test publication remote was changed; network access is refused.");
+        return origin;
     }
 
     private async Task<string?> TrackingBranchAsync(string branch, CancellationToken ct)
@@ -214,7 +233,7 @@ public sealed partial class GitSyncService(HelpProject project)
     private async Task<string?> ConfiguredTrackingBranchAsync(string branch, CancellationToken ct)
     {
         if (branch == "(detached HEAD)") return null;
-        var upstream = await RunAsync(project.RootPath, ["for-each-ref", "--format=%(upstream:short)", "--", "refs/heads/" + branch], ct, allowFailure: true);
+        var upstream = await RunAsync(RepositoryRoot, ["for-each-ref", "--format=%(upstream:short)", "--", "refs/heads/" + branch], ct, allowFailure: true);
         return upstream.ExitCode == 0 && !string.IsNullOrWhiteSpace(upstream.Output) ? upstream.Output.Trim() : null;
     }
 
@@ -222,20 +241,20 @@ public sealed partial class GitSyncService(HelpProject project)
     {
         if (branch == "(detached HEAD)") return null;
         var matching = "refs/remotes/origin/" + branch;
-        var exists = await RunAsync(project.RootPath, ["show-ref", "--verify", "--quiet", matching], ct, allowFailure: true);
+        var exists = await RunAsync(RepositoryRoot, ["show-ref", "--verify", "--quiet", matching], ct, allowFailure: true);
         return exists.ExitCode == 0 ? matching : null;
     }
 
     private async Task RejectOutsideStagedChangesAsync(CancellationToken ct, bool includeWebsite = false)
     {
-        var result = await RunAsync(project.RootPath, ["diff", "--cached", "--name-only", "--no-renames", "-z"], ct);
-        var outside = result.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries).Where(p => !IsSourcePath(p) && !(includeWebsite && IsWebsitePath(p))).ToArray();
+        var result = await RunAsync(RepositoryRoot, ["diff", "--cached", "--name-only", "--no-renames", "-z"], ct);
+        var outside = result.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries).Where(p => !IsScopedSourcePath(p) && !(includeWebsite && IsWebsitePath(p))).ToArray();
         if (outside.Length != 0)
             throw new InvalidOperationException("Other files are already staged. Unstage them before committing help source:" + Environment.NewLine + string.Join(Environment.NewLine, outside.Take(15)));
     }
 
-    private static bool IsRecoveryPath(string path) => path.Equals(RecoveryDirectory, StringComparison.OrdinalIgnoreCase) ||
-        path.StartsWith(RecoveryDirectory + "/", StringComparison.OrdinalIgnoreCase);
+    private bool IsRecoveryPath(string path) => TrySourceRelative(path, out var relative) &&
+        (relative.Equals(RecoveryDirectory, StringComparison.OrdinalIgnoreCase) || relative.StartsWith(RecoveryDirectory + "/", StringComparison.OrdinalIgnoreCase));
 
     public static bool IsSourcePath(string path)
     {
@@ -247,7 +266,7 @@ public sealed partial class GitSyncService(HelpProject project)
     private async Task<DateTimeOffset?> ReadFetchTimeAsync(string? origin, CancellationToken ct)
     {
         if (origin is null) return null;
-        var result = await RunAsync(project.RootPath, ["config", "--local", "--get", FetchStateKey], ct, allowFailure: true);
+        var result = await RunAsync(RepositoryRoot, ["config", "--local", "--get", FetchStateKey], ct, allowFailure: true);
         if (result.ExitCode != 0) return null;
         try
         {
@@ -263,7 +282,7 @@ public sealed partial class GitSyncService(HelpProject project)
     private async Task ValidateBranchAsync(string branch, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(branch) || branch.StartsWith('-') || branch.Contains('\r') || branch.Contains('\n')) throw new ArgumentException("Enter a valid working-branch name.", nameof(branch));
-        var result = await RunAsync(project.RootPath, ["check-ref-format", "--branch", branch], ct, allowFailure: true);
+        var result = await RunAsync(RepositoryRoot, ["check-ref-format", "--branch", branch], ct, allowFailure: true);
         if (result.ExitCode != 0) throw new ArgumentException("That branch name is not valid. Try help-editor/20261101.", nameof(branch));
     }
 
@@ -292,7 +311,7 @@ public sealed partial class GitSyncService(HelpProject project)
         IReadOnlyDictionary<string, string>? environment = null, string? input = null)
     {
         ct.ThrowIfCancellationRequested();
-        var start = new ProcessStartInfo("git") { WorkingDirectory = cwd, UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true, RedirectStandardInput = true, StandardInputEncoding = new UTF8Encoding(false), StandardOutputEncoding = Encoding.UTF8, StandardErrorEncoding = Encoding.UTF8 };
+        var start = new ProcessStartInfo(ResolveGitExecutable()) { WorkingDirectory = cwd, UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true, RedirectStandardInput = true, StandardInputEncoding = new UTF8Encoding(false), StandardOutputEncoding = Encoding.UTF8, StandardErrorEncoding = Encoding.UTF8 };
         start.ArgumentList.Add("-c"); start.ArgumentList.Add("credential.interactive=never");
         start.ArgumentList.Add("-c"); start.ArgumentList.Add("core.quotepath=false");
         // Generated artwork can exceed MAX_PATH in an otherwise valid authoring
@@ -328,4 +347,23 @@ public sealed partial class GitSyncService(HelpProject project)
     }
 
     private record GitRunResult(int ExitCode, string Output, string Error);
+
+    private static string ResolveGitExecutable()
+    {
+        string name = OperatingSystem.IsWindows() ? "git.exe" : "git";
+        // Only explicit absolute PATH entries participate. Never search the
+        // application's or parent's current directory implicitly, nor run a
+        // batch wrapper through a shell. Tests may supply an isolated PATH.
+        foreach (string entry in (Environment.GetEnvironmentVariable("PATH") ?? "").Split(Path.PathSeparator))
+        {
+            string directory = entry.Trim().Trim('"');
+            if (!Path.IsPathFullyQualified(directory)) continue;
+            string candidate = Path.GetFullPath(Path.Combine(directory, name));
+            if (!File.Exists(candidate)) continue;
+            SafePaths.CheckNoLinks(candidate);
+            if (!OperatingSystem.IsWindows() && (File.GetUnixFileMode(candidate) & (UnixFileMode.UserExecute | UnixFileMode.GroupExecute | UnixFileMode.OtherExecute)) == 0) continue;
+            return candidate;
+        }
+        throw new InvalidOperationException("Git was not found in an absolute PATH directory. Install Git and add its executable directory to PATH.");
+    }
 }

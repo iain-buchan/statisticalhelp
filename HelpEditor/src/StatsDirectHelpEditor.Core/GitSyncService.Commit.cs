@@ -8,39 +8,39 @@ public sealed partial class GitSyncService
     // Pin the reviewed tree instead, so a later save cannot enter that commit.
     private async Task<string> CommitReviewedTreeAsync(string[] paths, string message, string name, string email, bool website, CancellationToken ct)
     {
-        string branch = (await RunAsync(project.RootPath, ["symbolic-ref", "--quiet", "HEAD"], ct)).Output.Trim();
-        string parent = (await RunAsync(project.RootPath, ["rev-parse", "HEAD"], ct)).Output.Trim();
-        string gitIndex = (await RunAsync(project.RootPath, ["rev-parse", "--path-format=absolute", "--git-path", "index"], ct)).Output.Trim();
+        string branch = (await RunAsync(RepositoryRoot, ["symbolic-ref", "--quiet", "HEAD"], ct)).Output.Trim();
+        string parent = (await RunAsync(RepositoryRoot, ["rev-parse", "HEAD"], ct)).Output.Trim();
+        string gitIndex = (await RunAsync(RepositoryRoot, ["rev-parse", "--path-format=absolute", "--git-path", "index"], ct)).Output.Trim();
         SafePaths.CheckNoLinks(gitIndex);
         string stem = gitIndex + ".helpeditor-" + Guid.NewGuid().ToString("N");
         string originalIndex = stem + ".original", privateIndex = stem + ".reviewed", mergeIndex = stem + ".merge";
         var originalEnv = new Dictionary<string, string> { ["GIT_INDEX_FILE"] = originalIndex };
         var privateEnv = new Dictionary<string, string> { ["GIT_INDEX_FILE"] = privateIndex };
-        bool InScope(string path) => IsSourcePath(path) || website && IsWebsitePath(path);
+        bool InScope(string path) => IsScopedSourcePath(path) || website && IsWebsitePath(path);
         try
         {
             File.Copy(gitIndex, originalIndex);
             var originalEntries = await IndexEntriesAsync(originalEnv, ct);
             if (originalEntries.Values.Any(value => !value.Split('\t')[0].EndsWith(" 0", StringComparison.Ordinal)))
                 throw new InvalidOperationException("Resolve staged merge conflicts before committing help source.");
-            await RunAsync(project.RootPath, ["read-tree", parent], ct, environment: privateEnv);
+            await RunAsync(RepositoryRoot, ["read-tree", parent], ct, environment: privateEnv);
             string tree;
             // Git may read these files, but saves/renames cannot change their
             // bytes while they are staged and compared with the build receipt.
             var held = new List<FileStream>();
             try
             {
-                var inputs = SourceFiles().Concat(website ? WebsiteFiles(Path.Combine(project.RootPath, WebsitePath)).Keys
+                var inputs = SourceFiles().Concat(website ? WebsiteFiles(Path.Combine(RepositoryRoot, WebsitePath)).Keys
                     .Append(WebsiteReceiptName).Select(path => WebsitePath + "/" + path) : []);
                 foreach (string relative in inputs.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal))
-                    held.Add(File.Open(SafePaths.Resolve(project.RootPath, relative), FileMode.Open, FileAccess.Read, FileShare.Read));
+                    held.Add(File.Open(SafePaths.Resolve(RepositoryRoot, relative), FileMode.Open, FileAccess.Read, FileShare.Read));
                 await RejectContentFiltersAsync(paths, ct);
-                await RunAsync(project.RootPath, ["add", "--all", "--", .. paths], ct, environment: privateEnv);
+                await RunAsync(RepositoryRoot, ["add", "--all", "--", .. paths], ct, environment: privateEnv);
                 if (website) await VerifyWebsiteForCommitAsync(ct, privateEnv);
-                var changed = await RunAsync(project.RootPath, ["diff", "--cached", "--quiet", "--exit-code", parent], ct, allowFailure: true, environment: privateEnv);
+                var changed = await RunAsync(RepositoryRoot, ["diff", "--cached", "--quiet", "--exit-code", parent], ct, allowFailure: true, environment: privateEnv);
                 if (changed.ExitCode == 0) throw new InvalidOperationException("There are no help-source changes to commit.");
                 if (changed.ExitCode != 1) throw new InvalidOperationException("Git could not check the reviewed changes.");
-                tree = (await RunAsync(project.RootPath, ["write-tree"], ct, environment: privateEnv)).Output.Trim();
+                tree = (await RunAsync(RepositoryRoot, ["write-tree"], ct, environment: privateEnv)).Output.Trim();
             }
             finally { foreach (var stream in held) stream.Dispose(); }
             var identity = new Dictionary<string, string>
@@ -50,8 +50,9 @@ public sealed partial class GitSyncService
             };
             // User hooks cannot alter this already verified tree. No branch is
             // changed until the compare-and-set transaction below succeeds.
-            string commit = (await RunAsync(project.RootPath, ["commit-tree", "--no-gpg-sign", tree, "-p", parent, "-m", message], ct, environment: identity)).Output.Trim();
+            string commit = (await RunAsync(RepositoryRoot, ["commit-tree", "--no-gpg-sign", tree, "-p", parent, "-m", message], ct, environment: identity)).Output.Trim();
             await UpdateReviewedBranchAsync(branch, parent, commit, message, ct);
+            if (website && publicationLayout) reviewedPublicationCommit = commit;
             string? notice = null;
             try { await RefreshCommittedIndexAsync(gitIndex, mergeIndex, originalEntries, await IndexEntriesAsync(privateEnv, ct), InScope, branch, commit, ct); }
             catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException or OperationCanceledException)
@@ -67,18 +68,18 @@ public sealed partial class GitSyncService
 
     private async Task UpdateReviewedBranchAsync(string branch, string parent, string commit, string message, CancellationToken ct)
     {
-        string currentBranch = (await RunAsync(project.RootPath, ["symbolic-ref", "--quiet", "HEAD"], ct)).Output.Trim();
+        string currentBranch = (await RunAsync(RepositoryRoot, ["symbolic-ref", "--quiet", "HEAD"], ct)).Output.Trim();
         if (currentBranch != branch) throw new InvalidOperationException("The active branch changed during review. No branch was updated; review the current state and retry.");
         // The branch name is pinned: a checkout after the check above cannot
         // redirect this update to a different branch. The old SHA is atomic.
-        var update = await RunAsync(project.RootPath, ["update-ref", "-m", "help editor: " + message.Split('\n')[0], branch, commit, parent], ct, allowFailure: true);
+        var update = await RunAsync(RepositoryRoot, ["update-ref", "-m", "help editor: " + message.Split('\n')[0], branch, commit, parent], ct, allowFailure: true);
         if (update.ExitCode != 0)
             throw new InvalidOperationException("The branch changed during review. No branch was updated by the editor; review the current state and retry. " + Redact(update.Error.Trim()));
     }
 
     private async Task<Dictionary<string, string>> IndexEntriesAsync(IReadOnlyDictionary<string, string> environment, CancellationToken ct)
     {
-        string output = (await RunAsync(project.RootPath, ["ls-files", "--stage", "-z"], ct, environment: environment)).Output;
+        string output = (await RunAsync(RepositoryRoot, ["ls-files", "--stage", "-z"], ct, environment: environment)).Output;
         var result = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (string line in output.Split('\0', StringSplitOptions.RemoveEmptyEntries))
         {
@@ -92,8 +93,8 @@ public sealed partial class GitSyncService
     {
         // Newline normalization is supported. Arbitrary clean filters/ident can
         // change statistical text or generated HTML after its build was checked.
-        var listed = await RunAsync(project.RootPath, ["ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", .. paths], ct);
-        var attrs = await RunAsync(project.RootPath, ["check-attr", "-z", "--stdin", "filter", "ident"], ct, input: listed.Output);
+        var listed = await RunAsync(RepositoryRoot, ["ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", .. paths], ct);
+        var attrs = await RunAsync(RepositoryRoot, ["check-attr", "-z", "--stdin", "filter", "ident"], ct, input: listed.Output);
         string[] fields = attrs.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries);
         for (int i = 0; i + 2 < fields.Length; i += 3)
             if (fields[i + 2] is not ("unspecified" or "unset"))
@@ -123,7 +124,7 @@ public sealed partial class GitSyncService
                     records.Append(committed.GetValueOrDefault(path) ?? "0 " + new string('0', commit.Length) + "\t" + path).Append('\0');
                 }
                 if (records.Length > 0)
-                    await RunAsync(project.RootPath, ["update-index", "-z", "--index-info"], ct, environment: environment, input: records.ToString());
+                    await RunAsync(RepositoryRoot, ["update-index", "-z", "--index-info"], ct, environment: environment, input: records.ToString());
                 byte[] bytes = await File.ReadAllBytesAsync(mergeIndex, ct);
                 await RequireCommittedHeadAsync();
                 await guard.WriteAsync(bytes, ct); guard.Flush(flushToDisk: true);
@@ -134,8 +135,8 @@ public sealed partial class GitSyncService
         finally { if (ownsLock && File.Exists(indexLock)) File.Delete(indexLock); }
         async Task RequireCommittedHeadAsync()
         {
-            string currentBranch = (await RunAsync(project.RootPath, ["symbolic-ref", "--quiet", "HEAD"], ct)).Output.Trim();
-            string currentHead = (await RunAsync(project.RootPath, ["rev-parse", "HEAD"], ct)).Output.Trim();
+            string currentBranch = (await RunAsync(RepositoryRoot, ["symbolic-ref", "--quiet", "HEAD"], ct)).Output.Trim();
+            string currentHead = (await RunAsync(RepositoryRoot, ["rev-parse", "HEAD"], ct)).Output.Trim();
             if (currentBranch != branch || currentHead != commit)
                 throw new InvalidOperationException("The branch changed after committing; its staging was preserved.");
         }

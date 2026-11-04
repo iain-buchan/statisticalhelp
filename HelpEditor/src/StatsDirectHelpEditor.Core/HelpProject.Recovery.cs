@@ -163,7 +163,14 @@ public sealed partial class HelpProject
                 bool alreadyPresent = current.Descendants("TocEntry").Any(e =>
                     (string?)e.Attribute("Title") == (string?)entry.Attribute("Title") &&
                     (string?)e.Attribute("Link") == (string?)entry.Attribute("Link"));
-                if (!alreadyPresent) current.Root.Add(new XElement(entry.Name, entry.Attributes().Select(a => new XAttribute(a))));
+                if (!alreadyPresent)
+                {
+                    // Child entries were promoted at deletion. Retain this entry's
+                    // comments/extension XML without duplicating those children.
+                    var restoredEntry = new XElement(entry);
+                    restoredEntry.Elements("TocEntry").Remove();
+                    current.Root.Add(restoredEntry);
+                }
             }
             tocRestored = SerializeRecoveryXml(current);
         }

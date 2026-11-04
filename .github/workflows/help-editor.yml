@@ -13,30 +13,44 @@ permissions:
 jobs:
   windows:
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     defaults:
       run:
         shell: pwsh
         working-directory: HelpEditor
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: '10.0.x'
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '24'
+      - name: Install pinned browser dependencies for current-content validation
+        run: npm ci --ignore-scripts --prefix tests/browser
+      - name: Prepare current implementation with immutable regression source
+        run: |
+          $reg = & ./tests/Prepare-RegressionWorkspace.ps1 -EditorRoot $PWD.Path -DestinationDirectory (Join-Path $env:RUNNER_TEMP 'sdhe-reg-w') -RepositoryRoot (Split-Path $PWD.Path -Parent)
+          "HELP_REGRESSION_ROOT=$($reg.WorkspaceRoot)" >> $env:GITHUB_ENV
+          "NODE_PATH=$(Join-Path $PWD.Path 'tests/browser/node_modules')" >> $env:GITHUB_ENV
+          "STATSDIRECT_PLAYWRIGHT_PATH=$(Join-Path $PWD.Path 'tests/browser/node_modules/playwright')" >> $env:GITHUB_ENV
       - name: Build editor, console builder and test programs
-        run: dotnet build StatsDirectHelpEditor.slnx -c Release --nologo
+        run: dotnet build (Join-Path $env:HELP_REGRESSION_ROOT 'StatsDirectHelpEditor.slnx') -c Release --nologo
       - name: Core, installed workspace and Git checks
         run: |
-          foreach ($name in @('Checks','InstalledWorkspaceChecks','GitChecks','HeadlessChecks','NamespaceChecks','WebsiteZipChecks','TutorAuthoringChecks','TutorBuiltinChecks','TutorResearchChecks')) {
+          Set-Location $env:HELP_REGRESSION_ROOT
+          foreach ($name in @('Checks','ContentsNavigationChecks','DesktopDeliveryChecks','PortabilityChecks','InstalledWorkspaceChecks','GitChecks','NestedGitChecks','HelpPublicationChecks','HeadlessChecks','NamespaceChecks','WebsiteZipChecks','WebsitePublishChecks','SearchReplaceChecks','EquationArtworkChecks','CssScoperChecks','DeepSourceChecks','PolishChecks','PolishTransportChecks','TutorAuthoringChecks','TutorBuiltinChecks','TutorResearchChecks')) {
             dotnet run --no-build -c Release --project "tests/StatsDirectHelpEditor.$name" -- $PWD.Path
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
+          dotnet run --no-build -c Release --project tests/StatsDirectHelpEditor.Checks -- $PWD.Path --recovery-only
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --no-build -c Release --project tests/StatsDirectHelpEditor.HelpPublicationChecks -- $PWD.Path --full-corpus
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Native installed startup and source artwork
         run: |
-          foreach ($name in @('InstalledWorkspaceWindowsChecks','SourceImageWindowsChecks','NamespaceWindowsChecks','WebsiteExportWindowsChecks','TutorAuthoringWindowsChecks')) {
+          Set-Location $env:HELP_REGRESSION_ROOT
+          foreach ($name in @('InstalledWorkspaceWindowsChecks','SourceImageWindowsChecks','NamespaceWindowsChecks','WebsiteExportWindowsChecks','TutorAuthoringWindowsChecks','ContentsWindowsChecks','LinkWindowsChecks','WindowsChecks','BrowserPreviewWindowsChecks','WorkspaceWindowsChecks','AppHelpPreviewChecks','SearchReplaceWindowsChecks','PolishWindowsChecks','PreviewCacheWindowsChecks','DeepPreviewChecks','DeepWorkflowWindowsChecks','DeliveryWindowsChecks','HelpPublicationWindowsChecks')) {
             dotnet run --no-build -c Release --project "tests/StatsDirectHelpEditor.$name" -- $PWD.Path
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
@@ -45,7 +59,13 @@ jobs:
           dotnet run --no-build -c Release --project tests/StatsDirectHelpEditor.TutorResearchChecks -- $PWD.Path --dialog
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Rebuild all help without Flare or the GUI
-        run: ./Build-Help.ps1 -CompileBuilder -Target All
+        run: |
+          Set-Location $env:HELP_REGRESSION_ROOT
+          ./Build-Help.ps1 -CompileBuilder -Target All
+      - name: Validate actual maintained source without fixed corpus counts
+        run: |
+          $builder = Join-Path $env:HELP_REGRESSION_ROOT 'src/StatsDirectHelpEditor.Cli/bin/Release/net10.0/StatsDirectHelpBuilder.exe'
+          ./tests/Validate-MaintainedHelp.ps1 -ProjectPath (Join-Path $PWD.Path 'HelpSource') -OutputRoot (Join-Path $PWD.Path 'evidence/MaintainedHelp') -BuilderPath $builder -AssetsPath (Join-Path $PWD.Path 'src/StatsDirectHelpEditor.App/Web')
       - name: Validate the StatsDirect authoring schema
         run: ./Schema/Test-ExtensionSchema.ps1 | Out-Null
       - name: Verify source remains clean
@@ -61,7 +81,76 @@ jobs:
           ./tests/installer-package-checks.ps1 -Msi (Join-Path $output 'StatsDirectHelpEditor-x64.msi') -Bundle (Join-Path $output 'StatsDirectHelpEditorSetup.exe') -PayloadDirectory $payload -ExpectedVersion $version -ExpectedCommit $env:GITHUB_SHA -Root $PWD.Path
       - name: Preserve verification reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: help-editor-checks
-          path: HelpEditor/evidence/*.json
+          path: |
+            HelpEditor/evidence/*.json
+            HelpEditor/evidence/MaintainedHelp/*.json
+            ${{ env.HELP_REGRESSION_ROOT }}/regression-workspace.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/*.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/ReviewImprovements-*/ContentsNavigation/checks.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/ReviewImprovements-*/Portability/checks.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/ReviewImprovements-*/DesktopComparison/checks.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/ReviewImprovements-*/DesktopComparison/NativeIntegration/checks.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/HelpEditor100Release/UnifiedPublicationCore/*.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/HelpEditor100Release/NestedGit/*.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/HelpPublicationWindows/*.json
+
+  browser:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: HelpEditor
+    env:
+      STATSDIRECT_REQUIRE_FROZEN_FLARE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: HelpEditor/tests/browser/package-lock.json
+      - name: Install pinned browser test dependencies
+        run: npm ci --ignore-scripts --prefix tests/browser
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12.10'
+          architecture: 'x64'
+      - name: Install pinned isolated PDF print-check dependencies
+        run: |
+          $deps = & ./tests/Install-PrintCheckDependencies.ps1 -DestinationDirectory (Join-Path $env:RUNNER_TEMP 'statsdirect-print') -PythonPath ((Get-Command python -CommandType Application | Select-Object -First 1).Source)
+          "STATSDIRECT_PYTHON=$($deps.PythonPath)" >> $env:GITHUB_ENV
+          "STATSDIRECT_POPPLER_PATH=$($deps.PopplerBin)" >> $env:GITHUB_ENV
+      - name: Prepare current implementation with immutable regression source
+        run: |
+          $reg = & ./tests/Prepare-RegressionWorkspace.ps1 -EditorRoot $PWD.Path -DestinationDirectory (Join-Path $env:RUNNER_TEMP 'sdhe-reg-b') -RepositoryRoot (Split-Path $PWD.Path -Parent)
+          "HELP_REGRESSION_ROOT=$($reg.WorkspaceRoot)" >> $env:GITHUB_ENV
+          "NODE_PATH=$(Join-Path $PWD.Path 'tests/browser/node_modules')" >> $env:GITHUB_ENV
+          "STATSDIRECT_PLAYWRIGHT_PATH=$(Join-Path $PWD.Path 'tests/browser/node_modules/playwright')" >> $env:GITHUB_ENV
+      - name: Build test programs and both help outputs
+        run: |
+          Set-Location $env:HELP_REGRESSION_ROOT
+          dotnet build StatsDirectHelpEditor.slnx -c Release --nologo
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          ./Build-Help.ps1 -CompileBuilder -Target All
+          dotnet run --no-build -c Release --project tests/StatsDirectHelpEditor.WebsiteZipChecks -- $PWD.Path
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Authoring, generated website and frozen Flare regression checks
+        run: |
+          Set-Location $env:HELP_REGRESSION_ROOT
+          ./tests/Run-BrowserChecks.ps1 -Group All
+      - name: Preserve browser verification reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: help-editor-browser-checks
+          path: |
+            ${{ env.HELP_REGRESSION_ROOT }}/regression-workspace.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/BrowserRegression-All/**
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/*.json

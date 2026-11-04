@@ -67,9 +67,8 @@ public static class HelpLinkResolver
         }
         if (Path.GetExtension(topic).ToLowerInvariant() is not (".htm" or ".html"))
             throw new ArgumentException("Only HTML help pages can be opened in an editor window.");
-        // Core checks both path bounds and linked-directory escapes before reading.
-        project.ReadTopic(topic);
-        topic = project.ListTopics().FirstOrDefault(t => t.Path.Equals(topic, StringComparison.OrdinalIgnoreCase))?.Path ?? topic;
+        // Resolve only this file; an unrelated malformed page must not block navigation.
+        topic = project.ResolveTopicPath(topic);
         return new HelpLinkTarget(topic, fragment, null);
     }
 

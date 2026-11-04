@@ -4,6 +4,7 @@ HelpSource/** -text
 src/StatsDirectHelpEditor.App/Web/** -text
 src/StatsDirectHelpEditor.App/AppHelp/** -text
 TutorSource/Baseline/** -text
+tests/FlareBaseline/** -text whitespace=cr-at-eol
 tests/StatsDirectHelpEditor.TutorAuthoringChecks/Runtime*.cs -text
 *.png -text
 *.ico -text
