@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectPublishedContent.schema.json",
+  "title": "StatsDirect published content manifest",
+  "description": "Structural contract for one Git-pinned offline content bundle. Consumers must also verify complete artifact inventories, file bytes, payload counts, context links and tutor review/bank consistency. The publication Git commit is supplied externally; producer.sourceCommit identifies producer code, not this manifest's own commit.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "format", "publisher", "publicationId", "publishedAtUtc", "producer", "helpSourceSha256", "tutorSourceSha256", "artifacts"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "format": { "const": "statsdirect-published-content-v1" },
+    "publisher": { "const": "StatsDirectHelpEditor" },
+    "publicationId": { "type": "string", "format": "uuid", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" },
+    "publishedAtUtc": { "type": "string", "format": "date-time", "pattern": "(?:Z|\\+00:00)$" },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "sourceCommit"],
+      "properties": {
+        "version": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "sourceCommit": { "anyOf": [{ "type": "null" }, { "type": "string", "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$" }] }
+      }
+    },
+    "helpSourceSha256": { "$ref": "#/$defs/sha256" },
+    "tutorSourceSha256": { "$ref": "#/$defs/sha256" },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["website", "desktopHelp", "tutor"],
+      "properties": {
+        "website": { "$ref": "#/$defs/website" },
+        "desktopHelp": { "$ref": "#/$defs/desktopHelp" },
+        "tutor": { "$ref": "#/$defs/tutor" }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "maxLength": 32700, "pattern": "^(?!/)(?!.*[\\\\:#?])(?!.*(?:^|/)(?:\\.\\.?)(?:/|$))(?!.*//).+[^/]$|^[^/\\\\:#?.]$" },
+        "bytes": { "type": "integer", "minimum": 0, "maximum": 100000000 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "files": { "type": "array", "minItems": 1, "maxItems": 30000, "items": { "$ref": "#/$defs/file" } },
+    "website": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "fileCount", "files", "topicCount", "searchDocumentCount"],
+      "properties": {
+        "path": { "const": "Docs" }, "fileCount": { "type": "integer", "minimum": 1, "maximum": 30000 }, "files": { "$ref": "#/$defs/files" },
+        "topicCount": { "type": "integer", "minimum": 1 }, "searchDocumentCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "desktopHelp": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "fileCount", "files", "topicCount", "searchDocumentCount", "contextCount"],
+      "properties": {
+        "path": { "const": "Published/DesktopHelp" }, "fileCount": { "type": "integer", "minimum": 1, "maximum": 30000 }, "files": { "$ref": "#/$defs/files" },
+        "topicCount": { "type": "integer", "minimum": 1 }, "searchDocumentCount": { "type": "integer", "minimum": 0 }, "contextCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "tutor": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "fileCount", "files", "lessonCount", "questionCount", "trackCount", "bankVersion", "reviewProofBinding"],
+      "properties": {
+        "path": { "const": "Published/Tutor" }, "fileCount": { "const": 6 }, "files": { "allOf": [{ "$ref": "#/$defs/files" }], "minItems": 6, "maxItems": 6 },
+        "lessonCount": { "type": "integer", "minimum": 1, "maximum": 100 }, "questionCount": { "type": "integer", "minimum": 0, "maximum": 300 },
+        "trackCount": { "type": "integer", "minimum": 5 }, "bankVersion": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "reviewProofBinding": { "const": "authoring-source-before-generated-sync-v1" }
+      }
+    }
+  }
+}

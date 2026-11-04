@@ -24,6 +24,8 @@ public sealed record HelpPublicationOptions
     public bool AllowDefaultBranchPublication { get; init; }
     public bool PushToGitHub { get; init; } = true;
     public string? JournalDirectory { get; init; }
+    public bool PublishSharedContent { get; init; }
+    public string? TutorCoursePath { get; init; }
     public string CommitMessage { get; init; } = "Publish saved help source and rebuilt website";
 }
 
@@ -32,7 +34,13 @@ public sealed record HelpPublicationResult(bool Completed, string SourceSha256,
     WebsiteZipExportResult? WebsiteZip, DesktopHelpPublishResult? DesktopHelp,
     string? GitCommit, bool GitPushed, string GitHubBranch, string PagesDeploymentState,
     string JournalPath, string? SnapshotDirectory, IReadOnlyDictionary<string, string> TargetStates)
-{ public string? WebsiteZipSha256 { get; init; } }
+{
+    public string? WebsiteZipSha256 { get; init; }
+    public TutorBuiltinPublishResult? Tutor { get; init; }
+    public string? TutorSourceSha256 { get; init; }
+    public string? SharedContentManifestPath { get; init; }
+    public string? SharedContentManifestSha256 { get; init; }
+}
 public sealed class HelpPublicationException(string message, HelpPublicationResult result, Exception innerException)
     : IOException(message, innerException)
 { public HelpPublicationResult Result { get; } = result; }
@@ -62,7 +70,22 @@ public static class HelpPublicationPublisher
         ArgumentNullException.ThrowIfNull(project); ArgumentNullException.ThrowIfNull(options);
         string assets = Path.GetFullPath(runtimeAssetsDirectory), zip = ValidateZip(project, assets, options);
         ValidateOptions(options, localTestRemote);
+        Dictionary<string,string>? originalTutor = null;
+        if(options.PublishSharedContent)
+        {
+            if(string.IsNullOrWhiteSpace(options.TutorCoursePath)) throw new ArgumentException("Choose the saved tutor course to publish with help.");
+            var tutorInspection=SharedContentPublisher.InspectTutor(options.TutorCoursePath,options.StatsDirectSource,assets);
+            if(!tutorInspection.CanPublish) throw new InvalidDataException(string.Join("\n",tutorInspection.ReviewIssues.Select(issue=>issue.Path+": "+issue.Message)));
+            originalTutor=SharedContentPublisher.InspectTutorDestination(options.StatsDirectSource);
+        }
         var inspected = DesktopHelpPublisher.InspectDestination(options.StatsDirectSource);
+        if(options.PublishSharedContent)
+        {
+            string tutorPath=Path.GetFullPath(options.TutorCoursePath!);
+            if(SafePaths.Same(tutorPath,zip) || SafePaths.IsWithin(tutorPath,project.RootPath) || SafePaths.IsWithin(tutorPath,assets) ||
+                SafePaths.IsWithin(tutorPath,inspected.DestinationDirectory) || SafePaths.IsWithin(tutorPath,Path.Combine(inspected.RepositoryDirectory,"Learning/AuthoredTutor")))
+                throw new InvalidOperationException("Keep saved tutor authoring source outside help/runtime inputs and publication outputs; only its six generated tutor files may be published.");
+        }
         if (inspected.Ownership == DesktopHelpOwnership.Unrecognised)
             throw new IOException(string.Join("\n", inspected.Problems));
         if (inspected.FileCount > 0 && !string.Equals(inspected.Sha256, options.ExpectedDesktopSha256, StringComparison.OrdinalIgnoreCase))
@@ -84,13 +107,19 @@ public static class HelpPublicationPublisher
         string work = Path.Combine(tempParent, "sdhe-pub-" + operation[..12]);
         Directory.CreateDirectory(work); SafePaths.AtomicWrite(Path.Combine(work, OwnedMarker), JsonSerializer.Serialize(new { operation, journalPath }));
         var states = new Dictionary<string, string>(StringComparer.Ordinal) { ["WebsiteZip"] = "Not started", ["DesktopHelp"] = "Not started", ["GitHub"] = "Not started" };
+        if(options.PublishSharedContent){states["Tutor"]="Not started";states["SharedContent"]="Not started";}
         string sourceSha = "", pages = "Not published", phase = "Starting";
         WebsiteZipExportResult? zipResult = null; DesktopHelpPublishResult? desktopResult = null;
         string? commit = null, zipSha = null; bool pushed = false, completed = false;
         Snapshot? snapshot = null;
+        SharedContentPublisher.PreparedTutorArtifact? preparedTutor = null;
+        TutorBuiltinPublishResult? tutorResult = null;
+        SharedContentVerification? shared = null;
         HelpPublicationResult Result() => new(completed, sourceSha, zipResult, desktopResult, commit, pushed,
             options.GitHubBranch, pages, journalPath, Directory.Exists(work) ? work : null,
-            new Dictionary<string, string>(states, StringComparer.Ordinal)) { WebsiteZipSha256 = zipSha };
+            new Dictionary<string, string>(states, StringComparer.Ordinal)) { WebsiteZipSha256 = zipSha, Tutor = tutorResult,
+                TutorSourceSha256 = preparedTutor?.SourceSha256, SharedContentManifestPath = shared == null ? null : SharedContentPublisher.ManifestRelativePath,
+                SharedContentManifestSha256 = shared?.ManifestSha256 };
         void Journal(string nextPhase, string message)
         {
             phase = nextPhase;
@@ -109,6 +138,12 @@ public static class HelpPublicationPublisher
             Journal("Snapshot", "Capturing one saved help source and offline runtime snapshot; open drafts are excluded.");
             snapshot = Snapshot.Capture(project, assets, work, ct);
             sourceSha = snapshot.SourceSha256;
+            if(options.PublishSharedContent)
+            {
+                Journal("TutorSnapshot","Validating and exporting the saved tutor course once; changed/new material needs its recorded author review.");
+                preparedTutor=SharedContentPublisher.PrepareTutor(options.TutorCoursePath!,options.StatsDirectSource,assets,work);
+                states["Tutor"]="Prepared from saved course; not delivered"; snapshot.RequireUnchanged(ct);
+            }
             Journal("Clone", "Preparing a private checkout of the selected GitHub branch; your working checkout is unchanged.");
             string checkout = Path.Combine(work, "Git");
             GitPublicationCheckout cloned = localTestRemote
@@ -127,14 +162,32 @@ public static class HelpPublicationPublisher
             // and numeric context mappings, before changing any target.
             DesktopHelpPublisher.ValidatePreparedArtifact(snapshot.Project, publicBuild, HelpBuildTarget.Public);
             DesktopHelpPublisher.ValidatePreparedArtifact(snapshot.Project, desktopBuild);
+            DesktopHelpPublishResult? portable = null;
+            if(options.PublishSharedContent)
+            {
+                portable=DesktopHelpPublisher.CreatePortableReceipt(snapshot.Project,desktopBuild.Result,snapshot.Assets,sourceSha);
+                desktopBuild=desktopBuild with {Files=Files(desktopBuild.Result.OutputDirectory)};
+            }
             if (!options.AllowBuildWarnings && publicBuild.Result.Warnings.Concat(desktopBuild.Result.Warnings).Any())
                 throw new InvalidDataException("Review help build warnings before publication:\n" + string.Join("\n", publicBuild.Result.Warnings.Concat(desktopBuild.Result.Warnings).Distinct()));
 
             Journal("PrepareGit", "Preparing root Docs and its matching saved source in the private checkout.");
             await git.PrepareWebsiteFromBuildAsync(publicBuild.Result.OutputDirectory, publicBuild.Files, snapshot.SourceFiles,
                 publicBuild.Result.TopicCount, publicBuild.Result.SearchDocumentCount, publicBuild.Result.Warnings, ct,
-                allowWarnings: options.AllowBuildWarnings);
+                allowWarnings: options.AllowBuildWarnings, prepareSharedContent: options.PublishSharedContent);
+            if(preparedTutor!=null)
+            {
+                preparedTutor.Verify(); string stageRoot=Path.Combine(work,"Shared");Directory.CreateDirectory(stageRoot);
+                string docs=SafePaths.Resolve(cloned.Layout.GitRoot,"Docs");SharedContentPublisher.Copy(docs,Path.Combine(stageRoot,"Docs"),Files(docs),ct);
+                SharedContentPublisher.Copy(desktopBuild.Result.OutputDirectory,Path.Combine(stageRoot,"Published/DesktopHelp"),desktopBuild.Files,ct);
+                SharedContentPublisher.Copy(preparedTutor.Result.OutputDirectory,Path.Combine(stageRoot,"Published/Tutor"),preparedTutor.Payload,ct);
+                SafePaths.AtomicWrite(Path.Combine(stageRoot,"Published/.gitattributes"),"* -text\n");
+                shared=SharedContentPublisher.WriteManifest(stageRoot,Guid.ParseExact(operation,"N").ToString("D"),sourceSha,preparedTutor.SourceSha256,publicBuild.Result,portable!,preparedTutor.Result);
+                await git.PrepareSharedContentAsync(Path.Combine(stageRoot,"Published"),SharedContentPublisher.Files(Path.Combine(stageRoot,"Published")),ct);
+                states["SharedContent"]="Verified source, website, portable Desktop and tutor prepared privately";
+            }
             snapshot.RequireUnchanged(ct); publicBuild.Verify(); desktopBuild.Verify();
+            preparedTutor?.Verify();
             await git.CommitWebsiteAsync(options.CommitMessage, options.AuthorName, options.AuthorEmail, ct);
             commit = await git.ReadHeadCommitAsync(ct); states["GitHub"] = "Source and Docs committed privately; not pushed";
             Journal("LocalTargets", "Verified source and Docs are committed privately; delivering the matching website ZIP and desktop help.");
@@ -151,20 +204,50 @@ public static class HelpPublicationPublisher
                     AllowBuildWarnings = options.AllowBuildWarnings
                 }, ct), ct);
             states["DesktopHelp"] = "Verified"; Journal("DesktopHelp", "Desktop help verified in the application source build chain.");
-            snapshot.RequireUnchanged(ct); VerifyZip(publicBuild, zipResult.ZipPath, ct);
-            var verifiedDesktop = DesktopHelpPublisher.VerifyDestination(options.StatsDirectSource);
-            if (verifiedDesktop.ReceiptSha256 != desktopResult.ReceiptSha256 || verifiedDesktop.PublicationSnapshotSha256 != sourceSha)
-                throw new IOException("The delivered desktop help no longer matches this operation's receipt.");
+            if(preparedTutor!=null)
+            {
+                Journal("Tutor","Delivering the identical prepared tutor inputs to the Windows build chain.");
+                tutorResult=SharedContentPublisher.DeliverTutor(preparedTutor,options.StatsDirectSource,originalTutor,ct);
+                states["Tutor"]="Verified";Journal("Tutor","Tutor build inputs verified; no numerical code was executed.");
+            }
+            void VerifyDeliveredTargets()
+            {
+                snapshot.RequireUnchanged(ct); preparedTutor?.Verify();
+                try { VerifyZip(publicBuild,zipResult.ZipPath,ct); }
+                catch(Exception error) when(error is IOException or InvalidDataException) {states["WebsiteZip"]="Changed since verified delivery";throw;}
+                try
+                {
+                    var verified=DesktopHelpPublisher.VerifyDestination(options.StatsDirectSource);
+                    if(verified.ReceiptSha256!=desktopResult.ReceiptSha256 || verified.PublicationSnapshotSha256!=sourceSha)
+                        throw new IOException("Delivered desktop help no longer matches this operation's receipt.");
+                }
+                catch(Exception error) when(error is IOException or InvalidDataException or JsonException) {states["DesktopHelp"]="Changed since verified delivery";throw;}
+                if(tutorResult!=null)
+                {
+                    try
+                    {
+                        var delivered=SharedContentPublisher.InspectTutorDestination(options.StatsDirectSource);
+                        if(delivered==null || !delivered.OrderBy(pair=>pair.Key).SequenceEqual(preparedTutor!.Payload.OrderBy(pair=>pair.Key)))
+                            throw new IOException("Delivered tutor inputs no longer match the prepared export.");
+                    }
+                    catch(Exception error) when(error is IOException or InvalidDataException or JsonException) {states["Tutor"]="Changed since verified delivery";throw;}
+                }
+            }
+            VerifyDeliveredTargets();
             if (options.PushToGitHub)
             {
+                preparedTutor?.Verify();
+                if(shared!=null) SharedContentPublisher.Verify(cloned.Layout.GitRoot,shared.ManifestSha256);
                 Journal("Push", "All local artifacts verify. Publishing the exact reviewed source/Docs commit to the selected GitHub branch.");
+                // Progress callbacks and other applications may edit a local
+                // target after its delivery; recheck after the final handoff.
+                VerifyDeliveredTargets();
                 await git.PushPreparedWebsiteAsync(commit, options.AllowDefaultBranchPublication, ct);
                 pushed = true; states["GitHub"] = "Verified source and Docs commit pushed";
+                if(shared!=null) states["SharedContent"]="Verified shared manifest/Desktop/tutor committed and pushed with source and Docs";
                 pages = "Commit pushed; GitHub Pages deployment has not been verified";
                 Journal("Pushed", "The source and Docs commit was pushed. GitHub Pages deployment is a separate asynchronous step.");
-                snapshot.RequireUnchanged(ct); VerifyZip(publicBuild, zipResult.ZipPath, ct);
-                if (DesktopHelpPublisher.VerifyDestination(options.StatsDirectSource).ReceiptSha256 != desktopResult.ReceiptSha256)
-                    throw new IOException("Desktop help changed after the Git push. The pushed snapshot remains recorded; review the local target.");
+                VerifyDeliveredTargets();
                 completed = true;
             }
             else { pages = "Not pushed; private commit retained"; states["GitHub"] = "Prepared only; network publication not requested"; }

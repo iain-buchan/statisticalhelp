@@ -8,6 +8,8 @@ internal sealed class HelpPublicationDialog : Form
     private readonly TextBox repository = new() { Dock = DockStyle.Fill };
     private readonly TextBox branch = new() { Dock = DockStyle.Fill };
     private readonly TextBox desktop = new() { Dock = DockStyle.Fill };
+    private readonly TextBox tutorCourse = new() { Dock = DockStyle.Fill };
+    private readonly Label tutorInspection = new() { Dock = DockStyle.Fill, AutoSize = true };
     private readonly TextBox authorName = new() { Dock = DockStyle.Fill };
     private readonly TextBox authorEmail = new() { Dock = DockStyle.Fill };
     private readonly CheckBox allowDefault = new() { AutoSize = true, Text = "Allow publishing to the repository's default branch (may deploy its website)" };
@@ -19,13 +21,16 @@ internal sealed class HelpPublicationDialog : Form
     private readonly TableLayoutPanel layout;
     private readonly FlowLayoutPanel buttons;
     private DesktopHelpDestination? inspected;
+    private TutorBuiltinInspection? inspectedTutor;
     private int inspectionGeneration;
+    private int tutorInspectionGeneration;
     public HelpPublicationOptions? Options { get; private set; }
 
     internal HelpPublicationDialog(HelpPublicationOptions defaults)
     {
         this.defaults = defaults;
-        Text = "Publish help";
+        Text = defaults.PublishSharedContent ? "Publish content" : "Publish help";
+        publish.Text = Text;
         Font = new Font("Arial", 11);
         AutoScaleMode = AutoScaleMode.Dpi;
         AutoScaleDimensions = new SizeF(96, 96);
@@ -34,14 +39,16 @@ internal sealed class HelpPublicationDialog : Form
         StartPosition = FormStartPosition.CenterParent;
         MinimizeBox = false;
         MaximizeBox = false;
-        layout = new TableLayoutPanel { Dock = DockStyle.Top, AutoSize = true, Padding = new Padding(14), ColumnCount = 3, RowCount = 11 };
+        layout = new TableLayoutPanel { Dock = DockStyle.Top, AutoSize = true, Padding = new Padding(14), ColumnCount = 3, RowCount = defaults.PublishSharedContent ? 13 : 11 };
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180));
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
         layout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 95));
         var introduction = new Label
         {
             Dock = DockStyle.Fill, AutoSize = true,
-            Text = "One saved-source snapshot will create the website ZIP, commit and push the GitHub website, and deliver desktop help for the next StatsDirect build.\n\nIt does not upload to statsdirect.com or build the StatsDirect application or installers."
+            Text = defaults.PublishSharedContent
+                ? "Publish one saved version of the help and tutor material: website ZIP, GitHub website and shared desktop/tutor content, plus the Windows build inputs.\n\nOnly saved, publishable tutor changes are included. This does not upload to statsdirect.com, build applications or installers, or certify independent expert review or CPD accreditation."
+                : "One saved-source snapshot will create the website ZIP, commit and push the GitHub website, and deliver desktop help for the next StatsDirect build.\n\nIt does not upload to statsdirect.com or build the StatsDirect application or installers."
         };
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         layout.Controls.Add(introduction, 0, 0); layout.SetColumnSpan(introduction, 3);
@@ -51,14 +58,21 @@ internal sealed class HelpPublicationDialog : Form
         AddField(layout, 4, "Commit author", authorName);
         AddField(layout, 5, "Author email", authorEmail);
         AddField(layout, 6, "StatsDirect source", desktop, "Choose…", ChooseDesktop);
+        int row = 7;
+        if (defaults.PublishSharedContent)
+        {
+            AddField(layout, row++, "Saved tutor course", tutorCourse, "Choose…", ChooseTutor);
+            layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            layout.Controls.Add(tutorInspection, 0, row++); layout.SetColumnSpan(tutorInspection, 3);
+        }
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        layout.Controls.Add(allowDefault, 0, 7); layout.SetColumnSpan(allowDefault, 3);
+        layout.Controls.Add(allowDefault, 0, row++); layout.SetColumnSpan(allowDefault, 3);
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        layout.Controls.Add(adoptFlare, 0, 8); layout.SetColumnSpan(adoptFlare, 3);
+        layout.Controls.Add(adoptFlare, 0, row++); layout.SetColumnSpan(adoptFlare, 3);
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        layout.Controls.Add(inspection, 0, 9); layout.SetColumnSpan(inspection, 3);
+        layout.Controls.Add(inspection, 0, row++); layout.SetColumnSpan(inspection, 3);
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        layout.Controls.Add(error, 0, 10); layout.SetColumnSpan(error, 3);
+        layout.Controls.Add(error, 0, row); layout.SetColumnSpan(error, 3);
         buttons = new FlowLayoutPanel { Dock = DockStyle.Bottom, FlowDirection = FlowDirection.RightToLeft, AutoSize = true, WrapContents = false };
         var cancel = new Button { Text = "Cancel", AutoSize = true, DialogResult = DialogResult.Cancel };
         buttons.Controls.Add(cancel); buttons.Controls.Add(publish);
@@ -72,11 +86,13 @@ internal sealed class HelpPublicationDialog : Form
         repository.Text = defaults.GitHubRepositoryUrl;
         branch.Text = defaults.GitHubBranch;
         desktop.Text = defaults.StatsDirectSource;
+        tutorCourse.Text = defaults.TutorCoursePath ?? "";
         authorName.Text = defaults.AuthorName;
         authorEmail.Text = defaults.AuthorEmail;
         allowDefault.Checked = defaults.AllowDefaultBranchPublication;
         adoptFlare.Visible = false;
         desktop.TextChanged += async (_, _) => await InspectDesktopAsync();
+        tutorCourse.TextChanged += async (_, _) => await InspectTutorAsync();
         foreach (var field in new[] { zip, repository, branch, authorName, authorEmail }) field.TextChanged += (_, _) => ValidateChoices();
         allowDefault.CheckedChanged += (_, _) => ValidateChoices();
         adoptFlare.CheckedChanged += (_, _) => ValidateChoices();
@@ -92,9 +108,12 @@ internal sealed class HelpPublicationDialog : Form
                 StatsDirectSource = Path.GetFullPath(desktop.Text.Trim()),
                 ExpectedDesktopSha256 = inspected.Sha256,
                 AdoptExistingFlareOutput = adoptFlare.Visible && adoptFlare.Checked,
-                AdoptionReason = adoptFlare.Visible && adoptFlare.Checked ? "Author adopted the inspected Flare output in Publish help." : null,
+                AdoptionReason = adoptFlare.Visible && adoptFlare.Checked ? "Author adopted the inspected Flare output in " + Text + "." : null,
                 AllowDefaultBranchPublication = allowDefault.Checked,
-                PushToGitHub = true, JournalDirectory = defaults.JournalDirectory
+                PushToGitHub = true, JournalDirectory = defaults.JournalDirectory,
+                PublishSharedContent = defaults.PublishSharedContent,
+                TutorCoursePath = defaults.PublishSharedContent ? Path.GetFullPath(tutorCourse.Text.Trim()) : null,
+                CommitMessage = defaults.PublishSharedContent ? "Publish saved help and reviewed tutor content" : defaults.CommitMessage
             };
             DialogResult = DialogResult.OK;
         };
@@ -160,6 +179,14 @@ internal sealed class HelpPublicationDialog : Form
         if (picker.ShowDialog(this) == DialogResult.OK) desktop.Text = picker.SelectedPath;
     }
 
+    private void ChooseTutor(object? sender, EventArgs args)
+    {
+        using var picker = new OpenFileDialog { Title = "Choose saved tutor authoring source", Filter = "Tutor course source (*.json)|*.json", CheckFileExists = true };
+        try { picker.InitialDirectory = Path.GetDirectoryName(tutorCourse.Text); picker.FileName = Path.GetFileName(tutorCourse.Text); }
+        catch (ArgumentException) { }
+        if (picker.ShowDialog(this) == DialogResult.OK) tutorCourse.Text = picker.FileName;
+    }
+
     private async Task InspectDesktopAsync()
     {
         int generation = ++inspectionGeneration;
@@ -177,10 +204,38 @@ internal sealed class HelpPublicationDialog : Form
             adoptFlare.Visible = result.Ownership == DesktopHelpOwnership.FlareNeedsAdoption;
             inspection.Text = $"Desktop destination: {result.DestinationDirectory}\n{result.Ownership} · {result.FileCount} existing files\nInspected SHA256: {result.Sha256}\n\nPublishing uses saved pages only. GitHub Pages deployment, if configured for this branch, continues after the push.";
         }
-        catch (Exception failure) when (failure is IOException or ArgumentException or InvalidOperationException or UnauthorizedAccessException or System.Xml.XmlException)
+        catch (Exception failure) when (failure is IOException or InvalidDataException or ArgumentException or InvalidOperationException or UnauthorizedAccessException or System.Xml.XmlException)
         {
             if (IsDisposed || generation != inspectionGeneration) return;
             inspection.Text = failure.Message;
+        }
+        if (defaults.PublishSharedContent) await InspectTutorAsync();
+        ValidateChoices();
+    }
+
+    private async Task InspectTutorAsync()
+    {
+        if (!defaults.PublishSharedContent) return;
+        int generation = ++tutorInspectionGeneration;
+        string selected = tutorCourse.Text.Trim(), repositoryPath = desktop.Text.Trim();
+        inspectedTutor = null; publish.Enabled = false;
+        tutorInspection.Text = "Checking saved tutor material and recorded reviews…";
+        try
+        {
+            if (!Path.IsPathFullyQualified(selected) || !Path.GetExtension(selected).Equals(".json", StringComparison.OrdinalIgnoreCase) || !File.Exists(selected))
+                throw new InvalidDataException("Choose an existing saved tutor course JSON file.");
+            var result = await Task.Run(() => SharedContentPublisher.InspectTutor(selected, repositoryPath, Path.Combine(AppContext.BaseDirectory, "Web")));
+            if (IsDisposed || generation != tutorInspectionGeneration) return;
+            inspectedTutor = result;
+            string issues = string.Join(Environment.NewLine, result.ReviewIssues.GroupBy(issue => new { issue.Severity, issue.Message })
+                .Select(group => group.Key.Severity + ": " + group.Key.Message + (group.Count() > 1 ? " (" + group.Count() + " items)" : " · " + group.First().Path)));
+            tutorInspection.Text = $"Saved tutor: {result.LessonCount} lessons / {result.QuestionCount} questions · version {result.BankVersion ?? "not publishable"}\n" +
+                (issues.Length == 0 ? "Recorded author-review checks passed. This does not certify independent expert review or CPD accreditation." : issues);
+        }
+        catch (Exception failure) when (failure is IOException or InvalidDataException or ArgumentException or InvalidOperationException or UnauthorizedAccessException or System.Xml.XmlException or System.Text.Json.JsonException)
+        {
+            if (IsDisposed || generation != tutorInspectionGeneration) return;
+            tutorInspection.Text = failure.Message;
         }
         ValidateChoices();
     }
@@ -198,6 +253,7 @@ internal sealed class HelpPublicationDialog : Form
             message = "Enter a valid commit author's name and email address.";
         else if (!Path.IsPathFullyQualified(zip.Text) || !Path.GetExtension(zip.Text).Equals(".zip", StringComparison.OrdinalIgnoreCase)) message = "Choose a complete website ZIP filename.";
         else if (inspected == null) message = "Choose and inspect a valid desktop-help destination.";
+        else if (defaults.PublishSharedContent && inspectedTutor?.CanPublish != true) message = "Choose a saved tutor course with publishable changes; review the tutor checks above.";
         else if (adoptFlare.Visible && !adoptFlare.Checked) message = "Confirm replacement of the recognised Flare desktop output.";
         else if ((branch.Text.Trim() is "master" or "main") && !allowDefault.Checked) message = "Confirm default-branch publication to update the GitHub website.";
         error.Text = message;

@@ -18,7 +18,7 @@ function Run-Check([string]$Name,[scriptblock]$Action){
 Push-Location $root
 try{
     Run-Check 'Build solution' {dotnet build StatsDirectHelpEditor.slnx --configuration Release --nologo --verbosity minimal}
-    foreach($name in @('ContentsNavigationChecks','DesktopDeliveryChecks','PortabilityChecks','DeliveryWindowsChecks','HelpPublicationChecks','HelpPublicationWindowsChecks','NestedGitChecks')) {
+    foreach($name in @('ContentsNavigationChecks','DesktopDeliveryChecks','PortabilityChecks','DeliveryWindowsChecks','PublishedContentChecks','HelpPublicationChecks','HelpPublicationWindowsChecks','NestedGitChecks')) {
         Run-Check $name {dotnet run --no-build --project ('tests/StatsDirectHelpEditor.'+$name) --configuration Release -- $root}
     }
     foreach($name in @('Checks','WindowsChecks','ContentsWindowsChecks','LinkWindowsChecks','BrowserPreviewWindowsChecks','WebsiteExportWindowsChecks','WorkspaceWindowsChecks','AppHelpPreviewChecks','SearchReplaceChecks','SearchReplaceWindowsChecks','SourceImageWindowsChecks','InstalledWorkspaceChecks','InstalledWorkspaceWindowsChecks','PolishChecks','PolishTransportChecks','PolishWindowsChecks','PreviewCacheWindowsChecks','DeepPreviewChecks','DeepSourceChecks','DeepWorkflowWindowsChecks','GitChecks','WebsitePublishChecks','HeadlessChecks','EquationArtworkChecks','CssScoperChecks')){

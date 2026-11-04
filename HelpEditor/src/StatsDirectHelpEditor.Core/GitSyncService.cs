@@ -164,7 +164,7 @@ public sealed partial class GitSyncService
         if (string.IsNullOrWhiteSpace(authorName) || authorName.IndexOfAny(['\r', '\n', '<', '>']) >= 0 || !Regex.IsMatch(authorEmail, @"^[^\s<>@]+@[^\s<>@]+$"))
             throw new ArgumentException("Enter a valid author name and email address.");
         await RejectOutsideStagedChangesAsync(ct, includeWebsite);
-        var scope = includeWebsite ? ScopedSourcePaths.Append(WebsitePath).ToArray() : ScopedSourcePaths;
+        var scope = includeWebsite ? WebsiteCommitScope : ScopedSourcePaths;
         var tracked = await RunAsync(RepositoryRoot, ["ls-tree", "-r", "--name-only", "-z", "HEAD", "--", .. scope], ct);
         var trackedPaths = tracked.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries);
         var paths = scope.Where(p => Directory.Exists(Path.Combine(RepositoryRoot, p)) || File.Exists(Path.Combine(RepositoryRoot, p)) || trackedPaths.Any(t => t == p || t.StartsWith(p + "/", StringComparison.Ordinal))).ToArray();
@@ -248,7 +248,7 @@ public sealed partial class GitSyncService
     private async Task RejectOutsideStagedChangesAsync(CancellationToken ct, bool includeWebsite = false)
     {
         var result = await RunAsync(RepositoryRoot, ["diff", "--cached", "--name-only", "--no-renames", "-z"], ct);
-        var outside = result.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries).Where(p => !IsScopedSourcePath(p) && !(includeWebsite && IsWebsitePath(p))).ToArray();
+        var outside = result.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries).Where(p => !IsScopedSourcePath(p) && !(includeWebsite && IsWebsiteCommitPath(p))).ToArray();
         if (outside.Length != 0)
             throw new InvalidOperationException("Other files are already staged. Unstage them before committing help source:" + Environment.NewLine + string.Join(Environment.NewLine, outside.Take(15)));
     }

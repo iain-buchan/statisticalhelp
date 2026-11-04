@@ -16,7 +16,7 @@ public sealed partial class GitSyncService
         string originalIndex = stem + ".original", privateIndex = stem + ".reviewed", mergeIndex = stem + ".merge";
         var originalEnv = new Dictionary<string, string> { ["GIT_INDEX_FILE"] = originalIndex };
         var privateEnv = new Dictionary<string, string> { ["GIT_INDEX_FILE"] = privateIndex };
-        bool InScope(string path) => IsScopedSourcePath(path) || website && IsWebsitePath(path);
+        bool InScope(string path) => IsScopedSourcePath(path) || website && IsWebsiteCommitPath(path);
         try
         {
             File.Copy(gitIndex, originalIndex);
@@ -31,7 +31,7 @@ public sealed partial class GitSyncService
             try
             {
                 var inputs = SourceFiles().Concat(website ? WebsiteFiles(Path.Combine(RepositoryRoot, WebsitePath)).Keys
-                    .Append(WebsiteReceiptName).Select(path => WebsitePath + "/" + path) : []);
+                    .Append(WebsiteReceiptName).Select(path => WebsitePath + "/" + path).Concat(PreparedSharedPaths) : []);
                 foreach (string relative in inputs.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal))
                     held.Add(File.Open(SafePaths.Resolve(RepositoryRoot, relative), FileMode.Open, FileAccess.Read, FileShare.Read));
                 await RejectContentFiltersAsync(paths, ct);

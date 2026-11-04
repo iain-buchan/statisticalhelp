@@ -42,6 +42,7 @@ public sealed partial class MainForm : Form
     private bool dirty;
     private bool changingSelection;
     private bool busy;
+    private bool quietBusy;
     private bool closingApproved;
     private bool editorDialogOpen;
     private string? editorDialogKind;
@@ -145,7 +146,7 @@ public sealed partial class MainForm : Form
         pages.SelectedIndexChanged += async (_, _) =>
         {
             if (changingSelection || busy || pages.SelectedItem is not TopicInfo topic || topic.Path == currentPath) return;
-            await RunSafeAsync(async () => { if (await ConfirmLeaveAsync()) await OpenTopicAsync(topic.Path); else SelectCurrentPage(); });
+            await RunSafeAsync(async () => { if (await ConfirmLeaveAsync()) await OpenTopicAsync(topic.Path); else SelectCurrentPage(); }, quietNavigation: true);
         };
         contents.AfterSelect += async (_, e) =>
         {
@@ -167,7 +168,7 @@ public sealed partial class MainForm : Form
                 }
                 else if (await ConfirmLeaveAsync()) await OpenTopicAsync(node.Link);
                 else SelectCurrentPage();
-            });
+            }, quietNavigation: true);
         };
         contents.NodeMouseDoubleClick += (_, e) => e.Node?.Toggle();
         Shown += async (_, _) =>
@@ -220,7 +221,7 @@ public sealed partial class MainForm : Form
         file.DropDownItems.Add(new ToolStripSeparator());
         AddMenu(file, "&Build help and search", BuildHelpAsync, Keys.Control | Keys.B);
         AddMenu(file, "Export website &ZIP…", ShowWebsiteZipExportAsync);
-        AddMenu(file, "Publish help…", ShowHelpPublicationAsync);
+        AddMenu(file, "Publish content…", ShowHelpPublicationAsync);
         AddMenu(file, "Publish desktop help for StatsDirect builds…", ShowDesktopHelpPublishAsync);
         AddMenu(file, "Compare saved help sources…", ShowSourceComparisonAsync);
         AddMenu(file, "&Preview site in browser", PreviewSiteInBrowserAsync, Keys.F5);
@@ -648,8 +649,8 @@ public sealed partial class MainForm : Form
             currentTopicFragment = fragment;
             loadedDiskSource = source;
             SetDirty(false);
-            // Read the accepted view directly: load emits intermediate view
-            // notifications before restoring Browser/App for the new page.
+            // Read the accepted view directly rather than waiting for the
+            // renderer's asynchronous view notification.
             await RefreshEditorStateAsync();
             SelectCurrentPage();
             Text = $"{title} — StatsDirect Help Editor";
@@ -757,7 +758,7 @@ public sealed partial class MainForm : Form
     private async Task RunLinkOpenAsync(string href, bool newWindow)
     {
         if (busy) return;
-        SetBusy(true);
+        SetBusy(true, quietNavigation: !newWindow && (IsOrigin(href, ProjectOrigin) || IsOrigin(href, GeneratedPreviewOrigin)));
         try { await OpenLinkAsync(href, newWindow); }
         catch (Exception ex) { ShowError(ex); }
         finally { SetBusy(false); }
@@ -1090,28 +1091,32 @@ public sealed partial class MainForm : Form
         catch (Exception ex) { ShowError(ex); return false; }
     }
 
-    private async Task RunSafeAsync(Func<Task> action)
+    private async Task RunSafeAsync(Func<Task> action, bool quietNavigation = false)
     {
         if (busy) return;
         // Claim the command before the first renderer await. Two fast clicks
         // must not both pass the idle check while its state query is pending.
-        SetBusy(true);
+        SetBusy(true, quietNavigation);
         try { if (await AllowNativeActionAsync()) await action(); }
         catch (Exception ex) { ShowError(ex); }
         finally { SetBusy(false); }
     }
 
-    private void SetBusy(bool value)
+    private void SetBusy(bool value, bool quietNavigation = false)
     {
         busy = value;
+        quietBusy = value && quietNavigation;
         ApplyInteractionState();
-        progress.Visible = value;
+        progress.Visible = value && !quietBusy;
         UseWaitCursor = value;
     }
 
     private void ApplyInteractionState()
     {
-        bool enabled = !busy && !editorDialogOpen;
+        // Navigation still owns the command and blocks editing input, but
+        // greying every native control and resizing the progress strip makes
+        // each page selection flash the entire window.
+        bool enabled = (!busy || quietBusy) && !editorDialogOpen;
         target.Enabled = enabled;
         contentsBar.Enabled = enabled;
         contents.Enabled = enabled;

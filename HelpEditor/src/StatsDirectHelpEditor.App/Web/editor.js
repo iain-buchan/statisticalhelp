@@ -495,13 +495,14 @@ function setVisibleTab(name) {
 }
 function setTab(name) {
   if(!['visual','source','preview'].includes(name)||!state.path||modalState().dialogOpen)return false;
+  const enteringPreview=name==='preview'&&state.tab!=='preview';
   try{
     captureHistory();
     if(state.tab==='source'){
       const value=state.sourceDirty?source.value:state.baseSource;state.xml=parseXml(value);state.baseSource=value;state.visualDirty=false;state.sourceDirty=false;renderVisual();
     }else if(state.visualDirty){state.baseSource=serializeVisual();state.xml=parseXml(state.baseSource);state.visualDirty=false;}
     source.value=state.baseSource;setVisibleTab(name);showError();
-    if(name==='preview'){if(state.unifiedViews){$('preview-loading').hidden=false;}else renderPreview();}
+    if(name==='preview'){if(state.unifiedViews){if(enteringPreview)$('preview-loading').hidden=false;}else renderPreview();}
     else if(name==='source')source.focus();
     return true;
   }catch(error){showError(error.message);if(state.unifiedViews)state.pageView='source';setVisibleTab('source');return false;}
@@ -576,22 +577,31 @@ window.addEventListener('message',event=>{
 });
 function load(payload){
   const previousWorkspace=state.workspaceMode?workspaceView():'edit';
-  const previousPageView=state.pageView;
+  const previousPageView=state.pageView,previousEditTab=state.editTab;
   clearTimeout(state.historyTimer);state.historyTimer=null;state.pendingFontSize=null;state.editPosition=null;showError();
   hideEquationMenu();hideEquationKeyboard();if($('equation-dialog').open)closeEquationDialog();if($('link-dialog').open)closeLinkDialog();hideLinkContext();
   state.path=payload.path||'';state.title=payload.title||payload.path||'Untitled';state.baseUrl=payload.baseUrl||'';state.baseSource=payload.source||'';state.savedSource=state.baseSource;state.visualDirty=false;state.sourceDirty=false;
-  if(state.unifiedViews)state.pageView='formatted';
+  const retainedView=state.path?previousPageView:'formatted';
+  if(state.unifiedViews)state.pageView=retainedView;
   state.buildTarget=String(payload.target||'Desktop').toLowerCase()==='public'?'Public':'Desktop';
+  if(state.unifiedViews&&['browser','app'].includes(retainedView))state.buildTarget=retainedView==='browser'?'Public':'Desktop';
   if(payload.appearance)state.appearance=['flare','readable','clean-blue','warm-paper'].includes(payload.appearance)?payload.appearance:'flare';
   $('editor-hint').textContent='Double-click an equation to edit it. Preview: '+(state.buildTarget==='Public'?'public help.':'desktop help.');
   $('page-title').textContent=state.title;$('page-path').textContent=state.path;source.value=state.baseSource;
   state.history=[state.baseSource];state.historyIndex=0;
-  try{state.xml=parseXml(state.baseSource);renderVisual();setVisibleTab('visual');}
-  catch(error){state.xml=null;visual.replaceChildren();setVisibleTab('source');showError(error.message);}
+  // Parse the new page before committing its visible view. A cached Browser
+  // handoff must not expose the formatted editor or its full loading overlay.
+  try{
+    state.xml=parseXml(state.baseSource);renderVisual();
+    const tab=state.unifiedViews?(retainedView==='browser'?'preview':retainedView==='source'||retainedView==='app'&&previousEditTab==='source'?'source':'visual'):'visual';
+    setVisibleTab(tab);
+    if(state.unifiedViews&&retainedView==='browser')$('editor-hint').textContent='Browser view: generated website output.';
+    else if(state.unifiedViews&&retainedView==='app')$('editor-hint').textContent='App view: edit this page alongside the dockable StatsDirect help pane.';
+  }
+  catch(error){state.xml=null;visual.replaceChildren();if(state.unifiedViews)state.pageView='source';setVisibleTab('source');showError(error.message);}
   if(payload.topics)setTopics(payload.topics);setDirty(false);updateUndoButtons();updateToolbar();if(payload.fragment)revealFragment(payload.fragment);
   if(state.unifiedViews){
-    if(state.xml&&['browser','app'].includes(previousPageView)){setOutputView(previousPageView);requestOutputPreview(previousPageView,'load');}
-    else if(state.xml&&previousPageView==='source')setOutputView('source');
+    if(state.xml&&['browser','app'].includes(retainedView))requestOutputPreview(retainedView,'load');
   }else if(previousWorkspace!=='edit'&&state.xml)setWorkspaceView(previousWorkspace);
 }
 function markSaved(authoritativeSource){

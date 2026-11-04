@@ -1,4 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><TargetFramework>net10.0</TargetFramework><OutputType>Exe</OutputType><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AssemblyName>StatsDirectHelpBuilder</AssemblyName><RootNamespace>StatsDirect.HelpEditor.Cli</RootNamespace></PropertyGroup>
   <ItemGroup><ProjectReference Include="../StatsDirectHelpEditor.Core/StatsDirectHelpEditor.Core.csproj" /></ItemGroup>
+  <ItemGroup>
+    <Content Include="../StatsDirectHelpEditor.App/TutorSeed/**/*" Link="TutorSeed/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

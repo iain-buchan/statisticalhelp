@@ -29,7 +29,7 @@ internal static class Program
             finally
             {
                 Directory.CreateDirectory(Path.Combine(root, "evidence"));
-                File.WriteAllText(Path.Combine(root, "evidence", "preview-cache-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, checks }, new JsonSerializerOptions { WriteIndented = true }));
+                File.WriteAllText(Path.Combine(root, "evidence", "preview-cache-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, deviceDpi = form.DeviceDpi, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, checks }, new JsonSerializerOptions { WriteIndented = true }));
                 Console.WriteLine($"{passed} preview cache checks passed; {failed} failed");
                 typeof(MainForm).GetField("closingApproved", BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(form, true); form.Close();
             }
@@ -46,17 +46,32 @@ internal static class Program
         var sourceBaseline = Directory.GetFiles(fixture, "*", SearchOption.AllDirectories).ToDictionary(p => p, File.ReadAllBytes);
         await form.SwitchWorkspaceAsync("public");
         Check(form.OutputPreviewBuildCount == 1 && form.LastOutputPreviewWasReused && ReferenceEquals(first, form.LastOutputPreviewResult), "Selecting Browser view again reuses the prepared target");
-        var navWatch = Stopwatch.StartNew(); await form.OpenTopicAsync("basics/beta.htm#BetaTarget"); navWatch.Stop();
+        var navWatch = Stopwatch.StartNew();
+        await ObserveNavigationAsync("All pages selection", async () =>
+        {
+            var pages = Field<ListBox>("pages");
+            pages.SelectedItem = pages.Items.Cast<TopicInfo>().Single(topic => topic.Path == "basics/beta.htm");
+            await Until(() => form.CurrentTopicPath == "basics/beta.htm" && !Field<bool>("busy"));
+        });
+        navWatch.Stop();
         Check(form.OutputPreviewBuildCount == 1 && form.LastOutputPreviewWasReused && ReferenceEquals(first, form.LastOutputPreviewResult), "Navigating to another saved page does not regenerate help or search");
         Check(File.ReadAllText(Path.Combine(first.OutputDirectory, "build-info.json")) == info, "Saved-page navigation leaves the build receipt unchanged", new { initialBuildMs = firstWatch.ElapsedMilliseconds, savedNavigationMs = navWatch.ElapsedMilliseconds });
-        Check(await BrowserHas("location.pathname.endsWith('/basics/beta.htm') && location.hash==='#BetaTarget'"), "Cached Browser navigation preserves the requested page fragment");
-        await ClickContents("basics/alpha.htm#AlphaTarget");
-        await Until(() => form.CurrentTopicPath == "basics/alpha.htm" && !Field<bool>("busy"));
+        Check(await BrowserHas("location.pathname.endsWith('/basics/beta.htm')"), "Cached All pages navigation opens the selected generated topic");
+        await ObserveNavigationAsync("Generated Browser Contents", async () =>
+        {
+            await ClickContents("basics/alpha.htm#AlphaTarget");
+            await Until(() => form.CurrentTopicPath == "basics/alpha.htm" && !Field<bool>("busy"));
+        });
         Check(form.CurrentWorkspace == "public" && form.OutputPreviewBuildCount == 1 && form.LastOutputPreviewWasReused, "Clicking the generated Browser Contents follows the saved page without a build");
         Check(await BrowserHas("location.pathname.endsWith('/basics/alpha.htm') && location.hash==='#AlphaTarget'"), "Contents-link navigation retains its fragment while reusing output");
-        var contents = Field<TreeView>("contents"); contents.SelectedNode = contents.Nodes.Cast<TreeNode>().Single(n => ((TocNode)n.Tag!).Link == "basics/beta.htm#BetaTarget");
-        await Until(() => form.CurrentTopicPath == "basics/beta.htm" && !Field<bool>("busy"));
+        await ObserveNavigationAsync("Editor Contents tree", async () =>
+        {
+            var contents = Field<TreeView>("contents");
+            contents.SelectedNode = contents.Nodes.Cast<TreeNode>().Single(n => ((TocNode)n.Tag!).Link == "basics/beta.htm#BetaTarget");
+            await Until(() => form.CurrentTopicPath == "basics/beta.htm" && !Field<bool>("busy"));
+        });
         Check(form.OutputPreviewBuildCount == 1 && form.LastOutputPreviewWasReused, "Selecting the editor Contents tree also reuses the same generated site");
+        Check(await BrowserHas("location.pathname.endsWith('/basics/beta.htm') && location.hash==='#BetaTarget'"), "Native Contents selection preserves its requested page fragment");
         Check(sourceBaseline.All(p => p.Value.AsSpan().SequenceEqual(File.ReadAllBytes(p.Key))), "All saved navigation and fragments leave the source files unchanged");
 
         string betaSaved = form.CurrentProject.ReadTopic("basics/beta.htm");
@@ -113,6 +128,70 @@ internal static class Program
         Check(form.CurrentProject.RootPath == fixture && !fixture.Equals(Path.Combine(root, "HelpSource"), StringComparison.OrdinalIgnoreCase), "All cache tests use an isolated help source without modifying maintained pages");
     }
     private static string Output(string path) => File.ReadAllText(Path.Combine(form.LastOutputPreviewResult!.OutputDirectory, path.Replace('/', Path.DirectorySeparatorChar)));
+    private static async Task ObserveNavigationAsync(string name, Func<Task> navigate)
+    {
+        using var probe = new NavigationProbe();
+        await Js("window.__navigationPaintProbe={records:[]};window.__navigationPaintObserver=new MutationObserver(records=>{for(const r of records)window.__navigationPaintProbe.records.push({target:r.target.id||'body',attribute:r.attributeName,before:r.oldValue,after:r.target.getAttribute(r.attributeName)});});for(const id of ['preview-panel','visual-panel','source-panel','editor-toolbar'])window.__navigationPaintObserver.observe(document.getElementById(id),{attributes:true,attributeOldValue:true,attributeFilter:['hidden']});window.__navigationPaintObserver.observe(document.body,{attributes:true,attributeOldValue:true,attributeFilter:['data-workspace-view']});");
+        await navigate();
+        var dom = JsonSerializer.Deserialize<JsonElement>(await form.EditorWebView.ExecuteScriptAsync("(()=>{window.__navigationPaintObserver.disconnect();return {view:HelpEditor.getState().workspaceView,previewHidden:document.getElementById('preview-panel').hidden,records:window.__navigationPaintProbe.records};})()"));
+        Check(probe.Transitions.All(pair => pair.Key == "editor.Enabled") && probe.InputWasBlocked && !probe.InputReleasedWhileBusy,
+            name + " does not disable, hide or resize the native shell, or flash its progress indicator",
+            new { probe.Transitions, probe.Events, probe.InputWasBlocked, probe.InputReleasedWhileBusy });
+        bool stable = dom.GetProperty("view").GetString() == "public" && !dom.GetProperty("previewHidden").GetBoolean() &&
+            probe.Views.All(view => view == "public") && dom.GetProperty("records").EnumerateArray().All(record =>
+                record.GetProperty("before").GetRawText() == record.GetProperty("after").GetRawText());
+        Check(stable, name + " keeps Browser view visible without a transient Formatted or source view",
+            new { ViewNotifications = probe.Views, Dom = dom });
+    }
+    private sealed class NavigationProbe : IDisposable
+    {
+        internal Dictionary<string, int> Transitions { get; } = [];
+        internal List<object> Events { get; } = [];
+        internal List<string> Views { get; } = [];
+        internal bool InputWasBlocked { get; private set; }
+        internal bool InputReleasedWhileBusy { get; private set; }
+        private readonly List<Action> unsubscribe = [];
+        internal NavigationProbe()
+        {
+            foreach (var entry in new (string Name, Control Control)[]
+            {
+                ("menu", form.MainMenuStrip!), ("contents", Field<TreeView>("contents")), ("pages", Field<ListBox>("pages")),
+                ("contentsBar", Field<ToolStrip>("contentsBar")), ("pageFilter", Field<TextBox>("pageFilter")),
+                ("designBar", Field<ToolStrip>("designBar")), ("editor", form.EditorWebView)
+            })
+            {
+                string name = entry.Name; Control control = entry.Control;
+                EventHandler enabled = (_, _) => Record(name + ".Enabled", new { control.Enabled });
+                EventHandler visible = (_, _) => Record(name + ".Visible", new { control.Visible });
+                EventHandler size = (_, _) => Record(name + ".Size", new { control.Size });
+                control.EnabledChanged += enabled; control.VisibleChanged += visible; control.SizeChanged += size;
+                unsubscribe.Add(() => { control.EnabledChanged -= enabled; control.VisibleChanged -= visible; control.SizeChanged -= size; });
+            }
+            var progress = Field<ToolStripProgressBar>("progress");
+            EventHandler available = (_, _) => Record("progress.Available", new { progress.Available, progress.Visible });
+            progress.AvailableChanged += available; unsubscribe.Add(() => progress.AvailableChanged -= available);
+            EventHandler<CoreWebView2WebMessageReceivedEventArgs> message = (_, args) =>
+            {
+                if (!args.Source.StartsWith("https://help-editor.invalid/", StringComparison.Ordinal)) return;
+                using var data = JsonDocument.Parse(args.WebMessageAsJson);
+                if (data.RootElement.TryGetProperty("action", out var action) && action.GetString() == "view" &&
+                    data.RootElement.TryGetProperty("workspaceView", out var view) && view.ValueKind == JsonValueKind.String)
+                    Views.Add(view.GetString()!);
+            };
+            form.EditorWebView.CoreWebView2.WebMessageReceived += message;
+            unsubscribe.Add(() => form.EditorWebView.CoreWebView2.WebMessageReceived -= message);
+        }
+        private void Record(string name, object value)
+        {
+            if (name == "editor.Enabled")
+            {
+                if (!form.EditorWebView.Enabled && Field<bool>("busy")) InputWasBlocked = true;
+                if (form.EditorWebView.Enabled && Field<bool>("busy")) InputReleasedWhileBusy = true;
+            }
+            Transitions[name] = Transitions.GetValueOrDefault(name) + 1; Events.Add(new { name, value });
+        }
+        public void Dispose() { foreach (var action in unsubscribe) action(); }
+    }
     private static T Field<T>(string name) => (T)typeof(MainForm).GetField(name, BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(form)!;
     private static Task Js(string script) => form.EditorWebView.ExecuteScriptAsync(script);
     private static async Task<string?> Source() => JsonSerializer.Deserialize<string>(await form.EditorWebView.ExecuteScriptAsync("HelpEditor.getSource()"));

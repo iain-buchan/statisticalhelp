@@ -25,7 +25,17 @@ if (help)
             [--baseline <immutable-starter.json>]
         Compare saved help sources without changing either tree:
           StatsDirectHelpBuilder compare-source --left <project-or-Content> --right <project-or-Content>
-        Publish one saved-source snapshot to website ZIP, GitHub and desktop help:
+        Publish saved help and reviewed tutor content for Windows and Mac builds:
+          StatsDirectHelpBuilder publish-content --project <working-copy> --tutor-course <saved-course.json>
+            --zip <website.zip> --github-url <https://github.com/owner/repo> --github-branch <branch>
+            --author-name <name> --author-email <email> --statsdirect-source <repository>
+            [--expected-destination-sha256 <inspection hash>]
+            [--adopt-flare-output --adoption-reason <review notes>] [--allow-default-branch]
+            [--prepare-only] [--journal-directory <private folder>] [--assets <App/Web>]
+          Publishes matching Docs, Published/DesktopHelp and Published/Tutor artifacts.
+          New or changed tutor items require a saved author review; this does not certify
+          independent expert review or CPD accreditation. The build records its content version.
+        Publish help only (compatible existing command):
           StatsDirectHelpBuilder publish-help --project <working-copy> --zip <website.zip>
             --github-url <https://github.com/owner/repo> --github-branch <branch>
             --author-name <name> --author-email <email> --statsdirect-source <repository>
@@ -34,6 +44,7 @@ if (help)
             [--prepare-only] [--journal-directory <private folder>] [--assets <App/Web>]
           This explicitly pushes the source/Docs commit unless --prepare-only is set.
           GitHub Pages deployment continues afterwards; the live server is not certified here.
+          Repositories with shared Published content require publish-content so all artifacts agree.
         Inspect and explicitly deliver desktop help into a StatsDirect source copy:
           StatsDirectHelpBuilder inspect-desktop-help --statsdirect-source <repository>
           StatsDirectHelpBuilder publish-desktop-help --project <working-copy> --statsdirect-source <repository>

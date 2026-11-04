@@ -22,6 +22,8 @@ internal static partial class AuthoringPreferences
             GitHubRepositoryUrl = Value("repositoryUrl", "https://github.com/iain-buchan/statisticalhelp"),
             GitHubBranch = Value("branch", "master"),
             AuthorName = Value("authorName"), AuthorEmail = Value("authorEmail"),
+            PublishSharedContent = Flag("publishSharedContent"),
+            TutorCoursePath = Value("tutorCoursePath", Path.Combine(workspaceRoot, "TutorSource", "starter-course.json")),
             AllowDefaultBranchPublication = Flag("allowDefaultBranchPublication"),
             PushToGitHub = true,
             JournalDirectory = Path.Combine(workspaceRoot, "Publishing")
@@ -37,6 +39,9 @@ internal static partial class AuthoringPreferences
         saved["authorName"] = options.AuthorName;
         saved["authorEmail"] = options.AuthorEmail;
         saved["allowDefaultBranchPublication"] = options.AllowDefaultBranchPublication;
+        saved["publishSharedContent"] = options.PublishSharedContent;
+        if (options.PublishSharedContent && !string.IsNullOrWhiteSpace(options.TutorCoursePath))
+            saved["tutorCoursePath"] = Path.GetFullPath(options.TutorCoursePath);
         preferences["helpPublication"] = saved;
         preferences[WebsiteZipKey] = Path.GetFullPath(options.WebsiteZipPath);
         preferences["statsDirectSourceRoot"] = Path.GetFullPath(options.StatsDirectSource);

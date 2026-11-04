@@ -8,7 +8,7 @@ internal static class HelpDeliveryCommands
         string command = arguments[0].ToLowerInvariant();
         if (command is not ("compare-source" or "compare-flare-source" or
             "inspect-desktop-help" or "publish-desktop-help" or
-            "verify-desktop-help" or "recover-desktop-help" or "publish-help")) return null;
+            "verify-desktop-help" or "recover-desktop-help" or "publish-help" or "publish-content")) return null;
 
         string[] permitted = command switch
         {
@@ -19,6 +19,9 @@ internal static class HelpDeliveryCommands
             "publish-help" => ["--project", "--zip", "--github-url", "--github-branch", "--author-name", "--author-email",
                 "--statsdirect-source", "--expected-destination-sha256", "--adopt-flare-output", "--adoption-reason",
                 "--allow-default-branch", "--prepare-only", "--journal-directory", "--allow-warnings", "--assets"],
+            "publish-content" => ["--project", "--zip", "--github-url", "--github-branch", "--author-name", "--author-email",
+                "--statsdirect-source", "--expected-destination-sha256", "--adopt-flare-output", "--adoption-reason",
+                "--allow-default-branch", "--prepare-only", "--journal-directory", "--allow-warnings", "--assets", "--tutor-course"],
             _ => ["--statsdirect-source"]
         };
         var values = new Dictionary<string, string>(StringComparer.Ordinal);
@@ -40,7 +43,7 @@ internal static class HelpDeliveryCommands
         string Required(string key) => values.GetValueOrDefault(key) ?? throw new ArgumentException("Missing " + key);
 
         object result;
-        if (command == "publish-help")
+        if (command is "publish-help" or "publish-content")
         {
             // Parse every required option before opening source or starting any
             // Git/network operation. A failed publication still emits its honest
@@ -56,7 +59,10 @@ internal static class HelpDeliveryCommands
                 AllowDefaultBranchPublication = flags.Contains("--allow-default-branch"),
                 PushToGitHub = !flags.Contains("--prepare-only"),
                 AllowBuildWarnings = flags.Contains("--allow-warnings"),
-                JournalDirectory = values.GetValueOrDefault("--journal-directory")
+                JournalDirectory = values.GetValueOrDefault("--journal-directory"),
+                PublishSharedContent = command == "publish-content",
+                TutorCoursePath = command == "publish-content" ? Required("--tutor-course") : null,
+                CommitMessage = command == "publish-content" ? "Publish saved help and reviewed tutor content" : "Publish saved help source and rebuilt website"
             };
             var source = HelpProject.Open(Required("--project"));
             try

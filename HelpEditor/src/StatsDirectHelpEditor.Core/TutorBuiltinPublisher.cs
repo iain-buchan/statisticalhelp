@@ -9,6 +9,8 @@ namespace StatsDirect.HelpEditor.Core;
 
 public sealed record TutorBuiltinPublishResult(string OutputDirectory, int LessonCount, int QuestionCount,
     string BankVersion, string ManifestSha256, IReadOnlyList<TutorValidationIssue> ReviewIssues, IReadOnlyList<string> Warnings);
+public sealed record TutorBuiltinInspection(bool CanPublish, int LessonCount, int QuestionCount,
+    string? BankVersion, IReadOnlyList<TutorValidationIssue> ReviewIssues);
 
 /// <summary>Publish reviewed source inputs for the normal StatsDirect built-in tutor build.</summary>
 public static class TutorBuiltinPublisher
@@ -38,34 +40,14 @@ public static class TutorBuiltinPublisher
     public static TutorBuiltinPublishResult Publish(TutorCourseDocument course, string outputDirectory, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(course); cancellationToken.ThrowIfCancellationRequested(); course.AssertSavedSourceUnchanged();
-        string liveStamp = Hash(Encoding.UTF8.GetBytes(course.Content.ToJsonString()));
-        var snapshot = (JsonObject)course.Content.DeepClone();
-        var baseline = snapshot["authoring"]?["builtinBaseline"] as JsonObject
-            ?? throw new InvalidDataException("This course has no identified built-in baseline. Initialise it from the original packaged tutor source before publishing.");
-        if (I(baseline, "schemaVersion") != 1) throw new InvalidDataException("The built-in tutor baseline format is unsupported.");
-        if (S(baseline, "recordHashAlgorithm") != TutorContentFingerprint.Algorithm) throw new InvalidDataException("Initialise the built-in baseline from the original packaged source using the current content fingerprint format.");
-        var issues = course.Validate().ToList();
-        var lessons = (JsonArray)Array(snapshot, "lessons").DeepClone(); var questions = (JsonArray)Array(snapshot, "questions").DeepClone(); var tracks = (JsonObject)Tracks(snapshot).DeepClone();
-        StripAuthoring(lessons); StripAuthoring(questions);
-        ValidateBindings(lessons, questions, tracks, baseline, issues);
-        ReviewGate("lessons", lessons, baseline["lessonHashes"] as JsonObject ?? new(), issues);
-        ReviewGate("questions", questions, baseline["questionHashes"] as JsonObject ?? new(), issues);
-        if (S(snapshot["verification"], "status") == "not-rechecked-after-edit") issues.Add(new("Error", "course.verification", "The course's previous numerical verification is stale. Review/rerun the recorded checks and update its verification record before publishing."));
-        var reviewedChanges = ReviewedChanges(lessons, questions, baseline);
-        SynchroniseEmbeddedQuestions(lessons, questions, baseline, issues);
-        CheckHostLessonContext(lessons, issues);
-        var errors = issues.Where(issue => issue.Severity == "Error").ToArray();
-        if (errors.Length > 0) throw new InvalidDataException(string.Join(Environment.NewLine, errors.Select(issue => issue.Path + ": " + issue.Message)));
-        string bodyHash = BodyHash(lessons, questions, tracks);
-        string bankVersion = bodyHash == S(baseline, "bodyHash") ? S(baseline, "bankVersion") : S(snapshot, "version") + "-" + bodyHash[..12];
-        if (string.IsNullOrWhiteSpace(bankVersion)) throw new InvalidDataException("The tutor bank needs a version.");
+        var prepared = Prepare(course);
+        var (liveStamp, snapshot, lessons, questions, tracks, issues, reviewedChanges, bankVersion) = prepared;
         string output = Path.GetFullPath(outputDirectory).TrimEnd(Path.DirectorySeparatorChar);
         string parent = Path.GetDirectoryName(output) ?? throw new InvalidOperationException("Choose a dedicated tutor source-output folder.");
         if (SafePaths.Same(output, Path.GetPathRoot(output)!) || course.FilePath != null && SafePaths.IsWithin(course.FilePath, output)) throw new InvalidOperationException("Tutor build output must not contain or replace its authoring source.");
         SafePaths.CheckNoLinks(output); Directory.CreateDirectory(parent);
         string name = Path.GetFileName(output), token = Guid.NewGuid().ToString("N");
         string stage = Path.Combine(parent, "." + name + "-stage-" + token), old = Path.Combine(parent, "." + name + "-old-" + token);
-        // Build readers must reject this marker rather than fall back to old assets.
         string marker = Path.Combine(parent, "." + name + ".publishing");
         using (var own = new FileStream(marker, FileMode.CreateNew, FileAccess.Write, FileShare.None)) own.Write(Encoding.UTF8.GetBytes(token));
         bool promoted = false, movedOld = false; var warnings = new List<string>();
@@ -103,22 +85,52 @@ public static class TutorBuiltinPublisher
             VerifyOwnedOutput(stage); SafePaths.CheckNoLinks(output);
             if (Directory.Exists(output)) { VerifyOwnedOutput(output); Directory.Move(output, old); movedOld = true; }
             try { Directory.Move(stage, output); promoted = true; }
-            catch
-            {
-                if (movedOld && !Directory.Exists(output)) { Directory.Move(old, output); movedOld = false; }
-                throw;
-            }
+            catch { if (movedOld && !Directory.Exists(output)) { Directory.Move(old, output); movedOld = false; } throw; }
             return new(output, lessons.Count, questions.Count, bankVersion, FileHash(Path.Combine(output, "manifest.json")), issues.AsReadOnly(), warnings.AsReadOnly());
         }
         finally
         {
             try { if (Directory.Exists(stage)) DeleteOwned(stage, parent, "." + name + "-stage-" + token); if (promoted && movedOld && Directory.Exists(old)) DeleteOwned(old, parent, "." + name + "-old-" + token); }
             catch (Exception error) when (error is IOException or UnauthorizedAccessException) { if (promoted) warnings.Add("Build inputs were published, but temporary owned output could not be removed: " + error.Message); }
-            // Keep the stop marker if a failed promotion could not restore the
-            // previous output. Readers must not silently fall back to old assets.
             try { if ((promoted || !movedOld) && File.Exists(marker) && File.ReadAllText(marker) == token) File.Delete(marker); }
             catch (Exception error) when (error is IOException or UnauthorizedAccessException) { if (promoted) warnings.Add("The inputs were published, but the publishing marker could not be removed; builds must wait until it is resolved: " + error.Message); }
         }
+    }
+
+    public static TutorBuiltinInspection Inspect(TutorCourseDocument course)
+    {
+        try { var p = Prepare(course); return new(true, p.Lessons.Count, p.Questions.Count, p.BankVersion, p.Issues.AsReadOnly()); }
+        catch (Exception error) when (error is InvalidDataException or InvalidOperationException or IOException or ArgumentException)
+        { return new(false, course.GetItems("lessons").Count, course.GetItems("questions").Count, null, [new("Error", "course", error.Message)]); }
+    }
+
+    private sealed record PreparedTutor(string LiveStamp, JsonObject Snapshot, JsonArray Lessons, JsonArray Questions, JsonObject Tracks,
+        List<TutorValidationIssue> Issues, JsonArray ReviewedChanges, string BankVersion);
+    private static PreparedTutor Prepare(TutorCourseDocument course)
+    {
+        course.AssertSavedSourceUnchanged();
+        string liveStamp = Hash(Encoding.UTF8.GetBytes(course.Content.ToJsonString()));
+        var snapshot = (JsonObject)course.Content.DeepClone();
+        var baseline = snapshot["authoring"]?["builtinBaseline"] as JsonObject
+            ?? throw new InvalidDataException("This course has no identified built-in baseline. Initialise it from the original packaged tutor source before publishing.");
+        if (I(baseline, "schemaVersion") != 1) throw new InvalidDataException("The built-in tutor baseline format is unsupported.");
+        if (S(baseline, "recordHashAlgorithm") != TutorContentFingerprint.Algorithm) throw new InvalidDataException("Initialise the built-in baseline from the original packaged source using the current content fingerprint format.");
+        var issues = course.Validate().ToList();
+        var lessons = (JsonArray)Array(snapshot, "lessons").DeepClone(); var questions = (JsonArray)Array(snapshot, "questions").DeepClone(); var tracks = (JsonObject)Tracks(snapshot).DeepClone();
+        StripAuthoring(lessons); StripAuthoring(questions);
+        ValidateBindings(lessons, questions, tracks, baseline, issues);
+        ReviewGate("lessons", lessons, baseline["lessonHashes"] as JsonObject ?? new(), issues);
+        ReviewGate("questions", questions, baseline["questionHashes"] as JsonObject ?? new(), issues);
+        if (S(snapshot["verification"], "status") == "not-rechecked-after-edit") issues.Add(new("Error", "course.verification", "The course's previous numerical verification is stale. Review/rerun the recorded checks and update its verification record before publishing."));
+        var reviewedChanges = ReviewedChanges(lessons, questions, baseline);
+        SynchroniseEmbeddedQuestions(lessons, questions, baseline, issues);
+        CheckHostLessonContext(lessons, issues);
+        var errors = issues.Where(issue => issue.Severity == "Error").ToArray();
+        if (errors.Length > 0) throw new InvalidDataException(string.Join(Environment.NewLine, errors.Select(issue => issue.Path + ": " + issue.Message)));
+        string bodyHash = BodyHash(lessons, questions, tracks);
+        string bankVersion = bodyHash == S(baseline, "bodyHash") ? S(baseline, "bankVersion") : S(snapshot, "version") + "-" + bodyHash[..12];
+        if (string.IsNullOrWhiteSpace(bankVersion)) throw new InvalidDataException("The tutor bank needs a version.");
+        return new(liveStamp, snapshot, lessons, questions, tracks, issues, reviewedChanges, bankVersion);
     }
 
     private static void ReviewGate(string kind, JsonArray records, JsonObject hashes, List<TutorValidationIssue> issues)
@@ -251,6 +263,7 @@ public static class TutorBuiltinPublisher
         foreach (var row in files.OfType<JsonObject>()) if (FileHash(Path.Combine(directory, S(row, "path"))) != S(row, "sha256")) throw new IOException("A generated tutor input was edited outside the authoring source. Preserve it before publishing again.");
         if (FileHash(Path.Combine(directory, "README.md")) != S(manifest, "readmeSha256")) throw new IOException("The generated README was edited; preserve it before replacing this output.");
     }
+    internal static void RequireOwnedOutput(string directory) => VerifyOwnedOutput(directory);
     private static void DeleteOwned(string directory, string parent, string expectedName)
     {
         if (!SafePaths.Same(Path.GetDirectoryName(directory)!, parent) || Path.GetFileName(directory) != expectedName) throw new IOException("Temporary tutor output ownership could not be verified.");

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Publish content captures saved help and tutor source together, exports the website ZIP, and commits the website, desktop help and tutor build inputs to `statisticalhelp` with a complete hashed manifest. Windows build inputs receive the identical desktop and tutor files.
+- Shared content is validated before publication; changed tutor material still requires its recorded author review. Application builds can pin one publication revision without updating installed applications at runtime.
+- Contents navigation in Browser view keeps the editor window and current preview stable instead of flashing between views.
+
 ## 1.0.0 — 4 November 2026
 
 - One Publish help operation captures saved source, builds Public/Desktop once, saves the website ZIP, commits and pushes matching source plus the GitHub website, and delivers verified desktop help to StatsDirect's build inputs. Destinations are remembered; failures retain per-target evidence and never claim all outputs completed.

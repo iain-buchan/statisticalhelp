@@ -9,6 +9,7 @@
     <Project Path="tests/StatsDirectHelpEditor.DesktopDeliveryChecks/StatsDirectHelpEditor.DesktopDeliveryChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.DeliveryWindowsChecks/StatsDirectHelpEditor.DeliveryWindowsChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.HelpPublicationChecks/StatsDirectHelpEditor.HelpPublicationChecks.csproj" />
+    <Project Path="tests/StatsDirectHelpEditor.PublishedContentChecks/StatsDirectHelpEditor.PublishedContentChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.NestedGitChecks/StatsDirectHelpEditor.NestedGitChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.HelpPublicationWindowsChecks/StatsDirectHelpEditor.HelpPublicationWindowsChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.PortabilityChecks/StatsDirectHelpEditor.PortabilityChecks.csproj" />

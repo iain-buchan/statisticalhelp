@@ -2,9 +2,13 @@
 
 ## One operation for a help release
 
-Use **File > Publish help…** to produce the website ZIP, the GitHub source/website commit and the desktop-help copy together. On first use, set the GitHub HTTPS repository and branch, author identity, website ZIP filename and StatsDirect source path. These choices are remembered after successful completion. The dialog reviews the actual desktop destination and existing file hash; adoption of existing Flare output is explicit.
+Use **File > Publish content…** to produce the website ZIP, GitHub source/website commit, shared desktop/tutor artifacts and Windows build inputs together. Choose the saved tutor authoring course as well as the GitHub HTTPS repository/branch, author identity, website ZIP filename and StatsDirect source path. Choices are remembered after successful completion. The dialog reviews the actual desktop destination and existing file hash; adoption of existing Flare output is explicit. Open help drafts and the selected course's open tutor draft must be saved first.
 
-All three outputs come from one captured saved-source/runtime snapshot. Public and Desktop are built once each. The website ZIP and root GitHub `Docs` share the same Public reader files; desktop output has its own target conditions and a matching snapshot identifier. A private checkout carries the source and generated website commit without rewriting the author's original source or an unrelated checkout. The maintained `HelpEditor/HelpSource` layout is preferred when present; a legacy repository-root help source is also supported.
+The tutor defaults to the editable `TutorSource/starter-course.json`; first-use preparation never overwrites existing work. Publication freezes saved content, not an unsaved authoring window. The dialog displays tutor review issues before enabling publication. New or changed items need a current recorded author review. Unchanged original records may retain legacy review warnings; this is neither independent expert certification nor CPD accreditation.
+
+The Git commit includes matching `Docs`, `Published/DesktopHelp`, `Published/Tutor` and a hashed `Published/content-manifest.json`. These shared artifacts identify the content version that application builds consume. Windows also receives its local desktop help and tutor build inputs. Publication does not build applications/installers, transfer the ZIP to statsdirect.com, or certify a later GitHub Pages deployment.
+
+All published targets come from captured saved inputs. Public and Desktop are built once each. The website ZIP and root GitHub `Docs` share the same Public reader files; desktop output has its own target conditions and a matching snapshot identifier. A private checkout carries the source and generated content commit without rewriting the author's original source or an unrelated checkout. The maintained `HelpEditor/HelpSource` layout is preferred when present; a legacy repository-root help source is also supported.
 
 The network push happens only after local outputs and receipts verify. Publication to the default branch is a separate explicit choice; publishing a working branch does not merge it or make the live site current. Even a successful default-branch push reports GitHub Pages deployment as unverified/asynchronous. Uploading the ZIP to statsdirect.com is left to the author.
 
@@ -14,7 +18,7 @@ For the same workflow without the GUI:
 
 ```powershell
  $builder = 'C:\Develop\StatsDirectHelp\App\Builder\StatsDirectHelpBuilder.exe'
-& $builder publish-help --project '<marked saved help source>' `
+& $builder publish-content --project '<marked saved help source>' --tutor-course '<saved tutor source.json>' `
     --zip '<website.zip>' --github-url 'https://github.com/owner/statisticalhelp' `
     --github-branch master --author-name '<name>' --author-email '<email>' `
     --statsdirect-source '<StatsDirect repository>' `
@@ -22,6 +26,8 @@ For the same workflow without the GUI:
 ```
 
 Use `--adopt-flare-output --adoption-reason '<review notes>'` on the first reviewed Flare replacement. `--prepare-only` deliberately leaves GitHub unpushed and returns an incomplete publication receipt; it is not a completed live publication. Publication history is private local state. Ordinary GitHub-menu pushes continue to protect the default branch.
+
+Existing help-only automation can continue using `publish-help` with the same help options and no `--tutor-course` for legacy repositories without shared published content. A repository with a `Published` bundle requires `publish-content` to keep its website, desktop help and tutor consistent; help-only preparation refuses before changing `Docs`. A changed or unreviewed tutor item cannot be published by adding `--allow-warnings`.
 
 The working `HelpSource` remains separate from the original Flare tree. Ordinary builds write evaluation output only. The explicit desktop publishing command is the route into a selected StatsDirect source repository; it does not compile the application, sign anything or build installers.
 
@@ -61,7 +67,7 @@ Publication uses verified staging and a durable repository-root `.statsdirect-de
 
 Recovery chooses only a recorded, complete verified tree and refuses unexpected changes. If it restores the previous Flare tree, inspect and republish before expecting an editor delivery receipt. Recovery does not erase unrelated files. Transactional previous copies are removed after completion; they are not retained rollback builds.
 
-The publisher does **not** modify the main application's project file. Its optional `DesktopHelpPublisher.ConsumerGuardXml` can be saved as `BuildTools/StatsDirectDesktopHelp.targets` and explicitly imported from `StatsDirectUI.csproj`. This blocks a build with an existing incomplete-publication marker. An unmodified application build does not read that marker. It is a pending-publication guard, not a concurrent-build lock or full receipt verifier; keep publishing and application builds sequential and verify before release. This integration is tested in an isolated copy, not installed into the live main repository by the editor.
+The publisher does **not** modify the main application's project file. Current StatsDirect source explicitly imports `BuildTools/StatsDirectDesktopHelp.targets`; older source copies must add the provided `DesktopHelpPublisher.ConsumerGuardXml` and import it themselves. This blocks a build with an existing incomplete-publication marker. An unmodified older application build does not read that marker. It is a pending-publication guard, not a concurrent-build lock or full receipt verifier; keep publishing and application builds sequential and verify before release.
 
 ## Source protection and power failure
 

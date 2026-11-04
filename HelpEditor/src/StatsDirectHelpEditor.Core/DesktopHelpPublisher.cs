@@ -102,6 +102,31 @@ public static class DesktopHelpPublisher
         CancellationToken cancellationToken = default) =>
         PublishCore(project, statsDirectSource, runtimeAssetsDirectory, prepared, options, cancellationToken, null);
 
+    /// <summary>Add one portable receipt to an already built, isolated Desktop artifact. No source or application target is changed.</summary>
+    public static DesktopHelpPublishResult CreatePortableReceipt(HelpProject project, BuildResult build,
+        string runtimeAssetsDirectory, string publicationSnapshotSha256)
+    {
+        if (!ValidHash(publicationSnapshotSha256)) throw new ArgumentException("A publication snapshot hash is required.");
+        string root = Path.GetFullPath(build.OutputDirectory); SafePaths.CheckNoLinks(root);
+        string path = Path.Combine(root, ReceiptFileName);
+        if (File.Exists(path)) throw new IOException("The isolated Desktop artifact already contains a receipt.");
+        var contexts = ValidateArtifact(project, root, build);
+        var generated = Capture(root);
+        if (generated.Any(file => !PublicFile(file.Path))) throw new InvalidDataException("The Desktop artifact contains private or unsupported files.");
+        var receipt = new DeliveryReceipt(1, Format, DateTimeOffset.UtcNow, InputsHash(project.RootPath, runtimeAssetsDirectory), "index.html",
+            build.TopicCount, build.SearchDocumentCount, contexts, SourceFileHash(project,"Project/Advanced/STATSDIRECT.flali"),
+            SourceFileHash(project,"Project/Advanced/SD3ContextID.h"), "PortableArtifact", TreeHash([]), false, generated.ToArray(), publicationSnapshotSha256);
+        WriteJson(path,receipt); return VerifyPortableArtifact(root);
+    }
+
+    public static DesktopHelpPublishResult VerifyPortableArtifact(string outputDirectory)
+    {
+        string root=Path.GetFullPath(outputDirectory); VerifyOwned(root);
+        var receipt=ReadJson<DeliveryReceipt>(Path.Combine(root,ReceiptFileName));
+        return new(root,Path.Combine(root,ReceiptFileName),FileHash(Path.Combine(root,ReceiptFileName)),receipt.SourceSha256,
+            receipt.TopicCount,receipt.SearchDocumentCount,receipt.Contexts.Count,[],"",false) { PublicationSnapshotSha256=receipt.PublicationSnapshotSha256 };
+    }
+
     internal static void ValidatePreparedArtifact(HelpProject project, HelpPublicationPublisher.PreparedHelpArtifact prepared,
         HelpBuildTarget expectedTarget = HelpBuildTarget.Desktop)
     {
@@ -152,11 +177,20 @@ public static class DesktopHelpPublisher
             AssertInputs(project, runtimeAssetsDirectory, sourceHash, repo, projectHash);
             var generated = Capture(built);
             if (generated.Any(file => !PublicFile(file.Path))) throw new InvalidDataException("The desktop build contains private/source or unsupported files; delivery was refused.");
-            var receipt = new DeliveryReceipt(1, Format, DateTimeOffset.UtcNow, sourceHash, "index.html", build.TopicCount,
-                build.SearchDocumentCount, contexts, SourceFileHash(project, "Project/Advanced/STATSDIRECT.flali"),
-                SourceFileHash(project, "Project/Advanced/SD3ContextID.h"), before.Ownership.ToString(), before.Sha256,
-                before.Ownership == DesktopHelpOwnership.FlareNeedsAdoption, generated.ToArray(), prepared?.SourceSha256);
-            WriteJson(Path.Combine(built, ReceiptFileName), receipt);
+            if (prepared != null && File.Exists(Path.Combine(built,ReceiptFileName)))
+            {
+                var portable=VerifyPortableArtifact(built);
+                if (portable.SourceSha256!=sourceHash || portable.PublicationSnapshotSha256!=prepared.SourceSha256 || portable.TopicCount!=build.TopicCount || portable.SearchDocumentCount!=build.SearchDocumentCount || portable.ContextCount!=contexts.Count)
+                    throw new InvalidDataException("The portable Desktop receipt does not match the frozen prepared build.");
+            }
+            else
+            {
+                var receipt = new DeliveryReceipt(1, Format, DateTimeOffset.UtcNow, sourceHash, "index.html", build.TopicCount,
+                    build.SearchDocumentCount, contexts, SourceFileHash(project, "Project/Advanced/STATSDIRECT.flali"),
+                    SourceFileHash(project, "Project/Advanced/SD3ContextID.h"), before.Ownership.ToString(), before.Sha256,
+                    before.Ownership == DesktopHelpOwnership.FlareNeedsAdoption, generated.ToArray(), prepared?.SourceSha256);
+                WriteJson(Path.Combine(built, ReceiptFileName), receipt);
+            }
             VerifyOwned(built);
             Directory.CreateDirectory(parent); SafePaths.CheckNoLinks(parent);
             if (Directory.Exists(incoming) || Directory.Exists(previous)) throw new IOException("A desktop publication staging name is already occupied.");

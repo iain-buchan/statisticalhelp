@@ -148,7 +148,8 @@ public sealed partial class GitSyncService
     /// <summary>Consume an independently verified Public build without another compilation.</summary>
     public async Task<WebsitePublication> PrepareWebsiteFromBuildAsync(string preparedOutputDirectory,
         IReadOnlyDictionary<string, string> expectedOutputFiles, IReadOnlyDictionary<string, string> expectedSourceFiles,
-        int topicCount, int searchDocumentCount, IReadOnlyList<string> warnings, CancellationToken ct = default, bool allowWarnings = false)
+        int topicCount, int searchDocumentCount, IReadOnlyList<string> warnings, CancellationToken ct = default, bool allowWarnings = false,
+        bool prepareSharedContent = false)
     {
         if (!publicationLayout) throw new InvalidOperationException("Prepared publication requires an explicit Git publication layout.");
         if (topicCount <= 0 || searchDocumentCount < 0 || searchDocumentCount > topicCount || warnings.Count != 0 && !allowWarnings) throw new InvalidDataException("Review public-build counts and warnings before publishing.");
@@ -175,7 +176,7 @@ public sealed partial class GitSyncService
             AssertExpectedFiles(expectedOutputFiles, CheckedFiles(staging).ToDictionary(path => Path.GetRelativePath(staging, path).Replace('\\', '/'), FileHash, StringComparer.Ordinal), "Public staging differs from the verified artifact.");
             await Task.CompletedTask;
             return new BuildResult(staging, topicCount, searchDocumentCount, warnings);
-        }, ct, uniqueStaging: true);
+        }, ct, uniqueStaging: true, prepareSharedContent: prepareSharedContent);
         VerifyInputs(); return result;
     }
 
@@ -201,10 +202,11 @@ public sealed partial class GitSyncService
                 throw new InvalidOperationException("Docs contains custom Git attribute rules. Review them separately before publishing; they were not overwritten.");
     }
 
-    private async Task VerifyRawPublicationFilesAsync(CancellationToken ct, IReadOnlyDictionary<string, string>? environment = null, string? commit = null)
+    private async Task VerifyRawPublicationFilesAsync(CancellationToken ct, IReadOnlyDictionary<string, string>? environment = null, string? commit = null, bool includeShared = false)
     {
         string docs = SafePaths.Resolve(RepositoryRoot, WebsitePath); RequirePublicationAttributes(docs);
-        string[] paths = SourceFiles().Concat(WebsiteFiles(docs).Keys.Append(WebsiteReceiptName).Select(path => WebsitePath + "/" + path)).Order(StringComparer.Ordinal).ToArray();
+        string[] paths = SourceFiles().Concat(WebsiteFiles(docs).Keys.Append(WebsiteReceiptName).Select(path => WebsitePath + "/" + path))
+            .Concat(includeShared ? SharedFiles().Keys.Select(path => SharedPath + "/" + path) : []).Order(StringComparer.Ordinal).ToArray();
         string Quote(string path) => "\"" + string.Concat(path.Select(character => character switch
         {
             '\\' => "\\\\", '"' => "\\\"", < ' ' or '\u007f' => "\\" + Convert.ToString((int)character, 8).PadLeft(3, '0'), _ => character.ToString()
@@ -218,9 +220,9 @@ public sealed partial class GitSyncService
                 .ToDictionary(pair => pair.Key, pair => pair.Value.Split(' ', 3)[1], StringComparer.Ordinal);
         else
         {
-            var tree = await RunAsync(RepositoryRoot, ["ls-tree", "-r", "-z", "--full-tree", commit, "--", .. ScopedSourcePaths, WebsitePath], ct);
+            var tree = await RunAsync(RepositoryRoot, ["ls-tree", "-r", "-z", "--full-tree", commit, "--", .. ScopedSourcePaths, WebsitePath, .. (includeShared ? new[] { SharedPath } : Array.Empty<string>())], ct);
             indexed = tree.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries)
-                .Where(line => IsScopedSourcePath(line[(line.IndexOf('\t') + 1)..]) || IsWebsitePath(line[(line.IndexOf('\t') + 1)..]))
+                .Where(line => IsScopedSourcePath(line[(line.IndexOf('\t') + 1)..]) || IsWebsitePath(line[(line.IndexOf('\t') + 1)..]) || includeShared && IsSharedPath(line[(line.IndexOf('\t') + 1)..]))
                 .ToDictionary(line => line[(line.IndexOf('\t') + 1)..], line => line[..line.IndexOf('\t')].Split(' ')[2], StringComparer.Ordinal);
         }
         if (rawIds.Length != paths.Length || paths.Where((path, index) => !indexed.TryGetValue(path, out string? oid) || oid != rawIds[index]).Any())

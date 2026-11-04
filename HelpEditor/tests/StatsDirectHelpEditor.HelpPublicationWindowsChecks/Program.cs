@@ -16,6 +16,7 @@ internal static partial class Program
     private static string runnerMode = "success";
     private static HelpPublicationOptions options = null!, remembered = null!;
     private static HelpPublicationOptions? pickerResult;
+    private static HelpPublicationOptions? lastSelected;
     private static TaskCompletionSource entered = NewSignal(), release = NewSignal();
     private static Dictionary<string, string> sourceBefore = [];
     private static HelpPublicationResult? lastFakeResult;
@@ -36,7 +37,8 @@ internal static partial class Program
             StatsDirectSource = Path.Combine(fixture, "FakeStatsDirect"),
             GitHubRepositoryUrl = "https://github.com/statsdirect-tests/new-help",
             GitHubBranch = "authoring-check", AuthorName = "Test Author", AuthorEmail = "author@example.invalid",
-            JournalDirectory = Path.Combine(fixture, "Publishing"), PushToGitHub = true
+            JournalDirectory = Path.Combine(fixture, "Publishing"), PushToGitHub = true,
+            TutorCoursePath = Path.Combine(fixture, "SavedTutor.json")
         };
         ApplicationConfiguration.Initialize();
         Application.ThreadException += (_, e) => Check(false, "No unhandled publication UI exception", e.Exception.ToString());
@@ -84,6 +86,7 @@ internal static partial class Program
         HelpPublicationOptions selected, CancellationToken ct, IProgress<HelpPublicationProgress>? progress)
     {
         Interlocked.Increment(ref runnerCalls);
+        lastSelected = selected;
         if (project.RootPath != sourceRoot || !Directory.Exists(Path.Combine(assets, "mathlive")))
             throw new InvalidOperationException("The native host did not pass the selected source/runtime assets.");
         progress?.Report(new("Testing", "Frozen-source publication in progress"));
@@ -108,8 +111,9 @@ internal static partial class Program
         await form.Initialization.WaitAsync(TimeSpan.FromSeconds(45));
         await form.OpenTopicAsync(Topic);
         var file = form.MainMenuStrip!.Items.OfType<ToolStripMenuItem>().Single(i => Clean(i.Text) == "File");
-        var command = file.DropDownItems.OfType<ToolStripMenuItem>().Single(i => Clean(i.Text) == "Publish help…");
-        Check(command.Enabled, "File exposes one unified Publish help command");
+        var command = file.DropDownItems.OfType<ToolStripMenuItem>().Single(i => Clean(i.Text) == "Publish content…");
+        Check(command.Enabled && !file.DropDownItems.OfType<ToolStripMenuItem>().Any(i => Clean(i.Text) == "Publish help…"),
+            "File exposes one unified Publish content command without a competing help-only menu item");
         string saved = form.CurrentProject.ReadTopic(Topic), originalPreferences = File.ReadAllText(preferences);
         string draft = saved.Replace("Saved alpha", "Unsaved publication draft");
         await SetSource(form, draft); await Until(() => form.IsDirty);
@@ -158,20 +162,39 @@ internal static partial class Program
             CloseWithoutSaving(second);
         }
 
+        foreach (string? invalidTutor in new[] { null, "relative.json", Path.Combine(fixture, "MissingTutor.json"), Path.Combine(fixture, "ExistingTutor.txt") })
+            Check(await Refuses(() => form.PublishContentAsync(options with { TutorCoursePath = invalidTutor })) && runnerCalls == 0,
+                "Shared publication refuses an absent, relative, missing or non-JSON tutor selection before invoking the executor", invalidTutor);
+        using (var tutor = new TutorEditorForm(options.TutorCoursePath!, fixture, externalLinkLauncher: _ => { })
+        { SuppressDialogs = true, ShowInTaskbar = false, StartPosition = FormStartPosition.Manual, Location = new(-16000, 0) })
+        {
+            tutor.Show(); string savedTutor = File.ReadAllText(options.TutorCoursePath!);
+            tutor.Document.Content["title"] = "Unsaved synthetic tutor draft";
+            string tutorDraft = tutor.Document.Content.ToJsonString(); string pageState = await Snapshot(form);
+            Check(tutor.HasUnsavedChanges && await Refuses(() => form.PublishContentAsync(options)) && runnerCalls == 0
+                && tutor.Document.Content.ToJsonString() == tutorDraft && File.ReadAllText(options.TutorCoursePath!) == savedTutor
+                && await Snapshot(form) == pageState,
+                "An open selected tutor draft blocks shared publication while retaining its exact draft, saved file and current page");
+            tutor.Close();
+        }
+
         pickerResult = null; string cleanState = await Snapshot(form);
         command.PerformClick(); await Until(() => pickerCalls == 1 && !Field<bool>(form, "busy"));
         Check(runnerCalls == 0 && form.LastHelpPublication == null && Status.Contains("cancelled")
             && await Snapshot(form) == cleanState && File.ReadAllText(preferences) == originalPreferences,
-            "Cancelling Publish help changes no outputs, draft, result or remembered settings");
+            "Cancelling Publish content changes no published outputs, draft, result or remembered settings");
         Check(remembered.WebsiteZipPath.EndsWith("Previous.zip", StringComparison.Ordinal)
-            && remembered.GitHubBranch == "previous-branch" && remembered.AuthorName == "Previous Author",
-            "The options picker receives all remembered publication defaults");
+            && remembered.GitHubBranch == "previous-branch" && remembered.AuthorName == "Previous Author"
+            && remembered.PublishSharedContent && !string.IsNullOrWhiteSpace(remembered.TutorCoursePath),
+            "The options picker receives remembered defaults plus an explicit shared-content tutor selection");
 
         pickerResult = options; command.PerformClick();
         await Until(() => runnerCalls == 1 && !Field<bool>(form, "busy"));
         Check(ReferenceEquals(form.LastHelpPublication, lastFakeResult) && form.LastHelpPublication!.Completed
             && form.EditorWebView.Enabled && form.MainMenuStrip!.Enabled,
             "A completed mock publication is retained and returns control to the editor");
+        Check(lastSelected?.PublishSharedContent == true && lastSelected.TutorCoursePath == options.TutorCoursePath,
+            "The GUI forces shared publication while preserving the exact author-selected saved tutor path");
         var prefs = JsonNode.Parse(File.ReadAllText(preferences))!.AsObject();
         Check(prefs["futureSetting"]!["preserve"]!.GetValue<string>() == "outside"
             && prefs["helpPublication"]!["futureSetting"]!.GetValue<string>() == "inside",
@@ -183,7 +206,8 @@ internal static partial class Program
         pickerResult = null; command.PerformClick(); await Until(() => pickerCalls == 3 && !Field<bool>(form, "busy"));
         Check(remembered.WebsiteZipPath == options.WebsiteZipPath && remembered.StatsDirectSource == options.StatsDirectSource
             && remembered.GitHubRepositoryUrl == options.GitHubRepositoryUrl && remembered.GitHubBranch == options.GitHubBranch
-            && remembered.AuthorEmail == options.AuthorEmail && File.ReadAllText(preferences) == successfulPreferences,
+            && remembered.AuthorEmail == options.AuthorEmail && remembered.TutorCoursePath == options.TutorCoursePath
+            && remembered.PublishSharedContent && File.ReadAllText(preferences) == successfulPreferences,
             "Saved publication options round-trip through a later picker and Cancel preserves them exactly");
 
         runnerMode = "blocked"; entered = NewSignal(); release = NewSignal();
@@ -212,7 +236,12 @@ internal static partial class Program
             && File.ReadAllText(preferences) == successfulPreferences,
             "A structured target failure retains retry evidence and restores controls without rewriting preferences");
         Check(SameSources(), "Success, cancellation and failures never save a page draft implicitly");
+        runnerMode = "success"; var shared = await form.PublishContentAsync(options);
+        Check(shared.Completed && lastSelected?.PublishSharedContent == true && lastSelected.TutorCoursePath == options.TutorCoursePath
+            && !options.PublishSharedContent,
+            "The explicit shared API forces all-content mode without mutating the caller's legacy options");
         await RealDialogChecks();
+        await RealSharedDialogChecks();
         await CliChecks.Run(root, fixture, sourceRoot, Check);
     }
 
@@ -232,7 +261,7 @@ internal static partial class Program
     private static async Task<bool> Refuses(Func<Task> action)
     {
         try { await action(); return false; }
-        catch (Exception e) when (e is IOException or ArgumentException or InvalidOperationException or OperationCanceledException or System.Xml.XmlException) { return true; }
+        catch (Exception e) when (e is InvalidDataException or IOException or ArgumentException or InvalidOperationException or OperationCanceledException or System.Xml.XmlException) { return true; }
     }
     private static async Task Until(Func<bool> condition)
     {
@@ -257,6 +286,8 @@ internal static partial class Program
         Write("Content/resources/stylesheets/statsdirect.css", "body{font:10pt Arial}");
         Write(".help-editor-recovery/retained.txt", "Private recovery remains untouched.");
         Directory.CreateDirectory(Path.GetDirectoryName(preferences)!);
+        File.Copy(Path.Combine(root, "TutorSource", "starter-course.json"), Path.Combine(fixture, "SavedTutor.json"));
+        File.WriteAllText(Path.Combine(fixture, "ExistingTutor.txt"), "This is not a JSON course.");
         File.WriteAllText(preferences, JsonSerializer.Serialize(new
         {
             websiteZipPath = Path.Combine(fixture, "Previous.zip"), statsDirectSourceRoot = Path.Combine(fixture, "PreviousStatsDirect"),

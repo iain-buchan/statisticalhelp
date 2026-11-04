@@ -21,6 +21,10 @@ async Task<HelpPublicationException> Fails(Fixture fixture, Action<HelpPublicati
 }
 try
 {
+    if (args.Contains("--shared-races-only"))
+        await SharedPublicationRaceChecks.Run(root, fixtures, Check);
+    else
+    {
     var f = await New(); var before = f.SourceHashes(); var seedBefore = f.SeedHashes(); string remoteBefore = await f.Head();
     int callerThread = 0, snapshotThread = 0; bool returnedBeforeCompletion = false;
     var started = new TaskCompletionSource<Task<HelpPublicationResult>>(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -135,6 +139,9 @@ try
     Check(!File.Exists(unsupported.Zip) && !Directory.Exists(unsupported.Help) && await unsupported.Head() == unsupportedHead,
         "Unsupported source files are rejected by full artifact validation before ZIP or desktop promotion");
 
+    await SharedGitChecks.Run(root, fixtures, Check);
+    await SharedPublicationRaceChecks.Run(root, fixtures, Check);
+
     if (args.Contains("--full-corpus"))
     {
         var full = await New(); string maintained = Path.Combine(root, "HelpSource");
@@ -154,6 +161,7 @@ try
         Check(DesktopHelpPublisher.VerifyDestination(full.Application).PublicationSnapshotSha256 == result.SourceSha256 &&
             maintainedBefore.OrderBy(pair => pair.Key).SequenceEqual(HelpPublicationPublisher.Files(maintained).OrderBy(pair => pair.Key)),
             "Full desktop output verifies against the shared snapshot and every original saved-source byte is unchanged");
+    }
     }
 }
 catch (Exception error) { Check(false, "Unexpected unified publication test failure", error.ToString()); }

@@ -23,6 +23,14 @@ internal static class CliChecks
         cases.Add(("Duplicate boolean flag", [.. Args(basic), "--prepare-only", "--prepare-only"], "Duplicate option"));
         cases.Add(("Boolean flag cannot consume a value", [.. Args(basic), "--prepare-only", "false"], "Unknown option"));
         cases.Add(("Missing optional value", [.. Args(basic), "--assets"], "Missing value"));
+        cases.Add(("Legacy help command cannot silently accept a tutor source", [.. Args(basic), "--tutor-course", Path.Combine(fixture, "SavedTutor.json")], "Unknown option"));
+        var content = new Dictionary<string, string>(basic) { ["--tutor-course"] = Path.Combine(fixture, "SavedTutor.json") };
+        string[] ContentArgs(IEnumerable<KeyValuePair<string, string>> pairs) => ["publish-content", .. pairs.SelectMany(pair => new[] { pair.Key, pair.Value })];
+        foreach (string missing in content.Keys)
+            cases.Add(("Shared content missing required " + missing, ContentArgs(content.Where(pair => pair.Key != missing)), "Missing " + missing));
+        cases.Add(("Shared content duplicate tutor source", [.. ContentArgs(content), "--tutor-course", content["--tutor-course"]], "Duplicate option"));
+        cases.Add(("Shared content missing tutor value", [.. Args(basic).Skip(1).Prepend("publish-content"), "--tutor-course"], "Missing value"));
+        cases.Add(("Shared content unknown option", [.. ContentArgs(content), "--not-a-content-option", "refuse"], "Unknown option"));
         var results = new List<object>();
         foreach (var test in cases)
         {

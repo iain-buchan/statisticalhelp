@@ -20,10 +20,11 @@ public sealed partial class GitSyncService
     public Task<WebsitePublication> PrepareWebsiteAsync(string runtimeAssetsDirectory, CancellationToken ct = default) =>
         PrepareWebsiteCoreAsync(staging => Task.Run(() => HelpBuilder.Build(project, staging, runtimeAssetsDirectory, HelpBuildTarget.Public), ct), ct);
 
-    private async Task<WebsitePublication> PrepareWebsiteCoreAsync(Func<string, Task<BuildResult>> prepare, CancellationToken ct, bool uniqueStaging = false)
+    private async Task<WebsitePublication> PrepareWebsiteCoreAsync(Func<string, Task<BuildResult>> prepare, CancellationToken ct, bool uniqueStaging = false, bool prepareSharedContent = false)
     {
         var status = await RequireRepositoryAsync(ct);
         await RejectOutsideStagedChangesAsync(ct, includeWebsite: true);
+        CaptureSharedBeforeWebsitePreparation(prepareSharedContent);
         var gitDirectory = await RunAsync(RepositoryRoot, ["rev-parse", "--absolute-git-dir"], ct);
         string pendingPath = SafePaths.Resolve(gitDirectory.Output.Trim(), "statsdirect-help-website-pending.json");
         string docs = SafePaths.Resolve(RepositoryRoot, WebsitePath);
@@ -97,6 +98,7 @@ public sealed partial class GitSyncService
     {
         await RequireRepositoryAsync(ct);
         VerifyWebsite();
+        VerifySharedForCommit();
         return await CommitScopedAsync(message, authorName, authorEmail, includeWebsite: true, ct);
     }
 
@@ -124,7 +126,9 @@ public sealed partial class GitSyncService
         if (publicationLayout && (verifiedCommit != (reviewedPublicationCommit ?? publicationBaseCommit) || expectedCommit != null && verifiedCommit != expectedCommit))
             throw new InvalidOperationException("HEAD changed from the reviewed publication commit. Start with a fresh review before pushing; no unrelated commit was published.");
         VerifyWebsite();
-        if (status.Changes.Any(change => change.IsSource || IsWebsitePath(change.Path) || change.OriginalPath is { } old && IsWebsitePath(old)))
+        bool includesShared = VerifySharedForPush();
+        if (status.Changes.Any(change => change.IsSource || IsWebsitePath(change.Path) || includesShared && IsSharedPath(change.Path) ||
+            change.OriginalPath is { } old && (IsWebsitePath(old) || includesShared && IsSharedPath(old))))
             throw new InvalidOperationException("Saved source or website files have uncommitted changes. Rebuild and commit the source and website together before pushing.");
         var committed = await RunAsync(RepositoryRoot, ["show", verifiedCommit + ":" + WebsitePath + "/" + WebsiteReceiptName], ct, allowFailure: true);
         TryReadWebsiteReceipt(SafePaths.Resolve(RepositoryRoot, WebsitePath), out var current);
@@ -134,20 +138,21 @@ public sealed partial class GitSyncService
         // Git can normalize CRLF/LF in JSON. Compare its data, not serialized newlines.
         if (saved?.Schema != current!.Schema || saved.SourceHash != current.SourceHash || saved.TopicCount != current.TopicCount || saved.Files is null || !SameFiles(saved.Files, current.Files))
             throw new InvalidOperationException("The current commit has no matching generated website. Rebuild and commit before pushing.");
-        if (ScopedSourcePrivacy || HasPublicationAttributes(SafePaths.Resolve(RepositoryRoot, WebsitePath))) await VerifyRawPublicationFilesAsync(ct, commit: verifiedCommit);
+        if (ScopedSourcePrivacy || HasPublicationAttributes(SafePaths.Resolve(RepositoryRoot, WebsitePath))) await VerifyRawPublicationFilesAsync(ct, commit: verifiedCommit, includeShared: includesShared);
         return await PushCoreAsync(verifiedCommit, status.Branch, ct, allowDefaultBranchPublication);
     }
 
     private async Task VerifyWebsiteForCommitAsync(CancellationToken ct, IReadOnlyDictionary<string, string>? environment = null)
     {
         VerifyWebsite();
+        VerifySharedForCommit();
         // An ignored source file must not influence a site while being omitted from its commit.
-        var indexed = await RunAsync(RepositoryRoot, ["ls-files", "-z", "--", .. CommitPathSpecs(ScopedSourcePaths.Append(WebsitePath).ToArray())], ct, environment: environment);
+        var indexed = await RunAsync(RepositoryRoot, ["ls-files", "-z", "--", .. CommitPathSpecs(WebsiteCommitScope)], ct, environment: environment);
         var expected = SourceFiles().Concat(WebsiteFiles(SafePaths.Resolve(RepositoryRoot, WebsitePath)).Keys.Select(path => WebsitePath + "/" + path))
-            .Append(WebsitePath + "/" + WebsiteReceiptName).ToHashSet(StringComparer.Ordinal);
+            .Append(WebsitePath + "/" + WebsiteReceiptName).Concat(PreparedSharedPaths).ToHashSet(StringComparer.Ordinal);
         var actual = indexed.Output.Split('\0', StringSplitOptions.RemoveEmptyEntries).ToHashSet(StringComparer.Ordinal);
         if (!expected.SetEquals(actual)) throw new InvalidOperationException("Some source or website files are ignored or not staged. Check .gitignore before committing; the website and source must be saved together.");
-        if (ScopedSourcePrivacy || HasPublicationAttributes(SafePaths.Resolve(RepositoryRoot, WebsitePath))) await VerifyRawPublicationFilesAsync(ct, environment);
+        if (ScopedSourcePrivacy || HasPublicationAttributes(SafePaths.Resolve(RepositoryRoot, WebsitePath))) await VerifyRawPublicationFilesAsync(ct, environment, includeShared: preparedSharedFiles != null);
     }
 
     private void VerifyWebsite()

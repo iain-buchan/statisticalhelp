@@ -27,6 +27,7 @@ public sealed partial class MainForm
         design.SelectedIndexChanged += async (_, _) =>
         {
             if (synchronizingDesign || project == null || !IsEditorReady || design.SelectedIndex < 0) return;
+            if (busy) { SynchronizeDesignSelection(); return; }
             string key = DesignKeys[design.SelectedIndex];
             try { await SetDesignAsync(key); }
             catch (Exception ex) { ShowError(ex); }
