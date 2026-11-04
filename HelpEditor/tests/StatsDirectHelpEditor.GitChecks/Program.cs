@@ -2,11 +2,23 @@ using System.Diagnostics;
 using System.Text.Json;
 using StatsDirect.HelpEditor.Core;
 
+// Git launches this same already-built test executable as a deliberately slow
+// upload-pack. Signal readiness before any fixture setup or shell dependency.
+if (args.Length >= 2 && args[0] == "--slow-upload-pack")
+{
+    string temporary = args[1] + ".ready-" + Environment.ProcessId;
+    File.WriteAllText(temporary, Environment.ProcessId.ToString(System.Globalization.CultureInfo.InvariantCulture));
+    File.Move(temporary, args[1]);
+    await Task.Delay(TimeSpan.FromSeconds(30));
+    return 0;
+}
+
 string root = Path.GetFullPath(args[0]);
 string evidence = Path.Combine(root, "evidence");
 string fixtures = Path.Combine(evidence, "GitFixture-" + Guid.NewGuid().ToString("N"));
 Directory.CreateDirectory(fixtures);
 var checks = new List<object>(); int passed = 0, failed = 0;
+object? slowFetchEvidence = null;
 void Check(bool value, string name) { if (value) passed++; else failed++; checks.Add(new { name, passed = value }); Console.WriteLine($"{(value ? "PASS" : "FAIL")} {name}"); }
 async Task Reject(Func<Task> operation, string name) { try { await operation(); Check(false, name); } catch (Exception ex) when (ex is InvalidOperationException or ArgumentException or OperationCanceledException) { Check(true, name); } }
 async Task<string> Git(string cwd, params string[] arguments)
@@ -175,19 +187,41 @@ try
     Check((await sync.StatusAsync()).LastSuccessfulFetchUtc is null, "Malformed local receipt metadata cannot claim that the remote was checked");
     await Git(copy, "config", "--local", "statsdirectHelpEditor.lastSuccessfulFetch", goodReceipt);
     using var canceled = new CancellationTokenSource(); canceled.Cancel(); await Reject(() => sync.FetchAsync(canceled.Token), "Cancellation is honored before a Git operation starts");
-    string slowFlag = Path.Combine(fixtures, "slow-upload-started.txt"), slowScript = Path.Combine(fixtures, "slow-upload-pack.ps1");
-    string QuotePs(string value) => "'" + value.Replace("'", "''") + "'";
-    File.WriteAllText(slowScript, "[IO.File]::WriteAllText(" + QuotePs(slowFlag) + ", 'started')\nStart-Sleep -Seconds 30\n");
-    await Git(copy, "config", "remote.origin.uploadpack", "powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"" + slowScript.Replace('\\', '/') + "\"");
+    string slowFlag = Path.Combine(fixtures, "slow-upload-started.txt");
+    string QuoteGitShell(string value) => "'" + value.Replace('\\', '/').Replace("'", "'\\''") + "'";
+    string processPath = Environment.ProcessPath ?? throw new InvalidOperationException("The current test host path is unavailable.");
+    string helperCommand = QuoteGitShell(processPath);
+    if (Path.GetFileNameWithoutExtension(processPath).Equals("dotnet", StringComparison.OrdinalIgnoreCase))
+        helperCommand += " " + QuoteGitShell(typeof(LongPathChecks).Assembly.Location);
+    helperCommand += " --slow-upload-pack " + QuoteGitShell(slowFlag);
+    await Git(copy, "config", "remote.origin.uploadpack", helperCommand);
     string cancellationHead = await Git(copy, "rev-parse", "HEAD"), cancellationSource = project.ReadTopic(topicPath);
     using (var duringFetch = new CancellationTokenSource())
     {
         Task operation = sync.FetchAsync(duringFetch.Token);
         var startedAt = Stopwatch.StartNew();
-        while (!File.Exists(slowFlag) && !operation.IsCompleted && startedAt.Elapsed < TimeSpan.FromSeconds(10)) await Task.Delay(30);
-        Check(File.Exists(slowFlag), "The local slow-fetch helper started before cancellation was tested");
+        int helperPid = 0;
+        while (helperPid == 0 && !operation.IsCompleted && startedAt.Elapsed < TimeSpan.FromSeconds(10))
+        {
+            if (File.Exists(slowFlag)) int.TryParse(File.ReadAllText(slowFlag), out helperPid);
+            if (helperPid == 0) await Task.Delay(30);
+        }
+        bool helperStarted = helperPid > 0;
+        Check(helperStarted, "The local slow-fetch helper started before cancellation was tested");
         duringFetch.Cancel();
-        await Reject(async () => await operation.WaitAsync(TimeSpan.FromSeconds(5)), "Cancellation stops an already running Git fetch promptly");
+        bool actualCancellation = false, helperExited = false; string? cancellationFailure = null;
+        try { await operation.WaitAsync(TimeSpan.FromSeconds(5)); cancellationFailure = "Fetch completed without an OperationCanceledException."; }
+        catch (OperationCanceledException) { actualCancellation = true; }
+        catch (Exception error) { cancellationFailure = error.ToString(); }
+        if (helperStarted)
+        {
+            try { using var helper = Process.GetProcessById(helperPid); await helper.WaitForExitAsync().WaitAsync(TimeSpan.FromSeconds(2)); helperExited = helper.HasExited; }
+            catch (ArgumentException) { helperExited = true; }
+            catch (TimeoutException) { }
+        }
+        slowFetchEvidence = new { helperPid, helperStarted, startupMilliseconds = startedAt.Elapsed.TotalMilliseconds, actualCancellation, helperExited, cancellationFailure, helperHost = processPath };
+        if (cancellationFailure != null) Console.Error.WriteLine(cancellationFailure);
+        Check(helperStarted && actualCancellation && helperExited, "Cancellation stops an already running Git fetch promptly");
         Check(await Git(copy, "rev-parse", "HEAD") == cancellationHead && project.ReadTopic(topicPath) == cancellationSource, "Cancelling an active fetch preserves the current commit and authoring source");
         Check((await sync.StatusAsync()).LastSuccessfulFetchUtc == lastSuccessfulFetch, "Cancelling an active fetch preserves the previous successful-check timestamp");
     }
@@ -196,6 +230,6 @@ try
     if (OperatingSystem.IsWindows()) await LongPathChecks.RunAsync(root, fixtures, Check);
 }
 catch (Exception ex) { failed++; checks.Add(new { name = "Unexpected Git check failure", passed = false, error = ex.ToString() }); Console.Error.WriteLine(ex); }
-File.WriteAllText(Path.Combine(evidence, "git-checks.json"), JsonSerializer.Serialize(new { passed, failed, fixtures, remoteType = "Local bare repository only; no GitHub writes", results = checks }, new JsonSerializerOptions { WriteIndented = true }));
+File.WriteAllText(Path.Combine(evidence, "git-checks.json"), JsonSerializer.Serialize(new { passed, failed, fixtures, remoteType = "Local bare repository only; no GitHub writes", slowFetch = slowFetchEvidence, results = checks }, new JsonSerializerOptions { WriteIndented = true }));
 Console.WriteLine($"{passed} Git checks passed; {failed} failed");
 return failed == 0 ? 0 : 1;
