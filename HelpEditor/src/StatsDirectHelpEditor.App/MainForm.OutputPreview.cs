@@ -12,6 +12,7 @@ public sealed partial class MainForm
     private readonly string outputPreviewSession = Guid.NewGuid().ToString("N");
     private AppHelp.HelpService? appHelpPreview;
     private bool refreshingOutputPreviews;
+    private bool fittingAuthoringNavigation;
     private readonly Dictionary<HelpBuildTarget, OutputPreviewCache> outputPreviewCache = [];
     private readonly Dictionary<HelpBuildTarget, OutputPreviewDisplay> outputPreviewDisplays = [];
     private string? outputPreviewRuntimeFingerprint;
@@ -194,10 +195,24 @@ public sealed partial class MainForm
 
     private void FitAuthoringNavigation()
     {
-        // At a narrow window, give the page editor room beside the real app
-        // pane. The source Contents returns as soon as space permits.
-        bool collapse = IsAppPreviewVisible && IsAppPreviewDocked && authoringSplit.ClientSize.Width < 900 * DeviceDpi / 96d;
-        if (authoringSplit.Panel1Collapsed != collapse) authoringSplit.Panel1Collapsed = collapse;
+        if (fittingAuthoringNavigation) return;
+        fittingAuthoringNavigation = true;
+        try
+        {
+            // At a narrow window, give the page editor room beside the real app
+            // pane. The source Contents returns as soon as space permits.
+            bool collapse = IsAppPreviewVisible && IsAppPreviewDocked && authoringSplit.ClientSize.Width < 900 * DeviceDpi / 96d;
+            const int preferredMinimum = 650;
+            int minimum = !collapse && authoringSplit.ClientSize.Width >= authoringSplit.Panel1MinSize + authoringSplit.SplitterWidth + preferredMinimum
+                ? preferredMinimum : 0;
+            // SplitContainer still enforces Panel2MinSize when Panel1 is collapsed.
+            // Clear it before narrowing the editor, otherwise an already-collapsed
+            // panel retains its old bounds and overlaps the docked App preview.
+            if (authoringSplit.Panel2MinSize > minimum) authoringSplit.Panel2MinSize = minimum;
+            if (authoringSplit.Panel1Collapsed != collapse) authoringSplit.Panel1Collapsed = collapse;
+            if (authoringSplit.Panel2MinSize != minimum) authoringSplit.Panel2MinSize = minimum;
+        }
+        finally { fittingAuthoringNavigation = false; }
     }
 
     private string SourceLinkFromGeneratedPreview(string href)

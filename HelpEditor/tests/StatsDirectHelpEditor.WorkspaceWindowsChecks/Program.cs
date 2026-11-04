@@ -153,13 +153,43 @@ internal static class Program
         var editBounds = form.EditorWebView.RectangleToScreen(form.EditorWebView.ClientRectangle);
         Check(appBounds.Left >= editBounds.Right && editBounds.Width > 100 && appBounds.Width > 100, "Docked App help reserves space to the right without covering the editing surface", new { App = appBounds, Editor = editBounds });
         Size appTestSize = form.Size;
+        // Reach an already-collapsed dock layout before the final shrink. A
+        // large desktop can otherwise collapse navigation only at MinimumSize,
+        // hiding SplitContainer's stale-child layout when its minimum is too big.
+        double layoutScale = form.DeviceDpi / 96d;
+        form.Size = new Size(Math.Max(form.MinimumSize.Width, (int)Math.Ceiling(1044 * layoutScale)),
+            Math.Max(form.MinimumSize.Height, (int)Math.Ceiling(788 * layoutScale)));
+        form.PerformLayout();
+        await Task.Delay(100);
+        var authoring = Field<SplitContainer>("authoringSplit");
+        appBounds = appBrowser.RectangleToScreen(appBrowser.ClientRectangle);
+        editBounds = form.EditorWebView.RectangleToScreen(form.EditorWebView.ClientRectangle);
+        Check(authoring.Panel1Collapsed && appBounds.Left >= editBounds.Right,
+            "A narrow dock layout collapses navigation before a further minimum-size shrink without overlapping the editor",
+            new { App = appBounds, Editor = editBounds, form.DeviceDpi, form.Size, authoring.Panel1MinSize, authoring.Panel2MinSize, authoring.SplitterWidth });
         form.Size = form.MinimumSize;
         form.PerformLayout();
         await Task.Delay(100);
         appBounds = appBrowser.RectangleToScreen(appBrowser.ClientRectangle);
         editBounds = form.EditorWebView.RectangleToScreen(form.EditorWebView.ClientRectangle);
-        Check(appBounds.Left >= editBounds.Right && await Bool("innerWidth >= 240 && document.getElementById('source-editor').getBoundingClientRect().height > 100") && await AppBool("innerWidth >= 240"),
-            "At the DPI-scaled minimum window, the App pane and editable page remain usable without overlap", new { App = appBounds, Editor = editBounds, form.DeviceDpi, form.Size });
+        var editorLayout = JsonSerializer.Deserialize<JsonElement>(await form.EditorWebView.ExecuteScriptAsync("({width:innerWidth,sourceHeight:document.getElementById('source-editor').getBoundingClientRect().height})"));
+        var appLayout = JsonSerializer.Deserialize<JsonElement>(await appBrowser.ExecuteScriptAsync("({width:innerWidth})"));
+        Check(appBounds.Left >= editBounds.Right && editorLayout.GetProperty("width").GetDouble() >= 240 && editorLayout.GetProperty("sourceHeight").GetDouble() > 100 && appLayout.GetProperty("width").GetDouble() >= 240,
+            "At the DPI-scaled minimum window, the App pane and editable page remain usable without overlap",
+            new { App = appBounds, Editor = editBounds, EditorCss = editorLayout, AppCss = appLayout, form.DeviceDpi, form.Size, authoring.Panel1MinSize, authoring.Panel2MinSize, authoring.SplitterWidth });
+        foreach (int logicalWidth in new[] { 899, 900, 904 })
+        {
+            int outsideAuthoring = form.Width - authoring.Width;
+            form.Width = outsideAuthoring + (int)Math.Ceiling(logicalWidth * layoutScale);
+            form.PerformLayout();
+            await Task.Delay(100);
+            appBounds = appBrowser.RectangleToScreen(appBrowser.ClientRectangle);
+            editBounds = form.EditorWebView.RectangleToScreen(form.EditorWebView.ClientRectangle);
+            Check(authoring.Panel1Collapsed == (authoring.ClientSize.Width < 900 * layoutScale) && appBounds.Left >= editBounds.Right &&
+                await Bool("innerWidth >= 240 && document.getElementById('source-editor').getBoundingClientRect().height > 100") && await AppBool("innerWidth >= 240"),
+                "Crossing the " + logicalWidth + " logical-pixel navigation boundary keeps both docked views usable without overlap",
+                new { App = appBounds, Editor = editBounds, form.DeviceDpi, form.Size, authoring.ClientSize, authoring.Panel1Collapsed, authoring.Panel1MinSize, authoring.Panel2MinSize, authoring.SplitterWidth });
+        }
         form.Size = appTestSize;
         form.PerformLayout();
         Check(Descendants(appBrowser.Parent!).OfType<ToolStrip>().SelectMany(bar => bar.Items.Cast<ToolStripItem>()).Select(item => item.Text).Contains("Contents") && Descendants(appBrowser.Parent!).OfType<ToolStrip>().SelectMany(bar => bar.Items.Cast<ToolStripItem>()).Select(item => item.Text).Contains("Print"), "App view reuses StatsDirect's Contents, Print and navigation toolbar");
