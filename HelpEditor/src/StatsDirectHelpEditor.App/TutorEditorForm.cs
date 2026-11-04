@@ -17,7 +17,7 @@ public sealed partial class TutorEditorForm : Form
     private readonly Func<Task<HelpPolishContext?>> helpContext;
     private readonly Action<Uri> openLink;
     private readonly TreeView navigation = new() { Dock = DockStyle.Fill, HideSelection = false, FullRowSelect = true };
-    private readonly TextBox filter = new() { Dock = DockStyle.Top, PlaceholderText = "Find a lesson or question…" };
+    private readonly TextBox filter = new() { Dock = DockStyle.Top, PlaceholderText = "Find by topic, difficulty or learner goal…" };
     private readonly TabControl tabs = new() { Dock = DockStyle.Fill };
     private readonly Panel fieldsHost = new() { Dock = DockStyle.Fill, AutoScroll = true, BackColor = Color.White };
     private readonly TextBox source = new() { Dock = DockStyle.Fill, Multiline = true, AcceptsTab = true, AcceptsReturn = true, WordWrap = false, ScrollBars = ScrollBars.Both, Font = new Font("Consolas", 11) };
@@ -112,6 +112,7 @@ public sealed partial class TutorEditorForm : Form
         Add(review, "Check course / export requirements", ValidateCourse);
         Add(review, "Record author review…", RecordAuthorReview);
         var ai = new ToolStripMenuItem("&ChatGPT");
+        var mcqs = new ToolStripMenuItem("Discuss, research or draft MCQs…"); mcqs.Click += async (_, _) => await RunAsync(() => ResearchAsync(true)); ai.DropDownItems.Add(mcqs);
         var research = new ToolStripMenuItem("Research, draft or review material…"); research.Click += async (_, _) => await RunAsync(ResearchAsync); ai.DropDownItems.Add(research);
         var help = new ToolStripMenuItem("&Help");
         Add(help, "How to use this authoring workspace", () => MessageBox.Show(this,
@@ -149,7 +150,7 @@ public sealed partial class TutorEditorForm : Form
             foreach (var row in rows)
             {
                 string title = S(row, kind == "questions" ? "stem" : "title");
-                if (!string.IsNullOrWhiteSpace(filter.Text) && !(title + " " + S(row, "id") + " " + S(row, "topic")).Contains(filter.Text, StringComparison.OrdinalIgnoreCase)) continue;
+                if (!string.IsNullOrWhiteSpace(filter.Text) && !(title + " " + S(row, "id") + " " + S(row, "topic") + " " + QuestionLearningTargetText(row)).Contains(filter.Text, StringComparison.OrdinalIgnoreCase)) continue;
                 title = title.ReplaceLineEndings(" "); if (title.Length > 82) title = title[..79] + "…";
                 branch.Nodes.Add(new TreeNode(title.Length > 0 ? title : "Untitled draft") { Tag = new ItemKey(kind, S(row, "id")) });
             }
@@ -175,6 +176,7 @@ public sealed partial class TutorEditorForm : Form
         bool wasLoading = loading; loading = true;
         foreach (Control control in fieldsHost.Controls.Cast<Control>().ToArray()) control.Dispose();
         fieldsHost.Controls.Clear(); fields.Clear(); initialFieldValues.Clear(); teachingGrids.Clear(); changedTeachingGrids.Clear(); options = null; references = null; optionsEdited = false; referencesEdited = false;
+        questionDifficulty = null; questionGoals = null; difficultyEdited = learnerGoalsEdited = false;
         var table = new TableLayoutPanel { Dock = DockStyle.Top, AutoSize = true, ColumnCount = 1, Padding = new Padding(14), BackColor = Color.White };
         table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
         fieldsHost.Controls.Add(table);
@@ -204,7 +206,10 @@ public sealed partial class TutorEditorForm : Form
             Field("id", "Stable item ID"); fields["id"].ReadOnly = true;
             if (selectedKind == "questions")
             {
-                Field("topic", "Topic"); Field("track", "Learning pathway key: foundation, medicine, publicHealth, analyst, researcher or core"); Field("objective", "Learning objective", 2); Field("stem", "Question / clinical scenario", 5);
+                Field("topic", "Topic"); Field("objective", "Statistical learning objective", 2);
+                BuildQuestionLearningTargets(table);
+                Field("learnerGoalNotes", "Specific qualification, syllabus or learner goal (optional)", 3);
+                Field("track", "Existing StatsDirect learning pathway"); Field("stem", "Question / clinical scenario", 5);
                 fields["track"].AutoCompleteCustomSource.AddRange(["foundation", "medicine", "publicHealth", "analyst", "researcher", "core"]); fields["track"].AutoCompleteSource = AutoCompleteSource.CustomSource; fields["track"].AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 options = Grid("Choice", "Answer option", "Feedback for this choice");
                 foreach (var option in (current["options"] as JsonArray ?? []).OfType<JsonObject>()) { int index = options.Rows.Add(S(option, "id"), S(option, "text"), S(option, "feedback")); options.Rows[index].Tag = option.DeepClone(); }
@@ -248,7 +253,7 @@ public sealed partial class TutorEditorForm : Form
                 Field("review.status", "Review status", value: S(review, "status")); Field("review.notes", "Author / statistical review notes", 4, S(review, "notes"));
                 if (current["authoring"] is JsonObject itemAuthoring && itemAuthoring["lastAiReview"] is JsonObject aiReview)
                 {
-                    Field("_displayAiSummary", "Previous ChatGPT review", 4, S(aiReview, "Summary")); fields["_displayAiSummary"].ReadOnly = true;
+                    Field("_displayAiSummary", "Previous ChatGPT review", 4, S(aiReview, "ConversationReply") is { Length: > 0 } replyText ? replyText : S(aiReview, "Summary")); fields["_displayAiSummary"].ReadOnly = true;
                     Field("_displayRCheck", "Proposed R validation (not executed here)", 8, S(aiReview, "proposedRCheck")); fields["_displayRCheck"].ReadOnly = true; fields["_displayRCheck"].Font = new Font("Consolas", 10);
                 }
             }
@@ -312,6 +317,7 @@ public sealed partial class TutorEditorForm : Form
             { var value = row.Tag is JsonObject old ? (JsonObject)old.DeepClone() : new JsonObject(); for (int column = 0; column < keys.Length; column++) value[keys[column]] = row.Cells[column].Value?.ToString() ?? ""; values.Add(value); }
             result[grid.Key] = values;
         }
+        ReadQuestionLearningTargets(result);
         return result;
     }
     private static string Lines(JsonNode? value) => string.Join(Environment.NewLine, (value as JsonArray ?? []).Select(NodeText));
@@ -374,13 +380,14 @@ public sealed partial class TutorEditorForm : Form
             foreach (string key in new[] { "review.status", "review.notes" }) if (fields.TryGetValue(key, out var field)) field.Text = S(current["review"] as JsonObject ?? new(), key.Split('.')[1]);
             foreach (var pair in fields) initialFieldValues[pair.Key] = pair.Value.Text;
             optionsEdited = false; referencesEdited = false; changedTeachingGrids.Clear();
+            difficultyEdited = learnerGoalsEdited = false;
         }
         loading = false; UpdateStatus();
     }
     private bool TryCommit() { try { CommitCurrent(); return true; } catch (Exception error) { Error(error); return false; } }
     private JsonObject CourseMetadata() { var metadata = (JsonObject)document.Content.DeepClone(); foreach (var key in new[] { "lessons", "questions", "documents" }) metadata.Remove(key); return metadata; }
-    public void SetField(string key, string text) { fields[key].Text = text; }
-    public string GetField(string key) => fields[key].Text;
+    public void SetField(string key, string text) { if (!SetLearningTargetField(key, text)) fields[key].Text = text; }
+    public string GetField(string key) => key is "difficulty" or "learnerGoals" ? LearningTargetField(key) : fields[key].Text;
     public void SetJsonSource(string json) { tabs.SelectedIndex = 1; source.Text = json; }
     public void UndoItem() { CommitCurrent(); if (undo.Count == 0) return; redo.Push(document.Content.ToJsonString()); ReplaceContent(undo.Pop()); ReloadSelection(); }
     public void RedoItem() { CommitCurrent(); if (redo.Count == 0) return; undo.Push(document.Content.ToJsonString()); ReplaceContent(redo.Pop()); ReloadSelection(); }
@@ -494,23 +501,26 @@ public sealed partial class TutorEditorForm : Form
         var close = new Button { Text = "Close checks", Dock = DockStyle.Bottom, Height = 40 }; close.Click += (_, _) => dialog.Close();
         dialog.Controls.Add(grid); dialog.Controls.Add(heading); dialog.Controls.Add(close); dialog.ShowDialog(this);
     }
-    private async Task ResearchAsync()
+    private Task ResearchAsync() => ResearchAsync(false);
+    private async Task ResearchAsync(bool questionResearch)
     {
         CommitCurrent();
         var context = TutorResearchContext.Create(document.Content, await helpContext());
-        using var dialog = new TutorResearchDialog(context, selectedKind is "lessons" or "questions" ? (JsonObject)current.DeepClone() : new JsonObject(), selectedKind == "questions" ? "questions" : "lessons", externalLinkLauncher: openLink);
+        string kind = questionResearch || selectedKind == "questions" ? "questions" : "lessons";
+        using var dialog = new TutorResearchDialog(context, selectedKind == kind ? (JsonObject)current.DeepClone() : new JsonObject(), kind, externalLinkLauncher: openLink);
         if (dialog.ShowDialog(this) != DialogResult.OK || dialog.AcceptedProposal == null) return;
         ApplyResearchProposal(dialog.AcceptedProposal);
     }
     public void ApplyResearchProposal(TutorResearchProposal proposal)
     {
+        if (!proposal.HasDraft) throw new InvalidOperationException("This ChatGPT reply is a discussion, with no draft to apply. Ask for a draft when you are ready.");
         CommitCurrent(); string kind = proposal.Kind;
         if (kind is not ("lessons" or "questions")) throw new InvalidDataException("ChatGPT returned an unsupported item type.");
         var edited = (JsonObject)proposal.ProposedRecord.DeepClone(); string id = S(edited, "id");
         if (edited["authoring"] is not JsonObject authoring) edited["authoring"] = authoring = new JsonObject();
         authoring["lastAiReview"] = JsonSerializer.SerializeToNode(new
         {
-            acceptedAtUtc = DateTimeOffset.UtcNow, proposal.Mode, proposal.Summary, proposal.StatisticalNotes,
+            acceptedAtUtc = DateTimeOffset.UtcNow, proposal.Mode, proposal.Summary, proposal.ConversationReply, proposal.StatisticalNotes,
             proposedRCheck = proposal.RValidationCode, rCheckStatus = "Not executed by the authoring editor",
             proposal.WebResearchRequested, proposal.WebResearchObserved, proposal.EvidenceNote,
             sources = proposal.Sources, observedSearchActivity = proposal.SearchActivity
@@ -547,6 +557,8 @@ public sealed partial class TutorEditorForm : Form
         if (selectedKind == "questions")
         {
             html.Append("<h1>").Append(E(S(current, "topic"))).Append("</h1><p>").Append(E(S(current, "stem"))).Append("</p>");
+            string targets = QuestionLearningTargetText(current);
+            if (targets.Length > 0) html.Append("<aside aria-label='Question difficulty and target learners' style='margin:12px 0;color:#526474;overflow-wrap:anywhere'>").Append(E(targets)).Append("</aside>");
             foreach (var option in (current["options"] as JsonArray ?? []).OfType<JsonObject>()) html.Append("<label><input type='radio' name='answer' value='").Append(WebUtility.HtmlEncode(S(option, "id"))).Append("'> ").Append(E(S(option, "id") + ". " + S(option, "text"))).Append("</label>");
             html.Append("<button onclick='checkAnswer()'>Check answer</button><div id='feedback' hidden></div><script>const q=").Append(JsonSerializer.Serialize(new { correct = S(current, "correct"), explanation = S(current, "explanation"), options = (current["options"] as JsonArray ?? []).OfType<JsonObject>().Select(option => new { id = S(option, "id"), feedback = S(option, "feedback") }) })).Append(";function checkAnswer(){const a=document.querySelector('input:checked');if(!a)return;const f=document.getElementById('feedback');f.hidden=false;f.textContent=(a.value===q.correct?'Correct. ':'Review this choice. ')+(q.options.find(o=>o.id===a.value)?.feedback||'')+' '+q.explanation;}</script>");
         }

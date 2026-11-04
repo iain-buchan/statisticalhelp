@@ -22,6 +22,7 @@ internal static partial class Program
         try
         {
             if (args.Contains("--dialog")) DialogChecks();
+            else if (args.Contains("--live-conversation")) LiveConversationAsync().GetAwaiter().GetResult();
             else if (args.Contains("--live-research")) LiveAsync().GetAwaiter().GetResult();
             else TestsAsync(args.Contains("--real-startup")).GetAwaiter().GetResult();
             Report(true); return 0;
@@ -88,6 +89,7 @@ internal static partial class Program
         Refuses(() => PolishChatGptClient.ParseTutorResearch(createRequest, Reply(created), []), "New questions require one of the actual five pathways or shared core");
         var badKey = Question(); badKey["correct"] = "Z"; Refuses(() => PolishChatGptClient.ParseTutorResearch(Request(), Reply(badKey), []), "MCQ requires a correct key matching exactly one option");
         await AdversarialChecksAsync();
+        await ConversationChecksAsync();
         using (var client = Client("normal"))
         {
             var result = await client.ResearchTutorAsync(context, Request());
@@ -166,6 +168,7 @@ internal static partial class Program
                     try { await disposedReply; throw new Exception("Expected disposed reply suppression."); } catch (OperationCanceledException) { }
                     Check(disposableDialog.Proposal == null && disposableDialog.AcceptedProposal == null && !disposableClient.Disposed, "A reply after disposal cannot mutate a dead dialog or dispose its caller-owned client");
                 }
+                await ConversationDialogChecksAsync(dialog, fake);
                 dialog.AcceptProposal();
             }
             catch (Exception error) { checks.Add(new { name = error.ToString(), passed = false }); dialog.Close(); }
@@ -217,7 +220,7 @@ internal static partial class Program
         async Task Complete()
         {
             var proposed = Question(); proposed["review"] = new JsonObject { ["status"] = "Independently verified and accredited" };
-            await Send(new { method = "item/completed", @params = new { threadId = thread, turnId = turn, item = new { type = "agentMessage", id = "message", text = Reply(proposed) } } });
+            await Send(new { method = "item/completed", @params = new { threadId = thread, turnId = turn, item = new { type = "agentMessage", id = "message", text = scenario == "discuss" ? ConversationalReply(false) : Reply(proposed) } } });
             await Send(new { method = "turn/completed", @params = new { threadId = thread, turn = new { id = turn, status = "completed" } } });
         }
         while (await Console.In.ReadLineAsync() is { } line)
@@ -269,13 +272,16 @@ internal static partial class Program
         using var reader = new StreamReader(stream);
         return JsonNode.Parse(reader.ReadToEnd())!;
     }
-    private sealed class FakeClient : ITutorResearchChatGptClient
+    private sealed class FakeClient : ITutorResearchChatGptClient, ITutorResearchProgressSource
     {
         public bool IsSignedIn => true; public string Status => "Connected to mock ChatGPT"; public string? LoginUrl => null; public bool Disposed; public event Action? Changed;
         public bool HoldNext, FailNext, IgnoreCancellation;
         public TaskCompletionSource<bool>? Held;
         public CancellationToken LastCancellationToken;
         public TutorResearchRequest? LastRequest;
+        public event Action<TutorResearchActivity>? ResearchActivity;
+        public readonly List<TutorResearchRequest> Requests = [];
+        public void EmitActivity(TutorResearchActivity value) => ResearchActivity?.Invoke(value);
         public Task InitializeAsync(CancellationToken cancellationToken = default) { Changed?.Invoke(); return Task.CompletedTask; }
         public Task<string?> SignInAsync(CancellationToken cancellationToken = default) => Task.FromResult<string?>(null);
         public Task CancelSignInAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
@@ -283,7 +289,7 @@ internal static partial class Program
         public Task<HelpPolishReview> PolishAsync(HelpPolishContext context, HelpPolishSnapshot snapshot, string instructions, CancellationToken cancellationToken = default) => throw new NotSupportedException();
         public async Task<TutorResearchProposal> ResearchTutorAsync(TutorResearchContext context, TutorResearchRequest request, CancellationToken cancellationToken = default)
         {
-            LastRequest = request; LastCancellationToken = cancellationToken;
+            LastRequest = request; Requests.Add(request); LastCancellationToken = cancellationToken;
             if (HoldNext)
             {
                 HoldNext = false;
@@ -291,7 +297,7 @@ internal static partial class Program
                 else await Task.Delay(Timeout.Infinite, cancellationToken);
             }
             if (FailNext) { FailNext = false; throw new IOException("Mock provider failure"); }
-            return PolishChatGptClient.ParseTutorResearch(request, Reply(), []);
+            return PolishChatGptClient.ParseTutorResearch(request, request.Mode == "discuss" ? ConversationalReply(false) : ConversationalReply(true), []);
         }
         public void Dispose() => Disposed = true;
     }

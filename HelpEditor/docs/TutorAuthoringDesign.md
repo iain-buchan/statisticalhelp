@@ -29,6 +29,37 @@ Use audience tags, not assertions that one item satisfies a whole examination or
 
 USMLE is a licensing examination series, whereas ABIM is a board-certification body; do not label one as the other's blueprint. Each specialty, exam stage and jurisdiction needs its own mapping. MRCP/RCGP/USMLE/ABIM names identify intended preparation contexts, without implying affiliation or endorsement. Sources were opened on 3 November 2026; recheck changing curricula when publishing a course revision.
 
+## Conversational question authoring and classification, 4 November 2026
+
+Maintain the main bundled question library through its authoring course; optional provider course packs remain a separate export choice. Start with a concrete request such as: “Draft one beginner question about diagnostic-test denominators for undergraduate medicine, with one best answer, feedback for every choice, original fictional numbers and authoritative sources.” For an existing item, discuss its reasoning and alternatives before accepting the current proposed revision. The author should be able to refine the scenario, evidence, audience and difficulty in the same research conversation.
+
+Keep three concepts separate. Difficulty describes the author's provisional estimate of statistical demand. Learner goals describe the intended educational or professional context, and one question may serve several goals. The existing learner pathway still controls the current application practice sets. Selecting a new audience label does not rewrite that pathway, create a new student filter, or establish examination alignment.
+
+Question metadata use optional root fields, preserved in both built-in content and provider exports:
+
+| Field | Meaning and values |
+|---|---|
+| `difficulty` | `beginner`, `intermediate` or `advanced`; leave unassigned when not yet judged. Treat this as an author estimate until tutor review and pilot experience support it. |
+| `learnerGoals` | Up to eight distinct goal IDs from the table below. Multiple selections are intentional. |
+| `learnerGoalNotes` | Up to 3,000 characters to state the local module, qualification stage, specialty, prerequisite knowledge or reason the question is suitable. |
+
+| Goal ID | Author-facing context |
+|---|---|
+| `undergraduateMedicine` | Undergraduate medicine |
+| `undergraduateHealthScience` | Undergraduate health sciences |
+| `postgraduateMedicine` | Postgraduate medicine |
+| `postgraduateAlliedHealth` | Postgraduate allied health |
+| `publicHealth` | Public health |
+| `healthcareBusinessAnalyst` | Healthcare business analyst |
+| `mastersStatistics` | Master's-level statistics |
+| `usMedicalBoards` | US medical board examinations |
+
+Existing questions without these fields remain unassigned; there is no bulk inference from their original pathway. Missing or null values stay unassigned, an empty goal list is valid, and an empty difficulty string is invalid. A new question may start at beginner with no goals, but the author remains responsible for its classification. A single professional goal must not silently imply a particular difficulty. Use notes to identify a specific US board/specialty or UK qualification stage; broad goal labels do not claim endorsement, blueprint coverage, eligibility or examination readiness.
+
+Research should return draft wording, a defensible key, explanations for the correct answer and distractors, relevant sources, and an inspectable R check when arithmetic is involved. Distinguish sources actually opened during the conversation from suggested URLs, and keep the “R not run” state until a check has been inspected and executed separately. Accepting an AI proposal makes it an editable draft; it does not mark its statistics or source claims as verified. Content and classification changes remain subject to the version's author-review requirements before publication.
+
+These labels survive the complete question JSON, static built-in bank, provider conversion, learner attempt snapshots and JSON portfolio export. Existing readable learner reports enumerate selected fields and do not yet display the new classification metadata. That is a presentation limit rather than a loss of the stored question snapshot. This authoring change adds no adaptive selection, curriculum routing or learner-report redesign.
+
 ## Questions and practical exercises
 
 Use original scenarios and data. Do not copy commercial question banks or present generated material as authentic examination questions. The [NBME item-writing resource](https://www.nbme.org/institutions/nbme-item-writing-guide/) is a useful author resource; its full guide may require registration. [ABIM describes clinical single-best-answer questions and a multi-stage review process](https://www.abim.org/about/abim-exams/exam-development-process/). The prototype does not reproduce that examination assurance process.

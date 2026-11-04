@@ -99,14 +99,21 @@ public sealed class TutorResearchContext
 public sealed record TutorResearchSource(string Title, string Url, string Relevance, bool ObservedOpened, DateTimeOffset? AccessedAtUtc = null);
 public sealed record TutorResearchActivity(string Action, string Query, string Url, DateTimeOffset? AtUtc = null);
 public sealed record TutorResearchRequest(string Kind, string Mode, JsonObject SelectedRecord, string Instructions, string Audience,
-    bool UseWebResearch, string PreviousDiscussion = "");
+    bool UseWebResearch, string PreviousDiscussion = "", string? Difficulty = null, IReadOnlyList<string>? LearnerGoals = null,
+    string LearnerGoalNotes = "");
 public sealed record TutorResearchProposal(string Kind, string Mode, string BeforeJson, JsonObject ProposedRecord, string Summary,
     string StatisticalNotes, string RValidationCode, IReadOnlyList<TutorResearchSource> Sources,
-    IReadOnlyList<TutorResearchActivity> SearchActivity, bool WebResearchRequested)
+    IReadOnlyList<TutorResearchActivity> SearchActivity, bool WebResearchRequested, bool HasDraft = true, string ConversationReply = "")
 {
     public bool WebResearchObserved => SearchActivity.Count > 0;
     public string EvidenceNote => "AI-assisted draft and statistical review; numerical checks and source claims still require author review. Opened URLs show browsing activity, not independent verification." +
         (WebResearchRequested && !WebResearchObserved ? " Internet research was requested, but this reply contains no observed web-search activity. Check all suggested sources." : "");
+}
+
+/// <summary>Optional live research observations; existing injected clients need not implement it.</summary>
+public interface ITutorResearchProgressSource
+{
+    event Action<TutorResearchActivity>? ResearchActivity;
 }
 
 public interface ITutorResearchChatGptClient : IPolishChatGptClient

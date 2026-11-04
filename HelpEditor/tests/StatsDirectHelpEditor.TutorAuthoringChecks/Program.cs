@@ -99,6 +99,7 @@ try
   Check(Text(sample.GetItems("questions").Last()["verification"],"status")=="not-rechecked-after-edit"&&Text(sample.GetItems("questions").Last()["review"],"status").Contains("Draft")&&Text(sample.GetItems("questions").Last()["review"],"notes")=="Recheck the numerical denominator."&&sample.GetItems("questions").Last()["review"]!["reviewer"]==null,"New externally proposed records enter as unverified drafts with useful notes but no claimed reviewer");
  }
  AdversarialChecks.Run(root,fixture,Check);
+ LearningTargetChecks.Run(root,fixture,Check);
 }
 catch(Exception error){Check(false,"Unexpected authoring test error: "+error);}
 var report=new{passed=failed==0,failed,assertions=checks.Count,fixture,checkedAtUtc=DateTimeOffset.UtcNow,starterSha256=originalHash,sourceUntouched=Digest(starter)==originalHash,checks};

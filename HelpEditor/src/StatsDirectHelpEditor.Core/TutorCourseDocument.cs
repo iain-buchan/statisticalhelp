@@ -49,6 +49,7 @@ public sealed class TutorCourseDocument
     public JsonObject NewQuestion() => Add("questions", new JsonObject
     {
         ["id"] = NewId("questions", "question"), ["version"] = 1, ["track"] = "foundation", ["topic"] = "New question", ["objective"] = "Write the learning objective.",
+        ["difficulty"] = "beginner", ["learnerGoals"] = new JsonArray(),
         ["stem"] = "Write an original single-best-answer question.", ["options"] = new JsonArray(
             new JsonObject { ["id"] = "A", ["text"] = "First answer", ["feedback"] = "Explain this answer." },
             new JsonObject { ["id"] = "B", ["text"] = "Second answer", ["feedback"] = "Explain this answer." }),
@@ -248,6 +249,7 @@ public sealed class TutorCourseDocument
         foreach (var question in questions)
         {
             string path = "questions." + S(question, "id"); var options = question?["options"] as JsonArray ?? [];
+            if (question is JsonObject classified) issues.AddRange(TutorLearningTargets.Validate(classified, path));
             Error(path + ".authoring", question?["authoring"] == null || question["authoring"] is JsonObject, "Local authoring metadata must be an object; correct it in JSON source before editing this record.");
             Error(path, Identifier(S(question, "id")) && Text(question, "stem", 6000, true) && Text(question, "explanation", 10000, true) && HelpPath(S(question, "help")), "A question needs an ID, stem, explanation and valid optional help link.");
             Error(path + ".options", options.Count is >= 2 and <= 8 && Unique(options) && options.Any(option => S(option, "id") == S(question, "correct")), "Use 2–8 unique choices and select exactly one existing correct-answer ID.");

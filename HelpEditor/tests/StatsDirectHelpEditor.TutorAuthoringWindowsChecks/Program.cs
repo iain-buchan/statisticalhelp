@@ -20,11 +20,11 @@ internal static partial class Program
         """);
         ApplicationConfiguration.Initialize();Application.ThreadException+=(_,e)=>Check(false,"Unhandled UI exception: "+e.Exception);
         form=new TutorEditorForm(file,fixture,externalLinkLauncher:_=>{}){SuppressDialogs=true,ShowInTaskbar=false,StartPosition=FormStartPosition.Manual,Location=new Point(-16000,0),Size=new Size(1500,1000)};
-        bool previewOnly=args.Contains("--preview-only");
-        form.Shown+=async (_,_)=>{try{if(previewOnly)await CheckEmbeddedPreviewAsync();else Run();}catch(Exception error){Check(false,"Unexpected native tutor error: "+error);}finally{form.Close();}};
+        bool previewOnly=args.Contains("--preview-only"), classificationOnly=args.Contains("--classification-only");
+        form.Shown+=async (_,_)=>{try{if(previewOnly)await CheckEmbeddedPreviewAsync();else if(classificationOnly)CheckQuestionClassification();else Run();}catch(Exception error){Check(false,"Unexpected native tutor error: "+error);}finally{form.Close();}};
         Application.Run(form);
         var report=new{passed=failed==0,failed,assertions=checks.Count,fixture,checkedAtUtc=DateTimeOffset.UtcNow,checks};
-        File.WriteAllText(Path.Combine(evidence,previewOnly?"tutor-preview-windows-checks.json":"tutor-authoring-windows-checks.json"),JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true}));
+        File.WriteAllText(Path.Combine(evidence,previewOnly?"tutor-preview-windows-checks.json":classificationOnly?"tutor-classification-windows-checks.json":"tutor-authoring-windows-checks.json"),JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true}));
         Console.WriteLine(JsonSerializer.Serialize(new{report.passed,report.failed,report.assertions,report.fixture}));return failed==0?0:1;
     }
     private static void Check(bool value,string name){checks.Add(new{name,passed=value});Console.WriteLine((value?"PASS ":"FAIL ")+name);if(!value)failed++;}
@@ -80,6 +80,7 @@ internal static partial class Program
         CheckActiveGridSaves();
         CheckBuiltinPublishing();
         CheckDeepNativeWorkflows();
+        CheckQuestionClassification();
         CheckNativeNavigationSoak();
         WritePreviewFixtures();
     }

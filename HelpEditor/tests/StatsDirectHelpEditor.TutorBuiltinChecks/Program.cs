@@ -73,6 +73,7 @@ try
  var integration=TutorCourseDocument.Create(starter.Content);integration.Content["authoring"]!["builtinBaseline"]=TutorBuiltinPublisher.CreateBaseline(starter.Content);string integrationOutput=Path.Combine(fixture,"IntegrationOutput");var integrationResult=TutorBuiltinPublisher.Publish(integration,integrationOutput);
  File.WriteAllText(Path.Combine(evidence,"tutor-builtin-integration-fixture.json"),JsonSerializer.Serialize(new{outputDirectory=integrationOutput,integrationResult.BankVersion,manifest=Path.Combine(integrationOutput,"manifest.json")},new JsonSerializerOptions{WriteIndented=true}));
  AdversarialBuiltinChecks.Run(root,fixture,Check);
+ LearningTargetBuiltinChecks.Run(root,fixture,Check);
 }
 catch(Exception error){Check(false,"Unexpected builtin publication test error: "+error);}
 var report=new{passed=failed==0,failed,assertions=checks.Count,fixture,checkedAtUtc=DateTimeOffset.UtcNow,checks};
