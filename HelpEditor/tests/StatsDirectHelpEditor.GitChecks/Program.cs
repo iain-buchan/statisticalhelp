@@ -21,7 +21,14 @@ async Task<string> Git(string cwd, params string[] arguments)
 }
 try
 {
-    var disconnected = await new GitSyncService(HelpProject.Open(Path.Combine(root, "HelpSource"))).StatusAsync();
+    // The maintained HelpEditor/HelpSource is itself a valid nested checkout in
+    // CI. Exercise an actual independent copy rather than assuming it is not.
+    string disconnectedRoot = Path.Combine(fixtures, "independent-source");
+    Directory.CreateDirectory(Path.Combine(disconnectedRoot, "Content"));
+    Directory.CreateDirectory(Path.Combine(disconnectedRoot, "Project/TOCs"));
+    File.WriteAllText(Path.Combine(disconnectedRoot, HelpProject.MarkerFile), "{}");
+    File.WriteAllText(Path.Combine(disconnectedRoot, "Project/TOCs/STATSDIRECT.fltoc"), "<CatapultToc/>");
+    var disconnected = await new GitSyncService(HelpProject.Open(disconnectedRoot)).StatusAsync();
     Check(!disconnected.IsRepository, "Independent help source is not treated as a Git checkout");
     Check(disconnected.Remote is null && !disconnected.HasTrackingBranch && !disconnected.HasComparison && disconnected.LastSuccessfulFetchUtc is null && disconnected.SourceChangeCount == 0 && disconnected.OtherChangeCount == 0, "A plain source copy reports no remote, comparison or successful remote check");
     string seed = Path.Combine(fixtures, "seed"), remote = Path.Combine(fixtures, "origin.git"); Directory.CreateDirectory(seed);
