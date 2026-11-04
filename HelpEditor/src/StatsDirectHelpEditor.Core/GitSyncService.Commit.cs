@@ -35,7 +35,12 @@ public sealed partial class GitSyncService
                 foreach (string relative in inputs.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal))
                     held.Add(File.Open(SafePaths.Resolve(RepositoryRoot, relative), FileMode.Open, FileAccess.Read, FileShare.Read));
                 await RejectContentFiltersAsync(paths, ct);
-                await RunAsync(RepositoryRoot, ["add", "--all", "--", .. paths], ct, environment: privateEnv);
+                // Staging all authored pages and generated assets can exceed
+                // 30 seconds on a cold or actively scanned disk. Cancellation
+                // still stops this one bounded operation promptly.
+                try { await RunAsync(RepositoryRoot, ["add", "--all", "--", .. paths], ct, timeoutSeconds: 180, environment: privateEnv); }
+                catch (TimeoutException error)
+                { throw new TimeoutException("Git did not finish staging the help source and generated website within three minutes. This attempt did not create a commit. Check local disk activity and try again.", error); }
                 if (website) await VerifyWebsiteForCommitAsync(ct, privateEnv);
                 var changed = await RunAsync(RepositoryRoot, ["diff", "--cached", "--quiet", "--exit-code", parent], ct, allowFailure: true, environment: privateEnv);
                 if (changed.ExitCode == 0) throw new InvalidOperationException("There are no help-source changes to commit.");
