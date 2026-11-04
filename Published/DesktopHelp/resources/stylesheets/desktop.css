@@ -1,0 +1,10 @@
+@import url('statsdirect.css');
+
+/* The desktop host supplies history, contents, search and print controls.
+   Keep Flare's topic navigation, but give the reading pane more room. */
+nav.title-bar { padding-top: 4px !important; padding-bottom: 4px !important; }
+.title-bar-layout .logo-wrapper { min-height: 28px !important; }
+.title-bar-layout a.logo { background: none !important; width: auto !important; height: auto !important; }
+.title-bar-layout a.logo::after { content: 'StatsDirect Help'; color: white; font: bold 16px Arial, sans-serif; }
+.nav-search-wrapper { display: none !important; }
+.title-bar-section.middle { min-height: 32px !important; }

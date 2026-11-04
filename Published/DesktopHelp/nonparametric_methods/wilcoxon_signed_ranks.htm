@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="nonparametric_methods/wilcoxon_signed_ranks.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wilcoxon Signed Ranks Test - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        
+        <h1>Wilcoxon's Signed Ranks Test</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Nonparametric_Wilcoxon Signed Ranks</b>.</p>
+        <p> </p>
+        <p>This is a method for the comparison of a pair of samples.</p>
+        <p> </p>
+        <p>The Wilcoxon signed ranks test statistic T<sup>+</sup> is the sum of the ranks of the positive, non-zero differences (D<sub>i</sub>) between a pair of samples. Zero differences are set aside before the other differences are ranked, as in <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999)</a>. Some other software ranks the zero differences with the rest before setting them aside (<a href="../references/reference_list.htm#ref-pratt-1959">Pratt, 1959</a>), which can give a different P value when some differences are zero.</p>
+        <p> </p>
+        <p>Assumptions of tests on T<sup>+</sup>:</p>
+        <ul>
+            <li>distribution of each D<sub>i</sub> is symmetrical</li>
+            <li>all D<sub>i</sub> are mutually independent</li>
+            <li>all D<sub>i</sub> have the same mean</li>
+            <li>measurement scale of D<sub>i</sub> is at least interval</li>
+        </ul>
+        <p> </p>
+        <p>In most situations you should use a two sided test. A two sided test is based upon the null hypothesis that the common median of the differences is zero. The approximate alternative hypothesis in this case is that the differences tend not to be zero. For a lower side test the approximate alternative hypothesis is that differences tend to be less than zero. For an upper side test the approximate alternative hypothesis is that differences tend to be greater than zero.</p>
+        <p> </p>
+        <p>A confidence interval is constructed for the difference between the population medians. In sample terms this is called the confidence interval for the median or mean difference. It is also known as the Hodges-Lehmann estimate of shift. The assumptions of this method are:</p>
+        <ul>
+            <li>distribution of each D<sub>i</sub> is symmetrical</li>
+            <li>all D<sub>i</sub> are mutually independent</li>
+            <li>all D<sub>i</sub> have the same median</li>
+            <li>measurement scale of D<sub>i</sub> is at least interval</li>
+        </ul>
+        <p> </p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>Exact permutational probability associated with the test statistic is calculated for up to 200 non-zero differences (pairs that do not differ are set aside before ranking). A normal approximation is used with more than 200 non-zero differences. Note that StatsDirect uses more accurate methods than some other statistical software for calculating probabilities associated with this statistic, therefore, you may notice a difference in results, especially where there are tied observations - you should find that StatsDirect and StatXact give the same answers. Confidence limits are calculated using the exact critical value k from the signed rank distribution for samples of 4 to 199 observations, or by calculating the normal approximation K* for samples of 200 or more observations; the exact confidence level attained is evaluated for samples of up to 1000 observations (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-neumann-1988">Neumann, 1988</a>).</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999)</a>.</p>
+        <p>Test workbook (Nonparametric worksheet: First Born, Second Born).</p>
+        <p> </p>
+        <p>The following data represent aggressivity scores for 12 pairs of monozygotic twins.</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">First Born</td>
+                <td style="text-decoration: underline;text-align: right;">Second Born</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">86</td>
+                <td style="text-align: right;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">77</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">76</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">68</td>
+                <td style="text-align: right;">64</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">96</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">65</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">90</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">70</td>
+                <td style="text-align: right;">65</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">80</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">88</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">87</td>
+                <td style="text-align: right;">72</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select the Wilcoxon Signed Ranks from the Nonparametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "First Born" and "Second Born" when prompted for data.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Wilcoxon's signed ranks test</u></p>
+        <p> </p>
+        <p>First Born vs. Second Born</p>
+        <p>Number of non-zero differences ranked = 11</p>
+        <p>Sum of ranks for positive differences = 41.5</p>
+        <p> </p>
+        <p>Exact probability (adjusted for ties):</p>
+        <p>Lower side P = 0.7739 (H<sub>1</sub>: differences tend to be less than zero)</p>
+        <p>Upper side P = 0.2378 (H<sub>1</sub>: differences tend to be greater than zero)</p>
+        <p>Two sided P = 0.4756 (H<sub>1</sub>: differences tend not to be zero)</p>
+        <p> </p>
+        <p>95.8% confidence interval for difference between population medians:</p>
+        <p>K = 14   Median difference = 1.5 (-2.5 to 6.5)</p>
+        <p> </p>
+        <p>Assuming that the paired differences come from a symmetrical distribution then these results show that one group did not tend to yield different results to the other group which was paired with it, i.e. there was no statistically significant difference between the aggressivity scores of the first born as compared with the second twin. The extent of this lack of difference is shown well by the confidence interval which clearly encompasses zero. Note that the quoted 95.8% confidence interval is as close as you can get to 95% because of the mathematics involved in nonparametric methods like this.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Wilcoxon signed ranks test: the StatsDirect help example (Conover 1999) in R
+first  &lt;- c(86, 71, 77, 68, 91, 72, 77, 91, 70, 71, 88, 87)
+second &lt;- c(88, 77, 76, 64, 96, 72, 65, 90, 65, 80, 81, 72)
+d &lt;- first - second                       # one difference is 0 and some are tied
+n &lt;- length(d)
+
+# R's standard test. Its V is the sum of ranks for positive differences. R 4.6.0
+# or later gives exact results that allow for the zero and the ties, but it ranks
+# the zero with the other differences before setting it aside (the method of
+# Pratt, 1959): V = 48.5 and two sided P = 0.458. StatsDirect, like Conover, sets
+# zeros aside before ranking: the sum is 41.5 and two sided P = 0.4756. Each P is
+# exact for its own method. Older versions of R warn and use a normal
+# approximation with continuity correction, as exact = FALSE does (V = 41.5,
+# two sided P = 0.4765).
+print(wilcox.test(first, second, paired = TRUE, conf.int = TRUE))
+
+# With zeros set aside first, R 4.6.0 or later gives StatsDirect's two sided P.
+# Use alternative = "less" for the lower side P and "greater" for the upper.
+# Keep the confidence interval from the first call: it needs every difference.
+nz &lt;- d[d != 0]
+print(wilcox.test(nz))
+
+# Number of non-zero differences and the sum of ranks for positive differences
+r &lt;- rank(abs(nz))                        # tied values share a mid-rank
+Tplus &lt;- sum(r[nz &gt; 0])
+cat("Number of non-zero differences ranked =", length(nz), "\n")
+cat("Sum of ranks for positive differences =", Tplus, "\n")
+
+# Exact P given the ties, in any version of R: each rank is as likely to belong
+# to a positive as to a negative difference, so build the distribution of the
+# sum one rank at a time. Ranks are doubled to make mid-ranks whole numbers.
+p &lt;- 1                                    # P(doubled sum = 0), before any rank
+for (v in 2 * r) p &lt;- (c(p, numeric(v)) + c(numeric(v), p)) / 2
+w &lt;- 2 * Tplus + 1                        # position of the observed value
+lower &lt;- sum(p[1:w])                      # each side includes the observed sum
+upper &lt;- sum(p[w:length(p)])
+cat("Lower side P =", round(lower, 4), "  Upper side P =", round(upper, 4),
+    "  Two sided P =", round(min(1, 2 * min(lower, upper)), 4), "\n")
+
+# Confidence interval, from all n differences: K from the exact distribution of
+# the statistic without ties, then the Kth smallest and Kth largest of the
+# n(n + 1)/2 averages of two differences (each is also averaged with itself).
+# With fewer than 6 differences K is 0 and there is no 95% interval.
+# StatsDirect's median difference is the median of these averages, which R calls
+# the (pseudo)median; it is not median(d), which is 1 here.
+# R 4.6.0 or later gives the same limits for these data but works out the level
+# given the ties (96.2 percent in R 4.6.1). For other tied data its limits can
+# differ.
+K &lt;- qsignrank(0.025, n)
+a &lt;- outer(d, d, "+") / 2
+a &lt;- sort(a[upper.tri(a, diag = TRUE)])
+cat(sprintf("%.1f%% confidence interval for difference between population medians:\n",
+            100 * (1 - 2 * psignrank(K - 1, n))))
+cat(sprintf("K = %g   Median difference = %g (%g to %g)\n",
+            K, median(a), a[K], rev(a)[K]))</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

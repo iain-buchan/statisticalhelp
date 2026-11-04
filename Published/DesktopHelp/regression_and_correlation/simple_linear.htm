@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="regression_and_correlation/simple_linear.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Simple Linear Regression and Pearson Correlation - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Simple Linear Regression and Correlation</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Regression and Correlation_Simple Linear and Correlation</b>.</p>
+        <p> </p>
+        <p>This function provides simple linear regression and Pearson's correlation.</p>
+        <p> </p>
+        <p>Regression parameters for a straight line model (Y = a + bx) are calculated by the least squares method (minimisation of the sum of squares of deviations from a straight line). This differentiates to the following formulae for the slope (b) and the Y intercept (a) of the line:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="0c8a47e24113311f5d36451048d1b3c0962f298d37f4199e93f51a3c12a2cccc"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle b=\frac{\displaystyle \sum_{i=1}^n (x_i-\bar x)(Y_i-\bar Y)}{\displaystyle \sum_{i-1}^n (x_i-\bar x)^2}\ \\
+\displaystyle \displaystyle a=\bar Y- b\bar x
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/f692211b8d8c59893c21bcbc1072cce6511bf619d8e554af3e06079022e31dcc.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>Regression assumptions:</p>
+        <ul type="disc">
+            <li class="p">
+                <p>Y is linearly related to x or a transformation of x</p>
+            </li>
+            <li class="p">
+                <p>deviations from the regression line (residuals) follow a normal distribution</p>
+            </li>
+            <li class="p">
+                <p>deviations from the regression line (residuals) have uniform variance</p>
+            </li>
+        </ul>
+        <p> </p>
+        <p>A residual for a Y point is the difference between the observed and fitted value for that point, i.e. it is the distance of the point from the fitted regression line. If the pattern of residuals changes along the regression line then consider using <a href="../nonparametric_methods/nonparametric_regression.htm">rank methods</a> or linear regression after an appropriate <a href="../data_preparation/transformations.htm">transformation</a> of your data.</p>
+        <p> </p>
+        <p>Pearson's product moment correlation coefficient (r) is given as a measure of linear association between the two variables:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="d3a3a2722b270eaf4d237bc9eed608117f7ff86dd6e43202e6ae4d0e57c8a686"><span class="help-equation-accessible help-equation-live">$\displaystyle r=\frac{\displaystyle\sum_{i=1}^n (x_i-\bar x)(Y_i-\bar Y)}{\displaystyle \sqrt{\sum_{i=1}^n(x_i-\bar x)^2 \sum_{i=1}^n(Y_i-\bar Y)^2}}$</span><img src="../resources/help-editor-runtime/equation-artwork/91780bc3c63a0372563661757b657c8a4aa9a8ad4da24af29ffc6b7d757400ed.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>r² is the proportion of the total variance (s²) of Y that can be explained by the linear regression of Y on x. 1-r² is the proportion that is not explained by the regression. Thus 1-r² = s²xY / s²Y.</p>
+        <p> </p>
+        <p>Confidence limits are constructed for r using Fisher's z transformation. The null hypothesis that r = 0 (i.e. no association) is evaluated using a modified t test (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>).</p>
+        <p> </p>
+        <p>Pearson's correlation assumption:</p>
+        <p>·   at least one variable must follow a normal distribution</p>
+        <p> </p>
+        <p>The estimated regression line may be plotted and belts representing the standard error and confidence interval for the population value of the slope can be displayed. These belts represent the reliability of the regression estimate, the tighter the belt the more reliable the estimate (<a href="../references/reference_list.htm#ref-gardner-1989">Gardner and Altman, 1989</a>).</p>
+        <p> </p>
+        <p>N.B. If you require a weighted linear regression then please use the multiple linear regression function in StatsDirect; it will allow you to use just one predictor variable i.e. the simple linear regression situation. Note also that the multiple regression option will also enable you to estimate a regression without an intercept i.e. forced through the origin.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 161)</a>.</p>
+        <p>Test workbook (Regression worksheet: Birth Weight, % Increase).</p>
+        <p> </p>
+        <p>The following data represent birth weights (oz) of babies and their percentage increase between 70 and 100 days after birth.</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Birth Weight</td>
+                <td style="text-decoration: underline;text-align: right;">% Increase</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">68</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">112</td>
+                <td style="text-align: right;">63</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">111</td>
+                <td style="text-align: right;">66</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">107</td>
+                <td style="text-align: right;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">119</td>
+                <td style="text-align: right;">52</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">92</td>
+                <td style="text-align: right;">75</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">126</td>
+                <td style="text-align: right;">76</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">80</td>
+                <td style="text-align: right;">118</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">81</td>
+                <td style="text-align: right;">120</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">84</td>
+                <td style="text-align: right;">114</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">115</td>
+                <td style="text-align: right;">29</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">118</td>
+                <td style="text-align: right;">42</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">128</td>
+                <td style="text-align: right;">48</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">128</td>
+                <td style="text-align: right;">50</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">123</td>
+                <td style="text-align: right;">69</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">116</td>
+                <td style="text-align: right;">59</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">125</td>
+                <td style="text-align: right;">27</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">126</td>
+                <td style="text-align: right;">60</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">122</td>
+                <td style="text-align: right;">71</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">126</td>
+                <td style="text-align: right;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">127</td>
+                <td style="text-align: right;">63</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">86</td>
+                <td style="text-align: right;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">142</td>
+                <td style="text-align: right;">53</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">132</td>
+                <td style="text-align: right;">50</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">87</td>
+                <td style="text-align: right;">111</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">123</td>
+                <td style="text-align: right;">59</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">133</td>
+                <td style="text-align: right;">76</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">106</td>
+                <td style="text-align: right;">72</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">103</td>
+                <td style="text-align: right;">90</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">118</td>
+                <td style="text-align: right;">68</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">114</td>
+                <td style="text-align: right;">93</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">94</td>
+                <td style="text-align: right;">91</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Simple Linear and Correlation from the Regression and Correlation section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "% Increase" when prompted for the response (Y) variable and then select "Birth weight" when prompted for the predictor (x) variable.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Simple linear regression</u>
+        </p>
+        <p> </p>
+        <p>Equation: % Increase = -0.86433 Birth Weight +167.870079</p>
+        <p> </p>
+        <p>Standard Error of slope = 0.175684</p>
+        <p>95% CI for population value of slope = -1.223125 to -0.505535</p>
+        <p> </p>
+        <p>Correlation coefficient (r) = -0.668236 (r² = 0.446539)</p>
+        <p> </p>
+        <p>95% CI for r (Fisher's z transformed) = -0.824754 to -0.416618</p>
+        <p> </p>
+        <p>t with 30 DF = -4.919791</p>
+        <p>Two sided P &lt; .0001</p>
+        <p>Power (for 5% significance) = 99.15%</p>
+        <p> </p>
+        <p>Correlation coefficient is significantly different from zero</p>
+        <p> </p>
+        <p>From this analysis we have gained the equation for a straight line forced through our data i.e. % increase in weight = 167.87 - 0.864 * birth weight. The r square value tells us that about 45% of the total variation about the Y mean is explained by the regression line. The analysis of variance test for the regression, summarised by the ratio F, shows that the regression itself was statistically highly significant. This is equivalent to a t test with the null hypothesis that the slope is equal to zero. The confidence interval for the slope shows that with 95% confidence the population value for the slope lies somewhere between -0.5 and -1.2. The correlation coefficient r was statistically highly significantly different from zero. Its negative value indicates that there is an inverse relationship between X and Y i.e. lower birth weight babies show greater % increases in weight at 70 to 100 days after birth. With 95% confidence the population value for r lies somewhere between -0.4 and -0.8.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Simple linear regression and correlation: the StatsDirect help example (Armitage
+# and Berry 1994, birth weight and percentage weight gain of 32 babies) in R
+weight &lt;- c(72, 112, 111, 107, 119, 92, 126, 80, 81, 84, 115, 118, 128, 128, 123, 116,
+            125, 126, 122, 126, 127, 86, 142, 132, 87, 123, 133, 106, 103, 118, 114, 94)
+increase &lt;- c(68, 63, 66, 72, 52, 75, 76, 118, 120, 114, 29, 42, 48, 50, 69, 59, 27, 60,
+              71, 88, 63, 88, 53, 50, 111, 59, 76, 72, 90, 68, 93, 91)
+
+# R's standard regression: the coefficients, their standard errors and t tests
+fit &lt;- lm(increase ~ weight)
+print(summary(fit))
+print(confint(fit))
+
+# R's correlation test gives r, its Fisher z interval, t and the two sided P
+print(cor.test(weight, increase))
+
+# The report's lines to 6 places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+b &lt;- coef(fit)
+se &lt;- summary(fit)$coefficients["weight", "Std. Error"]
+n &lt;- length(weight)
+ct &lt;- cor.test(weight, increase)
+cat("Equation: % Increase =", six(b[2]), "Birth Weight +", six(b[1]), "\n")
+cat("Standard Error of slope =", six(se), "\n")
+cat("95% CI for population value of slope =", six(confint(fit)[2, 1]), "to",
+    six(confint(fit)[2, 2]), "\n")
+cat("Correlation coefficient (r) =", six(ct$estimate), " (r2 =", six(ct$estimate^2),
+    ")\n")
+cat("95% CI for r (Fisher's z transformed) =", six(ct$conf.int[1]), "to",
+    six(ct$conf.int[2]), "\n")
+cat("t with", n - 2, "DF =", six(ct$statistic), "\n")
+cat("Two sided", pv(ct$p.value), "\n")
+
+# Power of the test of r at the 5% level: Fisher's z of r is about normal with
+# standard deviation 1 / root(n - 3), so the power against zero is the two tails
+# beyond the 5% points
+z &lt;- abs(atanh(ct$estimate)) * sqrt(n - 3)
+power &lt;- pnorm(z - qnorm(0.975)) + pnorm(-z - qnorm(0.975))
+cat("Power (for 5% significance) =",
+    paste0(formatC(100 * power, digits = 2, format = "f"), "%"), "\n")</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="regression_and_correlation.htm">regression and correlation</a>
+        </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="graphics/control.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Control Charts (Statistical Process Control) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Control Chart</h1>
+        <p> </p>
+        <p>Menu location: <b>Graphics_Control</b>.</p>
+        <p> </p>
+        <p>This plots the values of a process indicator over time (or some other sequence variable), and shows the variation within specified bands.</p>
+        <p> </p>
+        <p>The bands shown on a control plot are often called control limits and warning limits, denoting the type of action to be taken if values lie beyond them. A common application is the monitoring of laboratory processes, in which the warning limits are usually taken as two standard deviations (SD) either side of the mean and the control limits are three standard deviations either side of the mean (<a href="../references/reference_list.htm#ref-mortimer-1994">Mortimer, 1994</a>, <a href="../references/reference_list.htm#ref-mortimer-1999">1999</a>).</p>
+        <p> </p>
+        <p>StatsDirect offers the following options for control plot bands:</p>
+        <ol>
+            <li>Optional display of mean (black), 1 SD (green), 2 SD (black) and 3 SD (red) - [Default is all].<br /></li>
+            <li>Mean and SD calculated from all process data - [Default].<br /></li>
+            <li>Mean and SD calculated from the first k observations in the process data - [You specify k, for example basing the control standard on the first six months of operation when strict validation was performed].<br /></li>
+            <li>Mean and SD specified - [Marked as 'external' on plot].<br /></li>
+            <li>Control (red) and warning (black) limits specified - [Marked as 'external' on plot].</li>
+        </ol>
+        <p> </p>
+        <p>If your time/sequence data are dates then the x axis is labelled at regular calendar intervals chosen to suit the span of the data (minutes, hours, days, weeks, months, quarters, years or decades), using the short date or time format that is set in your Windows installation.</p>
+        <p> </p>
+        <p>
+            <img src="../resources/images/controlchart.png" width="566" height="400" border="0" style="-ms-interpolation-mode: bicubic;" />
+        </p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Graphics worksheet: Process, Date).</p>
+        <p> </p>
+        <p>The chart above plots the values of a process indicator recorded on 19 dates between 19 January and 5 October 1999, mostly at fortnightly intervals.</p>
+        <p> </p>
+        <p>To draw it in StatsDirect open the test workbook using the file open function of the file menu. Then select Control from the Graphics menu. Select the column marked "Process" when prompted for the Y (process) axis data and the column marked "Date" for the X (sequence) axis data, then accept the default chart options (all four bands, with the mean and SD calculated from all of the process data).</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p>Mean = 23.468421</p>
+        <p>SD = 0.672518</p>
+        <p>n = 19</p>
+        <p> </p>
+        <p>The bands, as labelled at the right of the chart to 3 decimal places:</p>
+        <p>23.468 (mean)</p>
+        <p>24.141 (+1 SD)</p>
+        <p>22.796 (-1 SD)</p>
+        <p>24.813 (+2 SD)</p>
+        <p>22.123 (-2 SD)</p>
+        <p>25.486 (+3 SD)</p>
+        <p>21.451 (-3 SD)</p>
+        <p> </p>
+        <p>All of the values lie within the 3 SD control limits. The value of 21.5 recorded on 17 August 1999 lies below the 2 SD warning limit of 22.123, which under the laboratory convention above would prompt a check of the process; the other 18 values lie within 2 SD of the mean, three of them beyond 1 SD.</p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Control chart: the StatsDirect help illustration (a process indicator recorded on
+# 19 dates in 1999; the test workbook's Graphics worksheet columns Process and Date)
+# in R
+process &lt;- c(23.9, 24.6, 24.3, 23.5, 23.5, 23.4, 23.6, 23.6, 22.9, 22.9, 23.6, 24.3,
+             23.4, 23.5, 22.9, 21.5, 23.7, 23.8, 23.0)
+date &lt;- as.Date(c("1999-01-19", "1999-02-02", "1999-02-16", "1999-03-02", "1999-03-16",
+                  "1999-03-30", "1999-04-13", "1999-04-27", "1999-05-11", "1999-05-25",
+                  "1999-06-08", "1999-06-15", "1999-07-13", "1999-07-27", "1999-08-10",
+                  "1999-08-17", "1999-09-14", "1999-09-21", "1999-10-05"))
+
+# The bands are the mean and 1, 2 and 3 standard deviations either side of it, with
+# the mean and sd calculated from all of the process data (StatsDirect's default
+# option); sd() divides by n - 1, as StatsDirect does.
+m &lt;- mean(process)
+s &lt;- sd(process)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("Mean =", six(m), "  SD =", six(s), "  n =", length(process), "\n")
+
+# The labels StatsDirect writes at the right hand end of each band, to its default
+# 3 decimal places
+k &lt;- c(0, 1, -1, 2, -2, 3, -3)
+band &lt;- m + k * s
+label &lt;- paste0(formatC(band, digits = 3, format = "f", drop0trailing = TRUE), " (",
+                c("mean", "+1 SD", "-1 SD", "+2 SD", "-2 SD", "+3 SD", "-3 SD"), ")")
+cat(label, sep = "\n")
+
+# The chart: the process values joined in date order, with the mean (black), 1 SD
+# (green), 2 SD (black) and 3 SD (red) bands labelled beyond the right end of the
+# axis. StatsDirect labels the date axis at calendar intervals to suit the span of
+# the data, here the quarters that fall within it.
+op &lt;- par(mar = c(5, 4, 4, 7))
+plot(date, process, type = "l", col = "steelblue", xaxt = "n", xlab = "Date",
+     ylab = "Process", main = "Control chart", ylim = range(process, band))
+axis.Date(1, at = seq(as.Date("1999-04-01"), by = "quarter", length.out = 3),
+          format = "%d/%m/%Y")
+abline(h = band, col = c("black", "green", "green", "black", "black", "red", "red"))
+text(par("usr")[2], band, label, pos = 4, xpd = NA, cex = 0.8)
+par(op)</pre>
+            </div>
+        </details>
+        <p> </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

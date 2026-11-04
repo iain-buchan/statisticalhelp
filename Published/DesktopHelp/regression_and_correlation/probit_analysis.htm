@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="regression_and_correlation/probit_analysis.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Probit Analysis (Dose Response Curves, ED50 etc.) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
+            Probit Analysis</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Regression and</b><b> Correlation_Probit Analysis</b>.</p>
+        <p> </p>
+        <p>This function provides probit analysis for fitting probit and logit sigmoid dose/stimulus response curves and for calculating confidence intervals for dose-response quantiles such as ED50.</p>
+        <p> </p>
+        <p>When biological responses are plotted against their causal stimuli (or logarithms of them) they often form a sigmoid curve. Sigmoid relationships can be linearized by <a href="../data_preparation/transformations.htm">transformations</a> such as logit, probit and angular. For most systems the probit (normal sigmoid) and logit (logistic sigmoid) give the most closely fitting result. Logistic methods are useful in Epidemiology because odds ratios can be determined easily from differences between fitted logits (see <a href="logistic.htm">logistic regression</a>). In biological assay work, however, probit analysis is preferred (<a href="../references/reference_list.htm#ref-finney-1971">Finney, 1971</a>, <a href="../references/reference_list.htm#ref-finney-1978">1978</a>). Curves produced by these methods are very similar, with maximum variation occurring within 10% of the upper and lower asymptotes.</p>
+        <p> </p>
+        <p><u>Probit</u>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="aac723b6c79c69f93ca2d3a0e3344b4bd04ff13c98ee0f0c992e04ee0536209b"><span class="help-equation-accessible help-equation-live">$\displaystyle Y'=\Phi^{-1}(p)$</span><img src="../resources/help-editor-runtime/equation-artwork/37c89283a1700038a1af159ce6a3f3715aca0d38ff6551ccb623e26250040747.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where Y' is the probit transformed value (5 used to be added to avoid negative values in hand calculation), p is the proportion (p = responders/total number) and inverse Φ(p) is the 100*p% quantile from the <a href="../distributions/normal.htm">standard normal distribution</a>.</p>
+        <p> </p>
+        <p><u>Logit</u>
+        </p>
+        <p>Odds = p/(1-p)</p>
+        <p>[p = proportional response, i.e. r out of n responded so p = r/n]</p>
+        <p>Logit = log(p/(1-p)) / 2, half the log odds: Finney's (1971) definition, which puts the logit on nearly the same scale as the probit. The constant and slope of the logit model are reported on this scale, so they are half of those for the log odds itself.</p>
+        <p> </p>
+        <p><u>Data preparation</u>
+        </p>
+        <p>Your data are entered as dose levels, number of subjects tested at each dose level and number responding at each dose level. At the time of running the analysis you may enter a control result for the number of subjects responding in the absence of dose/stimulus; this provides a global adjustment for natural mortality/responsiveness. You may also specify automatic log transformation of the dose levels at run time if appropriate (this should be supported by good evidence of a log-probit relationship for your type of study).</p>
+        <p> </p>
+        <p><u>Model analysis and critical quantiles</u>
+        </p>
+        <p>The fitted model is assessed by statistics for heterogeneity which follow a chi-square distribution. If the heterogeneity statistics are significant then your observed values deviate from the fitted curve too much for reliable inference to be made (<a href="../references/reference_list.htm#ref-finney-1971">Finney, 1971</a>, <a href="../references/reference_list.htm#ref-finney-1978">1978</a>).</p>
+        <p> </p>
+        <p>StatsDirect gives you the effective/lethal levels of dose/stimulus with confidence intervals at the quantiles you specify, e.g. ED50/LD50.</p>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The curve is fitted by maximum likelihood estimation, using Newton-Raphson iteration. A dummy variable is used to factor in the background/natural response rate if the you specify a response in controls.</p>
+        <p> </p>
+        <p><u>Further analysis and cautions</u>
+        </p>
+        <p>For more complex probit analysis, such as the calculation of relative potencies from several related dose response curves, consider non-linear optimisation software or specialist dose-response analysis software such as Bliss. The latter is a FORTRAN routine written by David Finney and Ian Craigie, it is available from Edinburgh University Computing Centre. MLP, <a href="https://vsni.co.uk/software/genstat/" target="_blank" rel="noopener noreferrer">Genstat</a> or <a href="http://cran.r-project.org/" target="_blank" rel="noopener noreferrer">R</a> can be used for more general non-linear model fitting with the ability to constrain curves to "parallelism". Expert statistical guidance should be sought before attempting this sort of work.</p>
+        <p> </p>
+        <p>CAUTION 1: Please do not think of probit analysis as a "cure all" for dose response curves. Many log dose - response relationships are clearly not Gaussian sigmoids. Other well described sigmoid relationships include angular, Wilson-Worcester and Cauchy-Urban. There may be no "off the shelf" regression model suited to your study. Exploratory <a href="nonlinear.htm">non-linear modelling</a> should only be carried out by an expert Statistician.</p>
+        <p> </p>
+        <p>CAUTION 2: Standard probit analysis is designed to handle only quantal responses with binomial error distributions. Quantal data, such as the number of subjects responding vs. total number of subjects tested, usually have binomial error distributions. You should not use continuous data, such as percent maximal response, with probit analysis as these data are likely to require regression methods that assume a different error distribution. Most researchers should seek expert statistical help before pursuing this type of analysis (see <a href="nonlinear.htm">non-linear models</a>).</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-finney-1971">Finney (1971, p. 98)</a>.</p>
+        <p>Test workbook (Regression worksheet: Age, Girls, + Menses).</p>
+        <p> </p>
+        <p>The following data represent a study of the age at menarche (first menstruation) of 3918 Warsaw girls. For each age group you are given mean age, total number of girls and the number of girls who had reached menarche.</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Age</td>
+                <td style="text-decoration: underline;text-align: right;">Girls</td>
+                <td style="text-decoration: underline;text-align: right;">+ Menses</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9.21</td>
+                <td style="text-align: right;">376</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10.21</td>
+                <td style="text-align: right;">200</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10.58</td>
+                <td style="text-align: right;">93</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10.83</td>
+                <td style="text-align: right;">120</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.08</td>
+                <td style="text-align: right;">90</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.33</td>
+                <td style="text-align: right;">88</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.58</td>
+                <td style="text-align: right;">105</td>
+                <td style="text-align: right;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.83</td>
+                <td style="text-align: right;">111</td>
+                <td style="text-align: right;">17</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.08</td>
+                <td style="text-align: right;">100</td>
+                <td style="text-align: right;">16</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.33</td>
+                <td style="text-align: right;">93</td>
+                <td style="text-align: right;">29</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.58</td>
+                <td style="text-align: right;">100</td>
+                <td style="text-align: right;">39</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.83</td>
+                <td style="text-align: right;">108</td>
+                <td style="text-align: right;">51</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13.08</td>
+                <td style="text-align: right;">99</td>
+                <td style="text-align: right;">47</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13.33</td>
+                <td style="text-align: right;">106</td>
+                <td style="text-align: right;">67</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13.58</td>
+                <td style="text-align: right;">105</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13.83</td>
+                <td style="text-align: right;">117</td>
+                <td style="text-align: right;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14.08</td>
+                <td style="text-align: right;">98</td>
+                <td style="text-align: right;">79</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14.33</td>
+                <td style="text-align: right;">97</td>
+                <td style="text-align: right;">90</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14.58</td>
+                <td style="text-align: right;">120</td>
+                <td style="text-align: right;">113</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14.83</td>
+                <td style="text-align: right;">102</td>
+                <td style="text-align: right;">95</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15.08</td>
+                <td style="text-align: right;">122</td>
+                <td style="text-align: right;">117</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15.33</td>
+                <td style="text-align: right;">111</td>
+                <td style="text-align: right;">107</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15.58</td>
+                <td style="text-align: right;">94</td>
+                <td style="text-align: right;">92</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15.83</td>
+                <td style="text-align: right;">114</td>
+                <td style="text-align: right;">112</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">17.58</td>
+                <td style="text-align: right;">1049</td>
+                <td style="text-align: right;">1049</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect you must first prepare them in three workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Logit from the Probit analysis section of the Regression and Correlation section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Age" when you are prompted for dose levels, select "Girls" when you are prompted for subjects at each level and select "Menses" when prompted for responders at each level. Make sure that the "Calc log10" option is not checked when prompted, this disables base 10 logarithmic transformation of the "dose" variable (mean ages in this example). Enter number of controls as 0 when prompted and also enter 0 when you are asked about an additional quantile.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p>Probit analysis - logit sigmoid curve</p>
+        <p>constant = -10.613197</p>
+        <p>slope = 0.815984</p>
+        <p> </p>
+        <p>Median * Dose = 13.006622</p>
+        <p>Confidence interval (No Heterogeneity) = 12.930535 to 13.082483</p>
+        <p> </p>
+        <p>* Dose for centile 90 = 14.352986</p>
+        <p>Confidence interval (No Heterogeneity) = 14.238636 to 14.480677</p>
+        <p> </p>
+        <p>Chi² (heterogeneity of deviations from model) = 21.869854, (23 df), P = .5281</p>
+        <p> </p>
+        <p>t for slope = 27.682451 (23 df) P &lt; .0001</p>
+        <p> </p>
+        <p>
+            <img src="../resources/images/probitplot.png" width="566" height="400" border="0" style="-ms-interpolation-mode: bicubic;" />
+        </p>
+        <p>Having looked at a plot of this model and accepted that the model is reasonable, we conclude with 95% confidence that the true population value for median age at menarche in Warsaw lay between 12.93 and 13.08 years when this study was carried out.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Probit analysis, logit model: the StatsDirect help example (Finney 1971, age at
+# menarche of 3918 Warsaw girls) in R
+age &lt;- c(9.21, 10.21, 10.58, 10.83, 11.08, 11.33, 11.58, 11.83, 12.08, 12.33, 12.58,
+         12.83, 13.08, 13.33, 13.58, 13.83, 14.08, 14.33, 14.58, 14.83, 15.08, 15.33,
+         15.58, 15.83, 17.58)
+girls &lt;- c(376, 200, 93, 120, 90, 88, 105, 111, 100, 93, 100, 108, 99, 106, 105, 117,
+           98, 97, 120, 102, 122, 111, 94, 114, 1049)
+menses &lt;- c(0, 0, 0, 2, 2, 5, 10, 17, 16, 29, 39, 51, 47, 67, 81, 88, 79, 90, 113, 95,
+            117, 107, 92, 112, 1049)
+
+# R's standard model for a proportion responding at each dose level: a binomial
+# regression with the logit link (the doses are ages here, not logged)
+fit &lt;- glm(cbind(menses, girls - menses) ~ age, family = binomial)
+# One more iteration from the converged coefficients leaves them unchanged and
+# gives the standard errors from the final weights, as the report computes them
+fit &lt;- glm(cbind(menses, girls - menses) ~ age, family = binomial, start = coef(fit))
+print(summary(fit))
+
+# The report's lines to 6 places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+a &lt;- coef(fit)[1]
+b &lt;- coef(fit)[2]
+v &lt;- vcov(fit)
+# StatsDirect follows Finney in taking the logit as half the log odds, so that its
+# scale is close to the probit's: its constant and slope are half of R's
+cat("constant =", six(a / 2), "\n")
+cat("slope =", six(b / 2), "\n")
+
+# The dose for a given proportion p is (logit(p) - a) / b; its confidence interval
+# without heterogeneity is Fieller's, from the variances and covariance of a and b
+dose_for &lt;- function(p) (qlogis(p) - a) / b
+fieller &lt;- function(p, conf = 0.95) {
+  m &lt;- dose_for(p)
+  z &lt;- qnorm((1 + conf) / 2)
+  g &lt;- z^2 * v[2, 2] / b^2
+  vm &lt;- v[1, 1] + 2 * m * v[1, 2] + m^2 * v[2, 2]
+  half &lt;- z / abs(b) * sqrt(vm - g * (v[1, 1] - v[1, 2]^2 / v[2, 2]))
+  centre &lt;- m + g * (m + v[1, 2] / v[2, 2]) / (1 - g)
+  c(centre - half / (1 - g), centre + half / (1 - g))
+}
+cat("Median * Dose =", six(dose_for(0.5)), "\n")
+cat("Confidence interval (No Heterogeneity) =", six(fieller(0.5)[1]), "to",
+    six(fieller(0.5)[2]), "\n")
+cat("* Dose for centile 90 =", six(dose_for(0.9)), "\n")
+cat("Confidence interval (No Heterogeneity) =", six(fieller(0.9)[1]), "to",
+    six(fieller(0.9)[2]), "\n")
+
+# Heterogeneity of the observed proportions about the fitted curve: Pearson's
+# chi-square with n - 2 degrees of freedom; the test of the slope is b over its
+# standard error
+chi &lt;- sum(residuals(fit, type = "pearson")^2)
+cat("Chi2 (heterogeneity of deviations from model) =", six(chi),
+    paste0("(", fit$df.residual, " df)"),
+    pv(pchisq(chi, fit$df.residual, lower.tail = FALSE)), "\n")
+t_slope &lt;- b / sqrt(v[2, 2])
+cat("t for slope =", six(t_slope), paste0("(", fit$df.residual, " df)"),
+    pv(2 * pt(-abs(t_slope), fit$df.residual)), "\n")</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+        <p><a href="nonlinear.htm">non-linear models</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

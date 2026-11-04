@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="regression_and_correlation/partial_correlation.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Partial Correlation - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Partial Correlation</h1>
+        <p> </p>
+        <p>Partial correlation is a method used to describe the relationship between two variables whilst taking away the effects of another variable, or several other variables, on this relationship.</p>
+        <p> </p>
+        <p>Partial correlation is best thought of in terms of multiple regression; StatsDirect shows the partial correlation coefficient r with its main results from <a href="multiple_linear.htm">multiple linear regression</a>.</p>
+        <p> </p>
+        <p>A different way to calculate partial correlation coefficients, which does not require a full multiple regression, is show below for the sake of further explanation of the principles:</p>
+        <p> </p>
+        <p>Consider a correlation matrix for variables A, B and C (note that the multiple linear regression function in StatsDirect will output correlation matrices for you as one of its options):</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td> </td>
+                <td width="58" style="text-decoration: underline;">A</td>
+                <td width="58" style="text-decoration: underline;">B</td>
+                <td width="58" style="text-decoration: underline;">C</td>
+            </tr>
+            <tr>
+                <td>A:</td>
+                <td width="58">*</td>
+                <td width="58"> </td>
+                <td width="58"> </td>
+            </tr>
+            <tr>
+                <td>B:</td>
+                <td width="58">r(AB)</td>
+                <td width="58">*</td>
+                <td width="58"> </td>
+            </tr>
+            <tr>
+                <td>C:</td>
+                <td width="58">r(AC)</td>
+                <td width="58">r(BC)</td>
+                <td width="58">*</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>The partial correlation of A and B adjusted for C is:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="5ae0489f1ba88431fb6aaa19b67031718afe547a1b07a9d308c2327744a63019"><span class="help-equation-accessible help-equation-live">$\displaystyle r_{ABC}=\frac{r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r_{AC}^2)(1-r_{BC}^2)}}$</span><img src="../resources/help-editor-runtime/equation-artwork/bc7c0ae7b683eb9d3aaf3d536821b1a56ccca5642d650480881984835645bb7a.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>The same can be done using Spearman's rank correlation co-efficient.</p>
+        <p> </p>
+        <p>The hypothesis test for the partial correlation co-efficient is performed in the same way as for the usual correlation co-efficient but it is based upon n-3 degrees of freedom.</p>
+        <p> </p>
+        <p>Please note that this sort of relationship between three or more variables is more usefully investigated using the multiple regression itself (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>).</p>
+        <p> </p>
+        <p>The general form of partial correlation from a multiple regression is as follows:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="64e6b502464363e6be0da06720a5bffb5263ba6dc1f21d71a7a436ca1d4eabf0"><span class="help-equation-accessible help-equation-live">$\displaystyle r_k=\frac{t_k}{\sqrt{t_k^2+\text{residual DF}}}$</span><img src="../resources/help-editor-runtime/equation-artwork/170e4823447b8caf59f2d71c233699f260288530b2a53ad1e42bce146311449f.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where t<sub>k</sub> is the Student t statistic for the kth term in the linear model.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>For the <a href="multiple_linear.htm">multiple linear regression</a> example (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>: recovery time YY after a hypotensive drug against the log dose X1 and the mean blood pressure X2 of 53 patients) the multiple regression report gives the partial correlation of each predictor with the outcome, adjusted for the other predictor, beside its coefficient:</p>
+        <p> </p>
+        <p>X1: r = 0.438695, t = 3.45194, P = 0.0011</p>
+        <p>X2: r = -0.317915, t = -2.371006, P = 0.0216</p>
+        <p> </p>
+        <p>The first formula above gives the same values from the three pairwise correlations of YY, X1 and X2, and the second gives them from the t statistics with the 50 residual degrees of freedom.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Partial correlation: the multiple linear regression topic's example (Armitage and
+# Berry 1994, recovery time YY after a hypotensive drug against the log dose X1 and
+# the mean blood pressure X2 of 53 patients) in R
+yy &lt;- c(7, 10, 18, 4, 10, 13, 21, 12, 9, 65, 20, 31, 23, 22, 13, 9, 50, 12, 11, 8, 26,
+        16, 23, 7, 11, 8, 14, 39, 28, 12, 60, 10, 60, 22, 21, 14, 4, 27, 26, 28, 15, 8,
+        46, 24, 12, 25, 45, 72, 25, 28, 10, 25, 44)
+x1 &lt;- c(2.26, 1.81, 1.78, 1.54, 2.06, 1.74, 2.56, 2.29, 1.80, 2.32, 2.04, 1.88, 1.18,
+        2.08, 1.70, 1.74, 1.90, 1.79, 2.11, 1.72, 1.74, 1.60, 2.15, 2.26, 1.65, 1.63,
+        2.40, 2.70, 1.90, 2.78, 2.27, 1.74, 2.62, 1.80, 1.81, 1.58, 2.41, 1.65, 2.24,
+        1.70, 2.45, 1.72, 2.37, 2.23, 1.92, 1.99, 1.99, 2.35, 1.80, 2.36, 1.59, 2.10,
+        1.80)
+x2 &lt;- c(66, 52, 72, 67, 69, 71, 88, 68, 59, 73, 68, 58, 61, 68, 69, 55, 67, 67, 68, 59,
+        68, 63, 65, 72, 58, 69, 70, 73, 56, 83, 67, 84, 68, 64, 60, 62, 76, 60, 60, 59,
+        84, 66, 68, 65, 69, 72, 63, 56, 70, 69, 60, 51, 61)
+
+# From the correlation matrix, as the topic's first formula: the partial
+# correlation of YY and X1 adjusted for X2
+r &lt;- cor(cbind(yy, x1, x2))
+partial &lt;- function(ab, ac, bc) (ab - ac * bc) / sqrt((1 - ac^2) * (1 - bc^2))
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("r(YY, X1 | X2) =", six(partial(r["yy", "x1"], r["yy", "x2"], r["x1", "x2"])), "\n")
+cat("r(YY, X2 | X1) =", six(partial(r["yy", "x2"], r["yy", "x1"], r["x1", "x2"])), "\n")
+
+# From the multiple regression, as the topic's second formula: t over root(t squared
+# plus the residual degrees of freedom), the r the report prints beside each term
+fit &lt;- lm(yy ~ x1 + x2)
+t &lt;- summary(fit)$coefficients[, "t value"]
+df &lt;- fit$df.residual
+cat("From the regression: X1 r =", six(t["x1"] / sqrt(t["x1"]^2 + df)), " X2 r =",
+    six(t["x2"] / sqrt(t["x2"]^2 + df)), "\n")
+
+# The test of a partial correlation has n - 3 degrees of freedom here (one
+# adjusting variable); its P is the t test of the term in the regression
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+for (term in c("x1", "x2")) {
+  cat(toupper(term), ": t =", six(t[term]), "on", df, "DF, two sided",
+      pv(2 * pt(-abs(t[term]), df)), "\n")
+}</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="regression_and_correlation/logistic.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Logistic Regression (Multiple Logistic, Odds Ratio) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Logistic Regression</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Regression and Correlation_Logistic</b>.</p>
+        <p> </p>
+        <p>This function fits and analyses logistic models for binary outcome/response data with one or more predictors.</p>
+        <p> </p>
+        <p><a href="../distributions/binomial.htm">Binomial distributions</a> are used for handling the errors associated with regression models for binary/dichotomous responses (i.e. yes/no, dead/alive) in the same way that the <a href="../distributions/normal.htm">standard normal distribution</a> is used in <a href="multiple_linear.htm">general linear regression</a>. Other, less commonly used binomial models include normit/probit and complimentary log-log. The logistic model is widely used and has many desirable properties (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman 1991</a>; <a href="../references/reference_list.htm#ref-mccullagh-1989">McCullagh and Nelder, 1989</a>; <a href="../references/reference_list.htm#ref-cox-1989">Cox and Snell, 1989</a>; <a href="../references/reference_list.htm#ref-pregibon-1981">Pregibon, 1981</a>).</p>
+        <p> </p>
+        <p>Odds = π/(1-π)</p>
+        <p>[π = proportional response, i.e. r out of n responded so π = r/n]</p>
+        <p>Logit = log odds = log(π/(1-π))</p>
+        <p> </p>
+        <p>When a logistic regression model has been fitted, estimates of π are marked with a hat symbol above the Greek letter pi to denote that the proportion is estimated from the fitted regression model. Fitted proportional responses are often referred to as event probabilities (i.e. π hat n events out of n trials).</p>
+        <p> </p>
+        <p>The following information about the difference between two logits demonstrates one of the important uses of logistic regression models:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="bbb879879c23687db533ec98de3411ff525f68afc15270f052c5ee94aa608fe4"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle \text{logit}_a-\text{logit}_b=\log \left( \frac{\hat{\pi}_a}{1-\hat{\pi}_a}\right)-\log \left( \frac{\hat{\pi}_b}{1-\hat{\pi}_b}\right) \\
+\displaystyle \displaystyle \text{logit}_a-\text{logit}_b=\log \left( \frac{\hat{\pi}_a}{1-\hat{\pi}_a} \bigg/\frac{\hat{\pi}_b}{1-\hat{\pi}_b} \right) \\
+\displaystyle \displaystyle \text{logit}_a-\text{logit}_b= \log(\text{odds ratio})
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/8f650ab4866c3bca21655af096173fe1a7a95d50add3a99e487541d566505697.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>Logistic models provide important information about the relationship between response/outcome and exposure. It makes no difference to logistic models, whether outcomes have been sampled prospectively or retrospectively, this is not the case with other binomial models.</p>
+        <p> </p>
+        <p>The general form of a logistic regression is:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="b10225763e5de2f54a6349a4bef81780ebc1e287a4d549930d0386b819b6bb0b"><span class="help-equation-accessible help-equation-live">$\displaystyle \ln\left( \frac{\hat{\pi}}{1-\hat{\pi}}\right)=b_0+b_1x_1+b_2x_2+...+b_kx_k$</span><img src="../resources/help-editor-runtime/equation-artwork/34795315e57d2aed97f7fbaf70e561465ee36e6a8e5ce96b6e476abeb1f8814a.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where π hat is the expected proportional response for the logistic model with regression coefficients b1 to k and intercept b0 when the values for the predictor variables are x1 to k.</p>
+        <p> </p>
+        <p><u>Classifier predictors</u>
+        </p>
+        <p>If one of the predictors in a regression model classifies observations into more than two classes (e.g. blood group) then you should consider splitting it into separate dichotomous variables as described under <a href="../data_preparation/dummy_variables.htm">dummy variables</a>.</p>
+        <p> </p>
+        <p><u>Data preparation</u>
+        </p>
+        <p>For individual responses that are dichotomous (e.g. yes/no), enter the total number as 1 and the response as 1 or 0 for each observation (usually 1 for yes and 0 for no).</p>
+        <p> </p>
+        <p>For responses that are proportional, either enter the total number then the number responding or enter the total number as 1 and then a proportional response (r/n).</p>
+        <p> </p>
+        <p>Rows with missing data are left out of the model. If missing data are encountered you are warned that missing data can cause <a href="../basics/bias.htm">bias</a>.</p>
+        <p> </p>
+        <p><u>Deviance and model analysis</u>
+        </p>
+        <p>Deviance is minus twice the log of the likelihood ratio for models fitted by maximum likelihood (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>; <a href="../references/reference_list.htm#ref-cox-1989">Cox and Snell, 1989</a>; <a href="../references/reference_list.htm#ref-pregibon-1981">Pregibon, 1981</a>). Log likelihood and deviance are given under the model analysis option of logistic regression in StatsDirect.</p>
+        <p> </p>
+        <p>The value of adding parameter to a logistic model can be tested by subtracting the deviance of the model with the new parameter from the deviance of the model without the new parameter, this difference is then tested against a chi-square distribution with degrees of freedom equal to the difference between the degrees of freedom of the old and new models. The model analysis option tests the model you specify against a model with only one parameter, the intercept; this tests the combined value of the specified predictors/covariates in the model.</p>
+        <p> </p>
+        <p>Some statistical packages offer stepwise logistic regression that performs systematic tests for different combinations of predictors/covariates. Automatic model building procedures such as these can be erroneous as they do not consider the real world importance of each predictor, for this reason StatsDirect does not include stepwise selection.</p>
+        <p> </p>
+        <p>Three goodness of fit tests are given for the overall fit of a model: Pearson, deviance and Hosmer-Lemeshow (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>). Note that the Hosmer-Lemeshow (decile of risk) test is only applicable when the number of observations tied at any one covariate pattern is small in comparison with the total number of observations, and when all predictors are continuous variables.</p>
+        <p> </p>
+        <p><u>Influential data and odds ratios</u>
+        </p>
+        <p>The following are provided under the fits and residuals option for the purpose of identifying influential data:</p>
+        <ul>
+            <li>leverages (diagonal elements of the logistic "hat" matrix)</li>
+            <li>deviance residuals</li>
+            <li>Pearson residuals</li>
+            <li>standardized variances</li>
+            <li>deletion displacements</li>
+            <li>covariance</li>
+        </ul>
+        <p> </p>
+        <p>Approximate confidence intervals are given for the odds ratios derived from the covariates.</p>
+        <p> </p>
+        <p><u>Bootstrap estimates</u>
+        </p>
+        <p>A bootstrap procedure may be used to cross-validate confidence intervals calculated for odds ratios derived from fitted logistic models (<a href="../references/reference_list.htm#ref-efron-1997">Efron and Tibshirani, 1997</a>; <a href="../references/reference_list.htm#ref-gong-1986">Gong, 1986</a>). The bootstrap confidence intervals used here are the 'bias-corrected' type.</p>
+        <p> </p>
+        <p>The mechanism that StatsDirect uses is to draw a specified number of random samples (with replacement, i.e. some observations are drawn once only, others more than once and some not at all) from your data. These 're-samples' are fed back into the logistic regression and bootstrap' estimates of confidence intervals for the model parameters are made by examining the model parameters calculated at each cycle of the process. The bias statistic shows how much each mean model parameter from the bootstrap distribution deviates from observed model parameters.</p>
+        <p> </p>
+        <p><u>Classification and ROC curve</u>
+        </p>
+        <p>The confidence interval given with the likelihood ratios in the classification option is constructed using the robust approximation given by <a href="../references/reference_list.htm#ref-koopman-1984">Koopman (1984)</a> for ratios of binomial proportions. The 'near' cut-off in the classification option is the rounding cut-off that gives the maximum sum of sensitivity and specificity. This value should be the shoulder at the top left of the ROC (<a href="../nonparametric_methods/roc.htm">receiver operating characteristic curve</a>).</p>
+        <p> </p>
+        <p><u>Prediction and adjusted means</u>
+        </p>
+        <p>The prediction option allows you to calculate values of the outcome (as response proportion) using your fitted logistic model coefficients with a specified set of values for the predictors (X1…p). A confidence interval is given for each prediction.</p>
+        <p> </p>
+        <p>The default X values shown are those required to calculate the overall regression mean for the model, which is the mean of Y adjusted for all X. For continuous predictors the mean of X is used. For categorical predictors you should use X as 1/k, where k is the number of categories. StatsDirect attempts to identify categorical variables but you should check the values against these rules if you are using categorical predictors in this way.</p>
+        <p> </p>
+        <p>For example, if a model of Y = logit(proportion of population who are hypertensive), X1 = sex, X2 = age was fitted, and you wanted to know the age and sex adjusted prevalence of hypertension in the population that you sampled, you could use the prediction function to give the regression mean as the answer, i.e. with X1 as 0.5 and X2 as mean age. If you wanted to know the age-adjusted prevalence of hypertension for males in your population then you would set X1 to 1 (if male sex is coded as 1 in your data).</p>
+        <p> </p>
+        <p><u>Further methods</u>
+        </p>
+        <p>GLIM provides many generalised linear models with link functions including binomial (see <a href="nonlinear.htm">non-linear models</a>). <a href="http://www.sas.com" target="_blank" rel="noopener noreferrer">SAS</a> provides an extension of logistic regression to ordinal responses, this is known as ordered logistic regression. Generic modelling software such as R and S+ can also be used. Exploratory regression modelling should be attempted only under the expert guidance of a Statistician.</p>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The logits of the response data are fitted using an iteratively re-weighted least squares method to find maximum likelihood estimates of the parameters in the logistic model (<a href="../references/reference_list.htm#ref-mccullagh-1989">McCullagh and Nelder, 1989</a>; <a href="../references/reference_list.htm#ref-cox-1989">Cox and Snell, 1989</a>; <a href="../references/reference_list.htm#ref-pregibon-1981">Pregibon, 1981</a>).</p>
+        <p> </p>
+        <p>Residuals and case-wise diagnostic statistics are calculated as follows (<a href="../references/reference_list.htm#ref-hosmer-1989">Hosmer and Lemeshow, 1989</a>):</p>
+        <p> </p>
+        <p>Leverages are the diagonal elements of the logistic equivalent of the hat matrix in general linear regression (where leverages are proportional to the distances of the jth covariate pattern from the mean of the data). The jth diagonal element of the logistic equivalent of the hat matrix is calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="f0f76468136447c460c2390ecab32f08191a33afd5232cc8f5e2411728388f69"><span class="help-equation-accessible help-equation-live">$\displaystyle h_j=m_j\hat{\pi}(\textbf{x}_j)[1-\hat{\pi}(\textbf{x}_j)](1,\textbf{x}_j')(\textbf{X}'\textbf{V}\textbf{X})^{-1}(1,\textbf{x}_j')'$</span><img src="../resources/help-editor-runtime/equation-artwork/338c7d7d8e6dd3bf26ba532532ba7c85f7ebb38abfe9740e0b033476e7961102.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, π hat is the expected proportional response, x<sub>j</sub> is the jth covariate pattern, X is the design matrix containing all covariates (first column as 1 if intercept calculated) and V is a diagonal matrix with the general element m<sub>j</sub>π hat(1 - π hat).</p>
+        <p> </p>
+        <p><b>Deviance residuals</b> are used to detect ill-fitting covariate patterns, and they are calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="e84e231913585ef092eb9b8239de6aac52c9e323badb1830f614ef6713a86c60"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle d_j=\pm\sqrt{2\left[ y_j \ln \left(\frac{y_j}{m_j\hat{\pi}_j} \right)+(m_j-y_j)\ln \left(\frac{m_j-y_j}{m_j(1-\hat{\pi}_j)} \right)\right]} \\
+\displaystyle \displaystyle \text{sign for } d_j \text{ is same as} (y_j-m_j\hat{\pi}_j) \\
+\displaystyle \text{if }y_j=0 \text{ then } d_j=-\sqrt{2m_j|\ln(1-\hat{\pi}_j)|} \\
+\displaystyle \text{if }y_j=m_j \text{ then } d_j=\sqrt{2m_j|\ln(\hat{\pi}_j)|}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/fe0fe200126706ec5bbbd872af7d1079e086533a6cd5b150a5fb48162794efd4.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, π hat is the expected proportional response and y<sub>j</sub> is the number of successes with the jth covariate pattern.</p>
+        <p> </p>
+        <p><b>Pearson residuals</b> are used to detect ill-fitting covariate patterns, and they are calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="133350375fe66758657ab6df8df33838dcd85376e0570b72de7d0f2a0c6e010d"><span class="help-equation-accessible help-equation-live">$\displaystyle r_j=\frac{y_j-m_j\hat{\pi}_j}{\sqrt{m_j\hat{\pi}_j(1-\hat{\pi}_j)}}$</span><img src="../resources/help-editor-runtime/equation-artwork/8b72295261e22fa283698054ac950bc567ef4d0a5e4a1f5fda9e92dc1ee31baa.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where m<sub>j</sub> is the number of trials with the jth covariate pattern, π hat is the expected proportional response and y<sub>j</sub> is the number of successes with the jth covariate pattern.</p>
+        <p> </p>
+        <p><b>Standardized Pearson residuals</b> are used to detect ill-fitting covariate patterns, and they are calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="119f0e08c17039ce4b43062c802c5f01fe6af3ad8afe776231ce7f3491398315"><span class="help-equation-accessible help-equation-live">$\displaystyle rs_j=\frac{r_j}{\sqrt{1-h_j}}$</span><img src="../resources/help-editor-runtime/equation-artwork/11770e3fa1090cbd1853690d323d87d926dce743a34b7f7ce101c03d2454aa40.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where r<sub>j</sub> is the Pearson residual for the jth covariate pattern and h<sub>j</sub> is the leverage for the jth covariate pattern.</p>
+        <p> </p>
+        <p><b>Deletion displacement (delta beta)</b> measures the change caused by deleting all observations with the jth covariate pattern. The statistic is used to detect observations that have a strong influence upon the regression estimates. This change in regression coefficients is calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="855c9ff8d094724f39fc0152ff727f0220a324d3a1f0949b3a8a71deb63c3f2c"><span class="help-equation-accessible help-equation-live">$\displaystyle \Delta\beta_j=\frac{r_j^2h_j}{1-h_j}$</span><img src="../resources/help-editor-runtime/equation-artwork/9a9d3786c132fd3d01e73dbb7e234abd631a2c8b078abeb9d2fbcf40c8dbe6e7.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where r<sub>j</sub> is the Pearson residual for the jth covariate pattern and h<sub>j</sub> is the leverage for the jth covariate pattern.</p>
+        <p> </p>
+        <p><b>Standardized deletion displacement (std delta beta)</b> measures the change caused by deleting all observations with the jth covariate pattern. The statistic is used to detect observations that have a strong influence upon the regression estimates. This change in regression coefficients is calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="c0141b7aea3949f53d68f67d1b1bdb8087e72bbbb4d6c712357391492c40a708"><span class="help-equation-accessible help-equation-live">$\displaystyle \Delta\beta s_j=\frac{rs_j^2h_j}{1-h_j}$</span><img src="../resources/help-editor-runtime/equation-artwork/daaf97a3a537580628389540ba8d5deaa2b4b4174a083ac08de45fbf1c7531be.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where rs<sub>j</sub> is the standardized Pearson residual for the jth covariate pattern and h<sub>j</sub> is the leverage for the jth covariate pattern.</p>
+        <p> </p>
+        <p><b>Deletion chi-square (delta chi-square)</b> measures the change in the Pearson chi-square statistic (for the fit of the regression) caused by deleting all observations with the jth covariate pattern. The statistic is used to detect ill-fitting covariate patterns. This change in chi-square is calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="99a616fcb119b2d797b5ed36494e27dfe5352d7a5865f2bfd4e33a0611c036e3"><span class="help-equation-accessible help-equation-live">$\displaystyle \Delta\chi_j^2=\frac{r_j^2}{1-h_j}$</span><img src="../resources/help-editor-runtime/equation-artwork/ec4cdb297e1b45c65fc2cfbb23a7a3d1644232086663b3b750bf3593c5c76551.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where r<sub>j</sub> is the Pearson residual for the jth covariate pattern and h<sub>j</sub> is the leverage for the jth covariate pattern.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-altman-1991">Altman (1991)</a>.</p>
+        <p>Test workbook (Regression worksheet: Men, Hypertensive, Smoking, Obesity, Snoring).</p>
+        <p> </p>
+        <p>Smoking, obesity and snoring were related to hypertension in 433 men aged 40 or over.</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td width="92" style="text-decoration: underline;text-align: right;">Men</td>
+                <td width="92" style="text-decoration: underline;text-align: right;">Hypertensive</td>
+                <td width="92" style="text-decoration: underline;text-align: right;">Smoking</td>
+                <td width="92" style="text-decoration: underline;text-align: right;">Obesity</td>
+                <td width="92" style="text-decoration: underline;text-align: right;">Snoring</td>
+            </tr>
+            <tr>
+                <td width="92" style="text-align: right;">60</td>
+                <td width="92" style="text-align: right;">5</td>
+                <td width="92" style="text-align: right;">0</td>
+                <td width="92" style="text-align: right;">0</td>
+                <td width="92" style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td width="92" style="text-align: right;">17</td>
+                <td width="92" style="text-align: right;">2</td>
+                <td width="92" style="text-align: right;">1</td>
+                <td width="92" style="text-align: right;">0</td>
+                <td width="92" style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td width="92" style="text-align: right;">8</td>
+                <td width="92" style="text-align: right;">1</td>
+                <td width="92" style="text-align: right;">0</td>
+                <td width="92" style="text-align: right;">1</td>
+                <td width="92" style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td width="92" style="text-align: right;">2</td>
+                <td width="92" style="text-align: right;">0</td>
+                <td width="92" style="text-align: right;">1</td>
+                <td width="92" style="text-align: right;">1</td>
+                <td width="92" style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td width="92" style="text-align: right;">187</td>
+                <td width="92" style="text-align: right;">35</td>
+                <td width="92" style="text-align: right;">0</td>
+                <td width="92" style="text-align: right;">0</td>
+                <td width="92" style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td width="92" style="text-align: right;">85</td>
+                <td width="92" style="text-align: right;">13</td>
+                <td width="92" style="text-align: right;">1</td>
+                <td width="92" style="text-align: right;">0</td>
+                <td width="92" style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td width="92" style="text-align: right;">51</td>
+                <td width="92" style="text-align: right;">15</td>
+                <td width="92" style="text-align: right;">0</td>
+                <td width="92" style="text-align: right;">1</td>
+                <td width="92" style="text-align: right;">1</td>
+            </tr>
+            <tr>
+                <td width="92" style="text-align: right;">23</td>
+                <td width="92" style="text-align: right;">8</td>
+                <td width="92" style="text-align: right;">1</td>
+                <td width="92" style="text-align: right;">1</td>
+                <td width="92" style="text-align: right;">1</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data using StatsDirect you must first enter them into five columns of a workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select Logistic from the Regression and Correlation section of the analysis menu. Choose the option to enter grouped data when prompted. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Men" when asked for total number and select "Hypertensives" when asked for response. Then select "Smoking", "Obesity" and "Snoring" in one action when you are asked for predictors. Make sure the intercept option is checked and the weighted analysis option is unchecked.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Logistic regression</u>
+        </p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td>Deviance goodness of fit chi-square =
+1.618403</td>
+                    <td>df = 4
+</td>
+                    <td>P = 0.8055</td>
+                </tr>
+                <tr>
+                    <td>Deviance (likelihood ratio) chi-square =
+12.507498</td>
+                    <td> df = 3
+</td>
+                    <td>P = 0.0058
+</td>
+                </tr>
+            </tbody>
+        </table>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Parameter</td>
+                <td style="text-decoration: underline;">Odds Ratio</td>
+                <td>95% Conf. Int.</td>
+                <td style="text-decoration: underline;">Z Value</td>
+                <td><u>P(&gt;|Z|)</u>
+                </td>
+            </tr>
+            <tr>
+                <td>Intercept</td>
+                <td>n/a</td>
+                <td> </td>
+                <td>-6.253967</td>
+                <td>P &lt; 0.0001</td>
+            </tr>
+            <tr>
+                <td>Smoking</td>
+                <td>0.934471</td>
+                <td>(0.541784 to 1.611779)</td>
+                <td>-0.243686</td>
+                <td>P = 0.8075</td>
+            </tr>
+            <tr>
+                <td>Obesity</td>
+                <td>2.00433</td>
+                <td>(1.146316 to 3.504564)</td>
+                <td>2.438954</td>
+                <td>P = 0.0147</td>
+            </tr>
+            <tr>
+                <td>Snoring</td>
+                <td>2.391544</td>
+                <td>(1.097143 to 5.213072)</td>
+                <td>2.193152</td>
+                <td>P = 0.0283</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>logit Hypertensive = -2.377661 -0.067775 Smoking +0.69531 Obesity +0.871939 Snoring</p>
+        <p> </p>
+        <p>Thus with 95% confidence we can infer that the odds of hypertension in obese people are between 1.15 and 3.5 times those in non-obese people.</p>
+        <p> </p>
+        <p><u>Logistic regression - model analysis</u>
+        </p>
+        <p> </p>
+        <p>Accuracy = 1.00E-07</p>
+        <p>Log likelihood with all covariates = -199.4582</p>
+        <p> </p>
+        <p>Deviance with all covariates = 1.618403, df = 4, rank = 4</p>
+        <p>Akaike information criterion = 9.618403</p>
+        <p>Schwarz information criterion = 9.936169</p>
+        <p> </p>
+        <p>Deviance with no covariates = 14.1259</p>
+        <p> </p>
+        <p>Deviance (likelihood ratio) chi-square = 12.507498, df = 3, P = 0.0058</p>
+        <p>Pseudo (deviance based) R-square = 0.88543</p>
+        <p>Pseudo (McFadden, likelihood ratio index) R-square = 0.030401</p>
+        <p> </p>
+        <p>Pearson chi-square goodness of fit = 1.364272, df = 4, P = 0.8504</p>
+        <p>Deviance goodness of fit = 1.618403, df = 4, P = 0.8055</p>
+        <p>Hosmer-Lemeshow test = 0.453725, df = 2, P = 0.797</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Parameter</td>
+                <td style="text-decoration: underline;">Coefficient</td>
+                <td style="text-decoration: underline;">Standard Error</td>
+            </tr>
+            <tr>
+                <td>Constant</td>
+                <td>-2.377661</td>
+                <td>0.380185</td>
+            </tr>
+            <tr>
+                <td>Smoking</td>
+                <td>-0.067775</td>
+                <td>0.278124</td>
+            </tr>
+            <tr>
+                <td>Obesity</td>
+                <td>0.69531</td>
+                <td>0.285085</td>
+            </tr>
+            <tr>
+                <td>Snoring</td>
+                <td>0.871939</td>
+                <td>0.397574</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>We can infer that smoking has no association with hypertension from this evidence and drop it from our model. Remember that there may be important interactions between predictors. The fits and residuals option gives you the covariances. It would be prudent to seek statistical advice on the interpretation of covariance and influential data.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Logistic regression: the StatsDirect help example (Altman 1991, hypertension and
+# smoking, obesity and snoring in 433 men) in R
+men &lt;- c(60, 17, 8, 2, 187, 85, 51, 23)
+hypertensive &lt;- c(5, 2, 1, 0, 35, 13, 15, 8)
+smoking &lt;- c(0, 1, 0, 1, 0, 1, 0, 1)
+obesity &lt;- c(0, 0, 1, 1, 0, 0, 1, 1)
+snoring &lt;- c(0, 0, 0, 0, 1, 1, 1, 1)
+
+# R's standard model for grouped binomial data: responders and non-responders in
+# each row. Its residual deviance is the deviance goodness of fit, and the drop
+# from the null deviance is the likelihood ratio chi-square for the covariates
+fit &lt;- glm(cbind(hypertensive, men - hypertensive) ~ smoking + obesity + snoring,
+           family = binomial)
+print(summary(fit))
+print(exp(cbind(OR = coef(fit), confint.default(fit))))
+
+# The report's lines to 6 places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+dev &lt;- fit$deviance
+lr &lt;- fit$null.deviance - fit$deviance
+cat("Deviance goodness of fit chi-square =", six(dev), " df =", fit$df.residual, " ",
+    pv(pchisq(dev, fit$df.residual, lower.tail = FALSE)), "\n")
+df_lr &lt;- fit$df.null - fit$df.residual
+cat("Deviance (likelihood ratio) chi-square =", six(lr), " df =", df_lr, " ",
+    pv(pchisq(lr, df_lr, lower.tail = FALSE)), "\n")
+s &lt;- summary(fit)$coefficients
+ci &lt;- confint.default(fit)   # Wald limits, as the report's
+for (i in 2:4) {
+  cat(rownames(s)[i], "odds ratio =", six(exp(s[i, 1])), " (", six(exp(ci[i, 1])), "to",
+      six(exp(ci[i, 2])), ")  z =", six(s[i, 3]), " ", pv(s[i, 4]), "\n")
+}
+cat("logit Hypertensive =", six(s[1, 1]), six(s[2, 1]), "Smoking",
+    paste0("+", six(s[3, 1])), "Obesity", paste0("+", six(s[4, 1])), "Snoring\n")
+
+# The model analysis. The report's log likelihood is the sum over the men of
+# log p or log(1 - p) (without the binomial coefficients that R's logLik adds), the
+# information criteria are on the deviance scale (deviance + 2k, deviance + k log n
+# for the n rows of data), and the two pseudo R-squares are 1 minus the ratio of
+# the deviances and 1 minus the ratio of the log likelihoods (McFadden's)
+k &lt;- length(coef(fit))
+n &lt;- length(men)
+p &lt;- fitted(fit)
+ll &lt;- sum(hypertensive * log(p) + (men - hypertensive) * log(1 - p))
+p0 &lt;- sum(hypertensive) / sum(men)
+ll0 &lt;- sum(hypertensive * log(p0) + (men - hypertensive) * log(1 - p0))
+cat("Log likelihood with all covariates =", formatC(ll, digits = 4, format = "f"), "\n")
+cat("Deviance with all covariates =", six(dev), " df =", fit$df.residual,
+    " rank =", k, "\n")
+cat("Akaike information criterion =", six(dev + 2 * k), "\n")
+cat("Schwarz information criterion =", six(dev + k * log(n)), "\n")
+cat("Deviance with no covariates =", six(fit$null.deviance), "\n")
+cat("Pseudo (deviance based) R-square =", six(1 - dev / fit$null.deviance), "\n")
+cat("Pseudo (McFadden, likelihood ratio index) R-square =", six(1 - ll / ll0), "\n")
+pearson &lt;- sum(residuals(fit, type = "pearson")^2)
+cat("Pearson chi-square goodness of fit =", six(pearson), " df =", fit$df.residual, " ",
+    pv(pchisq(pearson, fit$df.residual, lower.tail = FALSE)), "\n")
+# The Hosmer-Lemeshow test as the report forms it for grouped data: the covariate
+# patterns in order of fitted proportion, a new group whenever the men so far
+# reach the next tenth of the total (a pattern is never split), then the sum over
+# the groups of (O - E)^2 / (E (1 - E / n)) with 2 fewer degrees of freedom than
+# groups; these 8 patterns make 4 groups
+ntot &lt;- sum(men)
+ncut &lt;- floor(ntot / 10)
+ncum &lt;- 0
+group &lt;- integer(n)
+g &lt;- 1
+for (i in order(p)) {
+  if (ncum &gt;= ncut &amp;&amp; g &lt;= 10) {
+    g &lt;- g + 1
+    ncut &lt;- floor(max(ncum + ntot / 10, g * ntot / 10))
+  }
+  group[i] &lt;- g
+  ncum &lt;- ncum + men[i]
+}
+o &lt;- tapply(hypertensive, group, sum)
+e &lt;- tapply(p * men, group, sum)
+size &lt;- tapply(men, group, sum)
+hl &lt;- sum((o - e)^2 / (e * (1 - e / size)))
+cat("Hosmer-Lemeshow test =", six(hl), " df =", length(o) - 2, " ",
+    pv(pchisq(hl, length(o) - 2, lower.tail = FALSE)), "\n")
+cat("Coefficients and standard errors:\n")
+for (i in 1:4) cat(rownames(s)[i], six(s[i, 1]), six(s[i, 2]), "\n")</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

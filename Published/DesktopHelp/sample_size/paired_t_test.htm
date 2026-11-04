@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="sample_size/paired_t_test.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sample Size for Paired t Test - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
+            Sample Size for Paired t Test</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Sample Size_Paired t</b>.</p>
+        <p> </p>
+        <p>This function gives you the minimum number of pairs of subjects needed to detect a true difference DELTA in population means with power POWER and two sided type I error probability ALPHA (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>; <a href="../references/reference_list.htm#ref-pearson-1970">Pearson and Hartley, 1970</a>).</p>
+        <p> </p>
+        <p><u>Information required</u>
+        </p>
+        <ul>
+            <li>POWER: probability of detecting a true effect.</li>
+            <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
+            <li>DELTA: difference in population means.</li>
+            <li>SD: estimated standard deviation of paired response differences.</li>
+        </ul>
+        <p> </p>
+        <p><u>Practical issues</u>
+        </p>
+        <ul>
+            <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
+            <li>5% is the usual choice for ALPHA.</li>
+            <li>SD is usually estimated from previous studies.</li>
+            <li>If possible, choose a range of mean differences that you want to have the statistical power to detect.</li>
+        </ul>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The estimated sample size n is calculated as the solution of:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="949adf155cf50a2463f7993b9dda686ca52568bbf245baa423b121019106a522"><span class="help-equation-accessible help-equation-live">$\displaystyle n=\frac{(t_{n-1, \space \alpha/2}+t_{n-1, \space \beta})^2}{d^2}$</span><img src="../resources/help-editor-runtime/equation-artwork/055b1f0313424e23102235883e7c2be0088301fcf524264432d8a9ea9bdf319a.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where d = delta/sd, α = alpha, β = 1 - power and t<sub>v,p</sub> is a Student t quantile with v degrees of freedom and probability p. n is rounded up to the closest integer, then adjusted if necessary to the smallest n for which the power calculated from the non-central t distribution reaches POWER.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>Suppose you plan a study of peak expiratory flow rate (PEFR) before and after a walk on a cold day, like the one in the <a href="../parametric_methods/paired_t.htm">paired t test</a> example but looking for a smaller effect. You want to detect a mean fall of 20 L/min with 80% power at a two sided alpha of 5%, and from that earlier study you expect the standard deviation of the paired differences to be about 35 L/min. The figures are invented for this illustration.</p>
+        <p> </p>
+        <p>To run this in StatsDirect select Paired t from the Sample Size section of the Analysis menu. Enter 20 as the difference of population mean from zero, 35 as the standard deviation of the paired differences, 80% as the power and 5% as alpha. Then run it again with 90% as the power.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Sample size for a paired or single sample Student t test</u>
+        </p>
+        <p> </p>
+        <p>Alpha = 0.05</p>
+        <p>Power = 0.8</p>
+        <p>Difference of mean from zero = 20</p>
+        <p>Standard deviation = 35</p>
+        <p>Estimated minimum sample size = 27 pairs</p>
+        <p>Degrees of freedom = 26</p>
+        <p> </p>
+        <p>and with 90% power:</p>
+        <p> </p>
+        <p>Alpha = 0.05</p>
+        <p>Power = 0.9</p>
+        <p>Difference of mean from zero = 20</p>
+        <p>Standard deviation = 35</p>
+        <p>Estimated minimum sample size = 35 pairs</p>
+        <p>Degrees of freedom = 34</p>
+        <p> </p>
+        <p>Twenty-seven pairs of measurements would give an 80% chance of detecting a true mean fall of 20 L/min, and 35 pairs a 90% chance. The size is the smallest number of pairs for which the power of the paired t test, calculated from the non-central t distribution, reaches the power asked for.</p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Sample size for a paired t test: the StatsDirect help example (an invented plan for
+# a study of peak expiratory flow rate before and after a cold walk, like the paired t
+# test example: a fall of 20 L/min to detect, sd of paired differences 35 L/min) in R
+delta &lt;- 20                               # difference in population means to detect
+sdiff &lt;- 35                               # sd of the paired response differences
+target &lt;- 0.8                             # power, the probability of detecting delta
+alpha &lt;- 0.05                             # two sided type I error probability
+
+# power.t.test solves for the number of pairs at which the power of the two sided
+# paired t test, from the non-central t distribution, equals the target. strict = TRUE
+# counts rejections in both tails as the report does; the default counts only the tail
+# on the side of delta, which seldom changes the whole number of pairs.
+r &lt;- power.t.test(delta = delta, sd = sdiff, sig.level = alpha, power = target,
+                  type = "paired", strict = TRUE)
+print(r)
+
+# A whole number of pairs: the smallest whose power reaches the target (checked below)
+n &lt;- ceiling(r$n)
+cat("Alpha =", alpha, "\n")
+cat("Power =", target, "\n")
+cat("Difference of mean from zero =", delta, "\n")
+cat("Standard deviation =", sdiff, "\n")
+cat("Estimated minimum sample size =", n, "pairs\n")
+cat("Degrees of freedom =", n - 1, "\n")
+
+# The report also checks that n is the smallest number of pairs whose power reaches the
+# target: the two sided power with n pairs, from the non-central t distribution with
+# n - 1 degrees of freedom and non-centrality delta / (sd / sqrt(n)), and with n - 1
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pw &lt;- function(n) {
+  tcrit &lt;- qt(1 - alpha / 2, n - 1)
+  ncp &lt;- delta / (sdiff / sqrt(n))
+  pt(tcrit, n - 1, ncp, lower.tail = FALSE) + pt(-tcrit, n - 1, ncp)
+}
+cat("Power with", n, "pairs =", six(pw(n)), "and with", n - 1, "pairs =",
+    six(pw(n - 1)), "\n")
+
+# The same plan with 90% power
+r90 &lt;- power.t.test(delta = delta, sd = sdiff, sig.level = alpha, power = 0.9,
+                    type = "paired", strict = TRUE)
+n90 &lt;- ceiling(r90$n)
+cat("Power = 0.9\n")
+cat("Estimated minimum sample size =", n90, "pairs\n")
+cat("Degrees of freedom =", n90 - 1, "\n")</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

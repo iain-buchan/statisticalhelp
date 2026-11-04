@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="nonparametric_methods/quantile_ci.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quantile (Median etc.) Confidence Interval - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Quantile Confidence Interval</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Nonparametric_Quantile Confidence Interval</b>.</p>
+        <p> </p>
+        <p>This function provides a confidence interval for any quantile or (per)centile.</p>
+        <p> </p>
+        <p>As with all nonparametric confidence intervals, the exact confidence level is not always attainable but the level which is exact to the interval constructed is displayed (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-gardner-1989">Gardner and Altman, 1989</a>).</p>
+        <p> </p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>random sample</li>
+            <li>measurement scale is at least ordinal</li>
+        </ul>
+        <p> </p>
+        <p>A presentation of medians and their confidence intervals is often more meaningful than the time honoured (abused) tradition of presenting means and standard deviations. Researchers sometimes quote means and their confidence intervals in situations where a median with confidence interval would be more appropriate (e.g. when outliers have a biasing effect on the mean but there is insufficient evidence to exclude them from the analysis). A <a href="../graphics/box_whisker.htm">box and whisker plot</a> is a useful accompaniment to this function.</p>
+        <p> </p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>For sample sizes greater than 200 an approximation to the binomial distribution is used otherwise the critical values of the binomial distribution used in this calculation are found by an exact method (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>). If the conservative option is not selected or the sample size is greater than 200 then for a c*100% confidence interval the binomial quantiles closest to a cumulative probability of (1-c)/2 and 1-(1-c)/2 are used. If the conservative option is selected and the sample size is not greater than 200 then for a c*100% confidence interval the binomial quantiles closest to and less than or equal to a cumulative probability of (1-c)/2, and closest to and greater than or equal to a cumulative probability of 1-(1-c)/2 are used. Note that the conservative interval calculates each side, not just the overall interval, on a conservative basis.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999, p. 145)</a>.</p>
+        <p>Test workbook (Nonparametric worksheet: Tubes).</p>
+        <p> </p>
+        <p>The following represent times to failure in hours for a set of pentode radio valves.</p>
+        <p> </p>
+        <table>
+            <col />
+            <tr>
+                <td style="text-align: right;"><u>Tubes</u>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">46.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">47.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">49.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">56.5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">56.8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">59.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">59.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">63.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">63.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">63.4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">63.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">64.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">67.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">67.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">73.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">78.5</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect you must first enter them into a workbook column and label it appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select Quantile Confidence Interval from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Tubes" when prompted for data. Choose 90% as the confidence level. Then enter 0.75 to specify that the quantile you want is the upper quartile or 75th percentile.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p>Quantile (0.75) = 66.35</p>
+        <p> </p>
+        <p>Approximate 90% CI (non-conservative) = 63.3 to 73.3</p>
+        <p>Exact confidence level = 90.93936%</p>
+        <p> </p>
+        <p>Approximate 90% CI (conservative) = 63.3 to 78.5</p>
+        <p>Exact confidence level = 96.284745%</p>
+        <p> </p>
+        <p>We may conclude with 91% confidence that the population value of the upper quartile lies between 63.3 and 73.3 hours.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Quantile confidence interval: the StatsDirect help example (Conover 1999,
+# p. 145) in R
+tubes &lt;- c(46.9, 47.2, 49.1, 56.5, 56.8, 59.2, 59.9, 63.2, 63.3, 63.4, 63.7, 64.1,
+           67.1, 67.7, 73.3, 78.5)
+p &lt;- 0.75                                 # the upper quartile
+conf &lt;- 0.90
+x &lt;- sort(tubes)
+n &lt;- length(x)
+
+# The quantile. StatsDirect takes the p(n + 1)th ordered value, interpolating
+# between neighbours. That is type 6 in R, whose default is type 7 (64.85 here).
+cat("Quantile (", p, ") = ", quantile(tubes, p, type = 6), "\n", sep = "")
+
+# R has no standard function for this interval. The limits are ordered values.
+# The number of observations below the population quantile is binomial(n, p), so
+# cum[q + 1] is the probability that at most q of them are below it, and the
+# interval from the (lo + 1)th to the (hi + 1)th ordered value covers the
+# quantile with probability cum[hi + 1] - cum[lo + 1].
+cum &lt;- pbinom(0:n, n, p)
+tail &lt;- (1 - conf) / 2
+show &lt;- function(lo, hi, label) {
+  cat(sprintf("Approximate %g%% CI (%s) = %g to %g\n", 100 * conf, label,
+              x[lo + 1], x[hi + 1]))
+  cat("Exact confidence level = ",
+      format(round(100 * (cum[hi + 1] - cum[lo + 1]), 6), digits = 10), "%\n",
+      sep = "")
+}
+
+# Non-conservative: the probability in each tail is as close as it can be to
+# (1 - conf) / 2
+show(which.min(abs(cum - tail)) - 1, which.min(abs(cum - (1 - tail))) - 1,
+     "non-conservative")
+
+# Conservative: no more than (1 - conf) / 2 in each tail. With a small sample, or
+# a quantile near 0 or 1, no ordered value may be far enough out: StatsDirect
+# then uses the smallest or largest observation and marks the limit.
+stopifnot(any(cum &lt;= tail), any(cum &gt;= 1 - tail))
+show(max(which(cum &lt;= tail)) - 1, min(which(cum &gt;= 1 - tail)) - 1, "conservative")</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

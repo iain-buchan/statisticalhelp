@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="nonparametric_methods/gini.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gini Coefficient of Inequality - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Gini Coefficient of Inequality</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Nonparametric_Gini Coefficient of Inequality</b></p>
+        <p> </p>
+        <p>This method calculates the Gini coefficient (G) of inequality with bootstrap confidence intervals. A Lorenz plot is produced when a single variable is specified for analysis, otherwise the summary statistics alone are displayed for a group of variables.</p>
+        <p> </p>
+        <p>The Gini coefficient was developed by the Italian Statistician Corrado Gini (<a href="../references/reference_list.htm#ref-gini-1912">Gini, 1912</a>) as a summary measure of income inequality in society. It is usually associated with the plot of wealth concentration introduced a few years earlier by Max Lorenz (<a href="../references/reference_list.htm#ref-lorenz-1905">Lorenz, 1905</a>). Since these measures were introduced, they have been applied to topics other than income and wealth, but mostly within Economics (<a href="../references/reference_list.htm#ref-cowell-1995">Cowell, 1995</a>, <a href="../references/reference_list.htm#ref-cowell-1995">2011</a>; <a href="../references/reference_list.htm#ref-jenkins-1991">Jenkins, 1991</a>; <a href="../references/reference_list.htm#ref-sen-1973">Sen, 1973</a>).</p>
+        <p> </p>
+        <p>G is a measure of inequality, defined as the mean of absolute differences between all pairs of individuals for some measure. The minimum value is 0 when all measurements are equal and the theoretical maximum is 1 for an infinitely large set of observations where all measurements but one has a value of 0, which is the ultimate inequality (<a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>).</p>
+        <p> </p>
+        <p>When G is based on the Lorenz curve of income distribution, it can be interpreted as the expected income gap between two individuals randomly selected from the population (<a href="../references/reference_list.htm#ref-sen-1973">Sen, 1973</a>).</p>
+        <p> </p>
+        <p>The classical definition of G appears in the notation of the theory of relative mean difference:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="736ade2b67503c9398fc82f44dcf5116a0660dff64e65b507a7f72073cf4adde"><span class="help-equation-accessible help-equation-live">$\displaystyle G=\frac{\displaystyle \sum_{i=1}^n \sum_{j=1}^n \left| x_i - x_j \right|}{2n^2\bar x}$</span><img src="../resources/help-editor-runtime/equation-artwork/79ffe1f50993ebe095febaa7fb1acf839a80929a9bee87e64f595453ef6e85fe.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where x is an observed value,  n is the number of values observed and x bar is the mean value.</p>
+        <p> </p>
+        <p>If the x values are first placed in ascending order, such that each x has rank i, the some of the comparisons above can be avoided and computation is quicker:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="0b67419a2fd76a11933d3fdc6cffa9499605f9ca33cca942365049ee4b012aca"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle G=\frac{2}{n^2\bar x} \sum_{i=1}^n i(x_i-\bar x) \\
+\displaystyle \displaystyle G=\frac{\displaystyle \sum_{i=1}^n (2i-n-1)x_i}{\displaystyle n\sum_{i=1}^n x_i}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/19c6f5b6955625afb7f15c0cf2e53adb79c4bfe296a0d5e731aac9e92acdbe12.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where x is an observed value, n is the number of values observed and i is the rank of values in ascending order.</p>
+        <p> </p>
+        <p>Note that only positive non-zero values are used.</p>
+        <p> </p>
+        <p>The small sample variance properties of G are not known, and large sample approximations to the variance of G are poor (<a href="../references/reference_list.htm#ref-mills-1997">Mills and Zandvakili, 1997</a>; <a href="../references/reference_list.htm#ref-glasser-1962">Glasser, 1962</a>; <a href="../references/reference_list.htm#ref-dixon-1987">Dixon et al., 1987</a>), therefore confidence intervals are calculated via bootstrap re-sampling methods (<a href="../references/reference_list.htm#ref-efron-1997">Efron and Tibshirani, 1997</a>).</p>
+        <p> </p>
+        <p>StatsDirect calculates two types of bootstrap confidence intervals, these are percentile and bias-corrected (<a href="../references/reference_list.htm#ref-mills-1997">Mills and Zandvakili, 1997</a>; <a href="../references/reference_list.htm#ref-dixon-1987">Dixon et al., 1987</a>; <a href="../references/reference_list.htm#ref-efron-1997">Efron and Tibshirani, 1997</a>). The bias-corrected intervals are most appropriate for most applications. You are asked for a seed for the random numbers of the re-samples; the box is filled with a seed from the clock, which you can change, and the report gives the seed that was used, so that the same re-samples can be drawn again.</p>
+        <p> </p>
+        <p>In order for G to be an unbiased estimate of the true population value, it should be multiplied by n/(n-1) (<a href="../references/reference_list.htm#ref-dixon-1987">Dixon, 1987</a>; <a href="../references/reference_list.htm#ref-mills-1997">Mills and Zandvakili, 1997</a>). This corrected form of G does not appear most literature, but there are few situations when it is not the most appropriate form to use.</p>
+        <p> </p>
+        <p>In the context of measuring inequalities in health, <a href="../references/reference_list.htm#ref-brown-1994">Brown (1994)</a> presents a Gini-style index, seemingly calculated from two variables instead of one. The two variables comprise distinct indicators of health (y, e.g. infant deaths) and population (x, live births) for n groups sorted by a composite measure of health and population (e.g. infant mortality rate).</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="29f1cbb37bd96c69641b2382de3d8b39522b1f49ec44e0b1a1c125310a061299"><span class="help-equation-accessible help-equation-live">$\displaystyle G_b=1-\sum_{i=0}^{n-1} (Y_{i+1}+Y_i)(X_{i+1}-X_i)$</span><img src="../resources/help-editor-runtime/equation-artwork/684e79ddc4abc53df56c2c42f0d704e064d8ec3abfe9b10c336a26f1acde7e24.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>G<sub>b</sub> based on two variables (e.g. infant deaths and live births) will be very similar to G calculated from a composite measure (e.g. infant mortality rate). In most situations it is more natural to think of inequality of the composite measure. Another reason not to use G<sub>b</sub> is that its statistical characteristics are not well studied.</p>
+        <p> </p>
+        <p>StatsDirect does not provide a separate function to handle distinct health and population variables when calculating Gini coefficients, instead you should use the single composite health/population measure.</p>
+        <p> </p>
+        <p>The <a href="../references/reference_list.htm#ref-pan-american-health-organization-2001">Pan American Health Organisation (2001)</a> gave the following illustration:</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Country</td>
+                <td style="text-decoration: underline;">GNP per capita</td>
+                <td style="text-decoration: underline;">infant mortality rate (IMR)</td>
+                <td style="text-decoration: underline;">live births</td>
+                <td style="text-decoration: underline;">infant deaths</td>
+            </tr>
+            <tr>
+                <td>Bolivia</td>
+                <td>2860</td>
+                <td>59</td>
+                <td>250</td>
+                <td>14750</td>
+            </tr>
+            <tr>
+                <td>Peru</td>
+                <td>4410</td>
+                <td>43</td>
+                <td>621</td>
+                <td>26703</td>
+            </tr>
+            <tr>
+                <td>Ecuador</td>
+                <td>4730</td>
+                <td>39</td>
+                <td>308</td>
+                <td>12012</td>
+            </tr>
+            <tr>
+                <td>Colombia</td>
+                <td>6720</td>
+                <td>24</td>
+                <td>889</td>
+                <td>21336</td>
+            </tr>
+            <tr>
+                <td>Venezuela</td>
+                <td>8130</td>
+                <td>22</td>
+                <td>568</td>
+                <td>12496</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu, then select Gini Coefficient of Inequality from the Nonparametric section of the Analysis menu. Select the column marked "Infant Mortality Rate (IMR)" when prompted for data, skip the frequency weights, and enter 2000 bootstrap replications and the seed 2001 to match the figures below (the default is 100,000 replications, and the seed box is filled from the clock).</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Gini coefficient of inequality</u>
+        </p>
+        <p> </p>
+        <p>Analysis for Infant Mortality Rate (IMR):</p>
+        <p> </p>
+        <p>Positive non-zero observations = 5</p>
+        <p>Variance coefficient = 0.404884</p>
+        <p> </p>
+        <p>Re-samples = 2000, seed = 2001</p>
+        <p>Bias = 0.040067</p>
+        <p>Standard error (bootstrap) = 0.046859</p>
+        <p> </p>
+        <p>Gini coefficient = 0.19893</p>
+        <p>Percentile 95% CI = 0.070485 to 0.223529</p>
+        <p>BCa 95% CI = 0.120245 to 0.241304</p>
+        <p> </p>
+        <p>Unbiased estimator of population Gini coefficient = 0.248663</p>
+        <p>Percentile 95% CI = 0.088106 to 0.279412</p>
+        <p>BCa 95% CI = 0.150307 to 0.30163</p>
+        <p> </p>
+        <p>
+            <img src="../resources/images/lorenz.png" width="566" height="400" border="0" style="-ms-interpolation-mode: bicubic;" />
+        </p>
+        <p> </p>
+        <p>The bias, standard error and confidence limits come from random re-samples: with the seed above they are the same each time the analysis is run, and with another seed they differ a little. Brown's G<sub>b</sub> = 0.1904 for these data, from the live births and infant deaths. This example uses too few groups for reliable inference from G.</p>
+        <p> </p>
+        <p><u>Technical notes</u>
+        </p>
+        <p>The percentile confidence interval is defined as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="8de4f810c35a93a8c181f7acc6800a7f62be82f95c77fc3159228e11383b579f"><span class="help-equation-accessible help-equation-live">$\displaystyle g^*_{\alpha/2} \space, \space g^*_{1-\alpha/2}$</span><img src="../resources/help-editor-runtime/equation-artwork/ae24af3e9f395dccecf737c347be15813d40f5f91ecd0d2e0077e1d164dd054e.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where g* is a Gini coefficient estimated from a bootstrap sample and a is (100-confidence level)/100.</p>
+        <p>A re-sample whose coefficient equals G is not counted in z<sub>0</sub> (Efron and Tibshirani 1993; the boot package in R counts the same way). When no re-sample lies below G, or every one does, z<sub>0</sub> is infinite and the BCa interval is reported as not defined.</p>
+        <p> </p>
+        <p>The bias-corrected and accelerated (BCa) confidence interval is defined as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="4f436ed459b2eac75668cd4ffbf85b5c577e914cd936228ca79c6b95bf64b9a7"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle g^*_{p1} \space, \space g^*_{p2} \\
+\displaystyle \displaystyle p_1=\phi\left[z_0+\frac{z_0-z_{1-\alpha/2}}{1-a(z_0-z_{1-\alpha/2})}\right] \\
+\displaystyle \displaystyle p_2=\phi\left[z_0+\frac{z_0+z_{1-\alpha/2}}{1-a(z_0+z_{1-\alpha/2})}\right] \\
+\displaystyle \displaystyle z_0=\phi^{-1}[\#(g^*&lt;G)/k] \\
+\displaystyle \displaystyle a=\frac{\sum_{i=1}^n (\bar g_{(\cdot)}-g_{(i)})^3}{6\left[\sum_{i=1}^n (\bar g_{(\cdot)}-g_{(i)})^2\right]^{3/2}}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/948d9aadaaded26bd3af1644ec6e73a853795e63a48853c3dace0b4a75001603.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where g* is a Gini coefficient estimated from a bootstrap sample, G is the observed Gini coefficient, g<sub>(i)</sub> is the Gini coefficient with the ith observation left out and ḡ<sub>(·)</sub> is the mean of these jackknife values (a is the acceleration), α is (100-confidence level)/100, ϕ is the standard normal distribution and k is the number of re-samples in the bootstrap.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It uses the boot package, which comes with R, and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Gini coefficient of inequality: the StatsDirect help example (Pan American
+# Health Organisation 2001, infant mortality in five countries) in R
+imr &lt;- c(59, 43, 39, 24, 22)              # infant deaths per 1000 live births
+n &lt;- length(imr)
+
+# The Gini coefficient from the values in ascending order (the argument i lets
+# boot() below pass in a re-sample)
+gini &lt;- function(x, i = seq_along(x)) {
+  x &lt;- sort(x[i])
+  n &lt;- length(x)
+  sum((2 * seq_len(n) - n - 1) * x) / (n * sum(x))
+}
+G &lt;- gini(imr)
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("Positive non-zero observations =", n, "\n")
+cat("Variance coefficient =", six(sd(imr) / mean(imr)), "\n")
+cat("Gini coefficient =", six(G), "\n")
+cat("Unbiased estimator of population Gini coefficient =", six(G * n / (n - 1)), "\n")
+
+# Bootstrap confidence intervals with the boot package, which comes with R: 2000
+# re-samples as in the example (StatsDirect's default is 100,000). The limits
+# depend on the random re-samples, so they differ a little from run to run and
+# from StatsDirect's. R's bias is the mean re-sampled coefficient less G, the
+# opposite way round to StatsDirect's. The BCa interval is given the jackknife
+# influence values, so its acceleration is the one StatsDirect uses (Efron and
+# Tibshirani 1993). With so few values R warns that the BCa limits are unstable.
+if (!requireNamespace("boot", quietly = TRUE)) install.packages("boot", repos = "https://cloud.r-project.org")
+library(boot)
+set.seed(2001)
+b &lt;- boot(imr, gini, R = 2000)
+cat("Re-samples =", b$R, "\n")
+print(b)
+ci &lt;- boot.ci(b, type = c("perc", "bca"), L = empinf(b, type = "jack"))
+print(ci)
+
+# StatsDirect multiplies the limits, like the coefficient, by n / (n - 1) for the
+# unbiased estimator
+cat("Unbiased percentile 95% CI =", six(ci$percent[4] * n / (n - 1)), "to",
+    six(ci$percent[5] * n / (n - 1)), "\n")
+cat("Unbiased BCa 95% CI =", six(ci$bca[4] * n / (n - 1)), "to",
+    six(ci$bca[5] * n / (n - 1)), "\n")
+
+# Brown's (1994) index from the two components, live births and infant deaths,
+# with the countries in ascending order of the rate
+births &lt;- c(250, 621, 308, 889, 568)
+deaths &lt;- c(14750, 26703, 12012, 21336, 12496)
+o &lt;- order(imr)
+X &lt;- c(0, cumsum(births[o]) / sum(births))
+Y &lt;- c(0, cumsum(deaths[o]) / sum(deaths))
+gb &lt;- 1 - sum((Y[-1] + Y[-(n + 1)]) * (X[-1] - X[-(n + 1)]))
+cat("Brown's G b =", formatC(gb, digits = 4, format = "f"), "\n")
+
+# The Lorenz plot at the end of the report: the cumulative share of the variable
+# against the cumulative share of the sample (green), with the line of equality
+# (red)
+x &lt;- sort(imr)
+plot(c(0, seq_len(n) / n), c(0, cumsum(x) / sum(x)), type = "b", col = "green",
+     xlim = c(0, 1), ylim = c(0, 1), xlab = "Proportion of sample",
+     ylab = "Proportion of variable")
+abline(0, 1, col = "red")</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

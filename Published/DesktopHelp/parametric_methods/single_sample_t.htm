@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="parametric_methods/single_sample_t.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Single Sample t Test - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Single Sample t Test</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Parametric_Single Sample t</b>.</p>
+        <p> </p>
+        <p>This function gives a single sample <a href="../distributions/t.htm">Student t</a> test with a confidence interval for the mean difference.</p>
+        <p> </p>
+        <p>The single sample t method tests a null hypothesis that the population mean is equal to a specified value. If this value is zero (or not entered) then the confidence interval for the sample mean is given (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
+        <p> </p>
+        <p>The test statistic is calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="43f4ee9b921e7306957c80af0217330b14a0038d424063273f031610bba4d1a5"><span class="help-equation-accessible help-equation-live">$\displaystyle t=\frac{\bar x-\mu}{\sqrt{s^2/n}}$</span><img src="../resources/help-editor-runtime/equation-artwork/81d8ca9bebf02a043b0affda2dc37bd19c4df5586a03b5fc8603bb363652273a.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where x bar is the sample mean, s² is the sample variance, n is the sample size, µ is the specified population mean and t is a Student t quantile with n-1 degrees of freedom.</p>
+        <p> </p>
+        <p>Power is calculated as the power achieved with the given sample size and variance for detecting the observed mean difference with a two-sided <a href="../basics/p_values.htm">type I error</a> probability of (100-CI%)% (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>).</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Parametric worksheet: Systolic BP).</p>
+        <p> </p>
+        <p>Consider 20 first year resident female doctors drawn at random from one area, resting systolic blood pressures measured using an electronic sphygmomanometer were:</p>
+        <table style="caption-side: top;">
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: left;">128</td>
+                <td style="text-align: left;">127</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">118</td>
+                <td style="text-align: left;">115</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">144</td>
+                <td style="text-align: left;">142</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">133</td>
+                <td style="text-align: left;">140</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">132</td>
+                <td style="text-align: left;">131</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">111</td>
+                <td style="text-align: left;">132</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">149</td>
+                <td style="text-align: left;">122</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">139</td>
+                <td style="text-align: left;">119</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">136</td>
+                <td style="text-align: left;">129</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">126</td>
+                <td style="text-align: left;">128</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>
+            From previous large studies of women drawn at random from the healthy general public, a resting systolic blood pressure of 120 mm Hg was predicted as the population mean for the relevant age group. To analyse these data in StatsDirect first prepare a workbook column containing the 20 data above or open the test workbook and select the single sample t test from the parametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Systolic BP" when prompted and enter the population mean as 120.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Single sample t test</u>
+        </p>
+        <p>Sample name: Systolic BP</p>
+        <p>Sample mean = 130.05</p>
+        <p>Population mean = 120</p>
+        <p>Sample size n = 20</p>
+        <p>Sample sd = 9.960316</p>
+        <p> </p>
+        <p>95% confidence interval for mean difference = 5.388429 to 14.711571</p>
+        <p> </p>
+        <p>df = 19</p>
+        <p>t = 4.512404</p>
+        <p> </p>
+        <p>One sided P = 0.0001</p>
+        <p>Two sided P = 0.0002</p>
+        <p> </p>
+        <p>Power (for 5% significance) = 98.97%</p>
+        <p> </p>
+        <p>A null hypothesis of no difference between sample and population means has clearly been rejected. Using the 95% CI we expect the mean systolic BP for this population of doctors to be at least 5 mm Hg greater than the age and sex matched general public, lying somewhere between 125 and 135 mm Hg.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Single sample t test: the StatsDirect help example (resting systolic blood
+# pressure of 20 first year resident doctors) in R
+bp &lt;- c(128, 127, 118, 115, 144, 142, 133, 140, 132, 131, 111, 132, 149, 122, 139,
+        119, 136, 129, 126, 128)
+mu &lt;- 120                                 # the population mean to compare with
+n &lt;- length(bp)
+
+# R's standard test gives t, df, the two sided P and a 95% confidence interval for
+# the mean. StatsDirect's interval is for the difference between the sample and
+# population means, so its limits are these less 120.
+r &lt;- t.test(bp, mu = mu)
+print(r)
+
+# The report's other lines, to 6 decimal places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("Sample mean =", six(mean(bp)), "  Sample size n =", n,
+    "  Sample sd =", six(sd(bp)), "\n")
+cat("95% confidence interval for mean difference =", six(r$conf.int[1] - mu), "to",
+    six(r$conf.int[2] - mu), "\n")
+cat("df =", r$parameter, "  t =", six(r$statistic), "\n")
+cat(sprintf("One sided P = %.4f   Two sided P = %.4f\n", r$p.value / 2, r$p.value))
+
+# Power of a two sided test at the 5% level to detect the difference and sd seen,
+# from the noncentral t distribution; strict = TRUE counts rejections in both
+# tails, as StatsDirect does.
+pw &lt;- power.t.test(n = n, delta = mean(bp) - mu, sd = sd(bp), sig.level = 0.05,
+                   type = "one.sample", strict = TRUE)
+cat(sprintf("Power (for 5%% significance) = %.2f%%\n", 100 * pw$power))</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

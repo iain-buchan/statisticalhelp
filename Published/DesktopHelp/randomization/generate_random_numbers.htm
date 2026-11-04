@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="randomization/generate_random_numbers.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random Number Generation (by Distribution) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
+            Random Numbers</h1>
+        <p> </p>
+        <p>Menu location: <b>Data_Generating_Random Numbers</b>.</p>
+        <p> </p>
+        <p>This function enables you to create one or more series of random numbers from given distributions.</p>
+        <p> </p>
+        <p>A <a href="random_number_generator.htm">robust generator</a> of uniform (pseudo)random numbers is used as the basis for generating deviates from the probability distributions described below. You are given the opportunity to enter your own seed number to be used by the random number generator but you should use the default seed (based upon your computer's clock) in most cases. Please note that each seed generates its own series and that series is the same if you use the seed again. You have very little chance of using the same seed twice if you select the seed that StatsDirect suggests.</p>
+        <p> </p>
+        <p>These functions are intended for simulation work; they employ widely cited and debated algorithms (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle, 2003</a>).</p>
+        <p> </p>
+        <p><u>Uniform (continuous uniform, rectangular)</u>
+        </p>
+        <p>The continuous uniform distribution has a constant density function of the interval (a, b) and thus a rectangular shape from a to b:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="617fbb99cf48a5105ba4ce20f01bfcabca531ac1145d9fb621f6bbee4f589e4e"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle f(x)=\frac{1}{b-a} \\
+\displaystyle \displaystyle \text{var}(x)=\frac{(b-a)^2}{12}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/fe864fc0e6a4becccde6835cdb51461968ed40e23cc030fe5cb5024ed7d02f04.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where a and b lie between minus and plus infinity.</p>
+        <p> </p>
+        <p>The interval most commonly used is 0 to 1</p>
+        <p> </p>
+        <p>For an interval a to b, StatsDirect asks for the number type: interval (any value between a and b) or count (whole numbers from a to b inclusive, each equally likely).</p>
+        <p> </p>
+        <p><u>Normal (Gaussian)</u>
+        </p>
+        <p>The commonly used standard <a href="../distributions/normal.htm">normal distribution</a> (mean of 0 and standard deviation of 1) is one of a family of normal distributions defined by the density function:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="26ab5eeb7827f141e60e61c517a41ec320e9c9b3b2210e247643fd485cf4d646"><span class="help-equation-accessible help-equation-live">$\displaystyle f(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(x-\mu)^2}{2\sigma^2}\right)}$</span><img src="../resources/help-editor-runtime/equation-artwork/db9c8600826f99a905b7517700d85b932aa93e8f3367100b19f6e8050b98e2bc.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
+        <p> </p>
+        <p>Algorithm: inversion of the cumulative distribution function (<a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>)</p>
+        <p> </p>
+        <p><u>Lognormal</u>
+        </p>
+        <p>The density of a lognormal distribution is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="4375c6ea1f62df02a7c505f78201179a95e9f6bb56c61a8f30e8f206a0c30d2c"><span class="help-equation-accessible help-equation-live">$\displaystyle f(x)=\frac{1}{x\sigma\sqrt{2\pi}}\exp{\left(\frac{\displaystyle -(\ln(x)-\mu)^2}{2\sigma^2}\right)}$</span><img src="../resources/help-editor-runtime/equation-artwork/55b89d26da647e1fe6fe3f28e7436087a3e4e9947bd76b448f148a0aabce4b5b.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where mean μ lies between minus and plus infinity and standard deviation σ is greater than zero.</p>
+        <p> </p>
+        <p>The mean of the lognormal distribution, as opposed to the mean of the underlying normal distribution, is equal to exp(μ+σ<sup>2</sup>/2) and the variance is equal to exp(2μ+2σ<sup>2</sup>)-exp(2μ+σ<sup>2</sup>).</p>
+        <p> </p>
+        <p>Algorithm: transformed inversion of the cumulative distribution function (<a href="../references/reference_list.htm#ref-wichura-1988">Wichura, 1988</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>)</p>
+        <p> </p>
+        <p><u>Exponential</u>
+        </p>
+        <p>The (negative) exponential distribution is a special case (shaping parameter of 1) of the gamma distribution. Its density is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="4eb92ed1d18c141c8d75f36bedb34920e83336a4feaf74682148fe8b054e6efd"><span class="help-equation-accessible help-equation-live">$\displaystyle f(x)=\lambda\exp (-\lambda x)$</span><img src="../resources/help-editor-runtime/equation-artwork/20f0eab9cbd346837b04d7c65954cd6aa62b262e3033a1ec48c5301e98423ffc.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where the parameter λ must be greater than zero.</p>
+        <p> </p>
+        <p>Algorithm: transformation (<a href="../references/reference_list.htm#ref-ahrens-1972">Ahrens and Dieter, 1972</a>).</p>
+        <p> </p>
+        <p><u>Gamma</u>
+        </p>
+        <p>The density function of the gamma distribution is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="bd184f9b85d86f298578e19110745da3b3965ec1084d4109497542618191639f"><span class="help-equation-accessible help-equation-live">$\displaystyle f(x)=\frac{\lambda}{\Gamma(r)}(\lambda x)^{r-1} \exp (-\lambda x)$</span><img src="../resources/help-editor-runtime/equation-artwork/ddc25a7d8052e44356e161d5ae9e146bead76cadb9f067be96201ea79bda99f0.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where the parameters λ and r (shaping parameter) must be greater than zero. StatsDirect asks for A (shaping parameter, r) and B (scaling parameter, 1/λ).</p>
+        <p> </p>
+        <p>Γ(*) is the gamma function:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="5497158e3a4d3aa64e2d06e608d9cc35e6db40ff3dd72ad81609d9f355e5ce83"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}\exp(-t) \space dt, \space x&gt;0
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/318de636d9eb40037f75c36712b2267d1488675c32025e767813975c42304f6c.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>Please note that gamma deviates with a shaping parameter of 0.5 are half the square of normal deviates and gamma deviates with a shaping parameter of 1 are exponential deviates.</p>
+        <p> </p>
+        <p>Algorithm: acceptance-rejection methods GD and GS (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>).</p>
+        <p> </p>
+        <p><u>Binomial</u>
+        </p>
+        <p>The density function of the <a href="../distributions/binomial.htm">binomial distribution</a> is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="b57c24e43da8353ab8593af6cc56fb2e1554fbae4a0aa9aaa396ec192546f40b"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle P(x)=\left(\begin{array}{c}n\\ x\end{array}\right)p^x(1-p)^{n-x}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/016139cadf29a735e31b698f1be96e8b4dc47d08c7ca2a646130f5227a993858.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where p lies between 0 and 1 and n is the number of trials.</p>
+        <p> </p>
+        <p>Algorithm: acceptance-rejection method BTPEC (<a href="../references/reference_list.htm#ref-kachitvichyanukul-1988">Kachitvichyanukul and Schmeiser, 1988</a>).</p>
+        <p> </p>
+        <p><u>Poisson</u>
+        </p>
+        <p>The density function of the <a href="../distributions/poisson.htm">Poisson distribution</a> is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="4735e55b556da97f2a78d22a844ad9efd1b9120d60eb0364e93a5c9090743c63"><span class="help-equation-accessible help-equation-live">$\displaystyle P(x)=\frac{\exp (-\lambda)\lambda^x}{x!}$</span><img src="../resources/help-editor-runtime/equation-artwork/28d14abeeb4f2ecde5cd9883f22f9d3479966a6ca1f409501bffafe9a02ed592.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where parameter λ is greater than zero.</p>
+        <p> </p>
+        <p>Algorithm: acceptance-rejection (<a href="../references/reference_list.htm#ref-ahrens-1982-a">Ahrens and Dieter, 1982a</a>).</p>
+        <p> </p>
+        <p><u>Chi-square</u>
+        </p>
+        <p>The density function of the <a href="../distributions/chisq.htm">chi-square distribution</a> is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="9db8a988f5c9ff5a9ca7279599c5c908c27035278412a8b476c740ef47d61e4a"><span class="help-equation-accessible help-equation-live">$\displaystyle P(x)=\frac{x^{n/2-1} \exp(-x/2)}{2^{n/2}(n/2-1)!} \space \text{if} \space x&gt;0; P(x)=0 \space \text{otherwise}$</span><img src="../resources/help-editor-runtime/equation-artwork/b751cc30e02ffaa20a7c74bd6976b12bb93aa71ae4b0dfba14381c0b6404cc67.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>The deviates are calculated as gamma deviates with parameters n/2 and 2, where n is degrees of freedom.</p>
+        <p> </p>
+        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>,<a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p> </p>
+        <p><u>F (variance ratio)</u>
+        </p>
+        <p>The density function of the <a href="../distributions/f.htm">F distribution</a> is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="d722b706fddad794caada176ffdfd5b0663014ef839add82ec4a1d9a257fae46"><span class="help-equation-accessible help-equation-live">$\displaystyle P(x)=\frac{\left( \frac{\displaystyle  n+d-2}{\displaystyle 2}\right)! \space x^{n/2-1}}{(n/2-1)!(d/2-1)!\left( 1+\frac{\displaystyle n}{\displaystyle d}x\right)^{(n+d)/2}} \left( \frac{n}{d}\right)^{n/2} \space \text{if}\space x&gt;0; P(x)=0 \space \text{otherwise}$</span><img src="../resources/help-editor-runtime/equation-artwork/a46247d885611532d208518f9150c778e251b492d9f6b2493280fac6dc0facbd.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>The deviates are calculated as (x/n)/(z/d) where n is the numerator degrees of freedom, d is the denominator degrees of freedom, x is a gamma deviate with parameters n/2 and 2 (chi-square with n degrees of freedom), and z is a gamma deviate with parameters d/2 and 2 (chi-square with d degrees of freedom).</p>
+        <p> </p>
+        <p>Algorithm: Transformed gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p> </p>
+        <p><u>Student's t</u>
+        </p>
+        <p>The density function of <a href="../distributions/t.htm">Student's t distribution</a>  is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="6d61dc60ec6a450b2391952ddc2cbe59705dab5b19a7202c7b2f6286dcadc59f"><span class="help-equation-accessible help-equation-live">$\displaystyle P(x)=\frac{\left( \frac{\displaystyle n-1}{\displaystyle 2}\right)!}{(n/2-1)!\sqrt{\pi n}(1+x^2/n)^{(n+1)/2}}$</span><img src="../resources/help-editor-runtime/equation-artwork/637651a94198994b9690f21acbc369f5e699e204cb91dc472b5f9b62611be382.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>The deviates are calculated as a standard normal deviate multiplied by the square root of the degrees of freedom (n) divided by a gamma deviate with parameters n/2 and 2 (a chi-square deviate with n degrees of freedom).</p>
+        <p> </p>
+        <p>Algorithm: Transformed standard normal and gamma deviates (<a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p> </p>
+        <p><u>Beta</u>
+        </p>
+        <p>The density function of the beta distribution is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="f296c9c34a6ee951b408f9d35641869b57ad8585398e17d76d07418e69af3a05"><span class="help-equation-accessible help-equation-live">$\displaystyle f(x)=\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \space x^{a-1}(1-x)^{b-1} \space \text{if} \space 0&lt;x&lt;1; f(x)=0 \space \text{otherwise}$</span><img src="../resources/help-editor-runtime/equation-artwork/037231e7b6e40577ae841697b93d322f841fbe42e95fb9c56bb57dcbc94b674f.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where a and b are the two shape parameters.</p>
+        <p> </p>
+        <p>Algorithm: Acceptance-rejection methods BB and BC (<a href="../references/reference_list.htm#ref-cheng-1978">Cheng 1978</a>).</p>
+        <p> </p>
+        <p><u>Logistic</u>
+        </p>
+        <p>The density function of the standard logistic distribution is given by:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="5165c58235f77680e60c34d18395a03267e670d7b7f3b94a04d6dbca744ec061"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle f(x)=\Lambda(x)[1-\Lambda(x)] \\
+\displaystyle \displaystyle \Lambda(x)=\frac{1}{1+\exp(-x)}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/f6bd1280969d0740ff5a12fa0ae68b99beb50bb1add9419488cf30ea2e232800.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>The deviates are calculated as location + scale * ln(u/(1-u)), where u is a uniform deviate.</p>
+        <p> </p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p> </p>
+        <p><u>Cauchy</u>
+        </p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p> </p>
+        <p><u>Weibull</u>
+        </p>
+        <p>Algorithm: Transformed uniform deviates (<a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>).</p>
+        <p> </p>
+        <p><u>Geometric</u>
+        </p>
+        <p>Algorithm: Transformed Poisson and exponential deviates (<a href="../references/reference_list.htm#ref-devroye-1986">Devroye, 1986</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>; <a href="../references/reference_list.htm#ref-ahrens-1972">Ahrens and Dieter, 1972</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-a">1982a</a>).</p>
+        <p> </p>
+        <p><u>Negative binomial</u>
+        </p>
+        <p>Algorithm: Transformed Poisson and gamma deviates (<a href="../references/reference_list.htm#ref-devroye-1986">Devroye, 1986</a>; <a href="../references/reference_list.htm#ref-gentle-2003">Gentle 2003</a>; <a href="../references/reference_list.htm#ref-ahrens-1974">Ahrens and Dieter, 1974</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-b">1982b</a>, <a href="../references/reference_list.htm#ref-ahrens-1982-a">1982a</a>).</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>To fill a column with ten random numbers from the standard normal distribution, select Normal from the Random Numbers section of the Generating section of the Data menu. Enter 1 as the number of columns to fill and 10 as the number of rows, keep the population mean of 0 and the population standard deviation of 1, and enter 1234 as the seed in place of the one suggested.</p>
+        <p> </p>
+        <p>StatsDirect puts these ten numbers (shown here to six decimal places) into a new column of the worksheet, under the heading:</p>
+        <p> </p>
+        <p>Normal (seed 1234, mean = 0, sd = 1)</p>
+        <p>-0.872311</p>
+        <p>0.311024</p>
+        <p>-0.156733</p>
+        <p>0.790419</p>
+        <p>0.772112</p>
+        <p>-0.604991</p>
+        <p>-0.593378</p>
+        <p>0.848327</p>
+        <p>1.729491</p>
+        <p>1.154892</p>
+        <p> </p>
+        <p>The ten values have mean 0.337885 and standard deviation 0.864366: a sample this small from a normal distribution with mean 0 and standard deviation 1 need not look like one. Running the function again with seed 1234 gives the same ten numbers, and any other seed gives a different series. The seed used is always in the column heading, so a series can be repeated even when you accept the seed that StatsDirect suggests.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the illustration above in its structure: R's random number generator gives a different series for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Random numbers by distribution: the StatsDirect help illustration (ten standard
+# normal deviates from seed 1234, then samples from the other distributions that the
+# Data_Generating_Random Numbers menu offers) in R
+# StatsDirect and R both use the Mersenne Twister generator, but each seeds it in
+# its own way, so the same seed gives a different series in each program. Within one
+# program a seed always repeats its own series: set.seed() then the r* function.
+set.seed(1234)
+x &lt;- rnorm(10, mean = 0, sd = 1)
+cat("Normal (seed 1234, mean = 0, sd = 1), from R's generator:\n")
+print(round(x, 6))
+cat("Mean of the ten =", round(mean(x), 6), " sd =", round(sd(x), 6), "\n")
+print(summary(x))
+
+# The menu's other distributions and R's function for each, with StatsDirect's
+# parameter names in the comment; n is the number of rows to fill. R's runif and
+# StatsDirect's uniform generator both leave out the end points 0 and 1.
+n &lt;- 1000
+set.seed(1234)
+u01 &lt;- runif(n)                            # Uniform 0 to 1
+uab &lt;- runif(n, min = 2, max = 5)          # Uniform A to B, interval type
+cnt &lt;- sample(1:6, n, replace = TRUE)      # Uniform A to B, count type: whole numbers
+ln &lt;- rlnorm(n, meanlog = 0, sdlog = 1)    # Lognormal: log mean, log sd
+bi &lt;- rbinom(n, size = 10, prob = 0.3)     # Binomial: number of trials, probability
+po &lt;- rpois(n, lambda = 4)                 # Poisson: mean
+ga &lt;- rgamma(n, shape = 2, scale = 3)      # Gamma: A (shape), B (scale, 1/lambda)
+ex &lt;- rexp(n, rate = 2)                    # Exponential: rate
+ch &lt;- rchisq(n, df = 3)                    # Chi-square: degrees of freedom
+fv &lt;- rf(n, df1 = 4, df2 = 10)             # F: numerator, denominator df
+st &lt;- rt(n, df = 5)                        # Student's t: degrees of freedom
+lo &lt;- rlogis(n, location = 0, scale = 1)   # Logistic: mu, sigma
+ge &lt;- rgeom(n, prob = 0.3)                 # Geometric: P (failures before a success)
+nb &lt;- rnbinom(n, size = 2, prob = 0.5)     # Negative binomial: N, P (failures before
+                                           #   the Nth success)
+ca &lt;- rcauchy(n, location = 0, scale = 1)  # Cauchy: L (location), S (scale)
+we &lt;- rweibull(n, shape = 1.5, scale = 2)  # Weibull: A (shape), sigma (scale)
+be &lt;- rbeta(n, shape1 = 2, shape2 = 5)     # Beta: A, B
+
+# A sample's summary should sit close to the distribution's mean and variance: for
+# the gamma distribution A * B and A * B^2, for the lognormal exp(mu + sigma^2 / 2)
+# and exp(2 * mu + 2 * sigma^2) - exp(2 * mu + sigma^2), for the Poisson its mean
+cat("Uniform 0 to 1 (mean 0.5, variance 1/12):\n")
+print(summary(u01))
+cat("Sample variance =", round(var(u01), 4), "\n")
+cat("Gamma (A = 2, B = 3; mean 6, variance 18):\n")
+print(summary(ga))
+cat("Sample variance =", round(var(ga), 4), "\n")
+cat("Lognormal (log mean 0, log sd 1; mean", round(exp(0.5), 4), "variance",
+    paste0(round(exp(2) - exp(1), 4), "):"), "\n")
+print(summary(ln))
+cat("Sample variance =", round(var(ln), 4), "\n")
+cat("Poisson (mean 4, variance 4):\n")
+print(summary(po))
+cat("Sample variance =", round(var(po), 4), "\n")
+cat("Binomial (10 trials, p = 0.3; mean 3, variance 2.1):\n")
+print(summary(bi))
+cat("Sample variance =", round(var(bi), 4), "\n")
+
+# The gamma sample against its density
+hist(ga, freq = FALSE, breaks = 30, main = "Gamma (A = 2, B = 3)", xlab = "x")
+curve(dgamma(x, shape = 2, scale = 3), add = TRUE, col = "red")</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="566" viewBox="0 0 1132 800" xmlns="http://www.w3.org/2000/svg" height="400">
+  <line x1="125" y1="696" x2="1052" y2="696" style="stroke:#868686;" />
+  <line x1="125" y1="80" x2="125" y2="696" style="stroke:#868686;" />
+  <g transform="translate(356.75,703)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">PEFR Before</tspan>
+    </text>
+  </g>
+  <line x1="588.5" y1="703" x2="588.5" y2="696" style="stroke:#868686;" />
+  <g transform="translate(820.25,703)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">PEFR After</tspan>
+    </text>
+  </g>
+  <line x1="1052" y1="703" x2="1052" y2="696" style="stroke:#868686;" />
+  <g transform="translate(110,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">200</tspan>
+    </text>
+  </g>
+  <line x1="118" y1="696" x2="125" y2="696" style="stroke:#868686;" />
+  <g transform="translate(110,543.5247524752475)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">250</tspan>
+    </text>
+  </g>
+  <line x1="118" y1="543.5247524752475" x2="125" y2="543.5247524752475" style="stroke:#868686;" />
+  <g transform="translate(110,391.049504950495)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">300</tspan>
+    </text>
+  </g>
+  <line x1="118" y1="391.049504950495" x2="125" y2="391.049504950495" style="stroke:#868686;" />
+  <g transform="translate(110,238.57425742574253)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">350</tspan>
+    </text>
+  </g>
+  <line x1="118" y1="238.57425742574253" x2="125" y2="238.57425742574253" style="stroke:#868686;" />
+  <g transform="translate(110,86.09900990099015)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">400</tspan>
+    </text>
+  </g>
+  <line x1="118" y1="86.09900990099015" x2="125" y2="86.09900990099015" style="stroke:#868686;" />
+  <text x="588.5" y="20">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">Peak Flows Before and After Exercise</tspan>
+  </text>
+  <ellipse cx="356.75" cy="354.4554455445543" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <rect x="814.25" y="385.049504950495" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <ellipse cx="356.75" cy="567.9207920792079" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <rect x="814.25" y="686.9504950495049" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <ellipse cx="356.75" cy="269.06930693069296" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <rect x="814.25" y="592.4158415841584" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <ellipse cx="356.75" cy="122.69306930693062" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <rect x="814.25" y="348.4554455445543" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <ellipse cx="356.75" cy="403.2475247524752" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <rect x="814.25" y="629.0099009900989" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <ellipse cx="356.75" cy="531.3267326732673" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <rect x="814.25" y="519.2277227722772" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <ellipse cx="356.75" cy="113.54455445544556" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <rect x="814.25" y="299.66336633663354" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <ellipse cx="356.75" cy="79.99999999999989" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <rect x="814.25" y="293.5643564356436" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <ellipse cx="356.75" cy="421.54455445544556" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <rect x="814.25" y="595.4653465346535" width="12" height="12" style="stroke:#9E413E;fill:none;" />
+  <line x1="356.75" y1="354.4554455445543" x2="820.25" y2="391.049504950495" style="stroke:#000000;" />
+  <line x1="356.75" y1="567.9207920792079" x2="820.25" y2="692.9504950495049" style="stroke:#000000;" />
+  <line x1="356.75" y1="269.06930693069296" x2="820.25" y2="598.4158415841584" style="stroke:#000000;" />
+  <line x1="356.75" y1="122.69306930693062" x2="820.25" y2="354.4554455445543" style="stroke:#000000;" />
+  <line x1="356.75" y1="403.2475247524752" x2="820.25" y2="635.0099009900989" style="stroke:#000000;" />
+  <line x1="356.75" y1="531.3267326732673" x2="820.25" y2="525.2277227722772" style="stroke:#000000;" />
+  <line x1="356.75" y1="113.54455445544556" x2="820.25" y2="305.66336633663354" style="stroke:#000000;" />
+  <line x1="356.75" y1="79.99999999999989" x2="820.25" y2="299.5643564356436" style="stroke:#000000;" />
+  <line x1="356.75" y1="421.54455445544556" x2="820.25" y2="601.4653465346535" style="stroke:#000000;" />
+</svg>

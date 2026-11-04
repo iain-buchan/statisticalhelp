@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="parametric_methods/z_normal.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Z (Normal Distribution) Tests - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Z (Normal Distribution) Tests</h1>
+        <p> </p>
+        <p>Menu locations:<br /><b>Analysis_Parametric_Single Sample z<br />Analysis_Parametric_Unpaired z</b></p>
+        <p> </p>
+        <p>For large (50 or more observations) normally distributed samples,  <a href="../distributions/normal.htm">normal distribution</a>  tests are equivalent to Student t tests.</p>
+        <p> </p>
+        <p><u>Normal data</u>
+        </p>
+        <p>You may either compare the means of two independent random samples or compare the mean of one sample with a known population mean. Note that for large degrees of freedom, <a href="../distributions/t.htm">Student's t</a>  distribution is approximately normal (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>).</p>
+        <p> </p>
+        <p>See the examples for <a href="parametric_methods.htm">t tests</a>  and consider these in the context of larger samples.</p>
+        <p> </p>
+        <p>You will gain a little more sensitivity by using a normal distribution test instead of its equivalent Student t test but you must have good reason to believe that your data have been drawn from a normal distribution. Student t tests are less sensitive than normal distribution tests to small deviations from normality; use t tests if you have any doubt. If your data are clearly non-normal then you should consider using a nonparametric alternative such as the <a href="../nonparametric_methods/wilcoxon_signed_ranks.htm">Wilcoxon signed ranks</a>  test or the <a href="../nonparametric_methods/mann_whitney.htm">Mann-Whitney</a> U test.</p>
+        <p> </p>
+        <p>The single sample test statistic is calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="1a904baf96a1aeb31d420932fbf072bca0dce910b8d123d445c0090591067020"><span class="help-equation-accessible help-equation-live">$\displaystyle z=\frac{\bar x-\mu}{\sqrt{s^2/n}}$</span><img src="../resources/help-editor-runtime/equation-artwork/f565868e720baaeee3d841f833c79a485694212f5e52e936c3df70a076377240.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where x bar is the sample mean, s² is the sample variance, n is the sample size, µ is the specified population mean and z is a quantile from the standard normal distribution.</p>
+        <p> </p>
+        <p>The unpaired test statistic is calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="2d723f958d4c2d6dba25b5bfaa522cfb3e22976bffe83e2daa64a76342080e65"><span class="help-equation-accessible help-equation-live">$\displaystyle z=\frac{\bar x_1 -\bar x_2}{\sqrt{\displaystyle \frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$</span><img src="../resources/help-editor-runtime/equation-artwork/f4b9b4d1afee0accd0bff00a98ddd3e7400be5ee25bd0aeb00abd7caea6ef66b.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where x-bar 1 and x-bar 2 are the sample means, s<sub>1</sub>² and s<sub>2</sub>² are the sample variances, n<sub>1</sub> and n<sub>2</sub> are the sample sizes and z is a quantile from the standard normal distribution.</p>
+        <p> </p>
+        <p><u>Log-normal data</u>
+        </p>
+        <p>For samples from a log-normal distribution (logs from a normal distribution) you may wish to construct an interval analogous to the confidence interval for the mean of a sample from a normal distribution. StatsDirect gives you the geometric mean (arithmetic mean of logs) and a reference range as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="816ea748363b63b0b471826988396915209fd17a2d71af158d3564c9a7e7382b"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle \exp(g \pm 2s) \\
+\displaystyle \displaystyle g=\frac{1}{n}\sum_{i=1}^n \ln(x_i) \\
+\displaystyle \displaystyle s=\sqrt{\frac{\displaystyle \sum_{i=1}^n \ln(x_i)^2- \frac{1}{n}\left[ \sum_{i=1}^n \ln(x_i)\right]^2 }{n-1}}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/e8586b521c8d3f2557279704687a06f412ccae055910d3302fd15bb00a4f16b5.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where g is geometric mean, ln is natural logarithm, n is sample size and z is a quantile from the standard normal distribution (alpha/2 quantile for a 100*(1-alpha)% confidence interval). The geometric mean and its reference range are given only if every value of the sample is above zero.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Parametric worksheet: Michelson).</p>
+        <p> </p>
+        <p>Consider Michelson's 100 measurements in 1879 of the speed of light in air, in millions of metres per second (<a href="../references/reference_list.htm#ref-dorsey-1944">Dorsey, 1944</a>), which are also used in the univariate summary example. The accepted value of the speed of light in a vacuum is 299.792458 million metres per second.</p>
+        <p> </p>
+        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu. Then select Single Sample z from the Parametric section of the Analysis menu. Select the column marked "Michelson" when prompted for data, enter 299.792458 as the population mean and leave the population standard deviation blank.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Normal distribution (z) test - single sample</u>
+        </p>
+        <p> </p>
+        <p>Sample name: Michelson</p>
+        <p>Sample mean = 299.8524</p>
+        <p>Population mean = 299.792458</p>
+        <p>Sample size n = 100</p>
+        <p>Sample sd = 0.079011</p>
+        <p>Population sd = not known</p>
+        <p> </p>
+        <p>95% confidence interval for mean difference = 0.044456 to 0.075428</p>
+        <p> </p>
+        <p>Standard normal deviate (z) = 7.586582</p>
+        <p>One sided P &lt; 0.0001</p>
+        <p>Two sided P &lt; 0.0001</p>
+        <p> </p>
+        <p>For lognormal data:</p>
+        <p>Geometric mean = 299.85239  (95% reference range = 299.697571 to 300.007288)</p>
+        <p> </p>
+        <p>The measurements were on average 0.06 million metres per second above the accepted value in a vacuum, and further above the speed in air, which is about 0.03% lower. The confidence interval shows that the variation between measurements does not explain this: the series carried a systematic error, as is well known for these data.</p>
+        <p> </p>
+        <p>To compare two independent samples, for example the first and the last 50 of these measurements to look for a drift over the series, copy them into two columns (or add a column of group identifiers, 1 for the first 50 and 2 for the rest, and select it as the group identifier). Then select Unpaired z from the Parametric section of the Analysis menu.</p>
+        <p> </p>
+        <p><u>Normal distribution (z) test - two independent samples</u>
+        </p>
+        <p> </p>
+        <p>Sample name: First 50</p>
+        <p>Mean = 299.8728</p>
+        <p>Variance = 0.008951</p>
+        <p>Size = 50</p>
+        <p> </p>
+        <p>Sample name: Last 50</p>
+        <p>Mean = 299.832</p>
+        <p>Variance = 0.002812</p>
+        <p>Size = 50</p>
+        <p> </p>
+        <p>Combined standard error = 0.015338</p>
+        <p> </p>
+        <p>95% confidence interval for difference between means = 0.010737 to 0.070863</p>
+        <p> </p>
+        <p>Standard normal deviate (z) = 2.659979</p>
+        <p> </p>
+        <p>One sided P = 0.0039</p>
+        <p>Two sided P = 0.0078</p>
+        <p> </p>
+        <p>The later measurements were lower on average, and a difference this large is unlikely to arise by chance. With 50 measurements in each sample the unpaired t test gives almost the same answer (t = 2.66 on 77 degrees of freedom with unequal variances, two sided P = 0.0095).</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Normal distribution (z) tests: the StatsDirect help example (Michelson's 100
+# measurements of the speed of light in air, millions of metres per second) in R
+speed &lt;- c(299.85, 299.74, 299.90, 300.07, 299.93, 299.85, 299.95, 299.98, 299.98,
+           299.88, 300.00, 299.98, 299.93, 299.65, 299.76, 299.81, 300.00, 300.00,
+           299.96, 299.96, 299.96, 299.94, 299.96, 299.94, 299.88, 299.80, 299.85,
+           299.88, 299.90, 299.84, 299.83, 299.79, 299.81, 299.88, 299.88, 299.83,
+           299.80, 299.79, 299.76, 299.80, 299.88, 299.88, 299.88, 299.86, 299.72,
+           299.72, 299.62, 299.86, 299.97, 299.95, 299.88, 299.91, 299.85, 299.87,
+           299.84, 299.84, 299.85, 299.84, 299.84, 299.84, 299.89, 299.81, 299.81,
+           299.82, 299.80, 299.77, 299.76, 299.74, 299.75, 299.76, 299.91, 299.92,
+           299.89, 299.86, 299.88, 299.72, 299.84, 299.85, 299.85, 299.78, 299.89,
+           299.84, 299.78, 299.81, 299.76, 299.81, 299.79, 299.81, 299.82, 299.85,
+           299.87, 299.87, 299.81, 299.74, 299.81, 299.94, 299.95, 299.80, 299.81,
+           299.87)
+n &lt;- length(speed)
+mu &lt;- 299.792458                          # the accepted value, in a vacuum
+
+# R has no z test among its standard functions (with a sample this large t.test
+# gives almost the same answers), so the report's lines are calculated here.
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else paste("P =", formatC(p, digits = 4, format = "f"))
+}
+z &lt;- qnorm(0.975)
+cat("Sample mean =", six(mean(speed)), "  Sample size n =", n,
+    "  Sample sd =", six(sd(speed)), "\n")
+
+# Single sample test, with the population sd not known: the sample sd is used
+se &lt;- sd(speed) / sqrt(n)
+cat("95% confidence interval for mean difference =", six(mean(speed) - mu - z * se),
+    "to", six(mean(speed) - mu + z * se), "\n")
+dev &lt;- (mean(speed) - mu) / se
+cat("Standard normal deviate (z) =", six(dev), "\n")
+cat("One sided", pv(pnorm(-abs(dev))), "  Two sided", pv(2 * pnorm(-abs(dev))), "\n")
+
+# For lognormal data: the geometric mean, with the reference range exp(mean of
+# the logs plus or minus z times their sd)
+lg &lt;- log(speed)
+cat("Geometric mean =", six(exp(mean(lg))), " (95% reference range =",
+    six(exp(mean(lg) - z * sd(lg))), "to", paste0(six(exp(mean(lg) + z * sd(lg))), ")"),
+    "\n")
+
+# Two independent samples: the first and last 50 measurements
+first &lt;- speed[1:50]
+last &lt;- speed[51:100]
+cat("First 50:  Mean =", six(mean(first)), "  Variance =", six(var(first)),
+    "  Size =", length(first), "\n")
+cat("Last 50:  Mean =", six(mean(last)), "  Variance =", six(var(last)),
+    "  Size =", length(last), "\n")
+se2 &lt;- sqrt(var(first) / length(first) + var(last) / length(last))
+cat("Combined standard error =", six(se2), "\n")
+d &lt;- mean(first) - mean(last)
+cat("95% confidence interval for difference between means =", six(d - z * se2), "to",
+    six(d + z * se2), "\n")
+dev2 &lt;- d / se2
+cat("Standard normal deviate (z) =", six(dev2), "\n")
+cat("One sided", pv(pnorm(-abs(dev2))), "  Two sided", pv(2 * pnorm(-abs(dev2))), "\n")</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

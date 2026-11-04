@@ -1,0 +1,200 @@
+/*<meta />*/
+
+#help-topic-body{
+	margin-left: 0em;
+	padding-left: 1.5em;
+	padding-right: 1em;
+	font-size: 10pt;
+	font-family: sans-serif;
+}
+
+#help-topic-body h1{
+	font-size: 125%;
+	clear: both;
+	background-color: #f5f5f5;
+	width: 100%;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	margin-left: 0em;
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+
+#help-topic-body h2{
+	font-size: 110%;
+	clear: both;
+	margin-left: 0em;
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+
+#help-topic-body h3{
+	font-size: 100%;
+	clear: both;
+	margin-left: 0em;
+	margin-bottom: 0em;
+	margin-top: 0em;
+}
+
+#help-topic-body h4{
+	font-size: 100%;
+	clear: both;
+	margin-left: 0em;
+	margin-bottom: 0em;
+	margin-top: 0em;
+}
+
+#help-topic-body a.Popup{
+	
+}
+
+#help-topic-body p{
+	margin-left: 0em;
+	margin-bottom: 0.3em;
+	margin-top: 0em;
+}
+
+#help-topic-body li{
+	left: 0em;
+	padding-left: 0em;
+	margin-left: 0em;
+	margin-bottom: 0.5em;
+	margin-top: 0em;
+}
+
+#help-topic-body ol{
+	margin-right: 0;
+	padding-left: 0em;
+	margin-left: 20px;
+	margin-bottom: 0em;
+	margin-top: 0em;
+}
+
+#help-topic-body ul{
+	list-style-type: disc;
+	left: 0em;
+	padding-left: 0em;
+	margin-left: 20px;
+	margin-bottom: 0em;
+	margin-top: 0.8em;
+}
+
+#help-topic-body td{
+	margin-left: 0em;
+	padding-right: 1em;
+	border-left-width: .5em;
+	border-right-width: .5em;
+	border-top-width: .5em;
+	border-bottom-width: 0;
+	padding-left: 0em;
+}
+
+#help-topic-body .TBLhead{
+	color: #002b00;
+	margin-top: 1.5em;
+	margin-bottom: .5em;
+	clear: both;
+	font-weight: bold;
+}
+
+#help-topic-body img{
+	border: none;
+	padding-bottom: -0.5em;
+}
+
+#help-topic-body MadCap|equation{
+	
+}
+
+#help-topic-body a:link{
+	color: #0000D0;
+	text-decoration: underline;
+}
+
+#help-topic-body a:visited{
+	color: #800080;
+	text-decoration: underline;
+}
+
+#help-topic-body a:hover{
+	color: #FF0000;
+	cursor: hand;
+	text-decoration: underline;
+}
+
+#help-topic-body a:active{
+	color: #FF0000;
+	cursor: hand;
+	text-decoration: underline;
+}
+
+/* "R code" section at the end of a topic (web and compiled help): R code that reproduces the worked example, closed until its heading is clicked. */
+
+#help-topic-body MadCap|dropDown.rcode{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#help-topic-body MadCap|dropDownHead.rcode{
+	font-weight: bold;
+}
+
+#help-topic-body MadCap|dropDownHotspot.rcode{
+	color: #2c5f8a;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* The chevron is drawn here, in place of Flare's arrow picture, and turns when the section is open. */
+
+#help-topic-body a.dropDownHotspotrcode{
+	background-image: none !important;
+	padding-left: 0 !important;
+}
+
+#help-topic-body a.dropDownHotspotrcode img.MCDropDown_Image_Icon{
+	display: none;
+}
+
+#help-topic-body a.dropDownHotspotrcode:before{
+	content: "";
+	display: inline-block;
+	width: 0.45em;
+	height: 0.45em;
+	border-right: solid 0.15em #2c5f8a;
+	border-bottom: solid 0.15em #2c5f8a;
+	margin-left: 0.1em;
+	margin-right: 0.65em;
+	vertical-align: 0.12em;
+	transform: rotate(-45deg);
+	transition: transform 0.15s ease;
+}
+
+#help-topic-body .MCDropDown_Open a.dropDownHotspotrcode:before{
+	transform: rotate(45deg);
+	vertical-align: 0.22em;
+}
+
+#help-topic-body img.rlogo{
+	vertical-align: middle;
+	border: none;
+	margin-right: 3px;
+}
+
+#help-topic-body pre.rcode{
+	font-family: Consolas, 'Lucida Console', 'Courier New', monospace;
+	font-size: 95%;
+	line-height: 135%;
+	color: #1a1a1a;
+	background-color: #f5f5f5;
+	border: solid 1px #d8d8d8;
+	padding: 0.6em 0.8em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	overflow: auto;
+}
+
+#help-topic-body p.rcodenote{
+	margin-top: 0.4em;
+	color: #404040;
+}

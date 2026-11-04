@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="analysis_of_variance/one_way.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One Way Analysis of Variance (ANOVA) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            One Way Analysis of Variance</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Analysis of Variance_One Way</b>.</p>
+        <p> </p>
+        <p>This function compares the sample means for k groups. There is an overall test for k means, <a href="multiple_comparisons.htm">multiple comparison</a> methods for pairs of means and tests for the <a href="homogeneity_of_variance.htm">equality of the variances</a> of the groups.</p>
+        <p> </p>
+        <p>
+            Consider four groups of data that represent one experiment performed on four occasions with ten different subjects each time. You could explore the consistency of the experimental conditions or the inherent error of the experiment by using one way analysis of variance (ANOVA), however, <a href="../agreement/intraclass.htm">agreement analysis</a> might be more appropriate. One way ANOVA is more appropriate for finding statistical evidence of inconsistency or difference across the means of the four groups.</p>
+        <p> </p>
+        <p>
+            One way ANOVA assumes that each group comes from an approximately normal distribution and that the variability within the groups is roughly constant. The <a href="anova.htm">factors</a> are arranged so that experiments are columns and subjects are rows, this is how you must enter your data in the StatsDirect workbook. The overall F test is fairly robust to small deviations from these assumptions but you could use the <a href="../nonparametric_methods/kruskal_wallis.htm">Kruskal-Wallis</a> test as an alternative to one way ANOVA if there was any doubt.</p>
+        <p> </p>
+        <p>Numerically, one way ANOVA is a generalisation of the two sample t test. The F statistic compares the variability between the groups to the variability within the groups:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="aeaf0d43e847a4611a90266ca47b451be442e58f12f5b01a04de3f2a8997c5d3"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle F=\frac{MST}{MSE} \\
+\displaystyle \displaystyle MST=\frac{\displaystyle \sum_{i=1}^k(T_i^2/n_i)-G^2/n}{k-1} \\
+\displaystyle \displaystyle MSE=\frac{\displaystyle \sum_{i=1}^k \sum_{j=1}^{n_i} Y_{ij}^2-\sum_{i=1}^k (T_i^2/n_i)}{n-k}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/199adcf646de860c1d34787415bbd02b09d01d47838f546cff3b326507df6262.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where F is the variance ratio for the overall test, MST is the mean square due to treatments/groups (between groups), MSE is the mean square due to error (within groups, residual mean square), Y<sub>ij</sub> is an observation, T<sub>i</sub> is a group total, G is the grand total of all observations, n<sub>i</sub> is the number in group i and n is the total number of observations.</p>
+        <p> </p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>random samples</li>
+            <li>normally distributed observations in each population</li>
+            <li>equal variance of observations in each population</li>
+        </ul>
+        <p> </p>
+        <p>- the <a href="homogeneity_of_variance.htm">homogeneity of variance</a> option (marked as "Equality of variance (Levene, Bartlett) and Welch's F" in the ANOVA results window) can be used to test the variance assumption. The <a href="../parametric_methods/normality.htm">Shapiro-Wilk</a> test can be used to look for evidence of non-normality. The most commonly unacceptable deviation from the assumptions is inequality of variance when the groups are of unequal sizes.</p>
+        <p> </p>
+        <p>A significant overall test indicates a difference between the population means for the groups as a whole; you may then go on to make <a href="multiple_comparisons.htm">multiple comparisons</a> between the groups but this "dredging" should be avoided if possible.</p>
+        <p> </p>
+        <p>If the subjects in this example had been grouped into blocks (for example by litter) before being allocated at random to the treatments, a <a href="two_way.htm">two way randomized block</a> design ANOVA would have been used.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 214)</a>.</p>
+        <p>Test workbook (ANOVA worksheet: Expt 1, Expt 2, Expt 3, Expt 4).</p>
+        <p> </p>
+        <p>The following data represent the numbers of worms isolated from the GI tracts of four groups of rats in a trial of carbon tetrachloride as an anthelminthic. These four groups were the control (untreated) groups.</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Expt 1</td>
+                <td style="text-decoration: underline;">Expt 2</td>
+                <td style="text-decoration: underline;">Expt 3</td>
+                <td style="text-decoration: underline;">Expt 4</td>
+            </tr>
+            <tr>
+                <td>279</td>
+                <td>378</td>
+                <td>172</td>
+                <td>381</td>
+            </tr>
+            <tr>
+                <td>338</td>
+                <td>275</td>
+                <td>335</td>
+                <td>346</td>
+            </tr>
+            <tr>
+                <td>334</td>
+                <td>412</td>
+                <td>335</td>
+                <td>340</td>
+            </tr>
+            <tr>
+                <td>198</td>
+                <td>265</td>
+                <td>282</td>
+                <td>471</td>
+            </tr>
+            <tr>
+                <td>303</td>
+                <td>286</td>
+                <td>250</td>
+                <td>318</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect you must first prepare them in four workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select One Way from the Analysis of Variance section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Expt 1", "Expt 2","Expt 3" and "Expt 4" in one action when prompted for data.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>One way analysis of variance</u>
+        </p>
+        <p> </p>
+        <p>Variables: Expt 1, Expt 2, Expt 3, Expt 4</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Source of Variation</td>
+                <td style="text-decoration: underline;">Sum Squares</td>
+                <td style="text-decoration: underline;">DF</td>
+                <td style="text-decoration: underline;">Mean Square</td>
+            </tr>
+            <tr>
+                <td>Between Groups</td>
+                <td>27234.2</td>
+                <td>3</td>
+                <td>9078.066667</td>
+            </tr>
+            <tr>
+                <td>Within Groups</td>
+                <td>63953.6</td>
+                <td>16</td>
+                <td>3997.1</td>
+            </tr>
+            <tr>
+                <td>Corrected Total</td>
+                <td>91187.8</td>
+                <td>19</td>
+                <td> </td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>F (variance ratio) = 2.271163 P = 0.1195</p>
+        <p> </p>
+        <p>The null hypothesis that there is no difference in mean worm counts across the four groups is held. If we had rejected this null hypothesis then we would have had to take a close look at the experimental conditions to make sure that all control groups were exposed to the same conditions.</p>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="multiple_comparisons.htm">multiple comparisons</a>
+        </p>
+        <p><a href="anova.htm">analysis of variance</a>
+        </p>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The American National Institute of Standards and Technology provide Statistical Reference Datasets for testing statistical software (<a href="../references/reference_list.htm#ref-mccullough-1999">McCullough and Wilson, 1999</a>; <a href="http://www.itl.nist.gov/div898/strd/" target="_blank" rel="noopener noreferrer">http://www.itl.nist.gov/div898/strd/</a>). The results below for the SiRstv data set are given to 12 decimal places. The sums of squares and mean squares agree with the certified values exactly; the F ratio, certified as 1.18046237440255, agrees to 11 decimal places, the twelfth being beyond the precision of double precision arithmetic for these data (their deviations from the mean have only four significant figures).</p>
+        <p> </p>
+        <p><u>One way analysis of variance</u>
+        </p>
+        <p> </p>
+        <p>Variables: Instrument 1, Instrument 2, Instrument 3, Instrument 4, Instrument 5</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Source of Variation</td>
+                <td style="text-decoration: underline;">Sum Squares</td>
+                <td style="text-decoration: underline;">DF</td>
+                <td style="text-decoration: underline;">Mean Square</td>
+            </tr>
+            <tr>
+                <td>Between Groups</td>
+                <td>0.0511462616</td>
+                <td>4</td>
+                <td>0.0127865654</td>
+            </tr>
+            <tr>
+                <td>Within Groups</td>
+                <td>0.21663656</td>
+                <td>20</td>
+                <td>0.010831828</td>
+            </tr>
+            <tr>
+                <td>Corrected Total</td>
+                <td>0.2677828216</td>
+                <td>24</td>
+                <td> </td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>F (variance ratio) = 1.180462374402 P = 0.3494</p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example and the technical validation above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># One way analysis of variance: the StatsDirect help example (Armitage and Berry
+# 1994, worms recovered from four groups of rats) in R
+expt1 &lt;- c(279, 338, 334, 198, 303)
+expt2 &lt;- c(378, 275, 412, 265, 286)
+expt3 &lt;- c(172, 335, 335, 282, 250)
+expt4 &lt;- c(381, 346, 340, 471, 318)
+worms &lt;- c(expt1, expt2, expt3, expt4)
+group &lt;- factor(rep(c("Expt 1", "Expt 2", "Expt 3", "Expt 4"), each = 5))
+
+# R's standard analysis gives the same table: its "group" line is Between
+# Groups and its "Residuals" line is Within Groups
+fit &lt;- aov(worms ~ group)
+print(summary(fit))
+
+# The report's lines to 6 places
+a &lt;- anova(fit)
+six &lt;- function(x) {
+  formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+}
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+cat("Between Groups", six(a$"Sum Sq"[1]), a$Df[1], six(a$"Mean Sq"[1]), "\n")
+cat("Within Groups", six(a$"Sum Sq"[2]), a$Df[2], six(a$"Mean Sq"[2]), "\n")
+cat("Corrected Total", six(sum(a$"Sum Sq")), sum(a$Df), "\n")
+cat("F (variance ratio) =", six(a$"F value"[1]), " ", pv(a$"Pr(&gt;F)"[1]), "\n")
+
+# The technical validation example: the NIST SiRstv data (five instruments), to
+# 12 places as the help shows them. The twelfth decimal place of F is at the
+# limit of double precision for these data, as the topic notes.
+inst &lt;- c(196.3052, 196.1240, 196.1890, 196.2569, 196.3403,
+          196.3042, 196.3825, 196.1669, 196.3257, 196.0422,
+          196.1303, 196.2005, 196.2889, 196.0343, 196.1811,
+          196.2795, 196.1748, 196.1494, 196.1485, 195.9885,
+          196.2119, 196.1051, 196.1850, 196.0052, 196.2090)
+instrument &lt;- factor(rep(1:5, each = 5))
+b &lt;- anova(aov(inst ~ instrument))
+twelve &lt;- function(x) formatC(x, digits = 12, format = "f", drop0trailing = TRUE)
+cat("Between Groups", twelve(b$"Sum Sq"[1]), b$Df[1], twelve(b$"Mean Sq"[1]), "\n")
+cat("Within Groups", twelve(b$"Sum Sq"[2]), b$Df[2], twelve(b$"Mean Sq"[2]), "\n")
+cat("Corrected Total", twelve(sum(b$"Sum Sq")), sum(b$Df), "\n")
+cat("F (variance ratio) =", twelve(b$"F value"[1]), " ", pv(b$"Pr(&gt;F)"[1]), "\n")</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

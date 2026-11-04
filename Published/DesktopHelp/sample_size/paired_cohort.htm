@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="sample_size/paired_cohort.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sample Size for Matched (Paired) Cohort Studies - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
+            Sample Size for Paired Cohort Studies</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Sample Size_Paired Cohort</b>.</p>
+        <p> </p>
+        <p>This function gives you the minimum number of subject pairs that you require to detect a true <a href="../clinical_epidemiology/risk_prospective.htm">relative risk RR</a> with power POWER and <a href="../basics/p_values.htm">two sided type I error probability</a> ALPHA (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>; <a href="../references/reference_list.htm#ref-breslow-1980">Breslow and Day, 1980</a>).</p>
+        <p> </p>
+        <p><u>Information required</u>
+        </p>
+        <ul>
+            <li>POWER: probability of detecting a real effect.</li>
+            <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
+            <li>r: correlation coefficient for failure between paired subjects.</li>
+            <li>*: input either (P0 and RR) or (P0 and P1), where RR=P1/P0.</li>
+            <li>P0: event rate in the control group.</li>
+            <li>P1: event rate in experimental group.</li>
+            <li>RR: risk of failure of experimental subjects relative to controls.</li>
+        </ul>
+        <p> </p>
+        <p><u>Practical issues</u>
+        </p>
+        <ul>
+            <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
+            <li>5% is the usual choice for ALPHA.</li>
+            <li>r can be estimated from previous studies - note that r is the phi (correlation) coefficient that is given for a two by two table if you enter it into the StatsDirect <a href="../chi_square_tests/rc.htm">r by c chi-square</a> function. When r is not known from previous studies, some authors state that it is better to use a small arbitrary value for r, say 0.2, than it is to assume independence (a value of 0) (<a href="../references/reference_list.htm#ref-dupont-1988">Dupont, 1988</a>).</li>
+            <li>P0 can be estimated as the population event rate. Note, however, that due to matching, the control sample is not a random sample from the population therefore population event rate can be a poor estimate of P0 (especially if <a href="../basics/confounding.htm">confounders</a> are strongly associated with the event).</li>
+            <li>If possible, choose a range of relative risks that you want to have the statistical power to detect.</li>
+        </ul>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The estimated sample size n is calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="7d88adfe72bbb24825fe2d11f11d2717dc2017a7cf34c294cbe938bd6e0834d8"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle n=\frac{\left[ \frac{1}{2}z_{\alpha/2}+z_{\beta}\sqrt{p_a(1-p_a)}\right]^2}{(p_a-0.5)^2(p_x+p_y)} \\
+\displaystyle \displaystyle p_a=\frac{p_y}{p_x+p_y} \\
+\displaystyle \displaystyle p_y=p_1(1-p_0)-r\sqrt{p_1(1-p_1)p_0(1-p_0)} \\
+\displaystyle \displaystyle p_x=p_0(1-p_1)-r\sqrt{p_1(1-p_1)p_0(1-p_0)}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/1ee48492433fd2249b73183387430ff435f0b2f7cb82033ff31da8aa3bfe7f57.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where α = alpha, β = 1 - power and z<sub>p</sub> is the standard normal deviate for probability p. n is rounded up to the closest integer.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>Consider a planned cohort study in which each worker exposed to a solvent is matched, on age and sex, with an unexposed worker from the same industry, and both are followed for the same period for a skin condition. Earlier studies suggest that about 10% of unexposed workers develop the condition. The investigators want a 90% chance of detecting a doubling of the risk with exposure (a relative risk of 2) with a two sided test at the 5% level. The correlation for failure between the paired subjects is not known, so it is taken as 0.2 as suggested above. These figures are invented for illustration.</p>
+        <p> </p>
+        <p>To calculate the sample size in StatsDirect select Paired Cohort from the Sample Size section of the Analysis menu. Enter 0.1 as the event rate in the control group, choose Relative Risk and enter 2, enter 0.2 as the correlation coefficient, then 90% for power and 5% for alpha.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Sample size for paired cohort study</u>
+        </p>
+        <p> </p>
+        <p>Event rate in control group = 0.1</p>
+        <p>Event rate in experimental group = 0.2</p>
+        <p>Correlation for failure between experimental and control subjects = 0.2</p>
+        <p>Alpha = 0.05</p>
+        <p>Power = 0.9</p>
+        <p> </p>
+        <p>Estimated minimum sample size = 203 pairs</p>
+        <p> </p>
+        <p>So 203 matched pairs, 406 workers in all, are needed. Entering the event rate in the experimental group as 0.2 instead of the relative risk gives the same result. Try other values of power, alpha and correlation to see how sensitive the size is to them.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Sample size for a paired cohort study: the StatsDirect help example (an invented study
+# of exposed workers each matched with an unexposed worker, 10% of controls with the
+# event, a relative risk of 2 to be detected) in R
+p0 &lt;- 0.1                                 # event rate in the control group
+rr &lt;- 2                                   # relative risk to be detected
+p1 &lt;- rr * p0                             # event rate in the experimental group, 0.2
+r &lt;- 0.2                                  # correlation for failure within a pair
+power &lt;- 0.9
+alpha &lt;- 0.05                             # two sided
+
+# Base R's power.prop.test() is for two independent groups and takes no account of the
+# pairing, so the topic's formula (Dupont 1990, from Breslow and Day 1980) is used: the
+# probabilities of the two kinds of discordant pair, the proportion of discordant pairs
+# in which the experimental subject is the one who fails, then the number of pairs,
+# rounded up. It needs p1 to differ from p0 and both discordant probabilities to be
+# positive (r not too large), which is why StatsDirect refuses some inputs.
+z_alpha &lt;- qnorm(1 - alpha / 2)           # two sided: 1.959964 for alpha 0.05
+z_beta &lt;- qnorm(power)                    # 1.281552 for 90% power
+s &lt;- r * sqrt(p1 * (1 - p1) * p0 * (1 - p0))
+py &lt;- p1 * (1 - p0) - s                   # experimental subject fails, control does not
+px &lt;- p0 * (1 - p1) - s                   # control fails, experimental subject does not
+stopifnot(p1 != p0, px &gt; 0, py &gt; 0)
+pa &lt;- py / (px + py)
+n &lt;- (z_alpha / 2 + z_beta * sqrt(pa * (1 - pa)))^2 / ((pa - 0.5)^2 * (px + py))
+cat("Event rate in control group =", p0, "\n")
+cat("Event rate in experimental group =", p1, "\n")
+cat("Correlation for failure between experimental and control subjects =", r, "\n")
+cat("Alpha =", alpha, "\n")
+cat("Power =", power, "\n")
+cat("Estimated minimum sample size =", ceiling(n), "pairs\n")</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

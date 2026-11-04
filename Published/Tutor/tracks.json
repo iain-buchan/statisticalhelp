@@ -1,0 +1,22 @@
+{
+  "foundation": {
+    "title": "Medical undergraduate",
+    "description": "Understand the question, choose the method, interpret the result."
+  },
+  "medicine": {
+    "title": "Postgraduate medicine",
+    "description": "Interpret diagnostic evidence, treatment effects and uncertainty."
+  },
+  "publicHealth": {
+    "title": "Public health postgraduate",
+    "description": "Work with population comparisons, bias and study design."
+  },
+  "analyst": {
+    "title": "Healthcare / business analyst",
+    "description": "Describe services, compare performance and communicate uncertainty."
+  },
+  "researcher": {
+    "title": "Researcher / degree module",
+    "description": "Choose methods, check assumptions and interpret research evidence."
+  }
+}

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="distributions/chisq.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chi-square Distribution - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
+            Chi-square Distribution</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Distributions_Chi-Square</b>.</p>
+        <p> </p>
+        <p>A variable from a chi-square distribution with n degrees of freedom is the sum of the squares of n independent <a href="normal.htm">standard normal variables</a> (z).</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="decd2389010ea7f28b62c1cb6914b2731c9a7769ca175cebe7ab7cf671c5efd8"><span class="help-equation-accessible help-equation-live">$\displaystyle \chi^2=z_1^2+z_2^2+...+z_n^2$</span><img src="../resources/help-editor-runtime/equation-artwork/39cac1f0a92d13c5cd6005888a740f04bf1ea04965b07bff3749924d5d14b1fb.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>[chi (Greek χ) is pronounced ki as in kind]</p>
+        <p> </p>
+        <p>A chi-square variable with one degree of freedom is equal to the square of the standard normal variable. A chi-square variable with many degrees of freedom (n) is approximately normally distributed with mean n and variance 2n, as the <a href="normal.htm">central limit theorem</a> dictates.</p>
+        <p> </p>
+        <p>The so called "linear constraint" property of chi-square explains its application in many statistical methods: Suppose we consider one sub-set of all possible outcomes of n random variables (z). The sub-set is defined by a linear constraint:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="fe04e74112d0cff73dcb82509de2ab4b26aa84b61a9fb75066cc1ebb6b1acc75"><span class="help-equation-accessible help-equation-live">$\displaystyle a_1 z_1+a_2z_2+...+a_n z_n=k$</span><img src="../resources/help-editor-runtime/equation-artwork/c6abdcc6b73ce846c499540e972ae3a1a305ca0616421e7c383b7aebe1464984.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where a and k are constants. Here the sum of the squares of z follows a chi-square distribution with n-1 degrees of freedom. If there are m linear constraints then the total degrees of freedom is n-m. The number of linear constraints associated with the design of contingency tables explains the number of degrees of freedom used in contingency table tests (<a href="../references/reference_list.htm#ref-bland-2000">Bland, 2000</a>).</p>
+        <p> </p>
+        <p>Another important relationship of chi-square is as follows: the sums of squares about the mean for a normal sample of size n will follow the distribution of the <a href="../basic_descriptive_statistics/standard_deviation.htm">population variance</a> times chi-square with n-1 degrees of freedom. As the expected value of chi-square is n-1 here, the sample variance is estimated as the sums of squares about the mean divided by n-1.</p>
+        <p> </p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect calculates the probability associated with a chi-square random variable with n degrees of freedom, for this a reliable approach to the incomplete gamma integral is used (<a href="../references/reference_list.htm#ref-shea-1988">Shea, 1988</a>). Chi-square quantiles are calculated for n degrees of freedom and a given probability using the Taylor series expansion of <a href="../references/reference_list.htm#ref-best-1975-b">Best and Roberts (1975)</a> when P ≤ 0.999998 and P ≥ 0.000002, otherwise a root finding algorithm is applied to the incomplete gamma integral.</p>
+        <p> </p>
+        <p>StatsDirect agrees fully with all of the double precision reference values quoted by Shea (1988).</p>
+        <p> </p>
+        <p><u>Function Definition</u>
+        </p>
+        <p>The distribution function F(x) of a chi-square random variable x with n degrees of freedom is:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="9c931629be9b9ec639f50ae9f6a9fe0b8e3709abeaadb886316215d7e38f5d5f"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle F(x)=\frac{1}{\displaystyle 2^{n/2} \Gamma(n/2)} \int_0^x t^{n/2-1}e^{-t/2} \space dt
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/0eb6dc0414a5d3c06e2c04151d4b1b6b2250f8a373aa2cda11c00f7123038fc9.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>Γ(*) is the gamma function:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="d53fb7fae09194c2920628f439cdc5e7aa7993b1723c3b069875e815255c1061"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/7a0898c8e04a982cb1c4cb9cf7eb7ccc7c7646243533c606944cc3d79d88022b.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>Select Chi-Square from the Distributions section of the Analysis menu. Enter a chi-square value and its degrees of freedom, then click Calculate to see the probability in the upper tail of the distribution beyond that value (the P value of a chi-square test). Alternatively enter an upper tail probability and the degrees of freedom, then click Invert to see the chi-square value that cuts off that tail (the critical value for that P).</p>
+        <p> </p>
+        <p>For example:</p>
+        <p> </p>
+        <p>P(chi-sq 3.84, df 1) = 0.050043521248705 upper tail</p>
+        <p>P(chi-sq 15.2, df 6) = 0.018756919725354 upper tail</p>
+        <p>chi-sq(upper P 0.01, df 3) = 11.3448667301444</p>
+        <p> </p>
+        <p>A chi-square of 3.84 on one degree of freedom, as from a 2 by 2 table, falls just short of the 5% level, whose critical value is 3.841459; 15.2 on six degrees of freedom, as from a 3 by 4 table, is significant at the 2% level; and a chi-square on three degrees of freedom must exceed 11.3449 to be significant at the 1% level. StatsDirect shows the P to 15 decimal places and the chi-square to 15 significant figures, and writes each result to the report as a probability distribution calculation.</p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Chi-square distribution: the example in the StatsDirect help (the upper tail
+# probabilities of two chi-square statistics and the 1% critical value on 3 degrees of
+# freedom, as the Distributions dialog computes them) in R
+fifteen &lt;- function(x) formatC(x, digits = 15, format = "f", drop0trailing = TRUE)
+
+# The upper tail probability of a chi-square statistic, the P value of a chi-square
+# test: pchisq with lower.tail = FALSE (pchisq(x, df) gives the lower tail; subtracting
+# that from 1 would lose accuracy far into the upper tail)
+cat("P(chi-sq 3.84, df 1) =", fifteen(pchisq(3.84, 1, lower.tail = FALSE)),
+    "upper tail\n")
+cat("P(chi-sq 15.2, df 6) =", fifteen(pchisq(15.2, 6, lower.tail = FALSE)),
+    "upper tail\n")
+
+# With one degree of freedom chi-square is the square of a standard normal deviate, so
+# its upper tail is the two sided normal tail beyond the square root of the statistic
+cat("Two sided normal P beyond sqrt(3.84) =", fifteen(2 * pnorm(-sqrt(3.84))), "\n")
+
+# The chi-square value that cuts off a given upper tail (the critical value for a P):
+# qchisq. StatsDirect shows it to at most 15 decimal places and 15 significant figures
+# (13 decimal places for a value above 10), so it is printed the same way here
+x15 &lt;- function(x) formatC(x, digits = 15, format = "g", drop0trailing = TRUE)
+cat("chi-sq(upper P 0.01, df 3) =", x15(qchisq(0.01, 3, lower.tail = FALSE)), "\n")</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

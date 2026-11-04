@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="nonparametric_methods/smirnov.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Smirnov Two-sample Test for Distribution Difference - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Two Sample Smirnov Test</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Nonparametric_Smirnov Two Sample</b>.</p>
+        <p> </p>
+        <p>This function compares the distribution functions of the parent populations of two samples.</p>
+        <p> </p>
+        <p>If you have two independent samples which may have been drawn from different populations then you might consider looking for differences between them using a t test or Mann-Whitney test. Mann-Whitney and t tests are sensitive to differences between two means or medians but do not detect other differences such as variance. The Smirnov test (a two sample version of the Kolmogorov test) detects a wider range of differences between two distributions.</p>
+        <p> </p>
+        <p>The test statistic for the two sided test is the largest vertical distance between the empirical distribution functions. In other words, if you plot the sorted values of sample x against the sorted values of sample y as a series of increasing steps then the test statistic is the maximum vertical gap between the two plots.</p>
+        <p> </p>
+        <p>The test statistics for the one sided tests are the largest vertical distance of one distribution function above the other and vice versa.</p>
+        <p> </p>
+        <p>The alternative hypothesis for the two sided test is that the distribution functions for x and y are different for at least one observation. The alternative hypotheses for the one sided tests are a) the distribution function for x is greater than that for y for at least one observation and b) the distribution function for x is less than that for y for at least one observation.</p>
+        <p> </p>
+        <p>The two sample Smirnov method tests the null hypothesis that the distribution functions of the populations from which your samples have been drawn are identical</p>
+        <p> </p>
+        <p>Assumptions:</p>
+        <ul>
+            <li>samples are random</li>
+            <li>two samples are mutually independent</li>
+            <li>measurement scale is at least ordinal</li>
+            <li>tied values are permitted: the exact P values are calculated conditional on the ties observed in the pooled sample</li>
+        </ul>
+        <p> </p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>P values for the test statistics are calculated from the exact permutation distribution of the statistic over all relabellings of the pooled sample, conditional on any tied values, as in the ks.test function of R (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-nikiforov-1994">Nikiforov, 1994</a>; <a href="../references/reference_list.htm#ref-kim-1973">Kim and Jennrich 1973</a>). The one sided P values are the exact upper tail probabilities of D<sup>+</sup> and D<sup>−</sup>, not half of the two sided P value.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999)</a>.</p>
+        <p>Test workbook (Nonparametric worksheet: Xi, Yi).</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Xi</td>
+                <td style="text-decoration: underline;text-align: right;">Yi</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7.6</td>
+                <td style="text-align: right;">5.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8.4</td>
+                <td style="text-align: right;">5.7</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8.6</td>
+                <td style="text-align: right;">5.9</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8.7</td>
+                <td style="text-align: right;">6.5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9.3</td>
+                <td style="text-align: right;">6.8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9.9</td>
+                <td style="text-align: right;">8.2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10.1</td>
+                <td style="text-align: right;">9.1</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10.6</td>
+                <td style="text-align: right;">9.8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.2</td>
+                <td style="text-align: right;">10.8</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;"> </td>
+                <td style="text-align: right;">11.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;"> </td>
+                <td style="text-align: right;">11.5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;"> </td>
+                <td style="text-align: right;">12.3</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;"> </td>
+                <td style="text-align: right;">12.5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;"> </td>
+                <td style="text-align: right;">13.4</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;"> </td>
+                <td style="text-align: right;">14.6</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect you must first enter them into two workbook columns and label them appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select the Smirnov Two Sample test from the from the Nonparametric section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Xi" and "Yi" when prompted for data.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p>Two sided test:</p>
+        <p>D = 0.4</p>
+        <p>P = 0.2653</p>
+        <p> </p>
+        <p>One sided test (suspecting Xi shifted left of Yi):</p>
+        <p>D = 0.4</p>
+        <p>P = 0.1328</p>
+        <p> </p>
+        <p>One sided test (suspecting Xi shifted right of Yi):</p>
+        <p>D = 0.333333</p>
+        <p>P = 0.2462</p>
+        <p> </p>
+        <p>Thus we can not reject the null hypothesis that the two populations from which our samples were drawn have the same distribution function.</p>
+        <p> </p>
+        <p>If we were interested in a one sided test then we would need good reason for expecting one group to yield values above (distribution shifted to the right of) or below (distribution shifted to the left of) the other group. For these data neither of the one sided tests reached significance.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Two sample Smirnov test: the StatsDirect help example (Conover 1999) in R
+xi &lt;- c(7.6, 8.4, 8.6, 8.7, 9.3, 9.9, 10.1, 10.6, 11.2)
+yi &lt;- c(5.2, 5.7, 5.9, 6.5, 6.8, 8.2, 9.1, 9.8, 10.8, 11.3, 11.5, 12.3, 12.5,
+        13.4, 14.6)
+
+# R's standard test, which it calls the two-sample Kolmogorov-Smirnov test. D is
+# the largest vertical distance between the two sample distribution functions.
+# StatsDirect's P is always exact. R's is exact by default when the product of
+# the sample sizes is less than 10000; exact = TRUE asks for it at any size.
+two &lt;- ks.test(xi, yi, exact = TRUE)
+print(two)
+cat(sprintf("Two sided test:          D = %g   P = %.4f\n",
+            two$statistic, two$p.value))
+
+# One sided tests. "greater" asks whether the distribution function of xi lies
+# above that of yi, which is what happens when xi is shifted left of yi (its
+# values tend to be smaller); "less" asks whether xi is shifted right of yi.
+left &lt;- ks.test(xi, yi, alternative = "greater", exact = TRUE)
+right &lt;- ks.test(xi, yi, alternative = "less", exact = TRUE)
+cat(sprintf("Xi shifted left of Yi:   D = %g   P = %.4f\n",
+            left$statistic, left$p.value))
+cat(sprintf("Xi shifted right of Yi:  D = %g   P = %.4f\n",
+            right$statistic, right$p.value))
+
+# The three D statistics from the sample distribution functions
+v &lt;- sort(c(xi, yi))
+fx &lt;- ecdf(xi)(v)                         # proportion of xi at or below each value
+fy &lt;- ecdf(yi)(v)
+cat("D =", max(abs(fx - fy)), "  D (left) =", max(fx - fy),
+    "  D (right) =", round(max(fy - fx), 6), "\n")</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

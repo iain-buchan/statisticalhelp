@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="data_preparation/transform_normal_scores.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Normal Scores Transform - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
+            Normal Scores</h1>
+        <p> </p>
+        <p>Menu location: <b>Data_Transforming and Deriving_Normal Scores</b>.</p>
+        <p> </p>
+        <p>This function saves the normal scores of workbook data you select into a new workbook column marked Nml Score: Name, where Name is the column label of the original data.</p>
+        <p> </p>
+        <p>Three different methods for calculating normal scores are provided:</p>
+        <p>1. <b>van der Waerden's</b> method (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>):</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="ca16c969422a9acc4ac43707fcf440ea50428ca1f108a91bf14ad2748617672a"><span class="help-equation-accessible help-equation-live">$\displaystyle s=\Phi^{-1}\left(\frac{r}{n+1}\right)$</span><img src="../resources/help-editor-runtime/equation-artwork/62a46c62667c3a9e01d3af23b8163896e3b6d7b4bc9567201ba7a365ed877cbf.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+            <br />- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ<sup>-1</sup>(p) is the pth quantile from the standard normal distribution.</p>
+        <p> </p>
+        <p>2. <b>Blom's</b> method (<a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>):<br /><span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="0b9665c5c3f2cb98e5ea27f4bc5273848786d5d50cc2bbc2b03e25b1ed98c7c0"><span class="help-equation-accessible help-equation-live">$\displaystyle s=\Phi^{-1}\left(\frac{r-3/8}{n+1/4}\right)$</span><img src="../resources/help-editor-runtime/equation-artwork/9080751933a642231c1b846b41447bba974f8c1d322b014cb5dc696320323593.svg" alt="" aria-hidden="true" class="help-equation-original" /></span></p>
+        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size and Φ<sup>-1</sup>(p) is the pth quantile from the standard normal distribution.</p>
+        <p> </p>
+        <p>3. <b>Expected normal order scores</b> (<a href="../references/reference_list.htm#ref-david-1981">David, 1981</a>; <a href="../references/reference_list.htm#ref-royston-1982-a">Royston, 1982</a>; <a href="../references/reference_list.htm#ref-harter-1961">Harter, 1961</a>)<br /></p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="08ec3d76125637849863e197cce5bc28accb5a32d32dccd1b952efc2e0d6f632"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle s=\frac{n!}{(r-1)!(n-r)!}\int_{-\infty}^\infty x[\Phi(x)]^{r-1}[1-\Phi(x)]^{n-r}\phi(x) \space dx \\
+\displaystyle \displaystyle \phi(x)=\frac{\exp(-0.5x^2)}{\sqrt{2\pi}}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/baaea83d6af344f714a68bc9d9296a0c53c1ffbcd1af7ba5615ed91e01cd022e.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where s is the normal score for an observation, r is the rank for that observation, n is the sample size, φ(x) is the standard normal density and Φ(x) is the standard normal distribution function. The solution is found by numerical integration. Calculation of expected normal order scores is not practical for very large samples, n of 2500 is the maximum permitted in StatsDirect.</p>
+        <p><u>Example</u>
+        </p>
+        <p>Test workbook (Nonparametric worksheet: First Born).</p>
+        <p> </p>
+        <p>Scoring the following agressivity scores for a sample of firstborn twins using the first method above gives:</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">First Born -----&gt;</td>
+                <td style="text-align: right;text-decoration: underline;">Nml Score(vdW): First Born</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">86</td>
+                <td style="text-align: right;">0.2934</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">-0.6151</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">68</td>
+                <td style="text-align: right;">-1.4261</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">1.1984</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">-0.2934</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">77</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">91</td>
+                <td style="text-align: right;">1.1984</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">70</td>
+                <td style="text-align: right;">-1.0201</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">71</td>
+                <td style="text-align: right;">-0.6151</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">88</td>
+                <td style="text-align: right;">0.7363</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">87</td>
+                <td style="text-align: right;">0.5024</td>
+            </tr>
+        </table>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "format": "statsdirect-builtin-tutor",
+  "publisher": "StatsDirectHelpEditor",
+  "publishedAtUtc": "2026-11-04T20:49:41.1856691\u002B00:00",
+  "sourceCourseId": "statsdirect-health-foundations",
+  "sourceCourseVersion": "2026-11-03-draft",
+  "sourceCourseSha256": "27896cc4c3865c21c50d797fa5953733efff2bf25d7da0b332dad08534239ff9",
+  "sourceFileName": "starter-course.json",
+  "sourceFileSha256": "618185dfe8d9ddcaa2ad7b25652d0ff54237b3050c8120d08f8bded33085f77e",
+  "bankVersion": "learn-draft-2026-10-01",
+  "lessonCount": 12,
+  "questionCount": 35,
+  "trackCount": 5,
+  "files": [
+    {
+      "path": "lessons.json",
+      "sha256": "ceb513c78b6f7d04333625437a4c00bf3accdc75990981f639bbec702411dab5",
+      "bytes": 104059
+    },
+    {
+      "path": "questions.json",
+      "sha256": "373df875b3095a508c1760e2e4bd5581723bb1f79349568880e8616def3bc10e",
+      "bytes": 70161
+    },
+    {
+      "path": "tracks.json",
+      "sha256": "d70bb02953a05a6db5abf04ec40c1b766e943dfc54e4fa7ef10d411f474cc114",
+      "bytes": 773
+    },
+    {
+      "path": "bank.mjs",
+      "sha256": "281a12ce9f963500f6680c5d7e73069a7993d03a940e82cf19273b4609d16250",
+      "bytes": 71131
+    }
+  ],
+  "readmeSha256": "d1882f2adea41402cb0e661534eb8b4be05752ec60b9f5e3fe6598d2532e87b4",
+  "reviewIssues": [
+    {
+      "severity": "Warning",
+      "path": "lessons.epidemiology.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.causal.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.paired.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.precision.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.diagnostic.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.risk.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.regression.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.rates.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.appraisal.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.missing.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.validation.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "lessons.meta.review",
+      "message": "Draft or edited lesson: review its statistical reasoning and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.UG-SENS-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.UG-NNT-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.UG-PVAL-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.UG-PAIR-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PG-PPV-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PG-CI-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PG-RROR-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PG-SE-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PH-STAND-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PH-CONF-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PH-CLUST-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PH-SMR-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.AN-MED-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.AN-PCT-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.AN-CAUS-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.AN-PREC-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.RS-PAIR-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.RS-MULT-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.RS-MISS-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.RS-CI-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PG-ROC-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PG-LR-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PG-FOREST-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.AN-RATE-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.PH-CASEMIX-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.RS-LEAD-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.CORE-DESIGN-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.CORE-RATE-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.CORE-MEDIATOR-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.CORE-SELECTION-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.LIB-RATES-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.LIB-APPRAISAL-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.LIB-MISSING-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.LIB-VALIDATION-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    },
+    {
+      "severity": "Warning",
+      "path": "questions.LIB-META-01.review",
+      "message": "Draft or edited question: independently check the key, distractors, numerical results and sources before student use."
+    }
+  ],
+  "reviewWarningCount": 47,
+  "reviewGatePassed": true,
+  "reviewedChangedItems": [],
+  "unreviewedChangedItems": []
+}

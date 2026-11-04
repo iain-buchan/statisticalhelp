@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="clinical_epidemiology/nnt.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Number Needed to Treat (NNT) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Number Needed to Treat</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Clinical Epidemiology_Number Needed to Treat</b>.</p>
+        <p> </p>
+        <p>This function gives relative risk, relative risk reduction, absolute risk reduction (risk difference) and number needed to treat (NNT) with exact or near-exact confidence intervals. These statistics are usually presented in the context of health care interventions but they apply equally to other forms of treatment; NNT in general terms is the number of treated subjects needed to produce one outcome (<a href="../references/reference_list.htm#ref-cook-1995">Cook and Sackett, 1995</a>; <a href="../references/reference_list.htm#ref-deeks-2001">Deeks and Altman, 2001</a>).</p>
+        <p> </p>
+        <p>For example, in the Veterans Administration Trial, drugs used to treat high blood pressure were investigated over three years for their effect on damage rates to organs of the body typically affected by high blood pressure (<a href="../references/reference_list.htm#ref-laupacis-1988">Laupacis et al., 1988</a>).</p>
+        <p> </p>
+        <p>If the intervention studied has an adverse effect on outcome then the same calculations used here for NNT may be expressed instead as number needed to harm (NNH). The notation of harm or benefit suggested by <a href="../references/reference_list.htm#ref-altman-1998">Doug Altman (1998)</a> is used here instead of quoting signed NNT estimates and confidence limits.</p>
+        <p> </p>
+        <p>Some authors discourage the use of NNT, due mainly to the assumptions made when converting rate differences into numbers of individuals (<a href="../references/reference_list.htm#ref-hutton-2000">Hutton, 2000</a>). In some situations, it may be preferable to quote absolute risk reduction (ARR) multiplied by a constant, say 100, as the main summary measure of effect from a clinical trial.</p>
+        <p> </p>
+        <p><u>Definitions</u>
+        </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">TREATMENT:</td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td style="text-align: center;text-decoration: underline;">TREATED</td>
+                <td style="text-align: center;text-decoration: underline;">CONTROLS</td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: right;">ADVERSE EVENT:</td>
+                <td style="text-align: right;">YES:</td>
+                <td style="text-align: center;">a</td>
+                <td style="text-align: center;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">NO:</td>
+                <td style="text-align: center;">c</td>
+                <td style="text-align: center;">d</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>LET:</p>
+        <p>pc = proportion of subjects in control group who suffer an event</p>
+        <p>pc = b / (b+d)</p>
+        <p>pt = proportion of subjects in treated group who suffer an event</p>
+        <p>pt = a / (a+c)</p>
+        <p>er = expected/baseline risk in untreated subjects</p>
+        <p> </p>
+        <p>THEN:</p>
+        <p>Relative risk of event (RRe) = pt / pc</p>
+        <p>Relative risk of no event (RRne) = (1-pt) / (1-pc)</p>
+        <p>Odds ratio (OR) = (a*d) / (b*c)</p>
+        <p>Relative risk reduction (RRR) = (pc-pt) / pc = 1-RRe</p>
+        <p>Absolute risk reduction (ARR)/ risk difference (RD) = pc-pt</p>
+        <p> </p>
+        <p>Number needed to treat (NNT):</p>
+        <p>NNT [risk difference] = 1 / RD</p>
+        <p>NNT [relative risk of event] = 1 / (pc*RRR)</p>
+        <p>NNT [relative risk of no event] = 1 / ((1-pc)*(RRne-1))</p>
+        <p>NNT [odds ratio] = (1-(pc*(1-OR)) / (pc*(1-pc)*(1-OR))</p>
+        <p> </p>
+        <p>Adjusted NNT statistics can be calculated with er substituted for pc.</p>
+        <p> </p>
+        <p>Consensus regarding the rounding of NNT statistics is to round up (<a href="../references/reference_list.htm#ref-sackett-1996-a">Sackett et al., 1996a</a>, <a href="../references/reference_list.htm#ref-sackett-1996-b">1996b</a>); StatsDirect gives rounded up and unrounded NNT statistics.</p>
+        <p> </p>
+        <p>The most commonly quoted NNT statistic is NNT [risk difference] or the empirical NNT, which assumes a constant risk difference over different expected event rates. The other NNT statistics assume that a relative measure (RRe, RRne or OR) is constant over different expected event rates, therefore these NNTs vary with the expected event rate. You might want to calculate a range of NNTs for the range of control event rates observed in all relevant studies. Careful thought must be given to the assumption that a relative measure is constant across different studies and populations, as this may be incorrect (<a href="../references/reference_list.htm#ref-sharp-1996">Sharp et al., 1996</a>; <a href="../references/reference_list.htm#ref-ioannidis-1997">Ioannidis et al., 1997</a>; <a href="../references/reference_list.htm#ref-davey-smith-1997">Smith et al., 1997</a>; <a href="../references/reference_list.htm#ref-thompson-1997">Thompson et al., 1997</a>; <a href="../references/reference_list.htm#ref-smeeth-1999">Smeeth et al., 1999</a>; <a href="../references/reference_list.htm#ref-altman-2002">Altman and Deeks, 2002</a>; <a href="../references/reference_list.htm#ref-deeks-2002">Deeks 2002</a>). If in doubt, please consult with a Statistician.</p>
+        <p> </p>
+        <p>If you wish to calculate NNTs across a number of studies then you might consider applying one of the relative NNT formulae above to a relative effect statistic calculated using <a href="../meta_analysis/meta_analyses.htm">meta-analysis</a>. This is best done with the guidance of a Statistician (<a href="../references/reference_list.htm#ref-smeeth-1999">Smeeth et al., 1999</a>; <a href="../references/reference_list.htm#ref-sharp-1996">Sharp et al. 1996</a>; <a href="../references/reference_list.htm#ref-davey-smith-1997">Smith et al., 1997</a>)</p>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>Confidence intervals for individual risks/proportions are calculated using the Clopper-Pearson method (<a href="../references/reference_list.htm#ref-newcombe-1998-c">Newcombe, 1998c</a>). Confidence intervals for relative risk are calculated using Koopman's likelihood-based approach advocated by Gart and Nam (<a href="../references/reference_list.htm#ref-gart-1988">Gart and Nam, 1988</a>; <a href="../references/reference_list.htm#ref-koopman-1984">Koopman, 1984</a>; <a href="../references/reference_list.htm#ref-haynes-1993">Haynes and Sackett, 1993</a>). Confidence intervals for risk difference and number needed to treat are based on the iterative method of Miettinen and Nurminen (<a href="../references/reference_list.htm#ref-mee-1984">Mee, 1984</a>; <a href="../references/reference_list.htm#ref-anbar-1983">Anbar, 1983</a>; <a href="../references/reference_list.htm#ref-gart-1990">Gart and Nam 1990</a>; <a href="../references/reference_list.htm#ref-miettinen-1985">Miettinen and Nurminen, 1985</a>) for constructing confidence intervals for differences between independent proportions. Exact Fisher confidence intervals are used for odds ratios (<a href="../references/reference_list.htm#ref-martin-1991">Martin and Austin, 1991</a>).</p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-haynes-1993">Haynes and Sackett (1993)</a>:</p>
+        <p> </p>
+        <p>In a trial of a drug for the treatment of severe congestive heart failure 607 patients were treated with a new angiotensin converting enzyme inhibitor (ACEi) and 607 other patients were treated with a standard non-ACEi régime. 123 out of 607 patients on the non-ACEi régime died within six months and 94 out of the 607 ACEi treated patients died within six months.</p>
+        <p> </p>
+        <p>To analyse these data in StatsDirect select Number Needed to Treat from the Clinical Epidemiology section of the Analysis menu. Choose the default 95% confidence interval. Enter the number of controls as 607 with 123 suffering an event and enter the number treated as 607 with 94 suffering an event.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Number needed to treat (empirical results using observed counts only)</u>
+        </p>
+        <p> </p>
+        <p>Estimates with 95% confidence intervals:</p>
+        <p> </p>
+        <p>Risk of event in controls = 123/607 = 0.202636 (0.171346 to 0.23685)</p>
+        <p>Risk of event in treated = 94/607 = 0.15486 (0.126993 to 0.186133)</p>
+        <p>Relative risk of event = 0.764228 (0.598898 to 0.974221)</p>
+        <p> </p>
+        <p>Risk of no event in controls = 484/607 = 0.797364 (0.76315 to 0.828654)</p>
+        <p>Risk of no event in treated = 513/607 = 0.84514 (0.813867 to 0.873007)</p>
+        <p>Relative risk of no event = 1.059917 (1.005736 to 1.118137)</p>
+        <p> </p>
+        <p>Odds ratio of event in treated cf. controls = 0.721026 (0.529913 to 0.979347)</p>
+        <p>Relative risk reduction (controls-treated) = 0.235772 (0.025779 to 0.401102)</p>
+        <p>Risk difference (controls-treated) = 0.047776 (0.004675 to 0.090991)</p>
+        <p> </p>
+        <p>NNT [risk difference] = 20.931034_benefit (10.990105_benefit to 213.910426_benefit)</p>
+        <p>NNT [risk difference] (rounded up) = 21_benefit (11_benefit to 214_benefit)</p>
+        <p> </p>
+        <p>Here we infer, with 95% confidence, that you need to treat as many as 214 or as few as 11 patients in severe congestive heart failure with this ACEi in order to prevent one death that would not have been prevented with the standard non-ACEi therapy in six months of treatment.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above, then adds the numbers needed to treat adjusted for an expected risk of 30%, which the report shows when an expected risk is entered at the optional prompt. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Number needed to treat: the StatsDirect help example (Haynes and Sackett 1993, a trial
+# of an ACE inhibitor in severe congestive heart failure: 123 of 607 controls and 94 of
+# 607 treated patients died within six months) in R
+nc &lt;- 607   # controls
+xc &lt;- 123   # controls who died (had the event)
+nt &lt;- 607   # treated
+xt &lt;- 94    # treated who died
+level &lt;- 0.95
+
+# Base R has no number needed to treat function. Each risk is a binomial proportion,
+# and its exact (Clopper-Pearson) confidence interval is the one binom.test gives:
+# the risk of death among the controls, for instance
+print(binom.test(xc, nc, conf.level = level))
+
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+risk &lt;- function(x, n) {
+  ci &lt;- binom.test(x, n, conf.level = level)$conf.int
+  paste0(x, "/", n, " = ", six(x / n), " (", six(ci[1]), " to ", six(ci[2]), ")")
+}
+
+# A relative risk is a ratio of two binomial proportions. Its interval is Koopman's
+# (1984) score interval: the ratios at which the score chi-square, with the two
+# proportions estimated under the constraint that they have that ratio, reaches the
+# critical value. All four cells of this table are non-zero, as the search assumes.
+koopman &lt;- function(x1, n1, x0, n0) {   # the ratio (x1 / n1) / (x0 / n0)
+  chi2 &lt;- function(theta) {
+    A &lt;- (n0 + n1) * theta
+    B &lt;- -((x0 + n1) * theta + x1 + n0)
+    p0 &lt;- (-B - sqrt(B^2 - 4 * A * (x0 + x1))) / (2 * A)  # constrained estimate
+    p1 &lt;- theta * p0
+    (x1 - n1 * p1)^2 / (n1 * p1 * (1 - p1)) *
+      (1 + n1 * (theta - p1) / (n0 * (1 - p1)))
+  }
+  est &lt;- (x1 / n1) / (x0 / n0)
+  f &lt;- function(lt) chi2(exp(lt)) - qchisq(level, 1)
+  lower &lt;- exp(uniroot(f, c(log(est) - 20, log(est)), tol = 1e-12)$root)
+  upper &lt;- exp(uniroot(f, c(log(est), log(est) + 20), tol = 1e-12)$root)
+  c(est, lower, upper)
+}
+interval &lt;- function(v) paste0(six(v[1]), " (", six(v[2]), " to ", six(v[3]), ")")
+cat("Estimates with 95% confidence intervals:\n")
+cat("Risk of event in controls =", risk(xc, nc), "\n")
+cat("Risk of event in treated =", risk(xt, nt), "\n")
+rre &lt;- koopman(xt, nt, xc, nc)
+cat("Relative risk of event =", interval(rre), "\n")
+cat("Risk of no event in controls =", risk(nc - xc, nc), "\n")
+cat("Risk of no event in treated =", risk(nt - xt, nt), "\n")
+rrne &lt;- koopman(nt - xt, nt, nc - xc, nc)
+cat("Relative risk of no event =", interval(rrne), "\n")
+
+# The odds ratio of death in the treated compared with the controls, with exact
+# (Fisher) limits. fisher.test gives them to about four significant figures, around
+# its conditional maximum likelihood estimate rather than the observed odds ratio
+counts &lt;- matrix(c(xt, nt - xt, xc, nc - xc), 2, byrow = TRUE,
+                 dimnames = list(Group = c("Treated", "Controls"),
+                                 Outcome = c("Died", "Survived")))
+print(fisher.test(counts, conf.level = level))
+
+# Solving the same equations reproduces the report's limits: given the margins of the
+# table, the number of treated deaths follows the non-central hypergeometric
+# distribution with the odds ratio as its parameter, and each limit puts a tail
+# probability of 2.5% at the observed count
+m1 &lt;- xt + xc                            # deaths in all
+x &lt;- max(0, m1 - nc):min(m1, nt)         # the possible numbers of treated deaths
+logd &lt;- dhyper(x, nt, nc, m1, log = TRUE)
+dens &lt;- function(log_or) {
+  w &lt;- exp(logd + x * log_or - max(logd + x * log_or))
+  w / sum(w)
+}
+solve_or &lt;- function(f) exp(uniroot(f, c(-40, 40), tol = 1e-13)$root)
+oor &lt;- c(xt * (nc - xc) / (xc * (nt - xt)),
+         solve_or(function(lo) sum(dens(lo)[x &gt;= xt]) - (1 - level) / 2),
+         solve_or(function(lo) sum(dens(lo)[x &lt;= xt]) - (1 - level) / 2))
+cat("Odds ratio of event in treated cf. controls =", interval(oor), "\n")
+
+# The relative risk reduction is 1 - the relative risk of event, its limits likewise
+rrr &lt;- 1 - rre[c(1, 3, 2)]
+cat("Relative risk reduction (controls-treated) =", interval(rrr), "\n")
+
+# The risk difference, with the score interval of Miettinen and Nurminen (1985): the
+# differences at which the score chi-square, with the two risks estimated by maximum
+# likelihood under the constraint that they differ by that amount, and the variance
+# multiplied by N / (N - 1), reaches the critical value. The constrained estimate of
+# the treated risk is the root of the derivative of the log likelihood in it.
+z &lt;- qnorm(1 - (1 - level) / 2)
+score &lt;- function(d) {
+  dl &lt;- function(p) {
+    xc / (p + d) - (nc - xc) / (1 - p - d) + xt / p - (nt - xt) / (1 - p)
+  }
+  p &lt;- uniroot(dl, c(max(0, -d) + 1e-12, min(1, 1 - d) - 1e-12), tol = 1e-15)$root
+  v &lt;- ((p + d) * (1 - p - d) / nc + p * (1 - p) / nt) * (nc + nt) / (nc + nt - 1)
+  (xc / nc - xt / nt - d)^2 / v - z^2
+}
+rd &lt;- c(xc / nc - xt / nt, NA, NA)
+rd[2] &lt;- uniroot(score, c(-1 + 1e-9, rd[1]), tol = 1e-14)$root
+rd[3] &lt;- uniroot(score, c(rd[1], 1 - 1e-9), tol = 1e-14)$root
+cat("Risk difference (controls-treated) =", interval(rd), "\n")
+
+# The number needed to treat is 1 / the risk difference, and its limits are the
+# reciprocals of the difference's limits. Altman (1998) quotes each as a number
+# needed to treat for one patient to benefit (a positive difference) or to be harmed
+# (a negative one), the harm limit first when the interval spans both. The rounded
+# up figures are the whole numbers at or above them
+nnt_text &lt;- function(x, roundup = FALSE) {
+  paste0(if (roundup) ceiling(abs(x)) else six(abs(x)),
+         if (x &lt; 0) "_harm" else "_benefit")
+}
+nnt &lt;- function(label, v) {
+  l &lt;- v[2:3]
+  l &lt;- if (all(l &lt; 0)) l[order(abs(l))] else sort(l)
+  cat("NNT [", label, "] = ", nnt_text(v[1]), " (", nnt_text(l[1]), " to ",
+      nnt_text(l[2]), ")\n", sep = "")
+  cat("NNT [", label, "] (rounded up) = ", nnt_text(v[1], TRUE), " (",
+      nnt_text(l[1], TRUE), " to ", nnt_text(l[2], TRUE), ")\n", sep = "")
+}
+nnt("risk difference", 1 / rd)
+
+# Given an expected risk of the event without treatment at the optional prompt, the
+# report adds the NNTs that assume the relative risk of event, the relative risk of no
+# event or the odds ratio holds at that risk, by the formulae above: here 30%
+er &lt;- 0.3
+cat("Expected risk of event without treatment = 30%\n")
+nnt("risk difference", 1 / rd)
+nnt("relative risk of event", 1 / (er * rrr))
+nnt("relative risk of no event", 1 / ((1 - er) * (rrne - 1)))
+nnt("odds ratio", (1 - er * (1 - oor)) / ((1 - er) * er * (1 - oor)))</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

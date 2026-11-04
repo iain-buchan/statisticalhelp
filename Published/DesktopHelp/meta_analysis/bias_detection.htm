@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="meta_analysis/bias_detection.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bias in Meta-analyses (Funnel Plots and Tests) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Bias Detection in Meta-analysis</h1>
+        <p> </p>
+        <ul>
+            <li>Systematic review of randomized trials is a gold standard for appraising evidence from trials, however, some meta-analyses were later contradicted by large trials (<a href="../references/reference_list.htm#ref-sterne-2001-a">Sterne et al. 2001a</a>).<br /></li>
+            <li>Plots of trials' variability or sample size against effect size are usually skewed and asymmetrical in the presence of publication bias and other biases (<a href="../references/reference_list.htm#ref-sterne-2001-b">Sterne and Egger, 2001</a>).<br /></li>
+            <li>Publication bias arises when trials with statistically significant results are more likely to be published and cited, and are preferentially published in English language journals and those indexed in Medline (<a href="../references/reference_list.htm#ref-juni-2002">Jüni et al, 2002</a>).<br /></li>
+            <li>Publication and selection biased in meta-analysis are more likely to affect small trials.<br /></li>
+            <li>Small trials are more likely to be of poorer quality, for example inadequate blinding due to use of open random number tables.<br /></li>
+            <li>Small trials are more likely to show larger treatment effects due to case-mix differences (e.g. higher risk patients) than larger trials.</li>
+        </ul>
+        <p> </p>
+        <p>
+            If there is no 'small sample' bias across a series of studies in a meta-analysis then the estimates of effect should vary (due to random error) most with the small studies and least with the large studies. This fact lead to the use of plots of sample size against effect estimate (the original funnel plot). Bias is likely to cause asymmetry in such plots.</p>
+        <p> </p>
+        <p>As sample size is not the only determinant of the precision of an effect estimate, richer information for detecting bias can be gained from plotting the standard errors against their effect estimates. The reciprocal of the standard error is referred to as precision. Again, lateral asymmetry indicates bias.</p>
+        <p> </p>
+        <p>StatsDirect offers the following choice of Y axes:</p>
+        <ul>
+            <li>standard error</li>
+            <li>precision (1/standard error)</li>
+            <li>sample size</li>
+            <li>1/sample size</li>
+            <li>log(sample size)</li>
+            <li>log(1/sample size)</li>
+            <li>Mantel-Haenszel weight</li>
+        </ul>
+        <p> </p>
+        <p>The direction of the Y axis is reversed in some cases, such as the default setting, standard error, in order to make the shape of each plot an inverted cone because this has become the convention in the literature (<a href="../references/reference_list.htm#ref-sterne-2001-b">Sterne and Egger, 2001</a>). The most widely accepted plot is standard error (scale reversed) against effect estimate with 95% confidence intervals outlining the inverted cone. You should examine the left-right symmetry of the plot, asymmetrical plots denote small sample bias.</p>
+        <p> </p>
+        <p>The best choice of x axis for detecting the small sample effect is the log odds ratio (<a href="../references/reference_list.htm#ref-sterne-2001-b">Sterne and Egger, 2001</a>). This is because the scale is not constrained and because the plot will be the same shape whether the outcome is defined as occurrence or non-occurrence of event.</p>
+        <p> </p>
+        <p>Note that you must have more than three trials/strata in your meta-analysis for the StatsDirect bias assessment functions to work.</p>
+        <p> </p>
+        <p>The following plots are from biased and unbiased meta-analyses respectively:</p>
+        <p>The biased example is an odds ratio meta-analysis (Analysis_Meta-Analysis_Odds Ratio) of the magnesium trials in the test workbook (Meta-analysis worksheet: Intervention total, Intervention deaths, Control total, Control deaths, Magnesium trial). The unbiased example is the same analysis of the smoking and lung cancer data (Meta-analysis worksheet: Smokers total, Smokers cancer, Control total, Control cancer).</p>
+        <p>
+            <img src="../resources/images/bias1_wmf.png" width="566" height="400" border="0" style="-ms-interpolation-mode: bicubic;" />
+        </p>
+        <p><u>Bias indicators</u>
+        </p>
+        <p>Begg-Mazumdar: Kendall's tau = 0.15 P = 0.4503</p>
+        <p>Egger: bias = -1.598185 (90% CI = -2.085441 to -1.110928) P &lt; 0.0001</p>
+        <p>Harbord-Egger: bias = -1.73257 (90% CI = -2.282024 to -1.183115) P &lt; 0.0001</p>
+        <p> </p>
+        <p>
+            <img src="../resources/images/bias2_wmf.png" width="566" height="400" border="0" style="-ms-interpolation-mode: bicubic;" />
+        </p>
+        <p><u>Bias indicators</u>
+        </p>
+        <p>Begg-Mazumdar: Kendall's tau = 0.111111 P = 0.7275 (low power)</p>
+        <p>Egger: bias = 0.580646 (90% CI = -0.6025 to 1.763792) P = 0.3881</p>
+        <p>Harbord-Egger: bias = 0.792634 (90% CI = -0.56532 to 2.150587) P = 0.3094</p>
+        <p> </p>
+        <p><a href="../references/reference_list.htm#ref-egger-1997">Egger et al. (1997)</a>  proposed a test for asymmetry of the funnel plot. This is a test for the Y intercept = 0 from a linear regression of normalized effect estimate (estimate divided by its standard error) against precision (reciprocal of the standard error of the estimate). StatsDirect provides this bias indicator method with all meta-analyses. Please note that the power of this method to detect bias will be low with small numbers of studies.</p>
+        <p> </p>
+        <p><a href="../references/reference_list.htm#ref-harbord-2006">Harbord et al. (2006)</a>
+             developed a test that maintains the power of the Egger test whilst reducing the false positive rate, which is a problem with the Egger test when there are large treatment effects, few events per trial or all trials are of similar sizes. The original Egger test should be used instead of the Harbord method if there is a large imbalance between the sizes of treatment and control groups – the same is true for the <a href="peto.htm">Peto odds ratio</a>, to which this test is mathematically related. The Harbord test is calculated from the counts as they are: it needs no continuity correction.</p>
+        <p>Because these regression tests have low power, StatsDirect gives the confidence interval for the Egger and Harbord bias estimates at twice the alpha of the analysis: a 90% interval when the meta-analysis uses 95% confidence intervals, in keeping with the P &lt; 0.1 criterion commonly used for these tests (<a href="../references/reference_list.htm#ref-egger-1997">Egger et al., 1997</a>).</p>
+        <p> </p>
+        <p><a href="../references/reference_list.htm#ref-begg-1994">Begg and Mazumdar (1994)</a>  proposed testing the interdependence of variance and effect size using <a href="../nonparametric_methods/kendall_correlation.htm">Kendall's method</a>. This bias indicator makes fewer assumptions than that of Egger et al. but it is insensitive to many types of bias to which the Egger test is sensitive. Unless you have many studies in your meta-analysis, the Begg method has very low power to detect biases (<a href="../references/reference_list.htm#ref-sterne-2000">Sterne et al., 2000</a>).</p>
+        <p> </p>
+        <p>Other statistical methods can be used to investigate the effects of study characteristics other than sample size upon effects (<a href="../references/reference_list.htm#ref-sterne-2002">Sterne et al., 2002</a>). Please seek the advice of a Statistician with regard to this.</p>
+        <p> </p>
+        <p>Note that when the between-study heterogeneity is large, none of the bias detection tests work well.</p>
+        <p> </p>
+        <p>See <a href="options.htm">meta-analysis options</a> for details of how to set the bias detection plot type.</p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

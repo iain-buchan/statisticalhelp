@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="meta_analysis/mh.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Odds Ratio Meta-analysis (Mantel-Haenszel and Exact) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
+            Mantel-Haenszel Test and Odds Ratio Meta-analysis</h1>
+        <p> </p>
+        <p>Menu locations:</p>
+        <p style="font-weight: bold;"> Analysis_Chi-square_Mantel Haenszel;</p>
+        <p style="font-weight: bold;"> Analysis_Meta-analysis_Odds Ratio.</p>
+        <p> </p>
+        <p>Case-control studies of dichotomous outcomes (e.g. healed or not healed) can be represented by arranging the observed counts into fourfold (2 by 2) tables. The separation of data into different tables or strata represents a sub-grouping, e.g. into age bands. Stratification of this kind is sometimes used to reduce <a href="../basics/confounding.htm">confounding</a>.</p>
+        <p> </p>
+        <p>The Mantel-Haenszel method provides a pooled odds ratio across the strata of fourfold tables. Meta-analysis is used to investigate the combination or interaction of a group of independent studies, for example a series of fourfold tables from similar studies conducted at different centres.</p>
+        <p> </p>
+        <p>This StatsDirect function examines the odds ratio for each stratum (a single fourfold table) and for the group of studies as a whole. Exact methods are used here in addition to conventional approximations.</p>
+        <p> </p>
+        <p>For a single stratum odds ratio is estimated as follows:</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr valign="top">
+                <td> </td>
+                <td> </td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">EXPOSURE:</td>
+            </tr>
+            <tr valign="top">
+                <td> </td>
+                <td> </td>
+                <td style="text-align: center;text-decoration: underline;">Exposed</td>
+                <td style="text-align: center;text-decoration: underline;">Non-Exposed</td>
+            </tr>
+            <tr valign="top">
+                <td rowspan="2" style="text-align: right;">OUTCOME:</td>
+                <td style="text-align: right;">Cases:</td>
+                <td style="text-align: center;">a</td>
+                <td style="text-align: center;">b</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">Non-cases:</td>
+                <td style="text-align: center;">c</td>
+                <td style="text-align: center;">d</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>Sample estimate of the odds ratio = (ad)/(bc)</p>
+        <p> </p>
+        <p>For each table, the observed odds ratio is displayed with an exact confidence interval (<a href="../references/reference_list.htm#ref-martin-1991">Martin and Austin, 1991</a>; <a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>). With very large numbers these calculations can take an appreciable amount of time. If the ’try exact’ <a href="options.htm">option</a> is not selected then the logit (Woolf) interval is given instead. With tables that are entered on screen (the Mantel-Haenszel function of the chi-square section) the option is asked for with the data, and it is for all of the exact methods of the results: the confidence interval of each table, the conditional maximum likelihood estimate of the pooled odds ratio and the confidence interval of I². Counts that are not whole numbers are rounded to the nearest whole number for the exact methods.</p>
+        <p> </p>
+        <p>The Mantel-Haenszel method is used to estimate the pooled odds ratio for all strata, assuming a fixed effects model:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="ae0ac6e060e9e84c92de573b569d1ee8f24016b21a0b561bc9f6712f6dad1508"><span class="help-equation-accessible help-equation-live">$\displaystyle \widehat{OR}_{MH}=\frac{\displaystyle \sum_{i=1}^k \left( \frac{a_id_i}{n_i}\right)}{\displaystyle \sum_{i=1}^k \left( \frac{b_ic_i}{n_i}\right)}$</span><img src="../resources/help-editor-runtime/equation-artwork/66dfa4a664e5d9160a9f288804f6208c66ca77cac50eb3bda4f3dcbd9a7ac08c.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where n<sub>i</sub> =  a<sub>i</sub>+b<sub>i</sub>+c<sub>i</sub>+d<sub>i</sub>.</p>
+        <p> </p>
+        <p>Alternative methods, such as Woolf and inverse variance, can be used to estimate the pooled odds ratio with fixed effects but the Mantel-Haenszel method is generally the most robust. A confidence interval for the Mantel-Haenszel odds ratio in StatsDirect is calculated using the Robins, Breslow and Greenland variance formula (<a href="../references/reference_list.htm#ref-robins-1986">Robins et al., 1986</a>) or by the method of <a href="../references/reference_list.htm#ref-sato-1990">Sato (1990)</a> if the estimate of the odds ratio can not be determined. A chi-square test statistic is given with its associated probability that the pooled odds ratio is equal to one; it is calculated from the counts as they are, with a correction of one half for continuity if the difference between the observed and expected numbers of exposed cases, summed over the tables, is one half or more.</p>
+        <p> </p>
+        <p>If any cell count in a table is zero then a continuity correction is applied to each cell in that table – if you have selected the ’delay continuity correction’ <a href="options.htm">option</a> then no continuity correction is applied to the Mantel-Haenszel calculation unless the product of the ’a’ and ’d’ cells is zero in every study. The type of continuity correction used is set in the <a href="options.htm">options</a>. A table is left out of the pooling, and marked as excluded, if it has no cases in either group, no non-cases in either group, or no subjects in one of the groups.</p>
+        <p> </p>
+        <p>An exact conditional likelihood method is optionally used to evaluate the pooled odds ratio (<a href="../references/reference_list.htm#ref-martin-2000">Martin and Austin, 2000</a>). The exact method may take an appreciable time to compute with large numbers. The exact results should be used in preference to the Mantel-Haenszel approximation, especially if some categories involve few observations (less than 15 or so).</p>
+        <p> </p>
+        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
+        <p> </p>
+        <p>Note that the results from StatsDirect may differ slightly from other software or from those quoted in papers; this is due to differences in the variance formulae. StatsDirect employs the most robust practical approaches to variance according to accepted statistical literature.</p>
+        <p> </p>
+        <p>DATA INPUT:</p>
+        <p>Observed frequencies may be entered in a workbook (see example in <a href="relative_risk.htm">relative risk meta-analysis</a>) or directly via the screen as multiple fourfold tables:</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr valign="top">
+                <td> </td>
+                <td style="text-decoration: underline;text-align: right;">feature present</td>
+                <td style="text-decoration: underline;text-align: right;">feature absent</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">outcome positive:</td>
+                <td style="text-align: right;">a</td>
+                <td style="text-align: right;">b</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">outcome negative:</td>
+                <td style="text-align: right;">c</td>
+                <td style="text-align: right;">d</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994, p. 516)</a>.</p>
+        <p> </p>
+        <p>The following data compare the smoking status of lung cancer patients with controls. Ten different studies are combined in an attempt to improve the overall estimate of relative risk. The matching of controls has been ignored because there was not enough information about matching from each study to be sure that the matching was the same in each study.</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr valign="top">
+                <td colspan="2" style="text-decoration: underline;text-align: center;">Lung cancer</td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">Controls</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-decoration: underline;text-align: right;">smoker</td>
+                <td style="text-decoration: underline;text-align: right;">non-smoker</td>
+                <td style="text-decoration: underline;text-align: right;">smoker</td>
+                <td style="text-decoration: underline;text-align: right;">non-smoker</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">83</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">14</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">90</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">227</td>
+                <td style="text-align: right;">43</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">129</td>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">81</td>
+                <td style="text-align: right;">19</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">412</td>
+                <td style="text-align: right;">32</td>
+                <td style="text-align: right;">299</td>
+                <td style="text-align: right;">131</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">1350</td>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">1296</td>
+                <td style="text-align: right;">61</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">60</td>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">106</td>
+                <td style="text-align: right;">27</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">459</td>
+                <td style="text-align: right;">18</td>
+                <td style="text-align: right;">534</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">499</td>
+                <td style="text-align: right;">19</td>
+                <td style="text-align: right;">462</td>
+                <td style="text-align: right;">56</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">451</td>
+                <td style="text-align: right;">39</td>
+                <td style="text-align: right;">1729</td>
+                <td style="text-align: right;">636</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">260</td>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">259</td>
+                <td style="text-align: right;">28</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect you may select the Mantel-Haenszel function from the chi-square section of the analysis menu. Select the default 95% confidence interval. Enter the number of tables as 10. Then enter each row of the table above as a separate 2 by 2 contingency table:</p>
+        <p> </p>
+        <p>i.e. The first row is entered as:</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr valign="top">
+                <td style="text-align: right;"> </td>
+                <td style="text-decoration: underline;text-align: right;">Smkr</td>
+                <td style="text-decoration: underline;text-align: right;">Non</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">Lung cancer:</td>
+                <td style="text-align: right;">83</td>
+                <td style="text-align: right;">3</td>
+            </tr>
+            <tr valign="top">
+                <td style="text-align: right;">Control:</td>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">14</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>... this is then repeated for each of the ten rows. Alternatively, open the test workbook, select the odds ratio function from the meta-analysis section of the analysis menu, and select the Meta-analysis worksheet columns "Smokers total", "Smokers cancer", "Control total" and "Control cancer" when prompted for the experimental (smokers) and control (non-smokers) totals and numbers with lung cancer.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Fixed effects (Mantel-Haenszel, Robins-Breslow-Greenland)</u>
+        </p>
+        <p>Pooled odds ratio = 4.681639 (95% CI = 3.865935 to 5.669455)</p>
+        <p>Chi² (test odds ratio differs from 1) = 292.379352 P &lt; 0.0001</p>
+        <p> </p>
+        <p><u>Fixed effects (conditional maximum likelihood)</u>
+        </p>
+        <p>Pooled odds ratio = 4.713244</p>
+        <p>Exact Fisher 95% CI = 3.888241 to 5.747141</p>
+        <p>Exact Fisher one sided P &lt; 0.0001, two sided P &lt; 0.0001</p>
+        <p>Exact mid-P 95% CI = 3.904839 to 5.719768</p>
+        <p>Exact mid-P one sided P &lt; 0.0001, two sided P &lt; 0.0001</p>
+        <p> </p>
+        <p><u>Non-combinability of studies</u>
+        </p>
+        <p>Breslow-Day = 6.766765 (df = 9) P = 0.6614</p>
+        <p>Cochran Q = 6.641235 (df = 9) P = 0.6744</p>
+        <p>Moment-based estimate of between studies variance = 0</p>
+        <p>I² (inconsistency) = 0% (95% CI = 0% to 51.7%)</p>
+        <p> </p>
+        <p><u>Random effects (DerSimonian-Laird)</u>
+        </p>
+        <p>Pooled odds ratio = 4.625084 (95% CI = 3.821652 to 5.597423)</p>
+        <p>Chi² (test odds ratio differs from 1) = 247.466729 (df = 1) P &lt; 0.0001</p>
+        <p> </p>
+        <p><u>Bias indicators</u>
+        </p>
+        <p>Begg-Mazumdar: Kendall's tau = 0.111111 P = 0.7275 (low power)</p>
+        <p>Egger: bias = 0.580646 (90% CI = -0.6025 to 1.763792) P = 0.3881</p>
+        <p>Harbord-Egger: bias = 0.792634 (90% CI = -0.56532 to 2.150587) P = 0.3094</p>
+        <p> </p>
+        <p>Here we can say with 95% confidence that the true population odds in favour of being a smoker were between 3.9 and 5.7 times greater in patients who had lung cancer compared with controls.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Odds ratio meta-analysis (Mantel-Haenszel and exact): the StatsDirect help example
+# (Armitage and Berry 1994, smoking among lung cancer patients and controls in ten
+# case-control studies; the test workbook's Meta-analysis worksheet columns Smokers
+# total, Smokers cancer, Control total and Control cancer) in R
+smokers &lt;- c(155, 317, 210, 711, 2646, 166, 993, 961, 2180, 519)
+smokers_cancer &lt;- c(83, 90, 129, 412, 1350, 60, 459, 499, 451, 260)
+nonsmokers &lt;- c(17, 46, 26, 163, 68, 30, 99, 75, 675, 33)
+nonsmokers_cancer &lt;- c(3, 3, 7, 32, 7, 3, 18, 19, 39, 5)
+k &lt;- length(smokers)
+
+# Each study's fourfold table: a and b are the smokers and non-smokers with lung
+# cancer, c and d the smokers and non-smokers among the controls (the workbook's
+# "Control" columns are the non-smokers), so the odds ratio a d / (b c) is the odds
+# of smoking among the patients relative to the controls
+a &lt;- smokers_cancer
+b &lt;- nonsmokers_cancer
+c &lt;- smokers - a
+d &lt;- nonsmokers - b
+n &lt;- a + b + c + d
+tables &lt;- array(rbind(a, b, c, d), dim = c(2, 2, k),
+                dimnames = list(smoking = c("smoker", "non-smoker"),
+                                group = c("lung cancer", "control"), study = 1:k))
+
+# R's standard test: the Mantel-Haenszel estimate of the common odds ratio with a
+# confidence interval that equals the report's Robins, Breslow and Greenland
+# interval, and the Mantel-Haenszel chi-square with the continuity correction
+# (correct = TRUE is the default)
+r &lt;- mantelhaen.test(tables)
+print(r)
+
+# The exact conditional test gives the conditional maximum likelihood estimate and
+# the exact (Fisher) interval; R finds them numerically and they agree with the
+# report to four significant figures. The code below finds them to a tighter
+# tolerance, together with the mid-P interval and P values that R does not print
+e &lt;- mantelhaen.test(tables, exact = TRUE)
+print(e)
+
+# The report's lines to 6 places
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+z &lt;- qnorm(0.975)
+
+# The exact methods condition on every table's margins: given them, the total of
+# the a cells has a distribution proportional to a product of hypergeometric terms
+# times psi^a, where psi is the common odds ratio. The function returns the log of
+# each term at psi = 1 over the support of the total (the terms are convolved on the
+# natural scale, each table's rescaled to a maximum of 1 to keep within range)
+conditional &lt;- function(a, b, c, d) {
+  exposed &lt;- a + c
+  unexposed &lt;- b + d
+  cases &lt;- a + b
+  coef &lt;- 1
+  start &lt;- 0
+  for (i in seq_along(a)) {
+    x &lt;- max(0, cases[i] - unexposed[i]):min(exposed[i], cases[i])
+    p &lt;- dhyper(x, exposed[i], unexposed[i], cases[i])
+    p &lt;- p / max(p)
+    new &lt;- numeric(length(coef) + length(p) - 1)
+    for (j in seq_along(p)) {
+      at &lt;- j:(j + length(coef) - 1)
+      new[at] &lt;- new[at] + coef * p[j]
+    }
+    coef &lt;- new / max(new)
+    start &lt;- start + x[1]
+  }
+  list(support = start + seq_along(coef) - 1, logc = log(coef))
+}
+# The probability of the part of the support that 'which' selects, at odds ratio psi
+cond_p &lt;- function(dist, psi, which) {
+  lw &lt;- dist$logc + dist$support * log(psi)
+  w &lt;- exp(lw - max(lw))
+  sum(w[which]) / sum(w)
+}
+# Solve for psi on the log scale: the conditional mean equal to the observed total
+# (the conditional maximum likelihood estimate), or a tail probability equal to
+# alpha / 2 (an exact limit); 'half' counts half of the observed total's probability
+# for the mid-P limits
+cond_solve &lt;- function(dist, target, s, side = "mean", half = FALSE) {
+  f &lt;- function(t) {
+    if (side == "mean") {
+      lw &lt;- dist$logc + dist$support * t
+      w &lt;- exp(lw - max(lw))
+      return(sum(dist$support * w) / sum(w) - s)
+    }
+    p &lt;- if (side == "upper") cond_p(dist, exp(t), dist$support &gt; s) else
+      cond_p(dist, exp(t), dist$support &lt; s)
+    if (half) p + 0.5 * cond_p(dist, exp(t), dist$support == s) - target else
+      p + cond_p(dist, exp(t), dist$support == s) - target
+  }
+  exp(uniroot(f, c(-30, 30), tol = 1e-10)$root)
+}
+exact_limits &lt;- function(dist, s, level = 0.95, half = FALSE) {
+  alpha &lt;- (1 - level) / 2
+  if (s == min(dist$support)) lower &lt;- 0 else
+    lower &lt;- cond_solve(dist, alpha, s, "upper", half)
+  if (s == max(dist$support)) upper &lt;- Inf else
+    upper &lt;- cond_solve(dist, alpha, s, "lower", half)
+  c(lower, upper)
+}
+
+# Each study's odds ratio with its exact (conditional maximum likelihood) limits,
+# as fisher.test would give them, but to a tight tolerance. The report gives the odds
+# ratio of a table with an empty cell after a continuity correction, and the exact
+# limits of the table as it is; no table has an empty cell here
+or &lt;- a * d / (b * c)
+lci &lt;- numeric(k)
+uci &lt;- numeric(k)
+for (i in 1:k) {
+  lim &lt;- exact_limits(conditional(a[i], b[i], c[i], d[i]), a[i])
+  lci[i] &lt;- lim[1]
+  uci[i] &lt;- lim[2]
+}
+cat("Stratum, odds ratio, 95% CI (CML)\n")
+for (i in 1:k) {
+  cat(i, six(or[i]), six(lci[i]), six(uci[i]), "\n")
+}
+
+# Mantel-Haenszel: the pooled odds ratio is sum(a d / n) / sum(b c / n), the
+# fixed effects weights are b c / n, and the Robins-Breslow-Greenland variance of
+# its log gives the interval, as mantelhaen.test printed
+R &lt;- a * d / n
+S &lt;- b * c / n
+P &lt;- (a + d) / n
+Q &lt;- (b + c) / n
+or_mh &lt;- sum(R) / sum(S)
+v_rbg &lt;- sum(P * R) / (2 * sum(R)^2) + sum(Q * R + P * S) / (2 * sum(R) * sum(S)) +
+  sum(Q * S) / (2 * sum(S)^2)
+wt_fixed &lt;- 100 * S / sum(S)
+
+# Heterogeneity: Breslow-Day compares each a cell with its expectation under the
+# pooled odds ratio (the root of a quadratic), and Cochran's Q is the weighted sum
+# of squared deviations of the log odds ratios from the log of the pooled odds
+# ratio, weighted by the inverse of each study's logit (Woolf) variance
+cases &lt;- a + b
+controls &lt;- c + d
+exposed &lt;- a + c
+unexposed &lt;- b + d
+qa &lt;- 1 - or_mh
+qb &lt;- unexposed - cases + (exposed + cases) * or_mh
+qc &lt;- -cases * exposed * or_mh
+ea &lt;- (-qb + sqrt(qb^2 - 4 * qa * qc)) / (2 * qa)
+v_ea &lt;- 1 / (1 / ea + 1 / (cases - ea) + 1 / (exposed - ea) +
+               1 / (controls - exposed + ea))
+bd &lt;- sum((a - ea)^2 / v_ea)
+yi &lt;- log(or)
+v_woolf &lt;- 1 / a + 1 / b + 1 / c + 1 / d
+w &lt;- 1 / v_woolf
+q &lt;- sum(w * (yi - log(or_mh))^2)
+
+# DerSimonian-Laird: the moment estimate of the between studies variance (not less
+# than zero), the random effects weights and the pooled odds ratio
+tau2 &lt;- max(0, (q - (k - 1)) * sum(w) / (sum(w)^2 - sum(w^2)))
+w_re &lt;- 1 / (tau2 + v_woolf)
+wt_random &lt;- 100 * w_re / sum(w_re)
+or_re &lt;- exp(sum(w_re * yi) / sum(w_re))
+x2_re &lt;- sum(w_re * yi)^2 / sum(w_re)
+
+# The report's second table: the standardised effect is the log odds ratio, with
+# its logit (Woolf) variance, and the weights are percentages
+vi &lt;- v_woolf
+cat("Stratum, standardized effect, variance, % weights (fixed, random)\n")
+for (i in 1:k) {
+  cat(i, six(yi[i]), six(vi[i]), six(wt_fixed[i]), six(wt_random[i]), "\n")
+}
+
+mh_ci &lt;- exp(log(or_mh) + c(-1, 1) * z * sqrt(v_rbg))
+cat("Fixed effects (Mantel-Haenszel, Robins-Breslow-Greenland)\n")
+cat("Pooled odds ratio = ", six(or_mh), " (95% CI = ", six(mh_ci[1]), " to ",
+    six(mh_ci[2]), ")\n", sep = "")
+x2 &lt;- as.numeric(r$statistic)
+cat("Chi2 (test odds ratio differs from 1) =", six(x2), " ", pv(r$p.value), "\n")
+
+# The pooled exact analysis: the conditional maximum likelihood estimate, the exact
+# Fisher and mid-P limits, and the P values at odds ratio 1 (the Fisher two sided P
+# sums the probabilities of totals no more probable than the one observed)
+all &lt;- conditional(a, b, c, d)
+s &lt;- sum(a)
+cml &lt;- cond_solve(all, 0, s)
+fisher &lt;- exact_limits(all, s)
+midp &lt;- exact_limits(all, s, half = TRUE)
+p_upper &lt;- cond_p(all, 1, all$support &gt;= s)
+p_lower &lt;- cond_p(all, 1, all$support &lt;= s)
+p_at_s &lt;- cond_p(all, 1, all$support == s)
+w1 &lt;- exp(all$logc - max(all$logc))
+p2_fisher &lt;- sum(w1[w1 &lt;= w1[all$support == s]]) / sum(w1)
+p1_mid &lt;- min(p_upper - p_at_s / 2, 1 - (p_upper - p_at_s / 2))
+cat("Fixed effects (conditional maximum likelihood)\n")
+cat("Pooled odds ratio =", six(cml), "\n")
+cat("Exact Fisher 95% CI =", six(fisher[1]), "to", six(fisher[2]), "\n")
+cat("Exact Fisher one sided ", pv(min(p_upper, p_lower)), ", two sided ",
+    pv(p2_fisher), "\n", sep = "")
+cat("Exact mid-P 95% CI =", six(midp[1]), "to", six(midp[2]), "\n")
+cat("Exact mid-P one sided ", pv(p1_mid), ", two sided ", pv(min(1, 2 * p1_mid)),
+    "\n", sep = "")
+
+# I-squared is 100 (Q - df) / Q, not below zero. Its interval is the non-central
+# chi-square method of Hedges and Pigott (2001) that the report uses: Q is treated
+# as a non-central chi-square variable on df degrees of freedom, and each limit is
+# the non-centrality parameter at which the observed Q sits at the 97.5th (lower
+# limit) or the 2.5th (upper limit) percentile, found with uniroot and pchisq; a
+# limit is 0 when the central distribution already puts Q below that percentile.
+# A non-centrality lambda gives I-squared = lambda / (df + lambda)
+df &lt;- k - 1
+isq &lt;- max(0, 100 * (q - df) / q)
+ncp_limit &lt;- function(p) {
+  if (pchisq(q, df) &lt;= p) return(0)
+  # the bracket Q + 1000 is ample: the distribution function there is near 0
+  uniroot(function(l) pchisq(q, df, ncp = l) - p, c(0, q + 1000), tol = 1e-10)$root
+}
+lambda &lt;- c(ncp_limit(0.975), ncp_limit(0.025))
+i2_ci &lt;- 100 * lambda / (df + lambda)
+one &lt;- function(x) formatC(x, digits = 1, format = "f", drop0trailing = TRUE)
+cat("Non-combinability of studies\n")
+cat("Breslow-Day = ", six(bd), "  (df = ", df, ")  ",
+    pv(pchisq(bd, df, lower.tail = FALSE)), "\n", sep = "")
+cat("Cochran Q = ", six(q), "  (df = ", df, ")  ",
+    pv(pchisq(q, df, lower.tail = FALSE)), "\n", sep = "")
+cat("Moment-based estimate of between studies variance =", six(tau2), "\n")
+cat("I2 (inconsistency) = ", one(isq), "% (95% CI = ", one(i2_ci[1]), "% to ",
+    one(i2_ci[2]), "%)\n", sep = "")
+
+re_ci &lt;- exp(log(or_re) + c(-1, 1) * z / sqrt(sum(w_re)))
+cat("Random effects (DerSimonian-Laird)\n")
+cat("Pooled odds ratio = ", six(or_re), " (95% CI = ", six(re_ci[1]), " to ",
+    six(re_ci[2]), ")\n", sep = "")
+cat("Chi2 (test odds ratio differs from 1) =", six(x2_re), " (df = 1) ",
+    pv(pchisq(x2_re, 1, lower.tail = FALSE)), "\n")
+
+# Bias indicators, from the log odds ratios and their logit standard errors.
+# Begg-Mazumdar: Kendall's tau between the deviations of the log odds ratios from
+# their weighted mean, standardised, and the variances; cor.test gives the exact
+# two sided P because there are fewer than 50 studies and no ties. With tied
+# variances the report uses tau-b and a continuity-corrected normal approximation,
+# cor.test(..., exact = FALSE, continuity = TRUE). The report adds "(low power)"
+# with fewer than eleven studies: the rank correlation test then has little power
+se &lt;- sqrt(v_woolf)
+dev &lt;- (yi - sum(w * yi) / sum(w)) / sqrt(v_woolf - 1 / sum(w))
+begg &lt;- cor.test(dev, v_woolf, method = "kendall")
+cat("Bias indicators\n")
+cat("Begg-Mazumdar: Kendall's tau =", six(begg$estimate), " ", pv(begg$p.value),
+    "(low power)\n")
+# Egger: the standardised effect regressed on precision, the intercept being the
+# bias; the limits are at 90% (twice the usual alpha) because the test has low power
+egger &lt;- lm(I(yi / se) ~ I(1 / se))
+ci &lt;- confint(egger, level = 0.9)
+cat("Egger: bias = ", six(coef(egger)[1]), " (90% CI = ", six(ci[1, 1]),
+    " to ", six(ci[1, 2]), ")  ", pv(summary(egger)$coefficients[1, 4]), "\n", sep = "")
+# Harbord-Egger: the same regression of each study's efficient score (a minus its
+# expectation) divided by the root of its hypergeometric variance, on that root
+score &lt;- a - cases * exposed / n
+v_score &lt;- cases * controls * exposed * unexposed / (n^2 * (n - 1))
+harbord &lt;- lm(I(score / sqrt(v_score)) ~ sqrt(v_score))
+ci &lt;- confint(harbord, level = 0.9)
+cat("Harbord-Egger: bias = ", six(coef(harbord)[1]), " (90% CI = ",
+    six(ci[1, 1]), " to ", six(ci[1, 2]), ")  ",
+    pv(summary(harbord)$coefficients[1, 4]), "\n", sep = "")
+
+# The report's charts. First the bias assessment (funnel) plot: each log odds ratio
+# against its logit standard error, the axis reversed so that the 95% cone about the
+# pooled Mantel-Haenszel log odds ratio opens downwards
+se_top &lt;- max(se) * 1.05
+plot(yi, se, ylim = c(se_top, 0), xlab = "Log(Odds ratio)", ylab = "Standard error",
+     main = "Bias assessment plot",
+     xlim = range(yi, log(or_mh) + c(-1, 1) * z * se_top))
+abline(v = log(or_mh))
+lines(log(or_mh) + c(-1, 0, 1) * z * se_top, c(se_top, 0, se_top))
+
+# The L'Abbe plot: the percentage of each study's smokers who were lung cancer
+# patients against the same percentage of its non-smokers, the symbol size growing
+# with the study size, with the line of equality. The report adds a dashed line from
+# the origin with the slope of the pooled odds ratio, which is the line of a risk
+# ratio; the curve of the studies that share the pooled odds ratio is drawn here
+p0 &lt;- 100 * b / (b + d)
+p1 &lt;- 100 * a / (a + c)
+plot(p0, p1, xlim = c(0, 100), ylim = c(0, 100), cex = 0.5 + 2 * sqrt(n / max(n)),
+     xlab = "control percent", ylab = "experimental percent",
+     main = "L'Abbe plot (symbol size represents sample size)")
+abline(0, 1)
+x0 &lt;- seq(0, 1, 0.01)
+lines(100 * x0, 100 * or_mh * x0 / (1 + (or_mh - 1) * x0), lty = 2)
+
+# The two forest plots: each study's odds ratio (the symbol area proportional to
+# its weight) with its exact interval on a log scale, the line of no effect at 1,
+# and the pooled estimate as a diamond at the foot with a dashed line up from it
+forest &lt;- function(pooled, lower, upper, weights, main, label) {
+  y &lt;- (k + 1):2
+  two &lt;- function(x) formatC(x, digits = 2, format = "f")
+  par(mar = c(5, 8, 4, 9))
+  plot(NA, xlim = range(1, lci, uci, lower, upper), ylim = c(0.5, k + 1.5),
+       log = "x", yaxt = "n", xlab = "odds ratio (95% confidence interval)",
+       ylab = "", main = main)
+  abline(v = 1)
+  segments(pooled, 1, pooled, k + 1, lty = 2)
+  segments(lci, y, uci, y)
+  points(or, y, pch = 15, cex = 0.5 + 2 * sqrt(weights / max(weights)))
+  polygon(c(lower, pooled, upper, pooled), c(1, 1.3, 1, 0.7), col = "grey")
+  axis(2, at = c(y, 1), labels = c(paste("stratum", 1:k), label), las = 1,
+       tick = FALSE)
+  axis(4, at = c(y, 1), tick = FALSE, las = 1,
+       labels = paste0(two(c(or, pooled)), " (", two(c(lci, lower)), ", ",
+                       two(c(uci, upper)), ")"))
+}
+forest(or_mh, mh_ci[1], mh_ci[2], wt_fixed,
+       "Odds ratio meta-analysis plot [fixed effects]", "combined [fixed]")
+forest(or_re, re_ci[1], re_ci[2], wt_random,
+       "Odds ratio meta-analysis plot [random effects]", "combined [random]")
+par(mar = c(5, 4, 4, 2) + 0.1)</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="566" viewBox="0 0 1132 1040" xmlns="http://www.w3.org/2000/svg" height="520">
+  <line x1="269" y1="929" x2="880" y2="929" style="stroke:#868686;stroke-linecap:square;" />
+  <g transform="translate(268.99999999999994,936)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.001</tspan>
+    </text>
+  </g>
+  <line x1="268.99999999999994" y1="936" x2="268.99999999999994" y2="929" style="stroke:#868686;stroke-linecap:square;" />
+  <g transform="translate(391.19999999999993,936)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.01</tspan>
+    </text>
+  </g>
+  <line x1="391.19999999999993" y1="936" x2="391.19999999999993" y2="929" style="stroke:#868686;stroke-linecap:square;" />
+  <g transform="translate(513.3999999999999,936)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">0.1</tspan>
+    </text>
+  </g>
+  <line x1="513.3999999999999" y1="936" x2="513.3999999999999" y2="929" style="stroke:#868686;stroke-linecap:square;" />
+  <g transform="translate(635.5999999999999,936)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">1</tspan>
+    </text>
+  </g>
+  <line x1="635.5999999999999" y1="936" x2="635.5999999999999" y2="929" style="stroke:#868686;stroke-linecap:square;" />
+  <g transform="translate(757.8,936)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">10</tspan>
+    </text>
+  </g>
+  <line x1="757.8" y1="936" x2="757.8" y2="929" style="stroke:#868686;stroke-linecap:square;" />
+  <g transform="translate(879.9999999999999,936)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">100</tspan>
+    </text>
+  </g>
+  <line x1="879.9999999999999" y1="936" x2="879.9999999999999" y2="929" style="stroke:#868686;stroke-linecap:square;" />
+  <text x="574.5" y="963">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">odds ratio (95% confidence interval)</tspan>
+  </text>
+  <text x="574.5" y="20">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">Odds ratio meta-analysis plot [random effects]</tspan>
+  </text>
+  <rect x="625.247433143854" y="840.6794677220723" width="26.81753514409065" height="26.81753514409065" style="stroke:#808080;fill:#808080;" />
+  <line x1="635.3388624726329" y1="854.0882352941176" x2="641.9745996177196" y2="854.0882352941176" style="stroke:#000000;" />
+  <ellipse cx="638.6562007158993" cy="854.0882352941176" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="854.0882352941176">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">ISIS-4</tspan>
+  </text>
+  <text x="890" y="854.0882352941176">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">1.059 (0.995, 1.128)</tspan>
+  </text>
+  <rect x="543.0507988920106" y="794.9608348745634" width="18.37244789793211" height="18.37244789793211" style="stroke:#808080;fill:#808080;" />
+  <line x1="475.9922187566756" y1="804.1470588235294" x2="614.5945387572049" y2="804.1470588235294" style="stroke:#000000;" />
+  <ellipse cx="552.2370228409766" cy="804.1470588235294" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="804.1470588235294">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Schechter 2</tspan>
+  </text>
+  <text x="890" y="804.1470588235294">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.208 (0.049, 0.673)</tspan>
+  </text>
+  <rect x="606.8013785302638" y="741.2934624228408" width="25.824839860200882" height="25.824839860200882" style="stroke:#808080;fill:#808080;" />
+  <line x1="603.8348769664764" y1="754.2058823529412" x2="635.4669021180597" y2="754.2058823529412" style="stroke:#000000;" />
+  <ellipse cx="619.7137984603643" cy="754.2058823529412" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="754.2058823529412">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">LIMIT-2</tspan>
+  </text>
+  <text x="890" y="754.2058823529412">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.741 (0.550, 0.997)</tspan>
+  </text>
+  <rect x="584.7017337480011" y="695.4638122039682" width="17.601787356769336" height="17.601787356769336" style="stroke:#808080;fill:#808080;" />
+  <line x1="511.9718582391738" y1="704.2647058823529" x2="665.2475674957036" y2="704.2647058823529" style="stroke:#000000;" />
+  <ellipse cx="593.5026274263857" cy="704.2647058823529" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="704.2647058823529">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Thogersen</tspan>
+  </text>
+  <text x="890" y="704.2647058823529">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.452 (0.097, 1.748)</tspan>
+  </text>
+  <rect x="581.627506778696" y="645.4692125792012" width="17.70863366512691" height="17.70863366512691" style="stroke:#808080;fill:#808080;" />
+  <line x1="513.5929230332374" y1="654.3235294117646" x2="661.5088160574435" y2="654.3235294117646" style="stroke:#000000;" />
+  <ellipse cx="590.4818236112594" cy="654.3235294117646" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="654.3235294117646">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Golf</tspan>
+  </text>
+  <text x="890" y="654.3235294117646">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.427 (0.100, 1.629)</tspan>
+  </text>
+  <rect x="519.6228969302247" y="596.5719947830719" width="15.62071631620912" height="15.62071631620912" style="stroke:#808080;fill:#808080;" />
+  <line x1="408.52075476646417" y1="604.3823529411766" x2="610.323267814517" y2="604.3823529411766" style="stroke:#000000;" />
+  <ellipse cx="527.4332550883292" cy="604.3823529411766" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="604.3823529411766">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Schechter 1</tspan>
+  </text>
+  <text x="890" y="604.3823529411766">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.130 (0.014, 0.621)</tspan>
+  </text>
+  <rect x="512.0682870040044" y="548.1043245886178" width="12.673703763940754" height="12.673703763940754" style="stroke:#808080;fill:#808080;" />
+  <line x1="314.3469278812408" y1="554.4411764705883" x2="635.7220094776246" y2="554.4411764705883" style="stroke:#000000;" />
+  <ellipse cx="518.4051388859748" cy="554.4411764705883" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="554.4411764705883">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Pereira</tspan>
+  </text>
+  <text x="890" y="554.4411764705883">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.110 (0.002, 1.002)</tspan>
+  </text>
+  <rect x="589.1905332505702" y="495.01442270874975" width="18.971154582500457" height="18.971154582500457" style="stroke:#808080;fill:#808080;" />
+  <line x1="532.5349246859549" y1="504.5" x2="659.8689666330813" y2="504.5" style="stroke:#000000;" />
+  <ellipse cx="598.6761105418204" cy="504.5" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="504.5">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Singh</tspan>
+  </text>
+  <text x="890" y="504.5">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.499 (0.143, 1.580)</tspan>
+  </text>
+  <rect x="568.9556209077291" y="449.58349709760614" width="9.950652863611191" height="9.950652863611191" style="stroke:#808080;fill:#808080;" />
+  <line x1="399.13773360252367" y1="454.5588235294117" x2="867.0096888542174" y2="454.5588235294117" style="stroke:#000000;" />
+  <ellipse cx="573.9309473395347" cy="454.5588235294117" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="454.5588235294117">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Bertschat</tspan>
+  </text>
+  <text x="890" y="454.5588235294117">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.313 (0.012, 78.288)</tspan>
+  </text>
+  <rect x="561.5607142834979" y="398.5585253576146" width="12.118243402417969" height="12.118243402417969" style="stroke:#808080;fill:#808080;" />
+  <line x1="355.295644712448" y1="404.61764705882354" x2="707.376837158203" y2="404.61764705882354" style="stroke:#000000;" />
+  <ellipse cx="567.6198359847068" cy="404.61764705882354" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="404.61764705882354">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Ceremuzynski</tspan>
+  </text>
+  <text x="890" y="404.61764705882354">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.278 (0.005, 3.867)</tspan>
+  </text>
+  <rect x="501.3597813650088" y="348.2052283793687" width="12.942484417733024" height="12.942484417733024" style="stroke:#808080;fill:#808080;" />
+  <line x1="306.32071204185473" y1="354.67647058823525" x2="616.7821342349051" y2="354.67647058823525" style="stroke:#000000;" />
+  <ellipse cx="507.8310235738753" cy="354.67647058823525" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="354.67647058823525">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Schechter</tspan>
+  </text>
+  <text x="890" y="354.67647058823525">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.090 (0.002, 0.701)</tspan>
+  </text>
+  <rect x="637.5646246915353" y="294.85751500690674" width="19.755558221480428" height="19.755558221480428" style="stroke:#808080;fill:#808080;" />
+  <line x1="590.7470153927802" y1="304.73529411764696" x2="705.8640225291251" y2="304.73529411764696" style="stroke:#000000;" />
+  <ellipse cx="647.4424038022755" cy="304.73529411764696" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="304.73529411764696">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Feldstedt</tspan>
+  </text>
+  <text x="890" y="304.73529411764696">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">1.250 (0.429, 3.758)</tspan>
+  </text>
+  <rect x="627.867387213777" y="249.36929393025014" width="10.849647433617536" height="10.849647433617536" style="stroke:#808080;fill:#808080;" />
+  <line x1="400.6380275726317" y1="254.7941176470589" x2="865.9955227613448" y2="254.7941176470589" style="stroke:#000000;" />
+  <ellipse cx="633.2922109305857" cy="254.7941176470589" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="254.7941176470589">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Abraham</tspan>
+  </text>
+  <text x="890" y="254.7941176470589">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.957 (0.012, 76.806)</tspan>
+  </text>
+  <rect x="560.0994856746756" y="197.19492188727156" width="15.316038578398087" height="15.316038578398087" style="stroke:#808080;fill:#808080;" />
+  <line x1="445.7971237182617" y1="204.8529411764706" x2="656.8102239102125" y2="204.8529411764706" style="stroke:#000000;" />
+  <ellipse cx="567.7575049638747" cy="204.8529411764706" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="204.8529411764706">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Smith</tspan>
+  </text>
+  <text x="890" y="204.8529411764706">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.278 (0.028, 1.491)</tspan>
+  </text>
+  <rect x="569.0076754831216" y="144.36498709619048" width="21.0935552193838" height="21.0935552193838" style="stroke:#808080;fill:#808080;" />
+  <line x1="529.8076425552367" y1="154.91176470588232" x2="625.2671094954013" y2="154.91176470588232" style="stroke:#000000;" />
+  <ellipse cx="579.5544530928134" cy="154.91176470588232" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="154.91176470588232">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Rasmussen</tspan>
+  </text>
+  <text x="890" y="154.91176470588232">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.348 (0.136, 0.823)</tspan>
+  </text>
+  <rect x="585.6341037285239" y="99.07193056288008" width="11.797315344828016" height="11.797315344828016" style="stroke:#808080;fill:#808080;" />
+  <line x1="373.8171299457549" y1="104.97058823529414" x2="751.0811915159225" y2="104.97058823529414" style="stroke:#000000;" />
+  <ellipse cx="591.5327614009379" cy="104.97058823529414" rx="2" ry="2" style="stroke:#000000;fill:#000000;" />
+  <text x="254" y="104.97058823529414">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">Morton</tspan>
+  </text>
+  <text x="890" y="104.97058823529414">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.436 (0.007, 8.811)</tspan>
+  </text>
+  <line x1="635.5999999999999" y1="929" x2="635.5999999999999" y2="80" style="stroke:#000000;" />
+  <line x1="596.9878282368182" y1="104.97058823529414" x2="596.9878282368182" y2="904.0294117647059" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <polygon points="580.3324459910392,904.0294117647059 596.9878282368182,920.6847940104849 613.6432104825973,904.0294117647059 596.9878282368182,887.3740295189268" style="stroke:#808080;fill:#808080;" />
+  <line x1="617.4168839365243" y1="904.0294117647059" x2="576.5587707161902" y2="904.0294117647059" style="stroke:#000000;" />
+  <text x="254" y="904.0294117647059">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">combined [random]</tspan>
+  </text>
+  <text x="890" y="904.0294117647059">
+    <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:start;">0.483 (0.329, 0.710)</tspan>
+  </text>
+</svg>

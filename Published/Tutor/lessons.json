@@ -1,0 +1,1590 @@
+[
+  {
+    "id": "epidemiology",
+    "title": "Epidemiological foundations",
+    "topic": "People, populations and study design",
+    "objective": "Define the population, outcome, denominator and time period before choosing an analysis.",
+    "summary": "Define the population, selection process, outcome and time horizon first. Prevalence counts existing cases in a population at a specified time or period. Incidence concerns new cases: cumulative risk concerns initially disease-free people over a fixed period, whereas an incidence rate uses their time at risk. Changing diagnosis counts can reflect population size, testing or case definitions, not just disease occurrence. Study design and ascertainment determine what comparisons mean.",
+    "challenge": "A clinic sees twice as many new diagnoses this year. Which population, testing and time-period information would you need before concluding that disease risk has doubled?",
+    "steps": "This fictional one-year cohort starts with 300 disease-free exposed and 300 disease-free unexposed people, with complete follow-up and comparable case ascertainment. There are 30 and 15 first cases respectively. The risk form takes four cell counts, not group totals: columns are exposed/unexposed and rows are outcome present/absent. Enter top row 30, 15 and bottom row 270, 285. Then one-year risks are 10% and 5%, RR = 2 and exposed-minus-unexposed risk difference = 5 percentage points. These are observational associations; they do not by themselves establish an exposure effect.",
+    "operation": "MiscRelRisk",
+    "help": "clinical_epidemiology/risk_prospective.htm",
+    "columns": [],
+    "r": "# Fictional cohort: initially disease-free people, complete one-year follow-up,\n# comparable case ascertainment; events are first cases in distinct people.\nevents \u003C- c(30,15); at_risk \u003C- c(300,300)\nprint(data.frame(Group=c(\u0022Exposed\u0022,\u0022Unexposed\u0022),Events=events,At_risk=at_risk,Risk=events/at_risk))\nprint(c(risk_ratio=(30/300)/(15/300),risk_difference=30/300-15/300))\nbarplot(events/at_risk,names.arg=c(\u0022Exposed\u0022,\u0022Unexposed\u0022),ylim=c(0,0.15),ylab=\u0022One-year risk\u0022,main=\u0022Observed association, not a causal estimate\u0022)\n# If follow-up durations differ, examine person-time and censoring; do not label these risks incidence rates.\n",
+    "contentVersion": "2026-10-01",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-01",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [],
+    "learningObjectives": [
+      "Distinguish prevalence, cumulative risk and incidence rate.",
+      "Identify who could become a case and how follow-up was measured.",
+      "Separate a descriptive comparison from a causal claim."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Denominator",
+        "explanation": "For first-event risk, start with people free of the outcome and specify a follow-up period. For a rate, count the time people actually spend at risk."
+      },
+      {
+        "term": "Ascertainment",
+        "explanation": "More diagnoses can reflect more testing, a changed definition or a larger population. Compare recruitment and measurement before interpreting a trend."
+      },
+      {
+        "term": "Sampling",
+        "explanation": "A sample selected by disease status cannot supply population prevalence from its case fraction. A cohort comparison still needs attention to selection and confounding."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "Twice as many diagnoses means twice the disease risk.",
+        "correction": "Check the denominator, time horizon, case definition and testing coverage."
+      },
+      {
+        "claim": "A large sample removes systematic bias.",
+        "correction": "It can improve precision while leaving selection or measurement bias intact."
+      }
+    ],
+    "workedExample": {
+      "design": "Two fictional observational groups, initially disease-free, with complete one-year follow-up; each person contributes at most one first case.",
+      "interpretation": "30/300 versus 15/300 gives a risk ratio of 2 and a 5 percentage-point risk difference. Neither measure identifies an exposure effect without additional causal assumptions."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "What belongs in the denominator of the one-year risk?",
+        "expectedReasoning": "Initially disease-free people followed for that year; distinguish event counts from people with an event."
+      },
+      {
+        "level": "advanced",
+        "prompt": "If exposed people receive more frequent testing, which part of this comparison becomes questionable?",
+        "expectedReasoning": "Comparable ascertainment is threatened; the observed ratio can combine disease occurrence with differential detection."
+      }
+    ],
+    "rProgression": {
+      "menus": "Enter the four event/non-event counts and explain their orientation.",
+      "bridge": "Match the R divisions to the two StatsDirect risks.",
+      "coding": "Change a group denominator while keeping cases fixed; explain what changes and why."
+    },
+    "sources": [
+      {
+        "id": "ohid-rates",
+        "title": "OHID: Rates",
+        "url": "https://fingertips.phe.org.uk/static-reports/public-health-technical-guidance/Basic_statistics/Rates.html",
+        "scope": "Events, population denominators and person-time units.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "catalogue-bias",
+        "title": "Catalogue of Bias",
+        "url": "https://catalogofbias.org/",
+        "scope": "Terminology and examples for confounding, selection and measurement bias.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "CORE-DESIGN-01",
+      "CORE-RATE-01"
+    ],
+    "practiceQuestions": []
+  },
+  {
+    "id": "causal",
+    "title": "From association to causal questions",
+    "topic": "Causal inference basics",
+    "objective": "Recognise confounding and define the assumptions behind a causal comparison.",
+    "summary": "A causal question compares well-defined alternatives in the same target population. Baseline age can influence exposure and outcome, making the exposed groups incomparable. Adjustment needs a justified causal structure and assumptions, not just a change in an estimate. Conditioning on a mediator can remove part of a total effect and does not automatically identify a direct effect; conditioning on a common consequence can induce selection bias.",
+    "challenge": "Age can affect both treatment choice and outcome. Why might adjusting for age help, while adjusting for a consequence of treatment change the effect we are trying to estimate?",
+    "steps": "Assume initially disease-free people, complete one-year follow-up and age measured before exposure. Constructed counts are 44/200 exposed versus 26/200 unexposed. For the crude risk grid, columns are exposed/unexposed and rows are outcome present/absent: enter top row 44, 26 and bottom row 156, 174. Younger risks are 4/40 and 16/160; older risks are 40/160 and 10/40. Crude RR is about 1.69, but each within-age RR is 1. Standardising both groups to a 50% younger, 50% older population gives risk 17.5% in each. This illustrates age imbalance; neither equality after adjustment nor a crude association proves a causal conclusion.",
+    "operation": "MiscRelRisk",
+    "help": "basics/confounding.htm",
+    "columns": [],
+    "r": "# Constructed baseline-age example: initially disease-free people,\n# first cases over one year with complete follow-up. Age precedes exposure.\ndata \u003C- data.frame(Age=c(\u0022Younger\u0022,\u0022Older\u0022),Exposed_events=c(4,40),Exposed_total=c(40,160),Unexposed_events=c(16,10),Unexposed_total=c(160,40))\ndata$Exposed_risk \u003C- data$Exposed_events/data$Exposed_total\ndata$Unexposed_risk \u003C- data$Unexposed_events/data$Unexposed_total\nprint(data)\nprint(c(crude_RR=(44/200)/(26/200)))\nprint(data.frame(Age=data$Age,Within_age_RR=data$Exposed_risk/data$Unexposed_risk))\n# Apply the SAME target-population weights to both groups.\nweights \u003C- c(0.5,0.5)\nstandardised \u003C- c(Exposed=sum(weights*data$Exposed_risk),Unexposed=sum(weights*data$Unexposed_risk))\nprint(standardised)\nprint(c(standardised_RR=unname(standardised[1]/standardised[2])))\nbarplot(rbind(data$Exposed_risk,data$Unexposed_risk),beside=TRUE,names.arg=data$Age,legend.text=c(\u0022Exposed\u0022,\u0022Unexposed\u0022),ylab=\u0022Observed risk\u0022,main=\u0022Same within-age risks; different age mix\u0022)\n# Within-stratum agreement is not proof that every source of bias has been removed.\n",
+    "contentVersion": "2026-10-01",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-01",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "epidemiology"
+    ],
+    "learningObjectives": [
+      "Define the target population, exposure alternatives, outcome and time horizon.",
+      "Distinguish confounders, mediators and colliders.",
+      "State the assumptions required to interpret an adjusted association causally."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Target comparison",
+        "explanation": "Ask what would happen under each well-defined exposure strategy in the same target population. Specify follow-up and the effect scale before analysing."
+      },
+      {
+        "term": "Causal assumptions",
+        "explanation": "Exchangeability means the compared groups are comparable for their potential outcomes after justified adjustment. Positivity requires both alternatives to be possible in relevant strata; consistency links observed outcomes to the specified exposure."
+      },
+      {
+        "term": "Adjustment",
+        "explanation": "Use temporal ordering and subject knowledge to choose covariates. A confounder precedes exposure; a mediator carries part of its effect; selecting on a common consequence can induce association."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "Include every recorded variable to remove confounding.",
+        "correction": "Some variables are mediators or colliders; adjustment can change the question or introduce bias."
+      },
+      {
+        "claim": "Equal age-adjusted risks prove there is no causal effect.",
+        "correction": "Other biases, effect modification, measurement error and uncertainty still need consideration."
+      }
+    ],
+    "workedExample": {
+      "design": "Constructed cohort with baseline age imbalance. No real treatment is being evaluated.",
+      "interpretation": "The crude RR is 22/13, while both age-specific RRs and the equally weighted standardised RR are 1. This illustrates how group composition can change a marginal comparison."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "Draw age \u2192 exposure and age \u2192 outcome. Why compare within age groups?",
+        "expectedReasoning": "Age can make the exposed groups incomparable; within-age comparisons address this measured difference."
+      },
+      {
+        "level": "advanced",
+        "prompt": "What if almost nobody in one age stratum receives the alternative exposure?",
+        "expectedReasoning": "Positivity may fail; regression cannot create a well-supported comparison where there are no data."
+      }
+    ],
+    "rProgression": {
+      "menus": "Compare crude risks and identify the age imbalance.",
+      "bridge": "Trace the common weights in the R standardisation calculation.",
+      "coding": "Try different common weights and explain why both groups must use the same target population."
+    },
+    "sources": [
+      {
+        "id": "hernan-robins",
+        "title": "Hern\u00E1n and Robins: Causal Inference: What If",
+        "url": "https://miguelhernan.org/whatifbook",
+        "scope": "Part I learning route: causal questions, exchangeability, positivity and consistency. Author landing page checked; not a claim of a full-book review.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "catalogue-bias",
+        "title": "Catalogue of Bias",
+        "url": "https://catalogofbias.org/",
+        "scope": "Terminology and examples for confounding, selection and measurement bias.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "CORE-MEDIATOR-01",
+      "CORE-SELECTION-01"
+    ],
+    "practiceQuestions": []
+  },
+  {
+    "id": "paired",
+    "title": "Comparing paired measurements",
+    "topic": "Change within a person",
+    "objective": "Recognise pairing, analyse differences and interpret a confidence interval.",
+    "summary": "Pairing means repeated measurements on the same people or explicitly matched units. A paired t test analyses within-pair differences, with independence between pairs. For exact small-sample inference the differences are normally distributed; inspect their distribution and unusual values. Two sets of patients attending the same clinic at different times are not automatically paired, and different patients may still be clustered.",
+    "challenge": "The example has a before and an after measurement on each of the same eight people. Why is a paired analysis appropriate, and what design questions would you ask if the two periods instead contained different, unmatched people?",
+    "steps": "Use Try in StatsDirect to open the paired t test with Before and After. The worksheet contains eight fictional, independently sampled participants. The comparison is Before minus After, so a positive difference means a fall. Use a 95% confidence level to compare with the R example. Inspect the differences and interpret the estimated mean difference and interval before the P value; an uncontrolled before\u2013after change alone does not establish causation.",
+    "operation": "TPaired",
+    "help": "parametric_methods/paired_t.htm",
+    "columns": [
+      {
+        "title": "Before",
+        "values": [
+          142,
+          136,
+          151,
+          145,
+          139,
+          148,
+          132,
+          155
+        ]
+      },
+      {
+        "title": "After",
+        "values": [
+          135,
+          134,
+          143,
+          141,
+          136,
+          140,
+          130,
+          147
+        ]
+      }
+    ],
+    "r": "# Fictional paired measurements: same eight people, same row order.\nbefore \u003C- c(142,136,151,145,139,148,132,155)\nafter \u003C- c(135,134,143,141,136,140,130,147)\ndata \u003C- data.frame(Before=before, After=after)\nprint(data)\n# StatsDirect uses first minus second for this selection.\n# Assume independent people; small-sample t inference models normal differences.\nchange \u003C- before - after\nprint(t.test(before, after, paired=TRUE, conf.level=0.95))\nplot(before, after, pch=19, xlab=\u0022Before\u0022, ylab=\u0022After\u0022, main=\u0022Fictional paired measurements\u0022)\nabline(0,1,lty=2)\n# The diagonal shows equal before/after values; this is not an agreement analysis.\n# Try: inspect change, change one after value, rerun, and explain the interval.\n# A change without a suitable control comparison does not establish causation.\n",
+    "previousChallenges": [
+      "If the average measurement falls after an intervention, what else would you need before claiming the intervention caused the change?",
+      "The same eight people have a measurement taken before and after an intervention, with each person\u0027s two values on the same row. Why are these paired observations? How would the analysis change if different people were measured in the two periods?"
+    ],
+    "contentVersion": "2026-10-01",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-01",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "precision"
+    ],
+    "learningObjectives": [
+      "Identify the independent unit and preserve pair alignment.",
+      "Interpret a mean difference and its confidence interval in a stated direction.",
+      "Distinguish change, association and agreement."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Pair alignment",
+        "explanation": "Each row must contain measurements from the same person or explicitly matched units. Reordering only one column destroys the design."
+      },
+      {
+        "term": "Analysis scale",
+        "explanation": "The paired t test is a one-sample t test of the differences. Small-sample exact inference concerns normally distributed differences and independent pairs."
+      },
+      {
+        "term": "Agreement and causation",
+        "explanation": "A high correlation does not establish agreement between methods. An uncontrolled before\u2013after change also permits time trends, regression to the mean and other explanations."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "Before and after labels automatically imply pairing.",
+        "correction": "Different unmatched people need a design-appropriate independent or clustered analysis."
+      },
+      {
+        "claim": "A normality test with P \u003E 0.05 proves the differences are normal.",
+        "correction": "Small samples provide weak evidence about shape; inspect the differences and unusual observations."
+      }
+    ],
+    "workedExample": {
+      "design": "Same eight fictional people, independently sampled; Before minus After is the chosen contrast.",
+      "interpretation": "The mean reduction is 5.25 units. Interpret the interval for the population mean difference, not as the spread of individual changes or proof of an intervention effect."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "What does a positive Before minus After difference mean here?",
+        "expectedReasoning": "The measurement fell; reversing the columns reverses the sign but preserves the paired structure."
+      },
+      {
+        "level": "advanced",
+        "prompt": "Would a small mean difference between two measurement methods establish interchangeability?",
+        "expectedReasoning": "No. Inspect limits of agreement and whether their width is acceptable for the intended use."
+      }
+    ],
+    "rProgression": {
+      "menus": "Run the paired analysis and inspect the differences.",
+      "bridge": "Find paired=TRUE and conf.level=0.95 in the R script.",
+      "coding": "Reverse both the contrast and its interpretation, then inspect a deliberately unusual difference."
+    },
+    "sources": [
+      {
+        "id": "harrell-change",
+        "title": "Harrell: Measuring change and regression to the mean",
+        "url": "https://hbiostat.org/bbr/change",
+        "scope": "Change scores, baseline measurements and regression to the mean.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "harrell-bbr",
+        "title": "Harrell: Biostatistics for Biomedical Research",
+        "url": "https://hbiostat.org/bbr/",
+        "scope": "Research question, measurement, design, description, interpretation and validation.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "UG-PAIR-01",
+      "UG-PVAL-01"
+    ],
+    "practiceQuestions": []
+  },
+  {
+    "id": "precision",
+    "title": "Variation, precision and uncertainty",
+    "topic": "Describing data",
+    "objective": "Separate standard deviation from standard error and confidence intervals.",
+    "summary": "Standard deviation describes variation between observations. Standard error describes sampling variation of an estimator. For independent observations from the same population, the mean has SE = population SD / sqrt(n), estimated using the sample SD. A nominal 95% confidence procedure targets 95% repeated-sampling coverage under its assumptions. These 12 waits are skewed: a small-sample t interval is an illustration to scrutinise, not an assurance of reliable coverage.",
+    "challenge": "For independent observations from the same population with a fixed, finite variance, why does quadrupling sample size halve the theoretical standard error of the mean? Why might the sample SD and estimated SE still vary between samples?",
+    "steps": "Open the descriptive summary for the fictional waiting times. Compare mean, median, SD and the 95% confidence interval. Inspect the long wait and the distribution before interpreting the small-sample t interval. Do not delete an observation merely because it is large. The appropriate summary depends on whether the question concerns an average, a typical wait or the long-wait tail. For these 12 values, StatsDirect and R t.test() both use a Student t interval for the mean with 11 degrees of freedom: approximately 13.8 to 24.8 minutes. Agreement between programs checks the calculation, not whether the model assumptions fit these skewed data.",
+    "operation": "UnivariateSummary",
+    "help": "basic_descriptive_statistics/univariate_summary.htm",
+    "columns": [
+      {
+        "title": "Waiting time (minutes)",
+        "values": [
+          12,
+          15,
+          14,
+          18,
+          21,
+          16,
+          19,
+          13,
+          45,
+          17,
+          20,
+          22
+        ]
+      }
+    ],
+    "r": "# Fictional clinic waits; no patient data.\nwait \u003C- c(12,15,14,18,21,16,19,13,45,17,20,22)\nprint(data.frame(Waiting_minutes=wait))\nprint(c(mean=mean(wait), median=median(wait), SD=sd(wait), SE=sd(wait)/sqrt(length(wait))))\n# An illustrative Student t mean CI with 11 df, as in StatsDirect: only 12 skewed observations.\n# Exact t coverage assumes independent normal observations; that is questionable here.\n# A non-significant normality test would not establish the assumption.\nmean_ci \u003C- t.test(wait, conf.level=0.95)$conf.int\ncat(\u0022Illustrative 95% t interval for the mean; check assumptions:\\n\u0022)\nprint(mean_ci)\n# Describe this as about 13.8 to 24.8 minutes; keep full values for calculations.\n# Extra displayed decimals do not make the assumptions more credible.\nhist(wait, breaks=8, main=\u0022Fictional clinic waiting times\u0022, xlab=\u0022Minutes\u0022)\n# Try: explain why mean and median differ; inspect the outlier without silently deleting it.\n",
+    "previousChallenges": [
+      "Why would collecting four times as many independent observations halve the standard error but not necessarily change the standard deviation?"
+    ],
+    "contentVersion": "2026-10-12",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-12",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [],
+    "learningObjectives": [
+      "Choose summaries that answer the substantive question.",
+      "Distinguish variability of observations from precision of estimates.",
+      "Interpret confidence intervals conditional on assumptions."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Spread versus precision",
+        "explanation": "SD describes variability between observations. SE describes variability of an estimator over repeated samples; they answer different questions."
+      },
+      {
+        "term": "Confidence coverage",
+        "explanation": "A 95% procedure aims to cover the fixed population parameter in 95% of repetitions under its assumptions. It is not an interval containing 95% of individual observations."
+      },
+      {
+        "term": "Distribution and design",
+        "explanation": "Skew, unusual observations, clustering and selection affect interpretation. Increasing sample size alone does not correct biased recruitment or recording."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "The confidence interval describes where most individual waits lie.",
+        "correction": "It describes uncertainty about a parameter; use the distribution or a suitable prediction interval for individuals."
+      },
+      {
+        "claim": "Delete the longest wait to make the data normal.",
+        "correction": "First check its provenance; a genuine long wait is relevant to service experience."
+      }
+    ],
+    "workedExample": {
+      "design": "Twelve fictional independent clinic waits, including a long wait of 45 minutes.",
+      "interpretation": "The mean is about 19.3 minutes and the median 17.5. The illustrative 95% Student t interval for the population mean is about 13.8 to 24.8 minutes in both StatsDirect and R (11 degrees of freedom). With only 12 skewed observations, its coverage assumptions need scrutiny. One decimal place is enough for this explanation; extra software digits do not imply reliable precision, and a narrow interval would not rule out selection bias."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "Which would you report for a typical wait, and which for total workload?",
+        "expectedReasoning": "The median can describe a typical wait; the mean relates to the total. Report context and distribution rather than declaring one always superior."
+      },
+      {
+        "level": "advanced",
+        "prompt": "Why does quadrupling independent sample size halve the theoretical SE but not guarantee a narrower realised interval?",
+        "expectedReasoning": "SE scales with 1/sqrt(n) at fixed population variance; estimated SD and critical values vary between samples."
+      }
+    ],
+    "rProgression": {
+      "menus": "Compare mean, median, SD and SE in the summary.",
+      "bridge": "Identify sd(wait)/sqrt(length(wait)) in R.",
+      "coding": "Simulate repeated independent samples and compare variation of sample means with variation of individual values."
+    },
+    "sources": [
+      {
+        "id": "harrell-bbr",
+        "title": "Harrell: Biostatistics for Biomedical Research",
+        "url": "https://hbiostat.org/bbr/",
+        "scope": "Research question, measurement, design, description, interpretation and validation.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "rcgp-akt",
+        "title": "RCGP: Preparing for the AKT",
+        "url": "https://www.rcgp.org.uk/mrcgp-exams/applied-knowledge-test/akt-preparing",
+        "scope": "Data interpretation and critical appraisal in examination preparation; original StatsDirect questions only.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "r-t",
+        "title": "R: Student t test",
+        "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html",
+        "scope": "The one-sample t interval for the population mean.",
+        "checkedAt": "2026-10-12",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "PG-SE-01",
+      "UG-PVAL-01"
+    ],
+    "practiceQuestions": []
+  },
+  {
+    "id": "diagnostic",
+    "title": "Interpreting a diagnostic test",
+    "topic": "Sensitivity and predictive value",
+    "objective": "Choose the right denominator for sensitivity, specificity and predictive value.",
+    "summary": "Sensitivity is the proportion positive among people with the condition; specificity is the proportion negative among those without it. Predictive values condition on the test result instead. The fictional sample represents a population with 10% prevalence and a reliable reference diagnosis. Predictive values depend on prevalence; sensitivity and specificity also need to be applicable to the intended case mix, threshold and reference standard.",
+    "challenge": "If the condition becomes rarer while sensitivity and specificity stay the same, what happens to the proportion of positive results that are false positives?",
+    "steps": "In the diagnostic grid, columns represent disease present/absent and rows test positive/negative: enter top row 72, 81 and bottom row 18, 729. These are true positives, false positives, false negatives and true negatives respectively. These fictional independent observations give sensitivity 80%, specificity 90%, PPV about 47.1% and NPV about 97.6%. For sensitivity, StatsDirect and R binom.test() both use the Clopper\u2013Pearson exact binomial method: the 95% interval is about 70.2% to 87.7%. This interval concerns sensitivity, not PPV; matching inputs, confidence level and method should give matching limits apart from rounding.",
+    "operation": "MiscDiagnostic",
+    "help": "clinical_epidemiology/diagnostic.htm",
+    "columns": [],
+    "r": "# Fictional diagnostic study. Rows: test result; columns: disease status.\ntp \u003C- 72; fn \u003C- 18; fp \u003C- 81; tn \u003C- 729\ncounts \u003C- matrix(c(tp,fp,fn,tn),nrow=2,byrow=TRUE,dimnames=list(Test=c(\u0022Positive\u0022,\u0022Negative\u0022),Disease=c(\u0022Present\u0022,\u0022Absent\u0022)))\nprint(counts)\nprint(c(sensitivity=tp/(tp\u002Bfn), specificity=tn/(tn\u002Bfp), PPV=tp/(tp\u002Bfp), NPV=tn/(tn\u002Bfn)))\n# Treat diagnoses as reliable and observations as independent.\n# StatsDirect and binom.test use the same Clopper-Pearson exact binomial method.\n# This is a sensitivity interval, not an interval for all four measures.\nsensitivity_ci \u003C- binom.test(tp,tp\u002Bfn,conf.level=0.95)$conf.int\ncat(\u002295% Clopper-Pearson exact CI for sensitivity (may be conservative):\\n\u0022)\nprint(sensitivity_ci)\nbarplot(counts, beside=TRUE, legend.text=TRUE, main=\u0022Fictional diagnostic counts\u0022, ylab=\u0022People\u0022)\n",
+    "contentVersion": "2026-10-12",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-12",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "epidemiology"
+    ],
+    "learningObjectives": [
+      "Use the correct conditional denominator for each accuracy measure.",
+      "Relate predictive value to prevalence and applicability.",
+      "Convert pre-test probability to odds before applying a likelihood ratio."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Conditioning",
+        "explanation": "Sensitivity and specificity condition on reference disease status. Predictive values condition on the observed test result."
+      },
+      {
+        "term": "Transfer to practice",
+        "explanation": "Prevalence changes predictive values when sensitivity and specificity are held fixed. Case mix, threshold and verification procedures may also change apparent accuracy."
+      },
+      {
+        "term": "Likelihood ratios",
+        "explanation": "LR\u002B = sensitivity/(1\u2212specificity). Multiply pre-test odds by LR\u002B, then convert post-test odds to probability. Multiplying probability by LR\u002B is incorrect."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "An 80% sensitive test means a positive result has an 80% probability of disease.",
+        "correction": "That confuses sensitivity with positive predictive value."
+      },
+      {
+        "claim": "Accuracy measured in severe cases and healthy controls transfers unchanged to screening.",
+        "correction": "The intended population may have a different spectrum of disease and alternative diagnoses."
+      }
+    ],
+    "workedExample": {
+      "design": "Fictional representative sample with a reliable reference diagnosis, 90 cases and 810 non-cases; a fixed test threshold.",
+      "interpretation": "72 true positives and 81 false positives give PPV 72/153, about 47.1%, despite 80% sensitivity and 90% specificity. A positive result is not a certain diagnosis. Sensitivity is 80%, with the same 95% Clopper\u2013Pearson interval of about 70.2% to 87.7% in StatsDirect and this R example."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "Which 153 people form the denominator of PPV?",
+        "expectedReasoning": "All people who tested positive: 72 true positives plus 81 false positives."
+      },
+      {
+        "level": "advanced",
+        "prompt": "What happens with incomplete reference testing concentrated among test-negative people?",
+        "expectedReasoning": "Verification bias may distort measured accuracy; consider how disease status is obtained for every test-result group."
+      }
+    ],
+    "rProgression": {
+      "menus": "Label all four cells before running the diagnostic form.",
+      "bridge": "Match each denominator in R to its clinical question.",
+      "coding": "Hold sensitivity and specificity fixed while changing prevalence; label this as an assumption-based illustration."
+    },
+    "sources": [
+      {
+        "id": "harrell-dx",
+        "title": "Harrell: Diagnosis",
+        "url": "https://hbiostat.org/bbr/dx",
+        "scope": "Diagnostic evidence and interpretation in the intended population.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "rcgp-akt",
+        "title": "RCGP: Preparing for the AKT",
+        "url": "https://www.rcgp.org.uk/mrcgp-exams/applied-knowledge-test/akt-preparing",
+        "scope": "Data interpretation and critical appraisal in examination preparation; original StatsDirect questions only.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "r-binom",
+        "title": "R: Exact binomial test",
+        "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/binom.test.html",
+        "scope": "Clopper\u2013Pearson intervals returned by binom.test().",
+        "checkedAt": "2026-10-12",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "UG-SENS-01",
+      "PG-PPV-01",
+      "PG-LR-01"
+    ],
+    "practiceQuestions": []
+  },
+  {
+    "id": "risk",
+    "title": "Absolute and relative benefit",
+    "topic": "Risk, treatment effects and NNT",
+    "objective": "Interpret absolute risk reduction, relative risk and the follow-up period.",
+    "summary": "Over one year, 28/200 controls and 16/200 programme participants have at least one unplanned admission. The estimated absolute risk reduction (control minus programme) is 6 percentage points; programme-to-control RR is about 0.57 and NNT for benefit rounds up to 17. These are uncertain point estimates. The illustrated risk-difference interval includes zero and possible harm, so it does not establish benefit. This example was chosen to lie near the conventional 5% significance boundary: interpret the effect size and uncertainty, and do not choose a method just to obtain significance.",
+    "challenge": "Would the same relative risk imply the same absolute benefit in a population with a much lower baseline risk?",
+    "steps": "Assume individual randomisation, independent participants and complete one-year follow-up. In the NNT form enter 16 people with at least one admission among 200 programme participants and 28 among 200 controls. Count people, not repeated admissions. Interpret NNT 17 as the point estimate for preventing one additional person having an admission over one year. A risk-difference interval spanning zero gives NNT uncertainty extending through infinity into both benefit and harm; do not present a single ordinary finite NNT interval. The R script explicitly computes the same Miettinen\u2013Nurminen score interval as StatsDirect, including its finite-sample variance correction; it does not use the simpler Wald interval from two-sample prop.test().",
+    "operation": "MiscNumberNeededToTreat",
+    "help": "clinical_epidemiology/nnt.htm",
+    "columns": [],
+    "r": "# Fictional individually randomised programme; complete one-year follow-up.\n# Events count people with at least one admission, not repeated admissions.\nevents \u003C- c(16,28); totals \u003C- c(200,200)\nrisk \u003C- events/totals\nprint(data.frame(Group=c(\u0022Programme\u0022,\u0022Usual care\u0022),Events=events,Total=totals,Risk=risk))\narr \u003C- risk[2]-risk[1]\nprint(c(absolute_reduction=arr,relative_risk=risk[1]/risk[2],NNT=if(arr==0) Inf else ceiling(1/abs(arr))))\ncat(\u0022NNT point-estimate direction:\u0022,if(arr\u003E0) \u0022benefit\u0022 else if(arr\u003C0) \u0022harm\u0022 else \u0022no difference\u0022, \u0022\\n\u0022)\n\n# Explicit Miettinen-Nurminen score interval, as used by StatsDirect.\n# This base-R helper inverts the constrained-binomial score with the N/(N-1)\n# variance correction. It also handles zero-event and all-event groups.\n# Its direction is the first risk minus the second. No extra R package is needed.\nmn_interval \u003C- function(x1,n1,x0,n0,conf.level=0.95) {\n  args \u003C- c(x1,n1,x0,n0,conf.level)\n  stopifnot(all(lengths(list(x1,n1,x0,n0,conf.level))==1), all(is.finite(args)),\n            n1\u003E=1,n0\u003E=1,x1\u003E=0,x1\u003C=n1,x0\u003E=0,x0\u003C=n0,\n            all(args[1:4]==floor(args[1:4])), conf.level\u003E0,conf.level\u003C1)\n  estimate \u003C- x1/n1-x0/n0\n  critical \u003C- qchisq(conf.level,df=1)\n  score \u003C- function(d) {\n    lo \u003C- max(0,-d); hi \u003C- min(1,1-d)\n    derivative \u003C- function(p0) {\n      term \u003C- function(x,n,p) {\n        (if(x==0) 0 else x/p) - (if(x==n) 0 else (n-x)/(1-p))\n      }\n      term(x1,n1,p0\u002Bd)\u002Bterm(x0,n0,p0)\n    }\n    if(lo==hi) p0 \u003C- lo else {\n      rises \u003C- (lo\u002Bd\u003C=0 \u0026\u0026 x1\u003E0) || (lo\u003C=0 \u0026\u0026 x0\u003E0) || derivative(lo)\u003E0\n      falls \u003C- (hi\u002Bd\u003E=1 \u0026\u0026 x1\u003Cn1) || (hi\u003E=1 \u0026\u0026 x0\u003Cn0) || derivative(hi)\u003C0\n      p0 \u003C- if(!rises) lo else if(!falls) hi else\n        uniroot(derivative,c(lo,hi),tol=1e-14,check.conv=TRUE)$root\n    }\n    p1 \u003C- min(1,max(0,p0\u002Bd))\n    variance \u003C- (p1*(1-p1)/n1\u002Bp0*(1-p0)/n0)*(n1\u002Bn0)/(n1\u002Bn0-1)\n    if(variance\u003C=0) return(if(estimate==d) -critical else Inf)\n    (estimate-d)^2/variance-critical\n  }\n  limits \u003C- c(lower=if(estimate\u003C= -1) -1 else uniroot(score,c(-1,estimate),tol=1e-13,check.conv=TRUE)$root,\n              upper=if(estimate\u003E= 1) 1 else uniroot(score,c(estimate,1),tol=1e-13,check.conv=TRUE)$root)\n  attr(limits,\u0022conf.level\u0022) \u003C- conf.level\n  limits\n}\n# Keep the interval direction consistent with arr: usual care minus programme.\narr_ci \u003C- mn_interval(events[2],totals[2],events[1],totals[1])\ncat(\u002295% Miettinen-Nurminen interval for risk reduction, usual care minus programme:\\n\u0022)\nprint(arr_ci,digits=10)\n# For the supplied counts this agrees with StatsDirect: about -0.001445 to 0.123548.\n# Recalculate when changing the counts; these reference limits are not new data.\n# This deliberately borderline example includes zero and possible harm.\n# Do not change the method to seek a smaller P value. No single method is best\n# for every design: these are independent binary outcomes, not paired/clustered data.\n# Inverting an interval across zero needs separate benefit/harm branches via infinity.\n# Do not report its reciprocals as one ordinary finite NNT interval.\nbarplot(risk,names.arg=c(\u0022Programme\u0022,\u0022Usual care\u0022),ylim=c(0,0.2),ylab=\u0022One-year event risk\u0022)\n",
+    "contentVersion": "2026-10-12",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-12",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "epidemiology",
+      "precision"
+    ],
+    "learningObjectives": [
+      "Report absolute and relative effects with the same outcome and time horizon.",
+      "Keep subtraction direction consistent across estimates and intervals.",
+      "Explain NNT uncertainty when an interval includes no effect."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Absolute benefit",
+        "explanation": "For this adverse outcome, control risk minus programme risk is the absolute risk reduction. Six percentage points is a difference of 0.06, not a 6% relative reduction."
+      },
+      {
+        "term": "Baseline risk",
+        "explanation": "An identical relative risk can imply different absolute differences in populations with different baseline risks, provided the relative effect is applicable."
+      },
+      {
+        "term": "NNT uncertainty",
+        "explanation": "NNT is a reciprocal of an absolute risk difference at a stated time horizon. If the difference interval crosses zero, its reciprocal has separate benefit and harm branches through infinity."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "An NNT point estimate of 17 establishes benefit.",
+        "correction": "The interval for the underlying risk difference includes no effect and possible harm."
+      },
+      {
+        "claim": "NNT counts admissions prevented, including repeated admissions in the same person.",
+        "correction": "This example counts people with at least one admission. Recurrent-event questions require a different analysis."
+      }
+    ],
+    "workedExample": {
+      "design": "Fictional individually randomised study with complete one-year follow-up and an adverse binary outcome.",
+      "interpretation": "Programme risk is 8% versus 14% in controls: ARR 6 percentage points, RR about 0.57 and NNT point estimate 17 over one year. For these counts, StatsDirect and the R script both give a Miettinen\u2013Nurminen 95% interval of about \u22120.14 to 12.35 percentage points (\u22120.001445 to 0.123548 on the proportion scale). Extra digits here identify the calculation, not clinical certainty. The interval includes no effect and possible harm; crossing a conventional significance threshold does not create a sharp change in evidence."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "Why is the absolute reduction 6 percentage points rather than 43 percentage points?",
+        "expectedReasoning": "43% is the approximate relative reduction, using control risk as a denominator."
+      },
+      {
+        "level": "advanced",
+        "prompt": "If control risk were 7% with the same RR, what would happen to ARR and NNT?",
+        "expectedReasoning": "Programme risk would be 4%, ARR 3 percentage points and the rounded-up NNT 34; this assumes the RR transports to that population."
+      }
+    ],
+    "rProgression": {
+      "menus": "Enter people with an event and total participants, keeping group labels clear.",
+      "bridge": "Match the Miettinen\u2013Nurminen risk-difference interval in R to StatsDirect; the helper makes the method explicit.",
+      "coding": "Change baseline risk and examine absolute benefit without claiming a new trial result."
+    },
+    "sources": [
+      {
+        "id": "cochrane-8",
+        "title": "Cochrane Handbook, chapter 8: Risk of bias in a randomised trial",
+        "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-08",
+        "scope": "Bias in specific trial results, missing outcomes and effects of assignment versus adherence.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "rcgp-akt",
+        "title": "RCGP: Preparing for the AKT",
+        "url": "https://www.rcgp.org.uk/mrcgp-exams/applied-knowledge-test/akt-preparing",
+        "scope": "Data interpretation and critical appraisal in examination preparation; original StatsDirect questions only.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "statsdirect-nnt",
+        "title": "StatsDirect: Number needed to treat",
+        "url": "https://www.statsdirect.com/help/clinical_epidemiology/nnt.htm",
+        "scope": "Miettinen\u2013Nurminen score intervals for independent risk differences and their inversion for NNT.",
+        "checkedAt": "2026-10-12",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "UG-NNT-01",
+      "AN-PCT-01"
+    ],
+    "practiceQuestions": []
+  },
+  {
+    "id": "regression",
+    "title": "Association is not causation",
+    "topic": "Regression and study design",
+    "objective": "Interpret a regression slope without confusing prediction with causation.",
+    "summary": "Each row is a different fictional service, with appointment duration and a mean satisfaction score on a 0\u2013100 scale. The line describes a service-level association; it does not establish an individual-level or causal effect. Conventional small-sample regression inference assumes a linear conditional mean, independent errors with constant variance and normal errors. Inspect residuals and study design; the predictor need not be normally distributed.",
+    "challenge": "A service with longer appointment slots has higher satisfaction. What alternative explanations could produce this association?",
+    "steps": "Use Satisfaction as the dependent variable and Appointment minutes as the predictor in simple linear regression. The eight services are treated as independent for this illustration. Inspect the scatterplot and residuals; consider service case mix and measurement. The R intervals are 95% intervals for model coefficients, not prediction intervals for a future service. Do not extrapolate beyond 10\u201324 minutes without justification.",
+    "operation": "SimpleLinearRegression",
+    "help": "regression_and_correlation/simple_linear.htm",
+    "columns": [
+      {
+        "title": "Satisfaction",
+        "values": [
+          58,
+          61,
+          60,
+          67,
+          65,
+          73,
+          71,
+          78
+        ]
+      },
+      {
+        "title": "Appointment minutes",
+        "values": [
+          10,
+          12,
+          14,
+          16,
+          18,
+          20,
+          22,
+          24
+        ]
+      }
+    ],
+    "r": "# Eight fictional services: each row is a separate service, not a patient.\n# Satisfaction is the service mean on a 0-100 scale.\n# For conventional small-sample inference assume linear mean, independent,\n# constant-variance normal errors. Predictor normality is not required.\ndata \u003C- data.frame(Satisfaction=c(58,61,60,67,65,73,71,78),Minutes=c(10,12,14,16,18,20,22,24))\nprint(data)\nfit \u003C- lm(Satisfaction ~ Minutes, data=data)\nprint(summary(fit))\ncat(\u002295% confidence intervals for regression coefficients (not predictions):\\n\u0022)\nprint(confint(fit,level=0.95))\nplot(data$Minutes,data$Satisfaction,pch=19,xlab=\u0022Appointment minutes\u0022,ylab=\u0022Satisfaction\u0022,main=\u0022Association in fictional service data\u0022)\nabline(fit)\nplot(fitted(fit),residuals(fit),pch=19,xlab=\u0022Fitted satisfaction\u0022,ylab=\u0022Residual\u0022,main=\u0022Check the model, not just the slope\u0022)\nabline(h=0,lty=2)\n# Explain a potential service-level confounder; do not infer individual causation.\n",
+    "contentVersion": "2026-10-01",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-01",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "precision",
+      "causal"
+    ],
+    "learningObjectives": [
+      "Interpret a slope at the level of the observed units.",
+      "Check the conditional mean and residual assumptions.",
+      "Separate coefficient confidence intervals from prediction intervals."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Unit of inference",
+        "explanation": "A relationship between service means is a service-level association. It need not describe the relationship between individual patients."
+      },
+      {
+        "term": "Residual assumptions",
+        "explanation": "Exact conventional small-sample t inference assumes normal independent errors with constant variance around the specified linear mean. Predictors themselves need not be normally distributed."
+      },
+      {
+        "term": "Prediction",
+        "explanation": "A confidence interval for a mean response differs from a prediction interval for a new observation. Extrapolation adds assumptions not checked by a good fit within the observed range."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "A statistically significant slope proves longer appointments cause satisfaction.",
+        "correction": "Service case mix, staffing and other factors can explain association."
+      },
+      {
+        "claim": "A high R-squared demonstrates accurate predictions for a new hospital.",
+        "correction": "Performance in new data requires validation and assessment of calibration and prediction error."
+      }
+    ],
+    "workedExample": {
+      "design": "Eight fictional independent services; satisfaction is a service mean on a 0\u2013100 scale.",
+      "interpretation": "The fitted association is descriptive within 10\u201324 appointment minutes. Residual checks assess the model; neither the fitted line nor its P value establishes an individual causal effect."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "What does one row represent, and why does that matter?",
+        "expectedReasoning": "One service, not one patient. The slope describes differences between services."
+      },
+      {
+        "level": "advanced",
+        "prompt": "What extra uncertainty belongs in a prediction interval for a new service?",
+        "expectedReasoning": "It includes residual variation of a new outcome as well as uncertainty about the fitted mean, under the model assumptions."
+      }
+    ],
+    "rProgression": {
+      "menus": "Select satisfaction as outcome and minutes as predictor.",
+      "bridge": "Connect the fitted line and residual plot with lm() output.",
+      "coding": "Use predict(..., interval=\u0022prediction\u0022) and compare with interval=\u0022confidence\u0022 at an in-range value."
+    },
+    "sources": [
+      {
+        "id": "harrell-reg",
+        "title": "Harrell: Regression models and model validation",
+        "url": "https://hbiostat.org/bbr/reg",
+        "scope": "Calibration, prediction accuracy, optimism and validation of the modelling process.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "hernan-robins",
+        "title": "Hern\u00E1n and Robins: Causal Inference: What If",
+        "url": "https://miguelhernan.org/whatifbook",
+        "scope": "Part I learning route: causal questions, exchangeability, positivity and consistency. Author landing page checked; not a claim of a full-book review.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "RS-MULT-01",
+      "PH-CASEMIX-01"
+    ],
+    "practiceQuestions": []
+  },
+  {
+    "id": "rates",
+    "title": "Comparing population rates",
+    "topic": "Person-time and age standardisation",
+    "objective": "Explain a crude rate difference using age-specific rates and a common standard population.",
+    "summary": "A rate divides events by time at risk. Different age structures can produce different crude rates even when age-specific rates are identical. Direct standardisation applies the same reference weights to each population. A standardised rate is a comparison measure; report its reference population, uncertainty and age-specific pattern.",
+    "challenge": "Two areas have identical younger and older age-specific rates but different crude rates. How could this happen, and what would a fair age-standardised comparison require?",
+    "steps": "The worksheet has two rows: younger, then older. For Area A select Events (40, 800), Person-years (20000, 80000), then Reference population (75000, 25000) in Direct standardization. Use default row labels and multiplier 100000. The crude rate is 840 per 100000 person-years; the directly standardised rate is 400. Area B has 160 and 200 events in 80000 and 20000 person-years: its crude rate is 360 but the same standardised rate is 400. R displays both areas. Compare point estimates with matching units; StatsDirect also supplies intervals.",
+    "operation": "RateDirect",
+    "help": "rates/direct_standardization.htm",
+    "columns": [
+      {
+        "title": "Events",
+        "values": [
+          40,
+          800
+        ]
+      },
+      {
+        "title": "Person-years",
+        "values": [
+          20000,
+          80000
+        ]
+      },
+      {
+        "title": "Reference population",
+        "values": [
+          75000,
+          25000
+        ]
+      }
+    ],
+    "r": "# Fictional independent event counts; rows are younger, older.\n# Person-time is time actually at risk, not the number of people enrolled.\narea_a \u003C- data.frame(Events=c(40,800),Person_years=c(20000,80000))\narea_b \u003C- data.frame(Events=c(160,200),Person_years=c(80000,20000))\nreference \u003C- c(75000,25000); weights \u003C- reference/sum(reference)\nrate_a \u003C- area_a$Events/area_a$Person_years\nrate_b \u003C- area_b$Events/area_b$Person_years\ncrude \u003C- c(A=sum(area_a$Events)/sum(area_a$Person_years),B=sum(area_b$Events)/sum(area_b$Person_years))*100000\nstandardised \u003C- c(A=sum(weights*rate_a),B=sum(weights*rate_b))*100000\nprint(data.frame(Age=c(\u0022Younger\u0022,\u0022Older\u0022),A_per_100000=rate_a*100000,B_per_100000=rate_b*100000,Weight=weights))\nprint(rbind(Crude=crude,Standardised=standardised))\nbarplot(rbind(Crude=crude,Standardised=standardised),beside=TRUE,legend.text=TRUE,ylab=\u0022Events per 100000 person-years\u0022,main=\u0022Fictional areas, common age-specific rates\u0022)\n# Point-estimate illustration. Do not give this weighted rate the CI for a single crude count.\n# Equal standardised rates do not prove equality or remove all sources of bias.\n",
+    "contentVersion": "2026-10-01",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-01",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "epidemiology",
+      "precision"
+    ],
+    "learningObjectives": [
+      "Retain person-time units when scaling rates.",
+      "Apply identical age weights to the populations compared.",
+      "Distinguish direct standardisation from observed/expected ratios."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Direct standardisation",
+        "explanation": "Multiply each stratum-specific rate by its reference weight and sum. Use common age bands, definitions, units and reference weights."
+      },
+      {
+        "term": "Indirect standardisation",
+        "explanation": "Apply reference rates to the study person-time to obtain expected events. Observed/expected is a ratio; an SMR of 1.25 means 25% more than expected under that reference, not a 25% population risk."
+      },
+      {
+        "term": "Uncertainty",
+        "explanation": "Age adjustment addresses measured age composition. Small counts, different case ascertainment and residual confounding still matter; inspect stratum-specific rates."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "A rate of 400 per 100000 person-years is necessarily a 0.4% annual risk.",
+        "correction": "A risk needs a specified event process and follow-up; person-time is not a count of people."
+      },
+      {
+        "claim": "Use each area\u2019s own age distribution as its standard for comparison.",
+        "correction": "That reproduces the crude rates. Both areas need the same standard weights."
+      }
+    ],
+    "workedExample": {
+      "design": "Fictional two-age-group populations with different person-time distributions but identical age-specific event rates.",
+      "interpretation": "Common weights of 0.75 and 0.25 give 0.75\u00D7200 \u002B 0.25\u00D71000 = 400 per 100000 person-years in both areas, despite crude rates of 840 and 360."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "Why is Area A\u2019s crude rate higher?",
+        "expectedReasoning": "More of its person-time is in the older group, which has the higher rate."
+      },
+      {
+        "level": "advanced",
+        "prompt": "Would two SMRs based on differently weighted study populations always be directly comparable?",
+        "expectedReasoning": "No. Their implicit weights can differ; compare age-specific patterns and the conditions under which a common summary comparison is meaningful."
+      }
+    ],
+    "rProgression": {
+      "menus": "Run direct standardisation for Area A using the named columns.",
+      "bridge": "Match sum(weights*rate_a) to the adjusted rate.",
+      "coding": "Change the shared reference weights, then explain why the summary changes even with unchanged age-specific rates."
+    },
+    "sources": [
+      {
+        "id": "ohid-rates",
+        "title": "OHID: Rates",
+        "url": "https://fingertips.phe.org.uk/static-reports/public-health-technical-guidance/Basic_statistics/Rates.html",
+        "scope": "Events, population denominators and person-time units.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "ohid-dsr",
+        "title": "OHID: Directly standardised rates",
+        "url": "https://fingertips.phe.org.uk/static-reports/public-health-technical-guidance/Standardisation/DSRs.html",
+        "scope": "Common reference weights and uncertainty in directly standardised rates.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "ohid-isr",
+        "title": "OHID: Indirectly standardised ratios",
+        "url": "https://fingertips.phe.org.uk/static-reports/public-health-technical-guidance/Standardisation/ISRatios.html",
+        "scope": "Observed versus expected events; indirect standardisation.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "PH-STAND-01",
+      "PH-SMR-01",
+      "LIB-RATES-01"
+    ],
+    "practiceQuestions": [
+      {
+        "id": "LIB-RATES-01",
+        "version": 1,
+        "track": "publicHealth",
+        "topic": "Person-time and age standardisation",
+        "objective": "Explain a crude rate difference using age-specific rates and a common standard population.",
+        "stem": "Two fictional areas have rates of 200 and 1000 events per 100000 person-years in younger and older groups respectively. Both are directly standardised using 75% younger and 25% older weights. Which conclusion is justified?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Both adjusted rates are 400 per 100000 person-years.",
+            "feedback": "Use 0.75\u00D7200 \u002B 0.25\u00D71000 for each area."
+          },
+          {
+            "id": "B",
+            "text": "Both adjusted rates are 600 because the two rates are averaged equally.",
+            "feedback": "The stated weights are 75% and 25%, not equal."
+          },
+          {
+            "id": "C",
+            "text": "The area with more older people must have a larger adjusted rate.",
+            "feedback": "That affects its crude rate; the shared standard weights remove this age-composition difference."
+          },
+          {
+            "id": "D",
+            "text": "Both areas have an annual disease risk of exactly 0.4%.",
+            "feedback": "A person-time rate is not automatically a one-year cumulative risk."
+          },
+          {
+            "id": "E",
+            "text": "Age adjustment proves that the two populations are causally identical.",
+            "feedback": "Other differences, biases and uncertainty remain."
+          }
+        ],
+        "correct": "A",
+        "hint": "Apply the same stated weights to the age-specific rates in each area.",
+        "lesson": "A rate divides events by time at risk. Different age structures can produce different crude rates even when age-specific rates are identical. Direct standardisation applies the same reference weights to each population. A standardised rate is a comparison measure; report its reference population, uncertainty and age-specific pattern.",
+        "explanation": "The common weighted rate is 150 \u002B 250 = 400 per 100000 person-years. Different actual age mixes can still produce different crude rates. Equal standardised point estimates do not prove equivalence.",
+        "help": "rates/direct_standardization.htm",
+        "operation": "RateDirect",
+        "lessonId": "rates",
+        "sourceIds": [
+          "ohid-rates",
+          "ohid-dsr",
+          "ohid-isr"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "appraisal",
+    "title": "Appraising a trial result",
+    "topic": "Design, missing outcomes and applicability",
+    "objective": "Explain what a numerical trial result can and cannot establish.",
+    "summary": "Read the research question, allocation, follow-up and outcome measurement before the P value. Risk of bias concerns a particular result; reporting completeness and a large sample do not guarantee validity. Missing outcomes can break the comparability intended by randomisation. Explain effect size, uncertainty and applicability separately.",
+    "challenge": "A randomised trial reports outcomes for 80 of 100 programme participants and all 100 controls. Before accepting its claim of benefit, what would you ask about the 20 missing outcomes?",
+    "steps": "Fictional one-year adverse outcomes are observed in 20/80 programme participants and 30/100 controls. Try in StatsDirect opens the risk comparison: columns programme/control, top row events 20, 30; bottom row observed non-events 60, 70. The observed-data RR is 5/6. This omits 20 programme participants. R shows how their unknown outcomes permit full-group programme risks from 20% to 40%, against 30% in controls. These bounds describe missing-outcome uncertainty, not a 95% confidence interval.",
+    "operation": "MiscRelRisk",
+    "help": "basics/bias.htm",
+    "columns": [],
+    "r": "# Fictional individually randomised trial, one-year binary adverse outcome.\nrandomised \u003C- c(Programme=100,Control=100)\nobserved \u003C- c(Programme=80,Control=100)\nevents \u003C- c(Programme=20,Control=30)\nmissing \u003C- randomised-observed\nprint(data.frame(Randomised=randomised,Observed=observed,Events=events,Missing=missing))\nobserved_rr \u003C- (events[1]/observed[1])/(events[2]/observed[2]); print(observed_rr)\nprogramme_bounds \u003C- c(Lower=20/100,Upper=(20\u002B20)/100)\ncontrol_risk \u003C- 30/100\narr_bounds \u003C- c(Lower=control_risk-programme_bounds[2],Upper=control_risk-programme_bounds[1])\nprint(programme_bounds); print(arr_bounds)\nplot(c(1,1),programme_bounds,type=\u0022b\u0022,pch=19,xlim=c(0.5,1.5),ylim=c(0,0.5),xaxt=\u0022n\u0022,xlab=\u0022Programme: possible one-year risk\u0022,ylab=\u0022Risk\u0022,main=\u0022Missing-outcome bounds, not a confidence interval\u0022)\nabline(h=control_risk,lty=2)\nlegend(\u0022topleft\u0022, \u0022Control risk: 30%\u0022, lty=2, bty=\u0022n\u0022)\n# Bounds assume all 20 unknown outcomes are either non-events or events.\n# They do not include sampling uncertainty or assert that either extreme is plausible.\n",
+    "contentVersion": "2026-10-01",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-01",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "epidemiology",
+      "risk"
+    ],
+    "learningObjectives": [
+      "Identify the intended effect and how the reported analysis targets it.",
+      "Separate precision, risk of bias and relevance to the learner\u2019s setting.",
+      "Write a short balanced interpretation for a non-specialist."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Effect of assignment",
+        "explanation": "An intention-to-treat question compares groups as randomised. Keeping treatment labels is insufficient if relevant outcomes are missing."
+      },
+      {
+        "term": "Appraisal",
+        "explanation": "Check recruitment, allocation concealment, deviations, ascertainment, follow-up and selective reporting. Seek the protocol and reasons for exclusions."
+      },
+      {
+        "term": "Applicability",
+        "explanation": "Ask whether participants, comparator, outcome, care setting and follow-up match the practical decision. A precise result can still be biased or inapplicable."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "Randomisation makes an analysis immune to missing-outcome bias.",
+        "correction": "Loss to follow-up after randomisation can depend on prognosis or treatment."
+      },
+      {
+        "claim": "A checklist score is proof that the result is trustworthy.",
+        "correction": "Explain specific concerns and their likely implications; a total score can conceal a serious problem."
+      }
+    ],
+    "workedExample": {
+      "design": "Fictional randomised trial; all controls but only 80% of the programme group have measured outcomes.",
+      "interpretation": "The observed risks are 25% and 30%. Depending on missing outcomes, the full-group absolute reduction can range from \u221210 to \u002B10 percentage points before allowing for sampling uncertainty."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "Give a two-sentence explanation for a patient representative.",
+        "expectedReasoning": "The observed participants suggest lower programme risk, but missing outcomes could change the conclusion; explain what additional follow-up is needed."
+      },
+      {
+        "level": "advanced",
+        "prompt": "Would an analysis restricted to adherent participants recover the causal effect of adherence?",
+        "expectedReasoning": "Not automatically. Adherence may depend on prognosis; a per-protocol causal effect needs appropriate methods and assumptions."
+      }
+    ],
+    "rProgression": {
+      "menus": "Compare the observed counts while retaining the attrition caveat.",
+      "bridge": "Identify the difference between observed and randomised denominators in R.",
+      "coding": "Replace extreme bounds with explicitly justified missing-event scenarios and report their assumptions."
+    },
+    "sources": [
+      {
+        "id": "cochrane-8",
+        "title": "Cochrane Handbook, chapter 8: Risk of bias in a randomised trial",
+        "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-08",
+        "scope": "Bias in specific trial results, missing outcomes and effects of assignment versus adherence.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "rcgp-akt",
+        "title": "RCGP: Preparing for the AKT",
+        "url": "https://www.rcgp.org.uk/mrcgp-exams/applied-knowledge-test/akt-preparing",
+        "scope": "Data interpretation and critical appraisal in examination preparation; original StatsDirect questions only.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "catalogue-bias",
+        "title": "Catalogue of Bias",
+        "url": "https://catalogofbias.org/",
+        "scope": "Terminology and examples for confounding, selection and measurement bias.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "LIB-APPRAISAL-01"
+    ],
+    "practiceQuestions": [
+      {
+        "id": "LIB-APPRAISAL-01",
+        "version": 1,
+        "track": "medicine",
+        "topic": "Design, missing outcomes and applicability",
+        "objective": "Explain what a numerical trial result can and cannot establish.",
+        "stem": "In the fictional trial, 20/80 observed programme participants and 30/100 controls have an adverse outcome. Twenty other programme participants have unknown outcomes. Which statement is most defensible?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Treat all missing outcomes as non-events because allocation was randomised.",
+            "feedback": "Randomisation does not reveal unmeasured outcomes."
+          },
+          {
+            "id": "B",
+            "text": "Use 20/80 and ignore the original allocation totals.",
+            "feedback": "That describes responders and can give a biased treatment comparison."
+          },
+          {
+            "id": "C",
+            "text": "Programme risk among all 100 allocated participants could be 20% to 40% before further assumptions.",
+            "feedback": "There are 20 known events and up to 20 additional unknown events."
+          },
+          {
+            "id": "D",
+            "text": "The programme definitely reduces risk by 5 percentage points.",
+            "feedback": "That observed-data difference does not settle missing-outcome or sampling uncertainty."
+          },
+          {
+            "id": "E",
+            "text": "The 20%\u201340% range is a 95% confidence interval.",
+            "feedback": "It is a logical bound, not a sampling interval."
+          }
+        ],
+        "correct": "C",
+        "hint": "Count how many events there could be if none, or all, of the missing participants had the outcome.",
+        "lesson": "Read the research question, allocation, follow-up and outcome measurement before the P value. Risk of bias concerns a particular result; reporting completeness and a large sample do not guarantee validity. Missing outcomes can break the comparability intended by randomisation. Explain effect size, uncertainty and applicability separately.",
+        "explanation": "Full-group programme risk ranges from 20/100 to 40/100. Against control risk 30%, this permits benefit or harm. Reasons for missingness, plausible sensitivity analyses and sampling uncertainty all need consideration.",
+        "help": "basics/bias.htm",
+        "operation": "MiscRelRisk",
+        "lessonId": "appraisal",
+        "sourceIds": [
+          "cochrane-8",
+          "rcgp-akt",
+          "catalogue-bias"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "missing",
+    "title": "Understanding missing data",
+    "topic": "Patterns, assumptions and sensitivity analysis",
+    "objective": "Describe missingness and avoid treating a filled-in value as observed information.",
+    "summary": "Document the amount, pattern and reasons for missingness before choosing an analysis. MCAR, MAR and MNAR describe assumptions about the missingness process. MAR allows dependence on observed information; it is not a synonym for a random-looking pattern. Replacing missing values with a mean does not restore information or valid uncertainty.",
+    "challenge": "Six of eight people return a symptom score. How might the interpretation change if the two missing people felt much worse, rather than simply forgetting an appointment?",
+    "steps": "Scores range from 0 to 40, with higher scores worse. The StatsDirect worksheet contains only the six observed scores: 20, 22, 18, 26, 24, 30. Its mean is 23.33 for responders, not necessarily all eight people. R retains two explicit NA positions and shows full-group mean bounds of 17.5 to 27.5 if each missing score can lie anywhere from 0 to 40. This is an illustration of assumptions, not a confidence interval or a recommended imputation method.",
+    "operation": "UnivariateSummary",
+    "help": "basics/missing_data.htm",
+    "columns": [
+      {
+        "title": "Observed symptom score",
+        "values": [
+          20,
+          22,
+          18,
+          26,
+          24,
+          30
+        ]
+      }
+    ],
+    "r": "# Fictional scores, allowable range 0\u201340; higher is worse.\nscore \u003C- c(20,22,18,26,24,30,NA,NA)\nprint(data.frame(Person=seq_along(score),Score=score,Missing=is.na(score)))\nobserved_mean \u003C- mean(score,na.rm=TRUE)\nmean_bounds \u003C- (sum(score,na.rm=TRUE)\u002Bsum(is.na(score))*c(0,40))/length(score)\nprint(c(Observed_mean=observed_mean,Missing=sum(is.na(score))))\nprint(mean_bounds)\nfilled \u003C- replace(score,is.na(score),observed_mean)\nprint(c(Observed_SD=sd(score,na.rm=TRUE),Mean_filled_SD=sd(filled)))\nbarplot(c(Observed_mean=observed_mean,Lower_bound=mean_bounds[1],Upper_bound=mean_bounds[2]),ylim=c(0,40),ylab=\u0022Symptom score\u0022,main=\u0022Missing values: bounds are not confidence limits\u0022)\n# Mean filling is shown as a pitfall: it understates uncertainty if treated as real data.\n# No method can identify the missing outcomes from these observed values alone.\n",
+    "contentVersion": "2026-10-01",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-01",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "precision",
+      "epidemiology"
+    ],
+    "learningObjectives": [
+      "Distinguish MCAR, MAR and MNAR assumptions.",
+      "Explain why complete-case analysis and single imputation need justification.",
+      "Describe sensitivity analysis without confusing bounds with confidence intervals."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Mechanisms",
+        "explanation": "MCAR means missingness does not depend on observed or unobserved values. Under MAR, after conditioning on observed information it does not additionally depend on the missing values. Under MNAR that dependence remains."
+      },
+      {
+        "term": "Method choice",
+        "explanation": "Complete-case validity depends on the estimand, model and missingness process; MCAR is sufficient in many simple settings but is not always necessary. Multiple imputation needs a suitable model and appropriate pooling of uncertainty."
+      },
+      {
+        "term": "Sensitivity",
+        "explanation": "Observed data alone cannot generally distinguish MAR from MNAR. Use reasons for absence, auxiliary measurements and scientifically defensible sensitivity scenarios."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "MAR can be proved from an observed-data test.",
+        "correction": "Patterns can inform modelling but cannot reveal the unobserved values or establish MAR."
+      },
+      {
+        "claim": "Mean imputation increases sample size with no downside.",
+        "correction": "It adds no observed information and distorts variability and relationships; ordinary complete-data standard errors ignore imputation uncertainty."
+      }
+    ],
+    "workedExample": {
+      "design": "Eight fictional independent people were due to provide a 0\u201340 score; six scores were recorded. No cause of missingness is stipulated.",
+      "interpretation": "Responder mean 140/6 = 23.33. The full-eight mean can range from 140/8 = 17.5 to 220/8 = 27.5. These are logical bounds within the permitted score scale, not confidence limits."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "Why must a blank not silently become zero?",
+        "expectedReasoning": "Zero is a real possible score. Replacing unknown scores with zero asserts a specific outcome."
+      },
+      {
+        "level": "advanced",
+        "prompt": "What should be inside each resampling fold when imputation and predictor selection are used?",
+        "expectedReasoning": "Learn preprocessing and selection from that fold\u2019s training data; carrying information from held-out outcomes into preprocessing leaks information."
+      }
+    ],
+    "rProgression": {
+      "menus": "Summarise the observed scores and state that only six responders are represented.",
+      "bridge": "Use is.na() and na.rm=TRUE, explaining that removing NAs does not justify ignoring missingness.",
+      "coding": "Vary assumptions for the missing scores and explain the resulting sensitivity; progress to properly pooled multiple imputation with guidance."
+    },
+    "sources": [
+      {
+        "id": "vanbuuren-mechanisms",
+        "title": "Van Buuren: MCAR, MAR and MNAR",
+        "url": "https://stefvanbuuren.name/fimd/sec-MCAR.html",
+        "scope": "Missingness mechanisms and sensitivity to assumptions.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "vanbuuren-simple",
+        "title": "Van Buuren: Simple solutions for missing data",
+        "url": "https://stefvanbuuren.name/fimd/sec-simplesolutions.html",
+        "scope": "Limitations of deletion and single-value imputation.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "LIB-MISSING-01"
+    ],
+    "practiceQuestions": [
+      {
+        "id": "LIB-MISSING-01",
+        "version": 1,
+        "track": "researcher",
+        "topic": "Patterns, assumptions and sensitivity analysis",
+        "objective": "Describe missingness and avoid treating a filled-in value as observed information.",
+        "stem": "A researcher replaces every missing symptom score with the mean of the observed scores, then analyses the filled values as if all were measured. What is the main problem?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The sample mean must necessarily change.",
+            "feedback": "Mean filling preserves the observed mean in this simple setting."
+          },
+          {
+            "id": "B",
+            "text": "The missing values have become independently observed measurements.",
+            "feedback": "No new measurements have been obtained."
+          },
+          {
+            "id": "C",
+            "text": "The method proves that the data are missing completely at random.",
+            "feedback": "Imputation does not establish a missingness mechanism."
+          },
+          {
+            "id": "D",
+            "text": "It ignores uncertainty about missing values and distorts variability and relationships.",
+            "feedback": "Ordinary analysis of the filled values does not account for uncertainty in their imputation."
+          },
+          {
+            "id": "E",
+            "text": "It is always identical to properly pooled multiple imputation.",
+            "feedback": "Multiple imputation represents missing-value uncertainty across draws and needs valid models and pooling."
+          }
+        ],
+        "correct": "D",
+        "hint": "What information was actually added when the same mean was inserted repeatedly?",
+        "lesson": "Document the amount, pattern and reasons for missingness before choosing an analysis. MCAR, MAR and MNAR describe assumptions about the missingness process. MAR allows dependence on observed information; it is not a synonym for a random-looking pattern. Replacing missing values with a mean does not restore information or valid uncertainty.",
+        "explanation": "Mean filling does not recover the unobserved values. Treating these invented values as observed commonly understates uncertainty and distorts distributions and associations. Investigate missingness and choose a method appropriate to the estimand and assumptions.",
+        "help": "basics/missing_data.htm",
+        "operation": "UnivariateSummary",
+        "lessonId": "missing",
+        "sourceIds": [
+          "vanbuuren-mechanisms",
+          "vanbuuren-simple"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "validation",
+    "title": "Checking prediction performance",
+    "topic": "Calibration, prediction error and validation",
+    "objective": "Assess predictions against outcomes not used to develop the model.",
+    "summary": "A model can rank outcomes well yet predict systematically wrong values. Evaluate calibration and prediction error as well as association. Performance on the development data is usually optimistic. Internal validation must repeat the modelling process; evaluation in a new relevant setting addresses transportability. A tiny illustration cannot establish clinical usefulness.",
+    "challenge": "If we add ten points to every predicted score, can its correlation with observed scores stay unchanged while its prediction error gets worse?",
+    "steps": "The fictional predictions were fixed before these eight outcomes were observed. Select Observed score as outcome and Predicted score as predictor in simple regression to inspect calibration; a descriptive calibration line is not a newly validated prediction model. R compares the original predictions with the same predictions shifted upward by ten. Correlation is unchanged; RMSE rises from about 1.58 to 10.12 points. Compare with the identity line, not just the fitted slope.",
+    "operation": "SimpleLinearRegression",
+    "help": "regression_and_correlation/simple_linear.htm",
+    "columns": [
+      {
+        "title": "Observed score",
+        "values": [
+          12,
+          18,
+          31,
+          39,
+          51,
+          59,
+          72,
+          78
+        ]
+      },
+      {
+        "title": "Predicted score",
+        "values": [
+          10,
+          20,
+          30,
+          40,
+          50,
+          60,
+          70,
+          80
+        ]
+      }
+    ],
+    "r": "# Fictional independent evaluation sample. Predictions were fixed in advance.\npredicted \u003C- seq(10,80,by=10)\nobserved \u003C- c(12,18,31,39,51,59,72,78)\nshifted \u003C- predicted\u002B10\nrmse \u003C- function(p) sqrt(mean((observed-p)^2))\nprint(data.frame(Observed=observed,Predicted=predicted,Shifted=shifted))\nmetrics \u003C- rbind(Original=c(Correlation=cor(observed,predicted),RMSE=rmse(predicted),Mean_error=mean(predicted-observed)),Shifted=c(Correlation=cor(observed,shifted),RMSE=rmse(shifted),Mean_error=mean(shifted-observed)))\nprint(metrics)\ncalibration \u003C- lm(observed~predicted); print(coef(calibration))\nplot(predicted,observed,pch=19,xlim=c(0,100),ylim=c(0,100),xlab=\u0022Predicted score\u0022,ylab=\u0022Observed score\u0022,main=\u0022Correlation does not establish calibration\u0022)\npoints(shifted,observed,pch=1,col=\u0022blue\u0022); abline(0,1,lty=2)\nlegend(\u0022topleft\u0022,c(\u0022Original\u0022,\u0022Shifted \u002B10\u0022,\u0022Ideal agreement\u0022),pch=c(19,1,NA),lty=c(NA,NA,2),col=c(\u0022black\u0022,\u0022blue\u0022,\u0022black\u0022))\n# This eight-person example demonstrates metrics; it does not validate clinical use.\n# Do not retune the model on these outcomes and then call the same data an untouched test set.\n",
+    "contentVersion": "2026-10-01",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-01",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "regression",
+      "precision"
+    ],
+    "learningObjectives": [
+      "Distinguish ranking, calibration and prediction error.",
+      "Recognise optimism and data leakage.",
+      "Explain the role of reporting standards without treating them as validation."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Calibration",
+        "explanation": "Predictions should agree with observed outcomes at the relevant scale. For continuous outcomes inspect observed versus predicted values against the identity line, not just correlation."
+      },
+      {
+        "term": "Validation design",
+        "explanation": "Repeat preprocessing, variable selection and tuning within resampling. Preserve grouping and temporal order when the intended use requires them; related observations must not leak across training and evaluation."
+      },
+      {
+        "term": "Reporting",
+        "explanation": "TRIPOD\u002BAI helps make model development and evaluation assessable. Reporting compliance cannot by itself establish low bias, transportability or usefulness."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "A high correlation means predictions are accurate in absolute terms.",
+        "correction": "A constant offset leaves correlation unchanged but alters calibration and prediction error."
+      },
+      {
+        "claim": "One favourable random train/test split proves the model will work in every setting.",
+        "correction": "Performance varies with sample and setting; assess uncertainty, the development process and relevant external data."
+      }
+    ],
+    "workedExample": {
+      "design": "Eight fictional held-out continuous outcomes and predictions fixed before observing them; no model is developed or selected on these eight rows.",
+      "interpretation": "Mean prediction error changes from 0 to \u002B10 after shifting; RMSE increases while correlation is identical. The sample only demonstrates these distinctions."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "Which plot feature reveals the upward shift?",
+        "expectedReasoning": "Predictions systematically exceed outcomes, so points fall below the observed=predicted line."
+      },
+      {
+        "level": "advanced",
+        "prompt": "Why should selecting predictors once before cross-validation be avoided?",
+        "expectedReasoning": "It uses held-out outcomes during selection and can make reported performance optimistic; repeat all relevant choices within training folds."
+      }
+    ],
+    "rProgression": {
+      "menus": "Inspect the observed-versus-predicted comparison.",
+      "bridge": "Calculate squared errors and their mean before taking the square root.",
+      "coding": "Add a constant to predictions and compare correlation, mean error and RMSE; then plan an appropriate resampling design."
+    },
+    "sources": [
+      {
+        "id": "harrell-reg",
+        "title": "Harrell: Regression models and model validation",
+        "url": "https://hbiostat.org/bbr/reg",
+        "scope": "Calibration, prediction accuracy, optimism and validation of the modelling process.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "tripod-ai",
+        "title": "TRIPOD\u002BAI: Scope",
+        "url": "https://www.tripod-statement.org/scope/",
+        "scope": "Reporting prediction-model development and evaluation; reporting completeness is not a guarantee of validity.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "LIB-VALIDATION-01"
+    ],
+    "practiceQuestions": [
+      {
+        "id": "LIB-VALIDATION-01",
+        "version": 1,
+        "track": "analyst",
+        "topic": "Calibration, prediction error and validation",
+        "objective": "Assess predictions against outcomes not used to develop the model.",
+        "stem": "Eight fictional fixed predictions have errors averaging zero. Ten points are added to every prediction, without changing the observed outcomes. Which statement must be true?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Correlation with observed outcomes falls by ten.",
+            "feedback": "Correlation is invariant to adding a constant."
+          },
+          {
+            "id": "B",
+            "text": "Correlation is unchanged, but mean prediction error becomes \u002B10 points.",
+            "feedback": "Adding ten to every prediction adds ten to every prediction-minus-outcome error."
+          },
+          {
+            "id": "C",
+            "text": "RMSE is unchanged because the ordering is unchanged.",
+            "feedback": "RMSE depends on error size, not just ordering."
+          },
+          {
+            "id": "D",
+            "text": "The new predictions are externally validated because correlation is high.",
+            "feedback": "A metric alone cannot certify a validation design or usefulness."
+          },
+          {
+            "id": "E",
+            "text": "Every observed outcome also increases by ten.",
+            "feedback": "Only predictions were changed."
+          }
+        ],
+        "correct": "B",
+        "hint": "Separate ranking from the numerical agreement between prediction and outcome.",
+        "lesson": "A model can rank outcomes well yet predict systematically wrong values. Evaluate calibration and prediction error as well as association. Performance on the development data is usually optimistic. Internal validation must repeat the modelling process; evaluation in a new relevant setting addresses transportability. A tiny illustration cannot establish clinical usefulness.",
+        "explanation": "Correlation is unchanged by an additive constant. With mean original error zero, shifting predictions by \u002B10 gives mean error \u002B10 and increases mean squared error by 100. Calibration and absolute prediction accuracy matter alongside association.",
+        "help": "regression_and_correlation/simple_linear.htm",
+        "operation": "SimpleLinearRegression",
+        "lessonId": "validation",
+        "sourceIds": [
+          "harrell-reg",
+          "tripod-ai"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "meta",
+    "title": "Combining study results",
+    "topic": "Meta-analysis, heterogeneity and interpretation",
+    "objective": "Explain inverse-variance weighting and decide whether a pooled effect answers a coherent question.",
+    "summary": "Pooling requires comparable populations, contrasts, outcomes and follow-up, together with an assessment of bias and dependence. Inverse-variance weights favour more precise estimates. A fixed-effect illustration assumes a common underlying effect. Random-effects models allow between-study variation but cannot repair biased studies or justify combining incompatible questions.",
+    "challenge": "Three studies estimate the same risk difference, but one has twice the standard error of the others. Should it receive twice the weight, half the weight or a quarter of the weight?",
+    "steps": "The fictional independent studies report one-year adverse-outcome risk differences (programme minus control) of \u22120.04, \u22120.08 and \u22120.03, with SEs 0.02, 0.04 and 0.02. In Summary meta-analysis choose Risk Difference, then Standard Error, and select the two named columns; use default study labels and 95% confidence. Compare the fixed-effect estimate with R: \u22124 percentage points, with a 95% normal interval of about \u22126.6 to \u22121.4 percentage points. Both use the inverse-variance common-effect estimate and a normal critical value. The R output retains unrounded values. This exercise assumes approximately normal estimates and a common underlying effect; it is not a complete systematic review.",
+    "operation": "MetaSummary",
+    "help": "meta_analysis/summary.htm",
+    "columns": [
+      {
+        "title": "Risk difference",
+        "values": [
+          -0.04,
+          -0.08,
+          -0.03
+        ]
+      },
+      {
+        "title": "Standard error",
+        "values": [
+          0.02,
+          0.04,
+          0.02
+        ]
+      }
+    ],
+    "r": "# Three fictional independent trials: same adverse outcome and one-year horizon.\n# Risk difference = programme minus control. SE, not SD, is supplied.\neffect \u003C- c(-0.04,-0.08,-0.03); se \u003C- c(0.02,0.04,0.02)\nweight \u003C- 1/se^2\npooled \u003C- sum(weight*effect)/sum(weight)\npooled_se \u003C- sqrt(1/sum(weight))\npooled_ci \u003C- pooled\u002Bc(-1,1)*qnorm(0.975)*pooled_se\nq \u003C- sum(weight*(effect-pooled)^2)\nprint(data.frame(Study=1:3,Risk_difference=effect,SE=se,Percent_weight=100*weight/sum(weight)))\nprint(c(Pooled=pooled,SE=pooled_se,Lower=pooled_ci[1],Upper=pooled_ci[2],Q=q))\nlower \u003C- effect-qnorm(0.975)*se; upper \u003C- effect\u002Bqnorm(0.975)*se\nplot(effect,1:3,pch=19,xlim=range(c(lower,upper,0)),ylim=c(0,3.5),yaxt=\u0022n\u0022,xlab=\u0022Risk difference: programme minus control\u0022,ylab=\u0022\u0022,main=\u0022Fictional fixed-effect illustration\u0022)\nsegments(lower,1:3,upper,1:3); abline(v=0,lty=2)\npoints(pooled,0,pch=18); segments(pooled_ci[1],0,pooled_ci[2],0)\naxis(2,at=0:3,labels=c(\u0022Pooled\u0022,\u0022Study 1\u0022,\u0022Study 2\u0022,\u0022Study 3\u0022),las=1)\n# The interval estimates a common effect under the model; not a prediction interval.\n# Few studies give weak information about heterogeneity and publication bias.\n\n# Optional further learning: conventional Q-based I-squared.\n# Change FALSE to TRUE to run this extension after the main lesson.\nif (FALSE) {\n  study_df \u003C- length(effect)-1\n  i_squared \u003C- if(q\u003E0) 100*max(0,(q-study_df)/q) else 0\n  print(c(Q=q,df=study_df,I_squared_percent=i_squared))\n  # Here I-squared is 0%, after truncating a negative untruncated estimate.\n  # Three studies give little information: 0% does not establish homogeneity.\n  # Do not select fixed versus random effects just from Q\u0027s P value or I-squared.\n}\n",
+    "contentVersion": "2026-10-12",
+    "knowledgeSchemaVersion": 1,
+    "review": {
+      "date": "2026-10-12",
+      "status": "AI-assisted editorial and numerical checks",
+      "authorship": "Original StatsDirect teaching material with fictional examples; not official examination content."
+    },
+    "prerequisites": [
+      "risk",
+      "precision",
+      "appraisal"
+    ],
+    "learningObjectives": [
+      "Calculate and interpret inverse-variance weights.",
+      "Keep effect directions, scales and time horizons consistent.",
+      "Distinguish a pooled-effect interval from between-setting variation."
+    ],
+    "keyConcepts": [
+      {
+        "term": "Weights",
+        "explanation": "For independent approximately normal estimates with known or adequately estimated SEs, fixed-effect weights are 1/SE\u00B2. Doubling SE gives one quarter of the weight."
+      },
+      {
+        "term": "Heterogeneity",
+        "explanation": "A pooled-effect interval does not show the spread of true effects across settings. Examine clinical differences and heterogeneity uncertainty; a non-significant heterogeneity test with few studies proves little. Optional extension: conventional Q-based I\u00B2 estimates the percentage of variation in study estimates attributable to heterogeneity. Here Q = 1.25 and df = 2, so max(0, (Q \u2212 df)/Q) \u00D7 100 = 0%. This truncated estimate is very uncertain with three studies and is not evidence of identical underlying effects."
+      },
+      {
+        "term": "Evidence selection",
+        "explanation": "Overlapping participants, selective reporting and unpublished results can undermine a synthesis. Choose eligible comparisons before looking at their P values."
+      }
+    ],
+    "misconceptions": [
+      {
+        "claim": "Meta-analysis always removes the biases of its component studies.",
+        "correction": "Pooling may increase precision around a biased answer."
+      },
+      {
+        "claim": "Pick fixed or random effects solely from the heterogeneity P value.",
+        "correction": "Choose the model to match the question and assumptions; examine variation and the uncertainty in estimating it."
+      }
+    ],
+    "workedExample": {
+      "design": "Three fictional independent trial estimates of the same one-year adverse-outcome risk difference, on an untransformed difference scale.",
+      "interpretation": "Weights are in the ratio 4:1:4, yielding a pooled difference of \u22120.04. Its model-based interval excludes zero, but this does not establish the quality, applicability or completeness of the underlying evidence."
+    },
+    "teachingPrompts": [
+      {
+        "level": "beginner",
+        "prompt": "What does the negative pooled risk difference mean?",
+        "expectedReasoning": "With programme minus control for an adverse outcome it favours the programme; specify the one-year horizon."
+      },
+      {
+        "level": "advanced",
+        "prompt": "Can two estimates from overlapping participant groups be entered as independent studies?",
+        "expectedReasoning": "No. Their covariance must be addressed or a suitable non-overlapping set chosen; otherwise uncertainty can be understated."
+      }
+    ],
+    "rProgression": {
+      "menus": "Select risk difference and standard error in the summary form.",
+      "bridge": "Trace the weighted mean and pooled SE in R.",
+      "coding": "Increase one SE and predict the weight change before rerunning; discuss when pooling would be inappropriate. Optional further learning: run the I-squared block at the end and explain why an estimate of zero from three studies does not prove homogeneity."
+    },
+    "sources": [
+      {
+        "id": "cochrane-10",
+        "title": "Cochrane Handbook, chapter 10: Meta-analysis",
+        "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-10",
+        "scope": "Inverse-variance pooling, heterogeneity and interpretation of fixed-effect and random-effects analyses.",
+        "checkedAt": "2026-10-12",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      },
+      {
+        "id": "cochrane-8",
+        "title": "Cochrane Handbook, chapter 8: Risk of bias in a randomised trial",
+        "url": "https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-08",
+        "scope": "Bias in specific trial results, missing outcomes and effects of assignment versus adherence.",
+        "checkedAt": "2026-10-01",
+        "use": "Editorial reference and further reading; no source text or examination items reproduced."
+      }
+    ],
+    "assessmentIds": [
+      "LIB-META-01"
+    ],
+    "practiceQuestions": [
+      {
+        "id": "LIB-META-01",
+        "version": 1,
+        "track": "researcher",
+        "topic": "Meta-analysis, heterogeneity and interpretation",
+        "objective": "Explain inverse-variance weighting and decide whether a pooled effect answers a coherent question.",
+        "stem": "In a fixed-effect inverse-variance meta-analysis, Study A has SE 0.02 and Study B has SE 0.04 for estimates on the same scale. What is the ratio of A\u2019s weight to B\u2019s weight?",
+        "options": [
+          {
+            "id": "A",
+            "text": "1:4",
+            "feedback": "That reverses the inverse-variance weighting."
+          },
+          {
+            "id": "B",
+            "text": "1:2",
+            "feedback": "The smaller SE receives more, not less, weight."
+          },
+          {
+            "id": "C",
+            "text": "1:1",
+            "feedback": "Equal weighting ignores their different precisions."
+          },
+          {
+            "id": "D",
+            "text": "2:1",
+            "feedback": "Weights use squared SE, not SE itself."
+          },
+          {
+            "id": "E",
+            "text": "4:1",
+            "feedback": "(1/0.02\u00B2)/(1/0.04\u00B2) = 4."
+          }
+        ],
+        "correct": "E",
+        "hint": "Variance is the square of the standard error; then take its reciprocal.",
+        "lesson": "Pooling requires comparable populations, contrasts, outcomes and follow-up, together with an assessment of bias and dependence. Inverse-variance weights favour more precise estimates. A fixed-effect illustration assumes a common underlying effect. Random-effects models allow between-study variation but cannot repair biased studies or justify combining incompatible questions.",
+        "explanation": "The weights are 2500 and 625, so A receives four times B\u2019s weight. This does not make A four times as free from bias; inverse-variance weighting represents statistical precision under the model.",
+        "help": "meta_analysis/summary.htm",
+        "operation": "MetaSummary",
+        "lessonId": "meta",
+        "sourceIds": [
+          "cochrane-10",
+          "cochrane-8"
+        ]
+      }
+    ]
+  }
+]

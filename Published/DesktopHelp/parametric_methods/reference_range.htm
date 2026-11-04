@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="parametric_methods/reference_range.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reference Range (Normal Range) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Reference Range</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Parametric_Reference Range</b>.</p>
+        <p> </p>
+        <p>
+            This function enables you to construct confidence intervals for a reference range (also known as reference interval or normal range) from a sample of observations drawn at random from a normal distribution. The nonparametric alternative (quantile reference range) is also given.</p>
+        <p> </p>
+        <p>The reference range and confidence interval for data from a normal distribution is calculated as:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="9b97b1b29779b360b4e63deb59ddc53b58dffcc5cc01fd16925c8793c99a233c"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle \text{RR}=\bar x\pm sz_{\displaystyle(1-c)/2} \\
+\displaystyle \displaystyle \text{SE}=\sqrt{\frac{s^2}{n}+\frac{s^2z_{\displaystyle(1-c)/2}^2}{2n}} \\
+\displaystyle \displaystyle \text{CI}=\text{RR}\pm z_{\alpha/2}\text{SE}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/a1a57d3f86148519f0cdc39148410b5c2b25d75af456de2d24ab57a81f664c50.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where x bar is the sample mean, s is the sample standard deviation, n is the sample size, RR is the reference range, SE is the standard error of the reference range limits, CI is the confidence interval for the reference range limits, z is a quantile from the standard normal distribution and c is % range coverage/100 (e.g. 0.95 for a 95% reference range).</p>
+        <p> </p>
+        <p>For samples with no zero or negative values, the above calculations are repeated on log-transformed data and the results are presented in the original measurement scale.</p>
+        <p> </p>
+        <p>The reference range and confidence interval for data that are not from a normal distribution should be calculated by the percentile method. For a c*100% reference range, the percentile method examines the (1-c)/2 and 1-(1-c)/2 (i.e. 0.025 and 0.975 for a 95% reference range) <a href="../nonparametric_methods/quantile_ci.htm">sample quantiles and their confidence intervals</a>.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-altman-1991">Altman (1991, p. 421)</a>.</p>
+        <p>Test workbook (Parametric worksheet: IgM).</p>
+        <p> </p>
+        <p>Consider the serum IgM concentrations measured from blood samples from 298 healthy children aged six months to six years.</p>
+        <p> </p>
+        <p>To analyse these data in StatsDirect open the test workbook using the file open function of the file menu. Then select the reference range from the parametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "IgM" when prompted for data.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Reference range/interval</u>
+        </p>
+        <p> </p>
+        <p>Sample name:  IgM</p>
+        <p>Sample mean = 0.80302</p>
+        <p>Sample size n =  298</p>
+        <p>Sample sd =  0.469498</p>
+        <p> </p>
+        <p><u>For normal data</u>
+        </p>
+        <p>95% reference interval = -0.117179 to 1.72322</p>
+        <p>95% confidence interval for lower range limit = -0.20828 to -0.026079</p>
+        <p>95% confidence interval for upper range limit = 1.632119 to 1.81432</p>
+        <p> </p>
+        <p><u>For log-normal data</u>
+        </p>
+        <p>95% reference interval = 0.238102 to 2.031412</p>
+        <p>95% confidence interval for lower range limit = 0.214129 to 0.264758</p>
+        <p>95% confidence interval for upper range limit = 1.826887 to 2.258836</p>
+        <p> </p>
+        <p><u>For any data</u>
+        </p>
+        <p>Quantile 0.025 = 0.2</p>
+        <p>Approximate 95% confidence interval (non-conservative) = 0.1 to 0.3</p>
+        <p>Exact confidence level = 94.120331%</p>
+        <p> </p>
+        <p>Quantile 0.975 = 2</p>
+        <p>Approximate 95% confidence interval (non-conservative) = 1.7 to 2.5</p>
+        <p>Exact confidence level = 94.120331%</p>
+        <p> </p>
+        <p>These data are not from a normal distribution but are from an approximately log-normal distribution. This explains why the results for log-normal data are closer to the 2.5% and 97.5% percentiles.</p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Reference range: the StatsDirect help example (Altman 1991, serum IgM in 298
+# children) in R
+# The data are the IgM column of the Parametric worksheet of the StatsDirect test
+# workbook.
+igm &lt;- c(0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.3, 0.3, 0.3, 0.3,
+  0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,
+  0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4,
+  0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.5, 0.5, 0.5,
+  0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
+  0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.6,
+  0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6,
+  0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6,
+  0.6, 0.6, 0.6, 0.6, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7,
+  0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7,
+  0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.8, 0.8, 0.8,
+  0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
+  0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
+  0.8, 0.8, 0.8, 0.8, 0.8, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
+  0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 1, 1, 1, 1, 1, 1,
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1,
+  1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.3, 1.3,
+  1.3, 1.3, 1.3, 1.3, 1.3, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.5,
+  1.5, 1.5, 1.5, 1.5, 1.5, 1.6, 1.6, 1.7, 1.7, 1.7, 1.8, 1.8, 1.8, 2, 2, 2, 2.1,
+  2.1, 2.2, 2.5, 2.7, 4.5)
+n &lt;- length(igm)
+z &lt;- qnorm(0.975)                   # for a 95% range and 95% confidence intervals
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+cat("Sample mean =", six(mean(igm)), "  Sample size n =", n,
+    "  Sample sd =", six(sd(igm)), "\n")
+
+# R has no standard function for a reference range. For data from a normal
+# distribution the range is the mean plus or minus z standard deviations, and
+# each limit has standard error s * sqrt(1/n + z^2/(2n)) (Altman 1991).
+normal_range &lt;- function(x, back = identity) {
+  m &lt;- mean(x)
+  s &lt;- sd(x)
+  limits &lt;- m + c(-1, 1) * z * s
+  se &lt;- s * sqrt(1 / n + z^2 / (2 * n))
+  cat("95% reference interval =", six(back(limits[1])), "to", six(back(limits[2])),
+      "\n")
+  cat("95% confidence interval for lower range limit =", six(back(limits[1] - z * se)),
+      "to", six(back(limits[1] + z * se)), "\n")
+  cat("95% confidence interval for upper range limit =", six(back(limits[2] - z * se)),
+      "to", six(back(limits[2] + z * se)), "\n")
+}
+cat("For normal data\n")
+normal_range(igm)
+# For log-normal data, the same on the logarithms with the results taken back to
+# the original scale (StatsDirect gives this only when no value is 0 or less)
+cat("For log-normal data\n")
+normal_range(log(igm), exp)
+
+# For any data: the 2.5th and 97.5th percentiles (type 6 in R, as in the quantile
+# confidence interval topic) with confidence intervals whose limits are ordered
+# values. The number of observations below a population quantile is binomial
+# (n, p). With more than 200 observations StatsDirect takes the limits from the
+# normal approximation to that distribution, at np plus or minus z sqrt(np(1-p)),
+# and then gives the exact probability that they cover the quantile; with fewer
+# it searches the binomial distribution itself, as in the quantile topic.
+stopifnot(n &gt; 200)
+cat("For any data\n")
+x &lt;- sort(igm)
+for (p in c(0.025, 0.975)) {
+  lo &lt;- floor(n * p - z * sqrt(n * p * (1 - p)))   # numbers of values below
+  hi &lt;- floor(n * p + z * sqrt(n * p * (1 - p)))
+  cat("Quantile", p, "=", quantile(igm, p, type = 6), "\n")
+  cat("Approximate 95% confidence interval (non-conservative) =", x[lo + 1], "to",
+      x[hi + 1], "\n")
+  cat(sprintf("Exact confidence level = %s%%\n",
+              six(100 * (pbinom(hi, n, p) - pbinom(lo, n, p)))))
+}</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="meta_analysis/further.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Further Meta-analysis - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Further Meta-analysis</h1>
+        <p> </p>
+        <p>The initial meta-analyses in StatsDirect maybe used to steer further meta-analyses in other software, such as <a href="http://www.r-project.org/" target="_blank" rel="noopener noreferrer">R</a> or <a href="https://www.medschl.cam.ac.uk/institutions/mrc-bsu/software-mrc-biostatistics-unit" target="_blank" rel="noopener noreferrer">WinBUGS</a>, with the guidance of an expert Statistician.</p>
+        <p> </p>
+        <p>For open-ended modelling and simulation meta-analyses we recommend the R <a href="http://www.metafor-project.org/" target="_blank" rel="noopener noreferrer">metafor</a> package written by Wolfgang Viechtbauer.</p>
+        <p> </p>
+        <p>The yi and vi inputs to metafor's advanced functions are equivalent to the "standardised effect" and "variance" outputs from StatsDirect.</p>
+        <p> </p>
+        <p>You will notice some differences where StatsDirect uses more accurate variance formulae than the escalc function of metafor.</p>
+        <p> </p>
+        <p>For example, try the odds ratio data from the test worksheet in R metafor as follows:</p>
+        <p> </p>
+        <p style="font-family: 'Courier New';">ttot = c(615,758,832,317,810,2267,8587)</p>
+        <p style="font-family: 'Courier New';">tpos = c(49,44,102,32,85,246,1570)</p>
+        <p style="font-family: 'Courier New';">tneg = ttot - tpos</p>
+        <p style="font-family: 'Courier New';">ctot = c(624,771,850,309,406,2257,8600)</p>
+        <p style="font-family: 'Courier New';">cpos = c(67,64,126,38,52,219,1720)</p>
+        <p style="font-family: 'Courier New';">cneg = ctot-cpos</p>
+        <p style="font-family: 'Courier New';">library(metafor)</p>
+        <p style="font-family: 'Courier New';">dat = escalc(measure="OR", ai=tpos, bi=tneg, ci=cpos, di=cneg)</p>
+        <p style="font-family: 'Courier New';">dat</p>
+        <p style="font-family: 'Courier New';">res = rma(yi, vi, data=dat, method="FE")</p>
+        <p> </p>
+        <p>The variance estimates in the metafor are made with the logit/Wolf approximation whereas StatsDirect uses an 'exact' alternative called the conditional maximum likelihood calculation, based on convolution of hyper-geometric distributions through polynomial root finding.</p>
+        <p> </p>
+        <p>When you have yi and vi from either escalc or StatsDirect's standardised effect and variance results you can proceed with a wide range of models, including meta-regression with covariates, via the rma function (the simple fixed effects model is shown above).</p>
+        <p> </p>
+        <p>
+            You can also perform meta-regression in other software such as Stata. Meta-regression methods (such as the metareg macro for Stata) can be used to explore origins of heterogeneity in meta-analyses. To perform meta-regression you need: the standardised effect and variance for each study as above, plus covariates that might explain the origins of the differences between the studies. There are numerous ways to go wrong in the use and interpretation of meta-regression, therefore please seek the help of a statistician (<a href="../references/reference_list.htm#ref-thompson-2002">Thompson and Higgins, 2002</a>).</p>
+        <p> </p>
+        <p>Some Statisticians might use WinBUGS to perform Bayesian simulations such as the one shown below:</p>
+        <p> </p>
+        <p>A typical fixed effects odds ratio BUGS model:</p>
+        <p> model<br /></p>
+        <p style="font-family: 'Courier New';"> {</p>
+        <p style="font-family: 'Courier New';"> for( i in 1 : Num ) {</p>
+        <p style="font-family: 'Courier New';">  rc[i] ~ dbin(pc[i], nc[i])</p>
+        <p style="font-family: 'Courier New';">  rt[i] ~ dbin(pt[i], nt[i])</p>
+        <p style="font-family: 'Courier New';">  logit(pc[i]) &lt;- mu[i]</p>
+        <p style="font-family: 'Courier New';">  logit(pt[i]) &lt;- mu[i] + d</p>
+        <p style="font-family: 'Courier New';">  mu[i] ~ dnorm(0.0,1.0E-6)</p>
+        <p style="font-family: 'Courier New';">  }</p>
+        <p style="font-family: 'Courier New';"> d ~ dnorm(0.0,1.0E-6)</p>
+        <p style="font-family: 'Courier New';"> or &lt;- exp(d)</p>
+        <p style="font-family: 'Courier New';"> }</p>
+        <p> </p>
+        <p>A typical random effects odds ratio BUGS model:</p>
+        <p style="font-family: 'Courier New';"> {</p>
+        <p style="font-family: 'Courier New';"> for( i in 1 : Num ) {</p>
+        <p style="font-family: 'Courier New';">  rc[i] ~ dbin(pc[i], nc[i])</p>
+        <p style="font-family: 'Courier New';">  rt[i] ~ dbin(pt[i], nt[i])</p>
+        <p style="font-family: 'Courier New';">  logit(pc[i]) &lt;- mu[i]</p>
+        <p style="font-family: 'Courier New';">  logit(pt[i]) &lt;- mu[i] + delta[i]</p>
+        <p style="font-family: 'Courier New';">  mu[i] ~ dnorm(0.0,1.0E-5)</p>
+        <p style="font-family: 'Courier New';">  delta[i] ~ dnorm(d, tau)</p>
+        <p style="font-family: 'Courier New';">  }</p>
+        <p style="font-family: 'Courier New';"> d ~ dnorm(0.0,1.0E-6)</p>
+        <p style="font-family: 'Courier New';"> # Choice of priors for random effects variance</p>
+        <p style="font-family: 'Courier New';"> #tau ~ dgamma(0.001,0.001)</p>
+        <p style="font-family: 'Courier New';"> #sigma &lt;- 1 / sqrt(tau)</p>
+        <p style="font-family: 'Courier New';"> tau&lt;-1/(sigma*sigma)</p>
+        <p style="font-family: 'Courier New';"> sigma~dunif(0,10)</p>
+        <p style="font-family: 'Courier New';"> delta.new ~ dnorm(d, tau)</p>
+        <p style="font-family: 'Courier New';"> or &lt;- exp(d)</p>
+        <p style="font-family: 'Courier New';"> }</p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

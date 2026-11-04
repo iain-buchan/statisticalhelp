@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="agreement/mcr.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Method Comparison Regression - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        
+        <h1>Method Comparison Regression</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Agreement_Method Comparison Regression</b>.</p>
+        <p> </p>
+        <p>This function compares two methods of measurement using linear regression techniques that can accommodate errors in both dimensions (test method Y vs. reference method X).</p>
+        <p> </p>
+        <p>Two main types of regression are offered: Deming and Passing-Bablok.</p>
+        <p> </p>
+        <p>Deming regression is an extension of simple linear regression to handle random measurement errors in X as well as Y variables (<a href="https://doi.org/10.1093/clinchem/25.3.432" target="_blank" rel="noopener noreferrer">Cornbleet &amp; Gochman, 1979</a>). So Deming regression considers both X and Y to be subject to measurement error whereas simple regression allows only the Y variable to be measured with error. The X and Y variables in Deming regression may contain repeated measurements or may be single measurements from each subject. You should not use this method with small samples (less than 40).</p>
+        <p> </p>
+        <p>Deming regression can accommodate differences in measurement errors between the test and reference methods. The default procedure assumes no difference, in other words an "error ratio" of 1. If there is a difference then change this value to the variance ratio between the methods (see <a href="../parametric_methods/f_variance_ratio.htm">F test</a>).</p>
+        <p> </p>
+        <p>If the differences between the test and reference observations tend to be different with higher or lower values of the factor being measured then the data are heteroscedastic. In this case a Deming regression breaks an important linear regression assumption about the distribution of residuals. To overcome this problem a weighted Deming regression is offered, using weights equal to the reciprocal of the square of the reference value - which is more robust to heteroscedasticity.</p>
+        <p> </p>
+        <p>Where Deming regression expects errors to be from a normal distribution, Passing-Bablok regression is a non-parametric method that does not make any assumptions about the distributions of the samples or their measurement errors (<a href="http://www.ncbi.nlm.nih.gov/pubmed/6655447" target="_blank" rel="noopener noreferrer">Passing and Bablok, 1983</a>). The method does, however, assume the two variables are highly correlated and have a linear relationship.</p>
+        <p> </p>
+        <p>Different methods for calculating confidence intervals are offered. For Deming and weighted Deming regression <a href="https://doi.org/10.1093/clinchem/39.3.424" target="_blank" rel="noopener noreferrer">Linnet (1993)</a> recommends the jackknife (leave one out resampling) method. For Passing-Bablok regression a nested bootstrap (bias corrected and accelerated) interval is preferred, but this can take a very long time with large datasets, where an approximate Passing-Bablok procedure may be more practical. The bootstrap intervals are calculated from random re-samples of the data: the seed of the random numbers is filled in from the clock and can be changed, and the results show it, so that the same re-samples can be drawn again.</p>
+        <p> </p>
+        <p>If the confidence interval for the slope does not contain the value 1 then you reject the null hypothesis that the slope is equal to 1 - in other words there is statistically significant evidence of at least a proportional difference between the two methods.</p>
+        <p> </p>
+        <p>If the confidence interval for the intercept does not contain the value 0 then you reject the null hypothesis that the intercept is equal to 0 - in other words there is statistically significant evidence that the methods differ by at least a constant amount.</p>
+        <p> </p>
+        <p>A scatter plot is given with each regression by default, showing the fitted regression line with a confidence interval, the identity line (methods equal) and the regression equation. This plot enables you to see the observations and how well the methods of measuring them agree, with the disagreement reflecting the bias and likely range of bias.</p>
+        <p> </p>
+        <p> You can select a residual plot, which is useful for spotting outliers and non linear patterns, and for checking how the agreement varies over the range of measurement.</p>
+        <p> </p>
+        <p>You can also select a Bland-Altman agreement plot displaying differences vs. means within standard limits of agreement.</p>
+        <p> </p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect produces a R script to execute these methods via the MCR package developed by E. Manuilova, A. Schuetzenmeister and F. Model at the pharmaceutical company Roche.</p>
+        <p> </p>
+        <p>Source: <a href="http://cran.r-project.org/web/packages/mcr/" target="_blank" rel="noopener noreferrer">cran.r-project.org/web/packages/mcr/</a></p>
+        <p> </p>
+        <p>Standard: The MCR package implements the <a href="http://www.clsi.org/" target="_blank" rel="noopener noreferrer">Clinical Laboratory and Standards Institute</a> guidance EP09-A2 (Method Comparison and Bias Estimation Using Patient Samples; Approved Guideline – Second Edition.).</p>
+        <p> </p>
+        <p>Further analysis in R: You can choose to save the intermediate R script to your StatsDirect report. You can then run supplementary analyses. For example to estimate the bias and confidence interval at a given series of measurement levels (1 to 5) you could run the command calcBias(model1,x.levels=c(1,2,3,4,5)) for absolute bias or calcBias(model1,x.levels=c(1,2,3,4,5),type="proportional") for proportional bias. calcCUSUM(model1) will give a cumulative sum test with which you can assess linearity.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="http://cran.r-project.org/web/packages/mcr" target="_blank" rel="noopener noreferrer">MCR R package</a>.</p>
+        <p>Data: Test workbook (Agreement worksheet: Plasma Creatinine, Serum Creatinine).</p>
+        <p> </p>
+        <p>To run this example in StatsDirect: select the menu item (Analysis_Agreement_Method Comparison Regression); when asked to "Select Data for Test Method" highlight the Plasma Creatinine column of the Agreement worksheet in the Test workbook (test.xlsx) and right click on the mouse to select the data; when asked for the "Reference Method" choose Serum Creatinine in the same way; when presented with options select Regression Method: Deming and Charts: Test vs. Reference.</p>
+        <p> </p>
+        <p><u>Method Comparison Regression</u>
+        </p>
+        <p> </p>
+        <p>Test method: Plasma Creatinine</p>
+        <p>Reference method: Serum Creatinine</p>
+        <p>Sample size: 108</p>
+        <p>Error ratio: 1</p>
+        <p> </p>
+        <p>Deming (jackknife CI):</p>
+        <table style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td> </td>
+                    <td style="text-decoration: underline;">Estimate</td>
+                    <td style="text-decoration: underline;">Standard Error</td>
+                    <td colspan="2" style="text-decoration: underline;">95% CI</td>
+                    <td style="text-decoration: underline;">Meaning</td>
+                </tr>
+                <tr>
+                    <td>Slope:</td>
+                    <td>1.054539</td>
+                    <td>0.024883</td>
+                    <td colspan="2">1.005207 to 1.103872</td>
+                    <td>Proportional differences</td>
+                </tr>
+                <tr>
+                    <td>Intercept:</td>
+                    <td>-0.058913</td>
+                    <td>0.034375</td>
+                    <td colspan="2">-0.127066 to 0.009239</td>
+                    <td>Systematic differences</td>
+                </tr>
+            </tbody>
+        </table>
+        <p> </p>
+        <p>
+            <img src="../resources/images/deming_regression.png" style="width: 678px;height: 684px;" />
+        </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It uses the mcr package, which StatsDirect itself runs for this analysis, and the package's own creatinine data; install the package first with install.packages("mcr"). It was checked with R 4.6.1 and mcr 1.3.3.1.</p>
+                <pre class="rcode" xml:space="preserve"># Method comparison regression: the StatsDirect help example (the creatinine data of
+# the mcr package, serum and plasma creatinine in 108 subjects; the test workbook's
+# Agreement worksheet columns Serum Creatinine and Plasma Creatinine hold the same
+# pairs) in R. StatsDirect runs this analysis through the mcr package, so install it
+# first with install.packages("mcr")
+if (!requireNamespace("mcr", quietly = TRUE)) install.packages("mcr", repos = "https://cloud.r-project.org")
+library(mcr)
+data(creatinine)
+complete &lt;- complete.cases(creatinine)
+serum &lt;- creatinine$serum.crea[complete]
+plasma &lt;- creatinine$plasma.crea[complete]
+
+# Deming regression of the test method (plasma) on the reference method (serum) with
+# an error ratio of 1, its standard errors and confidence intervals from Linnet's
+# jackknife: the package's summary, then its coefficient table to 6 places
+fit &lt;- mcreg(serum, plasma, error.ratio = 1, method.reg = "Deming",
+             method.ci = "jackknife", mref.name = "Serum Creatinine",
+             mtest.name = "Plasma Creatinine")
+invisible(printSummary(fit))
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+est &lt;- getCoefficients(fit)
+cat("Sample size:", length(serum), "\n")
+for (term in c("Slope", "Intercept")) {
+  cat(paste0(term, ":"), six(est[term, "EST"]), six(est[term, "SE"]),
+      six(est[term, "LCI"]), "to", six(est[term, "UCI"]), "\n")
+}
+
+# The same arithmetic without the package. With an error ratio of 1 the Deming line
+# is the orthogonal regression, from the sums of squares and products about the
+# means. The jackknife refits the line leaving each pair out in turn; the standard
+# error is that of the pseudo-values n b - (n - 1) b(-i) over root n, and the limits
+# use t on n - 2 degrees of freedom (Linnet 1993)
+deming &lt;- function(x, y) {
+  sxx &lt;- sum((x - mean(x))^2)
+  syy &lt;- sum((y - mean(y))^2)
+  sxy &lt;- sum((x - mean(x)) * (y - mean(y)))
+  b &lt;- (syy - sxx + sqrt((syy - sxx)^2 + 4 * sxy^2)) / (2 * sxy)
+  c(Intercept = mean(y) - b * mean(x), Slope = b)
+}
+n &lt;- length(serum)
+whole &lt;- deming(serum, plasma)
+left_out &lt;- t(sapply(1:n, function(i) deming(serum[-i], plasma[-i])))
+pseudo &lt;- n * rep(whole, each = n) - (n - 1) * left_out
+se &lt;- apply(pseudo, 2, sd) / sqrt(n)
+for (term in c("Slope", "Intercept")) {
+  cat(paste0(term, ":"), six(whole[term]), six(se[term]),
+      six(whole[term] - qt(0.975, n - 2) * se[term]), "to",
+      six(whole[term] + qt(0.975, n - 2) * se[term]), "\n")
+}
+
+# The report's plot: the test method against the reference method with the Deming
+# line, its confidence band and the line of identity
+plot(fit, x.lab = "Serum Creatinine", y.lab = "Plasma Creatinine")</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

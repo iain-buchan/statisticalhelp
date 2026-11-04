@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="distributions/t.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Student t Distribution - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Student's t Distribution</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Distributions_Student's t</b>.</p>
+        <p> </p>
+        <p>Student's t is the distribution with n degrees of freedom of :</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="caa0639cba3395aa5188432964257bf2212afa6e3b128ea6b51342c8443b6998"><span class="help-equation-accessible help-equation-live">$\displaystyle \frac{z}{\sqrt{\chi^2/n}}$</span><img src="../resources/help-editor-runtime/equation-artwork/92aebdbf0689e2f2907e3eefd3b9a57158a6c92adc174fb1bcb85ed16cf63157.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where z is the <a href="normal.htm">standard normal</a> variable and χ² is a <a href="chisq.htm">chi-square</a> random variable with n degrees of freedom.</p>
+        <p> </p>
+        <p>When n is large the distribution of t is close to normal. The largest differences between standard normal and t distributions occurs in the tails which is the most important area in statistical tests. You can see from the diagram below that a t distribution with fewer degrees of freedom has more of its values in the tails:</p>
+        <p>
+            <img src="../resources/images/tcurves.png" width="370" height="228" border="0" />
+        </p>
+        <p>For samples from a normal distribution, the ratio of the mean and its standard error follow a t distribution. The number of degrees of freedom used should be equal to the sample size minus the number of estimated parameters. In t tests the estimated parameter is the standard deviation about the mean, therefore, degrees of freedom are n-1.</p>
+        <p> </p>
+        <p>This family of distributions is associated with W. S. Gosset who, at the turn of the century, published his work under the pseudonym Student.</p>
+        <p> </p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect uses the relationship between Student's t and the beta distribution in its calculation of tail areas and percentage points for t distributions, at every number of degrees of freedom. The incomplete beta function is integrated by the methods of <a href="../references/reference_list.htm#ref-didonato-1992">DiDonato and Morris (1992)</a>: a power series, a recurrence on the shape parameter, an expansion in the incomplete gamma function, a weighted continued fraction and a central asymptotic expansion, each used where those authors prescribe, so that every figure is kept at any number of degrees of freedom, and the smaller tail is calculated directly, the larger as its complement, so a small tail area is never lost as one minus a number near 1. Percentage points are found by Newton's method on the logarithm of the tail area, in log odds within a bracket.</p>
+        <p> </p>
+        <p><u>Function Definition</u>
+        </p>
+        <p>The distribution function of a t distribution with n degrees of freedom is:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="87a4fc9b35bebc1c5bd4fb00bc988c58ea94b9d42a566c10ad7ead79dda20407"><span class="help-equation-accessible help-equation-live">$\displaystyle f(t)=\frac{\Gamma[(n+1)/2]}{\sqrt{n\pi} \space \Gamma[n/2]}\int_{-\infty}^t \left(1+\frac{x^2}{n}\right)^{-(n+1)/2} \space dx$</span><img src="../resources/help-editor-runtime/equation-artwork/f17b78956d52ee0269647e02e5dae7400e97f50151d1ab9b2a0ab475c9b13abf.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>Γ(*) is the gamma function:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="d53fb7fae09194c2920628f439cdc5e7aa7993b1723c3b069875e815255c1061"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} \space dt, \space x&gt;0
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/7a0898c8e04a982cb1c4cb9cf7eb7ccc7c7646243533c606944cc3d79d88022b.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>A t variable with n degrees of freedom can be transformed to an F variable with 1 and n degrees of freedom as t²=F. An F variable with ν<sub>1</sub> and ν<sub>2</sub> degrees of freedom can be transformed to a beta variable with parameters p=ν<sub>1</sub>/2 and q= ν<sub>2</sub>/2 as beta = ν<sub>1</sub>F/(ν<sub>2</sub>+ν<sub>1</sub>F). The beta distribution with parameters p and q is:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="c8374b0c32174fdd691e3c6459962bab076deac63d6b6f5c5a9a7ff32f8b9578"><span class="help-equation-accessible help-equation-live">$\displaystyle \text{beta}(x)=\frac{\Gamma(p+q)}{\Gamma(p)\Gamma(q)}\int_0^x t^{p-1}(1-t)^{q-1} \space dt$</span><img src="../resources/help-editor-runtime/equation-artwork/b64d95d0e48072914d1a00d9212faf9420d1d6176275fc0d03a3ad78844f3b1f.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>An illustration with chosen figures. Select Student's t from the Distributions section of the Analysis menu, enter 2 as Student's t and 10 as the degrees of freedom, then click Calculate. StatsDirect fills the upper tail, lower tail and two tailed P boxes; when you complete the calculator the report reads:</p>
+        <p> </p>
+        <p><u>Probability distribution calculations</u>
+        </p>
+        <p> </p>
+        <p>P(t 2, df 10) = 0.03669401738537 upper, 0.96330598261463 lower, 0.07338803477074 two sided</p>
+        <p> </p>
+        <p>So, when the null hypothesis holds, a t statistic of 2 or more arises by chance in about 3.7% of samples, and a t of 2 or more in either direction in about 7.3%. The two tailed P is twice the smaller tail. The distribution is symmetric, so a negative t swaps the tails: with -2.5 as Student's t and 15 degrees of freedom:</p>
+        <p> </p>
+        <p>P(t -2.5, df 15) = 0.987747098376743 upper, 0.012252901623257 lower, 0.024505803246514 two sided</p>
+        <p> </p>
+        <p>The function also works in reverse: enter a probability in one of the P boxes and click Invert, and StatsDirect finds the t that gives it. With 0.05 as the two tailed P and 10 degrees of freedom, the upper tail P becomes 0.025 and the report reads:</p>
+        <p> </p>
+        <p>t(upper P 0.025, df 10) = 2.22813885198627</p>
+        <p> </p>
+        <p>This is the critical value of t for a two sided test at the 5% level with 10 degrees of freedom, and the multiplier of the standard error in a 95% confidence interval based on 10 degrees of freedom.</p>
+        <p> </p>
+        <p>The figures above were calculated in R with the functions shown below; StatsDirect calculates the same values and shows them to the same 15 decimal places (15 significant figures for t).</p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the illustration above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Student's t distribution: the StatsDirect help illustration (tail areas for t = 2
+# with 10 degrees of freedom and for t = -2.5 with 15, then the t with an upper tail
+# of 0.025 for 10 degrees of freedom, the 5% two sided critical value) in R
+
+# StatsDirect's calculator shows tail areas to 15 decimal places and t to 15
+# significant figures; these helpers print R's values the same way.
+p15 &lt;- function(p) formatC(p, digits = 15, format = "f", drop0trailing = TRUE)
+t15 &lt;- function(x) formatC(x, digits = 15, format = "g", drop0trailing = TRUE)
+
+# Tail areas from t: pt() gives the lower tail P(T &lt;= t) by default, and the upper
+# tail P(T &gt; t) with lower.tail = FALSE. The two sided P is twice the smaller tail.
+tails &lt;- function(t, df) {
+  upper &lt;- pt(t, df, lower.tail = FALSE)
+  lower &lt;- pt(t, df)
+  cat("P(t ", t, ", df ", df, ") = ", p15(upper), " upper, ", p15(lower), " lower, ",
+      p15(2 * min(upper, lower)), " two sided\n", sep = "")
+}
+tails(2, 10)
+tails(-2.5, 15)      # a negative t: the distribution is symmetric, so the tails swap
+
+# t from a tail area (the calculator's Invert): qt() gives the t below which a given
+# area lies, so the t with 0.025 above it (0.05 in the two tails together) is
+cat("t(upper P 0.025, df 10) =", t15(qt(0.025, 10, lower.tail = FALSE)), "\n")
+# which is the same as qt(0.975, 10)</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

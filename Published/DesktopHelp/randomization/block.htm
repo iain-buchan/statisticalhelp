@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="randomization/block.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Block Randomization - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Block Randomization</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Randomization_Blocks</b></p>
+        <p> </p>
+        <p>This function randomizes n individuals into k treatments, in blocks of size m.</p>
+        <p> </p>
+        <p>Randomization reduces opportunities for <a href="../basics/bias.htm">bias</a> and <a href="../basics/confounding.htm">confounding</a> in experimental designs, and leads to treatment groups which are random samples of the population sampled, thus helping to meet assumptions of subsequent statistical analysis (<a href="../references/reference_list.htm#ref-bland-2000">Bland, 2000</a>).</p>
+        <p> </p>
+        <p>Random allocation can be made in blocks in order to keep the sizes of treatment groups similar. In order to do this you must specify a sample size that is divisible by the block size you choose. In turn you must choose a block size that is divisible by the number of treatment groups you specify.</p>
+        <p> </p>
+        <p>An advantage of small block sizes is that treatment group sizes are very similar. A disadvantage of small block sizes is that it is possible to guess some allocations, thus reducing blinding in the trial. An alternative to using large block sizes is to use random sequences of block sizes, which is done in StatsDirect by leaving the block size blank when it is asked for. The random block size option selects block sizes of 2, 3, or 4 (at random) times the number of treatments.</p>
+        <p> </p>
+        <p>The randomization proceeds by allocating random permutations of treatments within each block.</p>
+        <p> </p>
+        <p>For example, to allocate 20 subjects to two treatments in blocks of random size, select Blocks from the Randomization section of the Analysis menu, enter 20 as the number of subjects, leave the block size blank, enter 2 as the number of treatments and enter 10 as the seed. StatsDirect prints:</p>
+        <p> </p>
+        <p><u>Random allocation in blocks</u>
+        </p>
+        <p>Randomized with seed: 10</p>
+        <p>Subjects: 20</p>
+        <p>Block size: random between 4 and 8</p>
+        <p>Treatments: 2</p>
+        <table>
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;text-decoration: underline;">Subject</td>
+                <td style="text-align: right;text-decoration: underline;">Treatment</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">1</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">2</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">3</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">4</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">5</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">6</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">7</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">8</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">16</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">17</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">18</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">19</td>
+                <td style="text-align: right;">B</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">20</td>
+                <td style="text-align: right;">A</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>Each block holds the same number of subjects on each treatment, so the two groups are of equal size (10 each) here and at the end of every block. Running the function again with the same seed gives the same allocation. With the seed left blank, StatsDirect takes a seed from the computer's clock and prints it, so that the allocation can be repeated.</p>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>Robust (pseudo-)random number generation is used, see <a href="random_number_generator.htm">random number generation</a>.</p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the illustration above in its structure: R's random number generator gives a different allocation for the same seed. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Block randomization: the StatsDirect help illustration (20 subjects allocated to
+# 2 treatments in blocks of random size, seed 10) in R
+n &lt;- 20                                   # subjects
+t &lt;- 2                                    # treatments, labelled A, B, ...
+seed &lt;- 10
+if (n %% t != 0) {
+  stop("the number of subjects must be a multiple of the number of treatments")
+}
+
+# Each block holds the treatments in equal numbers, in an order drawn at random by
+# sample(). StatsDirect and R each have their own Mersenne Twister generator and
+# their own way of turning its output into a permutation, so the same seed gives a
+# different allocation in R: the structure of the output is the same, the sequence
+# is not. Keep the seed with the allocation, as either program can then repeat it.
+set.seed(seed)
+treatments &lt;- LETTERS[1:t]
+allocation &lt;- character(0)
+sizes &lt;- integer(0)
+while (length(allocation) &lt; n) {
+  left &lt;- n - length(allocation)
+  # a block of 2, 3 or 4 times the number of treatments, chosen at random; the
+  # last block takes whatever is left once fewer than 4 times t subjects remain
+  size &lt;- if (left &lt; 4 * t) left else t * sample(2:4, 1)
+  sizes &lt;- c(sizes, size)
+  allocation &lt;- c(allocation, sample(rep(treatments, size / t)))
+}
+cat("Random allocation in blocks\n")
+cat("Randomized with seed:", seed, "\n")
+cat("Subjects:", n, "\n")
+cat("Block size: random between", 2 * t, "and", 4 * t, "\n")
+cat("Treatments:", t, "\n")
+print(data.frame(Subject = 1:n, Treatment = allocation), row.names = FALSE)
+cat("Block sizes drawn:", sizes, "\n")
+print(table(allocation))
+
+# Blocks of one fixed size instead (4 here): n must be a multiple of the block
+# size, and the block size a multiple of the number of treatments.
+b &lt;- 4
+set.seed(seed)
+fixed &lt;- unlist(lapply(seq_len(n / b), function(i) sample(rep(treatments, b / t))))
+cat("\nBlock size:", b, "\n")
+print(data.frame(Subject = 1:n, Treatment = fixed), row.names = FALSE)</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

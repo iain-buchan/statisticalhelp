@@ -1,0 +1,1532 @@
+[
+  {
+    "id": "UG-SENS-01",
+    "version": 1,
+    "track": "foundation",
+    "topic": "Sensitivity",
+    "objective": "Choose the denominator for sensitivity.",
+    "stem": "In a fictional diagnostic study, 90 people have the condition and 810 do not. The test is positive in 72 of the 90 people with the condition and in 81 of the 810 without it. What is the sensitivity?",
+    "options": [
+      {
+        "id": "A",
+        "text": "20%",
+        "feedback": "This is the false-negative proportion: 18/90."
+      },
+      {
+        "id": "B",
+        "text": "47.1%",
+        "feedback": "This is the positive predictive value: 72/(72\u002B81)."
+      },
+      {
+        "id": "C",
+        "text": "80%",
+        "feedback": "Use the people with the condition as the denominator: 72/90."
+      },
+      {
+        "id": "D",
+        "text": "90%",
+        "feedback": "This is the specificity: 729/810."
+      },
+      {
+        "id": "E",
+        "text": "97.6%",
+        "feedback": "This is the negative predictive value: 729/(729\u002B18)."
+      }
+    ],
+    "correct": "C",
+    "hint": "Start with the people known to have the condition. How many did the test detect?",
+    "lesson": "Sensitivity asks: among people with the condition, what proportion test positive? Positive predictive value reverses the question: among people with a positive result, what proportion have the condition?",
+    "explanation": "Sensitivity = true positives / (true positives \u002B false negatives) = 72/90 = 80%. The 81 false positives matter for specificity and predictive values, not for this denominator.",
+    "calculation": {
+      "kind": "sensitivity",
+      "tp": 72,
+      "fn": 18,
+      "expected": 0.8
+    },
+    "help": "clinical_epidemiology/diagnostic.htm",
+    "operation": "MiscDiagnostic"
+  },
+  {
+    "id": "UG-NNT-01",
+    "version": 2,
+    "track": "foundation",
+    "topic": "Absolute benefit and NNT",
+    "objective": "Calculate NNT and retain the follow-up period.",
+    "stem": "With complete one-year follow-up, an individually randomised trial records at least one unplanned admission in 16 of 200 programme participants and 28 of 200 usual-care participants. Using these point estimates, what is the number needed to treat to prevent one additional person having an admission over one year, rounded up to a whole person?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6",
+        "feedback": "Six percentage points is the absolute risk reduction, not its reciprocal."
+      },
+      {
+        "id": "B",
+        "text": "7",
+        "feedback": "The absolute reduction is 0.06, so its reciprocal is larger than 7."
+      },
+      {
+        "id": "C",
+        "text": "12",
+        "feedback": "Twelve is the difference in event counts, not NNT."
+      },
+      {
+        "id": "D",
+        "text": "17",
+        "feedback": "1/(0.14\u22120.08) = 16.67, rounded up to 17."
+      },
+      {
+        "id": "E",
+        "text": "43",
+        "feedback": "About 43% is the relative risk reduction; NNT uses absolute risk reduction."
+      }
+    ],
+    "correct": "D",
+    "hint": "Calculate the two event risks, subtract them, then take the reciprocal of that absolute difference.",
+    "lesson": "NNT connects an absolute reduction in risk to the number of people treated. It depends on baseline risk, the outcome and the follow-up period. Count people with an outcome, not repeated events. A point estimate alone does not describe uncertainty or establish benefit.",
+    "explanation": "Usual-care risk is 28/200 = 0.14. Programme risk is 16/200 = 0.08. The absolute reduction is 0.06, so NNT = 16.67, conventionally rounded up to 17, for this outcome over one year.",
+    "calculation": {
+      "kind": "nnt",
+      "controlEvents": 28,
+      "controlN": 200,
+      "treatmentEvents": 16,
+      "treatmentN": 200,
+      "expected": 17
+    },
+    "help": "clinical_epidemiology/nnt.htm",
+    "operation": "MiscNumberNeededToTreat"
+  },
+  {
+    "id": "UG-PVAL-01",
+    "version": 1,
+    "track": "foundation",
+    "topic": "P values",
+    "objective": "Interpret a P value conditional on a null model.",
+    "stem": "A prespecified two-sided analysis gives P = 0.03. Which interpretation is most accurate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The null hypothesis has a 3% probability of being true.",
+        "feedback": "A P value is not a posterior probability for the null hypothesis."
+      },
+      {
+        "id": "B",
+        "text": "If the null model and its assumptions hold, a test statistic at least as extreme as this has probability 3%.",
+        "feedback": "This is the repeated-sampling interpretation under the specified null model."
+      },
+      {
+        "id": "C",
+        "text": "The treatment has a 97% probability of working.",
+        "feedback": "A P value does not give the probability that a treatment works."
+      },
+      {
+        "id": "D",
+        "text": "The estimated treatment effect is clinically important.",
+        "feedback": "Clinical importance depends on the effect size, uncertainty, harms and context."
+      },
+      {
+        "id": "E",
+        "text": "There is a 3% probability that the study contains any bias.",
+        "feedback": "P values do not measure the probability of bias."
+      }
+    ],
+    "correct": "B",
+    "hint": "Which statement starts by assuming the null model, rather than assigning a probability to it?",
+    "lesson": "A P value measures compatibility with a specified null model using a chosen test statistic. It does not determine clinical importance or rule out bias. Read it alongside the effect estimate and confidence interval.",
+    "explanation": "The probability refers to possible test statistics under the null model and its assumptions. It is not the probability that the null is true, that the finding is a chance accident, or that the effect matters clinically.",
+    "help": "basics/p_values.htm",
+    "operation": null
+  },
+  {
+    "id": "UG-PAIR-01",
+    "version": 1,
+    "track": "foundation",
+    "topic": "Choosing a paired analysis",
+    "objective": "Match a comparison to its paired structure.",
+    "stem": "Eighteen independently sampled adults each have a measurement before and after an intervention. Their within-person differences are approximately normally distributed, with no major outliers. Which test directly assesses whether the population mean change is zero?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Unpaired t test",
+        "feedback": "Treating the observations as independent loses the within-person pairing."
+      },
+      {
+        "id": "B",
+        "text": "Pearson chi-square test",
+        "feedback": "This is not a comparison of categorical counts."
+      },
+      {
+        "id": "C",
+        "text": "Mann\u2013Whitney test",
+        "feedback": "This test is for independent groups, not paired observations."
+      },
+      {
+        "id": "D",
+        "text": "Paired t test",
+        "feedback": "The paired t test is a one-sample t test of the within-person differences."
+      },
+      {
+        "id": "E",
+        "text": "Pearson correlation test",
+        "feedback": "Correlation measures association, not whether the mean change is zero."
+      }
+    ],
+    "correct": "D",
+    "hint": "What single value could you compute for each participant?",
+    "lesson": "Subtract each person\u2019s before value from their after value, using the same direction for everyone. The paired t test operates on those differences. The normality assumption concerns the differences.",
+    "explanation": "Use a paired t test on the 18 within-person differences. A before\u2013after change alone does not establish that the intervention caused it; a causal claim needs an appropriate study design.",
+    "help": "parametric_methods/paired_t.htm",
+    "operation": "TPaired"
+  },
+  {
+    "id": "PG-PPV-01",
+    "version": 1,
+    "track": "medicine",
+    "topic": "Predictive value and prevalence",
+    "objective": "Combine prevalence, sensitivity and specificity.",
+    "stem": "A fictional screening test has sensitivity 90% and specificity 95%. Assume these apply in a population with prevalence 1%. Approximately what proportion of positive results would be true positives?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1%",
+        "feedback": "Prevalence is the probability before seeing the test result."
+      },
+      {
+        "id": "B",
+        "text": "5%",
+        "feedback": "This is the false-positive rate among people without the condition."
+      },
+      {
+        "id": "C",
+        "text": "15.4%",
+        "feedback": "For 10,000 people, expect 90 true positives and 495 false positives: 90/585."
+      },
+      {
+        "id": "D",
+        "text": "90%",
+        "feedback": "Sensitivity conditions on having the condition, not on a positive test."
+      },
+      {
+        "id": "E",
+        "text": "95%",
+        "feedback": "Specificity conditions on not having the condition."
+      }
+    ],
+    "correct": "C",
+    "hint": "Imagine 10,000 people. Work out true positives and false positives separately.",
+    "lesson": "At low prevalence, people without the condition greatly outnumber those with it. Even a modest false-positive rate can therefore produce many false positives. Keep sensitivity and predictive value separate.",
+    "explanation": "Among 10,000 people, 100 have the condition, producing 90 true positives. The other 9,900 produce 495 false positives. PPV = 90/(90\u002B495) = 15.38%.",
+    "calculation": {
+      "kind": "ppv",
+      "prevalence": 0.01,
+      "sensitivity": 0.9,
+      "specificity": 0.95,
+      "expected": 0.15384615384615385
+    },
+    "help": "clinical_epidemiology/diagnostic.htm",
+    "operation": "MiscDiagnostic"
+  },
+  {
+    "id": "PG-CI-01",
+    "version": 2,
+    "track": "medicine",
+    "topic": "Confidence intervals",
+    "objective": "Distinguish inconclusive evidence from evidence of no effect.",
+    "stem": "A trial estimates a treatment-to-control risk ratio for an adverse outcome of 0.76 with a 95% confidence interval from 0.58 to 1.03. Which conclusion best describes these results?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The trial proves that the intervention has no effect.",
+        "feedback": "Including 1 does not prove the absence of an effect."
+      },
+      {
+        "id": "B",
+        "text": "The results are compatible with appreciable benefit and a small increase in risk; they do not exclude no effect.",
+        "feedback": "The interval spans a 42% reduction through a 3% increase and includes a risk ratio of 1."
+      },
+      {
+        "id": "C",
+        "text": "There is a 95% probability that this particular interval contains the true effect.",
+        "feedback": "That is not the frequentist repeated-sampling interpretation of a confidence interval."
+      },
+      {
+        "id": "D",
+        "text": "The intervention reduces risk by exactly 24% in every patient.",
+        "feedback": "A group-level point estimate is uncertain and is not an individual guarantee."
+      },
+      {
+        "id": "E",
+        "text": "Increasing the sample size would guarantee a statistically significant benefit.",
+        "feedback": "A larger sample can improve precision but cannot guarantee that conclusion."
+      }
+    ],
+    "correct": "B",
+    "hint": "For a ratio, what value represents no difference? What range of effects does the interval allow?",
+    "lesson": "For risk ratios the null value is 1; for risk differences it is 0. An interval that includes the null can also include important benefit or harm. Its width tells you about precision.",
+    "explanation": "The estimate favours benefit, but the interval includes no effect and a small increase in risk. Interpret the magnitude and precision together; clinical decisions also require harms, costs and other evidence.",
+    "help": "basics/confidence_interval.htm",
+    "operation": "PropUnPaired"
+  },
+  {
+    "id": "PG-RROR-01",
+    "version": 2,
+    "track": "medicine",
+    "topic": "Risk and odds",
+    "objective": "Recognise that odds ratios and risk ratios differ for common outcomes.",
+    "stem": "In a fictional cohort, an outcome occurs in 120 of 200 exposed people and 80 of 200 unexposed people. Which pair gives the exposed-to-unexposed risk ratio and odds ratio?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Risk ratio 1.50; odds ratio 2.25",
+        "feedback": "Risks are 0.6 and 0.4; odds are 120/80 and 80/120."
+      },
+      {
+        "id": "B",
+        "text": "Risk ratio 2.25; odds ratio 1.50",
+        "feedback": "These two statistics have been exchanged."
+      },
+      {
+        "id": "C",
+        "text": "Risk ratio 1.50; odds ratio 1.50",
+        "feedback": "These outcomes are common: the odds ratio is 2.25, not 1.50. Rarity in both groups is a useful sufficient condition for the usual risk-ratio approximation."
+      },
+      {
+        "id": "D",
+        "text": "Risk ratio 0.67; odds ratio 0.44",
+        "feedback": "These compare unexposed with exposed, reversing the requested direction."
+      },
+      {
+        "id": "E",
+        "text": "Risk ratio 0.20; odds ratio 0.20",
+        "feedback": "0.20 is the absolute risk difference."
+      }
+    ],
+    "correct": "A",
+    "hint": "Risk divides events by everyone in the group. Odds divides events by non-events.",
+    "lesson": "Always identify the reference group. Risks and odds are different quantities; with common outcomes, an odds ratio can be much further from 1 than the corresponding risk ratio.",
+    "explanation": "RR = (120/200)/(80/200) = 1.5. OR = (120/80)/(80/120) = 2.25. These observational comparisons do not by themselves establish causation.",
+    "calculation": {
+      "kind": "riskOdds",
+      "a": 120,
+      "b": 80,
+      "c": 80,
+      "d": 120,
+      "expected": [
+        1.5,
+        2.25
+      ]
+    },
+    "help": "clinical_epidemiology/risk_prospective.htm",
+    "operation": "MiscRelRisk"
+  },
+  {
+    "id": "PG-SE-01",
+    "version": 1,
+    "track": "medicine",
+    "topic": "Precision and sample size",
+    "objective": "Apply the square-root relationship between sample size and standard error.",
+    "stem": "For independent observations from the same population, assume the standard deviation stays fixed. If the sample size increases from 100 to 400, what happens to the standard error of the sample mean?",
+    "options": [
+      {
+        "id": "A",
+        "text": "It is unchanged.",
+        "feedback": "The standard error depends on sample size even when the population standard deviation is unchanged."
+      },
+      {
+        "id": "B",
+        "text": "It becomes one quarter as large.",
+        "feedback": "Standard error falls with the square root of sample size, not sample size itself."
+      },
+      {
+        "id": "C",
+        "text": "It doubles.",
+        "feedback": "A larger independent sample makes the mean more precise."
+      },
+      {
+        "id": "D",
+        "text": "It becomes half as large.",
+        "feedback": "SE = SD/\u221An, so the ratio is \u221A(100/400) = 0.5."
+      },
+      {
+        "id": "E",
+        "text": "It becomes zero.",
+        "feedback": "Finite samples retain sampling uncertainty."
+      }
+    ],
+    "correct": "D",
+    "hint": "Use SE = SD divided by the square root of n.",
+    "lesson": "Standard deviation describes variation between observations; standard error describes sampling variation in an estimate. Quadrupling an independent sample halves the standard error when the standard deviation stays fixed.",
+    "explanation": "SE(new)/SE(old) = \u221A100/\u221A400 = 0.5. Dependence or clustering changes the calculation, and systematic bias is not removed by increasing sample size.",
+    "calculation": {
+      "kind": "seRatio",
+      "oldN": 100,
+      "newN": 400,
+      "expected": 0.5
+    },
+    "help": "basics/precision.htm",
+    "operation": "UnivariateSummary"
+  },
+  {
+    "id": "PH-STAND-01",
+    "version": 1,
+    "track": "publicHealth",
+    "topic": "Direct standardisation",
+    "objective": "Apply common population weights to age-specific rates.",
+    "stem": "A district has annual mortality rates of 200 per 100,000 in its younger age group and 1,000 per 100,000 in its older group. A standard population contains 75% younger and 25% older people. What is the directly age-standardised annual rate per 100,000?",
+    "options": [
+      {
+        "id": "A",
+        "text": "200",
+        "feedback": "This uses only the younger group."
+      },
+      {
+        "id": "B",
+        "text": "300",
+        "feedback": "The weighted contribution of the older group alone is 250, in addition to 150 from the younger group."
+      },
+      {
+        "id": "C",
+        "text": "400",
+        "feedback": "0.75 \u00D7 200 \u002B 0.25 \u00D7 1,000 = 400."
+      },
+      {
+        "id": "D",
+        "text": "600",
+        "feedback": "This would use equal weights rather than the supplied standard population."
+      },
+      {
+        "id": "E",
+        "text": "1,200",
+        "feedback": "Adding the rates ignores the population weights."
+      }
+    ],
+    "correct": "C",
+    "hint": "Multiply each age-specific rate by its share of the standard population, then add.",
+    "lesson": "Direct standardisation applies each population\u2019s stratum-specific rates to a common set of weights. The resulting rate is a comparison summary, not necessarily the population\u2019s observed crude rate.",
+    "explanation": "The younger contribution is 150 and the older contribution is 250, giving 400 per 100,000 per year. Use the same standard weights when comparing districts.",
+    "calculation": {
+      "kind": "weightedRate",
+      "rates": [
+        200,
+        1000
+      ],
+      "weights": [
+        0.75,
+        0.25
+      ],
+      "expected": 400
+    },
+    "help": "rates/direct_standardization.htm",
+    "operation": "RateDirectScreen"
+  },
+  {
+    "id": "PH-CONF-01",
+    "version": 2,
+    "track": "publicHealth",
+    "topic": "Confounding",
+    "objective": "Interpret a change between crude and stratified associations.",
+    "stem": "An observational comparison gives a crude risk ratio of 2.0. Baseline age precedes exposure, influences exposure choice and predicts the outcome; the exposed group is older. In every age stratum the risk ratio is 1.0, with adequate data and accurate measurement. Which explanation is most consistent with this pattern?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The pattern is consistent with confounding by baseline age.",
+        "feedback": "Different age distributions can create a crude association when no association remains within age strata."
+      },
+      {
+        "id": "B",
+        "text": "Age is certainly a mediator of the exposure effect.",
+        "feedback": "Baseline age precedes exposure, so it cannot mediate the effect of that exposure."
+      },
+      {
+        "id": "C",
+        "text": "There must be strong effect modification by age.",
+        "feedback": "The stated stratum-specific risk ratios do not vary with age; effect modification must be described on a specified scale."
+      },
+      {
+        "id": "D",
+        "text": "The exposure has been proved harmless in every setting.",
+        "feedback": "Removing this observed association does not establish universal safety or remove other biases."
+      },
+      {
+        "id": "E",
+        "text": "The crude risk ratio is necessarily an arithmetic error.",
+        "feedback": "A correctly computed crude ratio can differ from stratum-specific ratios."
+      }
+    ],
+    "correct": "A",
+    "hint": "Distinguish imbalance in a third variable from variation of the effect across strata.",
+    "lesson": "Confounding can mix the effect of an exposure with differences in other determinants of the outcome. Effect modification describes variation across strata on a specified effect scale, such as a risk difference or risk ratio. A causal diagram and design knowledge help decide what to adjust for.",
+    "explanation": "Given the stated causal role and imbalance of baseline age, this pattern supports age confounding. A change after adjustment alone cannot diagnose confounding or establish no causal effect; chance, other biases and the causal assumptions still matter.",
+    "help": "basics/confounding.htm",
+    "operation": "MantelHaenszelScreen"
+  },
+  {
+    "id": "PH-CLUST-01",
+    "version": 1,
+    "track": "publicHealth",
+    "topic": "Clustered observations",
+    "objective": "Recognise the loss of precision from within-cluster correlation.",
+    "stem": "A survey uses equal clusters of 20 people. For its outcome, the intracluster correlation is 0.04. Using the approximation DE = 1 \u002B (m \u2212 1)\u03C1, what is the design effect relative to simple random sampling?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1.04",
+        "feedback": "The correlation is multiplied by m\u22121, not added just once."
+      },
+      {
+        "id": "B",
+        "text": "1.20",
+        "feedback": "Insert m = 20 and \u03C1 = 0.04 into the stated formula."
+      },
+      {
+        "id": "C",
+        "text": "1.76",
+        "feedback": "1 \u002B 19 \u00D7 0.04 = 1.76."
+      },
+      {
+        "id": "D",
+        "text": "2.00",
+        "feedback": "The supplied values give a smaller variance inflation."
+      },
+      {
+        "id": "E",
+        "text": "20.00",
+        "feedback": "A design effect of 20 under this formula would require perfect within-cluster correlation."
+      }
+    ],
+    "correct": "C",
+    "hint": "Here m is the number of people in each cluster, not the number of clusters.",
+    "lesson": "People in one cluster may provide partly overlapping information. This approximation multiplies the variance by the design effect; standard errors are multiplied by its square root. Unequal cluster sizes and few clusters need more careful planning.",
+    "explanation": "DE = 1 \u002B (20\u22121) \u00D7 0.04 = 1.76. Under this approximation, nominal sample size divided by 1.76 gives an effective sample size; it is not a substitute for a full cluster-design calculation.",
+    "calculation": {
+      "kind": "designEffect",
+      "m": 20,
+      "rho": 0.04,
+      "expected": 1.76
+    },
+    "help": "basics/precision.htm",
+    "operation": null
+  },
+  {
+    "id": "PH-SMR-01",
+    "version": 2,
+    "track": "publicHealth",
+    "topic": "Standardised mortality ratio",
+    "objective": "Interpret observed relative to expected events.",
+    "stem": "A population has 55 observed deaths over the study period. Applying reference age-specific mortality rates to its age-specific person-time gives 44 expected deaths. What is the standardised mortality ratio, expressed as a ratio rather than a percentage?",
+    "options": [
+      {
+        "id": "A",
+        "text": "0.20",
+        "feedback": "This is neither the observed-to-expected ratio nor its reciprocal."
+      },
+      {
+        "id": "B",
+        "text": "0.80",
+        "feedback": "This reverses observed and expected."
+      },
+      {
+        "id": "C",
+        "text": "1.25",
+        "feedback": "55/44 = 1.25."
+      },
+      {
+        "id": "D",
+        "text": "11",
+        "feedback": "Eleven is the difference in counts."
+      },
+      {
+        "id": "E",
+        "text": "125",
+        "feedback": "125 is the SMR expressed on a percentage scale, not the requested ratio scale."
+      }
+    ],
+    "correct": "C",
+    "hint": "Use observed deaths divided by expected deaths.",
+    "lesson": "An SMR compares observed with expected events based on reference stratum-specific rates. Always state whether you use a ratio scale (null 1) or percentage scale (null 100), and include uncertainty. SMRs for different populations may use different implicit weights, so they are not automatically comparable with each other.",
+    "explanation": "SMR = 55/44 = 1.25, or 25% more deaths than expected on this reference. The point estimate alone does not establish statistical significance or causation.",
+    "calculation": {
+      "kind": "smr",
+      "observed": 55,
+      "expectedDeaths": 44,
+      "expected": 1.25
+    },
+    "help": "rates/smr.htm",
+    "operation": "RateSmrScreen"
+  },
+  {
+    "id": "AN-MED-01",
+    "version": 1,
+    "track": "analyst",
+    "topic": "Skewed service data",
+    "objective": "Choose a resistant description of a typical waiting time.",
+    "stem": "Most clinic waits are 10\u201325 minutes, but a few exceed two hours. Which summary is least affected by these unusually long waits when describing a typical patient\u2019s wait?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mean and standard deviation",
+        "feedback": "Both are influenced by unusually large values."
+      },
+      {
+        "id": "B",
+        "text": "Median and interquartile range",
+        "feedback": "The median describes the middle observation and the IQR the middle half."
+      },
+      {
+        "id": "C",
+        "text": "Maximum only",
+        "feedback": "The maximum describes an extreme, not a typical observation."
+      },
+      {
+        "id": "D",
+        "text": "Standard error only",
+        "feedback": "This concerns precision of an estimate, not a typical wait."
+      },
+      {
+        "id": "E",
+        "text": "P value",
+        "feedback": "This does not describe the distribution."
+      }
+    ],
+    "correct": "B",
+    "hint": "Consider a measure based on ordered positions rather than the sum.",
+    "lesson": "Use a histogram with median and IQR for a resistant summary, while retaining the long waits as operationally important observations.",
+    "explanation": "Median and IQR resist the influence of extreme waits. They do not make long waits irrelevant: report tail performance separately when it matters.",
+    "help": "basic_descriptive_statistics/univariate_summary.htm",
+    "operation": "UnivariateSummary"
+  },
+  {
+    "id": "AN-PCT-01",
+    "version": 1,
+    "track": "analyst",
+    "topic": "Percentage points",
+    "objective": "Distinguish an absolute percentage-point change from a relative change.",
+    "stem": "The non-attendance rate falls from 10% to 8%. Which statement correctly describes both the absolute and relative reduction?",
+    "options": [
+      {
+        "id": "A",
+        "text": "2 percentage points; 20% relative reduction",
+        "feedback": "(0.10\u22120.08)/0.10 = 0.20."
+      },
+      {
+        "id": "B",
+        "text": "2 percentage points; 2% relative reduction",
+        "feedback": "The relative reduction divides by the starting risk."
+      },
+      {
+        "id": "C",
+        "text": "20 percentage points; 2% relative reduction",
+        "feedback": "This reverses and mis-scales the changes."
+      },
+      {
+        "id": "D",
+        "text": "8 percentage points; 80% relative reduction",
+        "feedback": "These describe the new rate or its ratio, not the reduction."
+      },
+      {
+        "id": "E",
+        "text": "No reduction",
+        "feedback": "The rate decreased."
+      }
+    ],
+    "correct": "A",
+    "hint": "Subtract for the absolute change; divide that change by the starting value for the relative change.",
+    "lesson": "State both absolute and relative changes, and include denominators and time periods.",
+    "explanation": "The absolute fall is 0.02, or two percentage points. Relative to the original 0.10 it is a 20% reduction. These rates alone do not establish what caused the reduction.",
+    "help": "clinical_epidemiology/risk_prospective.htm",
+    "operation": "MiscRelRisk"
+  },
+  {
+    "id": "AN-CAUS-01",
+    "version": 1,
+    "track": "analyst",
+    "topic": "Association and causation",
+    "objective": "Recognise confounding in service comparisons.",
+    "stem": "Hospitals with more specialist staff also have higher mortality. They receive the most severely ill patients. What is the best first interpretation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Specialists cause deaths",
+        "feedback": "The observational comparison does not support this causal claim."
+      },
+      {
+        "id": "B",
+        "text": "Severity may confound the association",
+        "feedback": "Severity can affect staffing needs and mortality."
+      },
+      {
+        "id": "C",
+        "text": "More staff must prevent every death",
+        "feedback": "This is not supported either."
+      },
+      {
+        "id": "D",
+        "text": "Mortality cannot be compared statistically",
+        "feedback": "Comparisons are possible, with careful design and adjustment."
+      },
+      {
+        "id": "E",
+        "text": "A small P value would eliminate confounding",
+        "feedback": "Statistical significance does not remove systematic bias."
+      }
+    ],
+    "correct": "B",
+    "hint": "What differs between the patients cared for by these hospitals?",
+    "lesson": "Case mix is essential to interpreting service comparisons. Adjustment needs design knowledge and measured relevant variables.",
+    "explanation": "Severity is a plausible confounder. Compare like with like where possible and describe remaining limitations; an adjusted model alone does not prove causation.",
+    "help": "basics/confounding.htm",
+    "operation": null
+  },
+  {
+    "id": "AN-PREC-01",
+    "version": 2,
+    "track": "analyst",
+    "topic": "Precision of a rate",
+    "objective": "Relate denominators to uncertainty.",
+    "stem": "Two services both observe a 10% event rate. One records 10 events among 100 people, the other 100 among 1,000. Using the same confidence level and binomial interval method, and independent comparable observations, which usually has the narrower interval for the underlying proportion?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The service with 100 people",
+        "feedback": "It has less information about the population proportion."
+      },
+      {
+        "id": "B",
+        "text": "The service with 1,000 people",
+        "feedback": "A larger independent denominator improves precision at the same observed rate."
+      },
+      {
+        "id": "C",
+        "text": "Both must have identical intervals",
+        "feedback": "Equal point estimates can have different uncertainty."
+      },
+      {
+        "id": "D",
+        "text": "Neither can have an interval",
+        "feedback": "A confidence interval can be calculated for either proportion."
+      },
+      {
+        "id": "E",
+        "text": "The service with the smaller P value, regardless of denominator",
+        "feedback": "The question concerns precision of an estimated rate."
+      }
+    ],
+    "correct": "B",
+    "hint": "Consider the standard error \u221A(p(1\u2212p)/n).",
+    "lesson": "Show denominators and uncertainty alongside performance rates.",
+    "explanation": "At the same rate, a larger independent sample generally gives a narrower interval. Clustering, bias and different case mix can complicate real comparisons.",
+    "help": "basics/confidence_interval.htm",
+    "operation": null
+  },
+  {
+    "id": "RS-PAIR-01",
+    "version": 1,
+    "track": "researcher",
+    "topic": "Paired assumptions",
+    "objective": "Identify the relevant distributional assumption for a paired t test.",
+    "stem": "Which distribution should be checked for major departures from normality when using a paired t test with a small sample of independent pairs?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The pooled before and after measurements",
+        "feedback": "Pooling ignores pairing."
+      },
+      {
+        "id": "B",
+        "text": "The within-pair differences",
+        "feedback": "The test is a one-sample t test of these differences."
+      },
+      {
+        "id": "C",
+        "text": "The participant identification numbers",
+        "feedback": "Identifiers have no relevant distribution."
+      },
+      {
+        "id": "D",
+        "text": "The P values",
+        "feedback": "These are outputs rather than the observations being modelled."
+      },
+      {
+        "id": "E",
+        "text": "Only the before measurements",
+        "feedback": "The test operates on differences."
+      }
+    ],
+    "correct": "B",
+    "hint": "What single observation enters the test for each pair?",
+    "lesson": "Check differences and the independence of pairs; investigate outliers and whether the study design supports the intended inference.",
+    "explanation": "The paired t test models within-pair differences. It does not require the two original measurement distributions individually to be normal.",
+    "help": "parametric_methods/paired_t.htm",
+    "operation": "TPaired"
+  },
+  {
+    "id": "RS-MULT-01",
+    "version": 2,
+    "track": "researcher",
+    "topic": "Multiple testing",
+    "objective": "Recognise false-positive risk across many tests.",
+    "stem": "Twenty tests are independent under their null hypotheses, which are all true. Each test has an actual false-positive probability of 5%. What is the probability of at least one false positive, approximately?",
+    "options": [
+      {
+        "id": "A",
+        "text": "5%",
+        "feedback": "This is the level for one test, not the whole family."
+      },
+      {
+        "id": "B",
+        "text": "10%",
+        "feedback": "Use the probability of no false positives across all tests."
+      },
+      {
+        "id": "C",
+        "text": "36%",
+        "feedback": "This is approximately the probability of no false positives."
+      },
+      {
+        "id": "D",
+        "text": "64%",
+        "feedback": "1\u22120.95^20 is approximately 0.642."
+      },
+      {
+        "id": "E",
+        "text": "100%",
+        "feedback": "A false positive is not guaranteed."
+      }
+    ],
+    "correct": "D",
+    "hint": "The chance of no false positives is 0.95 multiplied by itself twenty times.",
+    "lesson": "Prespecify analyses and distinguish confirmatory from exploratory work. Multiplicity affects interpretation.",
+    "explanation": "Under the stated independence assumption, P(at least one) = 1\u22120.95^20 \u2248 64.2%. Dependence changes this calculation.",
+    "help": "basics/p_values.htm",
+    "operation": null
+  },
+  {
+    "id": "RS-MISS-01",
+    "version": 1,
+    "track": "researcher",
+    "topic": "Missing data",
+    "objective": "Recognise bias from outcome-related missingness.",
+    "stem": "Participants with the worst symptoms are more likely to miss their follow-up visit. What is the main concern with analysing only complete records?",
+    "options": [
+      {
+        "id": "A",
+        "text": "It necessarily removes all bias",
+        "feedback": "Removing missing records does not fix selective follow-up."
+      },
+      {
+        "id": "B",
+        "text": "It always gives the same result as full follow-up",
+        "feedback": "Missingness can depend on outcomes."
+      },
+      {
+        "id": "C",
+        "text": "It may produce a biased estimate as well as lose precision",
+        "feedback": "Complete cases may systematically differ from those missing."
+      },
+      {
+        "id": "D",
+        "text": "It proves the symptoms improved",
+        "feedback": "Non-attendance is not an observed improvement."
+      },
+      {
+        "id": "E",
+        "text": "A larger sample guarantees no bias",
+        "feedback": "More observations do not remove systematic selection."
+      }
+    ],
+    "correct": "C",
+    "hint": "Are the observed participants representative of everyone originally enrolled?",
+    "lesson": "Describe missingness, investigate its causes and justify assumptions for sensitivity analyses or imputation.",
+    "explanation": "Outcome-related missingness can make complete cases unrepresentative. The direction and size of bias depend on the setting and missingness process.",
+    "help": "basics/bias.htm",
+    "operation": null
+  },
+  {
+    "id": "RS-CI-01",
+    "version": 1,
+    "track": "researcher",
+    "topic": "Confidence interval interpretation",
+    "objective": "Interpret repeated-sampling coverage.",
+    "stem": "What does a 95% frequentist confidence procedure aim to achieve under its assumptions?",
+    "options": [
+      {
+        "id": "A",
+        "text": "95% of individual observations lie in every interval",
+        "feedback": "This confuses a parameter interval with a range of observations."
+      },
+      {
+        "id": "B",
+        "text": "95% of intervals from repeated samples contain the fixed population parameter",
+        "feedback": "Coverage refers to the procedure across repeated samples."
+      },
+      {
+        "id": "C",
+        "text": "The null hypothesis is true with probability 95%",
+        "feedback": "This is not a posterior probability."
+      },
+      {
+        "id": "D",
+        "text": "95% of future studies give exactly the same estimate",
+        "feedback": "Estimates vary between samples."
+      },
+      {
+        "id": "E",
+        "text": "Bias is eliminated in 95% of studies",
+        "feedback": "Coverage relies on model and design assumptions."
+      }
+    ],
+    "correct": "B",
+    "hint": "Imagine repeating the sampling and interval calculation many times.",
+    "lesson": "A confidence interval reports precision under assumptions; it does not protect against every source of bias.",
+    "explanation": "The 95% refers to long-run coverage of the fixed parameter by the interval procedure, provided the relevant assumptions hold.",
+    "help": "basics/confidence_interval.htm",
+    "operation": null
+  },
+  {
+    "id": "PG-ROC-01",
+    "version": 2,
+    "track": "medicine",
+    "topic": "Diagnostic thresholds",
+    "objective": "Recognise the sensitivity\u2013specificity trade-off.",
+    "stem": "In a fictional study, a blood marker is considered positive above a chosen cut-off. Researchers raise that cut-off while keeping the same participants and reference diagnoses. Which change in classification is possible?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Some previously negative results become positive",
+        "feedback": "Raising the cut-off cannot do this on the same data."
+      },
+      {
+        "id": "B",
+        "text": "Some true positives and false positives become negative",
+        "feedback": "A higher cut-off can reduce both true-positive and false-positive counts."
+      },
+      {
+        "id": "C",
+        "text": "Sensitivity must increase",
+        "feedback": "A higher cut-off cannot capture additional positive cases on the same data."
+      },
+      {
+        "id": "D",
+        "text": "Specificity must decrease",
+        "feedback": "With the same disease-negative denominator, fewer false positives mean higher specificity; with none changing, specificity is unchanged."
+      },
+      {
+        "id": "E",
+        "text": "Both denominators change automatically",
+        "feedback": "Disease status is fixed by the reference diagnoses in this study."
+      }
+    ],
+    "correct": "B",
+    "hint": "Think about people whose marker lies between the old and new cut-offs.",
+    "lesson": "Choosing a threshold changes the balance of missed cases and false alarms. Inspect sensitivity and specificity together; predictive values also depend on the setting.",
+    "explanation": "Values between the two cut-offs change from positive to negative. This can lower sensitivity and raise specificity; if nobody falls between the cut-offs the classifications stay unchanged.",
+    "help": "clinical_epidemiology/diagnostic.htm",
+    "operation": "MiscDiagnostic",
+    "inspiration": "Public MRCP-style diagnostic threshold examples; original scenario and options."
+  },
+  {
+    "id": "PG-LR-01",
+    "version": 1,
+    "track": "medicine",
+    "topic": "Pre-test and post-test probability",
+    "objective": "Update odds with a likelihood ratio.",
+    "stem": "For a fictional test, the positive likelihood ratio is 6. Before testing, the probability of the condition is 10%. What is the approximate probability after a positive result, assuming the likelihood ratio applies in this setting?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6%",
+        "feedback": "The likelihood ratio is a multiplier of odds, not a probability."
+      },
+      {
+        "id": "B",
+        "text": "16%",
+        "feedback": "Adding a likelihood ratio to a probability is not valid."
+      },
+      {
+        "id": "C",
+        "text": "40%",
+        "feedback": "Prior odds 1/9 become 6/9; probability is (6/9)/(1\u002B6/9) = 0.4."
+      },
+      {
+        "id": "D",
+        "text": "60%",
+        "feedback": "Multiply odds, rather than multiplying the probability by 6."
+      },
+      {
+        "id": "E",
+        "text": "100%",
+        "feedback": "A positive test does not guarantee the condition."
+      }
+    ],
+    "correct": "C",
+    "hint": "First convert the 10% probability to odds p/(1\u2212p).",
+    "lesson": "Likelihood ratios update odds. Convert back to a probability after multiplication.",
+    "explanation": "Pre-test odds = 0.1/0.9 = 1/9. Post-test odds = 6/9 = 2/3. Post-test probability = (2/3)/(1\u002B2/3) = 0.4, or 40%.",
+    "help": "clinical_epidemiology/diagnostic.htm",
+    "operation": "MiscDiagnostic",
+    "inspiration": "Public MRCP-style diagnostic evidence teaching; independently constructed numerical question."
+  },
+  {
+    "id": "PG-FOREST-01",
+    "version": 2,
+    "track": "medicine",
+    "topic": "Interpreting effect estimates",
+    "objective": "Distinguish effect size from statistical evidence.",
+    "stem": "Two fictional studies estimate treatment-to-control risk ratios for the same adverse outcome. Study A: 0.40 (95% CI 0.10\u20131.60). Study B: 0.85 (95% CI 0.80\u20130.91). Assuming valid corresponding two-sided tests, which interpretation is best?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Study A has stronger evidence solely because its ratio is further from 1",
+        "feedback": "Effect magnitude alone does not measure statistical evidence."
+      },
+      {
+        "id": "B",
+        "text": "Only Study B rejects the null risk ratio of 1 at the 5% level",
+        "feedback": "Study B\u2019s interval excludes 1; Study A\u2019s includes it."
+      },
+      {
+        "id": "C",
+        "text": "Study A proves there is no benefit",
+        "feedback": "Its wide interval includes both substantial benefit and harm."
+      },
+      {
+        "id": "D",
+        "text": "Study B necessarily has the more important clinical benefit",
+        "feedback": "Clinical importance needs context and absolute risks."
+      },
+      {
+        "id": "E",
+        "text": "Both intervals exclude no effect",
+        "feedback": "Study A includes the null ratio of 1."
+      }
+    ],
+    "correct": "B",
+    "hint": "Inspect whether each confidence interval includes the null ratio of 1.",
+    "lesson": "Read the point estimate and interval together. A large but imprecise estimate does not automatically provide stronger evidence than a smaller, precise one.",
+    "explanation": "Only Study B\u2019s interval excludes 1. This does not settle clinical importance, bias, comparability or a direct difference between the two studies.",
+    "help": "basics/confidence_interval.htm",
+    "operation": null,
+    "inspiration": "RCGP November 2025 data-interpretation samples, especially Q41; new example separating magnitude from evidence."
+  },
+  {
+    "id": "AN-RATE-01",
+    "version": 1,
+    "track": "analyst",
+    "topic": "Rates versus counts",
+    "objective": "Avoid inferring absolute totals from a rate alone.",
+    "stem": "A chart shows Clinic A with 24 referrals per 1,000 registered patients and Clinic B with 18 per 1,000 during the same quarter. Their registered populations are not supplied. Which conclusion is justified by these values alone?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Clinic A made more referrals in total",
+        "feedback": "The population denominators are unknown."
+      },
+      {
+        "id": "B",
+        "text": "Clinic B has fewer registered patients",
+        "feedback": "The rates do not reveal population sizes."
+      },
+      {
+        "id": "C",
+        "text": "Clinic A has the higher referral rate",
+        "feedback": "24 per 1,000 exceeds 18 per 1,000."
+      },
+      {
+        "id": "D",
+        "text": "Clinic A\u2019s referrals were less appropriate",
+        "feedback": "No appropriateness data are supplied."
+      },
+      {
+        "id": "E",
+        "text": "Clinic B provides better care",
+        "feedback": "A rate alone does not establish quality."
+      }
+    ],
+    "correct": "C",
+    "hint": "What does \u201Cper 1,000\u201D tell you, and what does it leave unknown?",
+    "lesson": "Read the axis units and distinguish counts from rates. Rates support comparison but do not by themselves explain quality or total workload.",
+    "explanation": "Only the rate comparison follows. Total referrals also depend on population size; appropriateness and quality require additional evidence.",
+    "help": "rates/incidence_and_prevalence.htm",
+    "operation": null,
+    "inspiration": "RCGP November 2025 Q3 and Q20: interpretation of plotted rates; original referral scenario."
+  },
+  {
+    "id": "PH-CASEMIX-01",
+    "version": 2,
+    "track": "publicHealth",
+    "topic": "Case mix and service comparisons",
+    "objective": "Identify what is needed before attributing a difference to performance.",
+    "stem": "A rehabilitation unit has a higher average length of stay than another unit. It also receives more people with complex disability and has longer waits for supported housing. Which is the most defensible next step?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Conclude that its clinical team is inefficient",
+        "feedback": "The crude average mixes performance with patient needs and discharge circumstances."
+      },
+      {
+        "id": "B",
+        "text": "Delete every stay longer than the median",
+        "feedback": "Arbitrary exclusion loses relevant information and may bias the comparison."
+      },
+      {
+        "id": "C",
+        "text": "Examine the distribution, case mix and discharge pathways before judging performance",
+        "feedback": "All can explain differences in the crude mean."
+      },
+      {
+        "id": "D",
+        "text": "Compare only the two largest stays",
+        "feedback": "Extremes alone cannot characterise the services."
+      },
+      {
+        "id": "E",
+        "text": "Ignore all service comparisons",
+        "feedback": "Careful comparisons can be useful."
+      }
+    ],
+    "correct": "C",
+    "hint": "What factors beyond treatment quality influence how long someone stays?",
+    "lesson": "Combine descriptive statistics with service context. Investigate skew, recording conventions, patient needs and discharge support.",
+    "explanation": "Distribution, case mix and the wider care pathway matter. Adjusted comparisons still require appropriate data and assumptions; a crude mean alone cannot attribute causation. Define whether discharge support is part of the service effect being evaluated before deciding to adjust for it.",
+    "help": "basic_descriptive_statistics/univariate_summary.htm",
+    "operation": "UnivariateSummary",
+    "inspiration": "FPH DFPH Specimen Paper B Q1: interpretation and case mix; new setting and single-best-answer format."
+  },
+  {
+    "id": "RS-LEAD-01",
+    "version": 1,
+    "track": "researcher",
+    "topic": "Screening and lead-time bias",
+    "objective": "Distinguish earlier diagnosis from longer life.",
+    "stem": "A fictional screening programme diagnoses a disease two years earlier, but people die at the same age they would have without screening. Measured survival from diagnosis rises. What explains this rise?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A demonstrated reduction in mortality",
+        "feedback": "Death timing has not changed."
+      },
+      {
+        "id": "B",
+        "text": "Lead-time bias",
+        "feedback": "Earlier diagnosis starts the survival clock sooner without postponing death."
+      },
+      {
+        "id": "C",
+        "text": "Randomisation",
+        "feedback": "The scenario does not describe random allocation."
+      },
+      {
+        "id": "D",
+        "text": "A guaranteed treatment benefit",
+        "feedback": "Longer measured survival alone does not establish benefit."
+      },
+      {
+        "id": "E",
+        "text": "A fall in disease incidence",
+        "feedback": "No such change is stated."
+      }
+    ],
+    "correct": "B",
+    "hint": "Which event starts the survival clock?",
+    "lesson": "Screening evaluation needs outcomes that distinguish earlier detection from improved health. Consider harms and appropriate comparisons.",
+    "explanation": "Lead-time bias extends observed time from diagnosis to death when diagnosis happens earlier but death does not. Mortality and other patient-relevant outcomes are needed to assess benefit.",
+    "help": "basics/bias.htm",
+    "operation": null,
+    "inspiration": "FPH critical-appraisal and screening specimens: original bias question."
+  },
+  {
+    "id": "CORE-DESIGN-01",
+    "version": 2,
+    "track": "core",
+    "topic": "Study design and denominators",
+    "objective": "Recognise outcome-based sampling in a case-control study.",
+    "stem": "Researchers select 120 people with a disease and 240 without it, then compare previous exposure. Which statement best describes what can be estimated directly from this sampling design?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The population incidence, using 120/360",
+        "feedback": "The numbers with and without disease were selected by design."
+      },
+      {
+        "id": "B",
+        "text": "An exposure odds ratio, with suitable control selection and assumptions",
+        "feedback": "Case-control sampling can estimate an odds ratio; it does not directly give population risk from these group sizes."
+      },
+      {
+        "id": "C",
+        "text": "The population prevalence, using 120/360",
+        "feedback": "The investigator fixed the case-control ratio."
+      },
+      {
+        "id": "D",
+        "text": "The causal risk difference with no further assumptions",
+        "feedback": "Causal interpretation needs design and confounding assumptions."
+      },
+      {
+        "id": "E",
+        "text": "The number needed to treat from case counts alone",
+        "feedback": "Absolute treatment risks are not supplied."
+      }
+    ],
+    "correct": "B",
+    "hint": "Were participants sampled before or after their outcome status was known?",
+    "lesson": "Study design determines which denominators and measures have meaning. Recognise case-control, cohort and experimental designs before choosing a statistic.",
+    "explanation": "The investigator chooses cases and controls, so their proportion in the sample is not population incidence or prevalence. The meaning of the odds ratio depends on control sampling. Sampling controls from the risk sets can estimate an incidence rate ratio without a rare-disease assumption. Sampling non-cases at the end of a fixed period instead targets an odds ratio for cumulative risk. Causal interpretation needs additional assumptions.",
+    "help": "clinical_epidemiology/risk_retrospective.htm",
+    "operation": "MiscRetroRisk"
+  },
+  {
+    "id": "CORE-RATE-01",
+    "version": 2,
+    "track": "core",
+    "topic": "Incidence rate and person-time",
+    "objective": "Distinguish an incidence rate from a cumulative risk.",
+    "stem": "A fictional cohort contributes 600 person-years while participants are at risk, with 12 new events. What is the incidence rate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "2 events per 100 person-years",
+        "feedback": "12/600 = 0.02 events per person-year."
+      },
+      {
+        "id": "B",
+        "text": "2% of participants, regardless of follow-up",
+        "feedback": "Person-time is not a count of participants."
+      },
+      {
+        "id": "C",
+        "text": "12% per participant",
+        "feedback": "The participant denominator is not given."
+      },
+      {
+        "id": "D",
+        "text": "50 events per person-year",
+        "feedback": "This inverts the rate."
+      },
+      {
+        "id": "E",
+        "text": "600 events per year",
+        "feedback": "600 is follow-up time, not event count."
+      }
+    ],
+    "correct": "A",
+    "hint": "Divide events by total time at risk, then state the units.",
+    "lesson": "An incidence rate uses person-time at risk. A risk uses people initially at risk over a specified period, with appropriate treatment of incomplete follow-up.",
+    "explanation": "12/600 = 0.02 events per person-year, or 2 per 100 person-years. This cannot automatically be read as a two-percent one-year risk.",
+    "help": "rates/incidence_and_prevalence.htm",
+    "operation": null
+  },
+  {
+    "id": "CORE-MEDIATOR-01",
+    "version": 2,
+    "track": "core",
+    "topic": "Confounders and mediators",
+    "objective": "Match adjustment to the causal effect of interest.",
+    "stem": "A randomised exercise intervention can affect blood pressure partly by changing body weight. To estimate the total intervention effect on blood pressure, why might routinely adjusting for weight measured after the intervention be inappropriate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Post-intervention weight is necessarily a baseline confounder",
+        "feedback": "It is measured after treatment and may be affected by it."
+      },
+      {
+        "id": "B",
+        "text": "It can block part of the pathway through which the intervention acts",
+        "feedback": "That pathway contributes to the total effect."
+      },
+      {
+        "id": "C",
+        "text": "Adjustment always increases bias in every analysis",
+        "feedback": "Appropriate adjustment depends on the target effect and causal structure."
+      },
+      {
+        "id": "D",
+        "text": "Randomisation proves that weight is irrelevant",
+        "feedback": "Weight may still mediate treatment effects."
+      },
+      {
+        "id": "E",
+        "text": "A smaller P value decides which variables to adjust for",
+        "feedback": "Variable choice should follow the causal question and assumptions."
+      }
+    ],
+    "correct": "B",
+    "hint": "Distinguish a variable that precedes treatment from one affected by treatment.",
+    "lesson": "For a total effect, mediators are part of the causal pathway. Direct effects ask a different question and require additional identification assumptions; adding a mediator to a regression does not automatically estimate a causal direct effect.",
+    "explanation": "Adjusting for a mediator can remove part of the total effect and may introduce other bias. Define the estimand and causal structure before deciding what to adjust for.",
+    "help": "basics/confounding.htm",
+    "operation": null
+  },
+  {
+    "id": "CORE-SELECTION-01",
+    "version": 2,
+    "track": "core",
+    "topic": "Selection and collider bias",
+    "objective": "Recognise bias caused by conditioning on a common consequence.",
+    "stem": "In a fictional population, exposure E and illness Y both influence whether someone attends a specialist clinic. A study includes only clinic attendees. Even if E and Y were otherwise unrelated, what problem could this selection create?",
+    "options": [
+      {
+        "id": "A",
+        "text": "It guarantees a representative population sample",
+        "feedback": "Attendance selects people through both variables."
+      },
+      {
+        "id": "B",
+        "text": "It may create an association by conditioning on a common consequence",
+        "feedback": "Attendance can act as a collider between E and Y."
+      },
+      {
+        "id": "C",
+        "text": "It eliminates confounding automatically",
+        "feedback": "Selection does not guarantee comparability."
+      },
+      {
+        "id": "D",
+        "text": "It proves E causes Y",
+        "feedback": "The selection process can create a non-causal association."
+      },
+      {
+        "id": "E",
+        "text": "It can only reduce random error",
+        "feedback": "It can introduce systematic bias."
+      }
+    ],
+    "correct": "B",
+    "hint": "Consider the arrows E \u2192 attendance \u2190 Y.",
+    "lesson": "Conditioning on a common consequence can open a non-causal association. Eligibility, recruitment, follow-up and analysis restrictions can all matter.",
+    "explanation": "Selecting on clinic attendance conditions on a potential collider and can create an association between its causes. The direction and magnitude depend on the data-generating process.",
+    "help": "basics/bias.htm",
+    "operation": null
+  },
+  {
+    "id": "LIB-RATES-01",
+    "version": 1,
+    "track": "publicHealth",
+    "topic": "Person-time and age standardisation",
+    "objective": "Explain a crude rate difference using age-specific rates and a common standard population.",
+    "stem": "Two fictional areas have rates of 200 and 1000 events per 100000 person-years in younger and older groups respectively. Both are directly standardised using 75% younger and 25% older weights. Which conclusion is justified?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Both adjusted rates are 400 per 100000 person-years.",
+        "feedback": "Use 0.75\u00D7200 \u002B 0.25\u00D71000 for each area."
+      },
+      {
+        "id": "B",
+        "text": "Both adjusted rates are 600 because the two rates are averaged equally.",
+        "feedback": "The stated weights are 75% and 25%, not equal."
+      },
+      {
+        "id": "C",
+        "text": "The area with more older people must have a larger adjusted rate.",
+        "feedback": "That affects its crude rate; the shared standard weights remove this age-composition difference."
+      },
+      {
+        "id": "D",
+        "text": "Both areas have an annual disease risk of exactly 0.4%.",
+        "feedback": "A person-time rate is not automatically a one-year cumulative risk."
+      },
+      {
+        "id": "E",
+        "text": "Age adjustment proves that the two populations are causally identical.",
+        "feedback": "Other differences, biases and uncertainty remain."
+      }
+    ],
+    "correct": "A",
+    "hint": "Apply the same stated weights to the age-specific rates in each area.",
+    "lesson": "A rate divides events by time at risk. Different age structures can produce different crude rates even when age-specific rates are identical. Direct standardisation applies the same reference weights to each population. A standardised rate is a comparison measure; report its reference population, uncertainty and age-specific pattern.",
+    "explanation": "The common weighted rate is 150 \u002B 250 = 400 per 100000 person-years. Different actual age mixes can still produce different crude rates. Equal standardised point estimates do not prove equivalence.",
+    "help": "rates/direct_standardization.htm",
+    "operation": "RateDirect",
+    "lessonId": "rates",
+    "sourceIds": [
+      "ohid-rates",
+      "ohid-dsr",
+      "ohid-isr"
+    ]
+  },
+  {
+    "id": "LIB-APPRAISAL-01",
+    "version": 1,
+    "track": "medicine",
+    "topic": "Design, missing outcomes and applicability",
+    "objective": "Explain what a numerical trial result can and cannot establish.",
+    "stem": "In the fictional trial, 20/80 observed programme participants and 30/100 controls have an adverse outcome. Twenty other programme participants have unknown outcomes. Which statement is most defensible?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Treat all missing outcomes as non-events because allocation was randomised.",
+        "feedback": "Randomisation does not reveal unmeasured outcomes."
+      },
+      {
+        "id": "B",
+        "text": "Use 20/80 and ignore the original allocation totals.",
+        "feedback": "That describes responders and can give a biased treatment comparison."
+      },
+      {
+        "id": "C",
+        "text": "Programme risk among all 100 allocated participants could be 20% to 40% before further assumptions.",
+        "feedback": "There are 20 known events and up to 20 additional unknown events."
+      },
+      {
+        "id": "D",
+        "text": "The programme definitely reduces risk by 5 percentage points.",
+        "feedback": "That observed-data difference does not settle missing-outcome or sampling uncertainty."
+      },
+      {
+        "id": "E",
+        "text": "The 20%\u201340% range is a 95% confidence interval.",
+        "feedback": "It is a logical bound, not a sampling interval."
+      }
+    ],
+    "correct": "C",
+    "hint": "Count how many events there could be if none, or all, of the missing participants had the outcome.",
+    "lesson": "Read the research question, allocation, follow-up and outcome measurement before the P value. Risk of bias concerns a particular result; reporting completeness and a large sample do not guarantee validity. Missing outcomes can break the comparability intended by randomisation. Explain effect size, uncertainty and applicability separately.",
+    "explanation": "Full-group programme risk ranges from 20/100 to 40/100. Against control risk 30%, this permits benefit or harm. Reasons for missingness, plausible sensitivity analyses and sampling uncertainty all need consideration.",
+    "help": "basics/bias.htm",
+    "operation": "MiscRelRisk",
+    "lessonId": "appraisal",
+    "sourceIds": [
+      "cochrane-8",
+      "rcgp-akt",
+      "catalogue-bias"
+    ]
+  },
+  {
+    "id": "LIB-MISSING-01",
+    "version": 1,
+    "track": "researcher",
+    "topic": "Patterns, assumptions and sensitivity analysis",
+    "objective": "Describe missingness and avoid treating a filled-in value as observed information.",
+    "stem": "A researcher replaces every missing symptom score with the mean of the observed scores, then analyses the filled values as if all were measured. What is the main problem?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The sample mean must necessarily change.",
+        "feedback": "Mean filling preserves the observed mean in this simple setting."
+      },
+      {
+        "id": "B",
+        "text": "The missing values have become independently observed measurements.",
+        "feedback": "No new measurements have been obtained."
+      },
+      {
+        "id": "C",
+        "text": "The method proves that the data are missing completely at random.",
+        "feedback": "Imputation does not establish a missingness mechanism."
+      },
+      {
+        "id": "D",
+        "text": "It ignores uncertainty about missing values and distorts variability and relationships.",
+        "feedback": "Ordinary analysis of the filled values does not account for uncertainty in their imputation."
+      },
+      {
+        "id": "E",
+        "text": "It is always identical to properly pooled multiple imputation.",
+        "feedback": "Multiple imputation represents missing-value uncertainty across draws and needs valid models and pooling."
+      }
+    ],
+    "correct": "D",
+    "hint": "What information was actually added when the same mean was inserted repeatedly?",
+    "lesson": "Document the amount, pattern and reasons for missingness before choosing an analysis. MCAR, MAR and MNAR describe assumptions about the missingness process. MAR allows dependence on observed information; it is not a synonym for a random-looking pattern. Replacing missing values with a mean does not restore information or valid uncertainty.",
+    "explanation": "Mean filling does not recover the unobserved values. Treating these invented values as observed commonly understates uncertainty and distorts distributions and associations. Investigate missingness and choose a method appropriate to the estimand and assumptions.",
+    "help": "basics/missing_data.htm",
+    "operation": "UnivariateSummary",
+    "lessonId": "missing",
+    "sourceIds": [
+      "vanbuuren-mechanisms",
+      "vanbuuren-simple"
+    ]
+  },
+  {
+    "id": "LIB-VALIDATION-01",
+    "version": 1,
+    "track": "analyst",
+    "topic": "Calibration, prediction error and validation",
+    "objective": "Assess predictions against outcomes not used to develop the model.",
+    "stem": "Eight fictional fixed predictions have errors averaging zero. Ten points are added to every prediction, without changing the observed outcomes. Which statement must be true?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Correlation with observed outcomes falls by ten.",
+        "feedback": "Correlation is invariant to adding a constant."
+      },
+      {
+        "id": "B",
+        "text": "Correlation is unchanged, but mean prediction error becomes \u002B10 points.",
+        "feedback": "Adding ten to every prediction adds ten to every prediction-minus-outcome error."
+      },
+      {
+        "id": "C",
+        "text": "RMSE is unchanged because the ordering is unchanged.",
+        "feedback": "RMSE depends on error size, not just ordering."
+      },
+      {
+        "id": "D",
+        "text": "The new predictions are externally validated because correlation is high.",
+        "feedback": "A metric alone cannot certify a validation design or usefulness."
+      },
+      {
+        "id": "E",
+        "text": "Every observed outcome also increases by ten.",
+        "feedback": "Only predictions were changed."
+      }
+    ],
+    "correct": "B",
+    "hint": "Separate ranking from the numerical agreement between prediction and outcome.",
+    "lesson": "A model can rank outcomes well yet predict systematically wrong values. Evaluate calibration and prediction error as well as association. Performance on the development data is usually optimistic. Internal validation must repeat the modelling process; evaluation in a new relevant setting addresses transportability. A tiny illustration cannot establish clinical usefulness.",
+    "explanation": "Correlation is unchanged by an additive constant. With mean original error zero, shifting predictions by \u002B10 gives mean error \u002B10 and increases mean squared error by 100. Calibration and absolute prediction accuracy matter alongside association.",
+    "help": "regression_and_correlation/simple_linear.htm",
+    "operation": "SimpleLinearRegression",
+    "lessonId": "validation",
+    "sourceIds": [
+      "harrell-reg",
+      "tripod-ai"
+    ]
+  },
+  {
+    "id": "LIB-META-01",
+    "version": 1,
+    "track": "researcher",
+    "topic": "Meta-analysis, heterogeneity and interpretation",
+    "objective": "Explain inverse-variance weighting and decide whether a pooled effect answers a coherent question.",
+    "stem": "In a fixed-effect inverse-variance meta-analysis, Study A has SE 0.02 and Study B has SE 0.04 for estimates on the same scale. What is the ratio of A\u2019s weight to B\u2019s weight?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1:4",
+        "feedback": "That reverses the inverse-variance weighting."
+      },
+      {
+        "id": "B",
+        "text": "1:2",
+        "feedback": "The smaller SE receives more, not less, weight."
+      },
+      {
+        "id": "C",
+        "text": "1:1",
+        "feedback": "Equal weighting ignores their different precisions."
+      },
+      {
+        "id": "D",
+        "text": "2:1",
+        "feedback": "Weights use squared SE, not SE itself."
+      },
+      {
+        "id": "E",
+        "text": "4:1",
+        "feedback": "(1/0.02\u00B2)/(1/0.04\u00B2) = 4."
+      }
+    ],
+    "correct": "E",
+    "hint": "Variance is the square of the standard error; then take its reciprocal.",
+    "lesson": "Pooling requires comparable populations, contrasts, outcomes and follow-up, together with an assessment of bias and dependence. Inverse-variance weights favour more precise estimates. A fixed-effect illustration assumes a common underlying effect. Random-effects models allow between-study variation but cannot repair biased studies or justify combining incompatible questions.",
+    "explanation": "The weights are 2500 and 625, so A receives four times B\u2019s weight. This does not make A four times as free from bias; inverse-variance weighting represents statistical precision under the model.",
+    "help": "meta_analysis/summary.htm",
+    "operation": "MetaSummary",
+    "lessonId": "meta",
+    "sourceIds": [
+      "cochrane-10",
+      "cochrane-8"
+    ]
+  }
+]

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="566" viewBox="0 0 1132 800" xmlns="http://www.w3.org/2000/svg" height="400">
+  <line x1="120" y1="689" x2="1052" y2="689" style="stroke:#868686;" />
+  <line x1="120" y1="80" x2="120" y2="689" style="stroke:#868686;" />
+  <g transform="translate(120,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">100</tspan>
+    </text>
+  </g>
+  <line x1="120" y1="696" x2="120" y2="689" style="stroke:#868686;" />
+  <g transform="translate(306.3999999999999,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">150</tspan>
+    </text>
+  </g>
+  <line x1="306.3999999999999" y1="696" x2="306.3999999999999" y2="689" style="stroke:#868686;" />
+  <g transform="translate(492.8,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">200</tspan>
+    </text>
+  </g>
+  <line x1="492.8" y1="696" x2="492.8" y2="689" style="stroke:#868686;" />
+  <g transform="translate(679.2,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">250</tspan>
+    </text>
+  </g>
+  <line x1="679.2" y1="696" x2="679.2" y2="689" style="stroke:#868686;" />
+  <g transform="translate(865.5999999999999,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">300</tspan>
+    </text>
+  </g>
+  <line x1="865.5999999999999" y1="696" x2="865.5999999999999" y2="689" style="stroke:#868686;" />
+  <g transform="translate(1052,696)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:middle;">350</tspan>
+    </text>
+  </g>
+  <line x1="1052" y1="696" x2="1052" y2="689" style="stroke:#868686;" />
+  <g transform="translate(105,689)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.0</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="689" x2="120" y2="689" style="stroke:#868686;" />
+  <g transform="translate(105,567.1999981850386)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.2</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="567.1999981850386" x2="120" y2="567.1999981850386" style="stroke:#868686;" />
+  <g transform="translate(105,445.39999637007713)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.4</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="445.39999637007713" x2="120" y2="445.39999637007713" style="stroke:#868686;" />
+  <g transform="translate(105,323.59998548030853)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.6</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="323.59998548030853" x2="120" y2="323.59998548030853" style="stroke:#868686;" />
+  <g transform="translate(105,201.79999274015427)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">0.8</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="201.79999274015427" x2="120" y2="201.79999274015427" style="stroke:#868686;" />
+  <g transform="translate(105,80)">
+    <text x="0" y="0" transform="rotate(0)">
+      <tspan dy="0.4em" style="font-family:'Calibri',sans-serif;font-size:20px;fill:#000000;text-anchor:end;">1.0</tspan>
+    </text>
+  </g>
+  <line x1="113" y1="80" x2="120" y2="80" style="stroke:#868686;" />
+  <text x="586" y="723">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Times</tspan>
+  </text>
+  <g transform="translate(77,384.5)">
+    <text x="0" y="0" transform="rotate(-90)">
+      <tspan dy="0" style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:bold;fill:#000000;text-anchor:middle;">Survival proportion</tspan>
+    </text>
+  </g>
+  <text x="586" y="20">
+    <tspan dy="0.8em" style="font-family:'Calibri',sans-serif;font-size:29.333334px;font-weight:bold;fill:#000000;text-anchor:middle;">Plot of survivor function &amp; 95% CI</tspan>
+  </text>
+  <ellipse cx="276.57599999999996" cy="107.68182808160782" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="120" y1="80" x2="276.57599999999996" y2="80" style="stroke:#40699C;" />
+  <line x1="276.57599999999996" y1="80" x2="276.57599999999996" y2="107.68182808160782" style="stroke:#40699C;" />
+  <ellipse cx="332.49600000000004" cy="135.36361986398697" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="276.57599999999996" y1="107.68182808160782" x2="332.49600000000004" y2="107.68182808160782" style="stroke:#40699C;" />
+  <line x1="332.49600000000004" y1="107.68182808160782" x2="332.49600000000004" y2="135.36361986398697" style="stroke:#40699C;" />
+  <ellipse cx="354.864" cy="163.0454479455948" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="332.49600000000004" y1="135.36361986398697" x2="354.864" y2="135.36361986398697" style="stroke:#40699C;" />
+  <line x1="354.864" y1="135.36361986398697" x2="354.864" y2="163.0454479455948" style="stroke:#40699C;" />
+  <ellipse cx="485.344" cy="190.7272760272026" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="354.864" y1="163.0454479455948" x2="485.344" y2="163.0454479455948" style="stroke:#40699C;" />
+  <line x1="485.344" y1="163.0454479455948" x2="485.344" y2="190.7272760272026" style="stroke:#40699C;" />
+  <line x1="507.71199999999993" y1="190.7272760272026" x2="507.71199999999993" y2="183.7272760272026" style="stroke:#40699C;" />
+  <line x1="485.344" y1="190.7272760272026" x2="507.71199999999993" y2="190.7272760272026" style="stroke:#40699C;" />
+  <line x1="507.71199999999993" y1="190.7272760272026" x2="507.71199999999993" y2="190.7272760272026" style="stroke:#40699C;" />
+  <ellipse cx="511.44" cy="220.0374512076378" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="507.71199999999993" y1="190.7272760272026" x2="511.44" y2="190.7272760272026" style="stroke:#40699C;" />
+  <line x1="511.44" y1="190.7272760272026" x2="511.44" y2="220.0374512076378" style="stroke:#40699C;" />
+  <ellipse cx="612.096" cy="307.967904150486" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="511.44" y1="220.0374512076378" x2="612.096" y2="220.0374512076378" style="stroke:#40699C;" />
+  <line x1="612.096" y1="220.0374512076378" x2="612.096" y2="307.967904150486" style="stroke:#40699C;" />
+  <ellipse cx="612.096" cy="307.967904150486" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="612.096" y1="307.967904150486" x2="612.096" y2="307.967904150486" style="stroke:#40699C;" />
+  <line x1="612.096" y1="307.967904150486" x2="612.096" y2="307.967904150486" style="stroke:#40699C;" />
+  <ellipse cx="612.096" cy="307.967904150486" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="612.096" y1="307.967904150486" x2="612.096" y2="307.967904150486" style="stroke:#40699C;" />
+  <line x1="612.096" y1="307.967904150486" x2="612.096" y2="307.967904150486" style="stroke:#40699C;" />
+  <ellipse cx="615.8240000000001" cy="425.2085504233837" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="612.096" y1="307.967904150486" x2="615.8240000000001" y2="307.967904150486" style="stroke:#40699C;" />
+  <line x1="615.8240000000001" y1="307.967904150486" x2="615.8240000000001" y2="425.2085504233837" style="stroke:#40699C;" />
+  <ellipse cx="615.8240000000001" cy="425.2085504233837" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="615.8240000000001" y1="425.2085504233837" x2="615.8240000000001" y2="425.2085504233837" style="stroke:#40699C;" />
+  <line x1="615.8240000000001" y1="425.2085504233837" x2="615.8240000000001" y2="425.2085504233837" style="stroke:#40699C;" />
+  <ellipse cx="615.8240000000001" cy="425.2085504233837" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="615.8240000000001" y1="425.2085504233837" x2="615.8240000000001" y2="425.2085504233837" style="stroke:#40699C;" />
+  <line x1="615.8240000000001" y1="425.2085504233837" x2="615.8240000000001" y2="425.2085504233837" style="stroke:#40699C;" />
+  <ellipse cx="615.8240000000001" cy="425.2085504233837" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="615.8240000000001" y1="425.2085504233837" x2="615.8240000000001" y2="425.2085504233837" style="stroke:#40699C;" />
+  <line x1="615.8240000000001" y1="425.2085504233837" x2="615.8240000000001" y2="425.2085504233837" style="stroke:#40699C;" />
+  <ellipse cx="638.192" cy="454.5187256038189" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="615.8240000000001" y1="425.2085504233837" x2="638.192" y2="425.2085504233837" style="stroke:#40699C;" />
+  <line x1="638.192" y1="425.2085504233837" x2="638.192" y2="454.5187256038189" style="stroke:#40699C;" />
+  <ellipse cx="641.9199999999998" cy="483.82888263463974" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="638.192" y1="454.5187256038189" x2="641.9199999999998" y2="454.5187256038189" style="stroke:#40699C;" />
+  <line x1="641.9199999999998" y1="454.5187256038189" x2="641.9199999999998" y2="483.82888263463974" style="stroke:#40699C;" />
+  <ellipse cx="720.2080000000001" cy="513.1390396654606" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="641.9199999999998" y1="483.82888263463974" x2="720.2080000000001" y2="483.82888263463974" style="stroke:#40699C;" />
+  <line x1="720.2080000000001" y1="483.82888263463974" x2="720.2080000000001" y2="513.1390396654606" style="stroke:#40699C;" />
+  <ellipse cx="791.0400000000002" cy="571.7593628019094" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="720.2080000000001" y1="513.1390396654606" x2="791.0400000000002" y2="513.1390396654606" style="stroke:#40699C;" />
+  <line x1="791.0400000000002" y1="513.1390396654606" x2="791.0400000000002" y2="571.7593628019094" style="stroke:#40699C;" />
+  <ellipse cx="791.0400000000002" cy="571.7593628019094" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="791.0400000000002" y1="571.7593628019094" x2="791.0400000000002" y2="571.7593628019094" style="stroke:#40699C;" />
+  <line x1="791.0400000000002" y1="571.7593628019094" x2="791.0400000000002" y2="571.7593628019094" style="stroke:#40699C;" />
+  <ellipse cx="846.96" cy="630.3796814009547" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="791.0400000000002" y1="571.7593628019094" x2="846.96" y2="571.7593628019094" style="stroke:#40699C;" />
+  <line x1="846.96" y1="571.7593628019094" x2="846.96" y2="630.3796814009547" style="stroke:#40699C;" />
+  <ellipse cx="846.96" cy="630.3796814009547" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="846.96" y1="630.3796814009547" x2="846.96" y2="630.3796814009547" style="stroke:#40699C;" />
+  <line x1="846.96" y1="630.3796814009547" x2="846.96" y2="630.3796814009547" style="stroke:#40699C;" />
+  <ellipse cx="951.344" cy="659.6898407004774" rx="6" ry="6" style="stroke:#40699C;fill:none;" />
+  <line x1="846.96" y1="630.3796814009547" x2="951.344" y2="630.3796814009547" style="stroke:#40699C;" />
+  <line x1="951.344" y1="630.3796814009547" x2="951.344" y2="659.6898407004774" style="stroke:#40699C;" />
+  <line x1="1029.6319999999998" y1="659.6898407004774" x2="1029.6319999999998" y2="652.6898407004774" style="stroke:#40699C;" />
+  <line x1="951.344" y1="659.6898407004774" x2="1029.6319999999998" y2="659.6898407004774" style="stroke:#40699C;" />
+  <line x1="1029.6319999999998" y1="659.6898407004774" x2="1029.6319999999998" y2="659.6898407004774" style="stroke:#40699C;" />
+  <line x1="276.57599999999996" y1="251.30996268987656" x2="276.57599999999996" y2="83.97701609134674" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="332.49600000000004" y1="273.0660868883133" x2="332.49600000000004" y2="94.33754193782806" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="354.864" y1="302.62705343961716" x2="354.864" y2="108.09723645448685" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="485.344" y1="332.52313446998596" x2="485.344" y2="124.11238354444504" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="511.44" y1="364.7281731367111" x2="511.44" y2="142.5266918540001" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="612.096" y1="452.55392095446587" x2="612.096" y2="206.30247646570206" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="612.096" y1="452.55392095446587" x2="612.096" y2="206.30247646570206" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="612.096" y1="452.55392095446587" x2="612.096" y2="206.30247646570206" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="615.8240000000001" y1="553.3839581906796" x2="615.8240000000001" y2="306.86622256040573" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="615.8240000000001" y1="553.3839581906796" x2="615.8240000000001" y2="306.86622256040573" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="615.8240000000001" y1="553.3839581906796" x2="615.8240000000001" y2="306.86622256040573" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="615.8240000000001" y1="553.3839581906796" x2="615.8240000000001" y2="306.86622256040573" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="638.192" y1="575.8272540122271" x2="638.192" y2="334.5684508085251" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="641.9199999999998" y1="597.0771037936211" x2="641.9199999999998" y2="363.3522508740425" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="720.2080000000001" y1="617.0288750082254" x2="720.2080000000001" y2="393.2992052733898" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="791.0400000000002" y1="652.3174582831562" x2="791.0400000000002" y2="457.2591721713543" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="791.0400000000002" y1="652.3174582831562" x2="791.0400000000002" y2="457.2591721713543" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="846.96" y1="678.9885967317969" x2="846.96" y2="528.5315097868443" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="846.96" y1="678.9885967317969" x2="846.96" y2="528.5315097868443" style="stroke:#000000;stroke-dasharray:3,1;" />
+  <line x1="951.344" y1="686.9561164884362" x2="951.344" y2="567.9574360400438" style="stroke:#000000;stroke-dasharray:3,1;" />
+</svg>

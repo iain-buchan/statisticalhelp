@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="rates/compare_crude_incidence_rates.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Compare Two Crude Rates (Incidence Rate Ratio) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
+            Compare Two Crude Rates</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Rates_Compare Two Crude Rates</b>.</p>
+        <p> </p>
+        <p>Person-time data from <a href="../basics/prospective.htm">prospective</a> studies of two groups with different exposures may be expressed as a difference between <a href="incidence_and_prevalence.htm">incidence rates</a> or as a ratio of incidence rates.</p>
+        <p> </p>
+        <p>This function constructs confidence intervals for incidence rate differences and ratios where there are two exposures (i.e. exposed or not exposed, defined according to certain risk factors) (<a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>).</p>
+        <p> </p>
+        <p><u>Data input</u>
+        </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="2" style="text-align: center;text-decoration: underline;">EXPOSURE:</td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td style="text-align: center;text-decoration: underline;">Exposed</td>
+                <td style="text-align: center;text-decoration: underline;">Not Exposed</td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: right;">OUTCOME:</td>
+                <td style="text-align: right;">Cases:</td>
+                <td style="text-align: center;">a</td>
+                <td style="text-align: center;">b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Person-time:</td>
+                <td style="text-align: center;">PT1</td>
+                <td style="text-align: center;">PT2</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>The use of person-time as opposed to just "time" enables you to handle situations where there are drop-outs in a study or where you have not been able to follow an entire cohort at risk to watch for the development of the outcome under investigation. Thus, the follow up period does not have to be uniform for all participants. Person-time for a group is the sum of the times of follow up for each participant in that group.</p>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The confidence interval for the rate difference is constructed from the standard error of the difference, where each rate has the variance of a Poisson count divided by the square of its person-time. The chi-square statistic tests the equality of the two rates, given the total number of events. The confidence interval for the rate ratio is exact, using the Poisson distribution (<a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>):</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="86deaeb2d96f328ecb48154ca4d8e933e122f7896cfe405f7a98eb155e720e1a"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle \widehat{\text{IRD}}=\frac{a}{PT_1}-\frac{b}{PT_2} \\
+\displaystyle \displaystyle \chi^2=\left( a-\frac{mPT_1}{PT}\right)^2\bigg /\left( \frac{mPT_1 PT_2}{PT^2}\right) \\
+\displaystyle \displaystyle \widehat{\text{IRD}} \space \text{CI}=\widehat{\text{IRD}}\space \pm z_{\alpha/2}\sqrt{\frac{a}{PT_1^2}+\frac{b}{PT_2^2}} \\
+\displaystyle \displaystyle \widehat{\text{IRR}}=\frac{a}{PT_1}/\frac{b}{PT_2} \\
+\displaystyle \displaystyle \widehat{\text{IRR}}  \space \text{CI} = \left( \frac{PT_2}{PT_1}\right) \left( \frac{a}{b+1}\right) \frac{1}{F_{\alpha/2, \space 2(b+1), \space 2a}} \text{ to } \left( \frac{PT_2}{PT_1}\right) \left( \frac{a+1}{b}\right) {F_{\alpha/2, \space 2(a+1), \space 2b}}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/b31eed3913f03e6db7c718c43438b6fec44d9136d23ed21d4d52fe5d97793f5d.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where IRD hat and IRR hat are point estimates of incidence rate difference and ratio respectively, m is the total number of events observed, PT is the total person-time observed, Z is a quantile of the standard normal distribution and F is a quantile of the F distribution (denominator degrees of freedom are quoted last).</p>
+        <p> </p>
+        <p>The optional conditional maximum likelihood analysis for the rate ratio employs the polynomial multiplication method described by <a href="../references/reference_list.htm#ref-martin-1996">Martin and Austin (1996)</a>; this also provides <a href="../proportions/mid_p.htm">mid-P</a> estimates.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-stampfer-1985">Stampfer et al. (1985)</a>.</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td> </td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">Postmenopausal hormone use:</td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td style="text-decoration: underline;text-align: right;">Yes</td>
+                <td style="text-decoration: underline;text-align: right;">No</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">CHD cases:</td>
+                <td style="text-align: right;">30</td>
+                <td style="text-align: right;">60</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Person-years:</td>
+                <td style="text-align: right;">54308.7</td>
+                <td style="text-align: right;">51477.5</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>For this example:</p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td> </td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">EXPOSURE</td>
+                <td style="text-decoration: underline;text-align: center;"> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td style="text-decoration: underline;text-align: right;">Exposed</td>
+                <td style="text-decoration: underline;text-align: right;">Non-exposed</td>
+                <td style="text-decoration: underline;text-align: right;">Total</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Cases:</td>
+                <td style="text-align: right;">30</td>
+                <td style="text-align: right;">60</td>
+                <td style="text-align: right;">90</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">Person-time:</td>
+                <td style="text-align: right;">54308.7</td>
+                <td style="text-align: right;">51477.5</td>
+                <td style="text-align: right;">105786.2</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>Exposed incidence rate = 0.000552</p>
+        <p>Non-exposed incidence rate = 0.001166</p>
+        <p> </p>
+        <p>Rate difference = -0.000613</p>
+        <p>Approximate 95% confidence interval = -0.000968 to -0.000258</p>
+        <p> </p>
+        <p>Chi-square = 11.678635 P = 0.0006</p>
+        <p> </p>
+        <p>Rate ratio = 0.473934</p>
+        <p>Exact 95% confidence interval = 0.295128 to 0.746416</p>
+        <p> </p>
+        <p>Conditional maximum likelihood estimate of rate ratio = 0.473934</p>
+        <p>Exact Fisher 95% confidence interval = 0.295128 to 0.746416</p>
+        <p>Exact Fisher one sided P = 0.0004, two sided P = 0.0007</p>
+        <p>Exact mid-P 95% confidence interval = 0.302362 to 0.730939</p>
+        <p>Exact mid-P one sided P = 0.0003, two sided P = 0.0006</p>
+        <p> </p>
+        <p>Here we may conclude with 95% confidence that the true population value for the difference between the two incidence rates lies somewhere between -0.001 and -0.0003. We may also conclude with 95% confidence that the incidence rate for those who used postmenopausal hormones in the circumstances of the study was between 0.30 and 0.75 of that for those who did not take postmenopausal hormones.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Compare two crude rates: the StatsDirect help example (Stampfer et al. 1985, cases of
+# coronary heart disease and person-years of follow up among users and non-users of
+# postmenopausal hormones) in R
+a &lt;- 30          # cases among the exposed (hormone users)
+b &lt;- 60          # cases among the non-exposed
+pt1 &lt;- 54308.7   # person-years of follow up of the exposed
+pt2 &lt;- 51477.5   # person-years of follow up of the non-exposed
+
+# R's standard comparison of two rates. It conditions on the total number of cases:
+# if the two rates were equal, the exposed cases a would be binomial with probability
+# pt1 / (pt1 + pt2), so the comparison is the exact binomial test of a in a + b. Its
+# rate ratio is the report's rate ratio and its conditional maximum likelihood
+# estimate. Its interval is the Clopper-Pearson binomial interval turned into a rate
+# ratio, which is the report's exact (Fisher) interval. Its P value is the report's
+# two sided exact Fisher P (the binomial test of a in a + b, two sided).
+print(poisson.test(c(a, b), c(pt1, pt2)))
+
+# The rates and their difference. Each rate has the variance of a Poisson count
+# divided by the square of its person-time, so the standard error of the difference
+# is the square root of a / pt1^2 + b / pt2^2, and the limits are the difference
+# plus or minus z times that standard error. The chi-square statistic compares a
+# with its expected value given the total number of cases
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+pv &lt;- function(p) {
+  if (p &lt; 0.0001) "P &lt; 0.0001" else
+    paste("P =", formatC(p, digits = 4, format = "f", drop0trailing = TRUE))
+}
+m &lt;- a + b
+pt &lt;- pt1 + pt2
+ir1 &lt;- a / pt1
+ir2 &lt;- b / pt2
+ird &lt;- ir1 - ir2
+cat("Exposed incidence rate =", six(ir1), "\n")
+cat("Non-exposed incidence rate =", six(ir2), "\n")
+se &lt;- sqrt(a / pt1^2 + b / pt2^2)
+z &lt;- qnorm(0.975)
+cat("Rate difference =", six(ird), "\n")
+cat("approximate 95% confidence interval =", six(ird - z * se), "to",
+    six(ird + z * se), "\n")
+chisq &lt;- (a - m * pt1 / pt)^2 / (m * pt1 * pt2 / pt^2)
+cat("chi-square =", six(chisq), " ", pv(pchisq(chisq, 1, lower.tail = FALSE)), "\n")
+
+# The rate ratio and its exact interval from quantiles of the F distribution, as the
+# formula above gives it. The lower limit is 0 when a is 0 and the upper limit is
+# infinite when b is 0. The limits agree with those of poisson.test to 6 places.
+irr &lt;- ir1 / ir2
+lower &lt;- if (a == 0) 0 else pt2 / pt1 * (a / (b + 1)) / qf(0.975, 2 * (b + 1), 2 * a)
+upper &lt;- if (b == 0) Inf else pt2 / pt1 * ((a + 1) / b) * qf(0.975, 2 * (a + 1), 2 * b)
+cat("Rate ratio =", six(irr), "\n")
+cat("exact 95% confidence interval =", six(lower), "to", six(upper), "\n")
+
+# The conditional analysis. Given the total m, a is binomial with probability
+# p = pt1 * ratio / (pt1 * ratio + pt2), and a rate ratio is recovered from a
+# probability p as p * pt2 / ((1 - p) * pt1). The one sided Fisher P is the smaller
+# tail of that distribution at a ratio of 1; the two sided P adds up the probabilities
+# of the values of a that are no more probable than the one observed.
+ratio &lt;- function(p) p * pt2 / ((1 - p) * pt1)
+cat("Conditional maximum likelihood estimate of rate ratio =", six(irr), "\n")
+cat("Exact Fisher 95% confidence interval =", six(lower), "to", six(upper), "\n")
+prob &lt;- dbinom(0:m, m, pt1 / pt)
+up &lt;- sum(prob[(a + 1):(m + 1)])
+down &lt;- sum(prob[1:(a + 1)])
+two &lt;- sum(prob[prob &lt;= prob[a + 1] * (1 + 1e-7)])
+cat("Exact Fisher one sided ", pv(min(up, down)), ", two sided ", pv(two), "\n",
+    sep = "")
+
+# The mid-P versions count half of the probability of a itself: each limit is the
+# probability at which the tail beyond a plus half the probability of a is 2.5%,
+# found by root finding, and the two sided mid-P is twice the one sided value
+mid_tail &lt;- function(p, top) {
+  half &lt;- 0.5 * dbinom(a, m, p)
+  if (top) pbinom(a - 1, m, p) + half else pbinom(a, m, p, lower.tail = FALSE) + half
+}
+lower_mid &lt;- if (a == 0) 0 else
+  ratio(uniroot(function(p) mid_tail(p, FALSE) - 0.025, c(1e-12, 1 - 1e-12),
+                tol = 1e-12)$root)
+upper_mid &lt;- if (b == 0) Inf else
+  ratio(uniroot(function(p) mid_tail(p, TRUE) - 0.025, c(1e-12, 1 - 1e-12),
+                tol = 1e-12)$root)
+cat("Exact mid-P 95% confidence interval =", six(lower_mid), "to", six(upper_mid),
+    "\n")
+mid &lt;- min(up, down) - 0.5 * prob[a + 1]
+cat("Exact mid-P one sided ", pv(mid), ", two sided ", pv(min(2 * mid, 1)), "\n",
+    sep = "")</pre>
+            </div>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

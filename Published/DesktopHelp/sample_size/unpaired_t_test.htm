@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="sample_size/unpaired_t_test.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sample Size for Unpaired t Test - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
+            Sample Size for Unpaired t Test</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Sample Size_Unpaired t</b>.</p>
+        <p> </p>
+        <p>This function gives you the minimum number of experimental subjects needed to detect a true difference DELTA in population means with power POWER and two sided type I error probability ALPHA (<a href="../references/reference_list.htm#ref-dupont-1990">Dupont, 1990</a>; <a href="../references/reference_list.htm#ref-pearson-1970">Pearson and Hartley, 1970</a>).</p>
+        <p> </p>
+        <p><u>Information required</u>
+        </p>
+        <ul>
+            <li>POWER: probability of detecting a true effect.</li>
+            <li>ALPHA: probability of detecting a false effect (<a href="../basics/p_values.htm">two sided</a>: double this if you need <a href="../basics/p_values.htm">one sided</a>).</li>
+            <li>DELTA: difference in population means.</li>
+            <li>SD: estimated standard deviation for within group differences.</li>
+            <li>M: number of control subjects per experimental subject.</li>
+        </ul>
+        <p> </p>
+        <p><u>Practical issues</u>
+        </p>
+        <ul>
+            <li>Usual values for POWER are 80%, 85% and 90%; try several in order to explore/scope.</li>
+            <li>5% is the usual choice for ALPHA.</li>
+            <li>SD is usually estimated from previous studies.</li>
+            <li>If possible, choose a range of differences between means that you want to have the statistical power to detect.</li>
+        </ul>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The estimated sample size n is calculated as the solution of:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="a1c457b38f51d31eb1b4df68b1d733776f113d4392e62695083a061d9e393260"><span class="help-equation-accessible help-equation-live">$\displaystyle n=\frac{(1+1/m)(t_{n(m+1)-2, \space \alpha/2} + t_{n(m+1)-2, \space \beta} )^2}{d^2}$</span><img src="../resources/help-editor-runtime/equation-artwork/5649d17fe1c9d21d423618fd72595ff71e16019a65319d2189e893e472e3f00d.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where d = delta/sd, α = alpha, β = 1 - power, m is the number of control subjects per experimental subject, and t<sub>v,p</sub> is a Student t quantile with v degrees of freedom and probability p. n is rounded up to the closest integer, then adjusted if necessary to the smallest n for which the power calculated from the non-central t distribution reaches POWER.</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>Suppose you plan a trial in which a new treatment is compared with placebo and the outcome is systolic blood pressure at the end of treatment. A reduction of 5 mmHg would be worth detecting, and from earlier studies the standard deviation of systolic blood pressure among such patients is about 12 mmHg. You want 90% power at a two sided significance level of 5%, with one control for each treated patient. The figures are invented for this illustration.</p>
+        <p> </p>
+        <p>To run this in StatsDirect select Unpaired t from the Sample Size section of the Analysis menu. Enter 5 as the difference in population means, 12 as the estimate of population SD, 1 as the number of controls per experimental subject, 90% as the power and 5% as alpha.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p><u>Sample size for an unpaired two sample Student t test</u>
+        </p>
+        <p> </p>
+        <p>Alpha = 0.05</p>
+        <p>Power = 0.9</p>
+        <p>Difference between means = 5</p>
+        <p>Standard deviation = 12</p>
+        <p>Controls per experimental subject 1</p>
+        <p> </p>
+        <p>Estimated minimum sample size = 123 experimental subjects and 123 controls.</p>
+        <p> </p>
+        <p>Degrees of freedom = 244</p>
+        <p> </p>
+        <p>So 123 patients would be needed in each group, 246 in all; the power with these numbers is just over 90%. If two controls were recruited for each treated patient, entering 2 as the number of controls per experimental subject would give:</p>
+        <p> </p>
+        <p>Controls per experimental subject 2</p>
+        <p> </p>
+        <p>Estimated minimum sample size = 92 experimental subjects and 184 controls.</p>
+        <p> </p>
+        <p>Degrees of freedom = 274</p>
+        <p> </p>
+        <p>Fewer treated patients would then be needed (92 rather than 123) but more patients in all (276 rather than 246): for a given total, groups of unequal size have less power, so an unequal ratio is usually chosen only when experimental subjects are scarce or costly.</p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Sample size for an unpaired t test: the StatsDirect help example (a planned trial
+# of a treatment expected to lower systolic blood pressure by 5 mmHg, SD 12 mmHg,
+# made up for the help) in R
+delta &lt;- 5          # difference in population means worth detecting
+sd &lt;- 12            # estimated standard deviation within each group
+power &lt;- 0.9
+alpha &lt;- 0.05       # two sided
+m &lt;- 1              # controls per experimental subject
+
+# power.t.test solves the same two sided non-central t power equation as the report,
+# but only for two groups of the same size (m = 1). Its n is per group and is not a
+# whole number: the report gives the next whole number, the smallest n whose power
+# reaches the target. strict = TRUE counts a rejection in either tail as power, as
+# the report does; here the lower tail adds almost nothing.
+print(power.t.test(delta = delta, sd = sd, sig.level = alpha, power = power,
+                   type = "two.sample", alternative = "two.sided", strict = TRUE))
+
+# For m controls per experimental subject the power of the unpaired t test with n
+# experimental subjects (n(m + 1) - 2 degrees of freedom) comes from the non-central
+# t distribution, and the report gives the smallest whole n whose power reaches the
+# target. The search starts from n = 2, or from the smallest n giving at least one
+# degree of freedom when m is below 0.5.
+six &lt;- function(x) formatC(x, digits = 6, format = "f", drop0trailing = TRUE)
+size_unpaired &lt;- function(delta, sd, m, power, alpha) {
+  stopifnot(delta != 0, m &gt; 0)  # a zero difference or ratio has no finite answer
+  power_of &lt;- function(n) {
+    df &lt;- n * (m + 1) - 2
+    ncp &lt;- abs(delta) / (sd * sqrt((1 + 1 / m) / n))
+    tcrit &lt;- qt(1 - alpha / 2, df)
+    pt(tcrit, df, ncp, lower.tail = FALSE) + pt(-tcrit, df, ncp)
+  }
+  n &lt;- max(2, ceiling(3 / (m + 1)))
+  while (power_of(n) &lt; power) n &lt;- n + 1
+  cat("Alpha =", six(alpha), "\n")
+  cat("Power =", six(power), "\n")
+  cat("Difference between means =", six(delta), "\n")
+  cat("Standard deviation =", six(sd), "\n")
+  cat("Controls per experimental subject", six(m), "\n")
+  # the report rounds the control count down; the power uses m n controls exactly
+  cat("Estimated minimum sample size =", n, "experimental subjects and",
+      floor(m * n), "controls.\n")
+  cat("Degrees of freedom =", six(n * (m + 1) - 2), "\n")
+  cat("Power at this sample size =", six(power_of(n)), "\n\n")
+}
+size_unpaired(delta, sd, m, power, alpha)
+
+# The same trial with two controls for each experimental subject: fewer experimental
+# subjects are needed, but more subjects in all
+size_unpaired(delta, sd, m = 2, power, alpha)</pre>
+            </div>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+      <p style="font-family:Arial,sans-serif;font-size:8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan. <a href="https://www.statsdirect.com/" target="_blank" rel="noopener noreferrer">StatsDirect website</a>.</p>
+    </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>
