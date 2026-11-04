@@ -186,6 +186,7 @@ try
     }
     await Git(copy, "config", "--unset", "remote.origin.uploadpack");
     Check(await Git(remote, "rev-parse", "refs/heads/master") == masterBefore, "All fixture operations leave the default release branch unchanged");
+    if (OperatingSystem.IsWindows()) await LongPathChecks.RunAsync(root, fixtures, Check);
 }
 catch (Exception ex) { failed++; checks.Add(new { name = "Unexpected Git check failure", passed = false, error = ex.ToString() }); Console.Error.WriteLine(ex); }
 File.WriteAllText(Path.Combine(evidence, "git-checks.json"), JsonSerializer.Serialize(new { passed, failed, fixtures, remoteType = "Local bare repository only; no GitHub writes", results = checks }, new JsonSerializerOptions { WriteIndented = true }));

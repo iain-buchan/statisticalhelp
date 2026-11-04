@@ -56,6 +56,8 @@ internal static partial class Program
     }
     private static async Task ConversationDialogChecksAsync(TutorResearchDialog dialog, FakeClient fake)
     {
+        await QueueRemovalStatusChecksAsync(dialog, fake);
+        await ConversationFailureHistoryChecksAsync(dialog, fake);
         Check(dialog.Controls.OfType<TableLayoutPanel>().First().Controls.OfType<TabControl>().Single().SelectedTab!.Text == "Conversation", "Conversation is the primary view rather than a secondary raw-JSON discussion tab");
         var earlier = dialog.Proposal;
         var noDraft = await dialog.ResearchAsync("Which learning objective would best suit a screening lesson?", "Medical students", "discuss", true);
@@ -113,6 +115,67 @@ internal static partial class Program
         Check(fake.LastRequest!.Audience == "Liverpool CPD course for mixed clinical teams", "Changing learning goals preserves an explicitly typed audience in the actual research request");
         dialog.SetLearningTargets(null, Array.Empty<string>());
         Check(audience.Text == "Liverpool CPD course for mixed clinical teams", "Clearing automatic goal tags also preserves the author's explicitly typed audience");
+    }
+    private static async Task QueueRemovalStatusChecksAsync(TutorResearchDialog dialog, FakeClient fake)
+    {
+        fake.HoldNext = true; fake.IgnoreCancellation = true;
+        var current = dialog.ResearchAsync("Continue the first discussion while removing only its queue", "Course context", "discuss", false);
+        var composer = Descendants(dialog).OfType<TextBox>().Single(item => item.AccessibleName == "Tutor research instructions");
+        composer.Text = "Queued request to remove";
+        var sendComposer = typeof(TutorResearchDialog).GetMethod("SendComposerAsync", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!;
+        var uiSend = (Task)sendComposer.Invoke(dialog, null)!;
+        Check(dialog.HasQueuedFollowUp, "The actual composer pathway queues a follow-up while the first request is running");
+        dialog.RemoveQueuedMessage(); await uiSend;
+        var summary = (Label)typeof(TutorResearchDialog).GetField("summary", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.GetValue(dialog)!;
+        bool correctStatus = !current.IsCompleted && !fake.LastCancellationToken.IsCancellationRequested && !dialog.HasQueuedFollowUp && !summary.Text.StartsWith("Stopped", StringComparison.Ordinal);
+        fake.Held!.SetResult(true); await current;
+        Check(correctStatus, "Removing only a queued message keeps the first request running and never falsely reports it stopped");
+    }
+    private static async Task ConversationFailureHistoryChecksAsync(TutorResearchDialog dialog, FakeClient fake)
+    {
+        var priorDraft = dialog.Proposal;
+        const string failedQuestion = "FAILURE_HISTORY_04NOV: Can you clarify the denominator when the outcome is uncommon?";
+        fake.FailNext = true;
+        try { await dialog.ResearchAsync(failedQuestion, "Course context", "discuss", false); throw new Exception("Expected failed research request"); } catch (IOException) { }
+        await dialog.ResearchAsync("Please retry the previous question", "Course context", "discuss", false);
+        Check(fake.LastRequest!.PreviousDiscussion.Contains(failedQuestion) && fake.LastRequest.PreviousDiscussion.Contains("REQUEST STATUS: Failed; no complete AI reply received") && !fake.LastRequest.PreviousDiscussion.Contains("Mock provider failure") && ReferenceEquals(priorDraft, dialog.Proposal),
+            "A retry receives the failed question with an accurate no-reply status while preserving the prior complete draft");
+        var pathFailure = new PathFailureClient();
+        using (var isolated = new TutorResearchDialog(TutorResearchContext.Create(Course()), Question(), "questions", pathFailure, _ => { }) { SuppressDialogs = true, ShowInTaskbar = false, StartPosition = FormStartPosition.Manual, Location = new Point(-16000, 0) })
+        {
+            isolated.Show(dialog);
+            try { await isolated.ResearchAsync("Clarify the sampling assumption", "Course context", "discuss", false); throw new Exception("Expected path-bearing error"); } catch (IOException) { }
+            bool uiShowsError = isolated.LastError == PathFailureClient.LocalError;
+            await isolated.ResearchAsync("Please retry", "Course context", "discuss", false);
+            Check(uiShowsError && pathFailure.LastRequest!.PreviousDiscussion.Contains("Clarify the sampling assumption") && !pathFailure.LastRequest.PreviousDiscussion.Contains("ERROR:") && !pathFailure.LastRequest.PreviousDiscussion.Contains(PathFailureClient.LocalError) && !pathFailure.LastRequest.PreviousDiscussion.Contains("C:\\private"),
+                "Local provider error details remain in the UI and are never sent in retry conversation history"); isolated.Close();
+        }
+        const string stoppedQuestion = "CANCELLATION_HISTORY_04NOV: Could you compare sensitivity with predictive value?";
+        fake.HoldNext = true; fake.IgnoreCancellation = true;
+        var stopped = dialog.ResearchAsync(stoppedQuestion, "Course context", "discuss", true);
+        dialog.StopResearch(); fake.Held!.SetResult(true);
+        try { await stopped; throw new Exception("Expected stopped research request"); } catch (OperationCanceledException) { }
+        await dialog.ResearchAsync("Discuss the question I stopped, without searching again", "Course context", "discuss", false);
+        string history = fake.LastRequest!.PreviousDiscussion; int start = history.IndexOf("AUTHOR: " + stoppedQuestion, StringComparison.Ordinal);
+        int end = start < 0 ? -1 : history.IndexOf("\n\n", start, StringComparison.Ordinal);
+        string attempt = start >= 0 && end >= start ? history[start..end] : "";
+        Check(attempt.Contains("REQUEST STATUS: Stopped; no complete AI reply received") && !attempt.Contains("CHATGPT:") && !attempt.Contains("SOURCE CITATIONS") && ReferenceEquals(priorDraft, dialog.Proposal),
+            "A follow-up sees the stopped question without a fabricated answer, inherited source evidence or replacement draft");
+    }
+    private sealed class PathFailureClient : ITutorResearchChatGptClient
+    {
+        public const string LocalError = "Provider diagnostic ERROR: C:\\private\\account-runtime\\diagnostic.log";
+        public bool IsSignedIn => true; public string Status => "Connected to isolated mock"; public string? LoginUrl => null;
+        public event Action? Changed { add { } remove { } }
+        public TutorResearchRequest? LastRequest; private bool fail = true;
+        public Task InitializeAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public Task<string?> SignInAsync(CancellationToken cancellationToken = default) => Task.FromResult<string?>(null);
+        public Task CancelSignInAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public Task SignOutAsync(CancellationToken cancellationToken = default) => Task.CompletedTask;
+        public Task<StatsDirect.HelpEditor.Core.HelpPolishReview> PolishAsync(StatsDirect.HelpEditor.Core.HelpPolishContext context, StatsDirect.HelpEditor.Core.HelpPolishSnapshot snapshot, string instructions, CancellationToken cancellationToken = default) => throw new NotSupportedException();
+        public Task<TutorResearchProposal> ResearchTutorAsync(TutorResearchContext context, TutorResearchRequest request, CancellationToken cancellationToken = default)
+        { LastRequest = request; if (fail) { fail = false; throw new IOException(LocalError); } return Task.FromResult(PolishChatGptClient.ParseTutorResearch(request, ConversationalReply(false), [])); }
+        public void Dispose() { }
     }
     private static IEnumerable<Control> Descendants(Control control)
     { foreach (Control child in control.Controls) { yield return child; foreach (var item in Descendants(child)) yield return item; } }

@@ -192,7 +192,19 @@ public sealed class TutorResearchDialog : Form
     {
         string message = instructions.Text;
         if (string.IsNullOrWhiteSpace(message)) { summary.Text = "Type a question or instructions for ChatGPT."; instructions.Focus(); return; }
-        await TryAsync(async () => { var result = SendMessageAsync(message, audience.Text, ModeValue, web.Checked); instructions.Clear(); await result; });
+        await TryAsync(async () =>
+        {
+            bool wasQueued = active != null;
+            var result = SendMessageAsync(message, audience.Text, ModeValue, web.Checked); instructions.Clear();
+            try { await result; }
+            catch (OperationCanceledException) when (wasQueued)
+            {
+                // Removing a queued message is not Stop for the running reply.
+                // Its own completion/error handler owns the status if it ended.
+                if (!IsDisposed && !Disposing && active != null && !active.IsCancellationRequested)
+                    summary.Text = LastError ?? "Queued message removed; the current reply is still running.";
+            }
+        });
     }
     public Task<TutorResearchProposal> SendMessageAsync(string message, string targetAudience, string researchMode, bool useWebResearch)
     {
@@ -224,17 +236,29 @@ public sealed class TutorResearchDialog : Form
             string next = "AUTHOR: " + authorInstructions + "\nCHATGPT: " + proposed.ConversationReply + "\n" + proposed.Summary +
                 (proposed.HasDraft ? "\nLATEST DRAFT: " + proposed.ProposedRecord.ToJsonString() : "\nDISCUSSION ONLY: no draft supplied.") + "\nREVIEW NOTES: " + proposed.StatisticalNotes +
                 "\nPROPOSED R CHECK (not run): " + proposed.RValidationCode + "\nSOURCE CITATIONS (browsing evidence, not verification): " + JsonSerializer.Serialize(proposed.Sources) + "\n\n";
-            previousDiscussion += next;
-            if (previousDiscussion.Length > 180000) previousDiscussion = "[Earlier discussion omitted for length.]\n" + previousDiscussion[^180000..];
+            RememberDiscussion(next);
             return proposed;
         }
-        catch (OperationCanceledException) { RemoveQueuedMessage(); if (!IsDisposed) { summary.Text = "Stopped. Any earlier draft remains available."; AppendConversation("Status", "Request stopped; no partial reply was applied."); } throw; }
-        catch (Exception error) { RemoveQueuedMessage(); LastError = error.Message; if (!IsDisposed) { summary.Text = error.Message; AppendConversation("Status", error.Message); } throw; }
+        catch (OperationCanceledException)
+        {
+            RememberDiscussion("AUTHOR: " + authorInstructions + "\nREQUEST STATUS: Stopped; no complete AI reply received. No partial answer, source evidence or draft was accepted.\n\n");
+            RemoveQueuedMessage(); if (!IsDisposed) { summary.Text = "Stopped. Any earlier draft remains available."; AppendConversation("Status", "Request stopped; no partial reply was applied."); } throw;
+        }
+        catch (Exception error)
+        {
+            RememberDiscussion("AUTHOR: " + authorInstructions + "\nREQUEST STATUS: Failed; no complete AI reply received. No answer, source evidence or draft was accepted.\n\n");
+            RemoveQueuedMessage(); LastError = error.Message; if (!IsDisposed) { summary.Text = error.Message; AppendConversation("Status", error.Message); } throw;
+        }
         finally
         {
             FinishOperation();
             if (queued is { } next && !closingRequested && !IsDisposed && !Disposing) { queued = null; _ = RunQueuedAsync(next); }
         }
+    }
+    private void RememberDiscussion(string entry)
+    {
+        previousDiscussion += entry;
+        if (previousDiscussion.Length > 180000) previousDiscussion = "[Earlier discussion omitted for length.]\n" + previousDiscussion[^180000..];
     }
     private async Task RunQueuedAsync(QueuedMessage next)
     {

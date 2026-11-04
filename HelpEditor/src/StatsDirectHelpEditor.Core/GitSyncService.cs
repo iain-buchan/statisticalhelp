@@ -295,6 +295,9 @@ public sealed partial class GitSyncService(HelpProject project)
         var start = new ProcessStartInfo("git") { WorkingDirectory = cwd, UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true, RedirectStandardInput = true, StandardInputEncoding = new UTF8Encoding(false), StandardOutputEncoding = Encoding.UTF8, StandardErrorEncoding = Encoding.UTF8 };
         start.ArgumentList.Add("-c"); start.ArgumentList.Add("credential.interactive=never");
         start.ArgumentList.Add("-c"); start.ArgumentList.Add("core.quotepath=false");
+        // Generated artwork can exceed MAX_PATH in an otherwise valid authoring
+        // folder. Enable Git for Windows long paths for this process only.
+        if (OperatingSystem.IsWindows()) { start.ArgumentList.Add("-c"); start.ArgumentList.Add("core.longpaths=true"); }
         foreach (var arg in args) start.ArgumentList.Add(arg);
         start.Environment["GIT_TERMINAL_PROMPT"] = "0";
         start.Environment["GCM_INTERACTIVE"] = "Never";
