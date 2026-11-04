@@ -58,12 +58,12 @@ try
     string page = checkout.Project.ReadTopic("basics/example.htm"); checkout.Project.SaveTopic("basics/example.htm", page.Replace("Original body", "Reviewed body"));
     Check((await sync.StatusAsync()).SourceChangeCount == 1, "Nested source changes are classified using the explicit layout");
     Write(Path.Combine(checkout.Project.RootPath, "RCode/example.R"), "mean(c(1,2))\r\n");
-    string publicOutput = Path.Combine(fixture, "Public"); var built = HelpBuilder.Build(checkout.Project, publicOutput, Path.Combine(root, "App/Web"), HelpBuildTarget.Public);
+    string publicOutput = Path.Combine(fixture, "Public"); var built = HelpBuilder.Build(checkout.Project, publicOutput, Path.Combine(root, "src/StatsDirectHelpEditor.App/Web"), HelpBuildTarget.Public);
     var expectedOutput = Files(publicOutput); var expectedSource = Source(checkout.Project.RootPath); string oldDocs = Hash(Path.Combine(clone, "Docs/index.html"));
     Write(Path.Combine(publicOutput, "contents.htm"), "Tampered prepared body");
     await Reject(() => sync.PrepareWebsiteFromBuildAsync(publicOutput, expectedOutput, expectedSource, built.TopicCount, built.SearchDocumentCount, built.Warnings), "Prepared publication refuses a changed public file before overwriting Docs");
     Check(Hash(Path.Combine(clone, "Docs/index.html")) == oldDocs, "Rejected prepared artifact preserves the previous Docs tree");
-    built = HelpBuilder.Build(checkout.Project, publicOutput, Path.Combine(root, "App/Web"), HelpBuildTarget.Public); expectedOutput = Files(publicOutput);
+    built = HelpBuilder.Build(checkout.Project, publicOutput, Path.Combine(root, "src/StatsDirectHelpEditor.App/Web"), HelpBuildTarget.Public); expectedOutput = Files(publicOutput);
     await Reject(() => sync.PrepareWebsiteFromBuildAsync(publicOutput, expectedOutput, expectedSource, built.TopicCount, built.SearchDocumentCount, ["Review this warning"]), "Prepared warnings require explicit review opt-in");
     Write(Path.Combine(clone, "Docs/.gitattributes"), "*.html text eol=crlf\n");
     await Reject(() => sync.PrepareWebsiteFromBuildAsync(publicOutput, expectedOutput, expectedSource, built.TopicCount, built.SearchDocumentCount, built.Warnings), "Publication refuses existing incompatible custom Docs Git rules");
@@ -134,7 +134,7 @@ try
         Check((await normalSync.StatusAsync()).SourceChangeCount == 1, "Normal nested status classifies the edited canonical page as source");
         await normalSync.CommitAsync("Normal nested source edit", "Fixture Author", "author@example.test");
         Check(await Git(normal, "diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD") == "HelpEditor/HelpSource/Content/basics/example.htm", "Normal source commit scopes only the nested authored page");
-        await normalSync.PrepareWebsiteAsync(Path.Combine(root, "App/Web"));
+        await normalSync.PrepareWebsiteAsync(Path.Combine(root, "src/StatsDirectHelpEditor.App/Web"));
         Check(File.ReadAllText(Path.Combine(normal, "Docs/basics/example.htm")).Contains("Normal menu body") && File.ReadAllText(Path.Combine(normal, "Docs/.gitattributes")) == "* -text\n", "Normal nested website preparation updates root Docs and retains exact-byte metadata");
         await normalSync.CommitWebsiteAsync("Normal nested website", "Fixture Author", "author@example.test"); await normalSync.PushWebsiteAsync();
         Check(await Git(remote, "rev-parse", "refs/heads/author/normal-menu") == await normalSync.ReadHeadCommitAsync() && await Git(remote, "rev-parse", "master") == remoteAdvanced, "Normal nested website push updates only the working branch and leaves the live default unchanged");
