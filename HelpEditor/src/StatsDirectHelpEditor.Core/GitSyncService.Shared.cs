@@ -41,7 +41,7 @@ public sealed partial class GitSyncService
     public async Task PrepareSharedContentAsync(string preparedPublishedDirectory,
         IReadOnlyDictionary<string, string> expectedFiles, CancellationToken ct = default)
     {
-        if (!publicationLayout || publicationBaseCommit == null || expectedPublicationOrigin == null || expectedPublicationBranch == null ||
+        if (!publicationLayout || factoryCloneRoot == null || !SafePaths.Same(factoryCloneRoot, RepositoryRoot) || publicationBaseCommit == null || expectedPublicationOrigin == null || expectedPublicationBranch == null ||
             !Directory.Exists(Path.Combine(RepositoryRoot, ".git")))
             throw new InvalidOperationException("Shared publication requires the private checkout created by the publication workflow.");
         if (originalSharedFiles == null) throw new InvalidOperationException("Prepare the matching website before shared content.");

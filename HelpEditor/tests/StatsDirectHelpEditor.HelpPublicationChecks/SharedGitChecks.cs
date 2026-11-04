@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -11,6 +12,7 @@ static class SharedGitChecks
 {
     public static async Task Run(string editorRoot, string fixtures, Action<bool, string, object?> check)
     {
+        await RunCaseOnlyDocs(editorRoot, fixtures, check);
         Task<(Fixture Fixture, HelpPublicationOptions Options)> New() => NewFixture(editorRoot, fixtures);
         async Task<HelpPublicationException> Fail(Fixture fixture, HelpPublicationOptions options, Action<HelpPublicationProgress>? callback = null)
         {
@@ -100,9 +102,54 @@ static class SharedGitChecks
             "Enabling shared publication does not allow unrelated staged files into its commit", null);
     }
 
-    internal static async Task<(Fixture Fixture, HelpPublicationOptions Options)> NewFixture(string editorRoot, string fixtures)
+    public static async Task RunCaseOnlyDocs(string editorRoot, string fixtures, Action<bool, string, object?> check)
     {
-        var fixture = new Fixture(Path.Combine(fixtures, "shared-" + Guid.NewGuid().ToString("N")[..8]), true);
+        var (fixture, options) = await NewFixture(editorRoot, fixtures, mixedCaseDocs: true);
+        string[] before = (await Git(fixture.Remote, "ls-tree", "-r", "--name-only", "HEAD", "--", "Docs"))
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        if (!before.Contains("Docs/Basics/old.htm", StringComparer.Ordinal) ||
+            !before.Contains("Docs/resources/Scripts/chm-pictures.js", StringComparer.Ordinal) ||
+            !before.Contains("Docs/resources/Scripts/chm-pictures.js.props", StringComparer.Ordinal))
+            throw new InvalidDataException("The case-only regression needs the exact old tracked folder casing.");
+        var result = await HelpPublicationPublisher.PublishLocalForTestsAsync(HelpProject.Open(fixture.Source), fixture.Assets, options);
+        using var website = ZipFile.OpenRead(fixture.Zip);
+        using var committed = ZipFile.OpenRead(await fixture.ArchiveDocs());
+        Dictionary<string, byte[]> ReaderBytes(ZipArchive archive, bool docsPrefix)
+        {
+            var rows = new Dictionary<string, byte[]>(StringComparer.Ordinal);
+            foreach (var entry in archive.Entries.Where(entry => !entry.FullName.EndsWith('/')))
+            {
+                string path = docsPrefix ? entry.FullName["Docs/".Length..] : entry.FullName;
+                if (!HelpPublicationPublisher.ReaderFile(path)) continue;
+                using var input = entry.Open(); using var buffer = new MemoryStream(); input.CopyTo(buffer);
+                rows.Add(path, buffer.ToArray());
+            }
+            return rows;
+        }
+        var zip = ReaderBytes(website, false); var git = ReaderBytes(committed, true);
+        string[] missing = zip.Keys.Except(git.Keys, StringComparer.Ordinal).ToArray();
+        string[] extra = git.Keys.Except(zip.Keys, StringComparer.Ordinal).ToArray();
+        string[] changed = zip.Keys.Intersect(git.Keys, StringComparer.Ordinal).Where(path => !zip[path].AsSpan().SequenceEqual(git[path])).ToArray();
+        string[] required = ["basics/example.htm", "resources/scripts/chm-pictures.js", "resources/scripts/chm-pictures.js.props"];
+        check(result.Completed && result.GitPushed && missing.Length == 0 && extra.Length == 0 && changed.Length == 0 &&
+            required.All(path => zip.ContainsKey(path) && git.ContainsKey(path)) &&
+            !git.Keys.Any(path => path.StartsWith("Basics/", StringComparison.Ordinal) || path.StartsWith("resources/Scripts/", StringComparison.Ordinal)),
+            "Shared publication replaces old tracked folder casing so every ZIP reader path and byte exactly matches committed Docs",
+            new { ReaderFiles = zip.Count, Missing = missing, Extra = extra, ChangedBytes = changed, RequiredLowercasePaths = required, OldTrackedPaths = before, result.GitCommit });
+        var first = await GitSyncService.CloneLocalPublicationForTestsAsync(fixture.Remote, "main", Path.Combine(fixture.Root, "FactoryFirst"));
+        var second = await GitSyncService.CloneLocalPublicationForTestsAsync(fixture.Remote, "main", Path.Combine(fixture.Root, "FactorySecond"));
+        var secondBefore = Files(second.Layout.GitRoot); bool retargetRefused = false;
+        try { _ = new GitSyncService(second.Project, first.Layout with { GitRoot = second.Layout.GitRoot }); }
+        catch (ArgumentException) { retargetRefused = true; }
+        check(retargetRefused && first.Branch == second.Branch && first.BaseCommit == second.BaseCommit &&
+            first.Layout.SourceRelativePrefix == second.Layout.SourceRelativePrefix && Same(secondBefore, Files(second.Layout.GitRoot)),
+            "A private publication layout cannot be retargeted to a second otherwise-identical factory clone or mutate it",
+            new { first.Branch, first.BaseCommit, first.Layout.SourceRelativePrefix, FirstRoot = first.Layout.GitRoot, SecondRoot = second.Layout.GitRoot });
+    }
+
+    internal static async Task<(Fixture Fixture, HelpPublicationOptions Options)> NewFixture(string editorRoot, string fixtures, bool mixedCaseDocs = false)
+    {
+            var fixture = new Fixture(Path.Combine(fixtures, "shared-" + Guid.NewGuid().ToString("N")[..8]), true, mixedCaseDocs);
         await fixture.Initialize();
         string seed = Path.Combine(editorRoot, "src/StatsDirectHelpEditor.App/TutorSeed/starter-course.json");
         string immutable = Path.Combine(fixture.Root, "TutorSeed/starter-course.json");

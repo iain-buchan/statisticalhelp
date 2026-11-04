@@ -11,6 +11,7 @@ public sealed record GitPublicationLayout(string GitRoot, string SourceRelativeP
     internal string? ExpectedOriginUrl { get; init; }
     internal string? ExpectedBranch { get; init; }
     internal string? BaseCommit { get; init; }
+    internal string? FactoryCloneRoot { get; init; }
 }
 public sealed record GitPublicationCheckout(HelpProject Project, GitPublicationLayout Layout, string Branch, string BaseCommit);
 
@@ -25,6 +26,7 @@ public sealed partial class GitSyncService
     private readonly string? expectedPublicationOrigin;
     private readonly string? expectedPublicationBranch;
     private readonly string? publicationBaseCommit;
+    private readonly string? factoryCloneRoot;
     private string? reviewedPublicationCommit;
     private IReadOnlyDictionary<string, string>? TransportEnvironment => localTestRemote == null ? null : new Dictionary<string, string> { ["GIT_ALLOW_PROTOCOL"] = "file" };
     private string[] ScopedSourcePaths => SourcePaths.Select(path => SourcePrefix.Length == 0 ? path : SourcePrefix + "/" + path).ToArray();
@@ -37,6 +39,8 @@ public sealed partial class GitSyncService
         ArgumentNullException.ThrowIfNull(layout);
         RepositoryRoot = Path.GetFullPath(layout.GitRoot).TrimEnd(Path.DirectorySeparatorChar);
         SafePaths.CheckNoLinks(RepositoryRoot);
+        if (layout.FactoryCloneRoot != null && !SafePaths.Same(layout.FactoryCloneRoot, RepositoryRoot))
+            throw new ArgumentException("A publication layout cannot be retargeted from its factory-created private clone.");
         SourcePrefix = (layout.SourceRelativePrefix ?? throw new ArgumentException("A source-relative prefix is required.")).Replace('\\', '/');
         if (SourcePrefix.Length != 0 && (SourcePrefix.StartsWith('/') || SourcePrefix.EndsWith('/') || SourcePrefix.Contains(':') ||
             SourcePrefix.Split('/').Any(part => part is "" or "." or ".." || part.Equals(".git", StringComparison.OrdinalIgnoreCase)) ||
@@ -49,6 +53,7 @@ public sealed partial class GitSyncService
         expectedPublicationOrigin = layout.ExpectedOriginUrl;
         expectedPublicationBranch = layout.ExpectedBranch;
         publicationBaseCommit = layout.BaseCommit;
+        factoryCloneRoot = layout.FactoryCloneRoot;
     }
 
     private static GitPublicationLayout OrdinaryLayout(HelpProject project)
@@ -142,7 +147,7 @@ public sealed partial class GitSyncService
             string entry = "/" + (prefix.Length == 0 ? "" : prefix + "/") + local;
             if (!current.Split('\n').Any(line => line.Trim() == entry)) { File.AppendAllText(exclude, Environment.NewLine + entry + Environment.NewLine, new UTF8Encoding(false)); current += "\n" + entry; }
         }
-        return new(HelpProject.Open(helpRoot), new(destination, prefix) { LocalTestRemote = localTestRemote, ExpectedOriginUrl = source, ExpectedBranch = branch, BaseCommit = head }, branch, head);
+        return new(HelpProject.Open(helpRoot), new(destination, prefix) { LocalTestRemote = localTestRemote, ExpectedOriginUrl = source, ExpectedBranch = branch, BaseCommit = head, FactoryCloneRoot = destination }, branch, head);
     }
 
     /// <summary>Consume an independently verified Public build without another compilation.</summary>

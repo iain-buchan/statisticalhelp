@@ -35,6 +35,11 @@ public sealed partial class GitSyncService
                 foreach (string relative in inputs.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal))
                     held.Add(File.Open(SafePaths.Resolve(RepositoryRoot, relative), FileMode.Open, FileAccess.Read, FileShare.Read));
                 await RejectContentFiltersAsync(paths, ct);
+                // Windows Git otherwise reuses tracked directory casing even
+                // after the private clone receives a freshly cased Docs tree.
+                // Clear only this reviewed scope in the temporary index.
+                if (website && preparedFreshWebsite)
+                    await RunAsync(RepositoryRoot, ["rm", "--cached", "-r", "--ignore-unmatch", "--", WebsitePath], ct, environment: privateEnv);
                 // Staging all authored pages and generated assets can exceed
                 // 30 seconds on a cold or actively scanned disk. Cancellation
                 // still stops this one bounded operation promptly.

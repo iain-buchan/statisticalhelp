@@ -12,6 +12,7 @@ public sealed partial class GitSyncService
     private const string WebsiteReceiptName = ".statsdirect-help-website.json";
     private const string BuilderReceiptName = ".statsdirect-help-output.json";
     private static readonly string[] WebsiteMetadata = ["CNAME", ".nojekyll"];
+    private bool preparedFreshWebsite;
 
     public static bool IsWebsitePath(string path) => path.Replace('\\', '/') is var clean &&
         (clean.Equals(WebsitePath, StringComparison.Ordinal) || clean.StartsWith(WebsitePath + "/", StringComparison.Ordinal));
@@ -31,6 +32,7 @@ public sealed partial class GitSyncService
         bool pinWebsiteBytes = ScopedSourcePrivacy || HasPublicationAttributes(docs);
         if (pinWebsiteBytes) RequirePublicationAttributes(docs);
         var before = WebsiteFiles(docs);
+        string? previousReceiptHash = File.Exists(Path.Combine(docs, WebsiteReceiptName)) ? FileHash(Path.Combine(docs, WebsiteReceiptName)) : null;
         bool previousPrepared = TryReadWebsiteReceipt(docs, out var previous) && previous!.Schema == 1 && SameFiles(before, previous.Files);
         PendingWebsiteCopy? pending = null;
         try { if (File.Exists(pendingPath)) pending = JsonSerializer.Deserialize<PendingWebsiteCopy>(File.ReadAllText(pendingPath)); }
@@ -72,17 +74,25 @@ public sealed partial class GitSyncService
         if (!before.ContainsKey(".nojekyll")) intended[".nojekyll"] = Convert.ToHexString(SHA256.HashData([]));
         if (pinWebsiteBytes) intended[".gitattributes"] = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes("* -text\n")));
         SafePaths.AtomicWrite(pendingPath, JsonSerializer.Serialize(new PendingWebsiteCopy(before, intended)));
-        foreach (string path in generated.Keys)
+        if (uniqueStaging && factoryCloneRoot != null && publicationBaseCommit != null && expectedPublicationOrigin != null && expectedPublicationBranch != null &&
+            Directory.Exists(Path.Combine(RepositoryRoot, ".git")))
         {
-            ct.ThrowIfCancellationRequested();
-            string destination = SafePaths.Resolve(docs, path);
-            Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
-            string temporary = destination + ".helpeditor-publish-" + Guid.NewGuid().ToString("N") + ".tmp";
-            try { File.Copy(SafePaths.Resolve(staging, path), temporary); File.Move(temporary, destination, overwrite: true); }
-            finally { if (File.Exists(temporary)) File.Delete(temporary); }
+            InstallFreshPrivateWebsite(staging, docs, before, previousReceiptHash, ct);
         }
-        foreach (string path in before.Keys.Except(generated.Keys).Where(path => !WebsiteMetadata.Contains(path, StringComparer.Ordinal) && !(pinWebsiteBytes && path == ".gitattributes")))
-            File.Delete(SafePaths.Resolve(docs, path));
+        else
+        {
+            foreach (string path in generated.Keys)
+            {
+                ct.ThrowIfCancellationRequested();
+                string destination = SafePaths.Resolve(docs, path);
+                Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
+                string temporary = destination + ".helpeditor-publish-" + Guid.NewGuid().ToString("N") + ".tmp";
+                try { File.Copy(SafePaths.Resolve(staging, path), temporary); File.Move(temporary, destination, overwrite: true); }
+                finally { if (File.Exists(temporary)) File.Delete(temporary); }
+            }
+            foreach (string path in before.Keys.Except(generated.Keys).Where(path => !WebsiteMetadata.Contains(path, StringComparer.Ordinal) && !(pinWebsiteBytes && path == ".gitattributes")))
+                File.Delete(SafePaths.Resolve(docs, path));
+        }
         if (!File.Exists(Path.Combine(docs, ".nojekyll"))) SafePaths.AtomicWrite(Path.Combine(docs, ".nojekyll"), "");
         if (pinWebsiteBytes) SafePaths.AtomicWrite(Path.Combine(docs, ".gitattributes"), "* -text\n");
         ct.ThrowIfCancellationRequested();
@@ -91,6 +101,46 @@ public sealed partial class GitSyncService
         SafePaths.AtomicWrite(Path.Combine(docs, WebsiteReceiptName), JsonSerializer.Serialize(receipt, new JsonSerializerOptions { WriteIndented = true }));
         File.Delete(pendingPath);
         return new WebsitePublication(docs, built.TopicCount, built.SearchDocumentCount, built.Warnings);
+    }
+
+    // A reviewed publication uses its own disposable clone. Install a fresh
+    // tree there: copying into old Windows directories preserves their casing,
+    // which can break URLs on GitHub Pages and differ from the website ZIP.
+    private void InstallFreshPrivateWebsite(string staging, string docs, IReadOnlyDictionary<string, string> before,
+        string? previousReceiptHash, CancellationToken ct)
+    {
+        string privateGit = Path.Combine(RepositoryRoot, ".git");
+        if (!publicationLayout || factoryCloneRoot == null || !SafePaths.Same(factoryCloneRoot, RepositoryRoot) || publicationBaseCommit == null || expectedPublicationOrigin == null || expectedPublicationBranch == null ||
+            !Directory.Exists(privateGit) || !SafePaths.Same(docs, SafePaths.Resolve(RepositoryRoot, WebsitePath)) ||
+            !SafePaths.IsWithin(staging, privateGit))
+            throw new InvalidOperationException("Fresh website replacement is restricted to the publication workflow's private clone.");
+        foreach (string name in WebsiteMetadata)
+        {
+            string source = SafePaths.Resolve(docs, name), target = SafePaths.Resolve(staging, name);
+            if (File.Exists(source)) File.Copy(source, target, overwrite: false);
+        }
+        foreach (string marker in new[] { BuilderReceiptName, WebsiteReceiptName })
+        {
+            string file = SafePaths.Resolve(staging, marker);
+            if (File.Exists(file)) File.Delete(file);
+        }
+        ct.ThrowIfCancellationRequested();
+        string receipt = Path.Combine(docs, WebsiteReceiptName);
+        if (!SameFiles(before, WebsiteFiles(docs)) || previousReceiptHash != (File.Exists(receipt) ? FileHash(receipt) : null))
+            throw new InvalidOperationException("The private website changed before replacement; its files were preserved.");
+        // No live website or user's checkout is removed. Failure retains the
+        // private clone/journal; the previous tracked site remains in its Git.
+        RemovePrivateTree(docs);
+        Directory.Move(staging, docs);
+        preparedFreshWebsite = true;
+
+        static void RemovePrivateTree(string directory)
+        {
+            SafePaths.CheckNoLinks(directory);
+            foreach (string child in Directory.EnumerateDirectories(directory)) RemovePrivateTree(child);
+            foreach (string file in Directory.EnumerateFiles(directory)) { SafePaths.CheckNoLinks(file); File.Delete(file); }
+            Directory.Delete(directory);
+        }
     }
 
     /// <summary>Saved source and its freshly generated website enter the same commit.</summary>

@@ -23,6 +23,8 @@ try
 {
     if (args.Contains("--shared-races-only"))
         await SharedPublicationRaceChecks.Run(root, fixtures, Check);
+    else if (args.Contains("--shared-case-only"))
+        await SharedGitChecks.RunCaseOnlyDocs(root, fixtures, Check);
     else
     {
     var f = await New(); var before = f.SourceHashes(); var seedBefore = f.SeedHashes(); string remoteBefore = await f.Head();
@@ -176,9 +178,9 @@ sealed class Fixture
     public string Root { get; } public string Source => Path.Combine(Root, "CurrentSource"); public string Assets => Path.Combine(Root, "Runtime");
     public string Application => Path.Combine(Root, "Application"); public string Help => Path.Combine(Application, "StatsDirectUI/Assets/Help");
     public string Zip => Path.Combine(Root, "Website.zip"); public string Seed => Path.Combine(Root, "UserCheckout"); public string Remote => Path.Combine(Root, "Remote.git");
-    public string History => Path.Combine(Root, "History"); private bool Nested { get; }
+    public string History => Path.Combine(Root, "History"); private bool Nested { get; } private bool MixedCaseDocs { get; }
     public HelpPublicationOptions Options => new() { WebsiteZipPath = Zip, GitHubRepositoryUrl = Remote, GitHubBranch = "main", AuthorName = "Fixture Author", AuthorEmail = "fixture@example.org", StatsDirectSource = Application, AllowDefaultBranchPublication = true, JournalDirectory = History };
-    public Fixture(string root, bool nested) { Root = root; Nested = nested; }
+    public Fixture(string root, bool nested, bool mixedCaseDocs = false) { Root = root; Nested = nested; MixedCaseDocs = mixedCaseDocs; }
     public async Task Initialize()
     {
         Write(Source, HelpProject.MarkerFile, "{\"keepLocalMarker\":true}");
@@ -188,6 +190,11 @@ sealed class Fixture
         Write(Source, "Project/TOCs/STATSDIRECT.fltoc", "<CatapultToc><TocEntry Title='Contents' Link='/Content/contents.htm'/><TocEntry Title='Example' Link='/Content/basics/example.htm'/></CatapultToc>");
         Write(Source, "Project/Advanced/STATSDIRECT.flali", "<CatapultAliasFile><Map Name='CONTENTS' Link='/Content/contents.htm'/><Map Name='EXAMPLE' Link='/Content/basics/example.htm'/></CatapultAliasFile>");
         Write(Source, "Project/Advanced/SD3ContextID.h", "#define CONTENTS 1000\n#define EXAMPLE 1001\n");
+        if (MixedCaseDocs)
+        {
+            Write(Source, "Content/resources/scripts/chm-pictures.js", "window.caseFixture = 'exact byte identity';\r\n");
+            Write(Source, "Content/resources/scripts/chm-pictures.js.props", "<props value='case identity'/>\r\n");
+        }
         Write(Source, "Project/Users/private.xml", "Personal author state must not be published"); Write(Source, "Project/Destinations/secret.fldes", "Never publish a Flare destination");
         Write(Source, ".help-editor-recovery/deleted.htm", "Preserved user recovery data"); Write(Source, "RCode/example.R", "mean(c(1,2,3))\n");
         Write(Assets, "mathjax/tex-mml-svg.js", "// Isolated offline test renderer\n");
@@ -200,6 +207,12 @@ sealed class Fixture
         Write(canonical, "Project/TOCs/STATSDIRECT.fltoc", "<CatapultToc><TocEntry Title='Old' Link='/Content/contents.htm'/></CatapultToc>");
         if (Nested) Write(Seed, "Content/legacy.htm", "Legacy root source remains intact");
         Write(Seed, "Docs/index.html", "<html><body>Previous published site.</body></html>"); Write(Seed, "Docs/CNAME", "help.example.org");
+        if (MixedCaseDocs)
+        {
+            Write(Seed, "Docs/Basics/old.htm", "<html><body>Obsolete differently-cased folder.</body></html>");
+            Write(Seed, "Docs/resources/Scripts/chm-pictures.js", "window.caseFixture = 'exact byte identity';\r\n");
+            Write(Seed, "Docs/resources/Scripts/chm-pictures.js.props", "<props value='case identity'/>\r\n");
+        }
         Write(Seed, ".gitattributes", "* -text\n"); await Git(Seed, "add", "--all"); await Git(Seed, "commit", "-m", "Fixture baseline");
         await Git(Root, "clone", "--bare", "--no-hardlinks", Seed, Remote);
     }
