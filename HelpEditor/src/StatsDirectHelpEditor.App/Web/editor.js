@@ -61,6 +61,43 @@ function parseXml(text) {
   if (!doc.documentElement || doc.documentElement.localName.toLowerCase() !== 'html' || !findBody(doc)) throw new Error('The page needs an html root and a body element.');
   return doc;
 }
+// Match HelpSourceContent's explicit documentation policy. These operations
+// inspect actual XML/HTML nodes, never escaped examples or R/LaTeX text.
+const sourceUrlAttributes=new Set(['href','src','action','formaction','background','cite','longdesc','poster','data']);
+function activeSourceAttribute(attr){
+  if(attr.namespaceURI===XMLNS||attr.name==='xmlns')return false;
+  return /^on/i.test(attr.localName)||sourceUrlAttributes.has(attr.localName.toLowerCase())&&attr.value.replace(/[\t\r\n]/g,'').replace(/^[\x00-\x20]+/,'').toLowerCase().startsWith('javascript:');
+}
+function activeSourceElement(element){
+  const tag=element.localName.toLowerCase();
+  if(['iframe','object','embed'].includes(tag))return true;
+  if(tag!=='script')return false;
+  const hasSource=Array.from(element.attributes).some(a=>a.localName.toLowerCase()==='src');
+  const types=Array.from(element.attributes).filter(a=>!a.namespaceURI&&a.localName.toLowerCase()==='type');
+  if(!hasSource&&(!element.namespaceURI||element.namespaceURI==='http://www.w3.org/1999/xhtml')&&types.length===1&&['application/json','application/ld+json'].includes(types[0].value.replace(/^[\t\r\n\f ]+|[\t\r\n\f ]+$/g,'').toLowerCase()))return false;
+  const text=element.textContent.trim();
+  return element.parentElement?.localName.toLowerCase()!=='head'||hasSource||element.children.length>0||text.length>0&&!['/*<![CDATA[*//*]]>*/','/**//**/'].includes(text);
+}
+function stripImportedContent(root){
+  let removed=0;
+  for(const element of Array.from(root.getElementsByTagName('*')))if(activeSourceElement(element)){element.remove();removed++;}
+  const elements=[...(root.nodeType===Node.ELEMENT_NODE?[root]:[]),...root.getElementsByTagName('*')];
+  for(const element of elements)for(const attr of Array.from(element.attributes))if(activeSourceAttribute(attr)){element.removeAttributeNode(attr);removed++;}
+  return removed;
+}
+function validateSourceContent(doc){
+  for(const element of doc.getElementsByTagName('*')){
+    if(activeSourceElement(element))throw new Error('Remove executable script or embedded iframe/object/embed content before saving.');
+    if(Array.from(element.attributes).some(activeSourceAttribute))throw new Error('Remove event-handler attributes and javascript URLs before saving.');
+  }
+}
+function serializeImportedDocument(doc,original){
+  const declaration=original.match(/^\uFEFF?(<\?xml[^>]*\?>)[\r\n]*/)?.[1];
+  let text=new XMLSerializer().serializeToString(doc);
+  if(declaration&&!text.startsWith('<?xml'))text=declaration+'\n'+text;
+  if(original.includes('\r\n'))text=text.replace(/\r?\n/g,'\r\n');
+  return text;
+}
 function findBody(doc) { return Array.from(doc.documentElement.children).find(x=>x.localName.toLowerCase()==='body'); }
 function findTitle(doc) { return Array.from(doc.getElementsByTagName('*')).find(x=>x.localName.toLowerCase()==='title'); }
 function sourcePositionMapper(before,after){
@@ -132,7 +169,8 @@ function recoverProtected(element){
   if(!payload||payload.length>20_000_000||/<!DOCTYPE/i.test(payload))return null;
   const doc=new DOMParser().parseFromString('<root xmlns:sdh="'+SDH+'" xmlns:MadCap="'+LEGACY_MC+'">'+payload+'</root>','application/xml');
   if(doc.querySelector('parsererror')||doc.documentElement.childNodes.length!==1)return null;
-  const node=doc.documentElement.firstChild;if(![Node.ELEMENT_NODE,Node.COMMENT_NODE].includes(node.nodeType))return null;
+  stripImportedContent(doc);
+  const node=doc.documentElement.firstChild;if(!node||![Node.ELEMENT_NODE,Node.COMMENT_NODE].includes(node.nodeType))return null;
   const oldBase=element.dataset.editorSourceBase;
   if(oldBase&&node.nodeType===Node.ELEMENT_NODE){
     for(const part of [node,...node.getElementsByTagName('*')])for(const attr of Array.from(part.attributes)){
@@ -420,8 +458,8 @@ function serializeVisual() {
 function getSource() {
   if(!state.path)return '';
   try {
-    if(state.tab==='source') { const value=state.sourceDirty?source.value:state.baseSource;parseXml(value);return value; }
-    return state.visualDirty ? serializeVisual() : state.baseSource;
+    const value=state.tab==='source'?(state.sourceDirty?source.value:state.baseSource):state.visualDirty?serializeVisual():state.baseSource;
+    validateSourceContent(parseXml(value));return value;
   } catch(error) { showError(error.message);throw error; }
 }
 function currentSnapshot() { return state.tab==='source' ? state.sourceDirty?source.value:state.baseSource : state.visualDirty ? serializeVisual() : state.baseSource; }
@@ -462,7 +500,7 @@ function applyReviewedSource(path,expectedSource,newSource){
   if(!state.path||state.path!==path)throw new Error('The current page changed. Review the current page again.');
   if(modalState().dialogOpen)throw new Error('Apply or Cancel the open editing dialog before accepting suggestions.');
   if(getSource()!==expectedSource)throw new Error('The page changed after this review. Review the current text again.');
-  parseXml(newSource); // Refuse invalid output before touching the draft/history.
+  validateSourceContent(parseXml(newSource)); // Refuse invalid/active output before touching the draft/history.
   if(newSource===expectedSource)return true;
   const selection={text:source.value,start:source.selectionStart,end:source.selectionEnd,direction:source.selectionDirection,top:source.scrollTop,left:source.scrollLeft};
   const visualPanel=$('visual-panel'),visualPosition={top:visualPanel.scrollTop,left:visualPanel.scrollLeft},visualSelection=reviewSelectionBookmark();
@@ -592,14 +630,20 @@ function load(payload){
   // Parse the new page before committing its visible view. A cached Browser
   // handoff must not expose the formatted editor or its full loading overlay.
   try{
-    state.xml=parseXml(state.baseSource);renderVisual();
+    state.xml=parseXml(state.baseSource);
+    if(stripImportedContent(state.xml)){
+      state.baseSource=serializeImportedDocument(state.xml,state.baseSource);source.value=state.baseSource;
+      state.history=[state.baseSource];state.historyIndex=0;
+    }
+    renderVisual();
     const tab=state.unifiedViews?(retainedView==='browser'?'preview':retainedView==='source'||retainedView==='app'&&previousEditTab==='source'?'source':'visual'):'visual';
     setVisibleTab(tab);
     if(state.unifiedViews&&retainedView==='browser')$('editor-hint').textContent='Browser view: generated website output.';
     else if(state.unifiedViews&&retainedView==='app')$('editor-hint').textContent='App view: edit this page alongside the dockable StatsDirect help pane.';
   }
   catch(error){state.xml=null;visual.replaceChildren();if(state.unifiedViews)state.pageView='source';setVisibleTab('source');showError(error.message);}
-  if(payload.topics)setTopics(payload.topics);setDirty(false);updateUndoButtons();updateToolbar();if(payload.fragment)revealFragment(payload.fragment);
+  if(payload.topics)setTopics(payload.topics);setDirty(state.baseSource!==state.savedSource);updateUndoButtons();updateToolbar();if(payload.fragment)revealFragment(payload.fragment);
+  if(state.baseSource!==state.savedSource)showError('Executable page content was removed from this imported draft. Review and save the cleaned page; the original file has not changed.');
   if(state.unifiedViews){
     if(state.xml&&['browser','app'].includes(retainedView))requestOutputPreview(retainedView,'load');
   }else if(previousWorkspace!=='edit'&&state.xml)setWorkspaceView(previousWorkspace);
@@ -607,7 +651,7 @@ function load(payload){
 function markSaved(authoritativeSource){
   const current=getSource(),text=authoritativeSource===undefined?current:authoritativeSource;
   if(typeof text!=='string')throw new Error('The saved page source is invalid.');
-  const xml=parseXml(text);
+  const xml=parseXml(text);validateSourceContent(xml);
   if(text!==current){
     // The host can normalize an imported namespace before writing the page.
     // Adopt those exact disk bytes without adding a normalization-only Undo.
@@ -832,6 +876,16 @@ $('equation-form').addEventListener('submit',e=>e.preventDefault());
 $('equation-field').addEventListener('input',()=>{$('equation-latex').value=$('equation-field').value;$('equation-error').hidden=true;});
 $('equation-latex').addEventListener('input',()=>{$('equation-field').setValue($('equation-latex').value,{silenceNotifications:true});$('equation-error').hidden=true;});
 $('save-page').addEventListener('click',requestSave);
+visual.addEventListener('paste',event=>{
+  const html=event.clipboardData?.getData('text/html');if(!html)return;
+  const imported=new DOMParser().parseFromString(html,'text/html');
+  if(!stripImportedContent(imported))return;
+  event.preventDefault();captureHistory();
+  // Sanitize before inserting into the live editing DOM. Native rich paste
+  // remains unchanged when it contains no prohibited constructs.
+  document.execCommand('insertHTML',false,imported.body.innerHTML);visualChanged();
+  showError('Executable content was removed from the pasted text.');
+});
 visual.addEventListener('input',visualChanged);
 visual.addEventListener('pointerdown',()=>{state.pendingFontSize=null;});
 visual.addEventListener('click',e=>{const sourceButton=e.target.closest('[data-source-widget]');if(sourceButton){e.preventDefault();focusWidgetSource(sourceButton.dataset.sourceWidget);return;}const eq=e.target.closest('.equation-widget');selectEquation(eq);if(e.target.closest('a'))e.preventDefault();});

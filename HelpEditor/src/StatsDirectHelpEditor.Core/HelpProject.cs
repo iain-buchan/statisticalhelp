@@ -112,6 +112,7 @@ public sealed partial class HelpProject
         var document = Parse(source);
         if (document.Root?.Name.LocalName != "html" || !document.Descendants().Any(e => e.Name.LocalName == "body"))
             throw new InvalidDataException("A topic must contain an HTML root and body.");
+        HelpSourceContent.ValidateForSave(document);
         var path = TopicPath(relativePath);
         if (!File.Exists(path)) throw new FileNotFoundException("Open an existing topic, or use New page.", path);
         SafePaths.AtomicWrite(path, HelpSourceNamespaces.NormalizeSource(source));

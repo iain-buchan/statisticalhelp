@@ -24,7 +24,7 @@ void Case(string name, Action action)
 void Reject(Action action, string name)
 {
     try { action(); Check(false, name); }
-    catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or IOException or System.Xml.XmlException or UnauthorizedAccessException)
+    catch (Exception ex) when (ex is ArgumentException or InvalidOperationException or IOException or InvalidDataException or System.Xml.XmlException or UnauthorizedAccessException)
     { Check(true, name); }
 }
 string Hash(string path) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)));
@@ -93,7 +93,7 @@ Case("Case and Unicode boundaries", () =>
 
 Case("Protected source and visible runs", () =>
 {
-    string protectedParts = "<!-- Needle comment --><pre xml:space=\"preserve\">Needle &lt;- c(1, 2)\n  mean(Needle)</pre><code>Needle</code><textarea>Needle</textarea><script>var Needle=1;</script><style>.Needle{color:red}</style><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>Needle</mi></math><MadCap:equation>\\frac{Needle}{2}</MadCap:equation><svg xmlns=\"http://www.w3.org/2000/svg\"><text>Needle</text></svg><MadCap:dropDown class=\"rcode\"><MadCap:dropDownHead>R code</MadCap:dropDownHead><MadCap:dropDownBody><p>Needle note</p><pre>Needle &lt;- 1</pre></MadCap:dropDownBody></MadCap:dropDown>";
+    string protectedParts = "<!-- Needle comment --><pre xml:space=\"preserve\">Needle &lt;- c(1, 2)\n  mean(Needle)</pre><code>Needle</code><textarea>Needle</textarea><code>&lt;script&gt;var Needle=1;&lt;/script&gt;</code><style>.Needle{color:red}</style><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>Needle</mi></math><MadCap:equation>\\frac{Needle}{2}</MadCap:equation><svg xmlns=\"http://www.w3.org/2000/svg\"><text>Needle</text></svg><MadCap:dropDown class=\"rcode\"><MadCap:dropDownHead>R code</MadCap:dropDownHead><MadCap:dropDownBody><p>Needle note</p><pre>Needle &lt;- 1</pre></MadCap:dropDownBody></MadCap:dropDown>";
     string source = Page("<p data-label=\"Needle\">Needle normal text.</p>" + protectedParts);
     var f = Fixture("protection", ("a.htm", source));
     var preview = f.Project.SearchReplacePreview(new("Needle", "Changed"));
@@ -107,6 +107,17 @@ Case("Protected source and visible runs", () =>
     var document = XDocument.Parse(inline.Project.ReadTopic("a.htm"));
     Check(document.Descendants("p").First().Value == "New phrase after." && (string?)document.Descendants("b").Single().Attribute("class") == "keep", "Inline replacement preserves formatting elements and unmatched text");
     Check(inline.Project.SearchReplacePreview(new("start end", "X")).Matches.Count == 0 && inline.Project.SearchReplacePreview(new("blockoneblocktwo", "X")).Matches.Count == 0, "Text search never joins across protected code or paragraph boundaries");
+});
+
+Case("Unsafe original source rejects the entire batch", () =>
+{
+    var f = Fixture("unsafe-original", ("a.htm", Page("<p>Needle safe page.</p>")),
+        ("b.htm", Page("<p>Needle unsafe page.</p><script>var Needle=1;</script>")));
+    var before = Digests(f.Path);
+    var preview = f.Project.SearchReplacePreview(new("Needle", "Changed"));
+    Check(preview.Matches.Count == 2 && preview.Matches.All(match => !match.Before.Contains("var Needle")), "Search still excludes executable script text from visible match results");
+    Reject(() => f.Project.ApplySearchReplace(preview, Ids(preview)), "An unsafe original page refuses the reviewed batch even when its script was not selected");
+    Check(Same(before, f.Path) && !f.Project.CanUndoSearchReplace, "Unsafe-source refusal changes neither the earlier safe page nor the unsafe page and creates no Undo batch");
 });
 
 Case("Entity and line mapping", () =>

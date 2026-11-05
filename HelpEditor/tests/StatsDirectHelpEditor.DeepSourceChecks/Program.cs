@@ -27,6 +27,7 @@ if (string.Equals(Path.GetFileNameWithoutExtension(Environment.ProcessPath), "gi
 }
 
 string root = Path.GetFullPath(args[0]);
+if (args.Contains("--source-content-only")) { Environment.ExitCode = SourceContentChecks.Run(root); return; }
 string fixture = Path.Combine(root, "evidence", "DeepSourceFixture-" + Guid.NewGuid().ToString("N"));
 Directory.CreateDirectory(fixture);
 var checks = new List<object>(); var issues = new List<object>();
@@ -35,6 +36,7 @@ File.WriteAllText(reportPath, JsonSerializer.Serialize(new { startedAtUtc = Date
 AppDomain.CurrentDomain.UnhandledException += (_, failure) => File.WriteAllText(reportPath,
     JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, completed = false, passed = checks.Count(x => JsonSerializer.SerializeToElement(x).GetProperty("passed").GetBoolean()), failed = 1, error = failure.ExceptionObject.ToString(), checks }));
 void Check(bool value, string name, object? detail = null) { checks.Add(new { name, passed = value, detail }); Console.WriteLine($"{(value ? "PASS" : "FAIL")} {name}"); }
+Check(SourceContentChecks.Run(root) == 0, "Source import/save/build content policy checks pass");
 string realGit = @"C:\Program Files\Git\cmd\git.exe";
 async Task<string> Git(string cwd, params string[] arguments)
 {

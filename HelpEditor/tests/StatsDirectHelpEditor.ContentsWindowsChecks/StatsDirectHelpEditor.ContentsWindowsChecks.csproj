@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup><ProjectReference Include="../../src/StatsDirectHelpEditor.App/StatsDirectHelpEditor.App.csproj" /></ItemGroup>
+  <ItemGroup><Compile Include="../NativeReflection.cs" Link="NativeReflection.cs" /></ItemGroup>
   <Target Name="RemoveUnusedWpfWrapper" BeforeTargets="ResolveAssemblyReferences">
     <ItemGroup><Reference Remove="@(Reference)" Condition="'%(Reference.Filename)' == 'Microsoft.Web.WebView2.Wpf'" /></ItemGroup>
   </Target>

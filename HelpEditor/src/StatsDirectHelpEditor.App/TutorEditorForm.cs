@@ -449,8 +449,12 @@ public sealed partial class TutorEditorForm : Form
     private void ExportCourse()
     {
         CommitCurrent(); var issues = document.Validate(); if (issues.Any(issue => issue.Severity.Equals("Error", StringComparison.OrdinalIgnoreCase))) { ShowIssues(issues); return; }
-        using var picker = new SaveFileDialog { Title = "Export course for StatsDirect Learning", Filter = "StatsDirect course pack (*.json)|*.json", FileName = S(document.Content, "id") + "-course.json", InitialDirectory = Directory.Exists(@"C:\temp") ? @"C:\temp" : Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), AddExtension = true, DefaultExt = "json" };
-        if (picker.ShowDialog(this) != DialogResult.OK) return; document.Export(picker.FileName); status.Text = "Exported · Import this JSON in StatsDirect: Help > Learning Options > Import course materials";
+        using var picker = new SaveFileDialog { Title = "Export course for StatsDirect Learning", Filter = "StatsDirect course pack (*.json)|*.json", FileName = S(document.Content, "id") + "-course.json", InitialDirectory = AuthoringPreferences.ReadTutorExportDirectory(workspaceRoot), AddExtension = true, DefaultExt = "json" };
+        if (picker.ShowDialog(this) != DialogResult.OK) return;
+        document.Export(picker.FileName);
+        try { AuthoringPreferences.SaveTutorExportDirectory(workspaceRoot, picker.FileName); }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or InvalidDataException or ArgumentException) { status.Text = "Course exported, but its folder could not be remembered: " + error.Message; return; }
+        status.Text = "Exported · Import this JSON in StatsDirect: Help > Learning Options > Import course materials";
     }
     private void ValidateCourse() { CommitCurrent(); ShowIssues(document.Validate()); }
     private void RecordAuthorReview()
@@ -586,7 +590,7 @@ public sealed partial class TutorEditorForm : Form
         {
             string profile = Path.Combine(workspaceRoot, ".tutor-preview-profile"); Directory.CreateDirectory(profile);
             var environment = await CoreWebView2Environment.CreateAsync(null, profile); await preview.EnsureCoreWebView2Async(environment);
-            preview.CoreWebView2.Settings.AreDevToolsEnabled = false;
+            HelpWebViewSettings.Apply(preview.CoreWebView2);
             preview.CoreWebView2.NewWindowRequested += (_, e) => { e.Handled = true; if (Uri.TryCreate(e.Uri, UriKind.Absolute, out var uri) && uri.Scheme == "https") openLink(uri); };
             preview.CoreWebView2.NavigationStarting += (_, e) => { if (e.Uri != "about:blank" && e.Uri != previewDocumentUri) { e.Cancel = true; if (Uri.TryCreate(e.Uri, UriKind.Absolute, out var uri) && uri.Scheme == "https") openLink(uri); } };
             previewReady = true;

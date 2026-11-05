@@ -2,6 +2,8 @@
 
 A separate C#/.NET Windows authoring application in **`C:\Develop\StatsDirectHelp`**. It edits the **HelpSource working copy**, independently of the original Flare project. No Flare licence, Node installation, web server or internet connection is required to use the built editor or rebuild help.
 
+The repository-root `Content`/`Project` tree and `HelpEditor/HelpSource` are independent authoring trees. The author chooses the source for a publication; the publisher preserves the other tree. Source ownership and maintenance policy remain the author's decision.
+
 ## Start
 
 Double-click `Start-StatsDirectHelpEditor.cmd`, or open `App/StatsDirectHelpEditor.exe`. Both open `HelpSource` automatically. The .NET 10 Windows Desktop runtime and Microsoft Edge WebView2 runtime are required; both are already present on this PC.
@@ -32,7 +34,7 @@ Every MCQ can be classified as **Beginner**, **Intermediate** or **Advanced**, i
 
 Review the complete draft, sources, observed browsing activity, statistical notes and suggested R checks before **Accept this draft**. Acceptance updates an unsaved editor draft and retains its source evidence, explanatory reply and suggested R check. Proposed code is never run automatically. Source browsing, an AI review and an actual numerical check are recorded as different things. Use **Review > Record author review…** to record your own checked sources, calculations and reasoning. Editing content or classification invalidates old author review while retaining prior evidence locally. Saving and publishing remain explicit actions.
 
-**Save course source** preserves the editable source, author notes and deletion recovery. **Export course for StatsDirect…** creates a separate schema-2 provider pack, imported through StatsDirect **Help > Learning Options > Import course materials**. Courses add personalised material alongside the built-in tutor. The learner's existing versioned questions, practical work, reflections and evidence records are retained by StatsDirect; this authoring tool does not alter those records. Changed exports get distinct course versions, including different unsaved revisions. An authoring audience tag does not by itself filter the course's learner question set. Course providers determine assessment/CPD recognition; this prototype awards no credits or examination endorsement.
+**Save course source** preserves the editable source, author notes and deletion recovery. **Export course for StatsDirect…** creates a separate schema-2 provider pack, imported through StatsDirect **Help > Learning Options > Import course materials**. The export dialog starts in the last successful tutor export folder, or Documents when no available folder is remembered. Courses add personalised material alongside the built-in tutor. The learner's existing versioned questions, practical work, reflections and evidence records are retained by StatsDirect; this authoring tool does not alter those records. Changed exports get distinct course versions, including different unsaved revisions. An authoring audience tag does not by itself filter the course's learner question set. Course providers determine assessment/CPD recognition; this prototype awards no credits or examination endorsement.
 
 Headless authoring checks and export are also available, with no GUI or Flare:
 

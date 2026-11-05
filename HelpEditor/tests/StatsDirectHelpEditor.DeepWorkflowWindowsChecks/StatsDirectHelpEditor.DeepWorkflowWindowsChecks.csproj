@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><TargetFramework>net10.0-windows</TargetFramework><UseWindowsForms>true</UseWindowsForms><OutputType>Exe</OutputType><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>
   <ItemGroup><ProjectReference Include="../../src/StatsDirectHelpEditor.App/StatsDirectHelpEditor.App.csproj" /></ItemGroup>
+  <ItemGroup><Compile Include="../NativeReflection.cs" Link="NativeReflection.cs" /></ItemGroup>
   <Target Name="RemoveUnusedWpfWrapper" BeforeTargets="ResolveAssemblyReferences"><ItemGroup><Reference Remove="@(Reference)" Condition="'%(Reference.Filename)' == 'Microsoft.Web.WebView2.Wpf'" /></ItemGroup></Target>
 </Project>

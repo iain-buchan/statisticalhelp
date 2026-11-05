@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -9,27 +10,50 @@ using StatsDirect.HelpEditor.Core;
 internal static class Program
 {
     private static readonly List<object> Results = [];
+    private static readonly List<object> CleanupResults = [];
     private static int passed, failed;
     private static MainForm form = null!;
     private static string fixture = "", evidence = "";
+    private static bool cleanupAttempted, cleanupFaultMode;
+    private static string? cleanupProbeId;
 
     [STAThread]
     private static int Main(string[] args)
     {
         string artifact = Path.GetFullPath(args[0]);
+        cleanupFaultMode = args.Skip(1).Contains("--cleanup-fault", StringComparer.Ordinal);
+        if (cleanupFaultMode)
+        {
+            int flagIndex = Array.IndexOf(args, "--cleanup-fault");
+            if (flagIndex + 1 >= args.Length || !Guid.TryParseExact(args[flagIndex + 1], "N", out _))
+                throw new ArgumentException("The cleanup-fault mode requires its caller's unique probe identity.");
+            cleanupProbeId = args[flagIndex + 1];
+        }
         string testRoot = Path.Combine(artifact, "tests", "StatsDirectHelpEditor.ContentsWindowsChecks");
+        if (cleanupFaultMode) testRoot = Path.Combine(testRoot, "CleanupFault");
         fixture = Path.Combine(testRoot, "HelpSource");
         evidence = Path.Combine(artifact, "evidence");
         Directory.CreateDirectory(evidence);
+        if (!cleanupFaultMode) CheckFailureCleanup(artifact);
         CreateFixture(fixture);
         ApplicationConfiguration.Initialize();
-        Application.ThreadException += (_, e) => Check(false, "Unhandled native UI exception: " + e.Exception);
+        Application.ThreadException += (_, e) =>
+        {
+            Check(false, "Unhandled native UI exception: " + e.Exception);
+            CleanupNativeWindow();
+        };
         form = new MainForm(fixture) { SuppressDialogs = true, WindowState = FormWindowState.Normal, StartPosition = FormStartPosition.Manual, Location = new Point(-15000, 0), Size = new Size(1600, 1000) };
         form.Shown += async (_, _) =>
         {
             try
             {
                 await form.Initialization.WaitAsync(TimeSpan.FromSeconds(45));
+                if (cleanupFaultMode)
+                {
+                    Invoke("SetDirty", true);
+                    Invoke("SetBusy", true);
+                    throw new InvalidOperationException("Injected contents-check failure while the native form is dirty and busy.");
+                }
                 Check(form.IsEditorReady && form.LastError == null, "Native contents fixture opens without host errors");
                 Check(!form.EditorWebView.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled, "Browser refresh shortcuts cannot bypass the native unsaved-work guards");
                 Check(form.ArtifactRoot == testRoot, "Native test uses an isolated profile and build root");
@@ -272,16 +296,94 @@ internal static class Program
             catch (Exception ex) { Check(false, "Unexpected contents check failure: " + ex); }
             finally
             {
-                File.WriteAllText(Path.Combine(evidence, "contents-windows-checks.json"), JsonSerializer.Serialize(new { passed, failed, results = Results }, new JsonSerializerOptions { WriteIndented = true }));
-                Console.WriteLine($"{passed} contents/target native checks passed; {failed} failed");
-                Invoke("SetDirty", false);
-                Invoke("SetBusy", false);
-                typeof(MainForm).GetField("closingApproved", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(form, true);
-                form.Close();
+                CleanupNativeWindow();
             }
         };
-        Application.Run(form);
+        try { Application.Run(form); }
+        catch (Exception ex) { Check(false, "Native message loop failed: " + ex); }
+        finally
+        {
+            if (!cleanupAttempted) CleanupNativeWindow();
+            Check(form.IsDisposed && Application.OpenForms.Count == 0, "Native check cleanup disposes its form and leaves no open windows");
+            string reportName = cleanupFaultMode ? "contents-windows-cleanup-fault.json" : "contents-windows-checks.json";
+            object report = cleanupFaultMode ? new
+            {
+                expectedFault = true, cleanupProbeId, expectedFailureCount = 3, observedFailureCount = failed, results = Results, cleanupAttempted,
+                formDisposed = form.IsDisposed, openNativeFormCount = Application.OpenForms.Count, cleanup = CleanupResults
+            } : (object)new
+            {
+                passed, failed, results = Results, cleanupAttempted,
+                formDisposed = form.IsDisposed, openNativeFormCount = Application.OpenForms.Count, cleanup = CleanupResults
+            };
+            File.WriteAllText(Path.Combine(evidence, reportName), JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true }));
+            Console.WriteLine($"{passed} contents/target native checks passed; {failed} failed");
+        }
         return failed == 0 ? 0 : 1;
+    }
+
+    private static void CleanupNativeWindow()
+    {
+        if (cleanupAttempted) return;
+        cleanupAttempted = true;
+        Cleanup("Clear dirty state", () =>
+        {
+            if (cleanupFaultMode) throw new InvalidOperationException("Injected dirty-reset cleanup failure.");
+            Invoke("SetDirty", false);
+        });
+        Cleanup("Clear busy state", () =>
+        {
+            if (cleanupFaultMode) throw new InvalidOperationException("Injected busy-reset cleanup failure.");
+            Invoke("SetBusy", false);
+        });
+        // Each action is independent: private-method signature drift must never
+        // prevent this owned test window from closing or the process from exiting.
+        Cleanup("Approve close", () => typeof(MainForm).GetField("closingApproved", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(form, true));
+        Cleanup("Close native form", () => form.Close());
+        Cleanup("Dispose native form", () => { if (!form.IsDisposed) form.Dispose(); });
+        Cleanup("Exit native message loop", Application.ExitThread);
+    }
+
+    private static void Cleanup(string name, Action action)
+    {
+        try { action(); CleanupResults.Add(new { name, passed = true }); }
+        catch (Exception ex)
+        {
+            CleanupResults.Add(new { name, passed = false, error = ex.ToString() });
+            Check(false, "Native cleanup failed (" + name + "): " + ex);
+        }
+    }
+
+    private static void CheckFailureCleanup(string artifact)
+    {
+        string executable = Environment.ProcessPath ?? throw new InvalidOperationException("The native test executable path is unavailable.");
+        var start = new ProcessStartInfo(executable) { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
+        if (Path.GetFileNameWithoutExtension(executable).Equals("dotnet", StringComparison.OrdinalIgnoreCase)) start.ArgumentList.Add(typeof(Program).Assembly.Location);
+        start.ArgumentList.Add(artifact);
+        start.ArgumentList.Add("--cleanup-fault");
+        string probeId = Guid.NewGuid().ToString("N");
+        start.ArgumentList.Add(probeId);
+        using var child = Process.Start(start) ?? throw new InvalidOperationException("Could not start the owned cleanup-fault test.");
+        Task<string> stdout = child.StandardOutput.ReadToEndAsync(), stderr = child.StandardError.ReadToEndAsync();
+        if (!child.WaitForExit(90_000))
+        {
+            child.Kill(entireProcessTree: true);
+            child.WaitForExit();
+            Check(false, "An injected native failure exits without leaving a live test window (timed out)");
+        }
+        else
+        {
+            string reportPath = Path.Combine(evidence, "contents-windows-cleanup-fault.json");
+            using JsonDocument report = JsonDocument.Parse(File.ReadAllText(reportPath));
+            JsonElement root = report.RootElement;
+            Check(child.ExitCode == 1 && root.GetProperty("expectedFault").GetBoolean() && root.GetProperty("cleanupProbeId").GetString() == probeId &&
+                root.GetProperty("observedFailureCount").GetInt32() == root.GetProperty("expectedFailureCount").GetInt32(),
+                "An injected check failure and both reset failures return a nonzero exit status");
+            JsonElement[] closingSteps = root.GetProperty("cleanup").EnumerateArray().Where(s => s.GetProperty("name").GetString() is "Approve close" or "Close native form" or "Dispose native form" or "Exit native message loop").ToArray();
+            Check(root.GetProperty("formDisposed").GetBoolean() && root.GetProperty("openNativeFormCount").GetInt32() == 0 &&
+                closingSteps.Length == 4 && closingSteps.All(s => s.GetProperty("passed").GetBoolean()),
+                "Cleanup still closes and disposes the dirty busy native form after both reset failures");
+        }
+        File.WriteAllText(Path.Combine(evidence, "contents-windows-cleanup-fault.log"), stdout.GetAwaiter().GetResult() + stderr.GetAwaiter().GetResult());
     }
 
     private static async Task CheckRecoveryAsync()
@@ -412,11 +514,7 @@ internal static class Program
 
     private static T DialogField<T>(DeletedPagesDialog dialog, string name) => (T)typeof(DeletedPagesDialog).GetField(name, BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(dialog)!;
     private static T Field<T>(string name) => (T)typeof(MainForm).GetField(name, BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(form)!;
-    private static object? Invoke(string name, params object?[] args)
-    {
-        try { return typeof(MainForm).GetMethod(name, BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(form, args); }
-        catch (TargetInvocationException ex) { throw ex.InnerException ?? ex; }
-    }
+    private static object? Invoke(string name, params object?[] args) => NativeReflection.Invoke(form, name, args);
     private static async Task InvokeTask(string name, params object?[] args) => await (Task)Invoke(name, args)!;
     private static void SaveToc(string? id) => Invoke("SaveTocAndRefresh", new object?[] { id });
     private static IEnumerable<TreeNode> Nodes(TreeNodeCollection nodes) => nodes.Cast<TreeNode>().SelectMany(n => new[] { n }.Concat(Nodes(n.Nodes)));

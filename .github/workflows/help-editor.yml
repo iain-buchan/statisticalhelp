@@ -48,6 +48,7 @@ jobs:
           dotnet run --no-build -c Release --project tests/StatsDirectHelpEditor.HelpPublicationChecks -- $PWD.Path --full-corpus
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Native installed startup and source artwork
+        timeout-minutes: 15
         run: |
           Set-Location $env:HELP_REGRESSION_ROOT
           foreach ($name in @('InstalledWorkspaceWindowsChecks','SourceImageWindowsChecks','NamespaceWindowsChecks','WebsiteExportWindowsChecks','TutorAuthoringWindowsChecks','ContentsWindowsChecks','LinkWindowsChecks','WindowsChecks','BrowserPreviewWindowsChecks','WorkspaceWindowsChecks','AppHelpPreviewChecks','SearchReplaceWindowsChecks','PolishWindowsChecks','PreviewCacheWindowsChecks','DeepPreviewChecks','DeepWorkflowWindowsChecks','DeliveryWindowsChecks','HelpPublicationWindowsChecks')) {
@@ -89,6 +90,7 @@ jobs:
             HelpEditor/evidence/MaintainedHelp/*.json
             ${{ env.HELP_REGRESSION_ROOT }}/regression-workspace.json
             ${{ env.HELP_REGRESSION_ROOT }}/evidence/*.json
+            ${{ env.HELP_REGRESSION_ROOT }}/evidence/contents-windows-cleanup-fault.*
             ${{ env.HELP_REGRESSION_ROOT }}/evidence/ReviewImprovements-*/ContentsNavigation/checks.json
             ${{ env.HELP_REGRESSION_ROOT }}/evidence/ReviewImprovements-*/Portability/checks.json
             ${{ env.HELP_REGRESSION_ROOT }}/evidence/ReviewImprovements-*/DesktopComparison/checks.json

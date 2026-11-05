@@ -255,6 +255,7 @@ public static class HelpBuilder
 
     private static void Transform(XElement body, string path, HelpProject project, List<string> warnings, EquationArtworkCatalog artwork, string? linkOutputPath = null)
     {
+        HelpSourceContent.StripActiveContent(body);
         foreach (var e in body.Descendants().ToList())
         {
             if (e.Parent is null) continue;
