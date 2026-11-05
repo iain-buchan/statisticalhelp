@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.Json;
 using Microsoft.Web.WebView2.Core;
@@ -11,40 +12,80 @@ internal static class Program
     private static MainForm form = null!;
     private static string root = "", testRoot = "", fixture = "", report = "";
     private static readonly List<object> checks = [];
-    private static readonly List<CoreWebView2Frame> frames = [];
+    private sealed record LiveFrame(CoreWebView2Frame Frame, CancellationToken Lifetime);
+    private static readonly List<LiveFrame> frames = [];
     private static readonly List<string> external = [];
-    private static int passed, failed, uiErrors;
+    private static readonly TimeSpan ReplyTimeout = TimeSpan.FromSeconds(20);
+    private static string phase = "initialization";
+    private static bool cleanupAttempted, stallBrowserProbe;
+    private static int passed, failed, uiErrors, destroyedFrames;
     [STAThread]
     private static int Main(string[] args)
     {
         root = Path.GetFullPath(args[0]); testRoot = Path.Combine(Path.GetTempPath(), "sdhe-preview-" + Guid.NewGuid().ToString("N")[..8]);
         fixture = Path.Combine(testRoot, "HelpSource");
-        report = args.Contains("--baseline") ? "deep-preview-before.json" : "deep-preview-checks.json";
+        stallBrowserProbe = args.Contains("--stall-browser-probe");
+        report = stallBrowserProbe ? "deep-preview-stalled-probe.json" : args.Contains("--baseline") ? "deep-preview-before.json" : "deep-preview-checks.json";
         CreateFixture();
         ApplicationConfiguration.Initialize();
-        Application.ThreadException += (_, e) => { uiErrors++; Check(false, "Unhandled native preview exception", e.Exception.ToString()); };
+        Application.ThreadException += (_, e) => { uiErrors++; Check(false, "Unhandled native preview exception", e.Exception.ToString()); CloseFixture(); };
         form = new MainForm(fixture, uri => external.Add(uri.AbsoluteUri), initialTopic: "basics/alpha.htm", workspaceOverride: new HelpEditorWorkspace(testRoot, fixture, null))
         { SuppressDialogs = true, WindowState = FormWindowState.Normal, ShowInTaskbar = false, StartPosition = FormStartPosition.Manual, Location = new(-16000, 0), Size = new(1600, 1000) };
         form.Shown += async (_, _) =>
         {
-            try { await Run(args.Contains("--corpus")); }
-            catch (Exception ex) { Check(false, "Deep preview workflows completed", ex.ToString()); }
-            finally
-            {
-                Directory.CreateDirectory(Path.Combine(root, "evidence"));
-                File.WriteAllText(Path.Combine(root, "evidence", report), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, uiErrors, checks }, new JsonSerializerOptions { WriteIndented = true }));
-                Console.WriteLine($"{passed} deep preview checks passed; {failed} failed");
-                FieldInfo("closingApproved").SetValue(form, true); form.Close();
-            }
+            bool corpus = args.Contains("--corpus");
+            try { await Run(corpus).WaitAsync(TimeSpan.FromMinutes(corpus ? 6 : 3)); }
+            catch (Exception ex) { Check(false, $"Deep preview workflows completed ({phase})", ex.ToString()); Console.WriteLine(ex.Message); }
+            finally { CloseFixture(); }
         };
-        Application.Run(form); return failed == 0 ? 0 : 1;
+        try { Application.Run(form); }
+        catch (Exception ex) { Check(false, "Native preview message loop completed", ex.ToString()); }
+        finally
+        {
+            CloseFixture();
+            Check(form.IsDisposed && Application.OpenForms.Count == 0, "Deep preview cleanup disposes the fixture window");
+            Directory.CreateDirectory(Path.Combine(root, "evidence"));
+            File.WriteAllText(Path.Combine(root, "evidence", report), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, uiErrors, phase, deviceDpi = form.DeviceDpi, destroyedFrames, liveFrames = frames.Count, formDisposed = form.IsDisposed, openNativeFormCount = Application.OpenForms.Count, expectedFault = stallBrowserProbe, checks }, new JsonSerializerOptions { WriteIndented = true }));
+            Console.WriteLine($"{passed} deep preview checks passed; {failed} failed");
+        }
+        return failed == 0 ? 0 : 1;
     }
+
+    private static void CloseFixture()
+    {
+        if (cleanupAttempted) return;
+        cleanupAttempted = true;
+        TryCleanup("approve close", () => FieldInfo("closingApproved").SetValue(form, true));
+        TryCleanup("close", () => form.Close());
+        TryCleanup("dispose", () => { if (!form.IsDisposed) form.Dispose(); });
+        TryCleanup("exit message loop", Application.ExitThread);
+    }
+
+    private static void TryCleanup(string action, Action run)
+    {
+        try { run(); }
+        catch (Exception ex) { Check(false, "Deep preview cleanup could not " + action, ex.ToString()); }
+    }
+
+    private static async Task NativeStep(string name, Func<Task> action)
+    {
+        SetPhase(name);
+        try { await action().WaitAsync(TimeSpan.FromSeconds(60)); }
+        catch (TimeoutException ex) { throw new TimeoutException("Native preview transition did not complete: " + name, ex); }
+    }
+
+    private static void SetPhase(string name)
+    {
+        phase = name;
+        Console.WriteLine("RUN " + name);
+    }
+
     private static async Task Run(bool corpus)
     {
         await form.Initialization.WaitAsync(TimeSpan.FromSeconds(45));
         form.EditorWebView.CoreWebView2.FrameCreated += (_, e) => Track(e.Frame);
         var saved = Digests(fixture);
-        await form.SwitchWorkspaceAsync("public");
+        await NativeStep("Open initial Browser preview", () => form.SwitchWorkspaceAsync("public"));
         await UntilBrowser("Boolean(document.getElementById('AlphaTarget'))");
         await BrowserScript("window.deepMarker='browser-first';document.querySelector('details.rcode').open=true;document.getElementById('topic').scrollTop=500");
         int firstBuilds = form.OutputPreviewBuildCount;
@@ -57,7 +98,7 @@ internal static class Program
         await form.SwitchWorkspaceAsync("edit"); await form.SwitchWorkspaceAsync("public");
         Check(await BrowserBoolean("!document.getElementById('results').hidden && document.querySelector('#results a.result')?.href.includes('beta.htm')"), "Returning to Browser view preserves its active search instead of resetting it");
 
-        await form.SwitchWorkspaceAsync("desktop");
+        await NativeStep("Open initial App preview", () => form.SwitchWorkspaceAsync("desktop"));
         await UntilApp("Boolean(document.getElementById('AlphaTarget'))");
         int appNavigations = 0;
         form.AppPreviewWebView!.CoreWebView2.NavigationStarting += (_, _) => appNavigations++;
@@ -80,7 +121,8 @@ internal static class Program
         int beforeDock = appNavigations; await form.ToggleAppPreviewModeAsync(); await form.ToggleAppPreviewModeAsync();
         Check(await AppBoolean("window.deepMarker==='before-dock'") && appNavigations == beforeDock, "Pop out and Dock preserve the browser document without navigation");
 
-        await form.SwitchWorkspaceAsync("public"); await UntilBrowser("Boolean(document.getElementById('BetaTarget'))");
+        await NativeStep("Open Browser preview for cache repair", () => form.SwitchWorkspaceAsync("public"));
+        await UntilBrowser("Boolean(document.getElementById('BetaTarget'))");
         string cssPath = Path.Combine(form.LastOutputPreviewResult!.OutputDirectory, "help-viewer.css");
         File.Move(cssPath, Path.Combine(testRoot, "missing-viewer-style.probe")); int beforeMissingCss = form.OutputPreviewBuildCount;
         await form.SwitchWorkspaceAsync("public");
@@ -100,7 +142,10 @@ internal static class Program
 
         foreach (string skin in new[] { "flare", "readable", "clean-blue", "warm-paper" })
         {
-            await form.SwitchWorkspaceAsync("public"); await form.SetDesignAsync(skin); await form.OpenTopicAsync("basics/alpha.htm");
+            await NativeStep(skin + ": activate Browser view", () => form.SwitchWorkspaceAsync("public"));
+            await NativeStep(skin + ": apply design", () => form.SetDesignAsync(skin));
+            await NativeStep(skin + ": open Alpha topic", () => form.OpenTopicAsync("basics/alpha.htm"));
+            SetPhase(skin + ": find generated Contents link");
             await UntilBrowser("Boolean(document.querySelector('#contents a[data-link=\"basics/beta.htm#BetaTarget\"]'))");
             int builds = form.OutputPreviewBuildCount;
             await BrowserScript("document.querySelector('#contents a[data-link=\"basics/beta.htm#BetaTarget\"]').click()");
@@ -118,7 +163,7 @@ internal static class Program
             await Until(() => external.Count > beforeExternal);
             Check(external[^1] == "https://example.org/statistical-context" && form.CurrentTopicPath == "basics/alpha.htm", skin + " external links open separately and preserve the editing page");
         }
-        await form.SetDesignAsync("flare");
+        await NativeStep("Restore Flare design for native Contents navigation", () => form.SetDesignAsync("flare"));
         var tree = Field<TreeView>("contents");
         tree.SelectedNode = tree.Nodes.Cast<TreeNode>().Single(node => ((TocNode)node.Tag!).Link == "basics/beta.htm#BetaTarget");
         await Until(() => form.CurrentTopicPath == "basics/beta.htm" && Field<string>("currentTopicFragment") == "BetaTarget" && !Field<bool>("busy"));
@@ -128,17 +173,17 @@ internal static class Program
         await Until(() => form.CurrentTopicPath == "basics/alpha.htm" && !Field<bool>("busy"));
         await form.SwitchWorkspaceAsync("edit");
         string alphaSaved = form.CurrentProject.ReadTopic("basics/alpha.htm"), draft = alphaSaved.Replace("uniqueforalpha", "uniqueforalpha unsaved author draft");
-        await form.EditorWebView.ExecuteScriptAsync("HelpEditor.setTab('source');const t=document.getElementById('source-editor');t.value=" + JsonSerializer.Serialize(draft) + ";t.dispatchEvent(new Event('input',{bubbles:true}));");
+        await EditorScript("HelpEditor.setTab('source');const t=document.getElementById('source-editor');t.value=" + JsonSerializer.Serialize(draft) + ";t.dispatchEvent(new Event('input',{bubbles:true}));");
         await Task.Delay(300);
-        int history = JsonSerializer.Deserialize<JsonElement>(await form.EditorWebView.ExecuteScriptAsync("HelpEditor.getState()")).GetProperty("historyIndex").GetInt32();
+        int history = JsonSerializer.Deserialize<JsonElement>(await EditorScript("HelpEditor.getState()")).GetProperty("historyIndex").GetInt32();
         tree.SelectedNode = tree.Nodes.Cast<TreeNode>().Single(node => ((TocNode)node.Tag!).Link == "basics/alpha.htm#AlphaSecond");
         await Until(() => Field<string>("currentTopicFragment") == "AlphaSecond" && !Field<bool>("busy"));
-        string afterAnchor = JsonSerializer.Deserialize<string>(await form.EditorWebView.ExecuteScriptAsync("HelpEditor.getSource()"))!;
-        int afterHistory = JsonSerializer.Deserialize<JsonElement>(await form.EditorWebView.ExecuteScriptAsync("HelpEditor.getState()")).GetProperty("historyIndex").GetInt32();
+        string afterAnchor = JsonSerializer.Deserialize<string>(await EditorScript("HelpEditor.getSource()"))!;
+        int afterHistory = JsonSerializer.Deserialize<JsonElement>(await EditorScript("HelpEditor.getState()")).GetProperty("historyIndex").GetInt32();
         Check(afterAnchor == draft && form.IsDirty && history == afterHistory && form.CurrentProject.ReadTopic("basics/alpha.htm") == alphaSaved,
             "A same-page Contents section changes the anchor while preserving the exact unsaved draft and Undo history");
-        await form.EditorWebView.ExecuteScriptAsync("HelpEditor.undo()");
-        Check(JsonSerializer.Deserialize<string>(await form.EditorWebView.ExecuteScriptAsync("HelpEditor.getSource()")) == alphaSaved,
+        await EditorScript("HelpEditor.undo()");
+        Check(JsonSerializer.Deserialize<string>(await EditorScript("HelpEditor.getSource()")) == alphaSaved,
             "Normal Undo still restores the earlier edit after a same-page Contents jump");
         Check(saved.Where(p => !p.Key.EndsWith("HelpEditorDesign.json", StringComparison.OrdinalIgnoreCase)).All(p => File.Exists(p.Key) && p.Value == Hash(p.Key)), "Preview workflows do not rewrite any topic, artwork, stylesheet or Contents source");
         Check(uiErrors == 0 && form.LastError == null, "Deep preview navigation produces no unhandled or hidden host errors", form.LastError);
@@ -147,6 +192,7 @@ internal static class Program
 
     private static async Task CorpusNavigation()
     {
+        SetPhase("Full-corpus Browser navigation");
         string copy = Path.Combine(Path.GetDirectoryName(fixture)!, "Corpus");
         foreach (string file in Directory.EnumerateFiles(Path.Combine(root, "HelpSource"), "*", SearchOption.AllDirectories))
         {
@@ -164,26 +210,86 @@ internal static class Program
         Check(form.LastOutputPreviewResult!.TopicCount == 404 && form.OutputPreviewBuildCount == builds, "Twenty actual-corpus saved page transitions reuse one 404-page preview", new { firstBuildMs, navigationCount = times.Count, totalNavigationMs = times.Sum(), maximumNavigationMs = times.Max(), averageNavigationMs = times.Average() });
         Check(baseline.All(p => File.Exists(p.Key) && p.Value == Hash(p.Key)), "Full-corpus performance checks preserve every byte of the isolated source copy");
     }
-    private static Task AppScript(string script) => form.AppPreviewWebView!.CoreWebView2.ExecuteScriptAsync(script);
-    private static async Task<bool> AppBoolean(string expression) { try { return JsonSerializer.Deserialize<bool>(await form.AppPreviewWebView!.CoreWebView2.ExecuteScriptAsync("Boolean(" + expression + ")")); } catch { return false; } }
-    private static async Task UntilApp(string expression) { var end = DateTime.UtcNow.AddSeconds(20); while (!await AppBoolean(expression)) { if (DateTime.UtcNow > end) throw new TimeoutException("App: " + expression); await Task.Delay(40); } }
-    private static void Track(CoreWebView2Frame frame) { frames.Add(frame); frame.FrameCreated += (_, e) => Track(e.Frame); }
+    private static Task<string> EditorScript(string script) => ScriptReply(form.EditorWebView.ExecuteScriptAsync(script), "Authoring editor script");
+    private static Task<string> AppScript(string script) => ScriptReply(form.AppPreviewWebView!.CoreWebView2.ExecuteScriptAsync(script), "App preview script");
+    private static async Task<bool> AppBoolean(string expression)
+    {
+        try { return IsTrue(await AppScript("Boolean(" + expression + ")")); }
+        catch (Exception ex) when (ex is InvalidOperationException or COMException) { return false; }
+    }
+    private static Task UntilApp(string expression) => WaitForState(() => AppBoolean(expression), "App: " + expression);
+
+    private static void Track(CoreWebView2Frame frame)
+    {
+        var lifetime = new CancellationTokenSource();
+        var entry = new LiveFrame(frame, lifetime.Token);
+        frames.Add(entry);
+        frame.FrameCreated += (_, e) => Track(e.Frame);
+        frame.Destroyed += (_, _) =>
+        {
+            frames.Remove(entry);
+            destroyedFrames++;
+            lifetime.Cancel();
+            lifetime.Dispose();
+        };
+    }
+
+    private static async Task<bool> FrameMatches(LiveFrame entry, string expression)
+    {
+        if (entry.Lifetime.IsCancellationRequested) return false;
+        try
+        {
+            bool injectStall = stallBrowserProbe && phase == "warm-paper: find generated Contents link";
+            Task<string> reply = injectStall ? new TaskCompletionSource<string>().Task : entry.Frame.ExecuteScriptAsync("Boolean(" + expression + ")");
+            string value = await ScriptReply(reply, "Browser frame probe: " + expression, entry.Lifetime, injectStall ? TimeSpan.FromSeconds(1) : ReplyTimeout);
+            return !entry.Lifetime.IsCancellationRequested && IsTrue(value);
+        }
+        catch (OperationCanceledException) when (entry.Lifetime.IsCancellationRequested) { return false; }
+        catch (Exception ex) when (ex is InvalidOperationException or COMException) { return false; }
+    }
     private static async Task BrowserScript(string script)
         => await BrowserDocumentScript("Boolean(window.StatsDirectHelp)", script);
     private static async Task BrowserDocumentScript(string predicate, string script)
     {
-        foreach (var frame in frames.ToArray().Reverse()) try
+        foreach (var entry in frames.ToArray().Reverse())
         {
-            if (JsonSerializer.Deserialize<JsonElement>(await frame.ExecuteScriptAsync("Boolean(" + predicate + ")")).ValueKind == JsonValueKind.True) { await frame.ExecuteScriptAsync(script); return; }
-        } catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException) { }
+            if (!await FrameMatches(entry, predicate) || entry.Lifetime.IsCancellationRequested) continue;
+            // The click may already have taken effect when its reply fails. Do
+            // not retry this mutating operation in another frame.
+            await ScriptReply(entry.Frame.ExecuteScriptAsync(script), "Generated viewer action: " + script);
+            return;
+        }
         throw new InvalidOperationException("A generated viewer document was not available for: " + script);
     }
     private static async Task<bool> BrowserBoolean(string expression)
     {
-        foreach (var frame in frames.ToArray().Reverse()) try { if (JsonSerializer.Deserialize<JsonElement>(await frame.ExecuteScriptAsync("Boolean(" + expression + ")")).ValueKind == JsonValueKind.True) return true; } catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException) { }
+        foreach (var entry in frames.ToArray().Reverse())
+            if (await FrameMatches(entry, expression)) return true;
         return false;
     }
-    private static async Task UntilBrowser(string expression) { var end = DateTime.UtcNow.AddSeconds(20); while (!await BrowserBoolean(expression)) { if (DateTime.UtcNow > end) throw new TimeoutException("Browser: " + expression); await Task.Delay(40); } }
+    private static Task UntilBrowser(string expression) => WaitForState(() => BrowserBoolean(expression), "Browser: " + expression);
+
+    private static bool IsTrue(string json) => JsonSerializer.Deserialize<JsonElement>(json).ValueKind == JsonValueKind.True;
+
+    private static async Task<string> ScriptReply(Task<string> reply, string description, CancellationToken cancellation = default, TimeSpan? timeout = null)
+    {
+        try { return await reply.WaitAsync(timeout ?? ReplyTimeout, cancellation); }
+        catch (TimeoutException ex) { throw new TimeoutException("No WebView2 reply for " + description, ex); }
+    }
+
+    private static async Task WaitForState(Func<Task<bool>> condition, string description)
+    {
+        var timer = Stopwatch.StartNew();
+        while (timer.Elapsed < ReplyTimeout)
+        {
+            TimeSpan remaining = ReplyTimeout - timer.Elapsed;
+            if (remaining <= TimeSpan.Zero) break;
+            try { if (await condition().WaitAsync(remaining)) return; }
+            catch (TimeoutException ex) { throw new TimeoutException("Preview state was not reached: " + description, ex); }
+            await Task.Delay(40);
+        }
+        throw new TimeoutException("Preview state was not reached: " + description);
+    }
     private static FieldInfo FieldInfo(string name) => typeof(MainForm).GetField(name, BindingFlags.NonPublic | BindingFlags.Instance)!;
     private static T Field<T>(string name) => (T)FieldInfo(name).GetValue(form)!;
     private static async Task Until(Func<bool> predicate) { var end = DateTime.UtcNow.AddSeconds(20); while (!predicate()) { if (DateTime.UtcNow > end) throw new TimeoutException("Native transition"); await Task.Delay(40); } }
