@@ -1,274 +1,370 @@
-<!doctype html>
-<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="agreement/kappa.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Agreement Analysis (Categorical Data, Kappa, Maxwell, Scott Pi, Gwet AC1) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
-#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
-#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
-html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
-@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
-html[data-help-skin="flare"] #help-topic-body img{max-width:none}
-html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
-html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
-html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
-html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
-@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
-<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
-<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
-        <h1>
-            Agreement of Categorical Measurements</h1>
-        <p> </p>
-        <p>Menu locations:<br /><b>Analysis_Agreement_Categorical (Kappa)</b><br /><b>Analysis_Chi-square_Kappa and Maxwell</b><br /><b>Analysis_Clinical Epidemiology_Kappa and Maxwell</b></p>
-        <p>.</p>
-        <p><u>Agreement Analysis</u>
-        </p>
-        <p>
-            For the case of two raters, this function gives Cohen's kappa (weighted and unweighted), Scott's pi and Gwett's AC1 as measures of inter-rater agreement for two raters' categorical assessments (<a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-fleiss-1969">Fleiss, 1969</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-scott-1955">Scott 1955</a>). For three or more raters, this function gives extensions of the Cohen kappa method, due to <a href="../references/reference_list.htm#ref-fleiss-1979-b">Fleiss and Cuzick (1979)</a> in the case of two possible responses per rater, and <a href="../references/reference_list.htm#ref-fleiss-1979-c">Fleiss, Nee and Landis (1979)</a> in the general case of three or more responses per rater.</p>
-        <p> </p>
-        <p>If you have only two categories then Scott's pi statistic (with confidence interval constructed by the <a href="../references/reference_list.htm#ref-donner-1992">Donner-Eliasziw (1992)</a> method) for inter-rater agreement (<a href="../references/reference_list.htm#ref-zwick-1988">Zwick, 1988</a>) is more reliable than kappa.</p>
-        <p> </p>
-        <p>Gwet's AC1 is the statistic of choice for the case of two raters (<a href="../references/reference_list.htm#ref-gwet-2008">Gwet, 2008</a>). Gwet's agreement coefficient, can be used in more contexts than kappa or pi because it does not depend upon the assumption of independence between raters.</p>
-        <p> </p>
-        <p>Weighted kappa partly compensates for a problem with unweighted kappa, namely that it is not adjusted for the degree of disagreement. Disagreement is weighted in decreasing priority from the top left (origin) of the table. StatsDirect uses the following definitions for weight (1 is the default):</p>
-        <ol>
-            <li>w(ij)=1-abs(i-j)/(g-1)</li>
-            <li>w(ij)=1-[(i-j)/(g-1)]²</li>
-            <li>User defined (this is only available via workbook data entry)</li>
-        </ol>
-        <p>g = categories</p>
-        <p>w = weight</p>
-        <p>i = category for one observer (from 1 to g)</p>
-        <p>j = category for the other observer (from 1 to g)</p>
-        <p> </p>
-        <p>In broad terms a kappa below 0.2 indicates poor agreement and a kappa above 0.8 indicates very good agreement beyond chance.</p>
-        <p> </p>
-        <p>Guide (<a href="../references/reference_list.htm#ref-landis-1977">Landis and Koch, 1977</a>):</p>
-        <table cellspacing="0" style="margin-left: 0;margin-right: auto;caption-side: top;border-spacing: 2px 2px;border-collapse: separate;">
-            <col />
-            <col />
-            <tr>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;"><u>Kappa</u>
-                </td>
-                <td style="text-decoration: underline;padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Strength of agreement</td>
-            </tr>
-            <tr>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&lt; 0.2</td>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Poor</td>
-            </tr>
-            <tr>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&gt; 0.2 ≤ 0.4</td>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Fair</td>
-            </tr>
-            <tr>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&gt; 0.4 ≤ 0.6</td>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Moderate</td>
-            </tr>
-            <tr>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&gt; 0.6 ≤ 0.8</td>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Good</td>
-            </tr>
-            <tr>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&gt; 0.8 ≤ 1</td>
-                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Very good</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>N.B. You can not reliably compare kappa values from different studies because kappa is sensitive to the prevalence of different categories. i.e. if one category is observed more commonly in one study than another then kappa may indicate a difference in inter-rater agreement which is not due to the raters.</p>
-        <p> </p>
-        <p>Agreement analysis with more than two raters is a complex and controversial subject, see <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss (1981, p. 225)</a>.</p>
-        <p> </p>
-        <p><u>Disagreement Analysis</u>
-        </p>
-        <p>StatsDirect uses the methods of <a href="../references/reference_list.htm#ref-maxwell-1970">Maxwell (1970)</a> to test for differences between the ratings of the two raters (or k nominal responses with paired observations).</p>
-        <p> </p>
-        <p>
-            Maxwell's chi-square statistic tests for overall disagreement between the two raters. The general McNemar statistic tests for asymmetry in the distribution of subjects about which the raters disagree, i.e. disagreement more over some categories of response than others. A pair of categories in which neither rater put a subject that the other put in the other category adds nothing to this statistic, and is not counted in its degrees of freedom. Maxwell's statistic usually has one degree of freedom fewer than there are categories. If the raters disagree only within groups of categories, never taking a category of one group for a category of another, the statistic is worked out within each of the groups of categories that disagreements join and added up, and its degrees of freedom are the number of categories less the number of groups. If the raters agree on every subject, kappa is 1 with a standard error of 0, and neither test is given.</p>
-        <p> </p>
-        <p>Data preparation</p>
-        <p>You may present your data for the two-rater methods as a fourfold table in the interactive screen data entry menu option. Otherwise, you may present your data as responses/ratings in columns and rows in a worksheet, where the columns represent raters and the rows represent subjects rated. If you have more than two raters then you must present your data in the worksheet column (rater) row (subject) format. Missing data can be used where raters did not rate all subjects.</p>
-        <p> </p>
-        <p><u>Technical validation</u>
-        </p>
-        <p>All formulae for kappa statistics and their tests are as per <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss (1981)</a>:</p>
-        <p>For two raters (m=2) and two categories (k=2):</p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="e11db84bb35a902a332ad4bb27f56356b53de1c0b4619de695338c0224e86437"><span class="help-equation-accessible help-equation-live">$\displaystyle p_o=\sum_{i=1}^k \sum_{j=1}^k w_{ij} \space p_{ij}$</span><img src="../resources/help-editor-runtime/equation-artwork/b49c0f845283a8d8082b28c51d89616b5fbaba9dc065abc848da5c713321e2b7.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="4534ff8adc5fc0cd98916ddbddb2d41b1a74bb481276305aee9948efc9c357a7"><span class="help-equation-accessible help-equation-live">$\displaystyle p_e=\sum_{i=1}^k \sum_{j=1}^k w_{ij} \space p_{i.} \space p_{.j}$</span><img src="../resources/help-editor-runtime/equation-artwork/e64ee946807e9a4157c808869fd12bdd2f3e071f905f0d0c781f71e82d1b7901.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="f2dccb18c1b08d5395c9ab84ade01b68cdbab17eb61ef95dd7b8ec3b5c726ba8"><span class="help-equation-accessible help-equation-live">$\displaystyle \hat{\kappa} = (p_o-p_e)/(1-p_e)$</span><img src="../resources/help-editor-runtime/equation-artwork/21fc9ad5a1b3db86b31c529b3bb6c1b5acf63ccdf7f67ffcce0a18c6a2088fcf.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="36de881e92e38265fda220ea29d2815053a40efd0f0c015433d22bf91f5905f4"><span class="help-equation-accessible help-equation-live">$\displaystyle s_o=\frac{1}{(1-p_e) \space \sqrt{n}} \sqrt{[\sum_{i=1}^k\sum_{j=1}^k p_{i.} \space p_{.j} \space (\bar{w}_{ij}-(\bar{w}_{i.}+\bar{w}_{.i}))]-p_e^2}$</span><img src="../resources/help-editor-runtime/equation-artwork/eb45d5bdaa7b4be9deb2d7d8df0e8ad88bef02bb207d4e9aeaf5b1d07b22d276.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="d0c828184a92d0a840ed13eec44e7ef6f6062273753d8459df4a086762d517e0"><span class="help-equation-accessible help-equation-live">$\displaystyle p_{i.}=\sum_{j=1}^k p_{ij}$</span><img src="../resources/help-editor-runtime/equation-artwork/3dbeb251dad6269cd788e4f4e2a3b505f2daba3d7d33cbbf588645cfbc68bd59.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="d70c47e1c1798d4736436dd845a9e5196298254e572c489d39a9ec54c53b2572"><span class="help-equation-accessible help-equation-live">$\displaystyle p_{.j}=\sum_{i=1}^k p_{ij}$</span><img src="../resources/help-editor-runtime/equation-artwork/2d1aac9b086e001ab9230801fd963fb3e010500a66c1425d47792b57bf3a20cd.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>- where n is the number of subjects rated, w is the weight for agreement or disagreement, p<sub>o</sub> is the observed proportion of agreement, p<sub>e</sub> is the expected proportion of agreement, p<sub>ij</sub> is the fraction of ratings i by the first rater and j by the second rater, and so is the standard error for testing that the kappa statistic equals zero.</p>
-        <p> </p>
-        <p>For three or more raters (m&gt;2) and two categories (k =2):</p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="febccc1f0a9238a1f35a5d627668df21d18a160debd0e3f29f5674a6b3d6be3f"><span class="help-equation-accessible help-equation-live">$\displaystyle B=\frac{1}{n}\sum_{i=1}^k{\frac{(x_i-m_i \bar{p})^2}{m_i}}$</span><img src="../resources/help-editor-runtime/equation-artwork/8b0b4b5d7ff63d3aa5a6956915ce47c210141384db15bb2ec823fff0341a9ca6.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="73822ad5e3ae9c4008e611f996c55b0cc04aaeac7ff17656528f70a67a992d11"><span class="help-equation-accessible help-equation-live">$\displaystyle W=\frac{1}{n(\bar{m}-1)} \sum_{i=1}^k{\frac{x_i(m_i-x_i)}{m_i}}$</span><img src="../resources/help-editor-runtime/equation-artwork/bb009b66118fa64594f2a04a508d24c147be6ba44ab488f36f2654a1ec144ac5.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="6952ceb29e270af891f6171af9781415eb62ca50bbf43748ec8ef5954d9f8056"><span class="help-equation-accessible help-equation-live">$\displaystyle \hat{\kappa}=\frac{B-W}{B+(\bar{m}-1)W}$</span><img src="../resources/help-editor-runtime/equation-artwork/ab76f3407cf8cad6fa99e74faad03dc74d3307a64e8d25e335f2252d5ec59a75.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="60ac79a57cf1a71f781beff58f60399a5c55200a414c42960753e6252e5b9c63"><span class="help-equation-accessible help-equation-live">$\displaystyle s_o=\frac{1}{(\bar{m}-1)\sqrt{n \bar{m}_h}} \sqrt{2(\bar{m}_h-1)+\frac{(\bar{m}-\bar{m}_h)(1-4\bar{p}\bar{q})}{\bar{m}\bar{p}\bar{q}}}$</span><img src="../resources/help-editor-runtime/equation-artwork/421de4d42098afcbfe09e467460ec8da31134f840ca04900af436414cf8c4184.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="793c981a64cea73b4555493b6cea0f617ef50a53bc78eab1e3089df867c376ae"><span class="help-equation-accessible help-equation-live">$\displaystyle \bar{p}=\sum_{i=1}^k \frac{x_i}{n\bar{m}}$</span><img src="../resources/help-editor-runtime/equation-artwork/3858f6b57484710b2e2fc039064bc8e1c7d2a1495d218639205a1ec408ba8e01.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="42fe18fefedd6e880228ad7beeca326296039210c856baf57bedcff93413b4f3"><span class="help-equation-accessible help-equation-live">$\displaystyle \bar{m}=\sum_{i=1}^k{\frac{m_i}{n}}$</span><img src="../resources/help-editor-runtime/equation-artwork/2907876de78dac068769caa81721696ed018caacee3b9ef3edf41b5b7151af67.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="94cf59db7a93a7fc84b545f3bfc589f70ef44aa085c5635e8d60ffdd6da5f9f5"><span class="help-equation-accessible help-equation-live">$\displaystyle \bar{m}_h=\frac{k}{\sum_{i=1}^k{1/m_i}}$</span><img src="../resources/help-editor-runtime/equation-artwork/3ffa84257ca95c04de0cd680bfa592903040f0a4a1c98896f025d260c41ea426.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="78a4c3d7caf6e30bcb491ab5d6d54bb67896f5626d07052d0753d31e3b1f5fb5"><span class="help-equation-accessible help-equation-live">$\bar{q}=1-\bar{p}$</span><img src="../resources/help-editor-runtime/equation-artwork/b46b25845101aeb42d58f7c5e916d5859ea1b6919193606faa4efc5b3885c14d.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>- where x<sub>i</sub> is the number of positive ratings out of m<sub>i</sub> raters for subject i of n subjects, and so is the standard error for testing that the kappa statistic equals zero.</p>
-        <p> </p>
-        <p>For three or more raters and categories (m&gt;2, k&gt;2):</p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="e928fbbd77edc1b2c764d42f176024fff439afc0d264c71d9352272dd1b5f11a"><span class="help-equation-accessible help-equation-live">$\displaystyle \bar{\kappa}=\frac{\displaystyle \sum_{j=1}^k\bar{p}_j \bar{q}_j \hat{\kappa}_j}{\displaystyle \sum_{j=1}^k{\bar{p}_j \bar{q}_j}}$</span><img src="../resources/help-editor-runtime/equation-artwork/fcc0e9c97ec971eedf2230838c10935be3f0e7f453049c6094081913a4a4f319.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="57052b27a44ad08f85e51a37943281f4d7f469bc03d06bc28c6aecd15c1bc71c"><span class="help-equation-accessible help-equation-live">$\displaystyle s_{oj}=\sqrt{\frac{2}{nm(m-1)}}$</span><img src="../resources/help-editor-runtime/equation-artwork/94bb41be09bc4b8aa9fa3976f33d29d68b2a73e93e39db4d62371e89be69d5ec.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="7d75f73e7fe7bbf5aa9dac29a1ebc8888c2065e75a1e93df79b1718e26f38c99"><span class="help-equation-accessible help-equation-live">$\displaystyle \bar{s}_o=\frac{\sqrt{2}}{\displaystyle \sum_{i=1}^k{\bar{p}_j \bar{q}_j\sqrt{nm(m-1)}}} \sqrt{[\sum_{j=1}^k{\bar{p}_j\bar{q}_j}]^2-\sum_{j=1}^k{\bar{p}_j\bar{q}_j(\bar{q}_j-\bar{p}_j)}}$</span><img src="../resources/help-editor-runtime/equation-artwork/d66917d25dd6f76321204d4e5af59bf152f0bbdecccdbdef4c06aa03f469d035.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>- where s<sub>oj</sub> is the standard error for testing kappa equal for each rating category separately, and so bar is the standard error for testing kappa equal to zero for the overall kappa across the k categories. Kappa hat is calculated as for the m&gt;2, k=2 method shown above.</p>
-        <p> </p>
-        <p><u>Example</u>
-        </p>
-        <p>From <a href="../references/reference_list.htm#ref-altman-1991">Altman (1991)</a>.</p>
-        <p> </p>
-        <p>Altman quotes the results of Brostoff et al. in a comparison not of two human observers but of two different methods of assessment. These methods are RAST (radioallergosorbent test) and MAST (multi-RAST) for testing the sera of individuals for specifically reactive IgE in the diagnosis of allergies. Five categories of result were recorded using each method:</p>
-        <p> </p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td width="54"> </td>
-                <td width="72"> </td>
-                <td colspan="5" width="352" style="text-align: center;">RAST:</td>
-            </tr>
-            <tr>
-                <td width="54"> </td>
-                <td width="72"> </td>
-                <td width="69" style="text-decoration: underline;text-align: right;">negative</td>
-                <td width="67" style="text-decoration: underline;text-align: right;">weak</td>
-                <td width="73" style="text-decoration: underline;text-align: right;">moderate</td>
-                <td width="67" style="text-decoration: underline;text-align: right;">high</td>
-                <td width="76" style="text-decoration: underline;text-align: right;">very high</td>
-            </tr>
-            <tr>
-                <td rowspan="5" width="54">MAST:</td>
-                <td width="72">negative</td>
-                <td width="69" style="text-align: right;">86</td>
-                <td width="67" style="text-align: right;">3</td>
-                <td width="73" style="text-align: right;">14</td>
-                <td width="67" style="text-align: right;">0</td>
-                <td width="76" style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td width="72">weak</td>
-                <td width="69" style="text-align: right;">26</td>
-                <td width="67" style="text-align: right;">0</td>
-                <td width="73" style="text-align: right;">10</td>
-                <td width="67" style="text-align: right;">4</td>
-                <td width="76" style="text-align: right;">0</td>
-            </tr>
-            <tr>
-                <td width="72">moderate</td>
-                <td width="69" style="text-align: right;">20</td>
-                <td width="67" style="text-align: right;">2</td>
-                <td width="73" style="text-align: right;">22</td>
-                <td width="67" style="text-align: right;">4</td>
-                <td width="76" style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td width="72">high</td>
-                <td width="69" style="text-align: right;">11</td>
-                <td width="67" style="text-align: right;">1</td>
-                <td width="73" style="text-align: right;">37</td>
-                <td width="67" style="text-align: right;">16</td>
-                <td width="76" style="text-align: right;">14</td>
-            </tr>
-            <tr>
-                <td width="72">very high</td>
-                <td width="69" style="text-align: right;">3</td>
-                <td width="67" style="text-align: right;">0</td>
-                <td width="73" style="text-align: right;">15</td>
-                <td width="67" style="text-align: right;">24</td>
-                <td width="76" style="text-align: right;">48</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>To analyse these data in StatsDirect select Categorical from the Agreement section of the Analysis menu. Choose the default 95% confidence interval. Enter the above frequencies as directed on the screen and select the default method for weighting.</p>
-        <p> </p>
-        <p>For this example:</p>
-        <p> </p>
-        <p><u>General agreement over all categories (2 raters)</u>
-        </p>
-        <p> </p>
-        <p style="text-decoration: underline;">Cohen's kappa (unweighted)</p>
-        <p>Observed agreement = 47.38%</p>
-        <p>Expected agreement = 22.78%</p>
-        <p>Kappa = 0.318628 (se_0 = 0.026776, se = 0.030423)</p>
-        <p>95% confidence interval = 0.259 to 0.378256</p>
-        <p>z (for k = 0) = 11.899574</p>
-        <p>P &lt; 0.0001</p>
-        <p> </p>
-        <p style="text-decoration: underline;">Cohen's kappa (weighted by 1-abs(i-j)/(k-1))</p>
-        <p>Observed agreement = 80.51%</p>
-        <p>Expected agreement = 55.81%</p>
-        <p>Kappa = 0.558953 (se_0 = 0.038019, se = 0.028507)</p>
-        <p>95% confidence interval for kappa = 0.503081 to 0.614826</p>
-        <p>z (for kw = 0) = 14.701958</p>
-        <p>P &lt; 0.0001</p>
-        <p> </p>
-        <p style="text-decoration: underline;">Scott's pi</p>
-        <p>Observed agreement = 47.38%</p>
-        <p>Expected agreement = 24.07%</p>
-        <p>Pi = 0.30701</p>
-        <p> </p>
-        <p style="text-decoration: underline;">Gwet's AC1</p>
-        <p>Observed agreement = 47.38%</p>
-        <p>Chance-independent agreement = 18.98%</p>
-        <p>AC1 = 0.350552 (se = 0.033046)</p>
-        <p>95% confidence interval = 0.285782 to 0.415322</p>
-        <p> </p>
-        <p style="text-decoration: underline;">Disagreement over any category and asymmetry of disagreement (2 raters)</p>
-        <p>Marginal homogeneity (Maxwell) chi-square = 73.013451, df = 4, P &lt; 0.0001</p>
-        <p>Symmetry (generalised McNemar) chi-square = 79.076091, df = 9, P &lt; 0.0001</p>
-        <p> </p>
-        <p>Note that for calculation of standard errors for the kappa statistics, StatsDirect uses a more accurate method than that which is quoted in most textbooks (e.g. <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>).</p>
-        <p> </p>
-        <p>The statistically highly significant z tests indicate that we should reject the null hypothesis that the ratings are independent (i.e. kappa = 0) and accept the alternative that agreement is better than one would expect by chance. Do not put too much emphasis on the kappa statistic test, it makes a lot of assumptions and falls into error with small numbers.</p>
-        <p> </p>
-        <p>Note that Gwet's agreement coefficient does not depend upon the hypothesis of independence between raters, therefore you can use it to reflect the extent of agreement in more contexts than kappa.</p>
-        <p> </p>
-        <p>The statistically highly significant Maxwell test statistic above indicates that the raters disagree significantly in at least one category. The generalised McNemar statistic indicates the disagreement is not spread evenly.</p>
-        <p> </p>
-        <details class="rcode">
-            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
-            <div>
-                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
-                <pre class="rcode" xml:space="preserve"># Agreement of categorical measurements: the StatsDirect help example (Altman 1991,
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Clinical epidemiology calculations" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" />
+        <meta name="description" content="For the case of two raters, this function gives Cohen's kappa (weighted and unweighted), Scott's pi and Gwett's AC1 as measures of inter-rater agreement for two raters' categorical assessments. For three or more raters, this function gives extensions of the Cohen kappa method, due to Fleiss and Cuzick in the case of two possible responses per rater, and Fleiss, Nee and Landis in the general case of three or more responses per rater." /><title>Agreement Analysis (Categorical Data, Kappa, Maxwell, Scott Pi, Gwet AC1) - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/images/sd3.ico" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <div class="central-account-wrapper">
+                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="central-account-wrapper">
+                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
+                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
+                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
+                                                    </div>
+                                                    <div class="search-filter-content" id="sf-content">
+                                                        <ul>
+                                                            <li>
+                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <nav class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="body-container">
+                                <div data-mc-content-body="True">
+                                    <div role="main" id="mc-main-content">
+                                        <h1><a name="kanchor166"></a>Agreement of Categorical Measurements</h1>
+                                        <p>&#160;</p>
+                                        <p>Menu locations:<br /><b>Analysis_Agreement_Categorical (Kappa)</b><br /><b>Analysis_Chi-square_Kappa and Maxwell</b><br /><b>Analysis_Clinical Epidemiology_Kappa and Maxwell</b></p>
+                                        <p>.</p>
+                                        <p><u>Agreement Analysis</u>
+                                        </p>
+                                        <p><a name="kanchor167"></a>For the case of two raters, this function gives Cohen's kappa (weighted and unweighted), Scott's pi and Gwett's AC1 as measures of inter-rater agreement for two raters' categorical assessments (<a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-fleiss-1969">Fleiss, 1969</a>; <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>; <a href="../references/reference_list.htm#ref-scott-1955">Scott 1955</a>). For three or more raters, this function gives extensions of the Cohen kappa method, due to <a href="../references/reference_list.htm#ref-fleiss-1979-b">Fleiss and Cuzick (1979)</a> in the case of two possible responses per rater, and <a href="../references/reference_list.htm#ref-fleiss-1979-c">Fleiss, Nee and Landis (1979)</a> in the general case of three or more responses per rater.</p>
+                                        <p>&#160;</p>
+                                        <p>If you have only two categories then Scott's pi statistic (with confidence interval constructed by the <a href="../references/reference_list.htm#ref-donner-1992">Donner-Eliasziw (1992)</a> method) for inter-rater agreement (<a href="../references/reference_list.htm#ref-zwick-1988">Zwick, 1988</a>) is more reliable than kappa.</p>
+                                        <p>&#160;</p>
+                                        <p>Gwet's AC1 is the statistic of choice for the case of two raters (<a href="../references/reference_list.htm#ref-gwet-2008">Gwet, 2008</a>). Gwet's agreement coefficient, can be used in more contexts than kappa or pi because it does not depend upon the assumption of independence between raters.</p>
+                                        <p>&#160;</p>
+                                        <p>Weighted kappa partly compensates for a problem with unweighted kappa, namely that it is not adjusted for the degree of disagreement. Disagreement is weighted in decreasing priority from the top left (origin) of the table. StatsDirect uses the following definitions for weight (1 is the default):</p>
+                                        <ol>
+                                            <li value="1">w(ij)=1-abs(i-j)/(g-1)</li>
+                                            <li value="2">w(ij)=1-[(i-j)/(g-1)]²</li>
+                                            <li value="3">User defined (this is only available via workbook data entry)</li>
+                                        </ol>
+                                        <p>g = categories</p>
+                                        <p>w = weight</p>
+                                        <p>i = category for one observer (from 1 to g)</p>
+                                        <p>j = category for the other observer (from 1 to g)</p>
+                                        <p>&#160;</p>
+                                        <p>In broad terms a kappa below 0.2 indicates poor agreement and a kappa above 0.8 indicates very good agreement beyond chance.</p>
+                                        <p>&#160;</p>
+                                        <p>Guide (<a href="../references/reference_list.htm#ref-landis-1977">Landis and Koch, 1977</a>):</p>
+                                        <table cellspacing="0" style="margin-left: 0;margin-right: auto;caption-side: top;border-spacing: 2px 2px;border-collapse: separate;">
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;"><u>Kappa</u>
+                                                </td>
+                                                <td style="text-decoration: underline;padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Strength of agreement</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&lt; 0.2</td>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Poor</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&gt; 0.2 ≤ 0.4</td>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Fair</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&gt; 0.4 ≤ 0.6</td>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Moderate</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&gt; 0.6 ≤ 0.8</td>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Good</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">&gt; 0.8 ≤ 1</td>
+                                                <td style="padding-left: 0em;padding-right: 2em;border-left-width: .5em;border-right-width: .5em;border-top-width: .5em;border-bottom-width: .5em;">Very good</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>N.B. You can not reliably compare kappa values from different studies because kappa is sensitive to the prevalence of different categories. i.e. if one category is observed more commonly in one study than another then kappa may indicate a difference in inter-rater agreement which is not due to the raters.</p>
+                                        <p>&#160;</p>
+                                        <p>Agreement analysis with more than two raters is a complex and controversial subject, see <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss (1981, p. 225)</a>.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Disagreement Analysis</u>
+                                        </p>
+                                        <p>StatsDirect uses the methods of <a href="../references/reference_list.htm#ref-maxwell-1970">Maxwell (1970)</a> to test for differences between the ratings of the two raters (or k nominal responses with paired observations).</p>
+                                        <p>&#160;</p>
+                                        <p><a name="kanchor168"></a>Maxwell's chi-square statistic tests for overall disagreement between the two raters. The general McNemar statistic tests for asymmetry in the distribution of subjects about which the raters disagree, i.e. disagreement more over some categories of response than others. A pair of categories in which neither rater put a subject that the other put in the other category adds nothing to this statistic, and is not counted in its degrees of freedom. Maxwell's statistic usually has one degree of freedom fewer than there are categories. If the raters disagree only within groups of categories, never taking a category of one group for a category of another, the statistic is worked out within each of the groups of categories that disagreements join and added up, and its degrees of freedom are the number of categories less the number of groups. If the raters agree on every subject, kappa is 1 with a standard error of 0, and neither test is given.</p>
+                                        <p>&#160;</p>
+                                        <p>Data preparation</p>
+                                        <p>You may present your data for the two-rater methods as a fourfold table in the interactive screen data entry menu option. Otherwise, you may present your data as responses/ratings in columns and rows in a worksheet, where the columns represent raters and the rows represent subjects rated. If you have more than two raters then you must present your data in the worksheet column (rater) row (subject) format. Missing data can be used where raters did not rate all subjects.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Technical validation</u>
+                                        </p>
+                                        <p>All formulae for kappa statistics and their tests are as per <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss (1981)</a>:</p>
+                                        <p>For two raters (m=2) and two categories (k=2):</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation36.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation37.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation38.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation39.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation40.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation41.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where n is the number of subjects rated, w is the weight for agreement or disagreement, p<sub>o</sub> is the observed proportion of agreement, p<sub>e</sub> is the expected proportion of agreement, p<sub>ij</sub> is the fraction of ratings i by the first rater and j by the second rater, and so is the standard error for testing that the kappa statistic equals zero.</p>
+                                        <p>&#160;</p>
+                                        <p>For three or more raters (m&gt;2) and two categories (k =2):</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation42.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation43.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation44.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation45.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation46.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation47.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation48.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation49.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where x<sub>i</sub> is the number of positive ratings out of m<sub>i</sub> raters for subject i of n subjects, and so is the standard error for testing that the kappa statistic equals zero.</p>
+                                        <p>&#160;</p>
+                                        <p>For three or more raters and categories (m&gt;2, k&gt;2):</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation50.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation51.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation52.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where s<sub>oj</sub> is the standard error for testing kappa equal for each rating category separately, and so bar is the standard error for testing kappa equal to zero for the overall kappa across the k categories. Kappa hat is calculated as for the m&gt;2, k=2 method shown above.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>From <a href="../references/reference_list.htm#ref-altman-1991">Altman (1991)</a>.</p>
+                                        <p>&#160;</p>
+                                        <p>Altman quotes the results of Brostoff et al. in a comparison not of two human observers but of two different methods of assessment. These methods are RAST (radioallergosorbent test) and MAST (multi-RAST) for testing the sera of individuals for specifically reactive IgE in the diagnosis of allergies. Five categories of result were recorded using each method:</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td width="54">&#160;</td>
+                                                <td width="72">&#160;</td>
+                                                <td colspan="5" width="352" style="text-align: center;">RAST:</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="54">&#160;</td>
+                                                <td width="72">&#160;</td>
+                                                <td width="69" style="text-decoration: underline;text-align: right;">negative</td>
+                                                <td width="67" style="text-decoration: underline;text-align: right;">weak</td>
+                                                <td width="73" style="text-decoration: underline;text-align: right;">moderate</td>
+                                                <td width="67" style="text-decoration: underline;text-align: right;">high</td>
+                                                <td width="76" style="text-decoration: underline;text-align: right;">very high</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="5" width="54">MAST:</td>
+                                                <td width="72">negative</td>
+                                                <td width="69" style="text-align: right;">86</td>
+                                                <td width="67" style="text-align: right;">3</td>
+                                                <td width="73" style="text-align: right;">14</td>
+                                                <td width="67" style="text-align: right;">0</td>
+                                                <td width="76" style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="72">weak</td>
+                                                <td width="69" style="text-align: right;">26</td>
+                                                <td width="67" style="text-align: right;">0</td>
+                                                <td width="73" style="text-align: right;">10</td>
+                                                <td width="67" style="text-align: right;">4</td>
+                                                <td width="76" style="text-align: right;">0</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="72">moderate</td>
+                                                <td width="69" style="text-align: right;">20</td>
+                                                <td width="67" style="text-align: right;">2</td>
+                                                <td width="73" style="text-align: right;">22</td>
+                                                <td width="67" style="text-align: right;">4</td>
+                                                <td width="76" style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="72">high</td>
+                                                <td width="69" style="text-align: right;">11</td>
+                                                <td width="67" style="text-align: right;">1</td>
+                                                <td width="73" style="text-align: right;">37</td>
+                                                <td width="67" style="text-align: right;">16</td>
+                                                <td width="76" style="text-align: right;">14</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="72">very high</td>
+                                                <td width="69" style="text-align: right;">3</td>
+                                                <td width="67" style="text-align: right;">0</td>
+                                                <td width="73" style="text-align: right;">15</td>
+                                                <td width="67" style="text-align: right;">24</td>
+                                                <td width="76" style="text-align: right;">48</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>To analyse these data in StatsDirect select Categorical from the Agreement section of the Analysis menu. Choose the default 95% confidence interval. Enter the above frequencies as directed on the screen and select the default method for weighting.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>General agreement over all categories (2 raters)</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p style="text-decoration: underline;">Cohen's kappa (unweighted)</p>
+                                        <p>Observed agreement = 47.38%</p>
+                                        <p>Expected agreement = 22.78%</p>
+                                        <p>Kappa = 0.318628 (se_0 = 0.026776, se = 0.030423)</p>
+                                        <p>95% confidence interval = 0.259 to 0.378256</p>
+                                        <p>z (for k = 0) = 11.899574</p>
+                                        <p>P &lt; 0.0001</p>
+                                        <p>&#160;</p>
+                                        <p style="text-decoration: underline;">Cohen's kappa (weighted by 1-abs(i-j)/(k-1))</p>
+                                        <p>Observed agreement = 80.51%</p>
+                                        <p>Expected agreement = 55.81%</p>
+                                        <p>Kappa = 0.558953 (se_0 = 0.038019, se = 0.028507)</p>
+                                        <p>95% confidence interval for kappa = 0.503081 to 0.614826</p>
+                                        <p>z (for kw = 0) = 14.701958</p>
+                                        <p>P &lt; 0.0001</p>
+                                        <p>&#160;</p>
+                                        <p style="text-decoration: underline;">Scott's pi</p>
+                                        <p>Observed agreement = 47.38%</p>
+                                        <p>Expected agreement = 24.07%</p>
+                                        <p>Pi = 0.30701</p>
+                                        <p>&#160;</p>
+                                        <p style="text-decoration: underline;">Gwet's AC1</p>
+                                        <p>Observed agreement = 47.38%</p>
+                                        <p>Chance-independent agreement = 18.98%</p>
+                                        <p>AC1 = 0.350552 (se = 0.033046)</p>
+                                        <p>95% confidence interval = 0.285782 to 0.415322</p>
+                                        <p>&#160;</p>
+                                        <p style="text-decoration: underline;">Disagreement over any category and asymmetry of disagreement (2 raters)</p>
+                                        <p>Marginal homogeneity (Maxwell) chi-square = 73.013451, df = 4, P &lt; 0.0001</p>
+                                        <p>Symmetry (generalised McNemar) chi-square = 79.076091, df = 9, P &lt; 0.0001</p>
+                                        <p>&#160;</p>
+                                        <p>Note that for calculation of standard errors for the kappa statistics, StatsDirect uses a more accurate method than that which is quoted in most textbooks (e.g. <a href="../references/reference_list.htm#ref-altman-1991">Altman, 1991</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>The statistically highly significant z tests indicate that we should reject the null hypothesis that the ratings are independent (i.e. kappa = 0) and accept the alternative that agreement is better than one would expect by chance. Do not put too much emphasis on the kappa statistic test, it makes a lot of assumptions and falls into error with small numbers.</p>
+                                        <p>&#160;</p>
+                                        <p>Note that Gwet's agreement coefficient does not depend upon the hypothesis of independence between raters, therefore you can use it to reflect the extent of agreement in more contexts than kappa.</p>
+                                        <p>&#160;</p>
+                                        <p>The statistically highly significant Maxwell test statistic above indicates that the raters disagree significantly in at least one category. The generalised McNemar statistic indicates the disagreement is not spread evenly.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Agreement of categorical measurements: the StatsDirect help example (Altman 1991,
 # the RAST and MAST tests of 363 sera graded in five categories) in R
 grades &lt;- c("negative", "weak", "moderate", "high", "very high")
 counts &lt;- matrix(c(86, 3, 14, 0, 2,
@@ -382,13 +478,33 @@ x2m &lt;- sum((above - below)[filled]^2 / (above + below)[filled])
 dfm &lt;- sum(filled)
 cat("Symmetry (generalised McNemar) chi-square =", six(x2m), " df =", dfm, " ",
     pv(pchisq(x2m, dfm, lower.tail = FALSE)), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
+                                        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+                                        </p>
+                                        <p><a href="../basics/p_values.htm">P values</a>
+                                        </p>
+                                    </div>
+                                    <MadCap:pageFooter>
+                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
+                                    </MadCap:pageFooter>
+                                    <!-- Google tag (gtag.js) -->
+                                    <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
+                                    </script>
+                                    <script type="text/javascript">/* <![CDATA[ */
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GZZ7X1JX4D');
+        /* ]]> */</script>
+                                </div>
+                            </div>
+                        </div>
+                    </div><a data-close="true"></a>
+                </div>
             </div>
-        </details>
-        <p> </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-        </p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-    <footer class="help-shared-footer">
-            <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank" rel="noopener noreferrer">Download software here</a>.</p>
-        </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>
+        </div>
+    </body>
+</html>

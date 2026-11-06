@@ -1,383 +1,474 @@
-<!doctype html>
-<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="meta_analysis/effect_size.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Effect Size Meta-analysis - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
-#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
-#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
-html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
-@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
-html[data-help-skin="flare"] #help-topic-body img{max-width:none}
-html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
-html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
-html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
-html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
-@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
-<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
-<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
-        <h1>
-            Effect Size Meta-analysis</h1>
-        <p> </p>
-        <p>Menu location: <b>Analysis_Meta-Analysis_Effect Size</b>.</p>
-        <p> </p>
-        <p>Case-control studies of continuous outcomes (e.g. serum creatinine) may be investigated with respect to overall size of effect of an intervention. Meta-analysis may be used to investigate the combination or interaction of a group of independent studies, for example a series of effect sizes from similar studies conducted at different centres. This StatsDirect function examines the effect size within each stratum and across all of the studies/strata.</p>
-        <p> </p>
-        <p>There are a number of statistical methods for estimating effect size, StatsDirect uses g (modified Glass statistic with pooled sample standard deviation) and the unbiased estimator d (<a href="../references/reference_list.htm#ref-hedges-1985">Hedges and Olkin, 1985</a>):</p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="283dbbd2393cc45e7c191d3a479f46f741637bd41c6dcf472f0d717b12655caf"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
-\displaystyle \displaystyle d=g[J(N-2)] \\
-\displaystyle \displaystyle g=\frac{\mu_e-\mu_c}{\sigma_{\text{pooled}}} \\
-\displaystyle \displaystyle \sigma_{\text{pooled}}=\sqrt{\frac{\sigma_e^2(n_e-1)+\sigma_c^2(n_c-1)}{N-2}} \\
-\displaystyle \displaystyle J(m)=\frac{\Gamma[m/2]}{\Gamma[(m-1)/2]\sqrt{m/2}}
-\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/2f1a3e903cc5c88c2b32598593d215bf0a9d91f36646e2c72fd9259e26cf90ec.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>- where n<sub>e</sub> is the number in the experimental group, n<sub>c</sub> is the number in the control group, μ<sub>e</sub> is the sample mean of the experimental group, μ<sub>c</sub> is the sample mean of the control group, σ<sub>e</sub> is the sample standard deviation for the experimental group, σ<sub>c</sub> is the sample standard deviation for the control group, N = n<sub>e</sub> + n<sub>c</sub>, J(m) is the correction factor given m and Γ is the gamma function.</p>
-        <p> </p>
-        <p>For each study StatsDirect gives g with an exact confidence interval and d with an approximate confidence interval. An iterative method based on the non-central t distribution is used to construct the confidence interval for g (<a href="../references/reference_list.htm#ref-hedges-1985">Hedges and Olkin, 1985</a>).</p>
-        <p> </p>
-        <p>The pooled mean effect size estimate (d+) is calculated using direct weights defined as the inverse of the variance of d for each study/stratum. An approximate confidence interval for d+ is given with a z statistic and probability of this pooled effect size being equal to zero (<a href="../references/reference_list.htm#ref-hedges-1985">Hedges and Olkin, 1985</a>).</p>
-        <p> </p>
-        <p>
-            StatsDirect also gives the option to base effect size calculations on weighted mean difference (a non-standardized estimate unlike g and d) as described in the Cochrane Collaboration Handbook (<a href="../references/reference_list.htm#ref-mulrow-1996">Mulrow and Oxman, 1996</a>). The confidence interval for the mean difference of each study is calculated from the variances of its two groups taken separately, as the weights are.</p>
-        <p> </p>
-        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
-        <p> </p>
-        <p>Please note that the results from StatsDirect may be slightly different from the results you obtain using other packages or from those quoted in papers; this is due to the use of exact bias correction calculated from the gamma distribution in StatsDirect.</p>
-        <p> </p>
-        <p>DATA INPUT:</p>
-        <p>You may enter number, mean and standard deviation for control and experimental groups of each study. Alternatively you may just enter numbers in experimental groups, numbers in control groups and effect size g (nb. please make sure you use g only as defined above!).</p>
-        <p> </p>
-        <p><u>Example</u>
-        </p>
-        <p>From personal communication from Dr N. Freemantle.</p>
-        <p> </p>
-        <p>The following data represent test outcomes for six studies in which an educational intervention was investigated:</p>
-        <p> </p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td> </td>
-                <td colspan="3" style="text-align: center;"><u>Experimental</u>
-                </td>
-                <td colspan="3" style="text-align: center;"><u>Control</u>
-                </td>
-            </tr>
-            <tr>
-                <td>Trial</td>
-                <td style="text-decoration: underline;text-align: right;">N</td>
-                <td style="text-decoration: underline;text-align: right;">Mean</td>
-                <td style="text-decoration: underline;text-align: right;">SD</td>
-                <td style="text-decoration: underline;text-align: right;">N</td>
-                <td style="text-decoration: underline;text-align: right;">Mean</td>
-                <td style="text-decoration: underline;text-align: right;">SD</td>
-            </tr>
-            <tr>
-                <td>Kottke</td>
-                <td style="text-align: right;">27</td>
-                <td style="text-align: right;">18.50</td>
-                <td style="text-align: right;">14.90</td>
-                <td style="text-align: right;">17</td>
-                <td style="text-align: right;">5.40</td>
-                <td style="text-align: right;">17.30</td>
-            </tr>
-            <tr>
-                <td>Levinson</td>
-                <td style="text-align: right;">16</td>
-                <td style="text-align: right;">60.00</td>
-                <td style="text-align: right;">29.20</td>
-                <td style="text-align: right;">15</td>
-                <td style="text-align: right;">55.00</td>
-                <td style="text-align: right;">29.20</td>
-            </tr>
-            <tr>
-                <td>Oliver (intensive)</td>
-                <td style="text-align: right;">25</td>
-                <td style="text-align: right;">10.72</td>
-                <td style="text-align: right;">6.46</td>
-                <td style="text-align: right;">66</td>
-                <td style="text-align: right;">6.92</td>
-                <td style="text-align: right;">6.83</td>
-            </tr>
-            <tr>
-                <td>Oliver (standard)</td>
-                <td style="text-align: right;">62</td>
-                <td style="text-align: right;">9.20</td>
-                <td style="text-align: right;">6.16</td>
-                <td style="text-align: right;">66</td>
-                <td style="text-align: right;">6.92</td>
-                <td style="text-align: right;">6.83</td>
-            </tr>
-            <tr>
-                <td>Sulmasy</td>
-                <td style="text-align: right;">9</td>
-                <td style="text-align: right;">3.75</td>
-                <td style="text-align: right;">2.55</td>
-                <td style="text-align: right;">22</td>
-                <td style="text-align: right;">1.05</td>
-                <td style="text-align: right;">2.12</td>
-            </tr>
-            <tr>
-                <td>White</td>
-                <td style="text-align: right;">63</td>
-                <td style="text-align: right;">60.00</td>
-                <td style="text-align: right;">13.30</td>
-                <td style="text-align: right;">40</td>
-                <td style="text-align: right;">46.30</td>
-                <td style="text-align: right;">18.60</td>
-            </tr>
-            <tr>
-                <td>Wilson</td>
-                <td style="text-align: right;">23</td>
-                <td style="text-align: right;">9.24</td>
-                <td style="text-align: right;">5.35</td>
-                <td style="text-align: right;">23</td>
-                <td style="text-align: right;">5.33</td>
-                <td style="text-align: right;">4.48</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>To analyse these data in StatsDirect first prepare them in seven workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select effect size from the meta-analysis section of the analysis menu, select the option to use mean, n and sd, and then <a href="../workbook/selecting_data.htm">select</a> the columns ’Exptal. number’, ’Exptal. mean’, ’Exptal. SD’, ’Control number’, ’Control mean’, ’Control SD’ and ’Trial’ as prompted.</p>
-        <p> </p>
-        <p>For this example:</p>
-        <p> </p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;">Study</td>
-                <td style="text-decoration: underline;">J(N-2)</td>
-                <td style="text-decoration: underline;">g</td>
-                <td colspan="2" style="text-decoration: underline;">Exact 95% CI</td>
-                <td> </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>0.982018</td>
-                <td>0.826124</td>
-                <td>0.189712</td>
-                <td>1.453464</td>
-                <td>Kottke</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>0.973875</td>
-                <td>0.171233</td>
-                <td>-0.536003</td>
-                <td>0.87554</td>
-                <td>Levinson</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>0.991545</td>
-                <td>0.564449</td>
-                <td>0.09524</td>
-                <td>1.030587</td>
-                <td>Oliver (intensive)</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>0.994034</td>
-                <td>0.350002</td>
-                <td>-0.000005</td>
-                <td>0.698642</td>
-                <td>Oliver (standard)</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>0.973875</td>
-                <td>1.20168</td>
-                <td>0.358317</td>
-                <td>2.027136</td>
-                <td>Sulmasy</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>0.992553</td>
-                <td>0.880352</td>
-                <td>0.46397</td>
-                <td>1.292737</td>
-                <td>White</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>0.982841</td>
-                <td>0.792426</td>
-                <td>0.187185</td>
-                <td>1.38934</td>
-                <td>Wilson</td>
-            </tr>
-        </table>
-        <p> </p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;">Study</td>
-                <td style="text-decoration: underline;">N (exptal.)</td>
-                <td style="text-decoration: underline;">N (control)</td>
-                <td style="text-decoration: underline;">d</td>
-                <td colspan="2" style="text-decoration: underline;">Approximate 95% CI</td>
-                <td> </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>27</td>
-                <td>17</td>
-                <td>0.811269</td>
-                <td>0.18121</td>
-                <td>1.441328</td>
-                <td>Kottke</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>16</td>
-                <td>15</td>
-                <td>0.166759</td>
-                <td>-0.538869</td>
-                <td>0.872388</td>
-                <td>Levinson</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>25</td>
-                <td>66</td>
-                <td>0.559677</td>
-                <td>0.092265</td>
-                <td>1.027089</td>
-                <td>Oliver (intensive)</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>62</td>
-                <td>66</td>
-                <td>0.347914</td>
-                <td>-0.001341</td>
-                <td>0.697169</td>
-                <td>Oliver (standard)</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>9</td>
-                <td>22</td>
-                <td>1.170286</td>
-                <td>0.341855</td>
-                <td>1.998716</td>
-                <td>Sulmasy</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>63</td>
-                <td>40</td>
-                <td>0.873796</td>
-                <td>0.459972</td>
-                <td>1.28762</td>
-                <td>White</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>23</td>
-                <td>23</td>
-                <td>0.778829</td>
-                <td>0.179356</td>
-                <td>1.378302</td>
-                <td>Wilson</td>
-            </tr>
-        </table>
-        <p> </p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;">Study</td>
-                <td colspan="2" style="text-decoration: underline;">% weights (fixed, random)</td>
-                <td> </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>9.19968</td>
-                <td>10.62611</td>
-                <td>Kottke</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>7.334723</td>
-                <td>8.764878</td>
-                <td>Levinson</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>16.716159</td>
-                <td>17.01627</td>
-                <td>Oliver (intensive)</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>29.939856</td>
-                <td>25.212518</td>
-                <td>Oliver (standard)</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>5.321368</td>
-                <td>6.605485</td>
-                <td>Sulmasy</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>21.325794</td>
-                <td>20.235667</td>
-                <td>White</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>10.162419</td>
-                <td>11.53907</td>
-                <td>Wilson</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p><u>Fixed effects (Hedges-Olkin)</u>
-        </p>
-        <p>Pooled effect size d+ = 0.612354 (95% CI = 0.421251 to 0.803457)</p>
-        <p>Z (test d+ differs from 0) = 6.280333 P &lt; 0.0001</p>
-        <p> </p>
-        <p><u>Non-combinability of studies</u>
-        </p>
-        <p>Cochran Q = 7.737692 (df = 6) P = 0.258</p>
-        <p>Moment-based estimate of between studies variance = 0.020397</p>
-        <p>I² (inconsistency) = 22.5% (95% CI = 0% to 72.5%) </p>
-        <p> </p>
-        <p><u>Random effects (DerSimonian-Laird)</u>
-        </p>
-        <p>Pooled d+ = 0.627768 (95% CI = 0.403026 to 0.85251)</p>
-        <p>Z (test d+ differs from 0) = 5.474734 P &lt; 0.0001</p>
-        <p> </p>
-        <p><u>Bias indicators</u>
-        </p>
-        <p>Begg-Mazumdar: Kendall's tau = 0.238095 P = 0.5619 (low power)</p>
-        <p>Egger: bias = 1.439076 (90% CI = -1.712135 to 4.590287) P = 0.3997</p>
-        <p> </p>
-        <p>Here we can say with 95% confidence, assuming a random effects model, that the true size of the effect was at least 0.4 greater for the group who received the educational intervention compared with those who did not. Assuming a fixed effects model a slightly stronger inference could be made about an effect size of 0.42 (the lower confidence limit) but the high inter-study variation makes the fixed effects model less appropriate.</p>
-        <p> </p>
-        <details class="rcode">
-            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
-            <div>
-                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
-                <pre class="rcode" xml:space="preserve"># Effect size meta-analysis: the StatsDirect help example (Freemantle, personal
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Meta-analysis" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Effect Size Meta-analysis - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/images/sd3.ico" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <div class="central-account-wrapper">
+                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="central-account-wrapper">
+                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
+                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
+                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
+                                                    </div>
+                                                    <div class="search-filter-content" id="sf-content">
+                                                        <ul>
+                                                            <li>
+                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <nav class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="body-container">
+                                <div data-mc-content-body="True">
+                                    <div role="main" id="mc-main-content">
+                                        <h1><a name="kanchor240"></a>Effect Size Meta-analysis</h1>
+                                        <p>&#160;</p>
+                                        <p>Menu location: <b>Analysis_Meta-Analysis_Effect Size</b>.</p>
+                                        <p>&#160;</p>
+                                        <p>Case-control studies of continuous outcomes (e.g. serum creatinine) may be investigated with respect to overall size of effect of an intervention. Meta-analysis may be used to investigate the combination or interaction of a group of independent studies, for example a series of effect sizes from similar studies conducted at different centres. This StatsDirect function examines the effect size within each stratum and across all of the studies/strata.</p>
+                                        <p>&#160;</p>
+                                        <p>There are a number of statistical methods for estimating effect size, StatsDirect uses g (modified Glass statistic with pooled sample standard deviation) and the unbiased estimator d (<a href="../references/reference_list.htm#ref-hedges-1985">Hedges and Olkin, 1985</a>):</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation132.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where n<sub>e</sub> is the number in the experimental group, n<sub>c</sub> is the number in the control group, μ<sub>e</sub> is the sample mean of the experimental group, μ<sub>c</sub> is the sample mean of the control group, σ<sub>e</sub> is the sample standard deviation for the experimental group, σ<sub>c</sub> is the sample standard deviation for the control group, N = n<sub>e</sub> + n<sub>c</sub>, J(m) is the correction factor given m and Γ is the gamma function.</p>
+                                        <p>&#160;</p>
+                                        <p>For each study StatsDirect gives g with an exact confidence interval and d with an approximate confidence interval. An iterative method based on the non-central t distribution is used to construct the confidence interval for g (<a href="../references/reference_list.htm#ref-hedges-1985">Hedges and Olkin, 1985</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>The pooled mean effect size estimate (d+) is calculated using direct weights defined as the inverse of the variance of d for each study/stratum. An approximate confidence interval for d+ is given with a z statistic and probability of this pooled effect size being equal to zero (<a href="../references/reference_list.htm#ref-hedges-1985">Hedges and Olkin, 1985</a>).</p>
+                                        <p>&#160;</p>
+                                        <p><a name="kanchor241"></a>StatsDirect also gives the option to base effect size calculations on weighted mean difference (a non-standardized estimate unlike g and d) as described in the Cochrane Collaboration Handbook (<a href="../references/reference_list.htm#ref-mulrow-1996">Mulrow and Oxman, 1996</a>). The confidence interval for the mean difference of each study is calculated from the variances of its two groups taken separately, as the weights are.</p>
+                                        <p>&#160;</p>
+                                        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
+                                        <p>&#160;</p>
+                                        <p>Please note that the results from StatsDirect may be slightly different from the results you obtain using other packages or from those quoted in papers; this is due to the use of exact bias correction calculated from the gamma distribution in StatsDirect.</p>
+                                        <p>&#160;</p>
+                                        <p>DATA INPUT:</p>
+                                        <p>You may enter number, mean and standard deviation for control and experimental groups of each study. Alternatively you may just enter numbers in experimental groups, numbers in control groups and effect size g (nb. please make sure you use g only as defined above!).</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>From personal communication from Dr N. Freemantle.</p>
+                                        <p>&#160;</p>
+                                        <p>The following data represent test outcomes for six studies in which an educational intervention was investigated:</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td>&#160;</td>
+                                                <td colspan="3" style="text-align: center;"><u>Experimental</u>
+                                                </td>
+                                                <td colspan="3" style="text-align: center;"><u>Control</u>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Trial</td>
+                                                <td style="text-decoration: underline;text-align: right;">N</td>
+                                                <td style="text-decoration: underline;text-align: right;">Mean</td>
+                                                <td style="text-decoration: underline;text-align: right;">SD</td>
+                                                <td style="text-decoration: underline;text-align: right;">N</td>
+                                                <td style="text-decoration: underline;text-align: right;">Mean</td>
+                                                <td style="text-decoration: underline;text-align: right;">SD</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kottke</td>
+                                                <td style="text-align: right;">27</td>
+                                                <td style="text-align: right;">18.50</td>
+                                                <td style="text-align: right;">14.90</td>
+                                                <td style="text-align: right;">17</td>
+                                                <td style="text-align: right;">5.40</td>
+                                                <td style="text-align: right;">17.30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Levinson</td>
+                                                <td style="text-align: right;">16</td>
+                                                <td style="text-align: right;">60.00</td>
+                                                <td style="text-align: right;">29.20</td>
+                                                <td style="text-align: right;">15</td>
+                                                <td style="text-align: right;">55.00</td>
+                                                <td style="text-align: right;">29.20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oliver (intensive)</td>
+                                                <td style="text-align: right;">25</td>
+                                                <td style="text-align: right;">10.72</td>
+                                                <td style="text-align: right;">6.46</td>
+                                                <td style="text-align: right;">66</td>
+                                                <td style="text-align: right;">6.92</td>
+                                                <td style="text-align: right;">6.83</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Oliver (standard)</td>
+                                                <td style="text-align: right;">62</td>
+                                                <td style="text-align: right;">9.20</td>
+                                                <td style="text-align: right;">6.16</td>
+                                                <td style="text-align: right;">66</td>
+                                                <td style="text-align: right;">6.92</td>
+                                                <td style="text-align: right;">6.83</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sulmasy</td>
+                                                <td style="text-align: right;">9</td>
+                                                <td style="text-align: right;">3.75</td>
+                                                <td style="text-align: right;">2.55</td>
+                                                <td style="text-align: right;">22</td>
+                                                <td style="text-align: right;">1.05</td>
+                                                <td style="text-align: right;">2.12</td>
+                                            </tr>
+                                            <tr>
+                                                <td>White</td>
+                                                <td style="text-align: right;">63</td>
+                                                <td style="text-align: right;">60.00</td>
+                                                <td style="text-align: right;">13.30</td>
+                                                <td style="text-align: right;">40</td>
+                                                <td style="text-align: right;">46.30</td>
+                                                <td style="text-align: right;">18.60</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Wilson</td>
+                                                <td style="text-align: right;">23</td>
+                                                <td style="text-align: right;">9.24</td>
+                                                <td style="text-align: right;">5.35</td>
+                                                <td style="text-align: right;">23</td>
+                                                <td style="text-align: right;">5.33</td>
+                                                <td style="text-align: right;">4.48</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>To analyse these data in StatsDirect first prepare them in seven workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select effect size from the meta-analysis section of the analysis menu, select the option to use mean, n and sd, and then <a href="../workbook/selecting_data.htm">select</a> the columns ’Exptal. number’, ’Exptal. mean’, ’Exptal. SD’, ’Control number’, ’Control mean’, ’Control SD’ and ’Trial’ as prompted.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;">Study</td>
+                                                <td style="text-decoration: underline;">J(N-2)</td>
+                                                <td style="text-decoration: underline;">g</td>
+                                                <td colspan="2" style="text-decoration: underline;">Exact 95% CI</td>
+                                                <td>&#160;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>0.982018</td>
+                                                <td>0.826124</td>
+                                                <td>0.189712</td>
+                                                <td>1.453464</td>
+                                                <td>Kottke</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>0.973875</td>
+                                                <td>0.171233</td>
+                                                <td>-0.536003</td>
+                                                <td>0.87554</td>
+                                                <td>Levinson</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>0.991545</td>
+                                                <td>0.564449</td>
+                                                <td>0.09524</td>
+                                                <td>1.030587</td>
+                                                <td>Oliver (intensive)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>0.994034</td>
+                                                <td>0.350002</td>
+                                                <td>-0.000005</td>
+                                                <td>0.698642</td>
+                                                <td>Oliver (standard)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>0.973875</td>
+                                                <td>1.20168</td>
+                                                <td>0.358317</td>
+                                                <td>2.027136</td>
+                                                <td>Sulmasy</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>0.992553</td>
+                                                <td>0.880352</td>
+                                                <td>0.46397</td>
+                                                <td>1.292737</td>
+                                                <td>White</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>0.982841</td>
+                                                <td>0.792426</td>
+                                                <td>0.187185</td>
+                                                <td>1.38934</td>
+                                                <td>Wilson</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;">Study</td>
+                                                <td style="text-decoration: underline;">N (exptal.)</td>
+                                                <td style="text-decoration: underline;">N (control)</td>
+                                                <td style="text-decoration: underline;">d</td>
+                                                <td colspan="2" style="text-decoration: underline;">Approximate 95% CI</td>
+                                                <td>&#160;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>27</td>
+                                                <td>17</td>
+                                                <td>0.811269</td>
+                                                <td>0.18121</td>
+                                                <td>1.441328</td>
+                                                <td>Kottke</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>16</td>
+                                                <td>15</td>
+                                                <td>0.166759</td>
+                                                <td>-0.538869</td>
+                                                <td>0.872388</td>
+                                                <td>Levinson</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>25</td>
+                                                <td>66</td>
+                                                <td>0.559677</td>
+                                                <td>0.092265</td>
+                                                <td>1.027089</td>
+                                                <td>Oliver (intensive)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>62</td>
+                                                <td>66</td>
+                                                <td>0.347914</td>
+                                                <td>-0.001341</td>
+                                                <td>0.697169</td>
+                                                <td>Oliver (standard)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>9</td>
+                                                <td>22</td>
+                                                <td>1.170286</td>
+                                                <td>0.341855</td>
+                                                <td>1.998716</td>
+                                                <td>Sulmasy</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>63</td>
+                                                <td>40</td>
+                                                <td>0.873796</td>
+                                                <td>0.459972</td>
+                                                <td>1.28762</td>
+                                                <td>White</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>23</td>
+                                                <td>23</td>
+                                                <td>0.778829</td>
+                                                <td>0.179356</td>
+                                                <td>1.378302</td>
+                                                <td>Wilson</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;">Study</td>
+                                                <td colspan="2" style="text-decoration: underline;">% weights (fixed, random)</td>
+                                                <td>&#160;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>9.19968</td>
+                                                <td>10.62611</td>
+                                                <td>Kottke</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>7.334723</td>
+                                                <td>8.764878</td>
+                                                <td>Levinson</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>16.716159</td>
+                                                <td>17.01627</td>
+                                                <td>Oliver (intensive)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>29.939856</td>
+                                                <td>25.212518</td>
+                                                <td>Oliver (standard)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>5.321368</td>
+                                                <td>6.605485</td>
+                                                <td>Sulmasy</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>21.325794</td>
+                                                <td>20.235667</td>
+                                                <td>White</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>10.162419</td>
+                                                <td>11.53907</td>
+                                                <td>Wilson</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p><u>Fixed effects (Hedges-Olkin)</u>
+                                        </p>
+                                        <p>Pooled effect size d+ = 0.612354 (95% CI = 0.421251 to 0.803457)</p>
+                                        <p>Z (test d+ differs from 0) = 6.280333 P &lt; 0.0001</p>
+                                        <p>&#160;</p>
+                                        <p><u>Non-combinability of studies</u>
+                                        </p>
+                                        <p>Cochran Q = 7.737692 (df = 6) P = 0.258</p>
+                                        <p>Moment-based estimate of between studies variance = 0.020397</p>
+                                        <p>I² (inconsistency) = 22.5% (95% CI = 0% to 72.5%) </p>
+                                        <p>&#160;</p>
+                                        <p><u>Random effects (DerSimonian-Laird)</u>
+                                        </p>
+                                        <p>Pooled d+ = 0.627768 (95% CI = 0.403026 to 0.85251)</p>
+                                        <p>Z (test d+ differs from 0) = 5.474734 P &lt; 0.0001</p>
+                                        <p>&#160;</p>
+                                        <p><u>Bias indicators</u>
+                                        </p>
+                                        <p>Begg-Mazumdar: Kendall's tau = 0.238095 P = 0.5619 (low power)</p>
+                                        <p>Egger: bias = 1.439076 (90% CI = -1.712135 to 4.590287) P = 0.3997</p>
+                                        <p>&#160;</p>
+                                        <p>Here we can say with 95% confidence, assuming a random effects model, that the true size of the effect was at least 0.4 greater for the group who received the educational intervention compared with those who did not. Assuming a fixed effects model a slightly stronger inference could be made about an effect size of 0.42 (the lower confidence limit) but the high inter-study variation makes the fixed effects model less appropriate.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Effect size meta-analysis: the StatsDirect help example (Freemantle, personal
 # communication, test outcomes of seven comparisons from six trials of an educational
 # intervention; the test workbook's meta worksheet columns J to P) in R
 trial &lt;- c("Kottke", "Levinson", "Oliver (intensive)", "Oliver (standard)", "Sulmasy",
@@ -540,13 +631,33 @@ forest(dplus, dplus - z * se_dplus, dplus + z * se_dplus,
 forest(dsd, dsd - z * se_dsd, dsd + z * se_dsd,
        "Effect size meta-analysis plot [random effects]")
 par(op)</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
+                                        <p><a href="../basics/p_values.htm">P values</a>
+                                        </p>
+                                        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+                                        </p>
+                                    </div>
+                                    <MadCap:pageFooter>
+                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
+                                    </MadCap:pageFooter>
+                                    <!-- Google tag (gtag.js) -->
+                                    <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
+                                    </script>
+                                    <script type="text/javascript">/* <![CDATA[ */
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GZZ7X1JX4D');
+        /* ]]> */</script>
+                                </div>
+                            </div>
+                        </div>
+                    </div><a data-close="true"></a>
+                </div>
             </div>
-        </details>
-        <p> </p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-        </p>
-    <footer class="help-shared-footer">
-            <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank" rel="noopener noreferrer">Download software here</a>.</p>
-        </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>
+        </div>
+    </body>
+</html>

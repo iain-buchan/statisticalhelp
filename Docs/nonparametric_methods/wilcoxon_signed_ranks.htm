@@ -1,137 +1,235 @@
-<!doctype html>
-<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="nonparametric_methods/wilcoxon_signed_ranks.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wilcoxon Signed Ranks Test - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
-#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
-#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
-html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
-@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
-html[data-help-skin="flare"] #help-topic-body img{max-width:none}
-html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
-html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
-html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
-html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
-@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
-<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
-<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
-        
-        <h1>Wilcoxon's Signed Ranks Test</h1>
-        <p> </p>
-        <p>Menu location: <b>Analysis_Nonparametric_Wilcoxon Signed Ranks</b>.</p>
-        <p> </p>
-        <p>This is a method for the comparison of a pair of samples.</p>
-        <p> </p>
-        <p>The Wilcoxon signed ranks test statistic T<sup>+</sup> is the sum of the ranks of the positive, non-zero differences (D<sub>i</sub>) between a pair of samples. Zero differences are set aside before the other differences are ranked, as in <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999)</a>. Some other software ranks the zero differences with the rest before setting them aside (<a href="../references/reference_list.htm#ref-pratt-1959">Pratt, 1959</a>), which can give a different P value when some differences are zero.</p>
-        <p> </p>
-        <p>Assumptions of tests on T<sup>+</sup>:</p>
-        <ul>
-            <li>distribution of each D<sub>i</sub> is symmetrical</li>
-            <li>all D<sub>i</sub> are mutually independent</li>
-            <li>all D<sub>i</sub> have the same mean</li>
-            <li>measurement scale of D<sub>i</sub> is at least interval</li>
-        </ul>
-        <p> </p>
-        <p>In most situations you should use a two sided test. A two sided test is based upon the null hypothesis that the common median of the differences is zero. The approximate alternative hypothesis in this case is that the differences tend not to be zero. For a lower side test the approximate alternative hypothesis is that differences tend to be less than zero. For an upper side test the approximate alternative hypothesis is that differences tend to be greater than zero.</p>
-        <p> </p>
-        <p>A confidence interval is constructed for the difference between the population medians. In sample terms this is called the confidence interval for the median or mean difference. It is also known as the Hodges-Lehmann estimate of shift. The assumptions of this method are:</p>
-        <ul>
-            <li>distribution of each D<sub>i</sub> is symmetrical</li>
-            <li>all D<sub>i</sub> are mutually independent</li>
-            <li>all D<sub>i</sub> have the same median</li>
-            <li>measurement scale of D<sub>i</sub> is at least interval</li>
-        </ul>
-        <p> </p>
-        <p><u>Technical Validation</u>
-        </p>
-        <p>Exact permutational probability associated with the test statistic is calculated for up to 200 non-zero differences (pairs that do not differ are set aside before ranking). A normal approximation is used with more than 200 non-zero differences. Note that StatsDirect uses more accurate methods than some other statistical software for calculating probabilities associated with this statistic, therefore, you may notice a difference in results, especially where there are tied observations - you should find that StatsDirect and StatXact give the same answers. Confidence limits are calculated using the exact critical value k from the signed rank distribution for samples of 4 to 199 observations, or by calculating the normal approximation K* for samples of 200 or more observations; the exact confidence level attained is evaluated for samples of up to 1000 observations (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-neumann-1988">Neumann, 1988</a>).</p>
-        <p> </p>
-        <p><u>Example</u>
-        </p>
-        <p>From <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999)</a>.</p>
-        <p>Test workbook (Nonparametric worksheet: First Born, Second Born).</p>
-        <p> </p>
-        <p>The following data represent aggressivity scores for 12 pairs of monozygotic twins.</p>
-        <p> </p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;text-align: right;">First Born</td>
-                <td style="text-decoration: underline;text-align: right;">Second Born</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">86</td>
-                <td style="text-align: right;">88</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">71</td>
-                <td style="text-align: right;">77</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">77</td>
-                <td style="text-align: right;">76</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">68</td>
-                <td style="text-align: right;">64</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">91</td>
-                <td style="text-align: right;">96</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">72</td>
-                <td style="text-align: right;">72</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">77</td>
-                <td style="text-align: right;">65</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">91</td>
-                <td style="text-align: right;">90</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">70</td>
-                <td style="text-align: right;">65</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">71</td>
-                <td style="text-align: right;">80</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">88</td>
-                <td style="text-align: right;">81</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">87</td>
-                <td style="text-align: right;">72</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select the Wilcoxon Signed Ranks from the Nonparametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "First Born" and "Second Born" when prompted for data.</p>
-        <p> </p>
-        <p>For this example:</p>
-        <p> </p>
-        <p><u>Wilcoxon's signed ranks test</u></p>
-        <p> </p>
-        <p>First Born vs. Second Born</p>
-        <p>Number of non-zero differences ranked = 11</p>
-        <p>Sum of ranks for positive differences = 41.5</p>
-        <p> </p>
-        <p>Exact probability (adjusted for ties):</p>
-        <p>Lower side P = 0.7739 (H<sub>1</sub>: differences tend to be less than zero)</p>
-        <p>Upper side P = 0.2378 (H<sub>1</sub>: differences tend to be greater than zero)</p>
-        <p>Two sided P = 0.4756 (H<sub>1</sub>: differences tend not to be zero)</p>
-        <p> </p>
-        <p>95.8% confidence interval for difference between population medians:</p>
-        <p>K = 14   Median difference = 1.5 (-2.5 to 6.5)</p>
-        <p> </p>
-        <p>Assuming that the paired differences come from a symmetrical distribution then these results show that one group did not tend to yield different results to the other group which was paired with it, i.e. there was no statistically significant difference between the aggressivity scores of the first born as compared with the second twin. The extent of this lack of difference is shown well by the confidence interval which clearly encompasses zero. Note that the quoted 95.8% confidence interval is as close as you can get to 95% because of the mathematics involved in nonparametric methods like this.</p>
-        <p> </p>
-        <details class="rcode">
-            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
-            <div>
-                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
-                <pre class="rcode" xml:space="preserve"># Wilcoxon signed ranks test: the StatsDirect help example (Conover 1999) in R
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Nonparametric methods" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Wilcoxon Signed Ranks Test - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/images/sd3.ico" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <div class="central-account-wrapper">
+                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="central-account-wrapper">
+                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
+                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
+                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
+                                                    </div>
+                                                    <div class="search-filter-content" id="sf-content">
+                                                        <ul>
+                                                            <li>
+                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <nav class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="body-container">
+                                <div data-mc-content-body="True">
+                                    <div role="main" id="mc-main-content"><a name="kanchor266"></a>
+                                        <h1>Wilcoxon's Signed Ranks Test</h1>
+                                        <p>&#160;</p>
+                                        <p>Menu location: <b>Analysis_Nonparametric_Wilcoxon Signed Ranks</b>.</p>
+                                        <p>&#160;</p>
+                                        <p>This is a method for the comparison of a pair of samples.</p>
+                                        <p>&#160;</p>
+                                        <p>The Wilcoxon signed ranks test statistic T<sup>+</sup> is the sum of the ranks of the positive, non-zero differences (D<sub>i</sub>) between a pair of samples. Zero differences are set aside before the other differences are ranked, as in <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999)</a>. Some other software ranks the zero differences with the rest before setting them aside (<a href="../references/reference_list.htm#ref-pratt-1959">Pratt, 1959</a>), which can give a different P value when some differences are zero.</p>
+                                        <p>&#160;</p>
+                                        <p>Assumptions of tests on T<sup>+</sup>:</p>
+                                        <ul>
+                                            <li>distribution of each D<sub>i</sub> is symmetrical</li>
+                                            <li>all D<sub>i</sub> are mutually independent</li>
+                                            <li>all D<sub>i</sub> have the same mean</li>
+                                            <li>measurement scale of D<sub>i</sub> is at least interval</li>
+                                        </ul>
+                                        <p>&#160;</p>
+                                        <p>In most situations you should use a two sided test. A two sided test is based upon the null hypothesis that the common median of the differences is zero. The approximate alternative hypothesis in this case is that the differences tend not to be zero. For a lower side test the approximate alternative hypothesis is that differences tend to be less than zero. For an upper side test the approximate alternative hypothesis is that differences tend to be greater than zero.</p>
+                                        <p>&#160;</p>
+                                        <p>A confidence interval is constructed for the difference between the population medians. In sample terms this is called the confidence interval for the median or mean difference. It is also known as the Hodges-Lehmann estimate of shift. The assumptions of this method are:</p>
+                                        <ul>
+                                            <li>distribution of each D<sub>i</sub> is symmetrical</li>
+                                            <li>all D<sub>i</sub> are mutually independent</li>
+                                            <li>all D<sub>i</sub> have the same median</li>
+                                            <li>measurement scale of D<sub>i</sub> is at least interval</li>
+                                        </ul>
+                                        <p>&#160;</p>
+                                        <p><u>Technical Validation</u>
+                                        </p>
+                                        <p>Exact permutational probability associated with the test statistic is calculated for up to 200 non-zero differences (pairs that do not differ are set aside before ranking). A normal approximation is used with more than 200 non-zero differences. Note that StatsDirect uses more accurate methods than some other statistical software for calculating probabilities associated with this statistic, therefore, you may notice a difference in results, especially where there are tied observations - you should find that StatsDirect and StatXact give the same answers. Confidence limits are calculated using the exact critical value k from the signed rank distribution for samples of 4 to 199 observations, or by calculating the normal approximation K* for samples of 200 or more observations; the exact confidence level attained is evaluated for samples of up to 1000 observations (<a href="../references/reference_list.htm#ref-conover-1999">Conover, 1999</a>; <a href="../references/reference_list.htm#ref-neumann-1988">Neumann, 1988</a>).</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>From <a href="../references/reference_list.htm#ref-conover-1999">Conover (1999)</a>.</p>
+                                        <p>Test workbook (Nonparametric worksheet: First Born, Second Born).</p>
+                                        <p>&#160;</p>
+                                        <p>The following data represent aggressivity scores for 12 pairs of monozygotic twins.</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;text-align: right;">First Born</td>
+                                                <td style="text-decoration: underline;text-align: right;">Second Born</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">86</td>
+                                                <td style="text-align: right;">88</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">71</td>
+                                                <td style="text-align: right;">77</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">77</td>
+                                                <td style="text-align: right;">76</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">68</td>
+                                                <td style="text-align: right;">64</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">91</td>
+                                                <td style="text-align: right;">96</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">72</td>
+                                                <td style="text-align: right;">72</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">77</td>
+                                                <td style="text-align: right;">65</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">91</td>
+                                                <td style="text-align: right;">90</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">70</td>
+                                                <td style="text-align: right;">65</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">71</td>
+                                                <td style="text-align: right;">80</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">88</td>
+                                                <td style="text-align: right;">81</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">87</td>
+                                                <td style="text-align: right;">72</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>To analyse these data in StatsDirect you must first enter them into two columns in the workbook. Alternatively, open the test workbook using the file open function of the file menu. Then select the Wilcoxon Signed Ranks from the Nonparametric methods section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "First Born" and "Second Born" when prompted for data.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Wilcoxon's signed ranks test</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>First Born vs. Second Born</p>
+                                        <p>Number of non-zero differences ranked = 11</p>
+                                        <p>Sum of ranks for positive differences = 41.5</p>
+                                        <p>&#160;</p>
+                                        <p>Exact probability (adjusted for ties):</p>
+                                        <p>Lower side P = 0.7739 (H<sub>1</sub>: differences tend to be less than zero)</p>
+                                        <p>Upper side P = 0.2378 (H<sub>1</sub>: differences tend to be greater than zero)</p>
+                                        <p>Two sided P = 0.4756 (H<sub>1</sub>: differences tend not to be zero)</p>
+                                        <p>&#160;</p>
+                                        <p>95.8% confidence interval for difference between population medians:</p>
+                                        <p>K = 14   Median difference = 1.5 (-2.5 to 6.5)</p>
+                                        <p>&#160;</p>
+                                        <p>Assuming that the paired differences come from a symmetrical distribution then these results show that one group did not tend to yield different results to the other group which was paired with it, i.e. there was no statistically significant difference between the aggressivity scores of the first born as compared with the second twin. The extent of this lack of difference is shown well by the confidence interval which clearly encompasses zero. Note that the quoted 95.8% confidence interval is as close as you can get to 95% because of the mathematics involved in nonparametric methods like this.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Wilcoxon signed ranks test: the StatsDirect help example (Conover 1999) in R
 first  &lt;- c(86, 71, 77, 68, 91, 72, 77, 91, 70, 71, 88, 87)
 second &lt;- c(88, 77, 76, 64, 96, 72, 65, 90, 65, 80, 81, 72)
 d &lt;- first - second                       # one difference is 0 and some are tied
@@ -186,13 +284,33 @@ cat(sprintf("%.1f%% confidence interval for difference between population median
             100 * (1 - 2 * psignrank(K - 1, n))))
 cat(sprintf("K = %g   Median difference = %g (%g to %g)\n",
             K, median(a), a[K], rev(a)[K]))</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
+                                        <p><a href="../basics/p_values.htm">P values</a>
+                                        </p>
+                                        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+                                        </p>
+                                    </div>
+                                    <MadCap:pageFooter>
+                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
+                                    </MadCap:pageFooter>
+                                    <!-- Google tag (gtag.js) -->
+                                    <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
+                                    </script>
+                                    <script type="text/javascript">/* <![CDATA[ */
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GZZ7X1JX4D');
+        /* ]]> */</script>
+                                </div>
+                            </div>
+                        </div>
+                    </div><a data-close="true"></a>
+                </div>
             </div>
-        </details>
-        <p> </p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-        </p>
-    <footer class="help-shared-footer">
-            <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank" rel="noopener noreferrer">Download software here</a>.</p>
-        </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>
+        </div>
+    </body>
+</html>

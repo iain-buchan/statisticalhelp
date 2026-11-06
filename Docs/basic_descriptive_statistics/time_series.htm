@@ -1,721 +1,813 @@
-<!doctype html>
-<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="basic_descriptive_statistics/time_series.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Time Series Summary Statistics in StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
-#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
-#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
-html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
-@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
-html[data-help-skin="flare"] #help-topic-body img{max-width:none}
-html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
-html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
-html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
-html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
-@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
-<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
-<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
-        <h1>
-            Time Series Summary: Area Under Curve</h1>
-        <p> </p>
-        <p>Menu location: <b>Analysis_Descriptive_Time Series Summary</b>.</p>
-        <p> </p>
-        <p>This function summarises serially sampled data as the area under the time-observation or time-concentration curve (<a href="../references/reference_list.htm#ref-bland-2000">Bland 2000</a>, <a href="../references/reference_list.htm#ref-wolfsegger-2007">Wolfsegger 2007</a>, <a href="../references/reference_list.htm#ref-jaki-2009">Jaki &amp; Wolfsegger 2009</a>).</p>
-        <p> </p>
-        <p>The methods presented here are more commonly applied to peaked data than to growth data (<a href="../references/reference_list.htm#ref-matthews-1990">Matthews et al. 1990</a>).</p>
-        <p> </p>
-        <p>If no observation was made at time zero you are asked whether to treat the observation at time zero as zero; if you answer yes, a zero observation at time zero is added for every subject, so that each subject's baseline is zero and the area under the curve starts from the origin.</p>
-        <p> </p>
-        <p>A row without an observation is left out. If the same observation is entered twice for a subject at a time it is taken once; two observations that differ, for the same subject at the same time, are refused.</p>
-        <p> </p>
-        <p>The area under the curve (AUC) is calculated using the linear trapezoidal rule for each subject. The mean AUC of a group is summarised with the standard deviation of the subjects' AUCs and its standard error SD/√n; the t interval uses n − 1 degrees of freedom (Bland 2000). The weighted variance of <a href="../references/reference_list.htm#ref-wolfsegger-2007">Wolfsegger 2007</a> equation 4 is for serial-sampling designs in which each subject contributes a single time point and is not used for complete profiles.</p>
-        <p> </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="b45ceecb838c0b3b00bb24d2bd336d26fbf9200f58aa33986f4170477e72aa3c"><span class="help-equation-accessible help-equation-live">$\displaystyle \begin{array}{l}
-\displaystyle w_1 = \frac{1}{2}\Biggl(t_2-t_1\Biggr) \\
-\displaystyle w_j = \frac{1}{2}\Biggl(t_{j+1}-t_{j-1}\Biggr)\,\Biggl(2\le j\le J-1\Biggr) \\
-\displaystyle w_J = \frac{1}{2}\Biggl(t_J-t_{J-1}\Biggr) \\
-\displaystyle \widehat{AUC_k} = \sum_{j=1}^{J}w_j\bar{X}_{jk} \\
-\displaystyle \operatorname{var}\Biggl[\widehat{AUC_k}\Biggr] = \sum_{j=1}^{J}w_j^2\delta_{jk}^2 n_{jk}^{-1}
-\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/1ca2e433b92d55010a4455dcde534496616e655cc489f477754b0a2b43ad57c5.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>...where t 1-J are times of observations in a series from 1 to J, AUC is the area under the curve for the kth subject from baseline to the last measured time point, w are the weights applied to the observations (X), n is the number of observations at each time point,and sigma squared is the variance of the observations at each time point.</p>
-        <p> </p>
-        <p>For the t interval of a group's mean AUC the degrees of freedom are n − 1, where n is the number of subjects in the group; for the comparison of two groups the Welch-Satterthwaite degrees of freedom are df = (v<sub>1</sub> + v<sub>2</sub>)² / [v<sub>1</sub>²/(n<sub>1</sub> − 1) + v<sub>2</sub>²/(n<sub>2</sub> − 1)], where v = SD²/n is the variance of each group's mean AUC calculated from the subjects' AUCs.</p>
-        <p> </p>
-        <p>A bootstrap-t confidence interval may also be calculated: whole subjects (each with their observations at every time point) are resampled with replacement within the group; for each bootstrap sample the mean AUC and its standard error SE* = SD*/sqrt(n) are calculated from the resampled subjects' AUCs and the standardised statistic t* = (AUC - AUC*)/SE* is collected; the alpha/2 and 1-alpha/2 centiles of these t* values are then used to form the interval from AUC + t*(alpha/2) SE to AUC + t*(1-alpha/2) SE.</p>
-        <p> </p>
-        <p>When there are two groups the AUCs are compared using a two sample t test on the subjects' AUCs with unequal variances (Welch, Satterthwaite degrees of freedom). A bootstrap t test is also performed resampling whole subjects within each group.</p>
-        <p> </p>
-        <p>The areas under the curve of all the subjects, and their logarithms (base 10), are plotted against normal scores, and the square of the correlation is given with each plot. A plot that cannot be drawn is left out, and the report says why: the plot of the logarithms if an area is zero or below (a subject with one observation has an area of zero), and both plots if there are fewer than two areas or the areas are all the same.</p>
-        <p> </p>
-        <p><u>Example</u>
-        </p>
-        <p>From <a href="../references/reference_list.htm#ref-bland-2000">Bland (2000)</a>.</p>
-        <p>Test workbook (Other worksheet: Group, Time, Zidovudine, Patient).</p>
-        <p> </p>
-        <p>Blood levels of zidovudine or AZT in patients a different times after oral dosing, comparing those with and without malabsorbtion:</p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-align: right;text-decoration: underline;">
-                    <p>Group</p>
-                </td>
-                <td style="text-align: right;text-decoration: underline;">Time</td>
-                <td style="text-align: right;text-decoration: underline;">Zidovudine</td>
-                <td style="text-align: right;text-decoration: underline;">Patient</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">
-                    <p>Malabsorbtion</p>
-                </td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">0.08</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">15</td>
-                <td style="text-align: right;">13.15</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">30</td>
-                <td style="text-align: right;">5.70</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">45</td>
-                <td style="text-align: right;">3.22</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">60</td>
-                <td style="text-align: right;">2.69</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">90</td>
-                <td style="text-align: right;">1.91</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">120</td>
-                <td style="text-align: right;">1.72</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">150</td>
-                <td style="text-align: right;">1.22</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">180</td>
-                <td style="text-align: right;">1.15</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">240</td>
-                <td style="text-align: right;">0.71</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">300</td>
-                <td style="text-align: right;">0.43</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">360</td>
-                <td style="text-align: right;">0.32</td>
-                <td style="text-align: right;">1</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">0.08</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">15</td>
-                <td style="text-align: right;">0.08</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">30</td>
-                <td style="text-align: right;">0.14</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">45</td>
-                <td style="text-align: right;">2.10</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">60</td>
-                <td style="text-align: right;">6.37</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">90</td>
-                <td style="text-align: right;">4.89</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">120</td>
-                <td style="text-align: right;">2.11</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">150</td>
-                <td style="text-align: right;">1.40</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">180</td>
-                <td style="text-align: right;">1.42</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">240</td>
-                <td style="text-align: right;">0.72</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">300</td>
-                <td style="text-align: right;">0.39</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Malabsorbtion</td>
-                <td style="text-align: right;">360</td>
-                <td style="text-align: right;">0.28</td>
-                <td style="text-align: right;">2</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">...</td>
-                <td style="text-align: right;">...</td>
-                <td style="text-align: right;">...</td>
-                <td style="text-align: right;">...</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Descriptive statistics and tabulations" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" />
+        <meta name="description" content="This function calculates the area under the time-concentration or time-observation curve for serial sampling designs." /><title>Time Series Summary Statistics in StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/images/sd3.ico" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <div class="central-account-wrapper">
+                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="central-account-wrapper">
+                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
+                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
+                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
+                                                    </div>
+                                                    <div class="search-filter-content" id="sf-content">
+                                                        <ul>
+                                                            <li>
+                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <nav class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="body-container">
+                                <div data-mc-content-body="True">
+                                    <div role="main" id="mc-main-content">
+                                        <h1><a name="kanchor212"></a>Time Series Summary: Area Under Curve</h1>
+                                        <p>&#160;</p>
+                                        <p>Menu location: <b>Analysis_Descriptive_Time Series Summary</b>.</p>
+                                        <p>&#160;</p>
+                                        <p>This function summarises serially sampled data as the area under the time-observation or time-concentration curve (<a href="../references/reference_list.htm#ref-bland-2000">Bland 2000</a>, <a href="../references/reference_list.htm#ref-wolfsegger-2007">Wolfsegger 2007</a>, <a href="../references/reference_list.htm#ref-jaki-2009">Jaki &amp; Wolfsegger 2009</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>The methods presented here are more commonly applied to peaked data than to growth data (<a href="../references/reference_list.htm#ref-matthews-1990">Matthews et al. 1990</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>If no observation was made at time zero you are asked whether to treat the observation at time zero as zero; if you answer yes, a zero observation at time zero is added for every subject, so that each subject's baseline is zero and the area under the curve starts from the origin.</p>
+                                        <p>&#160;</p>
+                                        <p>A row without an observation is left out. If the same observation is entered twice for a subject at a time it is taken once; two observations that differ, for the same subject at the same time, are refused.</p>
+                                        <p>&#160;</p>
+                                        <p>The area under the curve (AUC) is calculated using the linear trapezoidal rule for each subject. The mean AUC of a group is summarised with the standard deviation of the subjects' AUCs and its standard error SD/√n; the t interval uses n − 1 degrees of freedom (Bland 2000). The weighted variance of <a href="../references/reference_list.htm#ref-wolfsegger-2007">Wolfsegger 2007</a> equation 4 is for serial-sampling designs in which each subject contributes a single time point and is not used for complete profiles.</p>
+                                        <p>&#160;</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation32.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>...where t 1-J are times of observations in a series from 1 to J, AUC is the area under the curve for the kth subject from baseline to the last measured time point, w are the weights applied to the observations (X), n is the number of observations at each time point,and sigma squared is the variance of the observations at each time point.</p>
+                                        <p>&#160;</p>
+                                        <p>For the t interval of a group's mean AUC the degrees of freedom are n − 1, where n is the number of subjects in the group; for the comparison of two groups the Welch-Satterthwaite degrees of freedom are df = (v<sub>1</sub> + v<sub>2</sub>)² / [v<sub>1</sub>²/(n<sub>1</sub> − 1) + v<sub>2</sub>²/(n<sub>2</sub> − 1)], where v = SD²/n is the variance of each group's mean AUC calculated from the subjects' AUCs.</p>
+                                        <p>&#160;</p>
+                                        <p>A bootstrap-t confidence interval may also be calculated: whole subjects (each with their observations at every time point) are resampled with replacement within the group; for each bootstrap sample the mean AUC and its standard error SE* = SD*/sqrt(n) are calculated from the resampled subjects' AUCs and the standardised statistic t* = (AUC - AUC*)/SE* is collected; the alpha/2 and 1-alpha/2 centiles of these t* values are then used to form the interval from AUC + t*(alpha/2) SE to AUC + t*(1-alpha/2) SE.</p>
+                                        <p>&#160;</p>
+                                        <p>When there are two groups the AUCs are compared using a two sample t test on the subjects' AUCs with unequal variances (Welch, Satterthwaite degrees of freedom). A bootstrap t test is also performed resampling whole subjects within each group.</p>
+                                        <p>&#160;</p>
+                                        <p>The areas under the curve of all the subjects, and their logarithms (base 10), are plotted against normal scores, and the square of the correlation is given with each plot. A plot that cannot be drawn is left out, and the report says why: the plot of the logarithms if an area is zero or below (a subject with one observation has an area of zero), and both plots if there are fewer than two areas or the areas are all the same.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>From <a href="../references/reference_list.htm#ref-bland-2000">Bland (2000)</a>.</p>
+                                        <p>Test workbook (Other worksheet: Group, Time, Zidovudine, Patient).</p>
+                                        <p>&#160;</p>
+                                        <p>Blood levels of zidovudine or AZT in patients a different times after oral dosing, comparing those with and without malabsorbtion:</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-align: right;text-decoration: underline;">
+                                                    <p>Group</p>
+                                                </td>
+                                                <td style="text-align: right;text-decoration: underline;">Time</td>
+                                                <td style="text-align: right;text-decoration: underline;">Zidovudine</td>
+                                                <td style="text-align: right;text-decoration: underline;">Patient</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">
+                                                    <p>Malabsorbtion</p>
+                                                </td>
+                                                <td style="text-align: right;">0</td>
+                                                <td style="text-align: right;">0.08</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">15</td>
+                                                <td style="text-align: right;">13.15</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">30</td>
+                                                <td style="text-align: right;">5.70</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">45</td>
+                                                <td style="text-align: right;">3.22</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">60</td>
+                                                <td style="text-align: right;">2.69</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">90</td>
+                                                <td style="text-align: right;">1.91</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">120</td>
+                                                <td style="text-align: right;">1.72</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">150</td>
+                                                <td style="text-align: right;">1.22</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">180</td>
+                                                <td style="text-align: right;">1.15</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">240</td>
+                                                <td style="text-align: right;">0.71</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">300</td>
+                                                <td style="text-align: right;">0.43</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">360</td>
+                                                <td style="text-align: right;">0.32</td>
+                                                <td style="text-align: right;">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">0</td>
+                                                <td style="text-align: right;">0.08</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">15</td>
+                                                <td style="text-align: right;">0.08</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">30</td>
+                                                <td style="text-align: right;">0.14</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">45</td>
+                                                <td style="text-align: right;">2.10</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">60</td>
+                                                <td style="text-align: right;">6.37</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">90</td>
+                                                <td style="text-align: right;">4.89</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">120</td>
+                                                <td style="text-align: right;">2.11</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">150</td>
+                                                <td style="text-align: right;">1.40</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">180</td>
+                                                <td style="text-align: right;">1.42</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">240</td>
+                                                <td style="text-align: right;">0.72</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">300</td>
+                                                <td style="text-align: right;">0.39</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Malabsorbtion</td>
+                                                <td style="text-align: right;">360</td>
+                                                <td style="text-align: right;">0.28</td>
+                                                <td style="text-align: right;">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">...</td>
+                                                <td style="text-align: right;">...</td>
+                                                <td style="text-align: right;">...</td>
+                                                <td style="text-align: right;">...</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>
             To analyse these data using StatsDirect you must first enter them into a workbook or open the test workbook. Then select Time Series Summary from the Descriptive section of the Analysis menu.</p>
-        <p> </p>
-        <p><u>Time Series Summary</u>
-        </p>
-        <p> </p>
-        <p><u>Group: Malabsorbtion</u>
-        </p>
-        <p> </p>
-        <table>
-            <tbody>
-                <tr>
-                    <td style="text-decoration: underline;">Time</td>
-                    <td style="text-decoration: underline;">Observations</td>
-                    <td style="text-decoration: underline;">Mean</td>
-                    <td style="text-decoration: underline;">SD</td>
-                    <td style="text-decoration: underline;">SE</td>
-                    <td style="text-decoration: underline;">Median</td>
-                    <td style="text-decoration: underline;">IQR</td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>9</td>
-                    <td>0.08</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                    <td>0.08</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td>15</td>
-                    <td>9</td>
-                    <td>3.06</td>
-                    <td>4.44</td>
-                    <td>1.48</td>
-                    <td>0.64</td>
-                    <td>4.20</td>
-                </tr>
-                <tr>
-                    <td>30</td>
-                    <td>9</td>
-                    <td>4.18</td>
-                    <td>3.17</td>
-                    <td>1.06</td>
-                    <td>3.53</td>
-                    <td>4.37</td>
-                </tr>
-                <tr>
-                    <td>45</td>
-                    <td>9</td>
-                    <td>3.41</td>
-                    <td>1.94</td>
-                    <td>0.65</td>
-                    <td>3.22</td>
-                    <td>3.31</td>
-                </tr>
-                <tr>
-                    <td>60</td>
-                    <td>9</td>
-                    <td>3.06</td>
-                    <td>1.55</td>
-                    <td>0.52</td>
-                    <td>2.69</td>
-                    <td>1.28</td>
-                </tr>
-                <tr>
-                    <td>90</td>
-                    <td>9</td>
-                    <td>2.19</td>
-                    <td>1.10</td>
-                    <td>0.37</td>
-                    <td>1.91</td>
-                    <td>0.48</td>
-                </tr>
-                <tr>
-                    <td>120</td>
-                    <td>9</td>
-                    <td>1.56</td>
-                    <td>0.67</td>
-                    <td>0.22</td>
-                    <td>1.41</td>
-                    <td>0.87</td>
-                </tr>
-                <tr>
-                    <td>150</td>
-                    <td>9</td>
-                    <td>1.11</td>
-                    <td>0.48</td>
-                    <td>0.16</td>
-                    <td>1.09</td>
-                    <td>0.33</td>
-                </tr>
-                <tr>
-                    <td>180</td>
-                    <td>9</td>
-                    <td>0.80</td>
-                    <td>0.33</td>
-                    <td>0.11</td>
-                    <td>0.73</td>
-                    <td>0.30</td>
-                </tr>
-                <tr>
-                    <td>240</td>
-                    <td>9</td>
-                    <td>0.45</td>
-                    <td>0.22</td>
-                    <td>0.07</td>
-                    <td>0.43</td>
-                    <td>0.28</td>
-                </tr>
-                <tr>
-                    <td>300</td>
-                    <td>9</td>
-                    <td>0.26</td>
-                    <td>0.13</td>
-                    <td>0.04</td>
-                    <td>0.22</td>
-                    <td>0.22</td>
-                </tr>
-                <tr>
-                    <td>360</td>
-                    <td>9</td>
-                    <td>0.20</td>
-                    <td>0.12</td>
-                    <td>0.04</td>
-                    <td>0.18</td>
-                    <td>0.17</td>
-                </tr>
-            </tbody>
-        </table>
-        <p> </p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <tbody>
-                <tr>
-                    <td style="text-decoration: underline;">Subject ID</td>
-                    <td style="text-decoration: underline;">Baseline</td>
-                    <td style="text-decoration: underline;">Min. observation</td>
-                    <td style="text-decoration: underline;">Max. observation</td>
-                    <td style="text-decoration: underline;">Time to max.</td>
-                    <td style="text-decoration: underline;">Slope to max.</td>
-                    <td style="text-decoration: underline;">AUC</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>13.15</td>
-                    <td>15</td>
-                    <td>0.87</td>
-                    <td>667.425</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>6.37</td>
-                    <td>60</td>
-                    <td>0.10</td>
-                    <td>569.625</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>3.47</td>
-                    <td>45</td>
-                    <td>0.09</td>
-                    <td>306.000</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>3.30</td>
-                    <td>60</td>
-                    <td>0.05</td>
-                    <td>298.200</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>8.27</td>
-                    <td>30</td>
-                    <td>0.27</td>
-                    <td>617.850</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>4.92</td>
-                    <td>30</td>
-                    <td>0.16</td>
-                    <td>256.275</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>9.29</td>
-                    <td>30</td>
-                    <td>0.31</td>
-                    <td>527.475</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>2.54</td>
-                    <td>120</td>
-                    <td>0.02</td>
-                    <td>388.875</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>6.28</td>
-                    <td>45</td>
-                    <td>0.13</td>
-                    <td>505.875</td>
-                </tr>
-            </tbody>
-        </table>
-        <p> </p>
-        <p>Subjects:			9</p>
-        <p>Total (mean per time point) observations: 108 (9)</p>
-        <p>Mean (SD) area under curve (AUC): 459.73 (151.28)</p>
-        <p>SE of mean AUC: 50.43</p>
-        <p>95% t-interval for mean AUC: 343.45 to 576.01</p>
-        <p>95% bootstrap-t interval for mean AUC (1000000 iterations, seed 2944296): 335.19 to 575.80</p>
-        <p>95% z-interval for mean AUC: 360.90 to 558.56</p>
-        <p>Median (IQR) area under curve: 505.88 (263.63)</p>
-        <p>Median (IQR) time to maximum: 45 (30)</p>
-        <p>Median (IQR) slope to maximum: 0.13 (0.18)</p>
-        <p>Mean (SD) slope to maximum: 0.22 (0.26)</p>
-        <p>
-            <img src="../resources/images/time_series_summary_malabsorbtion.svg" width="566" height="400" />
-        </p>
-        <p> </p>
-        <p><u>Group: Normal</u>
-        </p>
-        <p> </p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <col style="width: 35px;" />
-            <col />
-            <col />
-            <tbody>
-                <tr>
-                    <td>Time</td>
-                    <td>Observations</td>
-                    <td>Mean</td>
-                    <td>SD</td>
-                    <td>SE</td>
-                    <td>Median</td>
-                    <td>IQR</td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>5</td>
-                    <td>0.08</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                    <td>0.08</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>15</td>
-                    <td>5</td>
-                    <td>6.98</td>
-                    <td>4.87</td>
-                    <td>2.18</td>
-                    <td>6.72</td>
-                    <td>6.26</td>
-                </tr>
-                <tr>
-                    <td>30</td>
-                    <td>5</td>
-                    <td>10.73</td>
-                    <td>5.63</td>
-                    <td>2.52</td>
-                    <td>7.28</td>
-                    <td>8.75</td>
-                </tr>
-                <tr>
-                    <td>45</td>
-                    <td>5</td>
-                    <td>4.83</td>
-                    <td>1.94</td>
-                    <td>0.87</td>
-                    <td>3.90</td>
-                    <td>1.07</td>
-                </tr>
-                <tr>
-                    <td>60</td>
-                    <td>5</td>
-                    <td>3.69</td>
-                    <td>1.56</td>
-                    <td>0.70</td>
-                    <td>2.97</td>
-                    <td>2.79</td>
-                </tr>
-                <tr>
-                    <td>90</td>
-                    <td>5</td>
-                    <td>3.49</td>
-                    <td>2.44</td>
-                    <td>1.09</td>
-                    <td>1.95</td>
-                    <td>3.06</td>
-                </tr>
-                <tr>
-                    <td>120</td>
-                    <td>5</td>
-                    <td>2.14</td>
-                    <td>1.76</td>
-                    <td>0.79</td>
-                    <td>1.46</td>
-                    <td>0.85</td>
-                </tr>
-                <tr>
-                    <td>150</td>
-                    <td>5</td>
-                    <td>1.72</td>
-                    <td>1.23</td>
-                    <td>0.55</td>
-                    <td>1.49</td>
-                    <td>0.51</td>
-                </tr>
-                <tr>
-                    <td>180</td>
-                    <td>5</td>
-                    <td>1.27</td>
-                    <td>0.77</td>
-                    <td>0.35</td>
-                    <td>1.18</td>
-                    <td>0.51</td>
-                </tr>
-                <tr>
-                    <td>240</td>
-                    <td>5</td>
-                    <td>0.71</td>
-                    <td>0.41</td>
-                    <td>0.18</td>
-                    <td>0.72</td>
-                    <td>0.2</td>
-                </tr>
-                <tr>
-                    <td>300</td>
-                    <td>5</td>
-                    <td>0.41</td>
-                    <td>0.22</td>
-                    <td>0.10</td>
-                    <td>0.41</td>
-                    <td>0.12</td>
-                </tr>
-                <tr>
-                    <td>360</td>
-                    <td>5</td>
-                    <td>0.25</td>
-                    <td>0.11</td>
-                    <td>0.05</td>
-                    <td>0.28</td>
-                    <td>0.04</td>
-                </tr>
-            </tbody>
-        </table>
-        <p> </p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <tbody>
-                <tr>
-                    <td style="text-decoration: underline;">Subject ID</td>
-                    <td style="text-decoration: underline;">Baseline</td>
-                    <td style="text-decoration: underline;">Min. observation</td>
-                    <td style="text-decoration: underline;">Max. observation</td>
-                    <td style="text-decoration: underline;">Time to max.</td>
-                    <td style="text-decoration: underline;">Slope to max.</td>
-                    <td style="text-decoration: underline;">AUC</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>16.02</td>
-                    <td>30</td>
-                    <td>0.53</td>
-                    <td>919.875</td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>6.72</td>
-                    <td>15</td>
-                    <td>0.44</td>
-                    <td>599.850</td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>9.98</td>
-                    <td>15</td>
-                    <td>0.66</td>
-                    <td>499.500</td>
-                </tr>
-                <tr>
-                    <td>13</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>7.27</td>
-                    <td>30</td>
-                    <td>0.24</td>
-                    <td>472.875</td>
-                </tr>
-                <tr>
-                    <td>14</td>
-                    <td>0.08</td>
-                    <td>0.08</td>
-                    <td>17.61</td>
-                    <td>30</td>
-                    <td>0.58</td>
-                    <td>
-                        <p>1377.975</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p> </p>
-        <p>Subjects:			5</p>
-        <p>Total (mean per time point) observations: 60 (5)</p>
-        <p>Mean (SD) area under curve (AUC): 774.02 (381.58)</p>
-        <p>SE of mean AUC: 170.65</p>
-        <p>95% t-interval for mean AUC: 300.22 to 1247.81</p>
-        <p>95% bootstrap-t interval for mean AUC (1000000 iterations, seed 2944296): 448.85 to 2699.11</p>
-        <p>95% z-interval for mean AUC: 439.55 to 1108.48</p>
-        <p>Median (IQR) area under curve: 599.85 (420.38)</p>
-        <p>Median (IQR) time to maximum: 30 (15)</p>
-        <p>Median (IQR) slope to maximum: 0.53 (0.14)</p>
-        <p>Mean (SD) slope to maximum: 0.49 (0.16)</p>
-        <p>
-            <img src="../resources/images/time_series_summary_normal.svg" width="566" height="400" />
-        </p>
-        <p> </p>
-        <p><u>AUC Distribution</u>
-        </p>
-        <p> </p>
-        <p>
-            <img src="../resources/images/time_series_summary_normal_plot.svg" width="566" height="400" />
-        </p>
-        <p>R-square for AUC vs. normal scores: 0.80
+                                        <p>&#160;</p>
+                                        <p><u>Time Series Summary</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p><u>Group: Malabsorbtion</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-decoration: underline;">Time</td>
+                                                    <td style="text-decoration: underline;">Observations</td>
+                                                    <td style="text-decoration: underline;">Mean</td>
+                                                    <td style="text-decoration: underline;">SD</td>
+                                                    <td style="text-decoration: underline;">SE</td>
+                                                    <td style="text-decoration: underline;">Median</td>
+                                                    <td style="text-decoration: underline;">IQR</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>0</td>
+                                                    <td>9</td>
+                                                    <td>0.08</td>
+                                                    <td>0.00</td>
+                                                    <td>0.00</td>
+                                                    <td>0.08</td>
+                                                    <td>0.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>15</td>
+                                                    <td>9</td>
+                                                    <td>3.06</td>
+                                                    <td>4.44</td>
+                                                    <td>1.48</td>
+                                                    <td>0.64</td>
+                                                    <td>4.20</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>30</td>
+                                                    <td>9</td>
+                                                    <td>4.18</td>
+                                                    <td>3.17</td>
+                                                    <td>1.06</td>
+                                                    <td>3.53</td>
+                                                    <td>4.37</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>45</td>
+                                                    <td>9</td>
+                                                    <td>3.41</td>
+                                                    <td>1.94</td>
+                                                    <td>0.65</td>
+                                                    <td>3.22</td>
+                                                    <td>3.31</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>60</td>
+                                                    <td>9</td>
+                                                    <td>3.06</td>
+                                                    <td>1.55</td>
+                                                    <td>0.52</td>
+                                                    <td>2.69</td>
+                                                    <td>1.28</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>90</td>
+                                                    <td>9</td>
+                                                    <td>2.19</td>
+                                                    <td>1.10</td>
+                                                    <td>0.37</td>
+                                                    <td>1.91</td>
+                                                    <td>0.48</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>120</td>
+                                                    <td>9</td>
+                                                    <td>1.56</td>
+                                                    <td>0.67</td>
+                                                    <td>0.22</td>
+                                                    <td>1.41</td>
+                                                    <td>0.87</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>150</td>
+                                                    <td>9</td>
+                                                    <td>1.11</td>
+                                                    <td>0.48</td>
+                                                    <td>0.16</td>
+                                                    <td>1.09</td>
+                                                    <td>0.33</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>180</td>
+                                                    <td>9</td>
+                                                    <td>0.80</td>
+                                                    <td>0.33</td>
+                                                    <td>0.11</td>
+                                                    <td>0.73</td>
+                                                    <td>0.30</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>240</td>
+                                                    <td>9</td>
+                                                    <td>0.45</td>
+                                                    <td>0.22</td>
+                                                    <td>0.07</td>
+                                                    <td>0.43</td>
+                                                    <td>0.28</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>300</td>
+                                                    <td>9</td>
+                                                    <td>0.26</td>
+                                                    <td>0.13</td>
+                                                    <td>0.04</td>
+                                                    <td>0.22</td>
+                                                    <td>0.22</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>360</td>
+                                                    <td>9</td>
+                                                    <td>0.20</td>
+                                                    <td>0.12</td>
+                                                    <td>0.04</td>
+                                                    <td>0.18</td>
+                                                    <td>0.17</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-decoration: underline;">Subject ID</td>
+                                                    <td style="text-decoration: underline;">Baseline</td>
+                                                    <td style="text-decoration: underline;">Min. observation</td>
+                                                    <td style="text-decoration: underline;">Max. observation</td>
+                                                    <td style="text-decoration: underline;">Time to max.</td>
+                                                    <td style="text-decoration: underline;">Slope to max.</td>
+                                                    <td style="text-decoration: underline;">AUC</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>13.15</td>
+                                                    <td>15</td>
+                                                    <td>0.87</td>
+                                                    <td>667.425</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>6.37</td>
+                                                    <td>60</td>
+                                                    <td>0.10</td>
+                                                    <td>569.625</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>3.47</td>
+                                                    <td>45</td>
+                                                    <td>0.09</td>
+                                                    <td>306.000</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>3.30</td>
+                                                    <td>60</td>
+                                                    <td>0.05</td>
+                                                    <td>298.200</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>8.27</td>
+                                                    <td>30</td>
+                                                    <td>0.27</td>
+                                                    <td>617.850</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>4.92</td>
+                                                    <td>30</td>
+                                                    <td>0.16</td>
+                                                    <td>256.275</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>7</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>9.29</td>
+                                                    <td>30</td>
+                                                    <td>0.31</td>
+                                                    <td>527.475</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>8</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>2.54</td>
+                                                    <td>120</td>
+                                                    <td>0.02</td>
+                                                    <td>388.875</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>9</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>6.28</td>
+                                                    <td>45</td>
+                                                    <td>0.13</td>
+                                                    <td>505.875</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>Subjects:			9</p>
+                                        <p>Total (mean per time point) observations: 108 (9)</p>
+                                        <p>Mean (SD) area under curve (AUC): 459.73 (151.28)</p>
+                                        <p>SE of mean AUC: 50.43</p>
+                                        <p>95% t-interval for mean AUC: 343.45 to 576.01</p>
+                                        <p>95% bootstrap-t interval for mean AUC (1000000 iterations, seed 2944296): 335.19 to 575.80</p>
+                                        <p>95% z-interval for mean AUC: 360.90 to 558.56</p>
+                                        <p>Median (IQR) area under curve: 505.88 (263.63)</p>
+                                        <p>Median (IQR) time to maximum: 45 (30)</p>
+                                        <p>Median (IQR) slope to maximum: 0.13 (0.18)</p>
+                                        <p>Mean (SD) slope to maximum: 0.22 (0.26)</p>
+                                        <p>
+                                            <img src="../resources/images/time_series_summary_malabsorbtion.svg" width="566" height="400" data-mc-conditions="Primary.WEBHELP" />
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p><u>Group: Normal</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col style="width: 35px;" />
+                                            <col />
+                                            <col />
+                                            <tbody>
+                                                <tr>
+                                                    <td>Time</td>
+                                                    <td>Observations</td>
+                                                    <td>Mean</td>
+                                                    <td>SD</td>
+                                                    <td>SE</td>
+                                                    <td>Median</td>
+                                                    <td>IQR</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>0</td>
+                                                    <td>5</td>
+                                                    <td>0.08</td>
+                                                    <td>0.00</td>
+                                                    <td>0.00</td>
+                                                    <td>0.08</td>
+                                                    <td>0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>15</td>
+                                                    <td>5</td>
+                                                    <td>6.98</td>
+                                                    <td>4.87</td>
+                                                    <td>2.18</td>
+                                                    <td>6.72</td>
+                                                    <td>6.26</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>30</td>
+                                                    <td>5</td>
+                                                    <td>10.73</td>
+                                                    <td>5.63</td>
+                                                    <td>2.52</td>
+                                                    <td>7.28</td>
+                                                    <td>8.75</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>45</td>
+                                                    <td>5</td>
+                                                    <td>4.83</td>
+                                                    <td>1.94</td>
+                                                    <td>0.87</td>
+                                                    <td>3.90</td>
+                                                    <td>1.07</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>60</td>
+                                                    <td>5</td>
+                                                    <td>3.69</td>
+                                                    <td>1.56</td>
+                                                    <td>0.70</td>
+                                                    <td>2.97</td>
+                                                    <td>2.79</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>90</td>
+                                                    <td>5</td>
+                                                    <td>3.49</td>
+                                                    <td>2.44</td>
+                                                    <td>1.09</td>
+                                                    <td>1.95</td>
+                                                    <td>3.06</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>120</td>
+                                                    <td>5</td>
+                                                    <td>2.14</td>
+                                                    <td>1.76</td>
+                                                    <td>0.79</td>
+                                                    <td>1.46</td>
+                                                    <td>0.85</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>150</td>
+                                                    <td>5</td>
+                                                    <td>1.72</td>
+                                                    <td>1.23</td>
+                                                    <td>0.55</td>
+                                                    <td>1.49</td>
+                                                    <td>0.51</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>180</td>
+                                                    <td>5</td>
+                                                    <td>1.27</td>
+                                                    <td>0.77</td>
+                                                    <td>0.35</td>
+                                                    <td>1.18</td>
+                                                    <td>0.51</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>240</td>
+                                                    <td>5</td>
+                                                    <td>0.71</td>
+                                                    <td>0.41</td>
+                                                    <td>0.18</td>
+                                                    <td>0.72</td>
+                                                    <td>0.2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>300</td>
+                                                    <td>5</td>
+                                                    <td>0.41</td>
+                                                    <td>0.22</td>
+                                                    <td>0.10</td>
+                                                    <td>0.41</td>
+                                                    <td>0.12</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>360</td>
+                                                    <td>5</td>
+                                                    <td>0.25</td>
+                                                    <td>0.11</td>
+                                                    <td>0.05</td>
+                                                    <td>0.28</td>
+                                                    <td>0.04</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-decoration: underline;">Subject ID</td>
+                                                    <td style="text-decoration: underline;">Baseline</td>
+                                                    <td style="text-decoration: underline;">Min. observation</td>
+                                                    <td style="text-decoration: underline;">Max. observation</td>
+                                                    <td style="text-decoration: underline;">Time to max.</td>
+                                                    <td style="text-decoration: underline;">Slope to max.</td>
+                                                    <td style="text-decoration: underline;">AUC</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>16.02</td>
+                                                    <td>30</td>
+                                                    <td>0.53</td>
+                                                    <td>919.875</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>11</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>6.72</td>
+                                                    <td>15</td>
+                                                    <td>0.44</td>
+                                                    <td>599.850</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>9.98</td>
+                                                    <td>15</td>
+                                                    <td>0.66</td>
+                                                    <td>499.500</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>13</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>7.27</td>
+                                                    <td>30</td>
+                                                    <td>0.24</td>
+                                                    <td>472.875</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>14</td>
+                                                    <td>0.08</td>
+                                                    <td>0.08</td>
+                                                    <td>17.61</td>
+                                                    <td>30</td>
+                                                    <td>0.58</td>
+                                                    <td>
+                                                        <p>1377.975</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>Subjects:			5</p>
+                                        <p>Total (mean per time point) observations: 60 (5)</p>
+                                        <p>Mean (SD) area under curve (AUC): 774.02 (381.58)</p>
+                                        <p>SE of mean AUC: 170.65</p>
+                                        <p>95% t-interval for mean AUC: 300.22 to 1247.81</p>
+                                        <p>95% bootstrap-t interval for mean AUC (1000000 iterations, seed 2944296): 448.85 to 2699.11</p>
+                                        <p>95% z-interval for mean AUC: 439.55 to 1108.48</p>
+                                        <p>Median (IQR) area under curve: 599.85 (420.38)</p>
+                                        <p>Median (IQR) time to maximum: 30 (15)</p>
+                                        <p>Median (IQR) slope to maximum: 0.53 (0.14)</p>
+                                        <p>Mean (SD) slope to maximum: 0.49 (0.16)</p>
+                                        <p>
+                                            <img src="../resources/images/time_series_summary_normal.svg" width="566" height="400" data-mc-conditions="Primary.WEBHELP" />
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p><u>AUC Distribution</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>
+                                            <img src="../resources/images/time_series_summary_normal_plot.svg" width="566" height="400" data-mc-conditions="Primary.WEBHELP" />
+                                        </p>
+                                        <p>R-square for AUC vs. normal scores: 0.80
 </p>
-        <p> </p>
-        <p>
-            <img src="../resources/images/time_series_summary_normal_plot_log.svg" width="566" height="400" />
-        </p>
-        <p>R-square for log(AUC) vs. normal scores: 0.94
+                                        <p>&#160;</p>
+                                        <p>
+                                            <img src="../resources/images/time_series_summary_normal_plot_log.svg" width="566" height="400" data-mc-conditions="Primary.WEBHELP" />
+                                        </p>
+                                        <p>R-square for log(AUC) vs. normal scores: 0.94
 </p>
-        <p> </p>
-        <p><u>Group comparison: Malabsorbtion vs. Normal</u>
-        </p>
-        <p> </p>
-        <p>Welch t (SE of difference):		-1.77	(177.94)</p>
-        <p>DF (Satterthwaite):		4.71</p>
-        <p>Two sided P = 0.1412</p>
-        <p>AUC difference (95% CI):		-314.28	(-780.27	to	151.70)</p>
-        <p>Bootstrapped with 1000000 iterations, seed 2944296</p>
-        <p>Two sided bootstrap P = 0.1809</p>
-        <p>95% bootstrap-t interval: -1240.73 to 35.45</p>
-        <p>
-            <img src="../resources/images/time_series_summary_compare.svg" width="566" height="430" />
-        </p>
-        <p> </p>
-        <details class="rcode">
-            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
-            <div>
-                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
-                <pre class="rcode" xml:space="preserve"># Time series summary: the StatsDirect help example (Bland 2000, blood levels of
+                                        <p>&#160;</p>
+                                        <p><u>Group comparison: Malabsorbtion vs. Normal</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Welch t (SE of difference):		-1.77	(177.94)</p>
+                                        <p>DF (Satterthwaite):		4.71</p>
+                                        <p>Two sided P = 0.1412</p>
+                                        <p>AUC difference (95% CI):		-314.28	(-780.27	to	151.70)</p>
+                                        <p>Bootstrapped with 1000000 iterations, seed 2944296</p>
+                                        <p>Two sided bootstrap P = 0.1809</p>
+                                        <p>95% bootstrap-t interval: -1240.73 to 35.45</p>
+                                        <p>
+                                            <img src="../resources/images/time_series_summary_compare.svg" width="566" height="430" data-mc-conditions="Primary.WEBHELP" />
+                                        </p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Time series summary: the StatsDirect help example (Bland 2000, blood levels of
 # zidovudine after an oral dose in patients with and without malabsorption) in R
 # The data are the Group, Time, Zidovudine and Patient columns of the Other
 # worksheet of the StatsDirect test workbook.
@@ -886,10 +978,29 @@ cat("AUC difference (95% CI):", two(diff(rev(r$estimate))),
 qqnorm(c(auc_Malabsorbtion, auc_Normal), main = "Normal Plot for AUC",
        ylab = "Area Under Curve")
 qqline(c(auc_Malabsorbtion, auc_Normal))</pre>
-            </div>
-        </details>
-        <p> </p>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
+                                    </div>
+                                    <MadCap:pageFooter>
+                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
+                                    </MadCap:pageFooter>
+                                    <!-- Google tag (gtag.js) -->
+                                    <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
+                                    </script>
+                                    <script type="text/javascript">/* <![CDATA[ */
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    <footer class="help-shared-footer">
-            <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank" rel="noopener noreferrer">Download software here</a>.</p>
-        </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>
+        gtag('config', 'G-GZZ7X1JX4D');
+        /* ]]> */</script>
+                                </div>
+                            </div>
+                        </div>
+                    </div><a data-close="true"></a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

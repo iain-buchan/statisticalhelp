@@ -1,276 +1,373 @@
-<!doctype html>
-<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="meta_analysis/risk_difference.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Risk Difference Meta-analysis - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
-#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
-#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
-html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
-@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
-html[data-help-skin="flare"] #help-topic-body img{max-width:none}
-html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
-html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
-html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
-html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
-@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
-<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
-<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
-        <h1>
-            
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Meta-analysis" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Risk Difference Meta-analysis - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/images/sd3.ico" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <div class="central-account-wrapper">
+                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="central-account-wrapper">
+                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
+                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
+                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
+                                                    </div>
+                                                    <div class="search-filter-content" id="sf-content">
+                                                        <ul>
+                                                            <li>
+                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <nav class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="body-container">
+                                <div data-mc-content-body="True">
+                                    <div role="main" id="mc-main-content">
+                                        <h1><a name="kanchor7"></a>
             Risk Difference Meta-analysis</h1>
-        <p> </p>
-        <p>Menu location: <b>Analysis_Meta-Analysis_Risk Difference</b>.</p>
-        <p> </p>
-        <p>Case-control studies of dichotomous outcomes (e.g. dead or alive) can be represented by arranging the observed counts into fourfold (2 by 2) tables. Meta-analysis may be used to investigate the combination or interaction of a group of independent studies, for example a series of fourfold tables from similar studies conducted at different centres. This StatsDirect function examines the risk difference within each stratum (a single fourfold table) and across all of the studies/strata.</p>
-        <p> </p>
-        <p>For a single stratum risk difference is defined as follows:</p>
-        <p> </p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td colspan="2" style="text-decoration: underline;text-align: center;">EXPOSURE</td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td style="text-decoration: underline;text-align: center;">Exposed</td>
-                <td style="text-decoration: underline;text-align: center;">Non-Exposed</td>
-            </tr>
-            <tr>
-                <td rowspan="2" style="text-align: right;">OUTCOME:</td>
-                <td style="text-align: right;">Cases:</td>
-                <td style="text-align: center;">a</td>
-                <td style="text-align: center;">b</td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Non-cases:</td>
-                <td style="text-align: center;">c</td>
-                <td style="text-align: center;">d</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>Risk difference = [a/(a+c)] - [b/(b+d)]</p>
-        <p> </p>
-        <p>For each table the observed risk difference is displayed with a confidence interval. The ’near exact’ method of Miettinen and Nurminen is used to construct the confidence interval (<a href="../references/reference_list.htm#ref-mee-1984">Mee, 1984</a>; <a href="../references/reference_list.htm#ref-anbar-1983">Anbar, 1983</a>; <a href="../references/reference_list.htm#ref-gart-1990">Gart and Nam, 1990</a>; <a href="../references/reference_list.htm#ref-miettinen-1985">Miettinen and Nurminen, 1985</a>; <a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>). If the ’try exact’ <a href="options.htm">option</a> is not selected then a normal approximation to the confidence interval is given instead.</p>
-        <p> </p>
-        <p> </p>
-        <p>The Mantel-Haenszel type method of Greenland and Robins (<a href="../references/reference_list.htm#ref-greenland-1985">Greenland and Robins, 1985</a>; <a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>) is used to estimate the pooled risk difference for all strata, assuming a fixed effects model:</p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="3e0ba3c17acec213b7656be2d6ebe916759b3db87dc1e7b472de6498fe7d409e"><span class="help-equation-accessible help-equation-live">$\displaystyle \widehat{RD}_{MH}=\frac{\displaystyle \sum_{i=1}^k \left[a_i \left( \frac{b_i+d_i}{n_i}\right)\right]-b_i\left( \frac{a_i+c_i}{n_i}\right)}{\displaystyle \sum_{i=1}^k \left( \frac{(a_i+c_i)(b_i+d_i)}{n_i}\right)}$</span><img src="../resources/help-editor-runtime/equation-artwork/ef25ff7fa3201211bda8fcb41019ef3e2086d200e5b775e49541de2749c63c05.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>- where n<sub>i</sub> =  a<sub>i</sub>+b<sub>i</sub>+c<sub>i</sub>+d<sub>i</sub>.</p>
-        <p> </p>
-        <p>A confidence interval for the pooled risk difference is calculated using the Greenland-Robins variance formula (<a href="../references/reference_list.htm#ref-greenland-1985">Greenland and Robins, 1985</a>). A chi-square test statistic is given with associated probability of the pooled risk difference being equal to zero. Note that some packages give a z statistic; this is equal to the square root of the chi-square statistic with one degree of freedom, i.e. it is equivalent.</p>
-        <p> </p>
-        <p>If any cell count in a table is zero then a continuity correction is applied to each cell in that table for the calculation of the weights and variances (the risk difference of the table is calculated from the counts as they are) - if you have selected the 'delay continuity correction' <a href="options.htm">option</a> then the pooled risk difference, its confidence interval and the fixed effects weights are calculated from the counts as they are. The type of continuity correction used is set in the <a href="options.htm">options</a>. A table is left out of the pooling, and marked as excluded, if it has no subjects in one of the groups.</p>
-        <p> </p>
-        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
-        <p> </p>
-        <p>Note that the results from StatsDirect may differ slightly from other software or from those quoted in papers; this is due to differences in the variance formulae. StatsDirect employs the most robust practical approaches to variance according to accepted statistical literature.</p>
-        <p> </p>
-        <p>DATA INPUT:</p>
-        <p>Observed frequencies should be entered in a workbook as follows:</p>
-        <p> </p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td colspan="2" style="text-align: center;text-decoration: underline;">Exposed/Experimental</td>
-                <td colspan="2" style="text-align: center;text-decoration: underline;">Non-exposed/Non-experimental</td>
-            </tr>
-            <tr>
-                <td style="text-align: center;">Total number</td>
-                <td style="text-align: center;">Number of cases</td>
-                <td style="text-align: center;">Total number</td>
-                <td style="text-align: center;">Number of cases</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>...where total number = cases + non-cases</p>
-        <p> </p>
-        <p><u>Example</u>
-        </p>
-        <p>From <a href="../references/reference_list.htm#ref-fleiss-1991">Fleiss and Gross (1991)</a>.</p>
-        <p>Test workbook (Meta-analysis worksheet:  Exposed total, Exposed cases, Non-exposed total, Non-exposed cases, Study).</p>
-        <p> </p>
-        <p>The following data combine seven placebo-controlled randomized trials of the effect of aspirin in preventing death after myocardial infarction:</p>
-        <p> </p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;"> </td>
-                <td colspan="2" style="text-decoration: underline;text-align: center;">Aspirin</td>
-                <td colspan="2" style="text-decoration: underline;text-align: center;">Placebo</td>
-            </tr>
-            <tr>
-                <td style="text-decoration: underline;">Trial</td>
-                <td style="text-decoration: underline;text-align: right;">patients</td>
-                <td style="text-decoration: underline;text-align: right;">deaths</td>
-                <td style="text-decoration: underline;text-align: right;">patients</td>
-                <td style="text-decoration: underline;text-align: right;">deaths</td>
-            </tr>
-            <tr>
-                <td>MRC-1</td>
-                <td style="text-align: right;">615</td>
-                <td style="text-align: right;">49</td>
-                <td style="text-align: right;">624</td>
-                <td style="text-align: right;">67</td>
-            </tr>
-            <tr>
-                <td>CDP</td>
-                <td style="text-align: right;">758</td>
-                <td style="text-align: right;">44</td>
-                <td style="text-align: right;">771</td>
-                <td style="text-align: right;">64</td>
-            </tr>
-            <tr>
-                <td>MRC-2</td>
-                <td style="text-align: right;">832</td>
-                <td style="text-align: right;">102</td>
-                <td style="text-align: right;">850</td>
-                <td style="text-align: right;">126</td>
-            </tr>
-            <tr>
-                <td>GASP</td>
-                <td style="text-align: right;">317</td>
-                <td style="text-align: right;">32</td>
-                <td style="text-align: right;">309</td>
-                <td style="text-align: right;">38</td>
-            </tr>
-            <tr>
-                <td>PARIS</td>
-                <td style="text-align: right;">810</td>
-                <td style="text-align: right;">85</td>
-                <td style="text-align: right;">406</td>
-                <td style="text-align: right;">52</td>
-            </tr>
-            <tr>
-                <td>AMIS</td>
-                <td style="text-align: right;">2267</td>
-                <td style="text-align: right;">246</td>
-                <td style="text-align: right;">2257</td>
-                <td style="text-align: right;">219</td>
-            </tr>
-            <tr>
-                <td>ISIS-2</td>
-                <td style="text-align: right;">8587</td>
-                <td style="text-align: right;">1570</td>
-                <td style="text-align: right;">8600</td>
-                <td style="text-align: right;">1720</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>To analyse these data in StatsDirect first prepare them in four workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select risk difference from the meta-analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Exposed total", "Exposed cases", "Non-exposed total" and "Non-exposed cases" when prompted for data. Note that "exposed" and "experimental" groups are the same.</p>
-        <p> </p>
-        <p>For this example:</p>
-        <p> </p>
-        <table cellspacing="0" style="caption-side: top;">
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;">Study</td>
-                <td style="text-decoration: underline;">Risk difference</td>
-                <td colspan="2" style="text-decoration: underline;">95% CI (Miettinen)</td>
-                <td colspan="2" style="text-decoration: underline;">% Weight (fixed, random)</td>
-            </tr>
-            <tr>
-                <td>MRC-1</td>
-                <td>-0.027697</td>
-                <td>-0.060615</td>
-                <td>0.00482</td>
-                <td>4.445681</td>
-                <td>10.841853</td>
-            </tr>
-            <tr>
-                <td>CDP</td>
-                <td>-0.024962</td>
-                <td>-0.051149</td>
-                <td>0.000744</td>
-                <td>5.486129</td>
-                <td>14.756033</td>
-            </tr>
-            <tr>
-                <td>MRC-2</td>
-                <td>-0.025639</td>
-                <td>-0.058485</td>
-                <td>0.007133</td>
-                <td>6.034846</td>
-                <td>10.702518</td>
-            </tr>
-            <tr>
-                <td>GASP</td>
-                <td>-0.022031</td>
-                <td>-0.072572</td>
-                <td>0.027778</td>
-                <td>2.245915</td>
-                <td>5.579711</td>
-            </tr>
-            <tr>
-                <td>PARIS</td>
-                <td>-0.023141</td>
-                <td>-0.06406</td>
-                <td>0.013999</td>
-                <td>3.881749</td>
-                <td>8.292156</td>
-            </tr>
-            <tr>
-                <td>AMIS</td>
-                <td>0.011482</td>
-                <td>-0.006236</td>
-                <td>0.029241</td>
-                <td>16.233434</td>
-                <td>21.5868</td>
-            </tr>
-            <tr>
-                <td>ISIS-2</td>
-                <td>-0.017165</td>
-                <td>-0.028929</td>
-                <td>-0.005404</td>
-                <td>61.672246</td>
-                <td>28.240929</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p><u>Fixed effects (Mantel-Haenszel, Greenland-Robins)</u>
-        </p>
-        <p>Pooled risk difference = -0.014263 (95% CI = -0.022765 to -0.005762)</p>
-        <p>Chi² (test risk difference differs from 0) = 10.812247 (df = 1) P = 0.001</p>
-        <p> </p>
-        <p><u>Non-combinability of studies</u>
-        </p>
-        <p>Cochran Q = 10.461119 (df = 6) P = 0.1065</p>
-        <p>Moment-based estimate of between studies variance = 0.000112</p>
-        <p>I² (inconsistency) = 42.6% (95% CI = 0% to 77.4%)</p>
-        <p> </p>
-        <p><u>Random effects (DerSimonian-Laird)</u>
-        </p>
-        <p>Pooled risk difference = -0.014947 (95% CI = -0.0276 to -0.002295)</p>
-        <p>Chi² (test risk difference differs from 0) = 5.361139 (df = 1) P = 0.0206</p>
-        <p> </p>
-        <p><u>Bias indicators</u>
-        </p>
-        <p>Begg-Mazumdar: Kendall's tau = 0.333333 P = 0.3813 (low power)</p>
-        <p>Egger: bias = -0.817403 (90% CI = -3.132436 to 1.497631) P = 0.5086</p>
-        <p> </p>
-        <p>Here we can say with 95% confidence, assuming a random effects model, that for those given aspirin the true population risk of dying in the specified interval after a heart attack is at least 0.002 less than the risk for those not given aspirin. Assuming a fixed effects model a stronger inference could be made about a risk difference of 0.006 (the lower absolute confidence limit) but the high inter-study variation makes the fixed effects model less appropriate.</p>
-        <p> </p>
-        <details class="rcode">
-            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
-            <div>
-                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
-                <pre class="rcode" xml:space="preserve"># Risk difference meta-analysis: the StatsDirect help example (Fleiss and Gross 1991,
+                                        <p>&#160;</p>
+                                        <p>Menu location: <b>Analysis_Meta-Analysis_Risk Difference</b>.</p>
+                                        <p>&#160;</p>
+                                        <p>Case-control studies of dichotomous outcomes (e.g. dead or alive) can be represented by arranging the observed counts into fourfold (2 by 2) tables. Meta-analysis may be used to investigate the combination or interaction of a group of independent studies, for example a series of fourfold tables from similar studies conducted at different centres. This StatsDirect function examines the risk difference within each stratum (a single fourfold table) and across all of the studies/strata.</p>
+                                        <p>&#160;</p>
+                                        <p>For a single stratum risk difference is defined as follows:</p>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td>&#160;</td>
+                                                <td>&#160;</td>
+                                                <td colspan="2" style="text-decoration: underline;text-align: center;">EXPOSURE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&#160;</td>
+                                                <td>&#160;</td>
+                                                <td style="text-decoration: underline;text-align: center;">Exposed</td>
+                                                <td style="text-decoration: underline;text-align: center;">Non-Exposed</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="2" style="text-align: right;">OUTCOME:</td>
+                                                <td style="text-align: right;">Cases:</td>
+                                                <td style="text-align: center;">a</td>
+                                                <td style="text-align: center;">b</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Non-cases:</td>
+                                                <td style="text-align: center;">c</td>
+                                                <td style="text-align: center;">d</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>Risk difference = [a/(a+c)] - [b/(b+d)]</p>
+                                        <p>&#160;</p>
+                                        <p>For each table the observed risk difference is displayed with a confidence interval. The ’near exact’ method of Miettinen and Nurminen is used to construct the confidence interval (<a href="../references/reference_list.htm#ref-mee-1984">Mee, 1984</a>; <a href="../references/reference_list.htm#ref-anbar-1983">Anbar, 1983</a>; <a href="../references/reference_list.htm#ref-gart-1990">Gart and Nam, 1990</a>; <a href="../references/reference_list.htm#ref-miettinen-1985">Miettinen and Nurminen, 1985</a>; <a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>). If the ’try exact’ <a href="options.htm">option</a> is not selected then a normal approximation to the confidence interval is given instead.</p>
+                                        <p>&#160;</p>
+                                        <p>&#160;</p>
+                                        <p>The Mantel-Haenszel type method of Greenland and Robins (<a href="../references/reference_list.htm#ref-greenland-1985">Greenland and Robins, 1985</a>; <a href="../references/reference_list.htm#ref-sahai-1996">Sahai and Khurshid, 1996</a>) is used to estimate the pooled risk difference for all strata, assuming a fixed effects model:</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation131.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where n<sub>i</sub> =  a<sub>i</sub>+b<sub>i</sub>+c<sub>i</sub>+d<sub>i</sub>.</p>
+                                        <p>&#160;</p>
+                                        <p>A confidence interval for the pooled risk difference is calculated using the Greenland-Robins variance formula (<a href="../references/reference_list.htm#ref-greenland-1985">Greenland and Robins, 1985</a>). A chi-square test statistic is given with associated probability of the pooled risk difference being equal to zero. Note that some packages give a z statistic; this is equal to the square root of the chi-square statistic with one degree of freedom, i.e. it is equivalent.</p>
+                                        <p>&#160;</p>
+                                        <p>If any cell count in a table is zero then a continuity correction is applied to each cell in that table for the calculation of the weights and variances (the risk difference of the table is calculated from the counts as they are) - if you have selected the 'delay continuity correction' <a href="options.htm">option</a> then the pooled risk difference, its confidence interval and the fixed effects weights are calculated from the counts as they are. The type of continuity correction used is set in the <a href="options.htm">options</a>. A table is left out of the pooling, and marked as excluded, if it has no subjects in one of the groups.</p>
+                                        <p>&#160;</p>
+                                        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
+                                        <p>&#160;</p>
+                                        <p>Note that the results from StatsDirect may differ slightly from other software or from those quoted in papers; this is due to differences in the variance formulae. StatsDirect employs the most robust practical approaches to variance according to accepted statistical literature.</p>
+                                        <p>&#160;</p>
+                                        <p>DATA INPUT:</p>
+                                        <p>Observed frequencies should be entered in a workbook as follows:</p>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td colspan="2" style="text-align: center;text-decoration: underline;">Exposed/Experimental</td>
+                                                <td colspan="2" style="text-align: center;text-decoration: underline;">Non-exposed/Non-experimental</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;">Total number</td>
+                                                <td style="text-align: center;">Number of cases</td>
+                                                <td style="text-align: center;">Total number</td>
+                                                <td style="text-align: center;">Number of cases</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>...where total number = cases + non-cases</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>From <a href="../references/reference_list.htm#ref-fleiss-1991">Fleiss and Gross (1991)</a>.</p>
+                                        <p>Test workbook (Meta-analysis worksheet:  Exposed total, Exposed cases, Non-exposed total, Non-exposed cases, Study).</p>
+                                        <p>&#160;</p>
+                                        <p>The following data combine seven placebo-controlled randomized trials of the effect of aspirin in preventing death after myocardial infarction:</p>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;">&#160;</td>
+                                                <td colspan="2" style="text-decoration: underline;text-align: center;">Aspirin</td>
+                                                <td colspan="2" style="text-decoration: underline;text-align: center;">Placebo</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-decoration: underline;">Trial</td>
+                                                <td style="text-decoration: underline;text-align: right;">patients</td>
+                                                <td style="text-decoration: underline;text-align: right;">deaths</td>
+                                                <td style="text-decoration: underline;text-align: right;">patients</td>
+                                                <td style="text-decoration: underline;text-align: right;">deaths</td>
+                                            </tr>
+                                            <tr>
+                                                <td>MRC-1</td>
+                                                <td style="text-align: right;">615</td>
+                                                <td style="text-align: right;">49</td>
+                                                <td style="text-align: right;">624</td>
+                                                <td style="text-align: right;">67</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CDP</td>
+                                                <td style="text-align: right;">758</td>
+                                                <td style="text-align: right;">44</td>
+                                                <td style="text-align: right;">771</td>
+                                                <td style="text-align: right;">64</td>
+                                            </tr>
+                                            <tr>
+                                                <td>MRC-2</td>
+                                                <td style="text-align: right;">832</td>
+                                                <td style="text-align: right;">102</td>
+                                                <td style="text-align: right;">850</td>
+                                                <td style="text-align: right;">126</td>
+                                            </tr>
+                                            <tr>
+                                                <td>GASP</td>
+                                                <td style="text-align: right;">317</td>
+                                                <td style="text-align: right;">32</td>
+                                                <td style="text-align: right;">309</td>
+                                                <td style="text-align: right;">38</td>
+                                            </tr>
+                                            <tr>
+                                                <td>PARIS</td>
+                                                <td style="text-align: right;">810</td>
+                                                <td style="text-align: right;">85</td>
+                                                <td style="text-align: right;">406</td>
+                                                <td style="text-align: right;">52</td>
+                                            </tr>
+                                            <tr>
+                                                <td>AMIS</td>
+                                                <td style="text-align: right;">2267</td>
+                                                <td style="text-align: right;">246</td>
+                                                <td style="text-align: right;">2257</td>
+                                                <td style="text-align: right;">219</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ISIS-2</td>
+                                                <td style="text-align: right;">8587</td>
+                                                <td style="text-align: right;">1570</td>
+                                                <td style="text-align: right;">8600</td>
+                                                <td style="text-align: right;">1720</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>To analyse these data in StatsDirect first prepare them in four workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select risk difference from the meta-analysis section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the columns marked "Exposed total", "Exposed cases", "Non-exposed total" and "Non-exposed cases" when prompted for data. Note that "exposed" and "experimental" groups are the same.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <table cellspacing="0" style="caption-side: top;">
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;">Study</td>
+                                                <td style="text-decoration: underline;">Risk difference</td>
+                                                <td colspan="2" style="text-decoration: underline;">95% CI (Miettinen)</td>
+                                                <td colspan="2" style="text-decoration: underline;">% Weight (fixed, random)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>MRC-1</td>
+                                                <td>-0.027697</td>
+                                                <td>-0.060615</td>
+                                                <td>0.00482</td>
+                                                <td>4.445681</td>
+                                                <td>10.841853</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CDP</td>
+                                                <td>-0.024962</td>
+                                                <td>-0.051149</td>
+                                                <td>0.000744</td>
+                                                <td>5.486129</td>
+                                                <td>14.756033</td>
+                                            </tr>
+                                            <tr>
+                                                <td>MRC-2</td>
+                                                <td>-0.025639</td>
+                                                <td>-0.058485</td>
+                                                <td>0.007133</td>
+                                                <td>6.034846</td>
+                                                <td>10.702518</td>
+                                            </tr>
+                                            <tr>
+                                                <td>GASP</td>
+                                                <td>-0.022031</td>
+                                                <td>-0.072572</td>
+                                                <td>0.027778</td>
+                                                <td>2.245915</td>
+                                                <td>5.579711</td>
+                                            </tr>
+                                            <tr>
+                                                <td>PARIS</td>
+                                                <td>-0.023141</td>
+                                                <td>-0.06406</td>
+                                                <td>0.013999</td>
+                                                <td>3.881749</td>
+                                                <td>8.292156</td>
+                                            </tr>
+                                            <tr>
+                                                <td>AMIS</td>
+                                                <td>0.011482</td>
+                                                <td>-0.006236</td>
+                                                <td>0.029241</td>
+                                                <td>16.233434</td>
+                                                <td>21.5868</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ISIS-2</td>
+                                                <td>-0.017165</td>
+                                                <td>-0.028929</td>
+                                                <td>-0.005404</td>
+                                                <td>61.672246</td>
+                                                <td>28.240929</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p><u>Fixed effects (Mantel-Haenszel, Greenland-Robins)</u>
+                                        </p>
+                                        <p>Pooled risk difference = -0.014263 (95% CI = -0.022765 to -0.005762)</p>
+                                        <p>Chi² (test risk difference differs from 0) = 10.812247 (df = 1) P = 0.001</p>
+                                        <p>&#160;</p>
+                                        <p><u>Non-combinability of studies</u>
+                                        </p>
+                                        <p>Cochran Q = 10.461119 (df = 6) P = 0.1065</p>
+                                        <p>Moment-based estimate of between studies variance = 0.000112</p>
+                                        <p>I² (inconsistency) = 42.6% (95% CI = 0% to 77.4%)</p>
+                                        <p>&#160;</p>
+                                        <p><u>Random effects (DerSimonian-Laird)</u>
+                                        </p>
+                                        <p>Pooled risk difference = -0.014947 (95% CI = -0.0276 to -0.002295)</p>
+                                        <p>Chi² (test risk difference differs from 0) = 5.361139 (df = 1) P = 0.0206</p>
+                                        <p>&#160;</p>
+                                        <p><u>Bias indicators</u>
+                                        </p>
+                                        <p>Begg-Mazumdar: Kendall's tau = 0.333333 P = 0.3813 (low power)</p>
+                                        <p>Egger: bias = -0.817403 (90% CI = -3.132436 to 1.497631) P = 0.5086</p>
+                                        <p>&#160;</p>
+                                        <p>Here we can say with 95% confidence, assuming a random effects model, that for those given aspirin the true population risk of dying in the specified interval after a heart attack is at least 0.002 less than the risk for those not given aspirin. Assuming a fixed effects model a stronger inference could be made about a risk difference of 0.006 (the lower absolute confidence limit) but the high inter-study variation makes the fixed effects model less appropriate.</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Risk difference meta-analysis: the StatsDirect help example (Fleiss and Gross 1991,
 # deaths after myocardial infarction in seven placebo-controlled trials of aspirin; the
 # test workbook's Meta-analysis worksheet columns A to E) in R
 study &lt;- c("MRC-1", "CDP", "MRC-2", "GASP", "PARIS", "AMIS", "ISIS-2")
@@ -436,13 +533,33 @@ forest(w_mh, rd_mh, rd_mh - z * se_mh, rd_mh + z * se_mh,
        "Risk difference meta-analysis plot [fixed effects]", "combined [fixed]")
 forest(w_dl, rd_dl, rd_dl - z * se_dl, rd_dl + z * se_dl,
        "Risk difference meta-analysis plot [random effects]", "combined [random]")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
+                                        <p><a href="../basics/p_values.htm">P values</a>
+                                        </p>
+                                        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+                                        </p>
+                                    </div>
+                                    <MadCap:pageFooter>
+                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
+                                    </MadCap:pageFooter>
+                                    <!-- Google tag (gtag.js) -->
+                                    <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
+                                    </script>
+                                    <script type="text/javascript">/* <![CDATA[ */
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GZZ7X1JX4D');
+        /* ]]> */</script>
+                                </div>
+                            </div>
+                        </div>
+                    </div><a data-close="true"></a>
+                </div>
             </div>
-        </details>
-        <p> </p>
-        <p><a href="../basics/p_values.htm">P values</a>
-        </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-        </p>
-    <footer class="help-shared-footer">
-            <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank" rel="noopener noreferrer">Download software here</a>.</p>
-        </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>
+        </div>
+    </body>
+</html>

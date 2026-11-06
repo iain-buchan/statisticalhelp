@@ -1,336 +1,425 @@
-<!doctype html>
-<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="rates/direct_standardization.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Directly Standardized Rates - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
-#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
-#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
-html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
-@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
-html[data-help-skin="flare"] #help-topic-body img{max-width:none}
-html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
-html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
-html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
-html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
-@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
-<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
-<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
-        <h1>
-            Direct Standardization</h1>
-        <p> </p>
-        <p>Menu location: <b>Analysis_Rates_Direct Standardization</b>.</p>
-        <p> </p>
-        <p>This function calculates directly standardized rates (DSR) with approximate confidence intervals.</p>
-        <p> </p>
-        <p>DSR is simply a weighted mean event rate for a study population, using the group/stratum sizes of a reference population as the weighting scheme. Standardized or adjusted rates are summary index measures for the purpose of comparison only; their magnitude has no intrinsic value.</p>
-        <p> </p>
-        <p>The choice of a reference or standard population is important; it must relate to the population under study naturally.</p>
-        <p> </p>
-        <p>Please note that standardization is not a substitute for individual comparisons of stratum-specific rates.</p>
-        <p> </p>
-        <p>This method is unreliable with small numbers; there should be at least 25 events observed overall and at least one event in each stratum. If the number of events is small, consider aggregating strata.</p>
-        <p> </p>
-        <p>Direct standardization is not appropriate if there is not a consistent relationship between stratum-specific rates in different populations being compared.</p>
-        <p> </p>
-        <p>There are a lot of pitfalls in using directly standardized rates; if you have any doubts then please consult with an Epidemiologist and/or Statistician.</p>
-        <p> </p>
-        <p>Data input</p>
-        <ul>
-            <li>Number of events for each group from the index/study population</li>
-            <li>Person-time for each group from the index/study population (e.g. size of each group if just one year and all subjects were followed up)</li>
-            <li>Group sizes or weights from a reference/standard population</li>
-            <li>Group/stratum labels, e.g. age bands</li>
-        </ul>
-        <p> </p>
-        <p>Note that an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
-        <p>If a stratum has more events than person-time, i.e. a rate above 1 per unit of person-time, then only the results of the Poisson method are given. The binomial method cannot be used for such a rate; it requires person-time that has not been scaled (for example person-years, not thousands of person-years).</p>
-        <p> </p>
-        <p><u>Technical validation</u>
-        </p>
-        <p>Approximate confidence intervals for the DSR are calculated firstly by Chiang's normal approximation to Poisson rate sums (<a href="../references/reference_list.htm#ref-chiang-1961">Chiang, 1961</a>; <a href="../references/reference_list.htm#ref-keyfitz-1966">Keyfitz, 1966</a>; <a href="../references/reference_list.htm#ref-breslow-1987">Breslow and Day, 1987</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>) and secondly by an improved approximation adjusted for the total number of observed events (<a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al., 1991</a>).</p>
-        <p> </p>
-        <p>
-            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="f8c89cf8101c1162b3a372eb79e74fb79b37599834863485a7258c16d2eb9f0b"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
-\displaystyle \displaystyle \text{DSR}=\frac{\displaystyle \sum_{i=1}^k N_ir_i}{\displaystyle \sum_{i=1}^k N_i} \\
-\displaystyle \displaystyle r_i=y_i/n_i \\
-\displaystyle \displaystyle w_i=\frac{N_i}{\displaystyle  \sum_{i=1}^k N_i} \\
-\displaystyle \displaystyle v=\frac{\displaystyle \sum_{i=1}^k N^2_ir_i/n_i}{\displaystyle \left( \sum_{i=1}^k N_i\right)^2} \\
-\displaystyle \displaystyle \text{CI}=\text{DSR}\pm z_{\alpha/2} \sqrt{v} \\
-\displaystyle \displaystyle \text{ICI}_l=\text{DSR} + (Y_l-Y) \sqrt{v/Y} \\
-\displaystyle \displaystyle \text{ICI}_u=\text{DSR} + (Y_u-Y) \sqrt{v/Y}
-\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/75f3348e2152abb3c0e670d5352435d1b683554eebcc007255ea540e3df40b0e.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
-        </p>
-        <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub>  is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum, y<sub>i</sub> is the number of events observed in the ith stratum of the study population, n<sub>i</sub> is the person-time for the ith stratum of the study population, z<sub>α/2</sub> is the 100(1 - α/2) centile of the standard normal distribution, Y is the total number of events observed, Y<sub>l</sub> and Y<sub>u</sub> are the exact lower and upper confidence limits for the Poisson count Y and ICI <sub>l to u</sub> is the improved confidence interval due to <a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al</a>. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formula above.</p>
-        <p> </p>
-        <p><u>Example</u>
-        </p>
-        <p>From <a href="../references/reference_list.htm#ref-curtin-1995">Curtin and Klein (1995)</a>:</p>
-        <p>Test workbook (Rates worksheet: Age Bands, Index Events, Index Group Sizes, Reference Sizes).</p>
-        <p> </p>
-        <p>The following data relate to stroke deaths for males from a hypothetical medium-size US State. The reference population is the 1940 US Standard Million.</p>
-        <p> </p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;text-align: left;">Age group</td>
-                <td style="text-decoration: underline;text-align: right;">Deaths</td>
-                <td style="text-decoration: underline;text-align: right;">Person-Time (thousands)</td>
-                <td style="text-decoration: underline;text-align: right;">Reference Size/Weight</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">Under 1</td>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">38</td>
-                <td style="text-align: right;">15343</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">1-4</td>
-                <td style="text-align: right;">0</td>
-                <td style="text-align: right;">150</td>
-                <td style="text-align: right;">64718</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">5-14</td>
-                <td style="text-align: right;">1</td>
-                <td style="text-align: right;">322</td>
-                <td style="text-align: right;">170355</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">15-24</td>
-                <td style="text-align: right;">2</td>
-                <td style="text-align: right;">344</td>
-                <td style="text-align: right;">181677</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">25-34</td>
-                <td style="text-align: right;">8</td>
-                <td style="text-align: right;">443</td>
-                <td style="text-align: right;">162066</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">35-44</td>
-                <td style="text-align: right;">21</td>
-                <td style="text-align: right;">379</td>
-                <td style="text-align: right;">139237</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">45-54</td>
-                <td style="text-align: right;">46</td>
-                <td style="text-align: right;">256</td>
-                <td style="text-align: right;">117811</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">55-64</td>
-                <td style="text-align: right;">103</td>
-                <td style="text-align: right;">189</td>
-                <td style="text-align: right;">80294</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">65-74</td>
-                <td style="text-align: right;">254</td>
-                <td style="text-align: right;">136</td>
-                <td style="text-align: right;">48426</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">75-84</td>
-                <td style="text-align: right;">371</td>
-                <td style="text-align: right;">57</td>
-                <td style="text-align: right;">17303</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">85 and over</td>
-                <td style="text-align: right;">212</td>
-                <td style="text-align: right;">12</td>
-                <td style="text-align: right;">2770</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>To analyse these data in StatsDirect you must select direct standardization from the rates section of the analysis menu. Note that annual mortality rates are often expressed as rates per 100,000 population or units of person time (i.e. 100,000 person years); so a multiplier of 100,000 should be selected for the scaling of rates in the output - you are prompted to provide this.</p>
-        <p> </p>
-        <p>For this example:</p>
-        <p> </p>
-        <p><u>Directly Standardized Rates</u>
-        </p>
-        <p> </p>
-        <p>Rates are expressed per 100000 units of person time:</p>
-        <p> </p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;text-align: left;">Index events</td>
-                <td style="text-decoration: underline;text-align: left;">Index PT</td>
-                <td style="text-decoration: underline;text-align: left;">Index rate</td>
-                <td style="text-decoration: underline;text-align: left;">Reference size</td>
-                <td style="text-decoration: underline;text-align: left;">Weight</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">1</td>
-                <td style="text-align: left;">38000</td>
-                <td style="text-align: left;">2.631579</td>
-                <td style="text-align: left;">15343</td>
-                <td style="text-align: left;">0.015343</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">0</td>
-                <td style="text-align: left;">150000</td>
-                <td style="text-align: left;">0</td>
-                <td style="text-align: left;">64718</td>
-                <td style="text-align: left;">0.064718</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">1</td>
-                <td style="text-align: left;">322000</td>
-                <td style="text-align: left;">0.310559</td>
-                <td style="text-align: left;">170355</td>
-                <td style="text-align: left;">0.170355</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">2</td>
-                <td style="text-align: left;">344000</td>
-                <td style="text-align: left;">0.581395</td>
-                <td style="text-align: left;">181677</td>
-                <td style="text-align: left;">0.181677</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">8</td>
-                <td style="text-align: left;">443000</td>
-                <td style="text-align: left;">1.805869</td>
-                <td style="text-align: left;">162066</td>
-                <td style="text-align: left;">0.162066</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">21</td>
-                <td style="text-align: left;">379000</td>
-                <td style="text-align: left;">5.540897</td>
-                <td style="text-align: left;">139237</td>
-                <td style="text-align: left;">0.139237</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">46</td>
-                <td style="text-align: left;">256000</td>
-                <td style="text-align: left;">17.96875</td>
-                <td style="text-align: left;">117811</td>
-                <td style="text-align: left;">0.117811</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">103</td>
-                <td style="text-align: left;">189000</td>
-                <td style="text-align: left;">54.497354</td>
-                <td style="text-align: left;">80294</td>
-                <td style="text-align: left;">0.080294</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">254</td>
-                <td style="text-align: left;">136000</td>
-                <td style="text-align: left;">186.764706</td>
-                <td style="text-align: left;">48426</td>
-                <td style="text-align: left;">0.048426</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">371</td>
-                <td style="text-align: left;">57000</td>
-                <td style="text-align: left;">650.877193</td>
-                <td style="text-align: left;">17303</td>
-                <td style="text-align: left;">0.017303</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;">212</td>
-                <td style="text-align: left;">12000</td>
-                <td style="text-align: left;">1766.666667</td>
-                <td style="text-align: left;">2770</td>
-                <td style="text-align: left;">0.00277</td>
-            </tr>
-        </table>
-        <p> </p>
-        <table>
-            <col />
-            <col />
-            <col />
-            <tr>
-                <td style="text-decoration: underline;">Index rate</td>
-                <td style="text-decoration: underline;">Exact 95% confidence interval</td>
-                <td> </td>
-            </tr>
-            <tr>
-                <td>2.631579</td>
-                <td>0.066626 to 14.662219</td>
-                <td>Under 1 year</td>
-            </tr>
-            <tr>
-                <td>0</td>
-                <td>0 to 2.459253</td>
-                <td>1-4 years</td>
-            </tr>
-            <tr>
-                <td>0.310559</td>
-                <td>0.007863 to 1.730324</td>
-                <td>5-14 years</td>
-            </tr>
-            <tr>
-                <td>0.581395</td>
-                <td>0.07041 to 2.1002</td>
-                <td>15-24 years</td>
-            </tr>
-            <tr>
-                <td>1.805869</td>
-                <td>0.779646 to 3.558282</td>
-                <td>25-34 years</td>
-            </tr>
-            <tr>
-                <td>5.540897</td>
-                <td>3.429903 to 8.46985</td>
-                <td>35-44 years</td>
-            </tr>
-            <tr>
-                <td>17.96875</td>
-                <td>13.155383 to 23.967794</td>
-                <td>45-54 years</td>
-            </tr>
-            <tr>
-                <td>54.497354</td>
-                <td>44.482507 to 66.093892</td>
-                <td>55-64 years</td>
-            </tr>
-            <tr>
-                <td>186.764706</td>
-                <td>164.500721 to 211.201647</td>
-                <td>65-74 years</td>
-            </tr>
-            <tr>
-                <td>650.877193</td>
-                <td>586.323368 to 720.597325</td>
-                <td>75-84 years</td>
-            </tr>
-            <tr>
-                <td>1766.666667</td>
-                <td>1536.8427 to 2021.164948</td>
-                <td>85 years and over</td>
-            </tr>
-        </table>
-        <p> </p>
-        <p>Total events = 1019</p>
-        <p>Adjusted events = 766.55342</p>
-        <p>Crude rate = 43.809114</p>
-        <p>Adjusted rate R = 32.955865</p>
-        <p> </p>
-        <p>Any rates (binomial model)</p>
-        <p>Approximate standard error of R = 1.050864</p>
-        <p>Approximate 95% confidence interval = 30.89621 to 35.01552</p>
-        <p> </p>
-        <p>Small rates (Poisson model)</p>
-        <p>Approximate standard error of R = 1.053213</p>
-        <p>Approximate 95% confidence interval = 30.891605 to 35.020125</p>
-        <p>Improved approximate (Dobson) 95% confidence interval = 30.923031 to 35.085201</p>
-        <p> </p>
-        <details class="rcode">
-            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
-            <div>
-                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
-                <pre class="rcode" xml:space="preserve"># Direct standardization: the StatsDirect help example (Curtin and Klein 1995, stroke
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Rates analysis and standardization" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Directly Standardized Rates - StatsDirect</title>
+        <link rel="shortcut icon" href="../resources/images/sd3.ico" />
+        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
+        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
+        </script>
+        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
+        </script>
+    </head>
+    <body>
+        <div class="foundation-wrap off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
+                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
+                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
+                    </ul>
+                </aside>
+                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
+                    <div data-sticky-container="" class="title-bar-container">
+                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
+                            <div class="middle title-bar-section outer-row clearfix">
+                                <div class="menu-icon-container relative clearfix">
+                                    <div class="central-account-wrapper">
+                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="title-bar-layout outer-row">
+                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
+                                </div>
+                                <div class="navigation-wrapper nocontent">
+                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
+                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="central-account-wrapper">
+                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
+                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
+                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-search-wrapper">
+                                    <div class="nav-search row">
+                                        <form class="search" action="#">
+                                            <div class="search-bar search-bar-container needs-pie">
+                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
+                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
+                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
+                                                    </div>
+                                                    <div class="search-filter-content" id="sf-content">
+                                                        <ul>
+                                                            <li>
+                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
+                                                                </button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="search-submit-wrapper" dir="ltr">
+                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="main-section">
+                        <div class="row outer-row sidenav-layout">
+                            <nav class="sidenav-wrapper">
+                                <div class="sidenav-container">
+                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="body-container">
+                                <div data-mc-content-body="True">
+                                    <div role="main" id="mc-main-content">
+                                        <h1><a name="kanchor163"></a>Direct Standardization</h1>
+                                        <p>&#160;</p>
+                                        <p>Menu location: <b>Analysis_Rates_Direct Standardization</b>.</p>
+                                        <p>&#160;</p>
+                                        <p>This function calculates directly standardized rates (DSR) with approximate confidence intervals.</p>
+                                        <p>&#160;</p>
+                                        <p>DSR is simply a weighted mean event rate for a study population, using the group/stratum sizes of a reference population as the weighting scheme. Standardized or adjusted rates are summary index measures for the purpose of comparison only; their magnitude has no intrinsic value.</p>
+                                        <p>&#160;</p>
+                                        <p>The choice of a reference or standard population is important; it must relate to the population under study naturally.</p>
+                                        <p>&#160;</p>
+                                        <p>Please note that standardization is not a substitute for individual comparisons of stratum-specific rates.</p>
+                                        <p>&#160;</p>
+                                        <p>This method is unreliable with small numbers; there should be at least 25 events observed overall and at least one event in each stratum. If the number of events is small, consider aggregating strata.</p>
+                                        <p>&#160;</p>
+                                        <p>Direct standardization is not appropriate if there is not a consistent relationship between stratum-specific rates in different populations being compared.</p>
+                                        <p>&#160;</p>
+                                        <p>There are a lot of pitfalls in using directly standardized rates; if you have any doubts then please consult with an Epidemiologist and/or Statistician.</p>
+                                        <p>&#160;</p>
+                                        <p>Data input</p>
+                                        <ul>
+                                            <li>Number of events for each group from the index/study population</li>
+                                            <li>Person-time for each group from the index/study population (e.g. size of each group if just one year and all subjects were followed up)</li>
+                                            <li>Group sizes or weights from a reference/standard population</li>
+                                            <li>Group/stratum labels, e.g. age bands</li>
+                                        </ul>
+                                        <p>&#160;</p>
+                                        <p>Note that an alternative binomial method is provided for situations where your observed rates are too large for the Poisson distribution to be used, namely one or more rates r are not so small that 1-r can be considered almost equal to 1.</p>
+                                        <p>If a stratum has more events than person-time, i.e. a rate above 1 per unit of person-time, then only the results of the Poisson method are given. The binomial method cannot be used for such a rate; it requires person-time that has not been scaled (for example person-years, not thousands of person-years).</p>
+                                        <p>&#160;</p>
+                                        <p><u>Technical validation</u>
+                                        </p>
+                                        <p>Approximate confidence intervals for the DSR are calculated firstly by Chiang's normal approximation to Poisson rate sums (<a href="../references/reference_list.htm#ref-chiang-1961">Chiang, 1961</a>; <a href="../references/reference_list.htm#ref-keyfitz-1966">Keyfitz, 1966</a>; <a href="../references/reference_list.htm#ref-breslow-1987">Breslow and Day, 1987</a>; <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>) and secondly by an improved approximation adjusted for the total number of observed events (<a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al., 1991</a>).</p>
+                                        <p>&#160;</p>
+                                        <p>
+                                            <img src="../generatedimages/equations/equation181.svg" alt="" class="mcReset" />
+                                        </p>
+                                        <p>- where v is the approximate (Chiang) variance, w<sub>i</sub> is the reference weight for the ith stratum, r<sub>i</sub>  is the observed study rate for the ith stratum, N<sub>i</sub> is the reference population size for the ith stratum, y<sub>i</sub> is the number of events observed in the ith stratum of the study population, n<sub>i</sub> is the person-time for the ith stratum of the study population, z<sub>α/2</sub> is the 100(1 - α/2) centile of the standard normal distribution, Y is the total number of events observed, Y<sub>l</sub> and Y<sub>u</sub> are the exact lower and upper confidence limits for the Poisson count Y and ICI <sub>l to u</sub> is the improved confidence interval due to <a href="../references/reference_list.htm#ref-dobson-1991">Dobson et al</a>. For large rates, the binomial variance is used, where r(1-r) is substituted for r in the variance formula above.</p>
+                                        <p>&#160;</p>
+                                        <p><u>Example</u>
+                                        </p>
+                                        <p>From <a href="../references/reference_list.htm#ref-curtin-1995">Curtin and Klein (1995)</a>:</p>
+                                        <p>Test workbook (Rates worksheet: Age Bands, Index Events, Index Group Sizes, Reference Sizes).</p>
+                                        <p>&#160;</p>
+                                        <p>The following data relate to stroke deaths for males from a hypothetical medium-size US State. The reference population is the 1940 US Standard Million.</p>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;text-align: left;">Age group</td>
+                                                <td style="text-decoration: underline;text-align: right;">Deaths</td>
+                                                <td style="text-decoration: underline;text-align: right;">Person-Time (thousands)</td>
+                                                <td style="text-decoration: underline;text-align: right;">Reference Size/Weight</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">Under 1</td>
+                                                <td style="text-align: right;">1</td>
+                                                <td style="text-align: right;">38</td>
+                                                <td style="text-align: right;">15343</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">1-4</td>
+                                                <td style="text-align: right;">0</td>
+                                                <td style="text-align: right;">150</td>
+                                                <td style="text-align: right;">64718</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">5-14</td>
+                                                <td style="text-align: right;">1</td>
+                                                <td style="text-align: right;">322</td>
+                                                <td style="text-align: right;">170355</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">15-24</td>
+                                                <td style="text-align: right;">2</td>
+                                                <td style="text-align: right;">344</td>
+                                                <td style="text-align: right;">181677</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">25-34</td>
+                                                <td style="text-align: right;">8</td>
+                                                <td style="text-align: right;">443</td>
+                                                <td style="text-align: right;">162066</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">35-44</td>
+                                                <td style="text-align: right;">21</td>
+                                                <td style="text-align: right;">379</td>
+                                                <td style="text-align: right;">139237</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">45-54</td>
+                                                <td style="text-align: right;">46</td>
+                                                <td style="text-align: right;">256</td>
+                                                <td style="text-align: right;">117811</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">55-64</td>
+                                                <td style="text-align: right;">103</td>
+                                                <td style="text-align: right;">189</td>
+                                                <td style="text-align: right;">80294</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">65-74</td>
+                                                <td style="text-align: right;">254</td>
+                                                <td style="text-align: right;">136</td>
+                                                <td style="text-align: right;">48426</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">75-84</td>
+                                                <td style="text-align: right;">371</td>
+                                                <td style="text-align: right;">57</td>
+                                                <td style="text-align: right;">17303</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">85 and over</td>
+                                                <td style="text-align: right;">212</td>
+                                                <td style="text-align: right;">12</td>
+                                                <td style="text-align: right;">2770</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>To analyse these data in StatsDirect you must select direct standardization from the rates section of the analysis menu. Note that annual mortality rates are often expressed as rates per 100,000 population or units of person time (i.e. 100,000 person years); so a multiplier of 100,000 should be selected for the scaling of rates in the output - you are prompted to provide this.</p>
+                                        <p>&#160;</p>
+                                        <p>For this example:</p>
+                                        <p>&#160;</p>
+                                        <p><u>Directly Standardized Rates</u>
+                                        </p>
+                                        <p>&#160;</p>
+                                        <p>Rates are expressed per 100000 units of person time:</p>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;text-align: left;">Index events</td>
+                                                <td style="text-decoration: underline;text-align: left;">Index PT</td>
+                                                <td style="text-decoration: underline;text-align: left;">Index rate</td>
+                                                <td style="text-decoration: underline;text-align: left;">Reference size</td>
+                                                <td style="text-decoration: underline;text-align: left;">Weight</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">1</td>
+                                                <td style="text-align: left;">38000</td>
+                                                <td style="text-align: left;">2.631579</td>
+                                                <td style="text-align: left;">15343</td>
+                                                <td style="text-align: left;">0.015343</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">0</td>
+                                                <td style="text-align: left;">150000</td>
+                                                <td style="text-align: left;">0</td>
+                                                <td style="text-align: left;">64718</td>
+                                                <td style="text-align: left;">0.064718</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">1</td>
+                                                <td style="text-align: left;">322000</td>
+                                                <td style="text-align: left;">0.310559</td>
+                                                <td style="text-align: left;">170355</td>
+                                                <td style="text-align: left;">0.170355</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">2</td>
+                                                <td style="text-align: left;">344000</td>
+                                                <td style="text-align: left;">0.581395</td>
+                                                <td style="text-align: left;">181677</td>
+                                                <td style="text-align: left;">0.181677</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">8</td>
+                                                <td style="text-align: left;">443000</td>
+                                                <td style="text-align: left;">1.805869</td>
+                                                <td style="text-align: left;">162066</td>
+                                                <td style="text-align: left;">0.162066</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">21</td>
+                                                <td style="text-align: left;">379000</td>
+                                                <td style="text-align: left;">5.540897</td>
+                                                <td style="text-align: left;">139237</td>
+                                                <td style="text-align: left;">0.139237</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">46</td>
+                                                <td style="text-align: left;">256000</td>
+                                                <td style="text-align: left;">17.96875</td>
+                                                <td style="text-align: left;">117811</td>
+                                                <td style="text-align: left;">0.117811</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">103</td>
+                                                <td style="text-align: left;">189000</td>
+                                                <td style="text-align: left;">54.497354</td>
+                                                <td style="text-align: left;">80294</td>
+                                                <td style="text-align: left;">0.080294</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">254</td>
+                                                <td style="text-align: left;">136000</td>
+                                                <td style="text-align: left;">186.764706</td>
+                                                <td style="text-align: left;">48426</td>
+                                                <td style="text-align: left;">0.048426</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">371</td>
+                                                <td style="text-align: left;">57000</td>
+                                                <td style="text-align: left;">650.877193</td>
+                                                <td style="text-align: left;">17303</td>
+                                                <td style="text-align: left;">0.017303</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left;">212</td>
+                                                <td style="text-align: left;">12000</td>
+                                                <td style="text-align: left;">1766.666667</td>
+                                                <td style="text-align: left;">2770</td>
+                                                <td style="text-align: left;">0.00277</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <table>
+                                            <col />
+                                            <col />
+                                            <col />
+                                            <tr>
+                                                <td style="text-decoration: underline;">Index rate</td>
+                                                <td style="text-decoration: underline;">Exact 95% confidence interval</td>
+                                                <td>&#160;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2.631579</td>
+                                                <td>0.066626 to 14.662219</td>
+                                                <td>Under 1 year</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0</td>
+                                                <td>0 to 2.459253</td>
+                                                <td>1-4 years</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.310559</td>
+                                                <td>0.007863 to 1.730324</td>
+                                                <td>5-14 years</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.581395</td>
+                                                <td>0.07041 to 2.1002</td>
+                                                <td>15-24 years</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.805869</td>
+                                                <td>0.779646 to 3.558282</td>
+                                                <td>25-34 years</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5.540897</td>
+                                                <td>3.429903 to 8.46985</td>
+                                                <td>35-44 years</td>
+                                            </tr>
+                                            <tr>
+                                                <td>17.96875</td>
+                                                <td>13.155383 to 23.967794</td>
+                                                <td>45-54 years</td>
+                                            </tr>
+                                            <tr>
+                                                <td>54.497354</td>
+                                                <td>44.482507 to 66.093892</td>
+                                                <td>55-64 years</td>
+                                            </tr>
+                                            <tr>
+                                                <td>186.764706</td>
+                                                <td>164.500721 to 211.201647</td>
+                                                <td>65-74 years</td>
+                                            </tr>
+                                            <tr>
+                                                <td>650.877193</td>
+                                                <td>586.323368 to 720.597325</td>
+                                                <td>75-84 years</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1766.666667</td>
+                                                <td>1536.8427 to 2021.164948</td>
+                                                <td>85 years and over</td>
+                                            </tr>
+                                        </table>
+                                        <p>&#160;</p>
+                                        <p>Total events = 1019</p>
+                                        <p>Adjusted events = 766.55342</p>
+                                        <p>Crude rate = 43.809114</p>
+                                        <p>Adjusted rate R = 32.955865</p>
+                                        <p>&#160;</p>
+                                        <p>Any rates (binomial model)</p>
+                                        <p>Approximate standard error of R = 1.050864</p>
+                                        <p>Approximate 95% confidence interval = 30.89621 to 35.01552</p>
+                                        <p>&#160;</p>
+                                        <p>Small rates (Poisson model)</p>
+                                        <p>Approximate standard error of R = 1.053213</p>
+                                        <p>Approximate 95% confidence interval = 30.891605 to 35.020125</p>
+                                        <p>Improved approximate (Dobson) 95% confidence interval = 30.923031 to 35.085201</p>
+                                        <p>&#160;</p>
+                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
+                                            <div class="MCDropDownBody dropDownBody">
+                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Direct standardization: the StatsDirect help example (Curtin and Klein 1995, stroke
 # deaths in males of a hypothetical US state, standardized to the 1940 US Standard
 # Million; the test workbook's Rates worksheet columns Age Bands, Index Events, Index
 # Group Sizes and Reference Sizes) in R
@@ -400,11 +489,31 @@ total_ci &lt;- poisson.test(total, conf.level = conf)$conf.int
 dobson &lt;- dsr + (total_ci - total) * sqrt(v_poisson / total)
 cat("Improved approximate (Dobson) 95% confidence interval =",
     six(dobson[1] * per), "to", six(dobson[2] * per), "\n")</pre>
+                                            </div>
+                                        </div>
+                                        <p>&#160;</p>
+                                        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+                                        </p>
+                                    </div>
+                                    <MadCap:pageFooter>
+                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
+                                    </MadCap:pageFooter>
+                                    <!-- Google tag (gtag.js) -->
+                                    <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
+                                    </script>
+                                    <script type="text/javascript">/* <![CDATA[ */
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GZZ7X1JX4D');
+        /* ]]> */</script>
+                                </div>
+                            </div>
+                        </div>
+                    </div><a data-close="true"></a>
+                </div>
             </div>
-        </details>
-        <p> </p>
-        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-        </p>
-    <footer class="help-shared-footer">
-            <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank" rel="noopener noreferrer">Download software here</a>.</p>
-        </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>
+        </div>
+    </body>
+</html>
