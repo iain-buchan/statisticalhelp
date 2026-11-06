@@ -11,11 +11,15 @@ function check(target,name,passed,detail){checks.push({target,name,passed:!!pass
  for(const target of ['Desktop','Public']){
   const folder=path.join(buildRoot,target),page=await context.newPage(),errors=[];
   page.on('pageerror',error=>errors.push(error.message));
-  await page.goto(pathToFileURL(path.join(folder,'index.html')).href,{waitUntil:'load'});
+  const entry=pathToFileURL(path.join(folder,'index.html')).href;
+  await page.goto(entry,{waitUntil:'load'});
   await page.waitForFunction(()=>window.StatsDirectHelp&&window.StatsDirectSearch);
   const index=await page.evaluate(()=>({count:StatsDirectSearch.documents.length,urls:StatsDirectSearch.documents.map(d=>d.url),about:StatsDirectHelp.search('About StatsDirect').some(d=>d.url==='menus/about.htm')}));
   check(target,'The generated reader indexes 403 unique topics and excludes the opt-out page',index.count===403&&new Set(index.urls).size===403&&!index.urls.includes('menus/about.htm')&&!index.about,{count:index.count});
-  await page.fill('#search','paired t test');await page.locator('#search').press('Enter');
+  const desktop=target==='Desktop';
+  check(target,'Only Public shows the website search form',await page.locator('#search-form').isVisible()===!desktop);
+  if(desktop)await page.goto(entry+'#'+new URLSearchParams({searchQuery:'paired t test'}));
+  else {await page.fill('#search','paired t test');await page.locator('#search').press('Enter');}
   await page.locator('#results a[data-link]').first().waitFor();
   const result=await page.locator('#results a[data-link]').first().evaluate(a=>({url:a.dataset.link,title:a.textContent}));
   check(target,'A normal search still finds the paired t-test topic',/paired.*t.test/i.test(result.title)&&index.urls.includes(result.url),result);

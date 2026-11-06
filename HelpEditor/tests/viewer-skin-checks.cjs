@@ -35,7 +35,7 @@ function buildFixtures(){
     for(const target of ['Desktop','Public']){
       const output=path.join(fixture,choice.name,target),skin=choice[target.toLowerCase()];
       run([cli,'build','--project',project,'--output',output,'--assets',path.join(root,'src/StatsDirectHelpEditor.App/Web'),'--target',target]);
-      builds.push({name:choice.name+'/'+target,output,skin,project,url:'/'+choice.name+'/'+target+'/'});
+      builds.push({name:choice.name+'/'+target,output,skin,project,url:'/'+choice.name+'/'+target+'/',desktop:target==='Desktop'});
     }
   }
 }
@@ -72,6 +72,21 @@ async function usableLayout(page){
 }
 async function logoLayout(page){
   return page.locator('header .help-logo').evaluate(el=>{const box=el.getBoundingClientRect(),header=el.closest('header').getBoundingClientRect(),style=getComputedStyle(el);return {naturalWidth:el.naturalWidth,naturalHeight:el.naturalHeight,width:box.width,height:box.height,left:box.left,right:box.right,top:box.top,bottom:box.bottom,headerLeft:header.left,headerRight:header.right,headerTop:header.top,headerBottom:header.bottom,visible:style.display!=='none'&&style.visibility!=='hidden'&&Number(style.opacity)>0,alt:el.alt};});
+}
+async function checkSiteControls(page,build,surface){
+  const logo=page.locator('header .help-logo'),search=page.locator('#search-form');
+  record(build.name+' '+surface+' shows website branding and search only on Public',
+    await logo.isVisible()===!build.desktop&&await search.isVisible()===!build.desktop);
+}
+async function searchFixture(page,build,entry){
+  if(build.desktop){
+    const search=new URLSearchParams({searchQuery:'quartzforecast'});
+    await page.goto(entry+'#'+search);
+  }else{
+    await page.locator('#search').fill('quartzforecast');
+    await page.locator('#search-form button').click();
+  }
+  await page.locator('#results a[data-link="nested/beta.htm"]').waitFor();
 }
 async function favicon(page){return page.locator('head link[rel~="icon"]').evaluate(el=>({href:el.getAttribute('href'),resolved:el.href}));}
 async function noDuplicateNavigation(page){return await page.locator('.help-topic-nav').count()===0||await page.locator('.help-topic-nav').evaluate(el=>getComputedStyle(el).display==='none');}
@@ -134,7 +149,8 @@ async function anchoredContentsChecks(page,build,label){
     const page=await context.newPage();page.on('pageerror',e=>errors.push(build.name+': '+e.message));
     await page.goto(origin+build.url);let frame=await fixedSkin(page,build.skin);
     record(build.name+' home title uses the source topic title',await page.title()==='Fixture');
-    await page.locator('header .help-logo').waitFor();await page.locator('header .help-logo').evaluate(el=>el.decode());
+    await checkSiteControls(page,build,'home');
+    await page.locator('header .help-logo').evaluate(el=>el.decode());
     const viewerIcon=await favicon(page),rootIcon=await favicon(frame);
     const iconResponse=await context.request.get(viewerIcon.resolved);
     record(build.name+' viewer and root topic use the local StatsDirect favicon',viewerIcon.href==='resources/images/sd3.ico'&&rootIcon.resolved===viewerIcon.resolved&&iconResponse.ok()&&crypto.createHash('sha256').update(await iconResponse.body()).digest('hex')===hash(path.join(build.output,'resources/images/sd3.ico')),{viewerIcon,rootIcon});
@@ -145,10 +161,15 @@ async function anchoredContentsChecks(page,build,label){
     record(build.name+' uses the intended article or iframe renderer',build.skin==='flare'?await page.locator('article#topic>#help-topic-body').count()===1&&await page.locator('iframe').count()===0:await page.locator('iframe#topic').count()===1);
     const colours=await page.evaluate(()=>({header:getComputedStyle(document.querySelector('header')).backgroundColor,headerText:getComputedStyle(document.querySelector('header')).color,nav:getComputedStyle(document.querySelector('aside')).backgroundColor,navText:getComputedStyle(document.querySelector('#contents a')).color}));
     const topicColours=await frame.evaluate(()=>({background:getComputedStyle(document.body).backgroundColor,text:getComputedStyle(document.getElementById('topic-text')).color,link:getComputedStyle(document.getElementById('next-topic')).color}));
-    record(build.name+' maintains at least 4.5:1 normal text/link contrast',contrast(colours.header,colours.headerText)>=4.5&&contrast(colours.nav,colours.navText)>=4.5&&contrast(topicColours.background,topicColours.text)>=4.5&&contrast(topicColours.background,topicColours.link)>=4.5,{colours,topicColours});
+    record(build.name+' maintains at least 4.5:1 normal text/link contrast',(build.desktop||contrast(colours.header,colours.headerText)>=4.5)&&contrast(colours.nav,colours.navText)>=4.5&&contrast(topicColours.background,topicColours.text)>=4.5&&contrast(topicColours.background,topicColours.link)>=4.5,{colours,topicColours});
     const branch=page.locator('#contents details').first(),summary=branch.locator('summary'),beforeExpansion=frame.url();
     await summary.focus();await page.keyboard.press('Space');
     record(build.name+' keyboard Space expands a section without navigating',await branch.evaluate(e=>e.open)&&frame.url()===beforeExpansion);
+    const parentLink=build.desktop?branch.locator(':scope > ul > li:first-child > a'):summary.locator('a');
+    record(build.name+' retains the branch overview link in its target-specific position',
+      await parentLink.getAttribute('data-link')==='nested/section.htm'&&
+      await parentLink.textContent()===(build.desktop?'Overview':'Nested topics')&&
+      (!build.desktop||await summary.locator('a').count()===0));
     await page.keyboard.press('Space');
     record(build.name+' keyboard Space closes the expanded section',!await branch.evaluate(e=>e.open)&&frame.url()===beforeExpansion);
     // A valid old preference and the former parent/topic protocol must have no
@@ -159,7 +180,8 @@ async function anchoredContentsChecks(page,build,label){
     record(build.name+' ignores saved visitor preferences and former appearance messages',await page.locator('html').getAttribute('data-help-skin')===build.skin&&await frame.locator('html').getAttribute('data-help-skin')===build.skin&&await page.evaluate(()=>localStorage.getItem('statsdirect-help-skin'))===other);
     const popupPromise=context.waitForEvent('page');await frame.locator('#new-tab-topic').click();const popup=await popupPromise;await popup.waitForLoadState();
     const popupFrame=await fixedSkin(popup,build.skin,'nested/beta.htm');
-    record(build.name+' direct topics open the complete built design in a new tab',await popup.locator('header .help-logo').isVisible()&&await popupFrame.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor)===palettes[build.skin]&&await noDuplicateNavigation(popupFrame));
+    await checkSiteControls(popup,build,'direct new-tab topic');
+    record(build.name+' direct topics open the complete built design in a new tab',await popupFrame.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor)===palettes[build.skin]&&await noDuplicateNavigation(popupFrame));
     record(build.name+' direct topic tab title follows its source topic',await popup.title()==='Beta');
     const popupIcon=await favicon(popup);
     record(build.name+' nested topic entries retain the shell and topic local favicon',popupIcon.href===(build.skin==='flare'?'../resources/images/sd3.ico':'resources/images/sd3.ico')&&popupIcon.resolved===viewerIcon.resolved&&(await favicon(popupFrame)).resolved===viewerIcon.resolved,popupIcon);await popup.close();
@@ -168,7 +190,7 @@ async function anchoredContentsChecks(page,build,label){
     const nestedIcon=await favicon(frame);
     record(build.name+' iframe topics at a nested path resolve the original favicon',nestedIcon.href==='../resources/images/sd3.ico'&&nestedIcon.resolved===viewerIcon.resolved,nestedIcon);
     await page.locator('#contents a[data-link="contents.htm"]').click();await currentFrame(page);
-    await page.locator('#search').fill('quartzforecast');await page.locator('#search-form button').click();await page.locator('#results a[data-link="nested/beta.htm"]').waitFor();
+    await searchFixture(page,build,origin+build.url+'index.html');
     record(build.name+' search tab title matches Flare',await page.title()==='Search');
     await page.locator('#results a[data-link="nested/beta.htm"]').click();frame=await fixedSkin(page,build.skin,'nested/beta.htm');
     record(build.name+' retains working contents and full-text search',await frame.locator('#topic-text').textContent()==='Quartzforecast second topic.');
@@ -180,10 +202,26 @@ async function anchoredContentsChecks(page,build,label){
     frame=await topicUrlChecks(page,build,'HTTP');
     frame=await anchoredContentsChecks(page,build,'HTTP');
     for(const width of [1280,390,320]){
-      await page.setViewportSize({width,height:width<600?844:900});const layout=await usableLayout(page),logo=await logoLayout(page);
-      const expectedHeader=build.skin==='flare'?(width<1280?111.666667:90):(width<=700?52:60);
+      await page.setViewportSize({width,height:width<600?844:900});const layout=await usableLayout(page);
+      const compactBrowse=build.desktop&&build.skin==='flare'&&width<1280;
+      const expectedHeader=build.desktop?(compactBrowse?32:0):build.skin==='flare'?(width<1280?111.666667:90):(width<=700?52:60);
       record(build.name+' has the intended '+width+'px desktop/mobile geometry',layout.scroll<=layout.width&&Math.abs(layout.headerHeight-expectedHeader)<.1&&layout.identityTop>=0&&layout.identityBottom<=layout.headerBottom&&Math.abs(layout.mainTop-layout.headerBottom)<1&&layout.frameWidth>=150&&layout.frameHeight>300,layout);
-      record(build.name+' keeps the original logo visible and proportional inside its '+width+'px title bar',logo.naturalWidth===228&&logo.naturalHeight===33&&logo.visible&&logo.alt==='StatsDirect StatisticalHelp'&&logo.width>0&&logo.height>0&&Math.abs(logo.width/logo.height-228/33)<0.01&&logo.left>=logo.headerLeft&&logo.right<=logo.headerRight&&logo.top>=logo.headerTop&&logo.bottom<=logo.headerBottom,logo);
+      if(build.desktop){
+        await checkSiteControls(page,build,width+'px');
+        const browse=page.getByRole('button',{name:'Browse topics'});
+        record(build.name+' uses the compact Browse topics button only at narrow Flare widths',await browse.isVisible()===compactBrowse);
+        if(compactBrowse){
+          const before=page.url();
+          await browse.click();
+          record(build.name+' compact Browse opens Contents in place',
+            await browse.getAttribute('aria-expanded')==='true'&&await page.locator('#contents').isVisible()&&page.url()===before);
+          await page.keyboard.press('Escape');
+          record(build.name+' Escape closes the compact Contents panel',await browse.getAttribute('aria-expanded')==='false');
+        }
+      }else{
+        const logo=await logoLayout(page);
+        record(build.name+' keeps the original logo visible and proportional inside its '+width+'px title bar',logo.naturalWidth===228&&logo.naturalHeight===33&&logo.visible&&logo.alt==='StatsDirect StatisticalHelp'&&logo.width>0&&logo.height>0&&Math.abs(logo.width/logo.height-228/33)<0.01&&logo.left>=logo.headerLeft&&logo.right<=logo.headerRight&&logo.top>=logo.headerTop&&logo.bottom<=logo.headerBottom,logo);
+      }
     }
     await page.emulateMedia({media:'print'});
     record(build.name+' prints without navigation or coloured page backgrounds',await page.locator('header').evaluate(el=>getComputedStyle(el).display==='none')&&await page.locator('aside').evaluate(el=>getComputedStyle(el).display==='none')&&await frame.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor)==='rgb(255, 255, 255)');
@@ -192,13 +230,15 @@ async function anchoredContentsChecks(page,build,label){
     trackNetwork(offlineContext,origin,build.name+' file://');
     await offline.goto(pathToFileURL(path.join(build.output,'contents.htm')).href);
     let directFrame=await fixedSkin(offline,build.skin);
-    record(build.name+' direct file:// topics retain the complete design and navigation',await offline.locator('header .help-logo').isVisible()&&await directFrame.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor)===palettes[build.skin]&&await noDuplicateNavigation(directFrame));
+    await checkSiteControls(offline,build,'direct file:// topic');
+    record(build.name+' direct file:// topics retain the complete design and navigation',await directFrame.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor)===palettes[build.skin]&&await noDuplicateNavigation(directFrame));
     record(build.name+' direct root topics use an existing local favicon file',(await favicon(offline)).resolved===pathToFileURL(path.join(build.output,'resources/images/sd3.ico')).href);
-    await offline.goto(pathToFileURL(path.join(build.output,'index.html')).href);await currentFrame(offline);
+    const fileEntry=pathToFileURL(path.join(build.output,'index.html')).href;
+    await offline.goto(fileEntry);await currentFrame(offline);
     await offline.locator('header .help-logo').evaluate(el=>el.decode());
     const offlineLogo=await logoLayout(offline),offlineIcon=await favicon(offline);
     record(build.name+' loads its original logo and favicon from local files',offlineLogo.naturalWidth===228&&offlineLogo.naturalHeight===33&&offlineIcon.resolved===pathToFileURL(path.join(build.output,'resources/images/sd3.ico')).href);
-    await offline.locator('#search').fill('quartzforecast');await offline.locator('#search-form button').click();await offline.locator('#results a[data-link="nested/beta.htm"]').waitFor();await offline.locator('#results a[data-link="nested/beta.htm"]').click();frame=await currentFrame(offline,'nested/beta.htm');
+    await searchFixture(offline,build,fileEntry);await offline.locator('#results a[data-link="nested/beta.htm"]').click();frame=await currentFrame(offline,'nested/beta.htm');
     record(build.name+' works offline with file:// search and iframe navigation',await noReaderControl(offline)&&await frame.locator('html').getAttribute('data-help-skin')===build.skin&&await frame.locator('#topic-text').textContent()==='Quartzforecast second topic.');
     record(build.name+' nested file:// topics keep the existing local favicon file',(await favicon(frame)).resolved===pathToFileURL(path.join(build.output,'resources/images/sd3.ico')).href);
     await offline.goBack();await offline.locator('#results a[data-link="nested/beta.htm"]').waitFor();
