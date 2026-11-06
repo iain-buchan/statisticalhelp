@@ -542,9 +542,11 @@ internal static class Program
             {
                 try
                 {
-                    string found = await frame.ExecuteScriptAsync("Boolean(document.getElementById(" + JsonSerializer.Serialize(id) + "))");
+                    string? found = await ReadFrameAsync(frame, "Boolean(document.getElementById(" + JsonSerializer.Serialize(id) + "))", until);
                     if (found != "true") continue;
-                    await frame.ExecuteScriptAsync("setTimeout(()=>document.getElementById(" + JsonSerializer.Serialize(id) + ").click(),0);true");
+                    // Once dispatched, a click cannot be safely retried on timeout.
+                    await frame.ExecuteScriptAsync("setTimeout(()=>document.getElementById(" + JsonSerializer.Serialize(id) + ").click(),0);true")
+                        .WaitAsync(TimeSpan.FromSeconds(2));
                     return;
                 }
                 catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException) { /* An older preview frame has been destroyed. */ }
