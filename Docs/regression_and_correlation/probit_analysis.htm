@@ -1,330 +1,233 @@
-<!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Regression and correlation" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta charset="utf-8" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Probit Analysis (Dose Response Curves, ED50 etc.) - StatsDirect</title>
-        <link rel="shortcut icon" href="../resources/images/sd3.ico" />
-        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
-        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
-        </script>
-        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
-        </script>
-    </head>
-    <body>
-        <div class="foundation-wrap off-canvas-wrapper">
-            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
-                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
-                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
-                    </ul>
-                </aside>
-                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
-                    <div data-sticky-container="" class="title-bar-container">
-                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
-                            <div class="middle title-bar-section outer-row clearfix">
-                                <div class="menu-icon-container relative clearfix">
-                                    <div class="central-account-wrapper">
-                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
-                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
-                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="title-bar-layout outer-row">
-                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
-                                </div>
-                                <div class="navigation-wrapper nocontent">
-                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
-                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="central-account-wrapper">
-                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
-                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
-                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav-search-wrapper">
-                                    <div class="nav-search row">
-                                        <form class="search" action="#">
-                                            <div class="search-bar search-bar-container needs-pie">
-                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
-                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
-                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
-                                                    </div>
-                                                    <div class="search-filter-content" id="sf-content">
-                                                        <ul>
-                                                            <li>
-                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
-                                                                </button>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="search-submit-wrapper" dir="ltr">
-                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                    <div class="main-section">
-                        <div class="row outer-row sidenav-layout">
-                            <nav class="sidenav-wrapper">
-                                <div class="sidenav-container">
-                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
-                                    </ul>
-                                </div>
-                            </nav>
-                            <div class="body-container">
-                                <div data-mc-content-body="True">
-                                    <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor44"></a>
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="regression_and_correlation/probit_analysis.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Probit Analysis (Dose Response Curves, ED50 etc.) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
             Probit Analysis</h1>
-                                        <p>&#160;</p>
-                                        <p>Menu location: <b>Analysis_Regression and</b><b> Correlation_Probit Analysis</b>.</p>
-                                        <p>&#160;</p>
-                                        <p>This function provides probit analysis for fitting probit and logit sigmoid dose/stimulus response curves and for calculating confidence intervals for dose-response quantiles such as ED50.</p>
-                                        <p>&#160;</p>
-                                        <p>When biological responses are plotted against their causal stimuli (or logarithms of them) they often form a sigmoid curve. Sigmoid relationships can be linearized by <a href="../data_preparation/transformations.htm">transformations</a> such as logit, probit and angular. For most systems the probit (normal sigmoid) and logit (logistic sigmoid) give the most closely fitting result. Logistic methods are useful in Epidemiology because odds ratios can be determined easily from differences between fitted logits (see <a href="logistic.htm">logistic regression</a>). In biological assay work, however, probit analysis is preferred (<a href="../references/reference_list.htm#ref-finney-1971">Finney, 1971</a>, <a href="../references/reference_list.htm#ref-finney-1978">1978</a>). Curves produced by these methods are very similar, with maximum variation occurring within 10% of the upper and lower asymptotes.</p>
-                                        <p>&#160;</p>
-                                        <p><u>Probit</u>
-                                        </p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation198.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>- where Y' is the probit transformed value (5 used to be added to avoid negative values in hand calculation), p is the proportion (p = responders/total number) and inverse Φ(p) is the 100*p% quantile from the <a href="../distributions/normal.htm">standard normal distribution</a>.</p>
-                                        <p>&#160;</p>
-                                        <p><u>Logit</u>
-                                        </p>
-                                        <p>Odds = p/(1-p)</p>
-                                        <p>[p = proportional response, i.e. r out of n responded so p = r/n]</p>
-                                        <p>Logit = log(p/(1-p)) / 2, half the log odds: Finney's (1971) definition, which puts the logit on nearly the same scale as the probit. The constant and slope of the logit model are reported on this scale, so they are half of those for the log odds itself.</p>
-                                        <p>&#160;</p>
-                                        <p><u>Data preparation</u>
-                                        </p>
-                                        <p>Your data are entered as dose levels, number of subjects tested at each dose level and number responding at each dose level. At the time of running the analysis you may enter a control result for the number of subjects responding in the absence of dose/stimulus; this provides a global adjustment for natural mortality/responsiveness. You may also specify automatic log transformation of the dose levels at run time if appropriate (this should be supported by good evidence of a log-probit relationship for your type of study).</p>
-                                        <p>&#160;</p>
-                                        <p><u>Model analysis and critical quantiles</u>
-                                        </p>
-                                        <p>The fitted model is assessed by statistics for heterogeneity which follow a chi-square distribution. If the heterogeneity statistics are significant then your observed values deviate from the fitted curve too much for reliable inference to be made (<a href="../references/reference_list.htm#ref-finney-1971">Finney, 1971</a>, <a href="../references/reference_list.htm#ref-finney-1978">1978</a>).</p>
-                                        <p>&#160;</p>
-                                        <p>StatsDirect gives you the effective/lethal levels of dose/stimulus with confidence intervals at the quantiles you specify, e.g. ED50/LD50.</p>
-                                        <p>&#160;</p>
-                                        <p><u>Technical validation</u>
-                                        </p>
-                                        <p>The curve is fitted by maximum likelihood estimation, using Newton-Raphson iteration. A dummy variable is used to factor in the background/natural response rate if the you specify a response in controls.</p>
-                                        <p>&#160;</p>
-                                        <p><u>Further analysis and cautions</u>
-                                        </p>
-                                        <p>For more complex probit analysis, such as the calculation of relative potencies from several related dose response curves, consider non-linear optimisation software or specialist dose-response analysis software such as Bliss. The latter is a FORTRAN routine written by David Finney and Ian Craigie, it is available from Edinburgh University Computing Centre. MLP, <a href="https://vsni.co.uk/software/genstat/" target="_blank">Genstat</a> or <a href="http://cran.r-project.org/" target="_blank">R</a> can be used for more general non-linear model fitting with the ability to constrain curves to "parallelism". Expert statistical guidance should be sought before attempting this sort of work.</p>
-                                        <p>&#160;</p>
-                                        <p>CAUTION 1: Please do not think of probit analysis as a "cure all" for dose response curves. Many log dose - response relationships are clearly not Gaussian sigmoids. Other well described sigmoid relationships include angular, Wilson-Worcester and Cauchy-Urban. There may be no "off the shelf" regression model suited to your study. Exploratory <a href="nonlinear.htm">non-linear modelling</a> should only be carried out by an expert Statistician.</p>
-                                        <p>&#160;</p>
-                                        <p>CAUTION 2: Standard probit analysis is designed to handle only quantal responses with binomial error distributions. Quantal data, such as the number of subjects responding vs. total number of subjects tested, usually have binomial error distributions. You should not use continuous data, such as percent maximal response, with probit analysis as these data are likely to require regression methods that assume a different error distribution. Most researchers should seek expert statistical help before pursuing this type of analysis (see <a href="nonlinear.htm">non-linear models</a>).</p>
-                                        <p>&#160;</p>
-                                        <p><u>Example</u>
-                                        </p>
-                                        <p>From <a href="../references/reference_list.htm#ref-finney-1971">Finney (1971, p. 98)</a>.</p>
-                                        <p>Test workbook (Regression worksheet: Age, Girls, + Menses).</p>
-                                        <p>&#160;</p>
-                                        <p>The following data represent a study of the age at menarche (first menstruation) of 3918 Warsaw girls. For each age group you are given mean age, total number of girls and the number of girls who had reached menarche.</p>
-                                        <p>&#160;</p>
-                                        <table cellspacing="0" style="caption-side: top;">
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <tr>
-                                                <td style="text-decoration: underline;text-align: right;">Age</td>
-                                                <td style="text-decoration: underline;text-align: right;">Girls</td>
-                                                <td style="text-decoration: underline;text-align: right;">+ Menses</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">9.21</td>
-                                                <td style="text-align: right;">376</td>
-                                                <td style="text-align: right;">0</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">10.21</td>
-                                                <td style="text-align: right;">200</td>
-                                                <td style="text-align: right;">0</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">10.58</td>
-                                                <td style="text-align: right;">93</td>
-                                                <td style="text-align: right;">0</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">10.83</td>
-                                                <td style="text-align: right;">120</td>
-                                                <td style="text-align: right;">2</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">11.08</td>
-                                                <td style="text-align: right;">90</td>
-                                                <td style="text-align: right;">2</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">11.33</td>
-                                                <td style="text-align: right;">88</td>
-                                                <td style="text-align: right;">5</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">11.58</td>
-                                                <td style="text-align: right;">105</td>
-                                                <td style="text-align: right;">10</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">11.83</td>
-                                                <td style="text-align: right;">111</td>
-                                                <td style="text-align: right;">17</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">12.08</td>
-                                                <td style="text-align: right;">100</td>
-                                                <td style="text-align: right;">16</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">12.33</td>
-                                                <td style="text-align: right;">93</td>
-                                                <td style="text-align: right;">29</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">12.58</td>
-                                                <td style="text-align: right;">100</td>
-                                                <td style="text-align: right;">39</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">12.83</td>
-                                                <td style="text-align: right;">108</td>
-                                                <td style="text-align: right;">51</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">13.08</td>
-                                                <td style="text-align: right;">99</td>
-                                                <td style="text-align: right;">47</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">13.33</td>
-                                                <td style="text-align: right;">106</td>
-                                                <td style="text-align: right;">67</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">13.58</td>
-                                                <td style="text-align: right;">105</td>
-                                                <td style="text-align: right;">81</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">13.83</td>
-                                                <td style="text-align: right;">117</td>
-                                                <td style="text-align: right;">88</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">14.08</td>
-                                                <td style="text-align: right;">98</td>
-                                                <td style="text-align: right;">79</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">14.33</td>
-                                                <td style="text-align: right;">97</td>
-                                                <td style="text-align: right;">90</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">14.58</td>
-                                                <td style="text-align: right;">120</td>
-                                                <td style="text-align: right;">113</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">14.83</td>
-                                                <td style="text-align: right;">102</td>
-                                                <td style="text-align: right;">95</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">15.08</td>
-                                                <td style="text-align: right;">122</td>
-                                                <td style="text-align: right;">117</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">15.33</td>
-                                                <td style="text-align: right;">111</td>
-                                                <td style="text-align: right;">107</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">15.58</td>
-                                                <td style="text-align: right;">94</td>
-                                                <td style="text-align: right;">92</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">15.83</td>
-                                                <td style="text-align: right;">114</td>
-                                                <td style="text-align: right;">112</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">17.58</td>
-                                                <td style="text-align: right;">1049</td>
-                                                <td style="text-align: right;">1049</td>
-                                            </tr>
-                                        </table>
-                                        <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect you must first prepare them in three workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Logit from the Probit analysis section of the Regression and Correlation section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Age" when you are prompted for dose levels, select "Girls" when you are prompted for subjects at each level and select "Menses" when prompted for responders at each level. Make sure that the "Calc log10" option is not checked when prompted, this disables base 10 logarithmic transformation of the "dose" variable (mean ages in this example). Enter number of controls as 0 when prompted and also enter 0 when you are asked about an additional quantile.</p>
-                                        <p>&#160;</p>
-                                        <p>For this example:</p>
-                                        <p>&#160;</p>
-                                        <p>Probit analysis - logit sigmoid curve</p>
-                                        <p>constant = -10.613197</p>
-                                        <p>slope = 0.815984</p>
-                                        <p>&#160;</p>
-                                        <p>Median * Dose = 13.006622</p>
-                                        <p>Confidence interval (No Heterogeneity) = 12.930535 to 13.082483</p>
-                                        <p>&#160;</p>
-                                        <p>* Dose for centile 90 = 14.352986</p>
-                                        <p>Confidence interval (No Heterogeneity) = 14.238636 to 14.480677</p>
-                                        <p>&#160;</p>
-                                        <p>Chi² (heterogeneity of deviations from model) = 21.869854, (23 df), P = .5281</p>
-                                        <p>&#160;</p>
-                                        <p>t for slope = 27.682451 (23 df) P &lt; .0001</p>
-                                        <p>&#160;</p>
-                                        <p>
-                                            <img src="../resources/images/probitplot.svg" width="566" height="400" border="0" data-mc-conditions="Primary.WEBHELP" />
-                                        </p>
-                                        <p>Having looked at a plot of this model and accepted that the model is reasonable, we conclude with 95% confidence that the true population value for median age at menarche in Warsaw lay between 12.93 and 13.08 years when this study was carried out.</p>
-                                        <p>&#160;</p>
-                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
-                                            <div class="MCDropDownBody dropDownBody">
-                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Probit analysis, logit model: the StatsDirect help example (Finney 1971, age at
+        <p> </p>
+        <p>Menu location: <b>Analysis_Regression and</b><b> Correlation_Probit Analysis</b>.</p>
+        <p> </p>
+        <p>This function provides probit analysis for fitting probit and logit sigmoid dose/stimulus response curves and for calculating confidence intervals for dose-response quantiles such as ED50.</p>
+        <p> </p>
+        <p>When biological responses are plotted against their causal stimuli (or logarithms of them) they often form a sigmoid curve. Sigmoid relationships can be linearized by <a href="../data_preparation/transformations.htm">transformations</a> such as logit, probit and angular. For most systems the probit (normal sigmoid) and logit (logistic sigmoid) give the most closely fitting result. Logistic methods are useful in Epidemiology because odds ratios can be determined easily from differences between fitted logits (see <a href="logistic.htm">logistic regression</a>). In biological assay work, however, probit analysis is preferred (<a href="../references/reference_list.htm#ref-finney-1971">Finney, 1971</a>, <a href="../references/reference_list.htm#ref-finney-1978">1978</a>). Curves produced by these methods are very similar, with maximum variation occurring within 10% of the upper and lower asymptotes.</p>
+        <p> </p>
+        <p><u>Probit</u>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="aac723b6c79c69f93ca2d3a0e3344b4bd04ff13c98ee0f0c992e04ee0536209b"><span class="help-equation-accessible help-equation-live">$\displaystyle Y'=\Phi^{-1}(p)$</span><img src="../resources/help-editor-runtime/equation-artwork/37c89283a1700038a1af159ce6a3f3715aca0d38ff6551ccb623e26250040747.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where Y' is the probit transformed value (5 used to be added to avoid negative values in hand calculation), p is the proportion (p = responders/total number) and inverse Φ(p) is the 100*p% quantile from the <a href="../distributions/normal.htm">standard normal distribution</a>.</p>
+        <p> </p>
+        <p><u>Logit</u>
+        </p>
+        <p>Odds = p/(1-p)</p>
+        <p>[p = proportional response, i.e. r out of n responded so p = r/n]</p>
+        <p>Logit = log(p/(1-p)) / 2, half the log odds: Finney's (1971) definition, which puts the logit on nearly the same scale as the probit. The constant and slope of the logit model are reported on this scale, so they are half of those for the log odds itself.</p>
+        <p> </p>
+        <p><u>Data preparation</u>
+        </p>
+        <p>Your data are entered as dose levels, number of subjects tested at each dose level and number responding at each dose level. At the time of running the analysis you may enter a control result for the number of subjects responding in the absence of dose/stimulus; this provides a global adjustment for natural mortality/responsiveness. You may also specify automatic log transformation of the dose levels at run time if appropriate (this should be supported by good evidence of a log-probit relationship for your type of study).</p>
+        <p> </p>
+        <p><u>Model analysis and critical quantiles</u>
+        </p>
+        <p>The fitted model is assessed by statistics for heterogeneity which follow a chi-square distribution. If the heterogeneity statistics are significant then your observed values deviate from the fitted curve too much for reliable inference to be made (<a href="../references/reference_list.htm#ref-finney-1971">Finney, 1971</a>, <a href="../references/reference_list.htm#ref-finney-1978">1978</a>).</p>
+        <p> </p>
+        <p>StatsDirect gives you the effective/lethal levels of dose/stimulus with confidence intervals at the quantiles you specify, e.g. ED50/LD50.</p>
+        <p> </p>
+        <p><u>Technical validation</u>
+        </p>
+        <p>The curve is fitted by maximum likelihood estimation, using Newton-Raphson iteration. A dummy variable is used to factor in the background/natural response rate if the you specify a response in controls.</p>
+        <p> </p>
+        <p><u>Further analysis and cautions</u>
+        </p>
+        <p>For more complex probit analysis, such as the calculation of relative potencies from several related dose response curves, consider non-linear optimisation software or specialist dose-response analysis software such as Bliss. The latter is a FORTRAN routine written by David Finney and Ian Craigie, it is available from Edinburgh University Computing Centre. MLP, <a href="https://vsni.co.uk/software/genstat/" target="_blank" rel="noopener noreferrer">Genstat</a> or <a href="http://cran.r-project.org/" target="_blank" rel="noopener noreferrer">R</a> can be used for more general non-linear model fitting with the ability to constrain curves to "parallelism". Expert statistical guidance should be sought before attempting this sort of work.</p>
+        <p> </p>
+        <p>CAUTION 1: Please do not think of probit analysis as a "cure all" for dose response curves. Many log dose - response relationships are clearly not Gaussian sigmoids. Other well described sigmoid relationships include angular, Wilson-Worcester and Cauchy-Urban. There may be no "off the shelf" regression model suited to your study. Exploratory <a href="nonlinear.htm">non-linear modelling</a> should only be carried out by an expert Statistician.</p>
+        <p> </p>
+        <p>CAUTION 2: Standard probit analysis is designed to handle only quantal responses with binomial error distributions. Quantal data, such as the number of subjects responding vs. total number of subjects tested, usually have binomial error distributions. You should not use continuous data, such as percent maximal response, with probit analysis as these data are likely to require regression methods that assume a different error distribution. Most researchers should seek expert statistical help before pursuing this type of analysis (see <a href="nonlinear.htm">non-linear models</a>).</p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-finney-1971">Finney (1971, p. 98)</a>.</p>
+        <p>Test workbook (Regression worksheet: Age, Girls, + Menses).</p>
+        <p> </p>
+        <p>The following data represent a study of the age at menarche (first menstruation) of 3918 Warsaw girls. For each age group you are given mean age, total number of girls and the number of girls who had reached menarche.</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: right;">Age</td>
+                <td style="text-decoration: underline;text-align: right;">Girls</td>
+                <td style="text-decoration: underline;text-align: right;">+ Menses</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">9.21</td>
+                <td style="text-align: right;">376</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10.21</td>
+                <td style="text-align: right;">200</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10.58</td>
+                <td style="text-align: right;">93</td>
+                <td style="text-align: right;">0</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">10.83</td>
+                <td style="text-align: right;">120</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.08</td>
+                <td style="text-align: right;">90</td>
+                <td style="text-align: right;">2</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.33</td>
+                <td style="text-align: right;">88</td>
+                <td style="text-align: right;">5</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.58</td>
+                <td style="text-align: right;">105</td>
+                <td style="text-align: right;">10</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">11.83</td>
+                <td style="text-align: right;">111</td>
+                <td style="text-align: right;">17</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.08</td>
+                <td style="text-align: right;">100</td>
+                <td style="text-align: right;">16</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.33</td>
+                <td style="text-align: right;">93</td>
+                <td style="text-align: right;">29</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.58</td>
+                <td style="text-align: right;">100</td>
+                <td style="text-align: right;">39</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">12.83</td>
+                <td style="text-align: right;">108</td>
+                <td style="text-align: right;">51</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13.08</td>
+                <td style="text-align: right;">99</td>
+                <td style="text-align: right;">47</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13.33</td>
+                <td style="text-align: right;">106</td>
+                <td style="text-align: right;">67</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13.58</td>
+                <td style="text-align: right;">105</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">13.83</td>
+                <td style="text-align: right;">117</td>
+                <td style="text-align: right;">88</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14.08</td>
+                <td style="text-align: right;">98</td>
+                <td style="text-align: right;">79</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14.33</td>
+                <td style="text-align: right;">97</td>
+                <td style="text-align: right;">90</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14.58</td>
+                <td style="text-align: right;">120</td>
+                <td style="text-align: right;">113</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">14.83</td>
+                <td style="text-align: right;">102</td>
+                <td style="text-align: right;">95</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15.08</td>
+                <td style="text-align: right;">122</td>
+                <td style="text-align: right;">117</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15.33</td>
+                <td style="text-align: right;">111</td>
+                <td style="text-align: right;">107</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15.58</td>
+                <td style="text-align: right;">94</td>
+                <td style="text-align: right;">92</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">15.83</td>
+                <td style="text-align: right;">114</td>
+                <td style="text-align: right;">112</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">17.58</td>
+                <td style="text-align: right;">1049</td>
+                <td style="text-align: right;">1049</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect you must first prepare them in three workbook columns appropriately labelled. Alternatively, open the test workbook using the file open function of the file menu. Then select Logit from the Probit analysis section of the Regression and Correlation section of the analysis menu. <a href="../workbook/selecting_data.htm">Select</a> the column marked "Age" when you are prompted for dose levels, select "Girls" when you are prompted for subjects at each level and select "Menses" when prompted for responders at each level. Make sure that the "Calc log10" option is not checked when prompted, this disables base 10 logarithmic transformation of the "dose" variable (mean ages in this example). Enter number of controls as 0 when prompted and also enter 0 when you are asked about an additional quantile.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p>Probit analysis - logit sigmoid curve</p>
+        <p>constant = -10.613197</p>
+        <p>slope = 0.815984</p>
+        <p> </p>
+        <p>Median * Dose = 13.006622</p>
+        <p>Confidence interval (No Heterogeneity) = 12.930535 to 13.082483</p>
+        <p> </p>
+        <p>* Dose for centile 90 = 14.352986</p>
+        <p>Confidence interval (No Heterogeneity) = 14.238636 to 14.480677</p>
+        <p> </p>
+        <p>Chi² (heterogeneity of deviations from model) = 21.869854, (23 df), P = .5281</p>
+        <p> </p>
+        <p>t for slope = 27.682451 (23 df) P &lt; .0001</p>
+        <p> </p>
+        <p>
+            <img src="../resources/images/probitplot.svg" width="566" height="400" border="0" />
+        </p>
+        <p>Having looked at a plot of this model and accepted that the model is reasonable, we conclude with 95% confidence that the true population value for median age at menarche in Warsaw lay between 12.93 and 13.08 years when this study was carried out.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Probit analysis, logit model: the StatsDirect help example (Finney 1971, age at
 # menarche of 3918 Warsaw girls) in R
 age &lt;- c(9.21, 10.21, 10.58, 10.83, 11.08, 11.33, 11.58, 11.83, 12.08, 12.33, 12.58,
          12.83, 13.08, 13.33, 13.58, 13.83, 14.08, 14.33, 14.58, 14.83, 15.08, 15.33,
@@ -385,35 +288,15 @@ cat("Chi2 (heterogeneity of deviations from model) =", six(chi),
 t_slope &lt;- b / sqrt(v[2, 2])
 cat("t for slope =", six(t_slope), paste0("(", fit$df.residual, " df)"),
     pv(2 * pt(-abs(t_slope), fit$df.residual)), "\n")</pre>
-                                            </div>
-                                        </div>
-                                        <p>&#160;</p>
-                                        <p><a href="../basics/p_values.htm">P values</a>
-                                        </p>
-                                        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-                                        </p>
-                                        <p><a href="nonlinear.htm">non-linear models</a>
-                                        </p>
-                                    </div>
-                                    <MadCap:pageFooter>
-                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
-                                    </MadCap:pageFooter>
-                                    <!-- Google tag (gtag.js) -->
-                                    <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
-                                    </script>
-                                    <script type="text/javascript">/* <![CDATA[ */
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-GZZ7X1JX4D');
-        /* ]]> */</script>
-                                </div>
-                            </div>
-                        </div>
-                    </div><a data-close="true"></a>
-                </div>
             </div>
-        </div>
-    </body>
-</html>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+        <p><a href="nonlinear.htm">non-linear models</a>
+        </p>
+    <footer class="help-shared-footer">
+            <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank" rel="noopener noreferrer">Download software here</a>.</p>
+        </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

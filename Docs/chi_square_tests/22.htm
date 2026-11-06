@@ -1,293 +1,199 @@
-<!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Chi-square tests" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta charset="utf-8" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>2 by 2 Chi-square Test (Four-fold Contingency Table) - StatsDirect</title>
-        <link rel="shortcut icon" href="../resources/images/sd3.ico" />
-        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
-        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
-        </script>
-        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
-        </script>
-    </head>
-    <body>
-        <div class="foundation-wrap off-canvas-wrapper">
-            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
-                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
-                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
-                    </ul>
-                </aside>
-                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
-                    <div data-sticky-container="" class="title-bar-container">
-                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
-                            <div class="middle title-bar-section outer-row clearfix">
-                                <div class="menu-icon-container relative clearfix">
-                                    <div class="central-account-wrapper">
-                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
-                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
-                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="title-bar-layout outer-row">
-                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
-                                </div>
-                                <div class="navigation-wrapper nocontent">
-                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
-                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="central-account-wrapper">
-                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
-                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
-                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav-search-wrapper">
-                                    <div class="nav-search row">
-                                        <form class="search" action="#">
-                                            <div class="search-bar search-bar-container needs-pie">
-                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
-                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
-                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
-                                                    </div>
-                                                    <div class="search-filter-content" id="sf-content">
-                                                        <ul>
-                                                            <li>
-                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
-                                                                </button>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="search-submit-wrapper" dir="ltr">
-                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                    <div class="main-section">
-                        <div class="row outer-row sidenav-layout">
-                            <nav class="sidenav-wrapper">
-                                <div class="sidenav-container">
-                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
-                                    </ul>
-                                </div>
-                            </nav>
-                            <div class="body-container">
-                                <div data-mc-content-body="True">
-                                    <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor42"></a>
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="chi_square_tests/22.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2 by 2 Chi-square Test (Four-fold Contingency Table) - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            
             2 by 2 Chi-square Test</h1>
-                                        <p>&#160;</p>
-                                        <p>Menu location: <b>Analysis_Chi-square_2 by 2</b>.</p>
-                                        <p>&#160;</p>
-                                        <p>The two by two or fourfold contingency table represents two classifications of a set of counts or frequencies. The rows represent two classifications of one variable (e.g. outcome positive/outcome negative) and the columns represent two classifications of another variable (e.g. intervention/no intervention). These classifications must be independent. Paired results (e.g. outcomes for same group of individuals before and after intervention) should be analysed using a test for <a href="mcnemar.htm">matched pairs</a>. The chi-square statistic calculated from the table tests the independence between the two classifications.</p>
-                                        <p>&#160;</p>
-                                        <p>Assumptions of the tests of independence:</p>
-                                        <ul type="disc">
-                                            <li class="p">
-                                                <p>the sample is random</p>
-                                            </li>
-                                            <li class="p">
-                                                <p>each observation may be classified into one cell (in the table) only</p>
-                                            </li>
-                                        </ul>
-                                        <p>&#160;</p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation85.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n).</p>
-                                        <p>&#160;</p>
-                                        <p>Yates' continuity correction improves the approximation of the discrete sample chi-square statistic to a continuous chi-square distribution (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>):</p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation86.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>&#160;</p>
-                                        <p>The <a href="rc.htm">r by c chi-square</a> function can be used to examine two by two tables in greater detail.</p>
-                                        <p>&#160;</p>
-                                        <p>Pearson's and Cramér's (V) coefficients of contingency reflect the strength of the association in a contingency table (<a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>; <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>):</p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation87.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>&#160;</p>
-                                        <p>You will see another coefficient, phi (ϕ, correlation), given by the r by c chi-square function. This is equal to an unsigned version of V with 2 by 2 tables.</p>
-                                        <p>&#160;</p>
-                                        <p><a href="../exact_tests_on_counts/fisher_exact.htm">Fisher's exact test</a> should be used as an alternative to the fourfold chi-square test if the total number of observations is less than twenty or any of the expected frequencies are less than five. In practical terms, however, there is little point in using the fourfold chi-square for testing independence when StatsDirect provides a Fisher's exact test that can cope with large numbers.</p>
-                                        <p>&#160;</p>
-                                        <p>If you specify that your results are from a case-control study then StatsDirect adds an odds ratio analysis. With a, b, c and d as the observed frequencies arranged as in the table below:</p>
-                                        <p>&#160;</p>
-                                        <p>Odds ratio (OR) is related to risk ratio (RR, relative risk):</p>
-                                        <p>RR = (a / (a+c)) / (b / (b+d))</p>
-                                        <p>&#160;</p>
-                                        <p>When a is small in comparison to c and b is small in comparison to d (i.e. relatively small numbers of outcome positive observations or low prevalence) then c can be substituted for a+c and d can be substituted for d+b in the above. With a little rearrangement this gives the odds ratio (cross ratio, approximate relative risk):</p>
-                                        <p>OR = (a*d)/(b*c).</p>
-                                        <p>&#160;</p>
-                                        <p>A confidence interval (CI) for the odds ratio is calculated using two different methods. The Woolf (logit) method for large samples is given first followed by an exact conditional maximum likelihood method (<a href="../references/reference_list.htm#ref-fleiss-1979-a">Fleiss, 1979</a>; <a href="../references/reference_list.htm#ref-gardner-1989">Gardner and Altman, 1989</a>; <a href="../references/reference_list.htm#ref-martin-1991">Martin and Austin, 1991</a>). Please note that the exact calculations may take an appreciable amount of time with large numbers.</p>
-                                        <p>&#160;</p>
-                                        <p>If you specify that your results are from a cohort study then StatsDirect adds a relative risk analysis. See <a href="../clinical_epidemiology/risk_prospective.htm">risk (prospective)</a> for more details. If the outcome is present in none of those without the characteristic then there is no relative risk, and the results say so; the chi-square test is given all the same.</p>
-                                        <p>The exact method for the odds ratio is not used if the first frequency of the table could have more than a million values; the results then say so, and Fisher's exact test is given for its P values. Frequencies that are not whole numbers are rounded to the nearest whole number for the exact methods; the chi-square statistics are calculated from the frequencies as you entered them.</p>
-                                        <p>&#160;</p>
-                                        <p>DATA INPUT:</p>
-                                        <p>Observed frequencies should be entered as a standard fourfold table:</p>
-                                        <p>&#160;</p>
-                                        <table cellspacing="0" style="caption-side: top;">
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <tr>
-                                                <td>&#160;</td>
-                                                <td style="text-decoration: underline;">feature present</td>
-                                                <td style="text-decoration: underline;">feature absent</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">outcome positive:</td>
-                                                <td>a</td>
-                                                <td>b</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">outcome negative:</td>
-                                                <td>c</td>
-                                                <td>d</td>
-                                            </tr>
-                                        </table>
-                                        <p>&#160;</p>
-                                        <p><u>Example</u>
-                                        </p>
-                                        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994)</a>.</p>
-                                        <p>&#160;</p>
-                                        <p>The following represent mortality data for two groups of patients receiving different treatments, A and B.</p>
-                                        <p>&#160;</p>
-                                        <table cellspacing="0" style="caption-side: top;">
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <tr>
-                                                <td>&#160;</td>
-                                                <td>&#160;</td>
-                                                <td colspan="2" style="text-decoration: underline;text-align: center;">Outcome</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&#160;</td>
-                                                <td>&#160;</td>
-                                                <td style="text-decoration: underline;text-align: center;">Dead</td>
-                                                <td style="text-decoration: underline;text-align: center;">Alive</td>
-                                            </tr>
-                                            <tr>
-                                                <td rowspan="2">Treatment / Exposure</td>
-                                                <td>A</td>
-                                                <td style="text-align: center;">41</td>
-                                                <td style="text-align: center;">216</td>
-                                            </tr>
-                                            <tr>
-                                                <td>B</td>
-                                                <td style="text-align: center;">64</td>
-                                                <td style="text-align: center;">180</td>
-                                            </tr>
-                                        </table>
-                                        <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect you must select the 2 by 2 contingency table from the chi-square section of the analysis menu. Select the default 95% confidence interval. Enter the frequencies into the contingency table on screen. Note that the input screen has outcome values from top to bottom and the other classifier (e.g. treatment) from left to right, some books and papers show these the other way around.</p>
-                                        <p>&#160;</p>
-                                        <p>For this example:</p>
-                                        <p>&#160;</p>
-                                        <p>Observed values and totals:</p>
-                                        <table cellspacing="0">
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <tr>
-                                                <td style="text-align: right;">41</td>
-                                                <td style="text-align: right;">216</td>
-                                                <td style="text-align: right;">257</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">64</td>
-                                                <td style="text-align: right;">180</td>
-                                                <td style="text-align: right;">244</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">105</td>
-                                                <td style="text-align: right;">396</td>
-                                                <td style="text-align: right;">501</td>
-                                            </tr>
-                                        </table>
-                                        <p>&#160;</p>
-                                        <p>Expected values:</p>
-                                        <table cellspacing="0">
-                                            <col />
-                                            <col />
-                                            <tr>
-                                                <td style="text-align: left;">53.862275</td>
-                                                <td style="text-align: left;">203.137725</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">51.137725</td>
-                                                <td style="text-align: left;">192.862275</td>
-                                            </tr>
-                                        </table>
-                                        <p>&#160;</p>
-                                        <p>Uncorrected Chi² = 7.978869 P = 0.0047</p>
-                                        <p>Yates-corrected Chi² = 7.370595 P = 0.0066</p>
-                                        <p>&#160;</p>
-                                        <p>Measures of association:</p>
-                                        <p>Pearson's contingency = 0.125205</p>
-                                        <p>Cramér's V (signed) = -0.126198</p>
-                                        <p>&#160;</p>
-                                        <p><u>Odds ratio analysis</u>
-                                        </p>
-                                        <p>&#160;</p>
-                                        <p>Odds Ratio = 0.533854</p>
-                                        <p>&#160;</p>
-                                        <p>Using the Woolf (logit) approximation:</p>
-                                        <p>Approximate 95% confidence interval = 0.344118 to 0.828206</p>
-                                        <p>&#160;</p>
-                                        <p>Using conditional likelihood estimation:</p>
-                                        <p>Fisher exact 95% confidence interval = 0.334788 to 0.846292</p>
-                                        <p>Exact Fisher one sided P = 0.0033, two sided P = 0.0059</p>
-                                        <p>mid-P exact 95% confidence interval = 0.342636 to 0.828071</p>
-                                        <p>Exact mid-P one sided P = 0.0024, two sided P = 0.0049</p>
-                                        <p>&#160;</p>
-                                        <p>Here we can see a statistically significant relationship between treatment and mortality. The strength of that relationship is reflected by the coefficient of contingency. The odds ratio tells us that the odds in favour of dying after treatment A are about half of the odds of dying after treatment B. With 95% confidence we put the true population value for this ratio of odds somewhere between 0.33 and 0.85. If you need to phrase the arguments with odds ratios the other way around then just quote the reciprocals, i.e. here we would say that the odds of dying after treatment B are 1.9 times greater than after treatment A.</p>
-                                        <p>&#160;</p>
-                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
-                                            <div class="MCDropDownBody dropDownBody">
-                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># 2 by 2 chi-square test: the StatsDirect help example (Armitage and Berry 1994, deaths
+        <p> </p>
+        <p>Menu location: <b>Analysis_Chi-square_2 by 2</b>.</p>
+        <p> </p>
+        <p>The two by two or fourfold contingency table represents two classifications of a set of counts or frequencies. The rows represent two classifications of one variable (e.g. outcome positive/outcome negative) and the columns represent two classifications of another variable (e.g. intervention/no intervention). These classifications must be independent. Paired results (e.g. outcomes for same group of individuals before and after intervention) should be analysed using a test for <a href="mcnemar.htm">matched pairs</a>. The chi-square statistic calculated from the table tests the independence between the two classifications.</p>
+        <p> </p>
+        <p>Assumptions of the tests of independence:</p>
+        <ul type="disc">
+            <li class="p">
+                <p>the sample is random</p>
+            </li>
+            <li class="p">
+                <p>each observation may be classified into one cell (in the table) only</p>
+            </li>
+        </ul>
+        <p> </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="1d3b609e66691847994851bf38cbcad828565dbaf977f982ab2dd64aa92ea452"><span class="help-equation-accessible help-equation-live">$\displaystyle \chi^2=\sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}$</span><img src="../resources/help-editor-runtime/equation-artwork/01619ecaedc20a323652639ae619902986de61e39219fbc80c19034b55a60c04.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where, for r rows and c columns of n observations, O is an observed frequency and E is an estimated expected frequency. The expected frequency for any cell is estimated as the row total times the column total then divided by the grand total (n).</p>
+        <p> </p>
+        <p>Yates' continuity correction improves the approximation of the discrete sample chi-square statistic to a continuous chi-square distribution (<a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry, 1994</a>):</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="474afb55d9f22aae7cf810de3f09016ed273e6bde366c910ee94534ae48ae2b6"><span class="help-equation-accessible help-equation-live">$\displaystyle \text{Yates' corrected } \chi^2= \sum_{i=1}^r \sum_{j=1}^c \frac{\displaystyle (|O_{ij}-E_{ij}|-0.5)^2}{E_{ij}}$</span><img src="../resources/help-editor-runtime/equation-artwork/52ce1432050d5c67893d1c4b71dcdcf1e0f2702088027cb378d0251c88f02afb.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>The <a href="rc.htm">r by c chi-square</a> function can be used to examine two by two tables in greater detail.</p>
+        <p> </p>
+        <p>Pearson's and Cramér's (V) coefficients of contingency reflect the strength of the association in a contingency table (<a href="../references/reference_list.htm#ref-agresti-1996">Agresti, 1996</a>; <a href="../references/reference_list.htm#ref-fleiss-1981">Fleiss, 1981</a>; <a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>):</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="c3043b77c141919f8c2b4ed5eab9d52a2e996ce494214713824035c003d5ce88"><span class="help-equation-accessible help-equation-live">$\begin{array}{l}
+\displaystyle \displaystyle \text{Pearson V}=\sqrt{\frac{\chi^2}{\chi^2+n}} \\
+\displaystyle \displaystyle \text{Cram}\acute{\text{e}}\text{r V}=\frac{\displaystyle ad-bc}{\displaystyle \sqrt{(a+b)(c+d)(a+c)(b+d)}}
+\end{array}$</span><img src="../resources/help-editor-runtime/equation-artwork/34097ea0245172191a39f03d7c46d69ec34983f9adbc0f9504fae150f5018cc1.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p> </p>
+        <p>You will see another coefficient, phi (ϕ, correlation), given by the r by c chi-square function. This is equal to an unsigned version of V with 2 by 2 tables.</p>
+        <p> </p>
+        <p><a href="../exact_tests_on_counts/fisher_exact.htm">Fisher's exact test</a> should be used as an alternative to the fourfold chi-square test if the total number of observations is less than twenty or any of the expected frequencies are less than five. In practical terms, however, there is little point in using the fourfold chi-square for testing independence when StatsDirect provides a Fisher's exact test that can cope with large numbers.</p>
+        <p> </p>
+        <p>If you specify that your results are from a case-control study then StatsDirect adds an odds ratio analysis. With a, b, c and d as the observed frequencies arranged as in the table below:</p>
+        <p> </p>
+        <p>Odds ratio (OR) is related to risk ratio (RR, relative risk):</p>
+        <p>RR = (a / (a+c)) / (b / (b+d))</p>
+        <p> </p>
+        <p>When a is small in comparison to c and b is small in comparison to d (i.e. relatively small numbers of outcome positive observations or low prevalence) then c can be substituted for a+c and d can be substituted for d+b in the above. With a little rearrangement this gives the odds ratio (cross ratio, approximate relative risk):</p>
+        <p>OR = (a*d)/(b*c).</p>
+        <p> </p>
+        <p>A confidence interval (CI) for the odds ratio is calculated using two different methods. The Woolf (logit) method for large samples is given first followed by an exact conditional maximum likelihood method (<a href="../references/reference_list.htm#ref-fleiss-1979-a">Fleiss, 1979</a>; <a href="../references/reference_list.htm#ref-gardner-1989">Gardner and Altman, 1989</a>; <a href="../references/reference_list.htm#ref-martin-1991">Martin and Austin, 1991</a>). Please note that the exact calculations may take an appreciable amount of time with large numbers.</p>
+        <p> </p>
+        <p>If you specify that your results are from a cohort study then StatsDirect adds a relative risk analysis. See <a href="../clinical_epidemiology/risk_prospective.htm">risk (prospective)</a> for more details. If the outcome is present in none of those without the characteristic then there is no relative risk, and the results say so; the chi-square test is given all the same.</p>
+        <p>The exact method for the odds ratio is not used if the first frequency of the table could have more than a million values; the results then say so, and Fisher's exact test is given for its P values. Frequencies that are not whole numbers are rounded to the nearest whole number for the exact methods; the chi-square statistics are calculated from the frequencies as you entered them.</p>
+        <p> </p>
+        <p>DATA INPUT:</p>
+        <p>Observed frequencies should be entered as a standard fourfold table:</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td> </td>
+                <td style="text-decoration: underline;">feature present</td>
+                <td style="text-decoration: underline;">feature absent</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome positive:</td>
+                <td>a</td>
+                <td>b</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">outcome negative:</td>
+                <td>c</td>
+                <td>d</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>From <a href="../references/reference_list.htm#ref-armitage-1994">Armitage and Berry (1994)</a>.</p>
+        <p> </p>
+        <p>The following represent mortality data for two groups of patients receiving different treatments, A and B.</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="2" style="text-decoration: underline;text-align: center;">Outcome</td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td style="text-decoration: underline;text-align: center;">Dead</td>
+                <td style="text-decoration: underline;text-align: center;">Alive</td>
+            </tr>
+            <tr>
+                <td rowspan="2">Treatment / Exposure</td>
+                <td>A</td>
+                <td style="text-align: center;">41</td>
+                <td style="text-align: center;">216</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td style="text-align: center;">64</td>
+                <td style="text-align: center;">180</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect you must select the 2 by 2 contingency table from the chi-square section of the analysis menu. Select the default 95% confidence interval. Enter the frequencies into the contingency table on screen. Note that the input screen has outcome values from top to bottom and the other classifier (e.g. treatment) from left to right, some books and papers show these the other way around.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p>Observed values and totals:</p>
+        <table cellspacing="0">
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: right;">41</td>
+                <td style="text-align: right;">216</td>
+                <td style="text-align: right;">257</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">64</td>
+                <td style="text-align: right;">180</td>
+                <td style="text-align: right;">244</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">105</td>
+                <td style="text-align: right;">396</td>
+                <td style="text-align: right;">501</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>Expected values:</p>
+        <table cellspacing="0">
+            <col />
+            <col />
+            <tr>
+                <td style="text-align: left;">53.862275</td>
+                <td style="text-align: left;">203.137725</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">51.137725</td>
+                <td style="text-align: left;">192.862275</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>Uncorrected Chi² = 7.978869 P = 0.0047</p>
+        <p>Yates-corrected Chi² = 7.370595 P = 0.0066</p>
+        <p> </p>
+        <p>Measures of association:</p>
+        <p>Pearson's contingency = 0.125205</p>
+        <p>Cramér's V (signed) = -0.126198</p>
+        <p> </p>
+        <p><u>Odds ratio analysis</u>
+        </p>
+        <p> </p>
+        <p>Odds Ratio = 0.533854</p>
+        <p> </p>
+        <p>Using the Woolf (logit) approximation:</p>
+        <p>Approximate 95% confidence interval = 0.344118 to 0.828206</p>
+        <p> </p>
+        <p>Using conditional likelihood estimation:</p>
+        <p>Fisher exact 95% confidence interval = 0.334788 to 0.846292</p>
+        <p>Exact Fisher one sided P = 0.0033, two sided P = 0.0059</p>
+        <p>mid-P exact 95% confidence interval = 0.342636 to 0.828071</p>
+        <p>Exact mid-P one sided P = 0.0024, two sided P = 0.0049</p>
+        <p> </p>
+        <p>Here we can see a statistically significant relationship between treatment and mortality. The strength of that relationship is reflected by the coefficient of contingency. The odds ratio tells us that the odds in favour of dying after treatment A are about half of the odds of dying after treatment B. With 95% confidence we put the true population value for this ratio of odds somewhere between 0.33 and 0.85. If you need to phrase the arguments with odds ratios the other way around then just quote the reciprocals, i.e. here we would say that the odds of dying after treatment B are 1.9 times greater than after treatment A.</p>
+        <p> </p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># 2 by 2 chi-square test: the StatsDirect help example (Armitage and Berry 1994, deaths
 # among 257 patients given treatment A and 244 given treatment B) in R
 counts &lt;- matrix(c(41, 216, 64, 180), 2, byrow = TRUE,
                  dimnames = list(Treatment = c("A", "B"), Outcome = c("Dead", "Alive")))
@@ -364,33 +270,13 @@ cat("mid-P exact 95% confidence interval =", six(limit(upper, 0.5)), "to",
 mid &lt;- min(lower(1, 0.5), upper(1, 0.5))
 cat("Exact mid-P one sided ", pv(mid), ", two sided ", pv(min(1, 2 * mid)), "\n",
     sep = "")</pre>
-                                            </div>
-                                        </div>
-                                        <p>&#160;</p>
-                                        <p><a href="../basics/p_values.htm">P values</a>
-                                        </p>
-                                        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
-                                        </p>
-                                    </div>
-                                    <MadCap:pageFooter>
-                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
-                                    </MadCap:pageFooter>
-                                    <!-- Google tag (gtag.js) -->
-                                    <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
-                                    </script>
-                                    <script type="text/javascript">/* <![CDATA[ */
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-GZZ7X1JX4D');
-        /* ]]> */</script>
-                                </div>
-                            </div>
-                        </div>
-                    </div><a data-close="true"></a>
-                </div>
             </div>
-        </div>
-    </body>
-</html>
+        </details>
+        <p> </p>
+        <p><a href="../basics/p_values.htm">P values</a>
+        </p>
+        <p><a href="../basics/confidence_interval.htm">confidence intervals</a>
+        </p>
+    <footer class="help-shared-footer">
+            <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank" rel="noopener noreferrer">Download software here</a>.</p>
+        </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>

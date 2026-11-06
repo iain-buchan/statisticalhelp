@@ -1,729 +1,632 @@
-<!DOCTYPE html>
-<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" class="_Skins_SD_Web_Skin" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../" data-mc-has-content-body="True" data-mc-toc-path="Meta-analysis" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic;Default" data-mc-preload-images="false" data-mc-in-preview-mode="false">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta charset="utf-8" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="msvalidate.01" content="9D4F037DF99C5A667F6C18BED78768E6" /><title>Proportion Meta-analysis - StatsDirect</title>
-        <link rel="shortcut icon" href="../resources/images/sd3.ico" />
-        <link href="../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Default/Stylesheets/Components/Print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/foundation.6.2.3.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/tablet.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/mobile.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../Skins/Fluid/stylesheets/print.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
-        <link href="../resources/stylesheets/statsdirect.css" rel="stylesheet" type="text/css" />
-        <script src="../resources/Scripts/jquery.min.js" type="text/javascript">
-        </script>
-        <script src="../resources/Scripts/purify.min.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/require.min.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/require.config.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/foundation.6.2.3_custom.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/plugins.min.js" type="text/javascript" defer="defer">
-        </script>
-        <script src="../resources/Scripts/MadCapAll.js" type="text/javascript" defer="defer">
-        </script>
-    </head>
-    <body>
-        <div class="foundation-wrap off-canvas-wrapper">
-            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="">
-                <aside class="off-canvas position-right" role="complementary" id="offCanvas" data-off-canvas="" data-position="right" data-mc-ignore="true">
-                    <ul class="off-canvas-accordion vertical menu off-canvas-list" data-accordion-menu="" data-mc-back-link="Back" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="True" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True">
-                    </ul>
-                </aside>
-                <div class="off-canvas-content inner-wrap" data-off-canvas-content="">
-                    <div data-sticky-container="" class="title-bar-container">
-                        <nav class="title-bar tab-bar sticky" aria-label="Main navigation and search" data-sticky="" data-options="marginTop:0" style="width:100%" data-sticky-on="only screen and (max-width: 1279px)" data-mc-ignore="true"><a class="skip-to-content fluid-skip showOnFocus" href="#">Skip To Main Content</a>
-                            <div class="middle title-bar-section outer-row clearfix">
-                                <div class="menu-icon-container relative clearfix">
-                                    <div class="central-account-wrapper">
-                                        <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
-                                            <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
-                                                <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="menu-icon" aria-label="Show Navigation Panel" data-toggle="offCanvas"><span></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="title-bar-layout outer-row">
-                                <div class="logo-wrapper"><a class="logo" href="../contents.htm" alt="Logo"></a>
-                                </div>
-                                <div class="navigation-wrapper nocontent">
-                                    <ul class="navigation clearfix" data-mc-css-tree-node-has-children="has-children" data-mc-css-sub-menu="sub-menu" data-mc-expand-event="mouseenter" data-mc-top-nav-menu="True" data-mc-max-depth="3" data-mc-include-icon="False" data-mc-include-indicator="False" data-mc-include-children="True" data-mc-include-siblings="True" data-mc-include-parent="True" data-mc-toc="True">
-                                        <li class="placeholder" style="visibility:hidden"><a>placeholder</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="central-account-wrapper">
-                                    <div class="central-dropdown"><a class="central-account-drop"><span class="central-account-image"></span><span class="central-account-text">Account</span></a>
-                                        <div class="central-dropdown-content"><a class="MCCentralLink central-dropdown-content-settings">Settings</a>
-                                            <hr class="central-separator" /><a class="MCCentralLink central-dropdown-content-logout">Logout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav-search-wrapper">
-                                    <div class="nav-search row">
-                                        <form class="search" action="#">
-                                            <div class="search-bar search-bar-container needs-pie">
-                                                <input class="search-field needs-pie" type="search" aria-label="Search Field" placeholder="Search" />
-                                                <div class="search-filter-wrapper"><span class="invisible-label" id="search-filters-label">Filter: </span>
-                                                    <div class="search-filter" aria-haspopup="true" aria-controls="sf-content" aria-expanded="false" aria-label="Search Filter" title="All Files" role="button" tabindex="0">
-                                                    </div>
-                                                    <div class="search-filter-content" id="sf-content">
-                                                        <ul>
-                                                            <li>
-                                                                <button class="mc-dropdown-item" aria-labelledby="search-filters-label filterSelectorLabel-00001"><span id="filterSelectorLabel-00001">All Files</span>
-                                                                </button>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="search-submit-wrapper" dir="ltr">
-                                                    <div class="search-submit" title="Search" role="button" tabindex="0"><span class="invisible-label">Submit Search</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                    <div class="main-section">
-                        <div class="row outer-row sidenav-layout">
-                            <nav class="sidenav-wrapper">
-                                <div class="sidenav-container">
-                                    <ul class="off-canvas-accordion vertical menu sidenav" data-accordion-menu="" data-mc-css-tree-node-expanded="is-accordion-submenu-parent" data-mc-css-tree-node-collapsed="is-accordion-submenu-parent" data-mc-css-sub-menu="vertical menu accordion-menu is-accordion-submenu nested" data-mc-include-indicator="False" data-mc-include-icon="False" data-mc-include-parent-link="False" data-mc-include-back="False" data-mc-defer-expand-event="True" data-mc-expanded-event="down.zf.accordionMenu up.zf.accordionMenu" data-mc-expand-event="click.zf.accordionMenu" data-mc-toc="True" data-mc-side-nav-menu="True">
-                                    </ul>
-                                </div>
-                            </nav>
-                            <div class="body-container">
-                                <div data-mc-content-body="True">
-                                    <div role="main" id="mc-main-content">
-                                        <h1><a name="kanchor250"></a>Proportion Meta-analysis</h1>
-                                        <p>&#160;</p>
-                                        <p>Menu location: <b>Analysis_Meta-Analysis_Proportion</b>.</p>
-                                        <p>&#160;</p>
-                                        <p>This function enables you to calculate an overall proportion from a set of proportions, for example from a systematic review of studies of adherence with a particular drug treatment.</p>
-                                        <p>&#160;</p>
-                                        <p>This function can also be applied to a review of diagnostic test studies to give an overall sensitivity or specificity as follows:</p>
-                                        <p>&#160;</p>
-                                        <table>
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <tr>
-                                                <td>&#160;</td>
-                                                <td>&#160;</td>
-                                                <td colspan="2" style="text-align: center;"><u>DISEASE/OUTCOME</u>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&#160;</td>
-                                                <td>&#160;</td>
-                                                <td style="text-decoration: underline;text-align: center;">Present</td>
-                                                <td style="text-decoration: underline;text-align: center;">Absent</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">TEST:</td>
-                                                <td style="text-align: right;">+:</td>
-                                                <td style="text-align: left;">a (true +ve)</td>
-                                                <td style="text-align: left;">b (false +ve)</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">&#160;</td>
-                                                <td style="text-align: right;">-:</td>
-                                                <td style="text-align: left;">c (false -ve)</td>
-                                                <td style="text-align: left;">d (true -ve)</td>
-                                            </tr>
-                                        </table>
-                                        <p>&#160;</p>
-                                        <p>Sensitivity = a/(a+c)</p>
-                                        <p>Specificity = d/(b+d)</p>
-                                        <p>&#160;</p>
-                                        <p>Another way to summarise diagnostic test performance is via the diagnostic odds ratio:</p>
-                                        <p>&#160;</p>
-                                        <p>Diagnostic odds ratio = true/false = (a * d)/(b * c)</p>
-                                        <p>&#160;</p>
-                                        <p>In order to run a meta-analysis of diagnostic odds ratios simply use the <a href="mh.htm">odds ratio meta-analysis function</a> with the experimental group as the true (test correct)  outcomes and the control group as the false outcomes – enter a as experimental group responders; a+d as experimental group number; b as control group responders; and b+c as control group total.</p>
-                                        <p>&#160;</p>
-                                        <p>Many study designs can be expressed as a proportion, and relatively complex statistical models can be explored using sets of proportions – for example a random effects logistic regression. You should seek the assistance of a statistician if you want to pursue analyses deeper than the summaries that this StatsDirect function offers.</p>
-                                        <p>&#160;</p>
-                                        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
-                                        <p>&#160;</p>
-                                        <p>Beyond this meta-analysis function, <a href="../regression_and_correlation/logistic.htm">logistic regression</a> can be used to compare pooled proportions. Consult with a statistician if you are considering a random effects logistic model.</p>
-                                        <p>&#160;</p>
-                                        <p>DATA INPUT:</p>
-                                        <p>You enter the number of subjects responding (with the study outcome) and the total number of subjects studied. You may also enter a title for each study.</p>
-                                        <p>&#160;</p>
-                                        <p><u>Technical Validation</u>
-                                        </p>
-                                        <p>StatsDirect first transforms proportions via the Freeman-Tukey double arcsine method (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman and Tukey, 1950</a>, <a href="../references/reference_list.htm#ref-miller-1978">Miller 1978</a>) then performs an inverse-variance weighted fixed and random effects meta-analysis by conventional methods (<a href="../references/reference_list.htm#ref-dersimonian-1986">DerSimonian and Laird, 1986</a>). The appropriate weight is n+0.5 but some other software uses n+1.  In our own simulation testing of the variance options within the formula 1/(n+c), varying c from 0.5 to 1, we found that the n+1 method (<a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>) is conservative, avoiding underestimation of the true variance of the transformed proportion, but the original n+0.5 method (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman et al, 1950</a>) method is closer to the true variance in absolute terms. Note that there is no fixed transformation of a binomial proportion that provides optimal variance stabilization, which depends on your data - iterative variance stabilization methods may emerge with further research. The pooled proportion can be calculated as the back-transform of the weighted mean of the transformed proportions (<a href="../references/reference_list.htm#ref-miller-1978">Miller 1978</a>):</p>
-                                        <p>&#160;</p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation133.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation134.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation135.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation136.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation137.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation138.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation139.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation140.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation141.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>- where p hat is the fixed effects pooled proportion, x is the Freeman-Tukey transformed proportion, w is the inverse variance weight for the transformed proportion, q is the Cochran q statistic, tau squared is the moment-based estimate of the between-studies variance, w r is the DerSimonian-Laird weight, p hat r is the random effects estimate of the pooled proportion, and n in the back-transforms to p hat and p hat r is the harmonic mean of the study sample sizes.</p>
-                                        <p>&#160;</p>
-                                        <p>An alternative, simpler, back transform (Stuart-Ord), which is the default choice of inverse transform in StatsDirect, is:</p>
-                                        <p>
-                                            <img src="../generatedimages/equations/equation142.svg" alt="" class="mcReset" />
-                                        </p>
-                                        <p>This form is strictly less accurate than the Miller method above but it is less susceptible to the bias effects of non-linear transformations, giving more credible estimates of pooled proportions where the true population value is close to 0 or 1.</p>
-                                        <p>&#160;</p>
-                                        <p>&#160;</p>
-                                        <p><u>Example</u>
-                                        </p>
-                                        <p>The following data represent adherence with medication from 22 fictitious trials of a class of drug:</p>
-                                        <p>&#160;</p>
-                                        <table>
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <tr>
-                                                <td style="text-decoration: underline;text-align: left;">Trial</td>
-                                                <td style="text-decoration: underline;text-align: right;">Adherent</td>
-                                                <td style="text-decoration: underline;text-align: right;">Total</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Brown</td>
-                                                <td style="text-align: right;">214</td>
-                                                <td style="text-align: right;">311</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Lamont</td>
-                                                <td style="text-align: right;">58</td>
-                                                <td style="text-align: right;">65</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Lally</td>
-                                                <td style="text-align: right;">59</td>
-                                                <td style="text-align: right;">67</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Orwell</td>
-                                                <td style="text-align: right;">182</td>
-                                                <td style="text-align: right;">285</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Wagner</td>
-                                                <td style="text-align: right;">65</td>
-                                                <td style="text-align: right;">73</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Werner</td>
-                                                <td style="text-align: right;">66</td>
-                                                <td style="text-align: right;">116</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Venner</td>
-                                                <td style="text-align: right;">99</td>
-                                                <td style="text-align: right;">183</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Adams</td>
-                                                <td style="text-align: right;">600</td>
-                                                <td style="text-align: right;">696</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Brenner</td>
-                                                <td style="text-align: right;">45</td>
-                                                <td style="text-align: right;">57</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Borrowdale</td>
-                                                <td style="text-align: right;">165</td>
-                                                <td style="text-align: right;">277</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Byers</td>
-                                                <td style="text-align: right;">32</td>
-                                                <td style="text-align: right;">35</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Daniels</td>
-                                                <td style="text-align: right;">49</td>
-                                                <td style="text-align: right;">60</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Darling</td>
-                                                <td style="text-align: right;">175</td>
-                                                <td style="text-align: right;">199</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Ehert</td>
-                                                <td style="text-align: right;">155</td>
-                                                <td style="text-align: right;">311</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Fern</td>
-                                                <td style="text-align: right;">64</td>
-                                                <td style="text-align: right;">81</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Mullen</td>
-                                                <td style="text-align: right;">526</td>
-                                                <td style="text-align: right;">537</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Orton</td>
-                                                <td style="text-align: right;">104</td>
-                                                <td style="text-align: right;">107</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Jones</td>
-                                                <td style="text-align: right;">97</td>
-                                                <td style="text-align: right;">102</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Ning</td>
-                                                <td style="text-align: right;">2310</td>
-                                                <td style="text-align: right;">4612</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Sherraton</td>
-                                                <td style="text-align: right;">72</td>
-                                                <td style="text-align: right;">91</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Zu</td>
-                                                <td style="text-align: right;">37</td>
-                                                <td style="text-align: right;">37</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left;">Tarone</td>
-                                                <td style="text-align: right;">31</td>
-                                                <td style="text-align: right;">87</td>
-                                            </tr>
-                                        </table>
-                                        <p>&#160;</p>
-                                        <p>To analyse these data in StatsDirect first prepare them in three workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select proportion from the meta-analysis section of the analysis menu, and then <a href="../workbook/selecting_data.htm">select</a> the columns 'Total', 'Adherent' and 'Trial' as prompted.</p>
-                                        <p>&#160;</p>
-                                        <p>For this example:</p>
-                                        <p>&#160;</p>
-                                        <p>Method: Stuart-Ord (inverse double arcsine square root)</p>
-                                        <p>&#160;</p>
-                                        <table cellspacing="0" style="caption-side: top;">
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <tr>
-                                                <td style="text-decoration: underline;">Stratum</td>
-                                                <td style="text-decoration: underline;">Proportion</td>
-                                                <td colspan="2" style="text-decoration: underline;">95% CI (exact)</td>
-                                                <td>&#160;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>0.688103</td>
-                                                <td>0.633392</td>
-                                                <td>0.739187</td>
-                                                <td>Brown</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>0.892308</td>
-                                                <td>0.790618</td>
-                                                <td>0.955591</td>
-                                                <td>Lamont</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>0.880597</td>
-                                                <td>0.778215</td>
-                                                <td>0.947015</td>
-                                                <td>Lally</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>0.638596</td>
-                                                <td>0.579853</td>
-                                                <td>0.694424</td>
-                                                <td>Orwell</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>0.890411</td>
-                                                <td>0.795436</td>
-                                                <td>0.951484</td>
-                                                <td>Wagner</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>0.568966</td>
-                                                <td>0.473763</td>
-                                                <td>0.660561</td>
-                                                <td>Werner</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>0.540984</td>
-                                                <td>0.465895</td>
-                                                <td>0.614723</td>
-                                                <td>Venner</td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>0.862069</td>
-                                                <td>0.834196</td>
-                                                <td>0.886827</td>
-                                                <td>Adams</td>
-                                            </tr>
-                                            <tr>
-                                                <td>9</td>
-                                                <td>0.789474</td>
-                                                <td>0.66113</td>
-                                                <td>0.88621</td>
-                                                <td>Brenner</td>
-                                            </tr>
-                                            <tr>
-                                                <td>10</td>
-                                                <td>0.595668</td>
-                                                <td>0.5353</td>
-                                                <td>0.653966</td>
-                                                <td>Borrowdale</td>
-                                            </tr>
-                                            <tr>
-                                                <td>11</td>
-                                                <td>0.914286</td>
-                                                <td>0.769425</td>
-                                                <td>0.981962</td>
-                                                <td>Byers</td>
-                                            </tr>
-                                            <tr>
-                                                <td>12</td>
-                                                <td>0.816667</td>
-                                                <td>0.695604</td>
-                                                <td>0.904764</td>
-                                                <td>Daniels</td>
-                                            </tr>
-                                            <tr>
-                                                <td>13</td>
-                                                <td>0.879397</td>
-                                                <td>0.825884</td>
-                                                <td>0.921178</td>
-                                                <td>Darling</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14</td>
-                                                <td>0.498392</td>
-                                                <td>0.441461</td>
-                                                <td>0.555354</td>
-                                                <td>Ehert</td>
-                                            </tr>
-                                            <tr>
-                                                <td>15</td>
-                                                <td>0.790123</td>
-                                                <td>0.685373</td>
-                                                <td>0.872724</td>
-                                                <td>Fern</td>
-                                            </tr>
-                                            <tr>
-                                                <td>16</td>
-                                                <td>0.979516</td>
-                                                <td>0.963644</td>
-                                                <td>0.989731</td>
-                                                <td>Mullen</td>
-                                            </tr>
-                                            <tr>
-                                                <td>17</td>
-                                                <td>0.971963</td>
-                                                <td>0.920245</td>
-                                                <td>0.99418</td>
-                                                <td>Orton</td>
-                                            </tr>
-                                            <tr>
-                                                <td>18</td>
-                                                <td>0.95098</td>
-                                                <td>0.889304</td>
-                                                <td>0.983894</td>
-                                                <td>Jones</td>
-                                            </tr>
-                                            <tr>
-                                                <td>19</td>
-                                                <td>0.500867</td>
-                                                <td>0.486332</td>
-                                                <td>0.515402</td>
-                                                <td>Ning</td>
-                                            </tr>
-                                            <tr>
-                                                <td>20</td>
-                                                <td>0.791209</td>
-                                                <td>0.693308</td>
-                                                <td>0.869362</td>
-                                                <td>Sherraton</td>
-                                            </tr>
-                                            <tr>
-                                                <td>21</td>
-                                                <td>1</td>
-                                                <td>0.905109</td>
-                                                <td>1</td>
-                                                <td>Zu [97.5% one-sided CI]</td>
-                                            </tr>
-                                            <tr>
-                                                <td>22</td>
-                                                <td>0.356322</td>
-                                                <td>0.256493</td>
-                                                <td>0.466236</td>
-                                                <td>Tarone</td>
-                                            </tr>
-                                        </table>
-                                        <p>&#160;</p>
-                                        <table cellspacing="0" style="caption-side: top;">
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <col />
-                                            <tr>
-                                                <td style="text-decoration: underline;">Stratum</td>
-                                                <td style="text-decoration: underline;">Standardized effect</td>
-                                                <td style="text-decoration: underline;">Variance</td>
-                                                <td colspan="2" style="text-decoration: underline;">% Weights (fixed, random)</td>
-                                                <td>&#160;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>1.955196</td>
-                                                <td>0.00321</td>
-                                                <td>3.708333</td>
-                                                <td>4.657589</td>
-                                                <td>Brown</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>2.45427</td>
-                                                <td>0.015267</td>
-                                                <td>0.779762</td>
-                                                <td>4.459405</td>
-                                                <td>Lamont</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>2.419139</td>
-                                                <td>0.014815</td>
-                                                <td>0.803571</td>
-                                                <td>4.466536</td>
-                                                <td>Lally</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>1.850661</td>
-                                                <td>0.003503</td>
-                                                <td>3.39881</td>
-                                                <td>4.652575</td>
-                                                <td>Orwell</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>2.450333</td>
-                                                <td>0.013605</td>
-                                                <td>0.875</td>
-                                                <td>4.485712</td>
-                                                <td>Wagner</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>1.707983</td>
-                                                <td>0.008584</td>
-                                                <td>1.386905</td>
-                                                <td>4.56713</td>
-                                                <td>Werner</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>1.65241</td>
-                                                <td>0.00545</td>
-                                                <td>2.184524</td>
-                                                <td>4.619459</td>
-                                                <td>Venner</td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>2.379077</td>
-                                                <td>0.001436</td>
-                                                <td>8.291667</td>
-                                                <td>4.688254</td>
-                                                <td>Adams</td>
-                                            </tr>
-                                            <tr>
-                                                <td>9</td>
-                                                <td>2.176196</td>
-                                                <td>0.017391</td>
-                                                <td>0.684524</td>
-                                                <td>4.426224</td>
-                                                <td>Brenner</td>
-                                            </tr>
-                                            <tr>
-                                                <td>10</td>
-                                                <td>1.762619</td>
-                                                <td>0.003604</td>
-                                                <td>3.303571</td>
-                                                <td>4.650846</td>
-                                                <td>Borrowdale</td>
-                                            </tr>
-                                            <tr>
-                                                <td>11</td>
-                                                <td>2.508913</td>
-                                                <td>0.028169</td>
-                                                <td>0.422619</td>
-                                                <td>4.265199</td>
-                                                <td>Byers</td>
-                                            </tr>
-                                            <tr>
-                                                <td>12</td>
-                                                <td>2.243481</td>
-                                                <td>0.016529</td>
-                                                <td>0.720238</td>
-                                                <td>4.439636</td>
-                                                <td>Daniels</td>
-                                            </tr>
-                                            <tr>
-                                                <td>13</td>
-                                                <td>2.426484</td>
-                                                <td>0.005013</td>
-                                                <td>2.375</td>
-                                                <td>4.626852</td>
-                                                <td>Darling</td>
-                                            </tr>
-                                            <tr>
-                                                <td>14</td>
-                                                <td>1.567591</td>
-                                                <td>0.00321</td>
-                                                <td>3.708333</td>
-                                                <td>4.657589</td>
-                                                <td>Ehert</td>
-                                            </tr>
-                                            <tr>
-                                                <td>15</td>
-                                                <td>2.181244</td>
-                                                <td>0.01227</td>
-                                                <td>0.970238</td>
-                                                <td>4.50708</td>
-                                                <td>Fern</td>
-                                            </tr>
-                                            <tr>
-                                                <td>16</td>
-                                                <td>2.848202</td>
-                                                <td>0.00186</td>
-                                                <td>6.39881</td>
-                                                <td>4.680878</td>
-                                                <td>Mullen</td>
-                                            </tr>
-                                            <tr>
-                                                <td>17</td>
-                                                <td>2.780486</td>
-                                                <td>0.009302</td>
-                                                <td>1.279762</td>
-                                                <td>4.555298</td>
-                                                <td>Orton</td>
-                                            </tr>
-                                            <tr>
-                                                <td>18</td>
-                                                <td>2.675681</td>
-                                                <td>0.009756</td>
-                                                <td>1.220238</td>
-                                                <td>4.547858</td>
-                                                <td>Jones</td>
-                                            </tr>
-                                            <tr>
-                                                <td>19</td>
-                                                <td>1.572531</td>
-                                                <td>0.000217</td>
-                                                <td>54.910714</td>
-                                                <td>4.709554</td>
-                                                <td>Ning</td>
-                                            </tr>
-                                            <tr>
-                                                <td>20</td>
-                                                <td>2.184792</td>
-                                                <td>0.010929</td>
-                                                <td>1.089286</td>
-                                                <td>4.528741</td>
-                                                <td>Sherraton</td>
-                                            </tr>
-                                            <tr>
-                                                <td>21</td>
-                                                <td>2.978651</td>
-                                                <td>0.026667</td>
-                                                <td>0.446429</td>
-                                                <td>4.286939</td>
-                                                <td>Zu [97.5% one-sided CI]</td>
-                                            </tr>
-                                            <tr>
-                                                <td>22</td>
-                                                <td>1.282717</td>
-                                                <td>0.011429</td>
-                                                <td>1.041667</td>
-                                                <td>4.520646</td>
-                                                <td>Tarone</td>
-                                            </tr>
-                                        </table>
-                                        <p>&#160;</p>
-                                        <p><u>Fixed effects (inverse variance)</u>
-                                        </p>
-                                        <p>Pooled proportion = 0.63958 (95% CI = 0.629281 to 0.649814)</p>
-                                        <p>&#160;</p>
-                                        <p><u>Non-combinability of studies</u>
-                                        </p>
-                                        <p>Cochran Q = 1553.004499 (df = 21) P &lt; 0.0001</p>
-                                        <p>Moment-based estimate of between studies variance = 0.268086</p>
-                                        <p>I² (inconsistency) = 98.6% (95% CI = 98.5% to 98.8%)</p>
-                                        <p>&#160;</p>
-                                        <p><u>Random effects (DerSimonian-Laird)</u>
-                                        </p>
-                                        <p>Pooled proportion = 0.785824 (95% CI = 0.689259 to 0.868571)</p>
-                                        <p>&#160;</p>
-                                        <p><u>Bias indicators</u>
-                                        </p>
-                                        <p>Begg-Mazumdar: Kendall's tau = -0.272727  P = 0.0803</p>
-                                        <p>Egger: bias = -0.692257 (90% CI = -7.606501 to 6.221986)  P = 0.8646</p>
-                                        <p>Harbord: bias = 6.349191 (90% CI = 2.914719 to 9.783663)  P = 0.0046</p>
-                                        <p>&#160;</p>
-                                        <p>The differences between trials are very large (99% inconsistency), therefore a random effects model should be followed. The weights table shows both the fixed and random effects weights – the random effects weights used to calculate the pooled proportion are similar across the studies, unlike the fixed effects weights. We conclude that the adherence for this class of drug is approximately 79%, and with 95% confidence at least 69%. Of the bias indicators, only Harbord's test points to small-study effects: the smaller trials reported higher adherence than the pooled proportion predicts.</p>
-                                        <div class="MCDropDown MCDropDown_Closed dropDown dropDownrcode"><span class="MCDropDownHead dropDownHead dropDownHeadrcode"><a class="MCDropDownHotSpot dropDownHotspot dropDownHotspotrcode MCDropDownHotSpot_ MCDropDownHotSpot_rcode rcode MCHotSpotImage" href="#" aria-expanded="false"><img class="MCDropDown_Image_Icon" src="../Skins/Default/Stylesheets/Images/transparent.gif" height="11" width="16" alt="Closed" data-mc-alt2="Open" /><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</a></span>
-                                            <div class="MCDropDownBody dropDownBody">
-                                                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p><pre class="rcode" xml:space="preserve"># Proportion meta-analysis: the StatsDirect help example (adherence with medication in
+<!doctype html>
+<html lang="en" data-help-skin="flare" data-help-root="../" data-current-topic="meta_analysis/proportion.htm"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Proportion Meta-analysis - StatsDirect</title><link rel="icon" type="image/x-icon" href="../resources/images/sd3.ico"><link rel="stylesheet" href="../help-viewer.css"><link rel="stylesheet" href="../resources/help-editor-runtime/topic.css"><style>#help-topic-body{margin:0;padding:1em;font:10pt Arial,sans-serif;line-height:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#help-topic-body img,#help-topic-body svg{max-width:100%;height:auto}#help-topic-body details.rcode{margin:1em 0}#help-topic-body details.rcode>div{margin-left:18px}#help-topic-body summary{cursor:pointer}#help-topic-body details.rcode>summary{font-weight:bold;color:#2c5f8a}#help-topic-body details.rcode>summary{list-style:none}#help-topic-body details.rcode>summary::-webkit-details-marker{display:none}#help-topic-body details.rcode>summary:before{content:"";display:inline-block;width:.45em;height:.45em;border-right:.15em solid #2c5f8a;border-bottom:.15em solid #2c5f8a;margin-left:.1em;margin-right:.65em;vertical-align:.12em;transform:rotate(-45deg);transition:transform .15s ease}#help-topic-body details.rcode[open]>summary:before{transform:rotate(45deg);vertical-align:.22em}#help-topic-body .help-topic-nav{font-size:9pt;margin-bottom:1em}#help-topic-body .help-equation{display:inline-block;max-width:100%;overflow:visible;vertical-align:middle}#help-topic-body mjx-container{max-width:100%}#help-topic-body .help-equation mjx-assistive-mml{width:1px!important;height:1px!important}#help-topic-body .help-equation.help-equation-artwork{display:inline!important;vertical-align:baseline!important;overflow:visible!important}
+#help-topic-body .help-equation-artwork>img.help-equation-original{display:inline;vertical-align:baseline;border:0;padding:0;margin:0;max-width:none;height:auto}
+#help-topic-body .help-equation-accessible{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}#help-topic-body .help-embedded .help-topic-nav{display:none}
+html[data-help-skin] #help-topic-body *,html[data-help-skin] #help-topic-body *::before,html[data-help-skin] #help-topic-body *::after{box-sizing:border-box}
+@media screen{html[data-help-skin] #help-topic-body{transform:translateZ(0);padding-top:calc(1em + .1px)}}
+html[data-help-skin="flare"] #help-topic-body img{max-width:none}
+html[data-help-skin="clean-blue"] #help-topic-body{background:#f4f8fc!important}
+html[data-help-skin="clean-blue"] #help-topic-body a:not(svg a):not(math a){color:#124f7c!important}
+html[data-help-skin="warm-paper"] #help-topic-body{background:#fffaf0!important}
+html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){color:#704310!important}
+@media print{html[data-help-skin] #help-topic-body{background:#fff!important}html[data-help-skin] #help-topic-body a:not(svg a):not(math a){color:#000!important}#help-topic-body .help-topic-nav{display:none}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code'],ignoreHtmlClass:'help-math-ignore',processHtmlClass:'help-equation-live'},svg:{fontCache:'local'}};</script><script defer src="../resources/help-editor-runtime/mathjax/tex-mml-svg.js"></script></head>
+<body><header><a class="help-identity" href="../contents.htm" aria-label="StatsDirect Help home"><img class="help-logo" src="../resources/images/sd3helplogo.png" width="228" height="33" alt="StatsDirect StatisticalHelp"></a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><article id="topic" class="help-article" aria-label="Help topic"><div id="help-topic-body" class="help-math-ignore">
+        <h1>
+            Proportion Meta-analysis</h1>
+        <p> </p>
+        <p>Menu location: <b>Analysis_Meta-Analysis_Proportion</b>.</p>
+        <p> </p>
+        <p>This function enables you to calculate an overall proportion from a set of proportions, for example from a systematic review of studies of adherence with a particular drug treatment.</p>
+        <p> </p>
+        <p>This function can also be applied to a review of diagnostic test studies to give an overall sensitivity or specificity as follows:</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td colspan="2" style="text-align: center;"><u>DISEASE/OUTCOME</u>
+                </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td style="text-decoration: underline;text-align: center;">Present</td>
+                <td style="text-decoration: underline;text-align: center;">Absent</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;">TEST:</td>
+                <td style="text-align: right;">+:</td>
+                <td style="text-align: left;">a (true +ve)</td>
+                <td style="text-align: left;">b (false +ve)</td>
+            </tr>
+            <tr>
+                <td style="text-align: right;"> </td>
+                <td style="text-align: right;">-:</td>
+                <td style="text-align: left;">c (false -ve)</td>
+                <td style="text-align: left;">d (true -ve)</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>Sensitivity = a/(a+c)</p>
+        <p>Specificity = d/(b+d)</p>
+        <p> </p>
+        <p>Another way to summarise diagnostic test performance is via the diagnostic odds ratio:</p>
+        <p> </p>
+        <p>Diagnostic odds ratio = true/false = (a * d)/(b * c)</p>
+        <p> </p>
+        <p>In order to run a meta-analysis of diagnostic odds ratios simply use the <a href="mh.htm">odds ratio meta-analysis function</a> with the experimental group as the true (test correct)  outcomes and the control group as the false outcomes – enter a as experimental group responders; a+d as experimental group number; b as control group responders; and b+c as control group total.</p>
+        <p> </p>
+        <p>Many study designs can be expressed as a proportion, and relatively complex statistical models can be explored using sets of proportions – for example a random effects logistic regression. You should seek the assistance of a statistician if you want to pursue analyses deeper than the summaries that this StatsDirect function offers.</p>
+        <p> </p>
+        <p>The inconsistency of results across studies is summarised in the I² statistic, which is the percentage of variation across studies that is due to heterogeneity rather than chance – see the <a href="heterogeneity.htm">heterogeneity</a> section for more information.</p>
+        <p> </p>
+        <p>Beyond this meta-analysis function, <a href="../regression_and_correlation/logistic.htm">logistic regression</a> can be used to compare pooled proportions. Consult with a statistician if you are considering a random effects logistic model.</p>
+        <p> </p>
+        <p>DATA INPUT:</p>
+        <p>You enter the number of subjects responding (with the study outcome) and the total number of subjects studied. You may also enter a title for each study.</p>
+        <p> </p>
+        <p><u>Technical Validation</u>
+        </p>
+        <p>StatsDirect first transforms proportions via the Freeman-Tukey double arcsine method (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman and Tukey, 1950</a>, <a href="../references/reference_list.htm#ref-miller-1978">Miller 1978</a>) then performs an inverse-variance weighted fixed and random effects meta-analysis by conventional methods (<a href="../references/reference_list.htm#ref-dersimonian-1986">DerSimonian and Laird, 1986</a>). The appropriate weight is n+0.5 but some other software uses n+1.  In our own simulation testing of the variance options within the formula 1/(n+c), varying c from 0.5 to 1, we found that the n+1 method (<a href="../references/reference_list.htm#ref-stuart-1994">Stuart and Ord, 1994</a>) is conservative, avoiding underestimation of the true variance of the transformed proportion, but the original n+0.5 method (<a href="../references/reference_list.htm#ref-freeman-1950">Freeman et al, 1950</a>) method is closer to the true variance in absolute terms. Note that there is no fixed transformation of a binomial proportion that provides optimal variance stabilization, which depends on your data - iterative variance stabilization methods may emerge with further research. The pooled proportion can be calculated as the back-transform of the weighted mean of the transformed proportions (<a href="../references/reference_list.htm#ref-miller-1978">Miller 1978</a>):</p>
+        <p> </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="0e124098af79e550f2d96b1da13716ee9a0e25707507bc656fc2f1b3bb5e176a"><span class="help-equation-accessible help-equation-live">$\displaystyle \hat{p}=\left\{1-\text{sgn}⁡(\cos{(\hat{x})})\times\sqrt{1-{\left[\sin{(\hat x)}+\frac{(\sin{(\hat x)}-1/\sin{(\hat x)})}n\right]}^2}\ \right\} \times 0.5$</span><img src="../resources/help-editor-runtime/equation-artwork/1c6758b3cb14125781da84867e0d82a754a49f643f362380b97ac76fed41926e.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="6115496d368f0f84b4c4617f89346829cff232c6647cb8ee70f074d6345bcc83"><span class="help-equation-accessible help-equation-live">$\displaystyle \hat x=\frac{\sum ⁢xw⁢}{\sum ⁢w}$</span><img src="../resources/help-editor-runtime/equation-artwork/0a3cb604cfd6f3291fc89f25e5f37f3dfd67bc77ae8ecf6f727a9b6787dafb23.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="d999f69c9673cd36e7f26286ffbe355f88b82c0100c04128a7c64eb76841aabb"><span class="help-equation-accessible help-equation-live">$\displaystyle x=\sin^{-1}\left(\sqrt{r/(n+1)}\right)+\sin^{-1} \left( \sqrt{(r+1)/(n+1)}\right)$</span><img src="../resources/help-editor-runtime/equation-artwork/b07f8d662aa4c23e30862b1d67cc9e4f62ca724302798b99bb5716105c21c9fe.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="e666b0e99830a026a3d183985d13277fd6bf9faffc924fe83c435e355b8d850e"><span class="help-equation-accessible help-equation-live">$\displaystyle w=n+0.5$</span><img src="../resources/help-editor-runtime/equation-artwork/18f9530afe1aedf3196d5a13f04024a2b7756f5a08e4cd745b1965c93a2e8b44.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="5ad054e35a68f5c8f81a3ed4563b67d1a9afbf24bd8e65fc3fef0b83f8c396d6"><span class="help-equation-accessible help-equation-live">$\displaystyle q=\sum w(x-\hat x)^2$</span><img src="../resources/help-editor-runtime/equation-artwork/a6b63e7fdd5db038eb626b9fccce93acddade2a20c6467dea21ace71ab506eea.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="0cb03c24319df17071b71f7d7b57f420361161ae4df729f009f5d6ae861aa0ae"><span class="help-equation-accessible help-equation-live">$\displaystyle \tau^2=\frac{q-(k-1)}{\sum w-\sum w^2/\sum w}$</span><img src="../resources/help-editor-runtime/equation-artwork/27e1bc453044fa2663fe4bdca28202458d91fffc75f7b7cfb9b18a99f68f5332.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="64c21c9e3d4ea7dc88e99f03a9dac143bfc0039c887d2c4f66e49aa924811caf"><span class="help-equation-accessible help-equation-live">$\displaystyle w_r=\frac{1}{\tau^2+1/w}$</span><img src="../resources/help-editor-runtime/equation-artwork/1dacb9483ff6e3efb04d1e99aed8c1e87bae904ff8f4d1d61455eb8e7fb671a3.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="fb6b036ad042b172e0b8e233ba69f2466e81ea68f2bdd5e2e3592961ea8761c6"><span class="help-equation-accessible help-equation-live">$\displaystyle \hat x_r=\frac{\sum xw_r}{\sum w_r}$</span><img src="../resources/help-editor-runtime/equation-artwork/38629fb20b6a6f6be866b8ef2ddf797ef03f07167a93f6920105388e2c6dccb3.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="7bd2a623e91d72082e2e46a1d5d8ee65bf42b35eec47b24c6379f10eebfef50b"><span class="help-equation-accessible help-equation-live">$\displaystyle \hat{p_r}=\left\{1-\text{sgn}⁡(\cos{(\hat{x}_r)})\times\sqrt{1-{\left[\sin{(\hat x_r)}+\frac{(\sin{(\hat x_r)}-1/\sin{(\hat x_r)})}n\right]}^2}\ \right\} \times 0.5$</span><img src="../resources/help-editor-runtime/equation-artwork/1d2258c76216c9c04adf434b6865638405fe15e9b281f9df4003423a16eeef8f.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>- where p hat is the fixed effects pooled proportion, x is the Freeman-Tukey transformed proportion, w is the inverse variance weight for the transformed proportion, q is the Cochran q statistic, tau squared is the moment-based estimate of the between-studies variance, w r is the DerSimonian-Laird weight, p hat r is the random effects estimate of the pooled proportion, and n in the back-transforms to p hat and p hat r is the harmonic mean of the study sample sizes.</p>
+        <p> </p>
+        <p>An alternative, simpler, back transform (Stuart-Ord), which is the default choice of inverse transform in StatsDirect, is:</p>
+        <p>
+            <span class="help-equation help-equation-artwork help-math-ignore" data-equation-source-key="49d321b26f22dc8842173ee9fb93be3b9b04e7e31a97564efdafb5e9b6e83677"><span class="help-equation-accessible help-equation-live">$\displaystyle \hat p=\sin (\hat x/2)^2$</span><img src="../resources/help-editor-runtime/equation-artwork/3f7a740953b825797bf1e64470cf67c94443e036ff27ee9ab85f3bbd226ad511.svg" alt="" aria-hidden="true" class="help-equation-original" /></span>
+        </p>
+        <p>This form is strictly less accurate than the Miller method above but it is less susceptible to the bias effects of non-linear transformations, giving more credible estimates of pooled proportions where the true population value is close to 0 or 1.</p>
+        <p> </p>
+        <p> </p>
+        <p><u>Example</u>
+        </p>
+        <p>The following data represent adherence with medication from 22 fictitious trials of a class of drug:</p>
+        <p> </p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;text-align: left;">Trial</td>
+                <td style="text-decoration: underline;text-align: right;">Adherent</td>
+                <td style="text-decoration: underline;text-align: right;">Total</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Brown</td>
+                <td style="text-align: right;">214</td>
+                <td style="text-align: right;">311</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Lamont</td>
+                <td style="text-align: right;">58</td>
+                <td style="text-align: right;">65</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Lally</td>
+                <td style="text-align: right;">59</td>
+                <td style="text-align: right;">67</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Orwell</td>
+                <td style="text-align: right;">182</td>
+                <td style="text-align: right;">285</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Wagner</td>
+                <td style="text-align: right;">65</td>
+                <td style="text-align: right;">73</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Werner</td>
+                <td style="text-align: right;">66</td>
+                <td style="text-align: right;">116</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Venner</td>
+                <td style="text-align: right;">99</td>
+                <td style="text-align: right;">183</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Adams</td>
+                <td style="text-align: right;">600</td>
+                <td style="text-align: right;">696</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Brenner</td>
+                <td style="text-align: right;">45</td>
+                <td style="text-align: right;">57</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Borrowdale</td>
+                <td style="text-align: right;">165</td>
+                <td style="text-align: right;">277</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Byers</td>
+                <td style="text-align: right;">32</td>
+                <td style="text-align: right;">35</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Daniels</td>
+                <td style="text-align: right;">49</td>
+                <td style="text-align: right;">60</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Darling</td>
+                <td style="text-align: right;">175</td>
+                <td style="text-align: right;">199</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Ehert</td>
+                <td style="text-align: right;">155</td>
+                <td style="text-align: right;">311</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Fern</td>
+                <td style="text-align: right;">64</td>
+                <td style="text-align: right;">81</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Mullen</td>
+                <td style="text-align: right;">526</td>
+                <td style="text-align: right;">537</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Orton</td>
+                <td style="text-align: right;">104</td>
+                <td style="text-align: right;">107</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Jones</td>
+                <td style="text-align: right;">97</td>
+                <td style="text-align: right;">102</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Ning</td>
+                <td style="text-align: right;">2310</td>
+                <td style="text-align: right;">4612</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Sherraton</td>
+                <td style="text-align: right;">72</td>
+                <td style="text-align: right;">91</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Zu</td>
+                <td style="text-align: right;">37</td>
+                <td style="text-align: right;">37</td>
+            </tr>
+            <tr>
+                <td style="text-align: left;">Tarone</td>
+                <td style="text-align: right;">31</td>
+                <td style="text-align: right;">87</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p>To analyse these data in StatsDirect first prepare them in three workbook columns and label these columns appropriately. Alternatively, open the test workbook using the file open function of the file menu. Then select proportion from the meta-analysis section of the analysis menu, and then <a href="../workbook/selecting_data.htm">select</a> the columns 'Total', 'Adherent' and 'Trial' as prompted.</p>
+        <p> </p>
+        <p>For this example:</p>
+        <p> </p>
+        <p>Method: Stuart-Ord (inverse double arcsine square root)</p>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Stratum</td>
+                <td style="text-decoration: underline;">Proportion</td>
+                <td colspan="2" style="text-decoration: underline;">95% CI (exact)</td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>0.688103</td>
+                <td>0.633392</td>
+                <td>0.739187</td>
+                <td>Brown</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>0.892308</td>
+                <td>0.790618</td>
+                <td>0.955591</td>
+                <td>Lamont</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>0.880597</td>
+                <td>0.778215</td>
+                <td>0.947015</td>
+                <td>Lally</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>0.638596</td>
+                <td>0.579853</td>
+                <td>0.694424</td>
+                <td>Orwell</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>0.890411</td>
+                <td>0.795436</td>
+                <td>0.951484</td>
+                <td>Wagner</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>0.568966</td>
+                <td>0.473763</td>
+                <td>0.660561</td>
+                <td>Werner</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>0.540984</td>
+                <td>0.465895</td>
+                <td>0.614723</td>
+                <td>Venner</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>0.862069</td>
+                <td>0.834196</td>
+                <td>0.886827</td>
+                <td>Adams</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>0.789474</td>
+                <td>0.66113</td>
+                <td>0.88621</td>
+                <td>Brenner</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>0.595668</td>
+                <td>0.5353</td>
+                <td>0.653966</td>
+                <td>Borrowdale</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>0.914286</td>
+                <td>0.769425</td>
+                <td>0.981962</td>
+                <td>Byers</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>0.816667</td>
+                <td>0.695604</td>
+                <td>0.904764</td>
+                <td>Daniels</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>0.879397</td>
+                <td>0.825884</td>
+                <td>0.921178</td>
+                <td>Darling</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>0.498392</td>
+                <td>0.441461</td>
+                <td>0.555354</td>
+                <td>Ehert</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>0.790123</td>
+                <td>0.685373</td>
+                <td>0.872724</td>
+                <td>Fern</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>0.979516</td>
+                <td>0.963644</td>
+                <td>0.989731</td>
+                <td>Mullen</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>0.971963</td>
+                <td>0.920245</td>
+                <td>0.99418</td>
+                <td>Orton</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>0.95098</td>
+                <td>0.889304</td>
+                <td>0.983894</td>
+                <td>Jones</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>0.500867</td>
+                <td>0.486332</td>
+                <td>0.515402</td>
+                <td>Ning</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>0.791209</td>
+                <td>0.693308</td>
+                <td>0.869362</td>
+                <td>Sherraton</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>1</td>
+                <td>0.905109</td>
+                <td>1</td>
+                <td>Zu [97.5% one-sided CI]</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>0.356322</td>
+                <td>0.256493</td>
+                <td>0.466236</td>
+                <td>Tarone</td>
+            </tr>
+        </table>
+        <p> </p>
+        <table cellspacing="0" style="caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tr>
+                <td style="text-decoration: underline;">Stratum</td>
+                <td style="text-decoration: underline;">Standardized effect</td>
+                <td style="text-decoration: underline;">Variance</td>
+                <td colspan="2" style="text-decoration: underline;">% Weights (fixed, random)</td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>1.955196</td>
+                <td>0.00321</td>
+                <td>3.708333</td>
+                <td>4.657589</td>
+                <td>Brown</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2.45427</td>
+                <td>0.015267</td>
+                <td>0.779762</td>
+                <td>4.459405</td>
+                <td>Lamont</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2.419139</td>
+                <td>0.014815</td>
+                <td>0.803571</td>
+                <td>4.466536</td>
+                <td>Lally</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>1.850661</td>
+                <td>0.003503</td>
+                <td>3.39881</td>
+                <td>4.652575</td>
+                <td>Orwell</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2.450333</td>
+                <td>0.013605</td>
+                <td>0.875</td>
+                <td>4.485712</td>
+                <td>Wagner</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>1.707983</td>
+                <td>0.008584</td>
+                <td>1.386905</td>
+                <td>4.56713</td>
+                <td>Werner</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>1.65241</td>
+                <td>0.00545</td>
+                <td>2.184524</td>
+                <td>4.619459</td>
+                <td>Venner</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>2.379077</td>
+                <td>0.001436</td>
+                <td>8.291667</td>
+                <td>4.688254</td>
+                <td>Adams</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>2.176196</td>
+                <td>0.017391</td>
+                <td>0.684524</td>
+                <td>4.426224</td>
+                <td>Brenner</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>1.762619</td>
+                <td>0.003604</td>
+                <td>3.303571</td>
+                <td>4.650846</td>
+                <td>Borrowdale</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>2.508913</td>
+                <td>0.028169</td>
+                <td>0.422619</td>
+                <td>4.265199</td>
+                <td>Byers</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>2.243481</td>
+                <td>0.016529</td>
+                <td>0.720238</td>
+                <td>4.439636</td>
+                <td>Daniels</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>2.426484</td>
+                <td>0.005013</td>
+                <td>2.375</td>
+                <td>4.626852</td>
+                <td>Darling</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>1.567591</td>
+                <td>0.00321</td>
+                <td>3.708333</td>
+                <td>4.657589</td>
+                <td>Ehert</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>2.181244</td>
+                <td>0.01227</td>
+                <td>0.970238</td>
+                <td>4.50708</td>
+                <td>Fern</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>2.848202</td>
+                <td>0.00186</td>
+                <td>6.39881</td>
+                <td>4.680878</td>
+                <td>Mullen</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>2.780486</td>
+                <td>0.009302</td>
+                <td>1.279762</td>
+                <td>4.555298</td>
+                <td>Orton</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>2.675681</td>
+                <td>0.009756</td>
+                <td>1.220238</td>
+                <td>4.547858</td>
+                <td>Jones</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>1.572531</td>
+                <td>0.000217</td>
+                <td>54.910714</td>
+                <td>4.709554</td>
+                <td>Ning</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>2.184792</td>
+                <td>0.010929</td>
+                <td>1.089286</td>
+                <td>4.528741</td>
+                <td>Sherraton</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>2.978651</td>
+                <td>0.026667</td>
+                <td>0.446429</td>
+                <td>4.286939</td>
+                <td>Zu [97.5% one-sided CI]</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>1.282717</td>
+                <td>0.011429</td>
+                <td>1.041667</td>
+                <td>4.520646</td>
+                <td>Tarone</td>
+            </tr>
+        </table>
+        <p> </p>
+        <p><u>Fixed effects (inverse variance)</u>
+        </p>
+        <p>Pooled proportion = 0.63958 (95% CI = 0.629281 to 0.649814)</p>
+        <p> </p>
+        <p><u>Non-combinability of studies</u>
+        </p>
+        <p>Cochran Q = 1553.004499 (df = 21) P &lt; 0.0001</p>
+        <p>Moment-based estimate of between studies variance = 0.268086</p>
+        <p>I² (inconsistency) = 98.6% (95% CI = 98.5% to 98.8%)</p>
+        <p> </p>
+        <p><u>Random effects (DerSimonian-Laird)</u>
+        </p>
+        <p>Pooled proportion = 0.785824 (95% CI = 0.689259 to 0.868571)</p>
+        <p> </p>
+        <p><u>Bias indicators</u>
+        </p>
+        <p>Begg-Mazumdar: Kendall's tau = -0.272727  P = 0.0803</p>
+        <p>Egger: bias = -0.692257 (90% CI = -7.606501 to 6.221986)  P = 0.8646</p>
+        <p>Harbord: bias = 6.349191 (90% CI = 2.914719 to 9.783663)  P = 0.0046</p>
+        <p> </p>
+        <p>The differences between trials are very large (99% inconsistency), therefore a random effects model should be followed. The weights table shows both the fixed and random effects weights – the random effects weights used to calculate the pooled proportion are similar across the studies, unlike the fixed effects weights. We conclude that the adherence for this class of drug is approximately 79%, and with 95% confidence at least 69%. Of the bias indicators, only Harbord's test points to small-study effects: the smaller trials reported higher adherence than the pooled proportion predicts.</p>
+        <details class="rcode">
+            <summary class="rcode"><img class="rlogo" src="../resources/images/rcode/r-logo.png" alt="R" title="R code for this example" style="width: 26px;height: 20px;" /> R code</summary>
+            <div>
+                <p class="rcodenote">This R code reproduces the example above. It needs no packages and was checked with R 4.6.1. Paste it into R, or save it as a script and run it.</p>
+                <pre class="rcode" xml:space="preserve"># Proportion meta-analysis: the StatsDirect help example (adherence with medication in
 # 22 fictitious trials; the test workbook's Meta-analysis worksheet columns Trial,
 # Adherent and Total) in R
 trial &lt;- c("Brown", "Lamont", "Lally", "Orwell", "Wagner", "Werner", "Venner", "Adams",
@@ -889,29 +792,10 @@ cat("Harbord: bias = ", six(coef(harbord)[1]), " (90% CI = ",
     six(confint(harbord, level = 0.9)[1, 1]), " to ",
     six(confint(harbord, level = 0.9)[1, 2]), ")  ",
     pv(summary(harbord)$coefficients[1, 4]), "\n", sep = "")</pre>
-                                            </div>
-                                        </div>
-                                        <p>&#160;</p>
-                                    </div>
-                                    <MadCap:pageFooter>
-                                        <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank">Download software here</a>.</p>
-                                    </MadCap:pageFooter>
-                                    <!-- Google tag (gtag.js) -->
-                                    <script type="text/javascript" async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GZZ7X1JX4D">
-                                    </script>
-                                    <script type="text/javascript">/* <![CDATA[ */
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-GZZ7X1JX4D');
-        /* ]]> */</script>
-                                </div>
-                            </div>
-                        </div>
-                    </div><a data-close="true"></a>
-                </div>
             </div>
-        </div>
-    </body>
-</html>
+        </details>
+        <p> </p>
+
+    <footer class="help-shared-footer">
+            <p style="font-family: sans-serif;font-size: 8pt;margin-top:20pt;">Copyright © 1987-2026 Iain E. Buchan, all rights reserved. <a href="https://www.statsdirect.com/Download.aspx" target="_blank" rel="noopener noreferrer">Download software here</a>.</p>
+        </footer></div></article></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script><script src="../contents-data.js"></script><script src="../search-index.js"></script><script src="../help-viewer.js"></script></body></html>
