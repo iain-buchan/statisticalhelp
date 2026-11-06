@@ -75,6 +75,48 @@ try
         "Subsequent launches and upgraded seeds never overwrite an existing author's work");
     Check(!Directory.GetDirectories(expectedRoot, ".seed-*").Any(), "Successful initialization leaves no staging directories");
 
+    string originalWorkspace = Path.Combine(fixture, "Existing authoring workspace α");
+    string originalHelp = Path.Combine(originalWorkspace, "HelpSource");
+    Write(Path.Combine(originalHelp, HelpProject.MarkerFile), "{}");
+    Write(Path.Combine(originalHelp, "Content", "contents.htm"), authorTopic);
+    Write(Path.Combine(originalHelp, "Project", "TOCs", "STATSDIRECT.fltoc"),
+        "<CatapultToc><TocEntry Title='My work' Link='/Content/contents.htm'/></CatapultToc>");
+    string tutor = Path.Combine(originalWorkspace, "TutorSource", "starter-course.json");
+    Write(tutor, "{\"id\":\"my-tutor-course\"}");
+    string preference = Path.Combine(originalWorkspace, "Settings", "authoring-preferences.json");
+    Write(preference, JsonSerializer.Serialize(new { helpPublication = new { tutorCoursePath = tutor } }));
+    var originalHashes = Directory.GetFiles(originalWorkspace, "*", SearchOption.AllDirectories).ToDictionary(path => path, Hash);
+    string location = Path.Combine(expectedRoot, HelpEditorWorkspace.WorkspaceLocationFile);
+    void SelectWorkspace(string path) => Write(location, JsonSerializer.Serialize(new { schemaVersion = 1, workspaceRoot = path }));
+    SelectWorkspace(originalWorkspace);
+    var redirected = HelpEditorWorkspace.Resolve(installation, user);
+    redirected.PrepareDefaultProject();
+    Check(redirected.RootPath == originalWorkspace && redirected.DefaultProjectPath == originalHelp && redirected.SeedProjectPath == null,
+        "An installed editor selects the existing help, tutor and publication workspace without seeding");
+    Check(originalHashes.All(pair => Hash(pair.Key) == pair.Value) &&
+        Directory.GetFiles(originalWorkspace, "*", SearchOption.AllDirectories).Length == originalHashes.Count &&
+        !Directory.Exists(Path.Combine(expectedRoot, "TutorSource")),
+        "Selecting an existing workspace preserves all original bytes and creates no duplicate tutor source");
+    Check(HelpEditorWorkspace.Resolve(Path.Combine(dev, "App"), user).RootPath == dev,
+        "The installed workspace setting leaves developer layouts unchanged");
+
+    foreach (string target in new[] { "Relative root", Path.Combine(fixture, "Missing workspace"), seed })
+    {
+        SelectWorkspace(target);
+        bool refused = false;
+        try { _ = HelpEditorWorkspace.Resolve(installation, user); }
+        catch (Exception error) when (error is IOException or InvalidDataException or InvalidOperationException or ArgumentException) { refused = true; }
+        Check(refused, "An invalid configured location is refused without falling back");
+    }
+    Write(location, "{broken");
+    bool malformedLocationRejected = false;
+    try { _ = HelpEditorWorkspace.Resolve(installation, user); } catch (InvalidDataException) { malformedLocationRejected = true; }
+    Check(malformedLocationRejected && opened.ReadTopic("contents.htm") == authorTopic,
+        "Invalid workspace JSON preserves the other workspace instead of switching to it");
+    SelectWorkspace(originalWorkspace);
+    Check(HelpEditorWorkspace.Resolve(installation, user).RootPath == originalWorkspace && originalHashes.All(pair => Hash(pair.Key) == pair.Value),
+        "The per-user workspace choice remains effective with an updated installation seed");
+
     string brokenInstallation = Path.Combine(fixture, "Broken installation");
     string brokenSeed = Seed(brokenInstallation);
     File.WriteAllText(Path.Combine(brokenSeed, "Content", "contents.htm"), "<html><body>malformed");

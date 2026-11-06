@@ -28,7 +28,23 @@ internal static class Program
         File.WriteAllText(Path.Combine(application, HelpEditorWorkspace.InstallMarkerFile), "{\"schemaVersion\":1}");
         string originalHash = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(seed, "Content", "contents.htm"))));
         File.SetAttributes(Path.Combine(seed, "Content", "contents.htm"), FileAttributes.ReadOnly);
-        var workspace = HelpEditorWorkspace.Resolve(application, Path.Combine(fixture, "Isolated user data"));
+        string user = Path.Combine(fixture, "Isolated user data");
+        string? selectedRoot = null;
+        if (args.Contains("--redirected"))
+        {
+            selectedRoot = Path.Combine(fixture, "Existing authoring workspace");
+            foreach (string file in Directory.GetFiles(seed, "*", SearchOption.AllDirectories))
+            {
+                string destination = Path.Combine(selectedRoot, "HelpSource", Path.GetRelativePath(seed, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
+                File.Copy(file, destination);
+                File.SetAttributes(destination, File.GetAttributes(destination) & ~FileAttributes.ReadOnly);
+            }
+            string settings = Path.Combine(user, "StatsDirect", "HelpEditor", HelpEditorWorkspace.WorkspaceLocationFile);
+            Directory.CreateDirectory(Path.GetDirectoryName(settings)!);
+            File.WriteAllText(settings, JsonSerializer.Serialize(new { schemaVersion = 1, workspaceRoot = selectedRoot }));
+        }
+        var workspace = HelpEditorWorkspace.Resolve(application, user);
         ApplicationConfiguration.Initialize();
         Application.ThreadException += (_, e) => Check(false, "No unhandled installed-host exception: " + e.Exception);
         form = new MainForm(workspaceOverride: workspace) { SuppressDialogs = true, ShowInTaskbar = false, StartPosition = FormStartPosition.Manual, WindowState = FormWindowState.Normal, Location = new(-16000, 0), Size = new(1600, 1000) };
@@ -39,6 +55,10 @@ internal static class Program
                 await form.Initialization.WaitAsync(TimeSpan.FromSeconds(45));
                 Check(form.LastError == null && form.CurrentProject.RootPath == workspace.DefaultProjectPath, "Installed startup creates and opens the per-user working copy without a supplied project argument");
                 Check(form.ArtifactRoot == workspace.RootPath && !form.ArtifactRoot.StartsWith(application, StringComparison.OrdinalIgnoreCase), "Installed runtime stores mutable state outside its program installation");
+                if (selectedRoot != null)
+                    Check(form.ArtifactRoot == selectedRoot && form.CurrentProject.RootPath == Path.Combine(selectedRoot, "HelpSource") &&
+                        !Directory.Exists(Path.Combine(user, "StatsDirect", "HelpEditor", "HelpSource")),
+                        "Redirected startup opens the original project and never seeds a second AppData working copy");
                 Check(form.EditorWebView.CoreWebView2.Environment.UserDataFolder == Path.Combine(workspace.RootPath, ".editor-profile"), "The real WebView2 editor profile uses the isolated per-user workspace");
                 var until = DateTime.UtcNow.AddSeconds(10);
                 bool imageLoaded = false;
@@ -61,7 +81,8 @@ internal static class Program
             catch (Exception ex) { Check(false, "Installed native checks complete: " + ex); }
             finally
             {
-                File.WriteAllText(Path.Combine(root, "evidence", "installed-workspace-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, completed = true, passed = Checks.Count - failed, failed, fixture, checks = Checks }, new JsonSerializerOptions { WriteIndented = true }));
+                string report = selectedRoot == null ? "installed-workspace-windows-checks.json" : "installed-redirected-workspace-windows-checks.json";
+                File.WriteAllText(Path.Combine(root, "evidence", report), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, completed = true, passed = Checks.Count - failed, failed, fixture, checks = Checks }, new JsonSerializerOptions { WriteIndented = true }));
                 typeof(MainForm).GetField("closingApproved", BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(form, true);
                 form.Close();
             }

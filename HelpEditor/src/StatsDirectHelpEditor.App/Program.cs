@@ -1,3 +1,5 @@
+using StatsDirect.HelpEditor.Core;
+
 namespace StatsDirect.HelpEditor.App;
 
 internal static class Program
@@ -13,7 +15,14 @@ internal static class Program
             if (args[i].Equals("--project", StringComparison.OrdinalIgnoreCase)) project = args[++i];
             else if (args[i].Equals("--topic", StringComparison.OrdinalIgnoreCase)) topic = args[++i];
         }
-        var main = new MainForm(project, initialTopic: topic);
+        HelpEditorWorkspace workspace;
+        try { workspace = HelpEditorWorkspace.Resolve(AppContext.BaseDirectory); }
+        catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or InvalidOperationException)
+        {
+            MessageBox.Show(error.Message, "StatsDirect Help Editor workspace", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+        var main = new MainForm(project, initialTopic: topic, workspaceOverride: workspace);
         if (args.Contains("--tutor", StringComparer.OrdinalIgnoreCase)) main.Shown += async (_, _) =>
         {
             try { await main.Initialization; await main.OpenTutorAuthoringAsync(); }

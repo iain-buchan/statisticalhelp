@@ -6,6 +6,7 @@ namespace StatsDirect.HelpEditor.Core;
 public sealed record HelpEditorWorkspace(string RootPath, string DefaultProjectPath, string? SeedProjectPath)
 {
     public const string InstallMarkerFile = ".statsdirect-help-editor-install.json";
+    public const string WorkspaceLocationFile = "Settings/workspace-location.json";
 
     public static HelpEditorWorkspace Resolve(string applicationDirectory, string? localApplicationData = null)
     {
@@ -19,7 +20,8 @@ public sealed record HelpEditorWorkspace(string RootPath, string DefaultProjectP
             string local = localApplicationData ?? Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             if (string.IsNullOrWhiteSpace(local)) throw new IOException("The current user's local application-data folder is unavailable.");
             string workspace = Path.Combine(Path.GetFullPath(local), "StatsDirect", "HelpEditor");
-            return new(workspace, Path.Combine(workspace, "HelpSource"), Path.Combine(application, "HelpSource"));
+            return ReadInstalledWorkspaceLocation(workspace, application)
+                ?? new(workspace, Path.Combine(workspace, "HelpSource"), Path.Combine(application, "HelpSource"));
         }
         // Developer and isolated-test layouts retain their nearest source root.
         for (DirectoryInfo? directory = new(application); directory != null; directory = directory.Parent)
@@ -28,6 +30,37 @@ public sealed record HelpEditorWorkspace(string RootPath, string DefaultProjectP
                     return new(directory.FullName, Path.Combine(directory.FullName, folder), null);
         string fallback = Path.GetFullPath(Path.Combine(application, "..", "..", "..", "..", ".."));
         return new(fallback, Path.Combine(fallback, "SampleProject"), null);
+    }
+
+    private static HelpEditorWorkspace? ReadInstalledWorkspaceLocation(string defaultWorkspace, string application)
+    {
+        string path = Path.Combine(defaultWorkspace, WorkspaceLocationFile);
+        SafePaths.CheckNoLinks(path);
+        string text;
+        try { text = File.ReadAllText(path); }
+        catch (FileNotFoundException) { return null; }
+        catch (DirectoryNotFoundException) { return null; }
+        try
+        {
+            using var json = JsonDocument.Parse(text);
+            var settings = json.RootElement;
+            if (settings.ValueKind != JsonValueKind.Object || settings.EnumerateObject().Count() != 2 ||
+                !settings.TryGetProperty("schemaVersion", out var version) || version.ValueKind != JsonValueKind.Number ||
+                !version.TryGetInt32(out int schema) || schema != 1 ||
+                !settings.TryGetProperty("workspaceRoot", out var value) || value.ValueKind != JsonValueKind.String ||
+                !Path.IsPathFullyQualified(value.GetString()!))
+                throw new JsonException("Expected schema version 1 and an absolute workspaceRoot.");
+            string root = Path.TrimEndingDirectorySeparator(Path.GetFullPath(value.GetString()!));
+            if (SafePaths.IsWithin(root, application) || SafePaths.IsWithin(application, root))
+                throw new InvalidDataException("The authoring workspace must be separate from the installed program.");
+            SafePaths.CheckNoLinks(Path.Combine(root, "TutorSource"));
+            var project = HelpProject.Open(Path.Combine(root, "HelpSource"));
+            return new(root, project.RootPath, null);
+        }
+        catch (Exception error) when (error is JsonException or ArgumentException or NotSupportedException)
+        {
+            throw new InvalidDataException("The workspace location is invalid. Check " + path + " for an absolute workspaceRoot.", error);
+        }
     }
 
     /// <summary>First run copies the installed seed once; upgrades never replace an author's work.</summary>

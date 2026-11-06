@@ -25,6 +25,12 @@ ChatGPT account storage. The installed seed excludes personal Flare history,
 publishing destinations and generated/private data. Bundled third-party licenses
 and notices are retained.
 
+To reuse an existing authoring workspace, create `Settings/workspace-location.json`
+under `%LOCALAPPDATA%/StatsDirect/HelpEditor` with `schemaVersion` set to `1` and
+`workspaceRoot` set to the absolute path of the folder containing the marked
+`HelpSource` working copy. The installed editor then uses that workspace's tutor
+source and publication settings on every launch.
+
 For a signed release, first commit the reviewed source, then run:
 
 ```powershell
