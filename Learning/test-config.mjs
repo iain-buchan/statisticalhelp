@@ -1,17 +1,18 @@
-// Where the shared Learning tests find their inputs. The defaults are the Mac repository's layout;
-// a host points the tests elsewhere with STATSDIRECT_CONTENT_ROOT (the folder holding Learn/lessons.json,
-// Learn/provider-course-example.json, analysis-menu.json and Help/), STATSDIRECT_LEARN_ARCHIVE (an archived
-// question bank; required when named) and STATSDIRECT_RSCRIPT (or the repository's RSCRIPT).
+// Where the shared Learning tests find their inputs. A host runs the tests from its own root and sets
+// STATSDIRECT_CONTENT_ROOT (the folder holding Learn/lessons.json, Learn/provider-course-example.json,
+// analysis-menu.json and Help/; required), STATSDIRECT_LEARN_ARCHIVE (an archived question bank; optional,
+// required to exist when named) and STATSDIRECT_RSCRIPT (or RSCRIPT).
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync, writeFileSync, rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 const folder = value => pathToFileURL(value.endsWith('/') || value.endsWith('\\') ? value : value + '/');
-export const contentRoot = process.env.STATSDIRECT_CONTENT_ROOT ? folder(process.env.STATSDIRECT_CONTENT_ROOT) : new URL('../Content/', import.meta.url);
+if (!process.env.STATSDIRECT_CONTENT_ROOT) throw new Error('Set STATSDIRECT_CONTENT_ROOT to the folder holding Learn/lessons.json, Learn/provider-course-example.json, analysis-menu.json and Help/ for the shared Learning tests.');
+export const contentRoot = folder(process.env.STATSDIRECT_CONTENT_ROOT);
 export const contentFile = relative => new URL(relative, contentRoot);
 export const archiveRequested = Boolean(process.env.STATSDIRECT_LEARN_ARCHIVE);
-export const archivedBank = archiveRequested ? pathToFileURL(process.env.STATSDIRECT_LEARN_ARCHIVE) : new URL('../Docs/Learn/bank.mjs', import.meta.url);
+export const archivedBank = archiveRequested ? pathToFileURL(process.env.STATSDIRECT_LEARN_ARCHIVE) : null;
 export const rscript = process.env.STATSDIRECT_RSCRIPT || process.env.RSCRIPT || (process.platform === 'darwin' ? '/Library/Frameworks/R.framework/Resources/bin/Rscript' : 'Rscript');
 // Runs Rscript on a script file, or on the expressions given after -e, which are written in order to one temporary
 // file first because Rscript.exe does not keep a multiline -e argument intact. Output is returned as text. On Windows

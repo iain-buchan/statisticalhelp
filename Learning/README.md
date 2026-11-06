@@ -37,15 +37,14 @@ that publication separately from the code here.
 
 ## Tests
 
-From this folder, with the dependencies installed (`pnpm install --frozen-lockfile`):
-
-```sh
-STATSDIRECT_CONTENT_ROOT=<folder holding Learn/lessons.json> STATSDIRECT_RSCRIPT=<path to Rscript> node --test ./*.test.mjs
-```
-
-`STATSDIRECT_LEARN_ARCHIVE` may name an archived lesson bank to compare against; unset, that
-comparison is skipped, and a named but missing archive fails. Each application runs these tests
-from its submodule path in its own continuous integration.
+The tests run from a host's own root, not from this folder: the host supplies its `bank.mjs`
+beside the package (its remap or a copy), its `node_modules` above the package, and three
+variables: `STATSDIRECT_CONTENT_ROOT` (required; the folder holding `Learn/lessons.json`,
+`Learn/provider-course-example.json`, `analysis-menu.json` and `Help/`), `STATSDIRECT_RSCRIPT`
+(the Rscript to run; `RSCRIPT` is also read), and `STATSDIRECT_LEARN_ARCHIVE` (optional; an
+archived question bank to compare against; unset skips that comparison, named but missing fails).
+The Windows host runs them through `tests/Learning/run-shared.mjs`, the Mac through
+`Learn/test-register.mjs`; each runs them from its submodule path in its own continuous integration.
 
 ## Conventions
 
