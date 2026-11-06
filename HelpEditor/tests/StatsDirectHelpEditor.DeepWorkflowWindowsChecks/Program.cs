@@ -10,30 +10,76 @@ internal static class Program
     private static MainForm form = null!;
     private static string root = "", testRoot = "", fixture = "";
     private static readonly List<object> checks = [];
+    private static readonly List<object> cleanup = [];
     private static int passed, failed;
+    private static bool cleanupAttempted, cleanupFaultMode;
     private const string Topic = "basics/page.htm";
     [STAThread]
     private static int Main(string[] args)
     {
         root = Path.GetFullPath(args[0]); testRoot = Path.Combine(Path.GetTempPath(), "sdhe-workflow-" + Guid.NewGuid().ToString("N")[..8]);
+        cleanupFaultMode = args.Contains("--cleanup-fault", StringComparer.Ordinal);
         fixture = Path.Combine(testRoot, "HelpSource"); CreateFixture();
         ApplicationConfiguration.Initialize();
-        Application.ThreadException += (_, e) => Check(false, "Unhandled workflow UI exception", e.Exception.ToString());
+        Application.ThreadException += (_, e) => { Check(false, "Unhandled workflow UI exception", e.Exception.ToString()); CleanupNativeWindow(); };
         form = new MainForm(fixture, _ => throw new InvalidOperationException("Unexpected external URL"), initialTopic: Topic, workspaceOverride: new HelpEditorWorkspace(testRoot, fixture, null))
         { SuppressDialogs = true, WindowState = FormWindowState.Normal, ShowInTaskbar = false, StartPosition = FormStartPosition.Manual, Location = new(-16000, 0), Size = new(1400, 900) };
         form.Shown += async (_, _) =>
         {
-            try { await Run(); }
-            catch (Exception ex) { Check(false, "Workflow checks completed", ex.ToString()); }
-            finally
+            try
             {
-                Directory.CreateDirectory(Path.Combine(root, "evidence"));
-                File.WriteAllText(Path.Combine(root, "evidence", "deep-workflow-windows-checks.json"), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, count = passed + failed, passedCount = passed, failedCount = failed, checks }, new JsonSerializerOptions { WriteIndented = true }));
-                Console.WriteLine($"{passed} workflow checks passed; {failed} failed");
-                typeof(MainForm).GetField("closingApproved", BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(form, true); form.Close();
+                if (cleanupFaultMode)
+                {
+                    await form.Initialization.WaitAsync(TimeSpan.FromSeconds(45));
+                    NativeReflection.Invoke(form, "SetBusy", true);
+                    throw new InvalidOperationException("Injected workflow failure while the native form is busy.");
+                }
+                await Run();
             }
+            catch (Exception ex) { Check(false, "Workflow checks completed", ex.ToString()); }
+            finally { CleanupNativeWindow(); }
         };
-        Application.Run(form); return failed == 0 ? 0 : 1;
+        try { Application.Run(form); }
+        catch (Exception ex) { Check(false, "Native workflow message loop failed", ex.ToString()); }
+        finally
+        {
+            if (!cleanupAttempted) CleanupNativeWindow();
+            Check(form.IsDisposed && Application.OpenForms.Count == 0, "Workflow cleanup disposes its form and leaves no open native windows");
+            Directory.CreateDirectory(Path.Combine(root, "evidence"));
+            object report = cleanupFaultMode ? new
+            {
+                checkedAtUtc = DateTimeOffset.UtcNow, fixture, expectedFault = true, expectedFailureCount = 2, observedFailureCount = failed,
+                formDisposed = form.IsDisposed, openNativeFormCount = Application.OpenForms.Count, checks, cleanup
+            } : (object)new
+            {
+                checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, count = passed + failed, passedCount = passed, failedCount = failed,
+                formDisposed = form.IsDisposed, openNativeFormCount = Application.OpenForms.Count, checks, cleanup
+            };
+            string reportName = cleanupFaultMode ? "deep-workflow-cleanup-fault.json" : "deep-workflow-windows-checks.json";
+            File.WriteAllText(Path.Combine(root, "evidence", reportName), JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true }));
+            Console.WriteLine($"{passed} workflow checks passed; {failed} failed");
+        }
+        return failed == 0 ? 0 : 1;
+    }
+
+    private static void CleanupNativeWindow()
+    {
+        if (cleanupAttempted) return;
+        cleanupAttempted = true;
+        Cleanup("Approve close", () =>
+        {
+            if (cleanupFaultMode) throw new InvalidOperationException("Injected close-approval reflection failure.");
+            typeof(MainForm).GetField("closingApproved", BindingFlags.NonPublic | BindingFlags.Instance)!.SetValue(form, true);
+        });
+        Cleanup("Close native form", () => form.Close());
+        Cleanup("Dispose native form", () => { if (!form.IsDisposed) form.Dispose(); });
+        Cleanup("Exit native message loop", Application.ExitThread);
+    }
+
+    private static void Cleanup(string name, Action action)
+    {
+        try { action(); cleanup.Add(new { name, passed = true }); }
+        catch (Exception ex) { cleanup.Add(new { name, passed = false, error = ex.ToString() }); Check(false, "Workflow cleanup failed (" + name + ")", ex.ToString()); }
     }
     private static async Task Run()
     {
@@ -112,7 +158,7 @@ internal static class Program
         await Js("HelpEditor.setTopics=deepOriginalSetTopics;delete window.deepOriginalSetTopics");
         Check(catalogUpdates == 1 && form.CurrentTopicPath == recoveryPath, "Restoring a deleted page updates the catalog once and awaits that update", new { catalogUpdates });
     }
-    private static Task RunSafe(Func<Task> action) => (Task)typeof(MainForm).GetMethod("RunSafeAsync", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(form, [action])!;
+    private static Task RunSafe(Func<Task> action) => (Task)NativeReflection.Invoke(form, "RunSafeAsync", action)!;
     private static T Field<T>(string name) => (T)typeof(MainForm).GetField(name, BindingFlags.NonPublic | BindingFlags.Instance)!.GetValue(form)!;
     private static Task Js(string script) => form.EditorWebView.ExecuteScriptAsync(script);
     private static async Task<bool> Bool(string script) => JsonSerializer.Deserialize<bool>(await form.EditorWebView.ExecuteScriptAsync(script));

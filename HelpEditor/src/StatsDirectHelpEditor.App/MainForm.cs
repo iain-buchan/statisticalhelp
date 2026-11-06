@@ -351,10 +351,8 @@ public sealed partial class MainForm : Form
         var environment = await CoreWebView2Environment.CreateAsync(null, Path.Combine(artifactRoot, ".editor-profile"));
         await editor.EnsureCoreWebView2Async(environment);
         var core = editor.CoreWebView2;
-        core.SetVirtualHostNameToFolderMapping("help-editor.invalid", assets, CoreWebView2HostResourceAccessKind.DenyCors);
-        core.Settings.AreHostObjectsAllowed = false;
-        core.Settings.IsWebMessageEnabled = true;
-        core.Settings.AreBrowserAcceleratorKeysEnabled = false;
+        HelpWebViewSettings.MapLocalFolder(core, "help-editor.invalid", assets);
+        HelpWebViewSettings.Apply(core, authoring: true);
         core.NavigationStarting += (_, e) =>
         {
             if (!IsOrigin(e.Uri, EditorOrigin)) { e.Cancel = true; status.Text = "Use Preview to follow help links."; }
@@ -1263,9 +1261,8 @@ public sealed class PreviewForm : Form
                 var environment = await CoreWebView2Environment.CreateAsync(null, Path.Combine(artifactRoot, ".preview-profile"));
                 await browser.EnsureCoreWebView2Async(environment);
                 var core = browser.CoreWebView2;
-                core.SetVirtualHostNameToFolderMapping("help-preview.invalid", root, CoreWebView2HostResourceAccessKind.DenyCors);
-                core.Settings.AreHostObjectsAllowed = false;
-                core.Settings.IsWebMessageEnabled = false;
+                HelpWebViewSettings.MapLocalFolder(core, "help-preview.invalid", root);
+                HelpWebViewSettings.Apply(core);
                 core.NavigationStarting += (_, e) => { if (!Local(e.Uri)) e.Cancel = true; };
                 core.FrameNavigationStarting += (_, e) => { if (!Local(e.Uri) && e.Uri != "about:blank") e.Cancel = true; };
                 core.NewWindowRequested += (_, e) => e.Handled = true;

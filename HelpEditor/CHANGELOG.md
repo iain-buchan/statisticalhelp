@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Native Contents checks support optional method arguments and close their owned window even when cleanup fails. A forced-failure check covers that exit path; CI bounds the native step to 15 minutes.
+- Imported pages and rich-text paste remove executable attributes and embedded content from the draft. Save and project-wide replacement reject prohibited source before writing; equations, R examples and ordinary links are preserved.
+- Authoring and preview WebViews share settings, with cross-origin script access to local project files refused while topic images remain available.
+- Tutor course export remembers its last successful folder and otherwise starts in Documents. The website ZIP destination remains a separate preference.
 - Publish content captures saved help and tutor source together, exports the website ZIP, and commits the website, desktop help and tutor build inputs to `statisticalhelp` with a complete hashed manifest. Windows build inputs receive the identical desktop and tutor files.
 - Shared content is validated before publication; changed tutor material still requires its recorded author review. Application builds can pin one publication revision without updating installed applications at runtime.
 - Contents navigation in Browser view keeps the editor window and current preview stable instead of flashing between views.

@@ -33,7 +33,11 @@ internal static class Program
         Application.ThreadException+=(_,e)=>Check(false,"Unhandled image-check UI exception",e.Exception.ToString());
         form.Shown+=async(_,_)=>
         {
-            try{await Run();}catch(Exception ex){Check(false,"Source-image checks completed",ex.ToString());}
+            try{
+                if(!args.Contains("--webview-policy-only"))await Run();
+                await form.Initialization.WaitAsync(TimeSpan.FromSeconds(45));
+                Check(await WebViewPolicyChecks.RunAsync(root),"Shared WebView settings and local-folder access policy checks pass");
+            }catch(Exception ex){Check(false,"Source-image checks completed",ex.ToString());}
             finally{
                 Directory.CreateDirectory(Path.Combine(root,"evidence"));File.WriteAllText(Path.Combine(root,"evidence","source-image-windows-checks.json"),JsonSerializer.Serialize(new{checkedAtUtc=DateTimeOffset.UtcNow,fixture,passed,failed,checks,responses,networkFailures,observations},new JsonSerializerOptions{WriteIndented=true}));
                 Console.WriteLine($"{passed} image checks passed; {failed} failed");

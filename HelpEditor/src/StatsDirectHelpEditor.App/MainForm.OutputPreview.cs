@@ -84,7 +84,7 @@ public sealed partial class MainForm
         }
         if (selected == HelpBuildTarget.Public)
         {
-            editor.CoreWebView2.SetVirtualHostNameToFolderMapping("help-generated.invalid", output, Microsoft.Web.WebView2.Core.CoreWebView2HostResourceAccessKind.DenyCors);
+            HelpWebViewSettings.MapLocalFolder(editor.CoreWebView2, "help-generated.invalid", output);
             string uri = sourceProject.GetAppearance(HelpBuildTarget.Public) == "flare"
                 ? GeneratedPreviewOrigin + "/" + string.Join("/", path.ToLowerInvariant().Split('/').Select(Uri.EscapeDataString)) + fragment
                 : GeneratedPreviewOrigin + "/index.html#topic=" + Uri.EscapeDataString(path.ToLowerInvariant() + fragment);

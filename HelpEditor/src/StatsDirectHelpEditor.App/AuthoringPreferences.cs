@@ -39,6 +39,11 @@ internal static partial class AuthoringPreferences
             throw new ArgumentException("Choose a complete ZIP filename.", nameof(zipPath));
         var preferences = Read(workspaceRoot); // Retain settings saved by another editor window during export.
         preferences[WebsiteZipKey] = Path.GetFullPath(zipPath);
+        WritePreferences(workspaceRoot, preferences);
+    }
+
+    private static void WritePreferences(string workspaceRoot, JsonObject preferences)
+    {
         string path = Path.Combine(workspaceRoot, RelativePath);
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         string temporary = Path.Combine(Path.GetDirectoryName(path)!, ".authoring-preferences-" + Guid.NewGuid().ToString("N") + ".tmp");
@@ -65,9 +70,6 @@ internal static partial class AuthoringPreferences
     internal static void SaveStatsDirectSourceRoot(string workspaceRoot, string sourceRoot)
     {
         var preferences = Read(workspaceRoot); preferences["statsDirectSourceRoot"] = Path.GetFullPath(sourceRoot);
-        string path = Path.Combine(workspaceRoot, RelativePath); Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-        string temporary = Path.Combine(Path.GetDirectoryName(path)!, ".authoring-preferences-" + Guid.NewGuid().ToString("N") + ".tmp");
-        File.WriteAllText(temporary, preferences.ToJsonString(new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine, new UTF8Encoding(false));
-        File.Move(temporary, path, true);
+        WritePreferences(workspaceRoot, preferences);
     }
 }

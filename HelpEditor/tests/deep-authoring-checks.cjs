@@ -36,6 +36,8 @@ const xml=body=>'<html xmlns:MadCap="'+mc+'" xmlns:qa="urn:deep-test"><head><tit
  const close='</pre></MadCap:dropDownBody></MadCap:dropDown>';
  const blocks={path:'blocks.htm',title:'Blocks',baseUrl:origin+'/project/blocks.htm',source:xml('<p>Prose before blocks.</p>'+code+'x &lt;- 1'+close+'<p>Middle.</p>'+code+'y &lt;- 2'+close+'<script type="application/json"><![CDATA[{"name":"first"}]]></script><script type="application/json"><![CDATA[{"name":"second"}]]></script>')};
  await destPage.evaluate(p=>HelpEditor.load(p),blocks);
+ const refusedScript=await destPage.evaluate(p=>{const before=HelpEditor.getSource(),history=HelpEditor.getState().historyIndex,unsafe=p.source.replaceAll('type="application/json"','type="text/javascript"');let rejected=false;try{HelpEditor.applyReviewedSource(p.path,before,unsafe);}catch{rejected=true;}return{rejected,sourceUnchanged:HelpEditor.getSource()===before,historyUnchanged:HelpEditor.getState().historyIndex===history,stillClean:!HelpEditor.getState().dirty};},blocks);
+ check('Executable script proposals are refused without changing the inert JSON blocks, source history or clean state',Object.values(refusedScript).every(Boolean),refusedScript);
  await destPage.locator('#visual-editor .protected-block').nth(1).getByRole('button',{name:'Edit HTML'}).click();
  let focus=await destPage.evaluate(()=>{const t=document.getElementById('source-editor');return{start:t.selectionStart,end:t.selectionEnd,selected:t.value.slice(t.selectionStart,t.selectionEnd),text:t.value};});
  check('Edit HTML selects the chosen second R block rather than the first one',focus.start===[...blocks.source.matchAll(/<MadCap:dropDown(?=[\s>])/g)][1].index&&focus.selected==='<MadCap:dropDown',focus);

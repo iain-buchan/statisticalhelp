@@ -1,7 +1,7 @@
 # Help Editor development
 
 Work inside this directory. The supplied `HelpSource` is an independent copy.
-Keep the repository's canonical Content/Project/Docs and published help unchanged
+Keep the repository-root Content/Project/Docs and published help unchanged
 unless the user explicitly asks to update them. Never publish Flare destinations.
 
 After editing saved help source, rebuild it yourself with

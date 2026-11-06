@@ -5,14 +5,41 @@ function record(name,passed,detail){checks.push({name,passed:!!passed,detail});}
 const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://localhost'),target=path.resolve(web,u.pathname==='/'?'index.html':u.pathname.slice(1));if(!target.startsWith(web+path.sep)){res.statusCode=403;res.end();return;}try{res.setHeader('Content-Type',({'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.woff2':'font/woff2'})[path.extname(target)]||'application/octet-stream');res.end(fs.readFileSync(target));}catch{res.statusCode=404;res.end();}});
 (async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;try{
  const origin='http://127.0.0.1:'+server.address().port,payload={path:'basics/links.htm',title:'Links',baseUrl:origin+'/project/basics/links.htm',topics:[{path:'basics/links.htm',title:'Current page'},{path:'rates/target.htm',title:'Target help page'},{path:'graphics/box.htm',title:'Box plot'}],source:'<?xml version="1.0"?><html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd"><head><title>Links</title></head><body><h1>Links</h1><p id="sample"><strong>Formatted</strong> text remains here.</p><p id="format">Formatting sample</p><p id="anchor" name="Case-α">Target</p><MadCap:equation>$x+1$</MadCap:equation><MadCap:dropDown><pre> x &lt; 2 &amp; y\n  keep spaces</pre></MadCap:dropDown></body></html>'};
- browser=await chromium.launch({channel:'msedge',headless:true});const page=await browser.newPage({viewport:{width:1350,height:900}});page.setDefaultTimeout(5000);page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>{window.messages=[];window.chrome={webview:{postMessage:m=>messages.push(m)}};});await page.goto(origin+'/');await page.waitForFunction(()=>!!window.HelpEditor);await page.evaluate(p=>HelpEditor.load(p),payload);
+ browser=await chromium.launch({channel:'msedge',headless:true});const page=await browser.newPage({viewport:{width:1350,height:900}});page.setDefaultTimeout(5000);page.on('pageerror',e=>errors.push(e.message));
+ await page.addInitScript(()=>{
+  window.messages=[];
+  window.linkOpeningFocus=[];
+  window.chrome={webview:{postMessage(message){
+   messages.push(message);
+   if(message.action==='editor-dialog'&&message.kind==='link'&&message.open)linkOpeningFocus.push(document.activeElement.id);
+  }}};
+ });
+ await page.goto(origin+'/');await page.waitForFunction(()=>!!window.HelpEditor);await page.evaluate(p=>HelpEditor.load(p),payload);
  async function source(){return page.evaluate(()=>HelpEditor.getSource());}
  await page.locator('#sample strong').dblclick();await page.click('#insert-link');record('Pointer selection opens searchable Help page picker by default',await page.locator('#link-dialog').evaluate(e=>e.open)&&await page.locator('[name=link-mode][value=internal]').isChecked(),await page.locator('#link-text').inputValue());
  await page.fill('#link-search','Target');record('Page picker searches titles and paths',await page.locator('#link-page option').count()===1,await page.locator('#link-page').textContent());await page.selectOption('#link-page','rates/target.htm');await page.fill('#link-fragment','Case-α');await page.click('#link-open');record('A new-link draft can open its selected page without being inserted',await page.locator('#link-dialog').evaluate(e=>e.open)&&await source()===payload.source&&await page.evaluate(()=>messages.at(-1).action==='open-link'&&messages.at(-1).href.includes('/rates/target.htm#Case-%CE%B1')),null);await page.click('#link-apply');
  let result=await page.evaluate(()=>{const d=new DOMParser().parseFromString(HelpEditor.getSource(),'application/xml'),a=d.querySelector('#sample a');return{valid:!d.querySelector('parsererror'),href:a?.getAttribute('href'),bold:!!a?.querySelector('strong,b,span[style*="bold"]'),text:a?.textContent,ui:HelpEditor.getSource().includes('data-editor')};});record('Internal link preserves selected formatting and saves a relative Unicode fragment',result.valid&&result.bold&&result.text.trim()==='Formatted'&&result.href.startsWith('../rates/target.htm#Case-')&&!result.ui,result);
  const inserted=await source();await page.locator('#sample a').dblclick();record('Double-click existing link selects its target and fragment',await page.locator('#link-page').inputValue()==='rates/target.htm'&&await page.locator('#link-fragment').inputValue()==='Case-α',await page.locator('#link-fragment').inputValue());await page.locator('[name=link-mode][value=external]').check();await page.fill('#link-url','https://example.org/advice?q=α&n=2');await page.click('#link-apply');
  result=await page.evaluate(()=>{const d=new DOMParser().parseFromString(HelpEditor.getSource(),'application/xml'),a=d.querySelector('#sample a');return{href:a?.getAttribute('href'),bold:!!a?.querySelector('strong,b,span[style*="bold"]'),valid:!d.querySelector('parsererror')};});record('Editing only a destination preserves formatted link content',result.valid&&result.bold&&result.href.startsWith('https://example.org/advice'),result);
- await page.locator('#sample a').dblclick();await page.fill('#link-text','Pending rename');await page.fill('#link-url','https://example.org/new-target');const beforeOpen=await source();await page.click('#link-open');record('Dialog Open uses the changed destination and preserves its unapplied draft and source',await page.locator('#link-dialog').evaluate(e=>e.open)&&await page.locator('#link-text').inputValue()==='Pending rename'&&await page.locator('#link-url').inputValue()==='https://example.org/new-target'&&await source()===beforeOpen&&await page.evaluate(()=>messages.at(-1).action==='open-link'&&messages.at(-1).href==='https://example.org/new-target'),null);await page.click('#link-cancel');
+ await page.locator('#sample a').dblclick();
+ const openingFocus=await page.evaluate(()=>linkOpeningFocus.at(-1));
+ record('The external link dialog focuses its URL field before notifying the host',openingFocus==='link-url',openingFocus);
+ await page.fill('#link-text','Pending rename');
+ await page.fill('#link-url','https://example.org/new-target');
+ const beforeOpen=await source(),firstMessage=await page.evaluate(()=>messages.length);
+ await page.click('#link-open');
+ const openedDraft=await page.evaluate(({beforeOpen,firstMessage})=>({
+  dialogOpen:document.getElementById('link-dialog').open,
+  text:document.getElementById('link-text').value,
+  url:document.getElementById('link-url').value,
+  sourceUnchanged:HelpEditor.getSource()===beforeOpen,
+  requests:messages.slice(firstMessage).filter(message=>message.action==='open-link')
+ }),{beforeOpen,firstMessage});
+ const [request]=openedDraft.requests;
+ record('Dialog Open uses the changed destination and preserves its unapplied draft and source',
+  openedDraft.dialogOpen&&openedDraft.text==='Pending rename'&&openedDraft.url==='https://example.org/new-target'&&
+  openedDraft.sourceUnchanged&&openedDraft.requests.length===1&&request.href===openedDraft.url&&request.newWindow===true,openedDraft);
+ await page.click('#link-cancel');
  await page.locator('#sample a').click({button:'right'});await page.click('#context-open-link');record('Link context Open sends an explicit host request',await page.evaluate(()=>messages.some(m=>m.action==='open-link'&&m.newWindow&&m.href.startsWith('https://example.org/advice'))),await page.evaluate(()=>messages.filter(m=>m.action==='open-link')));
  await page.locator('#sample a').click({button:'right'});await page.click('#context-remove-link');result=await page.evaluate(()=>{const d=new DOMParser().parseFromString(HelpEditor.getSource(),'application/xml');return{link:!!d.querySelector('#sample a'),bold:!!d.querySelector('#sample strong,#sample b')};});record('Context Remove keeps the linked text and formatting',!result.link&&result.bold,result);await page.keyboard.press('Control+z');record('Link removal has Undo and Redo',!!await page.locator('#sample a').count(),null);await page.keyboard.press('Control+y');
  await page.locator('#sample strong').dblclick();await page.keyboard.press('Control+k');await page.fill('#link-search','Box');await page.fill('#link-text','New text');const beforeCancel=await source();await page.keyboard.press('Control+s');record('Pending link edits are protected from global Save',await page.evaluate(()=>HelpEditor.getState().dialogOpen&&HelpEditor.getState().dialogKind==='link'&&HelpEditor.getState().dialogDraftDirty)&&await page.locator('#link-error').isVisible(),await page.evaluate(()=>HelpEditor.getState()));await page.click('#link-cancel');record('Cancel leaves source and history unchanged',await source()===beforeCancel,null);

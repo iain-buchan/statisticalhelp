@@ -13,7 +13,7 @@ public sealed partial class MainForm
     {
         string content = Path.Combine(opened.RootPath, "Content");
         if (string.Equals(mappedProjectContent, content, StringComparison.OrdinalIgnoreCase)) return false;
-        editor.CoreWebView2.SetVirtualHostNameToFolderMapping("help-project.invalid", content, CoreWebView2HostResourceAccessKind.Allow);
+        HelpWebViewSettings.MapLocalFolder(editor.CoreWebView2, "help-project.invalid", content);
         mappedProjectContent = content;
         return true;
     }

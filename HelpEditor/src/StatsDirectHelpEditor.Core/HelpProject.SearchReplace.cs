@@ -114,6 +114,7 @@ public sealed partial class HelpProject
             var document = Parse(updated);
             if (document.Root?.Name.LocalName != "html" || !document.Descendants().Any(element => element.Name.LocalName == "body"))
                 throw new InvalidDataException("The replacement would remove a page's HTML root or body: " + page.Key);
+            HelpSourceContent.ValidateForSave(document);
             byte[] after = file.Preamble.Concat(file.Encoding.GetBytes(updated)).ToArray();
             if (after.AsSpan().SequenceEqual(file.Bytes)) continue;
             changes.Add(new(page.Key, file.Bytes, after)); replacements += effective.Length;
