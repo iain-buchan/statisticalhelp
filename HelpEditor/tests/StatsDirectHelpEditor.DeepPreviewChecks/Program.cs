@@ -16,9 +16,10 @@ internal static class Program
     private static readonly List<LiveFrame> frames = [];
     private static readonly List<string> external = [];
     private static readonly TimeSpan ReplyTimeout = TimeSpan.FromSeconds(20);
+    private static readonly TimeSpan FrameProbeTimeout = TimeSpan.FromMilliseconds(750);
     private static string phase = "initialization";
     private static bool cleanupAttempted, stallBrowserProbe;
-    private static int passed, failed, uiErrors, destroyedFrames;
+    private static int passed, failed, uiErrors, destroyedFrames, frameProbeTimeouts;
     [STAThread]
     private static int Main(string[] args)
     {
@@ -45,7 +46,7 @@ internal static class Program
             CloseFixture();
             Check(form.IsDisposed && Application.OpenForms.Count == 0, "Deep preview cleanup disposes the fixture window");
             Directory.CreateDirectory(Path.Combine(root, "evidence"));
-            File.WriteAllText(Path.Combine(root, "evidence", report), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, uiErrors, phase, deviceDpi = form.DeviceDpi, destroyedFrames, liveFrames = frames.Count, formDisposed = form.IsDisposed, openNativeFormCount = Application.OpenForms.Count, expectedFault = stallBrowserProbe, checks }, new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText(Path.Combine(root, "evidence", report), JsonSerializer.Serialize(new { checkedAtUtc = DateTimeOffset.UtcNow, fixture, passed = failed == 0, total = passed + failed, passedCount = passed, failedCount = failed, uiErrors, phase, deviceDpi = form.DeviceDpi, destroyedFrames, frameProbeTimeouts, liveFrames = frames.Count, formDisposed = form.IsDisposed, openNativeFormCount = Application.OpenForms.Count, expectedFault = stallBrowserProbe, checks }, new JsonSerializerOptions { WriteIndented = true }));
             Console.WriteLine($"{passed} deep preview checks passed; {failed} failed");
         }
         return failed == 0 ? 0 : 1;
@@ -150,12 +151,14 @@ internal static class Program
             int builds = form.OutputPreviewBuildCount;
             await BrowserScript("document.querySelector('#contents a[data-link=\"basics/beta.htm#BetaTarget\"]').click()");
             await Until(() => form.CurrentTopicPath == "basics/beta.htm" && !Field<bool>("busy"));
+            SetPhase(skin + ": verify generated Contents target");
             await UntilBrowser("Boolean(document.getElementById('BetaTarget')) && location.hash==='#BetaTarget'");
             Check(form.OutputPreviewBuildCount == builds && form.CurrentWorkspace == "public", skin + " generated Contents keeps the authoring page and fragment synchronized without a rebuild");
             await BrowserScript("window.StatsDirectHelp.search('uniqueforalpha')");
             await UntilBrowser("Boolean(document.querySelector('#results a.result'))");
             await BrowserScript("document.querySelector('#results a.result').click()");
             await Until(() => form.CurrentTopicPath == "basics/alpha.htm" && !Field<bool>("busy"));
+            SetPhase(skin + ": verify generated search target");
             await UntilBrowser("Boolean(document.getElementById('AlphaTarget'))");
             Check(form.OutputPreviewBuildCount == builds, skin + " search-result navigation reuses output and opens the requested authoring page");
             int beforeExternal = external.Count;
@@ -234,14 +237,16 @@ internal static class Program
         };
     }
 
-    private static async Task<bool> FrameMatches(LiveFrame entry, string expression)
+    private static bool InjectStalledProbe => stallBrowserProbe && phase == "warm-paper: find generated Contents link";
+
+    private static async Task<bool> FrameMatches(LiveFrame entry, string expression, TimeSpan? timeout = null)
     {
         if (entry.Lifetime.IsCancellationRequested) return false;
         try
         {
-            bool injectStall = stallBrowserProbe && phase == "warm-paper: find generated Contents link";
+            bool injectStall = InjectStalledProbe;
             Task<string> reply = injectStall ? new TaskCompletionSource<string>().Task : entry.Frame.ExecuteScriptAsync("Boolean(" + expression + ")");
-            string value = await ScriptReply(reply, "Browser frame probe: " + expression, entry.Lifetime, injectStall ? TimeSpan.FromSeconds(1) : ReplyTimeout);
+            string value = await ScriptReply(reply, "Browser frame probe: " + expression, entry.Lifetime, injectStall ? TimeSpan.FromSeconds(1) : timeout);
             return !entry.Lifetime.IsCancellationRequested && IsTrue(value);
         }
         catch (OperationCanceledException) when (entry.Lifetime.IsCancellationRequested) { return false; }
@@ -264,7 +269,12 @@ internal static class Program
     private static async Task<bool> BrowserBoolean(string expression)
     {
         foreach (var entry in frames.ToArray().Reverse())
-            if (await FrameMatches(entry, expression)) return true;
+        {
+            // A read started during a child-frame navigation can stop answering.
+            // Keep checking live frames within the overall state deadline.
+            try { if (await FrameMatches(entry, expression, FrameProbeTimeout)) return true; }
+            catch (TimeoutException) when (!InjectStalledProbe) { frameProbeTimeouts++; }
+        }
         return false;
     }
     private static Task UntilBrowser(string expression) => WaitForState(() => BrowserBoolean(expression), "Browser: " + expression);
