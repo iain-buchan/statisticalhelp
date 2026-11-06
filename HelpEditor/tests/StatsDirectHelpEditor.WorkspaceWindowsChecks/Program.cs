@@ -192,7 +192,10 @@ internal static class Program
         }
         form.Size = appTestSize;
         form.PerformLayout();
-        Check(Descendants(appBrowser.Parent!).OfType<ToolStrip>().SelectMany(bar => bar.Items.Cast<ToolStripItem>()).Select(item => item.Text).Contains("Contents") && Descendants(appBrowser.Parent!).OfType<ToolStrip>().SelectMany(bar => bar.Items.Cast<ToolStripItem>()).Select(item => item.Text).Contains("Print"), "App view reuses StatsDirect's Contents, Print and navigation toolbar");
+        string[] expectedNavigation = ["Back", "Forward", "Home", "Browse topics", "Print"];
+        Check(Descendants(appBrowser.Parent!).OfType<ToolStrip>().Any(bar => bar.Items
+                .OfType<ToolStripButton>().Select(button => button.Text).SequenceEqual(expectedNavigation)),
+            "App view reuses StatsDirect's native toolbar with Home and Browse topics beside each other");
         await AppJs("window.__workspaceProbe='retained';document.getElementById('app-details').open=true");
         await form.ToggleAppPreviewModeAsync();
         Check(!form.IsAppPreviewDocked && form.IsAppPreviewVisible && ReferenceEquals(appBrowser, form.AppPreviewWebView) && ReferenceEquals(appCore, form.AppPreviewWebView!.CoreWebView2), "Pop out retains the same App browser session");

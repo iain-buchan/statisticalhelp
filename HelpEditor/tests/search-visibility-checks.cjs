@@ -24,8 +24,12 @@ function check(target,name,passed,detail){checks.push({target,name,passed:!!pass
   const result=await page.locator('#results a[data-link]').first().evaluate(a=>({url:a.dataset.link,title:a.textContent}));
   check(target,'A normal search still finds the paired t-test topic',/paired.*t.test/i.test(result.title)&&index.urls.includes(result.url),result);
   await page.locator('#results a[data-link]').first().click();
-  await page.waitForFunction(expected=>document.documentElement.dataset.currentTopic===expected,result.url);
-  check(target,'Search opens the correct topic after index IDs change',new URL(page.url()).pathname.endsWith('/'+result.url)&&await page.locator('#help-topic-body h1').count()===1);
+  await page.waitForURL(url=>url.pathname.endsWith('/'+result.url),{waitUntil:'domcontentloaded'});
+  const heading=page.locator('#help-topic-body h1');
+  await heading.waitFor();
+  const currentTopic=await page.locator('html').getAttribute('data-current-topic');
+  check(target,'Search opens the correct topic after index IDs change',currentTopic===result.url&&await heading.count()===1,
+    {expectedTopic:result.url,currentTopic});
   await page.goto(pathToFileURL(path.join(folder,'menus/about.htm')).href,{waitUntil:'load'});
   await page.locator('#help-topic-body').waitFor();
   check(target,'The excluded topic is still a readable help page',await page.locator('#help-topic-body').innerText().then(text=>text.length>100));
