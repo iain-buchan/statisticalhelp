@@ -52,7 +52,8 @@ public sealed partial class MainForm
         var snapshot = await CaptureWebsiteExportAsync();
         cancellationToken.ThrowIfCancellationRequested();
         status.Text = "Exporting a fresh Website ZIP" + (snapshot.IncludesDraft ? " including the unsaved current-page draft…" : " from saved pages…");
-        var result = await Task.Run(() => WebsiteZipExporter.Export(snapshot.Project, zipPath, Path.Combine(AppContext.BaseDirectory, "Web"), snapshot.Overrides, cancellationToken), cancellationToken);
+        var result = await Task.Run(() => WebsiteZipExporter.Export(snapshot.Project, zipPath, Path.Combine(AppContext.BaseDirectory, "Web"),
+            snapshot.Overrides, cancellationToken, publicationHistoryDirectory: Path.Combine(artifactRoot, "Publishing")), cancellationToken);
         LastWebsiteZipExportResult = result;
         string? rememberWarning = null;
         try { AuthoringPreferences.SaveWebsiteZipPath(artifactRoot, result.ZipPath); }

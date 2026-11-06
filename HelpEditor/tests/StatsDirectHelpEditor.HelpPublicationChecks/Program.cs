@@ -55,6 +55,10 @@ try
             "ZIP, Docs and verified Desktop receipt explicitly identify one common frozen snapshot");
         Check(!zip.Entries.Any(entry => entry.FullName.Contains(".statsdirect-help-") || entry.FullName.Contains("Users/") || entry.FullName.Contains("Destinations/")), "Public ZIP excludes authoring/private ownership state");
     }
+    await Reject(() => Task.Run(() => WebsiteZipExporter.Export(HelpProject.Open(f.Source), f.Zip, f.Assets)),
+        "A standalone export refuses the actual ZIP produced by publication");
+    Check(HelpPublicationPublisher.Hash(f.Zip) == result.WebsiteZipSha256,
+        "The publication ZIP continues to match its delivered hash after a refused export");
     Check(await f.Show("HelpEditor/HelpSource/Content/basics/example.htm") == File.ReadAllText(Path.Combine(f.Source, "Content/basics/example.htm")) &&
         await f.Show("Content/legacy.htm") == "Legacy root source remains intact", "Nested publishing updates the maintained canonical copy and preserves legacy root source");
     Check(await f.Show("Docs/CNAME") == "help.example.org" && await f.Show("HelpEditor/HelpSource/" + HelpProject.MarkerFile) == "{\"publishedMarker\":true}", "Publishing preserves repository site metadata and its original marker bytes");

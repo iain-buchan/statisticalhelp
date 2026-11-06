@@ -51,7 +51,9 @@ public static class HelpPublicationPublisher
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true };
     private const string OwnedMarker = ".statsdirect-help-publication-owned.json";
     private static readonly string[] SourcePaths = ["Content", "Project", "RCode", "StatsDirect.flprj"];
-    private const string PublicationInfo = "resources/help-editor-runtime/publication.json";
+    internal const string PublicationInfo = "resources/help-editor-runtime/publication.json";
+    internal static string DefaultHistoryDirectory => Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "StatsDirect", "HelpEditor", "PublicationHistory");
 
     public static Task<HelpPublicationResult> PublishAsync(HelpProject project, string runtimeAssetsDirectory,
         HelpPublicationOptions options, CancellationToken cancellationToken = default,
@@ -96,8 +98,7 @@ public static class HelpPublicationPublisher
         string? originalZipSha256 = File.Exists(zip) ? Hash(zip) : null;
         ct.ThrowIfCancellationRequested();
 
-        string history = Path.GetFullPath(options.JournalDirectory ?? Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "StatsDirect", "HelpEditor", "PublicationHistory"));
+        string history = Path.GetFullPath(options.JournalDirectory ?? DefaultHistoryDirectory);
         if (SafePaths.IsWithin(history, project.RootPath) || SafePaths.IsWithin(history, assets) || SafePaths.IsWithin(history, options.StatsDirectSource))
             throw new InvalidOperationException("Publication history must be separate from source, runtime assets and the StatsDirect repository.");
         WorkspaceProtectionSettings.Load().RequireUnprotected(history, "Publication history"); SafePaths.CheckNoLinks(history);
@@ -302,6 +303,7 @@ public static class HelpPublicationPublisher
         if (SafePaths.IsWithin(zip, project.RootPath) || SafePaths.IsWithin(zip, assets) || SafePaths.IsWithin(zip, options.StatsDirectSource))
             throw new InvalidOperationException("Save the website ZIP outside help source, runtime assets and the StatsDirect source repository.");
         if (Directory.Exists(zip)) throw new IOException("The website ZIP filename is occupied by a directory.");
+        WebsiteZipExporter.CheckReplacement(zip, WorkspaceProtectionSettings.Load());
         return zip;
     }
 
@@ -335,9 +337,11 @@ public static class HelpPublicationPublisher
                     ct.ThrowIfCancellationRequested(); var entry = archive.CreateEntry(file.Key, CompressionLevel.Optimal);
                     using var content = entry.Open(); using var input = File.OpenRead(SafePaths.Resolve(artifact.Result.OutputDirectory, file.Key)); input.CopyTo(content);
                 }
-            VerifyZip(artifact, temporary, ct); artifact.Verify(); ct.ThrowIfCancellationRequested(); SafePaths.CheckNoLinks(destination);
+            VerifyZip(artifact, temporary, ct); artifact.Verify(); ct.ThrowIfCancellationRequested();
+            using var destinationLock = WebsiteZipExporter.LockDestination(destination);
+            WebsiteZipExporter.CheckReplacement(destination, WorkspaceProtectionSettings.Load());
             if ((File.Exists(destination) ? Hash(destination) : null) != expectedBefore) throw new IOException("The selected website ZIP changed while publication was being prepared. It was preserved.");
-            File.Move(temporary, destination, true);
+            File.Move(temporary, destination, overwrite: expectedBefore != null);
             return new(destination, artifact.Result.TopicCount, artifact.Result.SearchDocumentCount, files.Length, new FileInfo(destination).Length, artifact.Result.Warnings);
         }
         finally { if (File.Exists(temporary)) { SafePaths.CheckNoLinks(temporary); File.Delete(temporary); } }

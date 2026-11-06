@@ -141,6 +141,14 @@ internal static class Program
         bool sourceBlocked = await Reject(() => form.ExportWebsiteZipAsync(forbidden));
         Check(sourceBlocked && !File.Exists(forbidden) && File.ReadAllText(prefsPath) == originalPrefs && SameSources(), "The native export cannot write a ZIP inside protected help source");
 
+        string history = Path.Combine(testRoot, "Publishing");
+        Directory.CreateDirectory(history);
+        File.WriteAllText(Path.Combine(history, Guid.NewGuid().ToString("N") + ".json"),
+            JsonSerializer.Serialize(new { SchemaVersion = 1, Result = new { WebsiteZip = new { ZipPath = previousZip } } }));
+        bool publicationBlocked = await Reject(() => form.ExportWebsiteZipAsync(previousZip));
+        Check(publicationBlocked && Digest(previousZip) == originalZipHash && File.ReadAllText(prefsPath) == originalPrefs &&
+            await EditorSnapshot() == beforeFailure, "A recorded publication ZIP survives a refused export with the draft and preferences intact");
+
         int previewBuilds = form.OutputPreviewBuildCount;
         string beforeSuccess = await EditorSnapshot();
         pickerResult = DialogResult.OK;

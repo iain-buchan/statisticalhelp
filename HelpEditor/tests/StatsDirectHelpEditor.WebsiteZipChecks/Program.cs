@@ -65,6 +65,38 @@ try
         Check(names.Contains("menus/about.htm")&&!search.Contains("aboutprivatequery")&&Read(zip,"contents-data.js").Contains("menus/about.htm"),"Search exclusions preserve the page and Contents entry");
     }
     Check(Same(project.RootPath,before),"Saved export never modifies authored source or local state");
+    string movedPublication = Path.Combine(fixture, "Renamed publication.zip");
+    File.Copy(zipPath, movedPublication);
+    using (var archive = ZipFile.Open(movedPublication, ZipArchiveMode.Update))
+        archive.CreateEntry("resources/help-editor-runtime/publication.json");
+    string publicationHash = Hash(movedPublication);
+    Reject(() => WebsiteZipExporter.Export(project, movedPublication, runtime), "A moved publication ZIP is protected by its archive entry");
+    Check(Hash(movedPublication) == publicationHash, "Refusing to overwrite a publication preserves its exact bytes");
+
+    string history = Path.Combine(fixture, "Custom history");
+    string legacyZip = Path.Combine(fixture, "Previously used for publication.zip");
+    File.Copy(zipPath, legacyZip);
+    string legacyHash = Hash(legacyZip);
+    Write(history, Guid.NewGuid().ToString("N") + ".json", JsonSerializer.Serialize(new
+    {
+        SchemaVersion = 1, Phase = "Failed", Result = new { WebsiteZip = new { ZipPath = legacyZip } }
+    }));
+    Reject(() => WebsiteZipExporter.Export(project, legacyZip, runtime, publicationHistoryDirectory: history),
+        "A partial legacy publication reserves its delivered ZIP path even if its bytes have since changed");
+    Check(Hash(legacyZip) == legacyHash, "The legacy publication path retains the existing archive");
+    Write(history, Guid.NewGuid().ToString("N") + ".json", JsonSerializer.Serialize(new
+    {
+        SchemaVersion = 1, Phase = "Failed", Options = new { WebsiteZipPath = zipPath }, Result = new { WebsiteZip = (object?)null }
+    }));
+    WebsiteZipExporter.Export(project, zipPath, runtime, publicationHistoryDirectory: history);
+    Check(File.Exists(zipPath), "An attempt that never delivered a ZIP does not reserve the filename");
+
+    string lockPath = Path.Combine(Path.GetDirectoryName(zipPath)!, ".statsdirect-help-zip.lock");
+    string beforeLock = Hash(zipPath);
+    using (var locked = new FileStream(lockPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+        Reject(() => WebsiteZipExporter.Export(project, zipPath, runtime), "A busy destination lock prevents an overlapping replacement");
+    Check(Hash(zipPath) == beforeLock, "Lock contention preserves the earlier archive");
+    WebsiteZipExporter.Export(project, zipPath, runtime);
     project.SaveTopic("basics/example.htm",project.ReadTopic("basics/example.htm").Replace("Saved clarity token.","Fresh followon token."));
     project.SetAppearance(HelpBuildTarget.Public,"clean-blue");
     WebsiteZipExporter.Export(project,zipPath,runtime);
@@ -132,6 +164,13 @@ try
     var cliProject=Fixture("CliSource");string cliZip=Path.Combine(fixture,"CLI output","website.zip");
     var cli=await Cli("export-website","--project",cliProject.RootPath,"--zip",cliZip,"--assets",runtime);
     Check(cli.Exit==0&&JsonDocument.Parse(cli.Output).RootElement.GetProperty("TopicCount").GetInt32()==3&&File.Exists(cliZip)&&cli.Error.Length==0,"Packaged CLI exports saved source to a ZIP without SDK/Git/Flare on PATH");
+    var blockedCli = await Cli("export-website", "--project", cliProject.RootPath, "--zip", movedPublication, "--assets", runtime);
+    Check(blockedCli.Exit == 1 && blockedCli.Error.Contains("publication ZIP") && Hash(movedPublication) == publicationHash,
+        "CLI refuses to overwrite a publication ZIP and explains how to retry");
+    var legacyCli = await Cli("export-website", "--project", cliProject.RootPath, "--zip", legacyZip,
+        "--assets", runtime, "--journal-directory", history);
+    Check(legacyCli.Exit == 1 && legacyCli.Error.Contains("publication ZIP") && Hash(legacyZip) == legacyHash,
+        "CLI honours the configured custom legacy history");
     foreach(string[] bad in new[]{new[]{"export-website","--project",valid.RootPath},new[]{"export-website","--project",valid.RootPath,"--zip",cliZip,"--target","DesktopHelp"},new[]{"export-website","--project",valid.RootPath,"--zip",cliZip,"--zip",cliZip}})
     {var invalid=await Cli(bad);Check(invalid.Exit==1&&invalid.Output.Length==0&&invalid.Error.Length>0,"Invalid CLI export arguments fail without success JSON");}
 }

@@ -14,7 +14,7 @@ if (help)
           StatsDirectHelpBuilder list --project <working-copy>
         Export a freshly rebuilt Website as a flat ZIP:
           StatsDirectHelpBuilder export-website --project <working-copy> --zip <website.zip>
-            [--assets <App/Web>]
+            [--assets <App/Web>] [--journal-directory <private folder>]
         Installed first-run working copy:
           StatsDirectHelpBuilder prepare-workspace
         Check an editable tutor course or export a learner-importable pack:
@@ -60,7 +60,7 @@ if (help)
         Building help does not require the .NET SDK.
         Builds use saved source in a marked working copy. They do not open a GUI,
         invoke Flare, publish, or change source files.
-        export-website uses saved source and atomically replaces its ZIP only after success.
+        export-website uses saved source and preserves publication ZIPs. Choose a separate filename.
         prepare-workspace creates an installed user's first copy only; existing work is preserved.
         Successful results are JSON on stdout; errors go to stderr with exit code 1.
         """);
@@ -79,7 +79,7 @@ try
         return 0;
     }
     if (command is not ("build" or "list" or "export-website" or "validate-course" or "export-course" or "publish-tutor")) throw new ArgumentException("Unknown command. Use --help.");
-    var allowed = command switch { "build" => new[] { "--project", "--output", "--assets", "--target" }, "export-website" => ["--project", "--zip", "--assets"], "validate-course" => ["--course"], "export-course" => ["--course", "--output"], "publish-tutor" => ["--course", "--statsdirect-source", "--baseline"], _ => ["--project"] };
+    var allowed = command switch { "build" => new[] { "--project", "--output", "--assets", "--target" }, "export-website" => ["--project", "--zip", "--assets", "--journal-directory"], "validate-course" => ["--course"], "export-course" => ["--course", "--output"], "publish-tutor" => ["--course", "--statsdirect-source", "--baseline"], _ => ["--project"] };
     var options = new Dictionary<string, string>(StringComparer.Ordinal);
     for (int index = 1; index < args.Length; index += 2)
     {
@@ -125,7 +125,8 @@ try
     if (command == "export-website")
     {
         string exportAssets = options.TryGetValue("--assets", out var chosenExportAssets) ? chosenExportAssets : DefaultAssets();
-        var exported = WebsiteZipExporter.Export(project, Get("--zip"), exportAssets);
+        var exported = WebsiteZipExporter.Export(project, Get("--zip"), exportAssets,
+            publicationHistoryDirectory: options.GetValueOrDefault("--journal-directory"));
         Console.WriteLine(JsonSerializer.Serialize(exported, new JsonSerializerOptions { WriteIndented = true }));
         return 0;
     }

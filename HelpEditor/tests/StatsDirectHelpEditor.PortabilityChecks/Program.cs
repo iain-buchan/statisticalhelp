@@ -70,6 +70,11 @@ try
     catch (InvalidOperationException) { Check(true, "Clone destination protection is checked before Git is launched"); }
     var archive = WebsiteZipExporter.Export(project, Path.Combine(protectedRoot, "Transfer.zip"), assets);
     Check(archive.TopicCount == 1 && File.Exists(archive.ZipPath), "An explicit transfer ZIP may be saved in a protected artifact folder while its staging stays separate");
+    Reject(() => WebsiteZipExporter.Export(project, archive.ZipPath, assets), "An existing ZIP in a protected release folder cannot be replaced");
+    string protectedZip = Path.Combine(fixture, "Reserved release.zip");
+    WritePolicy(protectedRoot, protectedZip);
+    Reject(() => WebsiteZipExporter.Export(project, protectedZip, assets), "A protected release filename cannot be used for a new ZIP");
+    Check(!File.Exists(protectedZip), "Refusing a protected filename leaves it untouched");
     string executableName = OperatingSystem.IsWindows() ? "git.exe" : "git";
     string fakeBin = Path.Combine(fixture, "ExplicitTestPath"); Directory.CreateDirectory(fakeBin); File.WriteAllText(Path.Combine(fakeBin, executableName), "Not executed; resolver-only fixture.");
     if (!OperatingSystem.IsWindows()) File.SetUnixFileMode(Path.Combine(fakeBin, executableName), UnixFileMode.UserRead | UnixFileMode.UserExecute);
