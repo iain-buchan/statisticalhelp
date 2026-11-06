@@ -239,14 +239,14 @@ internal static class Program
 
     private static bool InjectStalledProbe => stallBrowserProbe && phase == "warm-paper: find generated Contents link";
 
-    private static async Task<bool> FrameMatches(LiveFrame entry, string expression, TimeSpan? timeout = null)
+    private static async Task<bool> FrameMatches(LiveFrame entry, string expression)
     {
         if (entry.Lifetime.IsCancellationRequested) return false;
         try
         {
             bool injectStall = InjectStalledProbe;
             Task<string> reply = injectStall ? new TaskCompletionSource<string>().Task : entry.Frame.ExecuteScriptAsync("Boolean(" + expression + ")");
-            string value = await ScriptReply(reply, "Browser frame probe: " + expression, entry.Lifetime, injectStall ? TimeSpan.FromSeconds(1) : timeout);
+            string value = await ScriptReply(reply, "Browser frame probe: " + expression, entry.Lifetime, injectStall ? TimeSpan.FromSeconds(1) : FrameProbeTimeout);
             return !entry.Lifetime.IsCancellationRequested && IsTrue(value);
         }
         catch (OperationCanceledException) when (entry.Lifetime.IsCancellationRequested) { return false; }
@@ -256,27 +256,30 @@ internal static class Program
         => await BrowserDocumentScript("Boolean(window.StatsDirectHelp)", script);
     private static async Task BrowserDocumentScript(string predicate, string script)
     {
-        foreach (var entry in frames.ToArray().Reverse())
+        LiveFrame? target = null;
+        // A topic's DOM can be visible before the viewer script is ready.
+        await WaitForState(async () =>
         {
-            if (!await FrameMatches(entry, predicate) || entry.Lifetime.IsCancellationRequested) continue;
-            // The click may already have taken effect when its reply fails. Do
-            // not retry this mutating operation in another frame.
-            await ScriptReply(entry.Frame.ExecuteScriptAsync(script), "Generated viewer action: " + script);
-            return;
-        }
-        throw new InvalidOperationException("A generated viewer document was not available for: " + script);
+            target = await FindBrowserFrame(predicate);
+            return target != null;
+        }, "Generated viewer action target: " + script);
+
+        // The click may already have taken effect when its reply fails. Do
+        // not retry this mutating operation in another frame.
+        await ScriptReply(target!.Frame.ExecuteScriptAsync(script), "Generated viewer action: " + script);
     }
-    private static async Task<bool> BrowserBoolean(string expression)
+    private static async Task<LiveFrame?> FindBrowserFrame(string expression)
     {
         foreach (var entry in frames.ToArray().Reverse())
         {
             // A read started during a child-frame navigation can stop answering.
             // Keep checking live frames within the overall state deadline.
-            try { if (await FrameMatches(entry, expression, FrameProbeTimeout)) return true; }
+            try { if (await FrameMatches(entry, expression)) return entry; }
             catch (TimeoutException) when (!InjectStalledProbe) { frameProbeTimeouts++; }
         }
-        return false;
+        return null;
     }
+    private static async Task<bool> BrowserBoolean(string expression) => await FindBrowserFrame(expression) != null;
     private static Task UntilBrowser(string expression) => WaitForState(() => BrowserBoolean(expression), "Browser: " + expression);
 
     private static bool IsTrue(string json) => JsonSerializer.Deserialize<JsonElement>(json).ValueKind == JsonValueKind.True;
