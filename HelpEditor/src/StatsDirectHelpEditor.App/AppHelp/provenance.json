@@ -10,10 +10,10 @@
       "source": "StatsDirectUI/UI/HtmlHelp/HelpView.cs",
       "snapshot": "HelpView.cs",
       "sourceSha256": "ea16b8d2b87c0bd3e0306c3bf6c9ffba068b3eccdb9a8a99d18f5d85f0d82b06",
-      "snapshotSha256": "bf27ebbb488594dfb2996f16f66b5df87b8245aea48f29fe133fc6e39eefc3b7",
+      "snapshotSha256": "8e492d2a6144ab97b6022ccee33797dacf1c97745206f27825028e492e551461",
       "changes": [
         "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility.",
-        "Default browser profile isolated from installed StatsDirect; visible help layout unchanged."
+        "Default browser profile isolated from installed StatsDirect. Mirrors the native Home and Browse topics toolbar and hides the embedded website header."
       ]
     },
     {

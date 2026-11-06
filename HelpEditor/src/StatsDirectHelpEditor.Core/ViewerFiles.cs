@@ -13,13 +13,16 @@ internal static class ViewerFiles
     internal const string FlareHtml = """
 <!doctype html>
 <html lang="en" data-help-skin="__HELP_SKIN__"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StatisticalHelp from StatsDirect</title>__HELP_ICON__<link rel="stylesheet" href="help-viewer.css"></head>
-<body><header><a class="help-identity" href="contents.htm" aria-label="StatsDirect Help home">__HELP_IDENTITY__</a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form><button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="Show Navigation Panel"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg></button></header>
+<body><header><a class="help-identity" href="contents.htm" aria-label="StatsDirect Help home">__HELP_IDENTITY__</a><form id="search-form" role="search"><label class="visually-hidden" for="search">Search help</label><div class="search-row"><input id="search" type="search" placeholder="Search"><button type="submit" aria-label="Search"><svg aria-hidden="true" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4.5 4.5"/></svg></button></div></form>__HELP_DESKTOP_TITLE__<button id="navigation-toggle" type="button" aria-controls="help-navigation" aria-expanded="false" aria-label="__HELP_NAVIGATION_NAME__"><svg aria-hidden="true" viewBox="0 0 22 17"><path d="M0 1.5h22M0 8.5h22M0 15.5h22"/></svg>__HELP_NAVIGATION_TEXT__</button></header>
 <main><aside id="help-navigation"><nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active">Contents</button><button id="results-tab">Search results</button></nav><nav id="contents" aria-label="Contents"></nav></aside><section id="results" aria-live="polite" hidden><p>Enter words to search all help pages.</p></section><iframe id="topic" title="Help topic" src="contents.htm"></iframe></main><button class="navigation-shade" type="button" aria-label="Close Navigation Panel" hidden></button><script src="contents-data.js"></script><script src="search-index.js"></script><script src="help-viewer.js"></script></body></html>
 """;
 
-    internal static string HtmlForAppearance(string key, string? logoPath, string? iconPath) => (key == "flare" ? FlareHtml : Html)
+    internal static string HtmlForAppearance(string key, string? logoPath, string? iconPath, bool desktop = false) => (key == "flare" ? FlareHtml : Html)
         .Replace("__HELP_SKIN__", key, StringComparison.Ordinal)
         .Replace("__HELP_ICON__", IconLink(iconPath), StringComparison.Ordinal)
+        .Replace("__HELP_DESKTOP_TITLE__", desktop ? "<strong class=\"desktop-help-title\">StatsDirect Help</strong>" : "", StringComparison.Ordinal)
+        .Replace("__HELP_NAVIGATION_NAME__", desktop ? "Browse topics" : "Show Navigation Panel", StringComparison.Ordinal)
+        .Replace("__HELP_NAVIGATION_TEXT__", desktop ? "Browse topics" : "", StringComparison.Ordinal)
         .Replace("__HELP_IDENTITY__", logoPath == null ? "<strong>StatsDirect Help</strong>" :
             "<img class=\"help-logo\" src=\"" + System.Net.WebUtility.HtmlEncode(logoPath) + "\" width=\"228\" height=\"33\" alt=\"StatsDirect StatisticalHelp\">", StringComparison.Ordinal);
 
@@ -29,11 +32,11 @@ internal static class ViewerFiles
     // rootRelative is a directory prefix ("" at the root, "../" for a nested
     // topic). Topic CSS is already scoped to the inner body by the builder.
     internal static string FlareTopicHtml(string title, string currentTopic, string headHtml, string bodyHtml,
-        string rootRelative, string? logoRelative, string? iconRelative)
+        string rootRelative, string? logoRelative, string? iconRelative, bool desktop)
     {
         string Encode(string value) => System.Net.WebUtility.HtmlEncode(value);
         var prefix = string.IsNullOrEmpty(rootRelative) ? "" : rootRelative.TrimEnd('/') + "/";
-        var html = HtmlForAppearance("flare", logoRelative, iconRelative)
+        var html = HtmlForAppearance("flare", logoRelative, iconRelative, desktop)
             .Replace("data-help-skin=\"flare\"", "data-help-skin=\"flare\" data-help-root=\"" + Encode(prefix.Length == 0 ? "./" : prefix) + "\" data-current-topic=\"" + Encode(currentTopic) + "\"", StringComparison.Ordinal)
             .Replace("<title>StatisticalHelp from StatsDirect</title>", "<title>" + Encode(title) + "</title>", StringComparison.Ordinal)
             .Replace("href=\"contents.htm\"", "href=\"" + Encode(prefix + "contents.htm") + "\"", StringComparison.Ordinal)
@@ -155,7 +158,44 @@ html[data-help-skin="flare"] .navigation-shade{display:none}
 @media print{body{color:#000;background:#fff}header,aside,html[data-help-skin="flare"] header,html[data-help-skin="flare"] aside,html[data-help-skin="flare"] .navigation-shade{display:none!important}main{display:block;height:auto}#topic{display:block;width:100%;height:100vh;background:#fff}html[data-help-skin="flare"] body{overflow:visible}html[data-help-skin="flare"] article#topic{height:auto;overflow:visible}html[data-help-skin="flare"] body.navigation-open main{transform:none}}
 """;
 
-    internal const string JavaScript = """
+    // Desktop help is hosted beside native search and navigation. Keep the
+    // reader DOM for offline results and retain the narrow Contents toggle.
+    internal const string DesktopShellCss = """
+
+:root[data-help-skin]{--help-height:0px}
+html[data-help-skin] > body > header,
+html[data-help-skin] > body > header > .help-identity,
+html[data-help-skin] #search-form{display:none}
+@media screen and (max-width:1279px){
+ :root[data-help-skin="flare"]{--help-height:32px}
+ html[data-help-skin="flare"] > body > header{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;height:var(--help-height);padding:0 10px;background:var(--help-background);color:var(--help-text);border-bottom:1px solid var(--help-border)}
+ html[data-help-skin="flare"] .desktop-help-title{font-size:13px;white-space:nowrap}
+ html[data-help-skin="flare"] #navigation-toggle{position:static;width:auto;height:100%;padding:0;gap:6px;white-space:nowrap;background:none;color:var(--help-text)}
+ html[data-help-skin="flare"] #navigation-toggle svg{display:block;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5}
+}
+""";
+
+    internal static string JavaScriptForTarget(HelpBuildTarget target) => JavaScript.Replace(
+        "__HELP_TOPIC_BRANCH__", target == HelpBuildTarget.Desktop ? DesktopTopicBranch : WebsiteTopicBranch, StringComparison.Ordinal);
+
+    private const string WebsiteTopicBranch = "if (node.link) s.append(makeLink(node.title,node.link)); else s.textContent=node.title; d.append(s,renderTree(node.children));";
+
+    // The whole summary toggles the branch. Keep the parent page as a
+    // separate link so browsing children never takes the reader away early.
+    private const string DesktopTopicBranch = """
+        s.textContent = node.title;
+        const children = renderTree(node.children);
+        if (node.link) {
+          const overview = document.createElement('li');
+          const link = makeLink('Overview', node.link);
+          link.setAttribute('aria-label', node.title + ' overview');
+          overview.append(link);
+          children.prepend(overview);
+        }
+        d.append(s, children);
+        """;
+
+    private const string JavaScript = """
 (() => {
   'use strict';
   const contents = document.getElementById('contents'), results = document.getElementById('results'), frame = document.getElementById('topic');
@@ -190,7 +230,7 @@ html[data-help-skin="flare"] .navigation-shade{display:none}
   function selectTopic(link) { const target=resolveTopic(link);if(!target)return;const links=[...document.querySelectorAll('#contents a')].map(a=>({a,topic:resolveTopic(a.dataset.link)}));const exact=target.fragment?links.find(item=>item.topic?.path===target.path&&item.topic.fragment===target.fragment):null,current=(exact||links.find(item=>item.topic?.path===target.path))?.a;links.forEach(({a})=>{const selected=a===current;a.classList.toggle('selected',selected);if(selected){a.setAttribute('aria-current','page');for(let p=a.parentElement;p&&p!==contents;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;}else a.removeAttribute('aria-current');});scrollSelection(); }
   function openTopic(link, anchor, updateHash=true) { const target=resolveTopic(link);if(!target)return;if(articleMode){navigation(false);location[updateHash?'assign':'replace'](target.url);return;}activeTopic=target;const hash=new URLSearchParams({topic:target.link}).toString();if(updateHash&&location.hash.slice(1)!==hash)history.pushState(null,'','#'+hash);try{frame.contentWindow.location.replace(target.url);}catch{frame.src=target.url;} selectTopic(target.link); if(flare)showResults(false);else document.title=target.title;navigation(false); }
   function makeLink(title, link) { const a = document.createElement('a'); a.href = resolveTopic(link)?.url||link; a.dataset.link = link; a.textContent = title; a.addEventListener('click', e => { if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;if(articleMode){navigation(false);return;}e.preventDefault();e.stopPropagation();openTopic(link,a); }); return a; }
-  function renderTree(nodes) { const ul = document.createElement('ul'); for (const node of nodes) { const li = document.createElement('li'); if (node.children.length) { const d = document.createElement('details'), s = document.createElement('summary'); if (node.link) s.append(makeLink(node.title,node.link)); else s.textContent=node.title; d.append(s,renderTree(node.children)); li.append(d); } else if (node.link) li.append(makeLink(node.title,node.link)); else { const span=document.createElement('span');span.textContent=node.title;li.append(span); } ul.append(li); } return ul; }
+  function renderTree(nodes) { const ul = document.createElement('ul'); for (const node of nodes) { const li = document.createElement('li'); if (node.children.length) { const d = document.createElement('details'), s = document.createElement('summary'); __HELP_TOPIC_BRANCH__ li.append(d); } else if (node.link) li.append(makeLink(node.title,node.link)); else { const span=document.createElement('span');span.textContent=node.title;li.append(span); } ul.append(li); } return ul; }
   contents.append(renderTree(tree));
   if(activeTopic)selectTopic(activeTopic.link);
   const home=document.querySelector('a.help-identity'),homeTopic=resolveTopic('contents.htm')||resolveTopic(index.documents[0]?.url);if(home&&homeTopic){home.href=homeTopic.url;home.addEventListener('click',e=>{if(articleMode||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();showResults(false);openTopic(homeTopic.link);});}

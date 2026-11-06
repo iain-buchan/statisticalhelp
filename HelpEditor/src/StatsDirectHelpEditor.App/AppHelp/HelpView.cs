@@ -22,6 +22,7 @@ internal sealed class HelpView : UserControl
     private readonly HelpCatalog catalog;
     private readonly string userData;
     private readonly ToolStripButton back = new("Back") { Enabled = false }, forward = new("Forward") { Enabled = false };
+    private readonly ToolStripButton browse = new("Browse topics") { Enabled = false };
     private readonly ToolStripTextBox search = new() { AutoSize = false, Width = 190, AccessibleName = "Search all help topics" };
     private readonly ToolStripStatusLabel status = new() { Spring = true, TextAlign = ContentAlignment.MiddleLeft };
     private readonly ToolStripButton mode = new("Pop out") { Alignment = ToolStripItemAlignment.Right, Overflow = ToolStripItemOverflow.Never };
@@ -46,7 +47,9 @@ internal sealed class HelpView : UserControl
         mode.Click += (_, _) => ModeRequested?.Invoke();
         heading.Items.AddRange([new ToolStripLabel("Help"), close, mode]);
         var toolbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top };
-        toolbar.Items.AddRange([back, forward, new ToolStripButton("Contents", null, (_, _) => ShowTopic("1000")), new ToolStripSeparator(), new ToolStripButton("Print", null, (_, _) => Browser.CoreWebView2?.ShowPrintUI())]);
+        browse.Click += async (_, _) => await BrowseTopicsAsync();
+        toolbar.Items.AddRange([back, forward, new ToolStripButton("Home", null, (_, _) => ShowTopic("1000")), browse,
+            new ToolStripSeparator(), new ToolStripButton("Print", null, (_, _) => Browser.CoreWebView2?.ShowPrintUI())]);
         var searchbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top, CanOverflow = false };
         var searchLabel = new ToolStripLabel("Search:");
         var searchButton = new ToolStripButton("Search", null, (_, _) => Search(search.Text));
@@ -105,6 +108,46 @@ internal sealed class HelpView : UserControl
         NavigateRequested();
     }
 
+    private async Task BrowseTopicsAsync()
+    {
+        var core = Browser.CoreWebView2;
+        if (core == null || !HelpCatalog.IsLocal(core.Source)) return;
+
+        string source = core.Source;
+        try
+        {
+            Browser.Focus();
+            string opened = await core.ExecuteScriptAsync("""
+                (() => {
+                    const contents = document.getElementById('contents');
+                    if (!contents) return false;
+                    const navigation = document.getElementById('help-navigation');
+                    const toggle = document.getElementById('navigation-toggle');
+                    if (toggle && navigation && getComputedStyle(navigation).display === 'none') toggle.click();
+                    if (contents.hidden) document.getElementById('contents-tab')?.click();
+                    const link = contents.querySelector('a[aria-current="page"]') ?? contents.querySelector('a');
+                    if (!link?.getClientRects().length) return false;
+                    link.focus({preventScroll:true});
+                    return true;
+                })()
+                """).WaitAsync(TimeSpan.FromSeconds(5));
+            if (opened == "true" || IsDisposed || core.Source != source) return;
+
+            // Standalone topics in the alternative layouts have no tree.
+            // Open their reader with the same topic selected.
+            var page = new Uri(source);
+            if (page.AbsolutePath != "/index.html")
+            {
+                requested = HelpCatalog.Origin + "/index.html#topic=" + Uri.EscapeDataString(page.AbsolutePath.TrimStart('/') + page.Fragment);
+                NavigateRequested();
+            }
+        }
+        catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException or TimeoutException)
+        {
+            if (!IsDisposed) status.Text = "Could not open the help topics: " + ex.Message;
+        }
+    }
+
     private void NavigateRequested()
     {
         if (Browser.CoreWebView2 == null || !ready.Task.IsCompletedSuccessfully || requested == null) return;
@@ -122,6 +165,7 @@ internal sealed class HelpView : UserControl
             await Browser.EnsureCoreWebView2Async(environment);
             if (IsDisposed) return;
             var core = Browser.CoreWebView2;
+            await core.AddScriptToExecuteOnDocumentCreatedAsync(NativeToolbarStyle);
             await core.AddScriptToExecuteOnDocumentCreatedAsync("for(const type of ['wheel','pointerdown','keydown']) addEventListener(type,()=>{window.__sdHelpPosition=null;},{capture:true,passive:true});");
             core.Settings.AreHostObjectsAllowed = false;
             core.Settings.IsWebMessageEnabled = false;
@@ -141,7 +185,11 @@ internal sealed class HelpView : UserControl
             };
             core.NavigationStarting += (_, e) =>
             {
-                if (HelpCatalog.IsLocal(e.Uri)) return;
+                if (HelpCatalog.IsLocal(e.Uri))
+                {
+                    browse.Enabled = false;
+                    return;
+                }
                 e.Cancel = true;
                 if (e.IsUserInitiated) OpenExternal(e.Uri);
             };
@@ -160,6 +208,7 @@ internal sealed class HelpView : UserControl
             };
             core.NavigationCompleted += (_, e) =>
             {
+                browse.Enabled = e.IsSuccess || e.WebErrorStatus == CoreWebView2WebErrorStatus.OperationCanceled;
                 if (!e.IsSuccess && e.WebErrorStatus != CoreWebView2WebErrorStatus.OperationCanceled) status.Text = "The help page could not load: " + e.WebErrorStatus;
             };
             core.ProcessFailed += (_, _) => status.Text = "The help browser stopped. Close and reopen Help to continue.";
@@ -174,6 +223,29 @@ internal sealed class HelpView : UserControl
             _ = ready.Task.Exception;
         }
     }
+
+    // The web reader still supplies the Contents tree and search results.
+    // Hide its redundant toolbar only inside this native help window.
+    private const string NativeToolbarStyle = """
+        (() => {
+            if (window !== window.top || location.origin !== 'https://help.statsdirect.invalid') return;
+            const style = document.createElement('style');
+            style.textContent = `
+                :root[data-help-skin]:has(> body > header > .help-identity){--help-height:0px !important}
+                html[data-help-skin] > body > header:has(> .help-identity),
+                html[data-help-skin] > body > main > aside > #search-form{display:none !important}
+            `;
+            if (document.head) document.head.append(style);
+            else {
+                const observer = new MutationObserver(() => {
+                    if (!document.head) return;
+                    document.head.append(style);
+                    observer.disconnect();
+                });
+                observer.observe(document,{childList:true,subtree:true});
+            }
+        })();
+        """;
 
     private void OpenExternal(string uri)
     {

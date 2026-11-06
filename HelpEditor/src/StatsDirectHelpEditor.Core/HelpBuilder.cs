@@ -148,7 +148,7 @@ public static class HelpBuilder
                 var scopedHead = "<link rel=\"stylesheet\" href=\"" + Relative(outputPath, ScopedStylesPath) + "\"><style>" +
                     HelpCssScoper.Scope(TopicCss + EquationArtworkCatalog.Css + ViewerFiles.TopicAppearanceCss) + "</style>" + mathHead;
                 html = ViewerFiles.FlareTopicHtml(topic.Title, outputPath, scopedHead, topicBody, rootRelative,
-                    logoPath == null ? null : Relative(outputPath, logoPath), iconPath == null ? null : Relative(outputPath, iconPath));
+                    logoPath == null ? null : Relative(outputPath, logoPath), iconPath == null ? null : Relative(outputPath, iconPath), target == HelpBuildTarget.Desktop);
             }
             else
             {
@@ -173,9 +173,9 @@ public static class HelpBuilder
         var homeTopic = topics.FirstOrDefault(t => t.Path.Equals("contents.htm", StringComparison.OrdinalIgnoreCase)) ?? topics.FirstOrDefault();
         Write("index.html", appearance == "flare" && homeTopic != null
             ? FlareIndexNavigation(homeTopic.Path.ToLowerInvariant(), logoPath, iconPath)
-            : ViewerFiles.HtmlForAppearance(appearance, logoPath, iconPath));
-        Write("help-viewer.css", ViewerFiles.Css);
-        Write("help-viewer.js", ViewerFiles.JavaScript);
+            : ViewerFiles.HtmlForAppearance(appearance, logoPath, iconPath, target == HelpBuildTarget.Desktop));
+        Write("help-viewer.css", target == HelpBuildTarget.Desktop ? ViewerFiles.Css + ViewerFiles.DesktopShellCss : ViewerFiles.Css);
+        Write("help-viewer.js", ViewerFiles.JavaScriptForTarget(target));
         Write("Data/Alias.xml", CreateAliases(project, outputTopics, warnings));
         Write("build-info.json", JsonSerializer.Serialize(new { Builder = "StatsDirectHelpEditor prototype", Target = target.ToString(), Appearance = appearance, BuiltAtUtc = DateTimeOffset.UtcNow, TopicCount = topics.Count, SearchDocumentCount = searchDocuments.Count, Warnings = warnings.Distinct().ToArray() }, new JsonSerializerOptions { WriteIndented = true }));
 

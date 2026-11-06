@@ -74,8 +74,8 @@ internal static class Program
         Check(workspace.Right <= service.DockHost.Divider.Left && service.DockHost.Divider.Right <= service.DockHost.Panel.Left && service.DockHost.Panel.Top >= ribbon.Bottom && ribbon.Width == owner.ClientSize.Width, "Help pane and splitter reserve space without covering the editor or full-width ribbon");
         Check(service.View.Font.Name == "Arial" && service.View.Font.SizeInPoints == 10, "App help chrome uses the app's Arial 10 font");
         var buttons = Descendants(service.View).OfType<ToolStrip>().SelectMany(strip => strip.Items.Cast<ToolStripItem>()).Select(item => item.Text).ToArray();
-        Check(new[] { "Help", "Pop out", "Close", "Back", "Forward", "Contents", "Print", "Search:", "Search" }.All(text => buttons.Contains(text)), "App heading, navigation, search, print and pop-out controls match StatsDirect");
-        Check((await Js("document.body.innerText.includes('Desktoponlysentinel') && !document.body.innerText.includes('Publiconlysentinel') && !!document.querySelector('#help-topic-body')")).GetBoolean(), "App view renders the complete Desktop site shell and Desktop source conditions");
+        Check(new[] { "Help", "Pop out", "Close", "Back", "Forward", "Home", "Browse topics", "Print", "Search:", "Search" }.All(text => buttons.Contains(text)), "App heading, navigation, search, print and pop-out controls match StatsDirect");
+        Check((await Js("document.body.innerText.includes('Desktoponlysentinel') && !document.body.innerText.includes('Publiconlysentinel') && !!document.querySelector('#help-topic-body') && !document.querySelector('body > header').getClientRects().length")).GetBoolean(), "App view renders Desktop topics and source conditions without the embedded website toolbar");
         await Until("!!document.querySelector('mjx-container svg')");
         Check(true, "Offline mathematics renders inside the exact app browser host");
         var browser = service.View.Browser.CoreWebView2;
