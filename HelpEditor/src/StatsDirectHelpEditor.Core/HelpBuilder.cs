@@ -78,7 +78,7 @@ public static class HelpBuilder
             var path = SafePaths.Resolve(output, relative);
             RequireOwnedOutput(path, relative);
             generated.Add(relative.Replace('\\', '/'));
-            SafePaths.AtomicWrite(path, content);
+            SafePaths.AtomicWriteLf(path, content); // Generated text is LF on every platform.
         }
 
         void Copy(string source, string relative)
@@ -193,7 +193,7 @@ public static class HelpBuilder
             // Even a failed transform leaves an attributable build folder that
             // can be rebuilt. Track only paths this invocation actually owned.
             var receiptFiles = completed ? generated : previous.Concat(generated).ToHashSet(StringComparer.OrdinalIgnoreCase);
-            SafePaths.AtomicWrite(oldManifest, JsonSerializer.Serialize(new OutputReceipt(receiptFiles.Order(StringComparer.OrdinalIgnoreCase).ToArray()), JsonOptions));
+            SafePaths.AtomicWriteLf(oldManifest, JsonSerializer.Serialize(new OutputReceipt(receiptFiles.Order(StringComparer.OrdinalIgnoreCase).ToArray()), JsonOptions));
         }
     }
 

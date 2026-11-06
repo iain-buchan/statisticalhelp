@@ -247,7 +247,7 @@ public static class TutorBuiltinPublisher
     private static string S(JsonNode? node, string key, string fallback = "") => node is JsonObject row && row[key] is JsonValue value && value.TryGetValue<string>(out var text) ? text : fallback;
     private static int I(JsonNode node, string key) => node[key] is JsonValue value && value.TryGetValue<int>(out int number) ? number : 0;
     private static JsonArray Strings(IEnumerable<string> values) => new(values.Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal).Select(value => (JsonNode)JsonValue.Create(value)!).ToArray());
-    private static void Write(string directory, string name, string text) => File.WriteAllText(Path.Combine(directory, name), text, new UTF8Encoding(false));
+    private static void Write(string directory, string name, string text) => File.WriteAllText(Path.Combine(directory, name), SafePaths.NormalizeNewlines(text), new UTF8Encoding(false));
     private static string Hash(byte[] bytes) => Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
     private static string FileHash(string file) => Hash(File.ReadAllBytes(file));
     private static void VerifyOwnedOutput(string directory)

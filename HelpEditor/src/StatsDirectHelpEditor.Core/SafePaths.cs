@@ -74,6 +74,11 @@ internal static class SafePaths
     [DllImport("kernel32.dll", ExactSpelling = true, SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)] private static extern bool FindClose(IntPtr handle);
 
+    /// <summary>Published outputs, receipts and manifests use LF whatever the platform, so their bytes depend on the source alone.</summary>
+    internal static string NormalizeNewlines(string text) => text.Replace("\r\n", "\n").Replace('\r', '\n');
+
+    internal static void AtomicWriteLf(string path, string text) => AtomicWrite(path, NormalizeNewlines(text));
+
     internal static void AtomicWrite(string path, string text)
     {
         CheckNoLinks(path);

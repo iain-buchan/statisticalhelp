@@ -447,7 +447,7 @@ public static class DesktopHelpPublisher
     { using var stream = new MemoryStream(bytes, false); using var reader = XmlReader.Create(stream, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit, XmlResolver = null, MaxCharactersInDocument = 20_000_000 }); return XDocument.Load(reader); }
     private static T ReadJson<T>(string path)
     { SafePaths.CheckNoLinks(path); if (new FileInfo(path).Length > 20_000_000) throw new InvalidDataException("Desktop control metadata is oversized."); return JsonSerializer.Deserialize<T>(File.ReadAllText(path), Json) ?? throw new InvalidDataException("Desktop control metadata is invalid."); }
-    private static void WriteJson<T>(string path, T value) => SafePaths.AtomicWrite(path, JsonSerializer.Serialize(value, Json) + "\n");
+    private static void WriteJson<T>(string path, T value) => SafePaths.AtomicWriteLf(path, JsonSerializer.Serialize(value, Json) + "\n");
     private static void WriteNewMarker(string path, Journal journal)
     {
         SafePaths.CheckNoLinks(path); string temporary = path + "." + journal.Token + ".tmp";

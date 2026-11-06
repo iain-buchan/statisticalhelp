@@ -106,7 +106,7 @@ public static partial class SharedContentPublisher
                 Artifact("Published/DesktopHelp") with { TopicCount = desktop.TopicCount, SearchDocumentCount = desktop.SearchDocumentCount, ContextCount = desktop.ContextCount },
                 Artifact("Published/Tutor") with { LessonCount = tutor.LessonCount, QuestionCount = tutor.QuestionCount, TrackCount = JsonNode.Parse(File.ReadAllText(SafePaths.Resolve(root,"Published/Tutor/tracks.json")))!.AsObject().Count, BankVersion = tutor.BankVersion, ReviewProofBinding = ReviewProofBinding })
         };
-        SafePaths.AtomicWrite(SafePaths.Resolve(root, ManifestRelativePath), JsonSerializer.Serialize(manifest, Json) + "\n");
+        SafePaths.AtomicWriteLf(SafePaths.Resolve(root, ManifestRelativePath), JsonSerializer.Serialize(manifest, Json) + "\n");
         return Verify(root);
     }
 

@@ -459,7 +459,7 @@ public static class HelpPublicationPublisher
             string info = SafePaths.Resolve(output, PublicationInfo);
             if (File.Exists(info)) throw new InvalidDataException("The generated publication information path is already occupied.");
             Directory.CreateDirectory(Path.GetDirectoryName(info)!);
-            File.WriteAllText(info, JsonSerializer.Serialize(new { schemaVersion = 1, sourceSha256 = digest, target = target.ToString() }, Json), new UTF8Encoding(false));
+            File.WriteAllText(info, SafePaths.NormalizeNewlines(JsonSerializer.Serialize(new { schemaVersion = 1, sourceSha256 = digest, target = target.ToString() }, Json)), new UTF8Encoding(false));
             string marker = SafePaths.Resolve(output, ".statsdirect-help-output.json");
             var ownership = JsonNode.Parse(File.ReadAllText(marker))!.AsObject(); ownership["files"]!.AsArray().Add(PublicationInfo);
             File.WriteAllText(marker, ownership.ToJsonString(), new UTF8Encoding(false));
