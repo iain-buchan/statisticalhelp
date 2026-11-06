@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Generated help, output receipts, the desktop delivery receipt, the shared-content manifest and the built-in tutor payload are written with LF on every platform, so a publication's bytes depend on its source alone rather than on the publishing machine.
+- Double-clicking a Contents node expands or collapses it once; the extra toggle that reversed the native one a moment later is gone.
 - Native Contents checks support optional method arguments and close their owned window even when cleanup fails. A forced-failure check covers that exit path; CI bounds the native step to 15 minutes.
 - Imported pages and rich-text paste remove executable attributes and embedded content from the draft. Save and project-wide replacement reject prohibited source before writing; equations, R examples and ordinary links are preserved.
 - Authoring and preview WebViews share settings, with cross-origin script access to local project files refused while topic images remain available.
