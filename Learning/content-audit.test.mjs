@@ -6,7 +6,7 @@ import {questions} from './bank.mjs';
 import {runR,archivedBank,archiveRequested} from './test-config.mjs';
 // The archive comparison runs where an archived bank exists; a host that names one with STATSDIRECT_LEARN_ARCHIVE must supply it.
 let archived=null,archiveError=null;
-if(archiveRequested||existsSync(fileURLToPath(archivedBank))){
+if(archiveRequested){ // An archive is compared only when STATSDIRECT_LEARN_ARCHIVE names one; a named but missing archive fails below.
   try{const module=await import(archivedBank);archived=module.questions;if(!Array.isArray(archived))throw Error('the archive exports no questions array');}
   catch(error){archiveError=`${fileURLToPath(archivedBank)}: ${error.message}`;}
 }
