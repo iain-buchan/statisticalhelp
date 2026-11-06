@@ -165,6 +165,16 @@ try
     string publicViewer = File.ReadAllText(Path.Combine(publicBuild.OutputDirectory, "index.html"));
     Check(desktopViewer.Contains("data-help-skin=\"clean-blue\"") && desktopTopic.Contains("data-help-skin=\"clean-blue\"") && publicViewer.Contains("data-help-skin=\"warm-paper\"") && publicTopic.Contains("data-help-skin=\"warm-paper\""), "Builder fixes each target's chosen design in its viewer and direct-entry topics");
     string readerScript = File.ReadAllText(Path.Combine(desktop.OutputDirectory, "help-viewer.js"));
+    string publicReaderScript = File.ReadAllText(Path.Combine(publicBuild.OutputDirectory, "help-viewer.js"));
+    string desktopViewerCss = File.ReadAllText(Path.Combine(desktop.OutputDirectory, "help-viewer.css"));
+    string publicViewerCss = File.ReadAllText(Path.Combine(publicBuild.OutputDirectory, "help-viewer.css"));
+    const string desktopChromeRule = "html[data-help-skin] > body > header > .help-identity,\nhtml[data-help-skin] #search-form{display:none}";
+    Check(desktopViewerCss.Contains(desktopChromeRule) && !publicViewerCss.Contains(desktopChromeRule),
+        "Only Desktop hides the website banner and search form");
+    Check(readerScript.Contains("makeLink('Overview', node.link)") && publicReaderScript.Contains("s.append(makeLink(node.title,node.link))")
+        && !publicReaderScript.Contains("makeLink('Overview', node.link)")
+        && !readerScript.Contains("__HELP_TOPIC_BRANCH__") && !publicReaderScript.Contains("__HELP_TOPIC_BRANCH__"),
+        "Desktop Contents keeps a separate Overview link while Public retains linked parent titles");
     Check(!desktopViewer.Contains("Appearance") && !desktopViewer.Contains("<select") && !readerScript.Contains("localStorage") && !readerScript.Contains("setSkin") && !readerScript.Contains("postMessage") && !desktopTopic.Contains("postMessage"), "Generated help contains no appearance control, stored preference or theme messaging API");
     Check(desktopViewer.Contains("<strong>StatsDirect Help</strong>") && !desktopViewer.Contains("<img class=\"help-logo\"") && !desktopViewer.Contains("rel=\"icon\"") && !desktopViewer.Contains("__HELP_"), "A project without branding retains a readable title without broken image or icon links");
     Check(desktopTopic.Contains("desktoponlyword") && !desktopTopic.Contains("publiconlyword"), "Desktop conditions include only desktop variants");
