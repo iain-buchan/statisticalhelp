@@ -170,7 +170,6 @@ public sealed partial class MainForm : Form
                 else SelectCurrentPage();
             }, quietNavigation: true);
         };
-        contents.NodeMouseDoubleClick += (_, e) => e.Node?.Toggle();
         Shown += async (_, _) =>
         {
             try
