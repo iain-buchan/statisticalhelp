@@ -398,10 +398,26 @@ internal static class Program
     private static void TrackFrame(CoreWebView2Frame frame, List<CoreWebView2Frame> frames)
     {
         frames.Add(frame);
+        frame.Destroyed += (_, _) => frames.Remove(frame);
         frame.FrameCreated += (_, e) => TrackFrame(e.Frame, frames);
     }
-    // A frame being torn down during navigation can leave a script call unanswered for ever; the poll must not.
-    private static readonly TimeSpan FrameAnswer = TimeSpan.FromSeconds(5);
+
+    private static async Task<string?> ReadFrameAsync(CoreWebView2Frame frame, string script, DateTime deadline)
+    {
+        var remaining = deadline - DateTime.UtcNow;
+        if (remaining <= TimeSpan.Zero) return null;
+        try
+        {
+            if (frame.IsDestroyed() != 0) return null;
+            // A frame retired during navigation may never complete its pending script.
+            var timeout = remaining < TimeSpan.FromSeconds(1) ? remaining : TimeSpan.FromSeconds(1);
+            return await frame.ExecuteScriptAsync(script).WaitAsync(timeout);
+        }
+        catch (Exception ex) when (ex is TimeoutException or InvalidOperationException or COMException)
+        {
+            return null;
+        }
+    }
     private static async Task<bool> BrowserHas(string script)
     {
         var until = DateTime.UtcNow.AddSeconds(12);
@@ -411,8 +427,7 @@ internal static class Program
             {
                 // A frame being navigated can return JSON null instead of a
                 // Boolean. Only true establishes readiness; otherwise poll on.
-                try { if (await frame.ExecuteScriptAsync("Boolean(" + script + ")").WaitAsync(FrameAnswer) == "true") return true; }
-                catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException or TimeoutException) { }
+                if (await ReadFrameAsync(frame, "Boolean(" + script + ")", until) == "true") return true;
             }
             await Task.Delay(35);
         }
@@ -428,8 +443,7 @@ internal static class Program
                 await form.AppPreviewWebView!.ExecuteScriptAsync("Boolean(" + script + ")") == "true") return true;
             foreach (var frame in appFrames.ToArray().Reverse())
             {
-                try { if (await frame.ExecuteScriptAsync("Boolean(" + script + ")").WaitAsync(FrameAnswer) == "true") return true; }
-                catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException or TimeoutException) { }
+                if (await ReadFrameAsync(frame, "Boolean(" + script + ")", until) == "true") return true;
             }
             await Task.Delay(35);
         }
@@ -442,12 +456,10 @@ internal static class Program
         {
             foreach (var frame in previewFrames.ToArray().Reverse())
             {
-                try
-                {
-                    string html = JsonSerializer.Deserialize<string>(await frame.ExecuteScriptAsync("document.documentElement.outerHTML").WaitAsync(FrameAnswer)) ?? "";
-                    if (html.Contains(token, StringComparison.Ordinal)) return html;
-                }
-                catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException) { }
+                string? result = await ReadFrameAsync(frame, "document.documentElement.outerHTML", until);
+                if (result == null) continue;
+                string html = JsonSerializer.Deserialize<string>(result) ?? "";
+                if (html.Contains(token, StringComparison.Ordinal)) return html;
             }
             await Task.Delay(35);
         }
@@ -530,9 +542,11 @@ internal static class Program
             {
                 try
                 {
-                    string found = await frame.ExecuteScriptAsync("Boolean(document.getElementById(" + JsonSerializer.Serialize(id) + "))").WaitAsync(FrameAnswer);
+                    string? found = await ReadFrameAsync(frame, "Boolean(document.getElementById(" + JsonSerializer.Serialize(id) + "))", until);
                     if (found != "true") continue;
-                    await frame.ExecuteScriptAsync("setTimeout(()=>document.getElementById(" + JsonSerializer.Serialize(id) + ").click(),0);true").WaitAsync(FrameAnswer);
+                    // Once dispatched, a click cannot be safely retried on timeout.
+                    await frame.ExecuteScriptAsync("setTimeout(()=>document.getElementById(" + JsonSerializer.Serialize(id) + ").click(),0);true")
+                        .WaitAsync(TimeSpan.FromSeconds(2));
                     return;
                 }
                 catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException) { /* An older preview frame has been destroyed. */ }
