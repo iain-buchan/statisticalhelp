@@ -1,6 +1,5 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {questions} from './bank.mjs';
 import {runR,archivedBank,archiveRequested} from './test-config.mjs';
