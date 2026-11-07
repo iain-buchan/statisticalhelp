@@ -37,7 +37,7 @@ try{
     Run-Check 'Deleted-page recovery' {dotnet run --no-build --project tests/StatsDirectHelpEditor.Checks --configuration Release -- $root --recovery-only}
     & (Join-Path $root 'Build-Help.ps1') -CompileBuilder
     Run-Check 'Headless wrapper without SDK or Flare' { & (Join-Path $root 'tests/headless-wrapper-checks.ps1') -Root $root }
-    foreach($file in @('web-checks.cjs','math-keyboard-checks.cjs','math-menu-checks.cjs','web-edit-lifecycle-checks.cjs','link-ribbon-checks.cjs','LinkFormattingPreservationChecks.cjs','workspace-view-checks.cjs','preview-link-checks.cjs','viewer-skin-checks.cjs','deep-authoring-checks.cjs')){
+    foreach($file in @('web-checks.cjs','math-keyboard-checks.cjs','math-menu-checks.cjs','web-edit-lifecycle-checks.cjs','link-ribbon-checks.cjs','LinkFormattingPreservationChecks.cjs','workspace-view-checks.cjs','preview-link-checks.cjs','viewer-skin-checks.cjs','viewer-index-checks.cjs','deep-authoring-checks.cjs')){
         if(Test-Path -LiteralPath (Join-Path $root ('tests\'+$file))){Run-Check $file {& $node.Source ('tests/'+$file)}}
     }
     $previousBuild=$env:STATSDIRECT_HELP_BUILD

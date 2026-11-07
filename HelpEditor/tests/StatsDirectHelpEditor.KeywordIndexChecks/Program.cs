@@ -70,6 +70,13 @@ try
         Check(receipt.RootElement.GetProperty("files").EnumerateArray().Any(file => file.GetString() == "keyword-index.json"), "The normal builder receipt owns keyword-index.json");
     byte[] bytes = File.ReadAllBytes(Path.Combine(desktop, "keyword-index.json"));
     Check(!bytes.Contains((byte)'\r') && !bytes.AsSpan().StartsWith(Encoding.UTF8.GetPreamble()), "Generated keyword metadata is UTF-8 without BOM and contains no CR line endings");
+    string keywordScript = File.ReadAllText(Path.Combine(desktop, "keyword-index.js"));
+    Check(keywordScript.StartsWith("window.STATSDIRECT_HELP_KEYWORDS=" + Encoding.UTF8.GetString(bytes) + ";\n", StringComparison.Ordinal), "The browser script carries the exact native keyword JSON without a network fetch");
+    string topicJson = keywordScript.Split("window.StatsDirectTopics=", StringSplitOptions.None)[1].TrimEnd(';', '\n');
+    using (var browserTopics = JsonDocument.Parse(topicJson))
+        Check(browserTopics.RootElement.EnumerateArray().Count() == 3 && browserTopics.RootElement.EnumerateArray().Any(topic => topic.GetProperty("url").GetString() == "private.htm"), "The browser catalogue includes search-excluded topics for safe keyword navigation");
+    using (var receipt = JsonDocument.Parse(File.ReadAllText(Path.Combine(desktop, ".statsdirect-help-output.json"))))
+        Check(receipt.RootElement.GetProperty("files").EnumerateArray().Any(file => file.GetString() == "keyword-index.js"), "The builder receipt owns the browser keyword companion script");
     string originalIndexHash = Hash(Path.Combine(desktop, "keyword-index.json"));
     HelpBuilder.Build(project, desktop, runtime);
     Check(Hash(Path.Combine(desktop, "keyword-index.json")) == originalIndexHash && File.ReadAllText(Path.Combine(desktop, "search-index.js")) == searchScript, "Repeated builds preserve exact index bytes and the existing full-text search output");
@@ -97,11 +104,21 @@ try
     string foreignHash = Hash(Path.Combine(foreignOutput, "keyword-index.json"));
     Reject(() => HelpBuilder.Build(project, foreignOutput, runtime), "An existing unowned keyword-index.json cannot be overwritten");
     Check(Hash(Path.Combine(foreignOutput, "keyword-index.json")) == foreignHash, "Refusing an unowned metadata file preserves its original bytes");
+    string foreignScriptOutput = Path.Combine(fixture, "UnownedScriptOutput");
+    Write(foreignScriptOutput, ".statsdirect-help-output.json", "{\"files\":[]}"); Write(foreignScriptOutput, "keyword-index.js", "Source-owned script");
+    string foreignScriptHash = Hash(Path.Combine(foreignScriptOutput, "keyword-index.js"));
+    Reject(() => HelpBuilder.Build(project, foreignScriptOutput, runtime), "An unowned keyword companion script cannot be overwritten");
+    Check(Hash(Path.Combine(foreignScriptOutput, "keyword-index.js")) == foreignScriptHash, "Refusing an unowned companion script preserves its original bytes");
     var conflict = Project("ConflictSource", ("topic.htm", Page("Topic", "<p>Source conflict.</p>")));
     Write(conflict.RootPath, "Content/keyword-index.json", "Source-owned data");
     var conflictBefore = Digests(conflict.RootPath);
     Reject(() => HelpBuilder.Build(conflict, Path.Combine(fixture, "ConflictOutput"), runtime), "A source resource cannot shadow the generated keyword metadata name");
     Check(Same(conflict.RootPath, conflictBefore), "A reserved-name conflict leaves all source bytes untouched");
+    var scriptConflict = Project("ScriptConflictSource", ("topic.htm", Page("Topic", "<p>Source conflict.</p>")));
+    Write(scriptConflict.RootPath, "Content/keyword-index.js", "Source-owned script");
+    var scriptConflictBefore = Digests(scriptConflict.RootPath);
+    Reject(() => HelpBuilder.Build(scriptConflict, Path.Combine(fixture, "ScriptConflictOutput"), runtime), "A source resource cannot shadow the generated keyword companion script");
+    Check(Same(scriptConflict.RootPath, scriptConflictBefore), "A companion-script name conflict leaves the source untouched");
 }
 catch (Exception error) { Check(false, "Unexpected keyword-index exception: " + error); }
 var report = new { checkedAtUtc = DateTimeOffset.UtcNow, passed = failed == 0, failed, assertions = checks.Count, fixture, checks };

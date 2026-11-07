@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Website help has **Contents**, **Index** and **Search** navigation. The authored keyword Index filters by keyword or topic title, supports keyboard navigation and multiple destinations, and works offline, including indexed pages excluded from full-text search. Desktop help retains its native toolbar controls.
 - Standalone website exports preserve publication ZIPs and ask for a different filename.
 - Generated help, output receipts, the desktop delivery receipt, the shared-content manifest and the built-in tutor payload are written with LF on every platform, so a publication's bytes depend on its source alone rather than on the publishing machine.
 - Double-clicking a Contents node expands or collapses it once; the extra toggle that reversed the native one a moment later is gone.

@@ -41,7 +41,7 @@ try {
             'web-checks.cjs', 'math-keyboard-checks.cjs', 'math-menu-checks.cjs',
             'web-edit-lifecycle-checks.cjs', 'link-ribbon-checks.cjs',
             'LinkFormattingPreservationChecks.cjs', 'workspace-view-checks.cjs', 'BrowserHandoffChecks.cjs', 'SourceContentBrowserChecks.cjs',
-            'preview-link-checks.cjs', 'viewer-skin-checks.cjs', 'viewer-keyboard-checks.cjs',
+            'preview-link-checks.cjs', 'viewer-skin-checks.cjs', 'viewer-keyboard-checks.cjs', 'viewer-index-checks.cjs',
             'deep-authoring-checks.cjs', 'overnight-browser-workflows.cjs',
             'FormattedEquationOverflowChecks.cjs', 'web-namespace-checks.cjs'
         )) { Run-Browser $file }

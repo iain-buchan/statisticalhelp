@@ -63,7 +63,7 @@ public static class HelpBuilder
         var assetPaths = sourceFiles.Select(file => Path.GetRelativePath(project.ContentPath, file).Replace('\\', '/').ToLowerInvariant()).ToHashSet(StringComparer.Ordinal);
         string? logoPath = assetPaths.Contains("resources/images/sd3helplogo.png") ? "resources/images/sd3helplogo.png" : null;
         string? iconPath = assetPaths.Contains("resources/images/sd3.ico") ? "resources/images/sd3.ico" : null;
-        var reserved = new HashSet<string>(["index.html", "contents-data.js", "search-index.js", "keyword-index.json", "help-viewer.css", "help-viewer.js", "build-info.json", OutputMarker, "data/alias.xml"], StringComparer.OrdinalIgnoreCase);
+        var reserved = new HashSet<string>(["index.html", "contents-data.js", "search-index.js", "keyword-index.json", "keyword-index.js", "help-viewer.css", "help-viewer.js", "build-info.json", OutputMarker, "data/alias.xml"], StringComparer.OrdinalIgnoreCase);
         foreach (var file in sourceFiles)
         {
             var relative = Path.GetRelativePath(project.ContentPath, file).Replace('\\', '/').ToLowerInvariant();
@@ -159,7 +159,7 @@ public static class HelpBuilder
                 html = "<!doctype html>\n<html lang=\"en\" data-help-skin=\"" + appearance + "\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
                     "<title>" + WebUtility.HtmlEncode(topic.Title) + "</title>" + ViewerFiles.IconLink(iconPath == null ? null : Relative(outputPath, iconPath)) + "<link rel=\"stylesheet\" href=\"" + css + "\">" +
                     "<style>" + TopicCss + EquationArtworkCatalog.Css + ViewerFiles.TopicAppearanceCss + "</style><script>" + StandaloneTopicNavigation(home, outputPath) + ViewerFiles.TopicNavigationJavaScript + "</script>" +
-                    mathHead + "</head><body class=\"help-math-ignore\"><nav class=\"help-topic-nav\"><a href=\"" + home + "\" target=\"_top\">Contents and search</a></nav>" + topicBody + "</body></html>";
+                    mathHead + "</head><body class=\"help-math-ignore\"><nav class=\"help-topic-nav\"><a href=\"" + home + "\" target=\"_top\">Contents, Index and Search</a></nav>" + topicBody + "</body></html>";
             }
             Write(outputPath, html);
             // A topic excluded from search still belongs in the built site,
@@ -183,7 +183,12 @@ public static class HelpBuilder
             .ThenBy(entry => entry.Title, StringComparer.OrdinalIgnoreCase)
             .ThenBy(entry => entry.Path, StringComparer.OrdinalIgnoreCase)
             .ToArray();
-        Write("keyword-index.json", JsonSerializer.Serialize(new { SchemaVersion = 1, Entries = keywordsForTarget }, JsonOptions));
+        var keywordJson = JsonSerializer.Serialize(new { SchemaVersion = 1, Entries = keywordsForTarget }, JsonOptions);
+        Write("keyword-index.json", keywordJson);
+        // Script data also works from file://, where browsers block JSON fetch.
+        // The complete topic catalogue includes pages excluded from full-text search.
+        Write("keyword-index.js", "window.STATSDIRECT_HELP_KEYWORDS=" + keywordJson + ";\nwindow.StatsDirectTopics=" +
+            JsonSerializer.Serialize(topics.Select(topic => new { Url = topic.Path.ToLowerInvariant(), topic.Title }), JsonOptions) + ";");
         var homeTopic = topics.FirstOrDefault(t => t.Path.Equals("contents.htm", StringComparison.OrdinalIgnoreCase)) ?? topics.FirstOrDefault();
         Write("index.html", appearance == "flare" && homeTopic != null
             ? FlareIndexNavigation(homeTopic.Path.ToLowerInvariant(), logoPath, iconPath)
