@@ -222,7 +222,20 @@ html[data-help-skin] #search-form{display:none}
   function navigation(open) { document.body.classList.toggle('navigation-open',open); if(menu)menu.setAttribute('aria-expanded',String(open)); if(shade)shade.hidden=!open;if(open)scrollSelection(); }
   if(menu)menu.addEventListener('click',()=>navigation(!document.body.classList.contains('navigation-open')));
   if(shade)shade.addEventListener('click',()=>navigation(false));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('navigation-open')){navigation(false);menu?.focus();}});
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+    const fromNavigation=contents.contains(document.activeElement)||document.getElementById('help-navigation')?.contains(document.activeElement);
+    if(!document.body.classList.contains('navigation-open')&&!fromNavigation)return;
+    navigation(false);
+    // Native hosts hide the reader header; the wide reader also hides its toggle.
+    // Return focus to the topic instead of a button that cannot receive it.
+    if(menu?.getClientRects().length)menu.focus({preventScroll:true});
+    if(!menu?.getClientRects().length||document.activeElement!==menu){
+      if(articleMode&&!frame.hasAttribute('tabindex'))frame.tabIndex=-1;
+      frame.focus({preventScroll:true});
+    }
+    e.preventDefault();
+  });
   matchMedia('(max-width:1279px)').addEventListener('change',()=>navigation(false));
   const tabs = [document.getElementById('contents-tab'), document.getElementById('results-tab')];
   let activeTopic=(articleMode?resolveTopic(location.href):null)||resolveTopic(document.documentElement.dataset.currentTopic||frame.getAttribute('src')||index.documents[0]?.url);
