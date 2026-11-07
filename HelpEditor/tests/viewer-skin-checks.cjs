@@ -13,7 +13,7 @@ function topic(title,body,prefix=''){return '<html><head><title>'+title+'</title
 function write(base,name,value){const file=path.join(base,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,value);}
 function hash(file){return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');}
 function files(base){return fs.readdirSync(base,{withFileTypes:true}).flatMap(e=>e.isDirectory()?files(path.join(base,e.name)):[path.join(base,e.name)]);}
-function record(name,passed,detail){checks.push({name,passed:!!passed,detail});console.log((passed?'PASS ':'FAIL ')+name);}
+function record(name,passed,detail){checks.push({name,passed:!!passed,detail});console.log((passed?'PASS ':'FAIL ')+name);if(!passed&&detail)console.log(typeof detail==='string'?detail:JSON.stringify(detail));}
 function run(args){const result=spawnSync('dotnet',args,{cwd:root,encoding:'utf8',windowsHide:true});if(result.error||result.status!==0)throw Error('dotnet '+args.join(' ')+'\n'+(result.error||result.stderr||result.stdout));return result.stdout;}
 const builds=[],sourceHashes=new Map();
 function buildFixtures(){
@@ -51,7 +51,7 @@ function contrast(a,b){const rgb=c=>(c.match(/[\d.]+/g)||[]).slice(0,3).map(n=>{
 async function currentFrame(page,topic='contents.htm'){
   await page.waitForFunction(()=>!!window.StatsDirectHelp);
   if(await page.locator('article#topic').count()){
-    await page.waitForURL(url=>url.pathname.endsWith('/'+topic));
+    await page.waitForFunction(topic=>document.documentElement.dataset.currentTopic===topic,topic);
     await page.waitForFunction(()=>!!window.StatsDirectHelp);
     await page.locator('#help-topic-body #topic-text').waitFor();return page;
   }
@@ -90,40 +90,48 @@ async function searchFixture(page,build,entry){
 }
 async function favicon(page){return page.locator('head link[rel~="icon"]').evaluate(el=>({href:el.getAttribute('href'),resolved:el.href}));}
 async function noDuplicateNavigation(page){return await page.locator('.help-topic-nav').count()===0||await page.locator('.help-topic-nav').evaluate(el=>getComputedStyle(el).display==='none');}
+// A public article now keeps one reader document. Chromium cannot push another
+// file:// path, so its logical topic URL may differ from the shell's location.
+async function topicUrl(frame){return frame.evaluate(()=>document.documentElement.dataset.helpTarget!=='desktop'&&document.querySelector('article#topic')&&window.StatsDirectHelp?.currentTopic||location.href);}
+async function waitTopicUrl(frame,predicate){
+  const timeout=Date.now()+15000;let last;
+  do{last=await topicUrl(frame);if(predicate(new URL(last)))return;await frame.waitForTimeout(25);}while(Date.now()<timeout);
+  throw Error('Timed out waiting for the logical topic URL: '+last);
+}
 function trackNetwork(context,origin,label){context.on('request',request=>{const url=request.url();if(!url.startsWith(origin+'/')&&!/^(?:file:|data:|blob:)/.test(url))externalRequests.push({label,url});});}
 async function topicUrlChecks(page,build,label){
   await page.evaluate(()=>StatsDirectHelp.openTopic('CoNtEnTs.HtM?sample=one%20two#note:1'));
-  let frame=await currentFrame(page);await frame.waitForURL(u=>u.hash==='#note:1'&&u.searchParams.get('sample')==='one two');
+  let frame=await currentFrame(page);await waitTopicUrl(frame,u=>u.hash==='#note:1'&&u.searchParams.get('sample')==='one two');
   record(build.name+' '+label+' canonicalises topic case and preserves queries/colon anchors',await page.locator('#contents a[data-link="contents.htm"]').getAttribute('aria-current')==='page'&&await frame.locator('[id="note:1"]').count()===1&&await page.title()==='Fixture');
-  await page.reload();frame=await currentFrame(page);await frame.waitForURL(u=>u.hash==='#note:1'&&u.searchParams.get('sample')==='one two');
-  record(build.name+' '+label+' reload restores the topic title, query and colon anchor',new URL(frame.url()).searchParams.get('sample')==='one two'&&new URL(frame.url()).hash==='#note:1'&&await page.title()==='Fixture');
-  await page.evaluate(()=>StatsDirectHelp.openTopic('CONTENTS.HTM#β-Δ'));frame=await currentFrame(page);await frame.waitForURL(u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');
+  await page.reload();frame=await currentFrame(page);await waitTopicUrl(frame,u=>u.hash==='#note:1'&&u.searchParams.get('sample')==='one two');
+  record(build.name+' '+label+' reload restores the topic title, query and colon anchor',new URL(await topicUrl(frame)).searchParams.get('sample')==='one two'&&new URL(await topicUrl(frame)).hash==='#note:1'&&await page.title()==='Fixture');
+  await page.evaluate(()=>StatsDirectHelp.openTopic('CONTENTS.HTM#β-Δ'));frame=await currentFrame(page);await waitTopicUrl(frame,u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');
   record(build.name+' '+label+' preserves Unicode anchors',await frame.locator('[id="β-Δ"]').count()===1);
-  await page.reload();frame=await currentFrame(page);await frame.waitForURL(u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');
-  record(build.name+' '+label+' Unicode anchors survive reload without double decoding',decodeURIComponent(new URL(frame.url()).hash.slice(1))==='β-Δ');
-  const before={url:page.url(),topic:frame.url()};
+  await page.reload();frame=await currentFrame(page);await waitTopicUrl(frame,u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');
+  record(build.name+' '+label+' Unicode anchors survive reload without double decoding',decodeURIComponent(new URL(await topicUrl(frame)).hash.slice(1))==='β-Δ');
+  const before={url:page.url(),topic:await topicUrl(frame)};
   await page.evaluate(()=>{StatsDirectHelp.openTopic('index.html');StatsDirectHelp.openTopic('../contents.htm');StatsDirectHelp.openTopic('resources/images/sd3.ico');});
-  record(build.name+' '+label+' ignores routes outside the generated topic catalogue',page.url()===before.url&&frame.url()===before.topic);
+  record(build.name+' '+label+' ignores routes outside the generated topic catalogue',page.url()===before.url&&await topicUrl(frame)===before.topic);
   await page.evaluate(()=>StatsDirectHelp.openTopic('nested/beta.htm'));return currentFrame(page,'nested/beta.htm');
 }
 async function anchoredContentsChecks(page,build,label){
   async function selected(link){await page.waitForFunction(link=>{const links=[...document.querySelectorAll('#contents a')],active=links.filter(a=>a.classList.contains('selected')),current=links.filter(a=>a.getAttribute('aria-current')==='page');return active.length===1&&current.length===1&&active[0]===current[0]&&active[0].dataset.link===link;},link);}
-  await page.evaluate(()=>StatsDirectHelp.openTopic('nested/anchor.htm#β-Δ'));let frame=await currentFrame(page,'nested/anchor.htm');await frame.waitForURL(u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');await selected('nested/anchor.htm#β-Δ');
+  await page.evaluate(()=>StatsDirectHelp.openTopic('nested/anchor.htm#β-Δ'));let frame=await currentFrame(page,'nested/anchor.htm');await waitTopicUrl(frame,u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');await selected('nested/anchor.htm#β-Δ');
   record(build.name+' '+label+' selects exactly the matching fragment-only Contents entry',await page.locator('#contents a.selected').count()===1);
   // File iframe documents can be isolated from their parent by the browser;
   // exercise their documented parent API while the normal article uses native links.
   if(label==='HTTP'||build.skin==='flare')await frame.locator('#anchor-back').click();else await page.evaluate(()=>StatsDirectHelp.openTopic('nested/anchor.htm#note:1'));
-  frame=await currentFrame(page,'nested/anchor.htm');await frame.waitForURL(u=>u.hash==='#note:1');await selected('nested/anchor.htm#note:1');
+  frame=await currentFrame(page,'nested/anchor.htm');await waitTopicUrl(frame,u=>u.hash==='#note:1');await selected('nested/anchor.htm#note:1');
   record(build.name+' '+label+' changes Contents selection when navigating to another anchor',await page.locator('#contents a[aria-current="page"]').count()===1);
-  await page.goBack();frame=await currentFrame(page,'nested/anchor.htm');await frame.waitForURL(u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');await selected('nested/anchor.htm#β-Δ');
+  await page.goBack();frame=await currentFrame(page,'nested/anchor.htm');await waitTopicUrl(frame,u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');await selected('nested/anchor.htm#β-Δ');
   record(build.name+' '+label+' Back restores the anchored Contents selection',await page.locator('#contents a.selected').count()===1);
-  await page.reload();frame=await currentFrame(page,'nested/anchor.htm');await frame.waitForURL(u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');await selected('nested/anchor.htm#β-Δ');
+  await page.reload();frame=await currentFrame(page,'nested/anchor.htm');await waitTopicUrl(frame,u=>decodeURIComponent(u.hash.slice(1))==='β-Δ');await selected('nested/anchor.htm#β-Δ');
   record(build.name+' '+label+' direct reload retains fragment-specific Contents selection',await page.locator('#contents a.selected').count()===1);
-  await page.evaluate(()=>StatsDirectHelp.openTopic('nested/anchor.htm'));frame=await currentFrame(page,'nested/anchor.htm');await frame.waitForURL(u=>u.hash==='');await selected('nested/anchor.htm#note:1');
+  await page.evaluate(()=>StatsDirectHelp.openTopic('nested/anchor.htm'));frame=await currentFrame(page,'nested/anchor.htm');await waitTopicUrl(frame,u=>u.hash==='');await selected('nested/anchor.htm#note:1');
   record(build.name+' '+label+' a page without a plain Contents entry selects its first canonical entry',await page.locator('#contents a.selected').count()===1);
   await page.evaluate(()=>StatsDirectHelp.openTopic('nested/beta.htm'));return currentFrame(page,'nested/beta.htm');
 }
-(async()=>{let browser;try{
+(async()=>{let browser,browserServer;try{
   buildFixtures();
   record('The legacy project defaults to Flare without creating a design file',!fs.existsSync(path.join(fixture,'default/Source/Project/HelpEditorDesign.json')));
   for(const build of builds){
@@ -134,7 +142,8 @@ async function anchoredContentsChecks(page,build,label){
   }
   await new Promise(r=>server.listen(0,'127.0.0.1',r));
   const origin='http://127.0.0.1:'+server.address().port;
-  browser=await chromium.launch({channel:'msedge',headless:true});
+  browserServer=await chromium.launchServer({channel:'msedge',headless:true});
+  browser=await chromium.connect(browserServer.wsEndpoint());
   const baseline=await browser.newPage();
   await baseline.goto(origin+'/default/Source/Content/contents.htm');
   const sourceStyle=await baseline.evaluate(textStyle),sourceArtwork=await baseline.evaluate(artwork);
@@ -188,7 +197,7 @@ async function anchoredContentsChecks(page,build,label){
     await frame.locator('#next-topic').click();frame=await fixedSkin(page,build.skin,'nested/beta.htm');
     record(build.name+' keeps the selected design through iframe links',await frame.locator('#topic-text').textContent()==='Quartzforecast second topic.');
     const nestedIcon=await favicon(frame);
-    record(build.name+' iframe topics at a nested path resolve the original favicon',nestedIcon.href==='../resources/images/sd3.ico'&&nestedIcon.resolved===viewerIcon.resolved,nestedIcon);
+    record(build.name+' iframe topics at a nested path resolve the original favicon',(!build.desktop&&build.skin==='flare'||nestedIcon.href==='../resources/images/sd3.ico')&&nestedIcon.resolved===viewerIcon.resolved,nestedIcon);
     await page.locator('#contents a[data-link="contents.htm"]').click();await currentFrame(page);
     await searchFixture(page,build,origin+build.url+'index.html');
     record(build.name+' search tab title matches Flare',await page.title()==='Search');
@@ -253,7 +262,8 @@ async function anchoredContentsChecks(page,build,label){
   record('No unhandled browser errors in HTTP, new-tab or file:// cases',errors.length===0,errors);
   record('All branding, fonts and help navigation remain local in HTTP and file:// cases',externalRequests.length===0,externalRequests);
 }catch(error){record('Viewer build-time design checks completed',false,error.stack||String(error));}finally{
-  if(browser)await browser.close();server.close();
+  if(browser){let timer;await Promise.race([browser.close(),new Promise(resolve=>{timer=setTimeout(resolve,5000);})]);clearTimeout(timer);}
+  if(browserServer)await browserServer.kill();server.closeAllConnections();server.close();
   const result={testedAt:new Date().toISOString(),fixture,passed:checks.every(c=>c.passed),checks,errors,externalRequests};
   fs.writeFileSync(path.join(evidence,'viewer-skin-results.json'),JSON.stringify(result,null,2));
   console.log(JSON.stringify({passed:result.passed,total:checks.length,failures:checks.filter(c=>!c.passed),fixture},null,2));if(!result.passed)process.exitCode=1;

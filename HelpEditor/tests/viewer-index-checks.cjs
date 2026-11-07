@@ -18,13 +18,15 @@ function buildFixtures(){
   for(const skin of ['flare','readable']){
     const source=path.join(fixture,skin,'Source');
     write(source,'.statsdirect-help-editor.json','{}');
-    write(source,'Project/TOCs/STATSDIRECT.fltoc','<CatapultToc><TocEntry Title="Home" Link="/Content/contents.htm"/><TocEntry Title="Methods" Link="/Content/nested/alpha.htm"><TocEntry Title="Nested beta" Link="/Content/nested/beta.htm"/><TocEntry Title="Other beta" Link="/Content/other/beta.htm"/></TocEntry></CatapultToc>');
+    write(source,'Project/TOCs/STATSDIRECT.fltoc','<CatapultToc><TocEntry Title="Home" Link="/Content/contents.htm"/><TocEntry Title="Methods" Link="/Content/nested/alpha.htm"><TocEntry Title="Nested beta" Link="/Content/nested/beta.htm"/><TocEntry Title="Other beta" Link="/Content/other/beta.htm"/><TocEntry Title="Artwork" Link="/Content/deep/nested/gamma.htm"/></TocEntry></CatapultToc>');
     const scrollTerms=Array.from({length:60},(_,i)=>'Scroll fixture '+String(i+1).padStart(2,'0')).join('; ');
     write(source,'Content/contents.htm',pageSource('Home',`<sdh:keyword term="Zulu; Shared; Cramér's V; &lt;img src=x onerror=alert(1)&gt;; ${scrollTerms}"/><p>Reader index fixture home.</p>`));
-    write(source,'Content/nested/alpha.htm',pageSource('Alpha method','<sdh:keyword term="Shared; Alpha"/><p>Quartzforecast reader search fixture.</p>'));
+    write(source,'Content/nested/alpha.htm',pageSource('Alpha method','<sdh:keyword term="Shared; Alpha"/><p>Quartzforecast reader search fixture.</p><a id="body-next" href="../deep/nested/gamma.htm">Artwork topic</a>'));
     for(const name of ['nested/beta.htm','other/beta.htm'])write(source,'Content/'+name,pageSource('Same title','<sdh:keyword term="Duplicate"/><p>Separate authored keyword destination.</p>'));
     write(source,'Content/private.htm',pageSource('Private indexed topic','<sdh:keyword term="Unsearchable keyword"/><p>Privateprose search exclusion.</p>', 'sdh:searchable="false"'));
     write(source,'Content/unindexed.htm',pageSource('Unindexed title','<p>No authored keyword.</p>'));
+    write(source,'Content/deep/nested/gamma.htm',pageSource('Artwork topic','<sdh:keyword term="Artwork"/><p id="artwork-note">New topic body with local artwork and mathematics.</p><img id="topic-image" src="../../resources/images/fixture.svg" alt="Local chart"/><sdh:equation><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mi>x</mi><mn>2</mn></mfrac></math></sdh:equation><sdh:dropDown class="rcode"><sdh:dropDownHead><sdh:dropDownHotspot>R code</sdh:dropDownHotspot></sdh:dropDownHead><sdh:dropDownBody><pre id="r-script">x &lt;- c(1, 2)\nmean(x)</pre></sdh:dropDownBody></sdh:dropDown><p><a id="body-anchor" href="#note">Go to the note</a> <a id="body-home" href="../../contents.htm">Home</a></p><div style="height:900px"></div><p id="note">Anchored note.</p>'));
+    write(source,'Content/resources/images/fixture.svg','<svg xmlns="http://www.w3.org/2000/svg" width="77" height="24" viewBox="0 0 77 24"><rect width="77" height="24" fill="#168b49"/></svg>');
     if(skin!=='flare')write(source,'Project/HelpEditorDesign.json',JSON.stringify({schemaVersion:1,appearance:{desktop:skin,public:skin}}));
     sourceHashes.push(...files(source).map(file=>[file,hash(file)]));
     for(const target of skin==='flare'?['Desktop','Public']:['Public']){
@@ -42,7 +44,7 @@ const server=http.createServer((request,response)=>{
 });
 async function ready(page){await page.waitForFunction(()=>!!window.StatsDirectHelp&&!!document.querySelector('#contents a'));}
 async function topicIs(page,name,skin){
-  if(skin==='flare')await page.waitForURL(url=>url.pathname.endsWith('/'+name));
+  if(skin==='flare')await page.waitForFunction(name=>document.documentElement.dataset.currentTopic?.split(/[?#]/)[0]===name&&document.querySelector('#help-topic-body h1')?.textContent===window.StatsDirectTopics?.find(topic=>topic.url===name)?.title,name);
   else {const frame=page.frames().find(f=>f.parentFrame()===page.mainFrame());if(!frame)throw Error('Expected the reader topic iframe');await frame.waitForURL(url=>url.pathname.endsWith('/'+name));}
   await ready(page);
 }
@@ -59,6 +61,78 @@ async function retainedIndex(page,filter){
   return await page.locator('#index-tab').getAttribute('aria-pressed')==='true'&&await page.locator('#keyword-index').isVisible()&&!await page.locator('#contents').isVisible()&&await page.locator('#index-filter').inputValue()===filter;
 }
 async function selectedEntry(page){return page.locator('#index-entries a.index-selected').evaluateAll(links=>links.map(a=>({label:a.textContent,path:a.dataset.link})));}
+async function navigationChecks(browser,build,origin){
+  for(const protocol of ['http','file'])for(const width of [390,1280]){
+    const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage(),topRequests=[];
+    const label='Persistent shell '+protocol+' '+width+'px';
+    page.on('pageerror',error=>errors.push(label+': '+error.message));
+    page.on('request',request=>{if(request.isNavigationRequest()&&request.frame()===page.mainFrame())topRequests.push(request.url());});
+    const initial=protocol==='http'?origin+build.url+'nested/alpha.htm':pathToFileURL(path.join(build.output,'nested/alpha.htm')).href;
+    await page.goto(initial);await topicIs(page,'nested/alpha.htm','flare');
+    await page.evaluate(()=>{window.shellProof={token:'persistent-help-reader',document,header:document.querySelector('header'),aside:document.querySelector('aside'),filter:document.getElementById('index-filter'),list:document.getElementById('index-entries'),article:document.getElementById('topic'),navigation:performance.getEntriesByType('navigation').length};});
+    const requestBaseline=topRequests.length;
+    async function unchanged(){return page.evaluate(()=>{const p=window.shellProof;return !!p&&p.token==='persistent-help-reader'&&p.document===document&&p.header===document.querySelector('header')&&p.aside===document.querySelector('aside')&&p.filter===document.getElementById('index-filter')&&p.list===document.getElementById('index-entries')&&p.article===document.getElementById('topic')&&p.navigation===performance.getEntriesByType('navigation').length;});}
+    await openNavigation(page);await page.locator('#contents-tab').click();await page.locator('#contents a[data-link="deep/nested/gamma.htm"]').click();await topicIs(page,'deep/nested/gamma.htm','flare');
+    record(label+' Contents changes only the article body, retaining the reader and navigation DOM',await unchanged()&&await page.locator('#help-topic-body h1').textContent()==='Artwork topic');
+    record(label+' Contents makes no top-frame navigation request',topRequests.length===requestBaseline,topRequests.slice(requestBaseline));
+    const image=await page.locator('#topic-image').evaluate(async img=>{await img.decode();return {width:img.naturalWidth,height:img.naturalHeight,url:img.currentSrc};});
+    record(label+' rebases a nested topic image to the packaged artwork',image.width===77&&image.height===24&&image.url.endsWith('/resources/images/fixture.svg'),image);
+    await page.waitForFunction(()=>!!document.querySelector('#help-topic-body mjx-container svg'));
+    record(label+' typesets mathematics in the newly selected topic',await page.locator('#help-topic-body mjx-container svg path').count()>0);
+    await page.locator('#help-topic-body details.rcode > summary').click();
+    record(label+' preserves usable R-code dropdowns after updating the body',await page.locator('#help-topic-body details.rcode').evaluate(el=>el.open)&&await page.locator('#r-script').isVisible()&&(await page.locator('#r-script').textContent()).includes('mean(x)'));
+    const historyBeforeAnchor=await page.evaluate(()=>history.length);
+    await page.locator('#body-anchor').click();
+    await page.waitForFunction(()=>location.hash.includes('note'));
+    record(label+' follows a local body anchor without replacing the shell',await unchanged()&&await page.evaluate(()=>history.length)===historyBeforeAnchor+1&&await page.locator('#note').textContent()==='Anchored note.');
+    await page.locator('#body-home').click();await topicIs(page,'contents.htm','flare');
+    record(label+' resolves a nested relative body link within the same reader',await unchanged()&&await page.locator('#help-topic-body h1').textContent()==='Home');
+    await index(page);await page.locator('#index-filter').fill('Duplicate');
+    await page.locator('#index-entries a[data-link="other/beta.htm"]').click();await topicIs(page,'other/beta.htm','flare');
+    record(label+' Index opens a topic without rebuilding the header, sidebar, filter or list',await unchanged()&&await retainedIndex(page,'Duplicate')&&(await selectedEntry(page)).some(entry=>entry.path==='other/beta.htm'));
+    const afterIndex=topRequests.length;
+    await page.goBack();await topicIs(page,'contents.htm','flare');
+    record(label+' Back updates the article while retaining its reader and Index context',await unchanged()&&await retainedIndex(page,'Duplicate'));
+    await page.goForward();await topicIs(page,'other/beta.htm','flare');
+    record(label+' Forward updates the article while retaining its reader and Index context',await unchanged()&&await retainedIndex(page,'Duplicate')&&topRequests.length===afterIndex);
+    await page.locator('#index-filter').fill('Scroll fixture');await page.locator('#index-filter').press('ArrowDown');await page.keyboard.press('End');
+    const position=await page.locator('aside').evaluate(el=>el.scrollTop),selection=await selectedEntry(page);
+    await page.keyboard.press('Enter');await topicIs(page,'contents.htm','flare');await openNavigation(page);
+    record(label+' Index navigation retains its filter, exact row and list position without a reload',await unchanged()&&await retainedIndex(page,'Scroll fixture')&&JSON.stringify(await selectedEntry(page))===JSON.stringify(selection)&&Math.abs(await page.locator('aside').evaluate(el=>el.scrollTop)-position)<3);
+    if(protocol==='http'&&width===1280){
+      // Force the first topic request to complete after the following choice.
+      // Implementations with an already-loaded local topic package still prove
+      // the same last-choice-wins behaviour without issuing this request.
+      await context.route('**/deep/nested/gamma.htm*',async route=>{await new Promise(resolve=>setTimeout(resolve,200));await route.continue();});
+      await page.locator('#contents-tab').click();
+      await page.evaluate(()=>{document.querySelector('#contents a[data-link="deep/nested/gamma.htm"]').click();document.querySelector('#contents a[data-link="nested/alpha.htm"]').click();});
+      await topicIs(page,'nested/alpha.htm','flare');await page.waitForTimeout(300);
+      record(label+' a slower earlier topic cannot overwrite the last choice',await unchanged()&&await page.locator('#help-topic-body h1').textContent()==='Alpha method'&&await page.evaluate(()=>document.documentElement.dataset.currentTopic)==='nested/alpha.htm');
+      await page.locator('#body-next').click();await topicIs(page,'deep/nested/gamma.htm','flare');
+      record(label+' follow-on topic-body links use the same persistent reader',await unchanged()&&await page.locator('#help-topic-body h1').textContent()==='Artwork topic');
+      await page.evaluate(()=>StatsDirectHelp.openTopic('nested/alpha.htm'));await topicIs(page,'nested/alpha.htm','flare');
+      await context.unroute('**/deep/nested/gamma.htm*');
+      let releaseTopic,topicRequested;
+      const heldTopic=new Promise(resolve=>{releaseTopic=resolve;}),requestedTopic=new Promise(resolve=>{topicRequested=resolve;});
+      await context.route('**/deep/nested/gamma.htm*',async route=>{topicRequested();await heldTopic;try{await route.continue();}catch{/* Cancelling the pending loader may already have aborted its request. */}});
+      await page.locator('#contents a[data-link="deep/nested/gamma.htm"]').click();await requestedTopic;
+      await page.locator('#search').fill('quartzforecast');await page.locator('#search').press('Enter');await page.locator('#results a[data-link="nested/alpha.htm"]').waitFor();
+      releaseTopic();await page.waitForTimeout(300);
+      record(label+' a pending topic cannot replace newer search results',await unchanged()&&await page.locator('#results').isVisible()&&await page.title()==='Search'&&await page.evaluate(()=>document.documentElement.dataset.currentTopic)==='nested/alpha.htm');
+    }
+    record(label+' completes all topic changes without a top-frame document request',topRequests.length===requestBaseline,topRequests.slice(requestBaseline));
+    if(protocol==='file'){
+      await index(page);await page.locator('#index-filter').fill('Artwork');await page.locator('#index-filter').press('Enter');await topicIs(page,'deep/nested/gamma.htm','flare');
+      if(width<1280){await openNavigation(page);await page.keyboard.press('Escape');}
+      await page.locator('#search').fill('quartzforecast');await page.locator('#search').press('Enter');await page.locator('#results a[data-link="nested/alpha.htm"]').waitFor();
+      await openNavigation(page);const tab=width<1280?'index':'contents';await page.locator('#'+tab+'-tab').click();
+      record(label+' leaving Search restores the current topic before reloading',await unchanged()&&await page.locator('#topic').isVisible()&&await page.evaluate(()=>document.documentElement.dataset.currentTopic)==='deep/nested/gamma.htm');
+      await page.reload();await topicIs(page,'deep/nested/gamma.htm','flare');await openNavigation(page);
+      record(label+' Search to '+tab+' retains the file-routed topic across reload',await page.locator('#'+tab+'-tab').getAttribute('aria-pressed')==='true'&&await page.locator('#help-topic-body h1').textContent()==='Artwork topic'&&(tab!=='index'||await page.locator('#index-filter').inputValue()==='Artwork'));
+    }
+    await context.close();
+  }
+}
 let browser,browserServer;
 (async()=>{try{
   buildFixtures();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
@@ -82,6 +156,7 @@ let browser,browserServer;
       record(label+' exposes only Contents and Index selectors',JSON.stringify(await page.locator('.tabs button').allTextContents())===JSON.stringify(['Contents','Index'])&&await page.locator('#results-tab').count()===0);
       const start=await snapshot(page);await index(page);
       record(label+' switches to Index without changing topic, URL or history',await sameDocument(page,start)&&await page.locator('#keyword-index').isVisible()&&!await page.locator('#contents').isVisible()&&!await page.locator('#results').isVisible());
+      record(label+' omits the routine entry count',!await page.locator('#index-status').isVisible()||!(await page.locator('#index-status').textContent()).trim());
       const all=await entries(page),ordered=[...all].sort((a,b)=>a.label.localeCompare(b.label,'en',{sensitivity:'base'})||a.path.localeCompare(b.path,'en',{sensitivity:'base'}));
       record(label+' lists only authored keywords in alphabetical order',all.length===metadata.entries.length&&JSON.stringify(all)===JSON.stringify(ordered)&&!all.some(e=>e.label==='Unindexed title'),all);
       record(label+' keeps the Index controls within the navigation pane',await page.evaluate(()=>{const pane=document.querySelector('aside').getBoundingClientRect(),filter=document.getElementById('index-filter').getBoundingClientRect();return document.documentElement.scrollWidth<=innerWidth&&filter.width>70&&filter.left>=pane.left&&filter.right<=pane.right+1;}));
@@ -95,6 +170,7 @@ let browser,browserServer;
       record(label+' disambiguates matching keyword and title by relative path',duplicate.length===2&&duplicate[0].label!==duplicate[1].label&&duplicate.every(e=>e.label.includes(e.path)),duplicate);
       await page.locator('#index-filter').fill('absentxyz');
       record(label+' shows a no-matches notice for an empty filter result',await page.locator('#index-entries a[data-link]').count()===0&&/no.+match/i.test(await page.locator('#index-status').textContent()));
+      record(label+' keeps the no-matches notice visible',await page.locator('#index-status').isVisible());
       await page.locator('#index-filter').press('Enter');
       record(label+' Enter with no matches preserves the topic',await sameDocument(page,start));
       await page.locator('#index-filter').fill('Shared');await page.locator('#index-filter').press('ArrowDown');
@@ -185,6 +261,7 @@ let browser,browserServer;
     record(build.name+' full-text search also works with storage blocked',await page.locator('#results').isVisible());
     await context.close();
   }
+  await navigationChecks(browser,publicBuilds.find(build=>build.skin==='flare'),origin);
   const build=builds.find(b=>b.skin==='flare'&&b.target==='Public');
   const corrupt=[
     ['missing metadata',null],['unsupported schema',{schemaVersion:2,entries:[]}],
@@ -200,7 +277,7 @@ let browser,browserServer;
     await context.route('**/keyword-index.js',route=>route.fulfill({contentType:'text/javascript',body:(value===null?'/* unavailable metadata */':'window.STATSDIRECT_HELP_KEYWORDS='+JSON.stringify(value)+';')+'\n'+catalogue}));
     await page.goto(origin+build.url+'nested/alpha.htm');await ready(page);const before=await snapshot(page);await index(page);
     const message=await page.locator('#index-status').textContent();
-    record(name+' produces a visible Index status and no partial list',/index|keyword/i.test(message)&&/unavailable|not included|could not|invalid|unsupported|missing|failed/i.test(message)&&await page.locator('#index-entries a[data-link]').count()===0,message);
+    record(name+' produces a visible Index status and no partial list',await page.locator('#index-status').isVisible()&&/index|keyword/i.test(message)&&/unavailable|not included|could not|invalid|unsupported|missing|failed/i.test(message)&&await page.locator('#index-entries a[data-link]').count()===0,message);
     record(name+' preserves the reading topic and history',await sameDocument(page,before));
     await page.locator('#contents-tab').click();record(name+' leaves Contents usable',await page.locator('#contents').isVisible());await context.close();
   }

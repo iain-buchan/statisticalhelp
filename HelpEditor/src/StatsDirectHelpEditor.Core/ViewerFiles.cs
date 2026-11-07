@@ -56,7 +56,28 @@ internal static class ViewerFiles
     }
 
     private const string ContentOnlyScript = """
-<script>if(new URLSearchParams(location.search).get('content')==='1'){const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;}</script>
+<script>
+if(new URLSearchParams(location.search).get('content')==='1'){
+  const topic=document.getElementById('help-topic-body');document.documentElement.classList.add('help-content-only');document.body.replaceChildren(...topic.childNodes);document.body.id='help-topic-body';document.body.className=topic.className;
+  const request=new URLSearchParams(location.search).get('sdHelpLoad');
+  if(request&&parent!==window)window.addEventListener('load',async()=>{
+    try{
+      await window.MathJax?.startup?.promise;
+      const base=new URL(location.href);base.searchParams.delete('content');base.searchParams.delete('sdHelpLoad');
+      const copy=document.body.cloneNode(true);copy.querySelectorAll('script').forEach(node=>node.remove());
+      for(const element of copy.querySelectorAll('*')){
+        for(const attribute of [...element.attributes]){
+          if(!['href','src','xlink:href'].includes(attribute.name))continue;
+          const value=attribute.value;if(!value||value.startsWith('#')&&element.closest('svg,math'))continue;
+          try{element.setAttributeNS(attribute.namespaceURI,attribute.name,new URL(value,base).href);}catch{/* Keep non-URL artwork attributes unchanged. */}
+        }
+        if(element.hasAttribute('style'))element.setAttribute('style',element.getAttribute('style').replace(/url\((['"]?)([^)'"\s]+)\1\)/gi,(all,quote,url)=>url.startsWith('#')?all:'url("'+new URL(url,base).href+'")'));
+      }
+      parent.postMessage({type:'statsdirect-help-content',request,url:base.href,html:copy.innerHTML},'*');
+    }catch{parent.postMessage({type:'statsdirect-help-content',request,error:true},'*');}
+  },{once:true});
+}
+</script>
 """;
 
     internal const string Css = """
@@ -81,6 +102,9 @@ button:hover{background:var(--help-hover)}button:focus-visible,a:focus-visible,i
 #keyword-index[hidden],#contents[hidden]{display:none!important}
 #keyword-index label{display:block;font-weight:bold;margin-bottom:8px}
 #index-status{font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+#index-status:empty{display:none}
+#topic-status{position:fixed;right:16px;bottom:16px;max-width:min(40em,calc(100vw - 32px));padding:12px;border:1px solid #8fa8ba;background:#fff;color:#1d3343;z-index:6}
+@media print{#topic-status{display:none!important}}
 #index-entries{list-style:none;padding:0;margin:0}
 #index-entries a{display:block;padding:8px 6px;color:var(--help-link);text-decoration:none;line-height:1.4;overflow-wrap:anywhere;border-radius:3px}
 #index-entries a:hover,#index-entries a.index-selected{background:var(--help-selected)}
@@ -273,7 +297,7 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
     const saved=JSON.parse(sessionStorage.getItem(navigationKey)||'null');
     if(saved){navigationMode=saved.mode==='index'?'index':'contents';if(typeof saved.filter==='string')keywordFilter.value=saved.filter;if(typeof saved.selected==='string')restoredSelection=saved.selected;if(Number.isFinite(saved.scroll)&&saved.scroll>=0)indexScroll=saved.scroll;}
   }catch{/* Storage can be unavailable for local files or browser privacy settings. */}
-  let keywordRows=[], selectedKeyword=0, keywordEntries=null;
+  let keywordRows=[], selectedKeyword=0, keywordEntries=null, renderedKeywordFilter=null;
   function saveNavigationState() {
     if(nativeDesktop||restoringNavigation)return;
     if(!keywordPanel.hidden&&navigationPane.getClientRects().length)indexScroll=navigationPane.scrollTop;
@@ -281,7 +305,7 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
     try{sessionStorage.setItem(navigationKey,JSON.stringify({mode:navigationMode,filter:keywordFilter.value,selected:restoredSelection,scroll:indexScroll}));}catch{/* Reading help does not require browser storage. */}
   }
   window.addEventListener('pagehide',saveNavigationState);
-  let activeTopic=(articleMode?resolveTopic(location.href):null)||resolveTopic(document.documentElement.dataset.currentTopic||frame.getAttribute('src')||index.documents[0]?.url);
+  let activeTopic=(articleMode?resolveTopic(new URLSearchParams(location.hash.slice(1)).has('searchQuery')?location.href.split('#')[0]:location.href):null)||resolveTopic(document.documentElement.dataset.currentTopic||frame.getAttribute('src')||index.documents[0]?.url);
   function showPanel(mode) {
     if(mode!=='search')navigationMode=mode;
     const panel=mode==='search'&&flare?navigationMode:mode;
@@ -319,13 +343,15 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
     if(focus&&keywordRows[selectedKeyword]){keywordRows[selectedKeyword].focus({preventScroll:true});keywordRows[selectedKeyword].scrollIntoView({block:'nearest'});saveNavigationState();}
   }
   function renderKeywords() {
+    if(keywordEntries!==null&&renderedKeywordFilter===keywordFilter.value)return;
     const previous=keywordRows[selectedKeyword]?.dataset.indexKey||restoredSelection;
     keywordList.replaceChildren();keywordRows=[];
     if(keywordEntries===null&&!loadKeywords())return;
     const query=foldKeyword(keywordFilter.value.trim()),matches=keywordEntries.filter(entry=>foldKeyword(entry.term+' '+entry.title).includes(query));
-    keywordStatus.textContent=matches.length?`${matches.length} index entr${matches.length===1?'y':'ies'}`:query?'No matching keywords. Try fewer words or a topic title.':'No keywords have been authored for this help build.';
+    keywordStatus.textContent=matches.length?'':query?'No matching keywords. Try fewer words or a topic title.':'No keywords have been authored for this help build.';
     for(const entry of matches){const li=document.createElement('li'),link=makeLink(entry.label,entry.path);link.dataset.indexKey=JSON.stringify([entry.path,entry.label]);link.addEventListener('focus',()=>{selectKeyword(keywordRows.indexOf(link));saveNavigationState();});li.append(link);keywordList.append(li);keywordRows.push(link);}
     selectKeyword(Math.max(0,keywordRows.findIndex(row=>row.dataset.indexKey===previous)));
+    renderedKeywordFilter=keywordFilter.value;
   }
   keywordFilter.addEventListener('input',()=>{renderKeywords();indexScroll=0;navigationPane.scrollTop=0;saveNavigationState();});
   keywordFilter.addEventListener('keydown',event=>{
@@ -339,16 +365,51 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
     else if(event.key==='Enter'){event.preventDefault();keywordRows[position].click();}
   });
   function selectTopic(link) { const target=resolveTopic(link);if(!target)return;const links=[...document.querySelectorAll('#contents a')].map(a=>({a,topic:resolveTopic(a.dataset.link)}));const exact=target.fragment?links.find(item=>item.topic?.path===target.path&&item.topic.fragment===target.fragment):null,current=(exact||links.find(item=>item.topic?.path===target.path))?.a;links.forEach(({a})=>{const selected=a===current;a.classList.toggle('selected',selected);if(selected){a.setAttribute('aria-current','page');for(let p=a.parentElement;p&&p!==contents;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;}else a.removeAttribute('aria-current');});scrollSelection(); }
-  function openTopic(link, anchor, updateHash=true) { const target=resolveTopic(link);if(!target)return;if(articleMode){navigation(false);location[updateHash?'assign':'replace'](target.url);return;}activeTopic=target;const hash=new URLSearchParams({topic:target.link}).toString();if(updateHash&&location.hash.slice(1)!==hash)history.pushState(null,'','#'+hash);try{frame.contentWindow.location.replace(target.url);}catch{frame.src=target.url;} selectTopic(target.link); if(flare)showResults(false);else document.title=target.title;navigation(false); }
-  function makeLink(title, link) { const a = document.createElement('a'); a.href = resolveTopic(link)?.url||link; a.dataset.link = link; a.textContent = title; a.addEventListener('click', e => { if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;if(articleMode){navigation(false);return;}e.preventDefault();e.stopPropagation();openTopic(link,a); }); return a; }
+  let pendingArticle=null, articleRequest=0;
+  function articlePosition(target){const id=target.fragment.replace(/^#/,'');const anchor=id?[...frame.querySelectorAll('[id],[name]')].find(node=>node.id===id||node.getAttribute('name')===id):null;if(anchor)anchor.scrollIntoView({block:'start'});else frame.scrollTop=0;}
+  function articleHistory(target,replace=false){
+    // Canonical topic paths may have different depths. Keep shell assets at
+    // their original addresses while the existing document changes its URL.
+    for(const element of document.querySelectorAll('head link[href],header img[src]')){const attribute=element.hasAttribute('href')?'href':'src';element.setAttribute(attribute,new URL(element.getAttribute(attribute),location.href).href);}
+    document.documentElement.dataset.helpRoot=viewerRoot.href;
+    try{history[replace?'replaceState':'pushState'](null,'',target.url);}catch{history[replace?'replaceState':'pushState'](null,'','#'+new URLSearchParams({topic:target.link}).toString());}
+  }
+  function articleError(){let status=document.getElementById('topic-status');if(!status){status=document.createElement('p');status.id='topic-status';status.setAttribute('role','status');document.body.append(status);}status.textContent='Could not open the help topic. Please try the link again.';}
+  function loadArticle(target,updateHistory){
+    if(pendingArticle?.link===target.link)return pendingArticle.promise;
+    pendingArticle?.cancel();document.getElementById('topic-status')?.remove();
+    if(activeTopic?.path===target.path&&activeTopic?.url.split('#')[0]===target.url.split('#')[0]){activeTopic=target;if(updateHistory&&location.href!==target.url)articleHistory(target);showResults(false);selectTopic(target.link);articlePosition(target);return Promise.resolve(true);}
+    const request=String(++articleRequest),loader=document.createElement('iframe'),url=new URL(target.url);
+    url.searchParams.set('content','1');url.searchParams.set('sdHelpLoad',request);
+    loader.title='Loading help topic';loader.tabIndex=-1;loader.setAttribute('aria-hidden','true');loader.style.cssText=`position:fixed;left:-100000px;top:0;width:${Math.max(frame.clientWidth,300)}px;height:${Math.max(frame.clientHeight,200)}px;visibility:hidden;pointer-events:none;border:0`;
+    frame.setAttribute('aria-busy','true');
+    let finish;
+    const promise=new Promise(resolve=>{
+      const timer=setTimeout(()=>{articleError();finish(false);},15000);
+      finish=success=>{clearTimeout(timer);window.removeEventListener('message',receive);loader.remove();if(pendingArticle?.request===request){pendingArticle=null;frame.removeAttribute('aria-busy');}resolve(success);};
+      function receive(event){
+        const data=event.data;if(event.source!==loader.contentWindow||data?.type!=='statsdirect-help-content'||data.request!==request)return;
+        if(data.error||typeof data.html!=='string'||resolveTopic(data.url)?.path!==target.path){articleError();finish(false);return;}
+        const body=document.getElementById('help-topic-body'),template=document.createElement('template');template.innerHTML=data.html;
+        body.replaceChildren(template.content);activeTopic=target;document.documentElement.dataset.currentTopic=target.path;
+        if(updateHistory)articleHistory(target);document.title=target.title;selectTopic(target.link);showPanel(navigationMode);articlePosition(target);finish(true);
+      }
+      window.addEventListener('message',receive);
+    });
+    pendingArticle={link:target.link,request,promise,cancel:()=>finish(false)};loader.src=url.href;document.body.append(loader);return promise;
+  }
+  function openTopic(link, anchor, updateHash=true) { const target=resolveTopic(link);if(!target)return;if(articleMode){navigation(false);if(!nativeDesktop)return loadArticle(target,updateHash);location[updateHash?'assign':'replace'](target.url);return;}activeTopic=target;const hash=new URLSearchParams({topic:target.link}).toString();if(updateHash&&location.hash.slice(1)!==hash)history.pushState(null,'','#'+hash);try{frame.contentWindow.location.replace(target.url);}catch{frame.src=target.url;} selectTopic(target.link); if(flare)showResults(false);else document.title=target.title;navigation(false); }
+  function makeLink(title, link) { const a = document.createElement('a'); a.href = resolveTopic(link)?.url||link; a.dataset.link = link; a.textContent = title; a.addEventListener('click', e => { if(e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;if(articleMode&&nativeDesktop){navigation(false);return;}e.preventDefault();e.stopPropagation();openTopic(link,a); }); return a; }
   function renderTree(nodes) { const ul = document.createElement('ul'); for (const node of nodes) { const li = document.createElement('li'); if (node.children.length) { const d = document.createElement('details'), s = document.createElement('summary'); __HELP_TOPIC_BRANCH__ li.append(d); } else if (node.link) li.append(makeLink(node.title,node.link)); else { const span=document.createElement('span');span.textContent=node.title;li.append(span); } ul.append(li); } return ul; }
   contents.append(renderTree(tree));
   if(activeTopic)selectTopic(activeTopic.link);
-  const home=document.querySelector('a.help-identity'),homeTopic=resolveTopic('contents.htm')||resolveTopic(index.documents[0]?.url);if(home&&homeTopic){home.href=homeTopic.url;home.addEventListener('click',e=>{if(articleMode||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();showResults(false);openTopic(homeTopic.link);});}
-  tabs[0].addEventListener('click',()=>{saveNavigationState();showPanel('contents');if(new URLSearchParams(location.hash.slice(1)).has('searchQuery'))history.replaceState(null,'',location.pathname+location.search);scrollSelection();saveNavigationState();});
-  tabs[1].addEventListener('click',()=>{showPanel('index');if(new URLSearchParams(location.hash.slice(1)).has('searchQuery'))history.replaceState(null,'',location.pathname+location.search);renderKeywords();navigationPane.scrollTop=indexScroll;keywordFilter.focus({preventScroll:true});keywordFilter.select();saveNavigationState();});
+  const home=document.querySelector('a.help-identity'),homeTopic=resolveTopic('contents.htm')||resolveTopic(index.documents[0]?.url);if(home&&homeTopic){home.href=homeTopic.url;home.addEventListener('click',e=>{if(articleMode&&nativeDesktop||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();showResults(false);openTopic(homeTopic.link);});}
+  function clearSearchHash(){if(new URLSearchParams(location.hash.slice(1)).has('searchQuery')){if(articleMode&&!nativeDesktop&&activeTopic)articleHistory(activeTopic,true);else history.replaceState(null,'',location.pathname+location.search);}}
+  tabs[0].addEventListener('click',()=>{saveNavigationState();showPanel('contents');clearSearchHash();scrollSelection();saveNavigationState();});
+  tabs[1].addEventListener('click',()=>{showPanel('index');clearSearchHash();renderKeywords();navigationPane.scrollTop=indexScroll;keywordFilter.focus({preventScroll:true});keywordFilter.select();saveNavigationState();});
   function tokenize(value) { return value.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase().match(/[\p{L}\p{N}]+/gu)?.filter(x=>x.length>1||/^\d$/.test(x)) || []; }
   function search(query) {
+    pendingArticle?.cancel();
     const tokens=[...new Set(tokenize(query))], scores=new Map(), hits=new Map();
     for(const token of tokens) { const perWord=new Map(); const exact=index.terms[token]; if(exact)for(const [id,weight]of exact)perWord.set(id,weight*3);
       if(token.length>=3) for(const [term,postings]of Object.entries(index.terms)) if(term!==token&&term.startsWith(token)) for(const [id,weight]of postings)perWord.set(id,Math.max(perWord.get(id)||0,weight));
@@ -360,10 +421,11 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
     return found.map(([id,score])=>({url:index.documents[id].url,title:index.documents[id].title,score}));
   }
   document.getElementById('search-form').addEventListener('submit',e=>{e.preventDefault();const query=document.getElementById('search').value,hash=new URLSearchParams({searchQuery:query}).toString();if(location.hash.slice(1)!==hash)history.pushState(null,'','#'+hash);search(query);});
-  window.StatsDirectHelp={search,openTopic};
-  function readSearchHash(){const state=new URLSearchParams(location.hash.slice(1)),query=state.get('searchQuery'),topic=state.get('topic');if(query!==null){document.getElementById('search').value=query;search(query);}else{if(articleMode&&!topic){const current=resolveTopic(location.href);if(current){activeTopic=current;selectTopic(current.link);}}showResults(false);if(topic)openTopic(topic,null,false);}}
-  window.addEventListener('hashchange',readSearchHash);readSearchHash();
+  window.StatsDirectHelp={search,openTopic,get currentTopic(){return activeTopic?.url;}};
+  function readSearchHash(){const state=new URLSearchParams(location.hash.slice(1)),query=state.get('searchQuery'),topic=state.get('topic');if(query!==null){pendingArticle?.cancel();document.getElementById('search').value=query;search(query);}else{showResults(false);if(topic)openTopic(topic,null,false);else if(articleMode){const current=resolveTopic(location.href);if(current&&nativeDesktop){activeTopic=current;selectTopic(current.link);}else if(current&&current.link!==activeTopic?.link)openTopic(current.link,null,false);else if(current)selectTopic(current.link);}}}
+  window.addEventListener('hashchange',readSearchHash);if(articleMode&&!nativeDesktop)window.addEventListener('popstate',readSearchHash);readSearchHash();
   restoringNavigation=false;
+  if(articleMode&&!nativeDesktop)frame.addEventListener('click',event=>{const link=event.target.closest?.('a[href]');if(!link||event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey||link.target==='_blank'||link.closest('svg,math'))return;const target=resolveTopic(link.href);if(!target)return;event.preventDefault();openTopic(target.link);});
   if(!articleMode)frame.addEventListener('load',()=>{try{const current=resolveTopic(frame.contentWindow.location.href);if(current){activeTopic=current;selectTopic(current.link);if(results.hidden&&!new URLSearchParams(location.hash.slice(1)).has('searchQuery')){document.title=current.title;history.replaceState(null,'','#'+new URLSearchParams({topic:current.link}).toString());}frame.contentDocument.addEventListener('click',e=>{const a=e.target.closest?.('a[href]');if(!a||e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||a.target==='_blank'||a.closest('svg,math'))return;const target=resolveTopic(a.href);if(!target)return;e.preventDefault();openTopic(target.link);});}}catch{/* Local file browsers may isolate iframe documents; navigation still works. */}});
 })();
 """;
