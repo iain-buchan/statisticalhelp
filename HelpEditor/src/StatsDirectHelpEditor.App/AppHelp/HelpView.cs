@@ -35,6 +35,8 @@ internal sealed class HelpView : UserControl
     internal event Action CloseRequested;
     private string requested;
     private bool starting;
+    private bool openingIndex, indexPrepared;
+    private int indexRequest;
     internal event Action<string> ExternalLinkRequested;
 
     internal HelpView(HelpCatalog catalog, string userDataDirectory = null)
@@ -53,22 +55,49 @@ internal sealed class HelpView : UserControl
         var toolbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top, TabStop = true, TabIndex = 1 };
         browse.Click += async (_, _) => await BrowseTopicsAsync();
         index.DropDown = indexMenu;
-        indexMenu.Opening += (_, e) =>
+        indexMenu.Opening += async (_, e) =>
         {
+            if (indexPrepared) return;
+            e.Cancel = true;
+            if (openingIndex) return;
+            openingIndex = true;
+            int request = ++indexRequest;
+            var owner = FindForm();
+            EventHandler deactivate = (_, _) => indexRequest++;
+            if (owner != null) owner.Deactivate += deactivate;
             try
             {
                 if (!catalog.HasKeywordIndex)
                 {
-                    e.Cancel = true;
                     status.Text = "This help bundle does not yet include a keyword index.";
                     return;
                 }
+                var core = Browser.CoreWebView2;
+                if (core == null || !HelpCatalog.IsLocal(core.Source)) return;
+                string source = core.Source;
+                // Finish the cancelled Opening event before a guarded reopen.
+                await Task.Yield();
+                if (IsDisposed || !Visible || request != indexRequest) return;
+                string closed = await core.ExecuteScriptAsync(CloseContentsScript).WaitAsync(TimeSpan.FromSeconds(5));
+                if (IsDisposed || !Visible || request != indexRequest || core.Source != source) return;
+                if (closed != "true")
+                {
+                    status.Text = "Could not close Contents to open the help index.";
+                    return;
+                }
                 indexMenu.Prepare(catalog.IndexEntries, this, index);
+                indexPrepared = true;
+                try { index.ShowDropDown(); }
+                finally { indexPrepared = false; }
             }
-            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or System.Text.Json.JsonException)
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or System.Text.Json.JsonException or InvalidOperationException or System.Runtime.InteropServices.COMException or TimeoutException)
             {
-                e.Cancel = true;
-                status.Text = "Could not open the help index: " + ex.Message;
+                if (!IsDisposed && request == indexRequest) status.Text = "Could not open the help index: " + ex.Message;
+            }
+            finally
+            {
+                if (owner != null) owner.Deactivate -= deactivate;
+                openingIndex = false;
             }
         };
         indexMenu.TopicChosen += entry => { ShowTopic(entry.Path); Browser.Focus(); };
@@ -80,8 +109,8 @@ internal sealed class HelpView : UserControl
                 index.Select();
             }
         };
-        VisibleChanged += (_, _) => { if (!Visible && indexMenu.Visible) indexMenu.Close(); };
-        ParentChanged += (_, _) => { if (indexMenu.Visible) indexMenu.Close(); };
+        VisibleChanged += (_, _) => { if (!Visible) CloseIndex(); };
+        ParentChanged += (_, _) => CloseIndex();
         toolbar.Items.AddRange([back, forward, new ToolStripButton("Home", null, (_, _) => ShowTopic("1000")), browse, index,
             new ToolStripSeparator(), new ToolStripButton("Print", null, (_, _) => Browser.CoreWebView2?.ShowPrintUI())]);
         var searchbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top, CanOverflow = false, TabStop = true, TabIndex = 2 };
@@ -126,6 +155,7 @@ internal sealed class HelpView : UserControl
 
     internal void ShowTopic(string topic)
     {
+        CloseIndex();
         Uri page = catalog.Resolve(topic);
         if (page == null && HelpCatalog.IsExternal(topic)) { OpenExternal(topic); return; }
         status.Text = page == null ? "This topic is unavailable; showing the help contents." : "";
@@ -135,6 +165,7 @@ internal sealed class HelpView : UserControl
 
     internal void Search(string query)
     {
+        CloseIndex();
         if (string.IsNullOrWhiteSpace(query)) { search.Focus(); return; }
         search.Text = query;
         requested = HelpCatalog.Origin + "/index.html#searchQuery=" + Uri.EscapeDataString(query.Trim());
@@ -144,6 +175,7 @@ internal sealed class HelpView : UserControl
 
     private async Task BrowseTopicsAsync()
     {
+        CloseIndex();
         var core = Browser.CoreWebView2;
         if (core == null || !HelpCatalog.IsLocal(core.Source)) return;
 
@@ -179,6 +211,25 @@ internal sealed class HelpView : UserControl
             if (!IsDisposed && core.Source == source) status.Text = BrowseFailure + ": " + ex.Message;
         }
     }
+
+    private void CloseIndex()
+    {
+        indexRequest++;
+        if (indexMenu.Visible) indexMenu.Close();
+    }
+
+    // Close only the transient drawer; a wide reader's permanent sidebar is
+    // not a dropdown and does not need a layout-changing hide/show cycle.
+    private const string CloseContentsScript = """
+        (() => {
+            if (document.body.classList.contains('navigation-open')) {
+                const toggle = document.getElementById('navigation-toggle');
+                if (!toggle) return false;
+                toggle.click();
+            }
+            return !document.body.classList.contains('navigation-open');
+        })()
+        """;
 
     // Keep this script portable: the Mac host mirrors the same text.
     private const string BrowseTopicsScript = """
@@ -244,6 +295,7 @@ internal sealed class HelpView : UserControl
             {
                 if (HelpCatalog.IsLocal(e.Uri))
                 {
+                    CloseIndex();
                     browse.Enabled = false;
                     index.Enabled = false;
                     return;

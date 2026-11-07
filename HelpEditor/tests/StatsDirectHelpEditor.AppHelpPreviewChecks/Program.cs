@@ -43,22 +43,35 @@ internal static class Program
     private static async Task CheckKeywordIndex()
     {
         var index = Descendants(service.View).OfType<ToolStrip>().SelectMany(strip => strip.Items.OfType<ToolStripDropDownButton>()).Single(button => button.Text == "Index");
+        var contents = index.Owner!.Items.OfType<ToolStripButton>().Single(button => button.Text == "Contents");
         await NativeUntil(() => index.Enabled);
         await Js("window.indexPreviewSnapshot={url:location.href,history:history.length};window.indexPreviewToken='retained'");
+        contents.PerformClick();
+        await Until("innerWidth<1280 && document.body.classList.contains('navigation-open') && !!document.activeElement.closest('#contents')");
         index.ShowDropDown();
         var popup = index.DropDown;
         var panel = popup.Items.OfType<ToolStripControlHost>().Single().Control;
         var filter = panel.Controls.OfType<TextBox>().Single();
         var list = panel.Controls.OfType<ListBox>().Single();
         await NativeUntil(() => popup.Visible && filter.Focused);
+        Check((await Js("!document.body.classList.contains('navigation-open')")).GetBoolean(),
+            "App preview opening Index closes the compact Contents drawer");
         Check(list.Items.Count == 4, "App preview Index lists authored keywords and keeps both destinations of a shared keyword");
         filter.Text = "Shared keyword";
         Check(list.Items.Count == 2 && list.Items.Cast<object>().Any(item => item.ToString()!.Contains("One")) && list.Items.Cast<object>().Any(item => item.ToString()!.Contains("Two")),
             "App preview distinguishes multiple pages for the same index keyword");
+        contents.PerformClick();
+        await Until("document.body.classList.contains('navigation-open') && !!document.activeElement.closest('#contents')");
+        Check(!popup.Visible, "App preview opening Contents closes the Index popup");
+        index.ShowDropDown(); await NativeUntil(() => popup.Visible && filter.Focused);
         NativeKey(filter, Keys.Escape);
         await NativeUntil(() => !popup.Visible && index.Selected);
         Check((await Js("location.href===window.indexPreviewSnapshot.url && history.length===window.indexPreviewSnapshot.history && window.indexPreviewToken==='retained'")).GetBoolean(),
             "Escape from the App preview Index returns to its toolbar without changing the reading page or history");
+        index.ShowDropDown();
+        contents.PerformClick();
+        await Until("document.body.classList.contains('navigation-open') && !!document.activeElement.closest('#contents')");
+        Check(!popup.Visible, "App preview Contents cancels an Index opening still awaiting the reader");
         index.ShowDropDown(); await NativeUntil(() => popup.Visible && filter.Focused);
         filter.Text = "Second authored keyword";
         Check(list.Items.Count == 1, "The App preview Index filter selects a keyword independently of page titles");

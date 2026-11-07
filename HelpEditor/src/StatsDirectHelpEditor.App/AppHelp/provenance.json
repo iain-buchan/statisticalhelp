@@ -1,7 +1,7 @@
 {
-  "capturedAtUtc": "2026-11-07T08:22:30.364410+00:00",
+  "capturedAtUtc": "2026-11-07T08:38:34.152327+00:00",
   "repository": "https://github.com/iain-buchan/statsdirect",
-  "sourceCommit": "a6e1ed429eb9c76be22d5cfff583ed2e4e6761fe",
+  "sourceCommit": "9e1124a963a9e4cf36cca33737a17263e5b7e007",
   "license": "MIT",
   "licenseFile": "LICENSE.StatsDirect.txt",
   "dockHostAdaptation": "None: ToolDockHost already finds a DockStyle.Fill workspace when there is no MdiClient.",
@@ -9,8 +9,8 @@
     {
       "source": "StatsDirectUI/UI/HtmlHelp/HelpView.cs",
       "snapshot": "HelpView.cs",
-      "sourceSha256": "e8ecd2912d229647634181b29d3181531c1835e28af856dac66294f272d9a1f6",
-      "snapshotSha256": "e31222a988e0d79e7034525f397cb63a36748f6ac1e837357ac28699612e08a1",
+      "sourceSha256": "cf70123f8f3500e26b779a22cc8c2a27e2b5a659398a4aa523b0884bb218bb57",
+      "snapshotSha256": "910fd89ea65fd638f89d3f7d50c7a0a17435066ce62a87cd6d6da1047a295df5",
       "changes": [
         "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility.",
         "Default browser profile isolated from installed StatsDirect. Mirrors Contents, the authored keyword Index and keyboard-accessible native navigation; hides the embedded website header."
