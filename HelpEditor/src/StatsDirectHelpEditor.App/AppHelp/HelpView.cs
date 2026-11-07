@@ -90,7 +90,7 @@ internal sealed class HelpView : UserControl
                 try { index.ShowDropDown(); }
                 finally { indexPrepared = false; }
             }
-            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or System.Text.Json.JsonException or InvalidOperationException or System.Runtime.InteropServices.COMException or TimeoutException)
+            catch (Exception ex) when (ex is InvalidDataException or IOException or UnauthorizedAccessException or System.Text.Json.JsonException or InvalidOperationException or System.Runtime.InteropServices.COMException or TimeoutException)
             {
                 if (!IsDisposed && request == indexRequest) status.Text = "Could not open the help index: " + ex.Message;
             }

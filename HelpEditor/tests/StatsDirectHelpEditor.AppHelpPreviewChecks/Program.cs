@@ -159,5 +159,6 @@ internal static class Program
         var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "src", "StatsDirectHelpEditor.App", "AppHelp", "provenance.json"))).RootElement;
         var snapshotFiles = manifest.GetProperty("files").EnumerateArray().ToArray();
         Check(snapshotFiles.Any(file => file.GetProperty("snapshot").GetString() == "HelpIndexMenu.cs") && snapshotFiles.All(file => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(root,"src","StatsDirectHelpEditor.App","AppHelp",file.GetProperty("snapshot").GetString()!)))).Equals(file.GetProperty("snapshotSha256").GetString(),StringComparison.OrdinalIgnoreCase)), "Every native host snapshot, including Index, matches its recorded source provenance hash");
+        await CorruptIndexPreviewChecks.Run(owner, output, fixture, Check);
     }
 }
