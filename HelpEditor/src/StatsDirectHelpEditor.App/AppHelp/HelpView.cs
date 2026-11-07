@@ -22,9 +22,12 @@ internal sealed class HelpView : UserControl
     private readonly HelpCatalog catalog;
     private readonly string userData;
     private readonly ToolStripButton back = new("Back") { Enabled = false }, forward = new("Forward") { Enabled = false };
-    private readonly ToolStripButton browse = new("Browse topics") { Enabled = false };
+    private readonly ToolStripButton browse = new("Contents") { Enabled = false };
+    private readonly ToolStripDropDownButton index = new("Index") { Enabled = false, ToolTipText = "Find a topic by an index keyword" };
+    private readonly HelpIndexMenu indexMenu = new();
     private readonly ToolStripTextBox search = new() { AutoSize = false, Width = 190, AccessibleName = "Search all help topics" };
     private readonly ToolStripStatusLabel status = new() { Spring = true, TextAlign = ContentAlignment.MiddleLeft };
+    private const string BrowseFailure = "Could not open the help topics";
     private readonly ToolStripButton mode = new("Pop out") { Alignment = ToolStripItemAlignment.Right, Overflow = ToolStripItemOverflow.Never };
     internal string PageTitle { get; private set; } = "StatsDirect Help";
     internal event Action TitleChanged;
@@ -42,15 +45,46 @@ internal sealed class HelpView : UserControl
         AutoScaleMode = AutoScaleMode.Dpi;
         Font = new Font("Arial", 10);
         Dock = DockStyle.Fill;
-        var heading = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top };
+        Browser.TabIndex = 3;
+        var heading = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top, TabStop = true, TabIndex = 0 };
         var close = new ToolStripButton("Close", null, (_, _) => CloseRequested?.Invoke()) { Alignment = ToolStripItemAlignment.Right, Overflow = ToolStripItemOverflow.Never, ToolTipText = "Close help" };
         mode.Click += (_, _) => ModeRequested?.Invoke();
         heading.Items.AddRange([new ToolStripLabel("Help"), close, mode]);
-        var toolbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top };
+        var toolbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top, TabStop = true, TabIndex = 1 };
         browse.Click += async (_, _) => await BrowseTopicsAsync();
-        toolbar.Items.AddRange([back, forward, new ToolStripButton("Home", null, (_, _) => ShowTopic("1000")), browse,
+        index.DropDown = indexMenu;
+        indexMenu.Opening += (_, e) =>
+        {
+            try
+            {
+                if (!catalog.HasKeywordIndex)
+                {
+                    e.Cancel = true;
+                    status.Text = "This help bundle does not yet include a keyword index.";
+                    return;
+                }
+                indexMenu.Prepare(catalog.IndexEntries, this, index);
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or System.Text.Json.JsonException)
+            {
+                e.Cancel = true;
+                status.Text = "Could not open the help index: " + ex.Message;
+            }
+        };
+        indexMenu.TopicChosen += entry => { ShowTopic(entry.Path); Browser.Focus(); };
+        indexMenu.Closed += (_, e) =>
+        {
+            if (e.CloseReason == ToolStripDropDownCloseReason.Keyboard && Visible && !IsDisposed)
+            {
+                index.GetCurrentParent()?.Focus();
+                index.Select();
+            }
+        };
+        VisibleChanged += (_, _) => { if (!Visible && indexMenu.Visible) indexMenu.Close(); };
+        ParentChanged += (_, _) => { if (indexMenu.Visible) indexMenu.Close(); };
+        toolbar.Items.AddRange([back, forward, new ToolStripButton("Home", null, (_, _) => ShowTopic("1000")), browse, index,
             new ToolStripSeparator(), new ToolStripButton("Print", null, (_, _) => Browser.CoreWebView2?.ShowPrintUI())]);
-        var searchbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top, CanOverflow = false };
+        var searchbar = new ToolStrip { GripStyle = ToolStripGripStyle.Hidden, Dock = DockStyle.Top, CanOverflow = false, TabStop = true, TabIndex = 2 };
         var searchLabel = new ToolStripLabel("Search:");
         var searchButton = new ToolStripButton("Search", null, (_, _) => Search(search.Text));
         searchbar.Items.AddRange([searchLabel, search, searchButton]);
@@ -58,7 +92,7 @@ internal sealed class HelpView : UserControl
         back.Click += (_, _) => { if (Browser.CoreWebView2?.CanGoBack == true) Browser.CoreWebView2.GoBack(); };
         forward.Click += (_, _) => { if (Browser.CoreWebView2?.CanGoForward == true) Browser.CoreWebView2.GoForward(); };
         search.KeyDown += (_, e) => { if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; Search(search.Text); } };
-        var statusBar = new StatusStrip();
+        var statusBar = new StatusStrip { TabStop = false, TabIndex = 4 };
         statusBar.Items.Add(status);
         Controls.Add(Browser);
         Controls.Add(searchbar);
@@ -117,36 +151,59 @@ internal sealed class HelpView : UserControl
         try
         {
             Browser.Focus();
-            string opened = await core.ExecuteScriptAsync("""
-                (() => {
-                    const contents = document.getElementById('contents');
-                    if (!contents) return false;
-                    const navigation = document.getElementById('help-navigation');
-                    const toggle = document.getElementById('navigation-toggle');
-                    if (toggle && navigation && getComputedStyle(navigation).display === 'none') toggle.click();
-                    if (contents.hidden) document.getElementById('contents-tab')?.click();
-                    const link = contents.querySelector('a[aria-current="page"]') ?? contents.querySelector('a');
-                    if (!link?.getClientRects().length) return false;
-                    link.focus({preventScroll:true});
-                    return true;
-                })()
-                """).WaitAsync(TimeSpan.FromSeconds(5));
-            if (opened == "true" || IsDisposed || core.Source != source) return;
+            string opened = await core.ExecuteScriptAsync(BrowseTopicsScript).WaitAsync(TimeSpan.FromSeconds(5));
+            if (IsDisposed || core.Source != source) return;
+            if (opened == "\"focused\"")
+            {
+                if (status.Text.StartsWith(BrowseFailure, StringComparison.Ordinal)) status.Text = "";
+                return;
+            }
 
             // Standalone topics in the alternative layouts have no tree.
-            // Open their reader with the same topic selected.
-            var page = new Uri(source);
-            if (page.AbsolutePath != "/index.html")
+            // Only that result permits opening the reader; a focus or script
+            // failure must leave the reading page and its history intact.
+            if (opened == "\"no-contents\"")
             {
-                requested = HelpCatalog.Origin + "/index.html#topic=" + Uri.EscapeDataString(page.AbsolutePath.TrimStart('/') + page.Fragment);
-                NavigateRequested();
+                var page = new Uri(source);
+                if (page.AbsolutePath != "/index.html")
+                {
+                    requested = HelpCatalog.Origin + "/index.html#topic=" + Uri.EscapeDataString(page.AbsolutePath.TrimStart('/') + page.Fragment);
+                    NavigateRequested();
+                    return;
+                }
             }
+            status.Text = BrowseFailure + ". Use Home or search to find a topic.";
         }
         catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException or TimeoutException)
         {
-            if (!IsDisposed) status.Text = "Could not open the help topics: " + ex.Message;
+            if (!IsDisposed && core.Source == source) status.Text = BrowseFailure + ": " + ex.Message;
         }
     }
+
+    // Keep this script portable: the Mac host mirrors the same text.
+    private const string BrowseTopicsScript = """
+        (() => {
+            const contents = document.getElementById('contents');
+            if (!contents) return 'no-contents';
+            const navigation = document.getElementById('help-navigation');
+            const toggle = document.getElementById('navigation-toggle');
+            if (toggle && navigation && getComputedStyle(navigation).display === 'none') toggle.click();
+            if (contents.hidden || document.getElementById('results')?.hidden === false)
+                document.getElementById('contents-tab')?.click();
+            const path = location.pathname.slice(1);
+            const folder = path.slice(0, path.lastIndexOf('/') + 1);
+            const overview = folder ? [...contents.querySelectorAll('details > ul > li:first-child > a')]
+                .find(a => a.dataset.link?.startsWith(folder)) : null;
+            const link = contents.querySelector('a[aria-current="page"]') ?? overview ?? contents.querySelector('a');
+            if (!link) return 'not-focused';
+            for (let p = link.parentElement; p && p !== contents; p = p.parentElement)
+                if (p.tagName === 'DETAILS') p.open = true;
+            if (!link.getClientRects().length) return 'not-focused';
+            (link.closest('li') ?? link).scrollIntoView({block: 'nearest', inline: 'nearest'});
+            link.focus({preventScroll: true});
+            return document.activeElement === link ? 'focused' : 'not-focused';
+        })()
+        """;
 
     private void NavigateRequested()
     {
@@ -188,6 +245,7 @@ internal sealed class HelpView : UserControl
                 if (HelpCatalog.IsLocal(e.Uri))
                 {
                     browse.Enabled = false;
+                    index.Enabled = false;
                     return;
                 }
                 e.Cancel = true;
@@ -209,6 +267,7 @@ internal sealed class HelpView : UserControl
             core.NavigationCompleted += (_, e) =>
             {
                 browse.Enabled = e.IsSuccess || e.WebErrorStatus == CoreWebView2WebErrorStatus.OperationCanceled;
+                index.Enabled = browse.Enabled;
                 if (!e.IsSuccess && e.WebErrorStatus != CoreWebView2WebErrorStatus.OperationCanceled) status.Text = "The help page could not load: " + e.WebErrorStatus;
             };
             core.ProcessFailed += (_, _) => status.Text = "The help browser stopped. Close and reopen Help to continue.";
@@ -266,7 +325,7 @@ internal sealed class HelpView : UserControl
 
     protected override void Dispose(bool disposing)
     {
-        if (disposing) ready.TrySetCanceled();
+        if (disposing) { ready.TrySetCanceled(); indexMenu.Dispose(); }
         base.Dispose(disposing);
     }
 }

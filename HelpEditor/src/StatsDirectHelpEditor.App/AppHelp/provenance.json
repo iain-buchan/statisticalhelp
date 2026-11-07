@@ -1,7 +1,7 @@
 {
-  "capturedAtUtc": "2026-11-02T11:47:55.567137+00:00",
+  "capturedAtUtc": "2026-11-07T08:22:30.364410+00:00",
   "repository": "https://github.com/iain-buchan/statsdirect",
-  "sourceCommit": "95e23818d986e5085a1a2b511ce7ebefd711f1cf",
+  "sourceCommit": "a6e1ed429eb9c76be22d5cfff583ed2e4e6761fe",
   "license": "MIT",
   "licenseFile": "LICENSE.StatsDirect.txt",
   "dockHostAdaptation": "None: ToolDockHost already finds a DockStyle.Fill workspace when there is no MdiClient.",
@@ -9,18 +9,27 @@
     {
       "source": "StatsDirectUI/UI/HtmlHelp/HelpView.cs",
       "snapshot": "HelpView.cs",
-      "sourceSha256": "ea16b8d2b87c0bd3e0306c3bf6c9ffba068b3eccdb9a8a99d18f5d85f0d82b06",
-      "snapshotSha256": "8e492d2a6144ab97b6022ccee33797dacf1c97745206f27825028e492e551461",
+      "sourceSha256": "e8ecd2912d229647634181b29d3181531c1835e28af856dac66294f272d9a1f6",
+      "snapshotSha256": "e31222a988e0d79e7034525f397cb63a36748f6ac1e837357ac28699612e08a1",
       "changes": [
         "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility.",
-        "Default browser profile isolated from installed StatsDirect. Mirrors the native Home and Browse topics toolbar and hides the embedded website header."
+        "Default browser profile isolated from installed StatsDirect. Mirrors Contents, the authored keyword Index and keyboard-accessible native navigation; hides the embedded website header."
       ]
     },
     {
       "source": "StatsDirectUI/UI/HtmlHelp/HelpCatalog.cs",
       "snapshot": "HelpCatalog.cs",
-      "sourceSha256": "ddbab4c66f2b2d3b0becedbea1a0f74e02864ea7b01f3ed94fb4e4e3f5e45fc0",
-      "snapshotSha256": "2b33891df8ee5c6357441dff982e6fd1413e489eb3fda579570d8d61dc677678",
+      "sourceSha256": "7459baafd7c14d733ae18c62c90ba5a41bfece67172aff4ea2faacf0cdfd996e",
+      "snapshotSha256": "23cfd2567599f253a4518a75b7214c43bf01267adaf4ea6d95998accfb991c9f",
+      "changes": [
+        "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility."
+      ]
+    },
+    {
+      "source": "StatsDirectUI/UI/HtmlHelp/HelpIndexMenu.cs",
+      "snapshot": "HelpIndexMenu.cs",
+      "sourceSha256": "3da5110a73999e43f6b7b8487d9db8977546f0f01ffbe0a13ecbe6dd9f21451f",
+      "snapshotSha256": "92b13f3b3121129f6c8b489ef6ad7aef2651057e0c770526ef9b760fd94dd6af",
       "changes": [
         "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility."
       ]
@@ -28,7 +37,7 @@
     {
       "source": "StatsDirectUI/UI/HtmlHelp/HelpService.cs",
       "snapshot": "HelpService.cs",
-      "sourceSha256": "11b673ea1a95dd380e21d91b82a3e6a1d6ad6d8f5071c97781b5e85dcd9f0d94",
+      "sourceSha256": "223f8bf62dcaf202127e3dbc9dc2fc0bf7b69c4dded6e7d92edc6602330fb0bf",
       "snapshotSha256": "2c4993769f3cc06694b6b41c56235f2a7282bb978e32b4b7fab4ece58f7cae94",
       "changes": [
         "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility.",
@@ -40,7 +49,7 @@
     {
       "source": "StatsDirectUI/UI/ToolWindows/ToolPaneSession.cs",
       "snapshot": "ToolPaneSession.cs",
-      "sourceSha256": "be1d951337d5b85e7279dc295fb305d133d590199925f7a7aff7a214bb216de8",
+      "sourceSha256": "5f9ee54c80f789a1be660a62b19c22be186b1c3ec1c82ac0a8ebd89cb3c6fe68",
       "snapshotSha256": "86b6f99055c9efd2a82c86528cf78aad9f245e416c95e4fae97d4392dff6fb84",
       "changes": [
         "Namespace moved into the independent help editor; nullable annotations disabled to preserve source compatibility.",

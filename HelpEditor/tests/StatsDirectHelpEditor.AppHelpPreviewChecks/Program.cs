@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Security.Cryptography;
+using System.Reflection;
 using Microsoft.Web.WebView2.Core;
 using StatsDirect.HelpEditor.App.AppHelp;
 using StatsDirect.HelpEditor.Core;
@@ -28,6 +29,45 @@ internal static class Program
         throw new TimeoutException(condition);
     }
     private static IEnumerable<Control> Descendants(Control control) => new[] { control }.Concat(control.Controls.Cast<Control>().SelectMany(Descendants));
+    private static async Task NativeUntil(Func<bool> condition)
+    {
+        var deadline = DateTime.UtcNow.AddSeconds(5);
+        while (DateTime.UtcNow < deadline) { if (condition()) return; await Task.Delay(50); }
+        throw new TimeoutException("The native Index controls did not reach the expected state.");
+    }
+    private static void NativeKey(Control target, Keys key)
+    {
+        var message = Message.Create(target.Handle, 0x0100, (IntPtr)(int)key, IntPtr.Zero);
+        if (!target.PreProcessMessage(ref message)) typeof(Control).GetMethod("WndProc", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(target, [message]);
+    }
+    private static async Task CheckKeywordIndex()
+    {
+        var index = Descendants(service.View).OfType<ToolStrip>().SelectMany(strip => strip.Items.OfType<ToolStripDropDownButton>()).Single(button => button.Text == "Index");
+        await NativeUntil(() => index.Enabled);
+        await Js("window.indexPreviewSnapshot={url:location.href,history:history.length};window.indexPreviewToken='retained'");
+        index.ShowDropDown();
+        var popup = index.DropDown;
+        var panel = popup.Items.OfType<ToolStripControlHost>().Single().Control;
+        var filter = panel.Controls.OfType<TextBox>().Single();
+        var list = panel.Controls.OfType<ListBox>().Single();
+        await NativeUntil(() => popup.Visible && filter.Focused);
+        Check(list.Items.Count == 4, "App preview Index lists authored keywords and keeps both destinations of a shared keyword");
+        filter.Text = "Shared keyword";
+        Check(list.Items.Count == 2 && list.Items.Cast<object>().Any(item => item.ToString()!.Contains("One")) && list.Items.Cast<object>().Any(item => item.ToString()!.Contains("Two")),
+            "App preview distinguishes multiple pages for the same index keyword");
+        NativeKey(filter, Keys.Escape);
+        await NativeUntil(() => !popup.Visible && index.Selected);
+        Check((await Js("location.href===window.indexPreviewSnapshot.url && history.length===window.indexPreviewSnapshot.history && window.indexPreviewToken==='retained'")).GetBoolean(),
+            "Escape from the App preview Index returns to its toolbar without changing the reading page or history");
+        index.ShowDropDown(); await NativeUntil(() => popup.Visible && filter.Focused);
+        filter.Text = "Second authored keyword";
+        Check(list.Items.Count == 1, "The App preview Index filter selects a keyword independently of page titles");
+        NativeKey(filter, Keys.Enter);
+        await Until("location.pathname==='/two.htm' && document.readyState==='complete'");
+        Check(!popup.Visible, "Enter opens the selected index topic in the existing App browser and closes its popup");
+        service.View.Browser.CoreWebView2.GoBack();
+        await Until("location.pathname==='/one.htm' && location.hash==='#Ref-Case' && document.readyState==='complete'");
+    }
     [STAThread]
     private static int Main(string[] args)
     {
@@ -55,8 +95,8 @@ internal static class Program
         Write("StatsDirect.flprj", "<CatapultProject />");
         Write("Project/TOCs/STATSDIRECT.fltoc", "<CatapultToc><TocEntry Title=\"Contents\" Link=\"/Content/contents.htm\"/><TocEntry Title=\"One\" Link=\"/Content/one.htm\"/><TocEntry Title=\"Two\" Link=\"/Content/two.htm\"/></CatapultToc>");
         Write("Content/contents.htm", "<html><head><title>Fixture contents</title></head><body><h1>Fixture contents</h1><a href=\"one.htm\">One</a></body></html>");
-        Write("Content/one.htm", "<html xmlns:MadCap=\"http://www.madcapsoftware.com/Schemas/MadCap.xsd\"><head><title>One</title></head><body><h1>One</h1><p id=\"Ref-Case\">Searchsentinel</p><p MadCap:conditions=\"Primary.SWHELP\">Desktoponlysentinel</p><p MadCap:conditions=\"Primary.WEBHELP\">Publiconlysentinel</p><MadCap:dropDown class=\"rcode\"><MadCap:dropDownHead><MadCap:dropDownHotspot>R code</MadCap:dropDownHotspot></MadCap:dropDownHead><MadCap:dropDownBody><pre>x &lt;- 1\nmean(x)</pre></MadCap:dropDownBody></MadCap:dropDown><p><MadCap:equation>\\(x^2\\)</MadCap:equation></p><a href=\"two.htm#Target\">Two</a>" + string.Concat(Enumerable.Repeat("<p>Long content retains the reading position.</p>", 130)) + "</body></html>");
-        Write("Content/two.htm", "<html><head><title>Two</title></head><body><h1>Two</h1><p id=\"Target\">Second topic</p></body></html>");
+        Write("Content/one.htm", "<html xmlns:MadCap=\"http://www.madcapsoftware.com/Schemas/MadCap.xsd\"><head><title>One</title></head><body><h1>One<MadCap:keyword term=\"First authored keyword;Shared keyword\" /></h1><p id=\"Ref-Case\">Searchsentinel</p><p MadCap:conditions=\"Primary.SWHELP\">Desktoponlysentinel</p><p MadCap:conditions=\"Primary.WEBHELP\">Publiconlysentinel</p><MadCap:dropDown class=\"rcode\"><MadCap:dropDownHead><MadCap:dropDownHotspot>R code</MadCap:dropDownHotspot></MadCap:dropDownHead><MadCap:dropDownBody><pre>x &lt;- 1\nmean(x)</pre></MadCap:dropDownBody></MadCap:dropDown><p><MadCap:equation>\\(x^2\\)</MadCap:equation></p><a href=\"two.htm#Target\">Two</a>" + string.Concat(Enumerable.Repeat("<p>Long content retains the reading position.</p>", 130)) + "</body></html>");
+        Write("Content/two.htm", "<html xmlns:MadCap=\"http://www.madcapsoftware.com/Schemas/MadCap.xsd\"><head><title>Two</title></head><body><h1>Two<MadCap:keyword term=\"Second authored keyword;Shared keyword\" /></h1><p id=\"Target\">Second topic</p></body></html>");
         var project = HelpProject.Open(source);
         string output = Path.Combine(fixture, "Desktop");
         var built = HelpBuilder.Build(project, output, Path.Combine(root, "src", "StatsDirectHelpEditor.App", "Web"), HelpBuildTarget.Desktop);
@@ -74,10 +114,11 @@ internal static class Program
         Check(workspace.Right <= service.DockHost.Divider.Left && service.DockHost.Divider.Right <= service.DockHost.Panel.Left && service.DockHost.Panel.Top >= ribbon.Bottom && ribbon.Width == owner.ClientSize.Width, "Help pane and splitter reserve space without covering the editor or full-width ribbon");
         Check(service.View.Font.Name == "Arial" && service.View.Font.SizeInPoints == 10, "App help chrome uses the app's Arial 10 font");
         var buttons = Descendants(service.View).OfType<ToolStrip>().SelectMany(strip => strip.Items.Cast<ToolStripItem>()).Select(item => item.Text).ToArray();
-        Check(new[] { "Help", "Pop out", "Close", "Back", "Forward", "Home", "Browse topics", "Print", "Search:", "Search" }.All(text => buttons.Contains(text)), "App heading, navigation, search, print and pop-out controls match StatsDirect");
+        Check(new[] { "Help", "Pop out", "Close", "Back", "Forward", "Home", "Contents", "Index", "Print", "Search:", "Search" }.All(text => buttons.Contains(text)), "App heading, navigation, search, print and pop-out controls match StatsDirect");
         Check((await Js("document.body.innerText.includes('Desktoponlysentinel') && !document.body.innerText.includes('Publiconlysentinel') && !!document.querySelector('#help-topic-body') && !document.querySelector('body > header').getClientRects().length")).GetBoolean(), "App view renders Desktop topics and source conditions without the embedded website toolbar");
         await Until("!!document.querySelector('mjx-container svg')");
         Check(true, "Offline mathematics renders inside the exact app browser host");
+        await CheckKeywordIndex();
         var browser = service.View.Browser.CoreWebView2;
         await Js("window.appPreviewToken='persistent';document.querySelector('details').open=true;document.getElementById('topic').scrollTop=300;");
         int originalWidth = service.DockHost.Panel.Width;
@@ -103,6 +144,7 @@ internal static class Program
         string installedProfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "StatsDirect", "HtmlHelp");
         Check(!browser.Environment.UserDataFolder.Equals(installedProfile, StringComparison.OrdinalIgnoreCase) && browser.Environment.UserDataFolder.Equals(profile, StringComparison.OrdinalIgnoreCase), "Editor preview test profile is isolated from installed StatsDirect and the live editor");
         var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "src", "StatsDirectHelpEditor.App", "AppHelp", "provenance.json"))).RootElement;
-        Check(manifest.GetProperty("files").EnumerateArray().All(file => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(root,"src","StatsDirectHelpEditor.App","AppHelp",file.GetProperty("snapshot").GetString()!)))).Equals(file.GetProperty("snapshotSha256").GetString(),StringComparison.OrdinalIgnoreCase)), "All six native host snapshots match their recorded source provenance hashes");
+        var snapshotFiles = manifest.GetProperty("files").EnumerateArray().ToArray();
+        Check(snapshotFiles.Any(file => file.GetProperty("snapshot").GetString() == "HelpIndexMenu.cs") && snapshotFiles.All(file => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(root,"src","StatsDirectHelpEditor.App","AppHelp",file.GetProperty("snapshot").GetString()!)))).Equals(file.GetProperty("snapshotSha256").GetString(),StringComparison.OrdinalIgnoreCase)), "Every native host snapshot, including Index, matches its recorded source provenance hash");
     }
 }

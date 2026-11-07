@@ -63,7 +63,7 @@ public static class HelpBuilder
         var assetPaths = sourceFiles.Select(file => Path.GetRelativePath(project.ContentPath, file).Replace('\\', '/').ToLowerInvariant()).ToHashSet(StringComparer.Ordinal);
         string? logoPath = assetPaths.Contains("resources/images/sd3helplogo.png") ? "resources/images/sd3helplogo.png" : null;
         string? iconPath = assetPaths.Contains("resources/images/sd3.ico") ? "resources/images/sd3.ico" : null;
-        var reserved = new HashSet<string>(["index.html", "contents-data.js", "search-index.js", "help-viewer.css", "help-viewer.js", "build-info.json", OutputMarker, "data/alias.xml"], StringComparer.OrdinalIgnoreCase);
+        var reserved = new HashSet<string>(["index.html", "contents-data.js", "search-index.js", "keyword-index.json", "help-viewer.css", "help-viewer.js", "build-info.json", OutputMarker, "data/alias.xml"], StringComparer.OrdinalIgnoreCase);
         foreach (var file in sourceFiles)
         {
             var relative = Path.GetRelativePath(project.ContentPath, file).Replace('\\', '/').ToLowerInvariant();
@@ -118,14 +118,18 @@ public static class HelpBuilder
 
         var sharedFooter = project.ReadSharedFooter(target);
         var searchDocuments = new List<SearchDocument>();
+        var keywordEntries = new List<KeywordEntry>();
         foreach (var topic in topics)
         {
             var document = HelpProject.Parse(drafts.TryGetValue(topic.Path, out string? draft) ? draft : project.ReadTopic(topic.Path));
             var body = document.Descendants().First(e => e.Name.LocalName == "body");
             ApplyConditions(body, target);
-            var keywordText = string.Join(" ", body.Descendants().Where(e => HelpSourceNamespaces.IsElement(e, "keyword")).Select(e => (string?)e.Attribute("term") ?? ""));
+            var keywords = body.Descendants().Where(e => HelpSourceNamespaces.IsElement(e, "keyword")).Select(e => (string?)e.Attribute("term") ?? "").ToArray();
+            var keywordText = string.Join(" ", keywords);
             var text = NormalizeText(string.Join(" ", body.DescendantNodes().OfType<XText>().Where(t => !t.Ancestors().Any(e => e.Name.LocalName is "script" or "style")).Select(t => t.Value)));
             var outputPath = topic.Path.ToLowerInvariant();
+            foreach (var term in keywords.SelectMany(value => value.Split(';')).Select(NormalizeText).Where(term => term.Length != 0))
+                keywordEntries.Add(new KeywordEntry(term, topic.Title, outputPath));
             var transformed = new XElement(body);
             Transform(transformed, topic.Path, project, warnings, equationArtwork);
             string footerHtml = "";
@@ -170,6 +174,16 @@ public static class HelpBuilder
         Write("contents-data.js", "window.StatsDirectContents=" + JsonSerializer.Serialize(viewerToc, JsonOptions) + ";");
         var search = CreateIndex(searchDocuments);
         Write("search-index.js", "window.StatsDirectSearch=" + JsonSerializer.Serialize(search, JsonOptions) + ";");
+        // Keep the authored keyword index separate from full-text search. It
+        // also includes indexed topics deliberately excluded from search.
+        var seenKeywords = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var keywordsForTarget = keywordEntries
+            .Where(entry => seenKeywords.Add(entry.Term + "\0" + entry.Path))
+            .OrderBy(entry => entry.Term, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(entry => entry.Title, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(entry => entry.Path, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        Write("keyword-index.json", JsonSerializer.Serialize(new { SchemaVersion = 1, Entries = keywordsForTarget }, JsonOptions));
         var homeTopic = topics.FirstOrDefault(t => t.Path.Equals("contents.htm", StringComparison.OrdinalIgnoreCase)) ?? topics.FirstOrDefault();
         Write("index.html", appearance == "flare" && homeTopic != null
             ? FlareIndexNavigation(homeTopic.Path.ToLowerInvariant(), logoPath, iconPath)
@@ -468,5 +482,6 @@ public static class HelpBuilder
     private record SearchDocument(int Id, string Url, string Title, string Keywords, string Text);
     private record SearchDisplay(string Url, string Title, string Excerpt);
     private record SearchData(List<SearchDisplay> Documents, Dictionary<string, int[][]> Terms);
+    private record KeywordEntry(string Term, string Title, string Path);
     private record OutputReceipt(string[] Files);
 }

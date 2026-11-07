@@ -6,6 +6,7 @@
     <Project Path="src/StatsDirectHelpEditor.Core/StatsDirectHelpEditor.Core.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/StatsDirectHelpEditor.KeywordIndexChecks/StatsDirectHelpEditor.KeywordIndexChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.TopicFormatChecks/StatsDirectHelpEditor.TopicFormatChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.ContentsNavigationChecks/StatsDirectHelpEditor.ContentsNavigationChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.DesktopDeliveryChecks/StatsDirectHelpEditor.DesktopDeliveryChecks.csproj" />
