@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>StatsDirectHelpEditor</AssemblyName>
     <RootNamespace>StatsDirect.HelpEditor.App</RootNamespace>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <ApplicationDefaultFont>Arial, 11pt</ApplicationDefaultFont>
     <ApplicationIcon>Assets\HelpEditor.ico</ApplicationIcon>
   </PropertyGroup>

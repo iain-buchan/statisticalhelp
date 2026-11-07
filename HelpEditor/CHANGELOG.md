@@ -1,9 +1,15 @@
 # Changelog
 
-## Unreleased
+## 1.0.5 — 7 November 2026
 
 - Website help has **Contents** and **Index** navigation alongside its search box. The authored keyword Index filters by keyword or topic title, supports keyboard navigation and multiple destinations, and works offline, including indexed pages excluded from full-text search. Topic navigation retains the chosen pane, Index filter, selection and scroll position for that help site. Desktop help retains its native toolbar controls.
 - Website topic links update only the reading pane, keeping the header, navigation tree and Index list in place. The Index shows status text only for no matches or an error, without an entry count.
+- The App preview mirrors the native **Home**, **Contents**, **Index** and search controls. Contents and Index menus exclude one another, closing Contents restores reader focus, and a corrupt keyword index reports a status message.
+- The shared browser editor preserves topic formatting when saving pages. Packaged help source includes the reviewed topic-title, keyword and method-selection link corrections.
+
+## 1.0.4 — 6 November 2026
+
+- Desktop Help and the editor's App preview use the native **Home**, **Browse topics** and search controls. Parent titles expand the topic tree in place, with a separate **Overview** link for each parent page. Desktop Help opened in a narrow browser window keeps a compact **Browse topics** button.
 - Standalone website exports preserve publication ZIPs and ask for a different filename.
 - Generated help, output receipts, the desktop delivery receipt, the shared-content manifest and the built-in tutor payload are written with LF on every platform, so a publication's bytes depend on its source alone rather than on the publishing machine.
 - Double-clicking a Contents node expands or collapses it once; the extra toggle that reversed the native one a moment later is gone.
@@ -14,10 +20,6 @@
 - Publish content captures saved help and tutor source together, exports the website ZIP, and commits the website, desktop help and tutor build inputs to `statisticalhelp` with a complete hashed manifest. Windows build inputs receive the identical desktop and tutor files.
 - Shared content is validated before publication; changed tutor material still requires its recorded author review. Application builds can pin one publication revision without updating installed applications at runtime.
 - Contents navigation in Browser view keeps the editor window and current preview stable instead of flashing between views.
-
-## 1.0.4 — 6 November 2026
-
-- Desktop Help and the editor's App preview use the native **Home**, **Browse topics** and search controls. Parent titles expand the topic tree in place, with a separate **Overview** link for each parent page. Desktop Help opened in a narrow browser window keeps a compact **Browse topics** button.
 
 ## 1.0.0 — 4 November 2026
 
