@@ -1,4 +1,5 @@
 using StatsDirect.HelpEditor.App.AppHelp;
+using Microsoft.Web.WebView2.Core;
 
 internal static class CorruptIndexPreviewChecks
 {
@@ -29,6 +30,18 @@ internal static class CorruptIndexPreviewChecks
             };
             using var view = new HelpView(new HelpCatalog(copy), Path.Combine(fixture, "profile-" + number));
             frame.Controls.Add(view);
+            // Ready means the WebView environment exists, not that its first
+            // document has loaded. Observe navigation before showing this new
+            // profile so a quick completion cannot be missed on either machine.
+            var loaded = new TaskCompletionSource<CoreWebView2NavigationCompletedEventArgs>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var navigations = new List<string>();
+            EventHandler<CoreWebView2NavigationCompletedEventArgs> completed = (_, e) =>
+            {
+                string source = view.Browser.CoreWebView2?.Source ?? "(no source)";
+                navigations.Add($"{source}: success={e.IsSuccess}, error={e.WebErrorStatus}");
+                if (source.EndsWith("/one.htm#Ref-Case", StringComparison.Ordinal)) loaded.TrySetResult(e);
+            };
+            view.Browser.NavigationCompleted += completed;
             var escaped = new List<Exception>();
             // Opening is async void: capture the real UI-thread escape so a
             // regression fails this private fixture rather than showing a dialog.
@@ -43,10 +56,15 @@ internal static class CorruptIndexPreviewChecks
                 var index = view.Controls.OfType<ToolStrip>().SelectMany(strip => strip.Items.OfType<ToolStripDropDownButton>())
                     .Single(button => button.Text == "Index");
                 var status = view.Controls.OfType<StatusStrip>().Single().Items[0];
-                await Wait(() => index.Enabled && core.Source.EndsWith("/one.htm#Ref-Case", StringComparison.Ordinal));
+                string State() => $"case={test.Name}; source={core.Source}; index.Enabled={index.Enabled}; status={status.Text}; navigations={string.Join(" | ", navigations)}";
+                CoreWebView2NavigationCompletedEventArgs initialNavigation;
+                try { initialNavigation = await loaded.Task.WaitAsync(TimeSpan.FromSeconds(45)); }
+                catch (TimeoutException ex) { throw new TimeoutException("The corrupt-index fixture's initial document did not finish navigating. " + State(), ex); }
+                if (!initialNavigation.IsSuccess) throw new InvalidOperationException("The corrupt-index fixture's initial document failed to navigate. " + State());
+                await Wait(() => index.Enabled && core.Source.EndsWith("/one.htm#Ref-Case", StringComparison.Ordinal), State);
                 await core.ExecuteScriptAsync("window.corruptIndexSnapshot={url:location.href,history:history.length};window.corruptIndexToken='retained';");
                 index.ShowDropDown();
-                await Wait(() => escaped.Count > 0 || status.Text?.StartsWith("Could not open the help index:", StringComparison.Ordinal) == true);
+                await Wait(() => escaped.Count > 0 || status.Text?.StartsWith("Could not open the help index:", StringComparison.Ordinal) == true, State);
                 check(escaped.Count == 0, $"App preview Index handles {test.Name} without an escaped UI exception" +
                     (escaped.Count == 0 ? "" : $": {escaped[0].GetType().Name}: {escaped[0].Message}"));
                 check(status.Text?.StartsWith("Could not open the help index:", StringComparison.Ordinal) == true, $"App preview Index reports {test.Name} in its native status line");
@@ -57,18 +75,19 @@ internal static class CorruptIndexPreviewChecks
             finally
             {
                 Application.ThreadException -= handler;
+                view.Browser.NavigationCompleted -= completed;
                 frame.Close();
             }
         }
     }
 
-    private static async Task Wait(Func<bool> condition)
+    private static async Task Wait(Func<bool> condition, Func<string> state)
     {
         for (int attempt = 0; attempt < 150; attempt++)
         {
             if (condition()) return;
             await Task.Delay(50);
         }
-        throw new TimeoutException("The corrupt preview Index did not reach an observable result.");
+        throw new TimeoutException("The corrupt preview Index did not reach an observable result. " + state());
     }
 }
