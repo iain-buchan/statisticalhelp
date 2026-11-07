@@ -1,10 +1,12 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/StatsDirectHelpEditor.App/StatsDirectHelpEditor.App.csproj" />
+    <Project Path="src/StatsDirectHelpEditor.Browser/StatsDirectHelpEditor.Browser.csproj" />
     <Project Path="src/StatsDirectHelpEditor.Cli/StatsDirectHelpEditor.Cli.csproj" />
     <Project Path="src/StatsDirectHelpEditor.Core/StatsDirectHelpEditor.Core.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/StatsDirectHelpEditor.TopicFormatChecks/StatsDirectHelpEditor.TopicFormatChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.ContentsNavigationChecks/StatsDirectHelpEditor.ContentsNavigationChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.DesktopDeliveryChecks/StatsDirectHelpEditor.DesktopDeliveryChecks.csproj" />
     <Project Path="tests/StatsDirectHelpEditor.DeliveryWindowsChecks/StatsDirectHelpEditor.DeliveryWindowsChecks.csproj" />

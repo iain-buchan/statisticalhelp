@@ -39,7 +39,7 @@ jobs:
       - name: Core, installed workspace and Git checks
         run: |
           Set-Location $env:HELP_REGRESSION_ROOT
-          foreach ($name in @('Checks','ContentsNavigationChecks','DesktopDeliveryChecks','PortabilityChecks','InstalledWorkspaceChecks','GitChecks','NestedGitChecks','PublishedContentChecks','HelpPublicationChecks','HeadlessChecks','NamespaceChecks','WebsiteZipChecks','WebsitePublishChecks','SearchReplaceChecks','EquationArtworkChecks','CssScoperChecks','DeepSourceChecks','PolishChecks','PolishTransportChecks','TutorAuthoringChecks','TutorBuiltinChecks','TutorResearchChecks')) {
+          foreach ($name in @('TopicFormatChecks','Checks','ContentsNavigationChecks','DesktopDeliveryChecks','PortabilityChecks','InstalledWorkspaceChecks','GitChecks','NestedGitChecks','PublishedContentChecks','HelpPublicationChecks','HeadlessChecks','NamespaceChecks','WebsiteZipChecks','WebsitePublishChecks','SearchReplaceChecks','EquationArtworkChecks','CssScoperChecks','DeepSourceChecks','PolishChecks','PolishTransportChecks','TutorAuthoringChecks','TutorBuiltinChecks','TutorResearchChecks')) {
             dotnet run --no-build -c Release --project "tests/StatsDirectHelpEditor.$name" -- $PWD.Path
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
