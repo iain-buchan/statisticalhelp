@@ -18,11 +18,12 @@ internal static class ViewerFiles
 """;
 
     private const string NavigationHtml = """
-<nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active" aria-pressed="true">Contents</button><button id="index-tab" aria-pressed="false">Index</button><button id="results-tab" aria-pressed="false">Search</button></nav><nav id="contents" aria-label="Contents"></nav><section id="keyword-index" aria-label="Keyword index" hidden><label for="index-filter">Type a keyword</label><input id="index-filter" aria-controls="index-entries" type="search" placeholder="Keyword or topic title" autocomplete="off"><p id="index-status" role="status" aria-live="polite"></p><ul id="index-entries" aria-label="Index entries"></ul></section>
+<nav class="tabs" aria-label="Help navigation"><button id="contents-tab" class="active" aria-pressed="true">Contents</button><button id="index-tab" aria-pressed="false">Index</button></nav><nav id="contents" aria-label="Contents"></nav><section id="keyword-index" aria-label="Keyword index" hidden><label for="index-filter">Type a keyword</label><input id="index-filter" aria-controls="index-entries" type="search" placeholder="Keyword or topic title" autocomplete="off"><p id="index-status" role="status" aria-live="polite"></p><ul id="index-entries" aria-label="Index entries"></ul></section>
 """;
 
     internal static string HtmlForAppearance(string key, string? logoPath, string? iconPath, bool desktop = false) => (key == "flare" ? FlareHtml : Html)
         .Replace("__HELP_NAVIGATION__", NavigationHtml, StringComparison.Ordinal)
+        .Replace("<html lang=\"en\"", "<html lang=\"en\" data-help-target=\"" + (desktop ? "desktop" : "public") + "\"", StringComparison.Ordinal)
         .Replace("__HELP_SKIN__", key, StringComparison.Ordinal)
         .Replace("__HELP_ICON__", IconLink(iconPath), StringComparison.Ordinal)
         .Replace("__HELP_DESKTOP_TITLE__", desktop ? "<strong class=\"desktop-help-title\">StatsDirect Help</strong>" : "", StringComparison.Ordinal)
@@ -246,7 +247,7 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
   }
   function scrollSelection() { const selected=document.getElementById('keyword-index')?.hidden===false?document.querySelector('#index-entries a.index-selected'):contents.querySelector('a.selected');if(selected?.offsetHeight)(selected.closest('li')||selected).scrollIntoView({block:'nearest',inline:'nearest'}); }
   const menu = document.getElementById('navigation-toggle'), shade = document.querySelector('.navigation-shade');
-  function navigation(open) { document.body.classList.toggle('navigation-open',open); if(menu)menu.setAttribute('aria-expanded',String(open)); if(shade)shade.hidden=!open;if(open)scrollSelection(); }
+  function navigation(open) { if(!open)saveNavigationState();document.body.classList.toggle('navigation-open',open); if(menu)menu.setAttribute('aria-expanded',String(open)); if(shade)shade.hidden=!open;if(open){if(navigationMode==='index')navigationPane.scrollTop=indexScroll;else scrollSelection();} }
   if(menu)menu.addEventListener('click',()=>navigation(!document.body.classList.contains('navigation-open')));
   if(shade)shade.addEventListener('click',()=>navigation(false));
   document.addEventListener('keydown',e=>{
@@ -264,17 +265,32 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
     e.preventDefault();
   });
   matchMedia('(max-width:1279px)').addEventListener('change',()=>navigation(false));
-  const tabs = [document.getElementById('contents-tab'), document.getElementById('index-tab'), document.getElementById('results-tab')];
+  const tabs = [document.getElementById('contents-tab'), document.getElementById('index-tab')];
   const keywordPanel=document.getElementById('keyword-index'), keywordFilter=document.getElementById('index-filter'), keywordList=document.getElementById('index-entries'), keywordStatus=document.getElementById('index-status');
+  const navigationPane=document.getElementById('help-navigation'), nativeDesktop=document.documentElement.dataset.helpTarget==='desktop', navigationKey='statsdirect-help-navigation:'+viewerRoot.href;
+  let navigationMode='contents', restoredSelection='', indexScroll=0, restoringNavigation=true;
+  if(!nativeDesktop)try {
+    const saved=JSON.parse(sessionStorage.getItem(navigationKey)||'null');
+    if(saved){navigationMode=saved.mode==='index'?'index':'contents';if(typeof saved.filter==='string')keywordFilter.value=saved.filter;if(typeof saved.selected==='string')restoredSelection=saved.selected;if(Number.isFinite(saved.scroll)&&saved.scroll>=0)indexScroll=saved.scroll;}
+  }catch{/* Storage can be unavailable for local files or browser privacy settings. */}
   let keywordRows=[], selectedKeyword=0, keywordEntries=null;
+  function saveNavigationState() {
+    if(nativeDesktop||restoringNavigation)return;
+    if(!keywordPanel.hidden&&navigationPane.getClientRects().length)indexScroll=navigationPane.scrollTop;
+    restoredSelection=keywordRows[selectedKeyword]?.dataset.indexKey||restoredSelection;
+    try{sessionStorage.setItem(navigationKey,JSON.stringify({mode:navigationMode,filter:keywordFilter.value,selected:restoredSelection,scroll:indexScroll}));}catch{/* Reading help does not require browser storage. */}
+  }
+  window.addEventListener('pagehide',saveNavigationState);
   let activeTopic=(articleMode?resolveTopic(location.href):null)||resolveTopic(document.documentElement.dataset.currentTopic||frame.getAttribute('src')||index.documents[0]?.url);
   function showPanel(mode) {
-    contents.hidden=mode==='index'||(!flare&&mode==='search');keywordPanel.hidden=mode!=='index';results.hidden=mode!=='search';
+    if(mode!=='search')navigationMode=mode;
+    const panel=mode==='search'&&flare?navigationMode:mode;
+    contents.hidden=panel!=='contents';keywordPanel.hidden=panel!=='index';results.hidden=mode!=='search';
     if(flare)frame.hidden=mode==='search';
-    tabs.forEach((tab,position)=>{const active=position===['contents','index','search'].indexOf(mode);tab.classList.toggle('active',active);tab.setAttribute('aria-pressed',String(active));});
+    tabs.forEach((tab,position)=>{const active=position===['contents','index'].indexOf(panel);tab.classList.toggle('active',active);tab.setAttribute('aria-pressed',String(active));});
     document.title=mode==='search'?'Search':activeTopic?.title||'StatsDirect Help';
   }
-  function showResults(on) { showPanel(on?'search':'contents'); }
+  function showResults(on) { if(on)saveNavigationState();showPanel(on?'search':navigationMode);if(navigationMode==='index'){renderKeywords();if(navigationPane.getClientRects().length)navigationPane.scrollTop=indexScroll;} }
   const keywordCollator=new Intl.Collator('en',{sensitivity:'base',numeric:true});
   const foldKeyword=value=>value.normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('en');
   function loadKeywords() {
@@ -300,18 +316,18 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
   function selectKeyword(position,focus=false) {
     selectedKeyword=Math.max(0,Math.min(position,keywordRows.length-1));
     keywordRows.forEach((row,i)=>{row.classList.toggle('index-selected',i===selectedKeyword);row.tabIndex=i===selectedKeyword?0:-1;});
-    if(focus&&keywordRows[selectedKeyword]){keywordRows[selectedKeyword].focus({preventScroll:true});keywordRows[selectedKeyword].scrollIntoView({block:'nearest'});}
+    if(focus&&keywordRows[selectedKeyword]){keywordRows[selectedKeyword].focus({preventScroll:true});keywordRows[selectedKeyword].scrollIntoView({block:'nearest'});saveNavigationState();}
   }
   function renderKeywords() {
-    const previous=keywordRows[selectedKeyword]?.dataset.link;
+    const previous=keywordRows[selectedKeyword]?.dataset.indexKey||restoredSelection;
     keywordList.replaceChildren();keywordRows=[];
     if(keywordEntries===null&&!loadKeywords())return;
     const query=foldKeyword(keywordFilter.value.trim()),matches=keywordEntries.filter(entry=>foldKeyword(entry.term+' '+entry.title).includes(query));
     keywordStatus.textContent=matches.length?`${matches.length} index entr${matches.length===1?'y':'ies'}`:query?'No matching keywords. Try fewer words or a topic title.':'No keywords have been authored for this help build.';
-    for(const entry of matches){const li=document.createElement('li'),link=makeLink(entry.label,entry.path);link.addEventListener('focus',()=>selectKeyword(keywordRows.indexOf(link)));li.append(link);keywordList.append(li);keywordRows.push(link);}
-    selectKeyword(Math.max(0,keywordRows.findIndex(row=>row.dataset.link===previous)));
+    for(const entry of matches){const li=document.createElement('li'),link=makeLink(entry.label,entry.path);link.dataset.indexKey=JSON.stringify([entry.path,entry.label]);link.addEventListener('focus',()=>{selectKeyword(keywordRows.indexOf(link));saveNavigationState();});li.append(link);keywordList.append(li);keywordRows.push(link);}
+    selectKeyword(Math.max(0,keywordRows.findIndex(row=>row.dataset.indexKey===previous)));
   }
-  keywordFilter.addEventListener('input',renderKeywords);
+  keywordFilter.addEventListener('input',()=>{renderKeywords();indexScroll=0;navigationPane.scrollTop=0;saveNavigationState();});
   keywordFilter.addEventListener('keydown',event=>{
     if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();selectKeyword(event.key==='ArrowUp'?keywordRows.length-1:selectedKeyword,true);}
     else if(event.key==='Enter'){event.preventDefault();keywordRows[selectedKeyword]?.click();}
@@ -329,9 +345,8 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
   contents.append(renderTree(tree));
   if(activeTopic)selectTopic(activeTopic.link);
   const home=document.querySelector('a.help-identity'),homeTopic=resolveTopic('contents.htm')||resolveTopic(index.documents[0]?.url);if(home&&homeTopic){home.href=homeTopic.url;home.addEventListener('click',e=>{if(articleMode||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();showResults(false);openTopic(homeTopic.link);});}
-  tabs[0].addEventListener('click',()=>{showResults(false);if(new URLSearchParams(location.hash.slice(1)).has('searchQuery'))history.replaceState(null,'',location.pathname+location.search);scrollSelection();});
-  tabs[1].addEventListener('click',()=>{showPanel('index');renderKeywords();keywordFilter.focus({preventScroll:true});keywordFilter.select();});
-  tabs[2].addEventListener('click',()=>{showResults(true);navigation(false);const search=document.getElementById('search');if(search?.getClientRects().length)search.focus({preventScroll:true});});
+  tabs[0].addEventListener('click',()=>{saveNavigationState();showPanel('contents');if(new URLSearchParams(location.hash.slice(1)).has('searchQuery'))history.replaceState(null,'',location.pathname+location.search);scrollSelection();saveNavigationState();});
+  tabs[1].addEventListener('click',()=>{showPanel('index');if(new URLSearchParams(location.hash.slice(1)).has('searchQuery'))history.replaceState(null,'',location.pathname+location.search);renderKeywords();navigationPane.scrollTop=indexScroll;keywordFilter.focus({preventScroll:true});keywordFilter.select();saveNavigationState();});
   function tokenize(value) { return value.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase().match(/[\p{L}\p{N}]+/gu)?.filter(x=>x.length>1||/^\d$/.test(x)) || []; }
   function search(query) {
     const tokens=[...new Set(tokenize(query))], scores=new Map(), hits=new Map();
@@ -348,6 +363,7 @@ html[data-help-skin] .tabs,html[data-help-skin] #keyword-index{display:none!impo
   window.StatsDirectHelp={search,openTopic};
   function readSearchHash(){const state=new URLSearchParams(location.hash.slice(1)),query=state.get('searchQuery'),topic=state.get('topic');if(query!==null){document.getElementById('search').value=query;search(query);}else{if(articleMode&&!topic){const current=resolveTopic(location.href);if(current){activeTopic=current;selectTopic(current.link);}}showResults(false);if(topic)openTopic(topic,null,false);}}
   window.addEventListener('hashchange',readSearchHash);readSearchHash();
+  restoringNavigation=false;
   if(!articleMode)frame.addEventListener('load',()=>{try{const current=resolveTopic(frame.contentWindow.location.href);if(current){activeTopic=current;selectTopic(current.link);if(results.hidden&&!new URLSearchParams(location.hash.slice(1)).has('searchQuery')){document.title=current.title;history.replaceState(null,'','#'+new URLSearchParams({topic:current.link}).toString());}frame.contentDocument.addEventListener('click',e=>{const a=e.target.closest?.('a[href]');if(!a||e.defaultPrevented||e.button!==0||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||a.target==='_blank'||a.closest('svg,math'))return;const target=resolveTopic(a.href);if(!target)return;e.preventDefault();openTopic(target.link);});}}catch{/* Local file browsers may isolate iframe documents; navigation still works. */}});
 })();
 """;

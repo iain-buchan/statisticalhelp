@@ -19,7 +19,8 @@ function buildFixtures(){
     const source=path.join(fixture,skin,'Source');
     write(source,'.statsdirect-help-editor.json','{}');
     write(source,'Project/TOCs/STATSDIRECT.fltoc','<CatapultToc><TocEntry Title="Home" Link="/Content/contents.htm"/><TocEntry Title="Methods" Link="/Content/nested/alpha.htm"><TocEntry Title="Nested beta" Link="/Content/nested/beta.htm"/><TocEntry Title="Other beta" Link="/Content/other/beta.htm"/></TocEntry></CatapultToc>');
-    write(source,'Content/contents.htm',pageSource('Home','<sdh:keyword term="Zulu; Shared; Cramér\'s V; &lt;img src=x onerror=alert(1)&gt;"/><p>Reader index fixture home.</p>'));
+    const scrollTerms=Array.from({length:60},(_,i)=>'Scroll fixture '+String(i+1).padStart(2,'0')).join('; ');
+    write(source,'Content/contents.htm',pageSource('Home',`<sdh:keyword term="Zulu; Shared; Cramér's V; &lt;img src=x onerror=alert(1)&gt;; ${scrollTerms}"/><p>Reader index fixture home.</p>`));
     write(source,'Content/nested/alpha.htm',pageSource('Alpha method','<sdh:keyword term="Shared; Alpha"/><p>Quartzforecast reader search fixture.</p>'));
     for(const name of ['nested/beta.htm','other/beta.htm'])write(source,'Content/'+name,pageSource('Same title','<sdh:keyword term="Duplicate"/><p>Separate authored keyword destination.</p>'));
     write(source,'Content/private.htm',pageSource('Private indexed topic','<sdh:keyword term="Unsearchable keyword"/><p>Privateprose search exclusion.</p>', 'sdh:searchable="false"'));
@@ -53,6 +54,11 @@ async function index(page){await openNavigation(page);await page.locator('#index
 async function snapshot(page){return page.evaluate(()=>({url:location.href,history:history.length,title:document.title,frame:document.getElementById('topic').getAttribute('src')}));}
 async function sameDocument(page,before){const after=await snapshot(page);return before.url===after.url&&before.history===after.history&&before.frame===after.frame;}
 async function entries(page){return page.locator('#index-entries a[data-link]').evaluateAll(links=>links.map(a=>({label:a.textContent,path:a.dataset.link})));}
+async function retainedIndex(page,filter){
+  await openNavigation(page);
+  return await page.locator('#index-tab').getAttribute('aria-pressed')==='true'&&await page.locator('#keyword-index').isVisible()&&!await page.locator('#contents').isVisible()&&await page.locator('#index-filter').inputValue()===filter;
+}
+async function selectedEntry(page){return page.locator('#index-entries a.index-selected').evaluateAll(links=>links.map(a=>({label:a.textContent,path:a.dataset.link})));}
 let browser,browserServer;
 (async()=>{try{
   buildFixtures();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
@@ -73,7 +79,7 @@ let browser,browserServer;
       page.on('pageerror',error=>errors.push(build.name+': '+error.message));
       const label=build.name+' '+width+'px';
       await page.goto(origin+build.url+'index.html');await ready(page);await openNavigation(page);
-      record(label+' exposes Contents, Index and Search in navigation order',JSON.stringify(await page.locator('.tabs button').allTextContents())===JSON.stringify(['Contents','Index','Search']));
+      record(label+' exposes only Contents and Index selectors',JSON.stringify(await page.locator('.tabs button').allTextContents())===JSON.stringify(['Contents','Index'])&&await page.locator('#results-tab').count()===0);
       const start=await snapshot(page);await index(page);
       record(label+' switches to Index without changing topic, URL or history',await sameDocument(page,start)&&await page.locator('#keyword-index').isVisible()&&!await page.locator('#contents').isVisible()&&!await page.locator('#results').isVisible());
       const all=await entries(page),ordered=[...all].sort((a,b)=>a.label.localeCompare(b.label,'en',{sensitivity:'base'})||a.path.localeCompare(b.path,'en',{sensitivity:'base'}));
@@ -98,25 +104,44 @@ let browser,browserServer;
       record(label+' row arrows change selection without opening its topic',await sameDocument(page,start)&&await page.evaluate(()=>document.activeElement.matches('#index-entries a[data-link="contents.htm"]')));
       await page.keyboard.press('ArrowUp');await page.keyboard.press('Enter');await topicIs(page,'nested/alpha.htm',build.skin);
       record(label+' Enter on a keyboard-selected row opens the selected destination',await page.locator('#topic').isVisible());
-      await index(page);
+      record(label+' keyboard activation retains Index and its filter',await retainedIndex(page,'Shared')&&(await selectedEntry(page)).some(e=>e.path==='nested/alpha.htm'));
+      await page.reload();await topicIs(page,'nested/alpha.htm',build.skin);
+      record(label+' reload restores Index mode, filter and selected destination',await retainedIndex(page,'Shared')&&(await selectedEntry(page)).some(e=>e.path==='nested/alpha.htm'));
       await page.locator('#index-filter').fill('Unsearchable keyword');await page.locator('#index-filter').press('Enter');await topicIs(page,'private.htm',build.skin);
       record(label+' Enter opens a keyword on a search-excluded topic in the same viewer',await page.locator('#topic').isVisible());
-      await index(page);await page.locator('#index-filter').fill('Shared');
+      record(label+' search-excluded keyword activation also retains Index and filter',await retainedIndex(page,'Unsearchable keyword'));
+      await page.goBack();await topicIs(page,'nested/alpha.htm',build.skin);
+      record(label+' Back retains the current Index filter while restoring the earlier topic',await retainedIndex(page,'Unsearchable keyword'));
+      await page.goForward();await topicIs(page,'private.htm',build.skin);
+      record(label+' Forward retains Index while restoring its destination topic',await retainedIndex(page,'Unsearchable keyword'));
+      await page.locator('#index-filter').fill('Shared');
       await page.locator('#index-entries a[data-link="nested/alpha.htm"]').click();await topicIs(page,'nested/alpha.htm',build.skin);
       record(label+' clicking a keyword opens its destination and marks Contents',await page.locator('#contents a[aria-current="page"]').getAttribute('data-link')==='nested/alpha.htm');
-      await index(page);await page.locator('#index-filter').fill('Shared');const retained=await snapshot(page);
+      record(label+' mouse activation retains Index and its filter',await retainedIndex(page,'Shared'));
+      await page.locator('#index-entries a[data-link="contents.htm"]').click();await topicIs(page,'contents.htm',build.skin);
+      record(label+' selecting a later matching row retains that exact selection',await retainedIndex(page,'Shared')&&(await selectedEntry(page)).some(e=>e.path==='contents.htm'));
+      await page.reload();await topicIs(page,'contents.htm',build.skin);
+      record(label+' reload retains a later matching row instead of selecting the first',await retainedIndex(page,'Shared')&&(await selectedEntry(page)).some(e=>e.path==='contents.htm'));
+      const retained=await snapshot(page);
       await page.locator('#contents-tab').click();
       record(label+' Contents replaces Index and retains the selected topic',await page.locator('#contents').isVisible()&&!await page.locator('#keyword-index').isVisible()&&await sameDocument(page,retained));
+      await page.reload();await topicIs(page,'contents.htm',build.skin);await openNavigation(page);
+      record(label+' an explicit Contents choice remains selected after reload',await page.locator('#contents-tab').getAttribute('aria-pressed')==='true'&&await page.locator('#contents').isVisible()&&!await page.locator('#keyword-index').isVisible());
       await page.locator('#index-tab').click();
       record(label+' reopening Index retains its filter',await page.locator('#index-filter').inputValue()==='Shared');
-      await page.locator('#results-tab').click();
-      record(label+' Search replaces Index without navigation',!await page.locator('#keyword-index').isVisible()&&await page.locator('#results').isVisible()&&await sameDocument(page,retained));
-      if(width<1280&&build.skin==='flare')record(label+' Search closes the drawer and exposes its search field',await page.evaluate(()=>{const box=document.getElementById('search').getBoundingClientRect();return !document.body.classList.contains('navigation-open')&&box.width>0&&box.left>=0&&box.right<=innerWidth&&box.top>=0&&box.bottom<=innerHeight;}));
+      if(width<1280&&build.skin==='flare')await page.keyboard.press('Escape');
       const query=page.locator('#search');await query.fill('quartzforecast');await query.press('Enter');await page.locator('#results a[data-link="nested/alpha.htm"]').waitFor();
+      record(label+' full-text search still works through its form without a Search tab',await page.locator('#results').isVisible());
       await openNavigation(page);await page.locator('#index-tab').click();
       record(label+' Index remains usable after full-text search',await page.locator('#keyword-index').isVisible()&&!await page.locator('#results').isVisible());
       await page.locator('#contents-tab').click();
-      record(label+' Contents restores the reading topic after search and Index',await page.locator('#topic').isVisible()&&await page.locator('#contents a[aria-current="page"]').getAttribute('data-link')==='nested/alpha.htm');
+      record(label+' Contents restores the reading topic after search and Index',await page.locator('#topic').isVisible()&&await page.locator('#contents a[aria-current="page"]').getAttribute('data-link')==='contents.htm');
+      await index(page);await page.locator('#index-filter').fill('Scroll fixture');await page.locator('#index-filter').press('ArrowDown');await page.keyboard.press('End');
+      const scrollBefore=await page.locator('aside').evaluate(el=>el.scrollTop),selectedBefore=await selectedEntry(page);
+      record(label+' scrolling to a later keyword does not navigate',selectedBefore.length===1&&selectedBefore[0].label==='Scroll fixture 60'&&scrollBefore>0);
+      await page.reload();await topicIs(page,'contents.htm',build.skin);await openNavigation(page);
+      const scrollAfter=await page.locator('aside').evaluate(el=>el.scrollTop);
+      record(label+' reload preserves Index filter, exact row and scrolling position',await retainedIndex(page,'Scroll fixture')&&JSON.stringify(await selectedEntry(page))===JSON.stringify(selectedBefore)&&Math.abs(scrollAfter-scrollBefore)<3,{scrollBefore,scrollAfter,selectedBefore,selectedAfter:await selectedEntry(page)});
       if(width<1280&&build.skin==='flare'){
         await index(page);await page.locator('#index-filter').focus();const beforeEscape=await snapshot(page);await page.keyboard.press('Escape');
         record(label+' Escape closes the compact Index navigation without changing the topic',!await page.locator('body').evaluate(e=>e.classList.contains('navigation-open'))&&await sameDocument(page,beforeEscape)&&await page.evaluate(()=>document.activeElement.id==='navigation-toggle'));
@@ -131,7 +156,34 @@ let browser,browserServer;
     record(build.name+' direct file:// '+entry+' loads the keyword index from its help root',await page.locator('#index-entries a[data-link]').count()===2);
     await page.locator('#index-entries a[data-link="other/beta.htm"]').click();await topicIs(page,'other/beta.htm',build.skin);
     record(build.name+' file:// keyword navigation stays in its local help tree',new URL(page.url()).protocol==='file:'&&await page.locator('#topic').isVisible());
+    record(build.name+' file:// topic activation retains Index, filter and destination',await retainedIndex(page,'Duplicate')&&(await selectedEntry(page)).some(e=>e.path==='other/beta.htm'));
+    await page.reload();await topicIs(page,'other/beta.htm',build.skin);
+    record(build.name+' nested file:// reload restores the same Index context',await retainedIndex(page,'Duplicate')&&(await selectedEntry(page)).some(e=>e.path==='other/beta.htm'));
     await offline.close();
+  }
+  const publicBuilds=builds.filter(build=>build.target==='Public'),isolationContext=await browser.newContext({viewport:{width:1280,height:900}}),isolated=await isolationContext.newPage();
+  await isolated.goto(origin+publicBuilds[0].url+'index.html');await ready(isolated);await index(isolated);await isolated.locator('#index-filter').fill('Duplicate');
+  // Use the same browsing session: separate tabs normally get independent
+  // sessionStorage and would not detect a key that accidentally ignores root.
+  await isolated.goto(origin+publicBuilds[1].url+'index.html');await ready(isolated);
+  record('A second help root does not inherit another root\'s Index mode or filter',await isolated.locator('#contents-tab').getAttribute('aria-pressed')==='true'&&await isolated.locator('#index-filter').inputValue()==='');
+  await index(isolated);await isolated.locator('#index-filter').fill('Shared');
+  await isolated.goto(origin+publicBuilds[0].url+'index.html');await ready(isolated);
+  record('Returning to the first help root restores its own filter',await retainedIndex(isolated,'Duplicate'));
+  await isolated.goto(origin+publicBuilds[1].url+'index.html');await ready(isolated);
+  record('Returning to the second help root restores its separate filter',await retainedIndex(isolated,'Shared'));
+  await isolationContext.close();
+  for(const build of publicBuilds){
+    const context=await browser.newContext({viewport:{width:1280,height:900}});
+    await context.addInitScript(()=>Object.defineProperty(window,'sessionStorage',{get(){throw new DOMException('Storage disabled by test','SecurityError');}}));
+    const page=await context.newPage();page.on('pageerror',error=>errors.push(build.name+' blocked storage: '+error.message));
+    await page.goto(origin+build.url+'index.html');await ready(page);await index(page);await page.locator('#index-filter').fill('Cramer');
+    record(build.name+' Index filtering works when session storage is blocked',await page.locator('#index-entries a[data-link]').count()===1);
+    await page.locator('#index-filter').fill('Unsearchable keyword');await page.locator('#index-filter').press('Enter');await topicIs(page,'private.htm',build.skin);
+    record(build.name+' Index activation works without persistent browser storage',await page.locator('#topic').isVisible());
+    await openNavigation(page);await page.locator('#contents-tab').click();const query=page.locator('#search');await query.fill('quartzforecast');await query.press('Enter');await page.locator('#results a[data-link="nested/alpha.htm"]').waitFor();
+    record(build.name+' full-text search also works with storage blocked',await page.locator('#results').isVisible());
+    await context.close();
   }
   const build=builds.find(b=>b.skin==='flare'&&b.target==='Public');
   const corrupt=[
