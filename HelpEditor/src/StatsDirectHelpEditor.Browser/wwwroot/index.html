@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>StatsDirect Help Editor</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%239bd9cf'/%3E%3Cpath d='M16 6 26 25H6Z' fill='none' stroke='%23153d3e' stroke-width='2.5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#page-workspace">Skip to page editor</a>
+  <header class="masthead">
+    <div class="identity">
+      <span class="brand-mark" aria-hidden="true">Δ</span>
+      <div><span class="product-name">StatsDirect</span><h1>Help Editor</h1></div>
+    </div>
+    <div class="workspace-label">Browser workspace</div>
+  </header>
+  <div class="app-layout">
+    <aside class="topic-sidebar" aria-labelledby="topics-heading">
+      <h2 id="topics-heading">Topics</h2>
+      <label for="topic-search">Find a topic</label>
+      <input type="search" id="topic-search" placeholder="Search titles or paths" autocomplete="off" spellcheck="false">
+      <p class="topic-count" id="topic-count" role="status">Loading topics…</p>
+      <nav class="topic-nav" aria-label="Help topics">
+        <ul id="topic-list"></ul>
+      </nav>
+    </aside>
+    <main class="workspace" id="page-workspace" tabindex="-1">
+      <div class="workspace-toolbar" aria-label="Page actions">
+        <div class="page-label">
+          <h2 id="page-title">Choose a topic</h2>
+          <p id="page-state" aria-live="polite">Scratch workspace</p>
+        </div>
+        <div class="commands">
+          <button id="preview-website" type="button" disabled>Preview website</button>
+          <button id="preview-desktop" type="button" disabled>Preview app help</button>
+          <button id="save" type="button" class="primary" disabled>Save page</button>
+        </div>
+      </div>
+      <div class="notices" aria-label="Editor status">
+        <p id="status" role="status">Starting the local editor…</p>
+        <p id="error" role="alert" hidden></p>
+        <a id="external-link" target="_blank" rel="noopener noreferrer" hidden>Open external link</a>
+      </div>
+      <div class="document-grid" id="document-grid">
+        <section class="editor-pane" aria-label="Topic editor">
+          <iframe id="editor-frame" title="Visual and HTML source editor"></iframe>
+        </section>
+        <section id="preview-pane" class="preview-pane" aria-labelledby="preview-title" hidden>
+          <div class="preview-toolbar">
+            <div><h2 id="preview-title">Generated preview</h2><p id="preview-details"></p></div>
+            <button id="close-preview" type="button">Close preview</button>
+          </div>
+          <iframe id="preview-frame" title="Generated help preview" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe>
+        </section>
+      </div>
+    </main>
+  </div>
+  <dialog id="unsaved-dialog" aria-labelledby="unsaved-heading" aria-describedby="unsaved-message">
+    <form method="dialog">
+      <h2 id="unsaved-heading">Save your changes?</h2>
+      <p id="unsaved-message"></p>
+      <div class="dialog-actions">
+        <button value="cancel" autofocus>Keep editing</button>
+        <button value="discard">Discard changes</button>
+        <button value="save" class="primary">Save and open</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

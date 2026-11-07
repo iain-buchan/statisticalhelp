@@ -26,9 +26,10 @@ MathfieldElement.soundsDirectory = null;
 const equationDialog=$('equation-dialog'),equationKeyboard=$('equation-keyboard'),mathKeyboard=window.mathVirtualKeyboard;
 // A modal dialog makes the rest of the document inert. The shared MathLive
 // keyboard must be inside that dialog, rather than behind its backdrop.
-mathKeyboard.container=equationKeyboard;
+const dockEquationKeyboard = window.top === window.self;
+if (dockEquationKeyboard) mathKeyboard.container=equationKeyboard;
 function resizeEquationKeyboard(){
-  const height=equationDialog.open&&mathKeyboard.visible?Math.ceil(mathKeyboard.boundingRect.height):0;
+  const height=dockEquationKeyboard&&equationDialog.open&&mathKeyboard.visible?Math.ceil(mathKeyboard.boundingRect.height):0;
   if(equationKeyboard.style.height!==height+'px')equationKeyboard.style.height=height+'px';
   equationKeyboard.classList.toggle('is-visible',height>0);
 }
@@ -659,8 +660,10 @@ function markSaved(authoritativeSource){
   }
   if(source.value!==text){
     const old=source.value,selection={start:source.selectionStart,end:source.selectionEnd,direction:source.selectionDirection,top:source.scrollTop,left:source.scrollLeft};
-    const position=sourcePositionMapper(old,text);
-    source.value=text;source.setSelectionRange(position(selection.start),position(selection.end),selection.direction);source.scrollTop=selection.top;source.scrollLeft=selection.left;
+    source.value=text;
+    // Textareas normalize newlines on assignment; map against the displayed buffer.
+    const position=sourcePositionMapper(old,source.value);
+    source.setSelectionRange(position(selection.start),position(selection.end),selection.direction);source.scrollTop=selection.top;source.scrollLeft=selection.left;
   }
   state.savedSource=text;state.baseSource=text;state.xml=xml;state.visualDirty=false;state.sourceDirty=false;setDirty(false);captureHistory();
   const title=findTitle(state.xml)?.textContent.trim();if(title){state.title=title;$('page-title').textContent=title;}
