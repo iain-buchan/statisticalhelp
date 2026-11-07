@@ -24,12 +24,18 @@ function check(target,name,passed,detail){checks.push({target,name,passed:!!pass
   const result=await page.locator('#results a[data-link]').first().evaluate(a=>({url:a.dataset.link,title:a.textContent}));
   check(target,'A normal search still finds the paired t-test topic',/paired.*t.test/i.test(result.title)&&index.urls.includes(result.url),result);
   await page.locator('#results a[data-link]').first().click();
-  await page.waitForURL(url=>url.pathname.endsWith('/'+result.url),{waitUntil:'domcontentloaded'});
+  // Public file readers retain their document and route through #topic when
+  // file:// history cannot change the pathname. Wait for the selected body.
+  await page.waitForFunction(topic=>document.documentElement.dataset.currentTopic===topic&&
+    !!document.querySelector('#help-topic-body h1')&&!document.querySelector('#topic[aria-busy="true"]'),result.url);
   const heading=page.locator('#help-topic-body h1');
   await heading.waitFor();
   const currentTopic=await page.locator('html').getAttribute('data-current-topic');
-  check(target,'Search opens the correct topic after index IDs change',currentTopic===result.url&&await heading.count()===1,
-    {expectedTopic:result.url,currentTopic});
+  const selectedUrl=new URL(page.url()),routedTopic=new URLSearchParams(selectedUrl.hash.slice(1)).get('topic');
+  const correctRoute=routedTopic?routedTopic===result.url:decodeURIComponent(selectedUrl.pathname).endsWith('/'+result.url);
+  const headingText=await heading.innerText();
+  check(target,'Search opens the correct topic after index IDs change',currentTopic===result.url&&correctRoute&&await heading.count()===1&&/paired.*t.test/i.test(headingText),
+    {expectedTopic:result.url,currentTopic,headingText,url:page.url(),routedTopic});
   await page.goto(pathToFileURL(path.join(folder,'menus/about.htm')).href,{waitUntil:'load'});
   await page.locator('#help-topic-body').waitFor();
   check(target,'The excluded topic is still a readable help page',await page.locator('#help-topic-body').innerText().then(text=>text.length>100));

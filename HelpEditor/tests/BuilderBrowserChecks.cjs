@@ -1,6 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {chromium}=require('./browser-runtime.cjs');
-const root=path.resolve(__dirname,'..'),build=process.env.STATSDIRECT_HELP_BUILD||path.join(root,'Build','Desktop'),evidence=path.join(root,'evidence');
+const root=path.resolve(__dirname,'..'),build=path.resolve(process.env.STATSDIRECT_HELP_BUILD||path.join(root,'Build','Desktop')),evidence=path.join(root,'evidence');
 const target=(process.env.STATSDIRECT_HELP_TARGET||path.basename(build)).toLowerCase().replace(/[^a-z0-9_-]/g,'-');
 const mime={'.html':'text/html','.htm':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.gif':'image/gif','.jpg':'image/jpeg','.woff':'font/woff','.woff2':'font/woff2','.json':'application/json','.xml':'application/xml'};
 const pages=[];function walk(dir){for(const item of fs.readdirSync(dir,{withFileTypes:true})){const full=path.join(dir,item.name);if(item.isDirectory())walk(full);else if(/\.htm$/i.test(item.name))pages.push(path.relative(build,full).replaceAll('\\','/'));}}walk(build);

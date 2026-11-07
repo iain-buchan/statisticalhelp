@@ -203,7 +203,9 @@ internal static class Program
         var until = DateTime.UtcNow.AddSeconds(15);
         while (DateTime.UtcNow < until)
         {
-            foreach (var frame in frames.ToArray().Reverse()) try { if (JsonSerializer.Deserialize<bool>(await frame.ExecuteScriptAsync("Boolean(" + expression + ")"))) return true; } catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException) { }
+            // WebView2 can return JSON null while a frame is navigating or being
+            // discarded. Keep polling live frames for the requested condition.
+            foreach (var frame in frames.ToArray().Reverse()) try { if (JsonSerializer.Deserialize<bool?>(await frame.ExecuteScriptAsync("Boolean(" + expression + ")")) == true) return true; } catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException) { }
             await Task.Delay(40);
         }
         return false;
@@ -211,7 +213,7 @@ internal static class Program
     private static async Task ClickContents(string path)
     {
         string script = "(()=>{const a=Array.from(document.querySelectorAll('#contents a')).find(a=>a.dataset.link===" + JsonSerializer.Serialize(path) + ");if(!a)return false;a.click();return true;})()";
-        foreach (var frame in frames.ToArray().Reverse()) try { if (JsonSerializer.Deserialize<bool>(await frame.ExecuteScriptAsync(script))) return; } catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException) { }
+        foreach (var frame in frames.ToArray().Reverse()) try { if (JsonSerializer.Deserialize<bool?>(await frame.ExecuteScriptAsync(script)) == true) return; } catch (Exception ex) when (ex is InvalidOperationException or System.Runtime.InteropServices.COMException) { }
         throw new InvalidOperationException("Generated Contents link was not available.");
     }
     private static async Task Until(Func<bool> condition) { var until = DateTime.UtcNow.AddSeconds(20); while (!condition()) { if (DateTime.UtcNow >= until) throw new TimeoutException("Native navigation did not complete."); await Task.Delay(40); } }
