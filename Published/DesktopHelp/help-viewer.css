@@ -100,3 +100,14 @@ html[data-help-skin="flare"] .navigation-shade{display:none}
  html[data-help-skin="flare"] #results{padding:13.333333px}
 }
 @media print{body{color:#000;background:#fff}header,aside,html[data-help-skin="flare"] header,html[data-help-skin="flare"] aside,html[data-help-skin="flare"] .navigation-shade{display:none!important}main{display:block;height:auto}#topic{display:block;width:100%;height:100vh;background:#fff}html[data-help-skin="flare"] body{overflow:visible}html[data-help-skin="flare"] article#topic{height:auto;overflow:visible}html[data-help-skin="flare"] body.navigation-open main{transform:none}}
+:root[data-help-skin]{--help-height:0px}
+html[data-help-skin] > body > header,
+html[data-help-skin] > body > header > .help-identity,
+html[data-help-skin] #search-form{display:none}
+@media screen and (max-width:1279px){
+ :root[data-help-skin="flare"]{--help-height:32px}
+ html[data-help-skin="flare"] > body > header{display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;height:var(--help-height);padding:0 10px;background:var(--help-background);color:var(--help-text);border-bottom:1px solid var(--help-border)}
+ html[data-help-skin="flare"] .desktop-help-title{font-size:13px;white-space:nowrap}
+ html[data-help-skin="flare"] #navigation-toggle{position:static;width:auto;height:100%;padding:0;gap:6px;white-space:nowrap;background:none;color:var(--help-text)}
+ html[data-help-skin="flare"] #navigation-toggle svg{display:block;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5}
+}
