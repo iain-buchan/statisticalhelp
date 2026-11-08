@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.6 — 8 November 2026
+
+- The setup, installer and program files are signed by StatsDirect Limited through Microsoft Artifact Signing, which replaces the hardware-token certificate. The editor itself is unchanged from 1.0.5.
+- Release builds can sign through Artifact Signing (`Build-Installer.ps1 -ArtifactSigningMetadata ... -ArtifactSigningDlib ... -SignerIdentityEku ...`) as well as with a certificate in the Windows store. Each signature is checked for the publisher's identity EKU, since Artifact Signing's certificates change every few days.
+
 ## 1.0.5 — 7 November 2026
 
 - Website help has **Contents** and **Index** navigation alongside its search box. The authored keyword Index filters by keyword or topic title, supports keyboard navigation and multiple destinations, and works offline, including indexed pages excluded from full-text search. Topic navigation retains the chosen pane, Index filter, selection and scroll position for that help site. Desktop help retains its native toolbar controls.

@@ -41,7 +41,29 @@ For a signed release, first commit the reviewed source, then run:
 
 SignTool uses the certificate in the current user's Windows certificate store.
 A hardware token may ask its owner for a PIN in Windows; no password or PIN is
-passed on the command line. Application assemblies, MSI, Burn engine and final
+passed on the command line.
+
+To sign with Microsoft Artifact Signing instead (StatsDirect Limited's signing
+identity from November 2026), sign in to Azure CLI as an account holding the
+Artifact Signing Certificate Profile Signer role, then run:
+
+```powershell
+.\Build-Installer.ps1 -Version 1.0.6 -Sign `
+  -SignToolPath 'C:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\signtool.exe' `
+  -ArtifactSigningMetadata 'C:\path\to\metadata.json' `
+  -ArtifactSigningDlib 'C:\path\to\Microsoft.ArtifactSigning.Client\bin\x64\Azure.CodeSigning.Dlib.dll' `
+  -SignerIdentityEku '1.3.6.1.4.1.311.97.193316448.43470637.652969214.765913894'
+```
+
+The metadata file names the account endpoint, account and certificate profile
+(see the client package's `metadata.sample.json`); it holds no secret and stays
+outside the repository. Artifact Signing certificates last three days, so each
+signature is checked for the publisher's identity EKU, which every certificate
+issued for the validated identity carries, rather than for a thumbprint. The
+timestamp server defaults to `http://timestamp.acs.microsoft.com` in this mode,
+and SignTool must come from Windows SDK 10.0.22621.755 or later.
+
+In either mode, application assemblies, MSI, Burn engine and final
 bundle are timestamped and verified. The build fails if any required signature
 is missing, belongs to another certificate or is not trusted.
 

@@ -6,7 +6,12 @@ param(
     [switch]$Sign,
     [string]$SignToolPath,
     [string]$CertificateThumbprint = $env:STATSDIRECT_SIGNING_THUMBPRINT,
-    [string]$TimestampUrl = 'http://timestamp.globalsign.com/tsa/r6advanced1'
+    [string]$TimestampUrl = 'http://timestamp.globalsign.com/tsa/r6advanced1',
+    # Microsoft Artifact Signing instead of a certificate in the Windows store: the metadata file naming the account and
+    # certificate profile, the Artifact Signing client's Azure.CodeSigning.Dlib.dll, and the publisher's identity EKU.
+    [string]$ArtifactSigningMetadata,
+    [string]$ArtifactSigningDlib,
+    [string]$SignerIdentityEku
 )
 $ErrorActionPreference = 'Stop'
 if (-not $Version) {
@@ -56,10 +61,33 @@ if ($Sign) {
     if (-not $SignToolPath) { $found = Get-Command signtool.exe -ErrorAction SilentlyContinue; if ($found) { $SignToolPath = $found.Source } }
     if (-not $SignToolPath -or -not (Test-Path -LiteralPath $SignToolPath -PathType Leaf)) { throw 'Pass -SignToolPath pointing to the Windows SDK SignTool executable.' }
     $SignToolPath = [IO.Path]::GetFullPath($SignToolPath)
-    $CertificateThumbprint = ($CertificateThumbprint -replace '\s', '').ToUpperInvariant()
-    if ($CertificateThumbprint -notmatch '^[0-9A-F]{40}$') { throw 'Pass the code-signing certificate SHA1 thumbprint with -CertificateThumbprint.' }
-    $certificate = Get-Item -LiteralPath ('Cert:\CurrentUser\My\' + $CertificateThumbprint) -ErrorAction SilentlyContinue
-    if (-not $certificate -or -not $certificate.HasPrivateKey -or $certificate.NotAfter -le (Get-Date)) { throw 'The selected current-user signing certificate is unavailable or expired.' }
+    if ($ArtifactSigningMetadata) {
+        # Artifact Signing: no certificate in the Windows store; the plug-in signs with the profile's current short-lived
+        # certificate after Azure sign-in, and each signature is checked for the publisher's identity EKU.
+        foreach ($required in @($ArtifactSigningMetadata, $ArtifactSigningDlib)) {
+            if (-not $required -or -not (Test-Path -LiteralPath $required -PathType Leaf)) { throw 'Pass -ArtifactSigningMetadata and -ArtifactSigningDlib with existing files.' }
+        }
+        $ArtifactSigningMetadata = [IO.Path]::GetFullPath($ArtifactSigningMetadata)
+        $ArtifactSigningDlib = [IO.Path]::GetFullPath($ArtifactSigningDlib)
+        if ($SignerIdentityEku -notmatch '^1\.3\.6\.1\.4\.1\.311\.97\.\d+(\.\d+)+$') { throw 'Pass the publisher identity EKU (1.3.6.1.4.1.311.97....) with -SignerIdentityEku.' }
+        $toolVersion = [version](Get-Item -LiteralPath $SignToolPath).VersionInfo.ProductVersion
+        if ($toolVersion -lt [version]'10.0.22621.755') { throw 'Artifact Signing needs SignTool from Windows SDK 10.0.22621.755 or later.' }
+        if (-not $PSBoundParameters.ContainsKey('TimestampUrl')) { $TimestampUrl = 'http://timestamp.acs.microsoft.com' }
+    }
+    else {
+        $CertificateThumbprint = ($CertificateThumbprint -replace '\s', '').ToUpperInvariant()
+        if ($CertificateThumbprint -notmatch '^[0-9A-F]{40}$') { throw 'Pass the code-signing certificate SHA1 thumbprint with -CertificateThumbprint.' }
+        $certificate = Get-Item -LiteralPath ('Cert:\CurrentUser\My\' + $CertificateThumbprint) -ErrorAction SilentlyContinue
+        if (-not $certificate -or -not $certificate.HasPrivateKey -or $certificate.NotAfter -le (Get-Date)) { throw 'The selected current-user signing certificate is unavailable or expired.' }
+    }
+}
+function Test-ExpectedSigner($Signature) {
+    if (-not $Signature -or $Signature.Status -ne 'Valid' -or -not $Signature.SignerCertificate -or -not $Signature.TimeStamperCertificate) { return $false }
+    if ($ArtifactSigningMetadata) {
+        $usages = @($Signature.SignerCertificate.Extensions | Where-Object { $_.Oid.Value -eq '2.5.29.37' } | ForEach-Object { $_.EnhancedKeyUsages } | ForEach-Object { $_.Value })
+        return $usages -contains $SignerIdentityEku
+    }
+    return $Signature.SignerCertificate.Thumbprint -eq $CertificateThumbprint
 }
 New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
 $work = Join-Path $OutputDirectory ('.work\' + $Version + '-' + [Guid]::NewGuid().ToString('N'))
@@ -133,14 +161,23 @@ $prerequisite = Join-Path $work 'MicrosoftEdgeWebview2Setup.exe'
 Invoke-WebRequest -Uri 'https://go.microsoft.com/fwlink/p/?LinkId=2124703' -OutFile $prerequisite -UseBasicParsing
 $microsoftSignature = Get-AuthenticodeSignature -LiteralPath $prerequisite
 if ($microsoftSignature.Status -ne 'Valid' -or $microsoftSignature.SignerCertificate.Subject -notmatch '(^|,\s*)O=Microsoft Corporation(,|$)') { throw 'The WebView2 bootstrapper does not have a valid Microsoft signature.' }
-$environmentNames = @('SD_HELP_SIGNTOOL_PATH', 'SD_HELP_CERT_THUMBPRINT', 'SD_HELP_TIMESTAMP_URL')
+$environmentNames = @('SD_HELP_SIGNTOOL_PATH', 'SD_HELP_CERT_THUMBPRINT', 'SD_HELP_TIMESTAMP_URL', 'SD_HELP_SIGNING_DLIB', 'SD_HELP_SIGNING_METADATA', 'SD_HELP_SIGNER_IDENTITY_EKU')
 $oldEnvironment = @{}
 foreach ($name in $environmentNames) { $oldEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 try {
     if ($Sign) {
         $env:SD_HELP_SIGNTOOL_PATH = $SignToolPath
-        $env:SD_HELP_CERT_THUMBPRINT = $CertificateThumbprint
         $env:SD_HELP_TIMESTAMP_URL = $TimestampUrl
+        if ($ArtifactSigningMetadata) {
+            $env:SD_HELP_CERT_THUMBPRINT = $null
+            $env:SD_HELP_SIGNING_DLIB = $ArtifactSigningDlib
+            $env:SD_HELP_SIGNING_METADATA = $ArtifactSigningMetadata
+            $env:SD_HELP_SIGNER_IDENTITY_EKU = $SignerIdentityEku
+        }
+        else {
+            $env:SD_HELP_CERT_THUMBPRINT = $CertificateThumbprint
+            foreach ($name in @('SD_HELP_SIGNING_DLIB', 'SD_HELP_SIGNING_METADATA', 'SD_HELP_SIGNER_IDENTITY_EKU')) { [Environment]::SetEnvironmentVariable($name, $null, 'Process') }
+        }
         foreach ($relative in @('StatsDirectHelpEditor.exe', 'StatsDirectHelpEditor.dll', 'StatsDirectHelpEditor.Core.dll', 'Builder\StatsDirectHelpBuilder.exe', 'Builder\StatsDirectHelpBuilder.dll', 'Builder\StatsDirectHelpEditor.Core.dll')) { & (Join-Path $root 'installer\Sign-Artifact.ps1') -Path (Join-Path $payload $relative) }
     }
     $authoring = Join-Path $work 'Payload.wxs'
@@ -154,7 +191,7 @@ try {
         $file = Join-Path $products $name
         if (-not (Test-Path -LiteralPath $file -PathType Leaf)) { throw ('Installer build did not produce ' + $name) }
         $signature = Get-AuthenticodeSignature -LiteralPath $file
-        if ($Sign -and ($signature.Status -ne 'Valid' -or $signature.SignerCertificate.Thumbprint -ne $CertificateThumbprint -or -not $signature.TimeStamperCertificate)) { throw ('Final installer signature did not verify: ' + $name) }
+        if ($Sign -and -not (Test-ExpectedSigner $signature)) { throw ('Final installer signature did not verify: ' + $name) }
         $artifacts += [pscustomobject]@{file=$name; bytes=(Get-Item -LiteralPath $file).Length; sha256=(Hash $file); signatureStatus=[string]$signature.Status; signer=if($signature.SignerCertificate){$signature.SignerCertificate.Subject}else{$null}; timestamped=[bool]$signature.TimeStamperCertificate}
     }
     $receipt = [ordered]@{schemaVersion=1; product='StatsDirect Help Editor'; version=$Version; builtAtUtc=[DateTimeOffset]::UtcNow.ToString('o'); sourceRepository='https://github.com/iain-buchan/statisticalhelp'; sourceCommit=$gitCommit; sourceInventorySha256=$inventoryHash; signed=[bool]$Sign; wixVersion='7.0.1'; scope='perUser'; prerequisites=[ordered]@{WebView2BootstrapperSha256=(Hash $prerequisite); publisher=$microsoftSignature.SignerCertificate.Subject; signatureStatus=[string]$microsoftSignature.Status; internetNeededOnlyIfWebView2Missing=$true; bundledDotNetRuntime=$true}; artifacts=$artifacts; published=$false}
