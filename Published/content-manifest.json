@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "format": "statsdirect-published-content-v1",
   "publisher": "StatsDirectHelpEditor",
-  "publicationId": "1a419fb0-c8c1-4bf1-b951-115c7fc53f54",
-  "publishedAtUtc": "2026-11-07T10:49:10.7983315+00:00",
+  "publicationId": "224fb782-a4fb-4acd-b9ac-fcdae2ecbd9f",
+  "publishedAtUtc": "2026-11-08T13:08:19.3497282+00:00",
   "producer": {
-    "version": "1.0.0\u002B12ce0c3dca7b4a03fb679f88907ee56cdf3e58f7",
-    "sourceCommit": "12ce0c3dca7b4a03fb679f88907ee56cdf3e58f7"
+    "version": "1.0.5\u002Bc1fc29119cc5634033da1359afe5872a0c7becef",
+    "sourceCommit": "c1fc29119cc5634033da1359afe5872a0c7becef"
   },
-  "helpSourceSha256": "33e836987d12d7a8fd9fc58a5b630a98cce20d06729313bba989fec4e37a651d",
+  "helpSourceSha256": "2d70e55173cb5d2584dd6ec4c89071e944e7a22b669db3e03e644d7968c1a1df",
   "tutorSourceSha256": "618185dfe8d9ddcaa2ad7b25652d0ff54237b3050c8120d08f8bded33085f77e",
   "artifacts": {
     "website": {
@@ -28,7 +28,7 @@
         {
           "path": ".statsdirect-help-website.json",
           "bytes": 120255,
-          "sha256": "03cafeb18a868e04036853721b34f8ca40a0bb624670dbd8886b551eff45c174"
+          "sha256": "6f4ca91aaee3968dff4a54adc535bb14f43512011b945e3caf22b2a4d2dbbb7b"
         },
         {
           "path": "Data/Alias.xml",
@@ -298,7 +298,7 @@
         {
           "path": "build-info.json",
           "bytes": 219,
-          "sha256": "faff2ae695230064d07b3f6ef3069634fee29626563b173f7cd1b77fee0af3c4"
+          "sha256": "58f531fc959b05934cd0eecf78322f6c9ec4fa552f1fbf9c2efaee377e39a6f6"
         },
         {
           "path": "chi_square_tests/22.htm",
@@ -3493,7 +3493,7 @@
         {
           "path": "resources/help-editor-runtime/publication.json",
           "bytes": 132,
-          "sha256": "86ccc8e312bb74d93747a96aca08b81de76e56ab02ab48b75f203913135b95d1"
+          "sha256": "f0d3621036c72ba457e3cd77cb3a59c96a0a83e954c4218e2c0717e1d8228141"
         },
         {
           "path": "resources/help-editor-runtime/topic.css",
@@ -4421,7 +4421,7 @@
         {
           "path": ".statsdirect-desktop-help.json",
           "bytes": 221739,
-          "sha256": "ef1c89ab5f6bc877f551284cd1868ebeecf1605a4067718416f073e0591f5e95"
+          "sha256": "f8d454dcc31b639ec95aada73956644a25207142bef7d7fe9fdde247f53b1258"
         },
         {
           "path": ".statsdirect-help-output.json",
@@ -4696,7 +4696,7 @@
         {
           "path": "build-info.json",
           "bytes": 220,
-          "sha256": "360bd7c80e6ce9511018d2698441046b250e1a569d08887e2f68b15c334a0e95"
+          "sha256": "71ed32565f9dde061fe44ac8aa7aabbe1271b63bbec21739dadd1f0afad5494d"
         },
         {
           "path": "chi_square_tests/22.htm",
@@ -7891,7 +7891,7 @@
         {
           "path": "resources/help-editor-runtime/publication.json",
           "bytes": 133,
-          "sha256": "4e6416798d7641cdee75b7149d1bff2561876653edef2c1c0c804d90b071beda"
+          "sha256": "348b4334ff2e105c4869469d4234c3a16ec35327731ebfdf5244a22f718acea6"
         },
         {
           "path": "resources/help-editor-runtime/topic.css",
@@ -8835,7 +8835,7 @@
         {
           "path": "manifest.json",
           "bytes": 11591,
-          "sha256": "ec8a4d7363a7d04a43028442292b4f7d31465a84d54ee351af9f67f8cf260629"
+          "sha256": "8b359a37bb9353e60cf7c664c141facf1f0ef4c5b3be4da4be5f30697dadf62d"
         },
         {
           "path": "questions.json",
