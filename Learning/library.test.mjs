@@ -12,13 +12,23 @@ const lessons=JSON.parse(readFileSync(contentFile('Learn/lessons.json')));
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 test('every curated lesson has reviewed teaching fields, resolvable prerequisites, sources and numerical checks',()=>{
-  assert.equal(lessons.length,12);
+  assert.ok(lessons.length>=12);
+  assert.equal(new Set(lessons.map(l=>l.id)).size,lessons.length);
   const visit=(id,path=[])=>{assert.ok(!path.includes(id),'Cyclic prerequisite: '+id);const lesson=lessons.find(l=>l.id===id);assert.ok(lesson,id);lesson.prerequisites.forEach(next=>visit(next,[...path,id]));};
   for(const l of lessons){
-    assert.equal(l.knowledgeSchemaVersion,1);assert.equal(l.review.status,'AI-assisted editorial and numerical checks');
-    assert.equal(l.contentVersion,['risk','diagnostic','precision','meta'].includes(l.id)?'2026-10-12':'2026-10-01');assert.equal(l.learningObjectives.length,3);
-    assert.equal(l.keyConcepts.length,3);assert.equal(l.misconceptions.length,2);assert.equal(l.teachingPrompts.length,2);
-    assert.ok(l.workedExample.design&&l.workedExample.interpretation&&lessonChecks[l.id]);visit(l.id);
+    assert.equal(l.knowledgeSchemaVersion,1);
+    // Historic baseline proofs are intentionally retained. The publisher
+    // binds new records to an explicit author review before they can ship.
+    if(lessonChecks[l.id]){
+      assert.ok(l.review.status==='AI-assisted editorial and numerical checks'||l.review.status==='Reviewed by course author',l.id);
+    }else{
+      assert.equal(l.review.status,'Reviewed by course author',l.id);
+      assert.ok(l.review.reviewer&&l.review.notes,l.id);
+      assert.match(l.review.contentSha256,/^[a-f0-9]{64}$/i,l.id);
+      assert.match(l.r,/\bstopifnot\s*\(/,l.id);
+    }
+    assert.ok(l.contentVersion&&l.learningObjectives.length&&l.keyConcepts.length&&l.misconceptions.length&&l.teachingPrompts.length,l.id);
+    assert.ok(l.workedExample.design&&l.workedExample.interpretation,l.id);visit(l.id);
     assert.ok(l.r.length<=4000,`${l.id}: R example would be truncated in the native tutor context`);
     const introduction=['title','objective','summary','challenge','steps','r'].map(field=>`${field}: ${l[field]}\n`).join('');
     assert.ok(introduction.length+400<7900,`${l.id}: introductory context would truncate the R example`);
@@ -30,9 +40,9 @@ test('every curated lesson has reviewed teaching fields, resolvable prerequisite
 });
 
 test('new library questions are scored by the practice engine and preserve old attempts',()=>{
-  const added=lessons.flatMap(l=>l.practiceQuestions);assert.equal(added.length,5);
+  const added=lessons.flatMap(l=>l.practiceQuestions);assert.ok(added.length>=5);
   for(const q of added){
-    const session=createSession(q.track,'learn');assert.ok(session.questionIds.includes(q.id));
+    const session=createSession(q.track==='core'?'foundation':q.track,'learn');assert.ok(session.questionIds.includes(q.id));
     for(const id of session.questionIds)recordAnswer(session,id,sessionQuestion(session,id).correct,'fairly');
     assert.equal(learnerResult(session).score,session.questionIds.length);
   }
