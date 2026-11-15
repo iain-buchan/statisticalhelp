@@ -4,7 +4,7 @@ import {conversationReading,restoreConversationReading} from './conversation-vie
 import {questions,tracks} from './bank.mjs';
 import {createSession,recordAnswer,recordAssistance,learnerResult,sessionQuestion} from './quiz.mjs';
 import {newPortfolio,restorePortfolio,transcriptEntry,reviewRecord,reviewText,practiceContext,stages} from './portfolio.mjs';
-import {examSources,communicationPrompt} from './exam-sources.mjs';
+import {examGroups,communicationPrompt} from './exam-sources.mjs';
 import {labelStudyGuides,ensureLessonPrompt,guidePresentation,conversationForTutor,lessonConversation,visibleLessonConversation,optionLetters,awaitingAnswer} from './lesson-context.mjs';
 import lessons from '../Content/Learn/lessons.json';
 import contract from './host-contract.json' with {type:'json'};
@@ -165,7 +165,7 @@ function renderOptions(){
   $('applyOptions').onclick=()=>{activity('Updated learning options');navigate('study');};
 }
 function renderSources(){
-  $('main').innerHTML=`<div class="eyebrow">EXAMINATION EXAMPLES</div><h1>Learn from the way questions are asked</h1><p class="subtle">Published examples inform our choice of topics and question styles. Our practice questions use original wording and fictional data; they are not endorsed by the examining bodies.</p><section class="card">${examSources.map(source=>`<div class="review-line"><h2><a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.title)} ↗</a></h2><p>${esc(source.note)}</p></div>`).join('')}</section><section class="card"><h2>Practise explaining a result</h2><p>For public-health examinations, build the ability to discuss evidence with a colleague or member of the public as well as answering knowledge questions. The tutor can role-play a fictional service manager and give formative feedback.</p><button id="communication" class="primary">Prepare a conversation exercise</button></section>`;
+  $('main').innerHTML=`<div class="eyebrow">EXAMINATION EXAMPLES</div><h1>Find sample questions and study guidance</h1><p class="subtle">Choose the published specification or sample questions for your exam and sitting. Our practice questions use original wording and fictional data; they are not endorsed by the examining bodies.</p>${examGroups.map(group=>`<details class="card"><summary>${esc(group.title)}</summary>${group.sources.map(source=>`<div class="review-line"><h2><a href="${esc(source.url)}" target="_blank" rel="noopener">${esc(source.title)} ↗</a></h2><p>${esc(source.note)}</p></div>`).join('')}</details>`).join('')}<section class="card"><h2>Practise explaining a result</h2><p>For public-health examinations, build the ability to discuss evidence with a colleague or member of the public as well as answering knowledge questions. The tutor can role-play a fictional service manager and give formative feedback.</p><button id="communication" class="primary">Prepare a conversation exercise</button></section>`;
   $('communication').onclick=()=>{state.draft=communicationPrompt;state.lesson='precision';navigate('study');};
 }
 function updatePreview(){$('recordPreview').textContent=reviewText(reviewRecord(state));$('consent').checked=false;$('emailRecord').disabled=true;}

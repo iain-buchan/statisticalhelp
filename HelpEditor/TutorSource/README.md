@@ -7,6 +7,10 @@ feedback and editorial references. Original upstream files are retained in
 `Baseline`; `provenance.json` records their hashes and source revision. These
 MIT-licensed teaching drafts are not official examination items.
 
+## Biostatistics expansion for the next shared publication
+
+Open [biostatistics-course.json](biostatistics-course.json) in the authoring editor. It preserves the original lessons, pathways and item identities and adds 19 lessons and 57 original questions. Use the [coverage and review guide](biostatistics-coverage.md) to check the UK and US source mapping and the publication steps. Select this saved course explicitly when preparing the next shared Mac and Windows publication.
+
 Open the working copy in the Help Editor's tutor authoring window. Add or revise
 lessons, exercises, source notes and MCQs; keep one best answer and explain the
 distractors. Use the research/review workflow to gather sources and check the
