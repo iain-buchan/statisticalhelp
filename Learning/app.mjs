@@ -35,10 +35,21 @@ function save(){if(!loaded)return;state.updatedAt=new Date().toISOString();revis
 function activity(text){state.activities.push({at:new Date().toISOString(),text});save();}
 function teachingSupport(){if(state.quiz?.mode==='learn'&&!state.quiz.completedAt)recordAssistance(state.quiz,state.quiz.questionIds[state.quiz.answers.length],'explanations');}
 function welcome(){if(!state.conversation.length)transcriptEntry(state,'assistant','Welcome. We can start with a clinical, service or research question, work through an example in StatsDirect, then connect each step to R when you are ready.\n\nFirst, tell me the population and question you want to understand. Are you describing what happens, predicting an outcome, or asking whether something causes it?','Study guide');}
-function updatePracticeCount() {
-  const count = state.quiz?.questionIds.length ?? (
-    courseQuestions(coursePack).length || questions.filter(q => q.track === state.profile || q.track === 'core').length
-  );
+function practiceQuestionSet(source) {
+  const quiz = state.quiz;
+  if (quiz) {
+    const title = quiz.course?.title ?? (quiz.questionSet === 'all' ? 'All questions' : tracks[quiz.track].title);
+    return {title, count: quiz.questionIds.length};
+  }
+  const providerCount = coursePack?.questions?.length ?? 0;
+  if (providerCount && (source === undefined || source === 'course')) {
+    return {title: coursePack.title, count: providerCount};
+  }
+  if (source === 'all') return {title: 'All questions', count: questions.length};
+  const count = questions.filter(q => q.track === state.profile || q.track === 'core').length;
+  return {title: tracks[state.profile].title, count};
+}
+function updatePracticeCount({count} = practiceQuestionSet()) {
   $('practiceNav').querySelector('span').textContent = count;
 }
 function render(){
@@ -119,10 +130,45 @@ function send(){
   const entry=transcriptEntry(state,'user',text,'Learner',{lessonId:lesson().id,lessonTitle:lesson().title});state.draft='';pending=crypto.randomUUID();streamedText='';save();render();
   post({action:'ask',id:pending,userMessageID:entry.id,lesson:lesson().id,profile:tracks[state.profile].title,stage:stages[state.stage],practiceContext:practiceContext(state),learningGoals:state.learning,messages:conversationForTutor(state)});
 }
-function startQuiz(mode,provider=false){if(pending||state.quiz&&!state.quiz.completedAt)return;if(state.quiz)state.attempts.push(state.quiz);state.quiz=createSession(state.profile,mode,crypto.randomUUID(),provider?{version:coursePack.version,questions:courseQuestions(coursePack),course:{key:courseKey(coursePack),title:coursePack.title,version:coursePack.version,provider:coursePack.provider.name}}:null);feedback=null;state.view='practice';activity(`Started ${mode==='test'?'independent':'supported'} practice for ${tracks[state.profile].title}`);render();}
+function startQuiz(mode, source) {
+  if (pending || (state.quiz && !state.quiz.completedAt)) return;
+  const provider = source === 'course' ? {
+    version: coursePack.version,
+    questions: courseQuestions(coursePack),
+    course: {key: courseKey(coursePack), title: coursePack.title, version: coursePack.version, provider: coursePack.provider.name}
+  } : null;
+  const quiz = createSession(state.profile, mode, crypto.randomUUID(), provider, source === 'all');
+  if (state.quiz) state.attempts.push(state.quiz);
+  state.quiz = quiz;
+  feedback = null;
+  state.view = 'practice';
+  activity(`Started ${mode === 'test' ? 'independent' : 'supported'} practice for ${tracks[state.profile].title}`);
+  render();
+}
 function renderPractice(){const qz=state.quiz;
-  $('main').innerHTML=`<div class="eyebrow">PRACTICE WITH PURPOSE</div><h1>Put your understanding to work</h1><p class="subtle"><span id="questionSetSummary">${esc(qz?.course?.title||(!qz&&courseQuestions(coursePack).length?coursePack.title:tracks[state.profile].title))} · ${qz?.questionIds.length??(courseQuestions(coursePack).length||questions.filter(q=>q.track===state.profile||q.track==='core').length)} questions.</span> These short practice sets do not establish exam readiness.</p>`;
-  if(!qz){$('main').insertAdjacentHTML('beforeend',`<section class="card"><h2>Choose how to practise</h2><p>Supported practice gives feedback after each answer. Independent practice pauses the tutor and withholds feedback until the end.</p>${courseQuestions(coursePack).length?`<label for="questionSource">Question set</label><select id="questionSource"><option value="course">${esc(coursePack.title)} — provider questions</option><option value="builtin">StatsDirect foundation / pathway questions</option></select>`:''}<div class="actions"><button class="primary" id="supported">Supported practice</button><button id="independent">Independent practice</button></div><p class="small">First answers are retained. Confidence and reasoning help you reflect; they do not alter the score.</p></section>`);$('supported').onclick=()=>startQuiz('learn',$('questionSource')?.value==='course');$('independent').onclick=()=>startQuiz('test',$('questionSource')?.value==='course');if($('questionSource'))$('questionSource').onchange=()=>{const course=$('questionSource').value==='course',count=course?courseQuestions(coursePack).length:questions.filter(q=>q.track===state.profile||q.track==='core').length;$('practiceNav').querySelector('span').textContent=count;$('questionSetSummary').textContent=(course?coursePack.title:tracks[state.profile].title)+' · '+count+' questions.';};return;}
+  const summary = ({title, count}) => `${title} · ${count} questions.`;
+  $('main').innerHTML=`<div class="eyebrow">PRACTICE WITH PURPOSE</div><h1>Put your understanding to work</h1><p class="subtle"><span id="questionSetSummary">${esc(summary(practiceQuestionSet()))}</span> These practice sets do not establish exam readiness.</p>`;
+  if (!qz) {
+    $('main').insertAdjacentHTML('beforeend', `<section class="card">
+      <h2>Choose how to practise</h2>
+      <p>Supported practice gives feedback after each answer. Independent practice pauses the tutor and withholds feedback until the end.</p>
+      <label for="questionSource">Question set</label><select id="questionSource">
+        ${coursePack?.questions?.length ? `<option value="course">${esc(coursePack.title)} — provider questions</option>` : ''}
+        <option value="builtin">My study context</option><option value="all">All questions</option>
+      </select>
+      <div class="actions"><button class="primary" id="supported">Supported practice</button><button id="independent">Independent practice</button></div>
+      <p class="small">First answers are retained. Confidence and reasoning help you reflect. They do not alter the score.</p>
+    </section>`);
+    const source = $('questionSource');
+    $('supported').onclick = () => startQuiz('learn', source.value);
+    $('independent').onclick = () => startQuiz('test', source.value);
+    source.onchange = () => {
+      const selected = practiceQuestionSet(source.value);
+      updatePracticeCount(selected);
+      $('questionSetSummary').textContent = summary(selected);
+    };
+    return;
+  }
   if(qz.completedAt){const r=learnerResult(qz);$('main').insertAdjacentHTML('beforeend',`<section class="card"><div class="eyebrow">${qz.mode==='test'?'INDEPENDENT PRACTICE · UNSUPERVISED':'SUPPORTED PRACTICE'}</div><p class="score">${r.score}<small> / ${r.total} · provisional score</small></p><p>${r.assisted?`${r.assisted} answer(s) used recorded teaching support.`:'No in-app assistance was recorded for these answers.'}</p><p class="small">This score has not been independently verified. Prior exposure or help outside this app cannot be ruled out.</p>${qz.answers.map(a=>{const q=sessionQuestion(qz,a.questionId);return `<div class="review-line"><strong>${a.correct?'✓':'↻'} ${esc(q.topic)}</strong><p>Your answer: ${a.choice} · Key: ${q.correct} · Confidence: ${esc(a.confidence)}${a.assisted?' · Assisted':''}</p><p>${esc(q.explanation)}</p></div>`;}).join('')}<div class="actions"><button id="reviewResults" class="primary">Review my learning record</button><button id="morePractice">New practice attempt</button><button id="discussResults">Discuss with the tutor</button></div></section>`);$('reviewResults').onclick=()=>navigate('record');$('morePractice').onclick=()=>{state.attempts.push(state.quiz);state.quiz=null;save();render();};$('discussResults').onclick=()=>{state.draft='Help me understand these provisional practice results and plan my next study step:\n'+qz.answers.map(a=>{const q=sessionQuestion(qz,a.questionId);return `${q.topic}: chose ${a.choice}; key ${q.correct}. ${q.explanation}`;}).join('\n');navigate('study');};return;}
   const q=sessionQuestion(qz,qz.questionIds[qz.answers.length]);
   $('main').insertAdjacentHTML('beforeend',`<section class="card"><div class="eyebrow">${qz.mode==='test'?'INDEPENDENT':'SUPPORTED'} · QUESTION ${qz.answers.length+1} OF ${qz.questionIds.length}</div>${qz.course?`<p class="small">${esc(qz.course.title)} · version ${esc(qz.course.version)}</p>`:''}<p class="question">${esc(q.stem)}</p>${learningTargetHTML(q,esc)}<form id="answerForm"><div class="options">${q.options.map(o=>`<label class="option"><input type="radio" name="answer" value="${o.id}" required><span><b>${o.id}.</b> ${esc(o.text)}</span></label>`).join('')}</div><div class="form-row"><div><label for="confidence">How confident are you?</label><select id="confidence" required><option value="">Choose confidence</option><option value="unsure">Unsure</option><option value="fairly">Fairly confident</option><option value="confident">Confident</option></select></div><div><label for="reasoning">Your reasoning (optional)</label><textarea id="reasoning" rows="2" maxlength="1500" placeholder="What led you to this answer?"></textarea></div></div><div class="actions"><button class="primary" type="submit">Submit first answer</button>${qz.mode==='learn'?'<button id="hint" type="button">Give me a hint</button><button id="teach" type="button">Explain the principle</button>':''}</div></form><div id="hintText" class="small"></div><button id="endPractice" class="link-button">End this attempt early</button></section><div id="feedback"></div>`);

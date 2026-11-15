@@ -18,7 +18,10 @@ test('provider lessons, submissions, keys and metadata survive changes to the ac
  assert.equal(record.courseWork[0].training.courseVersion,'1.1');assert.equal(record.training.courseVersion,'2');assert.match(text,/Same staff, repeated observations/);assert.match(text,/cannot isolate a causal effect/);
 });
 test('provider independent practice withholds keys and hints from exports until finished',()=>{
- const p=newPortfolio(),pack=fixture();p.quiz=createSession('foundation','test','test',{version:pack.version,questions:courseQuestions(pack)});
+ const p=newPortfolio(),pack=fixture(),providerQuestions=courseQuestions(pack);
+ p.quiz=createSession('foundation','test','test',{version:pack.version,questions:providerQuestions},true);
+ assert.deepEqual(p.quiz.questionIds,providerQuestions.map(q=>q.id));
+ assert.equal(p.quiz.questionSet,undefined);
  const q=p.quiz.questionSnapshots[0];assert.throws(()=>recordAssistance(p.quiz,q.id,'hints'));
  recordAnswer(p.quiz,q.id,'B','unsure');const record=reviewRecord(p);assert.equal(record.attempts[0].questionSnapshots[0].correct,undefined);assert.equal(record.attempts[0].answers[0].correct,undefined);
  assert.equal(restorePortfolio(p).quiz.questionSnapshots[0].correct,'A');
