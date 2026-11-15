@@ -3,11 +3,15 @@ import * as bank from './bank.mjs';
 const {bankVersion, questions, tracks} = bank;
 const bankPublication = Reflect.get(bank, 'bankPublication') ?? null; // Optional export (HOST-CONTRACT.md); read so that a bundler does not warn when a host's bank omits it.
 
-export function createSession(track, mode, id = crypto.randomUUID(), providerPack = null) {
+export function createSession(track, mode, id = crypto.randomUUID(), providerPack = null, allQuestions = false) {
   if (!tracks[track] || !['learn','test'].includes(mode)) throw new Error('Choose a valid learning path and mode.');
-  const selected=providerPack?.questions ?? questions.filter(q=>q.track===track || q.track==='core');
+  const useAllQuestions = allQuestions && !providerPack;
+  const selected = providerPack?.questions ?? (
+    useAllQuestions ? questions : questions.filter(q => q.track === track || q.track === 'core')
+  );
   if(!selected.length)throw Error('This course has no practice questions.');
   return {id, track, mode, bankVersion:providerPack?.version??bankVersion, contentPublication:providerPack?null:structuredClone(bankPublication), course:providerPack?.course??null, startedAt:new Date().toISOString(), completedAt:null,
+    ...(useAllQuestions ? {questionSet: 'all'} : {}),
     questionIds:selected.map(q=>q.id),
     questionSnapshots:structuredClone(selected), answers:[], hints:[], explanations:[], reflection:''};
 }

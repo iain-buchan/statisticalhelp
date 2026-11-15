@@ -6,6 +6,7 @@ import {questions,tracks} from './bank.mjs';
 import {lessonChecks} from './lesson-checks.mjs';
 import {createSession,recordAnswer,recordAssistance,learnerResult,sessionQuestion,reviewBundle} from './quiz.mjs';
 import {newPortfolio,restorePortfolio,reviewRecord,reviewText,transcriptEntry,practiceContext} from './portfolio.mjs';
+import {recordHTML} from './record-html.mjs';
 import {contentFile,runR} from './test-config.mjs';
 const lessons=JSON.parse(readFileSync(contentFile('Learn/lessons.json')));
 test('original questions map to established pathways, valid choices, real help and engine operations',()=>{
@@ -24,6 +25,27 @@ test('independent practice hides answer keys and feedback from record previews u
  assert.ok(r.attempts[0].questionSnapshots.every(q=>!q.correct&&!q.explanation&&q.options.every(o=>!o.feedback)));
  assert.equal(practiceContext(p),'');assert.match(reviewText(r),/withheld until the attempt ends/);
  p.quiz.endedAt=new Date().toISOString();r=reviewRecord(p);assert.equal(r.attempts[0].status,'ended early');assert.equal(r.attempts[0].questionSnapshots[0].correct,q.correct);
+});
+test('all questions survive reopening in authored order without changing the learner pathway', () => {
+ const state = newPortfolio();
+ state.profile = 'medicine';
+ state.quiz = createSession(state.profile, 'test', 'all-test', null, true);
+ const [first] = questions;
+ recordAnswer(state.quiz, first.id, first.correct, 'confident');
+
+ const restored = restorePortfolio(JSON.parse(JSON.stringify(state)));
+ assert.equal(restored.profile, 'medicine');
+ assert.equal(restored.quiz.track, 'medicine');
+ assert.equal(restored.quiz.questionSet, 'all');
+ assert.deepEqual(restored.quiz.questionIds, questions.map(q => q.id));
+ const inProgress = reviewRecord(restored);
+ assert.equal(inProgress.attempts[0].answers[0].correct, undefined);
+ assert.ok(inProgress.attempts[0].questionSnapshots.every(q => q.correct === undefined));
+ assert.match(reviewText(inProgress), /Question set: All questions/);
+ assert.match(recordHTML(inProgress), /<h3>All questions · in progress<\/h3>/);
+
+ for (const q of questions.slice(1)) recordAnswer(restored.quiz, q.id, q.correct, 'confident');
+ assert.equal(learnerResult(restored.quiz).score, questions.length);
 });
 test('provisional scores, support, first answers and full conversation survive reopen and export',()=>{
  const p=newPortfolio();p.quiz=createSession('researcher','learn');recordAssistance(p.quiz,p.quiz.questionIds[0],'hints');
