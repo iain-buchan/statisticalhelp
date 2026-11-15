@@ -217,7 +217,14 @@ public static class TutorBuiltinPublisher
         {
             var curated = new JsonObject(); foreach (string field in fields) if (lesson[field] != null) curated[field] = lesson[field]!.DeepClone();
             if (curated.ToJsonString().Length > 10000) curated.Remove("r");
-            if (curated.ToJsonString().Length > 10000) issues.Add(new("Error", "lessons." + S(lesson, "id"), "This lesson exceeds the application's 10,000-character tutor-context limit even without R code. Split it into smaller lessons or shorten learner-facing notes; content was not truncated."));
+            if (curated.ToJsonString().Length > 10000)
+            {
+                // Match the application's last fallback without altering the published lesson.
+                curated.Remove("review");
+                if (curated["practiceQuestions"] is JsonArray questions)
+                    foreach (var question in questions.OfType<JsonObject>()) question.Remove("review");
+            }
+            if (curated.ToJsonString().Length > 10000) issues.Add(new("Error", "lessons." + S(lesson, "id"), "This lesson exceeds the application's 10,000-character tutor-context limit even without R code or review metadata. Split it into smaller lessons or shorten learner-facing notes; content was not truncated."));
         }
     }
     private static void SynchroniseEmbeddedQuestions(JsonArray lessons, JsonArray questions, JsonObject baseline, List<TutorValidationIssue> issues)
