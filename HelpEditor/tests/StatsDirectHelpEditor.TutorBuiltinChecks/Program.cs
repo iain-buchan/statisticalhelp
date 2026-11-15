@@ -62,6 +62,21 @@ try
  broken=TutorCourseDocument.Create(course.Content);q=Item(broken,"questions","LIB-RATES-01");q["sourceIds"]=new JsonArray("missing-source");broken.Update("questions","LIB-RATES-01",q);broken.MarkReviewed("questions","LIB-RATES-01","Course author","Review fixture.");Reject(()=>TutorBuiltinPublisher.Publish(broken,output),"Dangling lesson-source reference is rejected");
  broken=TutorCourseDocument.Create(course.Content);l=Item(broken,"lessons","rates");var only=(JsonObject)l["practiceQuestions"]![0]!.DeepClone();only["id"]="embedded-only-new";l["practiceQuestions"]!.AsArray().Add(only);broken.Update("lessons","rates",l);broken.MarkReviewed("lessons","rates","Course author","Review fixture.");Reject(()=>TutorBuiltinPublisher.Publish(broken,output),"New embedded-only questions must first enter the editable flat question collection");
  var noBaseline=TutorCourseDocument.Create(starter.Content);noBaseline.Content["authoring"]!.AsObject().Remove("builtinBaseline");Reject(()=>TutorBuiltinPublisher.Publish(noBaseline,output),"A missing identified original baseline cannot be auto-trusted");
+ var reviewedContext = TutorCourseDocument.Create(course.Content);
+ var reviewedLesson = Item(reviewedContext, "lessons", "rates");
+ reviewedLesson["summary"] = S(reviewedLesson, "summary") + " Compare rates with matching time units.";
+ reviewedContext.Update("lessons", "rates", reviewedLesson);
+ string lessonReview = new('L', 10000), questionReview = new('Q', 10000);
+ reviewedContext.MarkReviewed("lessons", "rates", "Course author", lessonReview);
+ reviewedContext.MarkReviewed("questions", "LIB-RATES-01", "Course author", questionReview);
+ string reviewOutput = Path.Combine(fixture, "ReviewedContextOutput");
+ TutorBuiltinPublisher.Publish(reviewedContext, reviewOutput);
+ var publishedReviewedLesson = ReadJsonArray(Path.Combine(reviewOutput, "lessons.json")).Single(row => S(row, "id") == "rates");
+ var publishedReviewedQuestion = ReadJsonArray(Path.Combine(reviewOutput, "questions.json")).Single(row => S(row, "id") == "LIB-RATES-01");
+ var publishedEmbeddedQuestion = publishedReviewedLesson!["practiceQuestions"]!.AsArray().Single(row => S(row, "id") == "LIB-RATES-01");
+ Check(S(publishedReviewedLesson["review"], "notes") == lessonReview && S(publishedReviewedLesson, "r") == S(reviewedLesson, "r")
+     && S(publishedReviewedQuestion!["review"], "notes") == questionReview && JsonNode.DeepEquals(publishedReviewedQuestion, publishedEmbeddedQuestion),
+     "Long lesson and embedded-question reviews do not block publication or remove R and review data from the exported lesson");
  var oversized=TutorCourseDocument.Create(course.Content);l=Item(oversized,"lessons","paired");l["summary"]=new string('x',11000);oversized.Update("lessons","paired",l);oversized.MarkReviewed("lessons","paired","Course author","Reviewed wording.");Reject(()=>TutorBuiltinPublisher.Publish(oversized,output),"A lesson that exceeds the actual main-app tutor context bound cannot ship or be silently truncated");
  var evidenceStale=TutorCourseDocument.Create(course.Content);q=Item(evidenceStale,"questions","UG-SENS-01");q["verification"]=new JsonObject{["status"]="numerical-check-recorded",["passed"]=true};q["stem"]=S(q,"stem")+" New numerical setting.";evidenceStale.Update("questions","UG-SENS-01",q);evidenceStale.MarkReviewed("questions","UG-SENS-01","Course author","Educational review only.");Reject(()=>TutorBuiltinPublisher.Publish(evidenceStale,output),"Stale recorded numerical checks cannot be replaced by educational review alone");
  old=OutputHashes(output);using(var cancelled=new CancellationTokenSource()){cancelled.Cancel();Reject(()=>TutorBuiltinPublisher.Publish(course,output,cancelled.Token),"Cancelled source publication preserves the prior complete output");}Check(Same(output,old),"Cancellation does not mutate existing builtin files");
@@ -79,3 +94,4 @@ catch(Exception error){Check(false,"Unexpected builtin publication test error: "
 var report=new{passed=failed==0,failed,assertions=checks.Count,fixture,checkedAtUtc=DateTimeOffset.UtcNow,checks};
 File.WriteAllText(Path.Combine(evidence,"tutor-builtin-core-checks.json"),JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true}));Console.WriteLine(JsonSerializer.Serialize(new{report.passed,report.failed,report.assertions,report.fixture}));return failed==0?0:1;
 static JsonObject ReadJson(string text)=>JsonNode.Parse(text)!.AsObject();
+static JsonArray ReadJsonArray(string file) => JsonNode.Parse(File.ReadAllText(file))!.AsArray();

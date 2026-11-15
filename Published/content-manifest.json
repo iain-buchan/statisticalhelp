@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "format": "statsdirect-published-content-v1",
   "publisher": "StatsDirectHelpEditor",
-  "publicationId": "224fb782-a4fb-4acd-b9ac-fcdae2ecbd9f",
-  "publishedAtUtc": "2026-11-08T13:08:19.3497282+00:00",
+  "publicationId": "7fd9d645-ad32-4626-a3d2-e6ca9cf668e4",
+  "publishedAtUtc": "2026-11-15T16:16:14.6482711+00:00",
   "producer": {
-    "version": "1.0.5\u002Bc1fc29119cc5634033da1359afe5872a0c7becef",
-    "sourceCommit": "c1fc29119cc5634033da1359afe5872a0c7becef"
+    "version": "1.0.6\u002B420200394c62665834376f4069d1449762bf11ef",
+    "sourceCommit": "420200394c62665834376f4069d1449762bf11ef"
   },
   "helpSourceSha256": "2d70e55173cb5d2584dd6ec4c89071e944e7a22b669db3e03e644d7968c1a1df",
-  "tutorSourceSha256": "618185dfe8d9ddcaa2ad7b25652d0ff54237b3050c8120d08f8bded33085f77e",
+  "tutorSourceSha256": "3779ac876448b0fd685ba232f53c5da0801bce738d6ad8f23e2f997c657b0368",
   "artifacts": {
     "website": {
       "path": "Docs",
@@ -8819,28 +8819,28 @@
       "files": [
         {
           "path": "README.md",
-          "bytes": 699,
-          "sha256": "d1882f2adea41402cb0e661534eb8b4be05752ec60b9f5e3fe6598d2532e87b4"
+          "bytes": 691,
+          "sha256": "827c9ec40a349c7fe351c97b556fe32f6d8d379b35030800044f127513647ea1"
         },
         {
           "path": "bank.mjs",
-          "bytes": 69579,
-          "sha256": "6cf616442f5b385929f9ef087b9dec0341c501a5c7817542d8881a61cf67ca1a"
+          "bytes": 249443,
+          "sha256": "f7a8616ef676737e836ce85270309f8ee02e3cb8e90817c26f22b86c4b9a2800"
         },
         {
           "path": "lessons.json",
-          "bytes": 102470,
-          "sha256": "3615029651633d6bc5dac0a964d7c983abc967e88b3628e0ce103e860fe6efb0"
+          "bytes": 402609,
+          "sha256": "2b4c12848181707cc616bc1ec2ef6189aa40355bb3b3c657a7ef26a6c4808424"
         },
         {
           "path": "manifest.json",
-          "bytes": 11591,
-          "sha256": "8b359a37bb9353e60cf7c664c141facf1f0ef4c5b3be4da4be5f30697dadf62d"
+          "bytes": 43737,
+          "sha256": "7afdd1a7ce7bad7988fa0649bc8c6438ffe58dccc10d5db3042bde0726cfe010"
         },
         {
           "path": "questions.json",
-          "bytes": 68630,
-          "sha256": "1c2bc360afbd28c7bc45a5b5d8f93c5f480b71dd6e251fd317cc45ff58f4c4ad"
+          "bytes": 248479,
+          "sha256": "c3340cd7cd055ad399e499a18529c7f6b20c8c3a3ea040e0d5c18fd89ab0c5ea"
         },
         {
           "path": "tracks.json",
@@ -8848,10 +8848,10 @@
           "sha256": "4d55754bb0de19338402aca455546d77dad4c09eb7edefff70478d342c88bdd2"
         }
       ],
-      "lessonCount": 12,
-      "questionCount": 35,
+      "lessonCount": 37,
+      "questionCount": 108,
       "trackCount": 5,
-      "bankVersion": "learn-draft-2026-10-01",
+      "bankVersion": "2026-11-15-biostatistics-cc2d92a4dc90",
       "reviewProofBinding": "authoring-source-before-generated-sync-v1"
     }
   }
