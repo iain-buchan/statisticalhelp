@@ -35,17 +35,20 @@ function save(){if(!loaded)return;state.updatedAt=new Date().toISOString();revis
 function activity(text){state.activities.push({at:new Date().toISOString(),text});save();}
 function teachingSupport(){if(state.quiz?.mode==='learn'&&!state.quiz.completedAt)recordAssistance(state.quiz,state.quiz.questionIds[state.quiz.answers.length],'explanations');}
 function welcome(){if(!state.conversation.length)transcriptEntry(state,'assistant','Welcome. We can start with a clinical, service or research question, work through an example in StatsDirect, then connect each step to R when you are ready.\n\nFirst, tell me the population and question you want to understand. Are you describing what happens, predicting an outcome, or asking whether something causes it?','Study guide');}
+function updatePracticeCount() {
+  const count = state.quiz?.questionIds.length ?? (
+    courseQuestions(coursePack).length || questions.filter(q => q.track === state.profile || q.track === 'core').length
+  );
+  $('practiceNav').querySelector('span').textContent = count;
+}
 function render(){
   document.body.classList.toggle('study-mode',state.view==='study');
   document.body.classList.toggle('conversation-focus',state.view==='study'&&state.conversationFocus===true);
   $('workspaceContext').hidden=state.view!=='study';
-  $('profile').innerHTML=Object.entries(tracks).map(([id,t])=>`<option value="${id}" ${state.profile===id?'selected':''}>${esc(t.title)}</option>`).join('');
-  $('stage').innerHTML=Object.entries(stages).map(([id,t])=>`<option value="${id}" ${state.stage===id?'selected':''}>${esc(t)}</option>`).join('');
-  $('profile').disabled=Boolean(state.quiz&&!state.quiz.completedAt)||Boolean(pending);$('stage').disabled=independent()||Boolean(pending);
   $('lessons').innerHTML=allLessons().map((l,i)=>`<button data-lesson="${esc(l.id)}" class="${state.view==='study'&&state.lesson===l.id?'current':''}" ${independent()||pending?'disabled':''}>${i+1}. ${esc(l.title)}</button>`).join('');
   $('practiceNav').classList.toggle('current',state.view==='practice');$('practiceNav').disabled=Boolean(pending);$('recordNav').classList.toggle('current',state.view==='record');
   $('sourcesNav').classList.toggle('current',state.view==='sources');$('sourcesNav').disabled=independent();
-  $('practiceNav').querySelector('span').textContent=state.quiz?.questionIds.length??(courseQuestions(coursePack).length||questions.filter(q=>q.track===state.profile||q.track==='core').length);
+  updatePracticeCount();
   $('options').disabled=independent()||Boolean(pending);$('settings').disabled=Boolean(pending)||Boolean(settings.disabled);
   if(state.view==='options')renderOptions();else if(state.view==='sources')renderSources();else if(state.view==='practice')renderPractice();else if(state.view==='record')renderRecord();else renderStudy();
 }
@@ -142,13 +145,19 @@ function renderRecord(){const record=reviewRecord(state),text=reviewText(record)
 }
 function renderOptions(){
   const o=state.learning;
+  const profileDisabled = (state.quiz && !state.quiz.completedAt) || pending;
+  const stageDisabled = independent() || pending;
   $('main').innerHTML=`<div class="eyebrow">LEARNING OPTIONS</div><h1>Make learning work for you</h1>
   <section class="card"><h2>Your experience level and goals</h2>
-  <div class="form-row"><div><label for="statisticalSkills">Statistical skills</label><select id="statisticalSkills">${Object.entries(statisticalSkills).map(([id,title])=>`<option value="${id}" ${o.statisticalSkills===id?'selected':''}>${title}</option>`).join('')}</select></div><div><label for="optionStage">Confidence with R</label><select id="optionStage">${Object.entries(stages).map(([id,t])=>`<option value="${id}" ${state.stage===id?'selected':''}>${esc(t)}</option>`).join('')}</select></div></div>
+  <div class="form-row">
+    <div><label for="optionProfile">Professional or study context</label><select id="optionProfile" ${profileDisabled?'disabled':''}>${Object.entries(tracks).map(([id,t])=>`<option value="${id}" ${state.profile===id?'selected':''}>${esc(t.title)}</option>`).join('')}</select></div>
+    <div><label for="optionStage">Your next step with R</label><select id="optionStage" ${stageDisabled?'disabled':''}>${Object.entries(stages).map(([id,t])=>`<option value="${id}" ${state.stage===id?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
+  </div>
+  <p class="small">Your study context guides the examples and practice topics. Your statistical skills and next step with R guide the tutor’s explanations.</p>
+  <label for="statisticalSkills">Statistical skills</label><select id="statisticalSkills">${Object.entries(statisticalSkills).map(([id,title])=>`<option value="${id}" ${o.statisticalSkills===id?'selected':''}>${title}</option>`).join('')}</select>
   <label for="qualifications">Exams or courses you are studying for</label><textarea id="qualifications" rows="2" maxlength="1200" placeholder="For example: MRCP Part 1, MRCGP AKT, DFPH/MFPH, MPH, an undergraduate module, or a professional qualification">${esc(o.qualifications)}</textarea>
   <label for="needs">Your learning goals</label><textarea id="needs" rows="2" maxlength="2500" placeholder="What would you like to understand or be able to do?">${esc(o.needs)}</textarea>
   <details class="option-details"><summary>More learning preferences</summary>
-  <label for="optionProfile">Professional or study context</label><p class="small">Chooses examples and practice topics. Statistical skills sets the depth; confidence with R sets how much code the tutor explains.</p><select id="optionProfile" ${state.quiz&&!state.quiz.completedAt?'disabled':''}>${Object.entries(tracks).map(([id,t])=>`<option value="${id}" ${state.profile===id?'selected':''}>${esc(t.title)}</option>`).join('')}</select>
   <label for="priorKnowledge">Previous experience with statistics and epidemiology</label><textarea id="priorKnowledge" rows="2" maxlength="1500">${esc(o.priorKnowledge)}</textarea>
   <label for="targetDate">Target exam or completion date</label><input id="targetDate" type="date" value="${esc(o.targetDate)}">
   <p class="small">The target date helps the tutor suggest a study plan when you ask; it does not schedule reminders.</p><p class="small">Epidemiology and causal inference are included in every pathway.</p><div class="focus-grid">${[['epidemiology','Epidemiology and study design'],['causal','Causal inference and bias'],['interpretation','Interpreting results and uncertainty'],['methods','Choosing and checking statistical methods'],['r','R coding and reproducible analysis'],['communication','Explaining evidence to others']].map(([id,title])=>`<label class="option"><input type="checkbox" name="focus" value="${id}" ${o.focus.includes(id)?'checked':''} ${['epidemiology','causal'].includes(id)?'disabled':''}><span>${title}</span></label>`).join('')}</div>
@@ -156,8 +165,15 @@ function renderOptions(){
   ${trainingHTML(state,coursePack)}
   <div class="actions"><button id="applyOptions" class="primary">Return to learning</button><span id="optionSaved" class="small" role="status">Changes are saved as you edit.</span></div>`;
   for(const id of ['statisticalSkills','qualifications','needs','priorKnowledge','targetDate','style'])$(id).oninput=()=>{o[id]=$(id).value;save();};
-  $('optionProfile').onchange=()=>{state.profile=$('optionProfile').value;$('profile').value=state.profile;save();};
-  $('optionStage').onchange=()=>{state.stage=$('optionStage').value;$('stage').value=state.stage;save();};
+  $('optionProfile').onchange = event => {
+    state.profile = event.target.value;
+    activity('Learning pathway changed to ' + tracks[state.profile].title);
+    updatePracticeCount();
+  };
+  $('optionStage').onchange = event => {
+    state.stage = event.target.value;
+    activity('R learning stage changed to ' + stages[state.stage]);
+  };
   document.querySelectorAll('[name=focus]').forEach(el=>el.onchange=()=>{o.focus=Array.from(document.querySelectorAll('[name=focus]:checked')).map(x=>x.value);save();});
   $('exampleCourse').onclick=()=>{if(native)post({action:'exampleCourse'});else notice(`Open ${words().app} to load the example provider course.`);};
   $('importCourse').onclick=()=>{if(native)post({action:'importCoursePack'});else notice(`Course pack import is available in ${words().application}.`);};
@@ -171,11 +187,15 @@ function renderSources(){
 function updatePreview(){$('recordPreview').textContent=reviewText(reviewRecord(state));$('consent').checked=false;$('emailRecord').disabled=true;}
 function exportPayload(){const record=reviewRecord(state);return {record,text:reviewText(record),html:recordHTML(record)};}
 function exportRecord(){const payload=exportPayload();if(native)post({action:'export',format:$('recordFormat')?.value??'pdf',...payload});else{const url=URL.createObjectURL(new Blob([payload.text],{type:'text/plain'}));const a=document.createElement('a');a.href=url;a.download='StatsDirect-learning-record.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}}
-function navigate(view){if(independent()&&['study','options','sources'].includes(view))return;state.view=view;save();render();}
+function navigate(view) {
+  if (independent() && ['study', 'options', 'sources'].includes(view)) return;
+  state.view = view;
+  save();
+  render();
+  if (view === 'options') window.scrollTo(0, 0);
+}
 $('settings').onclick=configure;
 $('options').onclick=()=>navigate('options');
-$('profile').onchange=()=>{state.profile=$('profile').value;activity('Learning pathway changed to '+tracks[state.profile].title);render();};
-$('stage').onchange=()=>{state.stage=$('stage').value;activity('R learning stage changed to '+stages[state.stage]);render();};
 $('lessons').onclick=e=>{const button=e.target.closest('[data-lesson]');if(!button||button.disabled)return;teachingSupport();state.lessonDrafts??={};state.lessonDrafts[state.lesson]=state.draft;state.lesson=button.dataset.lesson;state.draft=state.lessonDrafts[state.lesson]??'';state.view='study';ensureLessonPrompt(state,allLessons());activity('Opened lesson: '+lesson().title);render();};
 $('sourcesNav').onclick=()=>navigate('sources');
 $('practiceNav').onclick=()=>navigate('practice');$('recordNav').onclick=()=>navigate('record');
