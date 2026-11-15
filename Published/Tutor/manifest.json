@@ -2,26 +2,26 @@
   "schemaVersion": 1,
   "format": "statsdirect-builtin-tutor",
   "publisher": "StatsDirectHelpEditor",
-  "publishedAtUtc": "2026-11-08T13:06:32.8609118\u002B00:00",
+  "publishedAtUtc": "2026-11-15T16:16:12.7074717\u002B00:00",
   "sourceCourseId": "statsdirect-health-foundations",
-  "sourceCourseVersion": "2026-11-03-draft",
-  "sourceCourseSha256": "7016e2f6c5e09fd7296bf116f6e059370249522686797f6f3b6b5fcde72e1f95",
-  "sourceFileName": "starter-course.json",
-  "sourceFileSha256": "618185dfe8d9ddcaa2ad7b25652d0ff54237b3050c8120d08f8bded33085f77e",
-  "bankVersion": "learn-draft-2026-10-01",
-  "lessonCount": 12,
-  "questionCount": 35,
+  "sourceCourseVersion": "2026-11-15-biostatistics",
+  "sourceCourseSha256": "b27b30aefa1142dc9409daa891549098c8462320df3be5e009cba3bfbc71cfc5",
+  "sourceFileName": "biostatistics-course.json",
+  "sourceFileSha256": "3779ac876448b0fd685ba232f53c5da0801bce738d6ad8f23e2f997c657b0368",
+  "bankVersion": "2026-11-15-biostatistics-cc2d92a4dc90",
+  "lessonCount": 37,
+  "questionCount": 108,
   "trackCount": 5,
   "files": [
     {
       "path": "lessons.json",
-      "sha256": "3615029651633d6bc5dac0a964d7c983abc967e88b3628e0ce103e860fe6efb0",
-      "bytes": 102470
+      "sha256": "2b4c12848181707cc616bc1ec2ef6189aa40355bb3b3c657a7ef26a6c4808424",
+      "bytes": 402609
     },
     {
       "path": "questions.json",
-      "sha256": "1c2bc360afbd28c7bc45a5b5d8f93c5f480b71dd6e251fd317cc45ff58f4c4ad",
-      "bytes": 68630
+      "sha256": "c3340cd7cd055ad399e499a18529c7f6b20c8c3a3ea040e0d5c18fd89ab0c5ea",
+      "bytes": 248479
     },
     {
       "path": "tracks.json",
@@ -30,11 +30,11 @@
     },
     {
       "path": "bank.mjs",
-      "sha256": "6cf616442f5b385929f9ef087b9dec0341c501a5c7817542d8881a61cf67ca1a",
-      "bytes": 69579
+      "sha256": "f7a8616ef676737e836ce85270309f8ee02e3cb8e90817c26f22b86c4b9a2800",
+      "bytes": 249443
     }
   ],
-  "readmeSha256": "d1882f2adea41402cb0e661534eb8b4be05752ec60b9f5e3fe6598d2532e87b4",
+  "readmeSha256": "827c9ec40a349c7fe351c97b556fe32f6d8d379b35030800044f127513647ea1",
   "reviewIssues": [
     {
       "severity": "Warning",
@@ -274,6 +274,791 @@
   ],
   "reviewWarningCount": 47,
   "reviewGatePassed": true,
-  "reviewedChangedItems": [],
+  "reviewedChangedItems": [
+    {
+      "kind": "lessons",
+      "id": "describe-data",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "5c972a5ea4936b6878aecb33ed39c9d4f7f42e8f512585d710e60f2d714c8c15"
+    },
+    {
+      "kind": "lessons",
+      "id": "choose-analysis",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "b715b3dd397b429b959a82b964959f5aacce6a259cbcf41491721977d810772c"
+    },
+    {
+      "kind": "lessons",
+      "id": "surveillance-outbreaks",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "2fd08883b5d5e8fef1e3e5d97e834959b1bd7b29595eaf4363bc567354272f05"
+    },
+    {
+      "kind": "lessons",
+      "id": "dependent-samples",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "a9ef3dfca5f915a9b527b545222ae0ea5d117c0cd95fde3bc9c1d57497444ded"
+    },
+    {
+      "kind": "lessons",
+      "id": "trial-power",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "fb492efde444ad96123a78a081614e9147cc1adbe5470fadf71498e157207fab"
+    },
+    {
+      "kind": "lessons",
+      "id": "trial-appraisal",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "619902aaff8f046bee136d3ba380d9e2ca9f6383b9eab5356b6176609dbbb459"
+    },
+    {
+      "kind": "lessons",
+      "id": "diagnostic-evidence",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "c447533738db60e2807ef954c6f78149eeb8599b66e7252e702a52640f8ec59c"
+    },
+    {
+      "kind": "lessons",
+      "id": "screening-programmes",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "f0e46c81ffb220d3e27a4aa14e1ca85e59d28ce92baf8f84238a14718ab03453"
+    },
+    {
+      "kind": "lessons",
+      "id": "survival-competing-risks",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "72d86c5dfc9f16192ddf249c1e88e11dbbcc63918ab75d4a5efcde3240b6b07b"
+    },
+    {
+      "kind": "lessons",
+      "id": "regression-models",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "1a9cfdeda9fc5a00cb8cdf76dcb4f83402964a869e46b0a49112ad2b3aec0cbf"
+    },
+    {
+      "kind": "lessons",
+      "id": "measurement-agreement",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "85e0b34d00d708604f9aa9cd5f42bec61ea8823439e086c2bca02dbd1d98ef5f"
+    },
+    {
+      "kind": "lessons",
+      "id": "audit-spc",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "71ded60b5abadc14b559917b91f5e735749c3a800efd921f439863c1834b94bb"
+    },
+    {
+      "kind": "lessons",
+      "id": "clinical-abstract",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "b71e37d442cd19cef5cd6d4089ee25ef7a55717c7160a105ce081fa35cade984"
+    },
+    {
+      "kind": "lessons",
+      "id": "causal-adjustment",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "9f659c042c4ace1b35c60d85d5edb3741a42dd19bd56bbd8a591e80ad2025710"
+    },
+    {
+      "kind": "lessons",
+      "id": "evidence-synthesis",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "f12ae2f09472e1a2419e0a06bf0ac7e3d6e5c5080e667243adee8b0071f831c8"
+    },
+    {
+      "kind": "lessons",
+      "id": "population-impact",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "946f0b835c1e2a0d697eedabd73df66efb59bd26cab4e6db04c646f09a00a6ed"
+    },
+    {
+      "kind": "lessons",
+      "id": "uncertainty-sensitivity",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "8407326ce9bf754654337f51caa85566a759afc0bedcf11a2b65d9a7dd731164"
+    },
+    {
+      "kind": "lessons",
+      "id": "study-designs",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "62b97f461c4934aa90729f8eee69a8a1e683fb215d0e92a13311142e0b0c53ec"
+    },
+    {
+      "kind": "lessons",
+      "id": "research-integrity",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "6a59f25bb9bca080e71484f24c8a6566f7cfbb52f344a48ab52316962156da8d"
+    },
+    {
+      "kind": "lessons",
+      "id": "independent-group-comparisons",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "425de5cb00f42452e8fd5b9917c7abcd594d513894567a54bee87156b92c8e8d"
+    },
+    {
+      "kind": "lessons",
+      "id": "repeated-condition-comparisons",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "feb805b8e52071824b5c5747ca3be577eaaca33d65b1e46215bbff27695e1b66"
+    },
+    {
+      "kind": "lessons",
+      "id": "complex-surveys",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "57e36e3c8b91219b9b3a70cf11afa285f9faafc2a20e99d23ac76eebd1773203"
+    },
+    {
+      "kind": "lessons",
+      "id": "interrupted-time-series",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "ec75f1983a2653595c4dc87ef314a8f99e7786296d31863296ec52de2e83aa45"
+    },
+    {
+      "kind": "lessons",
+      "id": "small-area-rates",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "1a800a281a33e809301e921e9fbae8d98e96a094a362bb34ebbb321bcdc61a8e"
+    },
+    {
+      "kind": "lessons",
+      "id": "health-economic-evaluation",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Worked explanation, bindings and R example checked.",
+      "contentSha256": "f8faba79fe22bd65b83dff855d39394600d47c71aacf3fa643daa2fe4f7404a1"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-DATA-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "451bf9f05bc2fda3f41fc32a14269968eac15a530b0b3b3edd821e8614cb5cd2"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-DATA-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "e3dd3027bb1ab015bf1dd759fa75a2e0af2e4d363a98964128cff6340df363a3"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-DATA-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "201335490035a2ba30828d67deb215af7dcb81e4357b7724473b9fdf099dc458"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-METHOD-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "4aebde7d85b881a2deb29858e0705d5ab257dbe843d4a5a34fec0647c12a6627"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-METHOD-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "74fadb48f17ca45af96e37625e9e48dcacd917bf294ad4740a6a0ffdea74a7ad"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-METHOD-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "57a614caa3b6ce466ccf19b7a9bca3f388e9beda5eec689961dc2b00e2cbef46"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SURV-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "f20ca59c78104ab88d32b0dd1ae8cc5163a10cc0ae8deba144b640532607d567"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SURV-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "d624e787ba5a585e20518288d2027b0f7aaeeea61902bea7310b537bd4a39a0c"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SURV-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "13dddd2c0769b58a81bd4fbe551827842e3e983a46ab2f0d06c2e542779a6a96"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-DEP-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "d018dbd2bdccda673a9fc38ac2339af01ee294ab4e335b366c0031305733a163"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-DEP-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "13adb037c412bd4db8c6e9e047a38b6088d4080fe52f21b69a056b039157beb6"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-DEP-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "dc86cf1958e6e8e18c9800b3c6bf36c696b471d3ba1d1974eef9cc3cf0ffcd43"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-POWER-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "6140f7b6226e9c152b7ca469be23df805744cf0ab8c3df752d8a076d11ca42d3"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-POWER-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "cd682852b69e7d77ee9035a3364c26e7858a2b80e887582f303d69110161ba68"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-POWER-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "5ac34ba3efdc5c112148ca5e360b6c50b4ff3d5cdcc3c1328ebbc99a2565efcf"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-TRIAL-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "520a7b0202bb58d08e11d01446b65b3a34ffa501e5b0a858311f3000bdd4c436"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-TRIAL-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "aa61308481c6d9b6bd53c45bdb2bfef4345a9932e5a182909ff40c7b14d083f3"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-TRIAL-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "7e63efc22c8244980808456cf53eb69da9625854230a0b2a119ac95f61028593"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-DX-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "0035d6a349c3b87ad2736a33397f8cfcd9d1059bf3a75ee0e0a1fbcf35594423"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-DX-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "98f800cb975c5f6af2e0453d3702281d5b668aaea14c99f72764b4f19611235f"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-DX-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "877f6944393418743df6178fc3fbeb46aab1350bde2b0f229cedd4fe74644c26"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-SCREEN-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "b1d930c0e2b2a6b9425adcd7c8c0bb278cd32c309f3a5e34dbe9f020d162e265"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-SCREEN-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "80d38cf49016395c843f444dd66f5438e0254cfb7e5a0a7bfdb0bdad5d002da8"
+    },
+    {
+      "kind": "questions",
+      "id": "CLIN-SCREEN-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "7a25327da344a3939b7b0e89492890423313ae4a849110790e26be5030a34c7f"
+    },
+    {
+      "kind": "questions",
+      "id": "SURVIVAL-KM-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "d6b3e72502f577aceb922b2c0b5686ac406209960d005c08a4dc3378b44679f9"
+    },
+    {
+      "kind": "questions",
+      "id": "SURVIVAL-CR-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "82453b0ce726a9564849a3278ec6f784da4c83dcd7614c2b870f6fcf627ab34a"
+    },
+    {
+      "kind": "questions",
+      "id": "SURVIVAL-PH-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "6e2fd548caf9218464984c11ba8d85e1bb6d4b74cb7d31b7e2ed4c9e6a59d5fb"
+    },
+    {
+      "kind": "questions",
+      "id": "REGMODEL-OR-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "bf97fb67b1f61010d477267c7deeaa1b5bef1972e300ebfacc8e37c46908b1e8"
+    },
+    {
+      "kind": "questions",
+      "id": "REGMODEL-RATE-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "7bca8e07baf7690da0cac30a96e99a26f45cb5a36925c650c187004af0833148"
+    },
+    {
+      "kind": "questions",
+      "id": "REGMODEL-CAL-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "e97abf1b707d47a9ba92999c2c022da7cbe31534fe472ee905a8c0ca1be7923c"
+    },
+    {
+      "kind": "questions",
+      "id": "AGREE-BA-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "d9ed377458cec9366ceff2a3e8e7671101eb74d1efcdb635479b4dbb64a68540"
+    },
+    {
+      "kind": "questions",
+      "id": "AGREE-KAPPA-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "dbc3a7c7159a1cf78a64031d30c0bf7e196dc46e9dd70d4f26e4c1fb0ef30285"
+    },
+    {
+      "kind": "questions",
+      "id": "AGREE-ICC-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "128e1ffa75fda946cd31e0290319da08946dda2e418da84e848e6ebbdb45e7d4"
+    },
+    {
+      "kind": "questions",
+      "id": "SPC-LIMIT-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "4a798ef816e08f89db9bb279143d69afdfd433dfc8d2a10f1ec39a97f7e649fe"
+    },
+    {
+      "kind": "questions",
+      "id": "SPC-RESPONSE-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "6809cabb79a255bcc3b40985458dfc7e6bea360c1594ab07655807c52930a244"
+    },
+    {
+      "kind": "questions",
+      "id": "SPC-STANDARD-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "ec4e23ff16a926d32c8460260dd2a5d6d0faf92fb79d9084a207bd9b7c0ba7a7"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-ABSTRACT-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "bc0c3d6775c62558431e24dd32964c9ec969212766e3099f07393929377cb143"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-ABSTRACT-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "54d414a928974f924473a72e79b49db569e9a23915a5cb8b29c64b6e989c1103"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-ABSTRACT-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "cdb8deb03d442679edda5525e4e1297ceb19ac712a339b937816498b892a927a"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-CAUSAL-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "7328ba85ac120eedb7debc0ee42d8b062be8352d6b23080b0bfbc3cf8a52773d"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-CAUSAL-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "6bd1119a65760f90aa6b480248bf018acbb968a0367ce6e528c3242e41a05496"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-CAUSAL-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "b3878510063a0177c8a80807f927e435a8a9c31fa6e180d2bca6a06ff8a85f46"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SYNTH-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "836616654efd6ebae9b15ae66a8ae1cdab93adf73fdd2e7f494fd6d3c779e48f"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SYNTH-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "5d820e45c513181e410b4c7b1148d6b78b072b2b34b6d947c0feaabdeb7f2f0f"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SYNTH-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "d4351ed9fedca665aed1a9e1ca8b0a7c69fef2a20c3a7ef89b98a04023b3b064"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-IMPACT-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "2b4f7010c06dc9bc8037ede9ac1a9edd950ad80c229ac427e9d0e7a4e58ba07f"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-IMPACT-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "434778b219775b78ca61cd279495046e228d4ac06938f292d9eee90924220228"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-IMPACT-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "a28badd70edc0b71f0d06f5e3103434c1baf739caaf64cd5734e1f5cf3d68e56"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-UNCERT-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "654abbc8e31a7aef5ae829cc467be418a2f28f75d2508f3069109118fdd21703"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-UNCERT-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "6ba8692b80b003b9b72fc8b7b50f8dc5941132866348ec8fbe7296690866b5f2"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-UNCERT-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "3e7342e764ef21e0ca621b081ec95e054fb36e87187e3ec3daa64d2aacd692ec"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-DESIGN-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "527e9c8c6fb58b50a98de33736955ea544bd56bd7627960f867341f52ea9f6f3"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-DESIGN-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "aba55b04da4ec88d4f42897fa8205bba797a6fe851d9f63844bf514cbd60c7c0"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-DESIGN-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "fa67de81ea8cb8b1a66e8656efc6534ab5889fb80f679758534e1a12204c4a19"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-INTEGRITY-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "28f95110e262783ba1d776c2eef802968a8f1073fd57f25c80471b1a7472b076"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-INTEGRITY-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "433b971be192d38942ec6f5f4dd6b43607edfb36e4c9b4aae3a12d2a8172926d"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-INTEGRITY-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "47d0273d1eb32eeae5fd71ffa754ebc48edcf81c2468f1bd5262c2b4ad6f1729"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-CAUSAL-04",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "c5d4a43a84f02f45eb7426f29e66aaa71cabb5ca509325a967614bdff6615ec7"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SYNTH-04",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "6bb788627db963668f07b29fa73cb61c53e20be3328155a7a9fc81e2cddf77c8"
+    },
+    {
+      "kind": "questions",
+      "id": "MULTI-IND-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "5b16a5771289f4d793d865af41544b5392f54707074c029b26c6385b8ab74baa"
+    },
+    {
+      "kind": "questions",
+      "id": "MULTI-IND-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "8766df6417317d201c8346994aaafa718e5ac4968149efeba914d8e74777bab7"
+    },
+    {
+      "kind": "questions",
+      "id": "MULTI-IND-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "94049a813e79cdb0297a029c43a0e4e61b09b8d28fea7b41c1ad413dd30f083f"
+    },
+    {
+      "kind": "questions",
+      "id": "MULTI-REP-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "097ba0b75dcf742fee53978de51e153e68032e5a95b2bf5d0fc819f9f83f5d8c"
+    },
+    {
+      "kind": "questions",
+      "id": "MULTI-REP-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "1a8e4d8025d2614ea51bdd4c949949c54a6a615a7d527ea5c94ca063297dafd5"
+    },
+    {
+      "kind": "questions",
+      "id": "MULTI-REP-03",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "89857be5af82f6ef9918afe3e7a96715f7e25afc37163f121207eaa748be9f4d"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SURVEY-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "86243ca487f161b2e485c408c4c5351de6ca79829cded5002f213b2f7e25d3bb"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SURVEY-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "55023b1319571cb847ff510ba9f52ac315c94c958260ed7c7d4976fc3a9a96d5"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-ITS-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "24e9a7e58004d1775496dbcdd51634f784e7d8b892683f0779a8b4b833f6c216"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-ITS-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "78d19df77e2bf18701bae7588d38389d95b170a9f0fe23df7070fbedfdc446c8"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SPATIAL-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "b31ef3b3b40ba6f4b2b205751b29c781e631750f5a0a1692588fbd214fbdeeee"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-SPATIAL-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "7ae2adc0bb1c2b03e290bc6e8922272493fa84a8a031d18af316a7b24cd3ce80"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-ECON-01",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "d914ae0cf066150a9d29868fc978c3e1f1c208dce9b8c7cc33e021560473b639"
+    },
+    {
+      "kind": "questions",
+      "id": "BIO-ECON-02",
+      "reviewer": "Codex review; Iain Buchan release approval",
+      "date": "2026-11-15",
+      "notes": "Answer key, distractors and feedback independently checked.",
+      "contentSha256": "bdaa72763ca1c3c27c5e094972cf841077673581730db6325877bc5f9f52e2a0"
+    }
+  ],
   "unreviewedChangedItems": []
 }
