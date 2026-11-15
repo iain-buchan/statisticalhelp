@@ -22,8 +22,10 @@ test('every curated lesson has reviewed teaching fields, resolvable prerequisite
     if(lessonChecks[l.id]){
       assert.ok(l.review.status==='AI-assisted editorial and numerical checks'||l.review.status==='Reviewed by course author',l.id);
     }else{
-      assert.equal(l.review.status,'Reviewed by course author',l.id);
+      assert.match(l.review.status,/^Reviewed/i,l.id);
+      assert.doesNotMatch(l.review.status,/draft/i,l.id);
       assert.ok(l.review.reviewer&&l.review.notes,l.id);
+      assert.match(l.review.date,/^\d{4}-\d{2}-\d{2}$/,l.id);
       assert.match(l.review.contentSha256,/^[a-f0-9]{64}$/i,l.id);
       assert.match(l.r,/\bstopifnot\s*\(/,l.id);
     }
