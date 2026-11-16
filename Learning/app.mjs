@@ -27,10 +27,18 @@ const words=()=>wordsFor(platform());
 const hostClass=()=>{for(const c of [...document.documentElement.classList])if(c.startsWith('host-'))document.documentElement.classList.remove(c);document.documentElement.classList.add(hostClassName(platform()));};
 const allLessons=()=>[...lessons,...courseLessons(coursePack)];
 const lesson=()=>allLessons().find(x=>x.id===state.lesson)??lessons[0];
-const privacyText=()=>settings.disabled?`The online tutor is disabled by ${words().computer}’s learning policy. Local lessons, practice, help and R examples remain available.`:settings.configured?'Send shares learning context and up to 40 recent messages with OpenAI. Document sharing requires confirmation for each question. Earlier shared content can remain in the conversation. Do not include person identifiers.':'Connect your ChatGPT account to talk with the tutor here. No API key is needed. Your account’s Codex access and usage allowance apply.';
+function privacyText() {
+  if (settings.disabled) return `The online tutor is disabled by ${words().computer}’s learning policy. Local lessons, practice, help and R examples remain available.`;
+  if (settings.configured) return 'Sending shares learning context and up to 40 recent messages with OpenAI. Use Tutor context to choose which open StatsDirect documents to share. Earlier shared content can remain in the conversation. Do not include person identifiers.';
+  return 'Connect your ChatGPT account to use the tutor. Codex is included with ChatGPT Free. Your plan’s usage limits apply.';
+}
 const sendLabel=()=>settings.disabled?'Online tutor disabled':settings.configured?'Send':settings.signingIn?'Finish sign-in':'Use my ChatGPT';
 const independent=()=>state.quiz?.mode==='test'&&!state.quiz.completedAt;
-const notice=text=>{ $('notice').textContent=text;$('notice').hidden=!text; };
+function notice(text) {
+  $('notice').textContent = text;
+  $('noticeBanner').hidden = !text;
+}
+$('dismissNotice').onclick = () => notice('');
 function save(){if(!loaded)return;state.updatedAt=new Date().toISOString();revision++;reviewApproved=false;$('saveStatus').textContent='Saving…';if(native)post({action:'save',state,revision});else{try{localStorage.setItem('statsdirect-learning-preview',JSON.stringify(state));$('saveStatus').textContent='Saved in this browser';}catch{$('saveStatus').textContent='Not saved — export before closing';}}}
 function activity(text){state.activities.push({at:new Date().toISOString(),text});save();}
 function teachingSupport(){if(state.quiz?.mode==='learn'&&!state.quiz.completedAt)recordAssistance(state.quiz,state.quiz.questionIds[state.quiz.answers.length],'explanations');}
@@ -56,7 +64,11 @@ function render(){
   document.body.classList.toggle('study-mode',state.view==='study');
   document.body.classList.toggle('conversation-focus',state.view==='study'&&state.conversationFocus===true);
   $('workspaceContext').hidden=state.view!=='study';
-  $('lessons').innerHTML=allLessons().map((l,i)=>`<button data-lesson="${esc(l.id)}" class="${state.view==='study'&&state.lesson===l.id?'current':''}" ${independent()||pending?'disabled':''}>${i+1}. ${esc(l.title)}</button>`).join('');
+  const provider = courseLessons(coursePack);
+  const lessonButton = (l, i) => `<button data-lesson="${esc(l.id)}" class="${state.view==='study'&&state.lesson===l.id?'current':''}" ${independent()||pending?'disabled':''}>${i+1}. ${esc(l.title)}</button>`;
+  $('lessons').innerHTML = (provider.length ? '<p class="lesson-group">StatsDirect lessons</p>' : '') +
+    lessons.map(lessonButton).join('') + (provider.length ?
+    '<p class="lesson-group">Provider course</p>' + provider.map(lessonButton).join('') : '');
   $('practiceNav').classList.toggle('current',state.view==='practice');$('practiceNav').disabled=Boolean(pending);$('recordNav').classList.toggle('current',state.view==='record');
   $('sourcesNav').classList.toggle('current',state.view==='sources');$('sourcesNav').disabled=independent();
   updatePracticeCount();
@@ -68,11 +80,26 @@ const bodyHTML=richText;
 const furtherReadingHTML=entry=>{const links=(entry.courseSources??[]).filter(s=>safeURL(s.url));return links.length?`<div class="small context-used">Further reading: ${links.map(s=>`<a href="${esc(safeURL(s.url))}" target="_blank" rel="noopener">${esc(s.title)}</a>`).join('; ')}</div>`:'';};
 // The composer doubles as the answer box: say so when the latest tutor or study-guide message asks a question.
 const composerLabel=()=>awaitingAnswer(visibleLessonConversation(state).at(-1))?'Answer the question above, or ask your own':'Ask a question, explain your thinking, or paste a small R example';
-const composerPlaceholder=()=>{const last=visibleLessonConversation(state).at(-1);if(!awaitingAnswer(last))return 'For example: why do we analyse the differences?';return optionLetters(last.text).length>=3?'For example: C, because …':'Type your answer, then press Send';};
+const composerPlaceholder=()=>{const last=visibleLessonConversation(state).at(-1);if(!awaitingAnswer(last))return 'For example: why do we analyse the differences?';return optionLetters(last.text).length>=3?'For example: C, because …':'Type your answer here';};
 const quickAnswersHTML=entry=>{const letters=optionLetters(entry.text);return letters.length>=3?`<div class="quick-answers" role="group" aria-label="Choose an answer">${letters.map(x=>`<button type="button" data-answer="${x}">Answer ${x}</button>`).join('')}</div>`:'';};
 function renderStudy(){const l=lesson();if(ensureLessonPrompt(state,allLessons()))save();
-  const key=state.id+':'+l.id,reading=renderedStudy===key?conversationReading($('messages')):null;renderedStudy=key;
-  $('main').innerHTML=`<section class="intro"><div class="eyebrow">${esc(l.topic)}</div><h1>${esc(l.title)}</h1></section><div class="actions">${l.operation?'<button class="primary" data-action="example">Try in StatsDirect</button>':''}${l.r?'<button data-action="r">Explore in R</button>':''}${l.help?'<button class="link-button" data-action="help">Read help ↗</button>':''}</div><details class="lesson-guide"><summary>Lesson guide and worked example</summary>${lessonGuideHTML(l,allLessons(),esc,safeURL)}</details>${courseWorkHTML(state,l)}<section class="chat"><div class="chat-heading"><strong>Your biostatistics tutor</strong><button id="focusConversation" class="link-button">${state.conversationFocus?'Show lesson controls':'Expand conversation'}</button><span id="tutorBadge" class="badge">${esc(settings.label)}</span></div><div id="messages" class="messages" role="log" aria-label="Learning conversation"></div><div class="composer"><label for="question">${esc(composerLabel())}</label><textarea id="question" rows="2" maxlength="4000" placeholder="${esc(composerPlaceholder())}" ${pending?'disabled':''}>${esc(state.draft)}</textarea><div class="composer-bottom"><small id="connectionPrivacy">${esc(privacyText())}</small><button id="send" class="primary" ${pending||settings.disabled?'disabled':''}>${esc(sendLabel())}</button>${pending?'<button id="stop">Stop</button>':''}</div><p class="small" id="chatStatus" role="status">${pending?'The tutor is thinking…':''}</p></div></section><div class="suggestions"><button data-prompt="Explain this without assuming I know any statistics.">Explain simply</button><button data-prompt="Ask me one original exam-style question on this topic, then wait for my answer.">Test my understanding</button><button data-prompt="Walk me through the bundled R example line by line, and suggest one small change I can try.">Help me learn R</button></div>`;
+  const key=state.id+':'+l.id,reading=renderedStudy===key?conversationReading($('messages')):null;
+  const previousMaterial = renderedStudy === key ? document.querySelector('.lesson-material') : null;
+  renderedStudy = key;
+  const materialScroll = previousMaterial?.scrollTop ?? 0;
+  const detailState = Array.from(previousMaterial?.querySelectorAll('details') ?? [], detail => ({
+    open: detail.open,
+    scrollTop: detail.scrollTop
+  }));
+  $('main').innerHTML = `<section class="lesson-material" aria-label="Lesson materials"><section class="intro"><div class="eyebrow">${esc(l.topic)}</div><h1>${esc(l.title)}</h1>${l.providerCourse?`<p class="small">From ${esc(coursePack.title)}</p>`:''}</section><div class="actions">${l.operation?'<button class="primary" data-action="example">Try in StatsDirect</button>':''}${l.r?'<button data-action="r">Explore in R</button>':''}${l.help?'<button class="link-button" data-action="help">Read help ↗</button>':''}</div><details class="lesson-guide"><summary>Lesson guide and worked example</summary>${lessonGuideHTML(l,allLessons(),esc,safeURL)}</details>${courseWorkHTML(state,l)}</section>
+  <section class="chat"><div class="chat-heading"><strong>Your biostatistics tutor</strong><button id="focusConversation" class="link-button">${state.conversationFocus?'Show lesson controls':'Expand conversation'}</button><span id="tutorBadge" class="badge">${esc(settings.label)}</span></div><div id="messages" class="messages" role="log" aria-label="Learning conversation"></div><div class="composer"><label for="question">${esc(composerLabel())}</label><textarea id="question" rows="2" maxlength="4000" aria-describedby="composerKeys connectionPrivacy" placeholder="${esc(composerPlaceholder())}" ${pending?'disabled':''}>${esc(state.draft)}</textarea><div class="composer-bottom"><div><small id="composerKeys">Enter sends. Shift+Enter adds a line.</small><small id="connectionPrivacy">${esc(privacyText())}</small></div><button id="send" class="primary" ${pending||settings.disabled?'disabled':''}>${esc(sendLabel())}</button>${pending?'<button id="stop">Stop</button>':''}</div><p class="small" id="chatStatus" role="status">${pending?'The tutor is thinking…':''}</p></div><div class="suggestions"><button data-prompt="Explain this without assuming I know any statistics.">Explain simply</button><button data-prompt="Ask me one original exam-style question on this topic, then wait for my answer.">Test my understanding</button><button data-prompt="Walk me through the bundled R example line by line, and suggest one small change I can try.">Help me learn R</button></div></section>`;
+  const material = document.querySelector('.lesson-material');
+  material.querySelectorAll('details').forEach((detail, index) => {
+    if (!detailState[index]) return;
+    detail.open = detailState[index].open;
+    detail.scrollTop = detailState[index].scrollTop;
+  });
+  material.scrollTop = materialScroll;
   const thread=visibleLessonConversation(state),last=thread.at(-1);
   $('messages').innerHTML=thread.map(c=>{
     const guide=guidePresentation(c,l);
@@ -87,11 +114,28 @@ function renderStudy(){const l=lesson();if(ensureLessonPrompt(state,allLessons()
   renderWorkspace();
   restoreConversationReading($('messages'),reading);
   $('question').oninput=()=>{state.draft=$('question').value;save();};
-  $('question').onkeydown=e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)){e.preventDefault();send();}};
+  $('question').onkeydown = event => {
+    if (event.key !== 'Enter' || event.shiftKey || event.isComposing || event.keyCode === 229) return;
+    event.preventDefault();
+    if (!event.repeat) send();
+  };
   $('send').onclick=()=>settings.configured?send():configure();
   if($('stop'))$('stop').onclick=()=>{const id=pending;post({action:'cancel',id});window.statsDirectLearn.tutorError({id,message:'Reply stopped. You can send another question.'});};
   document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>openActivity(b.dataset.action));
-  document.querySelectorAll('[data-prompt]').forEach(b=>{b.disabled=Boolean(pending);b.onclick=()=>{state.draft=b.dataset.prompt;save();renderStudy();$('question').focus();};});
+  document.querySelectorAll('[data-prompt]').forEach(button => {
+    button.disabled = Boolean(pending) || Boolean(settings.disabled);
+    button.onclick = () => {
+      if (settings.configured) send(button.dataset.prompt);
+      else {
+        const question = $('question');
+        if (!question.value.trim()) {
+          question.value = state.draft = button.dataset.prompt;
+          save();
+        }
+        configure();
+      }
+    };
+  });
   document.querySelectorAll('[data-answer]').forEach(b=>{b.disabled=Boolean(pending);b.onclick=()=>{state.draft='My answer: '+b.dataset.answer+', because ';save();renderStudy();const q=$('question');q.focus();q.setSelectionRange(q.value.length,q.value.length);};});
 }
 function bindConversation(){const generation=bridgeGeneration,lessonID=lesson().id;bindRichText($('messages'),{
@@ -122,12 +166,19 @@ function renderWorkspace(){
 }
 function configure(){if(settings.disabled){notice(privacyText());return;}if(native)post({action:'settings'});else notice(`Choose Use my ChatGPT in ${words().application} to sign in through your browser. No API key is needed.`);}
 function openActivity(action){if(independent())return;teachingSupport();const l=lesson();activity(`${action==='r'?'Opened bundled R example':action==='help'?'Opened help':'Opened StatsDirect analysis'}: ${l.title}`);if(native)post({action,lesson:l.id});else if(action==='help')window.open('../Help/'+l.help,'_blank');else notice(`Open this learning window in ${words().application} to start the `+(action==='r'?'R session':'StatsDirect analysis')+'.');}
-function send(){
-  if(pending||independent()||settings.disabled)return;
-  const text=$('question')?.value.trim()||state.draft.trim();if(!text)return;
-  if(!settings.configured){configure();return;}
+function send(prompt) {
+  if (pending || independent() || settings.disabled) return;
+  const text = (prompt ?? $('question')?.value ?? state.draft).trim();
+  if (!text) return;
+  if (!settings.configured) { configure(); return; }
   teachingSupport();
-  const entry=transcriptEntry(state,'user',text,'Learner',{lessonId:lesson().id,lessonTitle:lesson().title});state.draft='';pending=crypto.randomUUID();streamedText='';save();render();
+  const current = lesson();
+  const entry = transcriptEntry(state, 'user', text, 'Learner', {lessonId: current.id, lessonTitle: current.title});
+  if (prompt === undefined) state.draft = '';
+  pending = crypto.randomUUID();
+  streamedText = '';
+  save();
+  render();
   post({action:'ask',id:pending,userMessageID:entry.id,lesson:lesson().id,profile:tracks[state.profile].title,stage:stages[state.stage],practiceContext:practiceContext(state),learningGoals:state.learning,messages:conversationForTutor(state)});
 }
 function startQuiz(mode, source) {
@@ -156,6 +207,7 @@ function renderPractice(){const qz=state.quiz;
         ${coursePack?.questions?.length ? `<option value="course">${esc(coursePack.title)} — provider questions</option>` : ''}
         <option value="builtin">My study context</option><option value="all">All questions</option>
       </select>
+      ${coursePack?.questions?.length ? '<p class="small">My study context and All questions use the built-in StatsDirect question bank.</p>' : ''}
       <div class="actions"><button class="primary" id="supported">Supported practice</button><button id="independent">Independent practice</button></div>
       <p class="small">First answers are retained. Confidence and reasoning help you reflect. They do not alter the score.</p>
     </section>`);
@@ -191,26 +243,31 @@ function renderRecord(){const record=reviewRecord(state),text=reviewText(record)
 }
 function renderOptions(){
   const o=state.learning;
-  const profileDisabled = (state.quiz && !state.quiz.completedAt) || pending;
+  const unfinishedPractice = Boolean(state.quiz && !state.quiz.completedAt);
+  const profileDisabled = unfinishedPractice || Boolean(pending);
   const stageDisabled = independent() || pending;
-  $('main').innerHTML=`<div class="eyebrow">LEARNING OPTIONS</div><h1>Make learning work for you</h1>
+  $('main').innerHTML=`<h1>Learning options</h1>
   <section class="card"><h2>Your experience level and goals</h2>
   <div class="form-row">
-    <div><label for="optionProfile">Professional or study context</label><select id="optionProfile" ${profileDisabled?'disabled':''}>${Object.entries(tracks).map(([id,t])=>`<option value="${id}" ${state.profile===id?'selected':''}>${esc(t.title)}</option>`).join('')}</select></div>
+    <div><label for="optionProfile">Professional or study context</label><select id="optionProfile" ${profileDisabled?'disabled aria-describedby="profileUnavailable"':''}>${Object.entries(tracks).map(([id,t])=>`<option value="${id}" ${state.profile===id?'selected':''}>${esc(t.title)}</option>`).join('')}</select></div>
     <div><label for="optionStage">Your next step with R</label><select id="optionStage" ${stageDisabled?'disabled':''}>${Object.entries(stages).map(([id,t])=>`<option value="${id}" ${state.stage===id?'selected':''}>${esc(t)}</option>`).join('')}</select></div>
   </div>
-  <p class="small">Your study context guides the examples and practice topics. Your statistical skills and next step with R guide the tutor’s explanations.</p>
+  ${profileDisabled ? `<p class="small" id="profileUnavailable">${pending ? 'Wait for the tutor’s reply before changing your study context.' :
+    'Finish or end your current practice attempt to change your study context. <button type="button" class="link-button" id="returnToPractice">Return to practice</button>'}</p>` : ''}
+  <p class="small">Your study context guides the tutor and selects topics for “My study context” practice. Your R choice tells the tutor how much code to use.</p>
   <label for="statisticalSkills">Statistical skills</label><select id="statisticalSkills">${Object.entries(statisticalSkills).map(([id,title])=>`<option value="${id}" ${o.statisticalSkills===id?'selected':''}>${title}</option>`).join('')}</select>
-  <label for="qualifications">Exams or courses you are studying for</label><textarea id="qualifications" rows="2" maxlength="1200" placeholder="For example: MRCP Part 1, MRCGP AKT, DFPH/MFPH, MPH, an undergraduate module, or a professional qualification">${esc(o.qualifications)}</textarea>
-  <label for="needs">Your learning goals</label><textarea id="needs" rows="2" maxlength="2500" placeholder="What would you like to understand or be able to do?">${esc(o.needs)}</textarea>
+  <label for="needs">What would you like help with?</label><textarea id="needs" rows="2" maxlength="2500" placeholder="For example, interpreting clinical trials or learning R for a research project">${esc(o.needs)}</textarea>
   <details class="option-details"><summary>More learning preferences</summary>
+  <p class="small">These optional details help the tutor adapt its explanations and suggest a study plan.</p>
+  <label for="qualifications">Exams or courses you are studying for</label><textarea id="qualifications" rows="2" maxlength="1200" placeholder="For example, MRCP Part 1, MRCGP AKT, DFPH/MFPH or an undergraduate module">${esc(o.qualifications)}</textarea>
   <label for="priorKnowledge">Previous experience with statistics and epidemiology</label><textarea id="priorKnowledge" rows="2" maxlength="1500">${esc(o.priorKnowledge)}</textarea>
   <label for="targetDate">Target exam or completion date</label><input id="targetDate" type="date" value="${esc(o.targetDate)}">
-  <p class="small">The target date helps the tutor suggest a study plan when you ask; it does not schedule reminders.</p><p class="small">Epidemiology and causal inference are included in every pathway.</p><div class="focus-grid">${[['epidemiology','Epidemiology and study design'],['causal','Causal inference and bias'],['interpretation','Interpreting results and uncertainty'],['methods','Choosing and checking statistical methods'],['r','R coding and reproducible analysis'],['communication','Explaining evidence to others']].map(([id,title])=>`<label class="option"><input type="checkbox" name="focus" value="${id}" ${o.focus.includes(id)?'checked':''} ${['epidemiology','causal'].includes(id)?'disabled':''}><span>${title}</span></label>`).join('')}</div>
+  <p class="small">The tutor uses this date when you ask for a study plan.</p><p class="small">Epidemiology and causal inference are included in every pathway.</p><div class="focus-grid">${[['epidemiology','Epidemiology and study design'],['causal','Causal inference and bias'],['interpretation','Interpreting results and uncertainty'],['methods','Choosing and checking statistical methods'],['r','R coding and reproducible analysis'],['communication','Explaining evidence to others']].map(([id,title])=>`<label class="option"><input type="checkbox" name="focus" value="${id}" ${o.focus.includes(id)?'checked':''} ${['epidemiology','causal'].includes(id)?'disabled':''}><span>${title}</span></label>`).join('')}</div>
   <label for="style">How would you like the tutor to help?</label><select id="style">${['Worked examples and questions','Step-by-step explanations','Exam-style questions with feedback','Discuss my reasoning','Connect StatsDirect to R'].map(t=>`<option ${o.style===t?'selected':''}>${t}</option>`).join('')}</select></details></section>
   ${trainingHTML(state,coursePack)}
   <div class="actions"><button id="applyOptions" class="primary">Return to learning</button><span id="optionSaved" class="small" role="status">Changes are saved as you edit.</span></div>`;
   for(const id of ['statisticalSkills','qualifications','needs','priorKnowledge','targetDate','style'])$(id).oninput=()=>{o[id]=$(id).value;save();};
+  if ($('returnToPractice')) $('returnToPractice').onclick = () => navigate('practice');
   $('optionProfile').onchange = event => {
     state.profile = event.target.value;
     activity('Learning pathway changed to ' + tracks[state.profile].title);
@@ -258,6 +315,9 @@ window.statsDirectLearn={
     if($('tutorBadge'))$('tutorBadge').textContent=value.label;
     if($('send')){$('send').textContent=sendLabel();$('send').disabled=Boolean(pending)||Boolean(value.disabled);}
     if($('connectionPrivacy'))$('connectionPrivacy').textContent=privacyText();
+    document.querySelectorAll('[data-prompt]').forEach(button => {
+      button.disabled = Boolean(pending) || Boolean(value.disabled);
+    });
     renderWorkspace();
     if(wasSigningIn&&!value.signingIn)notice(value.configured?'Connected to ChatGPT. Send your question when you are ready.':value.label);
   },

@@ -1,14 +1,18 @@
 import {safeURL,validEmail,assessmentTypes,assessmentNotes} from './provider-course.mjs';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function trainingHTML(state,pack){const t=state.training;return `
-<section class="card" id="trainingProvider"><h2>Your training provider</h2><p class="small">Optional: the tutor, university or organisation delivering your course and reviewing your work. Choosing an exam does not enrol you with its examining body.</p>
-<label for="courseTitle">Course</label><input id="courseTitle" maxlength="200" value="${esc(t.courseTitle)}" placeholder="For example: www.statisticalhelp.org/help">
-<div class="form-row"><div><label for="reviewEmail">Assessment email address</label><input id="reviewEmail" type="email" maxlength="254" value="${esc(t.reviewEmail)}" placeholder="support@statisticalhelp.org"></div><div><label for="assessmentType">Assessment type</label><select id="assessmentType">${Object.entries(assessmentTypes).map(([id,title])=>`<option value="${id}" ${t.assessmentType===id?'selected':''}>${esc(title)}</option>`).join('')}</select></div></div>
-<p class="small" id="assessmentNote">${esc(assessmentNotes[t.assessmentType])}</p>
+<section class="card" id="trainingProvider"><h2>Your training provider</h2><p class="small">Optional. Use this section if a tutor or organisation provides your course or reviews your work.</p>
+<label for="courseTitle">Course name</label><input id="courseTitle" maxlength="200" value="${esc(t.courseTitle)}" placeholder="For example: www.statisticalhelp.org/help">
+<div class="form-row"><div><label for="reviewEmail">Assessment email address</label><input id="reviewEmail" type="email" maxlength="254" value="${esc(t.reviewEmail)}" placeholder="support@statisticalhelp.org"></div><div><label for="assessmentType">Assessment type</label><select id="assessmentType" aria-describedby="assessmentNote">${Object.entries(assessmentTypes).map(([id,title])=>`<option value="${id}" ${t.assessmentType===id?'selected':''}>${esc(title)}</option>`).join('')}</select><p class="small" id="assessmentNote">${esc(assessmentNotes[t.assessmentType])}</p></div></div>
 <div class="course-pack"><h3>A course pack from your tutor</h3>
-<p>${pack?`<strong>${esc(pack.title)}</strong> · ${pack.documents.length} document(s) or pages`:'Add course notes, lessons, examples or practice questions.'}</p>
+${pack ? `<p><strong>${esc(pack.title)}</strong></p><p class="small">${[
+  [pack.lessons?.length ?? 0, 'lesson', 'lessons'],
+  [pack.questions?.length ?? 0, 'practice question', 'practice questions'],
+  [pack.documents.length, 'document or page', 'documents or pages']
+].filter(([count]) => count > 0).map(([count, singular, plural]) => count === 1 ? `1 ${singular}` : `${count} ${plural}`).join(' · ')}</p>` :
+  '<p>Import lessons, practice questions or notes from your trainer.</p>'}
 <div class="actions"><button id="importCourse">${pack?'Replace course pack…':'Import course pack…'}</button><button id="exampleCourse" class="link-button">Try example course</button></div>
-<p class="small">PDF, Markdown, text or a StatsDirect course pack. Relevant extracts accompany questions you send to OpenAI. Only import materials you are permitted to share with that service.</p>
+<p class="small">Course packs add their own lessons and questions alongside StatsDirect’s built-in ones. PDF, Markdown and text files supply notes. The tutor can send relevant extracts to OpenAI with your question. Import only material you have permission to share.</p>
 ${pack?`<details><summary>Included materials</summary><ul>${pack.documents.map(d=>`<li>${esc(d.title)}</li>`).join('')}</ul></details>`:''}</div>
 <details class="option-details"><summary>Provider details and assessment conditions</summary>
 <div class="form-row"><div><label for="providerName">Provider or university</label><input id="providerName" maxlength="200" value="${esc(t.providerName)}"></div><div><label for="courseVersion">Course version</label><input id="courseVersion" maxlength="80" value="${esc(t.courseVersion)}"></div></div>

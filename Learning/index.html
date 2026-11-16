@@ -1,11 +1,15 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'"><title>Learning · StatsDirect</title><link rel="stylesheet" href="learn.css"><link rel="stylesheet" href="katex/katex.min.css"></head><body>
 <header class="masthead"><img src="../Brand/statsdirect.png" alt="StatsDirect symbol"><div><strong>StatsDirect <span>Learning</span></strong><p>Understand the question. Explore the data. Build your confidence.</p></div><div class="header-actions"><button id="options">Learning options</button><button id="settings">Use my ChatGPT</button></div></header>
-<div id="notice" role="status" hidden></div>
+<div id="noticeBanner" class="notice-banner" hidden>
+<p id="notice" role="status"></p><button id="dismissNotice" type="button" aria-label="Dismiss notice">×</button>
+</div>
 <div class="workspace"><aside>
 <nav id="lessons" aria-label="Lessons"></nav>
 <div class="nav-bottom"><button id="practiceNav">Practice questions <span>20</span></button><button id="recordNav">My learning record</button><button id="sourcesNav">Exam examples &amp; sources</button></div>
 <p class="small" id="saveStatus" role="status">Opening learning record…</p>
 </aside><main id="main"></main></div>
+<footer class="learning-footer">
 <div id="workspaceContext" class="workspace-context" hidden></div>
-<footer>Original teaching examples · AI feedback can be wrong · External review is required for any accreditation</footer>
+<small class="learning-disclaimer">AI feedback can be wrong. Your training provider decides any accreditation.</small>
+</footer>
 <script src="app.js"></script></body></html>
