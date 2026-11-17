@@ -7,5 +7,5 @@ These are built-in lessons/questions, with their original IDs, pathways and oper
 They are not a provider course pack and do not use course: ID prefixes.
 
 Do not edit generated files. Publish a new reviewed authoring revision instead.
-A sibling .Tutor.publishing marker means publishing is incomplete: builds must stop.
+A sibling .AuthoredTutor.publishing marker means publishing is incomplete: builds must stop.
 No R code is executed by publishing. Published content does not itself award CPD credit.

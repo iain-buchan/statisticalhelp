@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "format": "statsdirect-desktop-help-v1",
-  "publishedAtUtc": "2026-11-08T13:07:09.8902136+00:00",
-  "sourceSha256": "4ae0498b937e723787646a727dfcc59b127f5886e422e33921487d0c440eea52",
+  "publishedAtUtc": "2026-11-17T08:44:39.3738315+00:00",
+  "sourceSha256": "ae28ea24b9ab2ad6467294c9c9d47bd98a3b921cf9ae6b0eb73b532fe51175b1",
   "entryPage": "index.html",
   "topicCount": 404,
   "searchDocumentCount": 403,
@@ -2056,8 +2056,8 @@
     },
     {
       "path": "agreement/kappa.htm",
-      "bytes": 39169,
-      "sha256": "9953b881b6d5ee04147889d4b070b1b2b743db6e8ebaf7496d4af1215aed066f"
+      "bytes": 41704,
+      "sha256": "08bf4c8cf42bf127866fed0d7f48ecf1ccd8782a8e7761f2b5a2a243fc5ea6dc"
     },
     {
       "path": "agreement/mcr.htm",
@@ -2281,8 +2281,8 @@
     },
     {
       "path": "basics/script_ai.htm",
-      "bytes": 12635,
-      "sha256": "843804c14d68a0b596284eeb6d253678e471ec10ab9566d67ff14b9eeba5447f"
+      "bytes": 14146,
+      "sha256": "97146768e1e8bacbec8e56426b100682a491f982bab37c10ecb2c45e1f4beadb"
     },
     {
       "path": "basics/statistics.htm",
@@ -2307,7 +2307,7 @@
     {
       "path": "build-info.json",
       "bytes": 220,
-      "sha256": "71ed32565f9dde061fe44ac8aa7aabbe1271b63bbec21739dadd1f0afad5494d"
+      "sha256": "bb8c12d44411c6c42484d9bd0cde38755ae789fdb1c816b8ef97e88f193656af"
     },
     {
       "path": "chi_square_tests/22.htm",
@@ -5502,7 +5502,7 @@
     {
       "path": "resources/help-editor-runtime/publication.json",
       "bytes": 133,
-      "sha256": "348b4334ff2e105c4869469d4234c3a16ec35327731ebfdf5244a22f718acea6"
+      "sha256": "4d0e0c23a7c1af4830da3eddf3068ab363bdc68644e396c745e296376ae9e118"
     },
     {
       "path": "resources/help-editor-runtime/topic.css",
@@ -6081,8 +6081,8 @@
     },
     {
       "path": "search-index.js",
-      "bytes": 879367,
-      "sha256": "270c333868a7477ef88ce3b5e850f54722745aeae4d8701a5d86ef8db1a6b28d"
+      "bytes": 880180,
+      "sha256": "5b9de4c22d5c1b9d877d5d0265e27090035e9236e2b4b49e16692f7e4238f736"
     },
     {
       "path": "survival_analysis/abridged_life_table.htm",
@@ -6420,5 +6420,5 @@
       "sha256": "10f5155b3fbf0d431bb8ad559e3b8103fcf3b355e001208dfacb2855b22936c9"
     }
   ],
-  "publicationSnapshotSha256": "2d70e55173cb5d2584dd6ec4c89071e944e7a22b669db3e03e644d7968c1a1df"
+  "publicationSnapshotSha256": "a95823fa70a631b0e718b8369007f70e764c9b30f37ac2c26e98f7449a4af379"
 }
