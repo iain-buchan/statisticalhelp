@@ -3,7 +3,7 @@ import {richText,bindRichText} from './rich-text.mjs';
 import {conversationReading,restoreConversationReading} from './conversation-view.mjs';
 import {questions,tracks} from './bank.mjs';
 import {createSession,recordAnswer,recordAssistance,learnerResult,sessionQuestion} from './quiz.mjs';
-import {newPortfolio,restorePortfolio,transcriptEntry,reviewRecord,reviewText,practiceContext,stages} from './portfolio.mjs';
+import {newPortfolio,restorePortfolio,packPortfolio,transcriptEntry,reviewRecord,reviewText,practiceContext,stages} from './portfolio.mjs';
 import {examGroups,communicationPrompt} from './exam-sources.mjs';
 import {labelStudyGuides,ensureLessonPrompt,guidePresentation,conversationForTutor,lessonConversation,visibleLessonConversation,optionLetters,awaitingAnswer} from './lesson-context.mjs';
 import lessons from '../Content/Learn/lessons.json';
@@ -39,7 +39,7 @@ function notice(text) {
   $('noticeBanner').hidden = !text;
 }
 $('dismissNotice').onclick = () => notice('');
-function save(){if(!loaded)return;state.updatedAt=new Date().toISOString();revision++;reviewApproved=false;$('saveStatus').textContent='Saving…';if(native)post({action:'save',state,revision});else{try{localStorage.setItem('statsdirect-learning-preview',JSON.stringify(state));$('saveStatus').textContent='Saved in this browser';}catch{$('saveStatus').textContent='Not saved — export before closing';}}}
+function save(){if(!loaded)return;state.updatedAt=new Date().toISOString();revision++;reviewApproved=false;$('saveStatus').textContent='Saving…';if(native)post({action:'save',state:packPortfolio(state),revision});else{try{localStorage.setItem('statsdirect-learning-preview',JSON.stringify(packPortfolio(state)));$('saveStatus').textContent='Saved in this browser';}catch{$('saveStatus').textContent='Not saved — export before closing';}}}
 function activity(text){state.activities.push({at:new Date().toISOString(),text});save();}
 function teachingSupport(){if(state.quiz?.mode==='learn'&&!state.quiz.completedAt)recordAssistance(state.quiz,state.quiz.questionIds[state.quiz.answers.length],'explanations');}
 function welcome(){if(!state.conversation.length)transcriptEntry(state,'assistant','Welcome. We can start with a clinical, service or research question, work through an example in StatsDirect, then connect each step to R when you are ready.\n\nFirst, tell me the population and question you want to understand. Are you describing what happens, predicting an outcome, or asking whether something causes it?','Study guide');}
@@ -323,7 +323,7 @@ window.statsDirectLearn={
   },
   recordSharingConsent(value){
     if(!loaded)throw Error('The learning record is not ready. No document context was shared.');
-    state.sharingConsents.push(value);save();return {state};
+    state.sharingConsents.push(value);save();return {state:packPortfolio(state)};
   },
   workspace(value){workspace=value;renderWorkspace();refreshEvidenceChoices();},
   partial(value){if(value.id!==pending)return;streamedText=value.text;if(!streamTimer)streamTimer=setTimeout(()=>{streamTimer=null;renderStream();},80);},

@@ -5,7 +5,42 @@ export const stages = {menus:'Start with menus',bridge:'Connect menus to R',codi
 export function newPortfolio() {
   return {schemaVersion:2,id:crypto.randomUUID(),startedAt:new Date().toISOString(),profile:'foundation',stage:'menus',lesson:'epidemiology',view:'study',identity:{name:'',email:'',goal:''},learning:{statisticalSkills:'beginner',needs:'',qualifications:'',priorKnowledge:'',targetDate:'',focus:['epidemiology','causal'],style:'Worked examples and questions'},training:trainingDefaults(),courseKey:'',courseWork:[],workDrafts:{},providerReviews:[],evidence:[],conversation:[],sharingConsents:[],activities:[],attempts:[],quiz:null,reflection:'',draft:''};
 }
+// The saved form of a record (HOST-CONTRACT.md, "Saved record"). Every started practice attempt keeps the questions as
+// they were asked and the publication they came from; saved inline, one whole-bank attempt cost about a quarter of a
+// megabyte. packPortfolio stores each distinct question and publication once, in sharedContent, and an attempt refers
+// to them by position. restorePortfolio gives every attempt its own copies back, so the record in memory is unchanged.
+const canonical=v=>Array.isArray(v)?'['+v.map(x=>x===undefined?'null':canonical(x)).join(',')+']':v!==null&&typeof v==='object'?'{'+Object.keys(v).filter(k=>v[k]!==undefined).sort().map(k=>JSON.stringify(k)+':'+canonical(v[k])).join(',')+'}':JSON.stringify(v);
+export function packPortfolio(state) {
+  const questions=[],publications=[],seen=new Map();
+  const intern=(list,kind,value)=>{const key=kind+canonical(value);if(!seen.has(key)){seen.set(key,list.length);list.push(value);}return seen.get(key);};
+  const pack=session=>{
+    const {questionSnapshots,contentPublication,...rest}=session;
+    if(Array.isArray(questionSnapshots))rest.questionRefs=questionSnapshots.map(q=>intern(questions,'q',q));
+    if(contentPublication!==null&&typeof contentPublication==='object')rest.publicationRef=intern(publications,'p',contentPublication);
+    else if(contentPublication!==undefined)rest.contentPublication=contentPublication;
+    return rest;
+  };
+  return {...state,attempts:state.attempts.map(pack),quiz:state.quiz?pack(state.quiz):null,sharedContent:{questions,publications}};
+}
+function unpackPortfolio(value) {
+  const shared=value?.sharedContent;
+  if(shared===undefined)return value;
+  const fail=()=>{throw new Error('The saved learning record is incompatible. It has not been overwritten.');};
+  const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+  if(!object(shared)||!Array.isArray(shared.questions)||!Array.isArray(shared.publications)||!Array.isArray(value.attempts))fail();
+  const at=(list,i)=>Number.isInteger(i)&&i>=0&&i<list.length?structuredClone(list[i]):fail();
+  const unpack=session=>{
+    if(!object(session))return session;
+    const {questionRefs,publicationRef,...rest}=session;
+    if(questionRefs!==undefined){if(!Array.isArray(questionRefs)||rest.questionSnapshots!==undefined)fail();rest.questionSnapshots=questionRefs.map(i=>at(shared.questions,i));}
+    if(publicationRef!==undefined){if(rest.contentPublication!==undefined)fail();rest.contentPublication=at(shared.publications,publicationRef);}
+    return rest;
+  };
+  const {sharedContent,...rest}=value;
+  return {...rest,attempts:value.attempts.map(unpack),quiz:object(value.quiz)?unpack(value.quiz):value.quiz};
+}
 export function restorePortfolio(value) {
+  value=unpackPortfolio(value);
   const object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
   const strings=(v,keys)=>object(v)&&keys.every(k=>typeof v[k]==='string');
   const validQuestion=q=>strings(q,['id','topic','stem','correct','explanation','hint','lesson','help'])&&Array.isArray(q.options)&&q.options.length>=2&&q.options.length<=8&&q.options.every(o=>strings(o,['id','text','feedback']))&&q.options.filter(o=>o.id===q.correct).length===1;

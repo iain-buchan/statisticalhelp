@@ -15,7 +15,7 @@ The host registers `window.statsDirectHost` before the page runs: an object with
 | Action | Payload |
 |---|---|
 | ready | hostContract |
-| save | state (schemaVersion 2), revision |
+| save | state (schemaVersion 2, in its saved form), revision |
 | settings | none; the host shows its sign-in and answers with the settings callback |
 | workspace | choice, or none to ask for the choices |
 | ask | id, userMessageID, lesson, profile, stage, practiceContext, learningGoals, messages |
@@ -64,6 +64,7 @@ Windows implements `toolActivity` when it takes the package; the Mac calls all 1
 - Stop: the page keeps `pending`, posts `cancel` and reports `tutorError` itself, so the learner's question and the streamed partial reply stay in the transcript with the stop notice. The host's own `tutorError` on cancellation is ignored once `pending` is clear. The Windows copy at origin/main (6 November 2026) clears `pending` first and removes the cancelled question; it adopts the page's semantics with the package.
 - Ids: the assistant entry's id equals the request id; every entry carries `lessonId` except the welcome entry, which belongs to the epidemiology lesson by the page's and both hosts' fallback; `ask` carries `userMessageID`; `openRCode` carries the generation token. The host keeps R contexts by request id, rebuilds the script from the saved conversation filtered by `lessonId`, and never runs it.
 - Recovery: the host retains the portfolio and the last reply event across renderer death and replays them.
+- Saved record: the state the page hands a host (`save`, and the `{state}` that `recordSharingConsent` returns) is the saved form. Each distinct question snapshot and content publication is stored once, in `sharedContent.questions` and `sharedContent.publications`; a practice attempt (`attempts[]`, `quiz`) carries `questionRefs` and `publicationRef`, positions in those lists, in place of `questionSnapshots` and `contentPublication`. `schemaVersion` stays 2 and the fields a host reads (`quiz.mode`, `quiz.completedAt`, `conversation`, `lesson`, `training`, `diagnostics`, `rContexts`) are unchanged. A host carries the rest as it comes and hands it back through `restore`; the page accepts both this form and the earlier one with the snapshots inline, and writes this form on the next save. A page older than this form reads such a record with the current bank's questions for the referring attempts and keeps `sharedContent` and the references as they are.
 - `lessons.json` fields a host reads: id, title, topic, operation, columns, r, help, providerCourse, contentVersion, knowledgeSchemaVersion, objective, summary, challenge, steps, review, contentSha256, difficulty, learnerGoals, learnerGoalNotes, prerequisites, learningObjectives, keyConcepts, misconceptions, workedExample, teachingPrompts, rProgression, sources, assessmentIds, practiceQuestions. The page's copy and the host's copy come from one publication.
 - Element ids a host touches: `#loadError`, `#saveStatus`, `#optionSaved`, `#connectionPrivacy`.
 - Learners see no provenance line in the lesson guide; the review record stays in the lesson data and the exports. Learning targets (difficulty, goals, notes) are shown.
