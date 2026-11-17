@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {questions,tracks} from './bank.mjs';
 import {lessonChecks} from './lesson-checks.mjs';
 import {createSession,recordAnswer,recordAssistance,learnerResult,sessionQuestion,reviewBundle} from './quiz.mjs';
-import {newPortfolio,restorePortfolio,reviewRecord,reviewText,transcriptEntry,practiceContext} from './portfolio.mjs';
+import {newPortfolio,restorePortfolio,packPortfolio,reviewRecord,reviewText,transcriptEntry,practiceContext} from './portfolio.mjs';
 import {recordHTML} from './record-html.mjs';
 import {contentFile,runR} from './test-config.mjs';
 const lessons=JSON.parse(readFileSync(contentFile('Learn/lessons.json')));
@@ -112,4 +112,64 @@ test('local R replay snapshots survive reopening but stay out of learner exports
  assert.equal(restored.rContexts.request.rSource,'PRIVATE_SOURCE_SNAPSHOT');
  assert.doesNotMatch(JSON.stringify(reviewRecord(restored)),/PRIVATE_(SOURCE|DATA)_SNAPSHOT/);
  assert.doesNotMatch(JSON.stringify(conversationForTutor(restored)),/PRIVATE_(SOURCE|DATA)_SNAPSHOT/);
+});
+test('the saved form stores each question and publication once and restores every attempt exactly',()=>{
+ const p=newPortfolio(),first=tracks.foundation?'foundation':Object.keys(tracks)[0];
+ const whole=()=>{const s=createSession(first,'learn',undefined,null,true);for(const q of s.questionSnapshots)recordAnswer(s,q.id,q.correct,'fairly','Because.');return s;};
+ for(let i=0;i<5;i++)p.attempts.push(whole());
+ const early=createSession(first,'learn',undefined,null,true);recordAnswer(early,early.questionIds[0],early.questionSnapshots[0].options[0].id,'unsure');early.endedAt=new Date().toISOString();p.attempts.push(early);
+ p.quiz=createSession(first,'test');
+ const packed=packPortfolio(p),saved=JSON.parse(JSON.stringify(packed));
+ assert.equal(packed.schemaVersion,2);assert.equal(packed.quiz.mode,'test');assert.equal(packed.quiz.completedAt,null);
+ assert.equal(packed.sharedContent.questions.length,questions.length);
+ assert.ok(packed.sharedContent.publications.length<=1);
+ [...packed.attempts,packed.quiz].forEach((s,i)=>{const original=[...p.attempts,p.quiz][i];assert.equal(s.questionSnapshots,undefined);assert.equal(s.questionIds,undefined);assert.equal(s.questionRefs.length,original.questionIds.length);assert.ok(!('contentPublication' in s)||s.contentPublication===null);});
+ assert.equal(p.attempts[0].questionSnapshots.length,questions.length,'packing leaves the record in memory as it was');assert.equal(p.attempts[0].questionIds.length,questions.length);
+ const restored=restorePortfolio(saved);
+ assert.deepEqual(JSON.parse(JSON.stringify(restored)),JSON.parse(JSON.stringify({...newPortfolio(),...p,training:restored.training,learning:restored.learning})));
+ assert.equal(restored.sharedContent,undefined);assert.notEqual(restored.attempts[0].questionSnapshots[0],restored.attempts[1].questionSnapshots[0]);
+ const inline=JSON.stringify(p).length,compact=JSON.stringify(packed).length,one=JSON.stringify(p.attempts[0]).length;
+ assert.ok(compact<inline-4*one*0.7,`the saved form (${compact}) must be much smaller than the inline form (${inline})`);
+ const more=structuredClone(p);for(let i=0;i<40;i++)more.attempts.push(whole());
+ assert.ok(JSON.stringify(packPortfolio(more)).length<10_000_000/3,'forty more whole-bank attempts stay far below the save limit');
+});
+test('the saved form keeps a question as it was asked, ignores key order and still reads the inline form',()=>{
+ const p=newPortfolio(),s=createSession('foundation','learn'),q=questions.find(x=>x.id===s.questionIds[0]),oldStem=q.stem,oldKey=q.correct;
+ recordAnswer(s,q.id,q.correct,'confident');s.endedAt=new Date().toISOString();p.attempts.push(s);
+ const sorted=v=>Array.isArray(v)?v.map(sorted):v!==null&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,sorted(v[k])])):v;
+ const reloaded=restorePortfolio(sorted(JSON.parse(JSON.stringify(packPortfolio(p)))));
+ try{
+  q.stem='Replacement question';q.correct=oldKey==='A'?'B':'A';
+  const again=createSession('foundation','learn');reloaded.attempts.push(again);
+  const packed=packPortfolio(reloaded),stems=packed.sharedContent.questions.filter(x=>x.id===q.id).map(x=>x.stem).sort();
+  assert.deepEqual(stems,[oldStem,'Replacement question'].sort(),'both versions of a changed question are kept');
+  assert.equal(packed.sharedContent.questions.length,new Set(s.questionIds).size+1,'unchanged questions are stored once whatever their key order');
+  const back=restorePortfolio(JSON.parse(JSON.stringify(packed)));
+  assert.equal(sessionQuestion(back.attempts[0],q.id).stem,oldStem);assert.equal(sessionQuestion(back.attempts[0],q.id).correct,oldKey);assert.equal(sessionQuestion(back.attempts[1],q.id).stem,'Replacement question');
+  assert.deepEqual(back.attempts[0].questionIds,s.questionIds);
+ }finally{q.stem=oldStem;q.correct=oldKey;}
+ const legacy=JSON.parse(JSON.stringify(p));assert.equal(legacy.sharedContent,undefined);
+ assert.deepEqual(restorePortfolio(legacy).attempts[0].questionSnapshots,p.attempts[0].questionSnapshots);
+ const bare=newPortfolio(),old=createSession('foundation','learn');delete old.questionSnapshots;bare.attempts.push(old);
+ const kept=packPortfolio(bare).attempts[0];assert.equal(kept.questionRefs,undefined);assert.deepEqual(kept.questionIds,old.questionIds);
+ assert.deepEqual(restorePortfolio(JSON.parse(JSON.stringify(packPortfolio(bare)))).attempts[0].questionIds,old.questionIds);
+});
+test('a saved form with a broken reference is refused, not repaired',()=>{
+ const p=newPortfolio();p.quiz=createSession('foundation','learn');
+ const good=()=>JSON.parse(JSON.stringify(packPortfolio(p)));
+ for(const corrupt of [x=>x.quiz.questionRefs[0]=9999,x=>x.quiz.questionRefs[0]=-1,x=>x.quiz.questionRefs[0]='0',x=>x.quiz.questionRefs='all',x=>x.quiz.questionRefs=[],x=>x.quiz.questionRefs[1]=x.quiz.questionRefs[0],x=>x.sharedContent.questions=null,x=>x.sharedContent.questions[0]={id:'x'},x=>x.sharedContent=[],x=>x.quiz.questionSnapshots=[],x=>x.quiz.questionIds=['x'],x=>{if(x.quiz.publicationRef===undefined)x.quiz.publicationRef=0;else x.quiz.publicationRef=5;}]){
+  const x=good();corrupt(x);assert.throws(()=>restorePortfolio(x),/incompatible/);
+ }
+ assert.doesNotThrow(()=>restorePortfolio(good()));
+});
+test('an attempt ended early is exported with the questions that were answered',()=>{
+ const p=newPortfolio(),s=createSession('foundation','learn',undefined,null,true);
+ for(const q of s.questionSnapshots.slice(0,3))recordAnswer(s,q.id,q.correct,'fairly');
+ p.quiz=s;let r=reviewRecord(p);assert.equal(r.attempts[0].status,'in progress');assert.equal(r.attempts[0].questionSnapshots.length,s.questionIds.length);
+ s.endedAt=new Date().toISOString();p.attempts.push(s);p.quiz=null;r=reviewRecord(p);
+ assert.equal(r.attempts[0].status,'ended early');assert.deepEqual(r.attempts[0].questionSnapshots.map(q=>q.id),s.questionIds.slice(0,3));assert.equal(r.attempts[0].questionIds.length,s.questionIds.length);
+ assert.match(reviewText(r),new RegExp(`Answered: 3/${s.questionIds.length}; unanswered questions are not listed`));assert.match(recordHTML(r),/3\/\d+ answered; unanswered questions are not listed/);
+ assert.equal(s.questionSnapshots.length,s.questionIds.length,'the record itself keeps every question');
+ const many=newPortfolio();for(let i=0;i<60;i++){const a=createSession('foundation','learn',undefined,null,true);recordAnswer(a,a.questionIds[0],a.questionSnapshots[0].correct,'fairly');a.endedAt=new Date().toISOString();many.attempts.push(a);}
+ const exported=reviewRecord(many);assert.ok(JSON.stringify(exported).length<1_000_000&&reviewText(exported).length<1_000_000,'sixty whole-bank attempts ended after one answer export well under the limit');
 });
