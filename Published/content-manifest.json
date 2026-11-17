@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "format": "statsdirect-published-content-v1",
   "publisher": "StatsDirectHelpEditor",
-  "publicationId": "7fd9d645-ad32-4626-a3d2-e6ca9cf668e4",
-  "publishedAtUtc": "2026-11-15T16:16:14.6482711+00:00",
+  "publicationId": "895aadc2-02d8-4ee4-9690-7e2caffae468",
+  "publishedAtUtc": "2026-11-17T08:45:59.2332879+00:00",
   "producer": {
-    "version": "1.0.6\u002B420200394c62665834376f4069d1449762bf11ef",
-    "sourceCommit": "420200394c62665834376f4069d1449762bf11ef"
+    "version": "1.0.6\u002B6aec5f429917e7e99939b0eb5e5e68d9f490abc4",
+    "sourceCommit": "6aec5f429917e7e99939b0eb5e5e68d9f490abc4"
   },
-  "helpSourceSha256": "2d70e55173cb5d2584dd6ec4c89071e944e7a22b669db3e03e644d7968c1a1df",
+  "helpSourceSha256": "a95823fa70a631b0e718b8369007f70e764c9b30f37ac2c26e98f7449a4af379",
   "tutorSourceSha256": "3779ac876448b0fd685ba232f53c5da0801bce738d6ad8f23e2f997c657b0368",
   "artifacts": {
     "website": {
@@ -28,7 +28,7 @@
         {
           "path": ".statsdirect-help-website.json",
           "bytes": 120255,
-          "sha256": "6f4ca91aaee3968dff4a54adc535bb14f43512011b945e3caf22b2a4d2dbbb7b"
+          "sha256": "a494020511bc9aaab0e8de8aaad1113ffadec516f5b436bb163f5ac4539bfb7e"
         },
         {
           "path": "Data/Alias.xml",
@@ -47,8 +47,8 @@
         },
         {
           "path": "agreement/kappa.htm",
-          "bytes": 39146,
-          "sha256": "427d3fdf39576034c6f4e4883b330c7a3e2a45ccd9726ae3462c9f495cbf61cc"
+          "bytes": 41681,
+          "sha256": "687b949c99cd6ed90792fcdcd6cf9dba9a32c912bb475e5b6d9be9e836dbe49c"
         },
         {
           "path": "agreement/mcr.htm",
@@ -272,8 +272,8 @@
         },
         {
           "path": "basics/script_ai.htm",
-          "bytes": 12612,
-          "sha256": "ff8c2fa754b9292f409a01a50c6798897407b07ace5988e927ad7f28820dd7fe"
+          "bytes": 14123,
+          "sha256": "1ae53d67ec495f7d6a0c4572ab8ee943626d688c1bd8095ed5ab806fe90ba8ac"
         },
         {
           "path": "basics/statistics.htm",
@@ -298,7 +298,7 @@
         {
           "path": "build-info.json",
           "bytes": 219,
-          "sha256": "58f531fc959b05934cd0eecf78322f6c9ec4fa552f1fbf9c2efaee377e39a6f6"
+          "sha256": "cdc30c9370797d0479ab5142913cebe5af722ad6a79b2f9a9e838b35c0a30af9"
         },
         {
           "path": "chi_square_tests/22.htm",
@@ -3493,7 +3493,7 @@
         {
           "path": "resources/help-editor-runtime/publication.json",
           "bytes": 132,
-          "sha256": "f0d3621036c72ba457e3cd77cb3a59c96a0a83e954c4218e2c0717e1d8228141"
+          "sha256": "e5a14b515ccb655eb5917b0cd76110d3b0894dc8505f63dea56727601f9e11de"
         },
         {
           "path": "resources/help-editor-runtime/topic.css",
@@ -4072,8 +4072,8 @@
         },
         {
           "path": "search-index.js",
-          "bytes": 879325,
-          "sha256": "ac89cf0f204ef7b71371a3114bef66a6d52e785165aa044f8b063ec918f88796"
+          "bytes": 880138,
+          "sha256": "eeb2e988da39cb4212f6949cf82e72ee0e44f03c9845d0f666d310eb2e240a4d"
         },
         {
           "path": "survival_analysis/abridged_life_table.htm",
@@ -4421,7 +4421,7 @@
         {
           "path": ".statsdirect-desktop-help.json",
           "bytes": 221739,
-          "sha256": "f8d454dcc31b639ec95aada73956644a25207142bef7d7fe9fdde247f53b1258"
+          "sha256": "11fbc2bd0565d7d80a496fb0360c866d72a8d1074282299a0caabd933fe2dfad"
         },
         {
           "path": ".statsdirect-help-output.json",
@@ -4445,8 +4445,8 @@
         },
         {
           "path": "agreement/kappa.htm",
-          "bytes": 39169,
-          "sha256": "9953b881b6d5ee04147889d4b070b1b2b743db6e8ebaf7496d4af1215aed066f"
+          "bytes": 41704,
+          "sha256": "08bf4c8cf42bf127866fed0d7f48ecf1ccd8782a8e7761f2b5a2a243fc5ea6dc"
         },
         {
           "path": "agreement/mcr.htm",
@@ -4670,8 +4670,8 @@
         },
         {
           "path": "basics/script_ai.htm",
-          "bytes": 12635,
-          "sha256": "843804c14d68a0b596284eeb6d253678e471ec10ab9566d67ff14b9eeba5447f"
+          "bytes": 14146,
+          "sha256": "97146768e1e8bacbec8e56426b100682a491f982bab37c10ecb2c45e1f4beadb"
         },
         {
           "path": "basics/statistics.htm",
@@ -4696,7 +4696,7 @@
         {
           "path": "build-info.json",
           "bytes": 220,
-          "sha256": "71ed32565f9dde061fe44ac8aa7aabbe1271b63bbec21739dadd1f0afad5494d"
+          "sha256": "bb8c12d44411c6c42484d9bd0cde38755ae789fdb1c816b8ef97e88f193656af"
         },
         {
           "path": "chi_square_tests/22.htm",
@@ -7891,7 +7891,7 @@
         {
           "path": "resources/help-editor-runtime/publication.json",
           "bytes": 133,
-          "sha256": "348b4334ff2e105c4869469d4234c3a16ec35327731ebfdf5244a22f718acea6"
+          "sha256": "4d0e0c23a7c1af4830da3eddf3068ab363bdc68644e396c745e296376ae9e118"
         },
         {
           "path": "resources/help-editor-runtime/topic.css",
@@ -8470,8 +8470,8 @@
         },
         {
           "path": "search-index.js",
-          "bytes": 879367,
-          "sha256": "270c333868a7477ef88ce3b5e850f54722745aeae4d8701a5d86ef8db1a6b28d"
+          "bytes": 880180,
+          "sha256": "5b9de4c22d5c1b9d877d5d0265e27090035e9236e2b4b49e16692f7e4238f736"
         },
         {
           "path": "survival_analysis/abridged_life_table.htm",
@@ -8819,8 +8819,8 @@
       "files": [
         {
           "path": "README.md",
-          "bytes": 691,
-          "sha256": "827c9ec40a349c7fe351c97b556fe32f6d8d379b35030800044f127513647ea1"
+          "bytes": 699,
+          "sha256": "d1882f2adea41402cb0e661534eb8b4be05752ec60b9f5e3fe6598d2532e87b4"
         },
         {
           "path": "bank.mjs",
@@ -8835,7 +8835,7 @@
         {
           "path": "manifest.json",
           "bytes": 43737,
-          "sha256": "7afdd1a7ce7bad7988fa0649bc8c6438ffe58dccc10d5db3042bde0726cfe010"
+          "sha256": "3d1579ae986c0e641dbae914b3c47cb3540f407a498201145c2377be3d7f5018"
         },
         {
           "path": "questions.json",

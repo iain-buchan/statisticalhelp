@@ -29,7 +29,15 @@ html[data-help-skin="warm-paper"] #help-topic-body a:not(svg a):not(math a){colo
         <p> </p>
         <p>The pane docks at the right of the window. <b>Pop out</b> makes it a window of its own and <b>Dock</b> brings it back; <b>Close</b> hides it, keeping the conversation and any question not yet sent. Each script has its own conversation, kept while the script is open and gone when it closes; <b>New conversation</b> starts afresh, and what was shared before is not carried into it. If the connection drops, the status line says why and <b>Send</b> connects again.</p>
         <p> </p>
-        <p>An organisation can switch the assistant off for its users with the policy value DisableOnlineTutor, a DWORD other than zero under Software\Policies\StatsDirect in HKEY_LOCAL_MACHINE or HKEY_CURRENT_USER; the pane then says <b>AI disabled by policy</b>.</p>
+        <p>AI restrictions are off unless an administrator sets them in Windows policy; StatsDirect has no setting of its own for them. The policy value AISecurityLevel, a DWORD under Software\Policies\StatsDirect in HKEY_LOCAL_MACHINE, sets the level for this assistant and for the Learning tutor. Restart StatsDirect after changing it.</p>
+        <p> </p>
+        <p><b>Level 1</b>, or no value, is unrestricted: the assistant works as described above.</p>
+        <p> </p>
+        <p><b>Level 2</b> restricts data sharing. Each <b>Send</b> sends only the question you type, and the assistant can consult the method help that comes with StatsDirect. Scripts, R output, reports, workbooks and the earlier conversation stay on your computer, the sharing choices are locked, and the pane says <b>Data sharing is disabled by your organisation</b>. Text typed or pasted into the question still goes to OpenAI, so leave out confidential data.</p>
+        <p> </p>
+        <p><b>Level 3</b> restricts AI. StatsDirect does not connect, sign in or send anything, and the pane says <b>AI restricted by policy</b>. Analysis, R, lessons and help work as usual.</p>
+        <p> </p>
+        <p>Any other value, or a policy that cannot be read, is treated as level 3. At level 2 an administrator can also require the organisation's ChatGPT Enterprise workspace with the string value ChatGPTWorkspaceId, the UUID of the workspace, under the same key; sign-in to any other workspace or to a personal account is then refused, and a malformed value blocks the connection. The earlier value DisableOnlineTutor, a DWORD other than zero in HKEY_LOCAL_MACHINE or HKEY_CURRENT_USER, still gives level 3, and DisableAIDataSharing, a DWORD other than zero in HKEY_LOCAL_MACHINE, gives level 2.</p>
         <p> </p>
         <p><b>Help &gt; Learning</b> opens the lesson library, where the same tutor teaches statistics with StatsDirect and R, and <b>Learning Options</b> sets its preferences.</p>
     <footer class="help-shared-footer">
