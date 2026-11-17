@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {questions,tracks} from './bank.mjs';
 import {lessonChecks} from './lesson-checks.mjs';
 import {createSession,recordAnswer,recordAssistance,learnerResult,sessionQuestion,reviewBundle} from './quiz.mjs';
-import {newPortfolio,restorePortfolio,packPortfolio,reviewRecord,reviewText,transcriptEntry,practiceContext} from './portfolio.mjs';
+import {newPortfolio,restorePortfolio,packPortfolio,reviewRecord,recordQuestion,reviewText,transcriptEntry,practiceContext} from './portfolio.mjs';
 import {recordHTML} from './record-html.mjs';
 import {contentFile,runR} from './test-config.mjs';
 const lessons=JSON.parse(readFileSync(contentFile('Learn/lessons.json')));
@@ -170,6 +170,49 @@ test('an attempt ended early is exported with the questions that were answered',
  assert.equal(r.attempts[0].status,'ended early');assert.deepEqual(r.attempts[0].questionSnapshots.map(q=>q.id),s.questionIds.slice(0,3));assert.equal(r.attempts[0].questionIds.length,s.questionIds.length);
  assert.match(reviewText(r),new RegExp(`Answered: 3/${s.questionIds.length}; unanswered questions are not listed`));assert.match(recordHTML(r),/3\/\d+ answered; unanswered questions are not listed/);
  assert.equal(s.questionSnapshots.length,s.questionIds.length,'the record itself keeps every question');
- const many=newPortfolio();for(let i=0;i<60;i++){const a=createSession('foundation','learn',undefined,null,true);recordAnswer(a,a.questionIds[0],a.questionSnapshots[0].correct,'fairly');a.endedAt=new Date().toISOString();many.attempts.push(a);}
- const exported=reviewRecord(many);assert.ok(JSON.stringify(exported).length<1_000_000&&reviewText(exported).length<1_000_000,'sixty whole-bank attempts ended after one answer export well under the limit');
+ const size=n=>{const many=newPortfolio();for(let i=0;i<n;i++){const a=createSession('foundation','learn',undefined,null,true);recordAnswer(a,a.questionIds[0],a.questionSnapshots[0].correct,'fairly');a.endedAt=new Date().toISOString();many.attempts.push(a);}const exported=reviewRecord(many);return JSON.stringify(exported).length+reviewText(exported).length;};
+ const whole=newPortfolio(),full=createSession('foundation','learn',undefined,null,true);for(const q of full.questionSnapshots)recordAnswer(full,q.id,q.correct,'fairly');whole.attempts.push(full);
+ const oneFull=JSON.stringify(reviewRecord(whole)).length,each=(size(61)-size(1))/60;
+ assert.ok(each<oneFull/20,`an attempt ended after one answer adds ${Math.round(each)} to the export, which must be a small part of a whole attempt (${oneFull})`);
+});
+test('a repeated question is exported in full once and referred to afterwards, with every answer kept',()=>{
+ const p=newPortfolio(),answerAll=(s,confidence,why)=>{for(const q of s.questionSnapshots)recordAnswer(s,q.id,q.correct,confidence,why);return s;};
+ const first=answerAll(createSession('foundation','learn'),'fairly','First reasoning.'),second=answerAll(createSession('foundation','learn'),'confident','Second reasoning.');
+ first.contentPublication={source:'publication',items:[1,2,3]};second.contentPublication={items:[1,2,3],source:'publication'};
+ p.attempts.push(first);const single=reviewRecord(p);
+ assert.ok(single.attempts[0].questionSnapshots.every(q=>q.sameAsAttempt===undefined&&q.stem),'a record in which nothing repeats is exported in full, as before');
+ assert.deepEqual(single.attempts[0].contentPublication,first.contentPublication);assert.doesNotMatch(reviewText(single),/as in the attempt started/);
+ p.attempts.push(second);const r=reviewRecord(p),n=first.questionIds.length,text=reviewText(r),html=recordHTML(r),q0=first.questionSnapshots[0];
+ assert.ok(r.attempts[0].questionSnapshots.every(q=>q.sameAsAttempt===undefined));
+ assert.deepEqual(r.attempts[1].questionSnapshots,first.questionIds.map(id=>({id,sameAsAttempt:0})));
+ assert.deepEqual(r.attempts[1].contentPublication,{sameAsAttempt:0},'the same publication is named once whatever its key order');
+ assert.deepEqual(recordQuestion(r,r.attempts[1].questionSnapshots[0]),r.attempts[0].questionSnapshots[0]);assert.equal(recordQuestion(r,r.attempts[0].questionSnapshots[0]),r.attempts[0].questionSnapshots[0]);
+ assert.equal(r.attempts[1].answers.length,n);assert.equal(r.attempts[1].result.score,n);assert.equal(r.attempts[1].questionIds.length,n);
+ const count=(hay,needle)=>hay.split(needle).length-1;
+ assert.equal(count(text,q0.stem),1);assert.equal(count(text,`${q0.id} v${q0.version} — ${q0.topic}`),2);assert.equal(count(text,`Question, options and feedback as in the attempt started ${first.startedAt}.`),n);
+ assert.equal(count(text,'First reasoning.'),n);assert.equal(count(text,'Second reasoning.'),n);assert.equal(count(text,'Feedback: '),n);assert.equal(count(text,'First answer: '),2*n);
+ assert.equal(count(html,'<ol type="A">'),n);assert.equal(count(html,'Second reasoning.'),n);assert.equal(count(html,'as in the attempt started'),n);
+ assert.equal(second.questionSnapshots.length,n,'the record in memory keeps every snapshot');
+ const more=structuredClone(p);for(let i=0;i<8;i++)more.attempts.push(answerAll(createSession('foundation','learn'),'fairly','Because.'));
+ const one=JSON.stringify(single).length,many=reviewRecord(more),perRepeat=(JSON.stringify(many).length-JSON.stringify(r).length)/8,perRepeatText=(reviewText(many).length-text.length)/8;
+ assert.ok(perRepeat<one*0.4,`a repeated attempt adds ${Math.round(perRepeat)} to the JSON, which must be well under a first attempt (${one})`);
+ assert.ok(perRepeatText<reviewText(single).length*0.5,`a repeated attempt adds ${Math.round(perRepeatText)} to the text`);
+});
+test('a changed question is exported in full again, and an unfinished independent practice neither gives nor borrows a key',()=>{
+ const p=newPortfolio(),done=createSession('foundation','learn'),q=questions.find(x=>x.id===done.questionIds[0]),oldStem=q.stem;
+ for(const s of done.questionSnapshots)recordAnswer(done,s.id,s.correct,'fairly');p.attempts.push(done);
+ try{
+  q.stem='Replacement question';const changed=createSession('foundation','learn');for(const s of changed.questionSnapshots)recordAnswer(changed,s.id,s.correct,'fairly');p.attempts.push(changed);
+  const again=createSession('foundation','learn');for(const s of again.questionSnapshots)recordAnswer(again,s.id,s.correct,'fairly');p.attempts.push(again);
+  const r=reviewRecord(p),text=reviewText(r);
+  assert.equal(r.attempts[1].questionSnapshots[0].stem,'Replacement question');assert.deepEqual(r.attempts[1].questionSnapshots[1],{id:done.questionIds[1],sameAsAttempt:0});
+  assert.deepEqual(r.attempts[2].questionSnapshots[0],{id:q.id,sameAsAttempt:1});assert.equal(recordQuestion(r,r.attempts[2].questionSnapshots[0]).stem,'Replacement question');
+  assert.ok(text.includes(oldStem)&&text.includes('Replacement question'));
+ }finally{q.stem=oldStem;}
+ const t=newPortfolio(),learn=createSession('foundation','learn');for(const s of learn.questionSnapshots)recordAnswer(learn,s.id,s.correct,'fairly');t.attempts.push(learn);
+ t.quiz=createSession('foundation','test');const first=t.quiz.questionSnapshots[0];recordAnswer(t.quiz,first.id,first.correct,'confident');
+ let r=reviewRecord(t);assert.ok(r.attempts[1].questionSnapshots.every(s=>s.sameAsAttempt===undefined&&s.stem&&s.correct===undefined&&s.explanation===undefined),'the withheld form stands alone');
+ const block=reviewText(r).split('Independent practice (unsupervised)')[1].split('DOCUMENT SHARING CONFIRMATIONS')[0];
+ assert.doesNotMatch(block,/as in the attempt started/);assert.doesNotMatch(block,/Key: [A-H]\b/);assert.match(block,/withheld until the attempt ends/);
+ t.quiz.endedAt=new Date().toISOString();r=reviewRecord(t);assert.deepEqual(r.attempts[1].questionSnapshots,[{id:first.id,sameAsAttempt:0}],'once ended, its answered question is the same content as before');
 });

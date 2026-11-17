@@ -66,13 +66,25 @@ export function transcriptEntry(state,role,text,source='study guide',details={})
   const entry={id:crypto.randomUUID(),at:new Date().toISOString(),role,text,source,...details};
   state.conversation.push(entry); return entry;
 }
+// The exported record. A question, and a content publication, is given in full the first time that exact content
+// appears and referred to afterwards ({id, sameAsAttempt} and {sameAsAttempt}: the index in attempts of the attempt
+// that carries it in full), so repeated practice on the same questions does not repeat their text. The comparison
+// is on the snapshot as exported, so the withheld form of an unfinished independent practice never refers to, or is
+// referred to by, a snapshot that shows the key. A record in which nothing repeats is exported as it always was.
+export function recordQuestion(record,entry) {
+  return entry.sameAsAttempt===undefined?entry:record.attempts[entry.sameAsAttempt].questionSnapshots.find(q=>q.id===entry.id&&q.sameAsAttempt===undefined);
+}
 export function reviewRecord(state) {
-  const attempts=[...state.attempts,...(state.quiz?[state.quiz]:[])].map(session=>({
-    ...structuredClone(session),
+  const seenQuestions=new Map(),seenPublications=new Map();
+  const attempts=[...state.attempts,...(state.quiz?[state.quiz]:[])].map((session,index)=>{
+    const {questionSnapshots:inMemory,...rest}=session; // Rebuilt below; cloning them first would copy every question twice.
+    const copy={...structuredClone(rest),
     answers:session.answers.map(a=>{const copy=structuredClone(a);if(session.mode==='test'&&!session.completedAt&&!session.endedAt)delete copy.correct;return copy;}),result:session.completedAt?learnerResult(session):null,
-    questionSnapshots:(session.endedAt&&!session.completedAt?session.questionIds.slice(0,session.answers.length):session.questionIds).map(id=>{const q=structuredClone(sessionQuestion(session,id));if(session.mode==='test'&&!session.completedAt&&!session.endedAt){delete q.correct;delete q.explanation;delete q.hint;delete q.lesson;q.options=q.options.map(({id,text})=>({id,text}));}return q;}),
-    status:session.completedAt?'completed':session.endedAt?'ended early':'in progress'
-  }));
+    questionSnapshots:(session.endedAt&&!session.completedAt?session.questionIds.slice(0,session.answers.length):session.questionIds).map(id=>{const q=structuredClone(sessionQuestion(session,id));if(session.mode==='test'&&!session.completedAt&&!session.endedAt){delete q.correct;delete q.explanation;delete q.hint;delete q.lesson;q.options=q.options.map(({id,text})=>({id,text}));}const key=canonical(q),first=seenQuestions.get(key);if(first!==undefined)return {id:q.id,sameAsAttempt:first};seenQuestions.set(key,index);return q;}),
+    status:session.completedAt?'completed':session.endedAt?'ended early':'in progress'};
+    if(copy.contentPublication!==null&&typeof copy.contentPublication==='object'){const key=canonical(copy.contentPublication),first=seenPublications.get(key);if(first!==undefined)copy.contentPublication={sameAsAttempt:first};else seenPublications.set(key,index);}
+    return copy;
+  });
   return {schemaVersion:2,exportedAt:new Date().toISOString(),portfolioID:state.id,startedAt:state.startedAt,
     learner:structuredClone(state.identity),learningOptions:structuredClone(state.learning),pathway:tracks[state.profile].title,rExperience:stages[state.stage],
     diagnostics:structuredClone(state.diagnostics??{}),bankVersion,questionSource:'StatsDirect items are original teaching material. Provider items retain the course and version recorded with each attempt. These are not official examination questions.',
@@ -87,9 +99,9 @@ export function reviewText(record) {
     if(a.course)lines.push(`Provider assessment: ${a.course.title} · ${a.course.provider} · version ${a.course.version}`);
     if(a.questionSet==='all')lines.push('Question set: All questions');
     lines.push('',`${tracks[a.track].title} — ${a.mode==='test'?'Independent practice (unsupervised)':'Supported practice'} — ${a.status}`,`Started: ${a.startedAt} | Completed: ${a.completedAt || 'not completed'}`,a.result?`Provisional score: ${a.result.score}/${a.result.total}; ${a.result.assisted} answers flagged as assisted`:`Answered: ${a.answers.length}/${a.questionIds.length}${a.status==='ended early'?'; unanswered questions are not listed':''}`);
-    for(const q of a.questionSnapshots) {
-      const answer=a.answers.find(x=>x.questionId===q.id);
-      lines.push('',`${q.id} v${q.version} — ${q.topic}`,q.stem,...q.options.map(o=>`${o.id}. ${o.text}`),`First answer: ${answer?.choice || 'not answered'} | Key: ${q.correct || 'withheld until the attempt ends'}`,`Confidence: ${answer?.confidence || 'not recorded'} | Assisted: ${answer?.assisted??false}`,`Reasoning before answer: ${answer?.reasoning || '(none)'}`,`Reflection after feedback: ${answer?.reflection || '(none)'}`,`Feedback: ${q.explanation || 'withheld until the attempt ends'}`,q.help?`Help: https://www.statsdirect.com/help/${q.help}`:'');
+    for(const entry of a.questionSnapshots) {
+      const q=recordQuestion(record,entry),repeat=entry.sameAsAttempt!==undefined,answer=a.answers.find(x=>x.questionId===q.id);
+      lines.push('',`${q.id} v${q.version} — ${q.topic}`,...(repeat?[`Question, options and feedback as in the attempt started ${record.attempts[entry.sameAsAttempt].startedAt}.`]:[q.stem,...q.options.map(o=>`${o.id}. ${o.text}`)]),`First answer: ${answer?.choice || 'not answered'} | Key: ${q.correct || 'withheld until the attempt ends'}`,`Confidence: ${answer?.confidence || 'not recorded'} | Assisted: ${answer?.assisted??false}`,`Reasoning before answer: ${answer?.reasoning || '(none)'}`,`Reflection after feedback: ${answer?.reflection || '(none)'}`,...(repeat?[]:[`Feedback: ${q.explanation || 'withheld until the attempt ends'}`,q.help?`Help: https://www.statsdirect.com/help/${q.help}`:'']));
     }
   }
   lines.push('','DOCUMENT SHARING CONFIRMATIONS');
