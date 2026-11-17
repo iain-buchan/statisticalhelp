@@ -123,8 +123,8 @@ test('the saved form stores each question and publication once and restores ever
  assert.equal(packed.schemaVersion,2);assert.equal(packed.quiz.mode,'test');assert.equal(packed.quiz.completedAt,null);
  assert.equal(packed.sharedContent.questions.length,questions.length);
  assert.ok(packed.sharedContent.publications.length<=1);
- for(const s of [...packed.attempts,packed.quiz]){assert.equal(s.questionSnapshots,undefined);assert.equal(s.questionRefs.length,s.questionIds.length);assert.ok(!('contentPublication' in s)||s.contentPublication===null);}
- assert.equal(p.attempts[0].questionSnapshots.length,questions.length,'packing leaves the record in memory as it was');
+ [...packed.attempts,packed.quiz].forEach((s,i)=>{const original=[...p.attempts,p.quiz][i];assert.equal(s.questionSnapshots,undefined);assert.equal(s.questionIds,undefined);assert.equal(s.questionRefs.length,original.questionIds.length);assert.ok(!('contentPublication' in s)||s.contentPublication===null);});
+ assert.equal(p.attempts[0].questionSnapshots.length,questions.length,'packing leaves the record in memory as it was');assert.equal(p.attempts[0].questionIds.length,questions.length);
  const restored=restorePortfolio(saved);
  assert.deepEqual(JSON.parse(JSON.stringify(restored)),JSON.parse(JSON.stringify({...newPortfolio(),...p,training:restored.training,learning:restored.learning})));
  assert.equal(restored.sharedContent,undefined);assert.notEqual(restored.attempts[0].questionSnapshots[0],restored.attempts[1].questionSnapshots[0]);
@@ -146,15 +146,30 @@ test('the saved form keeps a question as it was asked, ignores key order and sti
   assert.equal(packed.sharedContent.questions.length,new Set(s.questionIds).size+1,'unchanged questions are stored once whatever their key order');
   const back=restorePortfolio(JSON.parse(JSON.stringify(packed)));
   assert.equal(sessionQuestion(back.attempts[0],q.id).stem,oldStem);assert.equal(sessionQuestion(back.attempts[0],q.id).correct,oldKey);assert.equal(sessionQuestion(back.attempts[1],q.id).stem,'Replacement question');
+  assert.deepEqual(back.attempts[0].questionIds,s.questionIds);
  }finally{q.stem=oldStem;q.correct=oldKey;}
  const legacy=JSON.parse(JSON.stringify(p));assert.equal(legacy.sharedContent,undefined);
  assert.deepEqual(restorePortfolio(legacy).attempts[0].questionSnapshots,p.attempts[0].questionSnapshots);
+ const bare=newPortfolio(),old=createSession('foundation','learn');delete old.questionSnapshots;bare.attempts.push(old);
+ const kept=packPortfolio(bare).attempts[0];assert.equal(kept.questionRefs,undefined);assert.deepEqual(kept.questionIds,old.questionIds);
+ assert.deepEqual(restorePortfolio(JSON.parse(JSON.stringify(packPortfolio(bare)))).attempts[0].questionIds,old.questionIds);
 });
 test('a saved form with a broken reference is refused, not repaired',()=>{
  const p=newPortfolio();p.quiz=createSession('foundation','learn');
  const good=()=>JSON.parse(JSON.stringify(packPortfolio(p)));
- for(const corrupt of [x=>x.quiz.questionRefs[0]=9999,x=>x.quiz.questionRefs[0]=-1,x=>x.quiz.questionRefs[0]='0',x=>x.quiz.questionRefs='all',x=>x.sharedContent.questions=null,x=>x.sharedContent=[],x=>x.quiz.questionSnapshots=[],x=>x.quiz.questionRefs.pop(),x=>{if(x.quiz.publicationRef===undefined)x.quiz.publicationRef=0;else x.quiz.publicationRef=5;}]){
+ for(const corrupt of [x=>x.quiz.questionRefs[0]=9999,x=>x.quiz.questionRefs[0]=-1,x=>x.quiz.questionRefs[0]='0',x=>x.quiz.questionRefs='all',x=>x.quiz.questionRefs=[],x=>x.quiz.questionRefs[1]=x.quiz.questionRefs[0],x=>x.sharedContent.questions=null,x=>x.sharedContent.questions[0]={id:'x'},x=>x.sharedContent=[],x=>x.quiz.questionSnapshots=[],x=>x.quiz.questionIds=['x'],x=>{if(x.quiz.publicationRef===undefined)x.quiz.publicationRef=0;else x.quiz.publicationRef=5;}]){
   const x=good();corrupt(x);assert.throws(()=>restorePortfolio(x),/incompatible/);
  }
  assert.doesNotThrow(()=>restorePortfolio(good()));
+});
+test('an attempt ended early is exported with the questions that were answered',()=>{
+ const p=newPortfolio(),s=createSession('foundation','learn',undefined,null,true);
+ for(const q of s.questionSnapshots.slice(0,3))recordAnswer(s,q.id,q.correct,'fairly');
+ p.quiz=s;let r=reviewRecord(p);assert.equal(r.attempts[0].status,'in progress');assert.equal(r.attempts[0].questionSnapshots.length,s.questionIds.length);
+ s.endedAt=new Date().toISOString();p.attempts.push(s);p.quiz=null;r=reviewRecord(p);
+ assert.equal(r.attempts[0].status,'ended early');assert.deepEqual(r.attempts[0].questionSnapshots.map(q=>q.id),s.questionIds.slice(0,3));assert.equal(r.attempts[0].questionIds.length,s.questionIds.length);
+ assert.match(reviewText(r),new RegExp(`Answered: 3/${s.questionIds.length}; unanswered questions are not listed`));assert.match(recordHTML(r),/3\/\d+ answered; unanswered questions are not listed/);
+ assert.equal(s.questionSnapshots.length,s.questionIds.length,'the record itself keeps every question');
+ const many=newPortfolio();for(let i=0;i<60;i++){const a=createSession('foundation','learn',undefined,null,true);recordAnswer(a,a.questionIds[0],a.questionSnapshots[0].correct,'fairly');a.endedAt=new Date().toISOString();many.attempts.push(a);}
+ const exported=reviewRecord(many);assert.ok(JSON.stringify(exported).length<1_000_000&&reviewText(exported).length<1_000_000,'sixty whole-bank attempts ended after one answer export well under the limit');
 });

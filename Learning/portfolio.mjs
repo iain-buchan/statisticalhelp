@@ -9,13 +9,16 @@ export function newPortfolio() {
 // they were asked and the publication they came from; saved inline, one whole-bank attempt cost about a quarter of a
 // megabyte. packPortfolio stores each distinct question and publication once, in sharedContent, and an attempt refers
 // to them by position. restorePortfolio gives every attempt its own copies back, so the record in memory is unchanged.
+// The question ids are the referred questions' ids in order, so the saved form does not repeat them; a page older than
+// the saved form therefore refuses such a record (not overwritten) instead of showing it with its own bank's wording.
 const canonical=v=>Array.isArray(v)?'['+v.map(x=>x===undefined?'null':canonical(x)).join(',')+']':v!==null&&typeof v==='object'?'{'+Object.keys(v).filter(k=>v[k]!==undefined).sort().map(k=>JSON.stringify(k)+':'+canonical(v[k])).join(',')+'}':JSON.stringify(v);
 export function packPortfolio(state) {
   const questions=[],publications=[],seen=new Map();
   const intern=(list,kind,value)=>{const key=kind+canonical(value);if(!seen.has(key)){seen.set(key,list.length);list.push(value);}return seen.get(key);};
   const pack=session=>{
-    const {questionSnapshots,contentPublication,...rest}=session;
-    if(Array.isArray(questionSnapshots))rest.questionRefs=questionSnapshots.map(q=>intern(questions,'q',q));
+    const {questionSnapshots,contentPublication,questionIds,...rest}=session;
+    if(Array.isArray(questionSnapshots)&&Array.isArray(questionIds)&&questionSnapshots.length===questionIds.length&&questionSnapshots.every((q,i)=>q?.id===questionIds[i]))rest.questionRefs=questionSnapshots.map(q=>intern(questions,'q',q));
+    else{rest.questionIds=questionIds;if(questionSnapshots!==undefined)rest.questionSnapshots=questionSnapshots;}
     if(contentPublication!==null&&typeof contentPublication==='object')rest.publicationRef=intern(publications,'p',contentPublication);
     else if(contentPublication!==undefined)rest.contentPublication=contentPublication;
     return rest;
@@ -32,7 +35,7 @@ function unpackPortfolio(value) {
   const unpack=session=>{
     if(!object(session))return session;
     const {questionRefs,publicationRef,...rest}=session;
-    if(questionRefs!==undefined){if(!Array.isArray(questionRefs)||rest.questionSnapshots!==undefined)fail();rest.questionSnapshots=questionRefs.map(i=>at(shared.questions,i));}
+    if(questionRefs!==undefined){if(!Array.isArray(questionRefs)||rest.questionSnapshots!==undefined||rest.questionIds!==undefined)fail();rest.questionSnapshots=questionRefs.map(i=>at(shared.questions,i));rest.questionIds=rest.questionSnapshots.map(q=>q?.id);}
     if(publicationRef!==undefined){if(rest.contentPublication!==undefined)fail();rest.contentPublication=at(shared.publications,publicationRef);}
     return rest;
   };
@@ -67,7 +70,7 @@ export function reviewRecord(state) {
   const attempts=[...state.attempts,...(state.quiz?[state.quiz]:[])].map(session=>({
     ...structuredClone(session),
     answers:session.answers.map(a=>{const copy=structuredClone(a);if(session.mode==='test'&&!session.completedAt&&!session.endedAt)delete copy.correct;return copy;}),result:session.completedAt?learnerResult(session):null,
-    questionSnapshots:session.questionIds.map(id=>{const q=structuredClone(sessionQuestion(session,id));if(session.mode==='test'&&!session.completedAt&&!session.endedAt){delete q.correct;delete q.explanation;delete q.hint;delete q.lesson;q.options=q.options.map(({id,text})=>({id,text}));}return q;}),
+    questionSnapshots:(session.endedAt&&!session.completedAt?session.questionIds.slice(0,session.answers.length):session.questionIds).map(id=>{const q=structuredClone(sessionQuestion(session,id));if(session.mode==='test'&&!session.completedAt&&!session.endedAt){delete q.correct;delete q.explanation;delete q.hint;delete q.lesson;q.options=q.options.map(({id,text})=>({id,text}));}return q;}),
     status:session.completedAt?'completed':session.endedAt?'ended early':'in progress'
   }));
   return {schemaVersion:2,exportedAt:new Date().toISOString(),portfolioID:state.id,startedAt:state.startedAt,
@@ -83,7 +86,7 @@ export function reviewText(record) {
   for(const a of record.attempts) {
     if(a.course)lines.push(`Provider assessment: ${a.course.title} · ${a.course.provider} · version ${a.course.version}`);
     if(a.questionSet==='all')lines.push('Question set: All questions');
-    lines.push('',`${tracks[a.track].title} — ${a.mode==='test'?'Independent practice (unsupervised)':'Supported practice'} — ${a.status}`,`Started: ${a.startedAt} | Completed: ${a.completedAt || 'not completed'}`,a.result?`Provisional score: ${a.result.score}/${a.result.total}; ${a.result.assisted} answers flagged as assisted`:`Answered: ${a.answers.length}/${a.questionIds.length}`);
+    lines.push('',`${tracks[a.track].title} — ${a.mode==='test'?'Independent practice (unsupervised)':'Supported practice'} — ${a.status}`,`Started: ${a.startedAt} | Completed: ${a.completedAt || 'not completed'}`,a.result?`Provisional score: ${a.result.score}/${a.result.total}; ${a.result.assisted} answers flagged as assisted`:`Answered: ${a.answers.length}/${a.questionIds.length}${a.status==='ended early'?'; unanswered questions are not listed':''}`);
     for(const q of a.questionSnapshots) {
       const answer=a.answers.find(x=>x.questionId===q.id);
       lines.push('',`${q.id} v${q.version} — ${q.topic}`,q.stem,...q.options.map(o=>`${o.id}. ${o.text}`),`First answer: ${answer?.choice || 'not answered'} | Key: ${q.correct || 'withheld until the attempt ends'}`,`Confidence: ${answer?.confidence || 'not recorded'} | Assisted: ${answer?.assisted??false}`,`Reasoning before answer: ${answer?.reasoning || '(none)'}`,`Reflection after feedback: ${answer?.reflection || '(none)'}`,`Feedback: ${q.explanation || 'withheld until the attempt ends'}`,q.help?`Help: https://www.statsdirect.com/help/${q.help}`:'');
