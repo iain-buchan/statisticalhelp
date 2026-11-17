@@ -181,7 +181,8 @@ test('a repeated question is exported in full once and referred to afterwards, w
  first.contentPublication={source:'publication',items:[1,2,3]};second.contentPublication={items:[1,2,3],source:'publication'};
  p.attempts.push(first);const single=reviewRecord(p);
  assert.ok(single.attempts[0].questionSnapshots.every(q=>q.sameAsAttempt===undefined&&q.stem),'a record in which nothing repeats is exported in full, as before');
- assert.deepEqual(single.attempts[0].contentPublication,first.contentPublication);assert.doesNotMatch(reviewText(single),/as in the attempt started/);
+ assert.deepEqual(single.attempts[0].contentPublication,first.contentPublication);assert.equal(single.repeatedContent,undefined);
+ assert.doesNotMatch(reviewText(single),/as in attempt|Attempt 1/);assert.doesNotMatch(recordHTML(single),/as in attempt|Attempt 1|started /);assert.ok(recordHTML(single).includes(`<h4>${first.questionSnapshots[0].topic.replace(/&/g,'&amp;')}</h4>`),'without repeats a question is headed by its topic, as before');
  p.attempts.push(second);const r=reviewRecord(p),n=first.questionIds.length,text=reviewText(r),html=recordHTML(r),q0=first.questionSnapshots[0];
  assert.ok(r.attempts[0].questionSnapshots.every(q=>q.sameAsAttempt===undefined));
  assert.deepEqual(r.attempts[1].questionSnapshots,first.questionIds.map(id=>({id,sameAsAttempt:0})));
@@ -189,14 +190,19 @@ test('a repeated question is exported in full once and referred to afterwards, w
  assert.deepEqual(recordQuestion(r,r.attempts[1].questionSnapshots[0]),r.attempts[0].questionSnapshots[0]);assert.equal(recordQuestion(r,r.attempts[0].questionSnapshots[0]),r.attempts[0].questionSnapshots[0]);
  assert.equal(r.attempts[1].answers.length,n);assert.equal(r.attempts[1].result.score,n);assert.equal(r.attempts[1].questionIds.length,n);
  const count=(hay,needle)=>hay.split(needle).length-1;
- assert.equal(count(text,q0.stem),1);assert.equal(count(text,`${q0.id} v${q0.version} — ${q0.topic}`),2);assert.equal(count(text,`Question, options and feedback as in the attempt started ${first.startedAt}.`),n);
+ assert.match(r.repeatedContent,/sameAsAttempt: n/);
+ assert.equal(count(text,q0.stem),1);assert.equal(count(text,`${q0.id} v${q0.version} — ${q0.topic}`),2);assert.equal(count(text,'Question, options and feedback as in attempt 1.'),n);
+ assert.equal(count(text,'\nAttempt 1 — '),1);assert.equal(count(text,'\nAttempt 2 — '),1);assert.ok(text.includes(`Started: ${first.startedAt}`));
  assert.equal(count(text,'First reasoning.'),n);assert.equal(count(text,'Second reasoning.'),n);assert.equal(count(text,'Feedback: '),n);assert.equal(count(text,'First answer: '),2*n);
- assert.equal(count(html,'<ol type="A">'),n);assert.equal(count(html,'Second reasoning.'),n);assert.equal(count(html,'as in the attempt started'),n);
+ assert.equal(count(html,'<ol type="A">'),n);assert.equal(count(html,'Second reasoning.'),n);assert.equal(count(html,'Question, options and feedback as in attempt 1.'),n);
+ assert.equal(count(html,'<h3>Attempt 1 · '),1);assert.equal(count(html,'<h3>Attempt 2 · '),1);assert.ok(html.includes(` · started ${first.startedAt}</h3>`)&&html.includes(` · started ${second.startedAt}</h3>`));
+ assert.equal(count(html,`<h4>${q0.id} v${q0.version} — `),2,'a repeated question can be matched to its full form by id and version');
  assert.equal(second.questionSnapshots.length,n,'the record in memory keeps every snapshot');
  const more=structuredClone(p);for(let i=0;i<8;i++)more.attempts.push(answerAll(createSession('foundation','learn'),'fairly','Because.'));
  const one=JSON.stringify(single).length,many=reviewRecord(more),perRepeat=(JSON.stringify(many).length-JSON.stringify(r).length)/8,perRepeatText=(reviewText(many).length-text.length)/8;
  assert.ok(perRepeat<one*0.4,`a repeated attempt adds ${Math.round(perRepeat)} to the JSON, which must be well under a first attempt (${one})`);
  assert.ok(perRepeatText<reviewText(single).length*0.5,`a repeated attempt adds ${Math.round(perRepeatText)} to the text`);
+ const perRepeatHTML=(recordHTML(many).length-html.length)/8;assert.ok(perRepeatHTML<recordHTML(single).length*0.5,`a repeated attempt adds ${Math.round(perRepeatHTML)} to the HTML`);
 });
 test('a changed question is exported in full again, and an unfinished independent practice neither gives nor borrows a key',()=>{
  const p=newPortfolio(),done=createSession('foundation','learn'),q=questions.find(x=>x.id===done.questionIds[0]),oldStem=q.stem;
@@ -213,6 +219,6 @@ test('a changed question is exported in full again, and an unfinished independen
  t.quiz=createSession('foundation','test');const first=t.quiz.questionSnapshots[0];recordAnswer(t.quiz,first.id,first.correct,'confident');
  let r=reviewRecord(t);assert.ok(r.attempts[1].questionSnapshots.every(s=>s.sameAsAttempt===undefined&&s.stem&&s.correct===undefined&&s.explanation===undefined),'the withheld form stands alone');
  const block=reviewText(r).split('Independent practice (unsupervised)')[1].split('DOCUMENT SHARING CONFIRMATIONS')[0];
- assert.doesNotMatch(block,/as in the attempt started/);assert.doesNotMatch(block,/Key: [A-H]\b/);assert.match(block,/withheld until the attempt ends/);
+ assert.doesNotMatch(block,/as in attempt/);assert.doesNotMatch(block,/Key: [A-H]\b/);assert.match(block,/withheld until the attempt ends/);
  t.quiz.endedAt=new Date().toISOString();r=reviewRecord(t);assert.deepEqual(r.attempts[1].questionSnapshots,[{id:first.id,sameAsAttempt:0}],'once ended, its answered question is the same content as before');
 });

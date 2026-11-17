@@ -70,7 +70,9 @@ export function transcriptEntry(state,role,text,source='study guide',details={})
 // appears and referred to afterwards ({id, sameAsAttempt} and {sameAsAttempt}: the index in attempts of the attempt
 // that carries it in full), so repeated practice on the same questions does not repeat their text. The comparison
 // is on the snapshot as exported, so the withheld form of an unfinished independent practice never refers to, or is
-// referred to by, a snapshot that shows the key. A record in which nothing repeats is exported as it always was.
+// referred to by, a snapshot that shows the key. A record in which nothing repeats is exported as it always was. One
+// that does refer back says so in repeatedContent, and its text and HTML number the attempts so that "as in attempt 3"
+// can be followed on paper.
 export function recordQuestion(record,entry) {
   return entry.sameAsAttempt===undefined?entry:record.attempts[entry.sameAsAttempt].questionSnapshots.find(q=>q.id===entry.id&&q.sameAsAttempt===undefined);
 }
@@ -91,17 +93,19 @@ export function reviewRecord(state) {
     marking:'Provisional fixed-key MCQ scoring: 1 correct, 0 otherwise. First answers retained. Confidence and free-text reasoning are not graded. Independent practice is unsupervised and cannot certify exam readiness.',
     reviewStatus:'No accreditation or CPD points awarded by StatsDirect. Imported provider responses are recorded separately and are not authenticated. Email preparation does not confirm delivery or acceptance.',
     training:structuredClone(state.training),courseKey:state.courseKey,courseWork:structuredClone(state.courseWork),providerReviews:structuredClone(state.providerReviews),evidence:structuredClone(state.evidence),
-    sharingConsents:structuredClone(state.sharingConsents??[]),attempts,conversation:structuredClone(state.conversation),activities:structuredClone(state.activities),reflection:state.reflection};
+    sharingConsents:structuredClone(state.sharingConsents??[]),attempts,conversation:structuredClone(state.conversation),activities:structuredClone(state.activities),reflection:state.reflection,
+    ...(attempts.some(a=>a.questionSnapshots.some(q=>q.sameAsAttempt!==undefined)||a.contentPublication?.sameAsAttempt!==undefined)?{repeatedContent:"An entry {id, sameAsAttempt: n} in an attempt's questionSnapshots, or {sameAsAttempt: n} as its contentPublication, stands for the same content given in full in attempts[n]."}:{})};
 }
 export function reviewText(record) {
   const lines=['STATSDIRECT — LEARNING RECORD','External review request',`Prepared: ${record.exportedAt}`,`Record: ${record.portfolioID}`,`Started: ${record.startedAt}`,'',`Learner: ${record.learner.name || '(not supplied)'}`,`Reply email: ${record.learner.email || '(not supplied)'}`,`Learning goal: ${record.learner.goal || '(not supplied)'}`,`Pathway: ${record.pathway}`,`Statistical skills: ${statisticalSkills[record.learningOptions?.statisticalSkills]||'Not recorded'}`,`R experience: ${record.rExperience}`,`Exams / qualifications: ${record.learningOptions?.qualifications || '(not supplied)'}`,`Learning needs: ${record.learningOptions?.needs || '(not supplied)'}`,`Prior knowledge: ${record.learningOptions?.priorKnowledge || '(not supplied)'}`,`Target date: ${record.learningOptions?.targetDate || '(not supplied)'}`,`Focus: ${(record.learningOptions?.focus || []).join(', ')}`,`Preferred teaching style: ${record.learningOptions?.style || ''}`,'',record.questionSource,record.marking,record.reviewStatus,'','PRACTICE ATTEMPTS'];
-  for(const a of record.attempts) {
+  const numbered=record.attempts.some(a=>a.questionSnapshots.some(q=>q.sameAsAttempt!==undefined));
+  for(const [i,a] of record.attempts.entries()) {
     if(a.course)lines.push(`Provider assessment: ${a.course.title} · ${a.course.provider} · version ${a.course.version}`);
     if(a.questionSet==='all')lines.push('Question set: All questions');
-    lines.push('',`${tracks[a.track].title} — ${a.mode==='test'?'Independent practice (unsupervised)':'Supported practice'} — ${a.status}`,`Started: ${a.startedAt} | Completed: ${a.completedAt || 'not completed'}`,a.result?`Provisional score: ${a.result.score}/${a.result.total}; ${a.result.assisted} answers flagged as assisted`:`Answered: ${a.answers.length}/${a.questionIds.length}${a.status==='ended early'?'; unanswered questions are not listed':''}`);
+    lines.push('',`${numbered?`Attempt ${i+1} — `:''}${tracks[a.track].title} — ${a.mode==='test'?'Independent practice (unsupervised)':'Supported practice'} — ${a.status}`,`Started: ${a.startedAt} | Completed: ${a.completedAt || 'not completed'}`,a.result?`Provisional score: ${a.result.score}/${a.result.total}; ${a.result.assisted} answers flagged as assisted`:`Answered: ${a.answers.length}/${a.questionIds.length}${a.status==='ended early'?'; unanswered questions are not listed':''}`);
     for(const entry of a.questionSnapshots) {
       const q=recordQuestion(record,entry),repeat=entry.sameAsAttempt!==undefined,answer=a.answers.find(x=>x.questionId===q.id);
-      lines.push('',`${q.id} v${q.version} — ${q.topic}`,...(repeat?[`Question, options and feedback as in the attempt started ${record.attempts[entry.sameAsAttempt].startedAt}.`]:[q.stem,...q.options.map(o=>`${o.id}. ${o.text}`)]),`First answer: ${answer?.choice || 'not answered'} | Key: ${q.correct || 'withheld until the attempt ends'}`,`Confidence: ${answer?.confidence || 'not recorded'} | Assisted: ${answer?.assisted??false}`,`Reasoning before answer: ${answer?.reasoning || '(none)'}`,`Reflection after feedback: ${answer?.reflection || '(none)'}`,...(repeat?[]:[`Feedback: ${q.explanation || 'withheld until the attempt ends'}`,q.help?`Help: https://www.statsdirect.com/help/${q.help}`:'']));
+      lines.push('',`${q.id} v${q.version} — ${q.topic}`,...(repeat?[`Question, options and feedback as in attempt ${entry.sameAsAttempt+1}.`]:[q.stem,...q.options.map(o=>`${o.id}. ${o.text}`)]),`First answer: ${answer?.choice || 'not answered'} | Key: ${q.correct || 'withheld until the attempt ends'}`,`Confidence: ${answer?.confidence || 'not recorded'} | Assisted: ${answer?.assisted??false}`,`Reasoning before answer: ${answer?.reasoning || '(none)'}`,`Reflection after feedback: ${answer?.reflection || '(none)'}`,...(repeat?[]:[`Feedback: ${q.explanation || 'withheld until the attempt ends'}`,q.help?`Help: https://www.statsdirect.com/help/${q.help}`:'']));
     }
   }
   lines.push('','DOCUMENT SHARING CONFIRMATIONS');
