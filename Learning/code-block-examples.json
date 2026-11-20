@@ -1,0 +1,529 @@
+{
+ "about": "Replies that hold fenced code. For each case, \"blocks\" is what the reference reader (code-blocks.mjs) and each host's own reader return, in order: \"r\" (the language is R), \"shown\" (the code as the page shows it, which is what a click sends) and \"text\" (the code a host opens or copies; given only where it differs from \"shown\"). The page shows exactly \"blocks\" unless the case has \"page\", which records what the page shows where it is known to differ. \"matches\" gives, for a click with a position and the text the page sent, the index of the block a host uses (among the R blocks when \"rOnly\", else among all blocks), or -1 for none.",
+ "cases": [
+  {
+   "name": "a plain r block",
+   "markdown": "Text.\n\n```r\nx <- 1\nmean(x)\n```\n\nMore.",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1\nmean(x)"
+    }
+   ]
+  },
+  {
+   "name": "the label in any letter case, and rscript",
+   "markdown": "```R\na\n```\n\n```Rscript\nb\n```\n\n```RSCRIPT\nc\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a"
+    },
+    {
+     "r": true,
+     "shown": "b"
+    },
+    {
+     "r": true,
+     "shown": "c"
+    }
+   ]
+  },
+  {
+   "name": "a label with options after a space or a tab",
+   "markdown": "```r echo=FALSE\na\n```\n\n```r\techo=FALSE\nb\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a"
+    },
+    {
+     "r": true,
+     "shown": "b"
+    }
+   ]
+  },
+  {
+   "name": "labels that are not R",
+   "markdown": "```{r}\na\n```\n\n```{r echo=FALSE}\nb\n```\n\n```python\nc\n```\n\n```\nd\n```\n\n```rr\ne\n```",
+   "blocks": [
+    {
+     "r": false,
+     "shown": "a"
+    },
+    {
+     "r": false,
+     "shown": "b"
+    },
+    {
+     "r": false,
+     "shown": "c"
+    },
+    {
+     "r": false,
+     "shown": "d"
+    },
+    {
+     "r": false,
+     "shown": "e"
+    }
+   ]
+  },
+  {
+   "name": "a label that holds a line separator character is one label",
+   "markdown": "```r\u2028x\na <- 1\n```",
+   "blocks": [
+    {
+     "r": false,
+     "shown": "a <- 1"
+    }
+   ]
+  },
+  {
+   "name": "tilde fences, one with a backtick in its label",
+   "markdown": "~~~r\na\n~~~\n\n~~~r title=`Example`\nb\n~~~",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a"
+    },
+    {
+     "r": true,
+     "shown": "b"
+    }
+   ]
+  },
+  {
+   "name": "a longer fence holds a shorter fence line",
+   "markdown": "````r\na\n```\nb\n````",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a\n```\nb"
+    }
+   ]
+  },
+  {
+   "name": "r, python, r in one reply",
+   "markdown": "```r echo=FALSE\nfirst <- 1\n```\n\n```python\nmiddle = 2\n```\n\n```r\nlast <- 3\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "first <- 1"
+    },
+    {
+     "r": false,
+     "shown": "middle = 2"
+    },
+    {
+     "r": true,
+     "shown": "last <- 3"
+    }
+   ]
+  },
+  {
+   "name": "three spaces under numbered steps",
+   "markdown": "1. Load the data:\n\n   ```r\n   d <- read.csv(\"a.csv\")\n   ```\n\n2. Summarise:\n\n   ```r\n   summary(d)\n   ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "d <- read.csv(\"a.csv\")"
+    },
+    {
+     "r": true,
+     "shown": "summary(d)"
+    }
+   ]
+  },
+  {
+   "name": "four spaces under a numbered step",
+   "markdown": "1. Step:\n\n    ```r\n    f <- function(x) {\n      x + 1\n    }\n    ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "f <- function(x) {\n  x + 1\n}"
+    }
+   ]
+  },
+  {
+   "name": "four spaces under step 10",
+   "markdown": "10. Step:\n    ```r\n    x <- 1\n    ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1"
+    }
+   ]
+  },
+  {
+   "name": "a nested bullet",
+   "markdown": "- a\n  - b\n    ```r\n    x <- 1\n    ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1"
+    }
+   ]
+  },
+  {
+   "name": "two spaces under a bullet with no blank line",
+   "markdown": "- Fit the model:\n  ```r\n  m <- lm(y ~ x)\n  ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "m <- lm(y ~ x)"
+    }
+   ]
+  },
+  {
+   "name": "a tab-indented fence under a bullet",
+   "markdown": "- item\n\t```r\n\tx <- 1\n\t```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1"
+    }
+   ]
+  },
+  {
+   "name": "a block quote",
+   "markdown": "> Note:\n>\n> ```r\n> x <- 1\n> y <- 2\n> ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1\ny <- 2"
+    }
+   ]
+  },
+  {
+   "name": "R prompt lines in a top-level block are kept",
+   "markdown": "```r\n> x <- 1\n> mean(x)\n[1] 1\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "> x <- 1\n> mean(x)\n[1] 1"
+    }
+   ]
+  },
+  {
+   "name": "R prompt lines in a quoted block lose only the quote marker",
+   "markdown": "> ```r\n> > x <- 1\n> ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "> x <- 1"
+    }
+   ]
+  },
+  {
+   "name": "a line that starts with a tab",
+   "markdown": "```r\nf <- function(x) {\n\tx + 1\n}\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "f <- function(x) {\n    x + 1\n}",
+     "text": "f <- function(x) {\n\tx + 1\n}"
+    }
+   ]
+  },
+  {
+   "name": "two spaces then a tab, and a tab in mid-line",
+   "markdown": "```r\n  \tz <- 3\nx <- c(1,\t2)\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "      z <- 3\nx <- c(1,\t2)",
+     "text": "  \tz <- 3\nx <- c(1,\t2)"
+    }
+   ]
+  },
+  {
+   "name": "CR LF line endings",
+   "markdown": "```r\r\nx <- 1\r\ny <- 2\r\n```\r\n",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1\ny <- 2"
+    }
+   ]
+  },
+  {
+   "name": "blank lines at the start, middle and end of a block",
+   "markdown": "```r\n\nx <- 1\n\ny <- 2\n\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "\nx <- 1\n\ny <- 2\n"
+    }
+   ]
+  },
+  {
+   "name": "spaces after a closing fence",
+   "markdown": "```r\nx <- 1\n```   \n\n```r\ny <- 2\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1"
+    },
+    {
+     "r": true,
+     "shown": "y <- 2"
+    }
+   ]
+  },
+  {
+   "name": "two blocks with the same code",
+   "markdown": "```r\nx <- 1\n```\n\nand again\n\n```r\nx <- 1\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1"
+    },
+    {
+     "r": true,
+     "shown": "x <- 1"
+    }
+   ]
+  },
+  {
+   "name": "code lines indented less than their fence keep their spaces",
+   "markdown": "  ```r\n  a\n b\n    c\n  ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a\n b\n  c"
+    }
+   ]
+  },
+  {
+   "name": "a short line in a block under a numbered step",
+   "markdown": "1. Step:\n   ```r\n   a\n b\n   ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a\n b"
+    }
+   ]
+  },
+  {
+   "name": "a short line in a block under a numbered step, after a blank line",
+   "markdown": "1. Step:\n\n   ```r\n   a\n b\n   ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a\n b"
+    }
+   ],
+   "page": [
+    {
+     "r": true,
+     "shown": "a"
+    }
+   ]
+  },
+  {
+   "name": "a quoted block with a line that has no quote marker",
+   "markdown": "> ```r\n> a\nb\n> ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a\nb"
+    }
+   ]
+  },
+  {
+   "name": "a fence on a bullet's own line",
+   "markdown": "- ```r\n  x <- 1\n  ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1"
+    }
+   ]
+  },
+  {
+   "name": "a fence on a numbered step's own line",
+   "markdown": "1. ```r\n   x <- 1\n   y <- 2\n   ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1\ny <- 2"
+    }
+   ]
+  },
+  {
+   "name": "a closing fence indented four spaces more than its opener does not close",
+   "markdown": "```r\na\n    ```\nb\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a\n    ```\nb"
+    }
+   ]
+  },
+  {
+   "name": "a closing fence followed by a tab does not close",
+   "markdown": "```r\nx <- 1\n```\t\n\nafter\n\n```r\ny <- 2\n```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1\n```\t\n\nafter\n\n```r\ny <- 2"
+    }
+   ]
+  },
+  {
+   "name": "a closing fence followed by the other fence character closes",
+   "markdown": "```r\nx <- 1\n```~\n\nafter",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1"
+    }
+   ]
+  },
+  {
+   "name": "an unclosed block at the end of a reply",
+   "markdown": "Text\n\n```r\nx <- 1",
+   "blocks": [],
+   "page": [
+    {
+     "r": true,
+     "shown": "x <- 1"
+    }
+   ]
+  },
+  {
+   "name": "a fence indented four spaces outside a list",
+   "markdown": "Text\n\n    ```r\n    x <- 1\n    ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "x <- 1"
+    }
+   ],
+   "page": [
+    {
+     "r": false,
+     "shown": "```r\nx <- 1\n```"
+    }
+   ]
+  },
+  {
+   "name": "a quoted block with no closing fence",
+   "markdown": "> ```r\n> a\n\nafter",
+   "blocks": [],
+   "page": [
+    {
+     "r": true,
+     "shown": "a"
+    }
+   ]
+  },
+  {
+   "name": "an indented tilde fence outside a list",
+   "markdown": "  ~~~r\n  a\n  b\n  ~~~",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a\nb"
+    }
+   ],
+   "page": [
+    {
+     "r": true,
+     "shown": "  a\n  b"
+    }
+   ]
+  },
+  {
+   "name": "a fence indented beyond its numbered step, with a shorter code line",
+   "markdown": "1. Step:\n\n     ```r\n     a\n    b\n     ```",
+   "blocks": [
+    {
+     "r": true,
+     "shown": "a\n    b"
+    }
+   ],
+   "page": [
+    {
+     "r": true,
+     "shown": "a\n b"
+    }
+   ]
+  }
+ ],
+ "matches": [
+  {
+   "name": "the block at the position, when its text is the text clicked",
+   "case": "r, python, r in one reply",
+   "rOnly": true,
+   "position": 1,
+   "shown": "last <- 3",
+   "expect": 1
+  },
+  {
+   "name": "a wrong position is corrected by the text",
+   "case": "r, python, r in one reply",
+   "rOnly": true,
+   "position": 0,
+   "shown": "last <- 3",
+   "expect": 1
+  },
+  {
+   "name": "Copy has no position and finds any block by its text",
+   "case": "r, python, r in one reply",
+   "rOnly": false,
+   "position": -1,
+   "shown": "middle = 2",
+   "expect": 1
+  },
+  {
+   "name": "Open in R does not match a block that is not R",
+   "case": "r, python, r in one reply",
+   "rOnly": true,
+   "position": 0,
+   "shown": "middle = 2",
+   "expect": -1
+  },
+  {
+   "name": "of two blocks with the same code, the one at the position",
+   "case": "two blocks with the same code",
+   "rOnly": true,
+   "position": 1,
+   "shown": "x <- 1",
+   "expect": 1
+  },
+  {
+   "name": "of two blocks with the same code and no usable position, the first",
+   "case": "two blocks with the same code",
+   "rOnly": true,
+   "position": 7,
+   "shown": "x <- 1",
+   "expect": 0
+  },
+  {
+   "name": "a block with a leading tab is matched by the text the page shows",
+   "case": "a line that starts with a tab",
+   "rOnly": true,
+   "position": 0,
+   "shown": "f <- function(x) {\n    x + 1\n}",
+   "expect": 0
+  },
+  {
+   "name": "text the page shows for no block has no match",
+   "case": "a plain r block",
+   "rOnly": true,
+   "position": 0,
+   "shown": "x <- 2",
+   "expect": -1
+  },
+  {
+   "name": "an unfinished block is never matched",
+   "case": "an unclosed block at the end of a reply",
+   "rOnly": true,
+   "position": 0,
+   "shown": "x <- 1",
+   "expect": -1
+  }
+ ]
+}

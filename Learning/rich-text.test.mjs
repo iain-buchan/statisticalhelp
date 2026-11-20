@@ -47,3 +47,19 @@ test('a mixed three-block message keeps R actions in R-block order', () => {
   assert.match(blocks[1][1], /middle/);
   assert.match(blocks[2][1], /last/);
 });
+test('Copy says Copied only when the host does not report a failure', async () => {
+  const run = async result => {
+    const button = {dataset: {code: 'copy'}, textContent: 'Copy', closest: () => ({querySelector: () => ({textContent: 'x <- 1'})})};
+    let copied;
+    richText.bindRichText({querySelectorAll: selector => selector === 'a' ? [] : [button]}, {copy: code => { copied = code; return result; }, openR() {}});
+    button.onclick();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    assert.equal(copied, 'x <- 1');
+    return button.textContent;
+  };
+  assert.equal(await run(undefined), 'Copied');
+  assert.equal(await run(true), 'Copied');
+  assert.equal(await run(Promise.resolve(true)), 'Copied');
+  assert.equal(await run(false), 'Copy');
+  assert.equal(await run(Promise.resolve(false)), 'Copy');
+});

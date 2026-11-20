@@ -17,6 +17,9 @@ that publication separately from the code here.
 - `host-contract.json` and `HOST-CONTRACT.md`: the contract between this code and a host, as a
   version number and the document that defines it (actions the page posts, callbacks it
   defines, payloads, the `lessons.json` fields it reads, and the bump rule).
+- `code-blocks.mjs` and `code-block-examples.json`: the reference reader for fenced code in a reply,
+  the rule that matches a clicked block to it, and the example replies that the page, the reference
+  and each host's own reader are tested against (`HOST-CONTRACT.md`, Code blocks).
 - `package.json` and `pnpm-lock.yaml`: the dependencies, one pinned set for every host.
 - `*.test.mjs`, `test-config.mjs` and `lesson-checks.mjs`: the unit tests and their
   configuration.
