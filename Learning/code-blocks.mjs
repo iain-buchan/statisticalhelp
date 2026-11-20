@@ -20,7 +20,7 @@ function unquote(line, limit = Infinity) {
 // or three or more tildes with anything after. It may also sit on a list marker's own line ("- ```r",
 // "1. ```r"); the marker and the spaces after it then count as indent. The language is the first word of the label.
 function opener(line) {
-  const m = /^( *(?:(?:[-*+]|\d{1,9}[.)]) {1,4})?)(`{3,}|~{3,})(.*)$/.exec(line);
+  const m = /^( *(?:(?:[-*+]|\d{1,9}[.)]) {1,4})?)(`{3,}|~{3,})([^\n]*)$/.exec(line);
   if (!m || (m[2][0] === '`' && m[3].includes('`'))) return null;
   return {indent: m[1].length, fence: m[2], language: m[3].trim().split(/[ \t]+/, 1)[0].toLowerCase()};
 }

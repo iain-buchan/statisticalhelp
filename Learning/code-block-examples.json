@@ -70,6 +70,16 @@
    ]
   },
   {
+   "name": "a label that holds a line separator character is one label",
+   "markdown": "```r\u2028x\na <- 1\n```",
+   "blocks": [
+    {
+     "r": false,
+     "shown": "a <- 1"
+    }
+   ]
+  },
+  {
    "name": "tilde fences, one with a backtick in its label",
    "markdown": "~~~r\na\n~~~\n\n~~~r title=`Example`\nb\n~~~",
    "blocks": [
