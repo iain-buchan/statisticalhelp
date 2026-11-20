@@ -22,7 +22,7 @@ The host registers `window.statsDirectHost` before the page runs: an object with
 | cancel | id |
 | help, example, r | action, lesson |
 | copyCode | code: at most 100,000 units; the Mac counts UTF-8 bytes and Windows UTF-16 units, and a longer block is answered with a notice (to be made one rule at the next bump) |
-| openRCode | generation, lessonID, messageID, blockIndex; the host opens the code and never runs it |
+| openRCode | generation, lessonID, messageID, blockIndex; optional code, the clicked block's text as the page shows it (see Code blocks); the host opens the code and never runs it |
 | export | format, record, text, html |
 | email | recipient, record, text, html |
 | captureLearningEvidence | documentID |
@@ -69,6 +69,16 @@ Windows implements `toolActivity` when it takes the package; the Mac calls all 1
 - `lessons.json` fields a host reads: id, title, topic, operation, columns, r, help, providerCourse, contentVersion, knowledgeSchemaVersion, objective, summary, challenge, steps, review, contentSha256, difficulty, learnerGoals, learnerGoalNotes, prerequisites, learningObjectives, keyConcepts, misconceptions, workedExample, teachingPrompts, rProgression, sources, assessmentIds, practiceQuestions. The page's copy and the host's copy come from one publication.
 - Element ids a host touches: `#loadError`, `#saveStatus`, `#optionSaved`, `#connectionPrivacy`.
 - Learners see no provenance line in the lesson guide; the review record stays in the lesson data and the exports. Learning targets (difficulty, goals, notes) are shown.
+
+## Code blocks
+
+Added 20 November 2026 (learning-v1.1.6). The page renders a reply with marked; a host reads the same reply itself, so that Open in R and Copy use only code the host finds in its own saved copy. `code-blocks.mjs` is the reference for that reader and for matching a click to a block, and `code-block-examples.json` holds the replies that the page, the reference and each host's own reader are tested against. The page does not import the reference; each host mirrors it in its own language and runs the examples through its reader.
+
+- A block is `{r, shown, text}`: whether its language is R (the first word of the fence label, `r` or `rscript` in any letter case), the code as the page shows it (each leading tab as four spaces), and the code as the reply has it, which is what the host opens or copies.
+- A click carries the block's shown text and, for Open in R, the block's position among the message's R blocks (`blockIndex`). The host uses the block at that position when its shown text is the text sent, otherwise the first block with that text. When there is none it uses no other block and shows this notice: "StatsDirect could not match that code block to the saved reply. Select the code in the conversation and copy it instead."
+- `openRCode` carries the shown text as the optional field `code`. A host given no `code` goes by position alone, as before.
+- `bindRichText` shows "Copied" only when the host's `copy(code)` callback does not report a failure: the callback may return `false`, or a promise of `false`, when nothing was copied. A callback that returns nothing is taken to have copied.
+- The cases marked `page` in the examples are the known differences between the page and the readers (an unfinished block, a fence indented four spaces outside a list, and a few rarer layouts). A click on such a block finds no match and the host shows the notice.
 
 ## The bank module
 

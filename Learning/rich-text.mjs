@@ -20,10 +20,12 @@ marked.use({renderer,mangle:false,headerIds:false,extensions:[
 export function richText(text){
  return DOMPurify.sanitize(marked.parse(String(text)),{USE_PROFILES:{html:true,mathMl:true,svg:true},FORBID_TAGS:['img','video','audio','iframe','style','form','input','textarea','select'],FORBID_ATTR:['id','name'],ALLOW_DATA_ATTR:true});
 }
+// copy(code) may return false, or a promise of false, when the host copied nothing: "Copied" is then not shown.
+// A callback that returns nothing is taken to have copied (HOST-CONTRACT.md, Code blocks).
 export function bindRichText(element,{copy,openR}){
  element.querySelectorAll('a').forEach(a=>{if(!/^https?:\/\//i.test(a.getAttribute('href')??''))a.removeAttribute('href');else {a.target='_blank';a.rel='noopener noreferrer';}});
  element.querySelectorAll('[data-code]').forEach(button=>button.onclick=()=>{
   const code=button.closest('.code-block').querySelector('code').textContent;
-  if(button.dataset.code==='r'){const message=button.closest('[data-message-id]');openR(code,{messageID:message?.dataset.messageId,blockIndex:message?Array.from(message.querySelectorAll('[data-code=r]')).indexOf(button):-1});}else {copy(code);button.textContent='Copied';setTimeout(()=>button.textContent='Copy',1500);}
+  if(button.dataset.code==='r'){const message=button.closest('[data-message-id]');openR(code,{messageID:message?.dataset.messageId,blockIndex:message?Array.from(message.querySelectorAll('[data-code=r]')).indexOf(button):-1});}else Promise.resolve(copy(code)).then(copied=>{if(copied===false)return;button.textContent='Copied';setTimeout(()=>button.textContent='Copy',1500);},()=>{});
  });
 }

@@ -140,7 +140,7 @@ function renderStudy(){const l=lesson();if(ensureLessonPrompt(state,allLessons()
 }
 function bindConversation(){const generation=bridgeGeneration,lessonID=lesson().id;bindRichText($('messages'),{
   copy:code=>{if(native)post({action:'copyCode',code});else navigator.clipboard.writeText(code).catch(()=>notice('Select the code and copy it.'));},
-  openR:(code,position)=>{if(native)post({action:'openRCode',generation,lessonID,...position});else notice(`Open ${words().app} to review and run this code in an R session.`);}
+  openR:(code,position)=>{if(native)post({action:'openRCode',generation,lessonID,...position,code});else notice(`Open ${words().app} to review and run this code in an R session.`);}
 });}
 function renderStream(preserve=true){
   if(!$('messages')||!pending)return;
