@@ -353,6 +353,22 @@ case('Only the format section that applies to the value counts', ['3.9'],
      {'entire': True},
      {'headingsSuggested': True, 'r': frame(['Date', 'Negative'], [date(20554), num(-1.5)], 1)})
 
+# Amendment 2 (learning-v1.1.9)
+case('The section that applies, with conditions and quoted text, decides the type', ['3.9'],
+     cells(col('A', T('Number'), D('date', '5.5', '[>10]yyyy-mm-dd;0.00')),
+           col('B', T('Duration'), D('time', '1.25', '[<1]0.00;[h]:mm')),
+           col('C', T('Clock'), D('time', '0.25', '[>1]yyyy-mm-dd;h:mm')),
+           col('D', T('Quoted'), D('datetime', '5.5', '"[>10]"yyyy-mm-dd;[h]:mm;0;@')),
+           col('E', T('Third'), D('date', '5.5', '[>10]yyyy-mm-dd;[h]:mm;0.00')),
+           col('F', T('Negative'), D('date', '-3', '[>10]0.00;yyyy-mm-dd;[h]:mm')),
+           col('G', T('Zero'), D('duration', '0', '0.00;0.00;[h]:mm')),
+           col('H', T('Second'), D('time', '0.5', '[>10]0.00;[<1]h:mm;yyyy-mm-dd'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['Number', 'Duration', 'Clock', 'Quoted', 'Third', 'Negative', 'Zero', 'Second'],
+                 [num(5.5), chr_('30:00:00'), chr_('06:00:00'), chr_('1900-01-05 12:00:00'), num(5.5), num(-3), chr_('00:00:00'),
+                  chr_('12:00:00')], 1)})
+
 case('A value beyond 9999-12-31, or before the date system, is a number', ['3.9'],
      cells(col('A', T('Big'), D('date', '2958466', 'yyyy-mm-dd')), col('B', T('Before'), D('date', '-1', 'yyyy-mm-dd')),
            col('C', T('Long'), D('duration', '3000000', '[h]:mm:ss')), col('D', T('Last'), D('date', '2958465', 'yyyy-mm-dd')),
