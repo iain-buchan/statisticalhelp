@@ -2341,6 +2341,130 @@
     "headingsSuggested": true,
     "r": "structure(list(c(1, NA, 3), c(\"x\", NA, \"y\")), names = c(\"a\", \"b\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
    }
+  },
+  {
+   "name": "Spacing and fill characters, and conditions written with a point or an exponent",
+   "rules": [
+    "3.9"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Spacing"
+    },
+    "A2": {
+     "time": "1.25",
+     "format": "[>10]yyyy-mm-dd_;;0.00;[h]:mm;@"
+    },
+    "B1": {
+     "text": "Fill"
+    },
+    "B2": {
+     "time": "1.25",
+     "format": "[>10]yyyy-mm-dd*;;0.00;[h]:mm;@"
+    },
+    "C1": {
+     "text": "Decimal"
+    },
+    "C2": {
+     "time": "0.25",
+     "format": "[>.5]h:mm;0.00"
+    },
+    "D1": {
+     "text": "Exponent"
+    },
+    "D2": {
+     "date": "5.5",
+     "format": "[>1E2]yyyy-mm-dd;0.00"
+    },
+    "E1": {
+     "text": "Decimal time"
+    },
+    "E2": {
+     "time": "0.25",
+     "format": "[>.5]0.00;h:mm"
+    },
+    "F1": {
+     "text": "Exponent date"
+    },
+    "F2": {
+     "datetime": "5.5",
+     "format": "[>1E2]0.00;yyyy-mm-dd hh:mm"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"30:00:00\"), c(\"30:00:00\"), c(0.25), c(5.5), c(\"06:00:00\"), c(\"1900-01-05 12:00:00\")), names = c(\"Spacing\", \"Fill\", \"Decimal\", \"Exponent\", \"Decimal time\", \"Exponent date\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Rounding to the millisecond, the end of a day, and durations beyond the last day",
+   "rules": [
+    "3.9"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Midnight"
+    },
+    "A2": {
+     "time": "0.999999999",
+     "format": "h:mm:ss"
+    },
+    "B1": {
+     "text": "Half"
+    },
+    "B2": {
+     "duration": "5.787037037037037e-09",
+     "format": "[h]:mm:ss.000"
+    },
+    "C1": {
+     "text": "Longest"
+    },
+    "C2": {
+     "duration": "2958465",
+     "format": "[h]:mm"
+    },
+    "D1": {
+     "text": "Beyond"
+    },
+    "D2": {
+     "duration": "2958465.25",
+     "format": "[h]:mm"
+    },
+    "E1": {
+     "text": "Below"
+    },
+    "E2": {
+     "duration": "-3000000",
+     "format": "[h]:mm"
+    },
+    "F1": {
+     "text": "Rounded"
+    },
+    "F2": {
+     "datetime": "0.9999999999",
+     "format": "yyyy-mm-dd hh:mm:ss"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"24:00:00\"), c(\"00:00:00.001\"), c(\"71003160:00:00\"), c(2958465.25), c(-3000000), structure(c(-25567), class = \"Date\")), names = c(\"Midnight\", \"Half\", \"Longest\", \"Beyond\", \"Below\", \"Rounded\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
   }
  ]
 }
