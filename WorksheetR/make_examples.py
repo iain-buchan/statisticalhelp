@@ -430,6 +430,32 @@ case('The same cells as a data frame keep rows aligned', ['5.2', '3.2'],
      cells(col('A', T('a'), N('1'), None, N('3')), col('B', T('b'), T('x'), T('*'), T('y'))), {'entire': True},
      {'headingsSuggested': True, 'r': frame(['a', 'b'], [num(1, None, 3), chr_('x', None, 'y')], 3)})
 
+# Amendment 3
+case('Spacing and fill characters, and conditions written with a point or an exponent', ['3.9'],
+     cells(col('A', T('Spacing'), D('time', '1.25', '[>10]yyyy-mm-dd_;;0.00;[h]:mm;@')),
+           col('B', T('Fill'), D('time', '1.25', '[>10]yyyy-mm-dd*;;0.00;[h]:mm;@')),
+           col('C', T('Decimal'), D('time', '0.25', '[>.5]h:mm;0.00')),
+           col('D', T('Exponent'), D('date', '5.5', '[>1E2]yyyy-mm-dd;0.00')),
+           col('E', T('Decimal time'), D('time', '0.25', '[>.5]0.00;h:mm')),
+           col('F', T('Exponent date'), D('datetime', '5.5', '[>1E2]0.00;yyyy-mm-dd hh:mm'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['Spacing', 'Fill', 'Decimal', 'Exponent', 'Decimal time', 'Exponent date'],
+                 [chr_('30:00:00'), chr_('30:00:00'), num(0.25), num(5.5), chr_('06:00:00'), chr_('1900-01-05 12:00:00')], 1)})
+
+# 5.787037037037037e-09 days is half a millisecond exactly: times 86,400,000 it is 0.5.
+case('Rounding to the millisecond, the end of a day, and durations beyond the last day', ['3.9'],
+     cells(col('A', T('Midnight'), D('time', '0.999999999', 'h:mm:ss')),
+           col('B', T('Half'), D('duration', '5.787037037037037e-09', '[h]:mm:ss.000')),
+           col('C', T('Longest'), D('duration', '2958465', '[h]:mm')),
+           col('D', T('Beyond'), D('duration', '2958465.25', '[h]:mm')),
+           col('E', T('Below'), D('duration', '-3000000', '[h]:mm')),
+           col('F', T('Rounded'), D('datetime', '0.9999999999', 'yyyy-mm-dd hh:mm:ss'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['Midnight', 'Half', 'Longest', 'Beyond', 'Below', 'Rounded'],
+                 [chr_('24:00:00'), chr_('00:00:00.001'), chr_('71003160:00:00'), num(2958465.25), num(-3000000), date(-25567)], 1)})
+
 about = ('Worksheets with a selection and the prompt\'s options, each with what StatsDirect must show and the exact R object '
          'it must create. Both StatsDirect for Windows and for Mac test their own import against every case: the object '
          'must be identical() in R to "expect.r", evaluated with base R only. See RULES.md, which these encode.')
