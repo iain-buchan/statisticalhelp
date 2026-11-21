@@ -1790,6 +1790,82 @@
    }
   },
   {
+   "name": "The section that applies, with conditions and quoted text, decides the type",
+   "rules": [
+    "3.9"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Number"
+    },
+    "A2": {
+     "date": "5.5",
+     "format": "[>10]yyyy-mm-dd;0.00"
+    },
+    "B1": {
+     "text": "Duration"
+    },
+    "B2": {
+     "time": "1.25",
+     "format": "[<1]0.00;[h]:mm"
+    },
+    "C1": {
+     "text": "Clock"
+    },
+    "C2": {
+     "time": "0.25",
+     "format": "[>1]yyyy-mm-dd;h:mm"
+    },
+    "D1": {
+     "text": "Quoted"
+    },
+    "D2": {
+     "datetime": "5.5",
+     "format": "\"[>10]\"yyyy-mm-dd;[h]:mm;0;@"
+    },
+    "E1": {
+     "text": "Third"
+    },
+    "E2": {
+     "date": "5.5",
+     "format": "[>10]yyyy-mm-dd;[h]:mm;0.00"
+    },
+    "F1": {
+     "text": "Negative"
+    },
+    "F2": {
+     "date": "-3",
+     "format": "[>10]0.00;yyyy-mm-dd;[h]:mm"
+    },
+    "G1": {
+     "text": "Zero"
+    },
+    "G2": {
+     "duration": "0",
+     "format": "0.00;0.00;[h]:mm"
+    },
+    "H1": {
+     "text": "Second"
+    },
+    "H2": {
+     "time": "0.5",
+     "format": "[>10]0.00;[<1]h:mm;yyyy-mm-dd"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(5.5), c(\"30:00:00\"), c(\"06:00:00\"), c(\"1900-01-05 12:00:00\"), c(5.5), c(-3), c(\"00:00:00\"), c(\"12:00:00\")), names = c(\"Number\", \"Duration\", \"Clock\", \"Quoted\", \"Third\", \"Negative\", \"Zero\", \"Second\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
    "name": "A value beyond 9999-12-31, or before the date system, is a number",
    "rules": [
     "3.9"
