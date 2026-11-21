@@ -1,6 +1,19 @@
 # Worksheet data sent to R: shared rules
 
-**Status: approved by Iain on 21 November 2026** ("agree", to the recommended answer of every choice below). Nothing here is in either application yet.
+**Status: approved by Iain on 21 November 2026** ("agree", to the recommended answer of every choice below), and tagged `learning-v1.1.7`.
+
+**Amendment 1** (`learning-v1.1.8`), agreed by the Windows and Mac sessions while building to these rules, 21 November 2026:
+
+- dates and date-times anchor the missing-value words; times of day and durations do not (rule 3.2);
+- a date-time column is defined, and a column that also holds a time of day or a duration is an ordinary character column (rules 3.6 and 3.9);
+- formats such as `mm:ss` give times of day (rule 3.9);
+- a script the user has saved in R.app's editor is kept (rule 6.2);
+- a value beyond 9999-12-31, or a date before its date system, is a number, and colour codes in a format do not make a duration (rule 3.9);
+- every control character in the sheet name is a space in the script's comment (rule 5.5);
+- only the format section that applies to the value counts (rule 3.9);
+- the user's own `R_PROFILE_USER` is honoured, and the user's start-up file cannot change the imported values (rule 6.1);
+- every column, or every row, selected as whole columns or rows is select all (rule 2.6);
+- five examples pin these.
 
 - This version takes in the Mac session's review of the first draft: 54 findings, each checked by a second reader, numbered M1 to M29 below where they changed a rule.
 - `examples.json` encodes these rules, and both applications must pass it before the worksheet R and R+ buttons are released.
@@ -8,7 +21,7 @@
 ## How this is used
 
 - **One set of rules** for StatsDirect for Windows and for Mac. Both send worksheet data to R from the worksheet toolbar's **R** button (StatsDirect's own R session) and **R+** button (external R).
-- **`examples.json`** (to follow) will hold worksheets, a selection and the prompt's options. Each example gives every cell's stored type, not keystrokes, and the exact R object expected.
+- **`examples.json`** holds worksheets, a selection and the prompt's options. Each example gives every cell's stored type, not keystrokes, and the exact R object expected.
 - **Each application's own test** builds each worksheet in its own grid and runs its own import code. In R, the result must be `identical()` to the expected object, and the prompt must show the expected labels.
 - **Expected data frames** are written as `structure(list(...), names = c(...), row.names = c(NA_integer_, -nL), class = "data.frame")`. This is `identical()` to `data.frame(..., check.names = FALSE)`, and it can also express names that `data.frame()` cannot build.
 - **Both applications reach these files** through their pinned copy of this repository, at the next `learning-v*` tag.
@@ -52,7 +65,7 @@
 | 2.3 | **Whole columns:** the selected columns, from the first to the last non-blank row of those columns. A selected column with no data stays, as a column of `NA`. | same, except several columns (C7) |
 | 2.4 | **Whole rows:** per C6. | the two differ |
 | 2.5 | **Several areas:** per C7. | Windows refuses all; Mac accepts columns or rows |
-| 2.6 | **Select all** (the corner, Ctrl+A or Command-A) is the same as Entire worksheet. | Windows. On the Mac, Command-A gives a rectangle from A1 across every grid column, and the corner selects every grid row, sent as whole rows from A1 (M29). |
+| 2.6 | **Select all** (the corner, Ctrl+A or Command-A) is the same as Entire worksheet. So are whole columns that together are every column of the sheet, and whole rows that together are every row, however they were selected: on Windows a drag across every column header gives the same range as the corner. | Windows. On the Mac, Command-A gives a rectangle from A1 across every grid column, and the corner selects every grid row, sent as whole rows from A1 (M29). |
 | 2.7 | **A merged area** sends its value in its top-left cell; the other cells are blank. | same |
 | 2.8 | **One cell** is a valid selection. The first-row check box is then disabled. | same |
 
@@ -73,7 +86,7 @@
   - the words `NA`, `N/A`, `NaN`, `NULL` and `MISSING`, written exactly so;
   - a formula whose value is empty text;
   - a spreadsheet error (C4): a cell holding an error value (`#DIV/0!`, `#N/A`, `#NAME?`, `#NULL!`, `#NUM!`, `#REF!`, `#VALUE!`, `#SPILL!`, `#CALC!` and the like). Text that only looks like an error stays text.
-- **Also in any case** (`na`, `n/a`, `nan`, `Null`): the same words count, in a column whose other non-missing cells are all numbers, all Booleans or all dates, and that has at least one such number, Boolean or date. All such words in a column are set aside together when its other cells are judged, so {1, `na`, `Null`, 2} is numeric. So {`Nan`, `Nan`} (two people called Nan) stays character, and {`na`, 1} is numeric.
+- **Also in any case** (`na`, `n/a`, `nan`, `Null`): the same words count, in a column whose other non-missing cells are all numbers, all Booleans, or all dates and date-times, and that has at least one such number, Boolean, date or date-time. Times of day and durations do not count, so {`14:30:00`, `na`} stays character, `c("14:30:00", "na")`, while {`2026-11-21 10:00`, `na`} gives `c("2026-11-21 10:00:00", NA)`. All such words in a column are set aside together when its other cells are judged, so {1, `na`, `Null`, 2} is numeric. So {`Nan`, `Nan`} (two people called Nan) stays character, and {`na`, 1} is numeric.
 - **Surrounding white space** is ignored.
 - **So real words survive** in text columns: `Na`, `Nan`, `Null`, `Missing`. Examples: {`Na`, `K`, `Cl`} is character; {`1`, `na`, `2`} is numeric; {`Alive`, `Missing`} is character; {`Smith`, `NA`} gives `c("Smith", NA)`; {TRUE, `na`} is logical.
 - **How this compares with the analyses** (M2): these are the markers StatsDirect treats as missing when it reads row-aligned columns. Ordinary numeric analyses differ by platform. The Mac takes only blank and `*`, and stops on other text. Windows takes any non-numeric cell as missing.
@@ -101,6 +114,7 @@
 | a number (rules 3.3 and 3.4) | numeric: double, never integer, even when every value is whole (M19) |
 | a Boolean (rule 3.5) | logical |
 | a date with no time of day (C3, rule 3.9) | `Date`, double storage: `structure(20778, class = "Date")` |
+| a date or a date-time, at least one with a time of day | character: a date-time column (rule 3.9) |
 | missing (every cell) | logical `NA`, R's own default; `logical(0)` in a list |
 | anything else | character |
 
@@ -139,9 +153,12 @@ Each application's own test proves the form over the example values and a large 
 
 - **A date column,** judged by value: every non-missing cell is a date or date-time whose time, rounded to the millisecond, is 00:00:00, whatever its format. The class is `Date`, as in rule 3.6.
 - **Precision:** every date-time, time of day and duration is rounded to the millisecond. A point and one to three digits follow the seconds only when there is a fraction: `14:30:00.5`.
-- **A time of day:** a value below one day, with a format that has no date. It is written `HH:MM:SS`.
-- **A duration** (an elapsed-time format): written `[-]HH:MM:SS`, with hours not wrapped: `26:00:00`, `-01:00:00`.
+- **A time of day:** a value below one day, with a format that has no date. It is written `HH:MM:SS`. Formats such as `mm:ss` and `mm:ss.0` (Excel's built-in formats 45 and 47) have no date, so they give times of day: 90.5 seconds is `00:01:30.5`. A value of one day or more in such a format is a date or a date-time, judged by value as above.
+- **A duration** (an elapsed-time format): written `[-]HH:MM:SS`, with hours not wrapped: `26:00:00`, `-01:00:00`. An elapsed-time format has, outside quotes, a bracket holding one of the letters h, m or s alone, repeated: `[h]`, `[hh]`, `[mm]`, `[ss]`. Other brackets are colours, locales and conditions (`[Red]`, `[Magenta]`, `[$-409]`, `[>=100]`): `[Magenta]yyyy-mm-dd` is a date format.
+- **The section that applies:** only the section of a format that applies to the value counts. Sections are separated by `;` outside quotes, escapes and brackets. With a condition (`[<0]`, `[>=100]`) in the first or second section, the first section whose condition holds applies, else the first section without a condition. Without conditions, the first section is for a positive value, the second for a negative one and the third for zero, where they exist. So 46123 in `[Magenta]yyyy-mm-dd;[h]:mm` is the date 2026-04-11, and -1.5 in `[h]:mm;yyyy-mm-dd` is a negative value in a date format, so a number.
+- **Out of range:** 9999-12-31 is the last day of either date system: serial 2,958,465 in the 1900 system and 2,957,003 in the 1904 system. A value in a date, time or duration format beyond it, as a number of days, is a number: a duration of 2,958,466 days in the 1900 system, and 2958466 in `yyyy-mm-dd`, give `2958466`, while a duration of 2,958,465 days is `71003160:00:00`. So is a value in a date or date-time format before the first day of its date system: 1900-01-01 (serial 1) in the 1900 system, 1904-01-01 (serial 0) in the 1904 system. In the 1900 system, -1, serial 0 (which Excel shows as 1900-01-00) and 0.5 in `yyyy-mm-dd hh:mm` give `-1`, `0` and `0.5`; a value below one day in a format with no date is a time of day, as above.
 - **A date-time:** written `YYYY-MM-DD HH:MM:SS`. In a date-time column midnight is written `00:00:00`, because `as.POSIXct()` drops the time from every value if one lacks it.
+- **A date-time column:** every non-missing cell is a date or a date-time, and at least one has a time of day (rule 3.6). A column that also holds a time of day or a duration is an ordinary character column, where a date is written `YYYY-MM-DD`: {`2026-11-21`, `14:30:00`} gives `c("2026-11-21", "14:30:00")`.
 - **A bare `YYYY-MM-DD`** appears only in a character column or a heading.
 - **Serial 60** (the nonexistent 1900-02-29) gives `NA`.
 - **The examples** give calendar dates. Each loader's date system (1900 or 1904) is tested separately.
@@ -175,21 +192,22 @@ Each application's own test proves the form over the example values and a large 
 | 5.2 | **Data frame:** columns in sheet order; automatic integer row names (compact `c(NA, -n)` or `1:n`, not character); character columns never factors (M19). |
 | 5.3 | **List of vectors:** a named list, each element its column with missing values removed. A column with no non-missing value is `logical(0)` (M19). |
 | 5.4 | **After the import** R shows what C2 decides. |
-| 5.5 | **The script's comments** are the same on both platforms, with the range text of rule 1.4 listing every area, and any CR or LF in the sheet name written as a space (M25): `# Data copied from the worksheet “Sheet1”, A1:C4.` and `# Blank cells, missing-value markers and spreadsheet errors are NA.` For a list, also `# Missing values are removed separately from each vector.` When the copied cells include a date, date-time, time of day or duration, also `# Dates without a time of day are R Date values; other dates and times are text.` |
+| 5.5 | **The script's comments** are the same on both platforms, with the range text of rule 1.4 listing every area, and each control character in the sheet name written as a space: U+0000 to U+001F, CR and LF among them, and U+007F to U+009F, so CR LF gives two spaces (M25). On Windows R stops reading a script at a raw Ctrl-Z (U+001A). For example: `# Data copied from the worksheet “Sheet1”, A1:C4.` and `# Blank cells, missing-value markers and spreadsheet errors are NA.` For a list, also `# Missing values are removed separately from each vector.` When the copied cells include a date, date-time, time of day or duration, also `# Dates without a time of day are R Date values; other dates and times are text.` |
 
 ## 6. Delivery and files
 
 **6.1 R+ keeps the user's own R start-up file** (M26). StatsDirect's own start-up file:
 
 - unsets `R_PROFILE_USER` (never sets it to `""`);
-- then runs the user's profile as R would: `./.Rprofile`, else `~/.Rprofile`, in the global environment;
+- then runs the user's profile as R would: the file the user's own `R_PROFILE_USER` names, when the user set one before StatsDirect started R, else `./.Rprofile`, else `~/.Rprofile`, in the global environment, printing what it prints; R processes started from the session get the user's own `R_PROFILE_USER` back, or none;
+- reads its own files without re-encoding them, so the user's start-up file cannot change the imported values: `options(encoding = "latin1")` in it leaves `café` as `café`;
 - leaves the user's `.First` to run.
 
 So nothing StatsDirect sets is inherited by R processes started from that session (`parallel`, `Rscript`, `callr`). **Change:** Windows (child processes fail today, and the user's profile is skipped); Mac (the user's profile is skipped).
 
 **6.2 Data is copied only where R needs it** (M27).
 
-- **A copy that R reads by itself** (the integrated session's input, or the script RGui or R.app is started to run) is removed once R has read it or that R session ends. R.app also shows its script in its editor, so for R.app the copy is removed when the session ends.
+- **A copy that R reads by itself** (the integrated session's input, or the script RGui or R.app is started to run) is removed once R has read it or that R session ends. R.app also shows its script in its editor, so for R.app the copy is removed when the session ends, unless the user has saved changes to it in R.app's editor: then it is the user's file, and it is kept.
 - **Any copy left over** is removed when StatsDirect closes or next starts.
 - **A script given to RStudio,** which runs it only when the user does, is the user's file. It is one uniquely named file per import in StatsDirect's R Scripts folder, with its full path shown, and no other copy is made.
 - **The folder R uses as its working directory is never deleted,** because users save files there.
@@ -224,3 +242,4 @@ So nothing StatsDirect sets is inherited by R processes started from that sessio
 - **Names:** column 365 (`NA`), a blank heading beside `B`, and repeated `row.names`, `check.rows` and `stringsAsFactors` headings.
 - **Text:** a cell `"a⁨b⁩‮c"`, a NUL (refused), a lone surrogate, and a formula with empty text.
 - **Dates:** a date column, a midnight date-time beside one with a time, a time of day, a duration over 24 hours, a duration with a fraction (`14:30:00.5`), and serial 60.
+- **Amendment 1:** {`2026-11-21 10:00`, `na`}, {`14:30:00`, `na`} and a duration with `na`; {`2026-11-21`, `2026-11-21 10:00`} beside {`2026-11-21`, `14:30:00`}; `mm:ss` and `mm:ss.0` values; `[Magenta]` and `[Red]` in date, date-time and time formats beside `[h]:mm`; 2958466 and -1 in `yyyy-mm-dd` and a duration of 3,000,000 days; 46123 in `[Magenta]yyyy-mm-dd;[h]:mm` and -1.5 in `[h]:mm;yyyy-mm-dd`.

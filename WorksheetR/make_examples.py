@@ -315,6 +315,54 @@ case('Serial 60 (1900-02-29) is missing', ['3.9'],
      cells(col('A', T('Date'), D('date', '60', 'yyyy-mm-dd'), D('date', '46347', 'yyyy-mm-dd'))), {'entire': True},
      {'headingsSuggested': True, 'r': frame(['Date'], [date(None, 20778)], 2)})
 
+# Amendment 1 (learning-v1.1.8)
+case('Date-times anchor the missing words; times of day and durations do not', ['3.2', '3.9'],
+     cells(col('A', T('When'), D('datetime', '46347.416666666664', 'yyyy-mm-dd hh:mm'), T('na')),
+           col('B', T('Time'), D('time', '0.6041666666666666', 'hh:mm:ss'), T('na')),
+           col('C', T('Duration'), D('duration', '1.0833333333333333', '[h]:mm:ss'), T('na'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['When', 'Time', 'Duration'], [chr_('2026-11-21 10:00:00', None), chr_('14:30:00', 'na'), chr_('26:00:00', 'na')], 2)})
+
+case('A date-time column writes midnight; a time of day makes the column character', ['3.6', '3.9'],
+     cells(col('A', T('When'), D('date', '46347', 'yyyy-mm-dd'), D('datetime', '46347.416666666664', 'yyyy-mm-dd hh:mm')),
+           col('B', T('Mixed'), D('date', '46347', 'yyyy-mm-dd'), D('time', '0.6041666666666666', 'hh:mm:ss'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['When', 'Mixed'], [chr_('2026-11-21 00:00:00', '2026-11-21 10:00:00'), chr_('2026-11-21', '14:30:00')], 2)})
+
+case('mm:ss formats give times of day', ['3.9'],
+     cells(col('A', T('Lap'), D('time', '0.0010416666666666667', 'mm:ss'), D('time', '0.0010474537037037037', 'mm:ss.0'))),
+     {'entire': True},
+     {'headingsSuggested': True, 'r': frame(['Lap'], [chr_('00:01:30', '00:01:30.5')], 2)})
+
+case('Colour codes in a format do not make a duration', ['3.9'],
+     cells(col('A', T('Date'), D('date', '46347', '[Magenta]yyyy-mm-dd'), D('date', '46348', '[magenta]dd/mm/yyyy')),
+           col('B', T('When'), D('datetime', '46347.5', '[Magenta]yyyy-mm-dd hh:mm'), D('datetime', '46347.25', '[Red]yyyy-mm-dd hh:mm')),
+           col('C', T('Time'), D('time', '0.25', '[Red]hh:mm'), D('time', '0.5', '[Magenta]hh:mm')),
+           col('D', T('Elapsed'), D('duration', '1.25', '[Red][h]:mm'), D('duration', '0.5', '[mm]:ss'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['Date', 'When', 'Time', 'Elapsed'],
+                 [date(20778, 20779), chr_('2026-11-21 12:00:00', '2026-11-21 06:00:00'), chr_('06:00:00', '12:00:00'),
+                  chr_('30:00:00', '12:00:00')], 2)})
+
+case('Only the format section that applies to the value counts', ['3.9'],
+     cells(col('A', T('Date'), D('date', '46123', '[Magenta]yyyy-mm-dd;[h]:mm')),
+           col('B', T('Negative'), D('duration', '-1.5', '[h]:mm;yyyy-mm-dd'))),
+     {'entire': True},
+     {'headingsSuggested': True, 'r': frame(['Date', 'Negative'], [date(20554), num(-1.5)], 1)})
+
+case('A value beyond 9999-12-31, or before the date system, is a number', ['3.9'],
+     cells(col('A', T('Big'), D('date', '2958466', 'yyyy-mm-dd')), col('B', T('Before'), D('date', '-1', 'yyyy-mm-dd')),
+           col('C', T('Long'), D('duration', '3000000', '[h]:mm:ss')), col('D', T('Last'), D('date', '2958465', 'yyyy-mm-dd')),
+           col('E', T('Edge'), D('duration', '2958466', '[h]:mm:ss')), col('F', T('Longest'), D('duration', '2958465', '[h]:mm:ss')),
+           col('G', T('Zero'), D('date', '0', 'yyyy-mm-dd')), col('H', T('Half'), D('datetime', '0.5', 'yyyy-mm-dd hh:mm'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['Big', 'Before', 'Long', 'Last', 'Edge', 'Longest', 'Zero', 'Half'],
+                 [num(2958466), num(-1), num(3000000), date(2932896), num(2958466), chr_('71003160:00:00'), num(0), num(0.5)], 1)})
+
 # ---------- 4. Headings and names ----------
 
 case('Headings: the electrolyte table', ['4.1'],
