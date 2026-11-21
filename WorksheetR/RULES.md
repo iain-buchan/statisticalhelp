@@ -1,9 +1,9 @@
 # Worksheet data sent to R: shared rules
 
-**Status: draft for Iain's approval, 21 November 2026 (third version).** Nothing here is in either application yet.
+**Status: approved by Iain on 21 November 2026** ("agree", to the recommended answer of every choice below). Nothing here is in either application yet.
 
 - This version takes in the Mac session's review of the first draft: 54 findings, each checked by a second reader, numbered M1 to M29 below where they changed a rule.
-- Once the choices in the first section are made, `examples.json` will encode them, and both applications must pass it before the worksheet R and R+ buttons are released.
+- `examples.json` encodes these rules, and both applications must pass it before the worksheet R and R+ buttons are released.
 
 ## How this is used
 
@@ -12,10 +12,10 @@
 - **Each application's own test** builds each worksheet in its own grid and runs its own import code. In R, the result must be `identical()` to the expected object, and the prompt must show the expected labels.
 - **Expected data frames** are written as `structure(list(...), names = c(...), row.names = c(NA_integer_, -nL), class = "data.frame")`. This is `identical()` to `data.frame(..., check.names = FALSE)`, and it can also express names that `data.frame()` cannot build.
 - **Both applications reach these files** through their pinned copy of this repository, at the next `learning-v*` tag.
-- **Choices:** rules marked **(choice)** await Iain's decision; the recommended answer is given first.
+- **Choices:** the nine in the first section were decided on 21 November 2026: the recommended answer in every case.
 - **"Today"** describes Windows pull request 24 (`preview/windows-analyse-picker`, `43d35b6d`) and Mac pull request 23 (`codex/mac-worksheet-r-parity`, `5022dd79`). The rule-by-rule comparison is in `WORKSHEET-R-RULES-WINDOWS-MAC-2026-11-20.md`.
 
-## Choices for Iain
+## Choices (decided: the recommended answer in every case)
 
 | | Question | Recommended | Alternatives | Today |
 |---|---|---|---|---|
@@ -73,13 +73,13 @@
   - the words `NA`, `N/A`, `NaN`, `NULL` and `MISSING`, written exactly so;
   - a formula whose value is empty text;
   - a spreadsheet error (C4): a cell holding an error value (`#DIV/0!`, `#N/A`, `#NAME?`, `#NULL!`, `#NUM!`, `#REF!`, `#VALUE!`, `#SPILL!`, `#CALC!` and the like). Text that only looks like an error stays text.
-- **Also in any case** (`na`, `n/a`, `nan`, `Null`): the same words count, in a column whose other non-missing cells are all numbers, all Booleans or all dates.
+- **Also in any case** (`na`, `n/a`, `nan`, `Null`): the same words count, in a column whose other non-missing cells are all numbers, all Booleans or all dates, and that has at least one such number, Boolean or date. So {`Nan`, `Nan`} (two people called Nan) stays character, and {`na`, 1} is numeric.
 - **Surrounding white space** is ignored.
 - **So real words survive** in text columns: `Na`, `Nan`, `Null`, `Missing`. Examples: {`Na`, `K`, `Cl`} is character; {`1`, `na`, `2`} is numeric; {`Alive`, `Missing`} is character; {`Smith`, `NA`} gives `c("Smith", NA)`; {TRUE, `na`} is logical.
 - **How this compares with the analyses** (M2): these are the markers StatsDirect treats as missing when it reads row-aligned columns. Ordinary numeric analyses differ by platform. The Mac takes only blank and `*`, and stops on other text. Windows takes any non-numeric cell as missing.
 - **Today:** Windows makes all of these text, so a single `*` turns a numeric column into text. The Mac makes blank cells `NA`, and `*` only in an otherwise numeric column; other markers, `*` elsewhere and white-space text stay text. **Change:** both.
 
-**3.3 Numbers.** A number cell, or text that reads as a number (rule 3.4), counts as a number. These are also numbers, in a column whose other non-missing cells are numbers (M10):
+**3.3 Numbers.** A number cell, or text that reads as a number (rule 3.4), counts as a number. These are also numbers, in a column whose other non-missing cells are numbers and that has at least one number, so that {`Inf`} alone stays text and {`Inf`, 1} is numeric (M10):
 
 - `Inf`, `-Inf`, `Infinity` and `-Infinity` in any case, as plus or minus `Inf`;
 - `NaN` counts as missing (rule 3.2).
@@ -175,7 +175,7 @@ Each application's own test proves the form over the example values and a large 
 | 5.2 | **Data frame:** columns in sheet order; automatic integer row names (compact `c(NA, -n)` or `1:n`, not character); character columns never factors (M19). |
 | 5.3 | **List of vectors:** a named list, each element its column with missing values removed. A column with no non-missing value is `logical(0)` (M19). |
 | 5.4 | **After the import** R shows what C2 decides. |
-| 5.5 | **The script's comments** are the same on both platforms, with the range text of rule 1.4 listing every area, and any CR or LF in the sheet name written as a space (M25): `# Data copied from the worksheet “Sheet1”, A1:C4.` and `# Blank cells, missing-value markers and spreadsheet errors are NA.` For a list, also `# Missing values are removed separately from each vector.` Plus one line on dates, per C3. |
+| 5.5 | **The script's comments** are the same on both platforms, with the range text of rule 1.4 listing every area, and any CR or LF in the sheet name written as a space (M25): `# Data copied from the worksheet “Sheet1”, A1:C4.` and `# Blank cells, missing-value markers and spreadsheet errors are NA.` For a list, also `# Missing values are removed separately from each vector.` When the copied cells include a date, date-time, time of day or duration, also `# Dates without a time of day are R Date values; other dates and times are text.` |
 
 ## 6. Delivery and files
 
@@ -217,6 +217,7 @@ So nothing StatsDirect sets is inherited by R processes started from that sessio
 - **Missing and Booleans:** {`Na`, `K`, `Cl`}, {`1`, `na`, `2`}, {`Alive`, `Missing`}, {`Smith`, `NA`}, {TRUE, `na`}.
 - **White space:** `" 13"`, `"13\u0085"`, `"　"` (missing), `"﻿13"` (text).
 - **Codes and non-finite:** {`0012`, `-007`, `00.5`} (text), {`0`, `0.5`, `-0.25`, `0e5`} (numbers), {`1`, `Inf`, `-infinity`}.
+- **No anchor:** {`Nan`, `Nan`} (character), {`Inf`} (text), {`Inf`, 1} (numeric), {`na`, 1} (numeric).
 - **Number cells in a character column:** `100000`, `0.00001`, `1e-7`, `1.2e-7`, `1e+21`, and `-0` written `0`.
 - **Boolean text:** `true` and `True` in a logical column and in a character column.
 - **Headings:** {`Na`, 140, 138} with {`K`, 4.1, 3.9} is suggested as headings.
