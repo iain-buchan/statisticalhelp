@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "format": "statsdirect-desktop-help-v1",
-  "publishedAtUtc": "2026-11-17T08:44:39.3738315+00:00",
-  "sourceSha256": "ae28ea24b9ab2ad6467294c9c9d47bd98a3b921cf9ae6b0eb73b532fe51175b1",
+  "publishedAtUtc": "2026-11-21T10:03:27.0188526+00:00",
+  "sourceSha256": "da0d1b026ca0e7e0bf76da617a7a777f691198cf28e3e9ca2b4eea8012945a4c",
   "entryPage": "index.html",
   "topicCount": 404,
   "searchDocumentCount": 403,
@@ -2171,8 +2171,8 @@
     },
     {
       "path": "basics/analysis.htm",
-      "bytes": 10503,
-      "sha256": "1c8e6853780f5bbf003458c2c0109317f7539fdfd6df1b77cdd49c52b8174a0e"
+      "bytes": 11640,
+      "sha256": "9ebb832f850f70d82cf76088b236ee898e2d78465d8fc818906db81ee05dd036"
     },
     {
       "path": "basics/attributable_risk.htm",
@@ -2266,8 +2266,8 @@
     },
     {
       "path": "basics/r_script_window.htm",
-      "bytes": 13835,
-      "sha256": "29eeb115deb322959515fd0a42f3ffcf9356c0bebeadcb41b01b90555f8d9fa5"
+      "bytes": 15539,
+      "sha256": "1ca10ccfe07b953c8f9882a1a2e6c276b03bed6d44980a93918ed49f69ad1dbe"
     },
     {
       "path": "basics/reliability.htm",
@@ -2276,8 +2276,8 @@
     },
     {
       "path": "basics/report_window.htm",
-      "bytes": 13963,
-      "sha256": "fab9c1be257824df51ba1c2c9a0f5491c6e959964284b5d4f759251a20b0576b"
+      "bytes": 15406,
+      "sha256": "f2a21ba3868e736eaef2161df31620a8415cbd3cf67ca88acc04b739ff45bf32"
     },
     {
       "path": "basics/script_ai.htm",
@@ -2301,13 +2301,13 @@
     },
     {
       "path": "basics/worksheet.htm",
-      "bytes": 13629,
-      "sha256": "5bca42b1082a9a874eec45df8f5d09c33d7b9e9fe4c13b1b22d593e8ac8125be"
+      "bytes": 17568,
+      "sha256": "bb01c6c58298ee6ede73fe5b67a4f97bd7a7d0f8b304ee22be86f99a5a944a46"
     },
     {
       "path": "build-info.json",
       "bytes": 220,
-      "sha256": "bb8c12d44411c6c42484d9bd0cde38755ae789fdb1c816b8ef97e88f193656af"
+      "sha256": "b4ddeeb64ad958b5e7cb08e0f0c9f525ed74d727e5815ee20efe45af291b6e62"
     },
     {
       "path": "chi_square_tests/22.htm",
@@ -2836,13 +2836,13 @@
     },
     {
       "path": "keyword-index.js",
-      "bytes": 134304,
-      "sha256": "632324afc20590b0228d368865d447b8f55200856d89a2b8b1947fce740f7f93"
+      "bytes": 134837,
+      "sha256": "01d006d71525cdef50c0f110782f4e56f7433d72e4bc378091c138fa70aadd01"
     },
     {
       "path": "keyword-index.json",
-      "bytes": 97003,
-      "sha256": "a820de2418a6b9db31fb674c210e6323131b1213c1a1c15cf842735e4aab46a9"
+      "bytes": 97536,
+      "sha256": "131e7507ea107dfb5f4234cdcb7ef78a2b41eb9637fa62534a844eb7ae1d51d9"
     },
     {
       "path": "menus/about.htm",
@@ -3691,8 +3691,8 @@
     },
     {
       "path": "report/new_report.htm",
-      "bytes": 8081,
-      "sha256": "aab385a4551d35d23fb2fc095d36846ef2e77f8032060d200be90e443e850fbb"
+      "bytes": 8266,
+      "sha256": "340481c838ef7f7ea91bd455264460af9708ef5882f16432ab3fdeba961923b6"
     },
     {
       "path": "report/replace.htm",
@@ -5502,7 +5502,7 @@
     {
       "path": "resources/help-editor-runtime/publication.json",
       "bytes": 133,
-      "sha256": "4d0e0c23a7c1af4830da3eddf3068ab363bdc68644e396c745e296376ae9e118"
+      "sha256": "00af037caa438843b7f62251cd6091ebb831ed989bce04903e1f4755bca5633a"
     },
     {
       "path": "resources/help-editor-runtime/topic.css",
@@ -6081,8 +6081,8 @@
     },
     {
       "path": "search-index.js",
-      "bytes": 880180,
-      "sha256": "5b9de4c22d5c1b9d877d5d0265e27090035e9236e2b4b49e16692f7e4238f736"
+      "bytes": 882442,
+      "sha256": "f820c556fa0bb5af94aed7c7d7a9525666e4c5557045c8788475a26e59cbd9de"
     },
     {
       "path": "survival_analysis/abridged_life_table.htm",
@@ -6420,5 +6420,5 @@
       "sha256": "10f5155b3fbf0d431bb8ad559e3b8103fcf3b355e001208dfacb2855b22936c9"
     }
   ],
-  "publicationSnapshotSha256": "a95823fa70a631b0e718b8369007f70e764c9b30f37ac2c26e98f7449a4af379"
+  "publicationSnapshotSha256": "7b92b0e3eac78d4ddbd92f5fc329076ee3bc9c8ad289a25d83adf56e2e92652e"
 }
