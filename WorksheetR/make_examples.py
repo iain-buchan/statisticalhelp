@@ -315,6 +315,27 @@ case('Serial 60 (1900-02-29) is missing', ['3.9'],
      cells(col('A', T('Date'), D('date', '60', 'yyyy-mm-dd'), D('date', '46347', 'yyyy-mm-dd'))), {'entire': True},
      {'headingsSuggested': True, 'r': frame(['Date'], [date(None, 20778)], 2)})
 
+# Amendment 1 (learning-v1.1.8)
+case('Date-times anchor the missing words; times of day and durations do not', ['3.2', '3.9'],
+     cells(col('A', T('When'), D('datetime', '46347.416666666664', 'yyyy-mm-dd hh:mm'), T('na')),
+           col('B', T('Time'), D('time', '0.6041666666666666', 'hh:mm:ss'), T('na')),
+           col('C', T('Duration'), D('duration', '1.0833333333333333', '[h]:mm:ss'), T('na'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['When', 'Time', 'Duration'], [chr_('2026-11-21 10:00:00', None), chr_('14:30:00', 'na'), chr_('26:00:00', 'na')], 2)})
+
+case('A date-time column writes midnight; a time of day makes the column character', ['3.6', '3.9'],
+     cells(col('A', T('When'), D('date', '46347', 'yyyy-mm-dd'), D('datetime', '46347.416666666664', 'yyyy-mm-dd hh:mm')),
+           col('B', T('Mixed'), D('date', '46347', 'yyyy-mm-dd'), D('time', '0.6041666666666666', 'hh:mm:ss'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['When', 'Mixed'], [chr_('2026-11-21 00:00:00', '2026-11-21 10:00:00'), chr_('2026-11-21', '14:30:00')], 2)})
+
+case('mm:ss formats give times of day', ['3.9'],
+     cells(col('A', T('Lap'), D('time', '0.0010416666666666667', 'mm:ss'), D('time', '0.0010474537037037037', 'mm:ss.0'))),
+     {'entire': True},
+     {'headingsSuggested': True, 'r': frame(['Lap'], [chr_('00:01:30', '00:01:30.5')], 2)})
+
 # ---------- 4. Headings and names ----------
 
 case('Headings: the electrolyte table', ['4.1'],

@@ -1,6 +1,14 @@
 # Worksheet data sent to R: shared rules
 
-**Status: approved by Iain on 21 November 2026** ("agree", to the recommended answer of every choice below). Nothing here is in either application yet.
+**Status: approved by Iain on 21 November 2026** ("agree", to the recommended answer of every choice below), and tagged `learning-v1.1.7`.
+
+**Amendment 1** (`learning-v1.1.8`), agreed by the Windows and Mac sessions while building to these rules, 21 November 2026:
+
+- dates and date-times anchor the missing-value words; times of day and durations do not (rule 3.2);
+- a date-time column is defined, and a column that also holds a time of day or a duration is an ordinary character column (rules 3.6 and 3.9);
+- formats such as `mm:ss` give times of day (rule 3.9);
+- a script the user has saved in R.app's editor is kept (rule 6.2);
+- three examples pin these.
 
 - This version takes in the Mac session's review of the first draft: 54 findings, each checked by a second reader, numbered M1 to M29 below where they changed a rule.
 - `examples.json` encodes these rules, and both applications must pass it before the worksheet R and R+ buttons are released.
@@ -8,7 +16,7 @@
 ## How this is used
 
 - **One set of rules** for StatsDirect for Windows and for Mac. Both send worksheet data to R from the worksheet toolbar's **R** button (StatsDirect's own R session) and **R+** button (external R).
-- **`examples.json`** (to follow) will hold worksheets, a selection and the prompt's options. Each example gives every cell's stored type, not keystrokes, and the exact R object expected.
+- **`examples.json`** holds worksheets, a selection and the prompt's options. Each example gives every cell's stored type, not keystrokes, and the exact R object expected.
 - **Each application's own test** builds each worksheet in its own grid and runs its own import code. In R, the result must be `identical()` to the expected object, and the prompt must show the expected labels.
 - **Expected data frames** are written as `structure(list(...), names = c(...), row.names = c(NA_integer_, -nL), class = "data.frame")`. This is `identical()` to `data.frame(..., check.names = FALSE)`, and it can also express names that `data.frame()` cannot build.
 - **Both applications reach these files** through their pinned copy of this repository, at the next `learning-v*` tag.
@@ -73,7 +81,7 @@
   - the words `NA`, `N/A`, `NaN`, `NULL` and `MISSING`, written exactly so;
   - a formula whose value is empty text;
   - a spreadsheet error (C4): a cell holding an error value (`#DIV/0!`, `#N/A`, `#NAME?`, `#NULL!`, `#NUM!`, `#REF!`, `#VALUE!`, `#SPILL!`, `#CALC!` and the like). Text that only looks like an error stays text.
-- **Also in any case** (`na`, `n/a`, `nan`, `Null`): the same words count, in a column whose other non-missing cells are all numbers, all Booleans or all dates, and that has at least one such number, Boolean or date. All such words in a column are set aside together when its other cells are judged, so {1, `na`, `Null`, 2} is numeric. So {`Nan`, `Nan`} (two people called Nan) stays character, and {`na`, 1} is numeric.
+- **Also in any case** (`na`, `n/a`, `nan`, `Null`): the same words count, in a column whose other non-missing cells are all numbers, all Booleans, or all dates and date-times, and that has at least one such number, Boolean, date or date-time. Times of day and durations do not count, so {`14:30:00`, `na`} stays character, `c("14:30:00", "na")`, while {`2026-11-21 10:00`, `na`} gives `c("2026-11-21 10:00:00", NA)`. All such words in a column are set aside together when its other cells are judged, so {1, `na`, `Null`, 2} is numeric. So {`Nan`, `Nan`} (two people called Nan) stays character, and {`na`, 1} is numeric.
 - **Surrounding white space** is ignored.
 - **So real words survive** in text columns: `Na`, `Nan`, `Null`, `Missing`. Examples: {`Na`, `K`, `Cl`} is character; {`1`, `na`, `2`} is numeric; {`Alive`, `Missing`} is character; {`Smith`, `NA`} gives `c("Smith", NA)`; {TRUE, `na`} is logical.
 - **How this compares with the analyses** (M2): these are the markers StatsDirect treats as missing when it reads row-aligned columns. Ordinary numeric analyses differ by platform. The Mac takes only blank and `*`, and stops on other text. Windows takes any non-numeric cell as missing.
@@ -101,6 +109,7 @@
 | a number (rules 3.3 and 3.4) | numeric: double, never integer, even when every value is whole (M19) |
 | a Boolean (rule 3.5) | logical |
 | a date with no time of day (C3, rule 3.9) | `Date`, double storage: `structure(20778, class = "Date")` |
+| a date or a date-time, at least one with a time of day | character: a date-time column (rule 3.9) |
 | missing (every cell) | logical `NA`, R's own default; `logical(0)` in a list |
 | anything else | character |
 
@@ -139,9 +148,10 @@ Each application's own test proves the form over the example values and a large 
 
 - **A date column,** judged by value: every non-missing cell is a date or date-time whose time, rounded to the millisecond, is 00:00:00, whatever its format. The class is `Date`, as in rule 3.6.
 - **Precision:** every date-time, time of day and duration is rounded to the millisecond. A point and one to three digits follow the seconds only when there is a fraction: `14:30:00.5`.
-- **A time of day:** a value below one day, with a format that has no date. It is written `HH:MM:SS`.
+- **A time of day:** a value below one day, with a format that has no date. It is written `HH:MM:SS`. Formats such as `mm:ss` and `mm:ss.0` (Excel's built-in formats 45 and 47) have no date, so they give times of day: 90.5 seconds is `00:01:30.5`. A value of one day or more in such a format is a date or a date-time, judged by value as above.
 - **A duration** (an elapsed-time format): written `[-]HH:MM:SS`, with hours not wrapped: `26:00:00`, `-01:00:00`.
 - **A date-time:** written `YYYY-MM-DD HH:MM:SS`. In a date-time column midnight is written `00:00:00`, because `as.POSIXct()` drops the time from every value if one lacks it.
+- **A date-time column:** every non-missing cell is a date or a date-time, and at least one has a time of day (rule 3.6). A column that also holds a time of day or a duration is an ordinary character column, where a date is written `YYYY-MM-DD`: {`2026-11-21`, `14:30:00`} gives `c("2026-11-21", "14:30:00")`.
 - **A bare `YYYY-MM-DD`** appears only in a character column or a heading.
 - **Serial 60** (the nonexistent 1900-02-29) gives `NA`.
 - **The examples** give calendar dates. Each loader's date system (1900 or 1904) is tested separately.
@@ -189,7 +199,7 @@ So nothing StatsDirect sets is inherited by R processes started from that sessio
 
 **6.2 Data is copied only where R needs it** (M27).
 
-- **A copy that R reads by itself** (the integrated session's input, or the script RGui or R.app is started to run) is removed once R has read it or that R session ends. R.app also shows its script in its editor, so for R.app the copy is removed when the session ends.
+- **A copy that R reads by itself** (the integrated session's input, or the script RGui or R.app is started to run) is removed once R has read it or that R session ends. R.app also shows its script in its editor, so for R.app the copy is removed when the session ends, unless the user has saved changes to it in R.app's editor: then it is the user's file, and it is kept.
 - **Any copy left over** is removed when StatsDirect closes or next starts.
 - **A script given to RStudio,** which runs it only when the user does, is the user's file. It is one uniquely named file per import in StatsDirect's R Scripts folder, with its full path shown, and no other copy is made.
 - **The folder R uses as its working directory is never deleted,** because users save files there.
@@ -224,3 +234,4 @@ So nothing StatsDirect sets is inherited by R processes started from that sessio
 - **Names:** column 365 (`NA`), a blank heading beside `B`, and repeated `row.names`, `check.rows` and `stringsAsFactors` headings.
 - **Text:** a cell `"a⁨b⁩‮c"`, a NUL (refused), a lone surrogate, and a formula with empty text.
 - **Dates:** a date column, a midnight date-time beside one with a time, a time of day, a duration over 24 hours, a duration with a fraction (`14:30:00.5`), and serial 60.
+- **Amendment 1:** {`2026-11-21 10:00`, `na`}, {`14:30:00`, `na`} and a duration with `na`; {`2026-11-21`, `2026-11-21 10:00`} beside {`2026-11-21`, `14:30:00`}; `mm:ss` and `mm:ss.0` values.
