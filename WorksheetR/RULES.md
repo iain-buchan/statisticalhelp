@@ -11,6 +11,7 @@
 - a value beyond 9999-12-31, or a date before its date system, is a number, and colour codes in a format do not make a duration (rule 3.9);
 - every control character in the sheet name is a space in the script's comment (rule 5.5);
 - the user's own `R_PROFILE_USER` is honoured, and the user's start-up file cannot change the imported values (rule 6.1);
+- every column, or every row, selected as whole columns or rows is select all (rule 2.6);
 - five examples pin these.
 
 - This version takes in the Mac session's review of the first draft: 54 findings, each checked by a second reader, numbered M1 to M29 below where they changed a rule.
@@ -63,7 +64,7 @@
 | 2.3 | **Whole columns:** the selected columns, from the first to the last non-blank row of those columns. A selected column with no data stays, as a column of `NA`. | same, except several columns (C7) |
 | 2.4 | **Whole rows:** per C6. | the two differ |
 | 2.5 | **Several areas:** per C7. | Windows refuses all; Mac accepts columns or rows |
-| 2.6 | **Select all** (the corner, Ctrl+A or Command-A) is the same as Entire worksheet. | Windows. On the Mac, Command-A gives a rectangle from A1 across every grid column, and the corner selects every grid row, sent as whole rows from A1 (M29). |
+| 2.6 | **Select all** (the corner, Ctrl+A or Command-A) is the same as Entire worksheet. So are whole columns that together are every column of the sheet, and whole rows that together are every row, however they were selected: on Windows a drag across every column header gives the same range as the corner. | Windows. On the Mac, Command-A gives a rectangle from A1 across every grid column, and the corner selects every grid row, sent as whole rows from A1 (M29). |
 | 2.7 | **A merged area** sends its value in its top-left cell; the other cells are blank. | same |
 | 2.8 | **One cell** is a valid selection. The first-row check box is then disabled. | same |
 
