@@ -336,6 +336,23 @@ case('mm:ss formats give times of day', ['3.9'],
      {'entire': True},
      {'headingsSuggested': True, 'r': frame(['Lap'], [chr_('00:01:30', '00:01:30.5')], 2)})
 
+case('Colour codes in a format do not make a duration', ['3.9'],
+     cells(col('A', T('Date'), D('date', '46347', '[Magenta]yyyy-mm-dd'), D('date', '46348', '[magenta]dd/mm/yyyy')),
+           col('B', T('When'), D('datetime', '46347.5', '[Magenta]yyyy-mm-dd hh:mm'), D('datetime', '46347.25', '[Red]yyyy-mm-dd hh:mm')),
+           col('C', T('Time'), D('time', '0.25', '[Red]hh:mm'), D('time', '0.5', '[Magenta]hh:mm')),
+           col('D', T('Elapsed'), D('duration', '1.25', '[Red][h]:mm'), D('duration', '0.5', '[mm]:ss'))),
+     {'entire': True},
+     {'headingsSuggested': True,
+      'r': frame(['Date', 'When', 'Time', 'Elapsed'],
+                 [date(20778, 20779), chr_('2026-11-21 12:00:00', '2026-11-21 06:00:00'), chr_('06:00:00', '12:00:00'),
+                  chr_('30:00:00', '12:00:00')], 2)})
+
+case('A value beyond 9999-12-31, or before the date system, is a number', ['3.9'],
+     cells(col('A', T('Big'), D('date', '2958466', 'yyyy-mm-dd')), col('B', T('Before'), D('date', '-1', 'yyyy-mm-dd')),
+           col('C', T('Long'), D('duration', '3000000', '[h]:mm:ss')), col('D', T('Last'), D('date', '2958465', 'yyyy-mm-dd'))),
+     {'entire': True},
+     {'headingsSuggested': True, 'r': frame(['Big', 'Before', 'Long', 'Last'], [num(2958466), num(-1), num(3000000), date(2932896)], 1)})
+
 # ---------- 4. Headings and names ----------
 
 case('Headings: the electrolyte table', ['4.1'],

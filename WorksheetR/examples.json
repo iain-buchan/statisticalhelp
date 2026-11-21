@@ -1692,6 +1692,118 @@
    }
   },
   {
+   "name": "Colour codes in a format do not make a duration",
+   "rules": [
+    "3.9"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Date"
+    },
+    "A2": {
+     "date": "46347",
+     "format": "[Magenta]yyyy-mm-dd"
+    },
+    "A3": {
+     "date": "46348",
+     "format": "[magenta]dd/mm/yyyy"
+    },
+    "B1": {
+     "text": "When"
+    },
+    "B2": {
+     "datetime": "46347.5",
+     "format": "[Magenta]yyyy-mm-dd hh:mm"
+    },
+    "B3": {
+     "datetime": "46347.25",
+     "format": "[Red]yyyy-mm-dd hh:mm"
+    },
+    "C1": {
+     "text": "Time"
+    },
+    "C2": {
+     "time": "0.25",
+     "format": "[Red]hh:mm"
+    },
+    "C3": {
+     "time": "0.5",
+     "format": "[Magenta]hh:mm"
+    },
+    "D1": {
+     "text": "Elapsed"
+    },
+    "D2": {
+     "duration": "1.25",
+     "format": "[Red][h]:mm"
+    },
+    "D3": {
+     "duration": "0.5",
+     "format": "[mm]:ss"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(structure(c(20778, 20779), class = \"Date\"), c(\"2026-11-21 12:00:00\", \"2026-11-21 06:00:00\"), c(\"06:00:00\", \"12:00:00\"), c(\"30:00:00\", \"12:00:00\")), names = c(\"Date\", \"When\", \"Time\", \"Elapsed\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "A value beyond 9999-12-31, or before the date system, is a number",
+   "rules": [
+    "3.9"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Big"
+    },
+    "A2": {
+     "date": "2958466",
+     "format": "yyyy-mm-dd"
+    },
+    "B1": {
+     "text": "Before"
+    },
+    "B2": {
+     "date": "-1",
+     "format": "yyyy-mm-dd"
+    },
+    "C1": {
+     "text": "Long"
+    },
+    "C2": {
+     "duration": "3000000",
+     "format": "[h]:mm:ss"
+    },
+    "D1": {
+     "text": "Last"
+    },
+    "D2": {
+     "date": "2958465",
+     "format": "yyyy-mm-dd"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(2958466), c(-1), c(3000000), structure(c(2932896), class = \"Date\")), names = c(\"Big\", \"Before\", \"Long\", \"Last\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
    "name": "Headings: the electrolyte table",
    "rules": [
     "4.1"

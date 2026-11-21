@@ -8,7 +8,10 @@
 - a date-time column is defined, and a column that also holds a time of day or a duration is an ordinary character column (rules 3.6 and 3.9);
 - formats such as `mm:ss` give times of day (rule 3.9);
 - a script the user has saved in R.app's editor is kept (rule 6.2);
-- three examples pin these.
+- a value beyond 9999-12-31, or a date before its date system, is a number, and colour codes in a format do not make a duration (rule 3.9);
+- every control character in the sheet name is a space in the script's comment (rule 5.5);
+- the user's own `R_PROFILE_USER` is honoured, and the user's start-up file cannot change the imported values (rule 6.1);
+- five examples pin these.
 
 - This version takes in the Mac session's review of the first draft: 54 findings, each checked by a second reader, numbered M1 to M29 below where they changed a rule.
 - `examples.json` encodes these rules, and both applications must pass it before the worksheet R and R+ buttons are released.
@@ -149,7 +152,8 @@ Each application's own test proves the form over the example values and a large 
 - **A date column,** judged by value: every non-missing cell is a date or date-time whose time, rounded to the millisecond, is 00:00:00, whatever its format. The class is `Date`, as in rule 3.6.
 - **Precision:** every date-time, time of day and duration is rounded to the millisecond. A point and one to three digits follow the seconds only when there is a fraction: `14:30:00.5`.
 - **A time of day:** a value below one day, with a format that has no date. It is written `HH:MM:SS`. Formats such as `mm:ss` and `mm:ss.0` (Excel's built-in formats 45 and 47) have no date, so they give times of day: 90.5 seconds is `00:01:30.5`. A value of one day or more in such a format is a date or a date-time, judged by value as above.
-- **A duration** (an elapsed-time format): written `[-]HH:MM:SS`, with hours not wrapped: `26:00:00`, `-01:00:00`.
+- **A duration** (an elapsed-time format): written `[-]HH:MM:SS`, with hours not wrapped: `26:00:00`, `-01:00:00`. An elapsed-time format has, outside quotes, a bracket holding one of the letters h, m or s alone, repeated: `[h]`, `[hh]`, `[mm]`, `[ss]`. Other brackets are colours, locales and conditions (`[Red]`, `[Magenta]`, `[$-409]`, `[>=100]`): `[Magenta]yyyy-mm-dd` is a date format.
+- **Out of range:** 9999-12-31 is the last day of either date system: serial 2,958,465 in the 1900 system and 2,957,003 in the 1904 system. A value in a date, time or duration format beyond it, as a number of days, and a value in a date or time format before the first day of its date system, is a number: 2958466 and -1 in `yyyy-mm-dd` give `2958466` and `-1`.
 - **A date-time:** written `YYYY-MM-DD HH:MM:SS`. In a date-time column midnight is written `00:00:00`, because `as.POSIXct()` drops the time from every value if one lacks it.
 - **A date-time column:** every non-missing cell is a date or a date-time, and at least one has a time of day (rule 3.6). A column that also holds a time of day or a duration is an ordinary character column, where a date is written `YYYY-MM-DD`: {`2026-11-21`, `14:30:00`} gives `c("2026-11-21", "14:30:00")`.
 - **A bare `YYYY-MM-DD`** appears only in a character column or a heading.
@@ -185,14 +189,15 @@ Each application's own test proves the form over the example values and a large 
 | 5.2 | **Data frame:** columns in sheet order; automatic integer row names (compact `c(NA, -n)` or `1:n`, not character); character columns never factors (M19). |
 | 5.3 | **List of vectors:** a named list, each element its column with missing values removed. A column with no non-missing value is `logical(0)` (M19). |
 | 5.4 | **After the import** R shows what C2 decides. |
-| 5.5 | **The script's comments** are the same on both platforms, with the range text of rule 1.4 listing every area, and any CR or LF in the sheet name written as a space (M25): `# Data copied from the worksheet “Sheet1”, A1:C4.` and `# Blank cells, missing-value markers and spreadsheet errors are NA.` For a list, also `# Missing values are removed separately from each vector.` When the copied cells include a date, date-time, time of day or duration, also `# Dates without a time of day are R Date values; other dates and times are text.` |
+| 5.5 | **The script's comments** are the same on both platforms, with the range text of rule 1.4 listing every area, and each control character in the sheet name written as a space: U+0000 to U+001F, CR and LF among them, and U+007F to U+009F, so CR LF gives two spaces (M25). On Windows R stops reading a script at a raw Ctrl-Z (U+001A). For example: `# Data copied from the worksheet “Sheet1”, A1:C4.` and `# Blank cells, missing-value markers and spreadsheet errors are NA.` For a list, also `# Missing values are removed separately from each vector.` When the copied cells include a date, date-time, time of day or duration, also `# Dates without a time of day are R Date values; other dates and times are text.` |
 
 ## 6. Delivery and files
 
 **6.1 R+ keeps the user's own R start-up file** (M26). StatsDirect's own start-up file:
 
 - unsets `R_PROFILE_USER` (never sets it to `""`);
-- then runs the user's profile as R would: `./.Rprofile`, else `~/.Rprofile`, in the global environment;
+- then runs the user's profile as R would: the file the user's own `R_PROFILE_USER` names, when the user set one before StatsDirect started R, else `./.Rprofile`, else `~/.Rprofile`, in the global environment, printing what it prints; R processes started from the session get the user's own `R_PROFILE_USER` back, or none;
+- reads its own files without re-encoding them, so the user's start-up file cannot change the imported values: `options(encoding = "latin1")` in it leaves `café` as `café`;
 - leaves the user's `.First` to run.
 
 So nothing StatsDirect sets is inherited by R processes started from that session (`parallel`, `Rscript`, `callr`). **Change:** Windows (child processes fail today, and the user's profile is skipped); Mac (the user's profile is skipped).
@@ -234,4 +239,4 @@ So nothing StatsDirect sets is inherited by R processes started from that sessio
 - **Names:** column 365 (`NA`), a blank heading beside `B`, and repeated `row.names`, `check.rows` and `stringsAsFactors` headings.
 - **Text:** a cell `"a⁨b⁩‮c"`, a NUL (refused), a lone surrogate, and a formula with empty text.
 - **Dates:** a date column, a midnight date-time beside one with a time, a time of day, a duration over 24 hours, a duration with a fraction (`14:30:00.5`), and serial 60.
-- **Amendment 1:** {`2026-11-21 10:00`, `na`}, {`14:30:00`, `na`} and a duration with `na`; {`2026-11-21`, `2026-11-21 10:00`} beside {`2026-11-21`, `14:30:00`}; `mm:ss` and `mm:ss.0` values.
+- **Amendment 1:** {`2026-11-21 10:00`, `na`}, {`14:30:00`, `na`} and a duration with `na`; {`2026-11-21`, `2026-11-21 10:00`} beside {`2026-11-21`, `14:30:00`}; `mm:ss` and `mm:ss.0` values; `[Magenta]` and `[Red]` in date, date-time and time formats beside `[h]:mm`; 2958466 and -1 in `yyyy-mm-dd` and a duration of 3,000,000 days.
