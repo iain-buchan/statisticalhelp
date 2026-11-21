@@ -1,6 +1,6 @@
 # Worksheet data sent to R: shared rules
 
-**Status: draft for Iain's approval, 21 November 2026 (second version).** Nothing here is in either application yet.
+**Status: draft for Iain's approval, 21 November 2026 (third version).** Nothing here is in either application yet.
 
 - This version takes in the Mac session's review of the first draft: 54 findings, each checked by a second reader, numbered M1 to M29 below where they changed a rule.
 - Once the choices in the first section are made, `examples.json` will encode them, and both applications must pass it before the worksheet R and R+ buttons are released.
@@ -36,7 +36,7 @@
 | 1.1 | **Title:** the button's tooltip. **R:** "Open in StatsDirect R". **R+:** "Open in external R" on Windows, which starts R's own window, RGui. On the Mac, "Open in R or RStudio", which opens RStudio when it is installed. |
 | 1.2 | **Text:** "Choose the data from “Sheet1” to copy into the new R session as worksheet_data." For Mac R+: "Choose the data from “Sheet1” to copy into R as worksheet_data.", since RStudio runs it in the user's own session (M24). With no data in the sheet: "The worksheet “Sheet1” has no data to copy." |
 | 1.3 | **Data choices,** in this order. **No data** is selected when the prompt opens, and focused where the platform gives that control focus (M23). The choices: "Entire worksheet — A1:C4 (4 rows × 3 columns)"; "Selected cells — A1:B3 (3 rows × 2 columns)"; "No data". |
-| 1.4 | **Counts:** written in digits with commas, whatever the locale: "1,048,576 rows", "1 row", "1 column". **Cells:** written in A1 notation (M21). One area is `B5:D9`, also for whole columns or rows after trimming. Several areas are written as Excel writes a union, in sheet order, with adjacent lines merged: `C3:C4,E3:E4`. The prompt lists at most three areas, then `,...`. |
+| 1.4 | **Counts:** written in digits with commas, whatever the locale: "1,048,576 rows", "1 row", "1 column". **Cells:** written in A1 notation (M21). One area is `B5:D9`, also for whole columns or rows after trimming. Several areas are written as Excel writes a union, in sheet order, with adjacent lines merged: `C3:C4,E3:E4`. The prompt lists at most three areas, then `,…` (U+2026, as with `—` and `×` in the same labels); the script's comment lists them all. |
 | 1.5 | **A choice that is not available** stays in the list, disabled, and says why: "Entire worksheet (no data)"; "Selected cells (no selection)"; "Selected cells (select one rectangle, or whole columns or rows)"; "Selected cells (no data in the selection)". |
 | 1.6 | **Then** "Import as:", with "Data frame (keep rows aligned)" selected and "List of vectors (independent samples)". It is disabled while No data is chosen. When the list is chosen, the hint "Missing values are removed separately from each vector." is shown. |
 | 1.7 | **Then two check boxes.** "Use the first row as column names" is enabled only for a data choice with more than one row. It is set to the suggestion (rule 4.1) each time the data choice changes. "Use R-friendly names" is enabled only while the first box is ticked, and is unticked when the prompt opens. While the prompt is open it keeps the user's tick. |
@@ -90,9 +90,9 @@
 - its value is finite;
 - it has no leading zero (C9).
 
-`1e-400` is 0. `1e999`, hexadecimal text, `Infinity` and `NaN` are not numbers by this rule (rule 3.3 covers the last three). The same test applies to number cells that keep their typed text, as the Mac grid's do.
+`1e-400` is 0. `1e999`, hexadecimal text, `Infinity` and `NaN` are not numbers by this rule; rule 3.3 covers the last two, so `1e999` and hexadecimal text stay text. The same test applies to number cells that keep their typed text, as the Mac grid's do.
 
-**3.5 Booleans** (M11). A spreadsheet Boolean, or the text `TRUE` or `FALSE` in any case, counts as a Boolean. Excel makes a typed TRUE a Boolean; the Mac grid stores it as text.
+**3.5 Booleans** (M11). A spreadsheet Boolean, or text that is `TRUE` or `FALSE` in any case after trimming, counts as a Boolean when the column's type is decided. Excel makes a typed TRUE a Boolean; the Mac grid stores it as text.
 
 **3.6 The type of each column,** judged on its non-missing cells:
 
@@ -108,14 +108,14 @@
 
 **3.7 Values in a character column** (M4, M7):
 
-- **A text cell** keeps its exact text, even text that reads as a number: `1.50` stays `1.50`.
+- **A text cell** keeps its exact text, even text that reads as a number or a Boolean: `1.50` stays `1.50`, and `true` stays `true`.
 - **A number cell** is written as ECMAScript's `Number::toString`, which is JavaScript's `String(x)`: the shortest digits that name the double, e-notation below 1e-6 and from 1e21, and -0 written as `0`. Examples: `100000`, `0.00001`, `1e-7`, `1.2e-7`, `0.30000000000000004`, `123456789012345680000`, `1e+21`, `5e-324`, `1.7976931348623157e+308`. .NET's own text differs (`1E-07`, `-0`). The Mac host has a C# port, `JsNumber` in `FullEngine/WorkbookIO.cs`, that matched `String(x)` on 1,200,000 values.
-- **A Boolean** is `TRUE` or `FALSE`.
+- **A spreadsheet Boolean** is `TRUE` or `FALSE`.
 - **A date** is its rule 3.9 text.
 - **Missing markers** are `NA`.
 - **Today:** the Mac's `c()` coercion keeps only 15 significant digits of a number in a mixed column, and writes 100000 as `1e+05`.
 
-**3.8 Numbers are exact** (M5, M6). Every finite number arrives in R `identical()` to the double in the worksheet; a negative zero may arrive as 0. Both applications write a number, in R code or in a data file, in one form:
+**3.8 Numbers are exact** (M5, M6). Every finite number arrives in R `identical()` to the double in the worksheet; a negative zero may arrive as 0. Plus and minus `Inf` (rule 3.3) are written `Inf` and `-Inf`. Both applications write a finite number, in R code or in a data file, in one form:
 
 - **the shortest decimal,** when it has at most 15 digits, no exponent and at most four digits after the point;
 - **otherwise R's hexadecimal form,** `0x1.<13 hex digits>p<exp>`;
@@ -138,9 +138,10 @@ Each application's own test proves the form over the example values and a large 
 **3.9 Dates and times** (C3, M16):
 
 - **A date column,** judged by value: every non-missing cell is a date or date-time whose time, rounded to the millisecond, is 00:00:00, whatever its format. The class is `Date`, as in rule 3.6.
+- **Precision:** every date-time, time of day and duration is rounded to the millisecond. A point and one to three digits follow the seconds only when there is a fraction: `14:30:00.5`.
 - **A time of day:** a value below one day, with a format that has no date. It is written `HH:MM:SS`.
 - **A duration** (an elapsed-time format): written `[-]HH:MM:SS`, with hours not wrapped: `26:00:00`, `-01:00:00`.
-- **A date-time:** rounded to the millisecond and written `YYYY-MM-DD HH:MM:SS`. A point and one to three digits follow only when there is a fraction. In a date-time column midnight is written `00:00:00`, because `as.POSIXct()` drops the time from every value if one lacks it.
+- **A date-time:** written `YYYY-MM-DD HH:MM:SS`. In a date-time column midnight is written `00:00:00`, because `as.POSIXct()` drops the time from every value if one lacks it.
 - **A bare `YYYY-MM-DD`** appears only in a character column or a heading.
 - **Serial 60** (the nonexistent 1900-02-29) gives `NA`.
 - **The examples** give calendar dates. Each loader's date system (1900 or 1904) is tested separately.
@@ -174,7 +175,7 @@ Each application's own test proves the form over the example values and a large 
 | 5.2 | **Data frame:** columns in sheet order; automatic integer row names (compact `c(NA, -n)` or `1:n`, not character); character columns never factors (M19). |
 | 5.3 | **List of vectors:** a named list, each element its column with missing values removed. A column with no non-missing value is `logical(0)` (M19). |
 | 5.4 | **After the import** R shows what C2 decides. |
-| 5.5 | **The script's comments** are the same on both platforms, with the range text of rule 1.4 and any CR or LF in the sheet name written as a space (M25): `# Data copied from the worksheet “Sheet1”, A1:C4.` and `# Blank cells, missing-value markers and spreadsheet errors are NA.` For a list, also `# Missing values are removed separately from each vector.` Plus one line on dates, per C3. |
+| 5.5 | **The script's comments** are the same on both platforms, with the range text of rule 1.4 listing every area, and any CR or LF in the sheet name written as a space (M25): `# Data copied from the worksheet “Sheet1”, A1:C4.` and `# Blank cells, missing-value markers and spreadsheet errors are NA.` For a list, also `# Missing values are removed separately from each vector.` Plus one line on dates, per C3. |
 
 ## 6. Delivery and files
 
@@ -188,7 +189,7 @@ So nothing StatsDirect sets is inherited by R processes started from that sessio
 
 **6.2 Data is copied only where R needs it** (M27).
 
-- **A copy that R reads by itself** (the integrated session's input, or the script RGui or R.app is started to run) is removed once R has read it or that R session ends.
+- **A copy that R reads by itself** (the integrated session's input, or the script RGui or R.app is started to run) is removed once R has read it or that R session ends. R.app also shows its script in its editor, so for R.app the copy is removed when the session ends.
 - **Any copy left over** is removed when StatsDirect closes or next starts.
 - **A script given to RStudio,** which runs it only when the user does, is the user's file. It is one uniquely named file per import in StatsDirect's R Scripts folder, with its full path shown, and no other copy is made.
 - **The folder R uses as its working directory is never deleted,** because users save files there.
@@ -202,7 +203,7 @@ So nothing StatsDirect sets is inherited by R processes started from that sessio
 
 - **Formulas:** the Mac grid holds the values Excel saved in the file and cannot recalculate. So the Mac refuses an import whose formula cells have no saved value, or whose workbook has been edited since it was opened (any cell, any sheet). The message is "Recalculate and save this workbook in Excel, then reopen it before using formula cells in R." A saved empty-text result is missing (rule 3.2), not a reason to refuse (M12). Windows recalculates and sends current values.
 - **Size:** Windows sends the data in a file and has no limit of its own. The Mac writes the values into the R script, at most 8 MiB for R and R+ alike: about 1.1 million short typed values, or 380,000 full-precision ones.
-- **Typed entry:** the two grids store some keystrokes differently. Typed `0012` is text on the Mac but 12 on Windows, as in Excel. Typed `TRUE` is text on the Mac but a Boolean on Windows. Rules 3.4 and 3.5 make the import treat the stored types alike; the examples give stored types (M3, M11).
+- **Typed entry:** the two grids store some keystrokes differently. Typed `0012` is text on the Mac but 12 on Windows, as in Excel. Typed `TRUE` is text on the Mac but a Boolean on Windows. For TRUE, rule 3.5 gives the same result on both. For `0012` the result still differs, `"0012"` on the Mac and 12 on Windows, because C9 keeps leading-zero text as text. The examples give stored types (M3, M11).
 - **No selection:** Windows always has an active cell, so "Selected cells" is offered as that cell. The Mac grid can have no selection, so the choice is disabled ("no selection").
 - **The grid's size:** the Mac grid ends at its own size, so a selection cannot reach beyond it.
 - **Where R runs** (M24, M28):
@@ -216,6 +217,8 @@ So nothing StatsDirect sets is inherited by R processes started from that sessio
 - **Missing and Booleans:** {`Na`, `K`, `Cl`}, {`1`, `na`, `2`}, {`Alive`, `Missing`}, {`Smith`, `NA`}, {TRUE, `na`}.
 - **White space:** `" 13"`, `"13\u0085"`, `"　"` (missing), `"﻿13"` (text).
 - **Codes and non-finite:** {`0012`, `-007`, `00.5`} (text), {`0`, `0.5`, `-0.25`, `0e5`} (numbers), {`1`, `Inf`, `-infinity`}.
+- **Number cells in a character column:** `100000`, `0.00001`, `1e-7`, `1.2e-7`, `1e+21`, and `-0` written `0`.
+- **Boolean text:** `true` and `True` in a logical column and in a character column.
 - **Names:** column 365 (`NA`), a blank heading beside `B`, and repeated `row.names`, `check.rows` and `stringsAsFactors` headings.
 - **Text:** a cell `"a⁨b⁩‮c"`, a NUL (refused), a lone surrogate, and a formula with empty text.
-- **Dates:** a date column, a midnight date-time beside one with a time, a time of day, a duration over 24 hours, and serial 60.
+- **Dates:** a date column, a midnight date-time beside one with a time, a time of day, a duration over 24 hours, a duration with a fraction (`14:30:00.5`), and serial 60.
