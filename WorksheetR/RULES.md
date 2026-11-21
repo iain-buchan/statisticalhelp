@@ -159,7 +159,7 @@ Each application's own test proves the form over the example values and a large 
 
 | | Rule | Today |
 |---|---|---|
-| 4.1 | **The first row is suggested as headings** when the data has at least two rows and every non-blank first-row cell is text with a letter in it, not numeric text (rule 3.4), not a Boolean (rule 3.5), and not a missing marker (rule 3.2). At least one such cell is needed. Blank and white-space cells are passed over. A formula cell counts by its value. | the details differ |
+| 4.1 | **The first row is suggested as headings** when the data has at least two rows and every non-blank first-row cell is text with a letter in it, not numeric text (rule 3.4), not a Boolean (rule 3.5), and not a missing marker written exactly so (rule 3.2's any-column list: `*`, `* (missing)`, `.`, `NA`, `N/A`, `NaN`, `NULL`, `MISSING`). So a heading `Na` over numbers is a heading. At least one such cell is needed. With the box unticked, the data rule stands: a first-row `Na` over numbers is `NA`. Blank and white-space cells are passed over. A formula cell counts by its value. | the details differ |
 | 4.2 | **Without headings,** column names follow C5. The first row stays in the data. | Windows `V1`; Mac `Column A`, or row-1 text when its grid treats row 1 as titles |
 | 4.3 | **A blank, white-space or error heading cell** takes the C5 name. The import goes on. A heading's letter name can repeat another heading (`B`, `B`); R-friendly names then give `B`, `B_1` (M20). | the two differ |
 | 4.4 | **Headings are kept exactly,** with no trimming and no change by R. This holds for repeated names, and for names that `data.frame()` itself uses (`row.names` twice, `check.rows`, `check.names`, `fix.empty.names`, `stringsAsFactors`), names starting `..adfl.`, and very long headings. So the data frame is built with base functions only (`structure()`), so that a user's start-up file cannot change the import (M18). | Windows exact; the Mac's `as.data.frame()` fails on repeated argument names |
@@ -219,6 +219,7 @@ So nothing StatsDirect sets is inherited by R processes started from that sessio
 - **Codes and non-finite:** {`0012`, `-007`, `00.5`} (text), {`0`, `0.5`, `-0.25`, `0e5`} (numbers), {`1`, `Inf`, `-infinity`}.
 - **Number cells in a character column:** `100000`, `0.00001`, `1e-7`, `1.2e-7`, `1e+21`, and `-0` written `0`.
 - **Boolean text:** `true` and `True` in a logical column and in a character column.
+- **Headings:** {`Na`, 140, 138} with {`K`, 4.1, 3.9} is suggested as headings.
 - **Names:** column 365 (`NA`), a blank heading beside `B`, and repeated `row.names`, `check.rows` and `stringsAsFactors` headings.
 - **Text:** a cell `"a⁨b⁩‮c"`, a NUL (refused), a lone surrogate, and a formula with empty text.
 - **Dates:** a date column, a midnight date-time beside one with a time, a time of day, a duration over 24 hours, a duration with a fraction (`14:30:00.5`), and serial 60.
