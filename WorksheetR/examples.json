@@ -1,0 +1,1971 @@
+{
+ "about": "Worksheets with a selection and the prompt's options, each with what StatsDirect must show and the exact R object it must create. Both StatsDirect for Windows and for Mac test their own import against every case: the object must be identical() in R to \"expect.r\", evaluated with base R only. See RULES.md, which these encode.",
+ "version": 1,
+ "schema": {
+  "cells": "A1 reference to stored cell. {\"number\": \"<decimal text, parsed to the nearest double>\"}; {\"text\": \"<string>\"}; {\"textUnits\": [<UTF-16 code units, for text JSON cannot carry, e.g. a lone surrogate>]}; {\"boolean\": true|false}; {\"error\": \"#DIV/0!\"}; {\"date\"|\"datetime\"|\"time\"|\"duration\": \"<1900-system serial, decimal text>\", \"format\": \"<number format>\"}; {\"formula\": \"<Excel formula>\", \"value\": <stored cell of its current value>}. A cell not listed is blank.",
+  "formatOnly": "cells with formatting (a number format) and no value",
+  "merged": "merged areas; only the top-left cell holds a value",
+  "select": "{\"entire\": true} | {\"range\": \"B2:D3\"} | {\"columns\": [\"A\", \"C\"]} | {\"rows\": [\"2:6\"]} | {\"areas\": [\"A1:A2\", \"C1:C2\"]} | {\"all\": true} (select all) | {\"none\": true} (no selection; on Windows the active cell A1)",
+  "options": "\"format\": \"data frame\" | \"list\"; \"headings\": null (leave the suggestion) | true | false; \"friendly\": true | false. The data choice is the one the select names (Entire worksheet for \"entire\", Selected cells otherwise).",
+  "expect": "\"entire\" and \"selected\": the two data-choice labels, exactly, where given (an object gives one per platform); \"entireEnabled\", \"selectedEnabled\", \"headingsEnabled\": where given; \"headingsSuggested\": the first check box's suggestion; \"comments\": lines the script must contain; \"r\": the R expression the object must be identical() to, or null when nothing is imported; \"refusedNaming\": the import is refused with a message naming that cell, and \"refusedMessage\" gives that message exactly; \"labelsOnly\": only the labels are checked.",
+  "sheet": "every case uses one worksheet named \"Sheet1\"",
+  "skip": "{\"windows\"|\"mac\": \"<reason>\"}: a case that platform cannot build, with the reason; it runs on the other"
+ },
+ "cases": [
+  {
+   "name": "Entire worksheet: margins and formatting-only cells are left out",
+   "rules": [
+    "2.1",
+    "4.1",
+    "1.3",
+    "5.5"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Before visit"
+    },
+    "A2": {
+     "number": "15"
+    },
+    "B1": {
+     "text": "Group / label"
+    },
+    "B2": {
+     "text": "café, \"quoted\"%"
+    },
+    "B3": {
+     "text": "%NA"
+    },
+    "C1": {
+     "text": "Outside selection"
+    },
+    "C2": {
+     "number": "30"
+    },
+    "C4": {
+     "number": "999"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "entire": "Entire worksheet — A1:C4 (4 rows × 3 columns)",
+    "headingsSuggested": true,
+    "comments": [
+     "# Data copied from the worksheet “Sheet1”, A1:C4.",
+     "# Blank cells, missing-value markers and spreadsheet errors are NA."
+    ],
+    "r": "structure(list(c(15, NA, NA), c(\"caf\\u00e9, \\\"quoted\\\"%\", \"%NA\", NA), c(30, NA, 999)), names = c(\"Before visit\", \"Group / label\", \"Outside selection\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   },
+   "formatOnly": [
+    "H20",
+    "A6"
+   ]
+  },
+  {
+   "name": "A rectangle keeps its bounds beyond the data",
+   "rules": [
+    "2.2",
+    "C5",
+    "3.6"
+   ],
+   "cells": {
+    "B2": {
+     "number": "1"
+    },
+    "C2": {
+     "text": "x"
+    }
+   },
+   "select": {
+    "range": "B2:D3"
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — B2:D3 (2 rows × 3 columns)",
+    "headingsSuggested": false,
+    "r": "structure(list(c(1, NA), c(\"x\", NA), c(NA, NA)), names = c(\"B\", \"C\", \"D\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Several whole columns, in sheet order",
+   "rules": [
+    "2.3",
+    "C7",
+    "1.4"
+   ],
+   "cells": {
+    "A1": {
+     "text": "a"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A3": {
+     "number": "2"
+    },
+    "B1": {
+     "text": "skip"
+    },
+    "C1": {
+     "text": "c"
+    },
+    "C2": {
+     "number": "3"
+    },
+    "C5": {
+     "number": "4"
+    }
+   },
+   "select": {
+    "columns": [
+     "A",
+     "C"
+    ]
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — A1:A5,C1:C5 (5 rows × 2 columns)",
+    "headingsSuggested": true,
+    "r": "structure(list(c(1, 2, NA, NA), c(3, NA, NA, 4)), names = c(\"a\", \"c\"), row.names = c(NA_integer_, -4L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "A selected column with no data stays, as NA",
+   "rules": [
+    "2.3",
+    "4.3",
+    "C5"
+   ],
+   "cells": {
+    "A1": {
+     "text": "a"
+    },
+    "A2": {
+     "number": "1"
+    }
+   },
+   "select": {
+    "columns": [
+     "A",
+     "B"
+    ]
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — A1:B2 (2 rows × 2 columns)",
+    "headingsSuggested": true,
+    "r": "structure(list(c(1), c(NA)), names = c(\"a\", \"B\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Whole rows: cut to the rows and columns that hold data",
+   "rules": [
+    "2.4",
+    "C6",
+    "C5"
+   ],
+   "cells": {
+    "B3": {
+     "text": "x"
+    },
+    "C3": {
+     "number": "1"
+    },
+    "D4": {
+     "number": "2"
+    }
+   },
+   "select": {
+    "rows": [
+     "2:6"
+    ]
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — B3:D4 (2 rows × 3 columns)",
+    "headingsSuggested": false,
+    "r": "structure(list(c(\"x\", NA), c(1, NA), c(NA, 2)), names = c(\"B\", \"C\", \"D\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Whole rows: a blank row between rows with data stays",
+   "rules": [
+    "2.4",
+    "C6"
+   ],
+   "cells": {
+    "A1": {
+     "number": "1"
+    },
+    "A3": {
+     "number": "3"
+    }
+   },
+   "select": {
+    "rows": [
+     "1:4"
+    ]
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — A1:A3 (3 rows × 1 column)",
+    "headingsSuggested": false,
+    "r": "structure(list(c(1, NA, 3)), names = c(\"A\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Select all is the entire worksheet",
+   "rules": [
+    "2.6"
+   ],
+   "cells": {
+    "B2": {
+     "number": "1"
+    },
+    "C3": {
+     "number": "2"
+    }
+   },
+   "select": {
+    "all": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — B2:C3 (2 rows × 2 columns)",
+    "entire": "Entire worksheet — B2:C3 (2 rows × 2 columns)",
+    "headingsSuggested": false,
+    "r": "structure(list(c(1, NA), c(NA, 2)), names = c(\"B\", \"C\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "A merged area sends its value in its top-left cell",
+   "rules": [
+    "2.7",
+    "4.3"
+   ],
+   "cells": {
+    "B1": {
+     "text": "Group"
+    },
+    "B2": {
+     "number": "1"
+    },
+    "C2": {
+     "number": "2"
+    }
+   },
+   "select": {
+    "range": "B1:C2"
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — B1:C2 (2 rows × 2 columns)",
+    "headingsSuggested": true,
+    "r": "structure(list(c(1), c(2)), names = c(\"Group\", \"C\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   },
+   "merged": [
+    "B1:C1"
+   ]
+  },
+  {
+   "name": "One cell",
+   "rules": [
+    "2.8",
+    "1.4"
+   ],
+   "cells": {
+    "A1": {
+     "number": "5"
+    }
+   },
+   "select": {
+    "range": "A1"
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — A1 (1 row × 1 column)",
+    "headingsSuggested": false,
+    "headingsEnabled": false,
+    "r": "structure(list(c(5)), names = c(\"A\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "An empty sheet offers no data",
+   "rules": [
+    "1.5",
+    "7"
+   ],
+   "cells": {},
+   "select": {
+    "none": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "entire": "Entire worksheet (no data)",
+    "entireEnabled": false,
+    "selected": {
+     "windows": "Selected cells (no data in the selection)",
+     "mac": "Selected cells (no selection)"
+    },
+    "selectedEnabled": false,
+    "r": null
+   },
+   "note": "Windows always has an active cell (here A1), so its selection exists but holds no data; the Mac grid has no selection."
+  },
+  {
+   "name": "Several rectangles are refused",
+   "rules": [
+    "2.5",
+    "C7",
+    "1.5"
+   ],
+   "cells": {
+    "A1": {
+     "number": "1"
+    },
+    "C1": {
+     "number": "2"
+    }
+   },
+   "select": {
+    "areas": [
+     "A1:A2",
+     "C1:C2"
+    ]
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells (select one rectangle, or whole columns or rows)",
+    "selectedEnabled": false,
+    "r": null
+   }
+  },
+  {
+   "name": "More than three areas: the label stops at three",
+   "rules": [
+    "1.4",
+    "C7",
+    "5.5"
+   ],
+   "cells": {
+    "A1": {
+     "number": "1"
+    },
+    "C1": {
+     "number": "2"
+    },
+    "E1": {
+     "number": "3"
+    },
+    "G1": {
+     "number": "4"
+    }
+   },
+   "select": {
+    "columns": [
+     "A",
+     "C",
+     "E",
+     "G"
+    ]
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — A1,C1,E1,… (1 row × 4 columns)",
+    "headingsSuggested": false,
+    "headingsEnabled": false,
+    "comments": [
+     "# Data copied from the worksheet “Sheet1”, A1,C1,E1,G1."
+    ],
+    "r": "structure(list(c(1), c(2), c(3), c(4)), names = c(\"A\", \"C\", \"E\", \"G\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "A selection with no data is not available",
+   "rules": [
+    "1.5",
+    "2.2"
+   ],
+   "cells": {
+    "A1": {
+     "number": "1"
+    }
+   },
+   "select": {
+    "range": "C3:D4"
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells (no data in the selection)",
+    "selectedEnabled": false,
+    "r": null
+   }
+  },
+  {
+   "name": "Counts are written with commas",
+   "rules": [
+    "1.4"
+   ],
+   "cells": {
+    "A1": {
+     "number": "1"
+    },
+    "A1048576": {
+     "number": "2"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "entire": "Entire worksheet — A1:A1048576 (1,048,576 rows × 1 column)",
+    "labelsOnly": true
+   }
+  },
+  {
+   "name": "Missing values in a text column",
+   "rules": [
+    "3.2",
+    "3.1"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Status"
+    },
+    "A2": {
+     "text": "Alive"
+    },
+    "A3": {
+     "text": "Missing"
+    },
+    "A4": {
+     "text": "NA"
+    },
+    "A5": {
+     "text": " "
+    },
+    "A6": {
+     "text": "*"
+    },
+    "A7": {
+     "text": "* (missing)"
+    },
+    "A8": {
+     "text": "."
+    },
+    "A9": {
+     "text": " "
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"Alive\", \"Missing\", NA, NA, NA, NA, NA, NA)), names = c(\"Status\"), row.names = c(NA_integer_, -8L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Missing words in any case among numbers",
+   "rules": [
+    "3.2"
+   ],
+   "cells": {
+    "A1": {
+     "text": "x"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A3": {
+     "text": "na"
+    },
+    "A4": {
+     "number": "2"
+    },
+    "A5": {
+     "text": "N/A"
+    },
+    "A6": {
+     "text": "nan"
+    },
+    "A7": {
+     "text": "Null"
+    },
+    "A8": {
+     "text": "MISSING"
+    },
+    "A9": {
+     "text": "*"
+    },
+    "A10": {
+     "text": "missing"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(1, NA, 2, NA, NA, NA, NA, NA, NA)), names = c(\"x\"), row.names = c(NA_integer_, -9L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Real words survive in a text column",
+   "rules": [
+    "3.2"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Element"
+    },
+    "A2": {
+     "text": "Na"
+    },
+    "A3": {
+     "text": "K"
+    },
+    "A4": {
+     "text": "Cl"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"Na\", \"K\", \"Cl\")), names = c(\"Element\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "NA written exactly so is missing in a text column",
+   "rules": [
+    "3.2"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Name"
+    },
+    "A2": {
+     "text": "Smith"
+    },
+    "A3": {
+     "text": "NA"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"Smith\", NA)), names = c(\"Name\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "A Boolean column with na",
+   "rules": [
+    "3.2",
+    "3.5"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Alive"
+    },
+    "A2": {
+     "boolean": true
+    },
+    "A3": {
+     "text": "na"
+    },
+    "A4": {
+     "boolean": false
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(TRUE, NA, FALSE)), names = c(\"Alive\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Words and Inf need an anchor value",
+   "rules": [
+    "3.2",
+    "3.3"
+   ],
+   "cells": {
+    "A1": {
+     "text": "First"
+    },
+    "A2": {
+     "text": "Nan"
+    },
+    "A3": {
+     "text": "Nan"
+    },
+    "B1": {
+     "text": "Second"
+    },
+    "B2": {
+     "text": "Inf"
+    },
+    "C1": {
+     "text": "Third"
+    },
+    "C2": {
+     "text": "Inf"
+    },
+    "C3": {
+     "number": "1"
+    },
+    "D1": {
+     "text": "Fourth"
+    },
+    "D2": {
+     "text": "na"
+    },
+    "D3": {
+     "number": "1"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"Nan\", \"Nan\"), c(\"Inf\", NA), c(Inf, 1), c(NA, 1)), names = c(\"First\", \"Second\", \"Third\", \"Fourth\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Spreadsheet errors are missing; text that looks like one is text",
+   "rules": [
+    "3.2",
+    "C4"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Value"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A3": {
+     "error": "#DIV/0!"
+    },
+    "A4": {
+     "number": "3"
+    },
+    "B1": {
+     "text": "Label"
+    },
+    "B2": {
+     "text": "x"
+    },
+    "B3": {
+     "text": "#DIV/0!"
+    },
+    "B4": {
+     "text": "y"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(1, NA, 3), c(\"x\", \"#DIV/0!\", \"y\")), names = c(\"Value\", \"Label\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Spreadsheet errors are left out of a list",
+   "rules": [
+    "3.2",
+    "C4",
+    "5.3"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Value"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A3": {
+     "error": "#N/A"
+    },
+    "A4": {
+     "number": "3"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "list",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(1, 3)), names = c(\"Value\"))"
+   }
+  },
+  {
+   "name": "A formula showing empty text is missing",
+   "rules": [
+    "3.2",
+    "3.11",
+    "7"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Dose"
+    },
+    "A2": {
+     "number": "2"
+    },
+    "A3": {
+     "formula": "=IF(A2>5,A2,\"\")",
+     "value": {
+      "text": ""
+     }
+    },
+    "A4": {
+     "number": "7"
+    },
+    "A5": {
+     "formula": "=IF(A4>5,A4,\"\")",
+     "value": {
+      "number": "7"
+     }
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(2, NA, 7, 7)), names = c(\"Dose\"), row.names = c(NA_integer_, -4L), class = \"data.frame\")"
+   },
+   "note": "Windows calculates the formulas; the Mac uses the values given here as those Excel saved."
+  },
+  {
+   "name": "Numbers stored as text",
+   "rules": [
+    "3.4",
+    "3.1"
+   ],
+   "cells": {
+    "A1": {
+     "text": "n"
+    },
+    "A2": {
+     "text": "12.5"
+    },
+    "A3": {
+     "text": " 13"
+    },
+    "A4": {
+     "text": "13"
+    },
+    "A5": {
+     "text": "1e3"
+    },
+    "A6": {
+     "text": "-0.25"
+    },
+    "A7": {
+     "text": ".5"
+    },
+    "A8": {
+     "text": "5."
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(12.5, 13, 13, 1000, -0.25, 0.5, 5)), names = c(\"n\"), row.names = c(NA_integer_, -7L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Codes with a leading zero stay text",
+   "rules": [
+    "3.4",
+    "C9"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Code"
+    },
+    "A2": {
+     "text": "0012"
+    },
+    "A3": {
+     "text": "-007"
+    },
+    "A4": {
+     "text": "00.5"
+    },
+    "B1": {
+     "text": "Value"
+    },
+    "B2": {
+     "text": "0"
+    },
+    "B3": {
+     "text": "0.5"
+    },
+    "B4": {
+     "text": "-0.25"
+    },
+    "B5": {
+     "text": "0e5"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"0012\", \"-007\", \"00.5\", NA), c(0, 0.5, -0.25, 0)), names = c(\"Code\", \"Value\"), row.names = c(NA_integer_, -4L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "White space is Unicode White_Space; U+FEFF is not",
+   "rules": [
+    "3.1",
+    "3.2"
+   ],
+   "cells": {
+    "A1": {
+     "text": "w"
+    },
+    "A2": {
+     "text": "　"
+    },
+    "A3": {
+     "text": "﻿13"
+    },
+    "A4": {
+     "number": "5"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(NA, \"\\ufeff13\", \"5\")), names = c(\"w\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Infinity among numbers; NaN is missing",
+   "rules": [
+    "3.3"
+   ],
+   "cells": {
+    "A1": {
+     "text": "x"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A3": {
+     "text": "Inf"
+    },
+    "A4": {
+     "text": "-infinity"
+    },
+    "A5": {
+     "text": "NaN"
+    },
+    "A6": {
+     "text": "INFINITY"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(1, Inf, -Inf, NA, Inf)), names = c(\"x\"), row.names = c(NA_integer_, -5L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Text that is not a number makes the column character",
+   "rules": [
+    "3.4",
+    "3.7"
+   ],
+   "cells": {
+    "A1": {
+     "text": "x"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A3": {
+     "text": "1e999"
+    },
+    "A4": {
+     "text": "0x1A"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"1\", \"1e999\", \"0x1A\")), names = c(\"x\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Booleans, as values and as text",
+   "rules": [
+    "3.5"
+   ],
+   "cells": {
+    "A1": {
+     "text": "b"
+    },
+    "A2": {
+     "boolean": true
+    },
+    "A3": {
+     "boolean": false
+    },
+    "A4": {
+     "text": "true"
+    },
+    "A5": {
+     "text": " False "
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(TRUE, FALSE, TRUE, FALSE)), names = c(\"b\"), row.names = c(NA_integer_, -4L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Boolean text keeps its text in a character column",
+   "rules": [
+    "3.7"
+   ],
+   "cells": {
+    "A1": {
+     "text": "c"
+    },
+    "A2": {
+     "boolean": true
+    },
+    "A3": {
+     "text": "true"
+    },
+    "A4": {
+     "text": "x"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"TRUE\", \"true\", \"x\")), names = c(\"c\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Booleans mixed with numbers are character",
+   "rules": [
+    "3.6",
+    "3.7"
+   ],
+   "cells": {
+    "A1": {
+     "text": "m"
+    },
+    "A2": {
+     "boolean": true
+    },
+    "A3": {
+     "number": "2"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"TRUE\", \"2\")), names = c(\"m\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "An all-missing column is logical",
+   "rules": [
+    "3.6",
+    "5.2"
+   ],
+   "cells": {
+    "A1": {
+     "text": "a"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A3": {
+     "number": "2"
+    },
+    "B1": {
+     "text": "b"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(1, 2), c(NA, NA)), names = c(\"a\", \"b\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "An all-missing column is logical(0) in a list",
+   "rules": [
+    "3.6",
+    "5.3"
+   ],
+   "cells": {
+    "A1": {
+     "text": "a"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A3": {
+     "number": "2"
+    },
+    "B1": {
+     "text": "b"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "list",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(1, 2), logical(0)), names = c(\"a\", \"b\"))"
+   }
+  },
+  {
+   "name": "Numbers arrive exactly",
+   "rules": [
+    "3.8"
+   ],
+   "cells": {
+    "A1": {
+     "text": "x"
+    },
+    "A2": {
+     "number": "0.30000000000000004"
+    },
+    "A3": {
+     "number": "0.3333333333333333"
+    },
+    "A4": {
+     "number": "5.499065962e-14"
+    },
+    "A5": {
+     "number": "84814136847853600000"
+    },
+    "A6": {
+     "number": "1e22"
+    },
+    "A7": {
+     "number": "1e23"
+    },
+    "A8": {
+     "number": "9007199254740993"
+    },
+    "A9": {
+     "number": "1.7976931348623157e308"
+    },
+    "A10": {
+     "number": "2.2250738585072014e-308"
+    },
+    "A11": {
+     "number": "-0"
+    },
+    "A12": {
+     "number": "0.883020325331"
+    },
+    "A13": {
+     "number": "12"
+    },
+    "A14": {
+     "number": "13.5"
+    },
+    "A15": {
+     "number": "0.1"
+    },
+    "A16": {
+     "number": "98.6"
+    },
+    "A17": {
+     "number": "-0.25"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(0x1.3333333333334p-2, 0x1.5555555555555p-2, 0x1.ef4fd3fb883e3p-45, 0x1.264216064eebbp+66, 0x1.0f0cf064dd592p+73, 0x1.52d02c7e14af6p+76, 0x1.0000000000000p+53, 0x1.fffffffffffffp+1023, 0x1.0000000000000p-1022, 0, 0x1.c41b3d75fff63p-1, 12, 13.5, 0.1, 98.6, -0.25)), names = c(\"x\"), row.names = c(NA_integer_, -16L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Subnormal numbers arrive exactly",
+   "rules": [
+    "3.8"
+   ],
+   "cells": {
+    "A1": {
+     "text": "x"
+    },
+    "A2": {
+     "number": "5e-324"
+    },
+    "A3": {
+     "number": "1.2e-310"
+    },
+    "A4": {
+     "number": "-2.2250738585072009e-308"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(0x0.0000000000001p-1022, 0x0.016170dbaadcdp-1022, -0x0.fffffffffffffp-1022)), names = c(\"x\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   },
+   "skip": {
+    "windows": "a SpreadsheetGear worksheet stores a subnormal number as 0, as Excel does, so it never reaches the import"
+   }
+  },
+  {
+   "name": "Number cells in a character column",
+   "rules": [
+    "3.7"
+   ],
+   "cells": {
+    "A1": {
+     "text": "c"
+    },
+    "A2": {
+     "text": "x"
+    },
+    "A3": {
+     "number": "100000"
+    },
+    "A4": {
+     "number": "0.00001"
+    },
+    "A5": {
+     "number": "1e-7"
+    },
+    "A6": {
+     "number": "1.2e-7"
+    },
+    "A7": {
+     "number": "1e21"
+    },
+    "A8": {
+     "number": "-0"
+    },
+    "A9": {
+     "number": "0.30000000000000004"
+    },
+    "A10": {
+     "number": "123456789012345680000"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"x\", \"100000\", \"0.00001\", \"1e-7\", \"1.2e-7\", \"1e+21\", \"0\", \"0.30000000000000004\", \"123456789012345680000\")), names = c(\"c\"), row.names = c(NA_integer_, -9L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Text arrives exactly",
+   "rules": [
+    "3.10"
+   ],
+   "cells": {
+    "A1": {
+     "text": "café, \"quoted\"%"
+    },
+    "A2": {
+     "text": "back\\slash"
+    },
+    "A3": {
+     "text": "line1\nline2"
+    },
+    "A4": {
+     "text": "tab\tx"
+    },
+    "A5": {
+     "text": "ctrl\u001az"
+    },
+    "A6": {
+     "text": "a⁨b⁩‮c"
+    },
+    "A7": {
+     "text": "  spaces  "
+    },
+    "A8": {
+     "text": "😀 emoji"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": false,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(\"caf\\u00e9, \\\"quoted\\\"%\", \"back\\\\slash\", \"line1\\nline2\", \"tab\\tx\", \"ctrl\\u001az\", \"a\\u2068b\\u2069\\u202ec\", \"  spaces  \", \"\\U{1f600} emoji\")), names = c(\"A\"), row.names = c(NA_integer_, -8L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "NUL is refused, naming the cell",
+   "rules": [
+    "3.10"
+   ],
+   "cells": {
+    "A1": {
+     "text": "a\u0000b"
+    },
+    "A2": {
+     "text": "x"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": false,
+    "friendly": false
+   },
+   "expect": {
+    "refusedNaming": "A1",
+    "refusedMessage": "Cell A1 contains a null character, which R cannot hold. Remove it, then open the R import again.",
+    "r": null
+   }
+  },
+  {
+   "name": "A lone surrogate arrives as U+FFFD",
+   "rules": [
+    "3.10"
+   ],
+   "cells": {
+    "A1": {
+     "textUnits": [
+      97,
+      55296,
+      98
+     ]
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": false,
+    "headingsEnabled": false,
+    "r": "structure(list(c(\"a\\ufffdb\")), names = c(\"A\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Dates and times",
+   "rules": [
+    "3.9",
+    "C3",
+    "5.5"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Date"
+    },
+    "A2": {
+     "date": "46347",
+     "format": "yyyy-mm-dd"
+    },
+    "A3": {
+     "datetime": "46348",
+     "format": "yyyy-mm-dd hh:mm"
+    },
+    "B1": {
+     "text": "When"
+    },
+    "B2": {
+     "datetime": "46347",
+     "format": "yyyy-mm-dd hh:mm:ss"
+    },
+    "B3": {
+     "datetime": "46347.604166666664",
+     "format": "yyyy-mm-dd hh:mm:ss"
+    },
+    "C1": {
+     "text": "Time"
+    },
+    "C2": {
+     "time": "0.6041666666666666",
+     "format": "hh:mm:ss"
+    },
+    "C3": {
+     "time": "0.6041724537037036",
+     "format": "hh:mm:ss.0"
+    },
+    "D1": {
+     "text": "Duration"
+    },
+    "D2": {
+     "duration": "1.0833333333333333",
+     "format": "[h]:mm:ss"
+    },
+    "D3": {
+     "duration": "-0.041666666666666664",
+     "format": "[h]:mm:ss"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "comments": [
+     "# Dates without a time of day are R Date values; other dates and times are text."
+    ],
+    "r": "structure(list(structure(c(20778, 20779), class = \"Date\"), c(\"2026-11-21 00:00:00\", \"2026-11-21 14:30:00\"), c(\"14:30:00\", \"14:30:00.5\"), c(\"26:00:00\", \"-01:00:00\")), names = c(\"Date\", \"When\", \"Time\", \"Duration\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Serial 60 (1900-02-29) is missing",
+   "rules": [
+    "3.9"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Date"
+    },
+    "A2": {
+     "date": "60",
+     "format": "yyyy-mm-dd"
+    },
+    "A3": {
+     "date": "46347",
+     "format": "yyyy-mm-dd"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(structure(c(NA, 20778), class = \"Date\")), names = c(\"Date\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Headings: the electrolyte table",
+   "rules": [
+    "4.1"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Na"
+    },
+    "A2": {
+     "number": "140"
+    },
+    "A3": {
+     "number": "138"
+    },
+    "B1": {
+     "text": "K"
+    },
+    "B2": {
+     "number": "4.1"
+    },
+    "B3": {
+     "number": "3.9"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(140, 138), c(4.1, 3.9)), names = c(\"Na\", \"K\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "No heading suggestion when the first row holds a number",
+   "rules": [
+    "4.1",
+    "4.2",
+    "C5"
+   ],
+   "cells": {
+    "A1": {
+     "text": "x"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "B1": {
+     "number": "2"
+    },
+    "B2": {
+     "number": "3"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": false,
+    "r": "structure(list(c(\"x\", \"1\"), c(2, 3)), names = c(\"A\", \"B\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Headings from a number and a Boolean, ticked by hand",
+   "rules": [
+    "4.5",
+    "3.7"
+   ],
+   "cells": {
+    "A1": {
+     "number": "1.5"
+    },
+    "A2": {
+     "number": "2"
+    },
+    "B1": {
+     "boolean": true
+    },
+    "B2": {
+     "number": "3"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": true,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": false,
+    "r": "structure(list(c(2), c(3)), names = c(\"1.5\", \"TRUE\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "A blank or error heading takes its column letter",
+   "rules": [
+    "4.3",
+    "C5"
+   ],
+   "cells": {
+    "A1": {
+     "text": "B"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "B2": {
+     "number": "2"
+    },
+    "C1": {
+     "error": "#N/A"
+    },
+    "C2": {
+     "number": "3"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": true,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": false,
+    "r": "structure(list(c(1), c(2), c(3)), names = c(\"B\", \"B\", \"C\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "R-friendly names make repeated letters unique",
+   "rules": [
+    "4.3",
+    "4.6"
+   ],
+   "cells": {
+    "A1": {
+     "text": "B"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "B2": {
+     "number": "2"
+    },
+    "C1": {
+     "error": "#N/A"
+    },
+    "C2": {
+     "number": "3"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": true,
+    "friendly": true
+   },
+   "expect": {
+    "headingsSuggested": false,
+    "r": "structure(list(c(1), c(2), c(3)), names = c(\"B\", \"B_1\", \"C\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Headings are kept exactly, even names data.frame() uses",
+   "rules": [
+    "4.4"
+   ],
+   "cells": {
+    "A1": {
+     "text": "row.names"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "B1": {
+     "text": "row.names"
+    },
+    "B2": {
+     "number": "2"
+    },
+    "C1": {
+     "text": "check.rows"
+    },
+    "C2": {
+     "number": "3"
+    },
+    "D1": {
+     "text": "check.rows"
+    },
+    "D2": {
+     "number": "4"
+    },
+    "E1": {
+     "text": "stringsAsFactors"
+    },
+    "E2": {
+     "number": "5"
+    },
+    "F1": {
+     "text": "stringsAsFactors"
+    },
+    "F2": {
+     "number": "6"
+    },
+    "G1": {
+     "text": "  padded  "
+    },
+    "G2": {
+     "number": "7"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(1), c(2), c(3), c(4), c(5), c(6), c(7)), names = c(\"row.names\", \"row.names\", \"check.rows\", \"check.rows\", \"stringsAsFactors\", \"stringsAsFactors\", \"  padded  \"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "R-friendly names",
+   "rules": [
+    "4.6"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Weight (kg)"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "B1": {
+     "text": "Weight (kg)"
+    },
+    "B2": {
+     "number": "2"
+    },
+    "C1": {
+     "text": "2nd"
+    },
+    "C2": {
+     "number": "3"
+    },
+    "D1": {
+     "text": "a b"
+    },
+    "D2": {
+     "number": "4"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": true
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(1), c(2), c(3), c(4)), names = c(\"Weight_.kg.\", \"Weight_.kg._1\", \"X2nd\", \"a_b\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Column 365 is named NA",
+   "rules": [
+    "C5",
+    "4.2"
+   ],
+   "cells": {
+    "NA1": {
+     "number": "1"
+    },
+    "NA2": {
+     "number": "2"
+    }
+   },
+   "select": {
+    "columns": [
+     "NA"
+    ]
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "selected": "Selected cells — NA1:NA2 (2 rows × 1 column)",
+    "headingsSuggested": false,
+    "r": "structure(list(c(1, 2)), names = c(\"NA\"), row.names = c(NA_integer_, -2L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "A list of vectors leaves out missing values separately",
+   "rules": [
+    "5.3",
+    "3.2",
+    "5.5"
+   ],
+   "cells": {
+    "A1": {
+     "text": "a"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A4": {
+     "number": "3"
+    },
+    "B1": {
+     "text": "b"
+    },
+    "B2": {
+     "text": "x"
+    },
+    "B3": {
+     "text": "*"
+    },
+    "B4": {
+     "text": "y"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "list",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "comments": [
+     "# Missing values are removed separately from each vector."
+    ],
+    "r": "structure(list(c(1, 3), c(\"x\", \"y\")), names = c(\"a\", \"b\"))"
+   }
+  },
+  {
+   "name": "The same cells as a data frame keep rows aligned",
+   "rules": [
+    "5.2",
+    "3.2"
+   ],
+   "cells": {
+    "A1": {
+     "text": "a"
+    },
+    "A2": {
+     "number": "1"
+    },
+    "A4": {
+     "number": "3"
+    },
+    "B1": {
+     "text": "b"
+    },
+    "B2": {
+     "text": "x"
+    },
+    "B3": {
+     "text": "*"
+    },
+    "B4": {
+     "text": "y"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(1, NA, 3), c(\"x\", NA, \"y\")), names = c(\"a\", \"b\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   }
+  }
+ ]
+}
