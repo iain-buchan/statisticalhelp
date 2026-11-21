@@ -259,11 +259,17 @@ case('An all-missing column is logical(0) in a list', ['3.6', '5.3'],
      {'headingsSuggested': True, 'r': vectors(['a', 'b'], [num(1, 2), 'logical(0)'])}, options=opts('list'))
 
 EXACT = ['0.30000000000000004', '0.3333333333333333', '5.499065962e-14', '84814136847853600000', '1e22', '1e23',
-         '9007199254740993', '1.7976931348623157e308', '2.2250738585072014e-308', '5e-324', '-0', '0.883020325331',
+         '9007199254740993', '1.7976931348623157e308', '2.2250738585072014e-308', '-0', '0.883020325331',
          '12', '13.5', '0.1', '98.6', '-0.25']
 case('Numbers arrive exactly', ['3.8'],
      cells(col('A', T('x'), *[N(v) for v in EXACT])), {'entire': True},
      {'headingsSuggested': True, 'r': frame(['x'], [num(*[float(v) for v in EXACT])], len(EXACT))})
+
+SUBNORMAL = ['5e-324', '1.2e-310', '-2.2250738585072009e-308']
+case('Subnormal numbers arrive exactly', ['3.8'],
+     cells(col('A', T('x'), *[N(v) for v in SUBNORMAL])), {'entire': True},
+     {'headingsSuggested': True, 'r': frame(['x'], [num(*[float(v) for v in SUBNORMAL])], len(SUBNORMAL))},
+     skip={'windows': 'a SpreadsheetGear worksheet stores a subnormal number as 0, as Excel does, so it never reaches the import'})
 
 case('Number cells in a character column', ['3.7'],
      cells(col('A', T('c'), T('x'), N('100000'), N('0.00001'), N('1e-7'), N('1.2e-7'), N('1e21'), N('-0'),
@@ -381,6 +387,7 @@ schema = {
               'to, or null when nothing is imported; "refusedNaming": the import is refused with a message naming that cell, and "refusedMessage" gives that message exactly; '
               '"labelsOnly": only the labels are checked.',
     'sheet': 'every case uses one worksheet named "Sheet1"',
+    'skip': '{"windows"|"mac": "<reason>"}: a case that platform cannot build, with the reason; it runs on the other',
 }
 json.dump({'about': about, 'version': 1, 'schema': schema, 'cases': cases}, open(sys.argv[1], 'w', encoding='utf-8', newline='\n'),
           ensure_ascii=False, indent=1)

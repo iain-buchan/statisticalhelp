@@ -8,7 +8,8 @@
   "select": "{\"entire\": true} | {\"range\": \"B2:D3\"} | {\"columns\": [\"A\", \"C\"]} | {\"rows\": [\"2:6\"]} | {\"areas\": [\"A1:A2\", \"C1:C2\"]} | {\"all\": true} (select all) | {\"none\": true} (no selection; on Windows the active cell A1)",
   "options": "\"format\": \"data frame\" | \"list\"; \"headings\": null (leave the suggestion) | true | false; \"friendly\": true | false. The data choice is the one the select names (Entire worksheet for \"entire\", Selected cells otherwise).",
   "expect": "\"entire\" and \"selected\": the two data-choice labels, exactly, where given (an object gives one per platform); \"entireEnabled\", \"selectedEnabled\", \"headingsEnabled\": where given; \"headingsSuggested\": the first check box's suggestion; \"comments\": lines the script must contain; \"r\": the R expression the object must be identical() to, or null when nothing is imported; \"refusedNaming\": the import is refused with a message naming that cell, and \"refusedMessage\" gives that message exactly; \"labelsOnly\": only the labels are checked.",
-  "sheet": "every case uses one worksheet named \"Sheet1\""
+  "sheet": "every case uses one worksheet named \"Sheet1\"",
+  "skip": "{\"windows\"|\"mac\": \"<reason>\"}: a case that platform cannot build, with the reason; it runs on the other"
  },
  "cases": [
   {
@@ -1247,27 +1248,24 @@
      "number": "2.2250738585072014e-308"
     },
     "A11": {
-     "number": "5e-324"
-    },
-    "A12": {
      "number": "-0"
     },
-    "A13": {
+    "A12": {
      "number": "0.883020325331"
     },
-    "A14": {
+    "A13": {
      "number": "12"
     },
-    "A15": {
+    "A14": {
      "number": "13.5"
     },
-    "A16": {
+    "A15": {
      "number": "0.1"
     },
-    "A17": {
+    "A16": {
      "number": "98.6"
     },
-    "A18": {
+    "A17": {
      "number": "-0.25"
     }
    },
@@ -1281,7 +1279,42 @@
    },
    "expect": {
     "headingsSuggested": true,
-    "r": "structure(list(c(0x1.3333333333334p-2, 0x1.5555555555555p-2, 0x1.ef4fd3fb883e3p-45, 0x1.264216064eebbp+66, 0x1.0f0cf064dd592p+73, 0x1.52d02c7e14af6p+76, 0x1.0000000000000p+53, 0x1.fffffffffffffp+1023, 0x1.0000000000000p-1022, 0x0.0000000000001p-1022, 0, 0x1.c41b3d75fff63p-1, 12, 13.5, 0.1, 98.6, -0.25)), names = c(\"x\"), row.names = c(NA_integer_, -17L), class = \"data.frame\")"
+    "r": "structure(list(c(0x1.3333333333334p-2, 0x1.5555555555555p-2, 0x1.ef4fd3fb883e3p-45, 0x1.264216064eebbp+66, 0x1.0f0cf064dd592p+73, 0x1.52d02c7e14af6p+76, 0x1.0000000000000p+53, 0x1.fffffffffffffp+1023, 0x1.0000000000000p-1022, 0, 0x1.c41b3d75fff63p-1, 12, 13.5, 0.1, 98.6, -0.25)), names = c(\"x\"), row.names = c(NA_integer_, -16L), class = \"data.frame\")"
+   }
+  },
+  {
+   "name": "Subnormal numbers arrive exactly",
+   "rules": [
+    "3.8"
+   ],
+   "cells": {
+    "A1": {
+     "text": "x"
+    },
+    "A2": {
+     "number": "5e-324"
+    },
+    "A3": {
+     "number": "1.2e-310"
+    },
+    "A4": {
+     "number": "-2.2250738585072009e-308"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(c(0x0.0000000000001p-1022, 0x0.016170dbaadcdp-1022, -0x0.fffffffffffffp-1022)), names = c(\"x\"), row.names = c(NA_integer_, -3L), class = \"data.frame\")"
+   },
+   "skip": {
+    "windows": "a SpreadsheetGear worksheet stores a subnormal number as 0, as Excel does, so it never reaches the import"
    }
   },
   {
