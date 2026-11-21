@@ -349,9 +349,13 @@ case('Colour codes in a format do not make a duration', ['3.9'],
 
 case('A value beyond 9999-12-31, or before the date system, is a number', ['3.9'],
      cells(col('A', T('Big'), D('date', '2958466', 'yyyy-mm-dd')), col('B', T('Before'), D('date', '-1', 'yyyy-mm-dd')),
-           col('C', T('Long'), D('duration', '3000000', '[h]:mm:ss')), col('D', T('Last'), D('date', '2958465', 'yyyy-mm-dd'))),
+           col('C', T('Long'), D('duration', '3000000', '[h]:mm:ss')), col('D', T('Last'), D('date', '2958465', 'yyyy-mm-dd')),
+           col('E', T('Edge'), D('duration', '2958466', '[h]:mm:ss')), col('F', T('Longest'), D('duration', '2958465', '[h]:mm:ss')),
+           col('G', T('Zero'), D('date', '0', 'yyyy-mm-dd')), col('H', T('Half'), D('datetime', '0.5', 'yyyy-mm-dd hh:mm'))),
      {'entire': True},
-     {'headingsSuggested': True, 'r': frame(['Big', 'Before', 'Long', 'Last'], [num(2958466), num(-1), num(3000000), date(2932896)], 1)})
+     {'headingsSuggested': True,
+      'r': frame(['Big', 'Before', 'Long', 'Last', 'Edge', 'Longest', 'Zero', 'Half'],
+                 [num(2958466), num(-1), num(3000000), date(2932896), num(2958466), chr_('71003160:00:00'), num(0), num(0.5)], 1)})
 
 # ---------- 4. Headings and names ----------
 

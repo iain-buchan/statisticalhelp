@@ -1788,6 +1788,34 @@
     "D2": {
      "date": "2958465",
      "format": "yyyy-mm-dd"
+    },
+    "E1": {
+     "text": "Edge"
+    },
+    "E2": {
+     "duration": "2958466",
+     "format": "[h]:mm:ss"
+    },
+    "F1": {
+     "text": "Longest"
+    },
+    "F2": {
+     "duration": "2958465",
+     "format": "[h]:mm:ss"
+    },
+    "G1": {
+     "text": "Zero"
+    },
+    "G2": {
+     "date": "0",
+     "format": "yyyy-mm-dd"
+    },
+    "H1": {
+     "text": "Half"
+    },
+    "H2": {
+     "datetime": "0.5",
+     "format": "yyyy-mm-dd hh:mm"
     }
    },
    "select": {
@@ -1800,7 +1828,7 @@
    },
    "expect": {
     "headingsSuggested": true,
-    "r": "structure(list(c(2958466), c(-1), c(3000000), structure(c(2932896), class = \"Date\")), names = c(\"Big\", \"Before\", \"Long\", \"Last\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+    "r": "structure(list(c(2958466), c(-1), c(3000000), structure(c(2932896), class = \"Date\"), c(2958466), c(\"71003160:00:00\"), c(0), c(0.5)), names = c(\"Big\", \"Before\", \"Long\", \"Last\", \"Edge\", \"Longest\", \"Zero\", \"Half\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
    }
   },
   {
