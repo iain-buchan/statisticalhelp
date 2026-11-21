@@ -347,6 +347,12 @@ case('Colour codes in a format do not make a duration', ['3.9'],
                  [date(20778, 20779), chr_('2026-11-21 12:00:00', '2026-11-21 06:00:00'), chr_('06:00:00', '12:00:00'),
                   chr_('30:00:00', '12:00:00')], 2)})
 
+case('Only the format section that applies to the value counts', ['3.9'],
+     cells(col('A', T('Date'), D('date', '46123', '[Magenta]yyyy-mm-dd;[h]:mm')),
+           col('B', T('Negative'), D('duration', '-1.5', '[h]:mm;yyyy-mm-dd'))),
+     {'entire': True},
+     {'headingsSuggested': True, 'r': frame(['Date', 'Negative'], [date(20554), num(-1.5)], 1)})
+
 case('A value beyond 9999-12-31, or before the date system, is a number', ['3.9'],
      cells(col('A', T('Big'), D('date', '2958466', 'yyyy-mm-dd')), col('B', T('Before'), D('date', '-1', 'yyyy-mm-dd')),
            col('C', T('Long'), D('duration', '3000000', '[h]:mm:ss')), col('D', T('Last'), D('date', '2958465', 'yyyy-mm-dd')),

@@ -1756,6 +1756,40 @@
    }
   },
   {
+   "name": "Only the format section that applies to the value counts",
+   "rules": [
+    "3.9"
+   ],
+   "cells": {
+    "A1": {
+     "text": "Date"
+    },
+    "A2": {
+     "date": "46123",
+     "format": "[Magenta]yyyy-mm-dd;[h]:mm"
+    },
+    "B1": {
+     "text": "Negative"
+    },
+    "B2": {
+     "duration": "-1.5",
+     "format": "[h]:mm;yyyy-mm-dd"
+    }
+   },
+   "select": {
+    "entire": true
+   },
+   "options": {
+    "format": "data frame",
+    "headings": null,
+    "friendly": false
+   },
+   "expect": {
+    "headingsSuggested": true,
+    "r": "structure(list(structure(c(20554), class = \"Date\"), c(-1.5)), names = c(\"Date\", \"Negative\"), row.names = c(NA_integer_, -1L), class = \"data.frame\")"
+   }
+  },
+  {
    "name": "A value beyond 9999-12-31, or before the date system, is a number",
    "rules": [
     "3.9"
