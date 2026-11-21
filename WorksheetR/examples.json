@@ -7,7 +7,7 @@
   "merged": "merged areas; only the top-left cell holds a value",
   "select": "{\"entire\": true} | {\"range\": \"B2:D3\"} | {\"columns\": [\"A\", \"C\"]} | {\"rows\": [\"2:6\"]} | {\"areas\": [\"A1:A2\", \"C1:C2\"]} | {\"all\": true} (select all) | {\"none\": true} (no selection; on Windows the active cell A1)",
   "options": "\"format\": \"data frame\" | \"list\"; \"headings\": null (leave the suggestion) | true | false; \"friendly\": true | false. The data choice is the one the select names (Entire worksheet for \"entire\", Selected cells otherwise).",
-  "expect": "\"entire\" and \"selected\": the two data-choice labels, exactly, where given (an object gives one per platform); \"entireEnabled\", \"selectedEnabled\", \"headingsEnabled\": where given; \"headingsSuggested\": the first check box's suggestion; \"comments\": lines the script must contain; \"r\": the R expression the object must be identical() to, or null when nothing is imported; \"refusedNaming\": the import is refused with a message naming that cell; \"labelsOnly\": only the labels are checked.",
+  "expect": "\"entire\" and \"selected\": the two data-choice labels, exactly, where given (an object gives one per platform); \"entireEnabled\", \"selectedEnabled\", \"headingsEnabled\": where given; \"headingsSuggested\": the first check box's suggestion; \"comments\": lines the script must contain; \"r\": the R expression the object must be identical() to, or null when nothing is imported; \"refusedNaming\": the import is refused with a message naming that cell, and \"refusedMessage\" gives that message exactly; \"labelsOnly\": only the labels are checked.",
   "sheet": "every case uses one worksheet named \"Sheet1\""
  },
  "cases": [
@@ -1401,6 +1401,7 @@
    },
    "expect": {
     "refusedNaming": "A1",
+    "refusedMessage": "Cell A1 contains a null character, which R cannot hold. Remove it, then open the R import again.",
     "r": null
    }
   },

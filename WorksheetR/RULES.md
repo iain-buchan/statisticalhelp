@@ -36,7 +36,7 @@
 | 1.1 | **Title:** the button's tooltip. **R:** "Open in StatsDirect R". **R+:** "Open in external R" on Windows, which starts R's own window, RGui. On the Mac, "Open in R or RStudio", which opens RStudio when it is installed. |
 | 1.2 | **Text:** "Choose the data from “Sheet1” to copy into the new R session as worksheet_data." For Mac R+: "Choose the data from “Sheet1” to copy into R as worksheet_data.", since RStudio runs it in the user's own session (M24). With no data in the sheet: "The worksheet “Sheet1” has no data to copy." |
 | 1.3 | **Data choices,** in this order. **No data** is selected when the prompt opens, and focused where the platform gives that control focus (M23). The choices: "Entire worksheet — A1:C4 (4 rows × 3 columns)"; "Selected cells — A1:B3 (3 rows × 2 columns)"; "No data". |
-| 1.4 | **Counts:** written in digits with commas, whatever the locale: "1,048,576 rows", "1 row", "1 column". **Cells:** written in A1 notation (M21). One area is `B5:D9`, also for whole columns or rows after trimming. Several areas are written as Excel writes a union, in sheet order, with adjacent lines merged: `C3:C4,E3:E4`. The prompt lists at most three areas, then `,…` (U+2026, as with `—` and `×` in the same labels); the script's comment lists them all. |
+| 1.4 | **Counts:** written in digits with commas, whatever the locale: "1,048,576 rows", "1 row", "1 column". **Cells:** written in A1 notation (M21). One area is `B5:D9`, also for whole columns or rows after trimming. A single cell is written alone, `A1`, not `A1:A1`: as one area, within a union, and in the script's comment. Several areas are written as Excel writes a union, in sheet order, with adjacent lines merged: `C3:C4,E3:E4`. The prompt lists at most three areas, then `,…` (U+2026, as with `—` and `×` in the same labels); the script's comment lists them all. |
 | 1.5 | **A choice that is not available** stays in the list, disabled, and says why: "Entire worksheet (no data)"; "Selected cells (no selection)"; "Selected cells (select one rectangle, or whole columns or rows)"; "Selected cells (no data in the selection)". |
 | 1.6 | **Then** "Import as:", with "Data frame (keep rows aligned)" selected and "List of vectors (independent samples)". It is disabled while No data is chosen. When the list is chosen, the hint "Missing values are removed separately from each vector." is shown. |
 | 1.7 | **Then two check boxes.** "Use the first row as column names" is enabled only for a data choice with more than one row. It is set to the suggestion (rule 4.1) each time the data choice changes. "Use R-friendly names" is enabled only while the first box is ticked, and is unticked when the prompt opens. While the prompt is open it keeps the user's tick. |
@@ -73,7 +73,7 @@
   - the words `NA`, `N/A`, `NaN`, `NULL` and `MISSING`, written exactly so;
   - a formula whose value is empty text;
   - a spreadsheet error (C4): a cell holding an error value (`#DIV/0!`, `#N/A`, `#NAME?`, `#NULL!`, `#NUM!`, `#REF!`, `#VALUE!`, `#SPILL!`, `#CALC!` and the like). Text that only looks like an error stays text.
-- **Also in any case** (`na`, `n/a`, `nan`, `Null`): the same words count, in a column whose other non-missing cells are all numbers, all Booleans or all dates, and that has at least one such number, Boolean or date. So {`Nan`, `Nan`} (two people called Nan) stays character, and {`na`, 1} is numeric.
+- **Also in any case** (`na`, `n/a`, `nan`, `Null`): the same words count, in a column whose other non-missing cells are all numbers, all Booleans or all dates, and that has at least one such number, Boolean or date. All such words in a column are set aside together when its other cells are judged, so {1, `na`, `Null`, 2} is numeric. So {`Nan`, `Nan`} (two people called Nan) stays character, and {`na`, 1} is numeric.
 - **Surrounding white space** is ignored.
 - **So real words survive** in text columns: `Na`, `Nan`, `Null`, `Missing`. Examples: {`Na`, `K`, `Cl`} is character; {`1`, `na`, `2`} is numeric; {`Alive`, `Missing`} is character; {`Smith`, `NA`} gives `c("Smith", NA)`; {TRUE, `na`} is logical.
 - **How this compares with the analyses** (M2): these are the markers StatsDirect treats as missing when it reads row-aligned columns. Ordinary numeric analyses differ by platform. The Mac takes only blank and `*`, and stops on other text. Windows takes any non-numeric cell as missing.
@@ -148,10 +148,10 @@ Each application's own test proves the form over the example values and a large 
 
 **3.10 Text** arrives exactly as in the cell: white space kept, UTF-8, and quotes, backslashes, newlines, tabs and other control characters intact (M13, M14).
 
-- **NUL (U+0000):** R cannot hold it. The import is refused, with a message that names the cell.
+- **NUL (U+0000):** R cannot hold it. The import is refused with the message "Cell A1 contains a null character, which R cannot hold. Remove it, then open the R import again.", naming the first such cell in sheet order (rows, then columns).
 - **A lone surrogate** arrives as U+FFFD. Each application tests this in its own tests.
 - **Text written inside R code** (a string literal: a heading, a name or a value) uses `\u` escapes for control characters and for the bidi controls U+202A to U+202E and U+2066 to U+2069. A raw bidi control in a string makes R refuse the whole script ("bidi formatting not allowed, use escapes instead"). This was checked on Windows R 4.6.2 and Mac R 4.6.1. Comments may hold them.
-- **Today:** on Windows a cell holding Ctrl-Z (U+001A) cuts the import short at that row. Windows writes headings into its script as string literals without escaping bidi controls. The Mac writes bidi controls raw. **Change:** both.
+- **Today:** on Windows a cell holding Ctrl-Z (U+001A) cuts the import short at that row; Windows already writes every non-ASCII character in its script's literals as a `\U` escape. The Mac writes bidi controls raw. **Change:** both.
 
 **3.11 Formula cells** send their current value. The Mac sends the value Excel saved in the file instead (section 7).
 

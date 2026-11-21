@@ -284,7 +284,8 @@ case('Text arrives exactly', ['3.10'],
 
 case('NUL is refused, naming the cell', ['3.10'],
      cells({'A1': T('a\u0000b'), 'A2': T('x')}), {'entire': True},
-     {'refusedNaming': 'A1', 'r': None}, options=opts(headings=False))
+     {'refusedNaming': 'A1', 'refusedMessage': 'Cell A1 contains a null character, which R cannot hold. Remove it, then open the R import again.',
+      'r': None}, options=opts(headings=False))
 
 case('A lone surrogate arrives as U+FFFD', ['3.10'],
      cells({'A1': {'textUnits': [97, 0xD800, 98]}}), {'entire': True},
@@ -377,7 +378,7 @@ schema = {
     'expect': '"entire" and "selected": the two data-choice labels, exactly, where given (an object gives one per platform); '
               '"entireEnabled", "selectedEnabled", "headingsEnabled": where given; "headingsSuggested": the first check box\'s '
               'suggestion; "comments": lines the script must contain; "r": the R expression the object must be identical() '
-              'to, or null when nothing is imported; "refusedNaming": the import is refused with a message naming that cell; '
+              'to, or null when nothing is imported; "refusedNaming": the import is refused with a message naming that cell, and "refusedMessage" gives that message exactly; '
               '"labelsOnly": only the labels are checked.',
     'sheet': 'every case uses one worksheet named "Sheet1"',
 }
