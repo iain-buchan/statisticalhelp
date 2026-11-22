@@ -17,11 +17,12 @@
 
 **Amendment 2** (`learning-v1.1.9`), from Codex's second review of the Windows candidate, 21 November 2026: the section of a format that applies is chosen as the spreadsheet chooses it, conditions count only outside quotes, and that section's own type decides how the value is read (rule 3.9). One example pins eight cases.
 
-**Amendment 3** (draft, to be tagged on Iain's word), from Codex's third reviews of the Windows and Mac candidates, agreed by the Windows and Mac sessions, 21 November 2026 (rule 3.9):
+**Amendment 3** (`learning-v1.1.10`), from Codex's third reviews of the Windows and Mac candidates, agreed by the Windows and Mac sessions, 21 November 2026 (rule 3.9):
 
 - the character after `_` (a space as wide as it) or `*` (a fill) belongs to the format, so `_;` and `*;` do not separate sections, and a condition's limit is any number the spreadsheet accepts, `.5` and `1E2` among them;
 - rounding to the millisecond is half away from zero, and a time of day is judged on the value before it is rounded, so 0.999999999 in `h:mm:ss` is `24:00:00`;
 - a duration longer than 9999-12-31's serial, either way, is a number;
+- a date-time is rounded to the millisecond before its date is judged, so 0.9999999999 in `yyyy-mm-dd hh:mm:ss` rounds to a whole day and is the date 1900-01-01;
 - two examples pin these.
 
 - This version takes in the Mac session's review of the first draft: 54 findings, each checked by a second reader, numbered M1 to M29 below where they changed a rule.
@@ -35,7 +36,7 @@
 - **Expected data frames** are written as `structure(list(...), names = c(...), row.names = c(NA_integer_, -nL), class = "data.frame")`. This is `identical()` to `data.frame(..., check.names = FALSE)`, and it can also express names that `data.frame()` cannot build.
 - **Both applications reach these files** through their pinned copy of this repository, at the next `learning-v*` tag.
 - **Choices:** the nine in the first section were decided on 21 November 2026: the recommended answer in every case.
-- **"Today"** describes Windows pull request 24 (`preview/windows-analyse-picker`, `43d35b6d`) and Mac pull request 23 (`codex/mac-worksheet-r-parity`, `5022dd79`). The rule-by-rule comparison is in `WORKSHEET-R-RULES-WINDOWS-MAC-2026-11-20.md`.
+- **"Today"** describes the two applications on 20 November 2026, before these rules: Windows pull request 24 (`preview/windows-analyse-picker`, `43d35b6d`) and Mac pull request 23 (`codex/mac-worksheet-r-parity`, `5022dd79`). StatsDirect for Windows 5.3.16 and StatsDirect for Mac 1.1.10 follow these rules. The rule-by-rule comparison is in `WORKSHEET-R-RULES-WINDOWS-MAC-2026-11-20.md`.
 
 ## Choices (decided: the recommended answer in every case)
 
