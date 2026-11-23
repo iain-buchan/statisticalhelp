@@ -3,22 +3,19 @@
     <head>
         <title>Worksheet Learn and AI Assist</title>
         <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
-        <meta name="description" content="Use Learn and AI Assist on the Windows worksheet toolbar. Ask questions using StatsDirect Help, review suggested worksheet edits, and run suggested analyses locally." />
+        <meta name="description" content="Use Learn and AI Assist on the Windows worksheet toolbar. Ask questions about your workbook, open suggested R code, and add locally run results to a report." />
     </head>
     <body>
-        <h1><sdh:keyword term="AI Assist;Worksheet AI;Worksheet edits;Review analysis" />Worksheet Learn and AI Assist</h1>
+        <h1><sdh:keyword term="AI Assist;Worksheet AI;Review analysis;R code from worksheet AI" />Worksheet Learn and AI Assist</h1>
         <p>The Windows worksheet toolbar has two ways to get guidance. <b>Learn</b> opens the <a href="learning.htm">lesson library</a>, including worked examples and practice questions that you can use without an AI connection. <b>AI Assist</b> opens a conversation for the current workbook.</p>
 
         <h2>Ask a question</h2>
-        <p>Ask how to organise or analyse your data. The assistant uses excerpts from the Help bundled with StatsDirect. Start with <b>Question only</b> to ask without sharing the workbook. When you press <b>Send</b>, ChatGPT receives your question and can use the relevant Help. Leave names, patient identifiers and other confidential information out of your question. In ordinary use, the recent conversation also provides context. Choose <b>New conversation</b> to leave earlier shared content out.</p>
-        <p>If you want advice based on worksheet values, open <b>Sharing</b>, select <b>Share data from</b> the workbook named in the pane, and confirm that you have removed person identifiers. This covers that workbook for the current application session. Another open workbook needs its own confirmation. Simply visiting it does not remove the first workbook's confirmation. Turn sharing off to stop further workbook reads.</p>
+        <p>Ask how to organise or analyse your data. At the start of a conversation the assistant uses a short guide based on <a href="../methods/method_selection.htm">Statistical Method Selection</a> to ask about your goal, study design and measurement scales. It can search and read the entire bundled Help and draw on general statistical and R knowledge for questions beyond StatsDirect. Leave <b>Share workbook data with AI</b> unticked to ask a question without sharing the workbook. When you press <b>Send</b>, ChatGPT receives your question and can use the relevant Help. Leave names, patient identifiers and other confidential information out of your question. In ordinary use, the recent conversation also provides context. Choose <b>New conversation</b> to leave earlier shared content out.</p>
+        <p>If you want advice based on worksheet values, tick <b>Share workbook data with AI</b> above the question box. When you enable sharing for a workbook for the first time in the session, the confirmation dialog names that workbook and asks you to confirm that you have removed person identifiers. This confirmation covers the named workbook for the current application session. Another open workbook needs its own confirmation. Simply visiting it does not remove the first workbook's confirmation. Turn sharing off to stop further workbook reads.</p>
 
-        <h2>Review proposed worksheet edits</h2>
-        <ol>
-            <li>With sharing confirmed, you can ask for an edit, such as adding an age band to a new column. One proposal can write literal numbers, text, TRUE or FALSE, or blanks to up to 4,000 cells in one rectangular range.</li>
-            <li>In the original worksheet, choose <b>Review worksheet edit</b>. Check the range and the <b>Before</b> and <b>After</b> values. A replacement value can overwrite an existing formula. If the worksheet has changed since the proposal, ask for a new edit.</li>
-            <li>Choose <b>Apply edits</b> to write the previewed changes, or <b>Cancel</b> to keep the sheet as it was. One <b>Undo</b> reverses the entire applied edit.</li>
-        </ol>
+        <h2>Open suggested R code</h2>
+        <p>AI Assist answers questions and leaves worksheet cells unchanged. If a reply includes code, expand <b>R code</b> to see it. Choose <b>Open in R</b> to open an editable script. StatsDirect includes a fixed snapshot of the worksheet values read for that reply. Ask a follow-up to get a new analysis using current approved values.</p>
+        <p>Review the code, then choose <b>Run</b> in the R window. When R finishes, choose <b>Add output to report</b> to save the text output and charts in a StatsDirect report.</p>
 
         <h2>Run a suggested analysis</h2>
         <p>In the original worksheet, select the cells you intend to analyse and choose <b>Review analysis</b>. The preview shows the method, source worksheet, selected cells, expected input and report destination. You can cancel and check the selection before reopening the review. If the workbook was shared for the suggestion, ask again after changing its data or selection.</p>
@@ -36,7 +33,7 @@
         <p>For another method, use <b>Analyse</b> on the worksheet toolbar.</p>
 
         <h2>Using AI Assist under an organisation's policy</h2>
-        <p>When your organisation restricts data sharing (level 2), AI Assist can still answer questions using packaged Help and suggest an analysis for you to review and run locally. Workbook sharing and worksheet edit proposals are unavailable. Each request sends the question you type and relevant Help, while your workbook, earlier conversation and local results stay on your computer.</p>
+        <p>When your organisation restricts data sharing (level 2), AI Assist can still answer questions using packaged Help and suggest an analysis for you to review and run locally. Workbook sharing is unavailable. Each request sends the question you type and relevant Help, while your workbook, earlier conversation and local results stay on your computer.</p>
         <p>When your organisation restricts AI (level 3), AI Assist cannot connect. Learn, local help, and the analyses on the <b>Analysis</b> menu remain available. See <a href="script_ai.htm">Script AI</a> for sign-in and Windows policy details.</p>
     </body>
 </html>
