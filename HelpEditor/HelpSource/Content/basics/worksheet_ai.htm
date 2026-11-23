@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns:sdh="https://raw.githubusercontent.com/iain-buchan/statisticalhelp/master/HelpEditor/Schema/StatsDirectHelp.xsd">
+    <head>
+        <title>Worksheet Learn and AI Assist</title>
+        <link rel="StyleSheet" href="../resources/Stylesheets/STATSDIRECT.css" type="text/css" />
+        <meta name="description" content="Use Learn and AI Assist on the Windows worksheet toolbar. Ask questions using StatsDirect Help, review suggested worksheet edits, and run suggested analyses locally." />
+    </head>
+    <body>
+        <h1><sdh:keyword term="AI Assist;Worksheet AI;Worksheet edits;Review analysis" />Worksheet Learn and AI Assist</h1>
+        <p>The Windows worksheet toolbar has two ways to get guidance. <b>Learn</b> opens the <a href="learning.htm">lesson library</a>, including worked examples and practice questions that you can use without an AI connection. <b>AI Assist</b> opens a conversation for the current workbook.</p>
+
+        <h2>Ask a question</h2>
+        <p>Ask how to organise or analyse your data. The assistant uses excerpts from the Help bundled with StatsDirect. Start with <b>Question only</b> to ask without sharing the workbook. When you press <b>Send</b>, ChatGPT receives your question and can use the relevant Help. Leave names, patient identifiers and other confidential information out of your question. In ordinary use, the recent conversation also provides context. Choose <b>New conversation</b> to leave earlier shared content out.</p>
+        <p>If you want advice based on worksheet values, open <b>Sharing</b>, select <b>Share data from</b> the workbook named in the pane, and confirm that you have removed person identifiers. This covers that workbook for the current application session. Another open workbook needs its own confirmation. Simply visiting it does not remove the first workbook's confirmation. Turn sharing off to stop further workbook reads.</p>
+
+        <h2>Review proposed worksheet edits</h2>
+        <ol>
+            <li>With sharing confirmed, you can ask for an edit, such as adding an age band to a new column. One proposal can write literal numbers, text, TRUE or FALSE, or blanks to up to 4,000 cells in one rectangular range.</li>
+            <li>In the original worksheet, choose <b>Review worksheet edit</b>. Check the range and the <b>Before</b> and <b>After</b> values. A replacement value can overwrite an existing formula. If the worksheet has changed since the proposal, ask for a new edit.</li>
+            <li>Choose <b>Apply edits</b> to write the previewed changes, or <b>Cancel</b> to keep the sheet as it was. One <b>Undo</b> reverses the entire applied edit.</li>
+        </ol>
+
+        <h2>Run a suggested analysis</h2>
+        <p>In the original worksheet, select the cells you intend to analyse and choose <b>Review analysis</b>. The preview shows the method, source worksheet, selected cells, expected input and report destination. You can cancel and check the selection before reopening the review. If the workbook was shared for the suggestion, ask again after changing its data or selection.</p>
+        <p><b>Run and add to report</b> opens StatsDirect's usual analysis setup so you can check the input and choose any required settings. StatsDirect runs the calculation locally and puts the result in the report named in the review, or creates a report if none is open. Running it does not send its data or results to ChatGPT.</p>
+        <p>The assistant can propose seven methods:</p>
+        <ul>
+            <li><a href="../parametric_methods/paired_t.htm">Paired Student t test</a></li>
+            <li><a href="../parametric_methods/unpaired_t.htm">Unpaired Student t test</a></li>
+            <li><a href="../nonparametric_methods/wilcoxon_signed_ranks.htm">Wilcoxon signed ranks test</a></li>
+            <li><a href="../nonparametric_methods/spearman.htm">Spearman rank correlation</a></li>
+            <li><a href="../agreement/intraclass.htm">General analysis of agreement</a></li>
+            <li><a href="../basic_descriptive_statistics/univariate_summary.htm">Univariate descriptive summaries</a></li>
+            <li><a href="../parametric_methods/normality.htm">Tests for departure from normality</a></li>
+        </ul>
+        <p>For another method, use <b>Analyse</b> on the worksheet toolbar.</p>
+
+        <h2>Using AI Assist under an organisation's policy</h2>
+        <p>When your organisation restricts data sharing (level 2), AI Assist can still answer questions using packaged Help and suggest an analysis for you to review and run locally. Workbook sharing and worksheet edit proposals are unavailable. Each request sends the question you type and relevant Help, while your workbook, earlier conversation and local results stay on your computer.</p>
+        <p>When your organisation restricts AI (level 3), AI Assist cannot connect. Learn, local help, and the analyses on the <b>Analysis</b> menu remain available. See <a href="script_ai.htm">Script AI</a> for sign-in and Windows policy details.</p>
+    </body>
+</html>

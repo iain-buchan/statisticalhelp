@@ -94,7 +94,11 @@
       Link="/Content/data_preparation/generating.htm">
       <TocEntry
         Title="Workbook"
-        Link="/Content/basics/worksheet.htm" />
+        Link="/Content/basics/worksheet.htm">
+        <TocEntry
+          Title="Worksheet Learn and AI Assist"
+          Link="/Content/basics/worksheet_ai.htm" />
+      </TocEntry>
       <TocEntry
         Title="Missing data"
         Link="/Content/basics/missing_data.htm" />
