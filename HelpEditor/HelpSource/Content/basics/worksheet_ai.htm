@@ -6,31 +6,23 @@
         <meta name="description" content="Use Learn and AI Assist on the Windows worksheet toolbar. Ask questions about your workbook, open suggested R code, and add locally run results to a report." />
     </head>
     <body>
-        <h1><sdh:keyword term="AI Assist;Worksheet AI;Review analysis;R code from worksheet AI" />Worksheet Learn and AI Assist</h1>
+        <h1><sdh:keyword term="AI Assist;Worksheet AI;Choose a method;Continue to analysis;R code from worksheet AI" />Worksheet Learn and AI Assist</h1>
         <p>The Windows worksheet toolbar has two ways to get guidance. <b>Learn</b> opens the <a href="learning.htm">lesson library</a>, including worked examples and practice questions that you can use without an AI connection. <b>AI Assist</b> opens a conversation for the current workbook.</p>
 
         <h2>Ask a question</h2>
-        <p>Ask how to organise or analyse your data. At the start of a conversation the assistant uses a short guide based on <a href="../methods/method_selection.htm">Statistical Method Selection</a> to ask about your goal, study design and measurement scales. It can search and read the entire bundled Help and draw on general statistical and R knowledge for questions beyond StatsDirect. Leave <b>Share workbook data with AI</b> unticked to ask a question without sharing the workbook. When you press <b>Send</b>, ChatGPT receives your question and can use the relevant Help. Leave names, patient identifiers and other confidential information out of your question. In ordinary use, the recent conversation also provides context. Choose <b>New conversation</b> to leave earlier shared content out.</p>
+        <p>Ask how to organise or analyse your data. At the start of a conversation the assistant uses a short guide based on <a href="../methods/method_selection.htm">Statistical Method Selection</a> to help you choose an analysis. It can search and read the entire bundled Help and draw on general statistical and R knowledge for questions beyond StatsDirect. Leave <b>Share workbook data with AI</b> unticked to ask a question without sharing the workbook. When you press <b>Send</b>, ChatGPT receives your question and can use the relevant Help. Leave names, patient identifiers and other confidential information out of your question. In ordinary use, the recent conversation also provides context. Choose <b>New conversation</b> to leave earlier shared content out.</p>
+        <p>If you ask the assistant to choose a test, it may first ask what you measured and how it was recorded (for example a quantitative measurement, an ordered rating or a category), what you want to compare, or how the observations are related (for example independent groups or matched pairs). Explain the meaning of any numeric codes, your comparison goal, and which measurements come from the same people or units. If you already know which method you need, ask for it by name.</p>
         <p>If you want advice based on worksheet values, tick <b>Share workbook data with AI</b> above the question box. When you enable sharing for a workbook for the first time in the session, the confirmation dialog names that workbook and asks you to confirm that you have removed person identifiers. This confirmation covers the named workbook for the current application session. Another open workbook needs its own confirmation. Simply visiting it does not remove the first workbook's confirmation. Turn sharing off to stop further workbook reads.</p>
 
         <h2>Open suggested R code</h2>
-        <p>AI Assist answers questions and leaves worksheet cells unchanged. If a reply includes code, expand <b>R code</b> to see it. Choose <b>Open in R</b> to open an editable script. StatsDirect includes a fixed snapshot of the worksheet values read for that reply. Ask a follow-up to get a new analysis using current approved values.</p>
-        <p>Review the code, then choose <b>Run</b> in the R window. When R finishes, choose <b>Add output to report</b> to save the text output and charts in a StatsDirect report.</p>
+        <p>AI Assist answers questions and leaves worksheet cells unchanged. If a reply includes code, expand <b>Show R code</b> to see it. Choose <b>Open in R</b> to open an editable script. StatsDirect includes a fixed snapshot of the worksheet values read for that reply. Ask a follow-up to get a new analysis using current approved values.</p>
+        <p>Review the code, then choose <b>Run script</b> in the R window. When R finishes, choose <b>Add output to report</b> to save the text output and charts in a StatsDirect report.</p>
 
-        <h2>Run a suggested analysis</h2>
-        <p>In the original worksheet, select the cells you intend to analyse and choose <b>Review analysis</b>. The preview shows the method, source worksheet, selected cells, expected input and report destination. You can cancel and check the selection before reopening the review. If the workbook was shared for the suggestion, ask again after changing its data or selection.</p>
-        <p><b>Run and add to report</b> opens StatsDirect's usual analysis setup so you can check the input and choose any required settings. StatsDirect runs the calculation locally and puts the result in the report named in the review, or creates a report if none is open. Running it does not send its data or results to ChatGPT.</p>
-        <p>The assistant can propose seven methods:</p>
-        <ul>
-            <li><a href="../parametric_methods/paired_t.htm">Paired Student t test</a></li>
-            <li><a href="../parametric_methods/unpaired_t.htm">Unpaired Student t test</a></li>
-            <li><a href="../nonparametric_methods/wilcoxon_signed_ranks.htm">Wilcoxon signed ranks test</a></li>
-            <li><a href="../nonparametric_methods/spearman.htm">Spearman rank correlation</a></li>
-            <li><a href="../agreement/intraclass.htm">General analysis of agreement</a></li>
-            <li><a href="../basic_descriptive_statistics/univariate_summary.htm">Univariate descriptive summaries</a></li>
-            <li><a href="../parametric_methods/normality.htm">Tests for departure from normality</a></li>
-        </ul>
-        <p>For another method, use <b>Analyse</b> on the worksheet toolbar.</p>
+        <h2>Choose and confirm a method</h2>
+        <p>Select the cells in the worksheet, then choose <b>Choose a method</b> in the chat. This opens the same list as <b>Analyse</b> on the worksheet toolbar. If a report is active, <b>Choose a method</b> returns to the workbook associated with the chat. The selected report remains the destination for results. You can search for a method such as <a href="../nonparametric_methods/mann_whitney.htm">Mann–Whitney</a> and select it. AI Assist can also suggest a method from this list in response to a question.</p>
+        <p>To compare means in two samples, choose <b>Compare two samples</b> at the start of a new conversation. Choose <b>Same people</b> for a paired t test or <b>Separate groups</b> for an unpaired t test. Use <b>Change design</b> if you need to change that choice.</p>
+        <p>The confirmation in the chat shows the method, its menu location, the worksheet and selected cells, and the destination when the method produces a report. Check these details, then choose <b>Continue to analysis</b>. StatsDirect opens the usual controls or runs the method with the available settings. It asks you to choose the method again if the worksheet, selection or report destination has changed.</p>
+        <p>AI Assist can read approved worksheet data. A native <b>Data</b> command may change worksheet cells after you confirm and use its usual StatsDirect controls. Choosing a method and continuing in StatsDirect sends no workbook data or results to ChatGPT.</p>
 
         <h2>Using AI Assist under an organisation's policy</h2>
         <p>When your organisation restricts data sharing (level 2), AI Assist can still answer questions using packaged Help and suggest an analysis for you to review and run locally. Workbook sharing is unavailable. Each request sends the question you type and relevant Help, while your workbook, earlier conversation and local results stay on your computer.</p>
