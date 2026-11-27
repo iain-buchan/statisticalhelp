@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "format": "statsdirect-published-content-v1",
   "publisher": "StatsDirectHelpEditor",
-  "publicationId": "92f42034-6c31-4fd7-9250-432acab642e6",
-  "publishedAtUtc": "2026-11-24T19:42:22.40811+00:00",
+  "publicationId": "b63e1c1a-2340-45a6-abd0-afa017ca6e21",
+  "publishedAtUtc": "2026-11-27T15:40:34.334424+00:00",
   "producer": {
-    "version": "1.0.6\u002B9047c88bb5889c7ae7e267326bf1022b6750d7b9",
-    "sourceCommit": "9047c88bb5889c7ae7e267326bf1022b6750d7b9"
+    "version": "1.0.0\u002B885bb244535057fa84921ea3f8eae156eb567026",
+    "sourceCommit": "885bb244535057fa84921ea3f8eae156eb567026"
   },
-  "helpSourceSha256": "beaaf4c67892cba3f05c41d16033dac9dd0de643a91b0bfbe973fdabcef31de4",
+  "helpSourceSha256": "40406844c4a5c822f737cab53b671a4f9779dbf5e3093fa64033251923ede7bc",
   "tutorSourceSha256": "3779ac876448b0fd685ba232f53c5da0801bce738d6ad8f23e2f997c657b0368",
   "artifacts": {
     "website": {
@@ -27,8 +27,8 @@
         },
         {
           "path": ".statsdirect-help-website.json",
-          "bytes": 119470,
-          "sha256": "227f4db09bb5efed4f94ace41308c29d6214a7d6f7734ba5e8318b6c2c03ff23"
+          "bytes": 120355,
+          "sha256": "ce5b470677814dd3f095f8003c7e6ac363450154d37395a38944aec8fb10b04b"
         },
         {
           "path": "Data/Alias.xml",
@@ -297,13 +297,13 @@
         },
         {
           "path": "basics/worksheet_ai.htm",
-          "bytes": 14006,
-          "sha256": "e5e4fb843b5f7bc78f08812af9b1868536d1770a085d9b4474a6cf12dfec8709"
+          "bytes": 16743,
+          "sha256": "a45741c8408362644e6c6b376a81470b819909134bb8f098c6399b51b20429d1"
         },
         {
           "path": "build-info.json",
-          "bytes": 218,
-          "sha256": "15c4a6e0ed0dbc1e47525a64d81fa4b852ae4d3bc33da4a2c58fdd3a1f5b8880"
+          "bytes": 219,
+          "sha256": "060c2c0ae4c0fb78cb2f059c9b65a0a97f48693ccba538720b034d292452dd87"
         },
         {
           "path": "chi_square_tests/22.htm",
@@ -832,13 +832,13 @@
         },
         {
           "path": "keyword-index.js",
-          "bytes": 135416,
-          "sha256": "d23aa523f48f7f343c3f63635c07a037adab416968a415400fb39662d3814ce7"
+          "bytes": 135609,
+          "sha256": "67fc5942424cd7c3a3db38f19d4cfe8c7ec0384c955588a65285083eb66b4b7e"
         },
         {
           "path": "keyword-index.json",
-          "bytes": 98041,
-          "sha256": "e49d17ea6c5a6750d0ef8053b48b3d98a1f9c4378e3bc6fd0c83dd650493917d"
+          "bytes": 98234,
+          "sha256": "40081eeecdec21c6f4e9f56426015468538c312a58a91580e0d5865b47e9465a"
         },
         {
           "path": "menus/about.htm",
@@ -3498,7 +3498,7 @@
         {
           "path": "resources/help-editor-runtime/publication.json",
           "bytes": 132,
-          "sha256": "7f851056157ad27aeab5d15abb225b1970a2d41a1f5b05922dd7de9c91c11cfa"
+          "sha256": "6c91495cf0eccf58759df8226ee6b2dbbad6fb1a1f977dee038df24261f10c94"
         },
         {
           "path": "resources/help-editor-runtime/topic.css",
@@ -4077,8 +4077,8 @@
         },
         {
           "path": "search-index.js",
-          "bytes": 885453,
-          "sha256": "ae83dd0dadb6d79475eb83d10453a065cb9cf0bedda931355094f480755c71ef"
+          "bytes": 886143,
+          "sha256": "4ab868e5426dd71ebd4ec5ffb3fc497396dd0c0c851347e0b5b0ad6529b1b454"
         },
         {
           "path": "survival_analysis/abridged_life_table.htm",
@@ -4425,8 +4425,8 @@
       "files": [
         {
           "path": ".statsdirect-desktop-help.json",
-          "bytes": 221897,
-          "sha256": "af57d6c33ff57570aea29cc2e3790092c65f8f477443d6b0546a32889440c237"
+          "bytes": 221898,
+          "sha256": "4dcf6ec3a22afa4f0c9659601c87e80a7e2127e317016d7464a7b7b3650655c3"
         },
         {
           "path": ".statsdirect-help-output.json",
@@ -4700,13 +4700,13 @@
         },
         {
           "path": "basics/worksheet_ai.htm",
-          "bytes": 14029,
-          "sha256": "996ee51759a8ba91f18d260eccce65a0dccf2149f8c17fa56900c3befc430c62"
+          "bytes": 16766,
+          "sha256": "e9d3ced365de8afe24ff34a450671d05dcf03966f8eb1f46c89fdf9362e14d2a"
         },
         {
           "path": "build-info.json",
-          "bytes": 218,
-          "sha256": "3a98761edf26a642ca12bbed2258b4b8af534e50807cc69a8101b1d60bc3782f"
+          "bytes": 220,
+          "sha256": "51e95cc34e34c0d2933917122b72eaa6a56b88af4a6d6cea64d69d1457a3dde0"
         },
         {
           "path": "chi_square_tests/22.htm",
@@ -5235,13 +5235,13 @@
         },
         {
           "path": "keyword-index.js",
-          "bytes": 135416,
-          "sha256": "d23aa523f48f7f343c3f63635c07a037adab416968a415400fb39662d3814ce7"
+          "bytes": 135609,
+          "sha256": "67fc5942424cd7c3a3db38f19d4cfe8c7ec0384c955588a65285083eb66b4b7e"
         },
         {
           "path": "keyword-index.json",
-          "bytes": 98041,
-          "sha256": "e49d17ea6c5a6750d0ef8053b48b3d98a1f9c4378e3bc6fd0c83dd650493917d"
+          "bytes": 98234,
+          "sha256": "40081eeecdec21c6f4e9f56426015468538c312a58a91580e0d5865b47e9465a"
         },
         {
           "path": "menus/about.htm",
@@ -7901,7 +7901,7 @@
         {
           "path": "resources/help-editor-runtime/publication.json",
           "bytes": 133,
-          "sha256": "597348aa5284ea4d884190f973511cba463583b3f4b55328ccbb311012e3783e"
+          "sha256": "bac34f22e09dbb47bdbe401e1eb190f158b60f8e3706bce13e8083b6631194d9"
         },
         {
           "path": "resources/help-editor-runtime/topic.css",
@@ -8480,8 +8480,8 @@
         },
         {
           "path": "search-index.js",
-          "bytes": 885495,
-          "sha256": "cb58d4c473b7fe6671bf0350d6236a15ce57e233993b9594376c78a1ccf9e719"
+          "bytes": 886185,
+          "sha256": "e8b560009741721e6e46ff39aed62084b3e29abdbd16a6234b9b0ecd299844d5"
         },
         {
           "path": "survival_analysis/abridged_life_table.htm",
@@ -8845,7 +8845,7 @@
         {
           "path": "manifest.json",
           "bytes": 43737,
-          "sha256": "94187cd6248e7d482222f28d12f683c003757b5f92d90cf43885bc414a1d69f7"
+          "sha256": "65dafdb0b3d15a8a6269c7882a62346c0ce5f1e8b251a64e4a4630218ea05a46"
         },
         {
           "path": "questions.json",
