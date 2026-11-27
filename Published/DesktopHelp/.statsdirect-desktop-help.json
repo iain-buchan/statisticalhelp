@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "format": "statsdirect-desktop-help-v1",
-  "publishedAtUtc": "2026-11-24T19:42:07.198307+00:00",
-  "sourceSha256": "9ad967b077c74e9d771c58e136ecd394e3f595b8c9f95c5a0eb0346847b47e41",
+  "publishedAtUtc": "2026-11-27T16:03:31.5297589+00:00",
+  "sourceSha256": "49c57f723a30e07175d026b92e5f19e9a7d7e5b18ae100bc540411d52284e002",
   "entryPage": "index.html",
   "topicCount": 405,
   "searchDocumentCount": 404,
@@ -2306,13 +2306,13 @@
     },
     {
       "path": "basics/worksheet_ai.htm",
-      "bytes": 14029,
-      "sha256": "996ee51759a8ba91f18d260eccce65a0dccf2149f8c17fa56900c3befc430c62"
+      "bytes": 16766,
+      "sha256": "e9d3ced365de8afe24ff34a450671d05dcf03966f8eb1f46c89fdf9362e14d2a"
     },
     {
       "path": "build-info.json",
-      "bytes": 218,
-      "sha256": "3a98761edf26a642ca12bbed2258b4b8af534e50807cc69a8101b1d60bc3782f"
+      "bytes": 220,
+      "sha256": "bb3b6dc439828a10f0a64cb81082b9adf9ccc41a4242880cea1ab0ddbf1bce7e"
     },
     {
       "path": "chi_square_tests/22.htm",
@@ -2841,13 +2841,13 @@
     },
     {
       "path": "keyword-index.js",
-      "bytes": 135416,
-      "sha256": "d23aa523f48f7f343c3f63635c07a037adab416968a415400fb39662d3814ce7"
+      "bytes": 135609,
+      "sha256": "67fc5942424cd7c3a3db38f19d4cfe8c7ec0384c955588a65285083eb66b4b7e"
     },
     {
       "path": "keyword-index.json",
-      "bytes": 98041,
-      "sha256": "e49d17ea6c5a6750d0ef8053b48b3d98a1f9c4378e3bc6fd0c83dd650493917d"
+      "bytes": 98234,
+      "sha256": "40081eeecdec21c6f4e9f56426015468538c312a58a91580e0d5865b47e9465a"
     },
     {
       "path": "menus/about.htm",
@@ -5507,7 +5507,7 @@
     {
       "path": "resources/help-editor-runtime/publication.json",
       "bytes": 133,
-      "sha256": "597348aa5284ea4d884190f973511cba463583b3f4b55328ccbb311012e3783e"
+      "sha256": "31e9898b2c14cfde16373b3569a838f7d93f2885fac4ec69bf78d71234a8c1a3"
     },
     {
       "path": "resources/help-editor-runtime/topic.css",
@@ -6086,8 +6086,8 @@
     },
     {
       "path": "search-index.js",
-      "bytes": 885495,
-      "sha256": "cb58d4c473b7fe6671bf0350d6236a15ce57e233993b9594376c78a1ccf9e719"
+      "bytes": 886185,
+      "sha256": "e8b560009741721e6e46ff39aed62084b3e29abdbd16a6234b9b0ecd299844d5"
     },
     {
       "path": "survival_analysis/abridged_life_table.htm",
@@ -6425,5 +6425,5 @@
       "sha256": "10f5155b3fbf0d431bb8ad559e3b8103fcf3b355e001208dfacb2855b22936c9"
     }
   ],
-  "publicationSnapshotSha256": "beaaf4c67892cba3f05c41d16033dac9dd0de643a91b0bfbe973fdabcef31de4"
+  "publicationSnapshotSha256": "cb309176babaec3e529c58dacbff197e279f8770f10d81ba7e0d8d952ebf5158"
 }
